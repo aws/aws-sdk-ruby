@@ -314,14 +314,15 @@ to be backwards compatible.
 | AWS Direct Connect                  | Aws::DirectConnect                 | aws-sdk-directconnect                 | 2012-10-25  |
 | AWS Directory Service               | Aws::DirectoryService              | aws-sdk-directoryservice              | 2015-04-16  |
 | AWS Elastic Beanstalk               | Aws::ElasticBeanstalk              | aws-sdk-elasticbeanstalk              | 2010-12-01  |
+| AWS Greengrass                      | Aws::Greengrass                    | aws-sdk-greengrass                    | 2017-06-07  |
 | AWS Health APIs and Notifications   | Aws::Health                        | aws-sdk-health                        | 2016-08-04  |
 | AWS Identity and Access Management  | Aws::IAM                           | aws-sdk-iam                           | 2010-05-08  |
 | AWS Import/Export                   | Aws::ImportExport                  | aws-sdk-importexport                  | 2010-06-01  |
 | AWS IoT                             | Aws::IoT                           | aws-sdk-iot                           | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                  | aws-sdk-iotdataplane                  | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                           | aws-sdk-kms                           | 2014-11-01  |
-| AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
 | AWS Lambda                          | Aws::Lambda                        | aws-sdk-lambda                        | 2015-03-31  |
+| AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics  | aws-sdk-marketplacecommerceanalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | Aws::MarketplaceEntitlementService | aws-sdk-marketplaceentitlementservice | 2017-01-11  |
 | AWS OpsWorks                        | Aws::OpsWorks                      | aws-sdk-opsworks                      | 2013-02-18  |
@@ -354,6 +355,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider    | Aws::CognitoIdentityProvider       | aws-sdk-cognitoidentityprovider       | 2016-04-18  |
 | Amazon Cognito Sync                 | Aws::CognitoSync                   | aws-sdk-cognitosync                   | 2014-06-30  |
 | Amazon DynamoDB                     | Aws::DynamoDB                      | aws-sdk-dynamodb                      | 2012-08-10  |
+| Amazon DynamoDB Accelerator (DAX)   | Aws::DAX                           | aws-sdk-dax                           | 2017-04-19  |
 | Amazon DynamoDB Streams             | Aws::DynamoDBStreams               | aws-sdk-dynamodbstreams               | 2012-08-10  |
 | Amazon EC2 Container Registry       | Aws::ECR                           | aws-sdk-ecr                           | 2015-09-21  |
 | Amazon EC2 Container Service        | Aws::ECS                           | aws-sdk-ecs                           | 2014-11-13  |

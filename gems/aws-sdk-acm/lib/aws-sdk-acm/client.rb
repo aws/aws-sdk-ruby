@@ -638,11 +638,35 @@ module Aws::ACM
     #   the same domain. For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
+    #   The maximum length of a DNS name is 253 octets. The name is made up of
+    #   multiple labels separated by periods. No label can be longer than 63
+    #   octets. Consider the following examples:
+    #
+    #   `(63 octets).(63 octets).(63 octets).(61 octets)` is legal because the
+    #   total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63
+    #   octets.
+    #
+    #   `(64 octets).(63 octets).(63 octets).(61 octets)` is not legal because
+    #   the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first
+    #   label exceeds 63 octets.
+    #
+    #   `(63 octets).(63 octets).(63 octets).(62 octets)` is not legal because
+    #   the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253
+    #   octets.
+    #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
     #   extension of the ACM Certificate. For example, add the name
     #   www.example.net to a certificate for which the `DomainName` field is
-    #   www.example.com if users can reach your site by using either name.
+    #   www.example.com if users can reach your site by using either name. The
+    #   maximum number of domain names that you can add to an ACM Certificate
+    #   is 100. However, the initial limit is 10 domain names. If you need
+    #   more than 10 names, you must request a limit increase. For more
+    #   information, see [Limits][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #
     # @option params [String] :idempotency_token
     #   Customer chosen string that can be used to distinguish between calls
@@ -698,6 +722,12 @@ module Aws::ACM
     # within 72 hours of requesting the ACM Certificate. If more than 72
     # hours have elapsed since your original request or since your last
     # attempt to resend validation mail, you must request a new certificate.
+    # For more information about setting up your contact email addresses,
+    # see [Configure Email for your Domain][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the requested certificate. The
@@ -766,7 +796,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

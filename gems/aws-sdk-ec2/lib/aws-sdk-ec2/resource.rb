@@ -24,22 +24,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcpoptions = ec2.create_dhcp_options({
-    #     dry_run: false,
     #     dhcp_configurations: [ # required
     #       {
     #         key: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
+    #   A DHCP configuration option.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
-    #   A DHCP configuration option.
     # @return [DhcpOptions]
     def create_dhcp_options(options = {})
       resp = @client.create_dhcp_options(options)
@@ -53,84 +53,85 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance = ec2.create_instances({
-    #     dry_run: false,
-    #     image_id: "String", # required
-    #     min_count: 1, # required
-    #     max_count: 1, # required
-    #     key_name: "String",
-    #     security_groups: ["String"],
-    #     security_group_ids: ["String"],
-    #     user_data: "String",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #     placement: {
-    #       availability_zone: "String",
-    #       group_name: "String",
-    #       tenancy: "default", # accepts default, dedicated, host
-    #       host_id: "String",
-    #       affinity: "String",
-    #     },
-    #     kernel_id: "String",
-    #     ramdisk_id: "String",
     #     block_device_mappings: [
     #       {
-    #         virtual_name: "String",
     #         device_name: "String",
+    #         virtual_name: "String",
     #         ebs: {
+    #           encrypted: false,
+    #           delete_on_termination: false,
+    #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           delete_on_termination: false,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           iops: 1,
-    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
     #     ],
-    #     monitoring: {
-    #       enabled: false, # required
-    #     },
-    #     subnet_id: "String",
-    #     disable_api_termination: false,
-    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #     private_ip_address: "String",
+    #     image_id: "String", # required
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
     #         ipv_6_address: "String",
     #       },
     #     ],
-    #     ipv_6_address_count: 1,
-    #     client_token: "String",
+    #     kernel_id: "String",
+    #     key_name: "String",
+    #     max_count: 1, # required
+    #     min_count: 1, # required
+    #     monitoring: {
+    #       enabled: false, # required
+    #     },
+    #     placement: {
+    #       availability_zone: "String",
+    #       affinity: "String",
+    #       group_name: "String",
+    #       host_id: "String",
+    #       tenancy: "default", # accepts default, dedicated, host
+    #       spread_domain: "String",
+    #     },
+    #     ramdisk_id: "String",
+    #     security_group_ids: ["String"],
+    #     security_groups: ["String"],
+    #     subnet_id: "String",
+    #     user_data: "String",
     #     additional_info: "String",
+    #     client_token: "String",
+    #     disable_api_termination: false,
+    #     dry_run: false,
+    #     ebs_optimized: false,
+    #     iam_instance_profile: {
+    #       arn: "String",
+    #       name: "String",
+    #     },
+    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
     #     network_interfaces: [
     #       {
-    #         network_interface_id: "String",
-    #         device_index: 1,
-    #         subnet_id: "String",
-    #         description: "String",
-    #         private_ip_address: "String",
-    #         groups: ["String"],
-    #         delete_on_termination: false,
-    #         private_ip_addresses: [
-    #           {
-    #             private_ip_address: "String", # required
-    #             primary: false,
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
     #         associate_public_ip_address: false,
+    #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["String"],
+    #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         ipv_6_address_count: 1,
+    #         network_interface_id: "String",
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String", # required
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
     #       },
     #     ],
-    #     iam_instance_profile: {
-    #       arn: "String",
-    #       name: "String",
-    #     },
-    #     ebs_optimized: false,
+    #     private_ip_address: "String",
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -144,26 +145,56 @@ module Aws::EC2
     #     ],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
+    #   The block device mapping.
+    #
+    #   Supplying both a snapshot ID and an encryption value as arguments for
+    #   block-device mapping results in an error. This is because only blank
+    #   volumes can be encrypted on start, and these are not created from a
+    #   snapshot. If a snapshot is the basis for the volume, it contains data
+    #   by definition and its encryption status cannot be changed using this
+    #   action.
     # @option options [required, String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages.
-    # @option options [required, Integer] :min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    # @option options [String] :instance_type
+    #   The instance type. For more information, see [Instance Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
+    #   Default: `m1.small`
     #
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # @option options [Integer] :ipv_6_address_count
+    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
+    #   range of your subnet. You cannot specify this option and the option to
+    #   assign specific IPv6 addresses in the same request. You can specify
+    #   this option if you've specified a minimum number of instances to
+    #   launch.
+    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
+    #   subnet to associate with the primary network interface. You cannot
+    #   specify this option and the option to assign a number of IPv6
+    #   addresses in the same request. You cannot specify this option if
+    #   you've specified a minimum number of instances to launch.
+    # @option options [String] :kernel_id
+    #   The ID of the kernel.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    # @option options [String] :key_name
+    #   The name of the key pair. You can create a key pair using
+    #   CreateKeyPair or ImportKeyPair.
+    #
+    #   If you do not specify a key pair, you can't connect to the instance
+    #   unless you choose an AMI that is configured to allow users another way
+    #   to log in.
     # @option options [required, Integer] :max_count
     #   The maximum number of instances to launch. If you specify more
     #   instances than Amazon EC2 can launch in the target Availability Zone,
@@ -178,23 +209,45 @@ module Aws::EC2
     #
     #
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
-    # @option options [String] :key_name
-    #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    # @option options [required, Integer] :min_count
+    #   The minimum number of instances to launch. If you specify a minimum
+    #   that is more instances than Amazon EC2 can launch in the target
+    #   Availability Zone, Amazon EC2 launches no instances.
     #
-    #   If you do not specify a key pair, you can't connect to the instance
-    #   unless you choose an AMI that is configured to allow users another way
-    #   to log in.
-    # @option options [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
-    #   nondefault VPC, you must use security group IDs instead.
+    #   Constraints: Between 1 and the maximum number you're allowed for the
+    #   specified instance type. For more information about the default
+    #   limits, and how to request an increase, see [How many instances can I
+    #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
+    #   The monitoring for the instance.
+    # @option options [Types::Placement] :placement
+    #   The placement for the instance.
+    # @option options [String] :ramdisk_id
+    #   The ID of the RAM disk.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [Array<String>] :security_group_ids
     #   One or more security group IDs. You can create a security group using
     #   CreateSecurityGroup.
     #
     #   Default: Amazon EC2 uses the default security group.
+    # @option options [Array<String>] :security_groups
+    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   nondefault VPC, you must use security group IDs instead.
+    #
+    #   Default: Amazon EC2 uses the default security group.
+    # @option options [String] :subnet_id
+    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
@@ -207,87 +260,8 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
     #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
-    # @option options [String] :instance_type
-    #   The instance type. For more information, see [Instance Types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #   Default: `m1.small`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # @option options [Types::Placement] :placement
-    #   The placement for the instance.
-    # @option options [String] :kernel_id
-    #   The ID of the kernel.
-    #
-    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
-    # @option options [String] :ramdisk_id
-    #   The ID of the RAM disk.
-    #
-    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
-    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping.
-    #
-    #   Supplying both a snapshot ID and an encryption value as arguments for
-    #   block-device mapping results in an error. This is because only blank
-    #   volumes can be encrypted on start, and these are not created from a
-    #   snapshot. If a snapshot is the basis for the volume, it contains data
-    #   by definition and its encryption status cannot be changed using this
-    #   action.
-    # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
-    #   The monitoring for the instance.
-    # @option options [String] :subnet_id
-    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
-    # @option options [Boolean] :disable_api_termination
-    #   If you set this parameter to `true`, you can't terminate the instance
-    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
-    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
-    #   the instance by running the shutdown command from the instance.
-    #
-    #   Default: `false`
-    # @option options [String] :instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #
-    #   Default: `stop`
-    # @option options [String] :private_ip_address
-    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
-    #   the IPv4 address range of the subnet.
-    #
-    #   Only one private IP address can be designated as primary. You can't
-    #   specify this option if you've specified the option to designate a
-    #   private IP address as the primary IP address in a network interface
-    #   specification. You cannot specify this option if you're launching
-    #   more than one instance in the request.
-    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
-    # @option options [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option to
-    #   assign specific IPv6 addresses in the same request. You can specify
-    #   this option if you've specified a minimum number of instances to
-    #   launch.
+    # @option options [String] :additional_info
+    #   Reserved.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
@@ -298,12 +272,20 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    # @option options [String] :additional_info
-    #   Reserved.
-    # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   One or more network interfaces.
-    # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
-    #   The IAM instance profile.
+    # @option options [Boolean] :disable_api_termination
+    #   If you set this parameter to `true`, you can't terminate the instance
+    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
+    #   change this attribute to `false` after launch, use
+    #   ModifyInstanceAttribute. Alternatively, if you set
+    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
+    #   the instance by running the shutdown command from the instance.
+    #
+    #   Default: `false`
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ebs_optimized
     #   Indicates whether the instance is optimized for EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
@@ -312,6 +294,25 @@ module Aws::EC2
     #   usage charges apply when using an EBS-optimized instance.
     #
     #   Default: `false`
+    # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
+    #   The IAM instance profile.
+    # @option options [String] :instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #
+    #   Default: `stop`
+    # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
+    #   One or more network interfaces.
+    # @option options [String] :private_ip_address
+    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
+    #   the IPv4 address range of the subnet.
+    #
+    #   Only one private IP address can be designated as primary. You can't
+    #   specify this option if you've specified the option to designate a
+    #   private IP address as the primary IP address in a network interface
+    #   specification. You cannot specify this option if you're launching
+    #   more than one instance in the request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all instances
@@ -354,19 +355,19 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   keypair = ec2.create_key_pair({
-    #     dry_run: false,
     #     key_name: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :key_name
+    #   A unique name for the key pair.
+    #
+    #   Constraints: Up to 255 ASCII characters
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :key_name
-    #   A unique name for the key pair.
-    #
-    #   Constraints: Up to 255 ASCII characters
     # @return [KeyPair]
     def create_key_pair(options = {})
       resp = @client.create_key_pair(options)
@@ -404,38 +405,51 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   networkinterface = ec2.create_network_interface({
-    #     subnet_id: "String", # required
     #     description: "String",
-    #     private_ip_address: "String",
+    #     dry_run: false,
     #     groups: ["String"],
-    #     private_ip_addresses: [
-    #       {
-    #         private_ip_address: "String", # required
-    #         primary: false,
-    #       },
-    #     ],
-    #     secondary_private_ip_address_count: 1,
+    #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
     #         ipv_6_address: "String",
     #       },
     #     ],
-    #     ipv_6_address_count: 1,
-    #     dry_run: false,
+    #     private_ip_address: "String",
+    #     private_ip_addresses: [
+    #       {
+    #         primary: false,
+    #         private_ip_address: "String", # required
+    #       },
+    #     ],
+    #     secondary_private_ip_address_count: 1,
+    #     subnet_id: "String", # required
     #   })
     # @param [Hash] options ({})
-    # @option options [required, String] :subnet_id
-    #   The ID of the subnet to associate with the network interface.
     # @option options [String] :description
     #   A description for the network interface.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :groups
+    #   The IDs of one or more security groups.
+    # @option options [Integer] :ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface. Amazon
+    #   EC2 automatically selects the IPv6 addresses from the subnet range.
+    #   You can't use this option if specifying specific IPv6 addresses. If
+    #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
+    #   `true`, you can specify `0` to override this setting.
+    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+    #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
+    #   your subnet. You can't use this option if you're specifying a number
+    #   of IPv6 addresses.
     # @option options [String] :private_ip_address
     #   The primary private IPv4 address of the network interface. If you
     #   don't specify an IPv4 address, Amazon EC2 selects one for you from
     #   the subnet's IPv4 CIDR range. If you specify an IP address, you
     #   cannot indicate any IP addresses specified in `privateIpAddresses` as
     #   primary (only one IP address can be designated as primary).
-    # @option options [Array<String>] :groups
-    #   The IDs of one or more security groups.
     # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
     #   One or more private IPv4 addresses.
     # @option options [Integer] :secondary_private_ip_address_count
@@ -453,21 +467,8 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
-    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
-    #   your subnet. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
-    # @option options [Integer] :ipv_6_address_count
-    #   The number of IPv6 addresses to assign to a network interface. Amazon
-    #   EC2 automatically selects the IPv6 addresses from the subnet range.
-    #   You can't use this option if specifying specific IPv6 addresses. If
-    #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
-    #   `true`, you can specify `0` to override this setting.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [required, String] :subnet_id
+    #   The ID of the subnet to associate with the network interface.
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       resp = @client.create_network_interface(options)
@@ -533,26 +534,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   securitygroup = ec2.create_security_group({
-    #     dry_run: false,
-    #     group_name: "String", # required
     #     description: "String", # required
+    #     group_name: "String", # required
     #     vpc_id: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :group_name
-    #   The name of the security group.
-    #
-    #   Constraints: Up to 255 characters in length
-    #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [required, String] :description
     #   A description for the security group. This is informational only.
     #
@@ -562,8 +549,22 @@ module Aws::EC2
     #
     #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    # @option options [required, String] :group_name
+    #   The name of the security group.
+    #
+    #   Constraints: Up to 255 characters in length
+    #
+    #   Constraints for EC2-Classic: ASCII characters
+    #
+    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [String] :vpc_id
     #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [SecurityGroup]
     def create_security_group(options = {})
       resp = @client.create_security_group(options)
@@ -576,20 +577,20 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot = ec2.create_snapshot({
-    #     dry_run: false,
-    #     volume_id: "String", # required
     #     description: "String",
+    #     volume_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :description
+    #   A description for the snapshot.
+    # @option options [required, String] :volume_id
+    #   The ID of the EBS volume.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :volume_id
-    #   The ID of the EBS volume.
-    # @option options [String] :description
-    #   A description for the snapshot.
     # @return [Snapshot]
     def create_snapshot(options = {})
       resp = @client.create_snapshot(options)
@@ -603,32 +604,32 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   subnet = ec2.create_subnet({
-    #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     availability_zone: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
-    #     availability_zone: "String",
+    #     vpc_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :vpc_id
-    #   The ID of the VPC.
-    # @option options [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`.
-    # @option options [String] :ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
     # @option options [String] :availability_zone
     #   The Availability Zone for the subnet.
     #
     #   Default: AWS selects one for you. If you create more than one subnet
     #   in your VPC, we may not necessarily select a different zone for each
     #   subnet.
+    # @option options [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`.
+    # @option options [String] :ipv_6_cidr_block
+    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
+    #   size must use a /64 prefix length.
+    # @option options [required, String] :vpc_id
+    #   The ID of the VPC.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Subnet]
     def create_subnet(options = {})
       resp = @client.create_subnet(options)
@@ -672,14 +673,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume = ec2.create_volume({
-    #     dry_run: false,
+    #     availability_zone: "String", # required
+    #     encrypted: false,
+    #     iops: 1,
+    #     kms_key_id: "String",
     #     size: 1,
     #     snapshot_id: "String",
-    #     availability_zone: "String", # required
     #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #     iops: 1,
-    #     encrypted: false,
-    #     kms_key_id: "String",
+    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -693,39 +694,10 @@ module Aws::EC2
     #     ],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Integer] :size
-    #   The size of the volume, in GiBs.
-    #
-    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
-    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you specify
-    #   a snapshot, the volume size must be equal to or larger than the
-    #   snapshot size.
-    #
-    #   Default: If you're creating the volume from a snapshot and don't
-    #   specify a volume size, the default is the snapshot size.
-    # @option options [String] :snapshot_id
-    #   The snapshot from which to create the volume.
     # @option options [required, String] :availability_zone
     #   The Availability Zone in which to create the volume. Use
     #   DescribeAvailabilityZones to list the Availability Zones that are
     #   currently available to you.
-    # @option options [String] :volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
-    #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
-    #   Cold HDD, or `standard` for Magnetic volumes.
-    #
-    #   Default: `standard`
-    # @option options [Integer] :iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
-    #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
     # @option options [Boolean] :encrypted
     #   Specifies whether the volume should be encrypted. Encrypted Amazon EBS
     #   volumes may only be attached to instances that support Amazon EBS
@@ -739,6 +711,12 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # @option options [Integer] :iops
+    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
+    #   operations per second (IOPS) to provision for the volume, with a
+    #   maximum ratio of 50 IOPS/GiB.
+    #
+    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
     # @option options [String] :kms_key_id
     #   The full ARN of the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use when creating the encrypted volume. This
@@ -749,6 +727,29 @@ module Aws::EC2
     #   then the CMK ID. For example,
     #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    # @option options [Integer] :size
+    #   The size of the volume, in GiBs.
+    #
+    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
+    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you specify
+    #   a snapshot, the volume size must be equal to or larger than the
+    #   snapshot size.
+    #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    # @option options [String] :snapshot_id
+    #   The snapshot from which to create the volume.
+    # @option options [String] :volume_type
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
+    #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
+    #   Cold HDD, or `standard` for Magnetic volumes.
+    #
+    #   Default: `standard`
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
     # @return [Volume]
@@ -764,20 +765,24 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc = ec2.create_vpc({
-    #     dry_run: false,
     #     cidr_block: "String", # required
-    #     instance_tenancy: "default", # accepts default, dedicated, host
     #     amazon_provided_ipv_6_cidr_block: false,
+    #     dry_run: false,
+    #     instance_tenancy: "default", # accepts default, dedicated, host
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :cidr_block
+    #   The IPv4 network range for the VPC, in CIDR notation. For example,
+    #   `10.0.0.0/16`.
+    # @option options [Boolean] :amazon_provided_ipv_6_cidr_block
+    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+    #   for the VPC. You cannot specify the range of IP addresses, or the size
+    #   of the CIDR block.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :cidr_block
-    #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`.
     # @option options [String] :instance_tenancy
     #   The tenancy options for instances launched into the VPC. For
     #   `default`, instances are launched with shared tenancy by default. You
@@ -790,10 +795,6 @@ module Aws::EC2
     #   Use the `default` or `dedicated` values only.
     #
     #   Default: `default`
-    # @option options [Boolean] :amazon_provided_ipv_6_cidr_block
-    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IP addresses, or the size
-    #   of the CIDR block.
     # @return [Vpc]
     def create_vpc(options = {})
       resp = @client.create_vpc(options)
@@ -808,9 +809,9 @@ module Aws::EC2
     #
     #   vpcpeeringconnection = ec2.create_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_id: "String",
-    #     peer_vpc_id: "String",
     #     peer_owner_id: "String",
+    #     peer_vpc_id: "String",
+    #     vpc_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -818,15 +819,15 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :vpc_id
-    #   The ID of the requester VPC.
-    # @option options [String] :peer_vpc_id
-    #   The ID of the VPC with which you are creating the VPC peering
-    #   connection.
     # @option options [String] :peer_owner_id
     #   The AWS account ID of the owner of the peer VPC.
     #
     #   Default: Your AWS account ID
+    # @option options [String] :peer_vpc_id
+    #   The ID of the VPC with which you are creating the VPC peering
+    #   connection.
+    # @option options [String] :vpc_id
+    #   The ID of the requester VPC.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
       resp = @client.create_vpc_peering_connection(options)
@@ -840,18 +841,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   ec2.disassociate_route_table({
-    #     dry_run: false,
     #     association_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :association_id
+    #   The association ID representing the current association between the
+    #   route table and subnet.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :association_id
-    #   The association ID representing the current association between the
-    #   route table and subnet.
     # @return [EmptyStructure]
     def disassociate_route_table(options = {})
       resp = @client.disassociate_route_table(options)
@@ -888,72 +889,74 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image = ec2.register_image({
-    #     dry_run: false,
     #     image_location: "String",
-    #     name: "String", # required
-    #     description: "String",
     #     architecture: "i386", # accepts i386, x86_64
-    #     kernel_id: "String",
-    #     ramdisk_id: "String",
-    #     billing_products: ["String"],
-    #     root_device_name: "String",
     #     block_device_mappings: [
     #       {
-    #         virtual_name: "String",
     #         device_name: "String",
+    #         virtual_name: "String",
     #         ebs: {
+    #           encrypted: false,
+    #           delete_on_termination: false,
+    #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           delete_on_termination: false,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           iops: 1,
-    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
     #     ],
-    #     virtualization_type: "String",
-    #     sriov_net_support: "String",
+    #     description: "String",
+    #     dry_run: false,
     #     ena_support: false,
+    #     kernel_id: "String",
+    #     name: "String", # required
+    #     billing_products: ["String"],
+    #     ramdisk_id: "String",
+    #     root_device_name: "String",
+    #     sriov_net_support: "String",
+    #     virtualization_type: "String",
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :image_location
+    #   The full path to your AMI manifest in Amazon S3 storage.
+    # @option options [String] :architecture
+    #   The architecture of the AMI.
+    #
+    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
+    #   AMIs, the architecture specified in the manifest file.
+    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
+    #   One or more block device mapping entries.
+    # @option options [String] :description
+    #   A description for your AMI.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    # @option options [Boolean] :ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the AMI and
+    #   any instances that you launch from the AMI.
+    #
+    #   This option is supported only for HVM AMIs. Specifying this option
+    #   with a PV AMI can make instances launched from the AMI unreachable.
+    # @option options [String] :kernel_id
+    #   The ID of the kernel.
     # @option options [required, String] :name
     #   A name for your AMI.
     #
     #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
     #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
     #   single quotes ('), at-signs (@), or underscores(\_)
-    # @option options [String] :description
-    #   A description for your AMI.
-    # @option options [String] :architecture
-    #   The architecture of the AMI.
-    #
-    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
-    #   AMIs, the architecture specified in the manifest file.
-    # @option options [String] :kernel_id
-    #   The ID of the kernel.
-    # @option options [String] :ramdisk_id
-    #   The ID of the RAM disk.
     # @option options [Array<String>] :billing_products
     #   The billing product codes. Your account must be authorized to specify
     #   billing product codes. Otherwise, you can use the AWS Marketplace to
     #   bill for the use of an AMI.
+    # @option options [String] :ramdisk_id
+    #   The ID of the RAM disk.
     # @option options [String] :root_device_name
     #   The name of the root device (for example, `/dev/sda1`, or
     #   `/dev/xvda`).
-    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries.
-    # @option options [String] :virtualization_type
-    #   The type of virtualization.
-    #
-    #   Default: `paravirtual`
     # @option options [String] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
     #   Virtual Function interface for the AMI and any instances that you
@@ -963,12 +966,10 @@ module Aws::EC2
     #
     #   This option is supported only for HVM AMIs. Specifying this option
     #   with a PV AMI can make instances launched from the AMI unreachable.
-    # @option options [Boolean] :ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the AMI and
-    #   any instances that you launch from the AMI.
+    # @option options [String] :virtualization_type
+    #   The type of virtualization.
     #
-    #   This option is supported only for HVM AMIs. Specifying this option
-    #   with a PV AMI can make instances launched from the AMI unreachable.
+    #   Default: `paravirtual`
     # @return [Image]
     def register_image(options = {})
       resp = @client.register_image(options)
@@ -983,26 +984,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_addresses = ec2.classic_addresses({
-    #     dry_run: false,
-    #     public_ips: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     public_ips: ["String"],
     #     allocation_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
-    #
-    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
@@ -1025,10 +1017,19 @@ module Aws::EC2
     #     with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    # @option options [Array<String>] :public_ips
+    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #
+    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
     #   \[EC2-VPC\] One or more allocation IDs.
     #
     #   Default: Describes all your Elastic IP addresses.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [ClassicAddress::Collection]
     def classic_addresses(options = {})
       batches = Enumerator.new do |y|
@@ -1062,7 +1063,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options_sets = ec2.dhcp_options_sets({
-    #     dry_run: false,
     #     dhcp_options_ids: ["String"],
     #     filters: [
     #       {
@@ -1070,13 +1070,9 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :dhcp_options_ids
     #   The IDs of one or more DHCP options sets.
     #
@@ -1106,6 +1102,11 @@ module Aws::EC2
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [DhcpOptions::Collection]
     def dhcp_options_sets(options = {})
       batches = Enumerator.new do |y|
@@ -1135,9 +1136,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   images = ec2.images({
-    #     dry_run: false,
-    #     image_ids: ["String"],
-    #     owners: ["String"],
     #     executable_users: ["String"],
     #     filters: [
     #       {
@@ -1145,23 +1143,11 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
+    #     image_ids: ["String"],
+    #     owners: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :image_ids
-    #   One or more image IDs.
-    #
-    #   Default: Describes all images available to you.
-    # @option options [Array<String>] :owners
-    #   Filters the images by the owner. Specify an AWS account ID, `self`
-    #   (owner is the sender of the request), or an AWS owner alias (valid
-    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
-    #   this option returns all images for which you have launch permissions,
-    #   regardless of ownership.
     # @option options [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
     #   an AWS account ID, `self` (the sender of the request), or `all`
@@ -1256,6 +1242,21 @@ module Aws::EC2
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
+    # @option options [Array<String>] :image_ids
+    #   One or more image IDs.
+    #
+    #   Default: Describes all images available to you.
+    # @option options [Array<String>] :owners
+    #   Filters the images by the owner. Specify an AWS account ID, `self`
+    #   (owner is the sender of the request), or an AWS owner alias (valid
+    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
+    #   this option returns all images for which you have launch permissions,
+    #   regardless of ownership.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Image::Collection]
     def images(options = {})
       batches = Enumerator.new do |y|
@@ -1285,25 +1286,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instances = ec2.instances({
-    #     dry_run: false,
-    #     instance_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     instance_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
-    #
-    #   Default: Describes all your instances.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1566,6 +1558,15 @@ module Aws::EC2
     #     (`paravirtual` \| `hvm`).
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
+    # @option options [Array<String>] :instance_ids
+    #   One or more instance IDs.
+    #
+    #   Default: Describes all your instances.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
@@ -1599,25 +1600,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   internet_gateways = ec2.internet_gateways({
-    #     dry_run: false,
-    #     internet_gateway_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     internet_gateway_ids: ["String"],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
-    #
-    #   Default: Describes all your Internet gateways.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1645,6 +1637,15 @@ module Aws::EC2
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :internet_gateway_ids
+    #   One or more Internet gateway IDs.
+    #
+    #   Default: Describes all your Internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
@@ -1674,31 +1675,31 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   key_pairs = ec2.key_pairs({
-    #     dry_run: false,
-    #     key_names: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     key_names: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :key_names
-    #   One or more key pair names.
-    #
-    #   Default: Describes all your key pairs.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    # @option options [Array<String>] :key_names
+    #   One or more key pair names.
+    #
+    #   Default: Describes all your key pairs.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [KeyPairInfo::Collection]
     def key_pairs(options = {})
       batches = Enumerator.new do |y|
@@ -1728,25 +1729,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_acls = ec2.network_acls({
-    #     dry_run: false,
-    #     network_acl_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     network_acl_ids: ["String"],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :network_acl_ids
-    #   One or more network ACL IDs.
-    #
-    #   Default: Describes all your network ACLs.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1808,6 +1800,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-id` - The ID of the VPC for the network ACL.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :network_acl_ids
+    #   One or more network ACL IDs.
+    #
+    #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
@@ -1837,25 +1838,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interfaces = ec2.network_interfaces({
-    #     dry_run: false,
-    #     network_interface_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     network_interface_ids: ["String"],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :network_interface_ids
-    #   One or more network interface IDs.
-    #
-    #   Default: Describes all your network interfaces.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1975,6 +1967,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :network_interface_ids
+    #   One or more network interface IDs.
+    #
+    #   Default: Describes all your network interfaces.
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
@@ -2004,16 +2005,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   placement_groups = ec2.placement_groups({
-    #     dry_run: false,
-    #     group_names: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     group_names: ["String"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `group-name` - The name of the placement group.
+    #
+    #   * `state` - The state of the placement group (`pending` \| `available`
+    #     \| `deleting` \| `deleted`).
+    #
+    #   * `strategy` - The strategy of the placement group (`cluster`).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2024,15 +2034,6 @@ module Aws::EC2
     #
     #   Default: Describes all your placement groups, or only those otherwise
     #   specified.
-    # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
-    #
-    #   * `group-name` - The name of the placement group.
-    #
-    #   * `state` - The state of the placement group (`pending` \| `available`
-    #     \| `deleting` \| `deleted`).
-    #
-    #   * `strategy` - The strategy of the placement group (`cluster`).
     # @return [PlacementGroup::Collection]
     def placement_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2071,25 +2072,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route_tables = ec2.route_tables({
-    #     dry_run: false,
-    #     route_table_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     route_table_ids: ["String"],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :route_table_ids
-    #   One or more route table IDs.
-    #
-    #   Default: Describes all your route tables.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2162,6 +2154,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :route_table_ids
+    #   One or more route table IDs.
+    #
+    #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
@@ -2191,34 +2192,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   security_groups = ec2.security_groups({
-    #     dry_run: false,
-    #     group_names: ["String"],
-    #     group_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     group_ids: ["String"],
+    #     group_names: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
-    #   You can specify either the security group name or the security group
-    #   ID. For security groups in a nondefault VPC, use the `group-name`
-    #   filter to describe security groups by name.
-    #
-    #   Default: Describes all your security groups.
-    # @option options [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
-    #   nondefault VPC.
-    #
-    #   Default: Describes all your security groups.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. If using multiple filters for rules, the results
     #   include security groups for which any combination of rules - not
@@ -2265,6 +2249,23 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
+    # @option options [Array<String>] :group_ids
+    #   One or more security group IDs. Required for security groups in a
+    #   nondefault VPC.
+    #
+    #   Default: Describes all your security groups.
+    # @option options [Array<String>] :group_names
+    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   You can specify either the security group name or the security group
+    #   ID. For security groups in a nondefault VPC, use the `group-name`
+    #   filter to describe security groups by name.
+    #
+    #   Default: Describes all your security groups.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2294,33 +2295,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshots = ec2.snapshots({
-    #     dry_run: false,
-    #     snapshot_ids: ["String"],
-    #     owner_ids: ["String"],
-    #     restorable_by_user_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     owner_ids: ["String"],
+    #     restorable_by_user_ids: ["String"],
+    #     snapshot_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
-    #
-    #   Default: Describes snapshots for which you have launch permissions.
-    # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
-    # @option options [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2363,6 +2349,21 @@ module Aws::EC2
     #   * `volume-id` - The ID of the volume the snapshot is for.
     #
     #   * `volume-size` - The size of the volume, in GiB.
+    # @option options [Array<String>] :owner_ids
+    #   Returns the snapshots owned by the specified owner. Multiple owners
+    #   can be specified.
+    # @option options [Array<String>] :restorable_by_user_ids
+    #   One or more AWS accounts IDs that can create volumes from the
+    #   snapshot.
+    # @option options [Array<String>] :snapshot_ids
+    #   One or more snapshot IDs.
+    #
+    #   Default: Describes snapshots for which you have launch permissions.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Snapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|
@@ -2394,25 +2395,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   subnets = ec2.subnets({
-    #     dry_run: false,
-    #     subnet_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     subnet_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :subnet_ids
-    #   One or more subnet IDs.
-    #
-    #   Default: Describes all your subnets.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2462,6 +2454,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-id` - The ID of the VPC for the subnet.
+    # @option options [Array<String>] :subnet_ids
+    #   One or more subnet IDs.
+    #
+    #   Default: Describes all your subnets.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
@@ -2491,23 +2492,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volumes = ec2.volumes({
-    #     dry_run: false,
-    #     volume_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     volume_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :volume_ids
-    #   One or more volume IDs.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2563,6 +2557,13 @@ module Aws::EC2
     #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
     #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
+    # @option options [Array<String>] :volume_ids
+    #   One or more volume IDs.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Volume::Collection]
     def volumes(options = {})
       batches = Enumerator.new do |y|
@@ -2594,26 +2595,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc_addresses = ec2.vpc_addresses({
-    #     dry_run: false,
-    #     public_ips: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     public_ips: ["String"],
     #     allocation_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
-    #
-    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
@@ -2636,10 +2628,19 @@ module Aws::EC2
     #     with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    # @option options [Array<String>] :public_ips
+    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #
+    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
     #   \[EC2-VPC\] One or more allocation IDs.
     #
     #   Default: Describes all your Elastic IP addresses.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [VpcAddress::Collection]
     def vpc_addresses(options = {})
       batches = Enumerator.new do |y|
@@ -2673,25 +2674,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc_peering_connections = ec2.vpc_peering_connections({
-    #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     dry_run: false,
+    #     vpc_peering_connection_ids: ["String"],
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
-    #
-    #   Default: Describes all your VPC peering connections.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2739,6 +2731,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :vpc_peering_connection_ids
+    #   One or more VPC peering connection IDs.
+    #
+    #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
     def vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
@@ -2759,25 +2760,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpcs = ec2.vpcs({
-    #     dry_run: false,
-    #     vpc_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     vpc_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :vpc_ids
-    #   One or more VPC IDs.
-    #
-    #   Default: Describes all your VPCs.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -2819,6 +2811,15 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #
     #   * `vpc-id` - The ID of the VPC.
+    # @option options [Array<String>] :vpc_ids
+    #   One or more VPC IDs.
+    #
+    #   Default: Describes all your VPCs.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Vpc::Collection]
     def vpcs(options = {})
       batches = Enumerator.new do |y|

@@ -85,6 +85,7 @@ module Aws::CodeBuild
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
+    WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
 
@@ -250,6 +251,7 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "image"))
     ProjectEnvironment.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
     ProjectEnvironment.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    ProjectEnvironment.add_member(:privileged_mode, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedMode"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: NonEmptyString)

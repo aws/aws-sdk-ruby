@@ -148,14 +148,14 @@ module Aws::CloudDirectory
     # Adds a new Facet to an object.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::SchemaFacet] :schema_facet
     #   Identifiers for the facet that you are adding to the object.
     #
     # @option params [Array<Types::AttributeKeyAndValue>] :object_attribute_list
-    #   Attributes on the facet you are adding to the object.
+    #   Attributes on the facet that you are adding to the object.
     #
     # @option params [required, Types::ObjectReference] :object_reference
     #   A reference to the object you are adding the specified facet to.
@@ -200,16 +200,16 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Copies input published schema into Directory with same name and
-    # version as that of published schema .
+    # Copies the input published schema into the Directory with the same
+    # name and version as that of the published schema .
     #
     # @option params [required, String] :published_schema_arn
-    #   Published schema ARN that needs to be copied. For more information,
-    #   see arns.
+    #   Published schema Amazon Resource Name (ARN) that needs to be copied.
+    #   For more information, see arns.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory into which the schema is copied. For
-    #   more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   into which the schema is copied. For more information, see arns.
     #
     # @return [Types::ApplySchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -245,17 +245,17 @@ module Aws::CloudDirectory
     # 2.  Using `ObjectIdentifier`
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where both objects reside. For more
-    #   information, see arns.
+    #   Amazon Resource Name (ARN) that is associated with the Directory where
+    #   both objects reside. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :parent_reference
-    #   Parent object reference.
+    #   The parent object reference.
     #
     # @option params [required, Types::ObjectReference] :child_reference
-    #   Child object reference to be attached to the object.
+    #   The child object reference to be attached to the object.
     #
     # @option params [required, String] :link_name
-    #   Link name with which the child object is attached to the parent.
+    #   The link name with which the child object is attached to the parent.
     #
     # @return [Types::AttachObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -291,14 +291,14 @@ module Aws::CloudDirectory
     # limited number of attached policies.
     #
     # @option params [String] :directory_arn
-    #   ARN associated with the Directory where both objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where both objects reside. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :policy_reference
-    #   Reference associated with the policy object.
+    #   The reference that is associated with the policy object.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object to which the policy will be
+    #   The reference that identifies the object to which the policy will be
     #   attached.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -327,7 +327,8 @@ module Aws::CloudDirectory
     # Attaches the specified object to the specified index.
     #
     # @option params [required, String] :directory_arn
-    #   The ARN of the directory where the object and index exist.
+    #   The Amazon Resource Name (ARN) of the directory where the object and
+    #   index exist.
     #
     # @option params [required, Types::ObjectReference] :index_reference
     #   A reference to the index that you are attaching the object to.
@@ -364,13 +365,93 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Attaches a typed link to a specified source and target object. For
+    # more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   attach the typed link.
+    #
+    # @option params [required, Types::ObjectReference] :source_object_reference
+    #   Identifies the source object that the typed link will attach to.
+    #
+    # @option params [required, Types::ObjectReference] :target_object_reference
+    #   Identifies the target object that the typed link will attach to.
+    #
+    # @option params [required, Types::TypedLinkSchemaAndFacetName] :typed_link_facet
+    #   Identifies the typed link facet that is associated with the typed
+    #   link.
+    #
+    # @option params [required, Array<Types::AttributeNameAndValue>] :attributes
+    #   A set of attributes that are associated with the typed link.
+    #
+    # @return [Types::AttachTypedLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AttachTypedLinkResponse#typed_link_specifier #typed_link_specifier} => Types::TypedLinkSpecifier
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_typed_link({
+    #     directory_arn: "Arn", # required
+    #     source_object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     target_object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     typed_link_facet: { # required
+    #       schema_arn: "Arn", # required
+    #       typed_link_name: "TypedLinkName", # required
+    #     },
+    #     attributes: [ # required
+    #       {
+    #         attribute_name: "AttributeName", # required
+    #         value: { # required
+    #           string_value: "StringAttributeValue",
+    #           binary_value: "data",
+    #           boolean_value: false,
+    #           number_value: "NumberAttributeValue",
+    #           datetime_value: Time.now,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.typed_link_specifier.typed_link_facet.schema_arn #=> String
+    #   resp.typed_link_specifier.typed_link_facet.typed_link_name #=> String
+    #   resp.typed_link_specifier.source_object_reference.selector #=> String
+    #   resp.typed_link_specifier.target_object_reference.selector #=> String
+    #   resp.typed_link_specifier.identity_attribute_values #=> Array
+    #   resp.typed_link_specifier.identity_attribute_values[0].attribute_name #=> String
+    #   resp.typed_link_specifier.identity_attribute_values[0].value.string_value #=> String
+    #   resp.typed_link_specifier.identity_attribute_values[0].value.binary_value #=> String
+    #   resp.typed_link_specifier.identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.typed_link_specifier.identity_attribute_values[0].value.number_value #=> String
+    #   resp.typed_link_specifier.identity_attribute_values[0].value.datetime_value #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink AWS API Documentation
+    #
+    # @overload attach_typed_link(params = {})
+    # @param [Hash] params ({})
+    def attach_typed_link(params = {}, options = {})
+      req = build_request(:attach_typed_link, params)
+      req.send_request(options)
+    end
+
     # Performs all the read operations in a batch.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory.
+    #   For more information, see arns.
     #
     # @option params [required, Array<Types::BatchReadOperation>] :operations
-    #   List of operations that are part of the batch.
+    #   A list of operations that are part of the batch.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -443,10 +524,11 @@ module Aws::CloudDirectory
     # operations.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory.
+    #   For more information, see arns.
     #
     # @option params [required, Array<Types::BatchWriteOperation>] :operations
-    #   List of operations that are part of the batch.
+    #   A list of operations that are part of the batch.
     #
     # @return [Types::BatchWriteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -591,11 +673,11 @@ module Aws::CloudDirectory
     # directory. A directory cannot be created without a schema.
     #
     # @option params [required, String] :name
-    #   Name of the Directory. Should be unique per account, per region.
+    #   The name of the Directory. Should be unique per account, per region.
     #
     # @option params [required, String] :schema_arn
-    #   ARN of the published schema that will be copied into the data
-    #   Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the published schema that will be
+    #   copied into the data Directory. For more information, see arns.
     #
     # @return [Types::CreateDirectoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -631,25 +713,25 @@ module Aws::CloudDirectory
     # development or applied schemas.
     #
     # @option params [required, String] :schema_arn
-    #   Schema ARN in which the new Facet will be created. For more
+    #   The schema ARN in which the new Facet will be created. For more
     #   information, see arns.
     #
     # @option params [required, String] :name
-    #   Name of the Facet, which is unique for a given schema.
+    #   The name of the Facet, which is unique for a given schema.
     #
     # @option params [Array<Types::FacetAttribute>] :attributes
-    #   Attributes associated with the Facet.e
+    #   The attributes that are associated with the Facet.
     #
     # @option params [required, String] :object_type
     #   Specifies whether a given object created from this facet is of type
-    #   Node, Leaf Node, Policy or Index.
+    #   node, leaf node, policy or index.
     #
     #   * Node: Can have multiple children but one parent.
     #
     #   ^
     #   ^
     #
-    #   * Leaf Node: Cannot have children but can have multiple parents.
+    #   * Leaf node: Cannot have children but can have multiple parents.
     #
     #   ^
     #   ^
@@ -726,12 +808,12 @@ module Aws::CloudDirectory
     #   The ARN of the directory where the index should be created.
     #
     # @option params [required, Array<Types::AttributeKey>] :ordered_indexed_attribute_list
-    #   Specifies the Attributes that should be indexed on. Currently only a
+    #   Specifies the attributes that should be indexed on. Currently only a
     #   single attribute is supported.
     #
     # @option params [required, Boolean] :is_unique
-    #   Indicates whether objects with the same indexed attribute value can be
-    #   added to the index.
+    #   Indicates whether the attribute that is being indexed has unique
+    #   values or not.
     #
     # @option params [Types::ObjectReference] :parent_reference
     #   A reference to the parent object that contains the index object.
@@ -775,22 +857,22 @@ module Aws::CloudDirectory
     end
 
     # Creates an object in a Directory. Additionally attaches the object to
-    # a parent, if a parent reference and LinkName is specified. An object
+    # a parent, if a parent reference and `LinkName` is specified. An object
     # is simply a collection of Facet attributes. You can also use this API
     # call to create a policy object, if the facet from which you create the
     # object is a policy facet.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory in which the object will be created.
-    #   For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   in which the object will be created. For more information, see arns.
     #
     # @option params [required, Array<Types::SchemaFacet>] :schema_facets
-    #   List of facet ARNs to be associated with the object. For more
-    #   information, see arns.
+    #   A list of schema facets to be associated with the object that contains
+    #   `SchemaArn` and facet name. For more information, see arns.
     #
     # @option params [Array<Types::AttributeKeyAndValue>] :object_attribute_list
-    #   Attribute map whose attribute ARN contains the key and attribute value
-    #   as the map value.
+    #   The attribute map whose attribute ARN contains the key and attribute
+    #   value as the map value.
     #
     # @option params [Types::ObjectReference] :parent_reference
     #   If specified, the parent reference to which this object will be
@@ -864,8 +946,8 @@ module Aws::CloudDirectory
     #   directories.
     #
     # @option params [required, String] :name
-    #   Name associated with the schema. This is unique to each account and in
-    #   each region.
+    #   The name that is associated with the schema. This is unique to each
+    #   account and in each region.
     #
     # @return [Types::CreateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -887,6 +969,63 @@ module Aws::CloudDirectory
     # @param [Hash] params ({})
     def create_schema(params = {}, options = {})
       req = build_request(:create_schema, params)
+      req.send_request(options)
+    end
+
+    # Creates a TypedLinkFacet. For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [required, Types::TypedLinkFacet] :facet
+    #   Facet structure that is associated with the typed link facet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_typed_link_facet({
+    #     schema_arn: "Arn", # required
+    #     facet: { # required
+    #       name: "TypedLinkName", # required
+    #       attributes: [ # required
+    #         {
+    #           name: "AttributeName", # required
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           default_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           is_immutable: false,
+    #           rules: {
+    #             "RuleKey" => {
+    #               type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #               parameters: {
+    #                 "RuleParameterKey" => "RuleParameterValue",
+    #               },
+    #             },
+    #           },
+    #           required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #         },
+    #       ],
+    #       identity_attribute_order: ["AttributeName"], # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet AWS API Documentation
+    #
+    # @overload create_typed_link_facet(params = {})
+    # @param [Hash] params ({})
+    def create_typed_link_facet(params = {}, options = {})
+      req = build_request(:create_typed_link_facet, params)
       req.send_request(options)
     end
 
@@ -920,12 +1059,13 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Deletes a given Facet. All attributes and Rules associated with the
-    # facet will be deleted. Only development schema facets are allowed
-    # deletion.
+    # Deletes a given Facet. All attributes and Rules that are associated
+    # with the facet will be deleted. Only development schema facets are
+    # allowed deletion.
     #
     # @option params [required, String] :schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet. For
+    #   more information, see arns.
     #
     # @option params [required, String] :name
     #   The name of the facet to delete.
@@ -952,11 +1092,11 @@ module Aws::CloudDirectory
     # children and no parents can be deleted.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object.
+    #   A reference that identifies the object.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -982,7 +1122,8 @@ module Aws::CloudDirectory
     # can only be deleted.
     #
     # @option params [required, String] :schema_arn
-    #   ARN of the development schema. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the development schema. For more
+    #   information, see arns.
     #
     # @return [Types::DeleteSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1007,10 +1148,42 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Deletes a TypedLinkFacet. For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [required, String] :name
+    #   The unique name of the typed link facet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_typed_link_facet({
+    #     schema_arn: "Arn", # required
+    #     name: "TypedLinkName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet AWS API Documentation
+    #
+    # @overload delete_typed_link_facet(params = {})
+    # @param [Hash] params ({})
+    def delete_typed_link_facet(params = {}, options = {})
+      req = build_request(:delete_typed_link_facet, params)
+      req.send_request(options)
+    end
+
     # Detaches the specified object from the specified index.
     #
     # @option params [required, String] :directory_arn
-    #   The ARN of the directory the index and object exist in.
+    #   The Amazon Resource Name (ARN) of the directory the index and object
+    #   exist in.
     #
     # @option params [required, Types::ObjectReference] :index_reference
     #   A reference to the index object.
@@ -1051,15 +1224,15 @@ module Aws::CloudDirectory
     # be detached from the parent is specified by the link name.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :parent_reference
-    #   Parent reference from which the object with the specified link name is
-    #   detached.
+    #   The parent reference from which the object with the specified link
+    #   name is detached.
     #
     # @option params [required, String] :link_name
-    #   Link name associated with the object that needs to be detached.
+    #   The link name associated with the object that needs to be detached.
     #
     # @return [Types::DetachObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1091,8 +1264,8 @@ module Aws::CloudDirectory
     # Detaches a policy from an object.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where both objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where both objects reside. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :policy_reference
     #   Reference that identifies the policy object.
@@ -1121,6 +1294,61 @@ module Aws::CloudDirectory
     # @param [Hash] params ({})
     def detach_policy(params = {}, options = {})
       req = build_request(:detach_policy, params)
+      req.send_request(options)
+    end
+
+    # Detaches a typed link from a specified source and target object. For
+    # more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   detach the typed link.
+    #
+    # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
+    #   Used to accept a typed link specifier as input.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_typed_link({
+    #     directory_arn: "Arn", # required
+    #     typed_link_specifier: { # required
+    #       typed_link_facet: { # required
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       },
+    #       source_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       target_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       identity_attribute_values: [ # required
+    #         {
+    #           attribute_name: "AttributeName", # required
+    #           value: { # required
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink AWS API Documentation
+    #
+    # @overload detach_typed_link(params = {})
+    # @param [Hash] params ({})
+    def detach_typed_link(params = {}, options = {})
+      req = build_request(:detach_typed_link, params)
       req.send_request(options)
     end
 
@@ -1214,12 +1442,13 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Gets details of the Facet, such as Facet Name, Attributes, Rules, or
-    # ObjectType. You can call this on all kinds of schema facets --
+    # Gets details of the Facet, such as facet name, attributes, Rules, or
+    # `ObjectType`. You can call this on all kinds of schema facets --
     # published, development, or applied.
     #
     # @option params [required, String] :schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet. For
+    #   more information, see arns.
     #
     # @option params [required, String] :name
     #   The name of the facet to retrieve.
@@ -1326,6 +1555,45 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Returns the identity attribute order for a specific TypedLinkFacet.
+    # For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [required, String] :name
+    #   The unique name of the typed link facet.
+    #
+    # @return [Types::GetTypedLinkFacetInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTypedLinkFacetInformationResponse#identity_attribute_order #identity_attribute_order} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_typed_link_facet_information({
+    #     schema_arn: "Arn", # required
+    #     name: "TypedLinkName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_attribute_order #=> Array
+    #   resp.identity_attribute_order[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation AWS API Documentation
+    #
+    # @overload get_typed_link_facet_information(params = {})
+    # @param [Hash] params ({})
+    def get_typed_link_facet_information(params = {}, options = {})
+      req = build_request(:get_typed_link_facet_information, params)
+      req.send_request(options)
+    end
+
     # Lists schemas applied to a directory.
     #
     # @option params [required, String] :directory_arn
@@ -1423,7 +1691,8 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Retrieves the ARNs of schemas in the development state.
+    # Retrieves each Amazon Resource Name (ARN) of schemas in the
+    # development state.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -1561,13 +1830,13 @@ module Aws::CloudDirectory
     # Retrieves the names of facets that exist in a schema.
     #
     # @option params [required, String] :schema_arn
-    #   The ARN to retrieve facet names from.
+    #   The Amazon Resource Name (ARN) to retrieve facet names from.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to retrieve
+    #   The maximum number of results to retrieve.
     #
     # @return [Types::ListFacetNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1594,6 +1863,110 @@ module Aws::CloudDirectory
     # @param [Hash] params ({})
     def list_facet_names(params = {}, options = {})
       req = build_request(:list_facet_names, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of all the incoming TypedLinkSpecifier
+    # information for an object. It also supports filtering by typed link
+    # facet and identity attributes. For more information, see [Typed
+    # link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to list
+    #   the typed links.
+    #
+    # @option params [required, Types::ObjectReference] :object_reference
+    #   Reference that identifies the object whose attributes will be listed.
+    #
+    # @option params [Array<Types::TypedLinkAttributeRange>] :filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing ranges
+    #   to typed link selection, any inexact ranges must be specified at the
+    #   end. Any attributes that do not have a range specified are presumed to
+    #   match the entire range.
+    #
+    # @option params [Types::TypedLinkSchemaAndFacetName] :filter_typed_link
+    #   Filters are interpreted in the order of the attributes on the typed
+    #   link facet, not the order in which they are supplied to any API calls.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve.
+    #
+    # @option params [String] :consistency_level
+    #   The consistency level to execute the request at.
+    #
+    # @return [Types::ListIncomingTypedLinksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIncomingTypedLinksResponse#link_specifiers #link_specifiers} => Array&lt;Types::TypedLinkSpecifier&gt;
+    #   * {Types::ListIncomingTypedLinksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_incoming_typed_links({
+    #     directory_arn: "Arn", # required
+    #     object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     filter_attribute_ranges: [
+    #       {
+    #         attribute_name: "AttributeName",
+    #         range: { # required
+    #           start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           start_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           end_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     filter_typed_link: {
+    #       schema_arn: "Arn", # required
+    #       typed_link_name: "TypedLinkName", # required
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.link_specifiers #=> Array
+    #   resp.link_specifiers[0].typed_link_facet.schema_arn #=> String
+    #   resp.link_specifiers[0].typed_link_facet.typed_link_name #=> String
+    #   resp.link_specifiers[0].source_object_reference.selector #=> String
+    #   resp.link_specifiers[0].target_object_reference.selector #=> String
+    #   resp.link_specifiers[0].identity_attribute_values #=> Array
+    #   resp.link_specifiers[0].identity_attribute_values[0].attribute_name #=> String
+    #   resp.link_specifiers[0].identity_attribute_values[0].value.string_value #=> String
+    #   resp.link_specifiers[0].identity_attribute_values[0].value.binary_value #=> String
+    #   resp.link_specifiers[0].identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
+    #   resp.link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks AWS API Documentation
+    #
+    # @overload list_incoming_typed_links(params = {})
+    # @param [Hash] params ({})
+    def list_incoming_typed_links(params = {}, options = {})
+      req = build_request(:list_incoming_typed_links, params)
       req.send_request(options)
     end
 
@@ -1685,21 +2058,22 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists all attributes associated with an object.
+    # Lists all attributes that are associated with an object.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object whose attributes will be listed.
+    #   The reference that identifies the object whose attributes will be
+    #   listed.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -1707,8 +2081,8 @@ module Aws::CloudDirectory
     #   that same object.
     #
     # @option params [Types::SchemaFacet] :facet_filter
-    #   Used to filter the list of object attributes associated with a certain
-    #   facet.
+    #   Used to filter the list of object attributes that are associated with
+    #   a certain facet.
     #
     # @return [Types::ListObjectAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1753,23 +2127,23 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Returns a paginated list of child objects associated with a given
-    # object.
+    # Returns a paginated list of child objects that are associated with a
+    # given object.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object for which child objects are being
-    #   listed.
+    #   The reference that identifies the object for which child objects are
+    #   being listed.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -1818,7 +2192,7 @@ module Aws::CloudDirectory
     # `MaxResults`, in case there are multiple paths to the parent. The
     # order of the paths and nodes returned is consistent among multiple API
     # calls unless the objects are deleted or moved. Paths not leading to
-    # directory root are ignored from the target object.
+    # the directory root are ignored from the target object.
     #
     #
     #
@@ -1828,14 +2202,15 @@ module Aws::CloudDirectory
     #   The ARN of the directory to which the parent path applies.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object whose parent paths are listed.
+    #   The reference that identifies the object whose parent paths are
+    #   listed.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @return [Types::ListObjectParentPathsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1870,23 +2245,23 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists parent objects associated with a given object in pagination
-    # fashion.
+    # Lists parent objects that are associated with a given object in
+    # pagination fashion.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object for which parent objects are
+    #   The reference that identifies the object for which parent objects are
     #   being listed.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -1928,8 +2303,8 @@ module Aws::CloudDirectory
     # Returns policies attached to an object in pagination fashion.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
     #   Reference that identifies the object for which policies will be
@@ -1939,8 +2314,8 @@ module Aws::CloudDirectory
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -1979,22 +2354,127 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Returns all of the `ObjectIdentifiers` to which a given policy is
-    # attached.
+    # Returns a paginated list of all the outgoing TypedLinkSpecifier
+    # information for an object. It also supports filtering by typed link
+    # facet and identity attributes. For more information, see [Typed
+    # link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) of the directory where you want to list
+    #   the typed links.
     #
-    # @option params [required, Types::ObjectReference] :policy_reference
-    #   Reference that identifies the policy object.
+    # @option params [required, Types::ObjectReference] :object_reference
+    #   A reference that identifies the object whose attributes will be
+    #   listed.
+    #
+    # @option params [Array<Types::TypedLinkAttributeRange>] :filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing ranges
+    #   to typed link selection, any inexact ranges must be specified at the
+    #   end. Any attributes that do not have a range specified are presumed to
+    #   match the entire range.
+    #
+    # @option params [Types::TypedLinkSchemaAndFacetName] :filter_typed_link
+    #   Filters are interpreted in the order of the attributes defined on the
+    #   typed link facet, not the order they are supplied to any API calls.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of results to retrieve.
+    #
+    # @option params [String] :consistency_level
+    #   The consistency level to execute the request at.
+    #
+    # @return [Types::ListOutgoingTypedLinksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOutgoingTypedLinksResponse#typed_link_specifiers #typed_link_specifiers} => Array&lt;Types::TypedLinkSpecifier&gt;
+    #   * {Types::ListOutgoingTypedLinksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_outgoing_typed_links({
+    #     directory_arn: "Arn", # required
+    #     object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     filter_attribute_ranges: [
+    #       {
+    #         attribute_name: "AttributeName",
+    #         range: { # required
+    #           start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           start_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           end_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     filter_typed_link: {
+    #       schema_arn: "Arn", # required
+    #       typed_link_name: "TypedLinkName", # required
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.typed_link_specifiers #=> Array
+    #   resp.typed_link_specifiers[0].typed_link_facet.schema_arn #=> String
+    #   resp.typed_link_specifiers[0].typed_link_facet.typed_link_name #=> String
+    #   resp.typed_link_specifiers[0].source_object_reference.selector #=> String
+    #   resp.typed_link_specifiers[0].target_object_reference.selector #=> String
+    #   resp.typed_link_specifiers[0].identity_attribute_values #=> Array
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].attribute_name #=> String
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.string_value #=> String
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.binary_value #=> String
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
+    #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks AWS API Documentation
+    #
+    # @overload list_outgoing_typed_links(params = {})
+    # @param [Hash] params ({})
+    def list_outgoing_typed_links(params = {}, options = {})
+      req = build_request(:list_outgoing_typed_links, params)
+      req.send_request(options)
+    end
+
+    # Returns all of the `ObjectIdentifiers` to which a given policy is
+    # attached.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
+    #
+    # @option params [required, Types::ObjectReference] :policy_reference
+    #   The reference that identifies the policy object.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @option params [String] :consistency_level
     #   Represents the manner and timing in which the successful write or
@@ -2033,7 +2513,7 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Retrieves published schema ARNs.
+    # Retrieves each published schema Amazon Resource Name (ARN).
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -2073,14 +2553,15 @@ module Aws::CloudDirectory
     # returned for a given directory with this API call.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #
     # @option params [String] :next_token
     #   The pagination token. This is for future use. Currently pagination is
     #   not supported for tagging.
     #
     # @option params [Integer] :max_results
-    #   The MaxResults parameter sets the maximum number of results returned
+    #   The `MaxResults` parameter sets the maximum number of results returned
     #   in a single page. This is for future use and is not supported
     #   currently.
     #
@@ -2113,16 +2594,127 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Returns a paginated list of all attribute definitions for a particular
+    # TypedLinkFacet. For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [required, String] :name
+    #   The unique name of the typed link facet.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve.
+    #
+    # @return [Types::ListTypedLinkFacetAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypedLinkFacetAttributesResponse#attributes #attributes} => Array&lt;Types::TypedLinkAttributeDefinition&gt;
+    #   * {Types::ListTypedLinkFacetAttributesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_typed_link_facet_attributes({
+    #     schema_arn: "Arn", # required
+    #     name: "TypedLinkName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].name #=> String
+    #   resp.attributes[0].type #=> String, one of "STRING", "BINARY", "BOOLEAN", "NUMBER", "DATETIME"
+    #   resp.attributes[0].default_value.string_value #=> String
+    #   resp.attributes[0].default_value.binary_value #=> String
+    #   resp.attributes[0].default_value.boolean_value #=> Boolean
+    #   resp.attributes[0].default_value.number_value #=> String
+    #   resp.attributes[0].default_value.datetime_value #=> Time
+    #   resp.attributes[0].is_immutable #=> Boolean
+    #   resp.attributes[0].rules #=> Hash
+    #   resp.attributes[0].rules["RuleKey"].type #=> String, one of "BINARY_LENGTH", "NUMBER_COMPARISON", "STRING_FROM_SET", "STRING_LENGTH"
+    #   resp.attributes[0].rules["RuleKey"].parameters #=> Hash
+    #   resp.attributes[0].rules["RuleKey"].parameters["RuleParameterKey"] #=> String
+    #   resp.attributes[0].required_behavior #=> String, one of "REQUIRED_ALWAYS", "NOT_REQUIRED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes AWS API Documentation
+    #
+    # @overload list_typed_link_facet_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_typed_link_facet_attributes(params = {}, options = {})
+      req = build_request(:list_typed_link_facet_attributes, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of `TypedLink` facet names for a particular
+    # schema. For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve.
+    #
+    # @return [Types::ListTypedLinkFacetNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypedLinkFacetNamesResponse#facet_names #facet_names} => Array&lt;String&gt;
+    #   * {Types::ListTypedLinkFacetNamesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_typed_link_facet_names({
+    #     schema_arn: "Arn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.facet_names #=> Array
+    #   resp.facet_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames AWS API Documentation
+    #
+    # @overload list_typed_link_facet_names(params = {})
+    # @param [Hash] params ({})
+    def list_typed_link_facet_names(params = {}, options = {})
+      req = build_request(:list_typed_link_facet_names, params)
+      req.send_request(options)
+    end
+
     # Lists all policies from the root of the Directory to the object
     # specified. If there are no policies present, an empty list is
     # returned. If policies are present, and if some objects don't have the
     # policies attached, it returns the `ObjectIdentifier` for such objects.
     # If policies are present, it returns `ObjectIdentifier`, `policyId`,
     # and `policyType`. Paths that don't lead to the root from the target
-    # object are ignored.
+    # object are ignored. For more information, see [Policies][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory.
+    #   For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
     #   Reference that identifies the object whose policies will be looked up.
@@ -2131,8 +2723,8 @@ module Aws::CloudDirectory
     #   The token to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This is
+    #   an approximate number.
     #
     # @return [Types::LookupPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2170,19 +2762,19 @@ module Aws::CloudDirectory
     end
 
     # Publishes a development schema with a version. If description and
-    # attributes are specified, PublishSchema overrides the development
+    # attributes are specified, `PublishSchema` overrides the development
     # schema description and attributes. If not, the development schema
     # description and attributes are used.
     #
     # @option params [required, String] :development_schema_arn
-    #   ARN associated with the development schema. For more information, see
-    #   arns.
+    #   The Amazon Resource Name (ARN) that is associated with the development
+    #   schema. For more information, see arns.
     #
     # @option params [required, String] :version
-    #   Version under which the schema will be published.
+    #   The version under which the schema will be published.
     #
     # @option params [String] :name
-    #   New name under which the schema will be published. If this is not
+    #   The new name under which the schema will be published. If this is not
     #   provided, the development schema is considered.
     #
     # @return [Types::PublishSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2282,13 +2874,14 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # API for adding tags to a resource.
+    # An API operation for adding tags to a resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   List of tag key value pairs.
+    #   A list of tag key-value pairs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2313,13 +2906,14 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # API for removing tags from a resource.
+    # An API operation for removing tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Keys of the tag that needs to be removed from the resource.
+    #   Keys of the tag that need to be removed from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2348,17 +2942,19 @@ module Aws::CloudDirectory
     # 3.  Deletes existing `Attributes`, `Rules`, or `ObjectTypes`.
     #
     # @option params [required, String] :schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet. For
+    #   more information, see arns.
     #
     # @option params [required, String] :name
+    #   The name of the facet.
     #
     # @option params [Array<Types::FacetAttributeUpdate>] :attribute_updates
     #   List of attributes that need to be updated in a given schema Facet.
-    #   Each attribute is followed by AttributeAction, which specifies the
+    #   Each attribute is followed by `AttributeAction`, which specifies the
     #   type of update operation to perform.
     #
     # @option params [String] :object_type
-    #   Object type associated with the facet. See
+    #   The object type that is associated with the facet. See
     #   CreateFacetRequest$ObjectType for more details.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2415,14 +3011,14 @@ module Aws::CloudDirectory
     # Updates a given object's attributes.
     #
     # @option params [required, String] :directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::ObjectReference] :object_reference
-    #   Reference that identifies the object.
+    #   The reference that identifies the object.
     #
     # @option params [required, Array<Types::ObjectAttributeUpdate>] :attribute_updates
-    #   Attributes update structure.
+    #   The attributes update structure.
     #
     # @return [Types::UpdateObjectAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2473,10 +3069,11 @@ module Aws::CloudDirectory
     # can be updated.
     #
     # @option params [required, String] :schema_arn
-    #   ARN of the development schema. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the development schema. For more
+    #   information, see arns.
     #
     # @option params [required, String] :name
-    #   Name of the schema.
+    #   The name of the schema.
     #
     # @return [Types::UpdateSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2502,6 +3099,82 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Updates a TypedLinkFacet. For more information, see [Typed link][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema. For
+    #   more information, see arns.
+    #
+    # @option params [required, String] :name
+    #   The unique name of the typed link facet.
+    #
+    # @option params [required, Array<Types::TypedLinkFacetAttributeUpdate>] :attribute_updates
+    #   Attributes update structure.
+    #
+    # @option params [required, Array<String>] :identity_attribute_order
+    #   The order of identity attributes for the facet, from most significant
+    #   to least significant. The ability to filter typed links considers the
+    #   order that the attributes are defined on the typed link facet. When
+    #   providing ranges to a typed link selection, any inexact ranges must be
+    #   specified at the end. Any attributes that do not have a range
+    #   specified are presumed to match the entire range. Filters are
+    #   interpreted in the order of the attributes on the typed link facet,
+    #   not the order in which they are supplied to any API calls. For more
+    #   information about identity attributes, see [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_typed_link_facet({
+    #     schema_arn: "Arn", # required
+    #     name: "TypedLinkName", # required
+    #     attribute_updates: [ # required
+    #       {
+    #         attribute: { # required
+    #           name: "AttributeName", # required
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           default_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           is_immutable: false,
+    #           rules: {
+    #             "RuleKey" => {
+    #               type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #               parameters: {
+    #                 "RuleParameterKey" => "RuleParameterValue",
+    #               },
+    #             },
+    #           },
+    #           required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #         },
+    #         action: "CREATE_OR_UPDATE", # required, accepts CREATE_OR_UPDATE, DELETE
+    #       },
+    #     ],
+    #     identity_attribute_order: ["AttributeName"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet AWS API Documentation
+    #
+    # @overload update_typed_link_facet(params = {})
+    # @param [Hash] params ({})
+    def update_typed_link_facet(params = {}, options = {})
+      req = build_request(:update_typed_link_facet, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2515,7 +3188,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

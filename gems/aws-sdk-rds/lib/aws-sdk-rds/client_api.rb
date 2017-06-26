@@ -359,6 +359,10 @@ module Aws::RDS
     SourceRegionList = Shapes::ListShape.new(name: 'SourceRegionList')
     SourceRegionMessage = Shapes::StructureShape.new(name: 'SourceRegionMessage')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartDBInstanceMessage = Shapes::StructureShape.new(name: 'StartDBInstanceMessage')
+    StartDBInstanceResult = Shapes::StructureShape.new(name: 'StartDBInstanceResult')
+    StopDBInstanceMessage = Shapes::StructureShape.new(name: 'StopDBInstanceMessage')
+    StopDBInstanceResult = Shapes::StructureShape.new(name: 'StopDBInstanceResult')
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
     StorageTypeNotSupportedFault = Shapes::StructureShape.new(name: 'StorageTypeNotSupportedFault')
     String = Shapes::StringShape.new(name: 'String')
@@ -489,6 +493,7 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CopyDBSnapshotMessage.add_member(:copy_tags, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTags"))
     CopyDBSnapshotMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
+    CopyDBSnapshotMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupName"))
     CopyDBSnapshotMessage.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion", metadata: {"documented"=>false}))
     CopyDBSnapshotMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CopyDBSnapshotMessage.struct_class = Types::CopyDBSnapshotMessage
@@ -709,6 +714,7 @@ module Aws::RDS
     DBCluster.add_member(:db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterArn"))
     DBCluster.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterRoles, location_name: "AssociatedRoles"))
     DBCluster.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
+    DBCluster.add_member(:clone_group_id, Shapes::ShapeRef.new(shape: String, location_name: "CloneGroupId"))
     DBCluster.add_member(:cluster_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ClusterCreateTime"))
     DBCluster.struct_class = Types::DBCluster
 
@@ -1804,6 +1810,7 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotResult.struct_class = Types::RestoreDBClusterFromSnapshotResult
 
     RestoreDBClusterToPointInTimeMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:restore_type, Shapes::ShapeRef.new(shape: String, location_name: "RestoreType"))
     RestoreDBClusterToPointInTimeMessage.add_member(:source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBClusterIdentifier"))
     RestoreDBClusterToPointInTimeMessage.add_member(:restore_to_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "RestoreToTime"))
     RestoreDBClusterToPointInTimeMessage.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseLatestRestorableTime"))
@@ -1897,6 +1904,19 @@ module Aws::RDS
     SourceRegionMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     SourceRegionMessage.add_member(:source_regions, Shapes::ShapeRef.new(shape: SourceRegionList, location_name: "SourceRegions"))
     SourceRegionMessage.struct_class = Types::SourceRegionMessage
+
+    StartDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    StartDBInstanceMessage.struct_class = Types::StartDBInstanceMessage
+
+    StartDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
+    StartDBInstanceResult.struct_class = Types::StartDBInstanceResult
+
+    StopDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    StopDBInstanceMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
+    StopDBInstanceMessage.struct_class = Types::StopDBInstanceMessage
+
+    StopDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
+    StopDBInstanceResult.struct_class = Types::StopDBInstanceResult
 
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
@@ -3078,6 +3098,38 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
+      end)
+
+      api.add_operation(:start_db_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDBInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDBInstanceMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartDBInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:stop_db_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDBInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDBInstanceMessage)
+        o.output = Shapes::ShapeRef.new(shape: StopDBInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
     end
 

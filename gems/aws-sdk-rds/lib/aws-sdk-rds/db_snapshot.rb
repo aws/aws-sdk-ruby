@@ -274,11 +274,12 @@ module Aws::RDS
     #     ],
     #     copy_tags: false,
     #     pre_signed_url: "String",
+    #     option_group_name: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_snapshot_identifier
-    #   The identifier for the copied snapshot.
+    #   The identifier for the copy of the snapshot.
     #
     #   Constraints:
     #
@@ -296,27 +297,22 @@ module Aws::RDS
     #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
     #   for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB snapshot and specify a value for the
-    #   `KmsKeyId` parameter, Amazon RDS encrypts the target DB snapshot using
-    #   the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
-    #   copy of the DB snapshot is encrypted with the same KMS key as the
+    #   specify a value for this parameter to encrypt the copy with a new KMS
+    #   encryption key. If you don't specify a value for this parameter, then
+    #   the copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
-    #   If you copy an encrypted snapshot to a different AWS region, then you
-    #   must specify a KMS key for the destination AWS region.
-    #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
-    #   account, then you must specify a value for `KmsKeyId`.
+    #   account, then you must specify a value for this parameter.
     #
-    #   To copy an encrypted DB snapshot to another region, you must set
-    #   `KmsKeyId` to the KMS key ID used to encrypt the copy of the DB
-    #   snapshot in the destination region. KMS encryption keys are specific
-    #   to the region that they are created in, and you cannot use encryption
-    #   keys from one region in another region.
+    #   If you specify this parameter when you copy an unencrypted snapshot,
+    #   the copy is encrypted.
+    #
+    #   If you copy an encrypted snapshot to a different AWS region, then you
+    #   must specify a KMS key for the destination AWS region. KMS encryption
+    #   keys are specific to the region that they are created in, and you
+    #   cannot use encryption keys from one region in another region.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [Boolean] :copy_tags
@@ -324,9 +320,13 @@ module Aws::RDS
     #   snapshot; otherwise false. The default is false.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBSnapshot` API action in the AWS region that contains the source
-    #   DB snapshot to copy. The `PreSignedUrl` parameter must be used when
-    #   copying an encrypted DB snapshot from another AWS region.
+    #   `CopyDBSnapshot` API action in the source AWS region that contains the
+    #   source DB snapshot to copy.
+    #
+    #   You must specify this parameter when you copy an encrypted DB snapshot
+    #   from another AWS region by using the Amazon RDS API. You can specify
+    #   the source region option instead of this parameter when you copy an
+    #   encrypted DB snapshot from another AWS region by using the AWS CLI.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
     #   action that can be executed in the source region that contains the
@@ -358,14 +358,26 @@ module Aws::RDS
     #     the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #   To learn how to generate a Signature Version 4 signed request, see
+    #   [Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [Signature Version 4 Signing Process][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # @option options [String] :option_group_name
+    #   The name of an option group to associate with the copy.
+    #
+    #   Specify this option if you are copying a snapshot from one AWS region
+    #   to another, and your DB instance uses a non-default option group. If
+    #   your source DB instance uses Transparent Data Encryption for Oracle or
+    #   Microsoft SQL Server, you must specify this option when copying across
+    #   regions. For more information, see [Option Group Considerations][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the

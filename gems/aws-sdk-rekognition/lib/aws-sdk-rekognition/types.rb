@@ -97,9 +97,46 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # For the provided the bounding box, confidence level that the bounding
-    # box actually contains a face, and the similarity between the face in
-    # the bounding box and the face in the source image.
+    # Provides information about a celebrity recognized by the operation.
+    #
+    # @!attribute [rw] urls
+    #   An array of URLs pointing to additional information about the
+    #   celebrity. If there is no additional information about the
+    #   celebrity, this list is empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the celebrity.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the celebrity.
+    #   @return [String]
+    #
+    # @!attribute [rw] face
+    #   Provides information about the celebrity's face, such as its
+    #   location on the image.
+    #   @return [Types::ComparedFace]
+    #
+    # @!attribute [rw] match_confidence
+    #   The confidence, in percentage, that Rekognition has that the
+    #   recognized face is the celebrity.
+    #   @return [Float]
+    #
+    class Celebrity < Struct.new(
+      :urls,
+      :name,
+      :id,
+      :face,
+      :match_confidence)
+      include Aws::Structure
+    end
+
+    # Provides information about a face in a target image that matches the
+    # source image face analysed by `CompareFaces`. The `Face` property
+    # contains the bounding box of the face in the target image. The
+    # `Similarity` property is the confidence that the source image face
+    # matches the face in the bounding box.
     #
     # @!attribute [rw] similarity
     #   Level of confidence that the faces match.
@@ -140,16 +177,16 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] source_image
-    #   Source image either as bytes or an S3 object
+    #   The source image, either as bytes or as an S3 object.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
-    #   Target image either as bytes or an S3 object
+    #   The target image, either as bytes or as an S3 object.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
-    #   The minimum level of confidence in the match you want included in
-    #   the result.
+    #   The minimum level of confidence in the face matches that a match
+    #   must meet to be included in the `FaceMatches` array.
     #   @return [Float]
     #
     class CompareFacesRequest < Struct.new(
@@ -160,59 +197,97 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] source_image_face
-    #   The face from the source image that was used for comparison.
+    #   The face in the source image that was used for comparison.
     #   @return [Types::ComparedSourceImageFace]
     #
     # @!attribute [rw] face_matches
-    #   Provides an array of `CompareFacesMatch` objects. Each object
-    #   provides the bounding box, confidence that the bounding box contains
-    #   a face, and the similarity between the face in the bounding box and
-    #   the face in the source image.
+    #   An array of faces in the target image that match the source image
+    #   face. Each `CompareFacesMatch` object provides the bounding box, the
+    #   confidence level that the bounding box contains a face, and the
+    #   similarity score for the face in the bounding box and the face in
+    #   the source image.
     #   @return [Array<Types::CompareFacesMatch>]
+    #
+    # @!attribute [rw] unmatched_faces
+    #   An array of faces in the target image that did not match the source
+    #   image face.
+    #   @return [Array<Types::ComparedFace>]
+    #
+    # @!attribute [rw] source_image_orientation_correction
+    #   The orientation of the source image (counterclockwise direction). If
+    #   your application displays the source image, you can use this value
+    #   to correct image orientation. The bounding box coordinates returned
+    #   in `SourceImageFace` represent the location of the face before the
+    #   image orientation is corrected.
+    #
+    #   <note markdown="1"> If the source image is in .jpeg format, it might contain
+    #   exchangeable image (Exif) metadata that includes the image's
+    #   orientation. If the Exif metadata for the source image populates the
+    #   orientation field, the value of `OrientationCorrection` is null and
+    #   the `SourceImageFace` bounding box coordinates represent the
+    #   location of the face after Exif metadata is used to correct the
+    #   orientation. Images in .png format don't contain Exif metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] target_image_orientation_correction
+    #   The orientation of the target image (in counterclockwise direction).
+    #   If your application displays the target image, you can use this
+    #   value to correct the orientation of the image. The bounding box
+    #   coordinates returned in `FaceMatches` and `UnmatchedFaces` represent
+    #   face locations before the image orientation is corrected.
+    #
+    #   <note markdown="1"> If the target image is in .jpg format, it might contain Exif
+    #   metadata that includes the orientation of the image. If the Exif
+    #   metadata for the target image populates the orientation field, the
+    #   value of `OrientationCorrection` is null and the bounding box
+    #   coordinates in `FaceMatches` and `UnmatchedFaces` represent the
+    #   location of the face after Exif metadata is used to correct the
+    #   orientation. Images in .png format don't contain Exif metadata.
+    #
+    #    </note>
+    #   @return [String]
     #
     class CompareFacesResponse < Struct.new(
       :source_image_face,
-      :face_matches)
+      :face_matches,
+      :unmatched_faces,
+      :source_image_orientation_correction,
+      :target_image_orientation_correction)
       include Aws::Structure
     end
 
-    # Provides face metadata (bounding box and confidence that the bounding
-    # box actually contains a face).
+    # Provides face metadata for target image faces that are analysed by
+    # `CompareFaces` and `RecognizeCelebrities`.
     #
     # @!attribute [rw] bounding_box
-    #   Identifies the bounding box around the object or face. The `left`
-    #   (x-coordinate) and `top` (y-coordinate) are coordinates representing
-    #   the top and left sides of the bounding box. Note that the upper-left
-    #   corner of the image is the origin (0,0).
-    #
-    #   The `top` and `left` values returned are ratios of the overall image
-    #   size. For example, if the input image is 700x200 pixels, and the
-    #   top-left coordinate of the bounding box is 350x50 pixels, the API
-    #   returns a `left` value of 0.5 (350/700) and a `top` value of 0.25
-    #   (50/200).
-    #
-    #   The `width` and `height` values represent the dimensions of the
-    #   bounding box as a ratio of the overall image dimension. For example,
-    #   if the input image is 700x200 pixels, and the bounding box width is
-    #   70 pixels, the width returned is 0.1.
-    #
-    #   <note markdown="1"> The bounding box coordinates can have negative values. For example,
-    #   if Amazon Rekognition is able to detect a face that is at the image
-    #   edge and is only partially visible, the service can return
-    #   coordinates that are outside the image bounds and, depending on the
-    #   image edge, you might get negative values or values greater than 1
-    #   for the `left` or `top` values.
-    #
-    #    </note>
+    #   Bounding box of the face.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] confidence
     #   Level of confidence that what the bounding box contains is a face.
     #   @return [Float]
     #
+    # @!attribute [rw] landmarks
+    #   An array of facial landmarks.
+    #   @return [Array<Types::Landmark>]
+    #
+    # @!attribute [rw] pose
+    #   Indicates the pose of the face as determined by its pitch, roll, and
+    #   yaw.
+    #   @return [Types::Pose]
+    #
+    # @!attribute [rw] quality
+    #   Identifies face image brightness and sharpness.
+    #   @return [Types::ImageQuality]
+    #
     class ComparedFace < Struct.new(
       :bounding_box,
-      :confidence)
+      :confidence,
+      :landmarks,
+      :pose,
+      :quality)
       include Aws::Structure
     end
 
@@ -223,30 +298,7 @@ module Aws::Rekognition
     # for this comparison.
     #
     # @!attribute [rw] bounding_box
-    #   Identifies the bounding box around the object or face. The `left`
-    #   (x-coordinate) and `top` (y-coordinate) are coordinates representing
-    #   the top and left sides of the bounding box. Note that the upper-left
-    #   corner of the image is the origin (0,0).
-    #
-    #   The `top` and `left` values returned are ratios of the overall image
-    #   size. For example, if the input image is 700x200 pixels, and the
-    #   top-left coordinate of the bounding box is 350x50 pixels, the API
-    #   returns a `left` value of 0.5 (350/700) and a `top` value of 0.25
-    #   (50/200).
-    #
-    #   The `width` and `height` values represent the dimensions of the
-    #   bounding box as a ratio of the overall image dimension. For example,
-    #   if the input image is 700x200 pixels, and the bounding box width is
-    #   70 pixels, the width returned is 0.1.
-    #
-    #   <note markdown="1"> The bounding box coordinates can have negative values. For example,
-    #   if Amazon Rekognition is able to detect a face that is at the image
-    #   edge and is only partially visible, the service can return
-    #   coordinates that are outside the image bounds and, depending on the
-    #   image edge, you might get negative values or values greater than 1
-    #   for the `left` or `top` values.
-    #
-    #    </note>
+    #   Bounding box of the face.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] confidence
@@ -367,13 +419,13 @@ module Aws::Rekognition
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
-    #   A list of facial attributes you want to be returned. This can be the
-    #   default list of attributes or all attributes. If you don't specify
-    #   a value for `Attributes` or if you specify `["DEFAULT"]`, the API
-    #   returns the following subset of facial attributes: `BoundingBox`,
-    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
-    #   `["ALL"]`, all facial attributes are returned but the operation will
-    #   take longer to complete.
+    #   An array of facial attributes you want to be returned. This can be
+    #   the default list of attributes or all attributes. If you don't
+    #   specify a value for `Attributes` or if you specify `["DEFAULT"]`,
+    #   the API returns the following subset of facial attributes:
+    #   `BoundingBox`, `Confidence`, `Pose`, `Quality` and `Landmarks`. If
+    #   you provide `["ALL"]`, all facial attributes are returned but the
+    #   operation will take longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
     #   logical AND operator to determine which attributes to return (in
@@ -391,19 +443,19 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceDetail>]
     #
     # @!attribute [rw] orientation_correction
-    #   The algorithm detects the image orientation. If it detects that the
-    #   image was rotated, it returns the degrees of rotation. If your
-    #   application is displaying the image, you can use this value to
-    #   adjust the orientation.
+    #   The orientation of the input image (counter-clockwise direction). If
+    #   your application displays the image, you can use this value to
+    #   correct image orientation. The bounding box coordinates returned in
+    #   `FaceDetails` represent face locations before the image orientation
+    #   is corrected.
     #
-    #   For example, if the service detects that the input image was rotated
-    #   by 90 degrees, it corrects orientation, performs face detection, and
-    #   then returns the faces. That is, the bounding box coordinates in the
-    #   response are based on the corrected orientation.
-    #
-    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
-    #   Amazon Rekognition does not perform orientation correction and the
-    #   value of OrientationCorrection will be nil.
+    #   <note markdown="1"> If the input image is in .jpeg format, it might contain exchangeable
+    #   image (Exif) metadata that includes the image's orientation. If so,
+    #   and the Exif metadata for the input image populates the orientation
+    #   field, the value of `OrientationCorrection` is null and the
+    #   `FaceDetails` bounding box coordinates represent face locations
+    #   after Exif metadata is used to correct the image orientation. Images
+    #   in .png format don't contain Exif metadata.
     #
     #    </note>
     #   @return [String]
@@ -462,16 +514,15 @@ module Aws::Rekognition
     #   @return [Array<Types::Label>]
     #
     # @!attribute [rw] orientation_correction
-    #   Amazon Rekognition returns the orientation of the input image that
-    #   was detected (clockwise direction). If your application displays the
-    #   image, you can use this value to correct the orientation. If Amazon
-    #   Rekognition detects that the input image was rotated (for example,
-    #   by 90 degrees), it first corrects the orientation before detecting
-    #   the labels.
+    #   The orientation of the input image (counter-clockwise direction). If
+    #   your application displays the image, you can use this value to
+    #   correct the orientation. If Amazon Rekognition detects that the
+    #   input image was rotated (for example, by 90 degrees), it first
+    #   corrects the orientation before detecting the labels.
     #
-    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
+    #   <note markdown="1"> If the input image Exif metadata populates the orientation field,
     #   Amazon Rekognition does not perform orientation correction and the
-    #   value of OrientationCorrection will be nil.
+    #   value of OrientationCorrection will be null.
     #
     #    </note>
     #   @return [String]
@@ -498,23 +549,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -533,7 +568,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] moderation_labels
-    #   A list of labels for explicit or suggestive adult content found in
+    #   An array of labels for explicit or suggestive adult content found in
     #   the image. The list includes the top-level label and each child
     #   label detected in the image. This is useful for filtering specific
     #   categories of content.
@@ -597,41 +632,18 @@ module Aws::Rekognition
     end
 
     # Describes the face properties such as the bounding box, face ID, image
-    # ID of the source image, and external image ID that you assigned.
+    # ID of the input image, and external image ID that you assigned.
     #
     # @!attribute [rw] face_id
     #   Unique identifier that Amazon Rekognition assigns to the face.
     #   @return [String]
     #
     # @!attribute [rw] bounding_box
-    #   Identifies the bounding box around the object or face. The `left`
-    #   (x-coordinate) and `top` (y-coordinate) are coordinates representing
-    #   the top and left sides of the bounding box. Note that the upper-left
-    #   corner of the image is the origin (0,0).
-    #
-    #   The `top` and `left` values returned are ratios of the overall image
-    #   size. For example, if the input image is 700x200 pixels, and the
-    #   top-left coordinate of the bounding box is 350x50 pixels, the API
-    #   returns a `left` value of 0.5 (350/700) and a `top` value of 0.25
-    #   (50/200).
-    #
-    #   The `width` and `height` values represent the dimensions of the
-    #   bounding box as a ratio of the overall image dimension. For example,
-    #   if the input image is 700x200 pixels, and the bounding box width is
-    #   70 pixels, the width returned is 0.1.
-    #
-    #   <note markdown="1"> The bounding box coordinates can have negative values. For example,
-    #   if Amazon Rekognition is able to detect a face that is at the image
-    #   edge and is only partially visible, the service can return
-    #   coordinates that are outside the image bounds and, depending on the
-    #   image edge, you might get negative values or values greater than 1
-    #   for the `left` or `top` values.
-    #
-    #    </note>
+    #   Bounding box of the face.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] image_id
-    #   Unique identifier that Amazon Rekognition assigns to the source
+    #   Unique identifier that Amazon Rekognition assigns to the input
     #   image.
     #   @return [String]
     #
@@ -710,11 +722,11 @@ module Aws::Rekognition
     #   @return [Array<Types::Emotion>]
     #
     # @!attribute [rw] landmarks
-    #   Indicates the location of the landmark on the face.
+    #   Indicates the location of landmarks on the face.
     #   @return [Array<Types::Landmark>]
     #
     # @!attribute [rw] pose
-    #   Indicates the pose of the face as determined by pitch, roll, and the
+    #   Indicates the pose of the face as determined by its pitch, roll, and
     #   yaw.
     #   @return [Types::Pose]
     #
@@ -771,7 +783,7 @@ module Aws::Rekognition
     #
     # @!attribute [rw] face
     #   Describes the face properties such as the bounding box, face ID,
-    #   image ID of the source image, and external image ID that you
+    #   image ID of the input image, and external image ID that you
     #   assigned.
     #   @return [Types::Face]
     #
@@ -802,14 +814,52 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides the source image either as bytes or an S3 object.
+    # @note When making an API call, you may pass GetCelebrityInfoRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "RekognitionUniqueId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID for the celebrity. You get the celebrity ID from a call to
+    #   the operation, which recognizes celebrities in an image.
+    #   @return [String]
+    #
+    class GetCelebrityInfoRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] urls
+    #   An array of URLs pointing to additional celebrity information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the celebrity.
+    #   @return [String]
+    #
+    class GetCelebrityInfoResponse < Struct.new(
+      :urls,
+      :name)
+      include Aws::Structure
+    end
+
+    # Provides the input image either as bytes or an S3 object.
+    #
+    # You pass image bytes to a Rekognition API operation by using the
+    # `Bytes` property. For example, you would use the `Bytes` property to
+    # pass an image loaded from a local file system. Image bytes passed by
+    # using the `Bytes` property must be base64-encoded. Your code may not
+    # need to encode image bytes if you are using an AWS SDK to call
+    # Rekognition API operations. For more information, see example4.
+    #
+    # You pass images stored in an S3 bucket to a Rekognition API operation
+    # by using the `S3Object` property. Images stored in an S3 bucket do not
+    # need to be base64-encoded.
     #
     # The region for the S3 bucket containing the S3 object must match the
     # region you use for Amazon Rekognition operations.
-    #
-    # You may need to Base64-encode the image bytes depending on the
-    # language you are using and whether or not you are using the AWS SDK.
-    # For more information, see example4.
     #
     # If you use the Amazon CLI to call Amazon Rekognition operations,
     # passing image bytes using the Bytes property is not supported. You
@@ -889,23 +939,7 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -913,7 +947,7 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] detection_attributes
-    #   A list of facial attributes that you want to be returned. This can
+    #   An array of facial attributes that you want to be returned. This can
     #   be the default list of attributes or all attributes. If you don't
     #   specify a value for `Attributes` or if you specify `["DEFAULT"]`,
     #   the API returns the following subset of facial attributes:
@@ -940,14 +974,18 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceRecord>]
     #
     # @!attribute [rw] orientation_correction
-    #   The algorithm detects the image orientation. If it detects that the
-    #   image was rotated, it returns the degree of rotation. You can use
-    #   this value to correct the orientation and also appropriately analyze
-    #   the bounding box coordinates that are returned.
+    #   The orientation of the input image (counterclockwise direction). If
+    #   your application displays the image, you can use this value to
+    #   correct image orientation. The bounding box coordinates returned in
+    #   `FaceRecords` represent face locations before the image orientation
+    #   is corrected.
     #
-    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
-    #   Amazon Rekognition does not perform orientation correction and the
-    #   value of OrientationCorrection will be nil.
+    #   <note markdown="1"> If the input image is in jpeg format, it might contain exchangeable
+    #   image (Exif) metadata. If so, and the Exif metadata populates the
+    #   orientation field, the value of `OrientationCorrection` is null and
+    #   the bounding box coordinates in `FaceRecords` represent face
+    #   locations after Exif metadata is used to correct the image
+    #   orientation. Images in .png format don't contain Exif metadata.
     #
     #    </note>
     #   @return [String]
@@ -1089,8 +1127,7 @@ module Aws::Rekognition
 
     # Provides information about a single type of moderated content found in
     # an image. Each type of moderated content has a label within a
-    # hierarchical taxonomy. For more information, see
-    # howitworks-moderateimage.
+    # hierarchical taxonomy. For more information, see image-moderation.
     #
     # @!attribute [rw] confidence
     #   Specifies the confidence that Amazon Rekognition has that the label
@@ -1152,7 +1189,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Indicates the pose of the face as determined by pitch, roll, and the
+    # Indicates the pose of the face as determined by its pitch, roll, and
     # yaw.
     #
     # @!attribute [rw] roll
@@ -1171,6 +1208,64 @@ module Aws::Rekognition
       :roll,
       :yaw,
       :pitch)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RecognizeCelebritiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The input image to use for celebrity recognition.
+    #   @return [Types::Image]
+    #
+    class RecognizeCelebritiesRequest < Struct.new(
+      :image)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] celebrity_faces
+    #   Details about each celebrity found in the image. Amazon Rekognition
+    #   can detect a maximum of 15 celebrities in an image.
+    #   @return [Array<Types::Celebrity>]
+    #
+    # @!attribute [rw] unrecognized_faces
+    #   Details about each unrecognized face in the image.
+    #   @return [Array<Types::ComparedFace>]
+    #
+    # @!attribute [rw] orientation_correction
+    #   The orientation of the input image (counterclockwise direction). If
+    #   your application displays the image, you can use this value to
+    #   correct the orientation. The bounding box coordinates returned in
+    #   `CelebrityFaces` and `UnrecognizedFaces` represent face locations
+    #   before the image orientation is corrected.
+    #
+    #   <note markdown="1"> If the input image is in .jpeg format, it might contain exchangeable
+    #   image (Exif) metadata that includes the image's orientation. If so,
+    #   and the Exif metadata for the input image populates the orientation
+    #   field, the value of `OrientationCorrection` is null and the
+    #   `CelebrityFaces` and `UnrecognizedFaces` bounding box coordinates
+    #   represent face locations after Exif metadata is used to correct the
+    #   image orientation. Images in .png format don't contain Exif
+    #   metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class RecognizeCelebritiesResponse < Struct.new(
+      :celebrity_faces,
+      :unrecognized_faces,
+      :orientation_correction)
       include Aws::Structure
     end
 
@@ -1234,23 +1329,7 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces

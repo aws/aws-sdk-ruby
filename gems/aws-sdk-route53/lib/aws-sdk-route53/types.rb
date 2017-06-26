@@ -387,6 +387,7 @@ module Aws::Route53
     #             subdivision_code: "GeoLocationSubdivisionCode",
     #           },
     #           failover: "PRIMARY", # accepts PRIMARY, SECONDARY
+    #           multi_value_answer: false,
     #           ttl: 1,
     #           resource_records: [
     #             {
@@ -496,6 +497,7 @@ module Aws::Route53
     #                 subdivision_code: "GeoLocationSubdivisionCode",
     #               },
     #               failover: "PRIMARY", # accepts PRIMARY, SECONDARY
+    #               multi_value_answer: false,
     #               ttl: 1,
     #               resource_records: [
     #                 {
@@ -597,6 +599,7 @@ module Aws::Route53
     #                   subdivision_code: "GeoLocationSubdivisionCode",
     #                 },
     #                 failover: "PRIMARY", # accepts PRIMARY, SECONDARY
+    #                 multi_value_answer: false,
     #                 ttl: 1,
     #                 resource_records: [
     #                   {
@@ -4048,6 +4051,7 @@ module Aws::Route53
     #           subdivision_code: "GeoLocationSubdivisionCode",
     #         },
     #         failover: "PRIMARY", # accepts PRIMARY, SECONDARY
+    #         multi_value_answer: false,
     #         ttl: 1,
     #         resource_records: [
     #           {
@@ -4120,6 +4124,9 @@ module Aws::Route53
     #   geolocation, or failover resource record sets, specify the same
     #   value for all of the resource record sets in the group.
     #
+    #   Valid values for multivalue answer resource record sets: `A` \|
+    #   `AAAA` \| `MX` \| `NAPTR` \| `PTR` \| `SPF` \| `SRV` \| `TXT`
+    #
     #   <note markdown="1"> SPF records were formerly used to verify the identity of the sender
     #   of email messages. However, we no longer recommend that you create
     #   resource record sets for which the value of `Type` is `SPF`. RFC
@@ -4148,8 +4155,8 @@ module Aws::Route53
     #   * **Amazon S3 buckets:** `A`
     #
     #   * **Another resource record set in this hosted zone:** Specify the
-    #     type of the resource record set for which you're creating the
-    #     alias. Specify any value except `NS` or `SOA`.
+    #     type of the resource record set that you're creating the alias
+    #     for. All values are supported except `NS` and `SOA`.
     #
     #
     #
@@ -4344,12 +4351,44 @@ module Aws::Route53
     #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [String]
     #
+    # @!attribute [rw] multi_value_answer
+    #   *Multivalue answer resource record sets only*\: To route traffic
+    #   approximately randomly to multiple resources, such as web servers,
+    #   create one multivalue answer record for each resource and specify
+    #   `true` for `MultiValueAnswer`. Note the following:
+    #
+    #   * If you associate a health check with a multivalue answer resource
+    #     record set, Amazon Route 53 responds to DNS queries with the
+    #     corresponding IP address only when the health check is healthy.
+    #
+    #   * If you don't associate a health check with a multivalue answer
+    #     record, Amazon Route 53 always considers the record to be healthy.
+    #
+    #   * Amazon Route 53 responds to DNS queries with up to eight healthy
+    #     records; if you have eight or fewer healthy records, Amazon Route
+    #     53 responds to all DNS queries with all the healthy records.
+    #
+    #   * If you have more than eight healthy records, Amazon Route 53
+    #     responds to different DNS resolvers with different combinations of
+    #     healthy records.
+    #
+    #   * When all records are unhealthy, Amazon Route 53 responds to DNS
+    #     queries with up to eight unhealthy records.
+    #
+    #   * If a resource becomes unavailable after a resolver caches a
+    #     response, client software typically tries another of the IP
+    #     addresses in the response.
+    #
+    #   You can't create multivalue answer alias records.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] ttl
     #   The resource record cache time to live (TTL), in seconds. Note the
     #   following:
     #
-    #   * If you're creating an alias resource record set, omit `TTL`.
-    #     Amazon Route 53 uses the value of `TTL` for the alias target.
+    #   * If you're creating or updating an alias resource record set, omit
+    #     `TTL`. Amazon Route 53 uses the value of `TTL` for the alias
+    #     target.
     #
     #   * If you're associating this resource record set with a health
     #     check (if you're adding a `HealthCheckId` element), we recommend
@@ -4513,6 +4552,7 @@ module Aws::Route53
       :region,
       :geo_location,
       :failover,
+      :multi_value_answer,
       :ttl,
       :resource_records,
       :alias_target,

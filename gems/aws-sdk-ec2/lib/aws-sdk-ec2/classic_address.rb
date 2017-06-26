@@ -115,34 +115,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.associate({
-    #     dry_run: false,
-    #     instance_id: "String",
     #     allocation_id: "String",
+    #     instance_id: "String",
+    #     allow_reassociation: false,
+    #     dry_run: false,
     #     network_interface_id: "String",
     #     private_ip_address: "String",
-    #     allow_reassociation: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :allocation_id
+    #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
     # @option options [String] :instance_id
     #   The ID of the instance. This is required for EC2-Classic. For EC2-VPC,
     #   you can specify either the instance ID or the network interface ID,
     #   but not both. The operation fails if you specify an instance ID unless
     #   exactly one network interface is attached.
-    # @option options [String] :allocation_id
-    #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
-    # @option options [String] :network_interface_id
-    #   \[EC2-VPC\] The ID of the network interface. If the instance has more
-    #   than one network interface, you must specify a network interface ID.
-    # @option options [String] :private_ip_address
-    #   \[EC2-VPC\] The primary or secondary private IP address to associate
-    #   with the Elastic IP address. If no private IP address is specified,
-    #   the Elastic IP address is associated with the primary private IP
-    #   address.
     # @option options [Boolean] :allow_reassociation
     #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to allow
     #   an Elastic IP address that is already associated with an instance or
@@ -151,6 +138,19 @@ module Aws::EC2
     #   EC2-VPC-only account, reassociation is automatic, therefore you can
     #   specify false to ensure the operation fails if the Elastic IP address
     #   is already associated with another resource.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :network_interface_id
+    #   \[EC2-VPC\] The ID of the network interface. If the instance has more
+    #   than one network interface, you must specify a network interface ID.
+    # @option options [String] :private_ip_address
+    #   \[EC2-VPC\] The primary or secondary private IP address to associate
+    #   with the Elastic IP address. If no private IP address is specified,
+    #   the Elastic IP address is associated with the primary private IP
+    #   address.
     # @return [Types::AssociateAddressResult]
     def associate(options = {})
       options = options.merge(public_ip: @public_ip)
@@ -161,17 +161,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.disassociate({
-    #     dry_run: false,
     #     association_id: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :association_id
+    #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :association_id
-    #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
     # @return [EmptyStructure]
     def disassociate(options = {})
       options = options.merge(public_ip: data.public_ip)
@@ -182,17 +182,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     dry_run: false,
     #     allocation_id: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :allocation_id
+    #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :allocation_id
-    #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
     # @return [EmptyStructure]
     def release(options = {})
       options = options.merge(public_ip: data.public_ip)

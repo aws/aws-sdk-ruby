@@ -256,8 +256,12 @@ module Aws::IoT
     # Creates an X.509 certificate using the specified certificate signing
     # request.
     #
-    # **Note** Reusing the same certificate signing request (CSR) results in
-    # a distinct certificate.
+    # **Note:** The CSR must include a public key that is either an RSA key
+    # with a length of at least 2048 bits or an ECC key from NIST P-256 or
+    # NIST P-384 curves.
+    #
+    # **Note:** Reusing the same certificate signing request (CSR) results
+    # in a distinct certificate.
     #
     # You can create multiple certificates in a batch by creating a
     # directory, copying multiple .csr files into that directory, and then
@@ -474,7 +478,7 @@ module Aws::IoT
     #   The attribute payload, which consists of up to three name/value pairs
     #   in a JSON document. For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\})`
+    #   `\{"attributes":\{"string1":"string2"\}\}`
     #
     # @return [Types::CreateThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -635,6 +639,10 @@ module Aws::IoT
     #             index: "ElasticsearchIndex", # required
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
+    #           },
+    #           salesforce: {
+    #             token: "SalesforceToken", # required
+    #             url: "SalesforceEndpoint", # required
     #           },
     #         },
     #       ],
@@ -1292,6 +1300,8 @@ module Aws::IoT
     #   resp.rule.actions[0].elasticsearch.index #=> String
     #   resp.rule.actions[0].elasticsearch.type #=> String
     #   resp.rule.actions[0].elasticsearch.id #=> String
+    #   resp.rule.actions[0].salesforce.token #=> String
+    #   resp.rule.actions[0].salesforce.url #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #
@@ -1849,11 +1859,11 @@ module Aws::IoT
     # Registers a CA certificate with AWS IoT. This CA certificate can then
     # be used to sign device certificates, which can be then registered with
     # AWS IoT. You can register up to 10 CA certificates per AWS account
-    # that have the same subject field and public key. This enables you to
-    # have up to 10 certificate authorities sign your device certificates.
-    # If you have more than one CA certificate registered, make sure you
-    # pass the CA certificate when you register your device certificates
-    # with the RegisterCertificate API.
+    # that have the same subject field. This enables you to have up to 10
+    # certificate authorities sign your device certificates. If you have
+    # more than one CA certificate registered, make sure you pass the CA
+    # certificate when you register your device certificates with the
+    # RegisterCertificate API.
     #
     # @option params [required, String] :ca_certificate
     #   The CA certificate.
@@ -1910,6 +1920,7 @@ module Aws::IoT
     #   A boolean value that specifies if the CA certificate is set to active.
     #
     # @option params [String] :status
+    #   The status of the register certificate request.
     #
     # @return [Types::RegisterCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2063,6 +2074,10 @@ module Aws::IoT
     #             index: "ElasticsearchIndex", # required
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
+    #           },
+    #           salesforce: {
+    #             token: "SalesforceToken", # required
+    #             url: "SalesforceEndpoint", # required
     #           },
     #         },
     #       ],
@@ -2256,7 +2271,7 @@ module Aws::IoT
     #   A list of thing attributes, a JSON string containing name-value pairs.
     #   For example:
     #
-    #   `\{"attributes":\{"name1":"value2"\}\})`
+    #   `\{"attributes":\{"name1":"value2"\}\}`
     #
     #   This data is used to add new attributes or update existing attributes.
     #
@@ -2307,7 +2322,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

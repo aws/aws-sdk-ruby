@@ -316,7 +316,7 @@ module Aws::LexModelBuildingService
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
-    #   The Amazon Parrot voice ID that Amazon Lex uses for voice
+    #   The Amazon Polly voice ID that Amazon Lex uses for voice
     #   interactions with the user.
     #   @return [String]
     #
@@ -1158,7 +1158,9 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] name_contains
     #   Substring to match in channel association names. An association will
     #   be returned if any part of its name matches the substring. For
-    #   example, "xyz" matches both "xyzabc" and "abcxyz."
+    #   example, "xyz" matches both "xyzabc" and "abcxyz." To return
+    #   all bot channel associations, use a hyphen ("-") as the
+    #   `nameContains` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationsRequest AWS API Documentation
@@ -1266,8 +1268,8 @@ module Aws::LexModelBuildingService
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
-    #   The Amazon Parrot voice ID that Amazon Lex uses for voice
-    #   interaction with the user. For more information, see .
+    #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
+    #   with the user. For more information, see .
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -2399,7 +2401,7 @@ module Aws::LexModelBuildingService
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
-    #   The Amazon Parrot voice ID that you want Amazon Lex to use for voice
+    #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
     #   match the locale of the bot. For more information, see [Voice][1] in
     #   the *Amazon Polly Developer Guide*.
@@ -2541,8 +2543,8 @@ module Aws::LexModelBuildingService
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
-    #   The Amazon Parrot voice ID that Amazon Lex uses for voice
-    #   interaction with the user. For more information, see .
+    #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
+    #   with the user. For more information, see .
     #   @return [String]
     #
     # @!attribute [rw] checksum

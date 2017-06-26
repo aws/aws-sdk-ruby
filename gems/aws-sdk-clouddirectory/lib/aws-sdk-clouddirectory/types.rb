@@ -39,8 +39,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] schema_facet
@@ -48,7 +48,7 @@ module Aws::CloudDirectory
     #   @return [Types::SchemaFacet]
     #
     # @!attribute [rw] object_attribute_list
-    #   Attributes on the facet you are adding to the object.
+    #   Attributes on the facet that you are adding to the object.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] object_reference
@@ -78,13 +78,13 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] published_schema_arn
-    #   Published schema ARN that needs to be copied. For more information,
-    #   see arns.
+    #   Published schema Amazon Resource Name (ARN) that needs to be copied.
+    #   For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory into which the schema is copied.
-    #   For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   into which the schema is copied. For more information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaRequest AWS API Documentation
@@ -96,13 +96,15 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] applied_schema_arn
-    #   Applied schema ARN associated with the copied schema in the
-    #   Directory. You can use this ARN to describe the schema information
-    #   applied on this directory. For more information, see arns.
+    #   The applied schema ARN that is associated with the copied schema in
+    #   the Directory. You can use this ARN to describe the schema
+    #   information applied on this directory. For more information, see
+    #   arns.
     #   @return [String]
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The ARN that is associated with the Directory. For more information,
+    #   see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaResponse AWS API Documentation
@@ -128,20 +130,20 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where both objects reside. For
-    #   more information, see arns.
+    #   Amazon Resource Name (ARN) that is associated with the Directory
+    #   where both objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] parent_reference
-    #   Parent object reference.
+    #   The parent object reference.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] child_reference
-    #   Child object reference to be attached to the object.
+    #   The child object reference to be attached to the object.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] link_name
-    #   Link name with which the child object is attached to the parent.
+    #   The link name with which the child object is attached to the parent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectRequest AWS API Documentation
@@ -155,7 +157,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attached_object_identifier
-    #   Attached `ObjectIdentifier`, which is the child `ObjectIdentifier`.
+    #   The attached `ObjectIdentifier`, which is the child
+    #   `ObjectIdentifier`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectResponse AWS API Documentation
@@ -179,16 +182,16 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where both objects reside. For
-    #   more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where both objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] policy_reference
-    #   Reference associated with the policy object.
+    #   The reference that is associated with the policy object.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object to which the policy will be
+    #   The reference that identifies the object to which the policy will be
     #   attached.
     #   @return [Types::ObjectReference]
     #
@@ -219,7 +222,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   The ARN of the directory where the object and index exist.
+    #   The Amazon Resource Name (ARN) of the directory where the object and
+    #   index exist.
     #   @return [String]
     #
     # @!attribute [rw] index_reference
@@ -250,6 +254,79 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AttachTypedLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         source_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         target_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         typed_link_facet: { # required
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         attributes: [ # required
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             value: { # required
+    #               string_value: "StringAttributeValue",
+    #               binary_value: "data",
+    #               boolean_value: false,
+    #               number_value: "NumberAttributeValue",
+    #               datetime_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   attach the typed link.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_object_reference
+    #   Identifies the source object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] target_object_reference
+    #   Identifies the target object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] typed_link_facet
+    #   Identifies the typed link facet that is associated with the typed
+    #   link.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] attributes
+    #   A set of attributes that are associated with the typed link.
+    #   @return [Array<Types::AttributeNameAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkRequest AWS API Documentation
+    #
+    class AttachTypedLinkRequest < Struct.new(
+      :directory_arn,
+      :source_object_reference,
+      :target_object_reference,
+      :typed_link_facet,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] typed_link_specifier
+    #   Returns a typed link specifier as output.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkResponse AWS API Documentation
+    #
+    class AttachTypedLinkResponse < Struct.new(
+      :typed_link_specifier)
+      include Aws::Structure
+    end
+
     # A unique identifier for an attribute.
     #
     # @note When making an API call, you may pass AttributeKey
@@ -262,11 +339,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   The ARN of the schema that contains the facet and attribute.
+    #   The Amazon Resource Name (ARN) of the schema that contains the facet
+    #   and attribute.
     #   @return [String]
     #
     # @!attribute [rw] facet_name
-    #   The name of the facet the attribute exists within.
+    #   The name of the facet that the attribute exists within.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -314,6 +392,38 @@ module Aws::CloudDirectory
     #
     class AttributeKeyAndValue < Struct.new(
       :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Identifies the attribute name and value for a typed link.
+    #
+    # @note When making an API call, you may pass AttributeNameAndValue
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "AttributeName", # required
+    #         value: { # required
+    #           string_value: "StringAttributeValue",
+    #           binary_value: "data",
+    #           boolean_value: false,
+    #           number_value: "NumberAttributeValue",
+    #           datetime_value: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name of the typed link.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the typed link.
+    #   @return [Types::TypedAttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeNameAndValue AWS API Documentation
+    #
+    class AttributeNameAndValue < Struct.new(
+      :attribute_name,
       :value)
       include Aws::Structure
     end
@@ -376,7 +486,7 @@ module Aws::CloudDirectory
     #
     class BatchAddFacetToObjectResponse < Aws::EmptyStructure; end
 
-    # Represents the output of an AttachObject operation.
+    # Represents the output of an `AttachObject` operation.
     #
     # @note When making an API call, you may pass BatchAttachObject
     #   data as a hash:
@@ -392,11 +502,11 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] parent_reference
-    #   Parent object reference.
+    #   The parent object reference.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] child_reference
-    #   Child object reference to be attached to the object.
+    #   The child object reference that is to be attached to the object.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] link_name
@@ -412,7 +522,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output batch AttachObject response operation.
+    # Represents the output batch `AttachObject` response operation.
     #
     # @!attribute [rw] attached_object_identifier
     #   The `ObjectIdentifier` of the object that has been attached.
@@ -425,7 +535,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a CreateObject operation.
+    # Represents the output of a `CreateObject` operation.
     #
     # @note When making an API call, you may pass BatchCreateObject
     #   data as a hash:
@@ -461,12 +571,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_facet
-    #   List of FacetArns that will be associated with the object. For more
-    #   information, see arns.
+    #   A list of `FacetArns` that will be associated with the object. For
+    #   more information, see arns.
     #   @return [Array<Types::SchemaFacet>]
     #
     # @!attribute [rw] object_attribute_list
-    #   Attribute map, which contains an attribute ARN as the key and
+    #   An attribute map, which contains an attribute ARN as the key and
     #   attribute value as the map value.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
@@ -501,7 +611,7 @@ module Aws::CloudDirectory
     # Represents the output of a `CreateObject` response operation.
     #
     # @!attribute [rw] object_identifier
-    #   ID associated with the object.
+    #   The ID that is associated with the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateObjectResponse AWS API Documentation
@@ -523,7 +633,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object.
+    #   The reference that identifies the object.
     #   @return [Types::ObjectReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDeleteObject AWS API Documentation
@@ -617,13 +727,13 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] facet_filter
-    #   Used to filter the list of object attributes associated with a
-    #   certain facet.
+    #   Used to filter the list of object attributes that are associated
+    #   with a certain facet.
     #   @return [Types::SchemaFacet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributes AWS API Documentation
@@ -639,8 +749,8 @@ module Aws::CloudDirectory
     # Represents the output of a `ListObjectAttributes` response operation.
     #
     # @!attribute [rw] attributes
-    #   Attributes map associated with the object. `AttributeArn` is the
-    #   key; attribute value is the value.
+    #   The attributes map that is associated with the object.
+    #   `AttributeArn` is the key; attribute value is the value.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] next_token
@@ -693,8 +803,8 @@ module Aws::CloudDirectory
     # Represents the output of a `ListObjectChildren` response operation.
     #
     # @!attribute [rw] children
-    #   Children structure, which is a map with key as the `LinkName` and
-    #   `ObjectIdentifier` as the value.
+    #   The children structure, which is a map with the key as the
+    #   `LinkName` and `ObjectIdentifier` as the value.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token
@@ -709,15 +819,15 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Batch Read Exception structure, which contains exception type and
-    # message.
+    # The batch read exception structure, which contains the exception type
+    # and message.
     #
     # @!attribute [rw] type
-    #   Type of exception, such as `InvalidArnException`.
+    #   A type of exception, such as `InvalidArnException`.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Exception message associated with the failure.
+    #   An exception message that is associated with the failure.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadException AWS API Documentation
@@ -755,7 +865,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] list_object_attributes
-    #   Lists all attributes associated with an object.
+    #   Lists all attributes that are associated with an object.
     #   @return [Types::BatchListObjectAttributes]
     #
     # @!attribute [rw] list_object_children
@@ -820,11 +930,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the
+    #   Directory. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] operations
-    #   List of operations that are part of the batch.
+    #   A list of operations that are part of the batch.
     #   @return [Array<Types::BatchReadOperation>]
     #
     # @!attribute [rw] consistency_level
@@ -843,7 +954,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] responses
-    #   List of all the responses for each batch read.
+    #   A list of all the responses for each batch read.
     #   @return [Array<Types::BatchReadOperationResponse>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadResponse AWS API Documentation
@@ -856,12 +967,12 @@ module Aws::CloudDirectory
     # Represents the output of a `BatchRead` success response operation.
     #
     # @!attribute [rw] list_object_attributes
-    #   Lists all attributes associated with an object.
+    #   Lists all attributes that are associated with an object.
     #   @return [Types::BatchListObjectAttributesResponse]
     #
     # @!attribute [rw] list_object_children
-    #   Returns a paginated list of child objects associated with a given
-    #   object.
+    #   Returns a paginated list of child objects that are associated with a
+    #   given object.
     #   @return [Types::BatchListObjectChildrenResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadSuccessfulResponse AWS API Documentation
@@ -872,7 +983,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Batch operation to remove a facet from an object.
+    # A batch operation to remove a facet from an object.
     #
     # @note When making an API call, you may pass BatchRemoveFacetFromObject
     #   data as a hash:
@@ -903,7 +1014,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Empty result representing success.
+    # An empty result that represents success.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRemoveFacetFromObjectResponse AWS API Documentation
     #
@@ -958,7 +1069,7 @@ module Aws::CloudDirectory
     # Represents the output of a `BatchUpdate` response operation.
     #
     # @!attribute [rw] object_identifier
-    #   ID associated with the object.
+    #   ID that is associated with the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateObjectAttributesResponse AWS API Documentation
@@ -1097,7 +1208,7 @@ module Aws::CloudDirectory
     #   @return [Types::BatchDetachObject]
     #
     # @!attribute [rw] update_object_attributes
-    #   Update a given object's attributes.
+    #   Updates a given object's attributes.
     #   @return [Types::BatchUpdateObjectAttributes]
     #
     # @!attribute [rw] delete_object
@@ -1105,11 +1216,11 @@ module Aws::CloudDirectory
     #   @return [Types::BatchDeleteObject]
     #
     # @!attribute [rw] add_facet_to_object
-    #   Batch operation adding a facet to an object.
+    #   A batch operation that adds a facet to an object.
     #   @return [Types::BatchAddFacetToObject]
     #
     # @!attribute [rw] remove_facet_from_object
-    #   Batch operation removing a facet from an object.
+    #   A batch operation that removes a facet from an object.
     #   @return [Types::BatchRemoveFacetFromObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperation AWS API Documentation
@@ -1148,11 +1259,11 @@ module Aws::CloudDirectory
     #   @return [Types::BatchDeleteObjectResponse]
     #
     # @!attribute [rw] add_facet_to_object
-    #   Result of an add facet to object batch operation.
+    #   The result of an add facet to object batch operation.
     #   @return [Types::BatchAddFacetToObjectResponse]
     #
     # @!attribute [rw] remove_facet_from_object
-    #   Result of a batch remove facet from object operation.
+    #   The result of a batch remove facet from object operation.
     #   @return [Types::BatchRemoveFacetFromObjectResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperationResponse AWS API Documentation
@@ -1288,11 +1399,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the
+    #   Directory. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] operations
-    #   List of operations that are part of the batch.
+    #   A list of operations that are part of the batch.
     #   @return [Array<Types::BatchWriteOperation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteRequest AWS API Documentation
@@ -1304,7 +1416,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] responses
-    #   List of all the responses for each batch write.
+    #   A list of all the responses for each batch write.
     #   @return [Array<Types::BatchWriteOperationResponse>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteResponse AWS API Documentation
@@ -1323,12 +1435,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the Directory. Should be unique per account, per region.
+    #   The name of the Directory. Should be unique per account, per region.
     #   @return [String]
     #
     # @!attribute [rw] schema_arn
-    #   ARN of the published schema that will be copied into the data
-    #   Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the published schema that will be
+    #   copied into the data Directory. For more information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectoryRequest AWS API Documentation
@@ -1340,11 +1452,12 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The ARN that is associated with the Directory. For more information,
+    #   see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the Directory.
+    #   The name of the Directory.
     #   @return [String]
     #
     # @!attribute [rw] object_identifier
@@ -1352,8 +1465,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] applied_schema_arn
-    #   ARN of the published schema in the Directory. Once a published
-    #   schema is copied into the directory, it has its own ARN which is
+    #   The ARN of the published schema in the Directory. Once a published
+    #   schema is copied into the directory, it has its own ARN, which is
     #   referred to applied schema ARN. For more information, see arns.
     #   @return [String]
     #
@@ -1406,28 +1519,28 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   Schema ARN in which the new Facet will be created. For more
+    #   The schema ARN in which the new Facet will be created. For more
     #   information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the Facet, which is unique for a given schema.
+    #   The name of the Facet, which is unique for a given schema.
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   Attributes associated with the Facet.e
+    #   The attributes that are associated with the Facet.
     #   @return [Array<Types::FacetAttribute>]
     #
     # @!attribute [rw] object_type
     #   Specifies whether a given object created from this facet is of type
-    #   Node, Leaf Node, Policy or Index.
+    #   node, leaf node, policy or index.
     #
     #   * Node: Can have multiple children but one parent.
     #
     #   ^
     #   ^
     #
-    #   * Leaf Node: Cannot have children but can have multiple parents.
+    #   * Leaf node: Cannot have children but can have multiple parents.
     #
     #   ^
     #   ^
@@ -1485,13 +1598,13 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] ordered_indexed_attribute_list
-    #   Specifies the Attributes that should be indexed on. Currently only a
+    #   Specifies the attributes that should be indexed on. Currently only a
     #   single attribute is supported.
     #   @return [Array<Types::AttributeKey>]
     #
     # @!attribute [rw] is_unique
-    #   Indicates whether objects with the same indexed attribute value can
-    #   be added to the index.
+    #   Indicates whether the attribute that is being indexed has unique
+    #   values or not.
     #   @return [Boolean]
     #
     # @!attribute [rw] parent_reference
@@ -1558,17 +1671,17 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory in which the object will be
-    #   created. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   in which the object will be created. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] schema_facets
-    #   List of facet ARNs to be associated with the object. For more
-    #   information, see arns.
+    #   A list of schema facets to be associated with the object that
+    #   contains `SchemaArn` and facet name. For more information, see arns.
     #   @return [Array<Types::SchemaFacet>]
     #
     # @!attribute [rw] object_attribute_list
-    #   Attribute map whose attribute ARN contains the key and attribute
+    #   The attribute map whose attribute ARN contains the key and attribute
     #   value as the map value.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
@@ -1593,7 +1706,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifier
-    #   Identifier associated with the object.
+    #   The identifier that is associated with the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObjectResponse AWS API Documentation
@@ -1611,8 +1724,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] name
-    #   Name associated with the schema. This is unique to each account and
-    #   in each region.
+    #   The name that is associated with the schema. This is unique to each
+    #   account and in each region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaRequest AWS API Documentation
@@ -1623,7 +1736,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] schema_arn
-    #   ARN associated with the schema. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaResponse AWS API Documentation
@@ -1632,6 +1746,61 @@ module Aws::CloudDirectory
       :schema_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateTypedLinkFacetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         facet: { # required
+    #           name: "TypedLinkName", # required
+    #           attributes: [ # required
+    #             {
+    #               name: "AttributeName", # required
+    #               type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #               default_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               is_immutable: false,
+    #               rules: {
+    #                 "RuleKey" => {
+    #                   type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #                   parameters: {
+    #                     "RuleParameterKey" => "RuleParameterValue",
+    #                   },
+    #                 },
+    #               },
+    #               required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #             },
+    #           ],
+    #           identity_attribute_order: ["AttributeName"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] facet
+    #   Facet structure that is associated with the typed link facet.
+    #   @return [Types::TypedLinkFacet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetRequest AWS API Documentation
+    #
+    class CreateTypedLinkFacetRequest < Struct.new(
+      :schema_arn,
+      :facet)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetResponse AWS API Documentation
+    #
+    class CreateTypedLinkFacetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDirectoryRequest
     #   data as a hash:
@@ -1671,7 +1840,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet.
+    #   For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1701,12 +1871,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object.
+    #   A reference that identifies the object.
     #   @return [Types::ObjectReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectRequest AWS API Documentation
@@ -1729,7 +1899,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   ARN of the development schema. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the development schema. For more
+    #   information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchemaRequest AWS API Documentation
@@ -1740,7 +1911,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] schema_arn
-    #   Input ARN that is returned as part of the response. For more
+    #   The input ARN that is returned as part of the response. For more
     #   information, see arns.
     #   @return [String]
     #
@@ -1750,6 +1921,35 @@ module Aws::CloudDirectory
       :schema_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteTypedLinkFacetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         name: "TypedLinkName", # required
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetRequest AWS API Documentation
+    #
+    class DeleteTypedLinkFacetRequest < Struct.new(
+      :schema_arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetResponse AWS API Documentation
+    #
+    class DeleteTypedLinkFacetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DetachFromIndexRequest
     #   data as a hash:
@@ -1765,7 +1965,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   The ARN of the directory the index and object exist in.
+    #   The Amazon Resource Name (ARN) of the directory the index and object
+    #   exist in.
     #   @return [String]
     #
     # @!attribute [rw] index_reference
@@ -1809,17 +2010,17 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] parent_reference
-    #   Parent reference from which the object with the specified link name
-    #   is detached.
+    #   The parent reference from which the object with the specified link
+    #   name is detached.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] link_name
-    #   Link name associated with the object that needs to be detached.
+    #   The link name associated with the object that needs to be detached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectRequest AWS API Documentation
@@ -1856,8 +2057,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where both objects reside. For
-    #   more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where both objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] policy_reference
@@ -1882,6 +2083,54 @@ module Aws::CloudDirectory
     #
     class DetachPolicyResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DetachTypedLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   detach the typed link.
+    #   @return [String]
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Used to accept a typed link specifier as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkRequest AWS API Documentation
+    #
+    class DetachTypedLinkRequest < Struct.new(
+      :directory_arn,
+      :typed_link_specifier)
+      include Aws::Structure
+    end
+
     # Directory structure that includes the directory name and directory
     # ARN.
     #
@@ -1890,7 +2139,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the
+    #   directory. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1978,7 +2228,7 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] object_type
-    #   Object type associated with the facet. See
+    #   The object type that is associated with the facet. See
     #   CreateFacetRequest$ObjectType for more details.
     #   @return [String]
     #
@@ -1990,7 +2240,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Attribute associated with the Facet.
+    # An attribute that is associated with the Facet.
     #
     # @note When making an API call, you may pass FacetAttribute
     #   data as a hash:
@@ -2038,8 +2288,8 @@ module Aws::CloudDirectory
     #   @return [Types::FacetAttributeDefinition]
     #
     # @!attribute [rw] attribute_reference
-    #   Attribute reference associated with the attribute. See [Attribute
-    #   References][1] for more information.
+    #   An attribute reference that is associated with the attribute. See
+    #   [Attribute References][1] for more information.
     #
     #
     #
@@ -2116,8 +2366,8 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Facet attribute reference that specifies the attribute definition
-    # which contains attribute facet name and attribute name.
+    # The facet attribute reference that specifies the attribute definition
+    # that contains the attribute facet name and attribute name.
     #
     # @note When making an API call, you may pass FacetAttributeReference
     #   data as a hash:
@@ -2128,8 +2378,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] target_facet_name
-    #   Target facet name associated with the facet reference. See
-    #   [Attribute References][1] for more information.
+    #   The target facet name that is associated with the facet reference.
+    #   See [Attribute References][1] for more information.
     #
     #
     #
@@ -2137,8 +2387,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] target_attribute_name
-    #   Target attribute name associated with the facet reference. See
-    #   [Attribute References][1] for more information.
+    #   The target attribute name that is associated with the facet
+    #   reference. See [Attribute References][1] for more information.
     #
     #
     #
@@ -2243,7 +2493,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet.
+    #   For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2259,7 +2510,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] facet
-    #   Facet structure associated with the facet.
+    #   The Facet structure that is associated with the facet.
     #   @return [Types::Facet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacetResponse AWS API Documentation
@@ -2348,6 +2599,55 @@ module Aws::CloudDirectory
     class GetSchemaAsJsonResponse < Struct.new(
       :name,
       :document)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTypedLinkFacetInformationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         name: "TypedLinkName", # required
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationRequest AWS API Documentation
+    #
+    class GetTypedLinkFacetInformationRequest < Struct.new(
+      :schema_arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_attribute_order
+    #   The order of identity attributes for the facet, from most
+    #   significant to least significant. The ability to filter typed links
+    #   considers the order that the attributes are defined on the typed
+    #   link facet. When providing ranges to typed link selection, any
+    #   inexact ranges must be specified at the end. Any attributes that do
+    #   not have a range specified are presumed to match the entire range.
+    #   Filters are interpreted in the order of the attributes on the typed
+    #   link facet, not the order in which they are supplied to any API
+    #   calls. For more information about identity attributes, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationResponse AWS API Documentation
+    #
+    class GetTypedLinkFacetInformationResponse < Struct.new(
+      :identity_attribute_order)
       include Aws::Structure
     end
 
@@ -2547,8 +2847,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] directories
-    #   Lists all directories associated with your account in pagination
-    #   fashion.
+    #   Lists all directories that are associated with your account in
+    #   pagination fashion.
     #   @return [Array<Types::Directory>]
     #
     # @!attribute [rw] next_token
@@ -2625,7 +2925,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   The ARN to retrieve facet names from.
+    #   The Amazon Resource Name (ARN) to retrieve facet names from.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2633,7 +2933,7 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to retrieve
+    #   The maximum number of results to retrieve.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNamesRequest AWS API Documentation
@@ -2657,6 +2957,110 @@ module Aws::CloudDirectory
     #
     class ListFacetNamesResponse < Struct.new(
       :facet_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListIncomingTypedLinksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         filter_attribute_ranges: [
+    #           {
+    #             attribute_name: "AttributeName",
+    #             range: { # required
+    #               start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               start_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               end_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         filter_typed_link: {
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   list the typed links.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing
+    #   ranges to typed link selection, any inexact ranges must be specified
+    #   at the end. Any attributes that do not have a range specified are
+    #   presumed to match the entire range.
+    #   @return [Array<Types::TypedLinkAttributeRange>]
+    #
+    # @!attribute [rw] filter_typed_link
+    #   Filters are interpreted in the order of the attributes on the typed
+    #   link facet, not the order in which they are supplied to any API
+    #   calls.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consistency_level
+    #   The consistency level to execute the request at.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksRequest AWS API Documentation
+    #
+    class ListIncomingTypedLinksRequest < Struct.new(
+      :directory_arn,
+      :object_reference,
+      :filter_attribute_ranges,
+      :filter_typed_link,
+      :next_token,
+      :max_results,
+      :consistency_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] link_specifiers
+    #   Returns one or more typed link specifiers as output.
+    #   @return [Array<Types::TypedLinkSpecifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksResponse AWS API Documentation
+    #
+    class ListIncomingTypedLinksResponse < Struct.new(
+      :link_specifiers,
       :next_token)
       include Aws::Structure
     end
@@ -2771,12 +3175,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object whose attributes will be
+    #   The reference that identifies the object whose attributes will be
     #   listed.
     #   @return [Types::ObjectReference]
     #
@@ -2785,8 +3189,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] consistency_level
@@ -2796,8 +3200,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] facet_filter
-    #   Used to filter the list of object attributes associated with a
-    #   certain facet.
+    #   Used to filter the list of object attributes that are associated
+    #   with a certain facet.
     #   @return [Types::SchemaFacet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesRequest AWS API Documentation
@@ -2813,8 +3217,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attributes
-    #   Attributes map associated with the object. AttributeArn is the key,
-    #   and attribute value is the value.
+    #   Attributes map that is associated with the object. `AttributeArn` is
+    #   the key, and attribute value is the value.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] next_token
@@ -2843,12 +3247,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object for which child objects are
+    #   The reference that identifies the object for which child objects are
     #   being listed.
     #   @return [Types::ObjectReference]
     #
@@ -2857,8 +3261,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] consistency_level
@@ -2879,7 +3283,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] children
-    #   Children structure, which is a map with key as the LinkName and
+    #   Children structure, which is a map with key as the `LinkName` and
     #   `ObjectIdentifier` as the value.
     #   @return [Hash<String,String>]
     #
@@ -2912,7 +3316,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object whose parent paths are listed.
+    #   The reference that identifies the object whose parent paths are
+    #   listed.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
@@ -2920,8 +3325,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsRequest AWS API Documentation
@@ -2935,8 +3340,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] path_to_object_identifiers_list
-    #   Returns the path to the `ObjectIdentifiers` associated with the
-    #   directory.
+    #   Returns the path to the `ObjectIdentifiers` that are associated with
+    #   the directory.
     #   @return [Array<Types::PathToObjectIdentifiers>]
     #
     # @!attribute [rw] next_token
@@ -2965,13 +3370,13 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object for which parent objects are
-    #   being listed.
+    #   The reference that identifies the object for which parent objects
+    #   are being listed.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
@@ -2979,8 +3384,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] consistency_level
@@ -3001,8 +3406,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] parents
-    #   Parent structure, which is a map with key as the `ObjectIdentifier`
-    #   and LinkName as the value.
+    #   The parent structure, which is a map with key as the
+    #   `ObjectIdentifier` and LinkName as the value.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token
@@ -3031,8 +3436,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
@@ -3045,8 +3450,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] consistency_level
@@ -3067,7 +3472,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attached_policy_ids
-    #   List of policy `ObjectIdentifiers`, that are attached to the object.
+    #   A list of policy `ObjectIdentifiers`, that are attached to the
+    #   object.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -3078,6 +3484,110 @@ module Aws::CloudDirectory
     #
     class ListObjectPoliciesResponse < Struct.new(
       :attached_policy_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOutgoingTypedLinksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         filter_attribute_ranges: [
+    #           {
+    #             attribute_name: "AttributeName",
+    #             range: { # required
+    #               start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               start_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               end_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         filter_typed_link: {
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) of the directory where you want to
+    #   list the typed links.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_reference
+    #   A reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing
+    #   ranges to typed link selection, any inexact ranges must be specified
+    #   at the end. Any attributes that do not have a range specified are
+    #   presumed to match the entire range.
+    #   @return [Array<Types::TypedLinkAttributeRange>]
+    #
+    # @!attribute [rw] filter_typed_link
+    #   Filters are interpreted in the order of the attributes defined on
+    #   the typed link facet, not the order they are supplied to any API
+    #   calls.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consistency_level
+    #   The consistency level to execute the request at.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksRequest AWS API Documentation
+    #
+    class ListOutgoingTypedLinksRequest < Struct.new(
+      :directory_arn,
+      :object_reference,
+      :filter_attribute_ranges,
+      :filter_typed_link,
+      :next_token,
+      :max_results,
+      :consistency_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] typed_link_specifiers
+    #   Returns a typed link specifier as output.
+    #   @return [Array<Types::TypedLinkSpecifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksResponse AWS API Documentation
+    #
+    class ListOutgoingTypedLinksResponse < Struct.new(
+      :typed_link_specifiers,
       :next_token)
       include Aws::Structure
     end
@@ -3096,12 +3606,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where objects reside. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where objects reside. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] policy_reference
-    #   Reference that identifies the policy object.
+    #   The reference that identifies the policy object.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
@@ -3109,8 +3619,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @!attribute [rw] consistency_level
@@ -3131,7 +3641,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifiers
-    #   List of `ObjectIdentifiers` to which the policy is attached.
+    #   A list of `ObjectIdentifiers` to which the policy is attached.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -3196,7 +3706,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3205,9 +3716,9 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The MaxResults parameter sets the maximum number of results returned
-    #   in a single page. This is for future use and is not supported
-    #   currently.
+    #   The `MaxResults` parameter sets the maximum number of results
+    #   returned in a single page. This is for future use and is not
+    #   supported currently.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -3220,7 +3731,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] tags
-    #   List of tag key value pairs associated with the response.
+    #   A list of tag key value pairs that are associated with the response.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
@@ -3232,6 +3743,106 @@ module Aws::CloudDirectory
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypedLinkFacetAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         name: "TypedLinkName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesRequest AWS API Documentation
+    #
+    class ListTypedLinkFacetAttributesRequest < Struct.new(
+      :schema_arn,
+      :name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   An ordered set of attributes associate with the typed link.
+    #   @return [Array<Types::TypedLinkAttributeDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesResponse AWS API Documentation
+    #
+    class ListTypedLinkFacetAttributesResponse < Struct.new(
+      :attributes,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTypedLinkFacetNamesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesRequest AWS API Documentation
+    #
+    class ListTypedLinkFacetNamesRequest < Struct.new(
+      :schema_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] facet_names
+    #   The names of typed link facets that exist within the schema.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesResponse AWS API Documentation
+    #
+    class ListTypedLinkFacetNamesResponse < Struct.new(
+      :facet_names,
       :next_token)
       include Aws::Structure
     end
@@ -3249,7 +3860,8 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the
+    #   Directory. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
@@ -3262,8 +3874,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of items to be retrieved in a single call. This is an
-    #   approximate number.
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyRequest AWS API Documentation
@@ -3278,7 +3890,12 @@ module Aws::CloudDirectory
 
     # @!attribute [rw] policy_to_path_list
     #   Provides list of path to policies. Policies contain `PolicyId`,
-    #   `ObjectIdentifier`, and `PolicyType`.
+    #   `ObjectIdentifier`, and `PolicyType`. For more information, see
+    #   [Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
     #   @return [Array<Types::PolicyToPath>]
     #
     # @!attribute [rw] next_token
@@ -3310,7 +3927,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] object_attribute_action_type
-    #   Type can be either Update or Delete.
+    #   A type that can be either `Update` or `Delete`.
     #   @return [String]
     #
     # @!attribute [rw] object_attribute_update_value
@@ -3357,7 +3974,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] attribute_key
-    #   The key of the attribute the attribute range covers.
+    #   The key of the attribute that the attribute range covers.
     #   @return [Types::AttributeKey]
     #
     # @!attribute [rw] range
@@ -3411,7 +4028,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Reference that identifies an object.
+    # The reference that identifies an object.
     #
     # @note When making an API call, you may pass ObjectReference
     #   data as a hash:
@@ -3421,14 +4038,27 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] selector
-    #   Allows you to specify an object. You can identify an object in one
-    #   of the following ways:
+    #   A path selector supports easy selection of an object by the
+    #   parent/child links leading to it from the directory root. Use the
+    #   link names from each parent/child link to construct the path. Path
+    #   selectors start with a slash (/) and link names are separated by
+    #   slashes. For more information about paths, see [Accessing
+    #   Objects][1]. You can identify an object in one of the following
+    #   ways:
     #
-    #   * *$ObjectIdentifier* - Identifies the object by `ObjectIdentifier`
+    #   * *$ObjectIdentifier* - An object identifier is an opaque string
+    #     provided by Amazon Cloud Directory. When creating objects, the
+    #     system will provide you with the identifier of the created object.
+    #     An object’s identifier is immutable and no two objects will ever
+    #     share the same object identifier
     #
     #   * */some/path* - Identifies the object based on path
     #
     #   * *#SomeBatchReference* - Identifies the object in a batch call
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectReference AWS API Documentation
@@ -3438,11 +4068,12 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Returns the path to the `ObjectIdentifiers` associated with the
-    # directory.
+    # Returns the path to the `ObjectIdentifiers` that is associated with
+    # the directory.
     #
     # @!attribute [rw] path
-    #   The path used to identify the object starting from directory root.
+    #   The path that is used to identify the object starting from directory
+    #   root.
     #   @return [String]
     #
     # @!attribute [rw] object_identifiers
@@ -3459,14 +4090,18 @@ module Aws::CloudDirectory
     end
 
     # Contains the `PolicyType`, `PolicyId`, and the `ObjectIdentifier` to
-    # which it is attached.
+    # which it is attached. For more information, see [Policies][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
     #
     # @!attribute [rw] policy_id
     #   The ID of `PolicyAttachment`.
     #   @return [String]
     #
     # @!attribute [rw] object_identifier
-    #   The `ObjectIdentifier` associated with `PolicyAttachment`.
+    #   The `ObjectIdentifier` that is associated with `PolicyAttachment`.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3483,8 +4118,8 @@ module Aws::CloudDirectory
     end
 
     # Used when a regular object exists in a Directory and you want to find
-    # all of the policies associated with that object and the parent to that
-    # object.
+    # all of the policies that are associated with that object and the
+    # parent to that object.
     #
     # @!attribute [rw] path
     #   The path that is referenced from the root.
@@ -3512,17 +4147,17 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] development_schema_arn
-    #   ARN associated with the development schema. For more information,
-    #   see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the
+    #   development schema. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version under which the schema will be published.
+    #   The version under which the schema will be published.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   New name under which the schema will be published. If this is not
-    #   provided, the development schema is considered.
+    #   The new name under which the schema will be published. If this is
+    #   not provided, the development schema is considered.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaRequest AWS API Documentation
@@ -3535,8 +4170,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] published_schema_arn
-    #   ARN associated with the published schema. For more information, see
-    #   arns.
+    #   The ARN that is associated with the published schema. For more
+    #   information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaResponse AWS API Documentation
@@ -3620,7 +4255,8 @@ module Aws::CloudDirectory
     #
     class RemoveFacetFromObjectResponse < Aws::EmptyStructure; end
 
-    # Contains an ARN and parameters associated with the rule.
+    # Contains an Amazon Resource Name (ARN) and parameters that are
+    # associated with the rule.
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
@@ -3637,7 +4273,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Min and max parameters associated with the rule.
+    #   The minimum and maximum parameters that are associated with the
+    #   rule.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Rule AWS API Documentation
@@ -3674,7 +4311,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Tag structure which contains tag key and value.
+    # The tag structure that contains a tag key and value.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -3685,11 +4322,11 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] key
-    #   Key associated with the tag.
+    #   The key that is associated with the tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value associated with the tag.
+    #   The value that is associated with the tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Tag AWS API Documentation
@@ -3714,11 +4351,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   List of tag key value pairs.
+    #   A list of tag key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceRequest AWS API Documentation
@@ -3804,7 +4442,7 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] start_mode
-    #   Inclusive or exclusive range start.
+    #   The inclusive or exclusive range start.
     #   @return [String]
     #
     # @!attribute [rw] start_value
@@ -3812,7 +4450,7 @@ module Aws::CloudDirectory
     #   @return [Types::TypedAttributeValue]
     #
     # @!attribute [rw] end_mode
-    #   Inclusive or exclusive range end.
+    #   The inclusive or exclusive range end.
     #   @return [String]
     #
     # @!attribute [rw] end_value
@@ -3829,6 +4467,312 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # A typed link attribute definition.
+    #
+    # @note When making an API call, you may pass TypedLinkAttributeDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         name: "AttributeName", # required
+    #         type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #         default_value: {
+    #           string_value: "StringAttributeValue",
+    #           binary_value: "data",
+    #           boolean_value: false,
+    #           number_value: "NumberAttributeValue",
+    #           datetime_value: Time.now,
+    #         },
+    #         is_immutable: false,
+    #         rules: {
+    #           "RuleKey" => {
+    #             type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #             parameters: {
+    #               "RuleParameterKey" => "RuleParameterValue",
+    #             },
+    #           },
+    #         },
+    #         required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the attribute (if configured).
+    #   @return [Types::TypedAttributeValue]
+    #
+    # @!attribute [rw] is_immutable
+    #   Whether the attribute is mutable or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rules
+    #   Validation rules that are attached to the attribute definition.
+    #   @return [Hash<String,Types::Rule>]
+    #
+    # @!attribute [rw] required_behavior
+    #   The required behavior of the `TypedLinkAttributeDefinition`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkAttributeDefinition AWS API Documentation
+    #
+    class TypedLinkAttributeDefinition < Struct.new(
+      :name,
+      :type,
+      :default_value,
+      :is_immutable,
+      :rules,
+      :required_behavior)
+      include Aws::Structure
+    end
+
+    # Identifies the range of attributes that are used by a specified
+    # filter.
+    #
+    # @note When making an API call, you may pass TypedLinkAttributeRange
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "AttributeName",
+    #         range: { # required
+    #           start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           start_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #           end_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The unique name of the typed link attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The range of attribute values that are being selected.
+    #   @return [Types::TypedAttributeValueRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkAttributeRange AWS API Documentation
+    #
+    class TypedLinkAttributeRange < Struct.new(
+      :attribute_name,
+      :range)
+      include Aws::Structure
+    end
+
+    # Defines the typed links structure and its attributes. To create a
+    # typed link facet, use the CreateTypedLinkFacet API.
+    #
+    # @note When making an API call, you may pass TypedLinkFacet
+    #   data as a hash:
+    #
+    #       {
+    #         name: "TypedLinkName", # required
+    #         attributes: [ # required
+    #           {
+    #             name: "AttributeName", # required
+    #             type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #             default_value: {
+    #               string_value: "StringAttributeValue",
+    #               binary_value: "data",
+    #               boolean_value: false,
+    #               number_value: "NumberAttributeValue",
+    #               datetime_value: Time.now,
+    #             },
+    #             is_immutable: false,
+    #             rules: {
+    #               "RuleKey" => {
+    #                 type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #                 parameters: {
+    #                   "RuleParameterKey" => "RuleParameterValue",
+    #                 },
+    #               },
+    #             },
+    #             required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #           },
+    #         ],
+    #         identity_attribute_order: ["AttributeName"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A set of key-value pairs associated with the typed link. Typed link
+    #   attributes are used when you have data values that are related to
+    #   the link itself, and not to one of the two objects being linked.
+    #   Identity attributes also serve to distinguish the link from others
+    #   of the same type between the same objects.
+    #   @return [Array<Types::TypedLinkAttributeDefinition>]
+    #
+    # @!attribute [rw] identity_attribute_order
+    #   The set of attributes that distinguish links made from this facet
+    #   from each other, in the order of significance. Listing typed links
+    #   can filter on the values of these attributes. See
+    #   ListOutgoingTypedLinks and ListIncomingTypeLinks for details.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacet AWS API Documentation
+    #
+    class TypedLinkFacet < Struct.new(
+      :name,
+      :attributes,
+      :identity_attribute_order)
+      include Aws::Structure
+    end
+
+    # A typed link facet attribute update.
+    #
+    # @note When making an API call, you may pass TypedLinkFacetAttributeUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: { # required
+    #           name: "AttributeName", # required
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           default_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #           is_immutable: false,
+    #           rules: {
+    #             "RuleKey" => {
+    #               type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #               parameters: {
+    #                 "RuleParameterKey" => "RuleParameterValue",
+    #               },
+    #             },
+    #           },
+    #           required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #         },
+    #         action: "CREATE_OR_UPDATE", # required, accepts CREATE_OR_UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute to update.
+    #   @return [Types::TypedLinkAttributeDefinition]
+    #
+    # @!attribute [rw] action
+    #   The action to perform when updating the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacetAttributeUpdate AWS API Documentation
+    #
+    class TypedLinkFacetAttributeUpdate < Struct.new(
+      :attribute,
+      :action)
+      include Aws::Structure
+    end
+
+    # Identifies the schema Amazon Resource Name (ARN) and facet name for
+    # the typed link.
+    #
+    # @note When making an API call, you may pass TypedLinkSchemaAndFacetName
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] typed_link_name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkSchemaAndFacetName AWS API Documentation
+    #
+    class TypedLinkSchemaAndFacetName < Struct.new(
+      :schema_arn,
+      :typed_link_name)
+      include Aws::Structure
+    end
+
+    # Contains all the information that is used to uniquely identify a typed
+    # link. The parameters discussed in this topic are used to uniquely
+    # specify the typed link being operated on. The AttachTypedLink API
+    # returns a typed link specifier while the DetachTypedLink API accepts
+    # one as input. Similarly, the ListIncomingTypedLinks and
+    # ListOutgoingTypedLinks API operations provide typed link specifiers as
+    # output. You can also construct a typed link specifier from scratch.
+    #
+    # @note When making an API call, you may pass TypedLinkSpecifier
+    #   data as a hash:
+    #
+    #       {
+    #         typed_link_facet: { # required
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         source_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         target_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         identity_attribute_values: [ # required
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             value: { # required
+    #               string_value: "StringAttributeValue",
+    #               binary_value: "data",
+    #               boolean_value: false,
+    #               number_value: "NumberAttributeValue",
+    #               datetime_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] typed_link_facet
+    #   Identifies the typed link facet that is associated with the typed
+    #   link.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] source_object_reference
+    #   Identifies the source object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] target_object_reference
+    #   Identifies the target object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] identity_attribute_values
+    #   Identifies the attribute value to update.
+    #   @return [Array<Types::AttributeNameAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkSpecifier AWS API Documentation
+    #
+    class TypedLinkSpecifier < Struct.new(
+      :typed_link_facet,
+      :source_object_reference,
+      :target_object_reference,
+      :identity_attribute_values)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -3838,11 +4782,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource. Tagging is only supported for directories.
+    #   The Amazon Resource Name (ARN) of the resource. Tagging is only
+    #   supported for directories.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Keys of the tag that needs to be removed from the resource.
+    #   Keys of the tag that need to be removed from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceRequest AWS API Documentation
@@ -3899,20 +4844,22 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   ARN associated with the Facet. For more information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Facet.
+    #   For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the facet.
     #   @return [String]
     #
     # @!attribute [rw] attribute_updates
     #   List of attributes that need to be updated in a given schema Facet.
-    #   Each attribute is followed by AttributeAction, which specifies the
+    #   Each attribute is followed by `AttributeAction`, which specifies the
     #   type of update operation to perform.
     #   @return [Array<Types::FacetAttributeUpdate>]
     #
     # @!attribute [rw] object_type
-    #   Object type associated with the facet. See
+    #   The object type that is associated with the facet. See
     #   CreateFacetRequest$ObjectType for more details.
     #   @return [String]
     #
@@ -3960,16 +4907,16 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] directory_arn
-    #   ARN associated with the Directory where the object resides. For more
-    #   information, see arns.
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides. For more information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] object_reference
-    #   Reference that identifies the object.
+    #   The reference that identifies the object.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] attribute_updates
-    #   Attributes update structure.
+    #   The attributes update structure.
     #   @return [Array<Types::ObjectAttributeUpdate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesRequest AWS API Documentation
@@ -3982,7 +4929,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifier
-    #   `ObjectIdentifier` of the updated object.
+    #   The `ObjectIdentifier` of the updated object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesResponse AWS API Documentation
@@ -4001,11 +4948,12 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   ARN of the development schema. For more information, see arns.
+    #   The Amazon Resource Name (ARN) of the development schema. For more
+    #   information, see arns.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the schema.
+    #   The name of the schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaRequest AWS API Documentation
@@ -4017,8 +4965,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] schema_arn
-    #   ARN associated with the updated schema. For more information, see
-    #   arns.
+    #   The ARN that is associated with the updated schema. For more
+    #   information, see arns.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaResponse AWS API Documentation
@@ -4027,6 +4975,85 @@ module Aws::CloudDirectory
       :schema_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateTypedLinkFacetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #         name: "TypedLinkName", # required
+    #         attribute_updates: [ # required
+    #           {
+    #             attribute: { # required
+    #               name: "AttributeName", # required
+    #               type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #               default_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               is_immutable: false,
+    #               rules: {
+    #                 "RuleKey" => {
+    #                   type: "BINARY_LENGTH", # accepts BINARY_LENGTH, NUMBER_COMPARISON, STRING_FROM_SET, STRING_LENGTH
+    #                   parameters: {
+    #                     "RuleParameterKey" => "RuleParameterValue",
+    #                   },
+    #                 },
+    #               },
+    #               required_behavior: "REQUIRED_ALWAYS", # required, accepts REQUIRED_ALWAYS, NOT_REQUIRED
+    #             },
+    #             action: "CREATE_OR_UPDATE", # required, accepts CREATE_OR_UPDATE, DELETE
+    #           },
+    #         ],
+    #         identity_attribute_order: ["AttributeName"], # required
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) that is associated with the schema.
+    #   For more information, see arns.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the typed link facet.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_updates
+    #   Attributes update structure.
+    #   @return [Array<Types::TypedLinkFacetAttributeUpdate>]
+    #
+    # @!attribute [rw] identity_attribute_order
+    #   The order of identity attributes for the facet, from most
+    #   significant to least significant. The ability to filter typed links
+    #   considers the order that the attributes are defined on the typed
+    #   link facet. When providing ranges to a typed link selection, any
+    #   inexact ranges must be specified at the end. Any attributes that do
+    #   not have a range specified are presumed to match the entire range.
+    #   Filters are interpreted in the order of the attributes on the typed
+    #   link facet, not the order in which they are supplied to any API
+    #   calls. For more information about identity attributes, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetRequest AWS API Documentation
+    #
+    class UpdateTypedLinkFacetRequest < Struct.new(
+      :schema_arn,
+      :name,
+      :attribute_updates,
+      :identity_attribute_order)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetResponse AWS API Documentation
+    #
+    class UpdateTypedLinkFacetResponse < Aws::EmptyStructure; end
 
   end
 end

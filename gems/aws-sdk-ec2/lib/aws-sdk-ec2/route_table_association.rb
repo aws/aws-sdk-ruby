@@ -31,6 +31,12 @@ module Aws::EC2
     end
     alias :route_table_association_id :id
 
+    # Indicates whether this is the main route table.
+    # @return [Boolean]
+    def main
+      data.main
+    end
+
     # The ID of the route table.
     # @return [String]
     def route_table_id
@@ -42,12 +48,6 @@ module Aws::EC2
     # @return [String]
     def subnet_id
       data.subnet_id
-    end
-
-    # Indicates whether this is the main route table.
-    # @return [Boolean]
-    def main
-      data.main
     end
 
     # @!endgroup

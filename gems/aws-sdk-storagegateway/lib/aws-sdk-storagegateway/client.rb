@@ -158,11 +158,11 @@ module Aws::StorageGateway
     # Activates the gateway you previously deployed on your host. For more
     # information, see [ Activate the AWS Storage Gateway][1]. In the
     # activation process, you specify information such as the region you
-    # want to use for storing snapshots, the time zone for scheduled
-    # snapshots the gateway snapshot schedule window, an activation key, and
-    # a name for your gateway. The activation process also associates your
-    # gateway with your account; for more information, see
-    # UpdateGatewayInformation.
+    # want to use for storing snapshots or tapes, the time zone for
+    # scheduled snapshots the gateway snapshot schedule window, an
+    # activation key, and a name for your gateway. The activation process
+    # also associates your gateway with your account; for more information,
+    # see UpdateGatewayInformation.
     #
     # <note markdown="1"> You must turn on the gateway VM before you can activate your gateway.
     #
@@ -187,20 +187,23 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_timezone
     #   A value that indicates the time zone you want to set for the gateway.
-    #   The time zone is used, for example, for scheduling snapshots and your
-    #   gateway's maintenance schedule.
+    #   The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For
+    #   example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00
+    #   indicates the time is 2 hours ahead of GMT. The time zone is used, for
+    #   example, for scheduling snapshots and your gateway's maintenance
+    #   schedule.
     #
     # @option params [required, String] :gateway_region
-    #   A value that indicates the region where you want to store the snapshot
-    #   backups. The gateway region specified must be the same region as the
-    #   region in your `Host` header in the request. For more information
-    #   about available regions and endpoints for AWS Storage Gateway, see
-    #   [Regions and Endpoints][1] in the *Amazon Web Services Glossary*.
+    #   A value that indicates the region where you want to store your data.
+    #   The gateway region specified must be the same region as the region in
+    #   your `Host` header in the request. For more information about
+    #   available regions and endpoints for AWS Storage Gateway, see [Regions
+    #   and Endpoints][1] in the *Amazon Web Services Glossary*.
     #
     #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
     #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
     #   "eu-west-2", "ap-northeast-1", "ap-northeast-2",
-    #   "ap-southeast-1", "ap-southeast-2", "sa-east-1"
+    #   "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"
     #
     #
     #
@@ -254,9 +257,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Configures one or more gateway local disks as cache for a cached
-    # volumes gateway. This operation is only supported in the cached
-    # volumes gateway architecture (see [Storage Gateway Concepts][1]).
+    # Configures one or more gateway local disks as cache for a gateway.
+    # This operation is only supported in the cached volume, tape and file
+    # gateway architectures (see [Storage Gateway Concepts][1]).
     #
     # In the request, you specify the gateway Amazon Resource Name (ARN) to
     # which you want to add cache, and one or more disk IDs that you want to
@@ -365,8 +368,8 @@ module Aws::StorageGateway
     end
 
     # Configures one or more gateway local disks as upload buffer for a
-    # specified gateway. This operation is supported for both the stored
-    # volumes and cached volumes gateway architectures.
+    # specified gateway. This operation is supported for the stored volume,
+    # cached volume and tape gateway architectures.
     #
     # In the request, you specify the gateway Amazon Resource Name (ARN) to
     # which you want to add upload buffer, and one or more disk IDs that you
@@ -404,11 +407,11 @@ module Aws::StorageGateway
 
     # Configures one or more gateway local disks as working storage for a
     # gateway. This operation is only supported in the stored volume gateway
-    # architecture. This operation is deprecated in cached-volumes API
+    # architecture. This operation is deprecated in cached volume API
     # version 20120630. Use AddUploadBuffer instead.
     #
     # <note markdown="1"> Working storage is also referred to as upload buffer. You can also use
-    # the AddUploadBuffer operation to add upload buffer to a stored-volume
+    # the AddUploadBuffer operation to add upload buffer to a stored volume
     # gateway.
     #
     #  </note>
@@ -452,7 +455,7 @@ module Aws::StorageGateway
 
     # Cancels archiving of a virtual tape to the virtual tape shelf (VTS)
     # after the archiving process is initiated. This operation is only
-    # supported in tape gateways.
+    # supported in the tape gateway architecture.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -522,9 +525,8 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Creates a cached volume on a specified cached volumes gateway. This
-    # operation is only supported in the cached volumes gateway
-    # architecture.
+    # Creates a cached volume on a specified cached volume gateway. This
+    # operation is only supported in the cached volume gateway architecture.
     #
     # <note markdown="1"> Cache storage must be allocated to the gateway before you can create a
     # cached volume. Use the AddCache operation to add cache storage to a
@@ -534,11 +536,10 @@ module Aws::StorageGateway
     #
     # In the request, you must specify the gateway, size of the volume in
     # bytes, the iSCSI target name, an IP address on which to expose the
-    # target, and a unique client token. In response, AWS Storage Gateway
-    # creates the volume and returns information about it. This information
-    # includes the volume Amazon Resource Name (ARN), its size, and the
-    # iSCSI target ARN that initiators can use to connect to the volume
-    # target.
+    # target, and a unique client token. In response, the gateway creates
+    # the volume and returns information about it. This information includes
+    # the volume Amazon Resource Name (ARN), its size, and the iSCSI target
+    # ARN that initiators can use to connect to the volume target.
     #
     # Optionally, you can provide the ARN for an existing volume as the
     # `SourceVolumeARN` for this cached volume, which creates an exact copy
@@ -600,8 +601,18 @@ module Aws::StorageGateway
     # Creates a file share on an existing file gateway. In Storage Gateway,
     # a file share is a file system mount point backed by Amazon S3 cloud
     # storage. Storage Gateway exposes file shares using a Network File
-    # System (NFS) interface. This operation is only supported in file
-    # gateways.
+    # System (NFS) interface. This operation is only supported in the file
+    # gateway architecture.
+    #
+    # File gateway requires AWS Security Token Service (AWS STS) to be
+    # activated to enable you create a file share. Make sure AWS STS is
+    # activated in the region you are creating your file gateway in. If AWS
+    # STS is not activated in the region, activate it. For information about
+    # how to activate AWS STS, see Activating and Deactivating AWS STS in an
+    # AWS Region in the AWS Identity and Access Management User Guide.
+    #
+    #  File gateway does not support creating hard or symbolic links on a
+    # file share.
     #
     # @option params [required, String] :client_token
     #   A unique string value that you supply that is used by file gateway to
@@ -627,7 +638,7 @@ module Aws::StorageGateway
     #   file gateway assumes when it accesses the underlying storage.
     #
     # @option params [required, String] :location_arn
-    #   The ARN of the backend storage used for storing file data.
+    #   The ARN of the backed storage used for storing file data.
     #
     # @option params [String] :default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket by
@@ -640,14 +651,17 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #
     # @option params [String] :squash
-    #   Maps a user to anonymous user. Valid options: "RootSquash" - Only
-    #   root is mapped to anonymous user, "NoSquash" - No one is mapped to
-    #   anonymous user or "AllSquash" - Everyone is mapped to anonymous
-    #   user.
+    #   Maps a user to anonymous user. Valid options are the following:
+    #
+    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #
+    #   * "NoSquash" - No one is mapped to anonymous user.
+    #
+    #   * "AllSquash" - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share. "true", if the write status
-    #   is read-only; otherwise "false.
+    #   Sets the write status of a file share: "true" if the write status is
+    #   read-only, and otherwise "false".
     #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -695,8 +709,7 @@ module Aws::StorageGateway
     # Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You
     # can take snapshots of your gateway volume on a scheduled or ad-hoc
     # basis. This API enables you to take ad-hoc snapshot. For more
-    # information, see [Working With Snapshots in the AWS Storage Gateway
-    # Console][1].
+    # information, see [Editing a Snapshot Schedule][1].
     #
     # In the CreateSnapshot request you identify the volume by providing its
     # Amazon Resource Name (ARN). You must also provide description for the
@@ -705,8 +718,8 @@ module Aws::StorageGateway
     # Gateway Console. In response, AWS Storage Gateway returns you a
     # snapshot ID. You can use this snapshot ID to check the snapshot
     # progress or later use it when you want to create a volume from a
-    # snapshot. This operation is only supported in stored and cached
-    # volumes gateways.
+    # snapshot. This operation is only supported in stored and cached volume
+    # gateway architecture.
     #
     # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
     # more information, see DescribeSnapshots or DeleteSnapshot in the [EC2
@@ -719,7 +732,7 @@ module Aws::StorageGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html
+    # [1]: http://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot
     # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html
     # [3]: http://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html
     #
@@ -760,22 +773,21 @@ module Aws::StorageGateway
     end
 
     # Initiates a snapshot of a gateway from a volume recovery point. This
-    # operation is only supported in the cached volumes gateway
-    # architecture.
+    # operation is only supported in the cached volume gateway architecture.
     #
     # A volume recovery point is a point in time at which all data of the
     # volume is consistent and from which you can create a snapshot. To get
-    # a list of volume recovery point for cached volumes gateway, use
+    # a list of volume recovery point for cached volume gateway, use
     # ListVolumeRecoveryPoints.
     #
     # In the `CreateSnapshotFromVolumeRecoveryPoint` request, you identify
     # the volume by providing its Amazon Resource Name (ARN). You must also
-    # provide a description for the snapshot. When AWS Storage Gateway takes
-    # a snapshot of the specified volume, the snapshot and its description
-    # appear in the AWS Storage Gateway console. In response, AWS Storage
-    # Gateway returns you a snapshot ID. You can use this snapshot ID to
-    # check the snapshot progress or later use it when you want to create a
-    # volume from a snapshot.
+    # provide a description for the snapshot. When the gateway takes a
+    # snapshot of the specified volume, the snapshot and its description
+    # appear in the AWS Storage Gateway console. In response, the gateway
+    # returns you a snapshot ID. You can use this snapshot ID to check the
+    # snapshot progress or later use it when you want to create a volume
+    # from a snapshot.
     #
     # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
     # more information, in *Amazon Elastic Compute Cloud API Reference*.
@@ -815,7 +827,7 @@ module Aws::StorageGateway
     end
 
     # Creates a volume on a specified gateway. This operation is only
-    # supported in the stored volumes gateway architecture.
+    # supported in the stored volume gateway architecture.
     #
     # The size of the volume to create is inferred from the disk size. You
     # can choose to preserve existing data on the disk, create volume from
@@ -824,9 +836,9 @@ module Aws::StorageGateway
     # erased.
     #
     # In the request you must specify the gateway and the disk information
-    # on which you are creating the volume. In response, AWS Storage Gateway
-    # creates the volume and returns volume information such as the volume
-    # Amazon Resource Name (ARN), its size, and the iSCSI target ARN that
+    # on which you are creating the volume. In response, the gateway creates
+    # the volume and returns volume information such as the volume Amazon
+    # Resource Name (ARN), its size, and the iSCSI target ARN that
     # initiators can use to connect to the volume target.
     #
     # @option params [required, String] :gateway_arn
@@ -909,7 +921,7 @@ module Aws::StorageGateway
 
     # Creates a virtual tape by using your own barcode. You write data to
     # the virtual tape and then archive the tape. This operation is only
-    # supported in tape gateways.
+    # supported in the tape gateway architecture.
     #
     # <note markdown="1"> Cache storage must be allocated to the gateway before you can create a
     # virtual tape. Use the AddCache operation to add cache storage to a
@@ -958,8 +970,8 @@ module Aws::StorageGateway
     end
 
     # Creates one or more virtual tapes. You write data to the virtual tapes
-    # and then archive the tapes. This operation is only supported in tape
-    # gateways.
+    # and then archive the tapes. This operation is only supported in the
+    # tape gateway architecture.
     #
     # <note markdown="1"> Cache storage must be allocated to the gateway before you can create
     # virtual tapes. Use the AddCache operation to add cache storage to a
@@ -1107,7 +1119,7 @@ module Aws::StorageGateway
     end
 
     # Deletes a file share from a file gateway. This operation is only
-    # supported in file gateways.
+    # supported in the file gateway architecture.
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
@@ -1229,7 +1241,7 @@ module Aws::StorageGateway
     end
 
     # Deletes the specified virtual tape. This operation is only supported
-    # in tape gateways.
+    # in the tape gateway architecture.
     #
     # @option params [required, String] :gateway_arn
     #   The unique Amazon Resource Name (ARN) of the gateway that the virtual
@@ -1264,7 +1276,7 @@ module Aws::StorageGateway
     end
 
     # Deletes the specified virtual tape from the virtual tape shelf (VTS).
-    # This operation is only supported in tape gateways.
+    # This operation is only supported in the tape gateway architecture.
     #
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape to delete from the
@@ -1293,18 +1305,19 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Deletes the specified gateway volume that you previously created using
-    # the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. For stored
-    # volumes gateways, the local disk that was configured as the storage
-    # volume is not deleted. You can reuse the local disk to create another
-    # storage volume.
+    # Deletes the specified storage volume that you previously created using
+    # the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This
+    # operation is only supported in the cached volume and stored volume
+    # architectures. For stored volume gateways, the local disk that was
+    # configured as the storage volume is not deleted. You can reuse the
+    # local disk to create another storage volume.
     #
-    # Before you delete a gateway volume, make sure there are no iSCSI
-    # connections to the volume you are deleting. You should also make sure
-    # there is no snapshot in progress. You can use the Amazon Elastic
-    # Compute Cloud (Amazon EC2) API to query snapshots on the volume you
-    # are deleting and check the snapshot status. For more information, go
-    # to [DescribeSnapshots][1] in the *Amazon Elastic Compute Cloud API
+    # Before you delete a volume, make sure there are no iSCSI connections
+    # to the volume you are deleting. You should also make sure there is no
+    # snapshot in progress. You can use the Amazon Elastic Compute Cloud
+    # (Amazon EC2) API to query snapshots on the volume you are deleting and
+    # check the snapshot status. For more information, go to
+    # [DescribeSnapshots][1] in the *Amazon Elastic Compute Cloud API
     # Reference*.
     #
     # In the request, you must provide the Amazon Resource Name (ARN) of the
@@ -1383,7 +1396,8 @@ module Aws::StorageGateway
     end
 
     # Returns information about the cache of a gateway. This operation is
-    # only supported in the cached volumes gateway architecture.
+    # only supported in the cached volume,tape and file gateway
+    # architectures.
     #
     # The response includes disk IDs that are configured as cache, and it
     # includes the amount of cache allocated and used.
@@ -1429,7 +1443,7 @@ module Aws::StorageGateway
     end
 
     # Returns a description of the gateway volumes specified in the request.
-    # This operation is only supported in the cached volumes gateway
+    # This operation is only supported in the cached volume gateway
     # architecture.
     #
     # The list of gateway volumes in the request must be from one gateway.
@@ -1650,7 +1664,8 @@ module Aws::StorageGateway
 
     # Describes the snapshot schedule for the specified gateway volume. The
     # snapshot schedule information includes intervals at which snapshots
-    # are automatically initiated on the volume.
+    # are automatically initiated on the volume. This operation is only
+    # supported in the cached volume and stored volume architectures.
     #
     # @option params [required, String] :volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -1691,7 +1706,7 @@ module Aws::StorageGateway
     # request. The list of gateway volumes in the request must be from one
     # gateway. In the response Amazon Storage Gateway returns volume
     # information sorted by volume ARNs. This operation is only supported in
-    # stored volumes gateways.
+    # stored volume gateway architecture.
     #
     # @option params [required, Array<String>] :volume_arns
     #   An array of strings where each string represents the Amazon Resource
@@ -1738,11 +1753,12 @@ module Aws::StorageGateway
     end
 
     # Returns a description of specified virtual tapes in the virtual tape
-    # shelf (VTS).
+    # shelf (VTS). This operation is only supported in the tape gateway
+    # architecture.
     #
     # If a specific `TapeARN` is not specified, AWS Storage Gateway returns
     # a description of all virtual tapes found in the VTS associated with
-    # your account. This operation is only supported in tape gateways.
+    # your account.
     #
     # @option params [Array<String>] :tape_arns
     #   Specifies one or more unique Amazon Resource Names (ARNs) that
@@ -1779,6 +1795,7 @@ module Aws::StorageGateway
     #   resp.tape_archives[0].completion_time #=> Time
     #   resp.tape_archives[0].retrieved_to #=> String
     #   resp.tape_archives[0].tape_status #=> String
+    #   resp.tape_archives[0].tape_used_in_bytes #=> Integer
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives AWS API Documentation
@@ -1796,7 +1813,8 @@ module Aws::StorageGateway
     # A recovery point is a point-in-time view of a virtual tape at which
     # all the data on the virtual tape is consistent. If your gateway
     # crashes, virtual tapes that have recovery points can be recovered to a
-    # new gateway. This operation is only supported in tape gateways.
+    # new gateway. This operation is only supported in the tape gateway
+    # architecture.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1846,7 +1864,7 @@ module Aws::StorageGateway
     # Returns a description of the specified Amazon Resource Name (ARN) of
     # virtual tapes. If a `TapeARN` is not specified, returns a description
     # of all virtual tapes associated with the specified gateway. This
-    # operation is only supported in tape gateways.
+    # operation is only supported in the tape gateway architecture.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1855,8 +1873,8 @@ module Aws::StorageGateway
     # @option params [Array<String>] :tape_arns
     #   Specifies one or more unique Amazon Resource Names (ARNs) that
     #   represent the virtual tapes you want to describe. If this parameter is
-    #   not specified, AWS Storage Gateway returns a description of all
-    #   virtual tapes associated with the specified gateway.
+    #   not specified, Tape gateway returns a description of all virtual tapes
+    #   associated with the specified gateway.
     #
     # @option params [String] :marker
     #   A marker value, obtained in a previous call to `DescribeTapes`. This
@@ -1897,6 +1915,7 @@ module Aws::StorageGateway
     #   resp.tapes[0].tape_status #=> String
     #   resp.tapes[0].vtl_device #=> String
     #   resp.tapes[0].progress #=> Float
+    #   resp.tapes[0].tape_used_in_bytes #=> Integer
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes AWS API Documentation
@@ -1909,7 +1928,7 @@ module Aws::StorageGateway
     end
 
     # Returns information about the upload buffer of a gateway. This
-    # operation is supported for both the stored volume and cached volumes
+    # operation is supported for the stored volume, cached volume and tape
     # gateway architectures.
     #
     # The response includes disk IDs that are configured as upload buffer
@@ -1954,7 +1973,7 @@ module Aws::StorageGateway
     # specified tape gateway. In the response, AWS Storage Gateway returns
     # VTL device information.
     #
-    # This operation is only supported in tape gateways.
+    # This operation is only supported in the tape gateway architecture.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2018,12 +2037,12 @@ module Aws::StorageGateway
 
     # Returns information about the working storage of a gateway. This
     # operation is only supported in the stored volumes gateway
-    # architecture. This operation is deprecated in cached-volumes API
+    # architecture. This operation is deprecated in cached volumes API
     # version (20120630). Use DescribeUploadBuffer instead.
     #
     # <note markdown="1"> Working storage is also referred to as upload buffer. You can also use
-    # the DescribeUploadBuffer operation to add upload buffer to a
-    # stored-volume gateway.
+    # the DescribeUploadBuffer operation to add upload buffer to a stored
+    # volume gateway.
     #
     #  </note>
     #
@@ -2064,12 +2083,13 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Disables a gateway when the gateway is no longer functioning. For
+    # Disables a tape gateway when the gateway is no longer functioning. For
     # example, if your gateway VM is damaged, you can disable the gateway so
     # you can recover virtual tapes.
     #
     # Use this operation for a tape gateway that is not reachable or not
-    # functioning.
+    # functioning. This operation is only supported in the tape gateway
+    # architectures.
     #
     # Once a gateway is disabled it cannot be enabled.
     #
@@ -2102,7 +2122,7 @@ module Aws::StorageGateway
 
     # Gets a list of the file shares for a specific file gateway, or the
     # list of file shares that belong to the calling user account. This
-    # operation is only supported in file gateways.
+    # operation is only supported in the file gateway architecture.
     #
     # @option params [String] :gateway_arn
     #   The Amazon resource Name (ARN) of the gateway whose file shares you
@@ -2251,7 +2271,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Lists the tags that have been added to the specified resource.
+    # Lists the tags that have been added to the specified resource. This
+    # operation is only supported in the cached volume, stored volume and
+    # tape gateway architecture.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
@@ -2308,7 +2330,7 @@ module Aws::StorageGateway
     # the number of tapes returned in the response is truncated, the
     # response includes a `Marker` element that you can use in your
     # subsequent request to retrieve the next set of tapes. This operation
-    # is only supported in tape gateways.
+    # is only supported in the tape gateway architecture.
     #
     # @option params [Array<String>] :tape_arns
     #   The Amazon Resource Name (ARN) of each of the tapes you want to list.
@@ -2357,6 +2379,8 @@ module Aws::StorageGateway
 
     # Lists iSCSI initiators that are connected to a volume. You can use
     # this operation to determine whether a volume is being used or not.
+    # This operation is only supported in the cached volume and stored
+    # volume gateway architecture.
     #
     # @option params [required, String] :volume_arn
     #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -2387,7 +2411,7 @@ module Aws::StorageGateway
     end
 
     # Lists the recovery points for a specified gateway. This operation is
-    # only supported in the cached volumes gateway architecture.
+    # only supported in the cached volume gateway architecture.
     #
     # Each cache volume has one recovery point. A volume recovery point is a
     # point in time at which all data of the volume is consistent and from
@@ -2438,7 +2462,9 @@ module Aws::StorageGateway
     # field in the body to limit the number of volumes in the response. If
     # the number of volumes returned in the response is truncated, the
     # response includes a Marker field. You can use this Marker value in
-    # your subsequent request to retrieve the next set of volumes.
+    # your subsequent request to retrieve the next set of volumes. This
+    # operation is only supported in the cached volume and stored volume
+    # gateway architectures.
     #
     # @option params [String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2518,7 +2544,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Removes one or more tags from the specified resource.
+    # Removes one or more tags from the specified resource. This operation
+    # is only supported in the cached volume, stored volume and tape gateway
+    # architectures.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to remove the
@@ -2558,7 +2586,8 @@ module Aws::StorageGateway
     # operations on virtual tapes in the gateway. For example, an error can
     # occur when a disk is corrupted or removed from the gateway. When a
     # cache is reset, the gateway loses its cache storage. At this point you
-    # can reconfigure the disks as cache disks.
+    # can reconfigure the disks as cache disks. This operation is only
+    # supported in the cached volume,tape and file gateway architectures.
     #
     # If the cache disk you are resetting contains data that has not been
     # uploaded to Amazon S3 yet, that data can be lost. After you reset
@@ -2596,11 +2625,14 @@ module Aws::StorageGateway
     # Retrieves an archived virtual tape from the virtual tape shelf (VTS)
     # to a tape gateway. Virtual tapes archived in the VTS are not
     # associated with any gateway. However after a tape is retrieved, it is
-    # associated with a gateway, even though it is also listed in the VTS.
+    # associated with a gateway, even though it is also listed in the VTS,
+    # that is, archive. This operation is only supported in the tape gateway
+    # architecture.
     #
     # Once a tape is successfully retrieved to a gateway, it cannot be
     # retrieved again to another gateway. You must archive the tape again
-    # before you can retrieve it to another gateway.
+    # before you can retrieve it to another gateway. This operation is only
+    # supported in the tape gateway architecture.
     #
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape you want to
@@ -2638,7 +2670,8 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Retrieves the recovery point for the specified virtual tape.
+    # Retrieves the recovery point for the specified virtual tape. This
+    # operation is only supported in the tape gateway architecture.
     #
     # A recovery point is a point in time view of a virtual tape at which
     # all the data on the tape is consistent. If your gateway crashes,
@@ -2723,7 +2756,7 @@ module Aws::StorageGateway
     # Amazon Resource Name (ARN) of the gateway in the body of your request.
     #
     # The operation shuts down the gateway service component running in the
-    # storage gateway's virtual machine (VM) and not the VM.
+    # gateway's virtual machine (VM) and not the host VM.
     #
     # <note markdown="1"> If you want to shut down the VM, it is recommended that you first shut
     # down the gateway component in the VM to avoid unpredictable
@@ -3071,11 +3104,28 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a file share. This operation is only supported in file
-    # gateways.
+    # Updates a file share. This operation is only supported in the file
+    # gateway architecture.
     #
     # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
     # field to null.
+    #
+    #  </note>
+    #
+    # Updates the following file share setting:
+    #
+    # * Default storage class for your S3 bucket
+    #
+    # * Metadata defaults for your S3 bucket
+    #
+    # * Allowed NFS clients for your file share
+    #
+    # * Squash settings
+    #
+    # * Write status of your file share
+    #
+    # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
+    # field to null. This operation is only supported in file gateways.
     #
     #  </note>
     #
@@ -3104,14 +3154,17 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #
     # @option params [String] :squash
-    #   Indicates the user mapped to anonymous user. Valid options:
-    #   "RootSquash" - Only root is mapped to anonymous user, "NoSquash" -
-    #   No one is mapped to anonymous user or "AllSquash" - Everyone is
-    #   mapped to anonymous user.
+    #   The user mapped to anonymous user. Valid options are the following:
+    #
+    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #
+    #   * "NoSquash" - No one is mapped to anonymous user
+    #
+    #   * "AllSquash" - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share. "true", if the write status
-    #   is read-only; otherwise "false.
+    #   Sets the write status of a file share: "true" if the write status is
+    #   read-only, and otherwise "false".
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3148,7 +3201,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a snapshot schedule configured for a gateway volume.
+    # Updates a snapshot schedule configured for a gateway volume. This
+    # operation is only supported in the cached volume and stored volume
+    # gateway architectures.
     #
     # The default snapshot schedule for volume is once every 24 hours,
     # starting at the creation time of the volume. You can use this API to
@@ -3205,7 +3260,7 @@ module Aws::StorageGateway
     # activate a tape gateway, you select a medium changer type for the tape
     # gateway. This operation enables you to select a different type of
     # medium changer after a tape gateway is activated. This operation is
-    # only supported in tape gateways.
+    # only supported in the tape gateway architecture.
     #
     # @option params [required, String] :vtl_device_arn
     #   The Amazon Resource Name (ARN) of the medium changer you want to
@@ -3253,7 +3308,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

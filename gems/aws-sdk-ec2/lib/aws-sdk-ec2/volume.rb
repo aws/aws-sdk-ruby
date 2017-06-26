@@ -31,6 +31,38 @@ module Aws::EC2
     end
     alias :volume_id :id
 
+    # Information about the volume attachments.
+    # @return [Array<Types::VolumeAttachment>]
+    def attachments
+      data.attachments
+    end
+
+    # The Availability Zone for the volume.
+    # @return [String]
+    def availability_zone
+      data.availability_zone
+    end
+
+    # The time stamp when volume creation was initiated.
+    # @return [Time]
+    def create_time
+      data.create_time
+    end
+
+    # Indicates whether the volume will be encrypted.
+    # @return [Boolean]
+    def encrypted
+      data.encrypted
+    end
+
+    # The full ARN of the AWS Key Management Service (AWS KMS) customer
+    # master key (CMK) that was used to protect the volume encryption key
+    # for the volume.
+    # @return [String]
+    def kms_key_id
+      data.kms_key_id
+    end
+
     # The size of the volume, in GiBs.
     # @return [Integer]
     def size
@@ -43,42 +75,10 @@ module Aws::EC2
       data.snapshot_id
     end
 
-    # The Availability Zone for the volume.
-    # @return [String]
-    def availability_zone
-      data.availability_zone
-    end
-
     # The volume state.
     # @return [String]
     def state
       data.state
-    end
-
-    # The time stamp when volume creation was initiated.
-    # @return [Time]
-    def create_time
-      data.create_time
-    end
-
-    # Information about the volume attachments.
-    # @return [Array<Types::VolumeAttachment>]
-    def attachments
-      data.attachments
-    end
-
-    # Any tags assigned to the volume.
-    # @return [Array<Types::Tag>]
-    def tags
-      data.tags
-    end
-
-    # The volume type. This can be `gp2` for General Purpose SSD, `io1` for
-    # Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
-    # Cold HDD, or `standard` for Magnetic volumes.
-    # @return [String]
-    def volume_type
-      data.volume_type
     end
 
     # The number of I/O operations per second (IOPS) that the volume
@@ -105,18 +105,18 @@ module Aws::EC2
       data.iops
     end
 
-    # Indicates whether the volume will be encrypted.
-    # @return [Boolean]
-    def encrypted
-      data.encrypted
+    # Any tags assigned to the volume.
+    # @return [Array<Types::Tag>]
+    def tags
+      data.tags
     end
 
-    # The full ARN of the AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) that was used to protect the volume encryption key
-    # for the volume.
+    # The volume type. This can be `gp2` for General Purpose SSD, `io1` for
+    # Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
+    # Cold HDD, or `standard` for Magnetic volumes.
     # @return [String]
-    def kms_key_id
-      data.kms_key_id
+    def volume_type
+      data.volume_type
     end
 
     # @!endgroup
@@ -159,21 +159,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.attach_to_instance({
-    #     dry_run: false,
-    #     instance_id: "String", # required
     #     device: "String", # required
+    #     instance_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :device
+    #   The device name to expose to the instance (for example, `/dev/sdh` or
+    #   `xvdh`).
+    # @option options [required, String] :instance_id
+    #   The ID of the instance.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :instance_id
-    #   The ID of the instance.
-    # @option options [required, String] :device
-    #   The device name to expose to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
     # @return [Types::VolumeAttachment]
     def attach_to_instance(options = {})
       options = options.merge(volume_id: @id)
@@ -184,17 +184,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot = volume.create_snapshot({
-    #     dry_run: false,
     #     description: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :description
+    #   A description for the snapshot.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :description
-    #   A description for the snapshot.
     # @return [Snapshot]
     def create_snapshot(options = {})
       options = options.merge(volume_id: @id)
@@ -264,17 +264,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.describe_attribute({
-    #     dry_run: false,
     #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :attribute
+    #   The attribute of the volume. This parameter is required.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :attribute
-    #   The attribute of the volume. This parameter is required.
     # @return [Types::DescribeVolumeAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(volume_id: @id)
@@ -285,22 +285,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.describe_status({
-    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     next_token: "String",
     #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -335,11 +330,6 @@ module Aws::EC2
     #
     #   * `volume-status.status` - The status of the volume (`ok` \|
     #     `impaired` \| `warning` \| `insufficient-data`).
-    # @option options [String] :next_token
-    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
-    #   request. When the results of the request exceed `MaxResults`, this
-    #   value can be used to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
     # @option options [Integer] :max_results
     #   The maximum number of volume results returned by
     #   `DescribeVolumeStatus` in paginated output. When this parameter is
@@ -351,6 +341,16 @@ module Aws::EC2
     #   returned. If this parameter is not used, then `DescribeVolumeStatus`
     #   returns all results. You cannot specify this parameter and the volume
     #   IDs parameter in the same request.
+    # @option options [String] :next_token
+    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
+    #   request. When the results of the request exceed `MaxResults`, this
+    #   value can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::DescribeVolumeStatusResult]
     def describe_status(options = {})
       options = Aws::Util.deep_merge(options, volume_ids: [@id])
@@ -361,19 +361,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.detach_from_instance({
-    #     dry_run: false,
-    #     instance_id: "String",
     #     device: "String",
     #     force: false,
+    #     instance_id: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :instance_id
-    #   The ID of the instance.
     # @option options [String] :device
     #   The device name.
     # @option options [Boolean] :force
@@ -385,6 +378,13 @@ module Aws::EC2
     #   opportunity to flush file system caches or file system metadata. If
     #   you use this option, you must perform file system check and repair
     #   procedures.
+    # @option options [String] :instance_id
+    #   The ID of the instance.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::VolumeAttachment]
     def detach_from_instance(options = {})
       options = options.merge(volume_id: @id)
@@ -413,20 +413,20 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.modify_attribute({
-    #     dry_run: false,
     #     auto_enable_io: {
     #       value: false,
     #     },
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Types::AttributeBooleanValue] :auto_enable_io
+    #   Indicates whether the volume should be auto-enabled for I/O
+    #   operations.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Types::AttributeBooleanValue] :auto_enable_io
-    #   Indicates whether the volume should be auto-enabled for I/O
-    #   operations.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(volume_id: @id)
@@ -439,33 +439,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshots = volume.snapshots({
-    #     dry_run: false,
-    #     snapshot_ids: ["String"],
-    #     owner_ids: ["String"],
-    #     restorable_by_user_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     owner_ids: ["String"],
+    #     restorable_by_user_ids: ["String"],
+    #     snapshot_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
-    #
-    #   Default: Describes snapshots for which you have launch permissions.
-    # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
-    # @option options [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -508,6 +493,21 @@ module Aws::EC2
     #   * `volume-id` - The ID of the volume the snapshot is for.
     #
     #   * `volume-size` - The size of the volume, in GiB.
+    # @option options [Array<String>] :owner_ids
+    #   Returns the snapshots owned by the specified owner. Multiple owners
+    #   can be specified.
+    # @option options [Array<String>] :restorable_by_user_ids
+    #   One or more AWS accounts IDs that can create volumes from the
+    #   snapshot.
+    # @option options [Array<String>] :snapshot_ids
+    #   One or more snapshot IDs.
+    #
+    #   Default: Describes snapshots for which you have launch permissions.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Snapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|

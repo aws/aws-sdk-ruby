@@ -30,11 +30,10 @@ module Aws::EC2
       @id
     end
 
-    # The public IP address or Elastic IP address bound to the network
-    # interface.
+    # The ID of the owner of the Elastic IP address.
     # @return [String]
-    def public_ip
-      data.public_ip
+    def ip_owner_id
+      data.ip_owner_id
     end
 
     # The public DNS name.
@@ -43,10 +42,11 @@ module Aws::EC2
       data.public_dns_name
     end
 
-    # The ID of the owner of the Elastic IP address.
+    # The public IP address or Elastic IP address bound to the network
+    # interface.
     # @return [String]
-    def ip_owner_id
-      data.ip_owner_id
+    def public_ip
+      data.public_ip
     end
 
     # @!endgroup
@@ -92,17 +92,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface_association.delete({
-    #     dry_run: false,
     #     public_ip: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :public_ip
+    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(association_id: @id)

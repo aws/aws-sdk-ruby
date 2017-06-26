@@ -48,6 +48,8 @@ module Aws::AppStream
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
+    FleetAttribute = Shapes::StringShape.new(name: 'FleetAttribute')
+    FleetAttributes = Shapes::ListShape.new(name: 'FleetAttributes')
     FleetError = Shapes::StructureShape.new(name: 'FleetError')
     FleetErrorCode = Shapes::StringShape.new(name: 'FleetErrorCode')
     FleetErrors = Shapes::ListShape.new(name: 'FleetErrors')
@@ -58,6 +60,7 @@ module Aws::AppStream
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
+    IncompatibleImageException = Shapes::StructureShape.new(name: 'IncompatibleImageException')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
@@ -72,18 +75,26 @@ module Aws::AppStream
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
+    ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotAvailableException = Shapes::StructureShape.new(name: 'ResourceNotAvailableException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
     Stack = Shapes::StructureShape.new(name: 'Stack')
+    StackError = Shapes::StructureShape.new(name: 'StackError')
+    StackErrorCode = Shapes::StringShape.new(name: 'StackErrorCode')
+    StackErrors = Shapes::ListShape.new(name: 'StackErrors')
     StackList = Shapes::ListShape.new(name: 'StackList')
     StartFleetRequest = Shapes::StructureShape.new(name: 'StartFleetRequest')
     StartFleetResult = Shapes::StructureShape.new(name: 'StartFleetResult')
     StopFleetRequest = Shapes::StructureShape.new(name: 'StopFleetRequest')
     StopFleetResult = Shapes::StructureShape.new(name: 'StopFleetResult')
+    StorageConnector = Shapes::StructureShape.new(name: 'StorageConnector')
+    StorageConnectorList = Shapes::ListShape.new(name: 'StorageConnectorList')
+    StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
@@ -140,6 +151,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    CreateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -228,6 +240,8 @@ module Aws::AppStream
     Fleet.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     Fleet.struct_class = Types::Fleet
 
+    FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
+
     FleetError.add_member(:error_code, Shapes::ShapeRef.new(shape: FleetErrorCode, location_name: "ErrorCode"))
     FleetError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     FleetError.struct_class = Types::FleetError
@@ -248,6 +262,7 @@ module Aws::AppStream
     Image.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ImageStateChangeReason, location_name: "StateChangeReason"))
     Image.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     Image.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Image.add_member(:public_base_image_released_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublicBaseImageReleasedDate"))
     Image.struct_class = Types::Image
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image)
@@ -275,6 +290,8 @@ module Aws::AppStream
     Metadata.key = Shapes::ShapeRef.new(shape: String)
     Metadata.value = Shapes::ShapeRef.new(shape: String)
 
+    SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
+
     Session.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     Session.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     Session.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
@@ -290,7 +307,15 @@ module Aws::AppStream
     Stack.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     Stack.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     Stack.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Stack.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
+    Stack.add_member(:stack_errors, Shapes::ShapeRef.new(shape: StackErrors, location_name: "StackErrors"))
     Stack.struct_class = Types::Stack
+
+    StackError.add_member(:error_code, Shapes::ShapeRef.new(shape: StackErrorCode, location_name: "ErrorCode"))
+    StackError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    StackError.struct_class = Types::StackError
+
+    StackErrors.member = Shapes::ShapeRef.new(shape: StackError)
 
     StackList.member = Shapes::ShapeRef.new(shape: Stack)
 
@@ -304,6 +329,12 @@ module Aws::AppStream
 
     StopFleetResult.struct_class = Types::StopFleetResult
 
+    StorageConnector.add_member(:connector_type, Shapes::ShapeRef.new(shape: StorageConnectorType, required: true, location_name: "ConnectorType"))
+    StorageConnector.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
+    StorageConnector.struct_class = Types::StorageConnector
+
+    StorageConnectorList.member = Shapes::ShapeRef.new(shape: StorageConnector)
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: String)
@@ -315,10 +346,11 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     UpdateFleetRequest.add_member(:max_user_duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxUserDurationInSeconds"))
     UpdateFleetRequest.add_member(:disconnect_timeout_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DisconnectTimeoutInSeconds"))
-    UpdateFleetRequest.add_member(:delete_vpc_config, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteVpcConfig"))
+    UpdateFleetRequest.add_member(:delete_vpc_config, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "DeleteVpcConfig"))
     UpdateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     UpdateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    UpdateFleetRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "AttributesToDelete"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -327,12 +359,15 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     UpdateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    UpdateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
+    UpdateStackRequest.add_member(:delete_storage_connectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteStorageConnectors"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
     UpdateStackResult.struct_class = Types::UpdateStackResult
 
-    VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "SubnetIds"))
+    VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
+    VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
     VpcConfig.struct_class = Types::VpcConfig
 
 
@@ -360,6 +395,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -385,6 +421,9 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:create_streaming_url, Seahorse::Model::Operation.new.tap do |o|
@@ -527,6 +566,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:update_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -537,6 +577,10 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: UpdateStackResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
     end
 

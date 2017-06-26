@@ -602,9 +602,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
-    #   The region where the Amazon Simple Storage Service (Amazon S3)
-    #   output bucket is located. The default value is the region where Run
-    #   Command is being called.
+    #   (Deprecated) You can no longer specify this parameter. The system
+    #   ignores it. Instead, Systems Manager automatically determines the
+    #   Amazon S3 bucket region.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -706,11 +706,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] key
-    #   The name of the filter. For example, requested date and time.
+    #   The name of the filter.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value. For example: June 30, 2015.
+    #   The filter value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
@@ -961,7 +961,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
-    #   The name of the region where the output is stored in Amazon S3.
+    #   (Deprecated) You can no longer specify this parameter. The system
+    #   ignores it. Instead, Systems Manager automatically determines the
+    #   Amazon S3 bucket region.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -1617,6 +1619,41 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameterResult AWS API Documentation
     #
     class DeleteParameterResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteParametersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["PSParameterName"], # required
+    #       }
+    #
+    # @!attribute [rw] names
+    #   The names of the parameters to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParametersRequest AWS API Documentation
+    #
+    class DeleteParametersRequest < Struct.new(
+      :names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deleted_parameters
+    #   The names of the deleted parameters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] invalid_parameters
+    #   The names of parameters that weren't deleted because the parameters
+    #   are not valid.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParametersResult AWS API Documentation
+    #
+    class DeleteParametersResult < Struct.new(
+      :deleted_parameters,
+      :invalid_parameters)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeletePatchBaselineRequest
     #   data as a hash:
@@ -2900,8 +2937,15 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "Name", # accepts Name, Type, KeyId
+    #             key: "Name", # required, accepts Name, Type, KeyId
     #             values: ["ParametersFilterValue"], # required
+    #           },
+    #         ],
+    #         parameter_filters: [
+    #           {
+    #             key: "ParameterStringFilterKey", # required
+    #             option: "ParameterStringQueryOption",
+    #             values: ["ParameterStringFilterValue"],
     #           },
     #         ],
     #         max_results: 1,
@@ -2912,6 +2956,10 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #   @return [Array<Types::ParametersFilter>]
+    #
+    # @!attribute [rw] parameter_filters
+    #   Filters to limit the request results.
+    #   @return [Array<Types::ParameterStringFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
@@ -2928,6 +2976,7 @@ module Aws::SSM
     #
     class DescribeParametersRequest < Struct.new(
       :filters,
+      :parameter_filters,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -3522,9 +3571,14 @@ module Aws::SSM
     #
     # @!attribute [rw] execution_start_date_time
     #   The date and time the plugin started executing. Date and time are
-    #   written in ISO 8601 format. For example, August 28, 2016 is
-    #   represented as 2016-08-28. If the plugin has not started to execute,
-    #   the string is empty.
+    #   written in ISO 8601 format. For example, June 7, 2017 is represented
+    #   as 2017-06-7. The following sample AWS CLI command uses the
+    #   `InvokedBefore` filter.
+    #
+    #   `aws ssm list-commands --filters
+    #   key=InvokedBefore,value=2017-06-07T00:00:00Z`
+    #
+    #   If the plugin has not started to execute, the string is empty.
     #   @return [String]
     #
     # @!attribute [rw] execution_elapsed_time
@@ -3533,9 +3587,14 @@ module Aws::SSM
     #
     # @!attribute [rw] execution_end_date_time
     #   The date and time the plugin was finished executing. Date and time
-    #   are written in ISO 8601 format. For example, August 28, 2016 is
-    #   represented as 2016-08-28. If the plugin has not started to execute,
-    #   the string is empty.
+    #   are written in ISO 8601 format. For example, June 7, 2017 is
+    #   represented as 2017-06-7. The following sample AWS CLI command uses
+    #   the `InvokedAfter` filter.
+    #
+    #   `aws ssm list-commands --filters
+    #   key=InvokedAfter,value=2017-06-07T00:00:00Z`
+    #
+    #   If the plugin has not started to execute, the string is empty.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4161,6 +4220,120 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistoryResult AWS API Documentation
     #
     class GetParameterHistoryResult < Struct.new(
+      :parameters,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetParameterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PSParameterName", # required
+    #         with_decryption: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter you want to query.
+    #   @return [String]
+    #
+    # @!attribute [rw] with_decryption
+    #   Return decrypted values for secure string parameters. This flag is
+    #   ignored for String and StringList parameter types.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterRequest AWS API Documentation
+    #
+    class GetParameterRequest < Struct.new(
+      :name,
+      :with_decryption)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parameter
+    #   Information about a parameter.
+    #   @return [Types::Parameter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterResult AWS API Documentation
+    #
+    class GetParameterResult < Struct.new(
+      :parameter)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetParametersByPathRequest
+    #   data as a hash:
+    #
+    #       {
+    #         path: "PSParameterName", # required
+    #         recursive: false,
+    #         parameter_filters: [
+    #           {
+    #             key: "ParameterStringFilterKey", # required
+    #             option: "ParameterStringQueryOption",
+    #             values: ["ParameterStringFilterValue"],
+    #           },
+    #         ],
+    #         with_decryption: false,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The hierarchy for the parameter. Hierarchies start with a forward
+    #   slash (/) and end with the parameter name. A hierarchy can have a
+    #   maximum of five levels. Examples: /Environment/Test/DBString003
+    #
+    #   /Finance/Prod/IAD/OS/WinServ2016/license15
+    #   @return [String]
+    #
+    # @!attribute [rw] recursive
+    #   Retrieve all parameters within a hierarchy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameter_filters
+    #   Filters to limit the request results.
+    #   @return [Array<Types::ParameterStringFilter>]
+    #
+    # @!attribute [rw] with_decryption
+    #   Retrieve all parameters in a hierarchy with their value decrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPathRequest AWS API Documentation
+    #
+    class GetParametersByPathRequest < Struct.new(
+      :path,
+      :recursive,
+      :parameter_filters,
+      :with_decryption,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parameters
+    #   A list of parameters found in the specified hierarchy.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPathResult AWS API Documentation
+    #
+    class GetParametersByPathResult < Struct.new(
       :parameters,
       :next_token)
       include Aws::Structure
@@ -5910,6 +6083,12 @@ module Aws::SSM
     #   The parameter value.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_pattern
+    #   Parameter names can include the following letters and symbols.
+    #
+    #   a-zA-Z0-9\_.-
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -5919,7 +6098,8 @@ module Aws::SSM
       :last_modified_date,
       :last_modified_user,
       :description,
-      :value)
+      :value,
+      :allowed_pattern)
       include Aws::Structure
     end
 
@@ -5952,6 +6132,12 @@ module Aws::SSM
     #   Description of the parameter actions.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_pattern
+    #   A parameter name can include only the following letters and symbols.
+    #
+    #   a-zA-Z0-9\_.-
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
     #
     class ParameterMetadata < Struct.new(
@@ -5960,7 +6146,42 @@ module Aws::SSM
       :key_id,
       :last_modified_date,
       :last_modified_user,
-      :description)
+      :description,
+      :allowed_pattern)
+      include Aws::Structure
+    end
+
+    # One or more filters. Use a filter to return a more specific list of
+    # results.
+    #
+    # @note When making an API call, you may pass ParameterStringFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ParameterStringFilterKey", # required
+    #         option: "ParameterStringQueryOption",
+    #         values: ["ParameterStringFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] option
+    #   Valid options are Equals and BeginsWith. For Path filter, valid
+    #   options are Recursive and OneLevel.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value you want to search for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterStringFilter AWS API Documentation
+    #
+    class ParameterStringFilter < Struct.new(
+      :key,
+      :option,
+      :values)
       include Aws::Structure
     end
 
@@ -5971,7 +6192,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "Name", # accepts Name, Type, KeyId
+    #         key: "Name", # required, accepts Name, Type, KeyId
     #         values: ["ParametersFilterValue"], # required
     #       }
     #
@@ -6373,6 +6594,7 @@ module Aws::SSM
     #         type: "String", # required, accepts String, StringList, SecureString
     #         key_id: "ParameterKeyId",
     #         overwrite: false,
+    #         allowed_pattern: "AllowedPattern",
     #       }
     #
     # @!attribute [rw] name
@@ -6392,13 +6614,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The parameter key ID that you want to add to the system.
+    #   The KMS Key ID that you want to use to encrypt a parameter when you
+    #   choose the SecureString data type. If you don't specify a key ID,
+    #   the system uses the default key associated with your AWS account.
     #   @return [String]
     #
     # @!attribute [rw] overwrite
     #   Overwrite an existing parameter. If not specified, will default to
     #   "false".
     #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_pattern
+    #   A regular expression used to validate the parameter value. For
+    #   example, for String types with values restricted to numbers, you can
+    #   specify the following: AllowedPattern=^\\d+$
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
     #
@@ -6408,7 +6638,8 @@ module Aws::SSM
       :value,
       :type,
       :key_id,
-      :overwrite)
+      :overwrite,
+      :allowed_pattern)
       include Aws::Structure
     end
 
@@ -6736,7 +6967,9 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] output_s3_region
-    #   The Amazon S3 region where the association information is stored.
+    #   (Deprecated) You can no longer specify this parameter. The system
+    #   ignores it. Instead, Systems Manager automatically determines the
+    #   Amazon S3 bucket region.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -6807,19 +7040,24 @@ module Aws::SSM
     #   The instance IDs where the command should execute. You can specify a
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
-    #   Targets parameter, which accepts EC2 tags.
+    #   Targets parameter, which accepts EC2 tags. For more information
+    #   about how to use Targets, see [Sending Commands to a Fleet][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] targets
     #   (Optional) An array of search criteria that targets instances using
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Executing a Command Using
-    #   Systems Manager Run Command][1].
+    #   information about how to use Targets, see [Sending Commands to a
+    #   Fleet][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] document_name
@@ -6860,9 +7098,9 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] output_s3_region
-    #   (Optional) The region where the Amazon Simple Storage Service
-    #   (Amazon S3) output bucket is located. The default value is the
-    #   region where Run Command is being called.
+    #   (Deprecated) You can no longer specify this parameter. The system
+    #   ignores it. Instead, Systems Manager automatically determines the
+    #   Amazon S3 bucket region.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -6879,12 +7117,12 @@ module Aws::SSM
     #   (Optional) The maximum number of instances that are allowed to
     #   execute the command at the same time. You can specify a number such
     #   as 10 or a percentage such as 10%. The default value is 50. For more
-    #   information about how to use MaxConcurrency, see [Executing a
-    #   Command Using Systems Manager Run Command][1].
+    #   information about how to use MaxConcurrency, see [Using Concurrency
+    #   Controls][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -6892,12 +7130,12 @@ module Aws::SSM
     #   When the command fails one more time beyond the value of MaxErrors,
     #   the systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
-    #   is 50. For more information about how to use MaxErrors, see
-    #   [Executing a Command Using Systems Manager Run Command][1].
+    #   is 50. For more information about how to use MaxErrors, see [Using
+    #   Error Controls][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -7106,7 +7344,7 @@ module Aws::SSM
     end
 
     # An array of search criteria that targets instances using a Key,Value
-    # combination that you specify. Targets is required if you don't
+    # combination that you specify. `Targets` is required if you don't
     # provide one or more instance IDs in the call.
     #
     # @note When making an API call, you may pass Target
@@ -7126,7 +7364,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -7139,7 +7377,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation

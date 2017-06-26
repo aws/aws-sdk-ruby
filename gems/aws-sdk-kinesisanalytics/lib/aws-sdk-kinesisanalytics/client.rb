@@ -155,6 +155,48 @@ module Aws::KinesisAnalytics
 
     # @!group API Operations
 
+    # Adds a CloudWatch log stream to monitor application configuration
+    # errors. For more information about using CloudWatch log streams with
+    # Amazon Kinesis Analytics applications, see [Monitoring Configuration
+    # Errors][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #
+    # @option params [required, String] :application_name
+    #   The Amazon Kinesis Analytics application name.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   The version ID of the Amazon Kinesis Analytics application.
+    #
+    # @option params [required, Types::CloudWatchLoggingOption] :cloud_watch_logging_option
+    #   Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To
+    #   write application messages to CloudWatch, the IAM role used must have
+    #   the `PutLogEvents` policy action enabled.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_application_cloud_watch_logging_option({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     cloud_watch_logging_option: { # required
+    #       log_stream_arn: "LogStreamARN", # required
+    #       role_arn: "RoleARN", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOption AWS API Documentation
+    #
+    # @overload add_application_cloud_watch_logging_option(params = {})
+    # @param [Hash] params ({})
+    def add_application_cloud_watch_logging_option(params = {}, options = {})
+      req = build_request(:add_application_cloud_watch_logging_option, params)
+      req.send_request(options)
+    end
+
     # Adds a streaming source to your Amazon Kinesis application. For
     # conceptual information, see [Configuring Application Input][1].
     #
@@ -184,14 +226,6 @@ module Aws::KinesisAnalytics
     #   version.
     #
     # @option params [required, Types::Input] :input
-    #   When you configure the application input, you specify the streaming
-    #   source, the in-application stream name that is created, and the
-    #   mapping between the two. For more information, see [Configuring
-    #   Application Input][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -425,8 +459,7 @@ module Aws::KinesisAnalytics
     # in-application stream, which you can think of as a constantly updating
     # table. In the mapping, you must provide a schema for the
     # in-application stream and map each data column in the in-application
-    # stream to a data element in the streaming source, with the option of
-    # renaming, casting and dropping columns as desired.
+    # stream to a data element in the streaming source.
     #
     # Your application code is one or more SQL statements that read input
     # data, transform it, and generate output. Your application code can
@@ -494,20 +527,36 @@ module Aws::KinesisAnalytics
     #   JSON, CSV). You also must provide an IAM role that Amazon Kinesis
     #   Analytics can assume to write to this stream on your behalf.
     #
+    # @option params [Array<Types::CloudWatchLoggingOption>] :cloud_watch_logging_options
+    #   Use this parameter to configure a CloudWatch log stream to monitor
+    #   application configuration errors. For more information, see
+    #   [Monitoring Configuration Errors][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #
     # @option params [String] :application_code
     #   One or more SQL statements that read input data, transform it, and
     #   generate output. For example, you can write a SQL statement that reads
-    #   input data and generates a running average of the number of
-    #   advertisement clicks by vendor.
+    #   data from one in-application stream, generates a running average of
+    #   the number of advertisement clicks by vendor, and insert resulting
+    #   rows in another in-application stream using pumps. For more
+    #   inforamtion about the typical pattern, see [Application Code][1].
     #
-    #   You can also provide a series of SQL statements, where output of one
-    #   statement can be used as the input for the next statement.
+    #   You can provide such series of SQL statements, where output of one
+    #   statement can be used as the input for the next statement. You store
+    #   intermediate results by creating in-application streams and pumps.
     #
     #   Note that the application code must create the streams with names
     #   specified in the `Outputs`. For example, if your `Outputs` defines
     #   output streams named `ExampleOutputStream1` and
     #   `ExampleOutputStream2`, then your application code must create these
     #   streams.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -572,6 +621,12 @@ module Aws::KinesisAnalytics
     #         },
     #       },
     #     ],
+    #     cloud_watch_logging_options: [
+    #       {
+    #         log_stream_arn: "LogStreamARN", # required
+    #         role_arn: "RoleARN", # required
+    #       },
+    #     ],
     #     application_code: "ApplicationCode",
     #   })
     #
@@ -619,6 +674,44 @@ module Aws::KinesisAnalytics
     # @param [Hash] params ({})
     def delete_application(params = {}, options = {})
       req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes a CloudWatch log stream from an application. For more
+    # information about using CloudWatch log streams with Amazon Kinesis
+    # Analytics applications, see [Monitoring Configuration Errors][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #
+    # @option params [required, String] :application_name
+    #   The Amazon Kinesis Analytics application name.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   The version ID of the Amazon Kinesis Analytics application.
+    #
+    # @option params [required, String] :cloud_watch_logging_option_id
+    #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
+    #   delete. You can use the DescribeApplication operation to get the
+    #   `CloudWatchLoggingOptionId`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application_cloud_watch_logging_option({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     cloud_watch_logging_option_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOption AWS API Documentation
+    #
+    # @overload delete_application_cloud_watch_logging_option(params = {})
+    # @param [Hash] params ({})
+    def delete_application_cloud_watch_logging_option(params = {}, options = {})
+      req = build_request(:delete_application_cloud_watch_logging_option, params)
       req.send_request(options)
     end
 
@@ -785,6 +878,10 @@ module Aws::KinesisAnalytics
     #   resp.application_detail.reference_data_source_descriptions[0].reference_schema.record_columns[0].name #=> String
     #   resp.application_detail.reference_data_source_descriptions[0].reference_schema.record_columns[0].mapping #=> String
     #   resp.application_detail.reference_data_source_descriptions[0].reference_schema.record_columns[0].sql_type #=> String
+    #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
+    #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
+    #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
+    #   resp.application_detail.cloud_watch_logging_option_descriptions[0].role_arn #=> String
     #   resp.application_detail.application_code #=> String
     #   resp.application_detail.application_version_id #=> Integer
     #
@@ -1003,18 +1100,18 @@ module Aws::KinesisAnalytics
       req.send_request(options)
     end
 
-    # Updates an existing Kinesis Analytics application. Using this API, you
-    # can update application code, input configuration, and output
+    # Updates an existing Amazon Kinesis Analytics application. Using this
+    # API, you can update application code, input configuration, and output
     # configuration.
     #
-    # Note that Kinesis Analytics updates the `CurrentApplicationVersionId`
-    # each time you update your application.
+    # Note that Amazon Kinesis Analytics updates the
+    # `CurrentApplicationVersionId` each time you update your application.
     #
-    # This opeation requires permission for the
+    # This operation requires permission for the
     # `kinesisanalytics:UpdateApplication` action.
     #
     # @option params [required, String] :application_name
-    #   Name of the Kinesis Analytics application to update.
+    #   Name of the Amazon Kinesis Analytics application to update.
     #
     # @option params [required, Integer] :current_application_version_id
     #   The current application version ID. You can use the
@@ -1121,6 +1218,13 @@ module Aws::KinesisAnalytics
     #           },
     #         },
     #       ],
+    #       cloud_watch_logging_option_updates: [
+    #         {
+    #           cloud_watch_logging_option_id: "Id", # required
+    #           log_stream_arn_update: "LogStreamARN",
+    #           role_arn_update: "RoleARN",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1146,7 +1250,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -21,6 +21,7 @@ module Aws::SSM
     AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
     AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
     AgentErrorCode = Shapes::StringShape.new(name: 'AgentErrorCode')
+    AllowedPattern = Shapes::StringShape.new(name: 'AllowedPattern')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
@@ -118,6 +119,8 @@ module Aws::SSM
     DeleteMaintenanceWindowResult = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowResult')
     DeleteParameterRequest = Shapes::StructureShape.new(name: 'DeleteParameterRequest')
     DeleteParameterResult = Shapes::StructureShape.new(name: 'DeleteParameterResult')
+    DeleteParametersRequest = Shapes::StructureShape.new(name: 'DeleteParametersRequest')
+    DeleteParametersResult = Shapes::StructureShape.new(name: 'DeleteParametersResult')
     DeletePatchBaselineRequest = Shapes::StructureShape.new(name: 'DeletePatchBaselineRequest')
     DeletePatchBaselineResult = Shapes::StructureShape.new(name: 'DeletePatchBaselineResult')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
@@ -246,12 +249,19 @@ module Aws::SSM
     GetMaintenanceWindowResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowResult')
     GetParameterHistoryRequest = Shapes::StructureShape.new(name: 'GetParameterHistoryRequest')
     GetParameterHistoryResult = Shapes::StructureShape.new(name: 'GetParameterHistoryResult')
+    GetParameterRequest = Shapes::StructureShape.new(name: 'GetParameterRequest')
+    GetParameterResult = Shapes::StructureShape.new(name: 'GetParameterResult')
+    GetParametersByPathMaxResults = Shapes::IntegerShape.new(name: 'GetParametersByPathMaxResults')
+    GetParametersByPathRequest = Shapes::StructureShape.new(name: 'GetParametersByPathRequest')
+    GetParametersByPathResult = Shapes::StructureShape.new(name: 'GetParametersByPathResult')
     GetParametersRequest = Shapes::StructureShape.new(name: 'GetParametersRequest')
     GetParametersResult = Shapes::StructureShape.new(name: 'GetParametersResult')
     GetPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupRequest')
     GetPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupResult')
     GetPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineRequest')
     GetPatchBaselineResult = Shapes::StructureShape.new(name: 'GetPatchBaselineResult')
+    HierarchyLevelLimitExceededException = Shapes::StructureShape.new(name: 'HierarchyLevelLimitExceededException')
+    HierarchyTypeMismatchException = Shapes::StructureShape.new(name: 'HierarchyTypeMismatchException')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
@@ -291,6 +301,7 @@ module Aws::SSM
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidActivation = Shapes::StructureShape.new(name: 'InvalidActivation')
     InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
+    InvalidAllowedPatternException = Shapes::StructureShape.new(name: 'InvalidAllowedPatternException')
     InvalidAutomationExecutionParametersException = Shapes::StructureShape.new(name: 'InvalidAutomationExecutionParametersException')
     InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
     InvalidDocument = Shapes::StructureShape.new(name: 'InvalidDocument')
@@ -300,6 +311,7 @@ module Aws::SSM
     InvalidDocumentVersion = Shapes::StructureShape.new(name: 'InvalidDocumentVersion')
     InvalidFilter = Shapes::StructureShape.new(name: 'InvalidFilter')
     InvalidFilterKey = Shapes::StructureShape.new(name: 'InvalidFilterKey')
+    InvalidFilterOption = Shapes::StructureShape.new(name: 'InvalidFilterOption')
     InvalidFilterValue = Shapes::StructureShape.new(name: 'InvalidFilterValue')
     InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
     InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
@@ -444,6 +456,13 @@ module Aws::SSM
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterNameList = Shapes::ListShape.new(name: 'ParameterNameList')
     ParameterNotFound = Shapes::StructureShape.new(name: 'ParameterNotFound')
+    ParameterPatternMismatchException = Shapes::StructureShape.new(name: 'ParameterPatternMismatchException')
+    ParameterStringFilter = Shapes::StructureShape.new(name: 'ParameterStringFilter')
+    ParameterStringFilterKey = Shapes::StringShape.new(name: 'ParameterStringFilterKey')
+    ParameterStringFilterList = Shapes::ListShape.new(name: 'ParameterStringFilterList')
+    ParameterStringFilterValue = Shapes::StringShape.new(name: 'ParameterStringFilterValue')
+    ParameterStringFilterValueList = Shapes::ListShape.new(name: 'ParameterStringFilterValueList')
+    ParameterStringQueryOption = Shapes::StringShape.new(name: 'ParameterStringQueryOption')
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ParameterValueList = Shapes::ListShape.new(name: 'ParameterValueList')
@@ -873,6 +892,13 @@ module Aws::SSM
 
     DeleteParameterResult.struct_class = Types::DeleteParameterResult
 
+    DeleteParametersRequest.add_member(:names, Shapes::ShapeRef.new(shape: ParameterNameList, required: true, location_name: "Names"))
+    DeleteParametersRequest.struct_class = Types::DeleteParametersRequest
+
+    DeleteParametersResult.add_member(:deleted_parameters, Shapes::ShapeRef.new(shape: ParameterNameList, location_name: "DeletedParameters"))
+    DeleteParametersResult.add_member(:invalid_parameters, Shapes::ShapeRef.new(shape: ParameterNameList, location_name: "InvalidParameters"))
+    DeleteParametersResult.struct_class = Types::DeleteParametersResult
+
     DeletePatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
     DeletePatchBaselineRequest.struct_class = Types::DeletePatchBaselineRequest
 
@@ -1090,6 +1116,7 @@ module Aws::SSM
     DescribeMaintenanceWindowsResult.struct_class = Types::DescribeMaintenanceWindowsResult
 
     DescribeParametersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ParametersFilterList, location_name: "Filters"))
+    DescribeParametersRequest.add_member(:parameter_filters, Shapes::ShapeRef.new(shape: ParameterStringFilterList, location_name: "ParameterFilters"))
     DescribeParametersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     DescribeParametersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeParametersRequest.struct_class = Types::DescribeParametersRequest
@@ -1321,6 +1348,25 @@ module Aws::SSM
     GetParameterHistoryResult.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterHistoryList, location_name: "Parameters"))
     GetParameterHistoryResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetParameterHistoryResult.struct_class = Types::GetParameterHistoryResult
+
+    GetParameterRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
+    GetParameterRequest.add_member(:with_decryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithDecryption", metadata: {"box"=>true}))
+    GetParameterRequest.struct_class = Types::GetParameterRequest
+
+    GetParameterResult.add_member(:parameter, Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter"))
+    GetParameterResult.struct_class = Types::GetParameterResult
+
+    GetParametersByPathRequest.add_member(:path, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Path"))
+    GetParametersByPathRequest.add_member(:recursive, Shapes::ShapeRef.new(shape: Boolean, location_name: "Recursive", metadata: {"box"=>true}))
+    GetParametersByPathRequest.add_member(:parameter_filters, Shapes::ShapeRef.new(shape: ParameterStringFilterList, location_name: "ParameterFilters"))
+    GetParametersByPathRequest.add_member(:with_decryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithDecryption", metadata: {"box"=>true}))
+    GetParametersByPathRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetParametersByPathMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetParametersByPathRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetParametersByPathRequest.struct_class = Types::GetParametersByPathRequest
+
+    GetParametersByPathResult.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "Parameters"))
+    GetParametersByPathResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetParametersByPathResult.struct_class = Types::GetParametersByPathResult
 
     GetParametersRequest.add_member(:names, Shapes::ShapeRef.new(shape: ParameterNameList, required: true, location_name: "Names"))
     GetParametersRequest.add_member(:with_decryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithDecryption", metadata: {"box"=>true}))
@@ -1704,6 +1750,7 @@ module Aws::SSM
     ParameterHistory.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: String, location_name: "LastModifiedUser"))
     ParameterHistory.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
     ParameterHistory.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, location_name: "Value"))
+    ParameterHistory.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     ParameterHistory.struct_class = Types::ParameterHistory
 
     ParameterHistoryList.member = Shapes::ShapeRef.new(shape: ParameterHistory)
@@ -1716,18 +1763,28 @@ module Aws::SSM
     ParameterMetadata.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
     ParameterMetadata.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: String, location_name: "LastModifiedUser"))
     ParameterMetadata.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
+    ParameterMetadata.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     ParameterMetadata.struct_class = Types::ParameterMetadata
 
     ParameterMetadataList.member = Shapes::ShapeRef.new(shape: ParameterMetadata)
 
     ParameterNameList.member = Shapes::ShapeRef.new(shape: PSParameterName)
 
+    ParameterStringFilter.add_member(:key, Shapes::ShapeRef.new(shape: ParameterStringFilterKey, required: true, location_name: "Key"))
+    ParameterStringFilter.add_member(:option, Shapes::ShapeRef.new(shape: ParameterStringQueryOption, location_name: "Option"))
+    ParameterStringFilter.add_member(:values, Shapes::ShapeRef.new(shape: ParameterStringFilterValueList, location_name: "Values"))
+    ParameterStringFilter.struct_class = Types::ParameterStringFilter
+
+    ParameterStringFilterList.member = Shapes::ShapeRef.new(shape: ParameterStringFilter)
+
+    ParameterStringFilterValueList.member = Shapes::ShapeRef.new(shape: ParameterStringFilterValue)
+
     ParameterValueList.member = Shapes::ShapeRef.new(shape: ParameterValue)
 
     Parameters.key = Shapes::ShapeRef.new(shape: ParameterName)
     Parameters.value = Shapes::ShapeRef.new(shape: ParameterValueList)
 
-    ParametersFilter.add_member(:key, Shapes::ShapeRef.new(shape: ParametersFilterKey, location_name: "Key"))
+    ParametersFilter.add_member(:key, Shapes::ShapeRef.new(shape: ParametersFilterKey, required: true, location_name: "Key"))
     ParametersFilter.add_member(:values, Shapes::ShapeRef.new(shape: ParametersFilterValueList, required: true, location_name: "Values"))
     ParametersFilter.struct_class = Types::ParametersFilter
 
@@ -1826,6 +1883,7 @@ module Aws::SSM
     PutParameterRequest.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "Type"))
     PutParameterRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: ParameterKeyId, location_name: "KeyId"))
     PutParameterRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite", metadata: {"box"=>true}))
+    PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.struct_class = Types::PutParameterResult
@@ -2210,6 +2268,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
       end)
 
+      api.add_operation(:delete_parameters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteParameters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteParametersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteParametersResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePatchBaseline"
         o.http_method = "POST"
@@ -2480,8 +2547,16 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeParametersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeParametersResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterOption)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_patch_baselines, Seahorse::Model::Operation.new.tap do |o|
@@ -2618,6 +2693,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_parameter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetParameter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetParameterRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetParameterResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyId)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
+      end)
+
       api.add_operation(:get_parameter_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetParameterHistory"
         o.http_method = "POST"
@@ -2627,6 +2713,13 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyId)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -2635,7 +2728,28 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetParametersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetParametersResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_parameters_by_path, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetParametersByPath"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetParametersByPathRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetParametersByPathResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterOption)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyId)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -2805,6 +2919,10 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ParameterLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
         o.errors << Shapes::ShapeRef.new(shape: ParameterAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: HierarchyLevelLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: HierarchyTypeMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAllowedPatternException)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterPatternMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedParameterType)
       end)
 

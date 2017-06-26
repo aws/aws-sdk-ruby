@@ -348,9 +348,12 @@ module Aws::ElasticLoadBalancingV2
 
     DescribeRulesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, location_name: "ListenerArn"))
     DescribeRulesInput.add_member(:rule_arns, Shapes::ShapeRef.new(shape: RuleArns, location_name: "RuleArns"))
+    DescribeRulesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeRulesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
     DescribeRulesInput.struct_class = Types::DescribeRulesInput
 
     DescribeRulesOutput.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
+    DescribeRulesOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeRulesOutput.struct_class = Types::DescribeRulesOutput
 
     DescribeSSLPoliciesInput.add_member(:names, Shapes::ShapeRef.new(shape: SslPolicyNames, location_name: "Names"))
@@ -921,6 +924,8 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
+        o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
       end)
 
       api.add_operation(:modify_target_group, Seahorse::Model::Operation.new.tap do |o|

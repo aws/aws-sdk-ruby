@@ -173,6 +173,9 @@ module Aws::Organizations
     #   organization, see [Enabling All Features in Your Organization][2] in
     #   the *AWS Organizations User Guide*.
     #
+    # After you accept a handshake, it continues to appear in the results of
+    # relevant APIs for only 30 days. After that it is deleted.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
@@ -332,6 +335,9 @@ module Aws::Organizations
     # handshake. The recipient of the handshake can't cancel it, but can
     # use DeclineHandshake instead. After a handshake is canceled, the
     # recipient can no longer respond to that handshake.
+    #
+    # After you cancel a handshake, it continues to appear in the results of
+    # relevant APIs for only 30 days. After that it is deleted.
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to cancel.
@@ -729,6 +735,9 @@ module Aws::Organizations
     # instead. The originator can't reactivate a declined request, but can
     # re-initiate the process with a new handshake request.
     #
+    # After you decline a handshake, it continues to appear in the results
+    # of relevant APIs for only 30 days. After that it is deleted.
+    #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to decline.
     #   You can get the ID from the ListHandshakesForAccount operation.
@@ -966,6 +975,10 @@ module Aws::Organizations
     # Retrieves information about a previously requested handshake. The
     # handshake ID comes from the response to the original
     # InviteAccountToOrganization operation that generated the handshake.
+    #
+    # You can access handshakes that are ACCEPTED, DECLINED, or CANCELED for
+    # only 30 days after they change to that state. They are then deleted
+    # and no longer accessible.
     #
     # This operation can be called from any account in the organization.
     #
@@ -1386,8 +1399,19 @@ module Aws::Organizations
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
+    # You can invite AWS accounts only from the same reseller as the master
+    # account. For example, if your organization's master account was
+    # created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS reseller
+    # in India, then you can only invite other AISPL accounts to your
+    # organization. You can't combine accounts from AISPL and AWS. For more
+    # information, see [Consolidated Billing in India][1].
+    #
     # This operation can be called only from the organization's master
     # account.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html
     #
     # @option params [required, Types::HandshakeParty] :target
     #   The identifier (ID) of the AWS account that you want to invite to join
@@ -1459,11 +1483,24 @@ module Aws::Organizations
     # This operation can be called only from a member account in the
     # organization.
     #
-    # The master account in an organization with all features enabled can
-    # set service control policies (SCPs) that can restrict what
-    # administrators of member accounts can do, including preventing them
-    # from successfully calling `LeaveOrganization` and leaving the
-    # organization.
+    # * The master account in an organization with all features enabled can
+    #   set service control policies (SCPs) that can restrict what
+    #   administrators of member accounts can do, including preventing them
+    #   from successfully calling `LeaveOrganization` and leaving the
+    #   organization.
+    #
+    # * If you created the account using the AWS Organizations console, the
+    #   Organizations API, or the Organizations CLI commands, then you
+    #   cannot remove the account.
+    #
+    # * You can leave an organization only after you enable IAM user access
+    #   to billing in your account. For more information, see [Activating
+    #   Access to the Billing and Cost Management Console][1] in the *AWS
+    #   Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1737,6 +1774,10 @@ module Aws::Organizations
     # Lists the current handshakes that are associated with the account of
     # the requesting user.
     #
+    # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
+    # results of this API for only 30 days after changing to that state.
+    # After that they are deleted and no longer accessible.
+    #
     # This operation can be called from any account in the organization.
     #
     # @option params [Types::HandshakeFilter] :filter
@@ -1813,6 +1854,10 @@ module Aws::Organizations
     # the requesting user is part of. The `ListHandshakesForOrganization`
     # operation returns a list of handshake structures. Each structure
     # contains details and status about a handshake.
+    #
+    # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
+    # results of this API for only 30 days after changing to that state.
+    # After that they are deleted and no longer accessible.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2386,9 +2431,19 @@ module Aws::Organizations
     # account. Member accounts can remove themselves with LeaveOrganization
     # instead.
     #
-    # You can remove only existing accounts that were invited to join the
-    # organization. You cannot remove accounts that were created by AWS
-    # Organizations.
+    # * You can remove only accounts that were created outside your
+    #   organization and invited to join. If you created the account using
+    #   the AWS Organizations console, the Organizations API, or the
+    #   Organizations CLI commands, then you cannot remove the account.
+    #
+    # * You can remove a member account only after you enable IAM user
+    #   access to billing in the member account. For more information, see
+    #   [Activating Access to the Billing and Cost Management Console][1] in
+    #   the *AWS Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the member account that you want to
@@ -2559,7 +2614,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

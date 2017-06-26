@@ -987,6 +987,7 @@ module Aws::AutoScaling
           key: t.key,
           resource_id: t.resource_id,
           resource_type: t.resource_type,
+          data: t,
           client: @client
         )
       end

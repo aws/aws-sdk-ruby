@@ -200,12 +200,14 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time up to which a streaming session can run.
+    #   The maximum time for which a streaming session can run. The input can
+    #   be any numeric value in seconds between 600 and 57600.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
     #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to his/her previous session.
+    #   interval, the user is connected back to their previous session. The
+    #   input can be any numeric value in seconds between 60 and 57600.
     #
     # @option params [String] :description
     #   The description of the fleet.
@@ -214,7 +216,7 @@ module Aws::AppStream
     #   The display name of the fleet.
     #
     # @option params [Boolean] :enable_default_internet_access
-    #   Enable/Disable default Internet access from fleet.
+    #   Enables or disables default Internet access for the fleet.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -230,7 +232,8 @@ module Aws::AppStream
     #       desired_instances: 1, # required
     #     },
     #     vpc_config: {
-    #       subnet_ids: ["String"], # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
     #     },
     #     max_user_duration_in_seconds: 1,
     #     disconnect_timeout_in_seconds: 1,
@@ -256,6 +259,8 @@ module Aws::AppStream
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.fleet.vpc_config.subnet_ids #=> Array
     #   resp.fleet.vpc_config.subnet_ids[0] #=> String
+    #   resp.fleet.vpc_config.security_group_ids #=> Array
+    #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
@@ -282,6 +287,9 @@ module Aws::AppStream
     # @option params [String] :display_name
     #   The name displayed to end users on the AppStream 2.0 portal.
     #
+    # @option params [Array<Types::StorageConnector>] :storage_connectors
+    #   The storage connectors to be enabled for the stack.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -292,6 +300,12 @@ module Aws::AppStream
     #     name: "String", # required
     #     description: "Description",
     #     display_name: "DisplayName",
+    #     storage_connectors: [
+    #       {
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         resource_identifier: "ResourceIdentifier",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -301,6 +315,12 @@ module Aws::AppStream
     #   resp.stack.description #=> String
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
+    #   resp.stack.storage_connectors #=> Array
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.stack_errors #=> Array
+    #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
+    #   resp.stack.stack_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -329,8 +349,9 @@ module Aws::AppStream
     #   starts.
     #
     # @option params [Integer] :validity
-    #   The validity duration of the URL in seconds. After this duration, the
-    #   URL returned by this operation becomes invalid.
+    #   The duration up to which the URL returned by this action is valid. The
+    #   input can be any numeric value in seconds between 1 and 604800
+    #   seconds.
     #
     # @option params [String] :session_context
     #   The sessionContext of the streaming URL.
@@ -452,6 +473,8 @@ module Aws::AppStream
     #   resp.fleets[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.fleets[0].vpc_config.subnet_ids #=> Array
     #   resp.fleets[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.fleets[0].vpc_config.security_group_ids #=> Array
+    #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
     #   resp.fleets[0].created_time #=> Time
     #   resp.fleets[0].fleet_errors #=> Array
     #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
@@ -509,6 +532,7 @@ module Aws::AppStream
     #   resp.images[0].applications[0].metadata #=> Hash
     #   resp.images[0].applications[0].metadata["String"] #=> String
     #   resp.images[0].created_time #=> Time
+    #   resp.images[0].public_base_image_released_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
     #
@@ -524,7 +548,7 @@ module Aws::AppStream
     # user. Pass this value for the `nextToken` parameter in a subsequent
     # call to this operation to retrieve the next set of items. If an
     # authentication type is not provided, the operation defaults to users
-    # authenticated using a streaming url.
+    # authenticated using a streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack for which to list sessions.
@@ -546,9 +570,9 @@ module Aws::AppStream
     #
     # @option params [String] :authentication_type
     #   The authentication method of the user. It can be `API` for a user
-    #   authenticated using a streaming url or `SAML` for a SAML federated
+    #   authenticated using a streaming URL, or `SAML` for a SAML federated
     #   user. If an authentication type is not provided, the operation
-    #   defaults to users authenticated using a streaming url.
+    #   defaults to users authenticated using a streaming URL.
     #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -563,7 +587,7 @@ module Aws::AppStream
     #     user_id: "UserId",
     #     next_token: "String",
     #     limit: 1,
-    #     authentication_type: "API", # accepts API, SAML
+    #     authentication_type: "API", # accepts API, SAML, USERPOOL
     #   })
     #
     # @example Response structure
@@ -574,7 +598,7 @@ module Aws::AppStream
     #   resp.sessions[0].stack_name #=> String
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
-    #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML"
+    #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -619,6 +643,12 @@ module Aws::AppStream
     #   resp.stacks[0].description #=> String
     #   resp.stacks[0].display_name #=> String
     #   resp.stacks[0].created_time #=> Time
+    #   resp.stacks[0].storage_connectors #=> Array
+    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
+    #   resp.stacks[0].stack_errors #=> Array
+    #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
+    #   resp.stacks[0].stack_errors[0].error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -817,12 +847,14 @@ module Aws::AppStream
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time during which a streaming session can run.
+    #   The maximum time for which a streaming session can run. The input can
+    #   be any numeric value in seconds between 600 and 57600.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. When the user reconnects after a disconnection, the user is
-    #   connected to the same instance within this time interval.
+    #   ended. If a user who got disconnected reconnects within this timeout
+    #   interval, the user is connected back to their previous session. The
+    #   input can be any numeric value in seconds between 60 and 57600.
     #
     # @option params [Boolean] :delete_vpc_config
     #   Delete the VPC association for the specified fleet.
@@ -834,7 +866,10 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #
     # @option params [Boolean] :enable_default_internet_access
-    #   Enable/Disable default Internet access from fleet.
+    #   Enables or disables default Internet access for the fleet.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   Fleet attributes to be deleted.
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,7 +885,8 @@ module Aws::AppStream
     #       desired_instances: 1, # required
     #     },
     #     vpc_config: {
-    #       subnet_ids: ["String"], # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
     #     },
     #     max_user_duration_in_seconds: 1,
     #     disconnect_timeout_in_seconds: 1,
@@ -858,6 +894,7 @@ module Aws::AppStream
     #     description: "Description",
     #     display_name: "DisplayName",
     #     enable_default_internet_access: false,
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS
     #   })
     #
     # @example Response structure
@@ -877,6 +914,8 @@ module Aws::AppStream
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.fleet.vpc_config.subnet_ids #=> Array
     #   resp.fleet.vpc_config.subnet_ids[0] #=> String
+    #   resp.fleet.vpc_config.security_group_ids #=> Array
+    #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
@@ -903,6 +942,12 @@ module Aws::AppStream
     # @option params [required, String] :name
     #   The name of the stack to update.
     #
+    # @option params [Array<Types::StorageConnector>] :storage_connectors
+    #   The storage connectors to be enabled for the stack.
+    #
+    # @option params [Boolean] :delete_storage_connectors
+    #   Remove all the storage connectors currently enabled for the stack.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -913,6 +958,13 @@ module Aws::AppStream
     #     display_name: "DisplayName",
     #     description: "Description",
     #     name: "String", # required
+    #     storage_connectors: [
+    #       {
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         resource_identifier: "ResourceIdentifier",
+    #       },
+    #     ],
+    #     delete_storage_connectors: false,
     #   })
     #
     # @example Response structure
@@ -922,6 +974,12 @@ module Aws::AppStream
     #   resp.stack.description #=> String
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
+    #   resp.stack.storage_connectors #=> Array
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.stack_errors #=> Array
+    #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
+    #   resp.stack.stack_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -945,7 +1003,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

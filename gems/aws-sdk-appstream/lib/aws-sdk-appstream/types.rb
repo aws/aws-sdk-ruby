@@ -36,7 +36,7 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] metadata
-    #   Additional attributes that describes the application.
+    #   Additional attributes that describe the application.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Application AWS API Documentation
@@ -143,7 +143,8 @@ module Aws::AppStream
     #           desired_instances: 1, # required
     #         },
     #         vpc_config: {
-    #           subnet_ids: ["String"], # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
     #         },
     #         max_user_duration_in_seconds: 1,
     #         disconnect_timeout_in_seconds: 1,
@@ -174,13 +175,15 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time up to which a streaming session can run.
+    #   The maximum time for which a streaming session can run. The input
+    #   can be any numeric value in seconds between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
     #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to his/her previous session.
+    #   interval, the user is connected back to their previous session. The
+    #   input can be any numeric value in seconds between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -192,7 +195,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Enable/Disable default Internet access from fleet.
+    #   Enables or disables default Internet access for the fleet.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
@@ -229,6 +232,12 @@ module Aws::AppStream
     #         name: "String", # required
     #         description: "Description",
     #         display_name: "DisplayName",
+    #         storage_connectors: [
+    #           {
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             resource_identifier: "ResourceIdentifier",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -243,12 +252,17 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #   @return [String]
     #
+    # @!attribute [rw] storage_connectors
+    #   The storage connectors to be enabled for the stack.
+    #   @return [Array<Types::StorageConnector>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
       :name,
       :description,
-      :display_name)
+      :display_name,
+      :storage_connectors)
       include Aws::Structure
     end
 
@@ -293,8 +307,9 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] validity
-    #   The validity duration of the URL in seconds. After this duration,
-    #   the URL returned by this operation becomes invalid.
+    #   The duration up to which the URL returned by this action is valid.
+    #   The input can be any numeric value in seconds between 1 and 604800
+    #   seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] session_context
@@ -455,7 +470,7 @@ module Aws::AppStream
     #         user_id: "UserId",
     #         next_token: "String",
     #         limit: 1,
-    #         authentication_type: "API", # accepts API, SAML
+    #         authentication_type: "API", # accepts API, SAML, USERPOOL
     #       }
     #
     # @!attribute [rw] stack_name
@@ -483,9 +498,9 @@ module Aws::AppStream
     #
     # @!attribute [rw] authentication_type
     #   The authentication method of the user. It can be `API` for a user
-    #   authenticated using a streaming url or `SAML` for a SAML federated
+    #   authenticated using a streaming URL, or `SAML` for a SAML federated
     #   user. If an authentication type is not provided, the operation
-    #   defaults to users authenticated using a streaming url.
+    #   defaults to users authenticated using a streaming URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
@@ -642,14 +657,15 @@ module Aws::AppStream
     #   @return [Types::ComputeCapacityStatus]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time during which a streaming session can run.
+    #   The maximum time for which a streaming session can run. The value
+    #   can be any numeric value in seconds between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. When a user reconnects after a disconnection, the user is
-    #   connected to the same session and instance within this time
-    #   interval.
+    #   ended. If a user who got disconnected reconnects within this timeout
+    #   interval, the user is connected back to their previous session. The
+    #   input can be any numeric value in seconds between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -669,8 +685,7 @@ module Aws::AppStream
     #   @return [Array<Types::FleetError>]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Default Internet access from the fleet. True (Enabled), False
-    #   (Disabled).
+    #   Whether default Internet access is enabled for the fleet.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
@@ -742,7 +757,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] image_builder_supported
-    #   Indicates whether an image builder can be launched from this image.
+    #   Whether an image builder can be launched from this image.
     #   @return [Boolean]
     #
     # @!attribute [rw] platform
@@ -765,6 +780,12 @@ module Aws::AppStream
     #   The timestamp when the image was created.
     #   @return [Time]
     #
+    # @!attribute [rw] public_base_image_released_date
+    #   The AWS release date of the public base image. For private images,
+    #   this date is the release date of the base image from which the image
+    #   was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -779,7 +800,8 @@ module Aws::AppStream
       :description,
       :state_change_reason,
       :applications,
-      :created_time)
+      :created_time,
+      :public_base_image_released_date)
       include Aws::Structure
     end
 
@@ -914,7 +936,7 @@ module Aws::AppStream
     # @!attribute [rw] authentication_type
     #   The authentication method of the user for whom the session was
     #   created. It can be `API` for a user authenticated using a streaming
-    #   url or `SAML` for a SAML federated user.
+    #   URL or `SAML` for a SAML federated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
@@ -951,6 +973,14 @@ module Aws::AppStream
     #   The timestamp when the stack was created.
     #   @return [Time]
     #
+    # @!attribute [rw] storage_connectors
+    #   The storage connectors to be enabled for the stack.
+    #   @return [Array<Types::StorageConnector>]
+    #
+    # @!attribute [rw] stack_errors
+    #   The list of errors associated with the stack.
+    #   @return [Array<Types::StackError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -958,7 +988,27 @@ module Aws::AppStream
       :name,
       :description,
       :display_name,
-      :created_time)
+      :created_time,
+      :storage_connectors,
+      :stack_errors)
+      include Aws::Structure
+    end
+
+    # Contains the parameters for a stack error.
+    #
+    # @!attribute [rw] error_code
+    #   The error code of a stack error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message of a stack error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StackError AWS API Documentation
+    #
+    class StackError < Struct.new(
+      :error_code,
+      :error_message)
       include Aws::Structure
     end
 
@@ -1006,6 +1056,33 @@ module Aws::AppStream
     #
     class StopFleetResult < Aws::EmptyStructure; end
 
+    # Contains the parameters for a storage connector.
+    #
+    # @note When making an API call, you may pass StorageConnector
+    #   data as a hash:
+    #
+    #       {
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         resource_identifier: "ResourceIdentifier",
+    #       }
+    #
+    # @!attribute [rw] connector_type
+    #   The type of storage connector. The possible values include:
+    #   HOMEFOLDERS.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The ARN associated with the storage connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
+    #
+    class StorageConnector < Struct.new(
+      :connector_type,
+      :resource_identifier)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateFleetRequest
     #   data as a hash:
     #
@@ -1017,7 +1094,8 @@ module Aws::AppStream
     #           desired_instances: 1, # required
     #         },
     #         vpc_config: {
-    #           subnet_ids: ["String"], # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
     #         },
     #         max_user_duration_in_seconds: 1,
     #         disconnect_timeout_in_seconds: 1,
@@ -1025,6 +1103,7 @@ module Aws::AppStream
     #         description: "Description",
     #         display_name: "DisplayName",
     #         enable_default_internet_access: false,
+    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS
     #       }
     #
     # @!attribute [rw] image_name
@@ -1049,13 +1128,15 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time during which a streaming session can run.
+    #   The maximum time for which a streaming session can run. The input
+    #   can be any numeric value in seconds between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. When the user reconnects after a disconnection, the user is
-    #   connected to the same instance within this time interval.
+    #   ended. If a user who got disconnected reconnects within this timeout
+    #   interval, the user is connected back to their previous session. The
+    #   input can be any numeric value in seconds between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] delete_vpc_config
@@ -1071,8 +1152,12 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Enable/Disable default Internet access from fleet.
+    #   Enables or disables default Internet access for the fleet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] attributes_to_delete
+    #   Fleet attributes to be deleted.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
@@ -1087,7 +1172,8 @@ module Aws::AppStream
       :delete_vpc_config,
       :description,
       :display_name,
-      :enable_default_internet_access)
+      :enable_default_internet_access,
+      :attributes_to_delete)
       include Aws::Structure
     end
 
@@ -1109,6 +1195,13 @@ module Aws::AppStream
     #         display_name: "DisplayName",
     #         description: "Description",
     #         name: "String", # required
+    #         storage_connectors: [
+    #           {
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             resource_identifier: "ResourceIdentifier",
+    #           },
+    #         ],
+    #         delete_storage_connectors: false,
     #       }
     #
     # @!attribute [rw] display_name
@@ -1123,12 +1216,22 @@ module Aws::AppStream
     #   The name of the stack to update.
     #   @return [String]
     #
+    # @!attribute [rw] storage_connectors
+    #   The storage connectors to be enabled for the stack.
+    #   @return [Array<Types::StorageConnector>]
+    #
+    # @!attribute [rw] delete_storage_connectors
+    #   Remove all the storage connectors currently enabled for the stack.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
       :display_name,
       :description,
-      :name)
+      :name,
+      :storage_connectors,
+      :delete_storage_connectors)
       include Aws::Structure
     end
 
@@ -1149,7 +1252,8 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         subnet_ids: ["String"], # required
+    #         subnet_ids: ["String"],
+    #         security_group_ids: ["String"],
     #       }
     #
     # @!attribute [rw] subnet_ids
@@ -1157,10 +1261,15 @@ module Aws::AppStream
     #   the fleet instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] security_group_ids
+    #   Security groups associated with the fleet.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
-      :subnet_ids)
+      :subnet_ids,
+      :security_group_ids)
       include Aws::Structure
     end
 

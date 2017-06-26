@@ -18,8 +18,8 @@ module Aws::EC2
     #         reserved_instance_ids: ["String"], # required
     #         target_configurations: [
     #           {
-    #             offering_id: "String", # required
     #             instance_count: 1,
+    #             offering_id: "String", # required
     #           },
     #         ],
     #       }
@@ -138,12 +138,12 @@ module Aws::EC2
 
     # Describes a running instance in a Spot fleet.
     #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_request_id
@@ -160,8 +160,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveInstance AWS API Documentation
     #
     class ActiveInstance < Struct.new(
-      :instance_type,
       :instance_id,
+      :instance_type,
       :spot_instance_request_id,
       :instance_health)
       include Aws::Structure
@@ -224,16 +224,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         domain: "vpc", # accepts vpc, standard
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] domain
     #   Set to `vpc` to allocate the address for use with instances in a
@@ -242,11 +235,18 @@ module Aws::EC2
     #   Default: The address is for use with instances in EC2-Classic.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressRequest AWS API Documentation
     #
     class AllocateAddressRequest < Struct.new(
-      :dry_run,
-      :domain)
+      :domain,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -256,22 +256,22 @@ module Aws::EC2
     #   The Elastic IP address.
     #   @return [String]
     #
-    # @!attribute [rw] domain
-    #   Indicates whether this Elastic IP address is for use with instances
-    #   in EC2-Classic (`standard`) or instances in a VPC (`vpc`).
-    #   @return [String]
-    #
     # @!attribute [rw] allocation_id
     #   \[EC2-VPC\] The ID that AWS assigns to represent the allocation of
     #   the Elastic IP address for use with instances in a VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   Indicates whether this Elastic IP address is for use with instances
+    #   in EC2-Classic (`standard`) or instances in a VPC (`vpc`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressResult AWS API Documentation
     #
     class AllocateAddressResult < Struct.new(
       :public_ip,
-      :domain,
-      :allocation_id)
+      :allocation_id,
+      :domain)
       include Aws::Structure
     end
 
@@ -282,10 +282,10 @@ module Aws::EC2
     #
     #       {
     #         auto_placement: "on", # accepts on, off
+    #         availability_zone: "String", # required
     #         client_token: "String",
     #         instance_type: "String", # required
     #         quantity: 1, # required
-    #         availability_zone: "String", # required
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -294,6 +294,10 @@ module Aws::EC2
     #   launching instances without specifying a host ID.
     #
     #   Default: Enabled
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the Dedicated Hosts.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -317,18 +321,14 @@ module Aws::EC2
     #   with these parameters.
     #   @return [Integer]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone for the Dedicated Hosts.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
     class AllocateHostsRequest < Struct.new(
       :auto_placement,
+      :availability_zone,
       :client_token,
       :instance_type,
-      :quantity,
-      :availability_zone)
+      :quantity)
       include Aws::Structure
     end
 
@@ -350,20 +350,10 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         network_interface_id: "String", # required
-    #         ipv_6_addresses: ["String"],
     #         ipv_6_address_count: 1,
+    #         ipv_6_addresses: ["String"],
+    #         network_interface_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses to be assigned to the network
-    #   interface. You can't use this option if you're specifying a number
-    #   of IPv6 addresses.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_address_count
     #   The number of IPv6 addresses to assign to the network interface.
@@ -372,28 +362,38 @@ module Aws::EC2
     #   addresses.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesRequest AWS API Documentation
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more specific IPv6 addresses to be assigned to the network
+    #   interface. You can't use this option if you're specifying a number
+    #   of IPv6 addresses.
+    #   @return [Array<String>]
     #
-    class AssignIpv6AddressesRequest < Struct.new(
-      :network_interface_id,
-      :ipv_6_addresses,
-      :ipv_6_address_count)
-      include Aws::Structure
-    end
-
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesRequest AWS API Documentation
+    #
+    class AssignIpv6AddressesRequest < Struct.new(
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :network_interface_id)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] assigned_ipv_6_addresses
     #   The IPv6 addresses assigned to the network interface.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesResult AWS API Documentation
     #
     class AssignIpv6AddressesResult < Struct.new(
-      :network_interface_id,
-      :assigned_ipv_6_addresses)
+      :assigned_ipv_6_addresses,
+      :network_interface_id)
       include Aws::Structure
     end
 
@@ -403,11 +403,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         allow_reassignment: false,
     #         network_interface_id: "String", # required
     #         private_ip_addresses: ["String"],
     #         secondary_private_ip_address_count: 1,
-    #         allow_reassignment: false,
     #       }
+    #
+    # @!attribute [rw] allow_reassignment
+    #   Indicates whether to allow an IP address that is already assigned to
+    #   another network interface or instance to be reassigned to the
+    #   specified network interface.
+    #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
@@ -428,19 +434,13 @@ module Aws::EC2
     #   private IP addresses.
     #   @return [Integer]
     #
-    # @!attribute [rw] allow_reassignment
-    #   Indicates whether to allow an IP address that is already assigned to
-    #   another network interface or instance to be reassigned to the
-    #   specified network interface.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesRequest AWS API Documentation
     #
     class AssignPrivateIpAddressesRequest < Struct.new(
+      :allow_reassignment,
       :network_interface_id,
       :private_ip_addresses,
-      :secondary_private_ip_address_count,
-      :allow_reassignment)
+      :secondary_private_ip_address_count)
       include Aws::Structure
     end
 
@@ -450,21 +450,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
+    #         allocation_id: "String",
     #         instance_id: "String",
     #         public_ip: "String",
-    #         allocation_id: "String",
+    #         allow_reassociation: false,
+    #         dry_run: false,
     #         network_interface_id: "String",
     #         private_ip_address: "String",
-    #         allow_reassociation: false,
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] allocation_id
+    #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
+    #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance. This is required for EC2-Classic. For
@@ -477,9 +474,22 @@ module Aws::EC2
     #   The Elastic IP address. This is required for EC2-Classic.
     #   @return [String]
     #
-    # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
-    #   @return [String]
+    # @!attribute [rw] allow_reassociation
+    #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to
+    #   allow an Elastic IP address that is already associated with an
+    #   instance or network interface to be reassociated with the specified
+    #   instance or network interface. Otherwise, the operation fails. In a
+    #   VPC in an EC2-VPC-only account, reassociation is automatic,
+    #   therefore you can specify false to ensure the operation fails if the
+    #   Elastic IP address is already associated with another resource.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has
@@ -494,26 +504,16 @@ module Aws::EC2
     #   address.
     #   @return [String]
     #
-    # @!attribute [rw] allow_reassociation
-    #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to
-    #   allow an Elastic IP address that is already associated with an
-    #   instance or network interface to be reassociated with the specified
-    #   instance or network interface. Otherwise, the operation fails. In a
-    #   VPC in an EC2-VPC-only account, reassociation is automatic,
-    #   therefore you can specify false to ensure the operation fails if the
-    #   Elastic IP address is already associated with another resource.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddressRequest AWS API Documentation
     #
     class AssociateAddressRequest < Struct.new(
-      :dry_run,
+      :allocation_id,
       :instance_id,
       :public_ip,
-      :allocation_id,
+      :allow_reassociation,
+      :dry_run,
       :network_interface_id,
-      :private_ip_address,
-      :allow_reassociation)
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -537,17 +537,10 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         dhcp_options_id: "String", # required
     #         vpc_id: "String", # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] dhcp_options_id
     #   The ID of the DHCP options set, or `default` to associate no DHCP
@@ -558,12 +551,19 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptionsRequest AWS API Documentation
     #
     class AssociateDhcpOptionsRequest < Struct.new(
-      :dry_run,
       :dhcp_options_id,
-      :vpc_id)
+      :vpc_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -612,8 +612,8 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         subnet_id: "String", # required
     #         route_table_id: "String", # required
+    #         subnet_id: "String", # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -623,20 +623,20 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
     # @!attribute [rw] route_table_id
     #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTableRequest AWS API Documentation
     #
     class AssociateRouteTableRequest < Struct.new(
       :dry_run,
-      :subnet_id,
-      :route_table_id)
+      :route_table_id,
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -658,40 +658,40 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "String", # required
     #         ipv_6_cidr_block: "String", # required
+    #         subnet_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :subnet_id,
-      :ipv_6_cidr_block)
+      :ipv_6_cidr_block,
+      :subnet_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::SubnetIpv6CidrBlockAssociation]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockResult AWS API Documentation
     #
     class AssociateSubnetCidrBlockResult < Struct.new(
-      :subnet_id,
-      :ipv_6_cidr_block_association)
+      :ipv_6_cidr_block_association,
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -699,13 +699,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         vpc_id: "String", # required
     #         amazon_provided_ipv_6_cidr_block: false,
+    #         vpc_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
     #
     # @!attribute [rw] amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -713,27 +709,31 @@ module Aws::EC2
     #   size of the CIDR block.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockRequest AWS API Documentation
-    #
-    class AssociateVpcCidrBlockRequest < Struct.new(
-      :vpc_id,
-      :amazon_provided_ipv_6_cidr_block)
-      include Aws::Structure
-    end
-
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockRequest AWS API Documentation
+    #
+    class AssociateVpcCidrBlockRequest < Struct.new(
+      :amazon_provided_ipv_6_cidr_block,
+      :vpc_id)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockResult AWS API Documentation
     #
     class AssociateVpcCidrBlockResult < Struct.new(
-      :vpc_id,
-      :ipv_6_cidr_block_association)
+      :ipv_6_cidr_block_association,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -744,9 +744,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
+    #         groups: ["String"], # required
     #         instance_id: "String", # required
     #         vpc_id: "String", # required
-    #         groups: ["String"], # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -755,6 +755,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] groups
+    #   The ID of one or more of the VPC's security groups. You cannot
+    #   specify security groups from a different VPC.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
     #   The ID of an EC2-Classic instance to link to the ClassicLink-enabled
@@ -765,18 +770,13 @@ module Aws::EC2
     #   The ID of a ClassicLink-enabled VPC.
     #   @return [String]
     #
-    # @!attribute [rw] groups
-    #   The ID of one or more of the VPC's security groups. You cannot
-    #   specify security groups from a different VPC.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpcRequest AWS API Documentation
     #
     class AttachClassicLinkVpcRequest < Struct.new(
       :dry_run,
+      :groups,
       :instance_id,
-      :vpc_id,
-      :groups)
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -835,11 +835,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_interface_id: "String", # required
-    #         instance_id: "String", # required
     #         device_index: 1, # required
+    #         dry_run: false,
+    #         instance_id: "String", # required
+    #         network_interface_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] device_index
+    #   The index of the device for the network interface attachment.
+    #   @return [Integer]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -848,25 +852,21 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] device_index
-    #   The index of the device for the network interface attachment.
-    #   @return [Integer]
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceRequest AWS API Documentation
     #
     class AttachNetworkInterfaceRequest < Struct.new(
+      :device_index,
       :dry_run,
-      :network_interface_id,
       :instance_id,
-      :device_index)
+      :network_interface_id)
       include Aws::Structure
     end
 
@@ -889,11 +889,25 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_id: "String", # required
-    #         instance_id: "String", # required
     #         device: "String", # required
+    #         instance_id: "String", # required
+    #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] device
+    #   The device name to expose to the instance (for example, `/dev/sdh`
+    #   or `xvdh`).
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the EBS volume. The volume and instance must be within the
+    #   same Availability Zone.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -902,27 +916,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the EBS volume. The volume and instance must be within the
-    #   same Availability Zone.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] device
-    #   The device name to expose to the instance (for example, `/dev/sdh`
-    #   or `xvdh`).
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolumeRequest AWS API Documentation
     #
     class AttachVolumeRequest < Struct.new(
-      :dry_run,
-      :volume_id,
+      :device,
       :instance_id,
-      :device)
+      :volume_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -932,10 +932,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpn_gateway_id: "String", # required
     #         vpc_id: "String", # required
+    #         vpn_gateway_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -944,20 +952,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGatewayRequest AWS API Documentation
     #
     class AttachVpnGatewayRequest < Struct.new(
-      :dry_run,
+      :vpc_id,
       :vpn_gateway_id,
-      :vpc_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -1022,27 +1022,10 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         group_id: "String", # required
-    #         source_security_group_name: "String",
-    #         source_security_group_owner_id: "String",
-    #         ip_protocol: "String",
-    #         from_port: 1,
-    #         to_port: 1,
-    #         cidr_ip: "String",
     #         ip_permissions: [
     #           {
-    #             ip_protocol: "String",
     #             from_port: 1,
-    #             to_port: 1,
-    #             user_id_group_pairs: [
-    #               {
-    #                 user_id: "String",
-    #                 group_name: "String",
-    #                 group_id: "String",
-    #                 vpc_id: "String",
-    #                 vpc_peering_connection_id: "String",
-    #                 peering_status: "String",
-    #               },
-    #             ],
+    #             ip_protocol: "String",
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
@@ -1058,8 +1041,25 @@ module Aws::EC2
     #                 prefix_list_id: "String",
     #               },
     #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
     #           },
     #         ],
+    #         cidr_ip: "String",
+    #         from_port: 1,
+    #         ip_protocol: "String",
+    #         to_port: 1,
+    #         source_security_group_name: "String",
+    #         source_security_group_owner_id: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -1073,6 +1073,33 @@ module Aws::EC2
     #   The ID of the security group.
     #   @return [String]
     #
+    # @!attribute [rw] ip_permissions
+    #   A set of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @!attribute [rw] cidr_ip
+    #   The CIDR IPv4 address range. We recommend that you specify the CIDR
+    #   range in a set of IP permissions instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The start of port range for the TCP and UDP protocols, or an ICMP
+    #   type number. We recommend that you specify the port range in a set
+    #   of IP permissions instead.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The IP protocol name or number. We recommend that you specify the
+    #   protocol in a set of IP permissions instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_port
+    #   The end of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. We recommend that you specify the port range in a set of IP
+    #   permissions instead.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_security_group_name
     #   The name of a destination security group. To authorize outbound
     #   access to a destination security group, we recommend that you use a
@@ -1085,45 +1112,18 @@ module Aws::EC2
     #   recommend that you use a set of IP permissions instead.
     #   @return [String]
     #
-    # @!attribute [rw] ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
-    #   @return [String]
-    #
-    # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. We recommend that you specify the port range in a set
-    #   of IP permissions instead.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cidr_ip
-    #   The CIDR IPv4 address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
-    #   @return [Array<Types::IpPermission>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest AWS API Documentation
     #
     class AuthorizeSecurityGroupEgressRequest < Struct.new(
       :dry_run,
       :group_id,
-      :source_security_group_name,
-      :source_security_group_owner_id,
-      :ip_protocol,
-      :from_port,
-      :to_port,
+      :ip_permissions,
       :cidr_ip,
-      :ip_permissions)
+      :from_port,
+      :ip_protocol,
+      :to_port,
+      :source_security_group_name,
+      :source_security_group_owner_id)
       include Aws::Structure
     end
 
@@ -1133,30 +1133,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_name: "String",
-    #         group_id: "String",
-    #         source_security_group_name: "String",
-    #         source_security_group_owner_id: "String",
-    #         ip_protocol: "String",
-    #         from_port: 1,
-    #         to_port: 1,
     #         cidr_ip: "String",
+    #         from_port: 1,
+    #         group_id: "String",
+    #         group_name: "String",
     #         ip_permissions: [
     #           {
-    #             ip_protocol: "String",
     #             from_port: 1,
-    #             to_port: 1,
-    #             user_id_group_pairs: [
-    #               {
-    #                 user_id: "String",
-    #                 group_name: "String",
-    #                 group_id: "String",
-    #                 vpc_id: "String",
-    #                 vpc_peering_connection_id: "String",
-    #                 peering_status: "String",
-    #               },
-    #             ],
+    #             ip_protocol: "String",
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
@@ -1172,23 +1156,63 @@ module Aws::EC2
     #                 prefix_list_id: "String",
     #               },
     #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
     #           },
     #         ],
+    #         ip_protocol: "String",
+    #         source_security_group_name: "String",
+    #         source_security_group_owner_id: "String",
+    #         to_port: 1,
+    #         dry_run: false,
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] cidr_ip
+    #   The CIDR IPv4 address range. You can't specify this parameter when
+    #   specifying a source security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The start of port range for the TCP and UDP protocols, or an
+    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
+    #   to specify all types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group. Required for a nondefault VPC.
+    #   @return [String]
     #
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group.
     #   @return [String]
     #
-    # @!attribute [rw] group_id
-    #   The ID of the security group. Required for a nondefault VPC.
+    # @!attribute [rw] ip_permissions
+    #   A set of IP permissions. Can be used to specify multiple rules in a
+    #   single command.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
+    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
+    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`,
+    #   or `58` (ICMPv6), traffic on all ports is allowed, regardless of any
+    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
+    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
+    #   port range; if you don't, traffic for all types and codes is
+    #   allowed.
+    #
+    #
+    #
+    #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_name
@@ -1213,84 +1237,60 @@ module Aws::EC2
     #   instead.
     #   @return [String]
     #
-    # @!attribute [rw] ip_protocol
-    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
-    #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`,
-    #   or `58` (ICMPv6), traffic on all ports is allowed, regardless of any
-    #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
-    #   port range. For protocol `58` (ICMPv6), you can optionally specify a
-    #   port range; if you don't, traffic for all types and codes is
-    #   allowed.
-    #
-    #
-    #
-    #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-    #   @return [String]
-    #
-    # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
-    #   to specify all types.
-    #   @return [Integer]
-    #
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use `-1`
     #   to specify all codes.
     #   @return [Integer]
     #
-    # @!attribute [rw] cidr_ip
-    #   The CIDR IPv4 address range. You can't specify this parameter when
-    #   specifying a source security group.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
-    #   @return [Array<Types::IpPermission>]
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressRequest AWS API Documentation
     #
     class AuthorizeSecurityGroupIngressRequest < Struct.new(
-      :dry_run,
-      :group_name,
+      :cidr_ip,
+      :from_port,
       :group_id,
+      :group_name,
+      :ip_permissions,
+      :ip_protocol,
       :source_security_group_name,
       :source_security_group_owner_id,
-      :ip_protocol,
-      :from_port,
       :to_port,
-      :cidr_ip,
-      :ip_permissions)
+      :dry_run)
       include Aws::Structure
     end
 
     # Describes an Availability Zone.
     #
-    # @!attribute [rw] zone_name
-    #   The name of the Availability Zone.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The state of the Availability Zone.
-    #   @return [String]
-    #
-    # @!attribute [rw] region_name
-    #   The name of the region.
     #   @return [String]
     #
     # @!attribute [rw] messages
     #   Any messages about the Availability Zone.
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
+    # @!attribute [rw] region_name
+    #   The name of the region.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_name
+    #   The name of the Availability Zone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
-      :zone_name,
       :state,
+      :messages,
       :region_name,
-      :messages)
+      :zone_name)
       include Aws::Structure
     end
 
@@ -1349,18 +1349,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         virtual_name: "String",
     #         device_name: "String",
+    #         virtual_name: "String",
     #         ebs: {
+    #           encrypted: false,
+    #           delete_on_termination: false,
+    #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           delete_on_termination: false,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           iops: 1,
-    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       }
+    #
+    # @!attribute [rw] device_name
+    #   The device name exposed to the instance (for example, `/dev/sdh` or
+    #   `xvdh`).
+    #   @return [String]
     #
     # @!attribute [rw] virtual_name
     #   The virtual device name (`ephemeral`N). Instance store volumes are
@@ -1376,11 +1381,6 @@ module Aws::EC2
     #   specified in the block device mapping for the AMI.
     #   @return [String]
     #
-    # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
-    #   @return [String]
-    #
     # @!attribute [rw] ebs
     #   Parameters used to automatically set up EBS volumes when the
     #   instance is launched.
@@ -1394,8 +1394,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlockDeviceMapping AWS API Documentation
     #
     class BlockDeviceMapping < Struct.new(
-      :virtual_name,
       :device_name,
+      :virtual_name,
       :ebs,
       :no_device)
       include Aws::Structure
@@ -1407,25 +1407,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_id: "String", # required
     #         storage: { # required
     #           s3: {
+    #             aws_access_key_id: "String",
     #             bucket: "String",
     #             prefix: "String",
-    #             aws_access_key_id: "String",
     #             upload_policy: "data",
     #             upload_policy_signature: "String",
     #           },
     #         },
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance to bundle.
@@ -1444,12 +1437,19 @@ module Aws::EC2
     #   EC2 returns an error.
     #   @return [Types::Storage]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceRequest AWS API Documentation
     #
     class BundleInstanceRequest < Struct.new(
-      :dry_run,
       :instance_id,
-      :storage)
+      :storage,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -1468,49 +1468,49 @@ module Aws::EC2
 
     # Describes a bundle task.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance associated with this bundle task.
-    #   @return [String]
-    #
     # @!attribute [rw] bundle_id
     #   The ID of the bundle task.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The state of the task.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The time this task started.
-    #   @return [Time]
-    #
-    # @!attribute [rw] update_time
-    #   The time of the most recent update for the task.
-    #   @return [Time]
-    #
-    # @!attribute [rw] storage
-    #   The Amazon S3 storage locations.
-    #   @return [Types::Storage]
-    #
-    # @!attribute [rw] progress
-    #   The level of task completion, as a percent (for example, 20%).
     #   @return [String]
     #
     # @!attribute [rw] bundle_task_error
     #   If the task fails, a description of the error.
     #   @return [Types::BundleTaskError]
     #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance associated with this bundle task.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The level of task completion, as a percent (for example, 20%).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time this task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage
+    #   The Amazon S3 storage locations.
+    #   @return [Types::Storage]
+    #
+    # @!attribute [rw] update_time
+    #   The time of the most recent update for the task.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTask AWS API Documentation
     #
     class BundleTask < Struct.new(
-      :instance_id,
       :bundle_id,
-      :state,
-      :start_time,
-      :update_time,
-      :storage,
+      :bundle_task_error,
+      :instance_id,
       :progress,
-      :bundle_task_error)
+      :start_time,
+      :state,
+      :storage,
+      :update_time)
       include Aws::Structure
     end
 
@@ -1538,9 +1538,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         bundle_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The ID of the bundle task.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1549,15 +1553,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] bundle_id
-    #   The ID of the bundle task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskRequest AWS API Documentation
     #
     class CancelBundleTaskRequest < Struct.new(
-      :dry_run,
-      :bundle_id)
+      :bundle_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -1580,10 +1580,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         conversion_task_id: "String", # required
+    #         dry_run: false,
     #         reason_message: "String",
     #       }
+    #
+    # @!attribute [rw] conversion_task_id
+    #   The ID of the conversion task.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1592,10 +1596,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] conversion_task_id
-    #   The ID of the conversion task.
-    #   @return [String]
-    #
     # @!attribute [rw] reason_message
     #   The reason for canceling the conversion task.
     #   @return [String]
@@ -1603,8 +1603,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionRequest AWS API Documentation
     #
     class CancelConversionRequest < Struct.new(
-      :dry_run,
       :conversion_task_id,
+      :dry_run,
       :reason_message)
       include Aws::Structure
     end
@@ -1636,10 +1636,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         cancel_reason: "String",
     #         dry_run: false,
     #         import_task_id: "String",
-    #         cancel_reason: "String",
     #       }
+    #
+    # @!attribute [rw] cancel_reason
+    #   The reason for canceling the task.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1652,16 +1656,12 @@ module Aws::EC2
     #   The ID of the import image or import snapshot task to be canceled.
     #   @return [String]
     #
-    # @!attribute [rw] cancel_reason
-    #   The reason for canceling the task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTaskRequest AWS API Documentation
     #
     class CancelImportTaskRequest < Struct.new(
+      :cancel_reason,
       :dry_run,
-      :import_task_id,
-      :cancel_reason)
+      :import_task_id)
       include Aws::Structure
     end
 
@@ -1671,11 +1671,11 @@ module Aws::EC2
     #   The ID of the task being canceled.
     #   @return [String]
     #
-    # @!attribute [rw] state
+    # @!attribute [rw] previous_state
     #   The current state of the task being canceled.
     #   @return [String]
     #
-    # @!attribute [rw] previous_state
+    # @!attribute [rw] state
     #   The current state of the task being canceled.
     #   @return [String]
     #
@@ -1683,8 +1683,8 @@ module Aws::EC2
     #
     class CancelImportTaskResult < Struct.new(
       :import_task_id,
-      :state,
-      :previous_state)
+      :previous_state,
+      :state)
       include Aws::Structure
     end
 
@@ -1741,19 +1741,19 @@ module Aws::EC2
 
     # Describes a Spot fleet request that was not successfully canceled.
     #
-    # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
-    #   @return [String]
-    #
     # @!attribute [rw] error
     #   The error.
     #   @return [Types::CancelSpotFleetRequestsError]
     #
+    # @!attribute [rw] spot_fleet_request_id
+    #   The ID of the Spot fleet request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsErrorItem AWS API Documentation
     #
     class CancelSpotFleetRequestsErrorItem < Struct.new(
-      :spot_fleet_request_id,
-      :error)
+      :error,
+      :spot_fleet_request_id)
       include Aws::Structure
     end
 
@@ -1795,29 +1795,25 @@ module Aws::EC2
 
     # Contains the output of CancelSpotFleetRequests.
     #
-    # @!attribute [rw] unsuccessful_fleet_requests
-    #   Information about the Spot fleet requests that are not successfully
-    #   canceled.
-    #   @return [Array<Types::CancelSpotFleetRequestsErrorItem>]
-    #
     # @!attribute [rw] successful_fleet_requests
     #   Information about the Spot fleet requests that are successfully
     #   canceled.
     #   @return [Array<Types::CancelSpotFleetRequestsSuccessItem>]
     #
+    # @!attribute [rw] unsuccessful_fleet_requests
+    #   Information about the Spot fleet requests that are not successfully
+    #   canceled.
+    #   @return [Array<Types::CancelSpotFleetRequestsErrorItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsResponse AWS API Documentation
     #
     class CancelSpotFleetRequestsResponse < Struct.new(
-      :unsuccessful_fleet_requests,
-      :successful_fleet_requests)
+      :successful_fleet_requests,
+      :unsuccessful_fleet_requests)
       include Aws::Structure
     end
 
     # Describes a Spot fleet request that was successfully canceled.
-    #
-    # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
-    #   @return [String]
     #
     # @!attribute [rw] current_spot_fleet_request_state
     #   The current state of the Spot fleet request.
@@ -1827,12 +1823,16 @@ module Aws::EC2
     #   The previous state of the Spot fleet request.
     #   @return [String]
     #
+    # @!attribute [rw] spot_fleet_request_id
+    #   The ID of the Spot fleet request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsSuccessItem AWS API Documentation
     #
     class CancelSpotFleetRequestsSuccessItem < Struct.new(
-      :spot_fleet_request_id,
       :current_spot_fleet_request_state,
-      :previous_spot_fleet_request_state)
+      :previous_spot_fleet_request_state,
+      :spot_fleet_request_id)
       include Aws::Structure
     end
 
@@ -1898,47 +1898,47 @@ module Aws::EC2
 
     # Describes the ClassicLink DNS support status of a VPC.
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] classic_link_dns_supported
     #   Indicates whether ClassicLink DNS support is enabled for the VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkDnsSupport AWS API Documentation
     #
     class ClassicLinkDnsSupport < Struct.new(
-      :vpc_id,
-      :classic_link_dns_supported)
+      :classic_link_dns_supported,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes a linked EC2-Classic instance.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] groups
     #   A list of security groups.
     #   @return [Array<Types::GroupIdentifier>]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the instance.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkInstance AWS API Documentation
     #
     class ClassicLinkInstance < Struct.new(
-      :instance_id,
-      :vpc_id,
       :groups,
-      :tags)
+      :instance_id,
+      :tags,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -1948,15 +1948,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         upload_start: Time.now,
+    #         comment: "String",
     #         upload_end: Time.now,
     #         upload_size: 1.0,
-    #         comment: "String",
+    #         upload_start: Time.now,
     #       }
     #
-    # @!attribute [rw] upload_start
-    #   The time that the disk upload starts.
-    #   @return [Time]
+    # @!attribute [rw] comment
+    #   A user-defined comment about the disk upload.
+    #   @return [String]
     #
     # @!attribute [rw] upload_end
     #   The time that the disk upload ends.
@@ -1966,17 +1966,17 @@ module Aws::EC2
     #   The size of the uploaded disk image, in GiB.
     #   @return [Float]
     #
-    # @!attribute [rw] comment
-    #   A user-defined comment about the disk upload.
-    #   @return [String]
+    # @!attribute [rw] upload_start
+    #   The time that the disk upload starts.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientData AWS API Documentation
     #
     class ClientData < Struct.new(
-      :upload_start,
+      :comment,
       :upload_end,
       :upload_size,
-      :comment)
+      :upload_start)
       include Aws::Structure
     end
 
@@ -1986,10 +1986,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         product_code: "String", # required
     #         instance_id: "String", # required
+    #         product_code: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code
+    #   The product code. This must be a product code that you own.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1998,20 +2006,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] product_code
-    #   The product code. This must be a product code that you own.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstanceRequest AWS API Documentation
     #
     class ConfirmProductInstanceRequest < Struct.new(
-      :dry_run,
+      :instance_id,
       :product_code,
-      :instance_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2088,38 +2088,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         source_region: "String", # required
-    #         source_image_id: "String", # required
-    #         name: "String", # required
-    #         description: "String",
     #         client_token: "String",
+    #         description: "String",
     #         encrypted: false,
     #         kms_key_id: "String",
+    #         name: "String", # required
+    #         source_image_id: "String", # required
+    #         source_region: "String", # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] source_region
-    #   The name of the region that contains the AMI to copy.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_image_id
-    #   The ID of the AMI to copy.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the new AMI in the destination region.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description for the new AMI in the destination region.
-    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
@@ -2129,6 +2106,10 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the new AMI in the destination region.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -2157,17 +2138,36 @@ module Aws::EC2
     #   must also be set.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the new AMI in the destination region.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_id
+    #   The ID of the AMI to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The name of the region that contains the AMI to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest AWS API Documentation
     #
     class CopyImageRequest < Struct.new(
-      :dry_run,
-      :source_region,
-      :source_image_id,
-      :name,
-      :description,
       :client_token,
+      :description,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :name,
+      :source_image_id,
+      :source_region,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2190,30 +2190,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         source_region: "String", # required
-    #         source_snapshot_id: "String", # required
     #         description: "String",
     #         destination_region: "String",
-    #         presigned_url: "String",
     #         encrypted: false,
     #         kms_key_id: "String",
+    #         presigned_url: "String",
+    #         source_region: "String", # required
+    #         source_snapshot_id: "String", # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] source_region
-    #   The ID of the region that contains the snapshot to be copied.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_snapshot_id
-    #   The ID of the EBS snapshot to copy.
-    #   @return [String]
     #
     # @!attribute [rw] description
     #   A description for the EBS snapshot.
@@ -2231,27 +2216,6 @@ module Aws::EC2
     #   the default region in your AWS configuration file).
     #
     #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] presigned_url
-    #   The pre-signed URL that facilitates copying an encrypted snapshot.
-    #   This parameter is only required when copying an encrypted snapshot
-    #   with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. The `PresignedUrl` should use the
-    #   snapshot source endpoint, the `CopySnapshot` action, and include the
-    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
-    #   parameters. The `PresignedUrl` must be signed using AWS Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
-    #   signing algorithm for this parameter uses the same logic that is
-    #   described in [Authenticating Requests by Using Query Parameters (AWS
-    #   Signature Version 4)][1] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will
-    #   cause the copy operation to fail asynchronously, and the snapshot
-    #   will move to an `error` state.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -2282,17 +2246,53 @@ module Aws::EC2
     #   must also be set.
     #   @return [String]
     #
+    # @!attribute [rw] presigned_url
+    #   The pre-signed URL that facilitates copying an encrypted snapshot.
+    #   This parameter is only required when copying an encrypted snapshot
+    #   with the Amazon EC2 Query API; it is available as an optional
+    #   parameter in all other cases. The `PresignedUrl` should use the
+    #   snapshot source endpoint, the `CopySnapshot` action, and include the
+    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
+    #   parameters. The `PresignedUrl` must be signed using AWS Signature
+    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
+    #   signing algorithm for this parameter uses the same logic that is
+    #   described in [Authenticating Requests by Using Query Parameters (AWS
+    #   Signature Version 4)][1] in the *Amazon Simple Storage Service API
+    #   Reference*. An invalid or improperly signed `PresignedUrl` will
+    #   cause the copy operation to fail asynchronously, and the snapshot
+    #   will move to an `error` state.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The ID of the region that contains the snapshot to be copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_snapshot_id
+    #   The ID of the EBS snapshot to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotRequest AWS API Documentation
     #
     class CopySnapshotRequest < Struct.new(
-      :dry_run,
-      :source_region,
-      :source_snapshot_id,
       :description,
       :destination_region,
-      :presigned_url,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :presigned_url,
+      :source_region,
+      :source_snapshot_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2315,11 +2315,27 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         type: "ipsec.1", # required, accepts ipsec.1
-    #         public_ip: "String", # required
     #         bgp_asn: 1, # required
+    #         public_ip: "String", # required
+    #         type: "ipsec.1", # required, accepts ipsec.1
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] bgp_asn
+    #   For devices that support BGP, the customer gateway's BGP ASN.
+    #
+    #   Default: 65000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] public_ip
+    #   The Internet-routable IP address for the customer gateway's outside
+    #   interface. The address must be static.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of VPN connection that this customer gateway supports
+    #   (`ipsec.1`).
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2328,29 +2344,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] type
-    #   The type of VPN connection that this customer gateway supports
-    #   (`ipsec.1`).
-    #   @return [String]
-    #
-    # @!attribute [rw] public_ip
-    #   The Internet-routable IP address for the customer gateway's outside
-    #   interface. The address must be static.
-    #   @return [String]
-    #
-    # @!attribute [rw] bgp_asn
-    #   For devices that support BGP, the customer gateway's BGP ASN.
-    #
-    #   Default: 65000
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest AWS API Documentation
     #
     class CreateCustomerGatewayRequest < Struct.new(
-      :dry_run,
-      :type,
+      :bgp_asn,
       :public_ip,
-      :bgp_asn)
+      :type,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2373,14 +2373,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         dhcp_configurations: [ # required
     #           {
     #             key: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] dhcp_configurations
+    #   A DHCP configuration option.
+    #   @return [Array<Types::NewDhcpConfiguration>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2389,15 +2393,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] dhcp_configurations
-    #   A DHCP configuration option.
-    #   @return [Array<Types::NewDhcpConfiguration>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptionsRequest AWS API Documentation
     #
     class CreateDhcpOptionsRequest < Struct.new(
-      :dry_run,
-      :dhcp_configurations)
+      :dhcp_configurations,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2418,10 +2418,20 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         client_token: "String",
     #         dry_run: false,
     #         vpc_id: "String", # required
-    #         client_token: "String",
     #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2435,6 +2445,46 @@ module Aws::EC2
     #   gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayRequest AWS API Documentation
+    #
+    class CreateEgressOnlyInternetGatewayRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :vpc_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_only_internet_gateway
+    #   Information about the egress-only Internet gateway.
+    #   @return [Types::EgressOnlyInternetGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayResult AWS API Documentation
+    #
+    class CreateEgressOnlyInternetGatewayResult < Struct.new(
+      :client_token,
+      :egress_only_internet_gateway)
+      include Aws::Structure
+    end
+
+    # Contains the parameters for CreateFlowLogs.
+    #
+    # @note When making an API call, you may pass CreateFlowLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         deliver_logs_permission_arn: "String", # required
+    #         log_group_name: "String", # required
+    #         resource_ids: ["String"], # required
+    #         resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
+    #         traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
+    #       }
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
@@ -2445,45 +2495,14 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayRequest AWS API Documentation
-    #
-    class CreateEgressOnlyInternetGatewayRequest < Struct.new(
-      :dry_run,
-      :vpc_id,
-      :client_token)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] egress_only_internet_gateway
-    #   Information about the egress-only Internet gateway.
-    #   @return [Types::EgressOnlyInternetGateway]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request.
+    # @!attribute [rw] deliver_logs_permission_arn
+    #   The ARN for the IAM role that's used to post flow logs to a
+    #   CloudWatch Logs log group.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayResult AWS API Documentation
-    #
-    class CreateEgressOnlyInternetGatewayResult < Struct.new(
-      :egress_only_internet_gateway,
-      :client_token)
-      include Aws::Structure
-    end
-
-    # Contains the parameters for CreateFlowLogs.
-    #
-    # @note When making an API call, you may pass CreateFlowLogsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_ids: ["String"], # required
-    #         resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
-    #         traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
-    #         log_group_name: "String", # required
-    #         deliver_logs_permission_arn: "String", # required
-    #         client_token: "String",
-    #       }
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group.
+    #   @return [String]
     #
     # @!attribute [rw] resource_ids
     #   One or more subnet, network interface, or VPC IDs.
@@ -2499,47 +2518,28 @@ module Aws::EC2
     #   The type of traffic to log.
     #   @return [String]
     #
-    # @!attribute [rw] log_group_name
-    #   The name of the CloudWatch log group.
-    #   @return [String]
-    #
-    # @!attribute [rw] deliver_logs_permission_arn
-    #   The ARN for the IAM role that's used to post flow logs to a
-    #   CloudWatch Logs log group.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
+      :client_token,
+      :deliver_logs_permission_arn,
+      :log_group_name,
       :resource_ids,
       :resource_type,
-      :traffic_type,
-      :log_group_name,
-      :deliver_logs_permission_arn,
-      :client_token)
+      :traffic_type)
       include Aws::Structure
     end
 
     # Contains the output of CreateFlowLogs.
     #
-    # @!attribute [rw] flow_log_ids
-    #   The IDs of the flow logs.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
+    #
+    # @!attribute [rw] flow_log_ids
+    #   The IDs of the flow logs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] unsuccessful
     #   Information about the flow logs that could not be created
@@ -2549,8 +2549,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsResult AWS API Documentation
     #
     class CreateFlowLogsResult < Struct.new(
-      :flow_log_ids,
       :client_token,
+      :flow_log_ids,
       :unsuccessful)
       include Aws::Structure
     end
@@ -2641,27 +2641,35 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instance_id: "String", # required
-    #         name: "String", # required
-    #         description: "String",
-    #         no_reboot: false,
     #         block_device_mappings: [
     #           {
-    #             virtual_name: "String",
     #             device_name: "String",
+    #             virtual_name: "String",
     #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               iops: 1,
-    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
+    #         description: "String",
+    #         dry_run: false,
+    #         instance_id: "String", # required
+    #         name: "String", # required
+    #         no_reboot: false,
     #       }
+    #
+    # @!attribute [rw] block_device_mappings
+    #   Information about one or more block device mappings.
+    #   @return [Array<Types::BlockDeviceMapping>]
+    #
+    # @!attribute [rw] description
+    #   A description for the new image.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2682,10 +2690,6 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description for the new image.
-    #   @return [String]
-    #
     # @!attribute [rw] no_reboot
     #   By default, Amazon EC2 attempts to shut down and reboot the instance
     #   before creating the image. If the 'No Reboot' option is set,
@@ -2694,19 +2698,15 @@ module Aws::EC2
     #   created image can't be guaranteed.
     #   @return [Boolean]
     #
-    # @!attribute [rw] block_device_mappings
-    #   Information about one or more block device mappings.
-    #   @return [Array<Types::BlockDeviceMapping>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImageRequest AWS API Documentation
     #
     class CreateImageRequest < Struct.new(
+      :block_device_mappings,
+      :description,
       :dry_run,
       :instance_id,
       :name,
-      :description,
-      :no_reboot,
-      :block_device_mappings)
+      :no_reboot)
       include Aws::Structure
     end
 
@@ -2730,20 +2730,24 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
-    #         instance_id: "String", # required
-    #         target_environment: "citrix", # accepts citrix, vmware, microsoft
     #         export_to_s3_task: {
-    #           disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #           container_format: "ova", # accepts ova
+    #           disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #           s3_bucket: "String",
     #           s3_prefix: "String",
     #         },
+    #         instance_id: "String", # required
+    #         target_environment: "citrix", # accepts citrix, vmware, microsoft
     #       }
     #
     # @!attribute [rw] description
     #   A description for the conversion task or the resource being
     #   exported. The maximum length is 255 bytes.
     #   @return [String]
+    #
+    # @!attribute [rw] export_to_s3_task
+    #   The format and location for an instance export task.
+    #   @return [Types::ExportToS3TaskSpecification]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -2753,17 +2757,13 @@ module Aws::EC2
     #   The target virtualization environment.
     #   @return [String]
     #
-    # @!attribute [rw] export_to_s3_task
-    #   The format and location for an instance export task.
-    #   @return [Types::ExportToS3TaskSpecification]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest AWS API Documentation
     #
     class CreateInstanceExportTaskRequest < Struct.new(
       :description,
+      :export_to_s3_task,
       :instance_id,
-      :target_environment,
-      :export_to_s3_task)
+      :target_environment)
       include Aws::Structure
     end
 
@@ -2822,9 +2822,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         key_name: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] key_name
+    #   A unique name for the key pair.
+    #
+    #   Constraints: Up to 255 ASCII characters
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2833,17 +2839,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] key_name
-    #   A unique name for the key pair.
-    #
-    #   Constraints: Up to 255 ASCII characters
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
-      :dry_run,
-      :key_name)
+      :key_name,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -2853,14 +2853,10 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "String", # required
     #         allocation_id: "String", # required
     #         client_token: "String",
+    #         subnet_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The subnet in which to create the NAT gateway.
-    #   @return [String]
     #
     # @!attribute [rw] allocation_id
     #   The allocation ID of an Elastic IP address to associate with the NAT
@@ -2880,20 +2876,20 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The subnet in which to create the NAT gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
     #
     class CreateNatGatewayRequest < Struct.new(
-      :subnet_id,
       :allocation_id,
-      :client_token)
+      :client_token,
+      :subnet_id)
       include Aws::Structure
     end
 
     # Contains the output of CreateNatGateway.
-    #
-    # @!attribute [rw] nat_gateway
-    #   Information about the NAT gateway.
-    #   @return [Types::NatGateway]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure the idempotency of the
@@ -2901,11 +2897,15 @@ module Aws::EC2
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway
+    #   Information about the NAT gateway.
+    #   @return [Types::NatGateway]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayResult AWS API Documentation
     #
     class CreateNatGatewayResult < Struct.new(
-      :nat_gateway,
-      :client_token)
+      :client_token,
+      :nat_gateway)
       include Aws::Structure
     end
 
@@ -2915,23 +2915,28 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_acl_id: "String", # required
-    #         rule_number: 1, # required
-    #         protocol: "String", # required
-    #         rule_action: "allow", # required, accepts allow, deny
-    #         egress: false, # required
     #         cidr_block: "String",
-    #         ipv_6_cidr_block: "String",
+    #         dry_run: false,
+    #         egress: false, # required
     #         icmp_type_code: {
-    #           type: 1,
     #           code: 1,
+    #           type: 1,
     #         },
+    #         ipv_6_cidr_block: "String",
+    #         network_acl_id: "String", # required
     #         port_range: {
     #           from: 1,
     #           to: 1,
     #         },
+    #         protocol: "String", # required
+    #         rule_action: "allow", # required, accepts allow, deny
+    #         rule_number: 1, # required
     #       }
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation (for
+    #   example `172.16.0.0/24`).
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2940,17 +2945,29 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] egress
+    #   Indicates whether this is an egress rule (rule is applied to traffic
+    #   leaving the subnet).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
+    #   CIDR block.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPv6 network range to allow or deny, in CIDR notation (for
+    #   example `2001:db8:1234:1a00::/64`).
+    #   @return [String]
+    #
     # @!attribute [rw] network_acl_id
     #   The ID of the network ACL.
     #   @return [String]
     #
-    # @!attribute [rw] rule_number
-    #   The rule number for the entry (for example, 100). ACL entries are
-    #   processed in ascending order by rule number.
-    #
-    #   Constraints: Positive integer from 1 to 32766. The range 32767 to
-    #   65535 is reserved for internal use.
-    #   @return [Integer]
+    # @!attribute [rw] port_range
+    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
     #   The protocol. A value of `-1` or `all` means all protocols. If you
@@ -2968,44 +2985,27 @@ module Aws::EC2
     #   rule.
     #   @return [String]
     #
-    # @!attribute [rw] egress
-    #   Indicates whether this is an egress rule (rule is applied to traffic
-    #   leaving the subnet).
-    #   @return [Boolean]
+    # @!attribute [rw] rule_number
+    #   The rule number for the entry (for example, 100). ACL entries are
+    #   processed in ascending order by rule number.
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range to allow or deny, in CIDR notation (for
-    #   example `172.16.0.0/24`).
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 network range to allow or deny, in CIDR notation (for
-    #   example `2001:db8:1234:1a00::/64`).
-    #   @return [String]
-    #
-    # @!attribute [rw] icmp_type_code
-    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
-    #   CIDR block.
-    #   @return [Types::IcmpTypeCode]
-    #
-    # @!attribute [rw] port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
-    #   @return [Types::PortRange]
+    #   Constraints: Positive integer from 1 to 32766. The range 32767 to
+    #   65535 is reserved for internal use.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryRequest AWS API Documentation
     #
     class CreateNetworkAclEntryRequest < Struct.new(
+      :cidr_block,
       :dry_run,
+      :egress,
+      :icmp_type_code,
+      :ipv_6_cidr_block,
       :network_acl_id,
-      :rule_number,
+      :port_range,
       :protocol,
       :rule_action,
-      :egress,
-      :cidr_block,
-      :ipv_6_cidr_block,
-      :icmp_type_code,
-      :port_range)
+      :rule_number)
       include Aws::Structure
     end
 
@@ -3057,33 +3057,55 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "String", # required
     #         description: "String",
-    #         private_ip_address: "String",
+    #         dry_run: false,
     #         groups: ["String"],
-    #         private_ip_addresses: [
-    #           {
-    #             private_ip_address: "String", # required
-    #             primary: false,
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
+    #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         ipv_6_address_count: 1,
-    #         dry_run: false,
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String", # required
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet to associate with the network interface.
-    #   @return [String]
     #
     # @!attribute [rw] description
     #   A description for the network interface.
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] groups
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface.
+    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+    #   range. You can't use this option if specifying specific IPv6
+    #   addresses. If your subnet has the `AssignIpv6AddressOnCreation`
+    #   attribute set to `true`, you can specify `0` to override this
+    #   setting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
+    #   of your subnet. You can't use this option if you're specifying a
+    #   number of IPv6 addresses.
+    #   @return [Array<Types::InstanceIpv6Address>]
     #
     # @!attribute [rw] private_ip_address
     #   The primary private IPv4 address of the network interface. If you
@@ -3092,10 +3114,6 @@ module Aws::EC2
     #   cannot indicate any IP addresses specified in `privateIpAddresses`
     #   as primary (only one IP address can be designated as primary).
     #   @return [String]
-    #
-    # @!attribute [rw] groups
-    #   The IDs of one or more security groups.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] private_ip_addresses
     #   One or more private IPv4 addresses.
@@ -3118,40 +3136,22 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #   @return [Integer]
     #
-    # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
-    #   of your subnet. You can't use this option if you're specifying a
-    #   number of IPv6 addresses.
-    #   @return [Array<Types::InstanceIpv6Address>]
-    #
-    # @!attribute [rw] ipv_6_address_count
-    #   The number of IPv6 addresses to assign to a network interface.
-    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
-    #   range. You can't use this option if specifying specific IPv6
-    #   addresses. If your subnet has the `AssignIpv6AddressOnCreation`
-    #   attribute set to `true`, you can specify `0` to override this
-    #   setting.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet to associate with the network interface.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
     #
     class CreateNetworkInterfaceRequest < Struct.new(
-      :subnet_id,
       :description,
-      :private_ip_address,
+      :dry_run,
       :groups,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
-      :ipv_6_addresses,
-      :ipv_6_address_count,
-      :dry_run)
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -3211,20 +3211,26 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         reserved_instances_id: "String", # required
+    #         client_token: "String", # required
     #         instance_count: 1, # required
     #         price_schedules: [ # required
     #           {
-    #             term: 1,
-    #             price: 1.0,
     #             currency_code: "USD", # accepts USD
+    #             price: 1.0,
+    #             term: 1,
     #           },
     #         ],
-    #         client_token: "String", # required
+    #         reserved_instances_id: "String", # required
     #       }
     #
-    # @!attribute [rw] reserved_instances_id
-    #   The ID of the active Standard Reserved Instance.
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of your listings. This helps avoid duplicate listings. For more
+    #   information, see [Ensuring Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -3239,23 +3245,17 @@ module Aws::EC2
     #   each month remaining in the Reserved Instance term.
     #   @return [Array<Types::PriceScheduleSpecification>]
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of your listings. This helps avoid duplicate listings. For more
-    #   information, see [Ensuring Idempotency][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @!attribute [rw] reserved_instances_id
+    #   The ID of the active Standard Reserved Instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingRequest AWS API Documentation
     #
     class CreateReservedInstancesListingRequest < Struct.new(
-      :reserved_instances_id,
+      :client_token,
       :instance_count,
       :price_schedules,
-      :client_token)
+      :reserved_instances_id)
       include Aws::Structure
     end
 
@@ -3278,17 +3278,27 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         route_table_id: "String", # required
     #         destination_cidr_block: "String",
-    #         gateway_id: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         dry_run: false,
     #         egress_only_internet_gateway_id: "String",
+    #         gateway_id: "String",
     #         instance_id: "String",
-    #         network_interface_id: "String",
-    #         vpc_peering_connection_id: "String",
     #         nat_gateway_id: "String",
+    #         network_interface_id: "String",
+    #         route_table_id: "String", # required
+    #         vpc_peering_connection_id: "String",
     #       }
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The IPv4 CIDR address block used for the destination match. Routing
+    #   decisions are based on the most specific match.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ipv_6_cidr_block
+    #   The IPv6 CIDR block used for the destination match. Routing
+    #   decisions are based on the most specific match.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3297,27 +3307,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] route_table_id
-    #   The ID of the route table for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_cidr_block
-    #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match.
+    # @!attribute [rw] egress_only_internet_gateway_id
+    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
     #   The ID of an Internet gateway or virtual private gateway attached to
     #   your VPC.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   The IPv6 CIDR block used for the destination match. Routing
-    #   decisions are based on the most specific match.
-    #   @return [String]
-    #
-    # @!attribute [rw] egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -3326,31 +3322,35 @@ module Aws::EC2
     #   attached.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table for the route.
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
-    # @!attribute [rw] nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteRequest AWS API Documentation
     #
     class CreateRouteRequest < Struct.new(
-      :dry_run,
-      :route_table_id,
       :destination_cidr_block,
-      :gateway_id,
       :destination_ipv_6_cidr_block,
+      :dry_run,
       :egress_only_internet_gateway_id,
+      :gateway_id,
       :instance_id,
+      :nat_gateway_id,
       :network_interface_id,
-      :vpc_peering_connection_id,
-      :nat_gateway_id)
+      :route_table_id,
+      :vpc_peering_connection_id)
       include Aws::Structure
     end
 
@@ -3416,21 +3416,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_name: "String", # required
     #         description: "String", # required
+    #         group_name: "String", # required
     #         vpc_id: "String",
+    #         dry_run: false,
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] group_name
-    #   The name of the security group.
+    # @!attribute [rw] description
+    #   A description for the security group. This is informational only.
     #
     #   Constraints: Up to 255 characters in length
     #
@@ -3440,8 +3433,8 @@ module Aws::EC2
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description for the security group. This is informational only.
+    # @!attribute [rw] group_name
+    #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length
     #
@@ -3455,13 +3448,20 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupRequest AWS API Documentation
     #
     class CreateSecurityGroupRequest < Struct.new(
-      :dry_run,
-      :group_name,
       :description,
-      :vpc_id)
+      :group_name,
+      :vpc_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -3484,10 +3484,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_id: "String", # required
     #         description: "String",
+    #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] description
+    #   A description for the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the EBS volume.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3496,20 +3504,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the EBS volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description for the snapshot.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotRequest AWS API Documentation
     #
     class CreateSnapshotRequest < Struct.new(
-      :dry_run,
+      :description,
       :volume_id,
-      :description)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -3519,10 +3519,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         bucket: "String", # required
+    #         dry_run: false,
     #         prefix: "String",
     #       }
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket in which to store the Spot instance data feed.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3531,10 +3535,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] bucket
-    #   The Amazon S3 bucket in which to store the Spot instance data feed.
-    #   @return [String]
-    #
     # @!attribute [rw] prefix
     #   A prefix for the data feed file names.
     #   @return [String]
@@ -3542,8 +3542,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionRequest AWS API Documentation
     #
     class CreateSpotDatafeedSubscriptionRequest < Struct.new(
-      :dry_run,
       :bucket,
+      :dry_run,
       :prefix)
       include Aws::Structure
     end
@@ -3567,22 +3567,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_id: "String", # required
+    #         availability_zone: "String",
     #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
-    #         availability_zone: "String",
+    #         vpc_id: "String", # required
+    #         dry_run: false,
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the subnet.
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
+    #   Default: AWS selects one for you. If you create more than one subnet
+    #   in your VPC, we may not necessarily select a different zone for each
+    #   subnet.
     #   @return [String]
     #
     # @!attribute [rw] cidr_block
@@ -3595,22 +3592,25 @@ module Aws::EC2
     #   size must use a /64 prefix length.
     #   @return [String]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone for the subnet.
-    #
-    #   Default: AWS selects one for you. If you create more than one subnet
-    #   in your VPC, we may not necessarily select a different zone for each
-    #   subnet.
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
-      :dry_run,
-      :vpc_id,
+      :availability_zone,
       :cidr_block,
       :ipv_6_cidr_block,
-      :availability_zone)
+      :vpc_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -3676,25 +3676,25 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         user_id: "String",
     #         group: "all", # accepts all
+    #         user_id: "String",
     #       }
-    #
-    # @!attribute [rw] user_id
-    #   The specific AWS account ID that is to be added or removed from a
-    #   volume's list of create volume permissions.
-    #   @return [String]
     #
     # @!attribute [rw] group
     #   The specific group that is to be added or removed from a volume's
     #   list of create volume permissions.
     #   @return [String]
     #
+    # @!attribute [rw] user_id
+    #   The specific AWS account ID that is to be added or removed from a
+    #   volume's list of create volume permissions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission AWS API Documentation
     #
     class CreateVolumePermission < Struct.new(
-      :user_id,
-      :group)
+      :group,
+      :user_id)
       include Aws::Structure
     end
 
@@ -3706,14 +3706,14 @@ module Aws::EC2
     #       {
     #         add: [
     #           {
-    #             user_id: "String",
     #             group: "all", # accepts all
+    #             user_id: "String",
     #           },
     #         ],
     #         remove: [
     #           {
-    #             user_id: "String",
     #             group: "all", # accepts all
+    #             user_id: "String",
     #           },
     #         ],
     #       }
@@ -3742,14 +3742,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
+    #         availability_zone: "String", # required
+    #         encrypted: false,
+    #         iops: 1,
+    #         kms_key_id: "String",
     #         size: 1,
     #         snapshot_id: "String",
-    #         availability_zone: "String", # required
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #         iops: 1,
-    #         encrypted: false,
-    #         kms_key_id: "String",
+    #         dry_run: false,
     #         tag_specifications: [
     #           {
     #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -3763,12 +3763,46 @@ module Aws::EC2
     #         ],
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to create the volume. Use
+    #   DescribeAvailabilityZones to list the Availability Zones that are
+    #   currently available to you.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether the volume should be encrypted. Encrypted Amazon
+    #   EBS volumes may only be attached to instances that support Amazon
+    #   EBS encryption. Volumes that are created from encrypted snapshots
+    #   are automatically encrypted. There is no way to create an encrypted
+    #   volume from an unencrypted snapshot or vice versa. If your AMI uses
+    #   encrypted volumes, you can only launch it on supported instance
+    #   types. For more information, see [Amazon EBS Encryption][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] iops
+    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
+    #   operations per second (IOPS) to provision for the volume, with a
+    #   maximum ratio of 50 IOPS/GiB.
+    #
+    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted volume. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used.
+    #   The ARN contains the `arn:aws:kms` namespace, followed by the region
+    #   of the CMK, the AWS account ID of the CMK owner, the `key`
+    #   namespace, and then the CMK ID. For example,
+    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   @return [String]
     #
     # @!attribute [rw] size
     #   The size of the volume, in GiBs.
@@ -3786,12 +3820,6 @@ module Aws::EC2
     #   The snapshot from which to create the volume.
     #   @return [String]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
-    #   @return [String]
-    #
     # @!attribute [rw] volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1`
     #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
@@ -3800,40 +3828,12 @@ module Aws::EC2
     #   Default: `standard`
     #   @return [String]
     #
-    # @!attribute [rw] iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
-    #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
-    #   @return [Integer]
-    #
-    # @!attribute [rw] encrypted
-    #   Specifies whether the volume should be encrypted. Encrypted Amazon
-    #   EBS volumes may only be attached to instances that support Amazon
-    #   EBS encryption. Volumes that are created from encrypted snapshots
-    #   are automatically encrypted. There is no way to create an encrypted
-    #   volume from an unencrypted snapshot or vice versa. If your AMI uses
-    #   encrypted volumes, you can only launch it on supported instance
-    #   types. For more information, see [Amazon EBS Encryption][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used.
-    #   The ARN contains the `arn:aws:kms` namespace, followed by the region
-    #   of the CMK, the AWS account ID of the CMK owner, the `key`
-    #   namespace, and then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
-    #   @return [String]
     #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the volume during creation.
@@ -3842,14 +3842,14 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
     #
     class CreateVolumeRequest < Struct.new(
-      :dry_run,
+      :availability_zone,
+      :encrypted,
+      :iops,
+      :kms_key_id,
       :size,
       :snapshot_id,
-      :availability_zone,
       :volume_type,
-      :iops,
-      :encrypted,
-      :kms_key_id,
+      :dry_run,
       :tag_specifications)
       include Aws::Structure
     end
@@ -3860,13 +3860,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         client_token: "String",
     #         dry_run: false,
-    #         vpc_id: "String", # required
-    #         service_name: "String", # required
     #         policy_document: "String",
     #         route_table_ids: ["String"],
-    #         client_token: "String",
+    #         service_name: "String", # required
+    #         vpc_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3874,16 +3884,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC in which the endpoint will be used.
-    #   @return [String]
-    #
-    # @!attribute [rw] service_name
-    #   The AWS service name, in the form `com.amazonaws.region.service `.
-    #   To get a list of available services, use the
-    #   DescribeVpcEndpointServices request.
-    #   @return [String]
     #
     # @!attribute [rw] policy_document
     #   A policy to attach to the endpoint that controls access to the
@@ -3896,44 +3896,44 @@ module Aws::EC2
     #   One or more route table IDs.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    # @!attribute [rw] service_name
+    #   The AWS service name, in the form `com.amazonaws.region.service `.
+    #   To get a list of available services, use the
+    #   DescribeVpcEndpointServices request.
+    #   @return [String]
     #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the endpoint will be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
     #
     class CreateVpcEndpointRequest < Struct.new(
+      :client_token,
       :dry_run,
-      :vpc_id,
-      :service_name,
       :policy_document,
       :route_table_ids,
-      :client_token)
+      :service_name,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Contains the output of CreateVpcEndpoint.
-    #
-    # @!attribute [rw] vpc_endpoint
-    #   Information about the endpoint.
-    #   @return [Types::VpcEndpoint]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint
+    #   Information about the endpoint.
+    #   @return [Types::VpcEndpoint]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointResult AWS API Documentation
     #
     class CreateVpcEndpointResult < Struct.new(
-      :vpc_endpoint,
-      :client_token)
+      :client_token,
+      :vpc_endpoint)
       include Aws::Structure
     end
 
@@ -3944,9 +3944,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         vpc_id: "String",
-    #         peer_vpc_id: "String",
     #         peer_owner_id: "String",
+    #         peer_vpc_id: "String",
+    #         vpc_id: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -3956,8 +3956,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the requester VPC.
+    # @!attribute [rw] peer_owner_id
+    #   The AWS account ID of the owner of the peer VPC.
+    #
+    #   Default: Your AWS account ID
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_id
@@ -3965,19 +3967,17 @@ module Aws::EC2
     #   connection.
     #   @return [String]
     #
-    # @!attribute [rw] peer_owner_id
-    #   The AWS account ID of the owner of the peer VPC.
-    #
-    #   Default: Your AWS account ID
+    # @!attribute [rw] vpc_id
+    #   The ID of the requester VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
     #
     class CreateVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
-      :vpc_id,
+      :peer_owner_id,
       :peer_vpc_id,
-      :peer_owner_id)
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -4000,11 +4000,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         cidr_block: "String", # required
-    #         instance_tenancy: "default", # accepts default, dedicated, host
     #         amazon_provided_ipv_6_cidr_block: false,
+    #         dry_run: false,
+    #         instance_tenancy: "default", # accepts default, dedicated, host
     #       }
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the VPC, in CIDR notation. For example,
+    #   `10.0.0.0/16`.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_provided_ipv_6_cidr_block
+    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+    #   for the VPC. You cannot specify the range of IP addresses, or the
+    #   size of the CIDR block.
+    #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4012,11 +4023,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`.
-    #   @return [String]
     #
     # @!attribute [rw] instance_tenancy
     #   The tenancy options for instances launched into the VPC. For
@@ -4032,19 +4038,13 @@ module Aws::EC2
     #   Default: `default`
     #   @return [String]
     #
-    # @!attribute [rw] amazon_provided_ipv_6_cidr_block
-    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IP addresses, or the
-    #   size of the CIDR block.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcRequest AWS API Documentation
     #
     class CreateVpcRequest < Struct.new(
-      :dry_run,
       :cidr_block,
-      :instance_tenancy,
-      :amazon_provided_ipv_6_cidr_block)
+      :amazon_provided_ipv_6_cidr_block,
+      :dry_run,
+      :instance_tenancy)
       include Aws::Structure
     end
 
@@ -4067,14 +4067,26 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         type: "String", # required
     #         customer_gateway_id: "String", # required
+    #         type: "String", # required
     #         vpn_gateway_id: "String", # required
+    #         dry_run: false,
     #         options: {
     #           static_routes_only: false,
     #         },
     #       }
+    #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of VPN connection (`ipsec.1`).
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4082,18 +4094,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] type
-    #   The type of VPN connection (`ipsec.1`).
-    #   @return [String]
-    #
-    # @!attribute [rw] customer_gateway_id
-    #   The ID of the customer gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
-    #   @return [String]
     #
     # @!attribute [rw] options
     #   Indicates whether the VPN connection requires static routes. If you
@@ -4106,10 +4106,10 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRequest AWS API Documentation
     #
     class CreateVpnConnectionRequest < Struct.new(
-      :dry_run,
-      :type,
       :customer_gateway_id,
+      :type,
       :vpn_gateway_id,
+      :dry_run,
       :options)
       include Aws::Structure
     end
@@ -4133,24 +4133,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         vpn_connection_id: "String", # required
     #         destination_cidr_block: "String", # required
+    #         vpn_connection_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] vpn_connection_id
-    #   The ID of the VPN connection.
-    #   @return [String]
     #
     # @!attribute [rw] destination_cidr_block
     #   The CIDR block associated with the local subnet of the customer
     #   network.
     #   @return [String]
     #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteRequest AWS API Documentation
     #
     class CreateVpnConnectionRouteRequest < Struct.new(
-      :vpn_connection_id,
-      :destination_cidr_block)
+      :destination_cidr_block,
+      :vpn_connection_id)
       include Aws::Structure
     end
 
@@ -4160,10 +4160,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         type: "ipsec.1", # required, accepts ipsec.1
     #         availability_zone: "String",
+    #         type: "ipsec.1", # required, accepts ipsec.1
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of VPN connection this virtual private gateway supports.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4172,20 +4180,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] type
-    #   The type of VPN connection this virtual private gateway supports.
-    #   @return [String]
-    #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone for the virtual private gateway.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayRequest AWS API Documentation
     #
     class CreateVpnGatewayRequest < Struct.new(
-      :dry_run,
+      :availability_zone,
       :type,
-      :availability_zone)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4204,8 +4204,18 @@ module Aws::EC2
 
     # Describes a customer gateway.
     #
+    # @!attribute [rw] bgp_asn
+    #   The customer gateway's Border Gateway Protocol (BGP) Autonomous
+    #   System Number (ASN).
+    #   @return [String]
+    #
     # @!attribute [rw] customer_gateway_id
     #   The ID of the customer gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The Internet-routable IP address of the customer gateway's outside
+    #   interface.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -4218,16 +4228,6 @@ module Aws::EC2
     #   (`ipsec.1`).
     #   @return [String]
     #
-    # @!attribute [rw] ip_address
-    #   The Internet-routable IP address of the customer gateway's outside
-    #   interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] bgp_asn
-    #   The customer gateway's Border Gateway Protocol (BGP) Autonomous
-    #   System Number (ASN).
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   Any tags assigned to the customer gateway.
     #   @return [Array<Types::Tag>]
@@ -4235,11 +4235,11 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway AWS API Documentation
     #
     class CustomerGateway < Struct.new(
+      :bgp_asn,
       :customer_gateway_id,
+      :ip_address,
       :state,
       :type,
-      :ip_address,
-      :bgp_asn,
       :tags)
       include Aws::Structure
     end
@@ -4250,9 +4250,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         customer_gateway_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4261,15 +4265,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] customer_gateway_id
-    #   The ID of the customer gateway.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayRequest AWS API Documentation
     #
     class DeleteCustomerGatewayRequest < Struct.new(
-      :dry_run,
-      :customer_gateway_id)
+      :customer_gateway_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4279,9 +4279,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         dhcp_options_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] dhcp_options_id
+    #   The ID of the DHCP options set.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4290,15 +4294,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] dhcp_options_id
-    #   The ID of the DHCP options set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptionsRequest AWS API Documentation
     #
     class DeleteDhcpOptionsRequest < Struct.new(
-      :dry_run,
-      :dhcp_options_id)
+      :dhcp_options_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4410,9 +4410,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         key_name: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4421,15 +4425,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPairRequest AWS API Documentation
     #
     class DeleteKeyPairRequest < Struct.new(
-      :dry_run,
-      :key_name)
+      :key_name,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4473,9 +4473,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
+    #         egress: false, # required
     #         network_acl_id: "String", # required
     #         rule_number: 1, # required
-    #         egress: false, # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -4483,6 +4483,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] egress
+    #   Indicates whether the rule is an egress rule.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_acl_id
@@ -4493,17 +4497,13 @@ module Aws::EC2
     #   The rule number of the entry to delete.
     #   @return [Integer]
     #
-    # @!attribute [rw] egress
-    #   Indicates whether the rule is an egress rule.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntryRequest AWS API Documentation
     #
     class DeleteNetworkAclEntryRequest < Struct.new(
       :dry_run,
+      :egress,
       :network_acl_id,
-      :rule_number,
-      :egress)
+      :rule_number)
       include Aws::Structure
     end
 
@@ -4600,11 +4600,21 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         route_table_id: "String", # required
     #         destination_cidr_block: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         dry_run: false,
+    #         route_table_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The IPv4 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ipv_6_cidr_block
+    #   The IPv6 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4617,23 +4627,13 @@ module Aws::EC2
     #   The ID of the route table.
     #   @return [String]
     #
-    # @!attribute [rw] destination_cidr_block
-    #   The IPv4 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   The IPv6 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteRequest AWS API Documentation
     #
     class DeleteRouteRequest < Struct.new(
-      :dry_run,
-      :route_table_id,
       :destination_cidr_block,
-      :destination_ipv_6_cidr_block)
+      :destination_ipv_6_cidr_block,
+      :dry_run,
+      :route_table_id)
       include Aws::Structure
     end
 
@@ -4672,10 +4672,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_name: "String",
     #         group_id: "String",
+    #         group_name: "String",
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group. Required for a nondefault VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   \[EC2-Classic, default VPC\] The name of the security group. You can
+    #   specify either the security group name or the security group ID.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4684,21 +4693,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] group_id
-    #   The ID of the security group. Required for a nondefault VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroupRequest AWS API Documentation
     #
     class DeleteSecurityGroupRequest < Struct.new(
-      :dry_run,
+      :group_id,
       :group_name,
-      :group_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4708,9 +4708,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         snapshot_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the EBS snapshot.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4719,15 +4723,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the EBS snapshot.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshotRequest AWS API Documentation
     #
     class DeleteSnapshotRequest < Struct.new(
-      :dry_run,
-      :snapshot_id)
+      :snapshot_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4760,9 +4760,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         subnet_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4771,15 +4775,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnetRequest AWS API Documentation
     #
     class DeleteSubnetRequest < Struct.new(
-      :dry_run,
-      :subnet_id)
+      :subnet_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4833,9 +4833,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4844,15 +4848,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolumeRequest AWS API Documentation
     #
     class DeleteVolumeRequest < Struct.new(
-      :dry_run,
-      :volume_id)
+      :volume_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4947,9 +4947,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         vpc_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4958,15 +4962,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcRequest AWS API Documentation
     #
     class DeleteVpcRequest < Struct.new(
-      :dry_run,
-      :vpc_id)
+      :vpc_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -4976,9 +4976,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         vpn_connection_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4987,15 +4991,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpn_connection_id
-    #   The ID of the VPN connection.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRequest AWS API Documentation
     #
     class DeleteVpnConnectionRequest < Struct.new(
-      :dry_run,
-      :vpn_connection_id)
+      :vpn_connection_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5005,24 +5005,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         vpn_connection_id: "String", # required
     #         destination_cidr_block: "String", # required
+    #         vpn_connection_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] vpn_connection_id
-    #   The ID of the VPN connection.
-    #   @return [String]
     #
     # @!attribute [rw] destination_cidr_block
     #   The CIDR block associated with the local subnet of the customer
     #   network.
     #   @return [String]
     #
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRouteRequest AWS API Documentation
     #
     class DeleteVpnConnectionRouteRequest < Struct.new(
-      :vpn_connection_id,
-      :destination_cidr_block)
+      :destination_cidr_block,
+      :vpn_connection_id)
       include Aws::Structure
     end
 
@@ -5032,9 +5032,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         vpn_gateway_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5043,15 +5047,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGatewayRequest AWS API Documentation
     #
     class DeleteVpnGatewayRequest < Struct.new(
-      :dry_run,
-      :vpn_gateway_id)
+      :vpn_gateway_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5061,9 +5061,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         image_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5072,15 +5076,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImageRequest AWS API Documentation
     #
     class DeregisterImageRequest < Struct.new(
-      :dry_run,
-      :image_id)
+      :image_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5090,9 +5090,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         attribute_names: ["supported-platforms"], # accepts supported-platforms, default-vpc
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute_names
+    #   One or more account attribute names.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5101,15 +5105,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] attribute_names
-    #   One or more account attribute names.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributesRequest AWS API Documentation
     #
     class DescribeAccountAttributesRequest < Struct.new(
-      :dry_run,
-      :attribute_names)
+      :attribute_names,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5132,29 +5132,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         public_ips: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         public_ips: ["String"],
     #         allocation_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
-    #
-    #   Default: Describes all your Elastic IP addresses.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
@@ -5180,19 +5167,32 @@ module Aws::EC2
     #   * `public-ip` - The Elastic IP address.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] public_ips
+    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #
+    #   Default: Describes all your Elastic IP addresses.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] allocation_ids
     #   \[EC2-VPC\] One or more allocation IDs.
     #
     #   Default: Describes all your Elastic IP addresses.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesRequest AWS API Documentation
     #
     class DescribeAddressesRequest < Struct.new(
-      :dry_run,
-      :public_ips,
       :filters,
-      :allocation_ids)
+      :public_ips,
+      :allocation_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5215,26 +5215,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         zone_names: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         zone_names: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] zone_names
-    #   The names of one or more Availability Zones.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -5251,12 +5240,23 @@ module Aws::EC2
     #     `us-east-1a`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] zone_names
+    #   The names of one or more Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesRequest AWS API Documentation
     #
     class DescribeAvailabilityZonesRequest < Struct.new(
-      :dry_run,
+      :filters,
       :zone_names,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5279,7 +5279,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         bundle_ids: ["String"],
     #         filters: [
     #           {
@@ -5287,14 +5286,8 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] bundle_ids
     #   One or more bundle task IDs.
@@ -5330,12 +5323,19 @@ module Aws::EC2
     #   * `update-time` - The time of the most recent update for the task.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasksRequest AWS API Documentation
     #
     class DescribeBundleTasksRequest < Struct.new(
-      :dry_run,
       :bundle_ids,
-      :filters)
+      :filters,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5358,29 +5358,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instance_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
+    #         dry_run: false,
+    #         instance_ids: ["String"],
     #         max_results: 1,
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs. Must be instances linked to a VPC through
-    #   ClassicLink.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -5408,9 +5396,17 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC that the instance is linked to.
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs. Must be instances linked to a VPC through
+    #   ClassicLink.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
@@ -5424,14 +5420,18 @@ module Aws::EC2
     #   items.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesRequest AWS API Documentation
     #
     class DescribeClassicLinkInstancesRequest < Struct.new(
+      :filters,
       :dry_run,
       :instance_ids,
-      :filters,
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -5460,9 +5460,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         conversion_task_ids: ["String"],
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] conversion_task_ids
+    #   One or more conversion task IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5471,15 +5475,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] conversion_task_ids
-    #   One or more conversion task IDs.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksRequest AWS API Documentation
     #
     class DescribeConversionTasksRequest < Struct.new(
-      :dry_run,
-      :conversion_task_ids)
+      :conversion_task_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5502,7 +5502,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         customer_gateway_ids: ["String"],
     #         filters: [
     #           {
@@ -5510,14 +5509,8 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] customer_gateway_ids
     #   One or more customer gateway IDs.
@@ -5561,12 +5554,19 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysRequest AWS API Documentation
     #
     class DescribeCustomerGatewaysRequest < Struct.new(
-      :dry_run,
       :customer_gateway_ids,
-      :filters)
+      :filters,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5589,7 +5589,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         dhcp_options_ids: ["String"],
     #         filters: [
     #           {
@@ -5597,14 +5596,8 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] dhcp_options_ids
     #   The IDs of one or more DHCP options sets.
@@ -5641,12 +5634,19 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsRequest AWS API Documentation
     #
     class DescribeDhcpOptionsRequest < Struct.new(
-      :dry_run,
       :dhcp_options_ids,
-      :filters)
+      :filters,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -5761,20 +5761,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         flow_log_ids: ["String"],
     #         filter: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
+    #         flow_log_ids: ["String"],
     #         max_results: 1,
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] flow_log_ids
-    #   One or more flow log IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -5792,9 +5788,9 @@ module Aws::EC2
     #     `ALL`)
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
+    # @!attribute [rw] flow_log_ids
+    #   One or more flow log IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
@@ -5805,13 +5801,17 @@ module Aws::EC2
     #   log IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest AWS API Documentation
     #
     class DescribeFlowLogsRequest < Struct.new(
-      :flow_log_ids,
       :filter,
-      :next_token,
-      :max_results)
+      :flow_log_ids,
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -5834,44 +5834,136 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFpgaImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fpga_image_ids: ["String"],
+    #         owners: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fpga_image_ids
+    #   One or more AFI IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owners
+    #   Filters the AFI by owner. Specify an AWS account ID, `self` (owner
+    #   is the sender of the request), or an AWS owner alias (valid values
+    #   are `amazon` \| `aws-marketplace`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `create-time` - The creation time of the AFI.
+    #
+    #   * `fpga-image-id` - The FPGA image identifier (AFI ID).
+    #
+    #   * `fpga-image-global-id` - The global FPGA image identifier (AGFI
+    #     ID).
+    #
+    #   * `name` - The name of the AFI.
+    #
+    #   * `owner-id` - The AWS account ID of the AFI owner.
+    #
+    #   * `product-code` - The product code.
+    #
+    #   * `shell-version` - The version of the AWS Shell that was used to
+    #     create the bitstream.
+    #
+    #   * `state` - The state of the AFI (`pending` \| `failed` \|
+    #     `available` \| `unavailable`).
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter
+    #     "tag-value=X", you get any resources assigned both the tag key
+    #     Purpose (regardless of what the tag's value is), and the tag
+    #     value X (regardless of what the tag's key is). If you want to
+    #     list only resources where Purpose is X, see the
+    #     `tag`\:*key*=*value* filter.
+    #
+    #   * `tag-value` - The value of a tag assigned to the resource. This
+    #     filter is independent of the `tag-key` filter.
+    #
+    #   * `update-time` - The time of the most recent update.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImagesRequest AWS API Documentation
+    #
+    class DescribeFpgaImagesRequest < Struct.new(
+      :dry_run,
+      :fpga_image_ids,
+      :owners,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fpga_images
+    #   Information about one or more FPGA images.
+    #   @return [Array<Types::FpgaImage>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImagesResult AWS API Documentation
+    #
+    class DescribeFpgaImagesResult < Struct.new(
+      :fpga_images,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeHostReservationOfferingsRequest
     #   data as a hash:
     #
     #       {
-    #         offering_id: "String",
-    #         min_duration: 1,
-    #         max_duration: 1,
     #         filter: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         max_duration: 1,
     #         max_results: 1,
+    #         min_duration: 1,
     #         next_token: "String",
+    #         offering_id: "String",
     #       }
-    #
-    # @!attribute [rw] offering_id
-    #   The ID of the reservation offering.
-    #   @return [String]
-    #
-    # @!attribute [rw] min_duration
-    #   This is the minimum duration of the reservation you'd like to
-    #   purchase, specified in seconds. Reservations are available in
-    #   one-year and three-year terms. The number of seconds specified must
-    #   be the number of seconds in a year (365x24x60x60) times one of the
-    #   supported durations (1 or 3). For example, specify 31536000 for one
-    #   year.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_duration
-    #   This is the maximum duration of the reservation you'd like to
-    #   purchase, specified in seconds. Reservations are available in
-    #   one-year and three-year terms. The number of seconds specified must
-    #   be the number of seconds in a year (365x24x60x60) times one of the
-    #   supported durations (1 or 3). For example, specify 94608000 for
-    #   three years.
-    #   @return [Integer]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -5883,6 +5975,15 @@ module Aws::EC2
     #     `PartialUpfront` \| `AllUpfront`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] max_duration
+    #   This is the maximum duration of the reservation you'd like to
+    #   purchase, specified in seconds. Reservations are available in
+    #   one-year and three-year terms. The number of seconds specified must
+    #   be the number of seconds in a year (365x24x60x60) times one of the
+    #   supported durations (1 or 3). For example, specify 94608000 for
+    #   three years.
+    #   @return [Integer]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
@@ -5891,36 +5992,49 @@ module Aws::EC2
     #   receive an error.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_duration
+    #   This is the minimum duration of the reservation you'd like to
+    #   purchase, specified in seconds. Reservations are available in
+    #   one-year and three-year terms. The number of seconds specified must
+    #   be the number of seconds in a year (365x24x60x60) times one of the
+    #   supported durations (1 or 3). For example, specify 31536000 for one
+    #   year.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   The ID of the reservation offering.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsRequest AWS API Documentation
     #
     class DescribeHostReservationOfferingsRequest < Struct.new(
-      :offering_id,
-      :min_duration,
-      :max_duration,
       :filter,
+      :max_duration,
       :max_results,
-      :next_token)
+      :min_duration,
+      :next_token,
+      :offering_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] offering_set
-    #   Information about the offerings.
-    #   @return [Array<Types::HostOffering>]
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] offering_set
+    #   Information about the offerings.
+    #   @return [Array<Types::HostOffering>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsResult AWS API Documentation
     #
     class DescribeHostReservationOfferingsResult < Struct.new(
-      :offering_set,
-      :next_token)
+      :next_token,
+      :offering_set)
       include Aws::Structure
     end
 
@@ -5928,20 +6042,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         host_reservation_id_set: ["String"],
     #         filter: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         host_reservation_id_set: ["String"],
     #         max_results: 1,
     #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] host_reservation_id_set
-    #   One or more host reservation IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -5954,6 +6064,10 @@ module Aws::EC2
     #   * `state` - The state of the reservation (`payment-pending` \|
     #     `payment-failed` \| `active` \| `retired`).
     #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] host_reservation_id_set
+    #   One or more host reservation IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
@@ -5970,8 +6084,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationsRequest AWS API Documentation
     #
     class DescribeHostReservationsRequest < Struct.new(
-      :host_reservation_id_set,
       :filter,
+      :host_reservation_id_set,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -6000,34 +6114,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         host_ids: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
     #         filter: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         host_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] host_ids
-    #   The IDs of the Dedicated Hosts. The IDs are used for targeted
-    #   instance launches.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500; if `maxResults` is given a larger value than 500, you will
-    #   receive an error. You cannot specify this parameter and the host IDs
-    #   parameter in the same request.
-    #   @return [Integer]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -6051,13 +6147,31 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone of the host.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] host_ids
+    #   The IDs of the Dedicated Hosts. The IDs are used for targeted
+    #   instance launches.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500; if `maxResults` is given a larger value than 500, you will
+    #   receive an error. You cannot specify this parameter and the host IDs
+    #   parameter in the same request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostsRequest AWS API Documentation
     #
     class DescribeHostsRequest < Struct.new(
+      :filter,
       :host_ids,
-      :next_token,
       :max_results,
-      :filter)
+      :next_token)
       include Aws::Structure
     end
 
@@ -6185,25 +6299,25 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         resource: "String",
     #         principal_arn: "String", # required
+    #         resource: "String",
     #       }
-    #
-    # @!attribute [rw] resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
-    #   @return [String]
     #
     # @!attribute [rw] principal_arn
     #   The ARN of the principal, which can be an IAM role, IAM user, or the
     #   root user.
     #   @return [String]
     #
+    # @!attribute [rw] resource
+    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+    #   `volume`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatRequest AWS API Documentation
     #
     class DescribeIdentityIdFormatRequest < Struct.new(
-      :resource,
-      :principal_arn)
+      :principal_arn,
+      :resource)
       include Aws::Structure
     end
 
@@ -6226,21 +6340,10 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         image_id: "String", # required
     #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+    #         image_id: "String", # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
     #
     # @!attribute [rw] attribute
     #   The AMI attribute.
@@ -6251,12 +6354,23 @@ module Aws::EC2
     #   the block device mapping for the AMI.
     #   @return [String]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttributeRequest AWS API Documentation
     #
     class DescribeImageAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :image_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -6266,9 +6380,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         image_ids: ["String"],
-    #         owners: ["String"],
     #         executable_users: ["String"],
     #         filters: [
     #           {
@@ -6276,28 +6387,10 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
+    #         image_ids: ["String"],
+    #         owners: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] image_ids
-    #   One or more image IDs.
-    #
-    #   Default: Describes all images available to you.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] owners
-    #   Filters the images by the owner. Specify an AWS account ID, `self`
-    #   (owner is the sender of the request), or an AWS owner alias (valid
-    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
-    #   this option returns all images for which you have launch
-    #   permissions, regardless of ownership.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -6400,14 +6493,35 @@ module Aws::EC2
     #     `hvm`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] image_ids
+    #   One or more image IDs.
+    #
+    #   Default: Describes all images available to you.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owners
+    #   Filters the images by the owner. Specify an AWS account ID, `self`
+    #   (owner is the sender of the request), or an AWS owner alias (valid
+    #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
+    #   this option returns all images for which you have launch
+    #   permissions, regardless of ownership.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesRequest AWS API Documentation
     #
     class DescribeImagesRequest < Struct.new(
-      :dry_run,
+      :executable_users,
+      :filters,
       :image_ids,
       :owners,
-      :executable_users,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -6431,15 +6545,15 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         import_task_ids: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         import_task_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -6449,13 +6563,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] filters
+    #   Filter tasks using the `task-state` filter and one of the following
+    #   values: active, completed, deleting, deleted.
+    #   @return [Array<Types::Filter>]
+    #
     # @!attribute [rw] import_task_ids
     #   A list of import image task IDs.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   A token that indicates the next page of results.
-    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
@@ -6463,19 +6578,18 @@ module Aws::EC2
     #   `NextToken` value.
     #   @return [Integer]
     #
-    # @!attribute [rw] filters
-    #   Filter tasks using the `task-state` filter and one of the following
-    #   values: active, completed, deleting, deleted.
-    #   @return [Array<Types::Filter>]
+    # @!attribute [rw] next_token
+    #   A token that indicates the next page of results.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksRequest AWS API Documentation
     #
     class DescribeImportImageTasksRequest < Struct.new(
       :dry_run,
+      :filters,
       :import_task_ids,
-      :next_token,
       :max_results,
-      :filters)
+      :next_token)
       include Aws::Structure
     end
 
@@ -6506,15 +6620,15 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         import_task_ids: ["String"],
-    #         next_token: "String",
-    #         max_results: 1,
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         import_task_ids: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -6524,13 +6638,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
     # @!attribute [rw] import_task_ids
     #   A list of import snapshot task IDs.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   A token that indicates the next page of results.
-    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
@@ -6538,18 +6652,18 @@ module Aws::EC2
     #   `NextToken` value.
     #   @return [Integer]
     #
-    # @!attribute [rw] filters
-    #   One or more filters.
-    #   @return [Array<Types::Filter>]
+    # @!attribute [rw] next_token
+    #   A token that indicates the next page of results.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksRequest AWS API Documentation
     #
     class DescribeImportSnapshotTasksRequest < Struct.new(
       :dry_run,
+      :filters,
       :import_task_ids,
-      :next_token,
       :max_results,
-      :filters)
+      :next_token)
       include Aws::Structure
     end
 
@@ -6579,10 +6693,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #         dry_run: false,
     #         instance_id: "String", # required
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The instance attribute.
+    #
+    #   Note: The `enaSupport` attribute is not supported at this time.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6595,18 +6715,12 @@ module Aws::EC2
     #   The ID of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] attribute
-    #   The instance attribute.
-    #
-    #   Note: The `enaSupport` attribute is not supported at this time.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttributeRequest AWS API Documentation
     #
     class DescribeInstanceAttributeRequest < Struct.new(
+      :attribute,
       :dry_run,
-      :instance_id,
-      :attribute)
+      :instance_id)
       include Aws::Structure
     end
 
@@ -6616,33 +6730,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instance_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
+    #         instance_ids: ["String"],
     #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
     #         include_all_instances: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #
-    #   Default: Describes all your instances.
-    #
-    #   Constraints: Maximum 100 explicitly specified instance IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -6688,9 +6787,13 @@ module Aws::EC2
     #     `not-applicable`).
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    #   Constraints: Maximum 100 explicitly specified instance IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
@@ -6699,6 +6802,17 @@ module Aws::EC2
     #   specify this parameter and the instance IDs parameter in the same
     #   call.
     #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] include_all_instances
     #   When `true`, includes the health status for all instances. When
@@ -6710,11 +6824,11 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatusRequest AWS API Documentation
     #
     class DescribeInstanceStatusRequest < Struct.new(
-      :dry_run,
-      :instance_ids,
       :filters,
-      :next_token,
+      :instance_ids,
       :max_results,
+      :next_token,
+      :dry_run,
       :include_all_instances)
       include Aws::Structure
     end
@@ -6744,30 +6858,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instance_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
+    #         instance_ids: ["String"],
+    #         dry_run: false,
     #         max_results: 1,
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #
-    #   Default: Describes all your instances.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7041,9 +7142,18 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The token to request the next page of results.
-    #   @return [String]
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
@@ -7053,14 +7163,18 @@ module Aws::EC2
     #   in the same call.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesRequest AWS API Documentation
     #
     class DescribeInstancesRequest < Struct.new(
-      :dry_run,
-      :instance_ids,
       :filters,
-      :next_token,
-      :max_results)
+      :instance_ids,
+      :dry_run,
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -7089,28 +7203,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         internet_gateway_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         internet_gateway_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] internet_gateway_ids
-    #   One or more Internet gateway IDs.
-    #
-    #   Default: Describes all your Internet gateways.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7142,12 +7243,25 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_gateway_ids
+    #   One or more Internet gateway IDs.
+    #
+    #   Default: Describes all your Internet gateways.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysRequest AWS API Documentation
     #
     class DescribeInternetGatewaysRequest < Struct.new(
+      :filters,
       :dry_run,
-      :internet_gateway_ids,
-      :filters)
+      :internet_gateway_ids)
       include Aws::Structure
     end
 
@@ -7170,28 +7284,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         key_names: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         key_names: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] key_names
-    #   One or more key pair names.
-    #
-    #   Default: Describes all your key pairs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7201,12 +7302,25 @@ module Aws::EC2
     #   * `key-name` - The name of the key pair.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] key_names
+    #   One or more key pair names.
+    #
+    #   Default: Describes all your key pairs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsRequest AWS API Documentation
     #
     class DescribeKeyPairsRequest < Struct.new(
-      :dry_run,
+      :filters,
       :key_names,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -7229,32 +7343,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         public_ips: ["String"],
-    #         next_token: "String",
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
     #         max_results: 1,
+    #         next_token: "String",
+    #         public_ips: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] public_ips
-    #   One or more Elastic IP addresses.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
-    #   @return [String]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7264,6 +7363,13 @@ module Aws::EC2
     #
     #   ^
     #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for the request in a single
@@ -7275,14 +7381,22 @@ module Aws::EC2
     #   Default: If no value is provided, the default is 1000.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ips
+    #   One or more Elastic IP addresses.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddressesRequest AWS API Documentation
     #
     class DescribeMovingAddressesRequest < Struct.new(
-      :dry_run,
-      :public_ips,
-      :next_token,
       :filters,
-      :max_results)
+      :dry_run,
+      :max_results,
+      :next_token,
+      :public_ips)
       include Aws::Structure
     end
 
@@ -7311,7 +7425,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         nat_gateway_ids: ["String"],
     #         filter: [
     #           {
     #             name: "String",
@@ -7319,12 +7432,9 @@ module Aws::EC2
     #           },
     #         ],
     #         max_results: 1,
+    #         nat_gateway_ids: ["String"],
     #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] nat_gateway_ids
-    #   One or more NAT gateway IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -7349,6 +7459,10 @@ module Aws::EC2
     #   only 1000 items.
     #   @return [Integer]
     #
+    # @!attribute [rw] nat_gateway_ids
+    #   One or more NAT gateway IDs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] next_token
     #   The token to retrieve the next page of results.
     #   @return [String]
@@ -7356,9 +7470,9 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysRequest AWS API Documentation
     #
     class DescribeNatGatewaysRequest < Struct.new(
-      :nat_gateway_ids,
       :filter,
       :max_results,
+      :nat_gateway_ids,
       :next_token)
       include Aws::Structure
     end
@@ -7388,28 +7502,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_acl_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         network_acl_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] network_acl_ids
-    #   One or more network ACL IDs.
-    #
-    #   Default: Describes all your network ACLs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7475,12 +7576,25 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the network ACL.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_acl_ids
+    #   One or more network ACL IDs.
+    #
+    #   Default: Describes all your network ACLs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsRequest AWS API Documentation
     #
     class DescribeNetworkAclsRequest < Struct.new(
+      :filters,
       :dry_run,
-      :network_acl_ids,
-      :filters)
+      :network_acl_ids)
       include Aws::Structure
     end
 
@@ -7503,10 +7617,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
     #         dry_run: false,
     #         network_interface_id: "String", # required
-    #         attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the network interface. This parameter is required.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7519,49 +7637,45 @@ module Aws::EC2
     #   The ID of the network interface.
     #   @return [String]
     #
-    # @!attribute [rw] attribute
-    #   The attribute of the network interface. This parameter is required.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class DescribeNetworkInterfaceAttributeRequest < Struct.new(
+      :attribute,
       :dry_run,
-      :network_interface_id,
-      :attribute)
+      :network_interface_id)
       include Aws::Structure
     end
 
     # Contains the output of DescribeNetworkInterfaceAttribute.
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
+    # @!attribute [rw] attachment
+    #   The attachment (if any) of the network interface.
+    #   @return [Types::NetworkInterfaceAttachment]
     #
     # @!attribute [rw] description
     #   The description of the network interface.
     #   @return [Types::AttributeValue]
     #
-    # @!attribute [rw] source_dest_check
-    #   Indicates whether source/destination checking is enabled.
-    #   @return [Types::AttributeBooleanValue]
-    #
     # @!attribute [rw] groups
     #   The security groups associated with the network interface.
     #   @return [Array<Types::GroupIdentifier>]
     #
-    # @!attribute [rw] attachment
-    #   The attachment (if any) of the network interface.
-    #   @return [Types::NetworkInterfaceAttachment]
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_dest_check
+    #   Indicates whether source/destination checking is enabled.
+    #   @return [Types::AttributeBooleanValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeResult AWS API Documentation
     #
     class DescribeNetworkInterfaceAttributeResult < Struct.new(
-      :network_interface_id,
+      :attachment,
       :description,
-      :source_dest_check,
       :groups,
-      :attachment)
+      :network_interface_id,
+      :source_dest_check)
       include Aws::Structure
     end
 
@@ -7571,28 +7685,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_interface_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         network_interface_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] network_interface_ids
-    #   One or more network interface IDs.
-    #
-    #   Default: Describes all your network interfaces.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7717,12 +7818,25 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the network interface.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   One or more network interface IDs.
+    #
+    #   Default: Describes all your network interfaces.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesRequest AWS API Documentation
     #
     class DescribeNetworkInterfacesRequest < Struct.new(
+      :filters,
       :dry_run,
-      :network_interface_ids,
-      :filters)
+      :network_interface_ids)
       include Aws::Structure
     end
 
@@ -7745,15 +7859,26 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_names: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         group_names: ["String"],
     #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `group-name` - The name of the placement group.
+    #
+    #   * `state` - The state of the placement group (`pending` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #
+    #   * `strategy` - The strategy of the placement group (`cluster`).
+    #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7769,23 +7894,12 @@ module Aws::EC2
     #   otherwise specified.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] filters
-    #   One or more filters.
-    #
-    #   * `group-name` - The name of the placement group.
-    #
-    #   * `state` - The state of the placement group (`pending` \|
-    #     `available` \| `deleting` \| `deleted`).
-    #
-    #   * `strategy` - The strategy of the placement group (`cluster`).
-    #   @return [Array<Types::Filter>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroupsRequest AWS API Documentation
     #
     class DescribePlacementGroupsRequest < Struct.new(
+      :filters,
       :dry_run,
-      :group_names,
-      :filters)
+      :group_names)
       include Aws::Structure
     end
 
@@ -7809,7 +7923,6 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         prefix_list_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
@@ -7818,6 +7931,7 @@ module Aws::EC2
     #         ],
     #         max_results: 1,
     #         next_token: "String",
+    #         prefix_list_ids: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -7826,10 +7940,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] prefix_list_ids
-    #   One or more prefix list IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7853,33 +7963,37 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @!attribute [rw] prefix_list_ids
+    #   One or more prefix list IDs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixListsRequest AWS API Documentation
     #
     class DescribePrefixListsRequest < Struct.new(
       :dry_run,
-      :prefix_list_ids,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :prefix_list_ids)
       include Aws::Structure
     end
 
     # Contains the output of DescribePrefixLists.
-    #
-    # @!attribute [rw] prefix_lists
-    #   All available prefix lists.
-    #   @return [Array<Types::PrefixList>]
     #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_lists
+    #   All available prefix lists.
+    #   @return [Array<Types::PrefixList>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixListsResult AWS API Documentation
     #
     class DescribePrefixListsResult < Struct.new(
-      :prefix_lists,
-      :next_token)
+      :next_token,
+      :prefix_lists)
       include Aws::Structure
     end
 
@@ -7889,26 +8003,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         region_names: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         region_names: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] region_names
-    #   The names of one or more regions.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7919,12 +8022,23 @@ module Aws::EC2
     #   * `region-name` - The name of the region (for example, `us-east-1`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] region_names
+    #   The names of one or more regions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsRequest AWS API Documentation
     #
     class DescribeRegionsRequest < Struct.new(
-      :dry_run,
+      :filters,
       :region_names,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -7947,23 +8061,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         reserved_instances_id: "String",
-    #         reserved_instances_listing_id: "String",
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         reserved_instances_id: "String",
+    #         reserved_instances_listing_id: "String",
     #       }
-    #
-    # @!attribute [rw] reserved_instances_id
-    #   One or more Reserved Instance IDs.
-    #   @return [String]
-    #
-    # @!attribute [rw] reserved_instances_listing_id
-    #   One or more Reserved Instance listing IDs.
-    #   @return [String]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -7979,12 +8085,20 @@ module Aws::EC2
     #   * `status-message` - The reason for the status.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] reserved_instances_id
+    #   One or more Reserved Instance IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instances_listing_id
+    #   One or more Reserved Instance listing IDs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListingsRequest AWS API Documentation
     #
     class DescribeReservedInstancesListingsRequest < Struct.new(
+      :filters,
       :reserved_instances_id,
-      :reserved_instances_listing_id,
-      :filters)
+      :reserved_instances_listing_id)
       include Aws::Structure
     end
 
@@ -8007,23 +8121,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         reserved_instances_modification_ids: ["String"],
-    #         next_token: "String",
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         reserved_instances_modification_ids: ["String"],
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] reserved_instances_modification_ids
-    #   IDs for the submitted modification request.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -8070,31 +8176,39 @@ module Aws::EC2
     #     updated.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] reserved_instances_modification_ids
+    #   IDs for the submitted modification request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsRequest AWS API Documentation
     #
     class DescribeReservedInstancesModificationsRequest < Struct.new(
+      :filters,
       :reserved_instances_modification_ids,
-      :next_token,
-      :filters)
+      :next_token)
       include Aws::Structure
     end
 
     # Contains the output of DescribeReservedInstancesModifications.
-    #
-    # @!attribute [rw] reserved_instances_modifications
-    #   The Reserved Instance modification information.
-    #   @return [Array<Types::ReservedInstancesModification>]
     #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] reserved_instances_modifications
+    #   The Reserved Instance modification information.
+    #   @return [Array<Types::ReservedInstancesModification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsResult AWS API Documentation
     #
     class DescribeReservedInstancesModificationsResult < Struct.new(
-      :reserved_instances_modifications,
-      :next_token)
+      :next_token,
+      :reserved_instances_modifications)
       include Aws::Structure
     end
 
@@ -8104,57 +8218,30 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         reserved_instances_offering_ids: ["String"],
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         availability_zone: "String",
-    #         product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         instance_tenancy: "default", # accepts default, dedicated, host
-    #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
-    #         next_token: "String",
-    #         max_results: 1,
     #         include_marketplace: false,
-    #         min_duration: 1,
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
+    #         min_duration: 1,
     #         offering_class: "standard", # accepts standard, convertible
+    #         product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
+    #         reserved_instances_offering_ids: ["String"],
+    #         dry_run: false,
+    #         instance_tenancy: "default", # accepts default, dedicated, host
+    #         max_results: 1,
+    #         next_token: "String",
+    #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] reserved_instances_offering_ids
-    #   One or more Reserved Instances offering IDs.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type that the reservation will cover (for example,
-    #   `m1.small`). For more information, see [Instance Types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    #   @return [String]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_description
-    #   The Reserved Instance product platform description. Instances that
-    #   include `(Amazon VPC)` in the description are for use with Amazon
-    #   VPC.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -8199,46 +8286,19 @@ module Aws::EC2
     #     (for example, 0.84).
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] instance_tenancy
-    #   The tenancy of the instances covered by the reservation. A Reserved
-    #   Instance with a tenancy of `dedicated` is applied to instances that
-    #   run in a VPC on single-tenant hardware (i.e., Dedicated Instances).
-    #
-    #   **Important:** The `host` value cannot be used with this parameter.
-    #   Use the `default` or `dedicated` values only.
-    #
-    #   Default: `default`
-    #   @return [String]
-    #
-    # @!attribute [rw] offering_type
-    #   The Reserved Instance offering type. If you are using tools that
-    #   predate the 2011-11-01 API version, you only have access to the
-    #   `Medium Utilization` Reserved Instance offering type.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next page of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results of the initial request can be seen by
-    #   sending another request with the returned `NextToken` value. The
-    #   maximum is 100.
-    #
-    #   Default: 100
-    #   @return [Integer]
-    #
     # @!attribute [rw] include_marketplace
     #   Include Reserved Instance Marketplace offerings in the response.
     #   @return [Boolean]
     #
-    # @!attribute [rw] min_duration
-    #   The minimum duration (in seconds) to filter when searching for
-    #   offerings.
+    # @!attribute [rw] instance_type
+    #   The instance type that the reservation will cover (for example,
+    #   `m1.small`). For more information, see [Instance Types][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Default: 2592000 (1 month)
-    #   @return [Integer]
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [String]
     #
     # @!attribute [rw] max_duration
     #   The maximum duration (in seconds) to filter when searching for
@@ -8254,29 +8314,83 @@ module Aws::EC2
     #   Default: 20
     #   @return [Integer]
     #
+    # @!attribute [rw] min_duration
+    #   The minimum duration (in seconds) to filter when searching for
+    #   offerings.
+    #
+    #   Default: 2592000 (1 month)
+    #   @return [Integer]
+    #
     # @!attribute [rw] offering_class
     #   The offering class of the Reserved Instance. Can be `standard` or
     #   `convertible`.
     #   @return [String]
     #
+    # @!attribute [rw] product_description
+    #   The Reserved Instance product platform description. Instances that
+    #   include `(Amazon VPC)` in the description are for use with Amazon
+    #   VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instances_offering_ids
+    #   One or more Reserved Instances offering IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tenancy
+    #   The tenancy of the instances covered by the reservation. A Reserved
+    #   Instance with a tenancy of `dedicated` is applied to instances that
+    #   run in a VPC on single-tenant hardware (i.e., Dedicated Instances).
+    #
+    #   **Important:** The `host` value cannot be used with this parameter.
+    #   Use the `default` or `dedicated` values only.
+    #
+    #   Default: `default`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. The
+    #   maximum is 100.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   The Reserved Instance offering type. If you are using tools that
+    #   predate the 2011-11-01 API version, you only have access to the
+    #   `Medium Utilization` Reserved Instance offering type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferingsRequest AWS API Documentation
     #
     class DescribeReservedInstancesOfferingsRequest < Struct.new(
-      :dry_run,
-      :reserved_instances_offering_ids,
-      :instance_type,
       :availability_zone,
-      :product_description,
       :filters,
-      :instance_tenancy,
-      :offering_type,
-      :next_token,
-      :max_results,
       :include_marketplace,
-      :min_duration,
+      :instance_type,
       :max_duration,
       :max_instance_count,
-      :offering_class)
+      :min_duration,
+      :offering_class,
+      :product_description,
+      :reserved_instances_offering_ids,
+      :dry_run,
+      :instance_tenancy,
+      :max_results,
+      :next_token,
+      :offering_type)
       include Aws::Structure
     end
 
@@ -8305,31 +8419,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         reserved_instances_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #         offering_class: "standard", # accepts standard, convertible
+    #         reserved_instances_ids: ["String"],
+    #         dry_run: false,
+    #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] reserved_instances_ids
-    #   One or more Reserved Instance IDs.
-    #
-    #   Default: Describes all your Reserved Instances, or only those
-    #   otherwise specified.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -8394,24 +8494,38 @@ module Aws::EC2
     #     (for example, 0.84).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] offering_class
+    #   Describes whether the Reserved Instance is Standard or Convertible.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instances_ids
+    #   One or more Reserved Instance IDs.
+    #
+    #   Default: Describes all your Reserved Instances, or only those
+    #   otherwise specified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] offering_type
     #   The Reserved Instance offering type. If you are using tools that
     #   predate the 2011-11-01 API version, you only have access to the
     #   `Medium Utilization` Reserved Instance offering type.
     #   @return [String]
     #
-    # @!attribute [rw] offering_class
-    #   Describes whether the Reserved Instance is Standard or Convertible.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesRequest AWS API Documentation
     #
     class DescribeReservedInstancesRequest < Struct.new(
-      :dry_run,
-      :reserved_instances_ids,
       :filters,
-      :offering_type,
-      :offering_class)
+      :offering_class,
+      :reserved_instances_ids,
+      :dry_run,
+      :offering_type)
       include Aws::Structure
     end
 
@@ -8434,28 +8548,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         route_table_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         route_table_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] route_table_ids
-    #   One or more route table IDs.
-    #
-    #   Default: Describes all your route tables.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -8532,12 +8633,25 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the route table.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] route_table_ids
+    #   One or more route table IDs.
+    #
+    #   Default: Describes all your route tables.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesRequest AWS API Documentation
     #
     class DescribeRouteTablesRequest < Struct.new(
+      :filters,
       :dry_run,
-      :route_table_ids,
-      :filters)
+      :route_table_ids)
       include Aws::Structure
     end
 
@@ -8561,6 +8675,20 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         first_slot_start_time_range: { # required
+    #           earliest_time: Time.now, # required
+    #           latest_time: Time.now, # required
+    #         },
+    #         max_results: 1,
+    #         max_slot_duration_in_hours: 1,
+    #         min_slot_duration_in_hours: 1,
+    #         next_token: "String",
     #         recurrence: { # required
     #           frequency: "String",
     #           interval: 1,
@@ -8568,20 +8696,6 @@ module Aws::EC2
     #           occurrence_relative_to_end: false,
     #           occurrence_unit: "String",
     #         },
-    #         first_slot_start_time_range: { # required
-    #           earliest_time: Time.now, # required
-    #           latest_time: Time.now, # required
-    #         },
-    #         min_slot_duration_in_hours: 1,
-    #         max_slot_duration_in_hours: 1,
-    #         next_token: "String",
-    #         max_results: 1,
-    #         filters: [
-    #           {
-    #             name: "String",
-    #             values: ["String"],
-    #           },
-    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -8590,37 +8704,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] recurrence
-    #   The schedule recurrence.
-    #   @return [Types::ScheduledInstanceRecurrenceRequest]
-    #
-    # @!attribute [rw] first_slot_start_time_range
-    #   The time period for the first schedule to start.
-    #   @return [Types::SlotDateTimeRangeRequest]
-    #
-    # @!attribute [rw] min_slot_duration_in_hours
-    #   The minimum available duration, in hours. The minimum required
-    #   duration is 1,200 hours per year. For example, the minimum daily
-    #   schedule is 4 hours, the minimum weekly schedule is 24 hours, and
-    #   the minimum monthly schedule is 100 hours.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_slot_duration_in_hours
-    #   The maximum available duration, in hours. This value must be greater
-    #   than `MinSlotDurationInHours` and less than 1,720.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. This value
-    #   can be between 5 and 300. The default value is 300. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
-    #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -8636,17 +8719,48 @@ module Aws::EC2
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] first_slot_start_time_range
+    #   The time period for the first schedule to start.
+    #   @return [Types::SlotDateTimeRangeRequest]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. This value
+    #   can be between 5 and 300. The default value is 300. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_slot_duration_in_hours
+    #   The maximum available duration, in hours. This value must be greater
+    #   than `MinSlotDurationInHours` and less than 1,720.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_slot_duration_in_hours
+    #   The minimum available duration, in hours. The minimum required
+    #   duration is 1,200 hours per year. For example, the minimum daily
+    #   schedule is 4 hours, the minimum weekly schedule is 24 hours, and
+    #   the minimum monthly schedule is 100 hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurrence
+    #   The schedule recurrence.
+    #   @return [Types::ScheduledInstanceRecurrenceRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityRequest AWS API Documentation
     #
     class DescribeScheduledInstanceAvailabilityRequest < Struct.new(
       :dry_run,
-      :recurrence,
+      :filters,
       :first_slot_start_time_range,
-      :min_slot_duration_in_hours,
-      :max_slot_duration_in_hours,
-      :next_token,
       :max_results,
-      :filters)
+      :max_slot_duration_in_hours,
+      :min_slot_duration_in_hours,
+      :next_token,
+      :recurrence)
       include Aws::Structure
     end
 
@@ -8676,19 +8790,19 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         scheduled_instance_ids: ["String"],
-    #         slot_start_time_range: {
-    #           earliest_time: Time.now,
-    #           latest_time: Time.now,
-    #         },
-    #         next_token: "String",
-    #         max_results: 1,
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         scheduled_instance_ids: ["String"],
+    #         slot_start_time_range: {
+    #           earliest_time: Time.now,
+    #           latest_time: Time.now,
+    #         },
     #       }
     #
     # @!attribute [rw] dry_run
@@ -8697,25 +8811,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] scheduled_instance_ids
-    #   One or more Scheduled Instance IDs.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] slot_start_time_range
-    #   The time period for the first schedule to start.
-    #   @return [Types::SlotStartTimeRangeRequest]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. This value
-    #   can be between 5 and 300. The default value is 100. To retrieve the
-    #   remaining results, make another call with the returned `NextToken`
-    #   value.
-    #   @return [Integer]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -8731,15 +8826,34 @@ module Aws::EC2
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. This value
+    #   can be between 5 and 300. The default value is 100. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_instance_ids
+    #   One or more Scheduled Instance IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] slot_start_time_range
+    #   The time period for the first schedule to start.
+    #   @return [Types::SlotStartTimeRangeRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesRequest AWS API Documentation
     #
     class DescribeScheduledInstancesRequest < Struct.new(
       :dry_run,
-      :scheduled_instance_ids,
-      :slot_start_time_range,
-      :next_token,
+      :filters,
       :max_results,
-      :filters)
+      :next_token,
+      :scheduled_instance_ids,
+      :slot_start_time_range)
       include Aws::Structure
     end
 
@@ -8806,39 +8920,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_names: ["String"],
-    #         group_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         group_ids: ["String"],
+    #         group_names: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group
-    #   names. You can specify either the security group name or the
-    #   security group ID. For security groups in a nondefault VPC, use the
-    #   `group-name` filter to describe security groups by name.
-    #
-    #   Default: Describes all your security groups.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] group_ids
-    #   One or more security group IDs. Required for security groups in a
-    #   nondefault VPC.
-    #
-    #   Default: Describes all your security groups.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters. If using multiple filters for rules, the
@@ -8889,13 +8980,36 @@ module Aws::EC2
     #     created.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] group_ids
+    #   One or more security group IDs. Required for security groups in a
+    #   nondefault VPC.
+    #
+    #   Default: Describes all your security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_names
+    #   \[EC2-Classic and default VPC only\] One or more security group
+    #   names. You can specify either the security group name or the
+    #   security group ID. For security groups in a nondefault VPC, use the
+    #   `group-name` filter to describe security groups by name.
+    #
+    #   Default: Describes all your security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsRequest AWS API Documentation
     #
     class DescribeSecurityGroupsRequest < Struct.new(
-      :dry_run,
-      :group_names,
+      :filters,
       :group_ids,
-      :filters)
+      :group_names,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -8918,10 +9032,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         snapshot_id: "String", # required
     #         attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+    #         snapshot_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The snapshot attribute you would like to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the EBS snapshot.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8930,28 +9052,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the EBS snapshot.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The snapshot attribute you would like to view.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeRequest AWS API Documentation
     #
     class DescribeSnapshotAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :snapshot_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
     # Contains the output of DescribeSnapshotAttribute.
-    #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the EBS snapshot.
-    #   @return [String]
     #
     # @!attribute [rw] create_volume_permissions
     #   A list of permissions for creating volumes from the snapshot.
@@ -8961,12 +9071,16 @@ module Aws::EC2
     #   A list of product codes.
     #   @return [Array<Types::ProductCode>]
     #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the EBS snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeResult AWS API Documentation
     #
     class DescribeSnapshotAttributeResult < Struct.new(
-      :snapshot_id,
       :create_volume_permissions,
-      :product_codes)
+      :product_codes,
+      :snapshot_id)
       include Aws::Structure
     end
 
@@ -8976,42 +9090,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         snapshot_ids: ["String"],
-    #         owner_ids: ["String"],
-    #         restorable_by_user_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
     #         max_results: 1,
+    #         next_token: "String",
+    #         owner_ids: ["String"],
+    #         restorable_by_user_ids: ["String"],
+    #         snapshot_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] snapshot_ids
-    #   One or more snapshot IDs.
-    #
-    #   Default: Describes snapshots for which you have launch permissions.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -9058,15 +9149,6 @@ module Aws::EC2
     #   * `volume-size` - The size of the volume, in GiB.
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeSnapshots` request where `MaxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `NextToken`
-    #   value. This value is `null` when there are no more results to
-    #   return.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of snapshot results returned by
     #   `DescribeSnapshots` in paginated output. When this parameter is
@@ -9081,16 +9163,48 @@ module Aws::EC2
     #   the same request.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `DescribeSnapshots` request where `MaxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `NextToken`
+    #   value. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_ids
+    #   Returns the snapshots owned by the specified owner. Multiple owners
+    #   can be specified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] restorable_by_user_ids
+    #   One or more AWS accounts IDs that can create volumes from the
+    #   snapshot.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_ids
+    #   One or more snapshot IDs.
+    #
+    #   Default: Describes snapshots for which you have launch permissions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotsRequest AWS API Documentation
     #
     class DescribeSnapshotsRequest < Struct.new(
-      :dry_run,
-      :snapshot_ids,
+      :filters,
+      :max_results,
+      :next_token,
       :owner_ids,
       :restorable_by_user_ids,
-      :filters,
-      :next_token,
-      :max_results)
+      :snapshot_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -9159,9 +9273,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         spot_fleet_request_id: "String", # required
-    #         next_token: "String",
     #         max_results: 1,
+    #         next_token: "String",
+    #         spot_fleet_request_id: "String", # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -9171,14 +9285,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Specify a
     #   value between 1 and 1000. The default value is 1000. To retrieve the
@@ -9186,21 +9292,25 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesRequest AWS API Documentation
-    #
-    class DescribeSpotFleetInstancesRequest < Struct.new(
-      :dry_run,
-      :spot_fleet_request_id,
-      :next_token,
-      :max_results)
-      include Aws::Structure
-    end
-
-    # Contains the output of DescribeSpotFleetInstances.
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
     #   The ID of the Spot fleet request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesRequest AWS API Documentation
+    #
+    class DescribeSpotFleetInstancesRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :spot_fleet_request_id)
+      include Aws::Structure
+    end
+
+    # Contains the output of DescribeSpotFleetInstances.
     #
     # @!attribute [rw] active_instances
     #   The running instances. Note that this list is refreshed periodically
@@ -9212,12 +9322,16 @@ module Aws::EC2
     #   is `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] spot_fleet_request_id
+    #   The ID of the Spot fleet request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesResponse AWS API Documentation
     #
     class DescribeSpotFleetInstancesResponse < Struct.new(
-      :spot_fleet_request_id,
       :active_instances,
-      :next_token)
+      :next_token,
+      :spot_fleet_request_id)
       include Aws::Structure
     end
 
@@ -9228,11 +9342,11 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         spot_fleet_request_id: "String", # required
     #         event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error
-    #         start_time: Time.now, # required
-    #         next_token: "String",
     #         max_results: 1,
+    #         next_token: "String",
+    #         spot_fleet_request_id: "String", # required
+    #         start_time: Time.now, # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -9242,22 +9356,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
-    #   @return [String]
-    #
     # @!attribute [rw] event_type
     #   The type of events to describe. By default, all events are
     #   described.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The starting date and time for the events, in UTC format (for
-    #   example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
-    #   @return [Time]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9267,19 +9368,9 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryRequest AWS API Documentation
-    #
-    class DescribeSpotFleetRequestHistoryRequest < Struct.new(
-      :dry_run,
-      :spot_fleet_request_id,
-      :event_type,
-      :start_time,
-      :next_token,
-      :max_results)
-      include Aws::Structure
-    end
-
-    # Contains the output of DescribeSpotFleetRequestHistory.
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
     #   The ID of the Spot fleet request.
@@ -9289,6 +9380,25 @@ module Aws::EC2
     #   The starting date and time for the events, in UTC format (for
     #   example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryRequest AWS API Documentation
+    #
+    class DescribeSpotFleetRequestHistoryRequest < Struct.new(
+      :dry_run,
+      :event_type,
+      :max_results,
+      :next_token,
+      :spot_fleet_request_id,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # Contains the output of DescribeSpotFleetRequestHistory.
+    #
+    # @!attribute [rw] history_records
+    #   Information about the events in the history of the Spot fleet
+    #   request.
+    #   @return [Array<Types::HistoryRecord>]
     #
     # @!attribute [rw] last_evaluated_time
     #   The last date and time for the events, in UTC format (for example,
@@ -9299,24 +9409,28 @@ module Aws::EC2
     #   not present.
     #   @return [Time]
     #
-    # @!attribute [rw] history_records
-    #   Information about the events in the history of the Spot fleet
-    #   request.
-    #   @return [Array<Types::HistoryRecord>]
-    #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] spot_fleet_request_id
+    #   The ID of the Spot fleet request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The starting date and time for the events, in UTC format (for
+    #   example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryResponse AWS API Documentation
     #
     class DescribeSpotFleetRequestHistoryResponse < Struct.new(
-      :spot_fleet_request_id,
-      :start_time,
-      :last_evaluated_time,
       :history_records,
-      :next_token)
+      :last_evaluated_time,
+      :next_token,
+      :spot_fleet_request_id,
+      :start_time)
       include Aws::Structure
     end
 
@@ -9327,9 +9441,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         spot_fleet_request_ids: ["String"],
-    #         next_token: "String",
     #         max_results: 1,
+    #         next_token: "String",
+    #         spot_fleet_request_ids: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -9339,14 +9453,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] spot_fleet_request_ids
-    #   The IDs of the Spot fleet requests.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Specify a
     #   value between 1 and 1000. The default value is 1000. To retrieve the
@@ -9354,32 +9460,40 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_fleet_request_ids
+    #   The IDs of the Spot fleet requests.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsRequest AWS API Documentation
     #
     class DescribeSpotFleetRequestsRequest < Struct.new(
       :dry_run,
-      :spot_fleet_request_ids,
+      :max_results,
       :next_token,
-      :max_results)
+      :spot_fleet_request_ids)
       include Aws::Structure
     end
 
     # Contains the output of DescribeSpotFleetRequests.
-    #
-    # @!attribute [rw] spot_fleet_request_configs
-    #   Information about the configuration of your Spot fleet.
-    #   @return [Array<Types::SpotFleetRequestConfig>]
     #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] spot_fleet_request_configs
+    #   Information about the configuration of your Spot fleet.
+    #   @return [Array<Types::SpotFleetRequestConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsResponse AWS API Documentation
     #
     class DescribeSpotFleetRequestsResponse < Struct.new(
-      :spot_fleet_request_configs,
-      :next_token)
+      :next_token,
+      :spot_fleet_request_configs)
       include Aws::Structure
     end
 
@@ -9389,26 +9503,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         spot_instance_request_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         spot_instance_request_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] spot_instance_request_ids
-    #   One or more Spot instance request IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -9540,12 +9643,23 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] spot_instance_request_ids
+    #   One or more Spot instance request IDs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest AWS API Documentation
     #
     class DescribeSpotInstanceRequestsRequest < Struct.new(
+      :filters,
       :dry_run,
-      :spot_instance_request_ids,
-      :filters)
+      :spot_instance_request_ids)
       include Aws::Structure
     end
 
@@ -9568,11 +9682,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #         product_descriptions: ["String"],
     #         filters: [
     #           {
     #             name: "String",
@@ -9580,37 +9689,14 @@ module Aws::EC2
     #           },
     #         ],
     #         availability_zone: "String",
+    #         dry_run: false,
+    #         end_time: Time.now,
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         max_results: 1,
     #         next_token: "String",
+    #         product_descriptions: ["String"],
+    #         start_time: Time.now,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] start_time
-    #   The date and time, up to the past 90 days, from which to start
-    #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
-    #   @return [Time]
-    #
-    # @!attribute [rw] end_time
-    #   The date and time, up to the current date, from which to stop
-    #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
-    #   @return [Time]
-    #
-    # @!attribute [rw] instance_types
-    #   Filters the results by the specified instance types. Note that T2
-    #   and HS1 instance types are not supported.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] product_descriptions
-    #   Filters the results by the specified basic product descriptions.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -9638,6 +9724,24 @@ module Aws::EC2
     #   Filters the results by the specified Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time, up to the current date, from which to stop
+    #   retrieving the price history data, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_types
+    #   Filters the results by the specified instance types. Note that T2
+    #   and HS1 instance types are not supported.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Specify a
     #   value between 1 and 1000. The default value is 1000. To retrieve the
@@ -9649,37 +9753,47 @@ module Aws::EC2
     #   The token for the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] product_descriptions
+    #   Filters the results by the specified basic product descriptions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time, up to the past 90 days, from which to start
+    #   retrieving the price history data, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryRequest AWS API Documentation
     #
     class DescribeSpotPriceHistoryRequest < Struct.new(
-      :dry_run,
-      :start_time,
-      :end_time,
-      :instance_types,
-      :product_descriptions,
       :filters,
       :availability_zone,
+      :dry_run,
+      :end_time,
+      :instance_types,
       :max_results,
-      :next_token)
+      :next_token,
+      :product_descriptions,
+      :start_time)
       include Aws::Structure
     end
 
     # Contains the output of DescribeSpotPriceHistory.
-    #
-    # @!attribute [rw] spot_price_history
-    #   The historical Spot prices.
-    #   @return [Array<Types::SpotPrice>]
     #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] spot_price_history
+    #   The historical Spot prices.
+    #   @return [Array<Types::SpotPrice>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryResult AWS API Documentation
     #
     class DescribeSpotPriceHistoryResult < Struct.new(
-      :spot_price_history,
-      :next_token)
+      :next_token,
+      :spot_price_history)
       include Aws::Structure
     end
 
@@ -9688,9 +9802,9 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         vpc_id: "String", # required
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         vpc_id: "String", # required
     #       }
     #
     # @!attribute [rw] dry_run
@@ -9699,10 +9813,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   DryRunOperation. Otherwise, it is UnauthorizedOperation.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. The request
@@ -9715,30 +9825,34 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsRequest AWS API Documentation
     #
     class DescribeStaleSecurityGroupsRequest < Struct.new(
       :dry_run,
-      :vpc_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :vpc_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] stale_security_group_set
-    #   Information about the stale security groups.
-    #   @return [Array<Types::StaleSecurityGroup>]
-    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] stale_security_group_set
+    #   Information about the stale security groups.
+    #   @return [Array<Types::StaleSecurityGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsResult AWS API Documentation
     #
     class DescribeStaleSecurityGroupsResult < Struct.new(
-      :stale_security_group_set,
-      :next_token)
+      :next_token,
+      :stale_security_group_set)
       include Aws::Structure
     end
 
@@ -9748,28 +9862,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         subnet_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         subnet_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] subnet_ids
-    #   One or more subnet IDs.
-    #
-    #   Default: Describes all your subnets.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -9823,12 +9924,25 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the subnet.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] subnet_ids
+    #   One or more subnet IDs.
+    #
+    #   Default: Describes all your subnets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsRequest AWS API Documentation
     #
     class DescribeSubnetsRequest < Struct.new(
-      :dry_run,
+      :filters,
       :subnet_ids,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -9908,20 +10022,20 @@ module Aws::EC2
 
     # Contains the output of DescribeTags.
     #
-    # @!attribute [rw] tags
-    #   A list of tags.
-    #   @return [Array<Types::TagDescription>]
-    #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return..
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Array<Types::TagDescription>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsResult AWS API Documentation
     #
     class DescribeTagsResult < Struct.new(
-      :tags,
-      :next_token)
+      :next_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -9931,10 +10045,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_id: "String", # required
     #         attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+    #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the volume. This parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9943,28 +10065,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The attribute of the volume. This parameter is required.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeRequest AWS API Documentation
     #
     class DescribeVolumeAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :volume_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
     # Contains the output of DescribeVolumeAttribute.
-    #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
-    #   @return [String]
     #
     # @!attribute [rw] auto_enable_io
     #   The state of `autoEnableIO` attribute.
@@ -9974,12 +10084,16 @@ module Aws::EC2
     #   A list of product codes.
     #   @return [Array<Types::ProductCode>]
     #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeResult AWS API Documentation
     #
     class DescribeVolumeAttributeResult < Struct.new(
-      :volume_id,
       :auto_enable_io,
-      :product_codes)
+      :product_codes,
+      :volume_id)
       include Aws::Structure
     end
 
@@ -9989,30 +10103,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
     #         max_results: 1,
+    #         next_token: "String",
+    #         volume_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] volume_ids
-    #   One or more volume IDs.
-    #
-    #   Default: Describes all your volumes.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10050,13 +10151,6 @@ module Aws::EC2
     #     `impaired` \| `warning` \| `insufficient-data`).
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
-    #   request. When the results of the request exceed `MaxResults`, this
-    #   value can be used to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of volume results returned by
     #   `DescribeVolumeStatus` in paginated output. When this parameter is
@@ -10070,33 +10164,53 @@ module Aws::EC2
     #   parameter and the volume IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in a future `DescribeVolumeStatus`
+    #   request. When the results of the request exceed `MaxResults`, this
+    #   value can be used to retrieve the next page of results. This value
+    #   is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_ids
+    #   One or more volume IDs.
+    #
+    #   Default: Describes all your volumes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusRequest AWS API Documentation
     #
     class DescribeVolumeStatusRequest < Struct.new(
-      :dry_run,
-      :volume_ids,
       :filters,
+      :max_results,
       :next_token,
-      :max_results)
+      :volume_ids,
+      :dry_run)
       include Aws::Structure
     end
 
     # Contains the output of DescribeVolumeStatus.
-    #
-    # @!attribute [rw] volume_statuses
-    #   A list of volumes.
-    #   @return [Array<Types::VolumeStatusItem>]
     #
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] volume_statuses
+    #   A list of volumes.
+    #   @return [Array<Types::VolumeStatusItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusResult AWS API Documentation
     #
     class DescribeVolumeStatusResult < Struct.new(
-      :volume_statuses,
-      :next_token)
+      :next_token,
+      :volume_statuses)
       include Aws::Structure
     end
 
@@ -10177,28 +10291,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         next_token: "String",
+    #         volume_ids: ["String"],
+    #         dry_run: false,
     #         max_results: 1,
+    #         next_token: "String",
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] volume_ids
-    #   One or more volume IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10258,14 +10361,16 @@ module Aws::EC2
     #     Magnetic volumes.
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] next_token
-    #   The `NextToken` value returned from a previous paginated
-    #   `DescribeVolumes` request where `MaxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `NextToken`
-    #   value. This value is `null` when there are no more results to
-    #   return.
-    #   @return [String]
+    # @!attribute [rw] volume_ids
+    #   One or more volume IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] max_results
     #   The maximum number of volume results returned by `DescribeVolumes`
@@ -10280,14 +10385,23 @@ module Aws::EC2
     #   parameter and the volume IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `DescribeVolumes` request where `MaxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `NextToken`
+    #   value. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesRequest AWS API Documentation
     #
     class DescribeVolumesRequest < Struct.new(
-      :dry_run,
-      :volume_ids,
       :filters,
-      :next_token,
-      :max_results)
+      :volume_ids,
+      :dry_run,
+      :max_results,
+      :next_token)
       include Aws::Structure
     end
 
@@ -10319,10 +10433,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_id: "String", # required
     #         attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
+    #         vpc_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The VPC attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -10331,20 +10453,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The VPC attribute.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeRequest AWS API Documentation
     #
     class DescribeVpcAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :vpc_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -10354,6 +10468,12 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] enable_dns_hostnames
+    #   Indicates whether the instances launched in the VPC get DNS
+    #   hostnames. If this attribute is `true`, instances in the VPC get DNS
+    #   hostnames; otherwise, they do not.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @!attribute [rw] enable_dns_support
     #   Indicates whether DNS resolution is enabled for the VPC. If this
     #   attribute is `true`, the Amazon DNS server resolves DNS hostnames
@@ -10361,18 +10481,12 @@ module Aws::EC2
     #   it does not.
     #   @return [Types::AttributeBooleanValue]
     #
-    # @!attribute [rw] enable_dns_hostnames
-    #   Indicates whether the instances launched in the VPC get DNS
-    #   hostnames. If this attribute is `true`, instances in the VPC get DNS
-    #   hostnames; otherwise, they do not.
-    #   @return [Types::AttributeBooleanValue]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeResult AWS API Documentation
     #
     class DescribeVpcAttributeResult < Struct.new(
       :vpc_id,
-      :enable_dns_support,
-      :enable_dns_hostnames)
+      :enable_dns_hostnames,
+      :enable_dns_support)
       include Aws::Structure
     end
 
@@ -10382,14 +10496,10 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         vpc_ids: ["String"],
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         vpc_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] vpc_ids
-    #   One or more VPC IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. The request
@@ -10402,30 +10512,34 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @!attribute [rw] vpc_ids
+    #   One or more VPC IDs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupportRequest AWS API Documentation
     #
     class DescribeVpcClassicLinkDnsSupportRequest < Struct.new(
-      :vpc_ids,
       :max_results,
-      :next_token)
+      :next_token,
+      :vpc_ids)
       include Aws::Structure
     end
 
     # Contains the output of DescribeVpcClassicLinkDnsSupport.
     #
-    # @!attribute [rw] vpcs
-    #   Information about the ClassicLink DNS support status of the VPCs.
-    #   @return [Array<Types::ClassicLinkDnsSupport>]
-    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items.
     #   @return [String]
     #
+    # @!attribute [rw] vpcs
+    #   Information about the ClassicLink DNS support status of the VPCs.
+    #   @return [Array<Types::ClassicLinkDnsSupport>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupportResult AWS API Documentation
     #
     class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
-      :vpcs,
-      :next_token)
+      :next_token,
+      :vpcs)
       include Aws::Structure
     end
 
@@ -10435,27 +10549,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         vpc_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_ids
-    #   One or more VPCs for which you want to describe the ClassicLink
-    #   status.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10482,12 +10584,24 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_ids
+    #   One or more VPCs for which you want to describe the ClassicLink
+    #   status.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkRequest AWS API Documentation
     #
     class DescribeVpcClassicLinkRequest < Struct.new(
+      :filters,
       :dry_run,
-      :vpc_ids,
-      :filters)
+      :vpc_ids)
       include Aws::Structure
     end
 
@@ -10547,20 +10661,20 @@ module Aws::EC2
 
     # Contains the output of DescribeVpcEndpointServices.
     #
-    # @!attribute [rw] service_names
-    #   A list of supported AWS services.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] service_names
+    #   A list of supported AWS services.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicesResult AWS API Documentation
     #
     class DescribeVpcEndpointServicesResult < Struct.new(
-      :service_names,
-      :next_token)
+      :next_token,
+      :service_names)
       include Aws::Structure
     end
 
@@ -10571,7 +10685,6 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         vpc_endpoint_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
@@ -10580,6 +10693,7 @@ module Aws::EC2
     #         ],
     #         max_results: 1,
     #         next_token: "String",
+    #         vpc_endpoint_ids: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -10588,10 +10702,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_endpoint_ids
-    #   One or more endpoint IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10620,33 +10730,37 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   One or more endpoint IDs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsRequest AWS API Documentation
     #
     class DescribeVpcEndpointsRequest < Struct.new(
       :dry_run,
-      :vpc_endpoint_ids,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :vpc_endpoint_ids)
       include Aws::Structure
     end
 
     # Contains the output of DescribeVpcEndpoints.
-    #
-    # @!attribute [rw] vpc_endpoints
-    #   Information about the endpoints.
-    #   @return [Array<Types::VpcEndpoint>]
     #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoints
+    #   Information about the endpoints.
+    #   @return [Array<Types::VpcEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsResult AWS API Documentation
     #
     class DescribeVpcEndpointsResult < Struct.new(
-      :vpc_endpoints,
-      :next_token)
+      :next_token,
+      :vpc_endpoints)
       include Aws::Structure
     end
 
@@ -10656,28 +10770,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_peering_connection_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         dry_run: false,
+    #         vpc_peering_connection_ids: ["String"],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
-    #
-    #   Default: Describes all your VPC peering connections.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10730,12 +10831,25 @@ module Aws::EC2
     #     connection.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_peering_connection_ids
+    #   One or more VPC peering connection IDs.
+    #
+    #   Default: Describes all your VPC peering connections.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsRequest AWS API Documentation
     #
     class DescribeVpcPeeringConnectionsRequest < Struct.new(
+      :filters,
       :dry_run,
-      :vpc_peering_connection_ids,
-      :filters)
+      :vpc_peering_connection_ids)
       include Aws::Structure
     end
 
@@ -10758,28 +10872,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         vpc_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] vpc_ids
-    #   One or more VPC IDs.
-    #
-    #   Default: Describes all your VPCs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10825,12 +10926,25 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] vpc_ids
+    #   One or more VPC IDs.
+    #
+    #   Default: Describes all your VPCs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsRequest AWS API Documentation
     #
     class DescribeVpcsRequest < Struct.new(
-      :dry_run,
+      :filters,
       :vpc_ids,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -10853,28 +10967,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpn_connection_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         vpn_connection_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] vpn_connection_ids
-    #   One or more VPN connection IDs.
-    #
-    #   Default: Describes your VPN connections.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -10925,12 +11026,25 @@ module Aws::EC2
     #     with the VPN connection.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] vpn_connection_ids
+    #   One or more VPN connection IDs.
+    #
+    #   Default: Describes your VPN connections.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsRequest AWS API Documentation
     #
     class DescribeVpnConnectionsRequest < Struct.new(
-      :dry_run,
+      :filters,
       :vpn_connection_ids,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -10953,28 +11067,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpn_gateway_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         vpn_gateway_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] vpn_gateway_ids
-    #   One or more virtual private gateway IDs.
-    #
-    #   Default: Describes all your virtual private gateways.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -11015,12 +11116,25 @@ module Aws::EC2
     #   * `vpn-gateway-id` - The ID of the virtual private gateway.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] vpn_gateway_ids
+    #   One or more virtual private gateway IDs.
+    #
+    #   Default: Describes all your virtual private gateways.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGatewaysRequest AWS API Documentation
     #
     class DescribeVpnGatewaysRequest < Struct.new(
-      :dry_run,
+      :filters,
       :vpn_gateway_ids,
-      :filters)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -11127,10 +11241,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         attachment_id: "String", # required
+    #         dry_run: false,
     #         force: false,
     #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11139,10 +11257,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] attachment_id
-    #   The ID of the attachment.
-    #   @return [String]
-    #
     # @!attribute [rw] force
     #   Specifies whether to force a detachment.
     #   @return [Boolean]
@@ -11150,8 +11264,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterfaceRequest AWS API Documentation
     #
     class DetachNetworkInterfaceRequest < Struct.new(
-      :dry_run,
       :attachment_id,
+      :dry_run,
       :force)
       include Aws::Structure
     end
@@ -11162,27 +11276,12 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_id: "String", # required
-    #         instance_id: "String",
     #         device: "String",
     #         force: false,
+    #         instance_id: "String",
+    #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
     #
     # @!attribute [rw] device
     #   The device name.
@@ -11199,14 +11298,29 @@ module Aws::EC2
     #   procedures.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolumeRequest AWS API Documentation
     #
     class DetachVolumeRequest < Struct.new(
-      :dry_run,
-      :volume_id,
-      :instance_id,
       :device,
-      :force)
+      :force,
+      :instance_id,
+      :volume_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -11216,10 +11330,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpn_gateway_id: "String", # required
     #         vpc_id: "String", # required
+    #         vpn_gateway_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11228,20 +11350,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGatewayRequest AWS API Documentation
     #
     class DetachVpnGatewayRequest < Struct.new(
-      :dry_run,
+      :vpc_id,
       :vpn_gateway_id,
-      :vpc_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -11265,13 +11379,13 @@ module Aws::EC2
 
     # Describes a set of DHCP options.
     #
-    # @!attribute [rw] dhcp_options_id
-    #   The ID of the set of DHCP options.
-    #   @return [String]
-    #
     # @!attribute [rw] dhcp_configurations
     #   One or more DHCP options in the set.
     #   @return [Array<Types::DhcpConfiguration>]
+    #
+    # @!attribute [rw] dhcp_options_id
+    #   The ID of the set of DHCP options.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the DHCP options set.
@@ -11280,8 +11394,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpOptions AWS API Documentation
     #
     class DhcpOptions < Struct.new(
-      :dhcp_options_id,
       :dhcp_configurations,
+      :dhcp_options_id,
       :tags)
       include Aws::Structure
     end
@@ -11292,23 +11406,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         route_table_id: "String", # required
     #         gateway_id: "String", # required
+    #         route_table_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the route table.
-    #   @return [String]
     #
     # @!attribute [rw] gateway_id
     #   The ID of the virtual private gateway.
     #   @return [String]
     #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationRequest AWS API Documentation
     #
     class DisableVgwRoutePropagationRequest < Struct.new(
-      :route_table_id,
-      :gateway_id)
+      :gateway_id,
+      :route_table_id)
       include Aws::Structure
     end
 
@@ -11395,10 +11509,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         public_ip: "String",
     #         association_id: "String",
+    #         public_ip: "String",
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] association_id
+    #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11407,20 +11529,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
-    #   @return [String]
-    #
-    # @!attribute [rw] association_id
-    #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddressRequest AWS API Documentation
     #
     class DisassociateAddressRequest < Struct.new(
-      :dry_run,
+      :association_id,
       :public_ip,
-      :association_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -11459,9 +11573,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         association_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID representing the current association between the
+    #   route table and subnet.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11470,16 +11589,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] association_id
-    #   The association ID representing the current association between the
-    #   route table and subnet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTableRequest AWS API Documentation
     #
     class DisassociateRouteTableRequest < Struct.new(
-      :dry_run,
-      :association_id)
+      :association_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -11501,19 +11615,19 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::SubnetIpv6CidrBlockAssociation]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlockResult AWS API Documentation
     #
     class DisassociateSubnetCidrBlockResult < Struct.new(
-      :subnet_id,
-      :ipv_6_cidr_block_association)
+      :ipv_6_cidr_block_association,
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -11535,19 +11649,19 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlockResult AWS API Documentation
     #
     class DisassociateVpcCidrBlockResult < Struct.new(
-      :vpc_id,
-      :ipv_6_cidr_block_association)
+      :ipv_6_cidr_block_association,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -11557,24 +11671,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         description: "String",
     #         image: {
-    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
     #           bytes: 1, # required
+    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
     #           import_manifest_url: "String", # required
     #         },
-    #         description: "String",
     #         volume: {
     #           size: 1, # required
     #         },
     #       }
     #
-    # @!attribute [rw] image
-    #   Information about the disk image.
-    #   @return [Types::DiskImageDetail]
-    #
     # @!attribute [rw] description
     #   A description of the disk image.
     #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   Information about the disk image.
+    #   @return [Types::DiskImageDetail]
     #
     # @!attribute [rw] volume
     #   Information about the volume.
@@ -11583,21 +11697,21 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImage AWS API Documentation
     #
     class DiskImage < Struct.new(
-      :image,
       :description,
+      :image,
       :volume)
       include Aws::Structure
     end
 
     # Describes a disk image.
     #
+    # @!attribute [rw] checksum
+    #   The checksum computed for the disk image.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   The disk image format.
     #   @return [String]
-    #
-    # @!attribute [rw] size
-    #   The size of the disk image, in GiB.
-    #   @return [Integer]
     #
     # @!attribute [rw] import_manifest_url
     #   A presigned URL for the import manifest stored in Amazon S3. For
@@ -11615,17 +11729,17 @@ module Aws::EC2
     #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #   @return [String]
     #
-    # @!attribute [rw] checksum
-    #   The checksum computed for the disk image.
-    #   @return [String]
+    # @!attribute [rw] size
+    #   The size of the disk image, in GiB.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDescription AWS API Documentation
     #
     class DiskImageDescription < Struct.new(
+      :checksum,
       :format,
-      :size,
       :import_manifest_url,
-      :checksum)
+      :size)
       include Aws::Structure
     end
 
@@ -11635,18 +11749,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         format: "VMDK", # required, accepts VMDK, RAW, VHD
     #         bytes: 1, # required
+    #         format: "VMDK", # required, accepts VMDK, RAW, VHD
     #         import_manifest_url: "String", # required
     #       }
-    #
-    # @!attribute [rw] format
-    #   The disk image format.
-    #   @return [String]
     #
     # @!attribute [rw] bytes
     #   The size of the disk image, in GiB.
     #   @return [Integer]
+    #
+    # @!attribute [rw] format
+    #   The disk image format.
+    #   @return [String]
     #
     # @!attribute [rw] import_manifest_url
     #   A presigned URL for the import manifest stored in Amazon S3 and
@@ -11668,27 +11782,27 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDetail AWS API Documentation
     #
     class DiskImageDetail < Struct.new(
-      :format,
       :bytes,
+      :format,
       :import_manifest_url)
       include Aws::Structure
     end
 
     # Describes a disk image volume.
     #
-    # @!attribute [rw] size
-    #   The size of the volume, in GiB.
-    #   @return [Integer]
-    #
     # @!attribute [rw] id
     #   The volume identifier.
     #   @return [String]
     #
+    # @!attribute [rw] size
+    #   The size of the volume, in GiB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageVolumeDescription AWS API Documentation
     #
     class DiskImageVolumeDescription < Struct.new(
-      :size,
-      :id)
+      :id,
+      :size)
       include Aws::Structure
     end
 
@@ -11698,40 +11812,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         encrypted: false,
+    #         delete_on_termination: false,
+    #         iops: 1,
     #         snapshot_id: "String",
     #         volume_size: 1,
-    #         delete_on_termination: false,
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #         iops: 1,
-    #         encrypted: false,
     #       }
     #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the snapshot.
-    #   @return [String]
-    #
-    # @!attribute [rw] volume_size
-    #   The size of the volume, in GiB.
-    #
-    #   Constraints: 1-16384 for General Purpose SSD (`gp2`), 4-16384 for
-    #   Provisioned IOPS SSD (`io1`), 500-16384 for Throughput Optimized HDD
-    #   (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024 for Magnetic
-    #   (`standard`) volumes. If you specify a snapshot, the volume size
-    #   must be equal to or larger than the snapshot size.
-    #
-    #   Default: If you're creating the volume from a snapshot and don't
-    #   specify a volume size, the default is the snapshot size.
-    #   @return [Integer]
+    # @!attribute [rw] encrypted
+    #   Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS
+    #   volumes may only be attached to instances that support Amazon EBS
+    #   encryption.
+    #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the EBS volume is deleted on instance termination.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] volume_type
-    #   The volume type: `gp2`, `io1`, `st1`, `sc1`, or `standard`.
-    #
-    #   Default: `standard`
-    #   @return [String]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) that the volume
@@ -11755,34 +11852,43 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
-    # @!attribute [rw] encrypted
-    #   Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS
-    #   volumes may only be attached to instances that support Amazon EBS
-    #   encryption.
-    #   @return [Boolean]
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB.
+    #
+    #   Constraints: 1-16384 for General Purpose SSD (`gp2`), 4-16384 for
+    #   Provisioned IOPS SSD (`io1`), 500-16384 for Throughput Optimized HDD
+    #   (`st1`), 500-16384 for Cold HDD (`sc1`), and 1-1024 for Magnetic
+    #   (`standard`) volumes. If you specify a snapshot, the volume size
+    #   must be equal to or larger than the snapshot size.
+    #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type: `gp2`, `io1`, `st1`, `sc1`, or `standard`.
+    #
+    #   Default: `standard`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
+      :encrypted,
+      :delete_on_termination,
+      :iops,
       :snapshot_id,
       :volume_size,
-      :delete_on_termination,
-      :volume_type,
-      :iops,
-      :encrypted)
+      :volume_type)
       include Aws::Structure
     end
 
     # Describes a parameter used to set up an EBS volume in a block device
     # mapping.
-    #
-    # @!attribute [rw] volume_id
-    #   The ID of the EBS volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The attachment state.
-    #   @return [String]
     #
     # @!attribute [rw] attach_time
     #   The time stamp when the attachment initiated.
@@ -11792,13 +11898,21 @@ module Aws::EC2
     #   Indicates whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @!attribute [rw] status
+    #   The attachment state.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the EBS volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
-      :volume_id,
-      :status,
       :attach_time,
-      :delete_on_termination)
+      :delete_on_termination,
+      :status,
+      :volume_id)
       include Aws::Structure
     end
 
@@ -11809,42 +11923,42 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         volume_id: "String",
     #         delete_on_termination: false,
+    #         volume_id: "String",
     #       }
-    #
-    # @!attribute [rw] volume_id
-    #   The ID of the EBS volume.
-    #   @return [String]
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @!attribute [rw] volume_id
+    #   The ID of the EBS volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDeviceSpecification AWS API Documentation
     #
     class EbsInstanceBlockDeviceSpecification < Struct.new(
-      :volume_id,
-      :delete_on_termination)
+      :delete_on_termination,
+      :volume_id)
       include Aws::Structure
     end
 
     # Describes an egress-only Internet gateway.
-    #
-    # @!attribute [rw] egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
-    #   @return [String]
     #
     # @!attribute [rw] attachments
     #   Information about the attachment of the egress-only Internet
     #   gateway.
     #   @return [Array<Types::InternetGatewayAttachment>]
     #
+    # @!attribute [rw] egress_only_internet_gateway_id
+    #   The ID of the egress-only Internet gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway AWS API Documentation
     #
     class EgressOnlyInternetGateway < Struct.new(
-      :egress_only_internet_gateway_id,
-      :attachments)
+      :attachments,
+      :egress_only_internet_gateway_id)
       include Aws::Structure
     end
 
@@ -11854,23 +11968,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         route_table_id: "String", # required
     #         gateway_id: "String", # required
+    #         route_table_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the route table.
-    #   @return [String]
     #
     # @!attribute [rw] gateway_id
     #   The ID of the virtual private gateway.
     #   @return [String]
     #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationRequest AWS API Documentation
     #
     class EnableVgwRoutePropagationRequest < Struct.new(
-      :route_table_id,
-      :gateway_id)
+      :gateway_id,
+      :route_table_id)
       include Aws::Structure
     end
 
@@ -11982,9 +12096,8 @@ module Aws::EC2
 
     # Describes a Spot fleet event.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance. This information is available only for
-    #   `instanceChange` events.
+    # @!attribute [rw] event_description
+    #   The description of the event.
     #   @return [String]
     #
     # @!attribute [rw] event_sub_type
@@ -12044,28 +12157,37 @@ module Aws::EC2
     #   * `terminated` - An instance was terminated by the user.
     #   @return [String]
     #
-    # @!attribute [rw] event_description
-    #   The description of the event.
+    # @!attribute [rw] instance_id
+    #   The ID of the instance. This information is available only for
+    #   `instanceChange` events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EventInformation AWS API Documentation
     #
     class EventInformation < Struct.new(
-      :instance_id,
+      :event_description,
       :event_sub_type,
-      :event_description)
+      :instance_id)
       include Aws::Structure
     end
 
     # Describes an instance export task.
     #
+    # @!attribute [rw] description
+    #   A description of the resource being exported.
+    #   @return [String]
+    #
     # @!attribute [rw] export_task_id
     #   The ID of the export task.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description of the resource being exported.
-    #   @return [String]
+    # @!attribute [rw] export_to_s3_task
+    #   Information about the export task.
+    #   @return [Types::ExportToS3Task]
+    #
+    # @!attribute [rw] instance_export_details
+    #   Information about the instance to export.
+    #   @return [Types::InstanceExportDetails]
     #
     # @!attribute [rw] state
     #   The state of the export task.
@@ -12075,35 +12197,27 @@ module Aws::EC2
     #   The status message related to the export task.
     #   @return [String]
     #
-    # @!attribute [rw] instance_export_details
-    #   Information about the instance to export.
-    #   @return [Types::InstanceExportDetails]
-    #
-    # @!attribute [rw] export_to_s3_task
-    #   Information about the export task.
-    #   @return [Types::ExportToS3Task]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTask AWS API Documentation
     #
     class ExportTask < Struct.new(
-      :export_task_id,
       :description,
-      :state,
-      :status_message,
+      :export_task_id,
+      :export_to_s3_task,
       :instance_export_details,
-      :export_to_s3_task)
+      :state,
+      :status_message)
       include Aws::Structure
     end
 
     # Describes the format and location for an instance export task.
     #
-    # @!attribute [rw] disk_image_format
-    #   The format for the exported image.
-    #   @return [String]
-    #
     # @!attribute [rw] container_format
     #   The container format used to combine disk images with metadata (such
     #   as OVF). If absent, only the disk image is exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_format
+    #   The format for the exported image.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
@@ -12119,8 +12233,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3Task AWS API Documentation
     #
     class ExportToS3Task < Struct.new(
-      :disk_image_format,
       :container_format,
+      :disk_image_format,
       :s3_bucket,
       :s3_key)
       include Aws::Structure
@@ -12132,19 +12246,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #         container_format: "ova", # accepts ova
+    #         disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
     #         s3_bucket: "String",
     #         s3_prefix: "String",
     #       }
     #
-    # @!attribute [rw] disk_image_format
-    #   The format for the exported image.
-    #   @return [String]
-    #
     # @!attribute [rw] container_format
     #   The container format used to combine disk images with metadata (such
     #   as OVF). If absent, only the disk image is exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_format
+    #   The format for the exported image.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
@@ -12161,8 +12275,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3TaskSpecification AWS API Documentation
     #
     class ExportToS3TaskSpecification < Struct.new(
-      :disk_image_format,
       :container_format,
+      :disk_image_format,
       :s3_bucket,
       :s3_prefix)
       include Aws::Structure
@@ -12202,30 +12316,6 @@ module Aws::EC2
     #   The date and time the flow log was created.
     #   @return [Time]
     #
-    # @!attribute [rw] flow_log_id
-    #   The flow log ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] flow_log_status
-    #   The status of the flow log (`ACTIVE`).
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_id
-    #   The ID of the resource on which the flow log was created.
-    #   @return [String]
-    #
-    # @!attribute [rw] traffic_type
-    #   The type of traffic captured for the flow log.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_group_name
-    #   The name of the flow log group.
-    #   @return [String]
-    #
-    # @!attribute [rw] deliver_logs_status
-    #   The status of the logs delivery (`SUCCESS` \| `FAILED`).
-    #   @return [String]
-    #
     # @!attribute [rw] deliver_logs_error_message
     #   Information about the error that occurred. `Rate limited` indicates
     #   that CloudWatch logs throttling has been applied for one or more
@@ -12240,18 +12330,143 @@ module Aws::EC2
     #   The ARN of the IAM role that posts logs to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] deliver_logs_status
+    #   The status of the logs delivery (`SUCCESS` \| `FAILED`).
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_log_id
+    #   The flow log ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_log_status
+    #   The status of the flow log (`ACTIVE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the flow log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource on which the flow log was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_type
+    #   The type of traffic captured for the flow log.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
       :creation_time,
+      :deliver_logs_error_message,
+      :deliver_logs_permission_arn,
+      :deliver_logs_status,
       :flow_log_id,
       :flow_log_status,
-      :resource_id,
-      :traffic_type,
       :log_group_name,
-      :deliver_logs_status,
-      :deliver_logs_error_message,
-      :deliver_logs_permission_arn)
+      :resource_id,
+      :traffic_type)
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FPGA image (AFI).
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The FPGA image identifier (AFI ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] fpga_image_global_id
+    #   The global FPGA image identifier (AGFI ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] shell_version
+    #   The version of the AWS Shell that was used to create the bitstream.
+    #   @return [String]
+    #
+    # @!attribute [rw] pci_id
+    #   Information about the PCI bus.
+    #   @return [Types::PciId]
+    #
+    # @!attribute [rw] state
+    #   Information about the state of the AFI.
+    #   @return [Types::FpgaImageState]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time the AFI was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time of the most recent update to the AFI.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the AFI owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_alias
+    #   The alias of the AFI owner. Possible values include `self`,
+    #   `amazon`, and `aws-marketplace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_codes
+    #   The product codes for the AFI.
+    #   @return [Array<Types::ProductCode>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the AFI.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage AWS API Documentation
+    #
+    class FpgaImage < Struct.new(
+      :fpga_image_id,
+      :fpga_image_global_id,
+      :name,
+      :description,
+      :shell_version,
+      :pci_id,
+      :state,
+      :create_time,
+      :update_time,
+      :owner_id,
+      :owner_alias,
+      :product_codes,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes the state of the bitstream generation process for an Amazon
+    # FPGA image (AFI).
+    #
+    # @!attribute [rw] code
+    #   The state. The following are the possible values:
+    #
+    #   * `pending` - AFI bitstream generation is in progress.
+    #
+    #   * `available` - The AFI is available for use.
+    #
+    #   * `failed` - AFI bitstream generation failed.
+    #
+    #   * `unavailable` - The AFI is no longer available for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the state is `failed`, this is the error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageState AWS API Documentation
+    #
+    class FpgaImageState < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 
@@ -12261,9 +12476,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12272,15 +12491,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputRequest AWS API Documentation
     #
     class GetConsoleOutputRequest < Struct.new(
-      :dry_run,
-      :instance_id)
+      :instance_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -12290,21 +12505,21 @@ module Aws::EC2
     #   The ID of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] timestamp
-    #   The time the output was last updated.
-    #   @return [Time]
-    #
     # @!attribute [rw] output
     #   The console output, Base64-encoded. If using a command line tool,
     #   the tool decodes the output for you.
     #   @return [String]
     #
+    # @!attribute [rw] timestamp
+    #   The time the output was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputResult AWS API Documentation
     #
     class GetConsoleOutputResult < Struct.new(
       :instance_id,
-      :timestamp,
-      :output)
+      :output,
+      :timestamp)
       include Aws::Structure
     end
 
@@ -12346,19 +12561,19 @@ module Aws::EC2
 
     # Contains the output of the request.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
     # @!attribute [rw] image_data
     #   The data that comprises the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshotResult AWS API Documentation
     #
     class GetConsoleScreenshotResult < Struct.new(
-      :instance_id,
-      :image_data)
+      :image_data,
+      :instance_id)
       include Aws::Structure
     end
 
@@ -12366,53 +12581,53 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         offering_id: "String", # required
     #         host_id_set: ["String"], # required
+    #         offering_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] offering_id
-    #   The offering ID of the reservation.
-    #   @return [String]
     #
     # @!attribute [rw] host_id_set
     #   The ID/s of the Dedicated Host/s that the reservation will be
     #   associated with.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] offering_id
+    #   The offering ID of the reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewRequest AWS API Documentation
     #
     class GetHostReservationPurchasePreviewRequest < Struct.new(
-      :offering_id,
-      :host_id_set)
+      :host_id_set,
+      :offering_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] purchase
-    #   The purchase information of the Dedicated Host Reservation and the
-    #   Dedicated Hosts associated with it.
-    #   @return [Array<Types::Purchase>]
-    #
-    # @!attribute [rw] total_upfront_price
-    #   The potential total upfront price. This is billed immediately.
-    #   @return [String]
-    #
-    # @!attribute [rw] total_hourly_price
-    #   The potential total hourly price of the reservation per hour.
-    #   @return [String]
-    #
     # @!attribute [rw] currency_code
     #   The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
     #   amounts are specified. At this time, the only supported currency is
     #   `USD`.
     #   @return [String]
     #
+    # @!attribute [rw] purchase
+    #   The purchase information of the Dedicated Host Reservation and the
+    #   Dedicated Hosts associated with it.
+    #   @return [Array<Types::Purchase>]
+    #
+    # @!attribute [rw] total_hourly_price
+    #   The potential total hourly price of the reservation per hour.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_upfront_price
+    #   The potential total upfront price. This is billed immediately.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewResult AWS API Documentation
     #
     class GetHostReservationPurchasePreviewResult < Struct.new(
+      :currency_code,
       :purchase,
-      :total_upfront_price,
       :total_hourly_price,
-      :currency_code)
+      :total_upfront_price)
       include Aws::Structure
     end
 
@@ -12422,9 +12637,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the Windows instance.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12433,15 +12652,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the Windows instance.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordDataRequest AWS API Documentation
     #
     class GetPasswordDataRequest < Struct.new(
-      :dry_run,
-      :instance_id)
+      :instance_id,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -12451,20 +12666,20 @@ module Aws::EC2
     #   The ID of the Windows instance.
     #   @return [String]
     #
-    # @!attribute [rw] timestamp
-    #   The time the data was last updated.
-    #   @return [Time]
-    #
     # @!attribute [rw] password_data
     #   The password of the instance.
     #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time the data was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordDataResult AWS API Documentation
     #
     class GetPasswordDataResult < Struct.new(
       :instance_id,
-      :timestamp,
-      :password_data)
+      :password_data,
+      :timestamp)
       include Aws::Structure
     end
 
@@ -12478,8 +12693,8 @@ module Aws::EC2
     #         reserved_instance_ids: ["String"], # required
     #         target_configurations: [
     #           {
-    #             offering_id: "String", # required
     #             instance_count: 1,
+    #             offering_id: "String", # required
     #           },
     #         ],
     #       }
@@ -12511,38 +12726,38 @@ module Aws::EC2
 
     # Contains the output of GetReservedInstancesExchangeQuote.
     #
+    # @!attribute [rw] currency_code
+    #   The currency of the transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_valid_exchange
+    #   If `true`, the exchange is valid. If `false`, the exchange cannot be
+    #   completed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_reserved_instances_will_expire_at
+    #   The new end date of the reservation term.
+    #   @return [Time]
+    #
+    # @!attribute [rw] payment_due
+    #   The total true upfront charge for the exchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instance_value_rollup
+    #   The cost associated with the Reserved Instance.
+    #   @return [Types::ReservationValue]
+    #
     # @!attribute [rw] reserved_instance_value_set
     #   The configuration of your Convertible Reserved Instances.
     #   @return [Array<Types::ReservedInstanceReservationValue>]
     #
-    # @!attribute [rw] reserved_instance_value_rollup
+    # @!attribute [rw] target_configuration_value_rollup
     #   The cost associated with the Reserved Instance.
     #   @return [Types::ReservationValue]
     #
     # @!attribute [rw] target_configuration_value_set
     #   The values of the target Convertible Reserved Instances.
     #   @return [Array<Types::TargetReservationValue>]
-    #
-    # @!attribute [rw] target_configuration_value_rollup
-    #   The cost associated with the Reserved Instance.
-    #   @return [Types::ReservationValue]
-    #
-    # @!attribute [rw] payment_due
-    #   The total true upfront charge for the exchange.
-    #   @return [String]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency of the transaction.
-    #   @return [String]
-    #
-    # @!attribute [rw] output_reserved_instances_will_expire_at
-    #   The new end date of the reservation term.
-    #   @return [Time]
-    #
-    # @!attribute [rw] is_valid_exchange
-    #   If `true`, the exchange is valid. If `false`, the exchange cannot be
-    #   completed.
-    #   @return [Boolean]
     #
     # @!attribute [rw] validation_failure_reason
     #   Describes the reason why the exchange cannot be completed.
@@ -12551,14 +12766,14 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteResult AWS API Documentation
     #
     class GetReservedInstancesExchangeQuoteResult < Struct.new(
-      :reserved_instance_value_set,
-      :reserved_instance_value_rollup,
-      :target_configuration_value_set,
-      :target_configuration_value_rollup,
-      :payment_due,
       :currency_code,
-      :output_reserved_instances_will_expire_at,
       :is_valid_exchange,
+      :output_reserved_instances_will_expire_at,
+      :payment_due,
+      :reserved_instance_value_rollup,
+      :reserved_instance_value_set,
+      :target_configuration_value_rollup,
+      :target_configuration_value_set,
       :validation_failure_reason)
       include Aws::Structure
     end
@@ -12591,10 +12806,9 @@ module Aws::EC2
 
     # Describes an event in the history of the Spot fleet request.
     #
-    # @!attribute [rw] timestamp
-    #   The date and time of the event, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
-    #   @return [Time]
+    # @!attribute [rw] event_information
+    #   Information about the event.
+    #   @return [Types::EventInformation]
     #
     # @!attribute [rw] event_type
     #   The event type.
@@ -12608,34 +12822,34 @@ module Aws::EC2
     #     terminated.
     #   @return [String]
     #
-    # @!attribute [rw] event_information
-    #   Information about the event.
-    #   @return [Types::EventInformation]
+    # @!attribute [rw] timestamp
+    #   The date and time of the event, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecord AWS API Documentation
     #
     class HistoryRecord < Struct.new(
-      :timestamp,
+      :event_information,
       :event_type,
-      :event_information)
+      :timestamp)
       include Aws::Structure
     end
 
     # Describes the properties of the Dedicated Host.
     #
-    # @!attribute [rw] host_id
-    #   The ID of the Dedicated Host.
-    #   @return [String]
-    #
     # @!attribute [rw] auto_placement
     #   Whether auto-placement is on or off.
     #   @return [String]
     #
-    # @!attribute [rw] host_reservation_id
-    #   The reservation ID of the Dedicated Host. This returns a `null`
-    #   response if the Dedicated Host doesn't have an associated
-    #   reservation.
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Dedicated Host.
     #   @return [String]
+    #
+    # @!attribute [rw] available_capacity
+    #   The number of new instances that can be launched onto the Dedicated
+    #   Host.
+    #   @return [Types::AvailableCapacity]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
@@ -12647,16 +12861,18 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host.
+    #   @return [String]
+    #
     # @!attribute [rw] host_properties
     #   The hardware specifications of the Dedicated Host.
     #   @return [Types::HostProperties]
     #
-    # @!attribute [rw] state
-    #   The Dedicated Host's state.
-    #   @return [String]
-    #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone of the Dedicated Host.
+    # @!attribute [rw] host_reservation_id
+    #   The reservation ID of the Dedicated Host. This returns a `null`
+    #   response if the Dedicated Host doesn't have an associated
+    #   reservation.
     #   @return [String]
     #
     # @!attribute [rw] instances
@@ -12664,23 +12880,22 @@ module Aws::EC2
     #   Dedicated Host.
     #   @return [Array<Types::HostInstance>]
     #
-    # @!attribute [rw] available_capacity
-    #   The number of new instances that can be launched onto the Dedicated
-    #   Host.
-    #   @return [Types::AvailableCapacity]
+    # @!attribute [rw] state
+    #   The Dedicated Host's state.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
-      :host_id,
       :auto_placement,
-      :host_reservation_id,
-      :client_token,
-      :host_properties,
-      :state,
       :availability_zone,
+      :available_capacity,
+      :client_token,
+      :host_id,
+      :host_properties,
+      :host_reservation_id,
       :instances,
-      :available_capacity)
+      :state)
       include Aws::Structure
     end
 
@@ -12705,12 +12920,24 @@ module Aws::EC2
 
     # Details about the Dedicated Host Reservation offering.
     #
-    # @!attribute [rw] offering_id
-    #   The ID of the offering.
+    # @!attribute [rw] currency_code
+    #   The currency of the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the offering (in seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hourly_price
+    #   The hourly price of the offering.
     #   @return [String]
     #
     # @!attribute [rw] instance_family
     #   The instance family of the offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   The ID of the offering.
     #   @return [String]
     #
     # @!attribute [rw] payment_option
@@ -12722,43 +12949,23 @@ module Aws::EC2
     #   offerings.
     #   @return [String]
     #
-    # @!attribute [rw] hourly_price
-    #   The hourly price of the offering.
-    #   @return [String]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency of the offering.
-    #   @return [String]
-    #
-    # @!attribute [rw] duration
-    #   The duration of the offering (in seconds).
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostOffering AWS API Documentation
     #
     class HostOffering < Struct.new(
-      :offering_id,
-      :instance_family,
-      :payment_option,
-      :upfront_price,
-      :hourly_price,
       :currency_code,
-      :duration)
+      :duration,
+      :hourly_price,
+      :instance_family,
+      :offering_id,
+      :payment_option,
+      :upfront_price)
       include Aws::Structure
     end
 
     # Describes properties of a Dedicated Host.
     #
-    # @!attribute [rw] sockets
-    #   The number of sockets on the Dedicated Host.
-    #   @return [Integer]
-    #
     # @!attribute [rw] cores
     #   The number of cores on the Dedicated Host.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] total_v_cpus
-    #   The number of vCPUs on the Dedicated Host.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type
@@ -12766,59 +12973,35 @@ module Aws::EC2
     #   example, `m3.medium`).
     #   @return [String]
     #
+    # @!attribute [rw] sockets
+    #   The number of sockets on the Dedicated Host.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_v_cpus
+    #   The number of vCPUs on the Dedicated Host.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostProperties AWS API Documentation
     #
     class HostProperties < Struct.new(
-      :sockets,
       :cores,
-      :total_v_cpus,
-      :instance_type)
+      :instance_type,
+      :sockets,
+      :total_v_cpus)
       include Aws::Structure
     end
 
     # Details about the Dedicated Host Reservation and associated Dedicated
     # Hosts.
     #
-    # @!attribute [rw] host_reservation_id
-    #   The ID of the reservation that specifies the associated Dedicated
-    #   Hosts.
-    #   @return [String]
-    #
-    # @!attribute [rw] host_id_set
-    #   The IDs of the Dedicated Hosts associated with the reservation.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] offering_id
-    #   The ID of the reservation. This remains the same regardless of which
-    #   Dedicated Hosts are associated with it.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_family
-    #   The instance family of the Dedicated Host Reservation. The instance
-    #   family on the Dedicated Host must be the same in order for it to
-    #   benefit from the reservation.
-    #   @return [String]
-    #
-    # @!attribute [rw] payment_option
-    #   The payment option selected for this reservation.
-    #   @return [String]
-    #
-    # @!attribute [rw] hourly_price
-    #   The hourly price of the reservation.
-    #   @return [String]
-    #
-    # @!attribute [rw] upfront_price
-    #   The upfront price of the reservation.
-    #   @return [String]
+    # @!attribute [rw] count
+    #   The number of Dedicated Hosts the reservation is associated with.
+    #   @return [Integer]
     #
     # @!attribute [rw] currency_code
     #   The currency in which the `upfrontPrice` and `hourlyPrice` amounts
     #   are specified. At this time, the only supported currency is `USD`.
     #   @return [String]
-    #
-    # @!attribute [rw] count
-    #   The number of Dedicated Hosts the reservation is associated with.
-    #   @return [Integer]
     #
     # @!attribute [rw] duration
     #   The length of the reservation's term, specified in seconds. Can be
@@ -12829,6 +13012,34 @@ module Aws::EC2
     #   The date and time that the reservation ends.
     #   @return [Time]
     #
+    # @!attribute [rw] host_id_set
+    #   The IDs of the Dedicated Hosts associated with the reservation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] host_reservation_id
+    #   The ID of the reservation that specifies the associated Dedicated
+    #   Hosts.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_price
+    #   The hourly price of the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family of the Dedicated Host Reservation. The instance
+    #   family on the Dedicated Host must be the same in order for it to
+    #   benefit from the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   The ID of the reservation. This remains the same regardless of which
+    #   Dedicated Hosts are associated with it.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option selected for this reservation.
+    #   @return [String]
+    #
     # @!attribute [rw] start
     #   The date and time that the reservation started.
     #   @return [Time]
@@ -12837,22 +13048,26 @@ module Aws::EC2
     #   The state of the reservation.
     #   @return [String]
     #
+    # @!attribute [rw] upfront_price
+    #   The upfront price of the reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostReservation AWS API Documentation
     #
     class HostReservation < Struct.new(
-      :host_reservation_id,
-      :host_id_set,
-      :offering_id,
-      :instance_family,
-      :payment_option,
-      :hourly_price,
-      :upfront_price,
-      :currency_code,
       :count,
+      :currency_code,
       :duration,
       :end,
+      :host_id_set,
+      :host_reservation_id,
+      :hourly_price,
+      :instance_family,
+      :offering_id,
+      :payment_option,
       :start,
-      :state)
+      :state,
+      :upfront_price)
       include Aws::Structure
     end
 
@@ -12940,28 +13155,34 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         type: 1,
     #         code: 1,
+    #         type: 1,
     #       }
-    #
-    # @!attribute [rw] type
-    #   The ICMP type. A value of -1 means all types.
-    #   @return [Integer]
     #
     # @!attribute [rw] code
     #   The ICMP code. A value of -1 means all codes for the specified ICMP
     #   type.
     #   @return [Integer]
     #
+    # @!attribute [rw] type
+    #   The ICMP type. A value of -1 means all types.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IcmpTypeCode AWS API Documentation
     #
     class IcmpTypeCode < Struct.new(
-      :type,
-      :code)
+      :code,
+      :type)
       include Aws::Structure
     end
 
     # Describes the ID format for a resource.
+    #
+    # @!attribute [rw] deadline
+    #   The date in UTC at which you are permanently switched over to using
+    #   longer IDs. If a deadline is not yet available for this resource
+    #   type, this field is not returned.
+    #   @return [Time]
     #
     # @!attribute [rw] resource
     #   The type of resource.
@@ -12972,22 +13193,24 @@ module Aws::EC2
     #   resource.
     #   @return [Boolean]
     #
-    # @!attribute [rw] deadline
-    #   The date in UTC at which you are permanently switched over to using
-    #   longer IDs. If a deadline is not yet available for this resource
-    #   type, this field is not returned.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IdFormat AWS API Documentation
     #
     class IdFormat < Struct.new(
+      :deadline,
       :resource,
-      :use_long_ids,
-      :deadline)
+      :use_long_ids)
       include Aws::Structure
     end
 
     # Describes an image.
+    #
+    # @!attribute [rw] architecture
+    #   The architecture of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time the image was created.
+    #   @return [String]
     #
     # @!attribute [rw] image_id
     #   The ID of the AMI.
@@ -12997,17 +13220,8 @@ module Aws::EC2
     #   The location of the AMI.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   The current state of the AMI. If the state is `available`, the image
-    #   is successfully registered and can be used to launch an instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] owner_id
-    #   The AWS account ID of the image owner.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_date
-    #   The date and time the image was created.
+    # @!attribute [rw] image_type
+    #   The type of image.
     #   @return [String]
     #
     # @!attribute [rw] public
@@ -13016,44 +13230,48 @@ module Aws::EC2
     #   it has only implicit and explicit launch permissions.
     #   @return [Boolean]
     #
-    # @!attribute [rw] product_codes
-    #   Any product codes associated with the AMI.
-    #   @return [Array<Types::ProductCode>]
-    #
-    # @!attribute [rw] architecture
-    #   The architecture of the image.
-    #   @return [String]
-    #
-    # @!attribute [rw] image_type
-    #   The type of image.
-    #   @return [String]
-    #
     # @!attribute [rw] kernel_id
     #   The kernel associated with the image, if any. Only applicable for
     #   machine images.
     #   @return [String]
     #
-    # @!attribute [rw] ramdisk_id
-    #   The RAM disk associated with the image, if any. Only applicable for
-    #   machine images.
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the image owner.
     #   @return [String]
     #
     # @!attribute [rw] platform
     #   The value is `Windows` for Windows AMIs; otherwise blank.
     #   @return [String]
     #
-    # @!attribute [rw] sriov_net_support
-    #   Specifies whether enhanced networking with the Intel 82599 Virtual
-    #   Function interface is enabled.
+    # @!attribute [rw] product_codes
+    #   Any product codes associated with the AMI.
+    #   @return [Array<Types::ProductCode>]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The RAM disk associated with the image, if any. Only applicable for
+    #   machine images.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the AMI. If the state is `available`, the image
+    #   is successfully registered and can be used to launch an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   Any block device mapping entries.
+    #   @return [Array<Types::BlockDeviceMapping>]
+    #
+    # @!attribute [rw] description
+    #   The description of the AMI that was provided during image creation.
     #   @return [String]
     #
     # @!attribute [rw] ena_support
     #   Specifies whether enhanced networking with ENA is enabled.
     #   @return [Boolean]
     #
-    # @!attribute [rw] state_reason
-    #   The reason for the state change.
-    #   @return [Types::StateReason]
+    # @!attribute [rw] hypervisor
+    #   The hypervisor type of the image.
+    #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
     #   The AWS account alias (for example, `amazon`, `self`) or the AWS
@@ -13064,8 +13282,9 @@ module Aws::EC2
     #   The name of the AMI that was provided during image creation.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The description of the AMI that was provided during image creation.
+    # @!attribute [rw] root_device_name
+    #   The device name of the root device (for example, `/dev/sda1` or
+    #   `/dev/xvda`).
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -13073,58 +13292,58 @@ module Aws::EC2
     #   volume or an instance store volume.
     #   @return [String]
     #
-    # @!attribute [rw] root_device_name
-    #   The device name of the root device (for example, `/dev/sda1` or
-    #   `/dev/xvda`).
+    # @!attribute [rw] sriov_net_support
+    #   Specifies whether enhanced networking with the Intel 82599 Virtual
+    #   Function interface is enabled.
     #   @return [String]
     #
-    # @!attribute [rw] block_device_mappings
-    #   Any block device mapping entries.
-    #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] virtualization_type
-    #   The type of virtualization of the AMI.
-    #   @return [String]
+    # @!attribute [rw] state_reason
+    #   The reason for the state change.
+    #   @return [Types::StateReason]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the image.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] hypervisor
-    #   The hypervisor type of the image.
+    # @!attribute [rw] virtualization_type
+    #   The type of virtualization of the AMI.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
+      :architecture,
+      :creation_date,
       :image_id,
       :image_location,
-      :state,
-      :owner_id,
-      :creation_date,
-      :public,
-      :product_codes,
-      :architecture,
       :image_type,
+      :public,
       :kernel_id,
-      :ramdisk_id,
+      :owner_id,
       :platform,
-      :sriov_net_support,
+      :product_codes,
+      :ramdisk_id,
+      :state,
+      :block_device_mappings,
+      :description,
       :ena_support,
-      :state_reason,
+      :hypervisor,
       :image_owner_alias,
       :name,
-      :description,
-      :root_device_type,
       :root_device_name,
-      :block_device_mappings,
-      :virtualization_type,
+      :root_device_type,
+      :sriov_net_support,
+      :state_reason,
       :tags,
-      :hypervisor)
+      :virtualization_type)
       include Aws::Structure
     end
 
     # Describes an image attribute.
+    #
+    # @!attribute [rw] block_device_mappings
+    #   One or more block device mapping entries.
+    #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
     #   The ID of the AMI.
@@ -13138,6 +13357,10 @@ module Aws::EC2
     #   One or more product codes.
     #   @return [Array<Types::ProductCode>]
     #
+    # @!attribute [rw] description
+    #   A description for the AMI.
+    #   @return [Types::AttributeValue]
+    #
     # @!attribute [rw] kernel_id
     #   The kernel ID.
     #   @return [Types::AttributeValue]
@@ -13146,30 +13369,22 @@ module Aws::EC2
     #   The RAM disk ID.
     #   @return [Types::AttributeValue]
     #
-    # @!attribute [rw] description
-    #   A description for the AMI.
-    #   @return [Types::AttributeValue]
-    #
     # @!attribute [rw] sriov_net_support
     #   Indicates whether enhanced networking with the Intel 82599 Virtual
     #   Function interface is enabled.
     #   @return [Types::AttributeValue]
     #
-    # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
-    #   @return [Array<Types::BlockDeviceMapping>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
     #
     class ImageAttribute < Struct.new(
+      :block_device_mappings,
       :image_id,
       :launch_permissions,
       :product_codes,
+      :description,
       :kernel_id,
       :ramdisk_id,
-      :description,
-      :sriov_net_support,
-      :block_device_mappings)
+      :sriov_net_support)
       include Aws::Structure
     end
 
@@ -13180,24 +13395,32 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
+    #         device_name: "String",
     #         format: "String",
+    #         snapshot_id: "String",
     #         url: "String",
     #         user_bucket: {
     #           s3_bucket: "String",
     #           s3_key: "String",
     #         },
-    #         device_name: "String",
-    #         snapshot_id: "String",
     #       }
     #
     # @!attribute [rw] description
     #   The description of the disk image.
     #   @return [String]
     #
+    # @!attribute [rw] device_name
+    #   The block device mapping for the disk.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
     #   Valid values: `RAW` \| `VHD` \| `VMDK` \| `OVA`
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the EBS snapshot to be used for importing the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -13209,23 +13432,15 @@ module Aws::EC2
     #   The S3 bucket for the disk image.
     #   @return [Types::UserBucket]
     #
-    # @!attribute [rw] device_name
-    #   The block device mapping for the disk.
-    #   @return [String]
-    #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the EBS snapshot to be used for importing the snapshot.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageDiskContainer AWS API Documentation
     #
     class ImageDiskContainer < Struct.new(
       :description,
-      :format,
-      :url,
-      :user_bucket,
       :device_name,
-      :snapshot_id)
+      :format,
+      :snapshot_id,
+      :url,
+      :user_bucket)
       include Aws::Structure
     end
 
@@ -13235,41 +13450,48 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
+    #         architecture: "String",
+    #         client_data: {
+    #           comment: "String",
+    #           upload_end: Time.now,
+    #           upload_size: 1.0,
+    #           upload_start: Time.now,
+    #         },
+    #         client_token: "String",
     #         description: "String",
     #         disk_containers: [
     #           {
     #             description: "String",
+    #             device_name: "String",
     #             format: "String",
+    #             snapshot_id: "String",
     #             url: "String",
     #             user_bucket: {
     #               s3_bucket: "String",
     #               s3_key: "String",
     #             },
-    #             device_name: "String",
-    #             snapshot_id: "String",
     #           },
     #         ],
-    #         license_type: "String",
+    #         dry_run: false,
     #         hypervisor: "String",
-    #         architecture: "String",
+    #         license_type: "String",
     #         platform: "String",
-    #         client_data: {
-    #           upload_start: Time.now,
-    #           upload_end: Time.now,
-    #           upload_size: 1.0,
-    #           comment: "String",
-    #         },
-    #         client_token: "String",
     #         role_name: "String",
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] architecture
+    #   The architecture of the virtual machine.
+    #
+    #   Valid values: `i386` \| `x86_64`
+    #   @return [String]
+    #
+    # @!attribute [rw] client_data
+    #   The client-specific data.
+    #   @return [Types::ClientData]
+    #
+    # @!attribute [rw] client_token
+    #   The token to enable idempotency for VM import requests.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   A description string for the import image task.
@@ -13278,6 +13500,19 @@ module Aws::EC2
     # @!attribute [rw] disk_containers
     #   Information about the disk containers.
     #   @return [Array<Types::ImageDiskContainer>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] hypervisor
+    #   The target hypervisor platform.
+    #
+    #   Valid values: `xen`
+    #   @return [String]
     #
     # @!attribute [rw] license_type
     #   The license type to be used for the Amazon Machine Image (AMI) after
@@ -13295,30 +13530,10 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
     #   @return [String]
     #
-    # @!attribute [rw] hypervisor
-    #   The target hypervisor platform.
-    #
-    #   Valid values: `xen`
-    #   @return [String]
-    #
-    # @!attribute [rw] architecture
-    #   The architecture of the virtual machine.
-    #
-    #   Valid values: `i386` \| `x86_64`
-    #   @return [String]
-    #
     # @!attribute [rw] platform
     #   The operating system of the virtual machine.
     #
     #   Valid values: `Windows` \| `Linux`
-    #   @return [String]
-    #
-    # @!attribute [rw] client_data
-    #   The client-specific data.
-    #   @return [Types::ClientData]
-    #
-    # @!attribute [rw] client_token
-    #   The token to enable idempotency for VM import requests.
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -13329,27 +13544,39 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
     #
     class ImportImageRequest < Struct.new(
-      :dry_run,
-      :description,
-      :disk_containers,
-      :license_type,
-      :hypervisor,
       :architecture,
-      :platform,
       :client_data,
       :client_token,
+      :description,
+      :disk_containers,
+      :dry_run,
+      :hypervisor,
+      :license_type,
+      :platform,
       :role_name)
       include Aws::Structure
     end
 
     # Contains the output for ImportImage.
     #
-    # @!attribute [rw] import_task_id
-    #   The task ID of the import image task.
-    #   @return [String]
-    #
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypervisor
+    #   The target hypervisor of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) created by the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_task_id
+    #   The task ID of the import image task.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -13360,61 +13587,64 @@ module Aws::EC2
     #   The operating system of the virtual machine.
     #   @return [String]
     #
-    # @!attribute [rw] hypervisor
-    #   The target hypervisor of the import task.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description of the import task.
+    # @!attribute [rw] progress
+    #   The progress of the task.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_details
     #   Information about the snapshots.
     #   @return [Array<Types::SnapshotDetail>]
     #
-    # @!attribute [rw] image_id
-    #   The ID of the Amazon Machine Image (AMI) created by the import task.
-    #   @return [String]
-    #
-    # @!attribute [rw] progress
-    #   The progress of the task.
+    # @!attribute [rw] status
+    #   A brief status of the task.
     #   @return [String]
     #
     # @!attribute [rw] status_message
     #   A detailed status message of the import task.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   A brief status of the task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
     #
     class ImportImageResult < Struct.new(
-      :import_task_id,
       :architecture,
+      :description,
+      :hypervisor,
+      :image_id,
+      :import_task_id,
       :license_type,
       :platform,
-      :hypervisor,
-      :description,
-      :snapshot_details,
-      :image_id,
       :progress,
-      :status_message,
-      :status)
+      :snapshot_details,
+      :status,
+      :status_message)
       include Aws::Structure
     end
 
     # Describes an import image task.
     #
-    # @!attribute [rw] import_task_id
-    #   The ID of the import image task.
-    #   @return [String]
-    #
     # @!attribute [rw] architecture
     #   The architecture of the virtual machine.
     #
     #   Valid values: `i386` \| `x86_64`
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] hypervisor
+    #   The target hypervisor for the import task.
+    #
+    #   Valid values: `xen`
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) of the imported virtual
+    #   machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_task_id
+    #   The ID of the import image task.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -13425,51 +13655,36 @@ module Aws::EC2
     #   The description string for the import image task.
     #   @return [String]
     #
-    # @!attribute [rw] hypervisor
-    #   The target hypervisor for the import task.
-    #
-    #   Valid values: `xen`
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description of the import task.
+    # @!attribute [rw] progress
+    #   The percentage of progress of the import image task.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_details
     #   Information about the snapshots.
     #   @return [Array<Types::SnapshotDetail>]
     #
-    # @!attribute [rw] image_id
-    #   The ID of the Amazon Machine Image (AMI) of the imported virtual
-    #   machine.
-    #   @return [String]
-    #
-    # @!attribute [rw] progress
-    #   The percentage of progress of the import image task.
+    # @!attribute [rw] status
+    #   A brief status for the import image task.
     #   @return [String]
     #
     # @!attribute [rw] status_message
     #   A descriptive status message for the import image task.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   A brief status for the import image task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask AWS API Documentation
     #
     class ImportImageTask < Struct.new(
-      :import_task_id,
       :architecture,
+      :description,
+      :hypervisor,
+      :image_id,
+      :import_task_id,
       :license_type,
       :platform,
-      :hypervisor,
-      :description,
-      :snapshot_details,
-      :image_id,
       :progress,
-      :status_message,
-      :status)
+      :snapshot_details,
+      :status,
+      :status_message)
       include Aws::Structure
     end
 
@@ -13479,49 +13694,49 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         architecture: "i386", # accepts i386, x86_64
-    #         group_names: ["String"],
-    #         group_ids: ["String"],
     #         additional_info: "String",
+    #         architecture: "i386", # accepts i386, x86_64
+    #         group_ids: ["String"],
+    #         group_names: ["String"],
+    #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         monitoring: false,
+    #         placement: {
+    #           availability_zone: "String",
+    #           affinity: "String",
+    #           group_name: "String",
+    #           host_id: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
+    #           spread_domain: "String",
+    #         },
+    #         private_ip_address: "String",
+    #         subnet_id: "String",
     #         user_data: {
     #           data: "String",
     #         },
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #         placement: {
-    #           availability_zone: "String",
-    #           group_name: "String",
-    #           tenancy: "default", # accepts default, dedicated, host
-    #           host_id: "String",
-    #           affinity: "String",
-    #         },
-    #         monitoring: false,
-    #         subnet_id: "String",
-    #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         private_ip_address: "String",
     #       }
-    #
-    # @!attribute [rw] architecture
-    #   The architecture of the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] group_names
-    #   One or more security group names.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] group_ids
-    #   One or more security group IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] additional_info
     #   Reserved.
     #   @return [String]
     #
-    # @!attribute [rw] user_data
-    #   The user data to make available to the instance. If you are using an
-    #   AWS SDK or command line tool, Base64-encoding is performed for you,
-    #   and you can load the text from a file. Otherwise, you must provide
-    #   Base64-encoded text.
-    #   @return [Types::UserData]
+    # @!attribute [rw] architecture
+    #   The architecture of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_ids
+    #   One or more security group IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_names
+    #   One or more security group names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #   @return [String]
     #
     # @!attribute [rw] instance_type
     #   The instance type. For more information about the instance types
@@ -13533,43 +13748,44 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types
     #   @return [String]
     #
-    # @!attribute [rw] placement
-    #   The placement information for the instance.
-    #   @return [Types::Placement]
-    #
     # @!attribute [rw] monitoring
     #   Indicates whether monitoring is enabled.
     #   @return [Boolean]
     #
-    # @!attribute [rw] subnet_id
-    #   \[EC2-VPC\] The ID of the subnet in which to launch the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #   @return [String]
+    # @!attribute [rw] placement
+    #   The placement information for the instance.
+    #   @return [Types::Placement]
     #
     # @!attribute [rw] private_ip_address
     #   \[EC2-VPC\] An available IP address from the IP address range of the
     #   subnet.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   \[EC2-VPC\] The ID of the subnet in which to launch the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instance. If you are using an
+    #   AWS SDK or command line tool, Base64-encoding is performed for you,
+    #   and you can load the text from a file. Otherwise, you must provide
+    #   Base64-encoded text.
+    #   @return [Types::UserData]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceLaunchSpecification AWS API Documentation
     #
     class ImportInstanceLaunchSpecification < Struct.new(
-      :architecture,
-      :group_names,
-      :group_ids,
       :additional_info,
-      :user_data,
-      :instance_type,
-      :placement,
-      :monitoring,
-      :subnet_id,
+      :architecture,
+      :group_ids,
+      :group_names,
       :instance_initiated_shutdown_behavior,
-      :private_ip_address)
+      :instance_type,
+      :monitoring,
+      :placement,
+      :private_ip_address,
+      :subnet_id,
+      :user_data)
       include Aws::Structure
     end
 
@@ -13579,44 +13795,53 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         description: "String",
-    #         launch_specification: {
-    #           architecture: "i386", # accepts i386, x86_64
-    #           group_names: ["String"],
-    #           group_ids: ["String"],
-    #           additional_info: "String",
-    #           user_data: {
-    #             data: "String",
-    #           },
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #           placement: {
-    #             availability_zone: "String",
-    #             group_name: "String",
-    #             tenancy: "default", # accepts default, dedicated, host
-    #             host_id: "String",
-    #             affinity: "String",
-    #           },
-    #           monitoring: false,
-    #           subnet_id: "String",
-    #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           private_ip_address: "String",
-    #         },
     #         disk_images: [
     #           {
+    #             description: "String",
     #             image: {
-    #               format: "VMDK", # required, accepts VMDK, RAW, VHD
     #               bytes: 1, # required
+    #               format: "VMDK", # required, accepts VMDK, RAW, VHD
     #               import_manifest_url: "String", # required
     #             },
-    #             description: "String",
     #             volume: {
     #               size: 1, # required
     #             },
     #           },
     #         ],
+    #         dry_run: false,
+    #         launch_specification: {
+    #           additional_info: "String",
+    #           architecture: "i386", # accepts i386, x86_64
+    #           group_ids: ["String"],
+    #           group_names: ["String"],
+    #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           monitoring: false,
+    #           placement: {
+    #             availability_zone: "String",
+    #             affinity: "String",
+    #             group_name: "String",
+    #             host_id: "String",
+    #             tenancy: "default", # accepts default, dedicated, host
+    #             spread_domain: "String",
+    #           },
+    #           private_ip_address: "String",
+    #           subnet_id: "String",
+    #           user_data: {
+    #             data: "String",
+    #           },
+    #         },
     #         platform: "Windows", # required, accepts Windows
     #       }
+    #
+    # @!attribute [rw] description
+    #   A description for the instance being imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_images
+    #   The disk image.
+    #   @return [Array<Types::DiskImage>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13625,17 +13850,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] description
-    #   A description for the instance being imported.
-    #   @return [String]
-    #
     # @!attribute [rw] launch_specification
     #   The launch specification.
     #   @return [Types::ImportInstanceLaunchSpecification]
-    #
-    # @!attribute [rw] disk_images
-    #   The disk image.
-    #   @return [Array<Types::DiskImage>]
     #
     # @!attribute [rw] platform
     #   The instance operating system.
@@ -13644,10 +13861,10 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceRequest AWS API Documentation
     #
     class ImportInstanceRequest < Struct.new(
-      :dry_run,
       :description,
-      :launch_specification,
       :disk_images,
+      :dry_run,
+      :launch_specification,
       :platform)
       include Aws::Structure
     end
@@ -13667,9 +13884,9 @@ module Aws::EC2
 
     # Describes an import instance task.
     #
-    # @!attribute [rw] volumes
-    #   One or more volumes.
-    #   @return [Array<Types::ImportInstanceVolumeDetailItem>]
+    # @!attribute [rw] description
+    #   A description of the task.
+    #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -13679,37 +13896,37 @@ module Aws::EC2
     #   The instance operating system.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description of the task.
-    #   @return [String]
+    # @!attribute [rw] volumes
+    #   One or more volumes.
+    #   @return [Array<Types::ImportInstanceVolumeDetailItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceTaskDetails AWS API Documentation
     #
     class ImportInstanceTaskDetails < Struct.new(
-      :volumes,
+      :description,
       :instance_id,
       :platform,
-      :description)
+      :volumes)
       include Aws::Structure
     end
 
     # Describes an import volume task.
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the resulting instance will reside.
+    #   @return [String]
+    #
     # @!attribute [rw] bytes_converted
     #   The number of bytes converted so far.
     #   @return [Integer]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone where the resulting instance will reside.
+    # @!attribute [rw] description
+    #   A description of the task.
     #   @return [String]
     #
     # @!attribute [rw] image
     #   The image.
     #   @return [Types::DiskImageDescription]
-    #
-    # @!attribute [rw] volume
-    #   The volume.
-    #   @return [Types::DiskImageVolumeDescription]
     #
     # @!attribute [rw] status
     #   The status of the import of this particular disk image.
@@ -13719,20 +13936,20 @@ module Aws::EC2
     #   The status information or errors related to the disk image.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description of the task.
-    #   @return [String]
+    # @!attribute [rw] volume
+    #   The volume.
+    #   @return [Types::DiskImageVolumeDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceVolumeDetailItem AWS API Documentation
     #
     class ImportInstanceVolumeDetailItem < Struct.new(
-      :bytes_converted,
       :availability_zone,
+      :bytes_converted,
+      :description,
       :image,
-      :volume,
       :status,
       :status_message,
-      :description)
+      :volume)
       include Aws::Structure
     end
 
@@ -13774,20 +13991,20 @@ module Aws::EC2
 
     # Contains the output of ImportKeyPair.
     #
-    # @!attribute [rw] key_name
-    #   The key pair name you provided.
-    #   @return [String]
-    #
     # @!attribute [rw] key_fingerprint
     #   The MD5 public key fingerprint as specified in section 4 of RFC
     #   4716.
     #   @return [String]
     #
+    # @!attribute [rw] key_name
+    #   The key pair name you provided.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairResult AWS API Documentation
     #
     class ImportKeyPairResult < Struct.new(
-      :key_name,
-      :key_fingerprint)
+      :key_fingerprint,
+      :key_name)
       include Aws::Structure
     end
 
@@ -13797,7 +14014,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
+    #         client_data: {
+    #           comment: "String",
+    #           upload_end: Time.now,
+    #           upload_size: 1.0,
+    #           upload_start: Time.now,
+    #         },
+    #         client_token: "String",
     #         description: "String",
     #         disk_container: {
     #           description: "String",
@@ -13808,30 +14031,9 @@ module Aws::EC2
     #             s3_key: "String",
     #           },
     #         },
-    #         client_data: {
-    #           upload_start: Time.now,
-    #           upload_end: Time.now,
-    #           upload_size: 1.0,
-    #           comment: "String",
-    #         },
-    #         client_token: "String",
+    #         dry_run: false,
     #         role_name: "String",
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] description
-    #   The description string for the import snapshot task.
-    #   @return [String]
-    #
-    # @!attribute [rw] disk_container
-    #   Information about the disk container.
-    #   @return [Types::SnapshotDiskContainer]
     #
     # @!attribute [rw] client_data
     #   The client-specific data.
@@ -13841,6 +14043,21 @@ module Aws::EC2
     #   Token to enable idempotency for VM import requests.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The description string for the import snapshot task.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_container
+    #   Information about the disk container.
+    #   @return [Types::SnapshotDiskContainer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] role_name
     #   The name of the role to use when not using the default role,
     #   'vmimport'.
@@ -13849,16 +14066,20 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest AWS API Documentation
     #
     class ImportSnapshotRequest < Struct.new(
-      :dry_run,
-      :description,
-      :disk_container,
       :client_data,
       :client_token,
+      :description,
+      :disk_container,
+      :dry_run,
       :role_name)
       include Aws::Structure
     end
 
     # Contains the output for ImportSnapshot.
+    #
+    # @!attribute [rw] description
+    #   A description of the import snapshot task.
+    #   @return [String]
     #
     # @!attribute [rw] import_task_id
     #   The ID of the import snapshot task.
@@ -13868,20 +14089,20 @@ module Aws::EC2
     #   Information about the import snapshot task.
     #   @return [Types::SnapshotTaskDetail]
     #
-    # @!attribute [rw] description
-    #   A description of the import snapshot task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult AWS API Documentation
     #
     class ImportSnapshotResult < Struct.new(
+      :description,
       :import_task_id,
-      :snapshot_task_detail,
-      :description)
+      :snapshot_task_detail)
       include Aws::Structure
     end
 
     # Describes an import snapshot task.
+    #
+    # @!attribute [rw] description
+    #   A description of the import snapshot task.
+    #   @return [String]
     #
     # @!attribute [rw] import_task_id
     #   The ID of the import snapshot task.
@@ -13891,16 +14112,12 @@ module Aws::EC2
     #   Describes an import snapshot task.
     #   @return [Types::SnapshotTaskDetail]
     #
-    # @!attribute [rw] description
-    #   A description of the import snapshot task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotTask AWS API Documentation
     #
     class ImportSnapshotTask < Struct.new(
+      :description,
       :import_task_id,
-      :snapshot_task_detail,
-      :description)
+      :snapshot_task_detail)
       include Aws::Structure
     end
 
@@ -13910,18 +14127,26 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         availability_zone: "String", # required
+    #         description: "String",
+    #         dry_run: false,
     #         image: { # required
-    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
     #           bytes: 1, # required
+    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
     #           import_manifest_url: "String", # required
     #         },
-    #         description: "String",
     #         volume: { # required
     #           size: 1, # required
     #         },
     #       }
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the resulting EBS volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13930,17 +14155,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone for the resulting EBS volume.
-    #   @return [String]
-    #
     # @!attribute [rw] image
     #   The disk image.
     #   @return [Types::DiskImageDetail]
-    #
-    # @!attribute [rw] description
-    #   A description of the volume.
-    #   @return [String]
     #
     # @!attribute [rw] volume
     #   The volume size.
@@ -13949,10 +14166,10 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeRequest AWS API Documentation
     #
     class ImportVolumeRequest < Struct.new(
-      :dry_run,
       :availability_zone,
-      :image,
       :description,
+      :dry_run,
+      :image,
       :volume)
       include Aws::Structure
     end
@@ -13972,13 +14189,13 @@ module Aws::EC2
 
     # Describes an import volume task.
     #
-    # @!attribute [rw] bytes_converted
-    #   The number of bytes converted so far.
-    #   @return [Integer]
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone where the resulting volume will reside.
     #   @return [String]
+    #
+    # @!attribute [rw] bytes_converted
+    #   The number of bytes converted so far.
+    #   @return [Integer]
     #
     # @!attribute [rw] description
     #   The description you provided when starting the import volume task.
@@ -13995,8 +14212,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeTaskDetails AWS API Documentation
     #
     class ImportVolumeTaskDetails < Struct.new(
-      :bytes_converted,
       :availability_zone,
+      :bytes_converted,
       :description,
       :image,
       :volume)
@@ -14005,17 +14222,47 @@ module Aws::EC2
 
     # Describes an instance.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
+    # @!attribute [rw] ami_launch_index
+    #   The AMI launch index, which can be used to find this instance in the
+    #   launch group.
+    #   @return [Integer]
     #
     # @!attribute [rw] image_id
     #   The ID of the AMI used to launch the instance.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   The current state of the instance.
-    #   @return [Types::InstanceState]
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The kernel associated with this instance, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair, if this instance was launched with an
+    #   associated key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_time
+    #   The time the instance was launched.
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring for the instance.
+    #   @return [Types::Monitoring]
+    #
+    # @!attribute [rw] placement
+    #   The location where the instance launched, if applicable.
+    #   @return [Types::Placement]
+    #
+    # @!attribute [rw] platform
+    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   @return [String]
     #
     # @!attribute [rw] private_dns_name
     #   (IPv4 only) The private DNS hostname name assigned to the instance.
@@ -14030,6 +14277,14 @@ module Aws::EC2
     #   servers must resolve the hostname as appropriate.
     #   @return [String]
     #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address assigned to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_codes
+    #   The product codes attached to this instance, if applicable.
+    #   @return [Array<Types::ProductCode>]
+    #
     # @!attribute [rw] public_dns_name
     #   (IPv4 only) The public DNS name assigned to the instance. This name
     #   is not available until the instance enters the `running` state. For
@@ -14037,52 +14292,22 @@ module Aws::EC2
     #   hostnames for your VPC.
     #   @return [String]
     #
-    # @!attribute [rw] state_transition_reason
-    #   The reason for the most recent state transition. This might be an
-    #   empty string.
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair, if this instance was launched with an
-    #   associated key pair.
-    #   @return [String]
-    #
-    # @!attribute [rw] ami_launch_index
-    #   The AMI launch index, which can be used to find this instance in the
-    #   launch group.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] product_codes
-    #   The product codes attached to this instance, if applicable.
-    #   @return [Array<Types::ProductCode>]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_time
-    #   The time the instance was launched.
-    #   @return [Time]
-    #
-    # @!attribute [rw] placement
-    #   The location where the instance launched, if applicable.
-    #   @return [Types::Placement]
-    #
-    # @!attribute [rw] kernel_id
-    #   The kernel associated with this instance, if applicable.
+    # @!attribute [rw] public_ip_address
+    #   The public IPv4 address assigned to the instance, if applicable.
     #   @return [String]
     #
     # @!attribute [rw] ramdisk_id
     #   The RAM disk associated with this instance, if applicable.
     #   @return [String]
     #
-    # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances; otherwise blank.
-    #   @return [String]
+    # @!attribute [rw] state
+    #   The current state of the instance.
+    #   @return [Types::InstanceState]
     #
-    # @!attribute [rw] monitoring
-    #   The monitoring for the instance.
-    #   @return [Types::Monitoring]
+    # @!attribute [rw] state_transition_reason
+    #   The reason for the most recent state transition. This might be an
+    #   empty string.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_id
     #   \[EC2-VPC\] The ID of the subnet in which the instance is running.
@@ -14092,55 +14317,56 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the VPC in which the instance is running.
     #   @return [String]
     #
-    # @!attribute [rw] private_ip_address
-    #   The private IPv4 address assigned to the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] public_ip_address
-    #   The public IPv4 address assigned to the instance, if applicable.
-    #   @return [String]
-    #
-    # @!attribute [rw] state_reason
-    #   The reason for the most recent state transition.
-    #   @return [Types::StateReason]
-    #
     # @!attribute [rw] architecture
     #   The architecture of the image.
-    #   @return [String]
-    #
-    # @!attribute [rw] root_device_type
-    #   The root device type used by the AMI. The AMI can use an EBS volume
-    #   or an instance store volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] root_device_name
-    #   The root device name (for example, `/dev/sda1` or `/dev/xvda`).
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
     #   Any block device mapping entries for the instance.
     #   @return [Array<Types::InstanceBlockDeviceMapping>]
     #
-    # @!attribute [rw] virtualization_type
-    #   The virtualization type of the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_lifecycle
-    #   Indicates whether this is a Spot instance or a Scheduled Instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] spot_instance_request_id
-    #   If the request is a Spot instance request, the ID of the request.
-    #   @return [String]
-    #
     # @!attribute [rw] client_token
     #   The idempotency token you provided when you launched the instance,
     #   if applicable.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the instance.
-    #   @return [Array<Types::Tag>]
+    # @!attribute [rw] ebs_optimized
+    #   Indicates whether the instance is optimized for EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal I/O performance.
+    #   This optimization isn't available with all instance types.
+    #   Additional usage charges apply when using an EBS Optimized instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_support
+    #   Specifies whether enhanced networking with ENA is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] hypervisor
+    #   The hypervisor type of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile associated with the instance, if
+    #   applicable.
+    #   @return [Types::IamInstanceProfile]
+    #
+    # @!attribute [rw] instance_lifecycle
+    #   Indicates whether this is a Spot instance or a Scheduled Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   \[EC2-VPC\] One or more network interfaces for the instance.
+    #   @return [Array<Types::InstanceNetworkInterface>]
+    #
+    # @!attribute [rw] root_device_name
+    #   The root device name (for example, `/dev/sda1` or `/dev/xvda`).
+    #   @return [String]
+    #
+    # @!attribute [rw] root_device_type
+    #   The root device type used by the AMI. The AMI can use an EBS volume
+    #   or an instance store volume.
+    #   @return [String]
     #
     # @!attribute [rw] security_groups
     #   One or more security groups for the instance.
@@ -14159,85 +14385,103 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     #   @return [Boolean]
     #
-    # @!attribute [rw] hypervisor
-    #   The hypervisor type of the instance.
+    # @!attribute [rw] spot_instance_request_id
+    #   If the request is a Spot instance request, the ID of the request.
     #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   \[EC2-VPC\] One or more network interfaces for the instance.
-    #   @return [Array<Types::InstanceNetworkInterface>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile associated with the instance, if
-    #   applicable.
-    #   @return [Types::IamInstanceProfile]
-    #
-    # @!attribute [rw] ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal I/O performance.
-    #   This optimization isn't available with all instance types.
-    #   Additional usage charges apply when using an EBS Optimized instance.
-    #   @return [Boolean]
     #
     # @!attribute [rw] sriov_net_support
     #   Specifies whether enhanced networking with the Intel 82599 Virtual
     #   Function interface is enabled.
     #   @return [String]
     #
-    # @!attribute [rw] ena_support
-    #   Specifies whether enhanced networking with ENA is enabled.
-    #   @return [Boolean]
+    # @!attribute [rw] state_reason
+    #   The reason for the most recent state transition.
+    #   @return [Types::StateReason]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the instance.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] virtualization_type
+    #   The virtualization type of the instance.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
-      :instance_id,
-      :image_id,
-      :state,
-      :private_dns_name,
-      :public_dns_name,
-      :state_transition_reason,
-      :key_name,
       :ami_launch_index,
-      :product_codes,
+      :image_id,
+      :instance_id,
       :instance_type,
-      :launch_time,
-      :placement,
       :kernel_id,
-      :ramdisk_id,
-      :platform,
+      :key_name,
+      :launch_time,
       :monitoring,
+      :placement,
+      :platform,
+      :private_dns_name,
+      :private_ip_address,
+      :product_codes,
+      :public_dns_name,
+      :public_ip_address,
+      :ramdisk_id,
+      :state,
+      :state_transition_reason,
       :subnet_id,
       :vpc_id,
-      :private_ip_address,
-      :public_ip_address,
-      :state_reason,
       :architecture,
-      :root_device_type,
-      :root_device_name,
       :block_device_mappings,
-      :virtualization_type,
-      :instance_lifecycle,
-      :spot_instance_request_id,
       :client_token,
-      :tags,
+      :ebs_optimized,
+      :ena_support,
+      :hypervisor,
+      :iam_instance_profile,
+      :instance_lifecycle,
+      :network_interfaces,
+      :root_device_name,
+      :root_device_type,
       :security_groups,
       :source_dest_check,
-      :hypervisor,
-      :network_interfaces,
-      :iam_instance_profile,
-      :ebs_optimized,
+      :spot_instance_request_id,
       :sriov_net_support,
-      :ena_support)
+      :state_reason,
+      :tags,
+      :virtualization_type)
       include Aws::Structure
     end
 
     # Describes an instance attribute.
     #
+    # @!attribute [rw] groups
+    #   The security groups associated with the instance.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   The block device mapping of the instance.
+    #   @return [Array<Types::InstanceBlockDeviceMapping>]
+    #
+    # @!attribute [rw] disable_api_termination
+    #   If the value is `true`, you can't terminate the instance through
+    #   the Amazon EC2 console, CLI, or API; otherwise, you can.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] ena_support
+    #   Indicates whether enhanced networking with ENA is enabled.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Indicates whether the instance is optimized for EBS I/O.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] instance_type
     #   The instance type.
@@ -14247,50 +14491,18 @@ module Aws::EC2
     #   The kernel ID.
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] product_codes
+    #   A list of product codes.
+    #   @return [Array<Types::ProductCode>]
+    #
     # @!attribute [rw] ramdisk_id
     #   The RAM disk ID.
-    #   @return [Types::AttributeValue]
-    #
-    # @!attribute [rw] user_data
-    #   The user data.
-    #   @return [Types::AttributeValue]
-    #
-    # @!attribute [rw] disable_api_termination
-    #   If the value is `true`, you can't terminate the instance through
-    #   the Amazon EC2 console, CLI, or API; otherwise, you can.
-    #   @return [Types::AttributeBooleanValue]
-    #
-    # @!attribute [rw] instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] root_device_name
     #   The name of the root device (for example, `/dev/sda1` or
     #   `/dev/xvda`).
     #   @return [Types::AttributeValue]
-    #
-    # @!attribute [rw] block_device_mappings
-    #   The block device mapping of the instance.
-    #   @return [Array<Types::InstanceBlockDeviceMapping>]
-    #
-    # @!attribute [rw] product_codes
-    #   A list of product codes.
-    #   @return [Array<Types::ProductCode>]
-    #
-    # @!attribute [rw] ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O.
-    #   @return [Types::AttributeBooleanValue]
-    #
-    # @!attribute [rw] sriov_net_support
-    #   Indicates whether enhanced networking with the Intel 82599 Virtual
-    #   Function interface is enabled.
-    #   @return [Types::AttributeValue]
-    #
-    # @!attribute [rw] ena_support
-    #   Indicates whether enhanced networking with ENA is enabled.
-    #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] source_dest_check
     #   Indicates whether source/destination checking is enabled. A value of
@@ -14299,28 +14511,33 @@ module Aws::EC2
     #   NAT.
     #   @return [Types::AttributeBooleanValue]
     #
-    # @!attribute [rw] groups
-    #   The security groups associated with the instance.
-    #   @return [Array<Types::GroupIdentifier>]
+    # @!attribute [rw] sriov_net_support
+    #   Indicates whether enhanced networking with the Intel 82599 Virtual
+    #   Function interface is enabled.
+    #   @return [Types::AttributeValue]
+    #
+    # @!attribute [rw] user_data
+    #   The user data.
+    #   @return [Types::AttributeValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttribute AWS API Documentation
     #
     class InstanceAttribute < Struct.new(
+      :groups,
+      :block_device_mappings,
+      :disable_api_termination,
+      :ena_support,
+      :ebs_optimized,
       :instance_id,
+      :instance_initiated_shutdown_behavior,
       :instance_type,
       :kernel_id,
-      :ramdisk_id,
-      :user_data,
-      :disable_api_termination,
-      :instance_initiated_shutdown_behavior,
-      :root_device_name,
-      :block_device_mappings,
       :product_codes,
-      :ebs_optimized,
-      :sriov_net_support,
-      :ena_support,
+      :ramdisk_id,
+      :root_device_name,
       :source_dest_check,
-      :groups)
+      :sriov_net_support,
+      :user_data)
       include Aws::Structure
     end
 
@@ -14352,11 +14569,11 @@ module Aws::EC2
     #       {
     #         device_name: "String",
     #         ebs: {
-    #           volume_id: "String",
     #           delete_on_termination: false,
+    #           volume_id: "String",
     #         },
-    #         virtual_name: "String",
     #         no_device: "String",
+    #         virtual_name: "String",
     #       }
     #
     # @!attribute [rw] device_name
@@ -14369,12 +14586,12 @@ module Aws::EC2
     #   instance is launched.
     #   @return [Types::EbsInstanceBlockDeviceSpecification]
     #
-    # @!attribute [rw] virtual_name
-    #   The virtual device name.
-    #   @return [String]
-    #
     # @!attribute [rw] no_device
     #   suppress the specified device included in the block device mapping.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_name
+    #   The virtual device name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMappingSpecification AWS API Documentation
@@ -14382,21 +14599,21 @@ module Aws::EC2
     class InstanceBlockDeviceMappingSpecification < Struct.new(
       :device_name,
       :ebs,
-      :virtual_name,
-      :no_device)
+      :no_device,
+      :virtual_name)
       include Aws::Structure
     end
 
     # Information about the instance type that the Dedicated Host supports.
     #
-    # @!attribute [rw] instance_type
-    #   The instance type size supported by the Dedicated Host.
-    #   @return [String]
-    #
     # @!attribute [rw] available_capacity
     #   The number of instances that can still be launched onto the
     #   Dedicated Host.
     #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type size supported by the Dedicated Host.
+    #   @return [String]
     #
     # @!attribute [rw] total_capacity
     #   The total number of instances that can be launched onto the
@@ -14406,28 +14623,28 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCapacity AWS API Documentation
     #
     class InstanceCapacity < Struct.new(
-      :instance_type,
       :available_capacity,
+      :instance_type,
       :total_capacity)
       include Aws::Structure
     end
 
     # Describes a Reserved Instance listing state.
     #
-    # @!attribute [rw] state
-    #   The states of the listed Reserved Instances.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_count
     #   The number of listed Reserved Instances in the state specified by
     #   the `state`.
     #   @return [Integer]
     #
+    # @!attribute [rw] state
+    #   The states of the listed Reserved Instances.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCount AWS API Documentation
     #
     class InstanceCount < Struct.new(
-      :state,
-      :instance_count)
+      :instance_count,
+      :state)
       include Aws::Structure
     end
 
@@ -14489,8 +14706,59 @@ module Aws::EC2
 
     # Describes a network interface.
     #
+    # @!attribute [rw] association
+    #   The association information for an Elastic IPv4 associated with the
+    #   network interface.
+    #   @return [Types::InstanceNetworkInterfaceAssociation]
+    #
+    # @!attribute [rw] attachment
+    #   The network interface attachment.
+    #   @return [Types::InstanceNetworkInterfaceAttachment]
+    #
+    # @!attribute [rw] description
+    #   The description.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   One or more security groups.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more IPv6 addresses associated with the network interface.
+    #   @return [Array<Types::InstanceIpv6Address>]
+    #
+    # @!attribute [rw] mac_address
+    #   The MAC address.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the AWS account that created the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   One or more private IPv4 addresses associated with the network
+    #   interface.
+    #   @return [Array<Types::InstancePrivateIpAddress>]
+    #
+    # @!attribute [rw] source_dest_check
+    #   Indicates whether to validate network traffic to or from this
+    #   network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -14501,107 +14769,65 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The description.
-    #   @return [String]
-    #
-    # @!attribute [rw] owner_id
-    #   The ID of the AWS account that created the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] mac_address
-    #   The MAC address.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_ip_address
-    #   The IPv4 address of the network interface within the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_dns_name
-    #   The private DNS name.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_dest_check
-    #   Indicates whether to validate network traffic to or from this
-    #   network interface.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] groups
-    #   One or more security groups.
-    #   @return [Array<Types::GroupIdentifier>]
-    #
-    # @!attribute [rw] attachment
-    #   The network interface attachment.
-    #   @return [Types::InstanceNetworkInterfaceAttachment]
-    #
-    # @!attribute [rw] association
-    #   The association information for an Elastic IPv4 associated with the
-    #   network interface.
-    #   @return [Types::InstanceNetworkInterfaceAssociation]
-    #
-    # @!attribute [rw] private_ip_addresses
-    #   One or more private IPv4 addresses associated with the network
-    #   interface.
-    #   @return [Array<Types::InstancePrivateIpAddress>]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   One or more IPv6 addresses associated with the network interface.
-    #   @return [Array<Types::InstanceIpv6Address>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
-      :network_interface_id,
-      :subnet_id,
-      :vpc_id,
-      :description,
-      :owner_id,
-      :status,
-      :mac_address,
-      :private_ip_address,
-      :private_dns_name,
-      :source_dest_check,
-      :groups,
-      :attachment,
       :association,
+      :attachment,
+      :description,
+      :groups,
+      :ipv_6_addresses,
+      :mac_address,
+      :network_interface_id,
+      :owner_id,
+      :private_dns_name,
+      :private_ip_address,
       :private_ip_addresses,
-      :ipv_6_addresses)
+      :source_dest_check,
+      :status,
+      :subnet_id,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes association information for an Elastic IP address (IPv4).
     #
-    # @!attribute [rw] public_ip
-    #   The public IP address or Elastic IP address bound to the network
-    #   interface.
+    # @!attribute [rw] ip_owner_id
+    #   The ID of the owner of the Elastic IP address.
     #   @return [String]
     #
     # @!attribute [rw] public_dns_name
     #   The public DNS name.
     #   @return [String]
     #
-    # @!attribute [rw] ip_owner_id
-    #   The ID of the owner of the Elastic IP address.
+    # @!attribute [rw] public_ip
+    #   The public IP address or Elastic IP address bound to the network
+    #   interface.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAssociation AWS API Documentation
     #
     class InstanceNetworkInterfaceAssociation < Struct.new(
-      :public_ip,
+      :ip_owner_id,
       :public_dns_name,
-      :ip_owner_id)
+      :public_ip)
       include Aws::Structure
     end
 
     # Describes a network interface attachment.
     #
+    # @!attribute [rw] attach_time
+    #   The time stamp when the attachment initiated.
+    #   @return [Time]
+    #
     # @!attribute [rw] attachment_id
     #   The ID of the network interface attachment.
     #   @return [String]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the network interface is deleted when the instance
+    #   is terminated.
+    #   @return [Boolean]
     #
     # @!attribute [rw] device_index
     #   The index of the device on the instance for the network interface
@@ -14612,23 +14838,14 @@ module Aws::EC2
     #   The attachment state.
     #   @return [String]
     #
-    # @!attribute [rw] attach_time
-    #   The time stamp when the attachment initiated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] delete_on_termination
-    #   Indicates whether the network interface is deleted when the instance
-    #   is terminated.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment AWS API Documentation
     #
     class InstanceNetworkInterfaceAttachment < Struct.new(
-      :attachment_id,
-      :device_index,
-      :status,
       :attach_time,
-      :delete_on_termination)
+      :attachment_id,
+      :delete_on_termination,
+      :device_index,
+      :status)
       include Aws::Structure
     end
 
@@ -14638,31 +14855,47 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         network_interface_id: "String",
-    #         device_index: 1,
-    #         subnet_id: "String",
-    #         description: "String",
-    #         private_ip_address: "String",
-    #         groups: ["String"],
-    #         delete_on_termination: false,
-    #         private_ip_addresses: [
-    #           {
-    #             private_ip_address: "String", # required
-    #             primary: false,
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
     #         associate_public_ip_address: false,
+    #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["String"],
+    #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         ipv_6_address_count: 1,
+    #         network_interface_id: "String",
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String", # required
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
     #       }
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to an instance you
+    #   launch in a VPC. The public IP address can only be assigned to a
+    #   network interface for eth0, and can only be assigned to a new
+    #   network interface, not an existing one. You cannot specify more than
+    #   one network interface in the request. If launching into a default
+    #   subnet, the default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   If set to `true`, the interface is deleted when the instance is
+    #   terminated. You can specify `true` only if creating a new network
+    #   interface when launching an instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the network interface. Applies only if creating a
+    #   network interface when launching an instance.
     #   @return [String]
     #
     # @!attribute [rw] device_index
@@ -14671,14 +14904,28 @@ module Aws::EC2
     #   RunInstances request, you must provide the device index.
     #   @return [Integer]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet associated with the network string. Applies
+    # @!attribute [rw] groups
+    #   The IDs of the security groups for the network interface. Applies
     #   only if creating a network interface when launching an instance.
-    #   @return [String]
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] description
-    #   The description of the network interface. Applies only if creating a
-    #   network interface when launching an instance.
+    # @!attribute [rw] ipv_6_address_count
+    #   A number of IPv6 addresses to assign to the network interface.
+    #   Amazon EC2 chooses the IPv6 addresses from the range of the subnet.
+    #   You cannot specify this option and the option to assign specific
+    #   IPv6 addresses in the same request. You can specify this option if
+    #   you've specified a minimum number of instances to launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more IPv6 addresses to assign to the network interface. You
+    #   cannot specify this option and the option to assign a number of IPv6
+    #   addresses in the same request. You cannot specify this option if
+    #   you've specified a minimum number of instances to launch.
+    #   @return [Array<Types::InstanceIpv6Address>]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -14687,17 +14934,6 @@ module Aws::EC2
     #   specify this option if you're launching more than one instance in a
     #   RunInstances request.
     #   @return [String]
-    #
-    # @!attribute [rw] groups
-    #   The IDs of the security groups for the network interface. Applies
-    #   only if creating a network interface when launching an instance.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] delete_on_termination
-    #   If set to `true`, the interface is deleted when the instance is
-    #   terminated. You can specify `true` only if creating a new network
-    #   interface when launching an instance.
-    #   @return [Boolean]
     #
     # @!attribute [rw] private_ip_addresses
     #   One or more private IPv4 addresses to assign to the network
@@ -14713,75 +14949,56 @@ module Aws::EC2
     #   you're launching more than one instance in a RunInstances request.
     #   @return [Integer]
     #
-    # @!attribute [rw] associate_public_ip_address
-    #   Indicates whether to assign a public IPv4 address to an instance you
-    #   launch in a VPC. The public IP address can only be assigned to a
-    #   network interface for eth0, and can only be assigned to a new
-    #   network interface, not an existing one. You cannot specify more than
-    #   one network interface in the request. If launching into a default
-    #   subnet, the default value is `true`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   One or more IPv6 addresses to assign to the network interface. You
-    #   cannot specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
-    #   @return [Array<Types::InstanceIpv6Address>]
-    #
-    # @!attribute [rw] ipv_6_address_count
-    #   A number of IPv6 addresses to assign to the network interface.
-    #   Amazon EC2 chooses the IPv6 addresses from the range of the subnet.
-    #   You cannot specify this option and the option to assign specific
-    #   IPv6 addresses in the same request. You can specify this option if
-    #   you've specified a minimum number of instances to launch.
-    #   @return [Integer]
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet associated with the network string. Applies
+    #   only if creating a network interface when launching an instance.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
-      :network_interface_id,
-      :device_index,
-      :subnet_id,
-      :description,
-      :private_ip_address,
-      :groups,
+      :associate_public_ip_address,
       :delete_on_termination,
+      :description,
+      :device_index,
+      :groups,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :network_interface_id,
+      :private_ip_address,
       :private_ip_addresses,
       :secondary_private_ip_address_count,
-      :associate_public_ip_address,
-      :ipv_6_addresses,
-      :ipv_6_address_count)
+      :subnet_id)
       include Aws::Structure
     end
 
     # Describes a private IPv4 address.
-    #
-    # @!attribute [rw] private_ip_address
-    #   The private IPv4 address of the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_dns_name
-    #   The private IPv4 DNS name.
-    #   @return [String]
-    #
-    # @!attribute [rw] primary
-    #   Indicates whether this IPv4 address is the primary private IP
-    #   address of the network interface.
-    #   @return [Boolean]
     #
     # @!attribute [rw] association
     #   The association information for an Elastic IP address for the
     #   network interface.
     #   @return [Types::InstanceNetworkInterfaceAssociation]
     #
+    # @!attribute [rw] primary
+    #   Indicates whether this IPv4 address is the primary private IP
+    #   address of the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private IPv4 DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address of the network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstancePrivateIpAddress AWS API Documentation
     #
     class InstancePrivateIpAddress < Struct.new(
-      :private_ip_address,
-      :private_dns_name,
+      :association,
       :primary,
-      :association)
+      :private_dns_name,
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -14818,13 +15035,13 @@ module Aws::EC2
 
     # Describes an instance state change.
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
-    #
     # @!attribute [rw] current_state
     #   The current state of the instance.
     #   @return [Types::InstanceState]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
     #
     # @!attribute [rw] previous_state
     #   The previous state of the instance.
@@ -14833,17 +15050,13 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStateChange AWS API Documentation
     #
     class InstanceStateChange < Struct.new(
-      :instance_id,
       :current_state,
+      :instance_id,
       :previous_state)
       include Aws::Structure
     end
 
     # Describes the status of an instance.
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
@@ -14853,10 +15066,19 @@ module Aws::EC2
     #   Any scheduled events associated with the instance.
     #   @return [Array<Types::InstanceStatusEvent>]
     #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_state
     #   The intended state of the instance. DescribeInstanceStatus requires
     #   that an instance be in the `running` state.
     #   @return [Types::InstanceState]
+    #
+    # @!attribute [rw] instance_status
+    #   Reports impaired functionality that stems from issues internal to
+    #   the instance, such as impaired reachability.
+    #   @return [Types::InstanceStatusSummary]
     #
     # @!attribute [rw] system_status
     #   Reports impaired functionality that stems from issues related to the
@@ -14864,24 +15086,25 @@ module Aws::EC2
     #   network connectivity problems.
     #   @return [Types::InstanceStatusSummary]
     #
-    # @!attribute [rw] instance_status
-    #   Reports impaired functionality that stems from issues internal to
-    #   the instance, such as impaired reachability.
-    #   @return [Types::InstanceStatusSummary]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
     #
     class InstanceStatus < Struct.new(
-      :instance_id,
       :availability_zone,
       :events,
+      :instance_id,
       :instance_state,
-      :system_status,
-      :instance_status)
+      :instance_status,
+      :system_status)
       include Aws::Structure
     end
 
     # Describes the instance status.
+    #
+    # @!attribute [rw] impaired_since
+    #   The time when a status check failed. For an instance that was
+    #   launched and impaired, this is the time when the instance was
+    #   launched.
+    #   @return [Time]
     #
     # @!attribute [rw] name
     #   The type of instance status.
@@ -14891,18 +15114,12 @@ module Aws::EC2
     #   The status.
     #   @return [String]
     #
-    # @!attribute [rw] impaired_since
-    #   The time when a status check failed. For an instance that was
-    #   launched and impaired, this is the time when the instance was
-    #   launched.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusDetails AWS API Documentation
     #
     class InstanceStatusDetails < Struct.new(
+      :impaired_since,
       :name,
-      :status,
-      :impaired_since)
+      :status)
       include Aws::Structure
     end
 
@@ -14920,12 +15137,12 @@ module Aws::EC2
     #   starts with the following text: \[Completed\].
     #   @return [String]
     #
-    # @!attribute [rw] not_before
-    #   The earliest scheduled start time for the event.
-    #   @return [Time]
-    #
     # @!attribute [rw] not_after
     #   The latest scheduled end time for the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_before
+    #   The earliest scheduled start time for the event.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusEvent AWS API Documentation
@@ -14933,38 +15150,38 @@ module Aws::EC2
     class InstanceStatusEvent < Struct.new(
       :code,
       :description,
-      :not_before,
-      :not_after)
+      :not_after,
+      :not_before)
       include Aws::Structure
     end
 
     # Describes the status of an instance.
     #
-    # @!attribute [rw] status
-    #   The status.
-    #   @return [String]
-    #
     # @!attribute [rw] details
     #   The system instance health or application instance health.
     #   @return [Array<Types::InstanceStatusDetails>]
     #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusSummary AWS API Documentation
     #
     class InstanceStatusSummary < Struct.new(
-      :status,
-      :details)
+      :details,
+      :status)
       include Aws::Structure
     end
 
     # Describes an Internet gateway.
     #
-    # @!attribute [rw] internet_gateway_id
-    #   The ID of the Internet gateway.
-    #   @return [String]
-    #
     # @!attribute [rw] attachments
     #   Any VPCs attached to the Internet gateway.
     #   @return [Array<Types::InternetGatewayAttachment>]
+    #
+    # @!attribute [rw] internet_gateway_id
+    #   The ID of the Internet gateway.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the Internet gateway.
@@ -14973,8 +15190,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGateway AWS API Documentation
     #
     class InternetGateway < Struct.new(
-      :internet_gateway_id,
       :attachments,
+      :internet_gateway_id,
       :tags)
       include Aws::Structure
     end
@@ -14982,19 +15199,19 @@ module Aws::EC2
     # Describes the attachment of a VPC to an Internet gateway or an
     # egress-only Internet gateway.
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The current state of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGatewayAttachment AWS API Documentation
     #
     class InternetGatewayAttachment < Struct.new(
-      :vpc_id,
-      :state)
+      :state,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -15004,19 +15221,8 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ip_protocol: "String",
     #         from_port: 1,
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             user_id: "String",
-    #             group_name: "String",
-    #             group_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #             peering_status: "String",
-    #           },
-    #         ],
+    #         ip_protocol: "String",
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
@@ -15032,7 +15238,24 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             group_id: "String",
+    #             group_name: "String",
+    #             peering_status: "String",
+    #             user_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #           },
+    #         ],
     #       }
+    #
+    # @!attribute [rw] from_port
+    #   The start of port range for the TCP and UDP protocols, or an
+    #   ICMP/ICMPv6 type number. A value of `-1` indicates all ICMP/ICMPv6
+    #   types.
+    #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -15051,22 +15274,6 @@ module Aws::EC2
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #   @return [String]
     #
-    # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 type number. A value of `-1` indicates all ICMP/ICMPv6
-    #   types.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an
-    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
-    #   for the specified ICMP type.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] user_id_group_pairs
-    #   One or more security group and AWS account ID pairs.
-    #   @return [Array<Types::UserIdGroupPair>]
-    #
     # @!attribute [rw] ip_ranges
     #   One or more IPv4 ranges.
     #   @return [Array<Types::IpRange>]
@@ -15083,16 +15290,26 @@ module Aws::EC2
     #   instances associated with the security group.
     #   @return [Array<Types::PrefixListId>]
     #
+    # @!attribute [rw] to_port
+    #   The end of port range for the TCP and UDP protocols, or an
+    #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
+    #   for the specified ICMP type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_id_group_pairs
+    #   One or more security group and AWS account ID pairs.
+    #   @return [Array<Types::UserIdGroupPair>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpPermission AWS API Documentation
     #
     class IpPermission < Struct.new(
-      :ip_protocol,
       :from_port,
-      :to_port,
-      :user_id_group_pairs,
+      :ip_protocol,
       :ip_ranges,
       :ipv_6_ranges,
-      :prefix_list_ids)
+      :prefix_list_ids,
+      :to_port,
+      :user_id_group_pairs)
       include Aws::Structure
     end
 
@@ -15155,10 +15372,6 @@ module Aws::EC2
 
     # Describes a key pair.
     #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
-    #
     # @!attribute [rw] key_fingerprint
     #   The SHA-1 digest of the DER encoded private key.
     #   @return [String]
@@ -15167,20 +15380,20 @@ module Aws::EC2
     #   An unencrypted PEM encoded RSA private key.
     #   @return [String]
     #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPair AWS API Documentation
     #
     class KeyPair < Struct.new(
-      :key_name,
       :key_fingerprint,
-      :key_material)
+      :key_material,
+      :key_name)
       include Aws::Structure
     end
 
     # Describes a key pair.
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
     #
     # @!attribute [rw] key_fingerprint
     #   If you used CreateKeyPair to create the key pair, this is the SHA-1
@@ -15189,11 +15402,15 @@ module Aws::EC2
     #   as specified in section 4 of RFC4716.
     #   @return [String]
     #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPairInfo AWS API Documentation
     #
     class KeyPairInfo < Struct.new(
-      :key_name,
-      :key_fingerprint)
+      :key_fingerprint,
+      :key_name)
       include Aws::Structure
     end
 
@@ -15203,23 +15420,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         user_id: "String",
     #         group: "all", # accepts all
+    #         user_id: "String",
     #       }
-    #
-    # @!attribute [rw] user_id
-    #   The AWS account ID.
-    #   @return [String]
     #
     # @!attribute [rw] group
     #   The name of the group.
     #   @return [String]
     #
+    # @!attribute [rw] user_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission AWS API Documentation
     #
     class LaunchPermission < Struct.new(
-      :user_id,
-      :group)
+      :group,
+      :user_id)
       include Aws::Structure
     end
 
@@ -15231,14 +15448,14 @@ module Aws::EC2
     #       {
     #         add: [
     #           {
-    #             user_id: "String",
     #             group: "all", # accepts all
+    #             user_id: "String",
     #           },
     #         ],
     #         remove: [
     #           {
-    #             user_id: "String",
     #             group: "all", # accepts all
+    #             user_id: "String",
     #           },
     #         ],
     #       }
@@ -15263,12 +15480,11 @@ module Aws::EC2
 
     # Describes the launch specification for an instance.
     #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instances. If you are using
+    #   an AWS SDK or command line tool, Base64-encoding is performed for
+    #   you, and you can load the text from a file. Otherwise, you must
+    #   provide Base64-encoded text.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -15278,31 +15494,8 @@ module Aws::EC2
     #   the security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
-    # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
-    #   @return [String]
-    #
     # @!attribute [rw] addressing_type
     #   Deprecated.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
-    # @!attribute [rw] placement
-    #   The placement information for the instance.
-    #   @return [Types::SpotPlacement]
-    #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -15311,20 +15504,6 @@ module Aws::EC2
     #   Although you can specify encrypted EBS volumes in this block device
     #   mapping for your Spot Instances, these volumes are not encrypted.
     #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
-    #   interface.
-    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
-    #   @return [Types::IamInstanceProfileSpecification]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instance is optimized for EBS I/O. This
@@ -15337,6 +15516,44 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::IamInstanceProfileSpecification]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces. If you specify a network interface,
+    #   you must specify subnet IDs and security group IDs using the network
+    #   interface.
+    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
+    #
+    # @!attribute [rw] placement
+    #   The placement information for the instance.
+    #   @return [Types::SpotPlacement]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] monitoring
     #   Describes the monitoring of an instance.
     #   @return [Types::RunInstancesMonitoringEnabled]
@@ -15344,20 +15561,20 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchSpecification AWS API Documentation
     #
     class LaunchSpecification < Struct.new(
-      :image_id,
-      :key_name,
-      :security_groups,
       :user_data,
+      :security_groups,
       :addressing_type,
-      :instance_type,
-      :placement,
-      :kernel_id,
-      :ramdisk_id,
       :block_device_mappings,
-      :subnet_id,
-      :network_interfaces,
-      :iam_instance_profile,
       :ebs_optimized,
+      :iam_instance_profile,
+      :image_id,
+      :instance_type,
+      :kernel_id,
+      :key_name,
+      :network_interfaces,
+      :placement,
+      :ramdisk_id,
+      :subnet_id,
       :monitoring)
       include Aws::Structure
     end
@@ -15368,23 +15585,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         host_ids: ["String"], # required
     #         auto_placement: "on", # required, accepts on, off
+    #         host_ids: ["String"], # required
     #       }
-    #
-    # @!attribute [rw] host_ids
-    #   The host IDs of the Dedicated Hosts you want to modify.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] auto_placement
     #   Specify whether to enable or disable auto-placement.
     #   @return [String]
     #
+    # @!attribute [rw] host_ids
+    #   The host IDs of the Dedicated Hosts you want to modify.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsRequest AWS API Documentation
     #
     class ModifyHostsRequest < Struct.new(
-      :host_ids,
-      :auto_placement)
+      :auto_placement,
+      :host_ids)
       include Aws::Structure
     end
 
@@ -15441,10 +15658,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         principal_arn: "String", # required
     #         resource: "String", # required
     #         use_long_ids: false, # required
-    #         principal_arn: "String", # required
     #       }
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the principal, which can be an IAM user, IAM role, or the
+    #   root user. Specify `all` to modify the ID format for all IAM users,
+    #   IAM roles, and the root user of the account.
+    #   @return [String]
     #
     # @!attribute [rw] resource
     #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
@@ -15456,18 +15679,12 @@ module Aws::EC2
     #   IDs)
     #   @return [Boolean]
     #
-    # @!attribute [rw] principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. Specify `all` to modify the ID format for all IAM users,
-    #   IAM roles, and the root user of the account.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormatRequest AWS API Documentation
     #
     class ModifyIdentityIdFormatRequest < Struct.new(
+      :principal_arn,
       :resource,
-      :use_long_ids,
-      :principal_arn)
+      :use_long_ids)
       include Aws::Structure
     end
 
@@ -15477,30 +15694,71 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         image_id: "String", # required
     #         attribute: "String",
-    #         operation_type: "add", # accepts add, remove
-    #         user_ids: ["String"],
-    #         user_groups: ["String"],
-    #         product_codes: ["String"],
-    #         value: "String",
+    #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         image_id: "String", # required
     #         launch_permission: {
     #           add: [
     #             {
-    #               user_id: "String",
     #               group: "all", # accepts all
+    #               user_id: "String",
     #             },
     #           ],
     #           remove: [
     #             {
-    #               user_id: "String",
     #               group: "all", # accepts all
+    #               user_id: "String",
     #             },
     #           ],
     #         },
-    #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         operation_type: "add", # accepts add, remove
+    #         product_codes: ["String"],
+    #         user_groups: ["String"],
+    #         user_ids: ["String"],
+    #         value: "String",
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The name of the attribute to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the AMI.
+    #   @return [Types::AttributeValue]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_permission
+    #   A launch permission modification.
+    #   @return [Types::LaunchPermissionModifications]
+    #
+    # @!attribute [rw] operation_type
+    #   The operation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_codes
+    #   One or more product codes. After you add a product code to an AMI,
+    #   it can't be removed. This is only valid when modifying the
+    #   `productCodes` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_groups
+    #   One or more user groups. This is only valid when modifying the
+    #   `launchPermission` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_ids
+    #   One or more AWS account IDs. This is only valid when modifying the
+    #   `launchPermission` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] value
+    #   The value of the attribute being modified. This is only valid when
+    #   modifying the `description` attribute.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15509,60 +15767,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The name of the attribute to modify.
-    #   @return [String]
-    #
-    # @!attribute [rw] operation_type
-    #   The operation type.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This is only valid when modifying the
-    #   `launchPermission` attribute.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] user_groups
-    #   One or more user groups. This is only valid when modifying the
-    #   `launchPermission` attribute.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] product_codes
-    #   One or more product codes. After you add a product code to an AMI,
-    #   it can't be removed. This is only valid when modifying the
-    #   `productCodes` attribute.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] value
-    #   The value of the attribute being modified. This is only valid when
-    #   modifying the `description` attribute.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_permission
-    #   A launch permission modification.
-    #   @return [Types::LaunchPermissionModifications]
-    #
-    # @!attribute [rw] description
-    #   A description for the AMI.
-    #   @return [Types::AttributeValue]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeRequest AWS API Documentation
     #
     class ModifyImageAttributeRequest < Struct.new(
-      :dry_run,
-      :image_id,
       :attribute,
-      :operation_type,
-      :user_ids,
-      :user_groups,
-      :product_codes,
-      :value,
+      :description,
+      :image_id,
       :launch_permission,
-      :description)
+      :operation_type,
+      :product_codes,
+      :user_groups,
+      :user_ids,
+      :value,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -15572,63 +15789,53 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instance_id: "String", # required
+    #         source_dest_check: {
+    #           value: false,
+    #         },
     #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
-    #         value: "String",
     #         block_device_mappings: [
     #           {
     #             device_name: "String",
     #             ebs: {
-    #               volume_id: "String",
     #               delete_on_termination: false,
+    #               volume_id: "String",
     #             },
-    #             virtual_name: "String",
     #             no_device: "String",
+    #             virtual_name: "String",
     #           },
     #         ],
-    #         source_dest_check: {
-    #           value: false,
-    #         },
     #         disable_api_termination: {
     #           value: false,
     #         },
-    #         instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         user_data: {
-    #           value: "data",
-    #         },
-    #         instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         groups: ["String"],
+    #         dry_run: false,
     #         ebs_optimized: {
     #           value: false,
     #         },
-    #         sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         ena_support: {
     #           value: false,
     #         },
+    #         groups: ["String"],
+    #         instance_id: "String", # required
+    #         instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         user_data: {
+    #           value: "data",
+    #         },
+    #         value: "String",
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance.
-    #   @return [String]
+    # @!attribute [rw] source_dest_check
+    #   Specifies whether source/destination checking is enabled. A value of
+    #   `true` means that checking is enabled, and `false` means checking is
+    #   disabled. This value must be `false` for a NAT instance to perform
+    #   NAT.
+    #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] attribute
     #   The name of the attribute.
-    #   @return [String]
-    #
-    # @!attribute [rw] value
-    #   A new value for the attribute. Use only with the `kernel`,
-    #   `ramdisk`, `userData`, `disableApiTermination`, or
-    #   `instanceInitiatedShutdownBehavior` attribute.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -15647,18 +15854,52 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
     #   @return [Array<Types::InstanceBlockDeviceMappingSpecification>]
     #
-    # @!attribute [rw] source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
-    #   @return [Types::AttributeBooleanValue]
-    #
     # @!attribute [rw] disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
     #   this paramater for Spot Instances.
     #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Specifies whether the instance is optimized for EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS Optimized
+    #   instance.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the
+    #   instance.
+    #
+    #   This option is supported only for HVM instances. Specifying this
+    #   option with a PV instance can make it unreachable.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] groups
+    #   \[EC2-VPC\] Changes the security groups of the instance. You must
+    #   specify at least one security group, even if it's just the default
+    #   security group for the VPC. You must specify the security group ID,
+    #   not the security group name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Specifies whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] instance_type
     #   Changes the instance type to the specified value. For more
@@ -15690,35 +15931,6 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     #   @return [Types::AttributeValue]
     #
-    # @!attribute [rw] user_data
-    #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
-    #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
-    #   @return [Types::BlobAttributeValue]
-    #
-    # @!attribute [rw] instance_initiated_shutdown_behavior
-    #   Specifies whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #   @return [Types::AttributeValue]
-    #
-    # @!attribute [rw] groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] ebs_optimized
-    #   Specifies whether the instance is optimized for EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O
-    #   performance. This optimization isn't available with all instance
-    #   types. Additional usage charges apply when using an EBS Optimized
-    #   instance.
-    #   @return [Types::AttributeBooleanValue]
-    #
     # @!attribute [rw] sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
     #   Virtual Function interface for the instance.
@@ -15730,33 +15942,38 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     #   @return [Types::AttributeValue]
     #
-    # @!attribute [rw] ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the
-    #   instance.
+    # @!attribute [rw] user_data
+    #   Changes the instance's user data to the specified value. If you are
+    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   for you, and you can load the text from a file. Otherwise, you must
+    #   provide Base64-encoded text.
+    #   @return [Types::BlobAttributeValue]
     #
-    #   This option is supported only for HVM instances. Specifying this
-    #   option with a PV instance can make it unreachable.
-    #   @return [Types::AttributeBooleanValue]
+    # @!attribute [rw] value
+    #   A new value for the attribute. Use only with the `kernel`,
+    #   `ramdisk`, `userData`, `disableApiTermination`, or
+    #   `instanceInitiatedShutdownBehavior` attribute.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeRequest AWS API Documentation
     #
     class ModifyInstanceAttributeRequest < Struct.new(
-      :dry_run,
-      :instance_id,
-      :attribute,
-      :value,
-      :block_device_mappings,
       :source_dest_check,
+      :attribute,
+      :block_device_mappings,
       :disable_api_termination,
+      :dry_run,
+      :ebs_optimized,
+      :ena_support,
+      :groups,
+      :instance_id,
+      :instance_initiated_shutdown_behavior,
       :instance_type,
       :kernel,
       :ramdisk,
-      :user_data,
-      :instance_initiated_shutdown_behavior,
-      :groups,
-      :ebs_optimized,
       :sriov_net_support,
-      :ena_support)
+      :user_data,
+      :value)
       include Aws::Structure
     end
 
@@ -15766,19 +15983,11 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_id: "String", # required
-    #         tenancy: "dedicated", # accepts dedicated, host
     #         affinity: "default", # accepts default, host
     #         host_id: "String",
+    #         instance_id: "String", # required
+    #         tenancy: "dedicated", # accepts dedicated, host
     #       }
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the instance that you are modifying.
-    #   @return [String]
-    #
-    # @!attribute [rw] tenancy
-    #   The tenancy of the instance that you are modifying.
-    #   @return [String]
     #
     # @!attribute [rw] affinity
     #   The new affinity setting for the instance.
@@ -15789,13 +15998,21 @@ module Aws::EC2
     #   with.
     #   @return [String]
     #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance that you are modifying.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance that you are modifying.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
     #
     class ModifyInstancePlacementRequest < Struct.new(
-      :instance_id,
-      :tenancy,
       :affinity,
-      :host_id)
+      :host_id,
+      :instance_id,
+      :tenancy)
       include Aws::Structure
     end
 
@@ -15818,18 +16035,28 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_interface_id: "String", # required
-    #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         source_dest_check: {
-    #           value: false,
-    #         },
-    #         groups: ["String"],
     #         attachment: {
     #           attachment_id: "String",
     #           delete_on_termination: false,
     #         },
+    #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         dry_run: false,
+    #         groups: ["String"],
+    #         network_interface_id: "String", # required
+    #         source_dest_check: {
+    #           value: false,
+    #         },
     #       }
+    #
+    # @!attribute [rw] attachment
+    #   Information about the interface attachment. If modifying the
+    #   'delete on termination' attribute, you must specify the ID of the
+    #   interface attachment.
+    #   @return [Types::NetworkInterfaceAttachmentChanges]
+    #
+    # @!attribute [rw] description
+    #   A description for the network interface.
+    #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15838,13 +16065,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] groups
+    #   Changes the security groups for the network interface. The new set
+    #   of groups you specify replaces the current set. You must specify at
+    #   least one group, even if it's just the default security group in
+    #   the VPC. You must specify the ID of the security group, not the
+    #   name.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description for the network interface.
-    #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] source_dest_check
     #   Indicates whether source/destination checking is enabled. A value of
@@ -15858,29 +16089,15 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     #   @return [Types::AttributeBooleanValue]
     #
-    # @!attribute [rw] groups
-    #   Changes the security groups for the network interface. The new set
-    #   of groups you specify replaces the current set. You must specify at
-    #   least one group, even if it's just the default security group in
-    #   the VPC. You must specify the ID of the security group, not the
-    #   name.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] attachment
-    #   Information about the interface attachment. If modifying the
-    #   'delete on termination' attribute, you must specify the ID of the
-    #   interface attachment.
-    #   @return [Types::NetworkInterfaceAttachmentChanges]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
-      :dry_run,
-      :network_interface_id,
+      :attachment,
       :description,
-      :source_dest_check,
+      :dry_run,
       :groups,
-      :attachment)
+      :network_interface_id,
+      :source_dest_check)
       include Aws::Structure
     end
 
@@ -15890,18 +16107,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         client_token: "String",
     #         reserved_instances_ids: ["String"], # required
+    #         client_token: "String",
     #         target_configurations: [ # required
     #           {
     #             availability_zone: "String",
-    #             platform: "String",
     #             instance_count: 1,
     #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] reserved_instances_ids
+    #   The IDs of the Reserved Instances to modify.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token you provide to ensure idempotency of
@@ -15913,10 +16134,6 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @!attribute [rw] reserved_instances_ids
-    #   The IDs of the Reserved Instances to modify.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] target_configurations
     #   The configuration settings for the Reserved Instances to modify.
     #   @return [Array<Types::ReservedInstancesConfiguration>]
@@ -15924,8 +16141,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesRequest AWS API Documentation
     #
     class ModifyReservedInstancesRequest < Struct.new(
-      :client_token,
       :reserved_instances_ids,
+      :client_token,
       :target_configurations)
       include Aws::Structure
     end
@@ -15949,38 +16166,27 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         snapshot_id: "String", # required
     #         attribute: "productCodes", # accepts productCodes, createVolumePermission
-    #         operation_type: "add", # accepts add, remove
-    #         user_ids: ["String"],
-    #         group_names: ["String"],
     #         create_volume_permission: {
     #           add: [
     #             {
-    #               user_id: "String",
     #               group: "all", # accepts all
+    #               user_id: "String",
     #             },
     #           ],
     #           remove: [
     #             {
-    #               user_id: "String",
     #               group: "all", # accepts all
+    #               user_id: "String",
     #             },
     #           ],
     #         },
+    #         group_names: ["String"],
+    #         operation_type: "add", # accepts add, remove
+    #         snapshot_id: "String", # required
+    #         user_ids: ["String"],
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the snapshot.
-    #   @return [String]
     #
     # @!attribute [rw] attribute
     #   The snapshot attribute to modify.
@@ -15991,32 +16197,43 @@ module Aws::EC2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] create_volume_permission
+    #   A JSON representation of the snapshot attribute modification.
+    #   @return [Types::CreateVolumePermissionModifications]
+    #
+    # @!attribute [rw] group_names
+    #   The group to modify for the snapshot.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] operation_type
     #   The type of operation to perform to the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] user_ids
     #   The account ID to modify for the snapshot.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] group_names
-    #   The group to modify for the snapshot.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] create_volume_permission
-    #   A JSON representation of the snapshot attribute modification.
-    #   @return [Types::CreateVolumePermissionModifications]
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeRequest AWS API Documentation
     #
     class ModifySnapshotAttributeRequest < Struct.new(
-      :dry_run,
-      :snapshot_id,
       :attribute,
-      :operation_type,
-      :user_ids,
+      :create_volume_permission,
       :group_names,
-      :create_volume_permission)
+      :operation_type,
+      :snapshot_id,
+      :user_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -16026,10 +16243,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         spot_fleet_request_id: "String", # required
     #         target_capacity: 1,
-    #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       }
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running Spot instances should be terminated if the
+    #   target capacity of the Spot fleet request is decreased below the
+    #   current size of the Spot fleet.
+    #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
     #   The ID of the Spot fleet request.
@@ -16039,18 +16262,12 @@ module Aws::EC2
     #   The size of the fleet.
     #   @return [Integer]
     #
-    # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot instances should be terminated if the
-    #   target capacity of the Spot fleet request is decreased below the
-    #   current size of the Spot fleet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest AWS API Documentation
     #
     class ModifySpotFleetRequestRequest < Struct.new(
+      :excess_capacity_termination_policy,
       :spot_fleet_request_id,
-      :target_capacity,
-      :excess_capacity_termination_policy)
+      :target_capacity)
       include Aws::Structure
     end
 
@@ -16073,26 +16290,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "String", # required
-    #         map_public_ip_on_launch: {
-    #           value: false,
-    #         },
     #         assign_ipv_6_address_on_creation: {
     #           value: false,
     #         },
+    #         map_public_ip_on_launch: {
+    #           value: false,
+    #         },
+    #         subnet_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] map_public_ip_on_launch
-    #   Specify `true` to indicate that network interfaces created in the
-    #   specified subnet should be assigned a public IPv4 address. This
-    #   includes a network interface that's created when launching an
-    #   instance into the subnet (the instance therefore receives a public
-    #   IPv4 address).
-    #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
     #   Specify `true` to indicate that network interfaces created in the
@@ -16105,12 +16310,24 @@ module Aws::EC2
     #   created using version `2016-11-15` or later of the Amazon EC2 API.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] map_public_ip_on_launch
+    #   Specify `true` to indicate that network interfaces created in the
+    #   specified subnet should be assigned a public IPv4 address. This
+    #   includes a network interface that's created when launching an
+    #   instance into the subnet (the instance therefore receives a public
+    #   IPv4 address).
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
     #
     class ModifySubnetAttributeRequest < Struct.new(
-      :subnet_id,
+      :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
-      :assign_ipv_6_address_on_creation)
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -16120,12 +16337,21 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         volume_id: "String", # required
     #         auto_enable_io: {
     #           value: false,
     #         },
+    #         volume_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] auto_enable_io
+    #   Indicates whether the volume should be auto-enabled for I/O
+    #   operations.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16134,21 +16360,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] auto_enable_io
-    #   Indicates whether the volume should be auto-enabled for I/O
-    #   operations.
-    #   @return [Types::AttributeBooleanValue]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttributeRequest AWS API Documentation
     #
     class ModifyVolumeAttributeRequest < Struct.new(
-      :dry_run,
+      :auto_enable_io,
       :volume_id,
-      :auto_enable_io)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -16238,18 +16455,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         vpc_id: "String", # required
-    #         enable_dns_support: {
-    #           value: false,
-    #         },
     #         enable_dns_hostnames: {
     #           value: false,
     #         },
+    #         enable_dns_support: {
+    #           value: false,
+    #         },
+    #         vpc_id: "String", # required
     #       }
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
+    # @!attribute [rw] enable_dns_hostnames
+    #   Indicates whether the instances launched in the VPC get DNS
+    #   hostnames. If enabled, instances in the VPC get DNS hostnames;
+    #   otherwise, they do not.
+    #
+    #   You cannot modify the DNS resolution and DNS hostnames attributes in
+    #   the same request. Use separate requests for each attribute. You can
+    #   only enable DNS hostnames if you've enabled DNS support.
+    #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] enable_dns_support
     #   Indicates whether the DNS resolution is supported for the VPC. If
@@ -16263,22 +16486,16 @@ module Aws::EC2
     #   the same request. Use separate requests for each attribute.
     #   @return [Types::AttributeBooleanValue]
     #
-    # @!attribute [rw] enable_dns_hostnames
-    #   Indicates whether the instances launched in the VPC get DNS
-    #   hostnames. If enabled, instances in the VPC get DNS hostnames;
-    #   otherwise, they do not.
-    #
-    #   You cannot modify the DNS resolution and DNS hostnames attributes in
-    #   the same request. Use separate requests for each attribute. You can
-    #   only enable DNS hostnames if you've enabled DNS support.
-    #   @return [Types::AttributeBooleanValue]
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttributeRequest AWS API Documentation
     #
     class ModifyVpcAttributeRequest < Struct.new(
-      :vpc_id,
+      :enable_dns_hostnames,
       :enable_dns_support,
-      :enable_dns_hostnames)
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -16288,13 +16505,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_endpoint_id: "String", # required
-    #         reset_policy: false,
-    #         policy_document: "String",
     #         add_route_table_ids: ["String"],
+    #         dry_run: false,
+    #         policy_document: "String",
     #         remove_route_table_ids: ["String"],
+    #         reset_policy: false,
+    #         vpc_endpoint_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] add_route_table_ids
+    #   One or more route tables IDs to associate with the endpoint.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16303,37 +16524,33 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the endpoint.
+    # @!attribute [rw] policy_document
+    #   A policy document to attach to the endpoint. The policy must be in
+    #   valid JSON format.
     #   @return [String]
+    #
+    # @!attribute [rw] remove_route_table_ids
+    #   One or more route table IDs to disassociate from the endpoint.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] reset_policy
     #   Specify `true` to reset the policy document to the default policy.
     #   The default policy allows access to the service.
     #   @return [Boolean]
     #
-    # @!attribute [rw] policy_document
-    #   A policy document to attach to the endpoint. The policy must be in
-    #   valid JSON format.
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the endpoint.
     #   @return [String]
-    #
-    # @!attribute [rw] add_route_table_ids
-    #   One or more route tables IDs to associate with the endpoint.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] remove_route_table_ids
-    #   One or more route table IDs to disassociate from the endpoint.
-    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
     #
     class ModifyVpcEndpointRequest < Struct.new(
-      :dry_run,
-      :vpc_endpoint_id,
-      :reset_policy,
-      :policy_document,
       :add_route_table_ids,
-      :remove_route_table_ids)
+      :dry_run,
+      :policy_document,
+      :remove_route_table_ids,
+      :reset_policy,
+      :vpc_endpoint_id)
       include Aws::Structure
     end
 
@@ -16355,19 +16572,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         vpc_peering_connection_id: "String", # required
-    #         requester_peering_connection_options: {
-    #           allow_egress_from_local_classic_link_to_remote_vpc: false,
-    #           allow_egress_from_local_vpc_to_remote_classic_link: false,
-    #           allow_dns_resolution_from_remote_vpc: false,
-    #         },
     #         accepter_peering_connection_options: {
+    #           allow_dns_resolution_from_remote_vpc: false,
     #           allow_egress_from_local_classic_link_to_remote_vpc: false,
     #           allow_egress_from_local_vpc_to_remote_classic_link: false,
-    #           allow_dns_resolution_from_remote_vpc: false,
     #         },
+    #         dry_run: false,
+    #         requester_peering_connection_options: {
+    #           allow_dns_resolution_from_remote_vpc: false,
+    #           allow_egress_from_local_classic_link_to_remote_vpc: false,
+    #           allow_egress_from_local_vpc_to_remote_classic_link: false,
+    #         },
+    #         vpc_peering_connection_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] accepter_peering_connection_options
+    #   The VPC peering connection options for the accepter VPC.
+    #   @return [Types::PeeringConnectionOptionsRequest]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
@@ -16376,43 +16597,39 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
-    #   @return [String]
-    #
     # @!attribute [rw] requester_peering_connection_options
     #   The VPC peering connection options for the requester VPC.
     #   @return [Types::PeeringConnectionOptionsRequest]
     #
-    # @!attribute [rw] accepter_peering_connection_options
-    #   The VPC peering connection options for the accepter VPC.
-    #   @return [Types::PeeringConnectionOptionsRequest]
+    # @!attribute [rw] vpc_peering_connection_id
+    #   The ID of the VPC peering connection.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsRequest AWS API Documentation
     #
     class ModifyVpcPeeringConnectionOptionsRequest < Struct.new(
+      :accepter_peering_connection_options,
       :dry_run,
-      :vpc_peering_connection_id,
       :requester_peering_connection_options,
-      :accepter_peering_connection_options)
+      :vpc_peering_connection_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] requester_peering_connection_options
-    #   Information about the VPC peering connection options for the
-    #   requester VPC.
-    #   @return [Types::PeeringConnectionOptions]
-    #
     # @!attribute [rw] accepter_peering_connection_options
     #   Information about the VPC peering connection options for the
     #   accepter VPC.
     #   @return [Types::PeeringConnectionOptions]
     #
+    # @!attribute [rw] requester_peering_connection_options
+    #   Information about the VPC peering connection options for the
+    #   requester VPC.
+    #   @return [Types::PeeringConnectionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsResult AWS API Documentation
     #
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
-      :requester_peering_connection_options,
-      :accepter_peering_connection_options)
+      :accepter_peering_connection_options,
+      :requester_peering_connection_options)
       include Aws::Structure
     end
 
@@ -16422,9 +16639,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_ids: ["String"], # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16433,15 +16654,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstancesRequest AWS API Documentation
     #
     class MonitorInstancesRequest < Struct.new(
-      :dry_run,
-      :instance_ids)
+      :instance_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -16521,36 +16738,24 @@ module Aws::EC2
 
     # Describes the status of a moving Elastic IP address.
     #
-    # @!attribute [rw] public_ip
-    #   The Elastic IP address.
-    #   @return [String]
-    #
     # @!attribute [rw] move_status
     #   The status of the Elastic IP address that's being moved to the
     #   EC2-VPC platform, or restored to the EC2-Classic platform.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip
+    #   The Elastic IP address.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MovingAddressStatus AWS API Documentation
     #
     class MovingAddressStatus < Struct.new(
-      :public_ip,
-      :move_status)
+      :move_status,
+      :public_ip)
       include Aws::Structure
     end
 
     # Describes a NAT gateway.
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC in which the NAT gateway is located.
-    #   @return [String]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which the NAT gateway is located.
-    #   @return [String]
-    #
-    # @!attribute [rw] nat_gateway_id
-    #   The ID of the NAT gateway.
-    #   @return [String]
     #
     # @!attribute [rw] create_time
     #   The date and time the NAT gateway was created.
@@ -16559,31 +16764,6 @@ module Aws::EC2
     # @!attribute [rw] delete_time
     #   The date and time the NAT gateway was deleted, if applicable.
     #   @return [Time]
-    #
-    # @!attribute [rw] nat_gateway_addresses
-    #   Information about the IP addresses and network interface associated
-    #   with the NAT gateway.
-    #   @return [Array<Types::NatGatewayAddress>]
-    #
-    # @!attribute [rw] state
-    #   The state of the NAT gateway.
-    #
-    #   * `pending`\: The NAT gateway is being created and is not ready to
-    #     process traffic.
-    #
-    #   * `failed`\: The NAT gateway could not be created. Check the
-    #     `failureCode` and `failureMessage` fields for the reason.
-    #
-    #   * `available`\: The NAT gateway is able to process traffic. This
-    #     status remains until you delete the NAT gateway, and does not
-    #     indicate the health of the NAT gateway.
-    #
-    #   * `deleting`\: The NAT gateway is in the process of being terminated
-    #     and may still be processing traffic.
-    #
-    #   * `deleted`\: The NAT gateway has been terminated and is no longer
-    #     processing traffic.
-    #   @return [String]
     #
     # @!attribute [rw] failure_code
     #   If the NAT gateway could not be created, specifies the error code
@@ -16617,6 +16797,15 @@ module Aws::EC2
     #     subnet-xxxxxxxx does not exist or could not be found."
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_addresses
+    #   Information about the IP addresses and network interface associated
+    #   with the NAT gateway.
+    #   @return [Array<Types::NatGatewayAddress>]
+    #
+    # @!attribute [rw] nat_gateway_id
+    #   The ID of the NAT gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] provisioned_bandwidth
     #   Reserved. If you need to sustain traffic greater than the
     #   [documented limits][1], contact us through the [Support Center][2].
@@ -16627,87 +16816,115 @@ module Aws::EC2
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Types::ProvisionedBandwidth]
     #
+    # @!attribute [rw] state
+    #   The state of the NAT gateway.
+    #
+    #   * `pending`\: The NAT gateway is being created and is not ready to
+    #     process traffic.
+    #
+    #   * `failed`\: The NAT gateway could not be created. Check the
+    #     `failureCode` and `failureMessage` fields for the reason.
+    #
+    #   * `available`\: The NAT gateway is able to process traffic. This
+    #     status remains until you delete the NAT gateway, and does not
+    #     indicate the health of the NAT gateway.
+    #
+    #   * `deleting`\: The NAT gateway is in the process of being terminated
+    #     and may still be processing traffic.
+    #
+    #   * `deleted`\: The NAT gateway has been terminated and is no longer
+    #     processing traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which the NAT gateway is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the NAT gateway is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGateway AWS API Documentation
     #
     class NatGateway < Struct.new(
-      :vpc_id,
-      :subnet_id,
-      :nat_gateway_id,
       :create_time,
       :delete_time,
-      :nat_gateway_addresses,
-      :state,
       :failure_code,
       :failure_message,
-      :provisioned_bandwidth)
+      :nat_gateway_addresses,
+      :nat_gateway_id,
+      :provisioned_bandwidth,
+      :state,
+      :subnet_id,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes the IP addresses and network interface associated with a NAT
     # gateway.
     #
-    # @!attribute [rw] public_ip
-    #   The Elastic IP address associated with the NAT gateway.
-    #   @return [String]
-    #
     # @!attribute [rw] allocation_id
     #   The allocation ID of the Elastic IP address that's associated with
     #   the NAT gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_ip
-    #   The private IP address associated with the Elastic IP address.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface associated with the NAT gateway.
     #   @return [String]
     #
+    # @!attribute [rw] private_ip
+    #   The private IP address associated with the Elastic IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The Elastic IP address associated with the NAT gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress AWS API Documentation
     #
     class NatGatewayAddress < Struct.new(
-      :public_ip,
       :allocation_id,
+      :network_interface_id,
       :private_ip,
-      :network_interface_id)
+      :public_ip)
       include Aws::Structure
     end
 
     # Describes a network ACL.
     #
-    # @!attribute [rw] network_acl_id
-    #   The ID of the network ACL.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC for the network ACL.
-    #   @return [String]
-    #
-    # @!attribute [rw] is_default
-    #   Indicates whether this is the default network ACL for the VPC.
-    #   @return [Boolean]
+    # @!attribute [rw] associations
+    #   Any associations between the network ACL and one or more subnets
+    #   @return [Array<Types::NetworkAclAssociation>]
     #
     # @!attribute [rw] entries
     #   One or more entries (rules) in the network ACL.
     #   @return [Array<Types::NetworkAclEntry>]
     #
-    # @!attribute [rw] associations
-    #   Any associations between the network ACL and one or more subnets
-    #   @return [Array<Types::NetworkAclAssociation>]
+    # @!attribute [rw] is_default
+    #   Indicates whether this is the default network ACL for the VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_acl_id
+    #   The ID of the network ACL.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the network ACL.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC for the network ACL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAcl AWS API Documentation
     #
     class NetworkAcl < Struct.new(
-      :network_acl_id,
-      :vpc_id,
-      :is_default,
-      :entries,
       :associations,
-      :tags)
+      :entries,
+      :is_default,
+      :network_acl_id,
+      :tags,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -16736,10 +16953,26 @@ module Aws::EC2
 
     # Describes an entry in a network ACL.
     #
-    # @!attribute [rw] rule_number
-    #   The rule number for the entry. ACL entries are processed in
-    #   ascending order by rule number.
-    #   @return [Integer]
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress
+    #   Indicates whether the rule is an egress rule (applied to traffic
+    #   leaving the subnet).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   ICMP protocol: The ICMP type and code.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPv6 network range to allow or deny, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_range
+    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
     #   The protocol. A value of `-1` means all protocols.
@@ -16750,54 +16983,35 @@ module Aws::EC2
     #   rule.
     #   @return [String]
     #
-    # @!attribute [rw] egress
-    #   Indicates whether the rule is an egress rule (applied to traffic
-    #   leaving the subnet).
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range to allow or deny, in CIDR notation.
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 network range to allow or deny, in CIDR notation.
-    #   @return [String]
-    #
-    # @!attribute [rw] icmp_type_code
-    #   ICMP protocol: The ICMP type and code.
-    #   @return [Types::IcmpTypeCode]
-    #
-    # @!attribute [rw] port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
-    #   @return [Types::PortRange]
+    # @!attribute [rw] rule_number
+    #   The rule number for the entry. ACL entries are processed in
+    #   ascending order by rule number.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclEntry AWS API Documentation
     #
     class NetworkAclEntry < Struct.new(
-      :rule_number,
+      :cidr_block,
+      :egress,
+      :icmp_type_code,
+      :ipv_6_cidr_block,
+      :port_range,
       :protocol,
       :rule_action,
-      :egress,
-      :cidr_block,
-      :ipv_6_cidr_block,
-      :icmp_type_code,
-      :port_range)
+      :rule_number)
       include Aws::Structure
     end
 
     # Describes a network interface.
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
+    # @!attribute [rw] association
+    #   The association information for an Elastic IP address (IPv4)
+    #   associated with the network interface.
+    #   @return [Types::NetworkInterfaceAssociation]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
+    # @!attribute [rw] attachment
+    #   The network interface attachment.
+    #   @return [Types::NetworkInterfaceAttachment]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
@@ -16807,9 +17021,41 @@ module Aws::EC2
     #   A description.
     #   @return [String]
     #
+    # @!attribute [rw] groups
+    #   Any security groups for the network interface.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses associated with the network interface.
+    #   @return [Array<Types::NetworkInterfaceIpv6Address>]
+    #
+    # @!attribute [rw] mac_address
+    #   The MAC address.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_id
     #   The AWS account ID of the owner of the network interface.
     #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses associated with the network interface.
+    #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
     #
     # @!attribute [rw] requester_id
     #   The ID of the entity that launched the instance on your behalf (for
@@ -16820,96 +17066,54 @@ module Aws::EC2
     #   Indicates whether the network interface is being managed by AWS.
     #   @return [Boolean]
     #
-    # @!attribute [rw] status
-    #   The status of the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] mac_address
-    #   The MAC address.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_ip_address
-    #   The IPv4 address of the network interface within the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_dns_name
-    #   The private DNS name.
-    #   @return [String]
-    #
     # @!attribute [rw] source_dest_check
     #   Indicates whether traffic to or from the instance is validated.
     #   @return [Boolean]
     #
-    # @!attribute [rw] groups
-    #   Any security groups for the network interface.
-    #   @return [Array<Types::GroupIdentifier>]
+    # @!attribute [rw] status
+    #   The status of the network interface.
+    #   @return [String]
     #
-    # @!attribute [rw] attachment
-    #   The network interface attachment.
-    #   @return [Types::NetworkInterfaceAttachment]
-    #
-    # @!attribute [rw] association
-    #   The association information for an Elastic IP address (IPv4)
-    #   associated with the network interface.
-    #   @return [Types::NetworkInterfaceAssociation]
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
     #
     # @!attribute [rw] tag_set
     #   Any tags assigned to the network interface.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] private_ip_addresses
-    #   The private IPv4 addresses associated with the network interface.
-    #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   The IPv6 addresses associated with the network interface.
-    #   @return [Array<Types::NetworkInterfaceIpv6Address>]
-    #
-    # @!attribute [rw] interface_type
-    #   The type of interface.
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
-      :network_interface_id,
-      :subnet_id,
-      :vpc_id,
+      :association,
+      :attachment,
       :availability_zone,
       :description,
+      :groups,
+      :interface_type,
+      :ipv_6_addresses,
+      :mac_address,
+      :network_interface_id,
       :owner_id,
+      :private_dns_name,
+      :private_ip_address,
+      :private_ip_addresses,
       :requester_id,
       :requester_managed,
-      :status,
-      :mac_address,
-      :private_ip_address,
-      :private_dns_name,
       :source_dest_check,
-      :groups,
-      :attachment,
-      :association,
+      :status,
+      :subnet_id,
       :tag_set,
-      :private_ip_addresses,
-      :ipv_6_addresses,
-      :interface_type)
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes association information for an Elastic IP address (IPv4
     # only).
-    #
-    # @!attribute [rw] public_ip
-    #   The address of the Elastic IP address bound to the network
-    #   interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] public_dns_name
-    #   The public DNS name.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_owner_id
-    #   The ID of the Elastic IP address owner.
-    #   @return [String]
     #
     # @!attribute [rw] allocation_id
     #   The allocation ID.
@@ -16919,22 +17123,49 @@ module Aws::EC2
     #   The association ID.
     #   @return [String]
     #
+    # @!attribute [rw] ip_owner_id
+    #   The ID of the Elastic IP address owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_dns_name
+    #   The public DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The address of the Elastic IP address bound to the network
+    #   interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAssociation AWS API Documentation
     #
     class NetworkInterfaceAssociation < Struct.new(
-      :public_ip,
-      :public_dns_name,
-      :ip_owner_id,
       :allocation_id,
-      :association_id)
+      :association_id,
+      :ip_owner_id,
+      :public_dns_name,
+      :public_ip)
       include Aws::Structure
     end
 
     # Describes a network interface attachment.
     #
+    # @!attribute [rw] attach_time
+    #   The timestamp indicating when the attachment initiated.
+    #   @return [Time]
+    #
     # @!attribute [rw] attachment_id
     #   The ID of the network interface attachment.
     #   @return [String]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the network interface is deleted when the instance
+    #   is terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index of the network interface attachment on the
+    #   instance.
+    #   @return [Integer]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -16944,34 +17175,20 @@ module Aws::EC2
     #   The AWS account ID of the owner of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] device_index
-    #   The device index of the network interface attachment on the
-    #   instance.
-    #   @return [Integer]
-    #
     # @!attribute [rw] status
     #   The attachment state.
     #   @return [String]
     #
-    # @!attribute [rw] attach_time
-    #   The timestamp indicating when the attachment initiated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] delete_on_termination
-    #   Indicates whether the network interface is deleted when the instance
-    #   is terminated.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachment AWS API Documentation
     #
     class NetworkInterfaceAttachment < Struct.new(
+      :attach_time,
       :attachment_id,
+      :delete_on_termination,
+      :device_index,
       :instance_id,
       :instance_owner_id,
-      :device_index,
-      :status,
-      :attach_time,
-      :delete_on_termination)
+      :status)
       include Aws::Structure
     end
 
@@ -17017,31 +17234,31 @@ module Aws::EC2
 
     # Describes the private IPv4 address of a network interface.
     #
-    # @!attribute [rw] private_ip_address
-    #   The private IPv4 address.
-    #   @return [String]
-    #
-    # @!attribute [rw] private_dns_name
-    #   The private DNS name.
-    #   @return [String]
+    # @!attribute [rw] association
+    #   The association information for an Elastic IP address (IPv4)
+    #   associated with the network interface.
+    #   @return [Types::NetworkInterfaceAssociation]
     #
     # @!attribute [rw] primary
     #   Indicates whether this IPv4 address is the primary private IPv4
     #   address of the network interface.
     #   @return [Boolean]
     #
-    # @!attribute [rw] association
-    #   The association information for an Elastic IP address (IPv4)
-    #   associated with the network interface.
-    #   @return [Types::NetworkInterfaceAssociation]
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePrivateIpAddress AWS API Documentation
     #
     class NetworkInterfacePrivateIpAddress < Struct.new(
-      :private_ip_address,
-      :private_dns_name,
+      :association,
       :primary,
-      :association)
+      :private_dns_name,
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -17067,7 +17284,41 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the data that identifies an Amazon FPGA image (AFI) on the
+    # PCI bus.
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_id
+    #   The ID of the vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] subsystem_id
+    #   The ID of the subsystem.
+    #   @return [String]
+    #
+    # @!attribute [rw] subsystem_vendor_id
+    #   The ID of the vendor for the subsystem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PciId AWS API Documentation
+    #
+    class PciId < Struct.new(
+      :device_id,
+      :vendor_id,
+      :subsystem_id,
+      :subsystem_vendor_id)
+      include Aws::Structure
+    end
+
     # Describes the VPC peering connection options.
+    #
+    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+    #   If true, enables a local VPC to resolve public DNS hostnames to
+    #   private IP addresses when queried from instances in the peer VPC.
+    #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
     #   If true, enables outbound communication from an EC2-Classic instance
@@ -17081,17 +17332,12 @@ module Aws::EC2
     #   ClassicLink.
     #   @return [Boolean]
     #
-    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
-    #   If true, enables a local VPC to resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in the peer VPC.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptions AWS API Documentation
     #
     class PeeringConnectionOptions < Struct.new(
+      :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link,
-      :allow_dns_resolution_from_remote_vpc)
+      :allow_egress_from_local_vpc_to_remote_classic_link)
       include Aws::Structure
     end
 
@@ -17101,10 +17347,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         allow_dns_resolution_from_remote_vpc: false,
     #         allow_egress_from_local_classic_link_to_remote_vpc: false,
     #         allow_egress_from_local_vpc_to_remote_classic_link: false,
-    #         allow_dns_resolution_from_remote_vpc: false,
     #       }
+    #
+    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+    #   If true, enables a local VPC to resolve public DNS hostnames to
+    #   private IP addresses when queried from instances in the peer VPC.
+    #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
     #   If true, enables outbound communication from an EC2-Classic instance
@@ -17118,17 +17369,12 @@ module Aws::EC2
     #   ClassicLink.
     #   @return [Boolean]
     #
-    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
-    #   If true, enables a local VPC to resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in the peer VPC.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptionsRequest AWS API Documentation
     #
     class PeeringConnectionOptionsRequest < Struct.new(
+      :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link,
-      :allow_dns_resolution_from_remote_vpc)
+      :allow_egress_from_local_vpc_to_remote_classic_link)
       include Aws::Structure
     end
 
@@ -17139,19 +17385,30 @@ module Aws::EC2
     #
     #       {
     #         availability_zone: "String",
-    #         group_name: "String",
-    #         tenancy: "default", # accepts default, dedicated, host
-    #         host_id: "String",
     #         affinity: "String",
+    #         group_name: "String",
+    #         host_id: "String",
+    #         tenancy: "default", # accepts default, dedicated, host
+    #         spread_domain: "String",
     #       }
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] affinity
+    #   The affinity setting for the instance on the Dedicated Host. This
+    #   parameter is not supported for the ImportInstance command.
+    #   @return [String]
+    #
     # @!attribute [rw] group_name
     #   The name of the placement group the instance is in (for cluster
     #   compute instances).
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host on which the instance resides. This
+    #   parameter is not supported for the ImportInstance command.
     #   @return [String]
     #
     # @!attribute [rw] tenancy
@@ -17161,24 +17418,19 @@ module Aws::EC2
     #   command.
     #   @return [String]
     #
-    # @!attribute [rw] host_id
-    #   The ID of the Dedicated Host on which the instance resides. This
-    #   parameter is not supported for the ImportInstance command.
-    #   @return [String]
-    #
-    # @!attribute [rw] affinity
-    #   The affinity setting for the instance on the Dedicated Host. This
-    #   parameter is not supported for the ImportInstance command.
+    # @!attribute [rw] spread_domain
+    #   Reserved for future use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
     #
     class Placement < Struct.new(
       :availability_zone,
+      :affinity,
       :group_name,
-      :tenancy,
       :host_id,
-      :affinity)
+      :tenancy,
+      :spread_domain)
       include Aws::Structure
     end
 
@@ -17188,20 +17440,20 @@ module Aws::EC2
     #   The name of the placement group.
     #   @return [String]
     #
-    # @!attribute [rw] strategy
-    #   The placement strategy.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The state of the placement group.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy
+    #   The placement strategy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
       :group_name,
-      :strategy,
-      :state)
+      :state,
+      :strategy)
       include Aws::Structure
     end
 
@@ -17233,6 +17485,10 @@ module Aws::EC2
 
     # Describes prefixes for AWS services.
     #
+    # @!attribute [rw] cidrs
+    #   The IP address range of the AWS service.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] prefix_list_id
     #   The ID of the prefix.
     #   @return [String]
@@ -17241,16 +17497,12 @@ module Aws::EC2
     #   The name of the prefix.
     #   @return [String]
     #
-    # @!attribute [rw] cidrs
-    #   The IP address range of the AWS service.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixList AWS API Documentation
     #
     class PrefixList < Struct.new(
+      :cidrs,
       :prefix_list_id,
-      :prefix_list_name,
-      :cidrs)
+      :prefix_list_name)
       include Aws::Structure
     end
 
@@ -17276,21 +17528,6 @@ module Aws::EC2
 
     # Describes the price for a Reserved Instance.
     #
-    # @!attribute [rw] term
-    #   The number of months remaining in the reservation. For example, 2 is
-    #   the second to the last month before the capacity reservation
-    #   expires.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] price
-    #   The fixed price for the term.
-    #   @return [Float]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency for transacting the Reserved Instance resale. At this
-    #   time, the only supported currency is `USD`.
-    #   @return [String]
-    #
     # @!attribute [rw] active
     #   The current price schedule, as determined by the term remaining for
     #   the Reserved Instance in the listing.
@@ -17305,13 +17542,28 @@ module Aws::EC2
     #   for months 2 and 1.
     #   @return [Boolean]
     #
+    # @!attribute [rw] currency_code
+    #   The currency for transacting the Reserved Instance resale. At this
+    #   time, the only supported currency is `USD`.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The fixed price for the term.
+    #   @return [Float]
+    #
+    # @!attribute [rw] term
+    #   The number of months remaining in the reservation. For example, 2 is
+    #   the second to the last month before the capacity reservation
+    #   expires.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceSchedule AWS API Documentation
     #
     class PriceSchedule < Struct.new(
-      :term,
-      :price,
+      :active,
       :currency_code,
-      :active)
+      :price,
+      :term)
       include Aws::Structure
     end
 
@@ -17321,10 +17573,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         term: 1,
-    #         price: 1.0,
     #         currency_code: "USD", # accepts USD
+    #         price: 1.0,
+    #         term: 1,
     #       }
+    #
+    # @!attribute [rw] currency_code
+    #   The currency for transacting the Reserved Instance resale. At this
+    #   time, the only supported currency is `USD`.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The fixed price for the term.
+    #   @return [Float]
     #
     # @!attribute [rw] term
     #   The number of months remaining in the reservation. For example, 2 is
@@ -17332,39 +17593,30 @@ module Aws::EC2
     #   expires.
     #   @return [Integer]
     #
-    # @!attribute [rw] price
-    #   The fixed price for the term.
-    #   @return [Float]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency for transacting the Reserved Instance resale. At this
-    #   time, the only supported currency is `USD`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceScheduleSpecification AWS API Documentation
     #
     class PriceScheduleSpecification < Struct.new(
-      :term,
+      :currency_code,
       :price,
-      :currency_code)
+      :term)
       include Aws::Structure
     end
 
     # Describes a Reserved Instance offering.
     #
-    # @!attribute [rw] price
-    #   The price per instance.
-    #   @return [Float]
-    #
     # @!attribute [rw] count
     #   The number of reservations available for the price.
     #   @return [Integer]
     #
+    # @!attribute [rw] price
+    #   The price per instance.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PricingDetail AWS API Documentation
     #
     class PricingDetail < Struct.new(
-      :price,
-      :count)
+      :count,
+      :price)
       include Aws::Structure
     end
 
@@ -17374,24 +17626,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         private_ip_address: "String", # required
     #         primary: false,
+    #         private_ip_address: "String", # required
     #       }
-    #
-    # @!attribute [rw] private_ip_address
-    #   The private IPv4 addresses.
-    #   @return [String]
     #
     # @!attribute [rw] primary
     #   Indicates whether the private IPv4 address is the primary private
     #   IPv4 address. Only one IPv4 address can be designated as primary.
     #   @return [Boolean]
     #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 addresses.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateIpAddressSpecification AWS API Documentation
     #
     class PrivateIpAddressSpecification < Struct.new(
-      :private_ip_address,
-      :primary)
+      :primary,
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -17434,7 +17686,7 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
     # [2]: https://console.aws.amazon.com/support/home?
     #
-    # @!attribute [rw] provisioned
+    # @!attribute [rw] provision_time
     #   Reserved. If you need to sustain traffic greater than the
     #   [documented limits][1], contact us through the [Support Center][2].
     #
@@ -17442,9 +17694,9 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
-    #   @return [String]
+    #   @return [Time]
     #
-    # @!attribute [rw] requested
+    # @!attribute [rw] provisioned
     #   Reserved. If you need to sustain traffic greater than the
     #   [documented limits][1], contact us through the [Support Center][2].
     #
@@ -17464,7 +17716,7 @@ module Aws::EC2
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Time]
     #
-    # @!attribute [rw] provision_time
+    # @!attribute [rw] requested
     #   Reserved. If you need to sustain traffic greater than the
     #   [documented limits][1], contact us through the [Support Center][2].
     #
@@ -17472,7 +17724,7 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
     #   [2]: https://console.aws.amazon.com/support/home?
-    #   @return [Time]
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   Reserved. If you need to sustain traffic greater than the
@@ -17487,23 +17739,36 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionedBandwidth AWS API Documentation
     #
     class ProvisionedBandwidth < Struct.new(
-      :provisioned,
-      :requested,
-      :request_time,
       :provision_time,
+      :provisioned,
+      :request_time,
+      :requested,
       :status)
       include Aws::Structure
     end
 
     # Describes the result of the purchase.
     #
-    # @!attribute [rw] host_reservation_id
-    #   The ID of the reservation.
+    # @!attribute [rw] currency_code
+    #   The currency in which the `UpfrontPrice` and `HourlyPrice` amounts
+    #   are specified. At this time, the only supported currency is `USD`.
     #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the reservation's term in seconds.
+    #   @return [Integer]
     #
     # @!attribute [rw] host_id_set
     #   The IDs of the Dedicated Hosts associated with the reservation.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] host_reservation_id
+    #   The ID of the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_price
+    #   The hourly price of the reservation per hour.
+    #   @return [String]
     #
     # @!attribute [rw] instance_family
     #   The instance family on the Dedicated Host that the reservation can
@@ -17518,30 +17783,17 @@ module Aws::EC2
     #   The upfront price of the reservation.
     #   @return [String]
     #
-    # @!attribute [rw] hourly_price
-    #   The hourly price of the reservation per hour.
-    #   @return [String]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency in which the `UpfrontPrice` and `HourlyPrice` amounts
-    #   are specified. At this time, the only supported currency is `USD`.
-    #   @return [String]
-    #
-    # @!attribute [rw] duration
-    #   The duration of the reservation's term in seconds.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Purchase AWS API Documentation
     #
     class Purchase < Struct.new(
-      :host_reservation_id,
+      :currency_code,
+      :duration,
       :host_id_set,
+      :host_reservation_id,
+      :hourly_price,
       :instance_family,
       :payment_option,
-      :upfront_price,
-      :hourly_price,
-      :currency_code,
-      :duration)
+      :upfront_price)
       include Aws::Structure
     end
 
@@ -17549,15 +17801,27 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         offering_id: "String", # required
+    #         client_token: "String",
+    #         currency_code: "USD", # accepts USD
     #         host_id_set: ["String"], # required
     #         limit_price: "String",
-    #         currency_code: "USD", # accepts USD
-    #         client_token: "String",
+    #         offering_id: "String", # required
     #       }
     #
-    # @!attribute [rw] offering_id
-    #   The ID of the offering.
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [How to Ensure
+    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
+    #   `totalHourlyPrice` amounts are specified. At this time, the only
+    #   supported currency is `USD`.
     #   @return [String]
     #
     # @!attribute [rw] host_id_set
@@ -17575,52 +17839,21 @@ module Aws::EC2
     #   example, to indicate a limit price of USD 100, specify 100.00.
     #   @return [String]
     #
-    # @!attribute [rw] currency_code
-    #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
-    #   `totalHourlyPrice` amounts are specified. At this time, the only
-    #   supported currency is `USD`.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    # @!attribute [rw] offering_id
+    #   The ID of the offering.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationRequest AWS API Documentation
     #
     class PurchaseHostReservationRequest < Struct.new(
-      :offering_id,
+      :client_token,
+      :currency_code,
       :host_id_set,
       :limit_price,
-      :currency_code,
-      :client_token)
+      :offering_id)
       include Aws::Structure
     end
 
-    # @!attribute [rw] purchase
-    #   Describes the details of the purchase.
-    #   @return [Array<Types::Purchase>]
-    #
-    # @!attribute [rw] total_upfront_price
-    #   The total amount that will be charged to your account when you
-    #   purchase the reservation.
-    #   @return [String]
-    #
-    # @!attribute [rw] total_hourly_price
-    #   The total hourly price of the reservation calculated per hour.
-    #   @return [String]
-    #
-    # @!attribute [rw] currency_code
-    #   The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
-    #   amounts are specified. At this time, the only supported currency is
-    #   `USD`.
-    #   @return [String]
-    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
     #   of the request. For more information, see [How to Ensure
@@ -17631,14 +17864,33 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] currency_code
+    #   The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
+    #   amounts are specified. At this time, the only supported currency is
+    #   `USD`.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase
+    #   Describes the details of the purchase.
+    #   @return [Array<Types::Purchase>]
+    #
+    # @!attribute [rw] total_hourly_price
+    #   The total hourly price of the reservation calculated per hour.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_upfront_price
+    #   The total amount that will be charged to your account when you
+    #   purchase the reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationResult AWS API Documentation
     #
     class PurchaseHostReservationResult < Struct.new(
-      :purchase,
-      :total_upfront_price,
-      :total_hourly_price,
+      :client_token,
       :currency_code,
-      :client_token)
+      :purchase,
+      :total_hourly_price,
+      :total_upfront_price)
       include Aws::Structure
     end
 
@@ -17648,23 +17900,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         purchase_token: "String", # required
     #         instance_count: 1, # required
+    #         purchase_token: "String", # required
     #       }
-    #
-    # @!attribute [rw] purchase_token
-    #   The purchase token.
-    #   @return [String]
     #
     # @!attribute [rw] instance_count
     #   The number of instances.
     #   @return [Integer]
     #
+    # @!attribute [rw] purchase_token
+    #   The purchase token.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseRequest AWS API Documentation
     #
     class PurchaseRequest < Struct.new(
-      :purchase_token,
-      :instance_count)
+      :instance_count,
+      :purchase_token)
       include Aws::Structure
     end
 
@@ -17674,14 +17926,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         reserved_instances_offering_id: "String", # required
     #         instance_count: 1, # required
+    #         reserved_instances_offering_id: "String", # required
+    #         dry_run: false,
     #         limit_price: {
     #           amount: 1.0,
     #           currency_code: "USD", # accepts USD
     #         },
     #       }
+    #
+    # @!attribute [rw] instance_count
+    #   The number of Reserved Instances to purchase.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reserved_instances_offering_id
+    #   The ID of the Reserved Instance offering to purchase.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17689,14 +17949,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] reserved_instances_offering_id
-    #   The ID of the Reserved Instance offering to purchase.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_count
-    #   The number of Reserved Instances to purchase.
-    #   @return [Integer]
     #
     # @!attribute [rw] limit_price
     #   Specified for Reserved Instance Marketplace offerings to limit the
@@ -17707,9 +17959,9 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingRequest AWS API Documentation
     #
     class PurchaseReservedInstancesOfferingRequest < Struct.new(
-      :dry_run,
-      :reserved_instances_offering_id,
       :instance_count,
+      :reserved_instances_offering_id,
+      :dry_run,
       :limit_price)
       include Aws::Structure
     end
@@ -17733,22 +17985,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         client_token: "String",
+    #         dry_run: false,
     #         purchase_requests: [ # required
     #           {
-    #             purchase_token: "String", # required
     #             instance_count: 1, # required
+    #             purchase_token: "String", # required
     #           },
     #         ],
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that ensures the idempotency of
@@ -17762,6 +18007,13 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] purchase_requests
     #   One or more purchase requests.
     #   @return [Array<Types::PurchaseRequest>]
@@ -17769,8 +18021,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesRequest AWS API Documentation
     #
     class PurchaseScheduledInstancesRequest < Struct.new(
-      :dry_run,
       :client_token,
+      :dry_run,
       :purchase_requests)
       include Aws::Structure
     end
@@ -17794,9 +18046,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_ids: ["String"], # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17805,51 +18061,47 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstancesRequest AWS API Documentation
     #
     class RebootInstancesRequest < Struct.new(
-      :dry_run,
-      :instance_ids)
+      :instance_ids,
+      :dry_run)
       include Aws::Structure
     end
 
     # Describes a recurring charge.
     #
-    # @!attribute [rw] frequency
-    #   The frequency of the recurring charge.
-    #   @return [String]
-    #
     # @!attribute [rw] amount
     #   The amount of the recurring charge.
     #   @return [Float]
     #
+    # @!attribute [rw] frequency
+    #   The frequency of the recurring charge.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RecurringCharge AWS API Documentation
     #
     class RecurringCharge < Struct.new(
-      :frequency,
-      :amount)
+      :amount,
+      :frequency)
       include Aws::Structure
     end
 
     # Describes a region.
     #
-    # @!attribute [rw] region_name
-    #   The name of the region.
-    #   @return [String]
-    #
     # @!attribute [rw] endpoint
     #   The region service endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
     #
     class Region < Struct.new(
-      :region_name,
-      :endpoint)
+      :endpoint,
+      :region_name)
       include Aws::Structure
     end
 
@@ -17859,34 +18111,53 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         image_location: "String",
-    #         name: "String", # required
-    #         description: "String",
     #         architecture: "i386", # accepts i386, x86_64
-    #         kernel_id: "String",
-    #         ramdisk_id: "String",
-    #         billing_products: ["String"],
-    #         root_device_name: "String",
     #         block_device_mappings: [
     #           {
-    #             virtual_name: "String",
     #             device_name: "String",
+    #             virtual_name: "String",
     #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               iops: 1,
-    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
-    #         virtualization_type: "String",
-    #         sriov_net_support: "String",
+    #         description: "String",
+    #         dry_run: false,
     #         ena_support: false,
+    #         kernel_id: "String",
+    #         name: "String", # required
+    #         billing_products: ["String"],
+    #         ramdisk_id: "String",
+    #         root_device_name: "String",
+    #         sriov_net_support: "String",
+    #         virtualization_type: "String",
     #       }
+    #
+    # @!attribute [rw] image_location
+    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The architecture of the AMI.
+    #
+    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance
+    #   store-backed AMIs, the architecture specified in the manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   One or more block device mapping entries.
+    #   @return [Array<Types::BlockDeviceMapping>]
+    #
+    # @!attribute [rw] description
+    #   A description for your AMI.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17895,8 +18166,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    # @!attribute [rw] ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the AMI and
+    #   any instances that you launch from the AMI.
+    #
+    #   This option is supported only for HVM AMIs. Specifying this option
+    #   with a PV AMI can make instances launched from the AMI unreachable.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -17907,44 +18186,19 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description for your AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] architecture
-    #   The architecture of the AMI.
-    #
-    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance
-    #   store-backed AMIs, the architecture specified in the manifest file.
-    #   @return [String]
-    #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
-    #   @return [String]
-    #
     # @!attribute [rw] billing_products
     #   The billing product codes. Your account must be authorized to
     #   specify billing product codes. Otherwise, you can use the AWS
     #   Marketplace to bill for the use of an AMI.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
     # @!attribute [rw] root_device_name
     #   The name of the root device (for example, `/dev/sda1`, or
     #   `/dev/xvda`).
-    #   @return [String]
-    #
-    # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
-    #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] virtualization_type
-    #   The type of virtualization.
-    #
-    #   Default: `paravirtual`
     #   @return [String]
     #
     # @!attribute [rw] sriov_net_support
@@ -17958,30 +18212,28 @@ module Aws::EC2
     #   with a PV AMI can make instances launched from the AMI unreachable.
     #   @return [String]
     #
-    # @!attribute [rw] ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the AMI and
-    #   any instances that you launch from the AMI.
+    # @!attribute [rw] virtualization_type
+    #   The type of virtualization.
     #
-    #   This option is supported only for HVM AMIs. Specifying this option
-    #   with a PV AMI can make instances launched from the AMI unreachable.
-    #   @return [Boolean]
+    #   Default: `paravirtual`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
-      :dry_run,
       :image_location,
-      :name,
-      :description,
       :architecture,
-      :kernel_id,
-      :ramdisk_id,
-      :billing_products,
-      :root_device_name,
       :block_device_mappings,
-      :virtualization_type,
+      :description,
+      :dry_run,
+      :ena_support,
+      :kernel_id,
+      :name,
+      :billing_products,
+      :ramdisk_id,
+      :root_device_name,
       :sriov_net_support,
-      :ena_support)
+      :virtualization_type)
       include Aws::Structure
     end
 
@@ -18047,10 +18299,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         public_ip: "String",
     #         allocation_id: "String",
+    #         public_ip: "String",
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18059,20 +18319,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
-    #   @return [String]
-    #
-    # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddressRequest AWS API Documentation
     #
     class ReleaseAddressRequest < Struct.new(
-      :dry_run,
+      :allocation_id,
       :public_ip,
-      :allocation_id)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -18159,10 +18411,15 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         association_id: "String", # required
+    #         dry_run: false,
     #         network_acl_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the current association between the original network ACL
+    #   and the subnet.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18171,11 +18428,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] association_id
-    #   The ID of the current association between the original network ACL
-    #   and the subnet.
-    #   @return [String]
-    #
     # @!attribute [rw] network_acl_id
     #   The ID of the new network ACL to associate with the subnet.
     #   @return [String]
@@ -18183,8 +18435,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociationRequest AWS API Documentation
     #
     class ReplaceNetworkAclAssociationRequest < Struct.new(
-      :dry_run,
       :association_id,
+      :dry_run,
       :network_acl_id)
       include Aws::Structure
     end
@@ -18208,23 +18460,28 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         network_acl_id: "String", # required
-    #         rule_number: 1, # required
-    #         protocol: "String", # required
-    #         rule_action: "allow", # required, accepts allow, deny
-    #         egress: false, # required
     #         cidr_block: "String",
-    #         ipv_6_cidr_block: "String",
+    #         dry_run: false,
+    #         egress: false, # required
     #         icmp_type_code: {
-    #           type: 1,
     #           code: 1,
+    #           type: 1,
     #         },
+    #         ipv_6_cidr_block: "String",
+    #         network_acl_id: "String", # required
     #         port_range: {
     #           from: 1,
     #           to: 1,
     #         },
+    #         protocol: "String", # required
+    #         rule_action: "allow", # required, accepts allow, deny
+    #         rule_number: 1, # required
     #       }
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation (for
+    #   example `172.16.0.0/24`).
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18233,13 +18490,31 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] egress
+    #   Indicates whether to replace the egress rule.
+    #
+    #   Default: If no value is specified, we replace the ingress rule.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an
+    #   IPv6 CIDR block.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPv6 network range to allow or deny, in CIDR notation (for
+    #   example `2001:bd8:1234:1a00::/64`).
+    #   @return [String]
+    #
     # @!attribute [rw] network_acl_id
     #   The ID of the ACL.
     #   @return [String]
     #
-    # @!attribute [rw] rule_number
-    #   The rule number of the entry to replace.
-    #   @return [Integer]
+    # @!attribute [rw] port_range
+    #   TCP or UDP protocols: The range of ports the rule applies to.
+    #   Required if specifying TCP (6) or UDP (17) for the protocol.
+    #   @return [Types::PortRange]
     #
     # @!attribute [rw] protocol
     #   The IP protocol. You can specify `all` or `-1` to mean all
@@ -18257,46 +18532,23 @@ module Aws::EC2
     #   rule.
     #   @return [String]
     #
-    # @!attribute [rw] egress
-    #   Indicates whether to replace the egress rule.
-    #
-    #   Default: If no value is specified, we replace the ingress rule.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range to allow or deny, in CIDR notation (for
-    #   example `172.16.0.0/24`).
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 network range to allow or deny, in CIDR notation (for
-    #   example `2001:bd8:1234:1a00::/64`).
-    #   @return [String]
-    #
-    # @!attribute [rw] icmp_type_code
-    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an
-    #   IPv6 CIDR block.
-    #   @return [Types::IcmpTypeCode]
-    #
-    # @!attribute [rw] port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to.
-    #   Required if specifying TCP (6) or UDP (17) for the protocol.
-    #   @return [Types::PortRange]
+    # @!attribute [rw] rule_number
+    #   The rule number of the entry to replace.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntryRequest AWS API Documentation
     #
     class ReplaceNetworkAclEntryRequest < Struct.new(
+      :cidr_block,
       :dry_run,
+      :egress,
+      :icmp_type_code,
+      :ipv_6_cidr_block,
       :network_acl_id,
-      :rule_number,
+      :port_range,
       :protocol,
       :rule_action,
-      :egress,
-      :cidr_block,
-      :ipv_6_cidr_block,
-      :icmp_type_code,
-      :port_range)
+      :rule_number)
       include Aws::Structure
     end
 
@@ -18306,37 +18558,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         route_table_id: "String", # required
     #         destination_cidr_block: "String",
-    #         gateway_id: "String",
     #         destination_ipv_6_cidr_block: "String",
+    #         dry_run: false,
     #         egress_only_internet_gateway_id: "String",
+    #         gateway_id: "String",
     #         instance_id: "String",
-    #         network_interface_id: "String",
-    #         vpc_peering_connection_id: "String",
     #         nat_gateway_id: "String",
+    #         network_interface_id: "String",
+    #         route_table_id: "String", # required
+    #         vpc_peering_connection_id: "String",
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the route table.
-    #   @return [String]
     #
     # @!attribute [rw] destination_cidr_block
     #   The IPv4 CIDR address block used for the destination match. The
     #   value you provide must match the CIDR of an existing route in the
     #   table.
-    #   @return [String]
-    #
-    # @!attribute [rw] gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
     #   @return [String]
     #
     # @!attribute [rw] destination_ipv_6_cidr_block
@@ -18345,39 +18582,54 @@ module Aws::EC2
     #   table.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of an Internet gateway or virtual private gateway.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of a NAT instance in your VPC.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The ID of a network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
-    # @!attribute [rw] nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteRequest AWS API Documentation
     #
     class ReplaceRouteRequest < Struct.new(
-      :dry_run,
-      :route_table_id,
       :destination_cidr_block,
-      :gateway_id,
       :destination_ipv_6_cidr_block,
+      :dry_run,
       :egress_only_internet_gateway_id,
+      :gateway_id,
       :instance_id,
+      :nat_gateway_id,
       :network_interface_id,
-      :vpc_peering_connection_id,
-      :nat_gateway_id)
+      :route_table_id,
+      :vpc_peering_connection_id)
       include Aws::Structure
     end
 
@@ -18387,10 +18639,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         association_id: "String", # required
+    #         dry_run: false,
     #         route_table_id: "String", # required
     #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18399,10 +18655,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] association_id
-    #   The association ID.
-    #   @return [String]
-    #
     # @!attribute [rw] route_table_id
     #   The ID of the new route table to associate with the subnet.
     #   @return [String]
@@ -18410,8 +18662,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociationRequest AWS API Documentation
     #
     class ReplaceRouteTableAssociationRequest < Struct.new(
-      :dry_run,
       :association_id,
+      :dry_run,
       :route_table_id)
       include Aws::Structure
     end
@@ -18435,14 +18687,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         instances: ["String"], # required
-    #         status: "ok", # required, accepts ok, impaired
-    #         start_time: Time.now,
-    #         end_time: Time.now,
-    #         reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
     #         description: "String",
+    #         dry_run: false,
+    #         end_time: Time.now,
+    #         instances: ["String"], # required
+    #         reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
+    #         start_time: Time.now,
+    #         status: "ok", # required, accepts ok, impaired
     #       }
+    #
+    # @!attribute [rw] description
+    #   Descriptive text about the health state of your instance.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18451,21 +18707,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instances
-    #   One or more instances.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] status
-    #   The status of all instances listed.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The time at which the reported instance health state began.
-    #   @return [Time]
-    #
     # @!attribute [rw] end_time
     #   The time at which the reported instance health state ended.
     #   @return [Time]
+    #
+    # @!attribute [rw] instances
+    #   One or more instances.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] reason_codes
     #   One or more reason codes that describes the health state of your
@@ -18497,20 +18745,24 @@ module Aws::EC2
     #   * `other`\: \[explain using the description parameter\]
     #   @return [Array<String>]
     #
-    # @!attribute [rw] description
-    #   Descriptive text about the health state of your instance.
+    # @!attribute [rw] start_time
+    #   The time at which the reported instance health state began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of all instances listed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatusRequest AWS API Documentation
     #
     class ReportInstanceStatusRequest < Struct.new(
+      :description,
       :dry_run,
-      :instances,
-      :status,
-      :start_time,
       :end_time,
+      :instances,
       :reason_codes,
-      :description)
+      :start_time,
+      :status)
       include Aws::Structure
     end
 
@@ -18522,90 +18774,90 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         spot_fleet_request_config: { # required
+    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
     #           client_token: "String",
-    #           spot_price: "String", # required
-    #           target_capacity: 1, # required
-    #           valid_from: Time.now,
-    #           valid_until: Time.now,
-    #           terminate_instances_with_expiration: false,
+    #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
+    #           fulfilled_capacity: 1.0,
     #           iam_fleet_role: "String", # required
     #           launch_specifications: [ # required
     #             {
-    #               image_id: "String",
-    #               key_name: "String",
     #               security_groups: [
     #                 {
     #                   group_name: "String",
     #                   group_id: "String",
     #                 },
     #               ],
-    #               user_data: "String",
     #               addressing_type: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #               placement: {
-    #                 availability_zone: "String",
-    #                 group_name: "String",
-    #                 tenancy: "default", # accepts default, dedicated, host
-    #               },
-    #               kernel_id: "String",
-    #               ramdisk_id: "String",
     #               block_device_mappings: [
     #                 {
-    #                   virtual_name: "String",
     #                   device_name: "String",
+    #                   virtual_name: "String",
     #                   ebs: {
+    #                     encrypted: false,
+    #                     delete_on_termination: false,
+    #                     iops: 1,
     #                     snapshot_id: "String",
     #                     volume_size: 1,
-    #                     delete_on_termination: false,
     #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                     iops: 1,
-    #                     encrypted: false,
     #                   },
     #                   no_device: "String",
     #                 },
     #               ],
+    #               ebs_optimized: false,
+    #               iam_instance_profile: {
+    #                 arn: "String",
+    #                 name: "String",
+    #               },
+    #               image_id: "String",
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #               kernel_id: "String",
+    #               key_name: "String",
     #               monitoring: {
     #                 enabled: false,
     #               },
-    #               subnet_id: "String",
     #               network_interfaces: [
     #                 {
-    #                   network_interface_id: "String",
-    #                   device_index: 1,
-    #                   subnet_id: "String",
-    #                   description: "String",
-    #                   private_ip_address: "String",
-    #                   groups: ["String"],
-    #                   delete_on_termination: false,
-    #                   private_ip_addresses: [
-    #                     {
-    #                       private_ip_address: "String", # required
-    #                       primary: false,
-    #                     },
-    #                   ],
-    #                   secondary_private_ip_address_count: 1,
     #                   associate_public_ip_address: false,
+    #                   delete_on_termination: false,
+    #                   description: "String",
+    #                   device_index: 1,
+    #                   groups: ["String"],
+    #                   ipv_6_address_count: 1,
     #                   ipv_6_addresses: [
     #                     {
     #                       ipv_6_address: "String",
     #                     },
     #                   ],
-    #                   ipv_6_address_count: 1,
+    #                   network_interface_id: "String",
+    #                   private_ip_address: "String",
+    #                   private_ip_addresses: [
+    #                     {
+    #                       primary: false,
+    #                       private_ip_address: "String", # required
+    #                     },
+    #                   ],
+    #                   secondary_private_ip_address_count: 1,
+    #                   subnet_id: "String",
     #                 },
     #               ],
-    #               iam_instance_profile: {
-    #                 arn: "String",
-    #                 name: "String",
+    #               placement: {
+    #                 availability_zone: "String",
+    #                 group_name: "String",
+    #                 tenancy: "default", # accepts default, dedicated, host
     #               },
-    #               ebs_optimized: false,
-    #               weighted_capacity: 1.0,
+    #               ramdisk_id: "String",
     #               spot_price: "String",
+    #               subnet_id: "String",
+    #               user_data: "String",
+    #               weighted_capacity: 1.0,
     #             },
     #           ],
-    #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
-    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
-    #           fulfilled_capacity: 1.0,
+    #           spot_price: "String", # required
+    #           target_capacity: 1, # required
+    #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain
+    #           valid_from: Time.now,
+    #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
     #         },
     #       }
@@ -18648,144 +18900,82 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         spot_price: "String", # required
-    #         client_token: "String",
-    #         instance_count: 1,
-    #         type: "one-time", # accepts one-time, persistent
-    #         valid_from: Time.now,
-    #         valid_until: Time.now,
-    #         launch_group: "String",
     #         availability_zone_group: "String",
     #         block_duration_minutes: 1,
+    #         client_token: "String",
+    #         dry_run: false,
+    #         instance_count: 1,
+    #         launch_group: "String",
     #         launch_specification: {
-    #           image_id: "String",
-    #           key_name: "String",
+    #           security_group_ids: ["String"],
     #           security_groups: ["String"],
-    #           user_data: "String",
     #           addressing_type: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #           placement: {
-    #             availability_zone: "String",
-    #             group_name: "String",
-    #             tenancy: "default", # accepts default, dedicated, host
-    #           },
-    #           kernel_id: "String",
-    #           ramdisk_id: "String",
     #           block_device_mappings: [
     #             {
-    #               virtual_name: "String",
     #               device_name: "String",
+    #               virtual_name: "String",
     #               ebs: {
+    #                 encrypted: false,
+    #                 delete_on_termination: false,
+    #                 iops: 1,
     #                 snapshot_id: "String",
     #                 volume_size: 1,
-    #                 delete_on_termination: false,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                 iops: 1,
-    #                 encrypted: false,
     #               },
     #               no_device: "String",
     #             },
     #           ],
-    #           subnet_id: "String",
+    #           ebs_optimized: false,
+    #           iam_instance_profile: {
+    #             arn: "String",
+    #             name: "String",
+    #           },
+    #           image_id: "String",
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           kernel_id: "String",
+    #           key_name: "String",
+    #           monitoring: {
+    #             enabled: false, # required
+    #           },
     #           network_interfaces: [
     #             {
-    #               network_interface_id: "String",
-    #               device_index: 1,
-    #               subnet_id: "String",
-    #               description: "String",
-    #               private_ip_address: "String",
-    #               groups: ["String"],
-    #               delete_on_termination: false,
-    #               private_ip_addresses: [
-    #                 {
-    #                   private_ip_address: "String", # required
-    #                   primary: false,
-    #                 },
-    #               ],
-    #               secondary_private_ip_address_count: 1,
     #               associate_public_ip_address: false,
+    #               delete_on_termination: false,
+    #               description: "String",
+    #               device_index: 1,
+    #               groups: ["String"],
+    #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
     #                   ipv_6_address: "String",
     #                 },
     #               ],
-    #               ipv_6_address_count: 1,
+    #               network_interface_id: "String",
+    #               private_ip_address: "String",
+    #               private_ip_addresses: [
+    #                 {
+    #                   primary: false,
+    #                   private_ip_address: "String", # required
+    #                 },
+    #               ],
+    #               secondary_private_ip_address_count: 1,
+    #               subnet_id: "String",
     #             },
     #           ],
-    #           iam_instance_profile: {
-    #             arn: "String",
-    #             name: "String",
+    #           placement: {
+    #             availability_zone: "String",
+    #             group_name: "String",
+    #             tenancy: "default", # accepts default, dedicated, host
     #           },
-    #           ebs_optimized: false,
-    #           monitoring: {
-    #             enabled: false, # required
-    #           },
-    #           security_group_ids: ["String"],
+    #           ramdisk_id: "String",
+    #           subnet_id: "String",
+    #           user_data: "String",
     #         },
+    #         spot_price: "String", # required
+    #         type: "one-time", # accepts one-time, persistent
+    #         valid_from: Time.now,
+    #         valid_until: Time.now,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] spot_price
-    #   The maximum hourly price (bid) for any Spot instance launched to
-    #   fulfill the request.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_count
-    #   The maximum number of Spot instances to launch.
-    #
-    #   Default: 1
-    #   @return [Integer]
-    #
-    # @!attribute [rw] type
-    #   The Spot instance request type.
-    #
-    #   Default: `one-time`
-    #   @return [String]
-    #
-    # @!attribute [rw] valid_from
-    #   The start date of the request. If this is a one-time request, the
-    #   request becomes active at this date and time and remains active
-    #   until all instances launch, the request expires, or the request is
-    #   canceled. If the request is persistent, the request becomes active
-    #   at this date and time and remains active until it expires or is
-    #   canceled.
-    #
-    #   Default: The request is effective indefinitely.
-    #   @return [Time]
-    #
-    # @!attribute [rw] valid_until
-    #   The end date of the request. If this is a one-time request, the
-    #   request remains active until all instances launch, the request is
-    #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date and time is
-    #   reached.
-    #
-    #   Default: The request is effective indefinitely.
-    #   @return [Time]
-    #
-    # @!attribute [rw] launch_group
-    #   The instance launch group. Launch groups are Spot instances that
-    #   launch together and terminate together.
-    #
-    #   Default: Instances are launched and terminated individually
-    #   @return [String]
     #
     # @!attribute [rw] availability_zone_group
     #   The user-specified name for a logical grouping of bids.
@@ -18827,24 +19017,86 @@ module Aws::EC2
     #   group if you specify a duration.
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_count
+    #   The maximum number of Spot instances to launch.
+    #
+    #   Default: 1
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_group
+    #   The instance launch group. Launch groups are Spot instances that
+    #   launch together and terminate together.
+    #
+    #   Default: Instances are launched and terminated individually
+    #   @return [String]
+    #
     # @!attribute [rw] launch_specification
-    #   Describes the launch specification for an instance.
+    #   The launch specification.
     #   @return [Types::RequestSpotLaunchSpecification]
+    #
+    # @!attribute [rw] spot_price
+    #   The maximum hourly price (bid) for any Spot instance launched to
+    #   fulfill the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The Spot instance request type.
+    #
+    #   Default: `one-time`
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The start date of the request. If this is a one-time request, the
+    #   request becomes active at this date and time and remains active
+    #   until all instances launch, the request expires, or the request is
+    #   canceled. If the request is persistent, the request becomes active
+    #   at this date and time and remains active until it expires or is
+    #   canceled.
+    #
+    #   Default: The request is effective indefinitely.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date of the request. If this is a one-time request, the
+    #   request remains active until all instances launch, the request is
+    #   canceled, or this date is reached. If the request is persistent, it
+    #   remains active until it is canceled or this date and time is
+    #   reached.
+    #
+    #   Default: The request is effective indefinitely.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesRequest AWS API Documentation
     #
     class RequestSpotInstancesRequest < Struct.new(
-      :dry_run,
-      :spot_price,
-      :client_token,
-      :instance_count,
-      :type,
-      :valid_from,
-      :valid_until,
-      :launch_group,
       :availability_zone_group,
       :block_duration_minutes,
-      :launch_specification)
+      :client_token,
+      :dry_run,
+      :instance_count,
+      :launch_group,
+      :launch_specification,
+      :spot_price,
+      :type,
+      :valid_from,
+      :valid_until)
       include Aws::Structure
     end
 
@@ -18867,107 +19119,84 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         image_id: "String",
-    #         key_name: "String",
+    #         security_group_ids: ["String"],
     #         security_groups: ["String"],
-    #         user_data: "String",
     #         addressing_type: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #         placement: {
-    #           availability_zone: "String",
-    #           group_name: "String",
-    #           tenancy: "default", # accepts default, dedicated, host
-    #         },
-    #         kernel_id: "String",
-    #         ramdisk_id: "String",
     #         block_device_mappings: [
     #           {
-    #             virtual_name: "String",
     #             device_name: "String",
+    #             virtual_name: "String",
     #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               iops: 1,
-    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
-    #         subnet_id: "String",
+    #         ebs_optimized: false,
+    #         iam_instance_profile: {
+    #           arn: "String",
+    #           name: "String",
+    #         },
+    #         image_id: "String",
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         kernel_id: "String",
+    #         key_name: "String",
+    #         monitoring: {
+    #           enabled: false, # required
+    #         },
     #         network_interfaces: [
     #           {
-    #             network_interface_id: "String",
-    #             device_index: 1,
-    #             subnet_id: "String",
-    #             description: "String",
-    #             private_ip_address: "String",
-    #             groups: ["String"],
-    #             delete_on_termination: false,
-    #             private_ip_addresses: [
-    #               {
-    #                 private_ip_address: "String", # required
-    #                 primary: false,
-    #               },
-    #             ],
-    #             secondary_private_ip_address_count: 1,
     #             associate_public_ip_address: false,
+    #             delete_on_termination: false,
+    #             description: "String",
+    #             device_index: 1,
+    #             groups: ["String"],
+    #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
     #                 ipv_6_address: "String",
     #               },
     #             ],
-    #             ipv_6_address_count: 1,
+    #             network_interface_id: "String",
+    #             private_ip_address: "String",
+    #             private_ip_addresses: [
+    #               {
+    #                 primary: false,
+    #                 private_ip_address: "String", # required
+    #               },
+    #             ],
+    #             secondary_private_ip_address_count: 1,
+    #             subnet_id: "String",
     #           },
     #         ],
-    #         iam_instance_profile: {
-    #           arn: "String",
-    #           name: "String",
+    #         placement: {
+    #           availability_zone: "String",
+    #           group_name: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
     #         },
-    #         ebs_optimized: false,
-    #         monitoring: {
-    #           enabled: false, # required
-    #         },
-    #         security_group_ids: ["String"],
+    #         ramdisk_id: "String",
+    #         subnet_id: "String",
+    #         user_data: "String",
     #       }
     #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
-    #
-    # @!attribute [rw] security_groups
+    # @!attribute [rw] security_group_ids
+    #   One or more security group IDs.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
-    #   @return [String]
+    # @!attribute [rw] security_groups
+    #   One or more security groups. When requesting instances in a VPC, you
+    #   must specify the IDs of the security groups. When requesting
+    #   instances in EC2-Classic, you can specify the names or the IDs of
+    #   the security groups.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] addressing_type
     #   Deprecated.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
-    # @!attribute [rw] placement
-    #   The placement information for the instance.
-    #   @return [Types::SpotPlacement]
-    #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -18976,20 +19205,6 @@ module Aws::EC2
     #   Although you can specify encrypted EBS volumes in this block device
     #   mapping for your Spot Instances, these volumes are not encrypted.
     #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
-    #   interface.
-    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
-    #   @return [Types::IamInstanceProfileSpecification]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instance is optimized for EBS I/O. This
@@ -19002,40 +19217,89 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::IamInstanceProfileSpecification]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
     # @!attribute [rw] monitoring
-    #   Describes the monitoring of an instance.
+    #   Indicates whether basic or detailed monitoring is enabled for the
+    #   instance.
+    #
+    #   Default: Disabled
     #   @return [Types::RunInstancesMonitoringEnabled]
     #
-    # @!attribute [rw] security_group_ids
-    #   @return [Array<String>]
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces. If you specify a network interface,
+    #   you must specify subnet IDs and security group IDs using the network
+    #   interface.
+    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
+    #
+    # @!attribute [rw] placement
+    #   The placement information for the instance.
+    #   @return [Types::SpotPlacement]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instances. If you are using
+    #   an AWS SDK or command line tool, Base64-encoding is performed for
+    #   you, and you can load the text from a file. Otherwise, you must
+    #   provide Base64-encoded text.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
     #
     class RequestSpotLaunchSpecification < Struct.new(
-      :image_id,
-      :key_name,
+      :security_group_ids,
       :security_groups,
-      :user_data,
       :addressing_type,
-      :instance_type,
-      :placement,
-      :kernel_id,
-      :ramdisk_id,
       :block_device_mappings,
-      :subnet_id,
-      :network_interfaces,
-      :iam_instance_profile,
       :ebs_optimized,
+      :iam_instance_profile,
+      :image_id,
+      :instance_type,
+      :kernel_id,
+      :key_name,
       :monitoring,
-      :security_group_ids)
+      :network_interfaces,
+      :placement,
+      :ramdisk_id,
+      :subnet_id,
+      :user_data)
       include Aws::Structure
     end
 
     # Describes a reservation.
     #
-    # @!attribute [rw] reservation_id
-    #   The ID of the reservation.
-    #   @return [String]
+    # @!attribute [rw] groups
+    #   \[EC2-Classic only\] One or more security groups.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
+    # @!attribute [rw] instances
+    #   One or more instances.
+    #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] owner_id
     #   The ID of the AWS account that owns the reservation.
@@ -19046,26 +19310,26 @@ module Aws::EC2
     #   (for example, AWS Management Console or Auto Scaling).
     #   @return [String]
     #
-    # @!attribute [rw] groups
-    #   \[EC2-Classic only\] One or more security groups.
-    #   @return [Array<Types::GroupIdentifier>]
-    #
-    # @!attribute [rw] instances
-    #   One or more instances.
-    #   @return [Array<Types::Instance>]
+    # @!attribute [rw] reservation_id
+    #   The ID of the reservation.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Reservation AWS API Documentation
     #
     class Reservation < Struct.new(
-      :reservation_id,
+      :groups,
+      :instances,
       :owner_id,
       :requester_id,
-      :groups,
-      :instances)
+      :reservation_id)
       include Aws::Structure
     end
 
     # The cost associated with the Reserved Instance.
+    #
+    # @!attribute [rw] hourly_price
+    #   The hourly rate of the reservation.
+    #   @return [String]
     #
     # @!attribute [rw] remaining_total_value
     #   The balance of the total value (the sum of remainingUpfrontValue +
@@ -19076,16 +19340,12 @@ module Aws::EC2
     #   The remaining upfront cost of the reservation.
     #   @return [String]
     #
-    # @!attribute [rw] hourly_price
-    #   The hourly rate of the reservation.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservationValue AWS API Documentation
     #
     class ReservationValue < Struct.new(
+      :hourly_price,
       :remaining_total_value,
-      :remaining_upfront_value,
-      :hourly_price)
+      :remaining_upfront_value)
       include Aws::Structure
     end
 
@@ -19119,52 +19379,36 @@ module Aws::EC2
 
     # The total value of the Convertible Reserved Instance.
     #
-    # @!attribute [rw] reserved_instance_id
-    #   The ID of the Convertible Reserved Instance that you are exchanging.
-    #   @return [String]
-    #
     # @!attribute [rw] reservation_value
     #   The total value of the Convertible Reserved Instance that you are
     #   exchanging.
     #   @return [Types::ReservationValue]
     #
+    # @!attribute [rw] reserved_instance_id
+    #   The ID of the Convertible Reserved Instance that you are exchanging.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceReservationValue AWS API Documentation
     #
     class ReservedInstanceReservationValue < Struct.new(
-      :reserved_instance_id,
-      :reservation_value)
+      :reservation_value,
+      :reserved_instance_id)
       include Aws::Structure
     end
 
     # Describes a Reserved Instance.
     #
-    # @!attribute [rw] reserved_instances_id
-    #   The ID of the Reserved Instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type on which the Reserved Instance can be used.
-    #   @return [String]
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
     #   @return [String]
-    #
-    # @!attribute [rw] start
-    #   The date and time the Reserved Instance started.
-    #   @return [Time]
-    #
-    # @!attribute [rw] end
-    #   The time when the Reserved Instance expires.
-    #   @return [Time]
     #
     # @!attribute [rw] duration
     #   The duration of the Reserved Instance, in seconds.
     #   @return [Integer]
     #
-    # @!attribute [rw] usage_price
-    #   The usage price of the Reserved Instance, per hour.
-    #   @return [Float]
+    # @!attribute [rw] end
+    #   The time when the Reserved Instance expires.
+    #   @return [Time]
     #
     # @!attribute [rw] fixed_price
     #   The purchase price of the Reserved Instance.
@@ -19174,26 +19418,42 @@ module Aws::EC2
     #   The number of reservations purchased.
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_type
+    #   The instance type on which the Reserved Instance can be used.
+    #   @return [String]
+    #
     # @!attribute [rw] product_description
     #   The Reserved Instance product platform description.
     #   @return [String]
+    #
+    # @!attribute [rw] reserved_instances_id
+    #   The ID of the Reserved Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] start
+    #   The date and time the Reserved Instance started.
+    #   @return [Time]
     #
     # @!attribute [rw] state
     #   The state of the Reserved Instance purchase.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the resource.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] instance_tenancy
-    #   The tenancy of the instance.
-    #   @return [String]
+    # @!attribute [rw] usage_price
+    #   The usage price of the Reserved Instance, per hour.
+    #   @return [Float]
     #
     # @!attribute [rw] currency_code
     #   The currency of the Reserved Instance. It's specified using ISO
     #   4217 standard currency codes. At this time, the only supported
     #   currency is `USD`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_tenancy
+    #   The tenancy of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_class
+    #   The offering class of the Reserved Instance.
     #   @return [String]
     #
     # @!attribute [rw] offering_type
@@ -19204,35 +19464,35 @@ module Aws::EC2
     #   The recurring charge tag assigned to the resource.
     #   @return [Array<Types::RecurringCharge>]
     #
-    # @!attribute [rw] offering_class
-    #   The offering class of the Reserved Instance.
-    #   @return [String]
-    #
     # @!attribute [rw] scope
     #   The scope of the Reserved Instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstances AWS API Documentation
     #
     class ReservedInstances < Struct.new(
-      :reserved_instances_id,
-      :instance_type,
       :availability_zone,
-      :start,
-      :end,
       :duration,
-      :usage_price,
+      :end,
       :fixed_price,
       :instance_count,
+      :instance_type,
       :product_description,
+      :reserved_instances_id,
+      :start,
       :state,
-      :tags,
-      :instance_tenancy,
+      :usage_price,
       :currency_code,
+      :instance_tenancy,
+      :offering_class,
       :offering_type,
       :recurring_charges,
-      :offering_class,
-      :scope)
+      :scope,
+      :tags)
       include Aws::Structure
     end
 
@@ -19244,19 +19504,14 @@ module Aws::EC2
     #
     #       {
     #         availability_zone: "String",
-    #         platform: "String",
     #         instance_count: 1,
     #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone for the modified Reserved Instances.
-    #   @return [String]
-    #
-    # @!attribute [rw] platform
-    #   The network platform of the modified Reserved Instances, which is
-    #   either EC2-Classic or EC2-VPC.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -19265,6 +19520,11 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_type
     #   The instance type for the modified Reserved Instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The network platform of the modified Reserved Instances, which is
+    #   either EC2-Classic or EC2-VPC.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -19276,9 +19536,9 @@ module Aws::EC2
     #
     class ReservedInstancesConfiguration < Struct.new(
       :availability_zone,
-      :platform,
       :instance_count,
       :instance_type,
+      :platform,
       :scope)
       include Aws::Structure
     end
@@ -19298,21 +19558,35 @@ module Aws::EC2
 
     # Describes a Reserved Instance listing.
     #
-    # @!attribute [rw] reserved_instances_listing_id
-    #   The ID of the Reserved Instance listing.
-    #   @return [String]
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive key supplied by the client to ensure that
+    #   the request is idempotent. For more information, see [Ensuring
+    #   Idempotency][1].
     #
-    # @!attribute [rw] reserved_instances_id
-    #   The ID of the Reserved Instance.
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] create_date
     #   The time the listing was created.
     #   @return [Time]
     #
-    # @!attribute [rw] update_date
-    #   The last modified timestamp of the listing.
-    #   @return [Time]
+    # @!attribute [rw] instance_counts
+    #   The number of instances in this state.
+    #   @return [Array<Types::InstanceCount>]
+    #
+    # @!attribute [rw] price_schedules
+    #   The price of the Reserved Instance listing.
+    #   @return [Array<Types::PriceSchedule>]
+    #
+    # @!attribute [rw] reserved_instances_id
+    #   The ID of the Reserved Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instances_listing_id
+    #   The ID of the Reserved Instance listing.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the Reserved Instance listing.
@@ -19323,17 +19597,31 @@ module Aws::EC2
     #   The response can be blank.
     #   @return [String]
     #
-    # @!attribute [rw] instance_counts
-    #   The number of instances in this state.
-    #   @return [Array<Types::InstanceCount>]
-    #
-    # @!attribute [rw] price_schedules
-    #   The price of the Reserved Instance listing.
-    #   @return [Array<Types::PriceSchedule>]
-    #
     # @!attribute [rw] tags
     #   Any tags assigned to the resource.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] update_date
+    #   The last modified timestamp of the listing.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesListing AWS API Documentation
+    #
+    class ReservedInstancesListing < Struct.new(
+      :client_token,
+      :create_date,
+      :instance_counts,
+      :price_schedules,
+      :reserved_instances_id,
+      :reserved_instances_listing_id,
+      :status,
+      :status_message,
+      :tags,
+      :update_date)
+      include Aws::Structure
+    end
+
+    # Describes a Reserved Instance modification.
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive key supplied by the client to ensure that
@@ -19345,48 +19633,26 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesListing AWS API Documentation
+    # @!attribute [rw] create_date
+    #   The time when the modification request was created.
+    #   @return [Time]
     #
-    class ReservedInstancesListing < Struct.new(
-      :reserved_instances_listing_id,
-      :reserved_instances_id,
-      :create_date,
-      :update_date,
-      :status,
-      :status_message,
-      :instance_counts,
-      :price_schedules,
-      :tags,
-      :client_token)
-      include Aws::Structure
-    end
-
-    # Describes a Reserved Instance modification.
-    #
-    # @!attribute [rw] reserved_instances_modification_id
-    #   A unique ID for the Reserved Instance modification.
-    #   @return [String]
-    #
-    # @!attribute [rw] reserved_instances_ids
-    #   The IDs of one or more Reserved Instances.
-    #   @return [Array<Types::ReservedInstancesId>]
+    # @!attribute [rw] effective_date
+    #   The time for the modification to become effective.
+    #   @return [Time]
     #
     # @!attribute [rw] modification_results
     #   Contains target configurations along with their corresponding new
     #   Reserved Instance IDs.
     #   @return [Array<Types::ReservedInstancesModificationResult>]
     #
-    # @!attribute [rw] create_date
-    #   The time when the modification request was created.
-    #   @return [Time]
+    # @!attribute [rw] reserved_instances_ids
+    #   The IDs of one or more Reserved Instances.
+    #   @return [Array<Types::ReservedInstancesId>]
     #
-    # @!attribute [rw] update_date
-    #   The time when the modification request was last updated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] effective_date
-    #   The time for the modification to become effective.
-    #   @return [Time]
+    # @!attribute [rw] reserved_instances_modification_id
+    #   A unique ID for the Reserved Instance modification.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the Reserved Instances modification request.
@@ -19396,28 +19662,22 @@ module Aws::EC2
     #   The reason for the status.
     #   @return [String]
     #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive key supplied by the client to ensure that
-    #   the request is idempotent. For more information, see [Ensuring
-    #   Idempotency][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #   @return [String]
+    # @!attribute [rw] update_date
+    #   The time when the modification request was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModification AWS API Documentation
     #
     class ReservedInstancesModification < Struct.new(
-      :reserved_instances_modification_id,
-      :reserved_instances_ids,
-      :modification_results,
+      :client_token,
       :create_date,
-      :update_date,
       :effective_date,
+      :modification_results,
+      :reserved_instances_ids,
+      :reserved_instances_modification_id,
       :status,
       :status_message,
-      :client_token)
+      :update_date)
       include Aws::Structure
     end
 
@@ -19444,16 +19704,6 @@ module Aws::EC2
 
     # Describes a Reserved Instance offering.
     #
-    # @!attribute [rw] reserved_instances_offering_id
-    #   The ID of the Reserved Instance offering. This is the offering ID
-    #   used in GetReservedInstancesExchangeQuote to confirm that an
-    #   exchange can be made.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type on which the Reserved Instance can be used.
-    #   @return [String]
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
     #   @return [String]
@@ -19462,21 +19712,27 @@ module Aws::EC2
     #   The duration of the Reserved Instance, in seconds.
     #   @return [Integer]
     #
-    # @!attribute [rw] usage_price
-    #   The usage price of the Reserved Instance, per hour.
-    #   @return [Float]
-    #
     # @!attribute [rw] fixed_price
     #   The purchase price of the Reserved Instance.
     #   @return [Float]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type on which the Reserved Instance can be used.
+    #   @return [String]
     #
     # @!attribute [rw] product_description
     #   The Reserved Instance product platform description.
     #   @return [String]
     #
-    # @!attribute [rw] instance_tenancy
-    #   The tenancy of the instance.
+    # @!attribute [rw] reserved_instances_offering_id
+    #   The ID of the Reserved Instance offering. This is the offering ID
+    #   used in GetReservedInstancesExchangeQuote to confirm that an
+    #   exchange can be made.
     #   @return [String]
+    #
+    # @!attribute [rw] usage_price
+    #   The usage price of the Reserved Instance, per hour.
+    #   @return [Float]
     #
     # @!attribute [rw] currency_code
     #   The currency of the Reserved Instance offering you are purchasing.
@@ -19484,13 +19740,9 @@ module Aws::EC2
     #   time, the only supported currency is `USD`.
     #   @return [String]
     #
-    # @!attribute [rw] offering_type
-    #   The Reserved Instance offering type.
+    # @!attribute [rw] instance_tenancy
+    #   The tenancy of the instance.
     #   @return [String]
-    #
-    # @!attribute [rw] recurring_charges
-    #   The recurring charge tag assigned to the resource.
-    #   @return [Array<Types::RecurringCharge>]
     #
     # @!attribute [rw] marketplace
     #   Indicates whether the offering is available through the Reserved
@@ -19498,15 +19750,23 @@ module Aws::EC2
     #   Marketplace offering, this is `true`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] pricing_details
-    #   The pricing details of the Reserved Instance offering.
-    #   @return [Array<Types::PricingDetail>]
-    #
     # @!attribute [rw] offering_class
     #   If `convertible` it can be exchanged for Reserved Instances of the
     #   same or higher monetary value, with different configurations. If
     #   `standard`, it is not possible to perform an exchange.
     #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   The Reserved Instance offering type.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_details
+    #   The pricing details of the Reserved Instance offering.
+    #   @return [Array<Types::PricingDetail>]
+    #
+    # @!attribute [rw] recurring_charges
+    #   The recurring charge tag assigned to the resource.
+    #   @return [Array<Types::RecurringCharge>]
     #
     # @!attribute [rw] scope
     #   Whether the Reserved Instance is applied to instances in a region or
@@ -19516,20 +19776,20 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesOffering AWS API Documentation
     #
     class ReservedInstancesOffering < Struct.new(
-      :reserved_instances_offering_id,
-      :instance_type,
       :availability_zone,
       :duration,
-      :usage_price,
       :fixed_price,
+      :instance_type,
       :product_description,
-      :instance_tenancy,
+      :reserved_instances_offering_id,
+      :usage_price,
       :currency_code,
-      :offering_type,
-      :recurring_charges,
+      :instance_tenancy,
       :marketplace,
-      :pricing_details,
       :offering_class,
+      :offering_type,
+      :pricing_details,
+      :recurring_charges,
       :scope)
       include Aws::Structure
     end
@@ -19540,10 +19800,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         image_id: "String", # required
     #         attribute: "launchPermission", # required, accepts launchPermission
+    #         image_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute to reset (currently you can only reset the launch
+    #   permission attribute).
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19552,21 +19821,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The attribute to reset (currently you can only reset the launch
-    #   permission attribute).
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttributeRequest AWS API Documentation
     #
     class ResetImageAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :image_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -19576,10 +19836,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #         dry_run: false,
     #         instance_id: "String", # required
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute to reset.
+    #
+    #   You can only reset the following attributes: `kernel` \| `ramdisk`
+    #   \| `sourceDestCheck`. To change an instance attribute, use
+    #   ModifyInstanceAttribute.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19592,20 +19860,12 @@ module Aws::EC2
     #   The ID of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] attribute
-    #   The attribute to reset.
-    #
-    #   You can only reset the following attributes: `kernel` \| `ramdisk`
-    #   \| `sourceDestCheck`. To change an instance attribute, use
-    #   ModifyInstanceAttribute.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttributeRequest AWS API Documentation
     #
     class ResetInstanceAttributeRequest < Struct.new(
+      :attribute,
       :dry_run,
-      :instance_id,
-      :attribute)
+      :instance_id)
       include Aws::Structure
     end
 
@@ -19651,10 +19911,19 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         snapshot_id: "String", # required
     #         attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+    #         snapshot_id: "String", # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] attribute
+    #   The attribute to reset. Currently, only the attribute for permission
+    #   to create volumes can be reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19663,21 +19932,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the snapshot.
-    #   @return [String]
-    #
-    # @!attribute [rw] attribute
-    #   The attribute to reset. Currently, only the attribute for permission
-    #   to create volumes can be reset.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttributeRequest AWS API Documentation
     #
     class ResetSnapshotAttributeRequest < Struct.new(
-      :dry_run,
+      :attribute,
       :snapshot_id,
-      :attribute)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -19712,19 +19972,19 @@ module Aws::EC2
 
     # Contains the output of RestoreAddressToClassic.
     #
-    # @!attribute [rw] status
-    #   The move status for the IP address.
-    #   @return [String]
-    #
     # @!attribute [rw] public_ip
     #   The Elastic IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The move status for the IP address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassicResult AWS API Documentation
     #
     class RestoreAddressToClassicResult < Struct.new(
-      :status,
-      :public_ip)
+      :public_ip,
+      :status)
       include Aws::Structure
     end
 
@@ -19736,27 +19996,10 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         group_id: "String", # required
-    #         source_security_group_name: "String",
-    #         source_security_group_owner_id: "String",
-    #         ip_protocol: "String",
-    #         from_port: 1,
-    #         to_port: 1,
-    #         cidr_ip: "String",
     #         ip_permissions: [
     #           {
-    #             ip_protocol: "String",
     #             from_port: 1,
-    #             to_port: 1,
-    #             user_id_group_pairs: [
-    #               {
-    #                 user_id: "String",
-    #                 group_name: "String",
-    #                 group_id: "String",
-    #                 vpc_id: "String",
-    #                 vpc_peering_connection_id: "String",
-    #                 peering_status: "String",
-    #               },
-    #             ],
+    #             ip_protocol: "String",
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
@@ -19772,8 +20015,25 @@ module Aws::EC2
     #                 prefix_list_id: "String",
     #               },
     #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
     #           },
     #         ],
+    #         cidr_ip: "String",
+    #         from_port: 1,
+    #         ip_protocol: "String",
+    #         to_port: 1,
+    #         source_security_group_name: "String",
+    #         source_security_group_owner_id: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -19787,6 +20047,33 @@ module Aws::EC2
     #   The ID of the security group.
     #   @return [String]
     #
+    # @!attribute [rw] ip_permissions
+    #   A set of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @!attribute [rw] cidr_ip
+    #   The CIDR IP address range. We recommend that you specify the CIDR
+    #   range in a set of IP permissions instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The start of port range for the TCP and UDP protocols, or an ICMP
+    #   type number. We recommend that you specify the port range in a set
+    #   of IP permissions instead.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The IP protocol name or number. We recommend that you specify the
+    #   protocol in a set of IP permissions instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_port
+    #   The end of port range for the TCP and UDP protocols, or an ICMP type
+    #   number. We recommend that you specify the port range in a set of IP
+    #   permissions instead.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_security_group_name
     #   The name of a destination security group. To revoke outbound access
     #   to a destination security group, we recommend that you use a set of
@@ -19799,45 +20086,18 @@ module Aws::EC2
     #   you use a set of IP permissions instead.
     #   @return [String]
     #
-    # @!attribute [rw] ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
-    #   @return [String]
-    #
-    # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. We recommend that you specify the port range in a set
-    #   of IP permissions instead.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cidr_ip
-    #   The CIDR IP address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
-    #   @return [Array<Types::IpPermission>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressRequest AWS API Documentation
     #
     class RevokeSecurityGroupEgressRequest < Struct.new(
       :dry_run,
       :group_id,
-      :source_security_group_name,
-      :source_security_group_owner_id,
-      :ip_protocol,
-      :from_port,
-      :to_port,
+      :ip_permissions,
       :cidr_ip,
-      :ip_permissions)
+      :from_port,
+      :ip_protocol,
+      :to_port,
+      :source_security_group_name,
+      :source_security_group_owner_id)
       include Aws::Structure
     end
 
@@ -19847,30 +20107,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         group_name: "String",
-    #         group_id: "String",
-    #         source_security_group_name: "String",
-    #         source_security_group_owner_id: "String",
-    #         ip_protocol: "String",
-    #         from_port: 1,
-    #         to_port: 1,
     #         cidr_ip: "String",
+    #         from_port: 1,
+    #         group_id: "String",
+    #         group_name: "String",
     #         ip_permissions: [
     #           {
-    #             ip_protocol: "String",
     #             from_port: 1,
-    #             to_port: 1,
-    #             user_id_group_pairs: [
-    #               {
-    #                 user_id: "String",
-    #                 group_name: "String",
-    #                 group_id: "String",
-    #                 vpc_id: "String",
-    #                 vpc_peering_connection_id: "String",
-    #                 peering_status: "String",
-    #               },
-    #             ],
+    #             ip_protocol: "String",
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
@@ -19886,24 +20130,58 @@ module Aws::EC2
     #                 prefix_list_id: "String",
     #               },
     #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
     #           },
     #         ],
+    #         ip_protocol: "String",
+    #         source_security_group_name: "String",
+    #         source_security_group_owner_id: "String",
+    #         to_port: 1,
+    #         dry_run: false,
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] cidr_ip
+    #   The CIDR IP address range. You can't specify this parameter when
+    #   specifying a source security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The start of port range for the TCP and UDP protocols, or an ICMP
+    #   type number. For the ICMP type number, use `-1` to specify all ICMP
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group. Required for a security group in a
+    #   nondefault VPC.
+    #   @return [String]
     #
     # @!attribute [rw] group_name
     #   \[EC2-Classic, default VPC\] The name of the security group.
     #   @return [String]
     #
-    # @!attribute [rw] group_id
-    #   The ID of the security group. Required for a security group in a
-    #   nondefault VPC.
+    # @!attribute [rw] ip_permissions
+    #   A set of IP permissions. You can't specify a source security group
+    #   and a CIDR IP address range.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
+    #   Numbers][1]). Use `-1` to specify all.
+    #
+    #
+    #
+    #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_name
@@ -19925,50 +20203,32 @@ module Aws::EC2
     #   an IP protocol and port range, use a set of IP permissions instead.
     #   @return [String]
     #
-    # @!attribute [rw] ip_protocol
-    #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). Use `-1` to specify all.
-    #
-    #
-    #
-    #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-    #   @return [String]
-    #
-    # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. For the ICMP type number, use `-1` to specify all ICMP
-    #   types.
-    #   @return [Integer]
-    #
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an ICMP code
     #   number. For the ICMP code number, use `-1` to specify all ICMP codes
     #   for the ICMP type.
     #   @return [Integer]
     #
-    # @!attribute [rw] cidr_ip
-    #   The CIDR IP address range. You can't specify this parameter when
-    #   specifying a source security group.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a source security group
-    #   and a CIDR IP address range.
-    #   @return [Array<Types::IpPermission>]
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressRequest AWS API Documentation
     #
     class RevokeSecurityGroupIngressRequest < Struct.new(
-      :dry_run,
-      :group_name,
+      :cidr_ip,
+      :from_port,
       :group_id,
+      :group_name,
+      :ip_permissions,
+      :ip_protocol,
       :source_security_group_name,
       :source_security_group_owner_id,
-      :ip_protocol,
-      :from_port,
       :to_port,
-      :cidr_ip,
-      :ip_permissions)
+      :dry_run)
       include Aws::Structure
     end
 
@@ -19978,8 +20238,16 @@ module Aws::EC2
     #   The IPv4 CIDR block used for the destination match.
     #   @return [String]
     #
+    # @!attribute [rw] destination_ipv_6_cidr_block
+    #   The IPv6 CIDR block used for the destination match.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_prefix_list_id
     #   The prefix of the AWS service.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_only_internet_gateway_id
+    #   The ID of the egress-only Internet gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
@@ -19994,23 +20262,12 @@ module Aws::EC2
     #   The AWS account ID of the owner of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
-    #   @return [String]
-    #
     # @!attribute [rw] nat_gateway_id
     #   The ID of a NAT gateway.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   The state of the route. The `blackhole` state indicates that the
-    #   route's target isn't available (for example, the specified gateway
-    #   isn't attached to the VPC, or the specified NAT instance has been
-    #   terminated).
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -20025,71 +20282,78 @@ module Aws::EC2
     #     propagation.
     #   @return [String]
     #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   The IPv6 CIDR block used for the destination match.
+    # @!attribute [rw] state
+    #   The state of the route. The `blackhole` state indicates that the
+    #   route's target isn't available (for example, the specified gateway
+    #   isn't attached to the VPC, or the specified NAT instance has been
+    #   terminated).
     #   @return [String]
     #
-    # @!attribute [rw] egress_only_internet_gateway_id
-    #   The ID of the egress-only Internet gateway.
+    # @!attribute [rw] vpc_peering_connection_id
+    #   The ID of the VPC peering connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation
     #
     class Route < Struct.new(
       :destination_cidr_block,
+      :destination_ipv_6_cidr_block,
       :destination_prefix_list_id,
+      :egress_only_internet_gateway_id,
       :gateway_id,
       :instance_id,
       :instance_owner_id,
-      :network_interface_id,
-      :vpc_peering_connection_id,
       :nat_gateway_id,
-      :state,
+      :network_interface_id,
       :origin,
-      :destination_ipv_6_cidr_block,
-      :egress_only_internet_gateway_id)
+      :state,
+      :vpc_peering_connection_id)
       include Aws::Structure
     end
 
     # Describes a route table.
     #
+    # @!attribute [rw] associations
+    #   The associations between the route table and one or more subnets.
+    #   @return [Array<Types::RouteTableAssociation>]
+    #
+    # @!attribute [rw] propagating_vgws
+    #   Any virtual private gateway (VGW) propagating routes.
+    #   @return [Array<Types::PropagatingVgw>]
+    #
     # @!attribute [rw] route_table_id
     #   The ID of the route table.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
     #   @return [String]
     #
     # @!attribute [rw] routes
     #   The routes in the route table.
     #   @return [Array<Types::Route>]
     #
-    # @!attribute [rw] associations
-    #   The associations between the route table and one or more subnets.
-    #   @return [Array<Types::RouteTableAssociation>]
-    #
     # @!attribute [rw] tags
     #   Any tags assigned to the route table.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] propagating_vgws
-    #   Any virtual private gateway (VGW) propagating routes.
-    #   @return [Array<Types::PropagatingVgw>]
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTable AWS API Documentation
     #
     class RouteTable < Struct.new(
-      :route_table_id,
-      :vpc_id,
-      :routes,
       :associations,
+      :propagating_vgws,
+      :route_table_id,
+      :routes,
       :tags,
-      :propagating_vgws)
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes an association between a route table and a subnet.
+    #
+    # @!attribute [rw] main
+    #   Indicates whether this is the main route table.
+    #   @return [Boolean]
     #
     # @!attribute [rw] route_table_association_id
     #   The ID of the association between a route table and a subnet.
@@ -20104,17 +20368,13 @@ module Aws::EC2
     #   association.
     #   @return [String]
     #
-    # @!attribute [rw] main
-    #   Indicates whether this is the main route table.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTableAssociation AWS API Documentation
     #
     class RouteTableAssociation < Struct.new(
+      :main,
       :route_table_association_id,
       :route_table_id,
-      :subnet_id,
-      :main)
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -20145,84 +20405,85 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
-    #         image_id: "String", # required
-    #         min_count: 1, # required
-    #         max_count: 1, # required
-    #         key_name: "String",
-    #         security_groups: ["String"],
-    #         security_group_ids: ["String"],
-    #         user_data: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #         placement: {
-    #           availability_zone: "String",
-    #           group_name: "String",
-    #           tenancy: "default", # accepts default, dedicated, host
-    #           host_id: "String",
-    #           affinity: "String",
-    #         },
-    #         kernel_id: "String",
-    #         ramdisk_id: "String",
     #         block_device_mappings: [
     #           {
-    #             virtual_name: "String",
     #             device_name: "String",
+    #             virtual_name: "String",
     #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               iops: 1,
-    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
-    #         monitoring: {
-    #           enabled: false, # required
-    #         },
-    #         subnet_id: "String",
-    #         disable_api_termination: false,
-    #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         private_ip_address: "String",
+    #         image_id: "String", # required
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         ipv_6_address_count: 1,
-    #         client_token: "String",
+    #         kernel_id: "String",
+    #         key_name: "String",
+    #         max_count: 1, # required
+    #         min_count: 1, # required
+    #         monitoring: {
+    #           enabled: false, # required
+    #         },
+    #         placement: {
+    #           availability_zone: "String",
+    #           affinity: "String",
+    #           group_name: "String",
+    #           host_id: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
+    #           spread_domain: "String",
+    #         },
+    #         ramdisk_id: "String",
+    #         security_group_ids: ["String"],
+    #         security_groups: ["String"],
+    #         subnet_id: "String",
+    #         user_data: "String",
     #         additional_info: "String",
+    #         client_token: "String",
+    #         disable_api_termination: false,
+    #         dry_run: false,
+    #         ebs_optimized: false,
+    #         iam_instance_profile: {
+    #           arn: "String",
+    #           name: "String",
+    #         },
+    #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
     #         network_interfaces: [
     #           {
-    #             network_interface_id: "String",
-    #             device_index: 1,
-    #             subnet_id: "String",
-    #             description: "String",
-    #             private_ip_address: "String",
-    #             groups: ["String"],
-    #             delete_on_termination: false,
-    #             private_ip_addresses: [
-    #               {
-    #                 private_ip_address: "String", # required
-    #                 primary: false,
-    #               },
-    #             ],
-    #             secondary_private_ip_address_count: 1,
     #             associate_public_ip_address: false,
+    #             delete_on_termination: false,
+    #             description: "String",
+    #             device_index: 1,
+    #             groups: ["String"],
+    #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
     #                 ipv_6_address: "String",
     #               },
     #             ],
-    #             ipv_6_address_count: 1,
+    #             network_interface_id: "String",
+    #             private_ip_address: "String",
+    #             private_ip_addresses: [
+    #               {
+    #                 primary: false,
+    #                 private_ip_address: "String", # required
+    #               },
+    #             ],
+    #             secondary_private_ip_address_count: 1,
+    #             subnet_id: "String",
     #           },
     #         ],
-    #         iam_instance_profile: {
-    #           arn: "String",
-    #           name: "String",
-    #         },
-    #         ebs_optimized: false,
+    #         private_ip_address: "String",
     #         tag_specifications: [
     #           {
     #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -20236,31 +20497,69 @@ module Aws::EC2
     #         ],
     #       }
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
+    # @!attribute [rw] block_device_mappings
+    #   The block device mapping.
+    #
+    #   Supplying both a snapshot ID and an encryption value as arguments
+    #   for block-device mapping results in an error. This is because only
+    #   blank volumes can be encrypted on start, and these are not created
+    #   from a snapshot. If a snapshot is the basis for the volume, it
+    #   contains data by definition and its encryption status cannot be
+    #   changed using this action.
+    #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
     #   The ID of the AMI, which you can get by calling DescribeImages.
     #   @return [String]
     #
-    # @!attribute [rw] min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    # @!attribute [rw] instance_type
+    #   The instance type. For more information, see [Instance Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for
-    #   the specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can
-    #   I run in Amazon EC2][1] in the Amazon EC2 General FAQ.
+    #   Default: `m1.small`
     #
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_address_count
+    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
+    #   range of your subnet. You cannot specify this option and the option
+    #   to assign specific IPv6 addresses in the same request. You can
+    #   specify this option if you've specified a minimum number of
+    #   instances to launch.
     #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
+    #   subnet to associate with the primary network interface. You cannot
+    #   specify this option and the option to assign a number of IPv6
+    #   addresses in the same request. You cannot specify this option if
+    #   you've specified a minimum number of instances to launch.
+    #   @return [Array<Types::InstanceIpv6Address>]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair. You can create a key pair using
+    #   CreateKeyPair or ImportKeyPair.
+    #
+    #   If you do not specify a key pair, you can't connect to the instance
+    #   unless you choose an AMI that is configured to allow users another
+    #   way to log in.
+    #   @return [String]
     #
     # @!attribute [rw] max_count
     #   The maximum number of instances to launch. If you specify more
@@ -20278,14 +20577,47 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
     #   @return [Integer]
     #
-    # @!attribute [rw] key_name
-    #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    # @!attribute [rw] min_count
+    #   The minimum number of instances to launch. If you specify a minimum
+    #   that is more instances than Amazon EC2 can launch in the target
+    #   Availability Zone, Amazon EC2 launches no instances.
     #
-    #   If you do not specify a key pair, you can't connect to the instance
-    #   unless you choose an AMI that is configured to allow users another
-    #   way to log in.
+    #   Constraints: Between 1 and the maximum number you're allowed for
+    #   the specified instance type. For more information about the default
+    #   limits, and how to request an increase, see [How many instances can
+    #   I run in Amazon EC2][1] in the Amazon EC2 General FAQ.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring for the instance.
+    #   @return [Types::RunInstancesMonitoringEnabled]
+    #
+    # @!attribute [rw] placement
+    #   The placement for the instance.
+    #   @return [Types::Placement]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   One or more security group IDs. You can create a security group
+    #   using CreateSecurityGroup.
+    #
+    #   Default: Amazon EC2 uses the default security group.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   \[EC2-Classic, default VPC\] One or more security group names. For a
@@ -20294,12 +20626,9 @@ module Aws::EC2
     #   Default: Amazon EC2 uses the default security group.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] security_group_ids
-    #   One or more security group IDs. You can create a security group
-    #   using CreateSecurityGroup.
-    #
-    #   Default: Amazon EC2 uses the default security group.
-    #   @return [Array<String>]
+    # @!attribute [rw] subnet_id
+    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
+    #   @return [String]
     #
     # @!attribute [rw] user_data
     #   The user data to make available to the instance. For more
@@ -20315,62 +20644,20 @@ module Aws::EC2
     #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
     #   @return [String]
     #
-    # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Instance Types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #   Default: `m1.small`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # @!attribute [rw] additional_info
+    #   Reserved.
     #   @return [String]
     #
-    # @!attribute [rw] placement
-    #   The placement for the instance.
-    #   @return [Types::Placement]
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
     #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #
-    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   Constraints: Maximum 64 ASCII characters
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
-    #
-    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
-    #   @return [String]
-    #
-    # @!attribute [rw] block_device_mappings
-    #   The block device mapping.
-    #
-    #   Supplying both a snapshot ID and an encryption value as arguments
-    #   for block-device mapping results in an error. This is because only
-    #   blank volumes can be encrypted on start, and these are not created
-    #   from a snapshot. If a snapshot is the basis for the volume, it
-    #   contains data by definition and its encryption status cannot be
-    #   changed using this action.
-    #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] monitoring
-    #   The monitoring for the instance.
-    #   @return [Types::RunInstancesMonitoringEnabled]
-    #
-    # @!attribute [rw] subnet_id
-    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] disable_api_termination
@@ -20385,65 +20672,12 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #
-    #   Default: `stop`
-    #   @return [String]
-    #
-    # @!attribute [rw] private_ip_address
-    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
-    #   the IPv4 address range of the subnet.
-    #
-    #   Only one private IP address can be designated as primary. You can't
-    #   specify this option if you've specified the option to designate a
-    #   private IP address as the primary IP address in a network interface
-    #   specification. You cannot specify this option if you're launching
-    #   more than one instance in the request.
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
-    #   @return [Array<Types::InstanceIpv6Address>]
-    #
-    # @!attribute [rw] ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option
-    #   to assign specific IPv6 addresses in the same request. You can
-    #   specify this option if you've specified a minimum number of
-    #   instances to launch.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
-    #
-    #   Constraints: Maximum 64 ASCII characters
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #   @return [String]
-    #
-    # @!attribute [rw] additional_info
-    #   Reserved.
-    #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
-    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
-    #   @return [Types::IamInstanceProfileSpecification]
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instance is optimized for EBS I/O. This
@@ -20456,6 +20690,33 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::IamInstanceProfileSpecification]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #
+    #   Default: `stop`
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces.
+    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
+    #
+    # @!attribute [rw] private_ip_address
+    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
+    #   the IPv4 address range of the subnet.
+    #
+    #   Only one private IP address can be designated as primary. You can't
+    #   specify this option if you've specified the option to designate a
+    #   private IP address as the primary IP address in a network interface
+    #   specification. You cannot specify this option if you're launching
+    #   more than one instance in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all
@@ -20465,31 +20726,31 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
-      :dry_run,
-      :image_id,
-      :min_count,
-      :max_count,
-      :key_name,
-      :security_groups,
-      :security_group_ids,
-      :user_data,
-      :instance_type,
-      :placement,
-      :kernel_id,
-      :ramdisk_id,
       :block_device_mappings,
-      :monitoring,
-      :subnet_id,
-      :disable_api_termination,
-      :instance_initiated_shutdown_behavior,
-      :private_ip_address,
-      :ipv_6_addresses,
+      :image_id,
+      :instance_type,
       :ipv_6_address_count,
-      :client_token,
+      :ipv_6_addresses,
+      :kernel_id,
+      :key_name,
+      :max_count,
+      :min_count,
+      :monitoring,
+      :placement,
+      :ramdisk_id,
+      :security_group_ids,
+      :security_groups,
+      :subnet_id,
+      :user_data,
       :additional_info,
-      :network_interfaces,
-      :iam_instance_profile,
+      :client_token,
+      :disable_api_termination,
+      :dry_run,
       :ebs_optimized,
+      :iam_instance_profile,
+      :instance_initiated_shutdown_behavior,
+      :network_interfaces,
+      :private_ip_address,
       :tag_specifications)
       include Aws::Structure
     end
@@ -20500,80 +20761,73 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         client_token: "String",
+    #         dry_run: false,
     #         instance_count: 1,
-    #         scheduled_instance_id: "String", # required
     #         launch_specification: { # required
-    #           image_id: "String", # required
-    #           key_name: "String",
-    #           security_group_ids: ["String"],
-    #           user_data: "String",
-    #           placement: {
-    #             availability_zone: "String",
-    #             group_name: "String",
-    #           },
-    #           kernel_id: "String",
-    #           instance_type: "String",
-    #           ramdisk_id: "String",
     #           block_device_mappings: [
     #             {
     #               device_name: "String",
-    #               no_device: "String",
-    #               virtual_name: "String",
     #               ebs: {
+    #                 delete_on_termination: false,
+    #                 encrypted: false,
+    #                 iops: 1,
     #                 snapshot_id: "String",
     #                 volume_size: 1,
-    #                 delete_on_termination: false,
     #                 volume_type: "String",
-    #                 iops: 1,
-    #                 encrypted: false,
     #               },
+    #               no_device: "String",
+    #               virtual_name: "String",
     #             },
     #           ],
+    #           ebs_optimized: false,
+    #           iam_instance_profile: {
+    #             arn: "String",
+    #             name: "String",
+    #           },
+    #           image_id: "String", # required
+    #           instance_type: "String",
+    #           kernel_id: "String",
+    #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
     #           },
-    #           subnet_id: "String",
     #           network_interfaces: [
     #             {
-    #               network_interface_id: "String",
-    #               device_index: 1,
-    #               subnet_id: "String",
-    #               description: "String",
-    #               private_ip_address: "String",
-    #               private_ip_address_configs: [
-    #                 {
-    #                   private_ip_address: "String",
-    #                   primary: false,
-    #                 },
-    #               ],
-    #               secondary_private_ip_address_count: 1,
     #               associate_public_ip_address: false,
-    #               groups: ["String"],
     #               delete_on_termination: false,
+    #               description: "String",
+    #               device_index: 1,
+    #               groups: ["String"],
+    #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
     #                   ipv_6_address: "Ipv6Address",
     #                 },
     #               ],
-    #               ipv_6_address_count: 1,
+    #               network_interface_id: "String",
+    #               private_ip_address: "String",
+    #               private_ip_address_configs: [
+    #                 {
+    #                   primary: false,
+    #                   private_ip_address: "String",
+    #                 },
+    #               ],
+    #               secondary_private_ip_address_count: 1,
+    #               subnet_id: "String",
     #             },
     #           ],
-    #           iam_instance_profile: {
-    #             arn: "String",
-    #             name: "String",
+    #           placement: {
+    #             availability_zone: "String",
+    #             group_name: "String",
     #           },
-    #           ebs_optimized: false,
+    #           ramdisk_id: "String",
+    #           security_group_ids: ["String"],
+    #           subnet_id: "String",
+    #           user_data: "String",
     #         },
+    #         scheduled_instance_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that ensures the idempotency of
@@ -20587,15 +20841,18 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] instance_count
     #   The number of instances.
     #
     #   Default: 1
     #   @return [Integer]
-    #
-    # @!attribute [rw] scheduled_instance_id
-    #   The Scheduled Instance ID.
-    #   @return [String]
     #
     # @!attribute [rw] launch_specification
     #   The launch specification. You must match the instance type,
@@ -20603,14 +20860,18 @@ module Aws::EC2
     #   purchased.
     #   @return [Types::ScheduledInstancesLaunchSpecification]
     #
+    # @!attribute [rw] scheduled_instance_id
+    #   The Scheduled Instance ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesRequest AWS API Documentation
     #
     class RunScheduledInstancesRequest < Struct.new(
-      :dry_run,
       :client_token,
+      :dry_run,
       :instance_count,
-      :scheduled_instance_id,
-      :launch_specification)
+      :launch_specification,
+      :scheduled_instance_id)
       include Aws::Structure
     end
 
@@ -20634,12 +20895,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         aws_access_key_id: "String",
     #         bucket: "String",
     #         prefix: "String",
-    #         aws_access_key_id: "String",
     #         upload_policy: "data",
     #         upload_policy_signature: "String",
     #       }
+    #
+    # @!attribute [rw] aws_access_key_id
+    #   The access key ID of the owner of the bucket. Before you specify a
+    #   value for your access key ID, review and follow the guidance in
+    #   [Best Practices for Managing AWS Access Keys][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
+    #   @return [String]
     #
     # @!attribute [rw] bucket
     #   The bucket in which to store the AMI. You can specify a bucket that
@@ -20650,16 +20921,6 @@ module Aws::EC2
     #
     # @!attribute [rw] prefix
     #   The beginning of the file name of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_access_key_id
-    #   The access key ID of the owner of the bucket. Before you specify a
-    #   value for your access key ID, review and follow the guidance in
-    #   [Best Practices for Managing AWS Access Keys][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
     #   @return [String]
     #
     # @!attribute [rw] upload_policy
@@ -20674,9 +20935,9 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3Storage AWS API Documentation
     #
     class S3Storage < Struct.new(
+      :aws_access_key_id,
       :bucket,
       :prefix,
-      :aws_access_key_id,
       :upload_policy,
       :upload_policy_signature)
       include Aws::Structure
@@ -20684,117 +20945,96 @@ module Aws::EC2
 
     # Describes a Scheduled Instance.
     #
-    # @!attribute [rw] scheduled_instance_id
-    #   The Scheduled Instance ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
-    # @!attribute [rw] platform
-    #   The platform (`Linux/UNIX` or `Windows`).
-    #   @return [String]
-    #
-    # @!attribute [rw] network_platform
-    #   The network platform (`EC2-Classic` or `EC2-VPC`).
-    #   @return [String]
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
     #   @return [String]
     #
-    # @!attribute [rw] slot_duration_in_hours
-    #   The number of hours in the schedule.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] recurrence
-    #   The schedule recurrence.
-    #   @return [Types::ScheduledInstanceRecurrence]
-    #
-    # @!attribute [rw] previous_slot_end_time
-    #   The time that the previous schedule ended or will end.
-    #   @return [Time]
-    #
-    # @!attribute [rw] next_slot_start_time
-    #   The time for the next schedule to start.
+    # @!attribute [rw] create_date
+    #   The date when the Scheduled Instance was purchased.
     #   @return [Time]
     #
     # @!attribute [rw] hourly_price
     #   The hourly price for a single instance.
     #   @return [String]
     #
-    # @!attribute [rw] total_scheduled_instance_hours
-    #   The total number of hours for a single instance for the entire term.
-    #   @return [Integer]
-    #
     # @!attribute [rw] instance_count
     #   The number of instances.
     #   @return [Integer]
     #
-    # @!attribute [rw] term_start_date
-    #   The start date for the Scheduled Instance.
-    #   @return [Time]
-    #
-    # @!attribute [rw] term_end_date
-    #   The end date for the Scheduled Instance.
-    #   @return [Time]
-    #
-    # @!attribute [rw] create_date
-    #   The date when the Scheduled Instance was purchased.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstance AWS API Documentation
-    #
-    class ScheduledInstance < Struct.new(
-      :scheduled_instance_id,
-      :instance_type,
-      :platform,
-      :network_platform,
-      :availability_zone,
-      :slot_duration_in_hours,
-      :recurrence,
-      :previous_slot_end_time,
-      :next_slot_start_time,
-      :hourly_price,
-      :total_scheduled_instance_hours,
-      :instance_count,
-      :term_start_date,
-      :term_end_date,
-      :create_date)
-      include Aws::Structure
-    end
-
-    # Describes a schedule that is available for your Scheduled Instances.
-    #
     # @!attribute [rw] instance_type
-    #   The instance type. You can specify one of the C3, C4, M4, or R3
-    #   instance types.
-    #   @return [String]
-    #
-    # @!attribute [rw] platform
-    #   The platform (`Linux/UNIX` or `Windows`).
+    #   The instance type.
     #   @return [String]
     #
     # @!attribute [rw] network_platform
     #   The network platform (`EC2-Classic` or `EC2-VPC`).
     #   @return [String]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone.
+    # @!attribute [rw] next_slot_start_time
+    #   The time for the next schedule to start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] platform
+    #   The platform (`Linux/UNIX` or `Windows`).
     #   @return [String]
     #
-    # @!attribute [rw] purchase_token
-    #   The purchase token. This token expires in two hours.
+    # @!attribute [rw] previous_slot_end_time
+    #   The time that the previous schedule ended or will end.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recurrence
+    #   The schedule recurrence.
+    #   @return [Types::ScheduledInstanceRecurrence]
+    #
+    # @!attribute [rw] scheduled_instance_id
+    #   The Scheduled Instance ID.
     #   @return [String]
     #
     # @!attribute [rw] slot_duration_in_hours
     #   The number of hours in the schedule.
     #   @return [Integer]
     #
-    # @!attribute [rw] recurrence
-    #   The schedule recurrence.
-    #   @return [Types::ScheduledInstanceRecurrence]
+    # @!attribute [rw] term_end_date
+    #   The end date for the Scheduled Instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] term_start_date
+    #   The start date for the Scheduled Instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_scheduled_instance_hours
+    #   The total number of hours for a single instance for the entire term.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstance AWS API Documentation
+    #
+    class ScheduledInstance < Struct.new(
+      :availability_zone,
+      :create_date,
+      :hourly_price,
+      :instance_count,
+      :instance_type,
+      :network_platform,
+      :next_slot_start_time,
+      :platform,
+      :previous_slot_end_time,
+      :recurrence,
+      :scheduled_instance_id,
+      :slot_duration_in_hours,
+      :term_end_date,
+      :term_start_date,
+      :total_scheduled_instance_hours)
+      include Aws::Structure
+    end
+
+    # Describes a schedule that is available for your Scheduled Instances.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_instance_count
+    #   The number of available instances.
+    #   @return [Integer]
     #
     # @!attribute [rw] first_slot_start_time
     #   The time period for the first schedule to start.
@@ -20804,38 +21044,59 @@ module Aws::EC2
     #   The hourly price for a single instance.
     #   @return [String]
     #
-    # @!attribute [rw] total_scheduled_instance_hours
-    #   The total number of hours for a single instance for the entire term.
-    #   @return [Integer]
+    # @!attribute [rw] instance_type
+    #   The instance type. You can specify one of the C3, C4, M4, or R3
+    #   instance types.
+    #   @return [String]
     #
-    # @!attribute [rw] available_instance_count
-    #   The number of available instances.
+    # @!attribute [rw] max_term_duration_in_days
+    #   The maximum term. The only possible value is 365 days.
     #   @return [Integer]
     #
     # @!attribute [rw] min_term_duration_in_days
     #   The minimum term. The only possible value is 365 days.
     #   @return [Integer]
     #
-    # @!attribute [rw] max_term_duration_in_days
-    #   The maximum term. The only possible value is 365 days.
+    # @!attribute [rw] network_platform
+    #   The network platform (`EC2-Classic` or `EC2-VPC`).
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform (`Linux/UNIX` or `Windows`).
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_token
+    #   The purchase token. This token expires in two hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurrence
+    #   The schedule recurrence.
+    #   @return [Types::ScheduledInstanceRecurrence]
+    #
+    # @!attribute [rw] slot_duration_in_hours
+    #   The number of hours in the schedule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_scheduled_instance_hours
+    #   The total number of hours for a single instance for the entire term.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceAvailability AWS API Documentation
     #
     class ScheduledInstanceAvailability < Struct.new(
-      :instance_type,
-      :platform,
-      :network_platform,
       :availability_zone,
-      :purchase_token,
-      :slot_duration_in_hours,
-      :recurrence,
+      :available_instance_count,
       :first_slot_start_time,
       :hourly_price,
-      :total_scheduled_instance_hours,
-      :available_instance_count,
+      :instance_type,
+      :max_term_duration_in_days,
       :min_term_duration_in_days,
-      :max_term_duration_in_days)
+      :network_platform,
+      :platform,
+      :purchase_token,
+      :recurrence,
+      :slot_duration_in_hours,
+      :total_scheduled_instance_hours)
       include Aws::Structure
     end
 
@@ -20937,22 +21198,27 @@ module Aws::EC2
     #
     #       {
     #         device_name: "String",
-    #         no_device: "String",
-    #         virtual_name: "String",
     #         ebs: {
+    #           delete_on_termination: false,
+    #           encrypted: false,
+    #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           delete_on_termination: false,
     #           volume_type: "String",
-    #           iops: 1,
-    #           encrypted: false,
     #         },
+    #         no_device: "String",
+    #         virtual_name: "String",
     #       }
     #
     # @!attribute [rw] device_name
     #   The device name exposed to the instance (for example, `/dev/sdh` or
     #   `xvdh`).
     #   @return [String]
+    #
+    # @!attribute [rw] ebs
+    #   Parameters used to set up EBS volumes automatically when the
+    #   instance is launched.
+    #   @return [Types::ScheduledInstancesEbs]
     #
     # @!attribute [rw] no_device
     #   Suppresses the specified device included in the block device mapping
@@ -20973,18 +21239,13 @@ module Aws::EC2
     #   specified in the block device mapping for the AMI.
     #   @return [String]
     #
-    # @!attribute [rw] ebs
-    #   Parameters used to set up EBS volumes automatically when the
-    #   instance is launched.
-    #   @return [Types::ScheduledInstancesEbs]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesBlockDeviceMapping AWS API Documentation
     #
     class ScheduledInstancesBlockDeviceMapping < Struct.new(
       :device_name,
+      :ebs,
       :no_device,
-      :virtual_name,
-      :ebs)
+      :virtual_name)
       include Aws::Structure
     end
 
@@ -20994,36 +21255,22 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         delete_on_termination: false,
+    #         encrypted: false,
+    #         iops: 1,
     #         snapshot_id: "String",
     #         volume_size: 1,
-    #         delete_on_termination: false,
     #         volume_type: "String",
-    #         iops: 1,
-    #         encrypted: false,
     #       }
-    #
-    # @!attribute [rw] snapshot_id
-    #   The ID of the snapshot.
-    #   @return [String]
-    #
-    # @!attribute [rw] volume_size
-    #   The size of the volume, in GiB.
-    #
-    #   Default: If you're creating the volume from a snapshot and don't
-    #   specify a volume size, the default is the snapshot size.
-    #   @return [Integer]
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
-    # @!attribute [rw] volume_type
-    #   The volume type. `gp2` for General Purpose SSD, `io1` for
-    #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
-    #   for `sc1`, or `standard` for Magnetic.
-    #
-    #   Default: `standard`
-    #   @return [String]
+    # @!attribute [rw] encrypted
+    #   Indicates whether the volume is encrypted. You can attached
+    #   encrypted volumes only to instances that support them.
+    #   @return [Boolean]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS) that the volume
@@ -21047,20 +21294,34 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
-    # @!attribute [rw] encrypted
-    #   Indicates whether the volume is encrypted. You can attached
-    #   encrypted volumes only to instances that support them.
-    #   @return [Boolean]
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB.
+    #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type. `gp2` for General Purpose SSD, `io1` for
+    #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
+    #   for `sc1`, or `standard` for Magnetic.
+    #
+    #   Default: `standard`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesEbs AWS API Documentation
     #
     class ScheduledInstancesEbs < Struct.new(
+      :delete_on_termination,
+      :encrypted,
+      :iops,
       :snapshot_id,
       :volume_size,
-      :delete_on_termination,
-      :volume_type,
-      :iops,
-      :encrypted)
+      :volume_type)
       include Aws::Structure
     end
 
@@ -21120,119 +21381,71 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         image_id: "String", # required
-    #         key_name: "String",
-    #         security_group_ids: ["String"],
-    #         user_data: "String",
-    #         placement: {
-    #           availability_zone: "String",
-    #           group_name: "String",
-    #         },
-    #         kernel_id: "String",
-    #         instance_type: "String",
-    #         ramdisk_id: "String",
     #         block_device_mappings: [
     #           {
     #             device_name: "String",
-    #             no_device: "String",
-    #             virtual_name: "String",
     #             ebs: {
+    #               delete_on_termination: false,
+    #               encrypted: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "String",
-    #               iops: 1,
-    #               encrypted: false,
     #             },
+    #             no_device: "String",
+    #             virtual_name: "String",
     #           },
     #         ],
+    #         ebs_optimized: false,
+    #         iam_instance_profile: {
+    #           arn: "String",
+    #           name: "String",
+    #         },
+    #         image_id: "String", # required
+    #         instance_type: "String",
+    #         kernel_id: "String",
+    #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
     #         },
-    #         subnet_id: "String",
     #         network_interfaces: [
     #           {
-    #             network_interface_id: "String",
-    #             device_index: 1,
-    #             subnet_id: "String",
-    #             description: "String",
-    #             private_ip_address: "String",
-    #             private_ip_address_configs: [
-    #               {
-    #                 private_ip_address: "String",
-    #                 primary: false,
-    #               },
-    #             ],
-    #             secondary_private_ip_address_count: 1,
     #             associate_public_ip_address: false,
-    #             groups: ["String"],
     #             delete_on_termination: false,
+    #             description: "String",
+    #             device_index: 1,
+    #             groups: ["String"],
+    #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
     #                 ipv_6_address: "Ipv6Address",
     #               },
     #             ],
-    #             ipv_6_address_count: 1,
+    #             network_interface_id: "String",
+    #             private_ip_address: "String",
+    #             private_ip_address_configs: [
+    #               {
+    #                 primary: false,
+    #                 private_ip_address: "String",
+    #               },
+    #             ],
+    #             secondary_private_ip_address_count: 1,
+    #             subnet_id: "String",
     #           },
     #         ],
-    #         iam_instance_profile: {
-    #           arn: "String",
-    #           name: "String",
+    #         placement: {
+    #           availability_zone: "String",
+    #           group_name: "String",
     #         },
-    #         ebs_optimized: false,
+    #         ramdisk_id: "String",
+    #         security_group_ids: ["String"],
+    #         subnet_id: "String",
+    #         user_data: "String",
     #       }
-    #
-    # @!attribute [rw] image_id
-    #   The ID of the Amazon Machine Image (AMI).
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
-    #
-    # @!attribute [rw] security_group_ids
-    #   The IDs of one or more security groups.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] user_data
-    #   The base64-encoded MIME user data.
-    #   @return [String]
-    #
-    # @!attribute [rw] placement
-    #   The placement information.
-    #   @return [Types::ScheduledInstancesPlacement]
-    #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type.
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
-    #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
     #   One or more block device mapping entries.
     #   @return [Array<Types::ScheduledInstancesBlockDeviceMapping>]
-    #
-    # @!attribute [rw] monitoring
-    #   Enable or disable monitoring for the instances.
-    #   @return [Types::ScheduledInstancesMonitoring]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instances.
-    #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   One or more network interfaces.
-    #   @return [Array<Types::ScheduledInstancesNetworkInterface>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
-    #   @return [Types::ScheduledInstancesIamInstanceProfile]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instances are optimized for EBS I/O. This
@@ -21245,23 +21458,71 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::ScheduledInstancesIamInstanceProfile]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI).
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring
+    #   Enable or disable monitoring for the instances.
+    #   @return [Types::ScheduledInstancesMonitoring]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces.
+    #   @return [Array<Types::ScheduledInstancesNetworkInterface>]
+    #
+    # @!attribute [rw] placement
+    #   The placement information.
+    #   @return [Types::ScheduledInstancesPlacement]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The base64-encoded MIME user data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesLaunchSpecification AWS API Documentation
     #
     class ScheduledInstancesLaunchSpecification < Struct.new(
-      :image_id,
-      :key_name,
-      :security_group_ids,
-      :user_data,
-      :placement,
-      :kernel_id,
-      :instance_type,
-      :ramdisk_id,
       :block_device_mappings,
-      :monitoring,
-      :subnet_id,
-      :network_interfaces,
+      :ebs_optimized,
       :iam_instance_profile,
-      :ebs_optimized)
+      :image_id,
+      :instance_type,
+      :kernel_id,
+      :key_name,
+      :monitoring,
+      :network_interfaces,
+      :placement,
+      :ramdisk_id,
+      :security_group_ids,
+      :subnet_id,
+      :user_data)
       include Aws::Structure
     end
 
@@ -21291,43 +21552,66 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         network_interface_id: "String",
-    #         device_index: 1,
-    #         subnet_id: "String",
-    #         description: "String",
-    #         private_ip_address: "String",
-    #         private_ip_address_configs: [
-    #           {
-    #             private_ip_address: "String",
-    #             primary: false,
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
     #         associate_public_ip_address: false,
-    #         groups: ["String"],
     #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["String"],
+    #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
     #             ipv_6_address: "Ipv6Address",
     #           },
     #         ],
-    #         ipv_6_address_count: 1,
+    #         network_interface_id: "String",
+    #         private_ip_address: "String",
+    #         private_ip_address_configs: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String",
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
     #       }
     #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to instances
+    #   launched in a VPC. The public IPv4 address can only be assigned to a
+    #   network interface for eth0, and can only be assigned to a new
+    #   network interface, not an existing one. You cannot specify more than
+    #   one network interface in the request. If launching into a default
+    #   subnet, the default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether to delete the interface when the instance is
+    #   terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description.
     #   @return [String]
     #
     # @!attribute [rw] device_index
     #   The index of the device for the network interface attachment.
     #   @return [Integer]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
-    #   @return [String]
+    # @!attribute [rw] groups
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] description
-    #   The description.
+    # @!attribute [rw] ipv_6_address_count
+    #   The number of IPv6 addresses to assign to the network interface. The
+    #   IPv6 addresses are automatically selected from the subnet range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more specific IPv6 addresses from the subnet range.
+    #   @return [Array<Types::ScheduledInstancesIpv6Address>]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -21342,48 +21626,25 @@ module Aws::EC2
     #   The number of secondary private IPv4 addresses.
     #   @return [Integer]
     #
-    # @!attribute [rw] associate_public_ip_address
-    #   Indicates whether to assign a public IPv4 address to instances
-    #   launched in a VPC. The public IPv4 address can only be assigned to a
-    #   network interface for eth0, and can only be assigned to a new
-    #   network interface, not an existing one. You cannot specify more than
-    #   one network interface in the request. If launching into a default
-    #   subnet, the default value is `true`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] groups
-    #   The IDs of one or more security groups.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] delete_on_termination
-    #   Indicates whether to delete the interface when the instance is
-    #   terminated.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   One or more specific IPv6 addresses from the subnet range.
-    #   @return [Array<Types::ScheduledInstancesIpv6Address>]
-    #
-    # @!attribute [rw] ipv_6_address_count
-    #   The number of IPv6 addresses to assign to the network interface. The
-    #   IPv6 addresses are automatically selected from the subnet range.
-    #   @return [Integer]
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesNetworkInterface AWS API Documentation
     #
     class ScheduledInstancesNetworkInterface < Struct.new(
-      :network_interface_id,
-      :device_index,
-      :subnet_id,
+      :associate_public_ip_address,
+      :delete_on_termination,
       :description,
+      :device_index,
+      :groups,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :network_interface_id,
       :private_ip_address,
       :private_ip_address_configs,
       :secondary_private_ip_address_count,
-      :associate_public_ip_address,
-      :groups,
-      :delete_on_termination,
-      :ipv_6_addresses,
-      :ipv_6_address_count)
+      :subnet_id)
       include Aws::Structure
     end
 
@@ -21419,73 +21680,73 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         private_ip_address: "String",
     #         primary: false,
+    #         private_ip_address: "String",
     #       }
-    #
-    # @!attribute [rw] private_ip_address
-    #   The IPv4 address.
-    #   @return [String]
     #
     # @!attribute [rw] primary
     #   Indicates whether this is a primary IPv4 address. Otherwise, this is
     #   a secondary IPv4 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPrivateIpAddressConfig AWS API Documentation
     #
     class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
-      :private_ip_address,
-      :primary)
+      :primary,
+      :private_ip_address)
       include Aws::Structure
     end
 
     # Describes a security group
     #
-    # @!attribute [rw] owner_id
-    #   The AWS account ID of the owner of the security group.
+    # @!attribute [rw] description
+    #   A description of the security group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
     #   The name of the security group.
     #   @return [String]
     #
-    # @!attribute [rw] group_id
-    #   The ID of the security group.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description of the security group.
-    #   @return [String]
-    #
     # @!attribute [rw] ip_permissions
     #   One or more inbound rules associated with the security group.
     #   @return [Array<Types::IpPermission>]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the owner of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group.
+    #   @return [String]
     #
     # @!attribute [rw] ip_permissions_egress
     #   \[EC2-VPC\] One or more outbound rules associated with the security
     #   group.
     #   @return [Array<Types::IpPermission>]
     #
-    # @!attribute [rw] vpc_id
-    #   \[EC2-VPC\] The ID of the VPC for the security group.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   Any tags assigned to the security group.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_id
+    #   \[EC2-VPC\] The ID of the VPC for the security group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroup AWS API Documentation
     #
     class SecurityGroup < Struct.new(
-      :owner_id,
-      :group_name,
-      :group_id,
       :description,
+      :group_name,
       :ip_permissions,
+      :owner_id,
+      :group_id,
       :ip_permissions_egress,
-      :vpc_id,
-      :tags)
+      :tags,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -21574,16 +21835,47 @@ module Aws::EC2
 
     # Describes a snapshot.
     #
+    # @!attribute [rw] data_encryption_key_id
+    #   The data encryption key identifier for the snapshot. This value is a
+    #   unique identifier that corresponds to the data encryption key that
+    #   was used to encrypt the original volume or snapshot copy. Because
+    #   data encryption keys are inherited by volumes created from
+    #   snapshots, and vice versa, if snapshots share the same data
+    #   encryption key identifier, then they belong to the same
+    #   volume/snapshot lineage. This parameter is only returned by the
+    #   DescribeSnapshots API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the snapshot is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) that was used to protect the volume encryption key
+    #   for the parent volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the EBS snapshot owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the snapshot, as a percentage.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot. Each snapshot receives a unique identifier
     #   when it is created.
     #   @return [String]
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume that was used to create the snapshot. Snapshots
-    #   created by the CopySnapshot action have an arbitrary volume ID that
-    #   should not be used for any purpose.
-    #   @return [String]
+    # @!attribute [rw] start_time
+    #   The time stamp when the snapshot was initiated.
+    #   @return [Time]
     #
     # @!attribute [rw] state
     #   The snapshot state.
@@ -21598,20 +21890,10 @@ module Aws::EC2
     #   DescribeSnapshots API operation.
     #   @return [String]
     #
-    # @!attribute [rw] start_time
-    #   The time stamp when the snapshot was initiated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] progress
-    #   The progress of the snapshot, as a percentage.
-    #   @return [String]
-    #
-    # @!attribute [rw] owner_id
-    #   The AWS account ID of the EBS snapshot owner.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description for the snapshot.
+    # @!attribute [rw] volume_id
+    #   The ID of the volume that was used to create the snapshot. Snapshots
+    #   created by the CopySnapshot action have an arbitrary volume ID that
+    #   should not be used for any purpose.
     #   @return [String]
     #
     # @!attribute [rw] volume_size
@@ -21629,59 +21911,58 @@ module Aws::EC2
     #   Any tags assigned to the snapshot.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] encrypted
-    #   Indicates whether the snapshot is encrypted.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the parent volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] data_encryption_key_id
-    #   The data encryption key identifier for the snapshot. This value is a
-    #   unique identifier that corresponds to the data encryption key that
-    #   was used to encrypt the original volume or snapshot copy. Because
-    #   data encryption keys are inherited by volumes created from
-    #   snapshots, and vice versa, if snapshots share the same data
-    #   encryption key identifier, then they belong to the same
-    #   volume/snapshot lineage. This parameter is only returned by the
-    #   DescribeSnapshots API operation.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
-      :snapshot_id,
-      :volume_id,
-      :state,
-      :state_message,
-      :start_time,
-      :progress,
-      :owner_id,
+      :data_encryption_key_id,
       :description,
-      :volume_size,
-      :owner_alias,
-      :tags,
       :encrypted,
       :kms_key_id,
-      :data_encryption_key_id)
+      :owner_id,
+      :progress,
+      :snapshot_id,
+      :start_time,
+      :state,
+      :state_message,
+      :volume_id,
+      :volume_size,
+      :owner_alias,
+      :tags)
       include Aws::Structure
     end
 
     # Describes the snapshot created from the imported disk.
     #
-    # @!attribute [rw] disk_image_size
-    #   The size of the disk in the snapshot, in GiB.
-    #   @return [Float]
-    #
     # @!attribute [rw] description
     #   A description for the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] device_name
+    #   The block device mapping for the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_size
+    #   The size of the disk in the snapshot, in GiB.
+    #   @return [Float]
+    #
     # @!attribute [rw] format
     #   The format of the disk image from which the snapshot is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The percentage of progress for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The snapshot ID of the disk being imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A brief status of the snapshot creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed status message for the snapshot creation.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -21692,39 +21973,19 @@ module Aws::EC2
     #   The S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
-    # @!attribute [rw] device_name
-    #   The block device mapping for the snapshot.
-    #   @return [String]
-    #
-    # @!attribute [rw] snapshot_id
-    #   The snapshot ID of the disk being imported.
-    #   @return [String]
-    #
-    # @!attribute [rw] progress
-    #   The percentage of progress for the task.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   A detailed status message for the snapshot creation.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   A brief status of the snapshot creation.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDetail AWS API Documentation
     #
     class SnapshotDetail < Struct.new(
-      :disk_image_size,
       :description,
-      :format,
-      :url,
-      :user_bucket,
       :device_name,
-      :snapshot_id,
+      :disk_image_size,
+      :format,
       :progress,
+      :snapshot_id,
+      :status,
       :status_message,
-      :status)
+      :url,
+      :user_bucket)
       include Aws::Structure
     end
 
@@ -21774,16 +22035,32 @@ module Aws::EC2
 
     # Details about the import snapshot task.
     #
-    # @!attribute [rw] disk_image_size
-    #   The size of the disk in the snapshot, in GiB.
-    #   @return [Float]
-    #
     # @!attribute [rw] description
     #   The description of the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] disk_image_size
+    #   The size of the disk in the snapshot, in GiB.
+    #   @return [Float]
+    #
     # @!attribute [rw] format
     #   The format of the disk image from which the snapshot is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The percentage of completion for the import snapshot task.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The snapshot ID of the disk being imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A brief status for the import snapshot task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed status message for the import snapshot task.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -21794,45 +22071,33 @@ module Aws::EC2
     #   The S3 bucket for the disk image.
     #   @return [Types::UserBucketDetails]
     #
-    # @!attribute [rw] snapshot_id
-    #   The snapshot ID of the disk being imported.
-    #   @return [String]
-    #
-    # @!attribute [rw] progress
-    #   The percentage of completion for the import snapshot task.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   A detailed status message for the import snapshot task.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   A brief status for the import snapshot task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotTaskDetail AWS API Documentation
     #
     class SnapshotTaskDetail < Struct.new(
-      :disk_image_size,
       :description,
+      :disk_image_size,
       :format,
-      :url,
-      :user_bucket,
-      :snapshot_id,
       :progress,
+      :snapshot_id,
+      :status,
       :status_message,
-      :status)
+      :url,
+      :user_bucket)
       include Aws::Structure
     end
 
     # Describes the data feed for a Spot instance.
     #
-    # @!attribute [rw] owner_id
-    #   The AWS account ID of the account.
-    #   @return [String]
-    #
     # @!attribute [rw] bucket
     #   The Amazon S3 bucket where the Spot instance data feed is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] fault
+    #   The fault codes for the Spot instance request, if any.
+    #   @return [Types::SpotInstanceStateFault]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the account.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -21843,18 +22108,14 @@ module Aws::EC2
     #   The state of the Spot instance data feed subscription.
     #   @return [String]
     #
-    # @!attribute [rw] fault
-    #   The fault codes for the Spot instance request, if any.
-    #   @return [Types::SpotInstanceStateFault]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotDatafeedSubscription AWS API Documentation
     #
     class SpotDatafeedSubscription < Struct.new(
-      :owner_id,
       :bucket,
+      :fault,
+      :owner_id,
       :prefix,
-      :state,
-      :fault)
+      :state)
       include Aws::Structure
     end
 
@@ -21864,84 +22125,76 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         image_id: "String",
-    #         key_name: "String",
     #         security_groups: [
     #           {
     #             group_name: "String",
     #             group_id: "String",
     #           },
     #         ],
-    #         user_data: "String",
     #         addressing_type: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #         placement: {
-    #           availability_zone: "String",
-    #           group_name: "String",
-    #           tenancy: "default", # accepts default, dedicated, host
-    #         },
-    #         kernel_id: "String",
-    #         ramdisk_id: "String",
     #         block_device_mappings: [
     #           {
-    #             virtual_name: "String",
     #             device_name: "String",
+    #             virtual_name: "String",
     #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
     #               snapshot_id: "String",
     #               volume_size: 1,
-    #               delete_on_termination: false,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               iops: 1,
-    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
+    #         ebs_optimized: false,
+    #         iam_instance_profile: {
+    #           arn: "String",
+    #           name: "String",
+    #         },
+    #         image_id: "String",
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         kernel_id: "String",
+    #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
     #         },
-    #         subnet_id: "String",
     #         network_interfaces: [
     #           {
-    #             network_interface_id: "String",
-    #             device_index: 1,
-    #             subnet_id: "String",
-    #             description: "String",
-    #             private_ip_address: "String",
-    #             groups: ["String"],
-    #             delete_on_termination: false,
-    #             private_ip_addresses: [
-    #               {
-    #                 private_ip_address: "String", # required
-    #                 primary: false,
-    #               },
-    #             ],
-    #             secondary_private_ip_address_count: 1,
     #             associate_public_ip_address: false,
+    #             delete_on_termination: false,
+    #             description: "String",
+    #             device_index: 1,
+    #             groups: ["String"],
+    #             ipv_6_address_count: 1,
     #             ipv_6_addresses: [
     #               {
     #                 ipv_6_address: "String",
     #               },
     #             ],
-    #             ipv_6_address_count: 1,
+    #             network_interface_id: "String",
+    #             private_ip_address: "String",
+    #             private_ip_addresses: [
+    #               {
+    #                 primary: false,
+    #                 private_ip_address: "String", # required
+    #               },
+    #             ],
+    #             secondary_private_ip_address_count: 1,
+    #             subnet_id: "String",
     #           },
     #         ],
-    #         iam_instance_profile: {
-    #           arn: "String",
-    #           name: "String",
+    #         placement: {
+    #           availability_zone: "String",
+    #           group_name: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
     #         },
-    #         ebs_optimized: false,
-    #         weighted_capacity: 1.0,
+    #         ramdisk_id: "String",
     #         spot_price: "String",
+    #         subnet_id: "String",
+    #         user_data: "String",
+    #         weighted_capacity: 1.0,
     #       }
-    #
-    # @!attribute [rw] image_id
-    #   The ID of the AMI.
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key pair.
-    #   @return [String]
     #
     # @!attribute [rw] security_groups
     #   One or more security groups. When requesting instances in a VPC, you
@@ -21950,57 +22203,13 @@ module Aws::EC2
     #   the security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
-    # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
-    #   @return [String]
-    #
     # @!attribute [rw] addressing_type
     #   Deprecated.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type. Note that T2 and HS1 instance types are not
-    #   supported.
-    #   @return [String]
-    #
-    # @!attribute [rw] placement
-    #   The placement information.
-    #   @return [Types::SpotPlacement]
-    #
-    # @!attribute [rw] kernel_id
-    #   The ID of the kernel.
-    #   @return [String]
-    #
-    # @!attribute [rw] ramdisk_id
-    #   The ID of the RAM disk.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
     #   One or more block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
-    #
-    # @!attribute [rw] monitoring
-    #   Enable or disable monitoring for the instances.
-    #   @return [Types::SpotFleetMonitoring]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instances. To specify
-    #   multiple subnets, separate them using commas; for example,
-    #   "subnet-a61dafcf, subnet-65ea5f08".
-    #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
-    #   interface.
-    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
-    #
-    # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
-    #   @return [Types::IamInstanceProfileSpecification]
     #
     # @!attribute [rw] ebs_optimized
     #   Indicates whether the instances are optimized for EBS I/O. This
@@ -22013,6 +22222,65 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::IamInstanceProfileSpecification]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type. Note that T2 and HS1 instance types are not
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring
+    #   Enable or disable monitoring for the instances.
+    #   @return [Types::SpotFleetMonitoring]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces. If you specify a network interface,
+    #   you must specify subnet IDs and security group IDs using the network
+    #   interface.
+    #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
+    #
+    # @!attribute [rw] placement
+    #   The placement information.
+    #   @return [Types::SpotPlacement]
+    #
+    # @!attribute [rw] ramdisk_id
+    #   The ID of the RAM disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_price
+    #   The bid price per unit hour for the specified instance type. If this
+    #   value is not specified, the default is the Spot bid price specified
+    #   for the fleet. To determine the bid price per unit hour, divide the
+    #   Spot bid price by the value of `WeightedCapacity`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances. To specify
+    #   multiple subnets, separate them using commas; for example,
+    #   "subnet-a61dafcf, subnet-65ea5f08".
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instances. If you are using
+    #   an AWS SDK or command line tool, Base64-encoding is performed for
+    #   you, and you can load the text from a file. Otherwise, you must
+    #   provide Base64-encoded text.
+    #   @return [String]
+    #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type. These
     #   are the same units that you chose to set the target capacity in
@@ -22024,33 +22292,26 @@ module Aws::EC2
     #   value is not specified, the default is 1.
     #   @return [Float]
     #
-    # @!attribute [rw] spot_price
-    #   The bid price per unit hour for the specified instance type. If this
-    #   value is not specified, the default is the Spot bid price specified
-    #   for the fleet. To determine the bid price per unit hour, divide the
-    #   Spot bid price by the value of `WeightedCapacity`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification AWS API Documentation
     #
     class SpotFleetLaunchSpecification < Struct.new(
-      :image_id,
-      :key_name,
       :security_groups,
-      :user_data,
       :addressing_type,
-      :instance_type,
-      :placement,
-      :kernel_id,
-      :ramdisk_id,
       :block_device_mappings,
-      :monitoring,
-      :subnet_id,
-      :network_interfaces,
-      :iam_instance_profile,
       :ebs_optimized,
-      :weighted_capacity,
-      :spot_price)
+      :iam_instance_profile,
+      :image_id,
+      :instance_type,
+      :kernel_id,
+      :key_name,
+      :monitoring,
+      :network_interfaces,
+      :placement,
+      :ramdisk_id,
+      :spot_price,
+      :subnet_id,
+      :user_data,
+      :weighted_capacity)
       include Aws::Structure
     end
 
@@ -22078,22 +22339,6 @@ module Aws::EC2
 
     # Describes a Spot fleet request.
     #
-    # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
-    #   @return [String]
-    #
-    # @!attribute [rw] spot_fleet_request_state
-    #   The state of the Spot fleet request.
-    #   @return [String]
-    #
-    # @!attribute [rw] spot_fleet_request_config
-    #   Information about the configuration of the Spot fleet request.
-    #   @return [Types::SpotFleetRequestConfigData]
-    #
-    # @!attribute [rw] create_time
-    #   The creation date and time of the request.
-    #   @return [Time]
-    #
     # @!attribute [rw] activity_status
     #   The progress of the Spot fleet request. If there is an error, the
     #   status is `error`. After all bids are placed, the status is
@@ -22103,14 +22348,30 @@ module Aws::EC2
     #   while Spot instances are terminating.
     #   @return [String]
     #
+    # @!attribute [rw] create_time
+    #   The creation date and time of the request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] spot_fleet_request_config
+    #   Information about the configuration of the Spot fleet request.
+    #   @return [Types::SpotFleetRequestConfigData]
+    #
+    # @!attribute [rw] spot_fleet_request_id
+    #   The ID of the Spot fleet request.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_fleet_request_state
+    #   The state of the Spot fleet request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfig AWS API Documentation
     #
     class SpotFleetRequestConfig < Struct.new(
-      :spot_fleet_request_id,
-      :spot_fleet_request_state,
-      :spot_fleet_request_config,
+      :activity_status,
       :create_time,
-      :activity_status)
+      :spot_fleet_request_config,
+      :spot_fleet_request_id,
+      :spot_fleet_request_state)
       include Aws::Structure
     end
 
@@ -22120,92 +22381,97 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
     #         client_token: "String",
-    #         spot_price: "String", # required
-    #         target_capacity: 1, # required
-    #         valid_from: Time.now,
-    #         valid_until: Time.now,
-    #         terminate_instances_with_expiration: false,
+    #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
+    #         fulfilled_capacity: 1.0,
     #         iam_fleet_role: "String", # required
     #         launch_specifications: [ # required
     #           {
-    #             image_id: "String",
-    #             key_name: "String",
     #             security_groups: [
     #               {
     #                 group_name: "String",
     #                 group_id: "String",
     #               },
     #             ],
-    #             user_data: "String",
     #             addressing_type: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
-    #             placement: {
-    #               availability_zone: "String",
-    #               group_name: "String",
-    #               tenancy: "default", # accepts default, dedicated, host
-    #             },
-    #             kernel_id: "String",
-    #             ramdisk_id: "String",
     #             block_device_mappings: [
     #               {
-    #                 virtual_name: "String",
     #                 device_name: "String",
+    #                 virtual_name: "String",
     #                 ebs: {
+    #                   encrypted: false,
+    #                   delete_on_termination: false,
+    #                   iops: 1,
     #                   snapshot_id: "String",
     #                   volume_size: 1,
-    #                   delete_on_termination: false,
     #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                   iops: 1,
-    #                   encrypted: false,
     #                 },
     #                 no_device: "String",
     #               },
     #             ],
+    #             ebs_optimized: false,
+    #             iam_instance_profile: {
+    #               arn: "String",
+    #               name: "String",
+    #             },
+    #             image_id: "String",
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #             kernel_id: "String",
+    #             key_name: "String",
     #             monitoring: {
     #               enabled: false,
     #             },
-    #             subnet_id: "String",
     #             network_interfaces: [
     #               {
-    #                 network_interface_id: "String",
-    #                 device_index: 1,
-    #                 subnet_id: "String",
-    #                 description: "String",
-    #                 private_ip_address: "String",
-    #                 groups: ["String"],
-    #                 delete_on_termination: false,
-    #                 private_ip_addresses: [
-    #                   {
-    #                     private_ip_address: "String", # required
-    #                     primary: false,
-    #                   },
-    #                 ],
-    #                 secondary_private_ip_address_count: 1,
     #                 associate_public_ip_address: false,
+    #                 delete_on_termination: false,
+    #                 description: "String",
+    #                 device_index: 1,
+    #                 groups: ["String"],
+    #                 ipv_6_address_count: 1,
     #                 ipv_6_addresses: [
     #                   {
     #                     ipv_6_address: "String",
     #                   },
     #                 ],
-    #                 ipv_6_address_count: 1,
+    #                 network_interface_id: "String",
+    #                 private_ip_address: "String",
+    #                 private_ip_addresses: [
+    #                   {
+    #                     primary: false,
+    #                     private_ip_address: "String", # required
+    #                   },
+    #                 ],
+    #                 secondary_private_ip_address_count: 1,
+    #                 subnet_id: "String",
     #               },
     #             ],
-    #             iam_instance_profile: {
-    #               arn: "String",
-    #               name: "String",
+    #             placement: {
+    #               availability_zone: "String",
+    #               group_name: "String",
+    #               tenancy: "default", # accepts default, dedicated, host
     #             },
-    #             ebs_optimized: false,
-    #             weighted_capacity: 1.0,
+    #             ramdisk_id: "String",
     #             spot_price: "String",
+    #             subnet_id: "String",
+    #             user_data: "String",
+    #             weighted_capacity: 1.0,
     #           },
     #         ],
-    #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
-    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified
-    #         fulfilled_capacity: 1.0,
+    #         spot_price: "String", # required
+    #         target_capacity: 1, # required
+    #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain
+    #         valid_from: Time.now,
+    #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
     #       }
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Indicates how to allocate the target capacity across the Spot pools
+    #   specified by the Spot fleet request. The default is `lowestPrice`.
+    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier you provide to ensure
@@ -22217,33 +22483,16 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @!attribute [rw] spot_price
-    #   The bid price per unit hour.
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running Spot instances should be terminated if the
+    #   target capacity of the Spot fleet request is decreased below the
+    #   current size of the Spot fleet.
     #   @return [String]
     #
-    # @!attribute [rw] target_capacity
-    #   The number of units to request. You can choose to set the target
-    #   capacity in terms of instances or a performance characteristic that
-    #   is important to your application workload, such as vCPUs, memory, or
-    #   I/O.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] valid_from
-    #   The start date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
-    #   fulfilling the request immediately.
-    #   @return [Time]
-    #
-    # @!attribute [rw] valid_until
-    #   The end date and time of the request, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
-    #   instance requests are placed or enabled to fulfill the request.
-    #   @return [Time]
-    #
-    # @!attribute [rw] terminate_instances_with_expiration
-    #   Indicates whether running Spot instances should be terminated when
-    #   the Spot fleet request expires.
-    #   @return [Boolean]
+    # @!attribute [rw] fulfilled_capacity
+    #   The number of units fulfilled by this request compared to the set
+    #   target capacity.
+    #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
     #   Grants the Spot fleet permission to terminate Spot instances on your
@@ -22257,21 +22506,21 @@ module Aws::EC2
     #   request.
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
-    # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot instances should be terminated if the
-    #   target capacity of the Spot fleet request is decreased below the
-    #   current size of the Spot fleet.
+    # @!attribute [rw] spot_price
+    #   The bid price per unit hour.
     #   @return [String]
     #
-    # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target capacity across the Spot pools
-    #   specified by the Spot fleet request. The default is `lowestPrice`.
-    #   @return [String]
+    # @!attribute [rw] target_capacity
+    #   The number of units to request. You can choose to set the target
+    #   capacity in terms of instances or a performance characteristic that
+    #   is important to your application workload, such as vCPUs, memory, or
+    #   I/O.
+    #   @return [Integer]
     #
-    # @!attribute [rw] fulfilled_capacity
-    #   The number of units fulfilled by this request compared to the set
-    #   target capacity.
-    #   @return [Float]
+    # @!attribute [rw] terminate_instances_with_expiration
+    #   Indicates whether running Spot instances should be terminated when
+    #   the Spot fleet request expires.
+    #   @return [Boolean]
     #
     # @!attribute [rw] type
     #   The type of request. Indicates whether the fleet will only `request`
@@ -22285,6 +22534,18 @@ module Aws::EC2
     #   interrupted instances. Default: `maintain`.
     #   @return [String]
     #
+    # @!attribute [rw] valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
+    #   instance requests are placed or enabled to fulfill the request.
+    #   @return [Time]
+    #
     # @!attribute [rw] replace_unhealthy_instances
     #   Indicates whether Spot fleet should replace unhealthy instances.
     #   @return [Boolean]
@@ -22292,23 +22553,70 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
     #
     class SpotFleetRequestConfigData < Struct.new(
+      :allocation_strategy,
       :client_token,
-      :spot_price,
-      :target_capacity,
-      :valid_from,
-      :valid_until,
-      :terminate_instances_with_expiration,
+      :excess_capacity_termination_policy,
+      :fulfilled_capacity,
       :iam_fleet_role,
       :launch_specifications,
-      :excess_capacity_termination_policy,
-      :allocation_strategy,
-      :fulfilled_capacity,
+      :spot_price,
+      :target_capacity,
+      :terminate_instances_with_expiration,
       :type,
+      :valid_from,
+      :valid_until,
       :replace_unhealthy_instances)
       include Aws::Structure
     end
 
     # Describes a Spot instance request.
+    #
+    # @!attribute [rw] actual_block_hourly_price
+    #   If you specified a duration and your Spot instance request was
+    #   fulfilled, this is the fixed hourly price in effect for the Spot
+    #   instance while it runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_group
+    #   The Availability Zone group. If you specify the same Availability
+    #   Zone group for all Spot instance requests, all Spot instances are
+    #   launched in the same Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   The duration for the Spot instance, in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time when the Spot instance request was created, in UTC
+    #   format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @!attribute [rw] fault
+    #   The fault codes for the Spot instance request, if any.
+    #   @return [Types::SpotInstanceStateFault]
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID, if an instance has been launched to fulfill the
+    #   Spot instance request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_group
+    #   The instance launch group. Launch groups are Spot instances that
+    #   launch together and terminate together.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_specification
+    #   Additional information for launching instances.
+    #   @return [Types::LaunchSpecification]
+    #
+    # @!attribute [rw] launched_availability_zone
+    #   The Availability Zone in which the bid is launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_description
+    #   The product description associated with the Spot instance.
+    #   @return [String]
     #
     # @!attribute [rw] spot_instance_request_id
     #   The ID of the Spot instance request.
@@ -22317,10 +22625,6 @@ module Aws::EC2
     # @!attribute [rw] spot_price
     #   The maximum hourly price (bid) for the Spot instance launched to
     #   fulfill the request.
-    #   @return [String]
-    #
-    # @!attribute [rw] type
-    #   The Spot instance request type.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -22334,14 +22638,18 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
     #   @return [String]
     #
-    # @!attribute [rw] fault
-    #   The fault codes for the Spot instance request, if any.
-    #   @return [Types::SpotInstanceStateFault]
-    #
     # @!attribute [rw] status
     #   The status code and status message describing the Spot instance
     #   request.
     #   @return [Types::SpotInstanceStatus]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] type
+    #   The Spot instance request type.
+    #   @return [String]
     #
     # @!attribute [rw] valid_from
     #   The start date of the request, in UTC format (for example,
@@ -22357,74 +22665,27 @@ module Aws::EC2
     #   remains active until it is canceled or this date is reached.
     #   @return [Time]
     #
-    # @!attribute [rw] launch_group
-    #   The instance launch group. Launch groups are Spot instances that
-    #   launch together and terminate together.
-    #   @return [String]
-    #
-    # @!attribute [rw] availability_zone_group
-    #   The Availability Zone group. If you specify the same Availability
-    #   Zone group for all Spot instance requests, all Spot instances are
-    #   launched in the same Availability Zone.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_specification
-    #   Additional information for launching instances.
-    #   @return [Types::LaunchSpecification]
-    #
-    # @!attribute [rw] instance_id
-    #   The instance ID, if an instance has been launched to fulfill the
-    #   Spot instance request.
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The date and time when the Spot instance request was created, in UTC
-    #   format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
-    #   @return [Time]
-    #
-    # @!attribute [rw] product_description
-    #   The product description associated with the Spot instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] block_duration_minutes
-    #   The duration for the Spot instance, in minutes.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] actual_block_hourly_price
-    #   If you specified a duration and your Spot instance request was
-    #   fulfilled, this is the fixed hourly price in effect for the Spot
-    #   instance while it runs.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the resource.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] launched_availability_zone
-    #   The Availability Zone in which the bid is launched.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceRequest AWS API Documentation
     #
     class SpotInstanceRequest < Struct.new(
+      :actual_block_hourly_price,
+      :availability_zone_group,
+      :block_duration_minutes,
+      :create_time,
+      :fault,
+      :instance_id,
+      :launch_group,
+      :launch_specification,
+      :launched_availability_zone,
+      :product_description,
       :spot_instance_request_id,
       :spot_price,
-      :type,
       :state,
-      :fault,
       :status,
-      :valid_from,
-      :valid_until,
-      :launch_group,
-      :availability_zone_group,
-      :launch_specification,
-      :instance_id,
-      :create_time,
-      :product_description,
-      :block_duration_minutes,
-      :actual_block_hourly_price,
       :tags,
-      :launched_availability_zone)
+      :type,
+      :valid_from,
+      :valid_until)
       include Aws::Structure
     end
 
@@ -22457,21 +22718,21 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html#spot-instance-bid-status-understand
     #   @return [String]
     #
+    # @!attribute [rw] message
+    #   The description for the status code.
+    #   @return [String]
+    #
     # @!attribute [rw] update_time
     #   The date and time of the most recent status update, in UTC format
     #   (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
     #   @return [Time]
     #
-    # @!attribute [rw] message
-    #   The description for the status code.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStatus AWS API Documentation
     #
     class SpotInstanceStatus < Struct.new(
       :code,
-      :update_time,
-      :message)
+      :message,
+      :update_time)
       include Aws::Structure
     end
 
@@ -22515,6 +22776,10 @@ module Aws::EC2
     # Describes the maximum hourly price (bid) for any Spot instance
     # launched to fulfill the request.
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_type
     #   The instance type. Note that T2 and HS1 instance types are not
     #   supported.
@@ -22534,18 +22799,14 @@ module Aws::EC2
     #   example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
     #   @return [Time]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPrice AWS API Documentation
     #
     class SpotPrice < Struct.new(
+      :availability_zone,
       :instance_type,
       :product_description,
       :spot_price,
-      :timestamp,
-      :availability_zone)
+      :timestamp)
       include Aws::Structure
     end
 
@@ -22601,20 +22862,16 @@ module Aws::EC2
     # Describes a stale security group (a security group that contains stale
     # rules).
     #
+    # @!attribute [rw] description
+    #   The description of the security group.
+    #   @return [String]
+    #
     # @!attribute [rw] group_id
     #   The ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
     #   The name of the security group.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the security group.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC for the security group.
     #   @return [String]
     #
     # @!attribute [rw] stale_ip_permissions
@@ -22625,15 +22882,19 @@ module Aws::EC2
     #   Information about the stale outbound rules in the security group.
     #   @return [Array<Types::StaleIpPermission>]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC for the security group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleSecurityGroup AWS API Documentation
     #
     class StaleSecurityGroup < Struct.new(
+      :description,
       :group_id,
       :group_name,
-      :description,
-      :vpc_id,
       :stale_ip_permissions,
-      :stale_ip_permissions_egress)
+      :stale_ip_permissions_egress,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -22737,10 +22998,14 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_ids: ["String"], # required
+    #         dry_run: false,
     #         force: false,
     #       }
+    #
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22748,10 +23013,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] force
     #   Forces the instances to stop. The instances do not have an
@@ -22765,8 +23026,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesRequest AWS API Documentation
     #
     class StopInstancesRequest < Struct.new(
-      :dry_run,
       :instance_ids,
+      :dry_run,
       :force)
       include Aws::Structure
     end
@@ -22791,9 +23052,9 @@ module Aws::EC2
     #
     #       {
     #         s3: {
+    #           aws_access_key_id: "String",
     #           bucket: "String",
     #           prefix: "String",
-    #           aws_access_key_id: "String",
     #           upload_policy: "data",
     #           upload_policy_signature: "String",
     #         },
@@ -22838,31 +23099,9 @@ module Aws::EC2
 
     # Describes a subnet.
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet.
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the subnet.
     #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The current state of the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC the subnet is in.
-    #   @return [String]
-    #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 CIDR block assigned to the subnet.
-    #   @return [String]
-    #
-    # @!attribute [rw] ipv_6_cidr_block_association_set
-    #   Information about the IPv6 CIDR blocks associated with the subnet.
-    #   @return [Array<Types::SubnetIpv6CidrBlockAssociation>]
-    #
-    # @!attribute [rw] assign_ipv_6_address_on_creation
-    #   Indicates whether a network interface created in this subnet
-    #   (including a network interface created by RunInstances) receives an
-    #   IPv6 address.
-    #   @return [Boolean]
     #
     # @!attribute [rw] available_ip_address_count
     #   The number of unused private IPv4 addresses in the subnet. Note that
@@ -22870,8 +23109,8 @@ module Aws::EC2
     #   unavailable.
     #   @return [Integer]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone of the subnet.
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block assigned to the subnet.
     #   @return [String]
     #
     # @!attribute [rw] default_for_az
@@ -22884,6 +23123,28 @@ module Aws::EC2
     #   IPv4 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] state
+    #   The current state of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC the subnet is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] assign_ipv_6_address_on_creation
+    #   Indicates whether a network interface created in this subnet
+    #   (including a network interface created by RunInstances) receives an
+    #   IPv6 address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_cidr_block_association_set
+    #   Information about the IPv6 CIDR blocks associated with the subnet.
+    #   @return [Array<Types::SubnetIpv6CidrBlockAssociation>]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the subnet.
     #   @return [Array<Types::Tag>]
@@ -22891,16 +23152,16 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
-      :subnet_id,
-      :state,
-      :vpc_id,
-      :cidr_block,
-      :ipv_6_cidr_block_association_set,
-      :assign_ipv_6_address_on_creation,
-      :available_ip_address_count,
       :availability_zone,
+      :available_ip_address_count,
+      :cidr_block,
       :default_for_az,
       :map_public_ip_on_launch,
+      :state,
+      :subnet_id,
+      :vpc_id,
+      :assign_ipv_6_address_on_creation,
+      :ipv_6_cidr_block_association_set,
       :tags)
       include Aws::Structure
     end
@@ -22925,6 +23186,10 @@ module Aws::EC2
 
     # Describes an IPv6 CIDR block associated with a subnet.
     #
+    # @!attribute [rw] association_id
+    #   The association ID for the CIDR block.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block.
     #   @return [String]
@@ -22933,16 +23198,12 @@ module Aws::EC2
     #   Information about the state of the CIDR block.
     #   @return [Types::SubnetCidrBlockState]
     #
-    # @!attribute [rw] association_id
-    #   The association ID for the CIDR block.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetIpv6CidrBlockAssociation AWS API Documentation
     #
     class SubnetIpv6CidrBlockAssociation < Struct.new(
+      :association_id,
       :ipv_6_cidr_block,
-      :ipv_6_cidr_block_state,
-      :association_id)
+      :ipv_6_cidr_block_state)
       include Aws::Structure
     end
 
@@ -22980,16 +23241,16 @@ module Aws::EC2
 
     # Describes a tag.
     #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_id
     #   The ID of the resource. For example, `ami-1a2b3c4d`.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   The resource type.
-    #   @return [String]
-    #
-    # @!attribute [rw] key
-    #   The tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -22999,9 +23260,9 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagDescription AWS API Documentation
     #
     class TagDescription < Struct.new(
+      :key,
       :resource_id,
       :resource_type,
-      :key,
       :value)
       include Aws::Structure
     end
@@ -23040,21 +23301,21 @@ module Aws::EC2
 
     # Information about the Convertible Reserved Instance offering.
     #
-    # @!attribute [rw] offering_id
-    #   The ID of the Convertible Reserved Instance offering.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_count
     #   The number of instances the Convertible Reserved Instance offering
     #   can be applied to. This parameter is reserved and cannot be
     #   specified in a request
     #   @return [Integer]
     #
+    # @!attribute [rw] offering_id
+    #   The ID of the Convertible Reserved Instance offering.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfiguration AWS API Documentation
     #
     class TargetConfiguration < Struct.new(
-      :offering_id,
-      :instance_count)
+      :instance_count,
+      :offering_id)
       include Aws::Structure
     end
 
@@ -23064,13 +23325,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         offering_id: "String", # required
     #         instance_count: 1,
+    #         offering_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] offering_id
-    #   The Convertible Reserved Instance offering ID.
-    #   @return [String]
     #
     # @!attribute [rw] instance_count
     #   The number of instances the Covertible Reserved Instance offering
@@ -23078,20 +23335,19 @@ module Aws::EC2
     #   specified in a request
     #   @return [Integer]
     #
+    # @!attribute [rw] offering_id
+    #   The Convertible Reserved Instance offering ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfigurationRequest AWS API Documentation
     #
     class TargetConfigurationRequest < Struct.new(
-      :offering_id,
-      :instance_count)
+      :instance_count,
+      :offering_id)
       include Aws::Structure
     end
 
     # The total value of the new Convertible Reserved Instances.
-    #
-    # @!attribute [rw] target_configuration
-    #   The configuration of the Convertible Reserved Instances that make up
-    #   the exchange.
-    #   @return [Types::TargetConfiguration]
     #
     # @!attribute [rw] reservation_value
     #   The total value of the Convertible Reserved Instances that make up
@@ -23099,11 +23355,16 @@ module Aws::EC2
     #   price, and additional upfront cost of the exchange.
     #   @return [Types::ReservationValue]
     #
+    # @!attribute [rw] target_configuration
+    #   The configuration of the Convertible Reserved Instances that make up
+    #   the exchange.
+    #   @return [Types::TargetConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetReservationValue AWS API Documentation
     #
     class TargetReservationValue < Struct.new(
-      :target_configuration,
-      :reservation_value)
+      :reservation_value,
+      :target_configuration)
       include Aws::Structure
     end
 
@@ -23113,16 +23374,9 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_ids: ["String"], # required
+    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] instance_ids
     #   One or more instance IDs.
@@ -23131,11 +23385,18 @@ module Aws::EC2
     #   request into smaller batches.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstancesRequest AWS API Documentation
     #
     class TerminateInstancesRequest < Struct.new(
-      :dry_run,
-      :instance_ids)
+      :instance_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -23156,23 +23417,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         network_interface_id: "String", # required
     #         ipv_6_addresses: ["String"], # required
+    #         network_interface_id: "String", # required
     #       }
-    #
-    # @!attribute [rw] network_interface_id
-    #   The ID of the network interface.
-    #   @return [String]
     #
     # @!attribute [rw] ipv_6_addresses
     #   The IPv6 addresses to unassign from the network interface.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest AWS API Documentation
     #
     class UnassignIpv6AddressesRequest < Struct.new(
-      :network_interface_id,
-      :ipv_6_addresses)
+      :ipv_6_addresses,
+      :network_interface_id)
       include Aws::Structure
     end
 
@@ -23227,9 +23488,13 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dry_run: false,
     #         instance_ids: ["String"], # required
+    #         dry_run: false,
     #       }
+    #
+    # @!attribute [rw] instance_ids
+    #   One or more instance IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -23238,15 +23503,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstancesRequest AWS API Documentation
     #
     class UnmonitorInstancesRequest < Struct.new(
-      :dry_run,
-      :instance_ids)
+      :instance_ids,
+      :dry_run)
       include Aws::Structure
     end
 
@@ -23266,19 +23527,19 @@ module Aws::EC2
     # Information about items that were not successfully processed in a
     # batch call.
     #
-    # @!attribute [rw] resource_id
-    #   The ID of the resource.
-    #   @return [String]
-    #
     # @!attribute [rw] error
     #   Information about the error.
     #   @return [Types::UnsuccessfulItemError]
     #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItem AWS API Documentation
     #
     class UnsuccessfulItem < Struct.new(
-      :resource_id,
-      :error)
+      :error,
+      :resource_id)
       include Aws::Structure
     end
 
@@ -23377,20 +23638,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         user_id: "String",
-    #         group_name: "String",
     #         group_id: "String",
+    #         group_name: "String",
+    #         peering_status: "String",
+    #         user_id: "String",
     #         vpc_id: "String",
     #         vpc_peering_connection_id: "String",
-    #         peering_status: "String",
     #       }
     #
-    # @!attribute [rw] user_id
-    #   The ID of an AWS account. For a referenced security group in another
-    #   VPC, the account ID of the referenced security group is returned.
-    #
-    #   \[EC2-Classic\] Required when adding or removing rules that
-    #   reference a security group in another AWS account.
+    # @!attribute [rw] group_id
+    #   The ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -23399,8 +23656,16 @@ module Aws::EC2
     #   security group in a nondefault VPC, use the security group ID.
     #   @return [String]
     #
-    # @!attribute [rw] group_id
-    #   The ID of the security group.
+    # @!attribute [rw] peering_status
+    #   The status of a VPC peering connection, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of an AWS account. For a referenced security group in another
+    #   VPC, the account ID of the referenced security group is returned.
+    #
+    #   \[EC2-Classic\] Required when adding or removing rules that
+    #   reference a security group in another AWS account.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -23411,23 +23676,27 @@ module Aws::EC2
     #   The ID of the VPC peering connection, if applicable.
     #   @return [String]
     #
-    # @!attribute [rw] peering_status
-    #   The status of a VPC peering connection, if applicable.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserIdGroupPair AWS API Documentation
     #
     class UserIdGroupPair < Struct.new(
-      :user_id,
-      :group_name,
       :group_id,
+      :group_name,
+      :peering_status,
+      :user_id,
       :vpc_id,
-      :vpc_peering_connection_id,
-      :peering_status)
+      :vpc_peering_connection_id)
       include Aws::Structure
     end
 
     # Describes telemetry for a VPN tunnel.
+    #
+    # @!attribute [rw] accepted_route_count
+    #   The number of accepted routes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_status_change
+    #   The date and time of the last change in status.
+    #   @return [Time]
     #
     # @!attribute [rw] outside_ip_address
     #   The Internet-routable IP address of the virtual private gateway's
@@ -23438,33 +23707,43 @@ module Aws::EC2
     #   The status of the VPN tunnel.
     #   @return [String]
     #
-    # @!attribute [rw] last_status_change
-    #   The date and time of the last change in status.
-    #   @return [Time]
-    #
     # @!attribute [rw] status_message
     #   If an error occurs, a description of the error.
     #   @return [String]
     #
-    # @!attribute [rw] accepted_route_count
-    #   The number of accepted routes.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry AWS API Documentation
     #
     class VgwTelemetry < Struct.new(
+      :accepted_route_count,
+      :last_status_change,
       :outside_ip_address,
       :status,
-      :last_status_change,
-      :status_message,
-      :accepted_route_count)
+      :status_message)
       include Aws::Structure
     end
 
     # Describes a volume.
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
+    # @!attribute [rw] attachments
+    #   Information about the volume attachments.
+    #   @return [Array<Types::VolumeAttachment>]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time stamp when volume creation was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the volume will be encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) that was used to protect the volume encryption key
+    #   for the volume.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -23475,30 +23754,12 @@ module Aws::EC2
     #   The snapshot from which the volume was created, if applicable.
     #   @return [String]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone for the volume.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The volume state.
     #   @return [String]
     #
-    # @!attribute [rw] create_time
-    #   The time stamp when volume creation was initiated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] attachments
-    #   Information about the volume attachments.
-    #   @return [Array<Types::VolumeAttachment>]
-    #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the volume.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] volume_type
-    #   The volume type. This can be `gp2` for General Purpose SSD, `io1`
-    #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
-    #   for Cold HDD, or `standard` for Magnetic volumes.
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -23523,55 +23784,55 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
-    # @!attribute [rw] encrypted
-    #   Indicates whether the volume will be encrypted.
-    #   @return [Boolean]
+    # @!attribute [rw] tags
+    #   Any tags assigned to the volume.
+    #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) that was used to protect the volume encryption key
-    #   for the volume.
+    # @!attribute [rw] volume_type
+    #   The volume type. This can be `gp2` for General Purpose SSD, `io1`
+    #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
+    #   for Cold HDD, or `standard` for Magnetic volumes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
     #
     class Volume < Struct.new(
-      :volume_id,
+      :attachments,
+      :availability_zone,
+      :create_time,
+      :encrypted,
+      :kms_key_id,
       :size,
       :snapshot_id,
-      :availability_zone,
       :state,
-      :create_time,
-      :attachments,
-      :tags,
-      :volume_type,
+      :volume_id,
       :iops,
-      :encrypted,
-      :kms_key_id)
+      :tags,
+      :volume_type)
       include Aws::Structure
     end
 
     # Describes volume attachment details.
     #
-    # @!attribute [rw] volume_id
-    #   The ID of the volume.
+    # @!attribute [rw] attach_time
+    #   The time stamp when the attachment initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] device
+    #   The device name.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] device
-    #   The device name.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The attachment state of the volume.
     #   @return [String]
     #
-    # @!attribute [rw] attach_time
-    #   The time stamp when the attachment initiated.
-    #   @return [Time]
+    # @!attribute [rw] volume_id
+    #   The ID of the volume.
+    #   @return [String]
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the EBS volume is deleted on instance termination.
@@ -23580,11 +23841,11 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment AWS API Documentation
     #
     class VolumeAttachment < Struct.new(
-      :volume_id,
-      :instance_id,
-      :device,
-      :state,
       :attach_time,
+      :device,
+      :instance_id,
+      :state,
+      :volume_id,
       :delete_on_termination)
       include Aws::Structure
     end
@@ -23691,12 +23952,12 @@ module Aws::EC2
     #   A description of the operation.
     #   @return [String]
     #
-    # @!attribute [rw] event_type
-    #   The event type associated with this operation.
-    #   @return [String]
-    #
     # @!attribute [rw] event_id
     #   The ID of the event associated with this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The event type associated with this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusAction AWS API Documentation
@@ -23704,8 +23965,8 @@ module Aws::EC2
     class VolumeStatusAction < Struct.new(
       :code,
       :description,
-      :event_type,
-      :event_id)
+      :event_id,
+      :event_type)
       include Aws::Structure
     end
 
@@ -23729,97 +23990,89 @@ module Aws::EC2
 
     # Describes a volume status event.
     #
-    # @!attribute [rw] event_type
-    #   The type of this event.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   A description of the event.
     #   @return [String]
-    #
-    # @!attribute [rw] not_before
-    #   The earliest start time of the event.
-    #   @return [Time]
-    #
-    # @!attribute [rw] not_after
-    #   The latest end time of the event.
-    #   @return [Time]
     #
     # @!attribute [rw] event_id
     #   The ID of this event.
     #   @return [String]
     #
+    # @!attribute [rw] event_type
+    #   The type of this event.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_after
+    #   The latest end time of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_before
+    #   The earliest start time of the event.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusEvent AWS API Documentation
     #
     class VolumeStatusEvent < Struct.new(
-      :event_type,
       :description,
-      :not_before,
+      :event_id,
+      :event_type,
       :not_after,
-      :event_id)
+      :not_before)
       include Aws::Structure
     end
 
     # Describes the status of a volume.
     #
-    # @!attribute [rw] status
-    #   The status of the volume.
-    #   @return [String]
-    #
     # @!attribute [rw] details
     #   The details of the volume status.
     #   @return [Array<Types::VolumeStatusDetails>]
     #
+    # @!attribute [rw] status
+    #   The status of the volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusInfo AWS API Documentation
     #
     class VolumeStatusInfo < Struct.new(
-      :status,
-      :details)
+      :details,
+      :status)
       include Aws::Structure
     end
 
     # Describes the volume status.
     #
-    # @!attribute [rw] volume_id
-    #   The volume ID.
-    #   @return [String]
+    # @!attribute [rw] actions
+    #   The details of the operation.
+    #   @return [Array<Types::VolumeStatusAction>]
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] events
+    #   A list of events associated with the volume.
+    #   @return [Array<Types::VolumeStatusEvent>]
+    #
+    # @!attribute [rw] volume_id
+    #   The volume ID.
     #   @return [String]
     #
     # @!attribute [rw] volume_status
     #   The volume status.
     #   @return [Types::VolumeStatusInfo]
     #
-    # @!attribute [rw] events
-    #   A list of events associated with the volume.
-    #   @return [Array<Types::VolumeStatusEvent>]
-    #
-    # @!attribute [rw] actions
-    #   The details of the operation.
-    #   @return [Array<Types::VolumeStatusAction>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusItem AWS API Documentation
     #
     class VolumeStatusItem < Struct.new(
-      :volume_id,
+      :actions,
       :availability_zone,
-      :volume_status,
       :events,
-      :actions)
+      :volume_id,
+      :volume_status)
       include Aws::Structure
     end
 
     # Describes a VPC.
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The current state of the VPC.
-    #   @return [String]
     #
     # @!attribute [rw] cidr_block
     #   The IPv4 CIDR block for the VPC.
@@ -23830,51 +24083,59 @@ module Aws::EC2
     #   (or `default` if the default options are associated with the VPC).
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the VPC.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] instance_tenancy
-    #   The allowed tenancy of instances launched into the VPC.
+    # @!attribute [rw] state
+    #   The current state of the VPC.
     #   @return [String]
-    #
-    # @!attribute [rw] is_default
-    #   Indicates whether the VPC is the default VPC.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] ipv_6_cidr_block_association_set
-    #   Information about the IPv6 CIDR blocks associated with the VPC.
-    #   @return [Array<Types::VpcIpv6CidrBlockAssociation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Vpc AWS API Documentation
-    #
-    class Vpc < Struct.new(
-      :vpc_id,
-      :state,
-      :cidr_block,
-      :dhcp_options_id,
-      :tags,
-      :instance_tenancy,
-      :is_default,
-      :ipv_6_cidr_block_association_set)
-      include Aws::Structure
-    end
-
-    # Describes an attachment between a virtual private gateway and a VPC.
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] instance_tenancy
+    #   The allowed tenancy of instances launched into the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block_association_set
+    #   Information about the IPv6 CIDR blocks associated with the VPC.
+    #   @return [Array<Types::VpcIpv6CidrBlockAssociation>]
+    #
+    # @!attribute [rw] is_default
+    #   Indicates whether the VPC is the default VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the VPC.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Vpc AWS API Documentation
+    #
+    class Vpc < Struct.new(
+      :cidr_block,
+      :dhcp_options_id,
+      :state,
+      :vpc_id,
+      :instance_tenancy,
+      :ipv_6_cidr_block_association_set,
+      :is_default,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes an attachment between a virtual private gateway and a VPC.
+    #
     # @!attribute [rw] state
     #   The current state of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcAttachment AWS API Documentation
     #
     class VpcAttachment < Struct.new(
-      :vpc_id,
-      :state)
+      :state,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -23898,10 +24159,6 @@ module Aws::EC2
 
     # Describes whether a VPC is enabled for ClassicLink.
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] classic_link_enabled
     #   Indicates whether the VPC is enabled for ClassicLink.
     #   @return [Boolean]
@@ -23910,32 +24167,24 @@ module Aws::EC2
     #   Any tags assigned to the VPC.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcClassicLink AWS API Documentation
     #
     class VpcClassicLink < Struct.new(
-      :vpc_id,
       :classic_link_enabled,
-      :tags)
+      :tags,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes a VPC endpoint.
     #
-    # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC to which the endpoint is associated.
-    #   @return [String]
-    #
-    # @!attribute [rw] service_name
-    #   The name of the AWS service to which the endpoint is associated.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The state of the VPC endpoint.
-    #   @return [String]
+    # @!attribute [rw] creation_timestamp
+    #   The date and time the VPC endpoint was created.
+    #   @return [Time]
     #
     # @!attribute [rw] policy_document
     #   The policy document associated with the endpoint.
@@ -23945,24 +24194,40 @@ module Aws::EC2
     #   One or more route tables associated with the endpoint.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] creation_timestamp
-    #   The date and time the VPC endpoint was created.
-    #   @return [Time]
+    # @!attribute [rw] service_name
+    #   The name of the AWS service to which the endpoint is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC to which the endpoint is associated.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
-      :vpc_endpoint_id,
-      :vpc_id,
-      :service_name,
-      :state,
+      :creation_timestamp,
       :policy_document,
       :route_table_ids,
-      :creation_timestamp)
+      :service_name,
+      :state,
+      :vpc_endpoint_id,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes an IPv6 CIDR block associated with a VPC.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv6 CIDR block.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block.
@@ -23972,26 +24237,20 @@ module Aws::EC2
     #   Information about the state of the CIDR block.
     #   @return [Types::VpcCidrBlockState]
     #
-    # @!attribute [rw] association_id
-    #   The association ID for the IPv6 CIDR block.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcIpv6CidrBlockAssociation AWS API Documentation
     #
     class VpcIpv6CidrBlockAssociation < Struct.new(
+      :association_id,
       :ipv_6_cidr_block,
-      :ipv_6_cidr_block_state,
-      :association_id)
+      :ipv_6_cidr_block_state)
       include Aws::Structure
     end
 
     # Describes a VPC peering connection.
     #
     # @!attribute [rw] accepter_vpc_info
-    #   Information about the accepter VPC. CIDR block information is not
-    #   returned when creating a VPC peering connection, or when describing
-    #   a VPC peering connection that's in the `initiating-request` or
-    #   `pending-acceptance` state.
+    #   Information about the accepter VPC. CIDR block information is only
+    #   returned when describing an active VPC peering connection.
     #   @return [Types::VpcPeeringConnectionVpcInfo]
     #
     # @!attribute [rw] expiration_time
@@ -23999,7 +24258,8 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] requester_vpc_info
-    #   Information about the requester VPC.
+    #   Information about the requester VPC. CIDR block information is only
+    #   returned when describing an active VPC peering connection.
     #   @return [Types::VpcPeeringConnectionVpcInfo]
     #
     # @!attribute [rw] status
@@ -24028,6 +24288,11 @@ module Aws::EC2
 
     # Describes the VPC peering connection options.
     #
+    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+    #   Indicates whether a local VPC can resolve public DNS hostnames to
+    #   private IP addresses when queried from instances in a peer VPC.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
     #   Indicates whether a local ClassicLink connection can communicate
     #   with the peer VPC over the VPC peering connection.
@@ -24038,17 +24303,12 @@ module Aws::EC2
     #   connection in the peer VPC over the VPC peering connection.
     #   @return [Boolean]
     #
-    # @!attribute [rw] allow_dns_resolution_from_remote_vpc
-    #   Indicates whether a local VPC can resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in a peer VPC.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionOptionsDescription AWS API Documentation
     #
     class VpcPeeringConnectionOptionsDescription < Struct.new(
+      :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link,
-      :allow_dns_resolution_from_remote_vpc)
+      :allow_egress_from_local_vpc_to_remote_classic_link)
       include Aws::Structure
     end
 
@@ -24077,43 +24337,35 @@ module Aws::EC2
     #   The IPv4 CIDR block for the VPC.
     #   @return [String]
     #
-    # @!attribute [rw] owner_id
-    #   The AWS account ID of the VPC owner.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block_set
     #   The IPv6 CIDR block for the VPC.
     #   @return [Array<Types::Ipv6CidrBlock>]
+    #
+    # @!attribute [rw] owner_id
+    #   The AWS account ID of the VPC owner.
+    #   @return [String]
     #
     # @!attribute [rw] peering_options
     #   Information about the VPC peering connection options for the
     #   accepter or requester VPC.
     #   @return [Types::VpcPeeringConnectionOptionsDescription]
     #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo AWS API Documentation
     #
     class VpcPeeringConnectionVpcInfo < Struct.new(
       :cidr_block,
-      :owner_id,
-      :vpc_id,
       :ipv_6_cidr_block_set,
-      :peering_options)
+      :owner_id,
+      :peering_options,
+      :vpc_id)
       include Aws::Structure
     end
 
     # Describes a VPN connection.
-    #
-    # @!attribute [rw] vpn_connection_id
-    #   The ID of the VPN connection.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The current state of the VPN connection.
-    #   @return [String]
     #
     # @!attribute [rw] customer_gateway_configuration
     #   The configuration information for the VPN connection's customer
@@ -24123,26 +24375,26 @@ module Aws::EC2
     #   `pending` or `available` state.
     #   @return [String]
     #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway at your end of the VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the VPN connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of VPN connection.
     #   @return [String]
     #
-    # @!attribute [rw] customer_gateway_id
-    #   The ID of the customer gateway at your end of the VPN connection.
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
     #   The ID of the virtual private gateway at the AWS side of the VPN
     #   connection.
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Any tags assigned to the VPN connection.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] vgw_telemetry
-    #   Information about the VPN tunnel.
-    #   @return [Array<Types::VgwTelemetry>]
     #
     # @!attribute [rw] options
     #   The VPN connection options.
@@ -24152,19 +24404,27 @@ module Aws::EC2
     #   The static routes associated with the VPN connection.
     #   @return [Array<Types::VpnStaticRoute>]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the VPN connection.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] vgw_telemetry
+    #   Information about the VPN tunnel.
+    #   @return [Array<Types::VgwTelemetry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnection AWS API Documentation
     #
     class VpnConnection < Struct.new(
-      :vpn_connection_id,
-      :state,
       :customer_gateway_configuration,
-      :type,
       :customer_gateway_id,
+      :state,
+      :type,
+      :vpn_connection_id,
       :vpn_gateway_id,
-      :tags,
-      :vgw_telemetry,
       :options,
-      :routes)
+      :routes,
+      :tags,
+      :vgw_telemetry)
       include Aws::Structure
     end
 
@@ -24205,8 +24465,9 @@ module Aws::EC2
 
     # Describes a virtual private gateway.
     #
-    # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway.
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the virtual private gateway was created,
+    #   if applicable. This field may be empty or not returned.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -24217,14 +24478,13 @@ module Aws::EC2
     #   The type of VPN connection the virtual private gateway supports.
     #   @return [String]
     #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone where the virtual private gateway was created,
-    #   if applicable. This field may be empty or not returned.
-    #   @return [String]
-    #
     # @!attribute [rw] vpc_attachments
     #   Any VPCs attached to the virtual private gateway.
     #   @return [Array<Types::VpcAttachment>]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the virtual private gateway.
@@ -24233,11 +24493,11 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnGateway AWS API Documentation
     #
     class VpnGateway < Struct.new(
-      :vpn_gateway_id,
+      :availability_zone,
       :state,
       :type,
-      :availability_zone,
       :vpc_attachments,
+      :vpn_gateway_id,
       :tags)
       include Aws::Structure
     end

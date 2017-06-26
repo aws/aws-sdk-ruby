@@ -38,10 +38,22 @@ module Aws::EC2
       @destination_cidr_block
     end
 
+    # The IPv6 CIDR block used for the destination match.
+    # @return [String]
+    def destination_ipv_6_cidr_block
+      data.destination_ipv_6_cidr_block
+    end
+
     # The prefix of the AWS service.
     # @return [String]
     def destination_prefix_list_id
       data.destination_prefix_list_id
+    end
+
+    # The ID of the egress-only Internet gateway.
+    # @return [String]
+    def egress_only_internet_gateway_id
+      data.egress_only_internet_gateway_id
     end
 
     # The ID of a gateway attached to your VPC.
@@ -62,31 +74,16 @@ module Aws::EC2
       data.instance_owner_id
     end
 
-    # The ID of the network interface.
-    # @return [String]
-    def network_interface_id
-      data.network_interface_id
-    end
-
-    # The ID of the VPC peering connection.
-    # @return [String]
-    def vpc_peering_connection_id
-      data.vpc_peering_connection_id
-    end
-
     # The ID of a NAT gateway.
     # @return [String]
     def nat_gateway_id
       data.nat_gateway_id
     end
 
-    # The state of the route. The `blackhole` state indicates that the
-    # route's target isn't available (for example, the specified gateway
-    # isn't attached to the VPC, or the specified NAT instance has been
-    # terminated).
+    # The ID of the network interface.
     # @return [String]
-    def state
-      data.state
+    def network_interface_id
+      data.network_interface_id
     end
 
     # Describes how the route was created.
@@ -103,16 +100,19 @@ module Aws::EC2
       data.origin
     end
 
-    # The IPv6 CIDR block used for the destination match.
+    # The state of the route. The `blackhole` state indicates that the
+    # route's target isn't available (for example, the specified gateway
+    # isn't attached to the VPC, or the specified NAT instance has been
+    # terminated).
     # @return [String]
-    def destination_ipv_6_cidr_block
-      data.destination_ipv_6_cidr_block
+    def state
+      data.state
     end
 
-    # The ID of the egress-only Internet gateway.
+    # The ID of the VPC peering connection.
     # @return [String]
-    def egress_only_internet_gateway_id
-      data.egress_only_internet_gateway_id
+    def vpc_peering_connection_id
+      data.vpc_peering_connection_id
     end
 
     # @!endgroup
@@ -150,18 +150,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route.delete({
-    #     dry_run: false,
     #     destination_ipv_6_cidr_block: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(
@@ -175,36 +175,36 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route.replace({
-    #     dry_run: false,
-    #     gateway_id: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     dry_run: false,
     #     egress_only_internet_gateway_id: "String",
+    #     gateway_id: "String",
     #     instance_id: "String",
+    #     nat_gateway_id: "String",
     #     network_interface_id: "String",
     #     vpc_peering_connection_id: "String",
-    #     nat_gateway_id: "String",
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR address block used for the destination match. The value
+    #   you provide must match the CIDR of an existing route in the table.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
-    # @option options [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
     # @option options [String] :egress_only_internet_gateway_id
     #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    # @option options [String] :gateway_id
+    #   The ID of an Internet gateway or virtual private gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC.
+    # @option options [String] :nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
-    # @option options [String] :nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @return [EmptyStructure]
     def replace(options = {})
       options = options.merge(

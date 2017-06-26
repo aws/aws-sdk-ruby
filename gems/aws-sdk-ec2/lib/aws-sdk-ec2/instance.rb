@@ -31,16 +31,60 @@ module Aws::EC2
     end
     alias :instance_id :id
 
+    # The AMI launch index, which can be used to find this instance in the
+    # launch group.
+    # @return [Integer]
+    def ami_launch_index
+      data.ami_launch_index
+    end
+
     # The ID of the AMI used to launch the instance.
     # @return [String]
     def image_id
       data.image_id
     end
 
-    # The current state of the instance.
-    # @return [Types::InstanceState]
-    def state
-      data.state
+    # The instance type.
+    # @return [String]
+    def instance_type
+      data.instance_type
+    end
+
+    # The kernel associated with this instance, if applicable.
+    # @return [String]
+    def kernel_id
+      data.kernel_id
+    end
+
+    # The name of the key pair, if this instance was launched with an
+    # associated key pair.
+    # @return [String]
+    def key_name
+      data.key_name
+    end
+
+    # The time the instance was launched.
+    # @return [Time]
+    def launch_time
+      data.launch_time
+    end
+
+    # The monitoring for the instance.
+    # @return [Types::Monitoring]
+    def monitoring
+      data.monitoring
+    end
+
+    # The location where the instance launched, if applicable.
+    # @return [Types::Placement]
+    def placement
+      data.placement
+    end
+
+    # The value is `Windows` for Windows instances; otherwise blank.
+    # @return [String]
+    def platform
+      data.platform
     end
 
     # (IPv4 only) The private DNS hostname name assigned to the instance.
@@ -57,6 +101,18 @@ module Aws::EC2
       data.private_dns_name
     end
 
+    # The private IPv4 address assigned to the instance.
+    # @return [String]
+    def private_ip_address
+      data.private_ip_address
+    end
+
+    # The product codes attached to this instance, if applicable.
+    # @return [Array<Types::ProductCode>]
+    def product_codes
+      data.product_codes
+    end
+
     # (IPv4 only) The public DNS name assigned to the instance. This name is
     # not available until the instance enters the `running` state. For
     # EC2-VPC, this name is only available if you've enabled DNS hostnames
@@ -66,55 +122,10 @@ module Aws::EC2
       data.public_dns_name
     end
 
-    # The reason for the most recent state transition. This might be an
-    # empty string.
+    # The public IPv4 address assigned to the instance, if applicable.
     # @return [String]
-    def state_transition_reason
-      data.state_transition_reason
-    end
-
-    # The name of the key pair, if this instance was launched with an
-    # associated key pair.
-    # @return [String]
-    def key_name
-      data.key_name
-    end
-
-    # The AMI launch index, which can be used to find this instance in the
-    # launch group.
-    # @return [Integer]
-    def ami_launch_index
-      data.ami_launch_index
-    end
-
-    # The product codes attached to this instance, if applicable.
-    # @return [Array<Types::ProductCode>]
-    def product_codes
-      data.product_codes
-    end
-
-    # The instance type.
-    # @return [String]
-    def instance_type
-      data.instance_type
-    end
-
-    # The time the instance was launched.
-    # @return [Time]
-    def launch_time
-      data.launch_time
-    end
-
-    # The location where the instance launched, if applicable.
-    # @return [Types::Placement]
-    def placement
-      data.placement
-    end
-
-    # The kernel associated with this instance, if applicable.
-    # @return [String]
-    def kernel_id
-      data.kernel_id
+    def public_ip_address
+      data.public_ip_address
     end
 
     # The RAM disk associated with this instance, if applicable.
@@ -123,16 +134,17 @@ module Aws::EC2
       data.ramdisk_id
     end
 
-    # The value is `Windows` for Windows instances; otherwise blank.
-    # @return [String]
-    def platform
-      data.platform
+    # The current state of the instance.
+    # @return [Types::InstanceState]
+    def state
+      data.state
     end
 
-    # The monitoring for the instance.
-    # @return [Types::Monitoring]
-    def monitoring
-      data.monitoring
+    # The reason for the most recent state transition. This might be an
+    # empty string.
+    # @return [String]
+    def state_transition_reason
+      data.state_transition_reason
     end
 
     # \[EC2-VPC\] The ID of the subnet in which the instance is running.
@@ -147,65 +159,16 @@ module Aws::EC2
       data.vpc_id
     end
 
-    # The private IPv4 address assigned to the instance.
-    # @return [String]
-    def private_ip_address
-      data.private_ip_address
-    end
-
-    # The public IPv4 address assigned to the instance, if applicable.
-    # @return [String]
-    def public_ip_address
-      data.public_ip_address
-    end
-
-    # The reason for the most recent state transition.
-    # @return [Types::StateReason]
-    def state_reason
-      data.state_reason
-    end
-
     # The architecture of the image.
     # @return [String]
     def architecture
       data.architecture
     end
 
-    # The root device type used by the AMI. The AMI can use an EBS volume or
-    # an instance store volume.
-    # @return [String]
-    def root_device_type
-      data.root_device_type
-    end
-
-    # The root device name (for example, `/dev/sda1` or `/dev/xvda`).
-    # @return [String]
-    def root_device_name
-      data.root_device_name
-    end
-
     # Any block device mapping entries for the instance.
     # @return [Array<Types::InstanceBlockDeviceMapping>]
     def block_device_mappings
       data.block_device_mappings
-    end
-
-    # The virtualization type of the instance.
-    # @return [String]
-    def virtualization_type
-      data.virtualization_type
-    end
-
-    # Indicates whether this is a Spot instance or a Scheduled Instance.
-    # @return [String]
-    def instance_lifecycle
-      data.instance_lifecycle
-    end
-
-    # If the request is a Spot instance request, the ID of the request.
-    # @return [String]
-    def spot_instance_request_id
-      data.spot_instance_request_id
     end
 
     # The idempotency token you provided when you launched the instance, if
@@ -215,10 +178,51 @@ module Aws::EC2
       data.client_token
     end
 
-    # Any tags assigned to the instance.
-    # @return [Array<Types::Tag>]
-    def tags
-      data.tags
+    # Indicates whether the instance is optimized for EBS I/O. This
+    # optimization provides dedicated throughput to Amazon EBS and an
+    # optimized configuration stack to provide optimal I/O performance. This
+    # optimization isn't available with all instance types. Additional
+    # usage charges apply when using an EBS Optimized instance.
+    # @return [Boolean]
+    def ebs_optimized
+      data.ebs_optimized
+    end
+
+    # Specifies whether enhanced networking with ENA is enabled.
+    # @return [Boolean]
+    def ena_support
+      data.ena_support
+    end
+
+    # The hypervisor type of the instance.
+    # @return [String]
+    def hypervisor
+      data.hypervisor
+    end
+
+    # The IAM instance profile associated with the instance, if applicable.
+    # @return [Types::IamInstanceProfile]
+    def iam_instance_profile
+      data.iam_instance_profile
+    end
+
+    # Indicates whether this is a Spot instance or a Scheduled Instance.
+    # @return [String]
+    def instance_lifecycle
+      data.instance_lifecycle
+    end
+
+    # The root device name (for example, `/dev/sda1` or `/dev/xvda`).
+    # @return [String]
+    def root_device_name
+      data.root_device_name
+    end
+
+    # The root device type used by the AMI. The AMI can use an EBS volume or
+    # an instance store volume.
+    # @return [String]
+    def root_device_type
+      data.root_device_type
     end
 
     # One or more security groups for the instance.
@@ -242,26 +246,10 @@ module Aws::EC2
       data.source_dest_check
     end
 
-    # The hypervisor type of the instance.
+    # If the request is a Spot instance request, the ID of the request.
     # @return [String]
-    def hypervisor
-      data.hypervisor
-    end
-
-    # The IAM instance profile associated with the instance, if applicable.
-    # @return [Types::IamInstanceProfile]
-    def iam_instance_profile
-      data.iam_instance_profile
-    end
-
-    # Indicates whether the instance is optimized for EBS I/O. This
-    # optimization provides dedicated throughput to Amazon EBS and an
-    # optimized configuration stack to provide optimal I/O performance. This
-    # optimization isn't available with all instance types. Additional
-    # usage charges apply when using an EBS Optimized instance.
-    # @return [Boolean]
-    def ebs_optimized
-      data.ebs_optimized
+    def spot_instance_request_id
+      data.spot_instance_request_id
     end
 
     # Specifies whether enhanced networking with the Intel 82599 Virtual
@@ -271,10 +259,22 @@ module Aws::EC2
       data.sriov_net_support
     end
 
-    # Specifies whether enhanced networking with ENA is enabled.
-    # @return [Boolean]
-    def ena_support
-      data.ena_support
+    # The reason for the most recent state transition.
+    # @return [Types::StateReason]
+    def state_reason
+      data.state_reason
+    end
+
+    # Any tags assigned to the instance.
+    # @return [Array<Types::Tag>]
+    def tags
+      data.tags
+    end
+
+    # The virtualization type of the instance.
+    # @return [String]
+    def virtualization_type
+      data.virtualization_type
     end
 
     # @!endgroup
@@ -404,8 +404,8 @@ module Aws::EC2
     #
     #   instance.attach_classic_link_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
     #     groups: ["String"], # required
+    #     vpc_id: "String", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -413,11 +413,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :vpc_id
-    #   The ID of a ClassicLink-enabled VPC.
     # @option options [required, Array<String>] :groups
     #   The ID of one or more of the VPC's security groups. You cannot
     #   specify security groups from a different VPC.
+    # @option options [required, String] :vpc_id
+    #   The ID of a ClassicLink-enabled VPC.
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
@@ -428,22 +428,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.attach_volume({
-    #     dry_run: false,
-    #     volume_id: "String", # required
     #     device: "String", # required
+    #     volume_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :device
+    #   The device name to expose to the instance (for example, `/dev/sdh` or
+    #   `xvdh`).
+    # @option options [required, String] :volume_id
+    #   The ID of the EBS volume. The volume and instance must be within the
+    #   same Availability Zone.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :volume_id
-    #   The ID of the EBS volume. The volume and instance must be within the
-    #   same Availability Zone.
-    # @option options [required, String] :device
-    #   The device name to expose to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
     # @return [Types::VolumeAttachment]
     def attach_volume(options = {})
       options = options.merge(instance_id: @id)
@@ -472,27 +472,31 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image = instance.create_image({
-    #     dry_run: false,
-    #     name: "String", # required
-    #     description: "String",
-    #     no_reboot: false,
     #     block_device_mappings: [
     #       {
-    #         virtual_name: "String",
     #         device_name: "String",
+    #         virtual_name: "String",
     #         ebs: {
+    #           encrypted: false,
+    #           delete_on_termination: false,
+    #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           delete_on_termination: false,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           iops: 1,
-    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
     #     ],
+    #     description: "String",
+    #     dry_run: false,
+    #     name: "String", # required
+    #     no_reboot: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
+    #   Information about one or more block device mappings.
+    # @option options [String] :description
+    #   A description for the new image.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -504,16 +508,12 @@ module Aws::EC2
     #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
     #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
     #   single quotes ('), at-signs (@), or underscores(\_)
-    # @option options [String] :description
-    #   A description for the new image.
     # @option options [Boolean] :no_reboot
     #   By default, Amazon EC2 attempts to shut down and reboot the instance
     #   before creating the image. If the 'No Reboot' option is set, Amazon
     #   EC2 doesn't shut down the instance before creating the image. When
     #   this option is used, file system integrity on the created image can't
     #   be guaranteed.
-    # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   Information about one or more block device mappings.
     # @return [Image]
     def create_image(options = {})
       options = options.merge(instance_id: @id)
@@ -564,19 +564,19 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.describe_attribute({
-    #     dry_run: false,
     #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :attribute
+    #   The instance attribute.
+    #
+    #   Note: The `enaSupport` attribute is not supported at this time.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :attribute
-    #   The instance attribute.
-    #
-    #   Note: The `enaSupport` attribute is not supported at this time.
     # @return [Types::InstanceAttribute]
     def describe_attribute(options = {})
       options = options.merge(instance_id: @id)
@@ -608,19 +608,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.detach_volume({
-    #     dry_run: false,
-    #     volume_id: "String", # required
     #     device: "String",
     #     force: false,
+    #     volume_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :volume_id
-    #   The ID of the volume.
     # @option options [String] :device
     #   The device name.
     # @option options [Boolean] :force
@@ -632,6 +625,13 @@ module Aws::EC2
     #   opportunity to flush file system caches or file system metadata. If
     #   you use this option, you must perform file system check and repair
     #   procedures.
+    # @option options [required, String] :volume_id
+    #   The ID of the volume.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::VolumeAttachment]
     def detach_volume(options = {})
       options = options.merge(instance_id: @id)
@@ -642,54 +642,50 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.modify_attribute({
-    #     dry_run: false,
+    #     source_dest_check: {
+    #       value: false,
+    #     },
     #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
-    #     value: "String",
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
     #         ebs: {
-    #           volume_id: "String",
     #           delete_on_termination: false,
+    #           volume_id: "String",
     #         },
-    #         virtual_name: "String",
     #         no_device: "String",
+    #         virtual_name: "String",
     #       },
     #     ],
-    #     source_dest_check: {
-    #       value: false,
-    #     },
     #     disable_api_termination: {
     #       value: false,
     #     },
-    #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     user_data: {
-    #       value: "data",
-    #     },
-    #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     groups: ["String"],
+    #     dry_run: false,
     #     ebs_optimized: {
     #       value: false,
     #     },
-    #     sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     ena_support: {
     #       value: false,
     #     },
+    #     groups: ["String"],
+    #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     user_data: {
+    #       value: "data",
+    #     },
+    #     value: "String",
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Types::AttributeBooleanValue] :source_dest_check
+    #   Specifies whether source/destination checking is enabled. A value of
+    #   `true` means that checking is enabled, and `false` means checking is
+    #   disabled. This value must be `false` for a NAT instance to perform
+    #   NAT.
     # @option options [String] :attribute
     #   The name of the attribute.
-    # @option options [String] :value
-    #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
-    #   `userData`, `disableApiTermination`, or
-    #   `instanceInitiatedShutdownBehavior` attribute.
     # @option options [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
@@ -704,15 +700,35 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM
-    # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
     # @option options [Types::AttributeBooleanValue] :disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
     #   this paramater for Spot Instances.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Types::AttributeBooleanValue] :ebs_optimized
+    #   Specifies whether the instance is optimized for EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal EBS I/O performance.
+    #   This optimization isn't available with all instance types. Additional
+    #   usage charges apply when using an EBS Optimized instance.
+    # @option options [Types::AttributeBooleanValue] :ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the instance.
+    #
+    #   This option is supported only for HVM instances. Specifying this
+    #   option with a PV instance can make it unreachable.
+    # @option options [Array<String>] :groups
+    #   \[EC2-VPC\] Changes the security groups of the instance. You must
+    #   specify at least one security group, even if it's just the default
+    #   security group for the VPC. You must specify the security group ID,
+    #   not the security group name.
+    # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
+    #   Specifies whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
     # @option options [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
     #   information, see [Instance Types][1]. If the instance type is not
@@ -737,26 +753,6 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
-    # @option options [Types::BlobAttributeValue] :user_data
-    #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
-    #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
-    # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
-    #   Specifies whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    # @option options [Array<String>] :groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
-    # @option options [Types::AttributeBooleanValue] :ebs_optimized
-    #   Specifies whether the instance is optimized for EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O performance.
-    #   This optimization isn't available with all instance types. Additional
-    #   usage charges apply when using an EBS Optimized instance.
     # @option options [Types::AttributeValue] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
     #   Virtual Function interface for the instance.
@@ -766,11 +762,15 @@ module Aws::EC2
     #
     #   This option is supported only for HVM instances. Specifying this
     #   option with a PV instance can make it unreachable.
-    # @option options [Types::AttributeBooleanValue] :ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the instance.
-    #
-    #   This option is supported only for HVM instances. Specifying this
-    #   option with a PV instance can make it unreachable.
+    # @option options [Types::BlobAttributeValue] :user_data
+    #   Changes the instance's user data to the specified value. If you are
+    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   for you, and you can load the text from a file. Otherwise, you must
+    #   provide Base64-encoded text.
+    # @option options [String] :value
+    #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
+    #   `userData`, `disableApiTermination`, or
+    #   `instanceInitiatedShutdownBehavior` attribute.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(instance_id: @id)
@@ -835,23 +835,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.report_status({
+    #     description: "String",
     #     dry_run: false,
-    #     status: "ok", # required, accepts ok, impaired
-    #     start_time: Time.now,
     #     end_time: Time.now,
     #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
-    #     description: "String",
+    #     start_time: Time.now,
+    #     status: "ok", # required, accepts ok, impaired
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :description
+    #   Descriptive text about the health state of your instance.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :status
-    #   The status of all instances listed.
-    # @option options [Time,DateTime,Date,Integer,String] :start_time
-    #   The time at which the reported instance health state began.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The time at which the reported instance health state ended.
     # @option options [required, Array<String>] :reason_codes
@@ -882,8 +880,10 @@ module Aws::EC2
     #     problems.
     #
     #   * `other`\: \[explain using the description parameter\]
-    # @option options [String] :description
-    #   Descriptive text about the health state of your instance.
+    # @option options [Time,DateTime,Date,Integer,String] :start_time
+    #   The time at which the reported instance health state began.
+    # @option options [required, String] :status
+    #   The status of all instances listed.
     # @return [EmptyStructure]
     def report_status(options = {})
       options = Aws::Util.deep_merge(options, instances: [@id])
@@ -894,21 +894,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.reset_attribute({
-    #     dry_run: false,
     #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :attribute
     #   The attribute to reset.
     #
     #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
     #   `sourceDestCheck`. To change an instance attribute, use
     #   ModifyInstanceAttribute.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(instance_id: @id)
@@ -1140,23 +1140,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volumes = instance.volumes({
-    #     dry_run: false,
-    #     volume_ids: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     volume_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :volume_ids
-    #   One or more volume IDs.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1212,6 +1205,13 @@ module Aws::EC2
     #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
     #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
+    # @option options [Array<String>] :volume_ids
+    #   One or more volume IDs.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Volume::Collection]
     def volumes(options = {})
       batches = Enumerator.new do |y|
@@ -1250,26 +1250,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc_addresses = instance.vpc_addresses({
-    #     dry_run: false,
-    #     public_ips: ["String"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     public_ips: ["String"],
     #     allocation_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
-    #
-    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
@@ -1292,10 +1283,19 @@ module Aws::EC2
     #     with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    # @option options [Array<String>] :public_ips
+    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #
+    #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
     #   \[EC2-VPC\] One or more allocation IDs.
     #
     #   Default: Describes all your Elastic IP addresses.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [VpcAddress::Collection]
     def vpc_addresses(options = {})
       batches = Enumerator.new do |y|

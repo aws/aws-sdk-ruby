@@ -280,7 +280,9 @@ module Aws::OpsWorks
     end
 
     # Attaches an Elastic Load Balancing load balancer to a specified layer.
-    # For more information, see [Elastic Load Balancing][1].
+    # AWS OpsWorks Stacks does not support Application Load Balancer. You
+    # can only use Classic Load Balancer with AWS OpsWorks Stacks. For more
+    # information, see [Elastic Load Balancing][1].
     #
     # <note markdown="1"> You must create the Elastic Load Balancing instance separately, by
     # using the Elastic Load Balancing console, API, or CLI. For more
@@ -295,7 +297,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/load-balancer-elb.html
+    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers-elb.html
     # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
     # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
@@ -424,8 +426,8 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -955,8 +957,8 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1450,8 +1452,8 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -2599,6 +2601,7 @@ module Aws::OpsWorks
     #   resp.instances[0].agent_version #=> String
     #   resp.instances[0].ami_id #=> String
     #   resp.instances[0].architecture #=> String, one of "x86_64", "i386"
+    #   resp.instances[0].arn #=> String
     #   resp.instances[0].auto_scaling_type #=> String, one of "load", "timer"
     #   resp.instances[0].availability_zone #=> String
     #   resp.instances[0].block_device_mappings #=> Array
@@ -2695,6 +2698,7 @@ module Aws::OpsWorks
     # @example Response structure
     #
     #   resp.layers #=> Array
+    #   resp.layers[0].arn #=> String
     #   resp.layers[0].stack_id #=> String
     #   resp.layers[0].layer_id #=> String
     #   resp.layers[0].type #=> String, one of "aws-flow-ruby", "ecs-cluster", "java-app", "lb", "web", "php-app", "rails-app", "nodejs-app", "memcached", "db-master", "monitoring-master", "custom"
@@ -3581,6 +3585,48 @@ module Aws::OpsWorks
       req.send_request(options)
     end
 
+    # Returns a list of tags that are applied to the specified stack or
+    # layer.
+    #
+    # @option params [required, String] :resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #
+    # @option params [Integer] :max_results
+    #   Do not use. A validation exception occurs if you add a `MaxResults`
+    #   parameter to a `ListTagsRequest` call.
+    #
+    # @option params [String] :next_token
+    #   Do not use. A validation exception occurs if you add a `NextToken`
+    #   parameter to a `ListTagsRequest` call.
+    #
+    # @return [Types::ListTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsResult#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ListTagsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags({
+    #     resource_arn: "ResourceArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTags AWS API Documentation
+    #
+    # @overload list_tags(params = {})
+    # @param [Hash] params ({})
+    def list_tags(params = {}, options = {})
+      req = build_request(:list_tags, params)
+      req.send_request(options)
+    end
+
     # Reboots a specified instance. For more information, see [Starting,
     # Stopping, and Rebooting Instances][1].
     #
@@ -4211,6 +4257,56 @@ module Aws::OpsWorks
       req.send_request(options)
     end
 
+    # Apply cost-allocation tags to a specified stack or layer in AWS
+    # OpsWorks Stacks. For more information about how tagging works, see
+    # [Tags][1] in the AWS OpsWorks User Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to a
+    #   stack or layer.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 40 tags is allowed for any resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
     # Unassigns a registered instance from all of it's layers. The instance
     # remains in the stack as an unassigned instance and can be assigned to
     # another layer, as needed. You cannot use this action with instances
@@ -4275,6 +4371,32 @@ module Aws::OpsWorks
     # @param [Hash] params ({})
     def unassign_volume(params = {}, options = {})
       req = build_request(:unassign_volume, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a specified stack or layer.
+    #
+    # @option params [required, String] :resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of the keys of tags to be removed from a stack or layer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -4475,8 +4597,8 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -4885,8 +5007,8 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -5238,7 +5360,7 @@ module Aws::OpsWorks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworks'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

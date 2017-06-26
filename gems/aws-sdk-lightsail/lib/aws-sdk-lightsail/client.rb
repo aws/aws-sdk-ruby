@@ -178,7 +178,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -223,7 +223,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -272,7 +272,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -320,7 +320,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -375,7 +375,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -422,7 +422,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -459,7 +459,12 @@ module Aws::Lightsail
     #   [1]: http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html
     #
     # @option params [String] :custom_image_name
-    #   The name for your custom image.
+    #   (Deprecated) The name for your custom image.
+    #
+    #   <note markdown="1"> In releases prior to June 12, 2017, this parameter was ignored by the
+    #   API. It is now deprecated.
+    #
+    #    </note>
     #
     # @option params [required, String] :blueprint_id
     #   The ID for a virtual private server image (e.g., `app_wordpress_4_4`
@@ -514,7 +519,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -600,7 +605,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -643,7 +648,7 @@ module Aws::Lightsail
     #   resp.key_pair.support_code #=> String
     #   resp.key_pair.created_at #=> Time
     #   resp.key_pair.location.availability_zone #=> String
-    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.key_pair.fingerprint #=> String
     #   resp.public_key_base_64 #=> String
@@ -653,7 +658,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -693,7 +698,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -746,7 +751,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -788,7 +793,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -830,7 +835,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -870,7 +875,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -912,7 +917,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -1103,7 +1108,7 @@ module Aws::Lightsail
     #   resp.domain.support_code #=> String
     #   resp.domain.created_at #=> Time
     #   resp.domain.location.availability_zone #=> String
-    #   resp.domain.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.domain.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.domain.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.domain.domain_entries #=> Array
     #   resp.domain.domain_entries[0].id #=> String
@@ -1147,7 +1152,7 @@ module Aws::Lightsail
     #   resp.domains[0].support_code #=> String
     #   resp.domains[0].created_at #=> Time
     #   resp.domains[0].location.availability_zone #=> String
-    #   resp.domains[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.domains[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.domains[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.domains[0].domain_entries #=> Array
     #   resp.domains[0].domain_entries[0].id #=> String
@@ -1190,7 +1195,7 @@ module Aws::Lightsail
     #   resp.instance.support_code #=> String
     #   resp.instance.created_at #=> Time
     #   resp.instance.location.availability_zone #=> String
-    #   resp.instance.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instance.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instance.blueprint_id #=> String
     #   resp.instance.blueprint_name #=> String
@@ -1206,7 +1211,7 @@ module Aws::Lightsail
     #   resp.instance.hardware.disks[0].support_code #=> String
     #   resp.instance.hardware.disks[0].created_at #=> Time
     #   resp.instance.hardware.disks[0].location.availability_zone #=> String
-    #   resp.instance.hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance.hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instance.hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instance.hardware.disks[0].size_in_gb #=> Integer
     #   resp.instance.hardware.disks[0].gb_in_use #=> Integer
@@ -1397,7 +1402,7 @@ module Aws::Lightsail
     #   resp.instance_snapshot.support_code #=> String
     #   resp.instance_snapshot.created_at #=> Time
     #   resp.instance_snapshot.location.availability_zone #=> String
-    #   resp.instance_snapshot.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshot.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instance_snapshot.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instance_snapshot.state #=> String, one of "pending", "error", "available"
     #   resp.instance_snapshot.progress #=> String
@@ -1441,7 +1446,7 @@ module Aws::Lightsail
     #   resp.instance_snapshots[0].support_code #=> String
     #   resp.instance_snapshots[0].created_at #=> Time
     #   resp.instance_snapshots[0].location.availability_zone #=> String
-    #   resp.instance_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instance_snapshots[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instance_snapshots[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instance_snapshots[0].state #=> String, one of "pending", "error", "available"
     #   resp.instance_snapshots[0].progress #=> String
@@ -1517,7 +1522,7 @@ module Aws::Lightsail
     #   resp.instances[0].support_code #=> String
     #   resp.instances[0].created_at #=> Time
     #   resp.instances[0].location.availability_zone #=> String
-    #   resp.instances[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instances[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instances[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instances[0].blueprint_id #=> String
     #   resp.instances[0].blueprint_name #=> String
@@ -1533,7 +1538,7 @@ module Aws::Lightsail
     #   resp.instances[0].hardware.disks[0].support_code #=> String
     #   resp.instances[0].hardware.disks[0].created_at #=> Time
     #   resp.instances[0].hardware.disks[0].location.availability_zone #=> String
-    #   resp.instances[0].hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.instances[0].hardware.disks[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.instances[0].hardware.disks[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.instances[0].hardware.disks[0].size_in_gb #=> Integer
     #   resp.instances[0].hardware.disks[0].gb_in_use #=> Integer
@@ -1590,7 +1595,7 @@ module Aws::Lightsail
     #   resp.key_pair.support_code #=> String
     #   resp.key_pair.created_at #=> Time
     #   resp.key_pair.location.availability_zone #=> String
-    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.key_pair.fingerprint #=> String
     #
@@ -1628,7 +1633,7 @@ module Aws::Lightsail
     #   resp.key_pairs[0].support_code #=> String
     #   resp.key_pairs[0].created_at #=> Time
     #   resp.key_pairs[0].location.availability_zone #=> String
-    #   resp.key_pairs[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.key_pairs[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.key_pairs[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.key_pairs[0].fingerprint #=> String
     #   resp.next_page_token #=> String
@@ -1666,7 +1671,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -1714,7 +1719,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -1747,6 +1752,7 @@ module Aws::Lightsail
     #
     #   * {Types::GetOperationsForResourceResult#operations #operations} => Array&lt;Types::Operation&gt;
     #   * {Types::GetOperationsForResourceResult#next_page_count #next_page_count} => String
+    #   * {Types::GetOperationsForResourceResult#next_page_token #next_page_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1763,7 +1769,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -1772,6 +1778,7 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #   resp.next_page_count #=> String
+    #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource AWS API Documentation
     #
@@ -1807,7 +1814,7 @@ module Aws::Lightsail
     #   resp.regions[0].continent_code #=> String
     #   resp.regions[0].description #=> String
     #   resp.regions[0].display_name #=> String
-    #   resp.regions[0].name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.regions[0].name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.regions[0].availability_zones #=> Array
     #   resp.regions[0].availability_zones[0].zone_name #=> String
     #   resp.regions[0].availability_zones[0].state #=> String
@@ -1843,7 +1850,7 @@ module Aws::Lightsail
     #   resp.static_ip.support_code #=> String
     #   resp.static_ip.created_at #=> Time
     #   resp.static_ip.location.availability_zone #=> String
-    #   resp.static_ip.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.static_ip.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.static_ip.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.static_ip.ip_address #=> String
     #   resp.static_ip.attached_to #=> String
@@ -1883,7 +1890,7 @@ module Aws::Lightsail
     #   resp.static_ips[0].support_code #=> String
     #   resp.static_ips[0].created_at #=> Time
     #   resp.static_ips[0].location.availability_zone #=> String
-    #   resp.static_ips[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.static_ips[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.static_ips[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.static_ips[0].ip_address #=> String
     #   resp.static_ips[0].attached_to #=> String
@@ -1925,7 +1932,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -1994,7 +2001,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2025,7 +2032,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2077,7 +2084,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2121,7 +2128,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2162,7 +2169,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2204,7 +2211,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2245,7 +2252,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2276,7 +2283,7 @@ module Aws::Lightsail
     #   resp.operation.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operation.created_at #=> Time
     #   resp.operation.location.availability_zone #=> String
-    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operation.location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operation.is_terminal #=> Boolean
     #   resp.operation.operation_details #=> String
     #   resp.operation.operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2330,7 +2337,7 @@ module Aws::Lightsail
     #   resp.operations[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.operations[0].created_at #=> Time
     #   resp.operations[0].location.availability_zone #=> String
-    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
+    #   resp.operations[0].location.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.operations[0].is_terminal #=> Boolean
     #   resp.operations[0].operation_details #=> String
     #   resp.operations[0].operation_type #=> String, one of "DeleteInstance", "CreateInstance", "StopInstance", "StartInstance", "RebootInstance", "OpenInstancePublicPorts", "PutInstancePublicPorts", "CloseInstancePublicPorts", "AllocateStaticIp", "ReleaseStaticIp", "AttachStaticIp", "DetachStaticIp", "UpdateDomainEntry", "DeleteDomainEntry", "CreateDomain", "DeleteDomain", "CreateInstanceSnapshot", "DeleteInstanceSnapshot", "CreateInstancesFromSnapshot"
@@ -2361,7 +2368,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

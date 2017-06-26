@@ -12,9 +12,16 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #         version_id: "DocumentVersionIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -27,6 +34,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUploadRequest AWS API Documentation
     #
     class AbortDocumentVersionUploadRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :version_id)
       include Aws::Structure
@@ -37,16 +45,24 @@ module Aws::WorkDocs
     #
     #       {
     #         user_id: "IdType", # required
+    #         authentication_token: "AuthenticationHeaderType",
     #       }
     #
     # @!attribute [rw] user_id
     #   The ID of the user.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserRequest AWS API Documentation
     #
     class ActivateUserRequest < Struct.new(
-      :user_id)
+      :user_id,
+      :authentication_token)
       include Aws::Structure
     end
 
@@ -61,10 +77,64 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # Describes the activity information.
+    #
+    # @!attribute [rw] type
+    #   The activity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_stamp
+    #   The timestamp when the action was performed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiator
+    #   The user who performed the action.
+    #   @return [Types::UserMetadata]
+    #
+    # @!attribute [rw] participants
+    #   The list of users or groups impacted by this action. This is an
+    #   optional field and is filled for the following sharing activities:
+    #   DOCUMENT\_SHARED, DOCUMENT\_SHARED, DOCUMENT\_UNSHARED,
+    #   FOLDER\_SHARED, FOLDER\_UNSHARED.
+    #   @return [Types::Participants]
+    #
+    # @!attribute [rw] resource_metadata
+    #   The metadata of the resource involved in the user action.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] original_parent
+    #   The original parent of the resource. This is an optional field and
+    #   is filled for move activities.
+    #   @return [Types::ResourceMetadata]
+    #
+    # @!attribute [rw] comment_metadata
+    #   Metadata of the commenting activity. This is an optional field and
+    #   is filled for commenting activities.
+    #   @return [Types::CommentMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Activity AWS API Documentation
+    #
+    class Activity < Struct.new(
+      :type,
+      :time_stamp,
+      :organization_id,
+      :initiator,
+      :participants,
+      :resource_metadata,
+      :original_parent,
+      :comment_metadata)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddResourcePermissionsRequest
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         resource_id: "ResourceIdType", # required
     #         principals: [ # required
     #           {
@@ -74,6 +144,12 @@ module Aws::WorkDocs
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
@@ -86,6 +162,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsRequest AWS API Documentation
     #
     class AddResourcePermissionsRequest < Struct.new(
+      :authentication_token,
       :resource_id,
       :principals)
       include Aws::Structure
@@ -102,13 +179,230 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # Describes a comment.
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_id
+    #   The ID of the parent comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] thread_id
+    #   The ID of the root comment in the thread.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The text of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor
+    #   The details of the user who made the comment.
+    #   @return [Types::User]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time that the comment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the comment. Options are either PRIVATE, where the
+    #   comment is visible only to the comment author and document owner and
+    #   co-owners, or PUBLIC, where the comment is visible to document
+    #   owners, co-owners, and contributors.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipient_id
+    #   If the comment is a reply to another user's comment, this field
+    #   contains the user ID of the user being replied to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Comment AWS API Documentation
+    #
+    class Comment < Struct.new(
+      :comment_id,
+      :parent_id,
+      :thread_id,
+      :text,
+      :contributor,
+      :created_timestamp,
+      :status,
+      :visibility,
+      :recipient_id)
+      include Aws::Structure
+    end
+
+    # Describes the metadata of a comment.
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor
+    #   The user who made the comment.
+    #   @return [Types::User]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] comment_status
+    #   @return [String]
+    #
+    # @!attribute [rw] recipient_id
+    #   The ID of the user being replied to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CommentMetadata AWS API Documentation
+    #
+    class CommentMetadata < Struct.new(
+      :comment_id,
+      :contributor,
+      :created_timestamp,
+      :comment_status,
+      :recipient_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCommentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         parent_id: "CommentIdType",
+    #         thread_id: "CommentIdType",
+    #         text: "CommentTextType", # required
+    #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #         notify_collaborators: false,
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_id
+    #   The ID of the parent comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] thread_id
+    #   The ID of the root comment in the thread.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The text of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the comment. Options are either PRIVATE, where the
+    #   comment is visible only to the comment author and document owner and
+    #   co-owners, or PUBLIC, where the comment is visible to document
+    #   owners, co-owners, and contributors.
+    #   @return [String]
+    #
+    # @!attribute [rw] notify_collaborators
+    #   Set this parameter to TRUE to send an email out to the document
+    #   collaborators after the comment is created.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCommentRequest AWS API Documentation
+    #
+    class CreateCommentRequest < Struct.new(
+      :authentication_token,
+      :document_id,
+      :version_id,
+      :parent_id,
+      :thread_id,
+      :text,
+      :visibility,
+      :notify_collaborators)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comment
+    #   The comment that has been created.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCommentResponse AWS API Documentation
+    #
+    class CreateCommentResponse < Struct.new(
+      :comment)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateCustomMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         resource_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType",
+    #         custom_metadata: { # required
+    #           "CustomMetadataKeyType" => "CustomMetadataValueType",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the version, if the custom metadata is being added to a
+    #   document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_metadata
+    #   Custom metadata in the form of name-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadataRequest AWS API Documentation
+    #
+    class CreateCustomMetadataRequest < Struct.new(
+      :authentication_token,
+      :resource_id,
+      :version_id,
+      :custom_metadata)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadataResponse AWS API Documentation
+    #
+    class CreateCustomMetadataResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateFolderRequest
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         name: "ResourceNameType",
     #         parent_folder_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the new folder.
@@ -121,6 +415,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolderRequest AWS API Documentation
     #
     class CreateFolderRequest < Struct.new(
+      :authentication_token,
       :name,
       :parent_folder_id)
       include Aws::Structure
@@ -136,6 +431,42 @@ module Aws::WorkDocs
       :metadata)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #         labels: ["Label"], # required
+    #         authentication_token: "AuthenticationHeaderType",
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   List of labels to add to the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsRequest AWS API Documentation
+    #
+    class CreateLabelsRequest < Struct.new(
+      :resource_id,
+      :labels,
+      :authentication_token)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsResponse AWS API Documentation
+    #
+    class CreateLabelsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateNotificationSubscriptionRequest
     #   data as a hash:
@@ -192,6 +523,7 @@ module Aws::WorkDocs
     #       {
     #         organization_id: "IdType",
     #         username: "UsernameType", # required
+    #         email_address: "EmailAddressType",
     #         given_name: "UserAttributeValueType", # required
     #         surname: "UserAttributeValueType", # required
     #         password: "PasswordType", # required
@@ -200,6 +532,7 @@ module Aws::WorkDocs
     #           storage_allocated_in_bytes: 1,
     #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
     #         },
+    #         authentication_token: "AuthenticationHeaderType",
     #       }
     #
     # @!attribute [rw] organization_id
@@ -208,6 +541,10 @@ module Aws::WorkDocs
     #
     # @!attribute [rw] username
     #   The login name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user.
     #   @return [String]
     #
     # @!attribute [rw] given_name
@@ -230,16 +567,24 @@ module Aws::WorkDocs
     #   The amount of storage for the user.
     #   @return [Types::StorageRuleType]
     #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
       :organization_id,
       :username,
+      :email_address,
       :given_name,
       :surname,
       :password,
       :time_zone_id,
-      :storage_rule)
+      :storage_rule,
+      :authentication_token)
       include Aws::Structure
     end
 
@@ -259,25 +604,128 @@ module Aws::WorkDocs
     #
     #       {
     #         user_id: "IdType", # required
+    #         authentication_token: "AuthenticationHeaderType",
     #       }
     #
     # @!attribute [rw] user_id
     #   The ID of the user.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserRequest AWS API Documentation
     #
     class DeactivateUserRequest < Struct.new(
-      :user_id)
+      :user_id,
+      :authentication_token)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteCommentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         comment_id: "CommentIdType", # required
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment_id
+    #   The ID of the comment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCommentRequest AWS API Documentation
+    #
+    class DeleteCommentRequest < Struct.new(
+      :authentication_token,
+      :document_id,
+      :version_id,
+      :comment_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCustomMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         resource_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType",
+    #         keys: ["CustomMetadataKeyType"],
+    #         delete_all: false,
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource, either a document or folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the version, if the custom metadata is being deleted from
+    #   a document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] keys
+    #   List of properties to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delete_all
+    #   Flag to indicate removal of all custom metadata properties from the
+    #   specified resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadataRequest AWS API Documentation
+    #
+    class DeleteCustomMetadataRequest < Struct.new(
+      :authentication_token,
+      :resource_id,
+      :version_id,
+      :keys,
+      :delete_all)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadataResponse AWS API Documentation
+    #
+    class DeleteCustomMetadataResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDocumentRequest
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -286,6 +734,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentRequest AWS API Documentation
     #
     class DeleteDocumentRequest < Struct.new(
+      :authentication_token,
       :document_id)
       include Aws::Structure
     end
@@ -294,8 +743,15 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
@@ -304,6 +760,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContentsRequest AWS API Documentation
     #
     class DeleteFolderContentsRequest < Struct.new(
+      :authentication_token,
       :folder_id)
       include Aws::Structure
     end
@@ -312,8 +769,15 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
@@ -322,9 +786,52 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderRequest AWS API Documentation
     #
     class DeleteFolderRequest < Struct.new(
+      :authentication_token,
       :folder_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #         authentication_token: "AuthenticationHeaderType",
+    #         labels: ["Label"],
+    #         delete_all: false,
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   List of labels to delete from the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delete_all
+    #   Flag to request removal of all labels from the specified resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsRequest AWS API Documentation
+    #
+    class DeleteLabelsRequest < Struct.new(
+      :resource_id,
+      :authentication_token,
+      :labels,
+      :delete_all)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsResponse AWS API Documentation
+    #
+    class DeleteLabelsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteNotificationSubscriptionRequest
     #   data as a hash:
@@ -354,8 +861,15 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         user_id: "IdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] user_id
     #   The ID of the user.
@@ -364,7 +878,150 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUserRequest AWS API Documentation
     #
     class DeleteUserRequest < Struct.new(
+      :authentication_token,
       :user_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeActivitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         organization_id: "IdType",
+    #         user_id: "IdType",
+    #         limit: 1,
+    #         marker: "MarkerType",
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp that determines the starting time of the activities;
+    #   the response includes the activities performed after the specified
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp that determines the end time of the activities; the
+    #   response includes the activities performed before the specified
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization. This is a mandatory parameter when using
+    #   administrative API (SigV4) requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user who performed the action. The response includes
+    #   activities pertaining to this user. This is an optional parameter
+    #   and is only applicable for administrative API (SigV4) requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesRequest AWS API Documentation
+    #
+    class DescribeActivitiesRequest < Struct.new(
+      :authentication_token,
+      :start_time,
+      :end_time,
+      :organization_id,
+      :user_id,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_activities
+    #   The list of activities for the specified user and time period.
+    #   @return [Array<Types::Activity>]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesResponse AWS API Documentation
+    #
+    class DescribeActivitiesResponse < Struct.new(
+      :user_activities,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCommentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         limit: 1,
+    #         marker: "MarkerType",
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. This marker was received
+    #   from a previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeCommentsRequest AWS API Documentation
+    #
+    class DescribeCommentsRequest < Struct.new(
+      :authentication_token,
+      :document_id,
+      :version_id,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comments
+    #   The list of comments for the specified document version.
+    #   @return [Array<Types::Comment>]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. This marker was received
+    #   from a previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeCommentsResponse AWS API Documentation
+    #
+    class DescribeCommentsResponse < Struct.new(
+      :comments,
+      :marker)
       include Aws::Structure
     end
 
@@ -372,12 +1029,19 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #         marker: "PageMarkerType",
     #         limit: 1,
     #         include: "FieldNamesType",
     #         fields: "FieldNamesType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -405,6 +1069,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersionsRequest AWS API Documentation
     #
     class DescribeDocumentVersionsRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :marker,
       :limit,
@@ -434,6 +1099,7 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "ResourceIdType", # required
     #         sort: "DATE", # accepts DATE, NAME
     #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
@@ -442,6 +1108,12 @@ module Aws::WorkDocs
     #         type: "ALL", # accepts ALL, DOCUMENT, FOLDER
     #         include: "FieldNamesType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
@@ -460,8 +1132,8 @@ module Aws::WorkDocs
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   The marker for the next set of results. (You received this marker
-    #   from a previous call.)
+    #   The marker for the next set of results. This marker was received
+    #   from a previous call.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -476,6 +1148,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContentsRequest AWS API Documentation
     #
     class DescribeFolderContentsRequest < Struct.new(
+      :authentication_token,
       :folder_id,
       :sort,
       :order,
@@ -487,7 +1160,7 @@ module Aws::WorkDocs
     end
 
     # @!attribute [rw] folders
-    #   The sub-folders in the specified folder.
+    #   The subfolders in the specified folder.
     #   @return [Array<Types::FolderMetadata>]
     #
     # @!attribute [rw] documents
@@ -560,10 +1233,17 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         resource_id: "ResourceIdType", # required
     #         limit: 1,
     #         marker: "PageMarkerType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
@@ -581,6 +1261,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissionsRequest AWS API Documentation
     #
     class DescribeResourcePermissionsRequest < Struct.new(
+      :authentication_token,
       :resource_id,
       :limit,
       :marker)
@@ -604,10 +1285,60 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRootFoldersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType", # required
+    #         limit: 1,
+    #         marker: "PageMarkerType",
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFoldersRequest AWS API Documentation
+    #
+    class DescribeRootFoldersRequest < Struct.new(
+      :authentication_token,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] folders
+    #   The user's special folders.
+    #   @return [Array<Types::FolderMetadata>]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFoldersResponse AWS API Documentation
+    #
+    class DescribeRootFoldersResponse < Struct.new(
+      :folders,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeUsersRequest
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         organization_id: "IdType",
     #         user_ids: "UserIdsType",
     #         query: "SearchQueryType",
@@ -618,6 +1349,12 @@ module Aws::WorkDocs
     #         limit: 1,
     #         fields: "FieldNamesType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] organization_id
     #   The ID of the organization.
@@ -660,6 +1397,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersRequest AWS API Documentation
     #
     class DescribeUsersRequest < Struct.new(
+      :authentication_token,
       :organization_id,
       :user_ids,
       :query,
@@ -724,6 +1462,10 @@ module Aws::WorkDocs
     #   The resource state.
     #   @return [String]
     #
+    # @!attribute [rw] labels
+    #   List of labels on the document.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentMetadata AWS API Documentation
     #
     class DocumentMetadata < Struct.new(
@@ -733,7 +1475,8 @@ module Aws::WorkDocs
       :created_timestamp,
       :modified_timestamp,
       :latest_version_metadata,
-      :resource_state)
+      :resource_state,
+      :labels)
       include Aws::Structure
     end
 
@@ -846,6 +1589,18 @@ module Aws::WorkDocs
     #   the folder.
     #   @return [String]
     #
+    # @!attribute [rw] labels
+    #   List of labels on the folder.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] size
+    #   The size of the folder metadata.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_size
+    #   The size of the latest version of the folder metadata.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/FolderMetadata AWS API Documentation
     #
     class FolderMetadata < Struct.new(
@@ -856,7 +1611,39 @@ module Aws::WorkDocs
       :created_timestamp,
       :modified_timestamp,
       :resource_state,
-      :signature)
+      :signature,
+      :labels,
+      :size,
+      :latest_version_size)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCurrentUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType", # required
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserRequest AWS API Documentation
+    #
+    class GetCurrentUserRequest < Struct.new(
+      :authentication_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user
+    #   Metadata of the user.
+    #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserResponse AWS API Documentation
+    #
+    class GetCurrentUserResponse < Struct.new(
+      :user)
       include Aws::Structure
     end
 
@@ -864,11 +1651,18 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "IdType", # required
     #         limit: 1,
     #         fields: "FieldNamesType",
     #         marker: "PageMarkerType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -879,7 +1673,7 @@ module Aws::WorkDocs
     #   @return [Integer]
     #
     # @!attribute [rw] fields
-    #   A comma-separated list of values. Specify "NAME" to include the
+    #   A comma-separated list of values. Specify `NAME` to include the
     #   names of the parent folders.
     #   @return [String]
     #
@@ -890,6 +1684,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPathRequest AWS API Documentation
     #
     class GetDocumentPathRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :limit,
       :fields,
@@ -912,28 +1707,47 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
+    #         include_custom_metadata: false,
     #       }
     #
-    # @!attribute [rw] document_id
-    #   The ID of the document object.
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_custom_metadata
+    #   Set this to `TRUE` to include custom metadata in the response.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentRequest AWS API Documentation
     #
     class GetDocumentRequest < Struct.new(
-      :document_id)
+      :authentication_token,
+      :document_id,
+      :include_custom_metadata)
       include Aws::Structure
     end
 
     # @!attribute [rw] metadata
-    #   The document object.
+    #   The metadata details of the document.
     #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata on the document.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentResponse AWS API Documentation
     #
     class GetDocumentResponse < Struct.new(
-      :metadata)
+      :metadata,
+      :custom_metadata)
       include Aws::Structure
     end
 
@@ -941,10 +1755,18 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #         version_id: "DocumentVersionIdType", # required
     #         fields: "FieldNamesType",
+    #         include_custom_metadata: false,
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -959,12 +1781,18 @@ module Aws::WorkDocs
     #   URL for the source document.
     #   @return [String]
     #
+    # @!attribute [rw] include_custom_metadata
+    #   Set this to TRUE to include custom metadata in the response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionRequest AWS API Documentation
     #
     class GetDocumentVersionRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :version_id,
-      :fields)
+      :fields,
+      :include_custom_metadata)
       include Aws::Structure
     end
 
@@ -972,10 +1800,15 @@ module Aws::WorkDocs
     #   The version metadata.
     #   @return [Types::DocumentVersionMetadata]
     #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata on the document version.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionResponse AWS API Documentation
     #
     class GetDocumentVersionResponse < Struct.new(
-      :metadata)
+      :metadata,
+      :custom_metadata)
       include Aws::Structure
     end
 
@@ -983,11 +1816,18 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "IdType", # required
     #         limit: 1,
     #         fields: "FieldNamesType",
     #         marker: "PageMarkerType",
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
@@ -1009,6 +1849,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPathRequest AWS API Documentation
     #
     class GetFolderPathRequest < Struct.new(
+      :authentication_token,
       :folder_id,
       :limit,
       :fields,
@@ -1031,17 +1872,31 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "ResourceIdType", # required
+    #         include_custom_metadata: false,
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
     #   @return [String]
     #
+    # @!attribute [rw] include_custom_metadata
+    #   Set to TRUE to include custom metadata in the response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderRequest AWS API Documentation
     #
     class GetFolderRequest < Struct.new(
-      :folder_id)
+      :authentication_token,
+      :folder_id,
+      :include_custom_metadata)
       include Aws::Structure
     end
 
@@ -1049,10 +1904,33 @@ module Aws::WorkDocs
     #   The metadata of the folder.
     #   @return [Types::FolderMetadata]
     #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata on the folder.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderResponse AWS API Documentation
     #
     class GetFolderResponse < Struct.new(
-      :metadata)
+      :metadata,
+      :custom_metadata)
+      include Aws::Structure
+    end
+
+    # Describes the metadata of a user group.
+    #
+    # @!attribute [rw] id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GroupMetadata AWS API Documentation
+    #
+    class GroupMetadata < Struct.new(
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -1060,6 +1938,7 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         id: "ResourceIdType",
     #         name: "ResourceNameType",
     #         content_created_timestamp: Time.now,
@@ -1068,6 +1947,12 @@ module Aws::WorkDocs
     #         document_size_in_bytes: 1,
     #         parent_folder_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of the document.
@@ -1101,6 +1986,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUploadRequest AWS API Documentation
     #
     class InitiateDocumentVersionUploadRequest < Struct.new(
+      :authentication_token,
       :id,
       :name,
       :content_created_timestamp,
@@ -1124,6 +2010,24 @@ module Aws::WorkDocs
     class InitiateDocumentVersionUploadResponse < Struct.new(
       :metadata,
       :upload_metadata)
+      include Aws::Structure
+    end
+
+    # Describes the users and/or user groups.
+    #
+    # @!attribute [rw] users
+    #   The list of users.
+    #   @return [Array<Types::UserMetadata>]
+    #
+    # @!attribute [rw] groups
+    #   The list of user groups.
+    #   @return [Array<Types::GroupMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Participants AWS API Documentation
+    #
+    class Participants < Struct.new(
+      :users,
+      :groups)
       include Aws::Structure
     end
 
@@ -1172,8 +2076,15 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         resource_id: "ResourceIdType", # required
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
@@ -1182,6 +2093,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissionsRequest AWS API Documentation
     #
     class RemoveAllResourcePermissionsRequest < Struct.new(
+      :authentication_token,
       :resource_id)
       include Aws::Structure
     end
@@ -1190,10 +2102,17 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         resource_id: "ResourceIdType", # required
     #         principal_id: "IdType", # required
     #         principal_type: "USER", # accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
@@ -1210,9 +2129,54 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermissionRequest AWS API Documentation
     #
     class RemoveResourcePermissionRequest < Struct.new(
+      :authentication_token,
       :resource_id,
       :principal_id,
       :principal_type)
+      include Aws::Structure
+    end
+
+    # Describes the metadata of a resource.
+    #
+    # @!attribute [rw] type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_name
+    #   The original name of the resource prior to a rename operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the resource. This is an optional field and is
+    #   filled for action on document version.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the resource.
+    #   @return [Types::UserMetadata]
+    #
+    # @!attribute [rw] parent_id
+    #   The parent ID of the resource before a rename operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourceMetadata AWS API Documentation
+    #
+    class ResourceMetadata < Struct.new(
+      :type,
+      :name,
+      :original_name,
+      :id,
+      :version_id,
+      :owner,
+      :parent_id)
       include Aws::Structure
     end
 
@@ -1365,11 +2329,18 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #         name: "ResourceNameType",
     #         parent_folder_id: "ResourceIdType",
     #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -1391,6 +2362,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentRequest AWS API Documentation
     #
     class UpdateDocumentRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :name,
       :parent_folder_id,
@@ -1402,10 +2374,17 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         document_id: "ResourceIdType", # required
     #         version_id: "DocumentVersionIdType", # required
     #         version_status: "ACTIVE", # accepts ACTIVE
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] document_id
     #   The ID of the document.
@@ -1422,6 +2401,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersionRequest AWS API Documentation
     #
     class UpdateDocumentVersionRequest < Struct.new(
+      :authentication_token,
       :document_id,
       :version_id,
       :version_status)
@@ -1432,11 +2412,18 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         folder_id: "ResourceIdType", # required
     #         name: "ResourceNameType",
     #         parent_folder_id: "ResourceIdType",
     #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] folder_id
     #   The ID of the folder.
@@ -1458,6 +2445,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderRequest AWS API Documentation
     #
     class UpdateFolderRequest < Struct.new(
+      :authentication_token,
       :folder_id,
       :name,
       :parent_folder_id,
@@ -1469,6 +2457,7 @@ module Aws::WorkDocs
     #   data as a hash:
     #
     #       {
+    #         authentication_token: "AuthenticationHeaderType",
     #         user_id: "IdType", # required
     #         given_name: "UserAttributeValueType",
     #         surname: "UserAttributeValueType",
@@ -1480,6 +2469,12 @@ module Aws::WorkDocs
     #         time_zone_id: "TimeZoneIdType",
     #         locale: "en", # accepts en, fr, ko, de, es, ja, ru, zh_CN, zh_TW, pt_BR, default
     #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #   @return [String]
     #
     # @!attribute [rw] user_id
     #   The ID of the user.
@@ -1512,6 +2507,7 @@ module Aws::WorkDocs
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
+      :authentication_token,
       :user_id,
       :given_name,
       :surname,
@@ -1631,6 +2627,39 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :storage)
+      include Aws::Structure
+    end
+
+    # Describes the metadata of the user.
+    #
+    # @!attribute [rw] id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name of the user before a rename operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] surname
+    #   The surname of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserMetadata AWS API Documentation
+    #
+    class UserMetadata < Struct.new(
+      :id,
+      :username,
+      :given_name,
+      :surname,
+      :email_address)
       include Aws::Structure
     end
 

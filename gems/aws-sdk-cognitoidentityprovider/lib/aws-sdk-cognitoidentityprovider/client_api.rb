@@ -11,6 +11,7 @@ module Aws::CognitoIdentityProvider
 
     include Seahorse::Model
 
+    AWSAccountIdType = Shapes::StringShape.new(name: 'AWSAccountIdType')
     AddCustomAttributesRequest = Shapes::StructureShape.new(name: 'AddCustomAttributesRequest')
     AddCustomAttributesResponse = Shapes::StructureShape.new(name: 'AddCustomAttributesResponse')
     AdminAddUserToGroupRequest = Shapes::StructureShape.new(name: 'AdminAddUserToGroupRequest')
@@ -57,6 +58,7 @@ module Aws::CognitoIdentityProvider
     ArnType = Shapes::StringShape.new(name: 'ArnType')
     AttributeDataType = Shapes::StringShape.new(name: 'AttributeDataType')
     AttributeListType = Shapes::ListShape.new(name: 'AttributeListType')
+    AttributeMappingType = Shapes::MapShape.new(name: 'AttributeMappingType')
     AttributeNameListType = Shapes::ListShape.new(name: 'AttributeNameListType')
     AttributeNameType = Shapes::StringShape.new(name: 'AttributeNameType')
     AttributeType = Shapes::StructureShape.new(name: 'AttributeType')
@@ -65,6 +67,7 @@ module Aws::CognitoIdentityProvider
     AuthParametersType = Shapes::MapShape.new(name: 'AuthParametersType')
     AuthenticationResultType = Shapes::StructureShape.new(name: 'AuthenticationResultType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
+    CallbackURLsListType = Shapes::ListShape.new(name: 'CallbackURLsListType')
     ChallengeNameType = Shapes::StringShape.new(name: 'ChallengeNameType')
     ChallengeParametersType = Shapes::MapShape.new(name: 'ChallengeParametersType')
     ChallengeResponsesType = Shapes::MapShape.new(name: 'ChallengeResponsesType')
@@ -91,27 +94,38 @@ module Aws::CognitoIdentityProvider
     ConfirmationCodeType = Shapes::StringShape.new(name: 'ConfirmationCodeType')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
+    CreateIdentityProviderRequest = Shapes::StructureShape.new(name: 'CreateIdentityProviderRequest')
+    CreateIdentityProviderResponse = Shapes::StructureShape.new(name: 'CreateIdentityProviderResponse')
     CreateUserImportJobRequest = Shapes::StructureShape.new(name: 'CreateUserImportJobRequest')
     CreateUserImportJobResponse = Shapes::StructureShape.new(name: 'CreateUserImportJobResponse')
     CreateUserPoolClientRequest = Shapes::StructureShape.new(name: 'CreateUserPoolClientRequest')
     CreateUserPoolClientResponse = Shapes::StructureShape.new(name: 'CreateUserPoolClientResponse')
+    CreateUserPoolDomainRequest = Shapes::StructureShape.new(name: 'CreateUserPoolDomainRequest')
+    CreateUserPoolDomainResponse = Shapes::StructureShape.new(name: 'CreateUserPoolDomainResponse')
     CreateUserPoolRequest = Shapes::StructureShape.new(name: 'CreateUserPoolRequest')
     CreateUserPoolResponse = Shapes::StructureShape.new(name: 'CreateUserPoolResponse')
     CustomAttributeNameType = Shapes::StringShape.new(name: 'CustomAttributeNameType')
     CustomAttributesListType = Shapes::ListShape.new(name: 'CustomAttributesListType')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
+    DeleteIdentityProviderRequest = Shapes::StructureShape.new(name: 'DeleteIdentityProviderRequest')
     DeleteUserAttributesRequest = Shapes::StructureShape.new(name: 'DeleteUserAttributesRequest')
     DeleteUserAttributesResponse = Shapes::StructureShape.new(name: 'DeleteUserAttributesResponse')
     DeleteUserPoolClientRequest = Shapes::StructureShape.new(name: 'DeleteUserPoolClientRequest')
+    DeleteUserPoolDomainRequest = Shapes::StructureShape.new(name: 'DeleteUserPoolDomainRequest')
+    DeleteUserPoolDomainResponse = Shapes::StructureShape.new(name: 'DeleteUserPoolDomainResponse')
     DeleteUserPoolRequest = Shapes::StructureShape.new(name: 'DeleteUserPoolRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeliveryMediumListType = Shapes::ListShape.new(name: 'DeliveryMediumListType')
     DeliveryMediumType = Shapes::StringShape.new(name: 'DeliveryMediumType')
+    DescribeIdentityProviderRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderRequest')
+    DescribeIdentityProviderResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderResponse')
     DescribeUserImportJobRequest = Shapes::StructureShape.new(name: 'DescribeUserImportJobRequest')
     DescribeUserImportJobResponse = Shapes::StructureShape.new(name: 'DescribeUserImportJobResponse')
     DescribeUserPoolClientRequest = Shapes::StructureShape.new(name: 'DescribeUserPoolClientRequest')
     DescribeUserPoolClientResponse = Shapes::StructureShape.new(name: 'DescribeUserPoolClientResponse')
+    DescribeUserPoolDomainRequest = Shapes::StructureShape.new(name: 'DescribeUserPoolDomainRequest')
+    DescribeUserPoolDomainResponse = Shapes::StructureShape.new(name: 'DescribeUserPoolDomainResponse')
     DescribeUserPoolRequest = Shapes::StructureShape.new(name: 'DescribeUserPoolRequest')
     DescribeUserPoolResponse = Shapes::StructureShape.new(name: 'DescribeUserPoolResponse')
     DescriptionType = Shapes::StringShape.new(name: 'DescriptionType')
@@ -122,6 +136,11 @@ module Aws::CognitoIdentityProvider
     DeviceRememberedStatusType = Shapes::StringShape.new(name: 'DeviceRememberedStatusType')
     DeviceSecretVerifierConfigType = Shapes::StructureShape.new(name: 'DeviceSecretVerifierConfigType')
     DeviceType = Shapes::StructureShape.new(name: 'DeviceType')
+    DomainDescriptionType = Shapes::StructureShape.new(name: 'DomainDescriptionType')
+    DomainStatusType = Shapes::StringShape.new(name: 'DomainStatusType')
+    DomainType = Shapes::StringShape.new(name: 'DomainType')
+    DomainVersionType = Shapes::StringShape.new(name: 'DomainVersionType')
+    DuplicateProviderException = Shapes::StructureShape.new(name: 'DuplicateProviderException')
     EmailAddressType = Shapes::StringShape.new(name: 'EmailAddressType')
     EmailConfigurationType = Shapes::StructureShape.new(name: 'EmailConfigurationType')
     EmailVerificationMessageType = Shapes::StringShape.new(name: 'EmailVerificationMessageType')
@@ -140,6 +159,8 @@ module Aws::CognitoIdentityProvider
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
     GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
     GetGroupResponse = Shapes::StructureShape.new(name: 'GetGroupResponse')
+    GetIdentityProviderByIdentifierRequest = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierRequest')
+    GetIdentityProviderByIdentifierResponse = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierResponse')
     GetUserAttributeVerificationCodeRequest = Shapes::StructureShape.new(name: 'GetUserAttributeVerificationCodeRequest')
     GetUserAttributeVerificationCodeResponse = Shapes::StructureShape.new(name: 'GetUserAttributeVerificationCodeResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
@@ -150,12 +171,17 @@ module Aws::CognitoIdentityProvider
     GroupListType = Shapes::ListShape.new(name: 'GroupListType')
     GroupNameType = Shapes::StringShape.new(name: 'GroupNameType')
     GroupType = Shapes::StructureShape.new(name: 'GroupType')
+    IdentityProviderType = Shapes::StructureShape.new(name: 'IdentityProviderType')
+    IdentityProviderTypeType = Shapes::StringShape.new(name: 'IdentityProviderTypeType')
+    IdpIdentifierType = Shapes::StringShape.new(name: 'IdpIdentifierType')
+    IdpIdentifiersListType = Shapes::ListShape.new(name: 'IdpIdentifiersListType')
     InitiateAuthRequest = Shapes::StructureShape.new(name: 'InitiateAuthRequest')
     InitiateAuthResponse = Shapes::StructureShape.new(name: 'InitiateAuthResponse')
     IntegerType = Shapes::IntegerShape.new(name: 'IntegerType')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidEmailRoleAccessPolicyException = Shapes::StructureShape.new(name: 'InvalidEmailRoleAccessPolicyException')
     InvalidLambdaResponseException = Shapes::StructureShape.new(name: 'InvalidLambdaResponseException')
+    InvalidOAuthFlowException = Shapes::StructureShape.new(name: 'InvalidOAuthFlowException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
     InvalidSmsRoleAccessPolicyException = Shapes::StructureShape.new(name: 'InvalidSmsRoleAccessPolicyException')
@@ -167,7 +193,10 @@ module Aws::CognitoIdentityProvider
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
     ListGroupsResponse = Shapes::StructureShape.new(name: 'ListGroupsResponse')
+    ListIdentityProvidersRequest = Shapes::StructureShape.new(name: 'ListIdentityProvidersRequest')
+    ListIdentityProvidersResponse = Shapes::StructureShape.new(name: 'ListIdentityProvidersResponse')
     ListOfStringTypes = Shapes::ListShape.new(name: 'ListOfStringTypes')
+    ListProvidersLimitType = Shapes::IntegerShape.new(name: 'ListProvidersLimitType')
     ListUserImportJobsRequest = Shapes::StructureShape.new(name: 'ListUserImportJobsRequest')
     ListUserImportJobsResponse = Shapes::StructureShape.new(name: 'ListUserImportJobsResponse')
     ListUserPoolClientsRequest = Shapes::StructureShape.new(name: 'ListUserPoolClientsRequest')
@@ -178,6 +207,7 @@ module Aws::CognitoIdentityProvider
     ListUsersInGroupResponse = Shapes::StructureShape.new(name: 'ListUsersInGroupResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    LogoutURLsListType = Shapes::ListShape.new(name: 'LogoutURLsListType')
     LongType = Shapes::IntegerShape.new(name: 'LongType')
     MFAMethodNotFoundException = Shapes::StructureShape.new(name: 'MFAMethodNotFoundException')
     MFAOptionListType = Shapes::ListShape.new(name: 'MFAOptionListType')
@@ -188,6 +218,8 @@ module Aws::CognitoIdentityProvider
     NewDeviceMetadataType = Shapes::StructureShape.new(name: 'NewDeviceMetadataType')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
     NumberAttributeConstraintsType = Shapes::StructureShape.new(name: 'NumberAttributeConstraintsType')
+    OAuthFlowType = Shapes::StringShape.new(name: 'OAuthFlowType')
+    OAuthFlowsType = Shapes::ListShape.new(name: 'OAuthFlowsType')
     PaginationKey = Shapes::StringShape.new(name: 'PaginationKey')
     PaginationKeyType = Shapes::StringShape.new(name: 'PaginationKeyType')
     PasswordPolicyMinLengthType = Shapes::IntegerShape.new(name: 'PasswordPolicyMinLengthType')
@@ -198,16 +230,25 @@ module Aws::CognitoIdentityProvider
     PreSignedUrlType = Shapes::StringShape.new(name: 'PreSignedUrlType')
     PrecedenceType = Shapes::IntegerShape.new(name: 'PrecedenceType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
+    ProviderDescription = Shapes::StructureShape.new(name: 'ProviderDescription')
+    ProviderDetailsType = Shapes::MapShape.new(name: 'ProviderDetailsType')
+    ProviderNameType = Shapes::StringShape.new(name: 'ProviderNameType')
+    ProvidersListType = Shapes::ListShape.new(name: 'ProvidersListType')
     QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
     QueryLimitType = Shapes::IntegerShape.new(name: 'QueryLimitType')
+    RedirectUrlType = Shapes::StringShape.new(name: 'RedirectUrlType')
     RefreshTokenValidityType = Shapes::IntegerShape.new(name: 'RefreshTokenValidityType')
     ResendConfirmationCodeRequest = Shapes::StructureShape.new(name: 'ResendConfirmationCodeRequest')
     ResendConfirmationCodeResponse = Shapes::StructureShape.new(name: 'ResendConfirmationCodeResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RespondToAuthChallengeRequest = Shapes::StructureShape.new(name: 'RespondToAuthChallengeRequest')
     RespondToAuthChallengeResponse = Shapes::StructureShape.new(name: 'RespondToAuthChallengeResponse')
+    S3BucketType = Shapes::StringShape.new(name: 'S3BucketType')
     SchemaAttributeType = Shapes::StructureShape.new(name: 'SchemaAttributeType')
     SchemaAttributesListType = Shapes::ListShape.new(name: 'SchemaAttributesListType')
+    ScopeDoesNotExistException = Shapes::StructureShape.new(name: 'ScopeDoesNotExistException')
+    ScopeListType = Shapes::ListShape.new(name: 'ScopeListType')
+    ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     SearchPaginationTokenType = Shapes::StringShape.new(name: 'SearchPaginationTokenType')
     SearchedAttributeNamesListType = Shapes::ListShape.new(name: 'SearchedAttributeNamesListType')
     SecretHashType = Shapes::StringShape.new(name: 'SecretHashType')
@@ -225,15 +266,19 @@ module Aws::CognitoIdentityProvider
     StopUserImportJobResponse = Shapes::StructureShape.new(name: 'StopUserImportJobResponse')
     StringAttributeConstraintsType = Shapes::StructureShape.new(name: 'StringAttributeConstraintsType')
     StringType = Shapes::StringShape.new(name: 'StringType')
+    SupportedIdentityProvidersListType = Shapes::ListShape.new(name: 'SupportedIdentityProvidersListType')
     TokenModelType = Shapes::StringShape.new(name: 'TokenModelType')
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnexpectedLambdaException = Shapes::StructureShape.new(name: 'UnexpectedLambdaException')
+    UnsupportedIdentityProviderException = Shapes::StructureShape.new(name: 'UnsupportedIdentityProviderException')
     UnsupportedUserStateException = Shapes::StructureShape.new(name: 'UnsupportedUserStateException')
     UpdateDeviceStatusRequest = Shapes::StructureShape.new(name: 'UpdateDeviceStatusRequest')
     UpdateDeviceStatusResponse = Shapes::StructureShape.new(name: 'UpdateDeviceStatusResponse')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateGroupResponse = Shapes::StructureShape.new(name: 'UpdateGroupResponse')
+    UpdateIdentityProviderRequest = Shapes::StructureShape.new(name: 'UpdateIdentityProviderRequest')
+    UpdateIdentityProviderResponse = Shapes::StructureShape.new(name: 'UpdateIdentityProviderResponse')
     UpdateUserAttributesRequest = Shapes::StructureShape.new(name: 'UpdateUserAttributesRequest')
     UpdateUserAttributesResponse = Shapes::StructureShape.new(name: 'UpdateUserAttributesResponse')
     UpdateUserPoolClientRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolClientRequest')
@@ -445,6 +490,9 @@ module Aws::CognitoIdentityProvider
 
     AttributeListType.member = Shapes::ShapeRef.new(shape: AttributeType)
 
+    AttributeMappingType.key = Shapes::ShapeRef.new(shape: CustomAttributeNameType)
+    AttributeMappingType.value = Shapes::ShapeRef.new(shape: StringType)
+
     AttributeNameListType.member = Shapes::ShapeRef.new(shape: AttributeNameType)
 
     AttributeType.add_member(:name, Shapes::ShapeRef.new(shape: AttributeNameType, required: true, location_name: "Name"))
@@ -462,6 +510,8 @@ module Aws::CognitoIdentityProvider
     AuthenticationResultType.add_member(:new_device_metadata, Shapes::ShapeRef.new(shape: NewDeviceMetadataType, location_name: "NewDeviceMetadata"))
     AuthenticationResultType.struct_class = Types::AuthenticationResultType
 
+    CallbackURLsListType.member = Shapes::ShapeRef.new(shape: RedirectUrlType)
+
     ChallengeParametersType.key = Shapes::ShapeRef.new(shape: StringType)
     ChallengeParametersType.value = Shapes::ShapeRef.new(shape: StringType)
 
@@ -470,7 +520,7 @@ module Aws::CognitoIdentityProvider
 
     ChangePasswordRequest.add_member(:previous_password, Shapes::ShapeRef.new(shape: PasswordType, required: true, location_name: "PreviousPassword"))
     ChangePasswordRequest.add_member(:proposed_password, Shapes::ShapeRef.new(shape: PasswordType, required: true, location_name: "ProposedPassword"))
-    ChangePasswordRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    ChangePasswordRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     ChangePasswordRequest.struct_class = Types::ChangePasswordRequest
 
     ChangePasswordResponse.struct_class = Types::ChangePasswordResponse
@@ -524,6 +574,17 @@ module Aws::CognitoIdentityProvider
     CreateGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
+    CreateIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CreateIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, required: true, location_name: "ProviderName"))
+    CreateIdentityProviderRequest.add_member(:provider_type, Shapes::ShapeRef.new(shape: IdentityProviderTypeType, required: true, location_name: "ProviderType"))
+    CreateIdentityProviderRequest.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, required: true, location_name: "ProviderDetails"))
+    CreateIdentityProviderRequest.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
+    CreateIdentityProviderRequest.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    CreateIdentityProviderRequest.struct_class = Types::CreateIdentityProviderRequest
+
+    CreateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
+    CreateIdentityProviderResponse.struct_class = Types::CreateIdentityProviderResponse
+
     CreateUserImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: UserImportJobNameType, required: true, location_name: "JobName"))
     CreateUserImportJobRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "CloudWatchLogsRoleArn"))
@@ -539,10 +600,23 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientRequest.add_member(:read_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
     CreateUserPoolClientRequest.add_member(:write_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
     CreateUserPoolClientRequest.add_member(:explicit_auth_flows, Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    CreateUserPoolClientRequest.add_member(:supported_identity_providers, Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    CreateUserPoolClientRequest.add_member(:callback_urls, Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
+    CreateUserPoolClientRequest.add_member(:logout_urls, Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
+    CreateUserPoolClientRequest.add_member(:default_redirect_uri, Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows, Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
+    CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     CreateUserPoolClientRequest.struct_class = Types::CreateUserPoolClientRequest
 
     CreateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
     CreateUserPoolClientResponse.struct_class = Types::CreateUserPoolClientResponse
+
+    CreateUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
+    CreateUserPoolDomainRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CreateUserPoolDomainRequest.struct_class = Types::CreateUserPoolDomainRequest
+
+    CreateUserPoolDomainResponse.struct_class = Types::CreateUserPoolDomainResponse
 
     CreateUserPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: UserPoolNameType, required: true, location_name: "PoolName"))
     CreateUserPoolRequest.add_member(:policies, Shapes::ShapeRef.new(shape: UserPoolPolicyType, location_name: "Policies"))
@@ -571,8 +645,12 @@ module Aws::CognitoIdentityProvider
     DeleteGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
 
+    DeleteIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DeleteIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, required: true, location_name: "ProviderName"))
+    DeleteIdentityProviderRequest.struct_class = Types::DeleteIdentityProviderRequest
+
     DeleteUserAttributesRequest.add_member(:user_attribute_names, Shapes::ShapeRef.new(shape: AttributeNameListType, required: true, location_name: "UserAttributeNames"))
-    DeleteUserAttributesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    DeleteUserAttributesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     DeleteUserAttributesRequest.struct_class = Types::DeleteUserAttributesRequest
 
     DeleteUserAttributesResponse.struct_class = Types::DeleteUserAttributesResponse
@@ -581,13 +659,26 @@ module Aws::CognitoIdentityProvider
     DeleteUserPoolClientRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
     DeleteUserPoolClientRequest.struct_class = Types::DeleteUserPoolClientRequest
 
+    DeleteUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
+    DeleteUserPoolDomainRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DeleteUserPoolDomainRequest.struct_class = Types::DeleteUserPoolDomainRequest
+
+    DeleteUserPoolDomainResponse.struct_class = Types::DeleteUserPoolDomainResponse
+
     DeleteUserPoolRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DeleteUserPoolRequest.struct_class = Types::DeleteUserPoolRequest
 
-    DeleteUserRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    DeleteUserRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
 
     DeliveryMediumListType.member = Shapes::ShapeRef.new(shape: DeliveryMediumType)
+
+    DescribeIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DescribeIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, required: true, location_name: "ProviderName"))
+    DescribeIdentityProviderRequest.struct_class = Types::DescribeIdentityProviderRequest
+
+    DescribeIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
+    DescribeIdentityProviderResponse.struct_class = Types::DescribeIdentityProviderResponse
 
     DescribeUserImportJobRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DescribeUserImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: UserImportJobIdType, required: true, location_name: "JobId"))
@@ -602,6 +693,12 @@ module Aws::CognitoIdentityProvider
 
     DescribeUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
     DescribeUserPoolClientResponse.struct_class = Types::DescribeUserPoolClientResponse
+
+    DescribeUserPoolDomainRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, required: true, location_name: "Domain"))
+    DescribeUserPoolDomainRequest.struct_class = Types::DescribeUserPoolDomainRequest
+
+    DescribeUserPoolDomainResponse.add_member(:domain_description, Shapes::ShapeRef.new(shape: DomainDescriptionType, location_name: "DomainDescription"))
+    DescribeUserPoolDomainResponse.struct_class = Types::DescribeUserPoolDomainResponse
 
     DescribeUserPoolRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DescribeUserPoolRequest.struct_class = Types::DescribeUserPoolRequest
@@ -625,6 +722,15 @@ module Aws::CognitoIdentityProvider
     DeviceType.add_member(:device_last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeviceLastModifiedDate"))
     DeviceType.add_member(:device_last_authenticated_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeviceLastAuthenticatedDate"))
     DeviceType.struct_class = Types::DeviceType
+
+    DomainDescriptionType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
+    DomainDescriptionType.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AWSAccountIdType, location_name: "AWSAccountId"))
+    DomainDescriptionType.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
+    DomainDescriptionType.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketType, location_name: "S3Bucket"))
+    DomainDescriptionType.add_member(:cloud_front_distribution, Shapes::ShapeRef.new(shape: ArnType, location_name: "CloudFrontDistribution"))
+    DomainDescriptionType.add_member(:version, Shapes::ShapeRef.new(shape: DomainVersionType, location_name: "Version"))
+    DomainDescriptionType.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatusType, location_name: "Status"))
+    DomainDescriptionType.struct_class = Types::DomainDescriptionType
 
     EmailConfigurationType.add_member(:source_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "SourceArn"))
     EmailConfigurationType.add_member(:reply_to_email_address, Shapes::ShapeRef.new(shape: EmailAddressType, location_name: "ReplyToEmailAddress"))
@@ -665,14 +771,21 @@ module Aws::CognitoIdentityProvider
     GetGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
     GetGroupResponse.struct_class = Types::GetGroupResponse
 
-    GetUserAttributeVerificationCodeRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    GetIdentityProviderByIdentifierRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    GetIdentityProviderByIdentifierRequest.add_member(:idp_identifier, Shapes::ShapeRef.new(shape: IdpIdentifierType, required: true, location_name: "IdpIdentifier"))
+    GetIdentityProviderByIdentifierRequest.struct_class = Types::GetIdentityProviderByIdentifierRequest
+
+    GetIdentityProviderByIdentifierResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
+    GetIdentityProviderByIdentifierResponse.struct_class = Types::GetIdentityProviderByIdentifierResponse
+
+    GetUserAttributeVerificationCodeRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     GetUserAttributeVerificationCodeRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeNameType, required: true, location_name: "AttributeName"))
     GetUserAttributeVerificationCodeRequest.struct_class = Types::GetUserAttributeVerificationCodeRequest
 
     GetUserAttributeVerificationCodeResponse.add_member(:code_delivery_details, Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
     GetUserAttributeVerificationCodeResponse.struct_class = Types::GetUserAttributeVerificationCodeResponse
 
-    GetUserRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    GetUserRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     GetUserRequest.struct_class = Types::GetUserRequest
 
     GetUserResponse.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
@@ -680,7 +793,7 @@ module Aws::CognitoIdentityProvider
     GetUserResponse.add_member(:mfa_options, Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
     GetUserResponse.struct_class = Types::GetUserResponse
 
-    GlobalSignOutRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    GlobalSignOutRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     GlobalSignOutRequest.struct_class = Types::GlobalSignOutRequest
 
     GlobalSignOutResponse.struct_class = Types::GlobalSignOutResponse
@@ -695,6 +808,18 @@ module Aws::CognitoIdentityProvider
     GroupType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     GroupType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     GroupType.struct_class = Types::GroupType
+
+    IdentityProviderType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
+    IdentityProviderType.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
+    IdentityProviderType.add_member(:provider_type, Shapes::ShapeRef.new(shape: IdentityProviderTypeType, location_name: "ProviderType"))
+    IdentityProviderType.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
+    IdentityProviderType.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
+    IdentityProviderType.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    IdentityProviderType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    IdentityProviderType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    IdentityProviderType.struct_class = Types::IdentityProviderType
+
+    IdpIdentifiersListType.member = Shapes::ShapeRef.new(shape: IdpIdentifierType)
 
     InitiateAuthRequest.add_member(:auth_flow, Shapes::ShapeRef.new(shape: AuthFlowType, required: true, location_name: "AuthFlow"))
     InitiateAuthRequest.add_member(:auth_parameters, Shapes::ShapeRef.new(shape: AuthParametersType, location_name: "AuthParameters"))
@@ -735,6 +860,15 @@ module Aws::CognitoIdentityProvider
     ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: GroupListType, location_name: "Groups"))
     ListGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
+
+    ListIdentityProvidersRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    ListIdentityProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListProvidersLimitType, location_name: "MaxResults"))
+    ListIdentityProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListIdentityProvidersRequest.struct_class = Types::ListIdentityProvidersRequest
+
+    ListIdentityProvidersResponse.add_member(:providers, Shapes::ShapeRef.new(shape: ProvidersListType, required: true, location_name: "Providers"))
+    ListIdentityProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListIdentityProvidersResponse.struct_class = Types::ListIdentityProvidersResponse
 
     ListOfStringTypes.member = Shapes::ShapeRef.new(shape: StringType)
 
@@ -785,6 +919,8 @@ module Aws::CognitoIdentityProvider
     ListUsersResponse.add_member(:pagination_token, Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    LogoutURLsListType.member = Shapes::ShapeRef.new(shape: RedirectUrlType)
+
     MFAOptionListType.member = Shapes::ShapeRef.new(shape: MFAOptionType)
 
     MFAOptionType.add_member(:delivery_medium, Shapes::ShapeRef.new(shape: DeliveryMediumType, location_name: "DeliveryMedium"))
@@ -804,12 +940,25 @@ module Aws::CognitoIdentityProvider
     NumberAttributeConstraintsType.add_member(:max_value, Shapes::ShapeRef.new(shape: StringType, location_name: "MaxValue"))
     NumberAttributeConstraintsType.struct_class = Types::NumberAttributeConstraintsType
 
+    OAuthFlowsType.member = Shapes::ShapeRef.new(shape: OAuthFlowType)
+
     PasswordPolicyType.add_member(:minimum_length, Shapes::ShapeRef.new(shape: PasswordPolicyMinLengthType, location_name: "MinimumLength"))
     PasswordPolicyType.add_member(:require_uppercase, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireUppercase"))
     PasswordPolicyType.add_member(:require_lowercase, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireLowercase"))
     PasswordPolicyType.add_member(:require_numbers, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireNumbers"))
     PasswordPolicyType.add_member(:require_symbols, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireSymbols"))
     PasswordPolicyType.struct_class = Types::PasswordPolicyType
+
+    ProviderDescription.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ProviderName"))
+    ProviderDescription.add_member(:provider_type, Shapes::ShapeRef.new(shape: IdentityProviderTypeType, location_name: "ProviderType"))
+    ProviderDescription.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    ProviderDescription.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    ProviderDescription.struct_class = Types::ProviderDescription
+
+    ProviderDetailsType.key = Shapes::ShapeRef.new(shape: StringType)
+    ProviderDetailsType.value = Shapes::ShapeRef.new(shape: StringType)
+
+    ProvidersListType.member = Shapes::ShapeRef.new(shape: ProviderDescription)
 
     ResendConfirmationCodeRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
     ResendConfirmationCodeRequest.add_member(:secret_hash, Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
@@ -842,6 +991,8 @@ module Aws::CognitoIdentityProvider
 
     SchemaAttributesListType.member = Shapes::ShapeRef.new(shape: SchemaAttributeType)
 
+    ScopeListType.member = Shapes::ShapeRef.new(shape: ScopeType)
+
     SearchedAttributeNamesListType.member = Shapes::ShapeRef.new(shape: AttributeNameType)
 
     SetUserSettingsRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
@@ -858,8 +1009,9 @@ module Aws::CognitoIdentityProvider
     SignUpRequest.add_member(:validation_data, Shapes::ShapeRef.new(shape: AttributeListType, location_name: "ValidationData"))
     SignUpRequest.struct_class = Types::SignUpRequest
 
-    SignUpResponse.add_member(:user_confirmed, Shapes::ShapeRef.new(shape: BooleanType, location_name: "UserConfirmed"))
+    SignUpResponse.add_member(:user_confirmed, Shapes::ShapeRef.new(shape: BooleanType, required: true, location_name: "UserConfirmed"))
     SignUpResponse.add_member(:code_delivery_details, Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
+    SignUpResponse.add_member(:user_sub, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "UserSub"))
     SignUpResponse.struct_class = Types::SignUpResponse
 
     SmsConfigurationType.add_member(:sns_caller_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "SnsCallerArn"))
@@ -884,6 +1036,8 @@ module Aws::CognitoIdentityProvider
     StringAttributeConstraintsType.add_member(:max_length, Shapes::ShapeRef.new(shape: StringType, location_name: "MaxLength"))
     StringAttributeConstraintsType.struct_class = Types::StringAttributeConstraintsType
 
+    SupportedIdentityProvidersListType.member = Shapes::ShapeRef.new(shape: ProviderNameType)
+
     UpdateDeviceStatusRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     UpdateDeviceStatusRequest.add_member(:device_key, Shapes::ShapeRef.new(shape: DeviceKeyType, required: true, location_name: "DeviceKey"))
     UpdateDeviceStatusRequest.add_member(:device_remembered_status, Shapes::ShapeRef.new(shape: DeviceRememberedStatusType, location_name: "DeviceRememberedStatus"))
@@ -901,8 +1055,18 @@ module Aws::CognitoIdentityProvider
     UpdateGroupResponse.add_member(:group, Shapes::ShapeRef.new(shape: GroupType, location_name: "Group"))
     UpdateGroupResponse.struct_class = Types::UpdateGroupResponse
 
+    UpdateIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    UpdateIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, required: true, location_name: "ProviderName"))
+    UpdateIdentityProviderRequest.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
+    UpdateIdentityProviderRequest.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
+    UpdateIdentityProviderRequest.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    UpdateIdentityProviderRequest.struct_class = Types::UpdateIdentityProviderRequest
+
+    UpdateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
+    UpdateIdentityProviderResponse.struct_class = Types::UpdateIdentityProviderResponse
+
     UpdateUserAttributesRequest.add_member(:user_attributes, Shapes::ShapeRef.new(shape: AttributeListType, required: true, location_name: "UserAttributes"))
-    UpdateUserAttributesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    UpdateUserAttributesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     UpdateUserAttributesRequest.struct_class = Types::UpdateUserAttributesRequest
 
     UpdateUserAttributesResponse.add_member(:code_delivery_details_list, Shapes::ShapeRef.new(shape: CodeDeliveryDetailsListType, location_name: "CodeDeliveryDetailsList"))
@@ -915,6 +1079,13 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientRequest.add_member(:read_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
     UpdateUserPoolClientRequest.add_member(:write_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
     UpdateUserPoolClientRequest.add_member(:explicit_auth_flows, Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    UpdateUserPoolClientRequest.add_member(:supported_identity_providers, Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    UpdateUserPoolClientRequest.add_member(:callback_urls, Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
+    UpdateUserPoolClientRequest.add_member(:logout_urls, Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
+    UpdateUserPoolClientRequest.add_member(:default_redirect_uri, Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows, Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
+    UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     UpdateUserPoolClientRequest.struct_class = Types::UpdateUserPoolClientRequest
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -972,6 +1143,13 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:read_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "ReadAttributes"))
     UserPoolClientType.add_member(:write_attributes, Shapes::ShapeRef.new(shape: ClientPermissionListType, location_name: "WriteAttributes"))
     UserPoolClientType.add_member(:explicit_auth_flows, Shapes::ShapeRef.new(shape: ExplicitAuthFlowsListType, location_name: "ExplicitAuthFlows"))
+    UserPoolClientType.add_member(:supported_identity_providers, Shapes::ShapeRef.new(shape: SupportedIdentityProvidersListType, location_name: "SupportedIdentityProviders"))
+    UserPoolClientType.add_member(:callback_urls, Shapes::ShapeRef.new(shape: CallbackURLsListType, location_name: "CallbackURLs"))
+    UserPoolClientType.add_member(:logout_urls, Shapes::ShapeRef.new(shape: LogoutURLsListType, location_name: "LogoutURLs"))
+    UserPoolClientType.add_member(:default_redirect_uri, Shapes::ShapeRef.new(shape: RedirectUrlType, location_name: "DefaultRedirectURI"))
+    UserPoolClientType.add_member(:allowed_o_auth_flows, Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AllowedOAuthFlows"))
+    UserPoolClientType.add_member(:allowed_o_auth_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedOAuthScopes"))
+    UserPoolClientType.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", metadata: {"box"=>true}))
     UserPoolClientType.struct_class = Types::UserPoolClientType
 
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
@@ -1028,7 +1206,7 @@ module Aws::CognitoIdentityProvider
 
     VerifiedAttributesListType.member = Shapes::ShapeRef.new(shape: VerifiedAttributeType)
 
-    VerifyUserAttributeRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    VerifyUserAttributeRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     VerifyUserAttributeRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeNameType, required: true, location_name: "AttributeName"))
     VerifyUserAttributeRequest.add_member(:code, Shapes::ShapeRef.new(shape: ConfirmationCodeType, required: true, location_name: "Code"))
     VerifyUserAttributeRequest.struct_class = Types::VerifyUserAttributeRequest
@@ -1491,6 +1669,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:create_identity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIdentityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIdentityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIdentityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateProviderException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:create_user_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUserImportJob"
         o.http_method = "POST"
@@ -1534,6 +1727,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:create_user_pool_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUserPoolDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserPoolDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserPoolDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -1547,6 +1754,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:delete_identity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdentityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdentityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedIdentityProviderException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -1611,6 +1832,31 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:delete_user_pool_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUserPoolDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUserPoolDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteUserPoolDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:describe_identity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIdentityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIdentityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIdentityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:describe_user_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeUserImportJob"
         o.http_method = "POST"
@@ -1648,6 +1894,18 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:describe_user_pool_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUserPoolDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUserPoolDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeUserPoolDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -1732,6 +1990,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:get_identity_provider_by_identifier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdentityProviderByIdentifier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIdentityProviderByIdentifierRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIdentityProviderByIdentifierResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -1839,6 +2110,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:list_identity_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdentityProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListIdentityProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIdentityProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -2053,6 +2337,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:update_identity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIdentityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIdentityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIdentityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedIdentityProviderException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:update_user_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateUserAttributes"
         o.http_method = "POST"
@@ -2109,6 +2407,8 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ScopeDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOAuthFlowException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

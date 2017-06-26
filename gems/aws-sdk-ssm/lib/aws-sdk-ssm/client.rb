@@ -845,6 +845,38 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Delete a list of parameters.
+    #
+    # @option params [required, Array<String>] :names
+    #   The names of the parameters to delete.
+    #
+    # @return [Types::DeleteParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteParametersResult#deleted_parameters #deleted_parameters} => Array&lt;String&gt;
+    #   * {Types::DeleteParametersResult#invalid_parameters #invalid_parameters} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_parameters({
+    #     names: ["PSParameterName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted_parameters #=> Array
+    #   resp.deleted_parameters[0] #=> String
+    #   resp.invalid_parameters #=> Array
+    #   resp.invalid_parameters[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameters AWS API Documentation
+    #
+    # @overload delete_parameters(params = {})
+    # @param [Hash] params ({})
+    def delete_parameters(params = {}, options = {})
+      req = build_request(:delete_parameters, params)
+      req.send_request(options)
+    end
+
     # Deletes a patch baseline.
     #
     # @option params [required, String] :baseline_id
@@ -2130,6 +2162,9 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #
+    # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
+    #   Filters to limit the request results.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
@@ -2149,8 +2184,15 @@ module Aws::SSM
     #   resp = client.describe_parameters({
     #     filters: [
     #       {
-    #         key: "Name", # accepts Name, Type, KeyId
+    #         key: "Name", # required, accepts Name, Type, KeyId
     #         values: ["ParametersFilterValue"], # required
+    #       },
+    #     ],
+    #     parameter_filters: [
+    #       {
+    #         key: "ParameterStringFilterKey", # required
+    #         option: "ParameterStringQueryOption",
+    #         values: ["ParameterStringFilterValue"],
     #       },
     #     ],
     #     max_results: 1,
@@ -2166,6 +2208,7 @@ module Aws::SSM
     #   resp.parameters[0].last_modified_date #=> Time
     #   resp.parameters[0].last_modified_user #=> String
     #   resp.parameters[0].description #=> String
+    #   resp.parameters[0].allowed_pattern #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
@@ -2792,6 +2835,41 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Get information about a parameter by using the parameter name.
+    #
+    # @option params [required, String] :name
+    #   The name of the parameter you want to query.
+    #
+    # @option params [Boolean] :with_decryption
+    #   Return decrypted values for secure string parameters. This flag is
+    #   ignored for String and StringList parameter types.
+    #
+    # @return [Types::GetParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetParameterResult#parameter #parameter} => Types::Parameter
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_parameter({
+    #     name: "PSParameterName", # required
+    #     with_decryption: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parameter.name #=> String
+    #   resp.parameter.type #=> String, one of "String", "StringList", "SecureString"
+    #   resp.parameter.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
+    #
+    # @overload get_parameter(params = {})
+    # @param [Hash] params ({})
+    def get_parameter(params = {}, options = {})
+      req = build_request(:get_parameter, params)
+      req.send_request(options)
+    end
+
     # Query a list of all parameters used by the AWS account.
     #
     # @option params [required, String] :name
@@ -2834,6 +2912,7 @@ module Aws::SSM
     #   resp.parameters[0].last_modified_user #=> String
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].value #=> String
+    #   resp.parameters[0].allowed_pattern #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -2882,6 +2961,77 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_parameters(params = {}, options = {})
       req = build_request(:get_parameters, params)
+      req.send_request(options)
+    end
+
+    # Retrieve parameters in a specific hierarchy. For more information, see
+    # [Using Parameter Hierarchies][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html
+    #
+    # @option params [required, String] :path
+    #   The hierarchy for the parameter. Hierarchies start with a forward
+    #   slash (/) and end with the parameter name. A hierarchy can have a
+    #   maximum of five levels. Examples: /Environment/Test/DBString003
+    #
+    #   /Finance/Prod/IAD/OS/WinServ2016/license15
+    #
+    # @option params [Boolean] :recursive
+    #   Retrieve all parameters within a hierarchy.
+    #
+    # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
+    #   Filters to limit the request results.
+    #
+    # @option params [Boolean] :with_decryption
+    #   Retrieve all parameters in a hierarchy with their value decrypted.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::GetParametersByPathResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetParametersByPathResult#parameters #parameters} => Array&lt;Types::Parameter&gt;
+    #   * {Types::GetParametersByPathResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_parameters_by_path({
+    #     path: "PSParameterName", # required
+    #     recursive: false,
+    #     parameter_filters: [
+    #       {
+    #         key: "ParameterStringFilterKey", # required
+    #         option: "ParameterStringQueryOption",
+    #         values: ["ParameterStringFilterValue"],
+    #       },
+    #     ],
+    #     with_decryption: false,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parameters #=> Array
+    #   resp.parameters[0].name #=> String
+    #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
+    #   resp.parameters[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
+    #
+    # @overload get_parameters_by_path(params = {})
+    # @param [Hash] params ({})
+    def get_parameters_by_path(params = {}, options = {})
+      req = build_request(:get_parameters_by_path, params)
       req.send_request(options)
     end
 
@@ -3496,7 +3646,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Add one or more paramaters to the system.
+    # Add one or more parameters to the system.
     #
     # @option params [required, String] :name
     #   The name of the parameter that you want to add to the system.
@@ -3511,11 +3661,18 @@ module Aws::SSM
     #   The type of parameter that you want to add to the system.
     #
     # @option params [String] :key_id
-    #   The parameter key ID that you want to add to the system.
+    #   The KMS Key ID that you want to use to encrypt a parameter when you
+    #   choose the SecureString data type. If you don't specify a key ID, the
+    #   system uses the default key associated with your AWS account.
     #
     # @option params [Boolean] :overwrite
     #   Overwrite an existing parameter. If not specified, will default to
     #   "false".
+    #
+    # @option params [String] :allowed_pattern
+    #   A regular expression used to validate the parameter value. For
+    #   example, for String types with values restricted to numbers, you can
+    #   specify the following: AllowedPattern=^\\d+$
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3528,6 +3685,7 @@ module Aws::SSM
     #     type: "String", # required, accepts String, StringList, SecureString
     #     key_id: "ParameterKeyId",
     #     overwrite: false,
+    #     allowed_pattern: "AllowedPattern",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter AWS API Documentation
@@ -3780,24 +3938,29 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Executes commands on one or more remote instances.
+    # Executes commands on one or more managed instances.
     #
     # @option params [Array<String>] :instance_ids
     #   The instance IDs where the command should execute. You can specify a
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
-    #   Targets parameter, which accepts EC2 tags.
+    #   Targets parameter, which accepts EC2 tags. For more information about
+    #   how to use Targets, see [Sending Commands to a Fleet][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [Array<Types::Target>] :targets
     #   (Optional) An array of search criteria that targets instances using a
     #   Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use Targets, see [Executing a Command Using
-    #   Systems Manager Run Command][1].
+    #   information about how to use Targets, see [Sending Commands to a
+    #   Fleet][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [required, String] :document_name
     #   Required. The name of the Systems Manager document to execute. This
@@ -3831,9 +3994,9 @@ module Aws::SSM
     #   executed.
     #
     # @option params [String] :output_s3_region
-    #   (Optional) The region where the Amazon Simple Storage Service (Amazon
-    #   S3) output bucket is located. The default value is the region where
-    #   Run Command is being called.
+    #   (Deprecated) You can no longer specify this parameter. The system
+    #   ignores it. Instead, Systems Manager automatically determines the
+    #   Amazon S3 bucket region.
     #
     # @option params [String] :output_s3_bucket_name
     #   The name of the S3 bucket where command execution responses should be
@@ -3847,24 +4010,23 @@ module Aws::SSM
     #   (Optional) The maximum number of instances that are allowed to execute
     #   the command at the same time. You can specify a number such as 10 or a
     #   percentage such as 10%. The default value is 50. For more information
-    #   about how to use MaxConcurrency, see [Executing a Command Using
-    #   Systems Manager Run Command][1].
+    #   about how to use MaxConcurrency, see [Using Concurrency Controls][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed without the command failing. When
     #   the command fails one more time beyond the value of MaxErrors, the
     #   systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
-    #   is 50. For more information about how to use MaxErrors, see [Executing
-    #   a Command Using Systems Manager Run Command][1].
+    #   is 50. For more information about how to use MaxErrors, see [Using
+    #   Error Controls][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
     #
     # @option params [String] :service_role_arn
     #   The IAM role that Systems Manager uses to send notifications.
@@ -4471,7 +4633,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -147,8 +147,13 @@ module Aws::WorkDocs
 
     # Aborts the upload of the specified document version that was
     # previously initiated by InitiateDocumentVersionUpload. The client
-    # should make this call only when it no longer intends or fails to
-    # upload the document version.
+    # should make this call only when it no longer intends to upload the
+    # document version, or fails to do so.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -161,6 +166,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.abort_document_version_upload({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #     version_id: "DocumentVersionIdType", # required
     #   })
@@ -180,6 +186,11 @@ module Aws::WorkDocs
     # @option params [required, String] :user_id
     #   The ID of the user.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @return [Types::ActivateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ActivateUserResponse#user #user} => Types::User
@@ -188,6 +199,7 @@ module Aws::WorkDocs
     #
     #   resp = client.activate_user({
     #     user_id: "IdType", # required
+    #     authentication_token: "AuthenticationHeaderType",
     #   })
     #
     # @example Response structure
@@ -223,6 +235,11 @@ module Aws::WorkDocs
     # resource permissions are overwritten if the principals already have
     # different permissions.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
     #
@@ -236,6 +253,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_resource_permissions({
+    #     authentication_token: "AuthenticationHeaderType",
     #     resource_id: "ResourceIdType", # required
     #     principals: [ # required
     #       {
@@ -264,7 +282,138 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Adds a new comment to the specified document version.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [required, String] :document_id
+    #   The ID of the document.
+    #
+    # @option params [required, String] :version_id
+    #   The ID of the document version.
+    #
+    # @option params [String] :parent_id
+    #   The ID of the parent comment.
+    #
+    # @option params [String] :thread_id
+    #   The ID of the root comment in the thread.
+    #
+    # @option params [required, String] :text
+    #   The text of the comment.
+    #
+    # @option params [String] :visibility
+    #   The visibility of the comment. Options are either PRIVATE, where the
+    #   comment is visible only to the comment author and document owner and
+    #   co-owners, or PUBLIC, where the comment is visible to document owners,
+    #   co-owners, and contributors.
+    #
+    # @option params [Boolean] :notify_collaborators
+    #   Set this parameter to TRUE to send an email out to the document
+    #   collaborators after the comment is created.
+    #
+    # @return [Types::CreateCommentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCommentResponse#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_comment({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     document_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType", # required
+    #     parent_id: "CommentIdType",
+    #     thread_id: "CommentIdType",
+    #     text: "CommentTextType", # required
+    #     visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #     notify_collaborators: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.parent_id #=> String
+    #   resp.comment.thread_id #=> String
+    #   resp.comment.text #=> String
+    #   resp.comment.contributor.id #=> String
+    #   resp.comment.contributor.username #=> String
+    #   resp.comment.contributor.email_address #=> String
+    #   resp.comment.contributor.given_name #=> String
+    #   resp.comment.contributor.surname #=> String
+    #   resp.comment.contributor.organization_id #=> String
+    #   resp.comment.contributor.root_folder_id #=> String
+    #   resp.comment.contributor.recycle_bin_folder_id #=> String
+    #   resp.comment.contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
+    #   resp.comment.contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.comment.contributor.created_timestamp #=> Time
+    #   resp.comment.contributor.modified_timestamp #=> Time
+    #   resp.comment.contributor.time_zone_id #=> String
+    #   resp.comment.contributor.locale #=> String, one of "en", "fr", "ko", "de", "es", "ja", "ru", "zh_CN", "zh_TW", "pt_BR", "default"
+    #   resp.comment.contributor.storage.storage_utilized_in_bytes #=> Integer
+    #   resp.comment.contributor.storage.storage_rule.storage_allocated_in_bytes #=> Integer
+    #   resp.comment.contributor.storage.storage_rule.storage_type #=> String, one of "UNLIMITED", "QUOTA"
+    #   resp.comment.created_timestamp #=> Time
+    #   resp.comment.status #=> String, one of "DRAFT", "PUBLISHED", "DELETED"
+    #   resp.comment.visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.comment.recipient_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateComment AWS API Documentation
+    #
+    # @overload create_comment(params = {})
+    # @param [Hash] params ({})
+    def create_comment(params = {}, options = {})
+      req = build_request(:create_comment, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more custom properties to the specified resource (a
+    # folder, document, or version).
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource.
+    #
+    # @option params [String] :version_id
+    #   The ID of the version, if the custom metadata is being added to a
+    #   document version.
+    #
+    # @option params [required, Hash<String,String>] :custom_metadata
+    #   Custom metadata in the form of name-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_metadata({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     resource_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType",
+    #     custom_metadata: { # required
+    #       "CustomMetadataKeyType" => "CustomMetadataValueType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadata AWS API Documentation
+    #
+    # @overload create_custom_metadata(params = {})
+    # @param [Hash] params ({})
+    def create_custom_metadata(params = {}, options = {})
+      req = build_request(:create_custom_metadata, params)
+      req.send_request(options)
+    end
+
     # Creates a folder with the specified name and parent folder.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [String] :name
     #   The name of the new folder.
@@ -279,6 +428,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_folder({
+    #     authentication_token: "AuthenticationHeaderType",
     #     name: "ResourceNameType",
     #     parent_folder_id: "ResourceIdType", # required
     #   })
@@ -293,6 +443,10 @@ module Aws::WorkDocs
     #   resp.metadata.modified_timestamp #=> Time
     #   resp.metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
     #   resp.metadata.signature #=> String
+    #   resp.metadata.labels #=> Array
+    #   resp.metadata.labels[0] #=> String
+    #   resp.metadata.size #=> Integer
+    #   resp.metadata.latest_version_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolder AWS API Documentation
     #
@@ -300,6 +454,39 @@ module Aws::WorkDocs
     # @param [Hash] params ({})
     def create_folder(params = {}, options = {})
       req = build_request(:create_folder, params)
+      req.send_request(options)
+    end
+
+    # Adds the specified list of labels to the given resource (a document or
+    # folder)
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource.
+    #
+    # @option params [required, Array<String>] :labels
+    #   List of labels to add to the resource.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_labels({
+    #     resource_id: "ResourceIdType", # required
+    #     labels: ["Label"], # required
+    #     authentication_token: "AuthenticationHeaderType",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabels AWS API Documentation
+    #
+    # @overload create_labels(params = {})
+    # @param [Hash] params ({})
+    def create_labels(params = {}, options = {})
+      req = build_request(:create_labels, params)
       req.send_request(options)
     end
 
@@ -365,6 +552,9 @@ module Aws::WorkDocs
     # @option params [required, String] :username
     #   The login name of the user.
     #
+    # @option params [String] :email_address
+    #   The email address of the user.
+    #
     # @option params [required, String] :given_name
     #   The given name of the user.
     #
@@ -380,6 +570,11 @@ module Aws::WorkDocs
     # @option params [Types::StorageRuleType] :storage_rule
     #   The amount of storage for the user.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserResponse#user #user} => Types::User
@@ -389,6 +584,7 @@ module Aws::WorkDocs
     #   resp = client.create_user({
     #     organization_id: "IdType",
     #     username: "UsernameType", # required
+    #     email_address: "EmailAddressType",
     #     given_name: "UserAttributeValueType", # required
     #     surname: "UserAttributeValueType", # required
     #     password: "PasswordType", # required
@@ -397,6 +593,7 @@ module Aws::WorkDocs
     #       storage_allocated_in_bytes: 1,
     #       storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
     #     },
+    #     authentication_token: "AuthenticationHeaderType",
     #   })
     #
     # @example Response structure
@@ -434,12 +631,18 @@ module Aws::WorkDocs
     # @option params [required, String] :user_id
     #   The ID of the user.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deactivate_user({
     #     user_id: "IdType", # required
+    #     authentication_token: "AuthenticationHeaderType",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUser AWS API Documentation
@@ -451,8 +654,91 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Deletes the specified comment from the document version.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [required, String] :document_id
+    #   The ID of the document.
+    #
+    # @option params [required, String] :version_id
+    #   The ID of the document version.
+    #
+    # @option params [required, String] :comment_id
+    #   The ID of the comment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_comment({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     document_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType", # required
+    #     comment_id: "CommentIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteComment AWS API Documentation
+    #
+    # @overload delete_comment(params = {})
+    # @param [Hash] params ({})
+    def delete_comment(params = {}, options = {})
+      req = build_request(:delete_comment, params)
+      req.send_request(options)
+    end
+
+    # Deletes custom metadata from the specified resource.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource, either a document or folder.
+    #
+    # @option params [String] :version_id
+    #   The ID of the version, if the custom metadata is being deleted from a
+    #   document version.
+    #
+    # @option params [Array<String>] :keys
+    #   List of properties to remove.
+    #
+    # @option params [Boolean] :delete_all
+    #   Flag to indicate removal of all custom metadata properties from the
+    #   specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_metadata({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     resource_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType",
+    #     keys: ["CustomMetadataKeyType"],
+    #     delete_all: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadata AWS API Documentation
+    #
+    # @overload delete_custom_metadata(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_metadata(params = {}, options = {})
+      req = build_request(:delete_custom_metadata, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the specified document and its associated
     # metadata.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -462,6 +748,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_document({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #   })
     #
@@ -476,6 +763,11 @@ module Aws::WorkDocs
 
     # Permanently deletes the specified folder and its contents.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
@@ -484,6 +776,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_folder({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "ResourceIdType", # required
     #   })
     #
@@ -498,6 +791,11 @@ module Aws::WorkDocs
 
     # Deletes the contents of the specified folder.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
@@ -506,6 +804,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_folder_contents({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "ResourceIdType", # required
     #   })
     #
@@ -515,6 +814,42 @@ module Aws::WorkDocs
     # @param [Hash] params ({})
     def delete_folder_contents(params = {}, options = {})
       req = build_request(:delete_folder_contents, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified list of labels from a resource.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [Array<String>] :labels
+    #   List of labels to delete from the resource.
+    #
+    # @option params [Boolean] :delete_all
+    #   Flag to request removal of all labels from the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_labels({
+    #     resource_id: "ResourceIdType", # required
+    #     authentication_token: "AuthenticationHeaderType",
+    #     labels: ["Label"],
+    #     delete_all: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabels AWS API Documentation
+    #
+    # @overload delete_labels(params = {})
+    # @param [Hash] params ({})
+    def delete_labels(params = {}, options = {})
+      req = build_request(:delete_labels, params)
       req.send_request(options)
     end
 
@@ -546,6 +881,11 @@ module Aws::WorkDocs
 
     # Deletes the specified user from a Simple AD or Microsoft AD directory.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :user_id
     #   The ID of the user.
     #
@@ -554,6 +894,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_user({
+    #     authentication_token: "AuthenticationHeaderType",
     #     user_id: "IdType", # required
     #   })
     #
@@ -566,9 +907,212 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Describes the user activities in a specified time period.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The timestamp that determines the starting time of the activities; the
+    #   response includes the activities performed after the specified
+    #   timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The timestamp that determines the end time of the activities; the
+    #   response includes the activities performed before the specified
+    #   timestamp.
+    #
+    # @option params [String] :organization_id
+    #   The ID of the organization. This is a mandatory parameter when using
+    #   administrative API (SigV4) requests.
+    #
+    # @option params [String] :user_id
+    #   The ID of the user who performed the action. The response includes
+    #   activities pertaining to this user. This is an optional parameter and
+    #   is only applicable for administrative API (SigV4) requests.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @return [Types::DescribeActivitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeActivitiesResponse#user_activities #user_activities} => Array&lt;Types::Activity&gt;
+    #   * {Types::DescribeActivitiesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_activities({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     organization_id: "IdType",
+    #     user_id: "IdType",
+    #     limit: 1,
+    #     marker: "MarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_activities #=> Array
+    #   resp.user_activities[0].type #=> String, one of "DOCUMENT_CHECKED_IN", "DOCUMENT_CHECKED_OUT", "DOCUMENT_RENAMED", "DOCUMENT_VERSION_UPLOADED", "DOCUMENT_VERSION_DELETED", "DOCUMENT_RECYCLED", "DOCUMENT_RESTORED", "DOCUMENT_REVERTED", "DOCUMENT_SHARED", "DOCUMENT_UNSHARED", "DOCUMENT_SHARE_PERMISSION_CHANGED", "DOCUMENT_SHAREABLE_LINK_CREATED", "DOCUMENT_SHAREABLE_LINK_REMOVED", "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", "DOCUMENT_MOVED", "DOCUMENT_COMMENT_ADDED", "DOCUMENT_COMMENT_DELETED", "DOCUMENT_ANNOTATION_ADDED", "DOCUMENT_ANNOTATION_DELETED", "FOLDER_CREATED", "FOLDER_DELETED", "FOLDER_RENAMED", "FOLDER_RECYCLED", "FOLDER_RESTORED", "FOLDER_SHARED", "FOLDER_UNSHARED", "FOLDER_SHARE_PERMISSION_CHANGED", "FOLDER_SHAREABLE_LINK_CREATED", "FOLDER_SHAREABLE_LINK_REMOVED", "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", "FOLDER_MOVED"
+    #   resp.user_activities[0].time_stamp #=> Time
+    #   resp.user_activities[0].organization_id #=> String
+    #   resp.user_activities[0].initiator.id #=> String
+    #   resp.user_activities[0].initiator.username #=> String
+    #   resp.user_activities[0].initiator.given_name #=> String
+    #   resp.user_activities[0].initiator.surname #=> String
+    #   resp.user_activities[0].initiator.email_address #=> String
+    #   resp.user_activities[0].participants.users #=> Array
+    #   resp.user_activities[0].participants.users[0].id #=> String
+    #   resp.user_activities[0].participants.users[0].username #=> String
+    #   resp.user_activities[0].participants.users[0].given_name #=> String
+    #   resp.user_activities[0].participants.users[0].surname #=> String
+    #   resp.user_activities[0].participants.users[0].email_address #=> String
+    #   resp.user_activities[0].participants.groups #=> Array
+    #   resp.user_activities[0].participants.groups[0].id #=> String
+    #   resp.user_activities[0].participants.groups[0].name #=> String
+    #   resp.user_activities[0].resource_metadata.type #=> String, one of "FOLDER", "DOCUMENT"
+    #   resp.user_activities[0].resource_metadata.name #=> String
+    #   resp.user_activities[0].resource_metadata.original_name #=> String
+    #   resp.user_activities[0].resource_metadata.id #=> String
+    #   resp.user_activities[0].resource_metadata.version_id #=> String
+    #   resp.user_activities[0].resource_metadata.owner.id #=> String
+    #   resp.user_activities[0].resource_metadata.owner.username #=> String
+    #   resp.user_activities[0].resource_metadata.owner.given_name #=> String
+    #   resp.user_activities[0].resource_metadata.owner.surname #=> String
+    #   resp.user_activities[0].resource_metadata.owner.email_address #=> String
+    #   resp.user_activities[0].resource_metadata.parent_id #=> String
+    #   resp.user_activities[0].original_parent.type #=> String, one of "FOLDER", "DOCUMENT"
+    #   resp.user_activities[0].original_parent.name #=> String
+    #   resp.user_activities[0].original_parent.original_name #=> String
+    #   resp.user_activities[0].original_parent.id #=> String
+    #   resp.user_activities[0].original_parent.version_id #=> String
+    #   resp.user_activities[0].original_parent.owner.id #=> String
+    #   resp.user_activities[0].original_parent.owner.username #=> String
+    #   resp.user_activities[0].original_parent.owner.given_name #=> String
+    #   resp.user_activities[0].original_parent.owner.surname #=> String
+    #   resp.user_activities[0].original_parent.owner.email_address #=> String
+    #   resp.user_activities[0].original_parent.parent_id #=> String
+    #   resp.user_activities[0].comment_metadata.comment_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.username #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.email_address #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.given_name #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.surname #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.organization_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.root_folder_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.recycle_bin_folder_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
+    #   resp.user_activities[0].comment_metadata.contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.user_activities[0].comment_metadata.contributor.created_timestamp #=> Time
+    #   resp.user_activities[0].comment_metadata.contributor.modified_timestamp #=> Time
+    #   resp.user_activities[0].comment_metadata.contributor.time_zone_id #=> String
+    #   resp.user_activities[0].comment_metadata.contributor.locale #=> String, one of "en", "fr", "ko", "de", "es", "ja", "ru", "zh_CN", "zh_TW", "pt_BR", "default"
+    #   resp.user_activities[0].comment_metadata.contributor.storage.storage_utilized_in_bytes #=> Integer
+    #   resp.user_activities[0].comment_metadata.contributor.storage.storage_rule.storage_allocated_in_bytes #=> Integer
+    #   resp.user_activities[0].comment_metadata.contributor.storage.storage_rule.storage_type #=> String, one of "UNLIMITED", "QUOTA"
+    #   resp.user_activities[0].comment_metadata.created_timestamp #=> Time
+    #   resp.user_activities[0].comment_metadata.comment_status #=> String, one of "DRAFT", "PUBLISHED", "DELETED"
+    #   resp.user_activities[0].comment_metadata.recipient_id #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities AWS API Documentation
+    #
+    # @overload describe_activities(params = {})
+    # @param [Hash] params ({})
+    def describe_activities(params = {}, options = {})
+      req = build_request(:describe_activities, params)
+      req.send_request(options)
+    end
+
+    # List all the comments for the specified document version.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [required, String] :document_id
+    #   The ID of the document.
+    #
+    # @option params [required, String] :version_id
+    #   The ID of the document version.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. This marker was received from
+    #   a previous call.
+    #
+    # @return [Types::DescribeCommentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCommentsResponse#comments #comments} => Array&lt;Types::Comment&gt;
+    #   * {Types::DescribeCommentsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_comments({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     document_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType", # required
+    #     limit: 1,
+    #     marker: "MarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comments #=> Array
+    #   resp.comments[0].comment_id #=> String
+    #   resp.comments[0].parent_id #=> String
+    #   resp.comments[0].thread_id #=> String
+    #   resp.comments[0].text #=> String
+    #   resp.comments[0].contributor.id #=> String
+    #   resp.comments[0].contributor.username #=> String
+    #   resp.comments[0].contributor.email_address #=> String
+    #   resp.comments[0].contributor.given_name #=> String
+    #   resp.comments[0].contributor.surname #=> String
+    #   resp.comments[0].contributor.organization_id #=> String
+    #   resp.comments[0].contributor.root_folder_id #=> String
+    #   resp.comments[0].contributor.recycle_bin_folder_id #=> String
+    #   resp.comments[0].contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
+    #   resp.comments[0].contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.comments[0].contributor.created_timestamp #=> Time
+    #   resp.comments[0].contributor.modified_timestamp #=> Time
+    #   resp.comments[0].contributor.time_zone_id #=> String
+    #   resp.comments[0].contributor.locale #=> String, one of "en", "fr", "ko", "de", "es", "ja", "ru", "zh_CN", "zh_TW", "pt_BR", "default"
+    #   resp.comments[0].contributor.storage.storage_utilized_in_bytes #=> Integer
+    #   resp.comments[0].contributor.storage.storage_rule.storage_allocated_in_bytes #=> Integer
+    #   resp.comments[0].contributor.storage.storage_rule.storage_type #=> String, one of "UNLIMITED", "QUOTA"
+    #   resp.comments[0].created_timestamp #=> Time
+    #   resp.comments[0].status #=> String, one of "DRAFT", "PUBLISHED", "DELETED"
+    #   resp.comments[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.comments[0].recipient_id #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeComments AWS API Documentation
+    #
+    # @overload describe_comments(params = {})
+    # @param [Hash] params ({})
+    def describe_comments(params = {}, options = {})
+      req = build_request(:describe_comments, params)
+      req.send_request(options)
+    end
+
     # Retrieves the document versions for the specified document.
     #
     # By default, only active versions are returned.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -596,6 +1140,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_document_versions({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #     marker: "PageMarkerType",
     #     limit: 1,
@@ -633,12 +1178,17 @@ module Aws::WorkDocs
     end
 
     # Describes the contents of the specified folder, including its
-    # documents and sub-folders.
+    # documents and subfolders.
     #
     # By default, Amazon WorkDocs returns the first 100 active document and
     # folder metadata items. If there are more results, the response
     # includes a marker that you can use to request the next set of results.
     # You can also request initialized documents.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -653,8 +1203,8 @@ module Aws::WorkDocs
     #   The maximum number of items to return with this call.
     #
     # @option params [String] :marker
-    #   The marker for the next set of results. (You received this marker from
-    #   a previous call.)
+    #   The marker for the next set of results. This marker was received from
+    #   a previous call.
     #
     # @option params [String] :type
     #   The type of items.
@@ -672,6 +1222,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_folder_contents({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "ResourceIdType", # required
     #     sort: "DATE", # accepts DATE, NAME
     #     order: "ASCENDING", # accepts ASCENDING, DESCENDING
@@ -692,6 +1243,10 @@ module Aws::WorkDocs
     #   resp.folders[0].modified_timestamp #=> Time
     #   resp.folders[0].resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
     #   resp.folders[0].signature #=> String
+    #   resp.folders[0].labels #=> Array
+    #   resp.folders[0].labels[0] #=> String
+    #   resp.folders[0].size #=> Integer
+    #   resp.folders[0].latest_version_size #=> Integer
     #   resp.documents #=> Array
     #   resp.documents[0].id #=> String
     #   resp.documents[0].creator_id #=> String
@@ -714,6 +1269,8 @@ module Aws::WorkDocs
     #   resp.documents[0].latest_version_metadata.source #=> Hash
     #   resp.documents[0].latest_version_metadata.source["DocumentSourceType"] #=> String
     #   resp.documents[0].resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.documents[0].labels #=> Array
+    #   resp.documents[0].labels[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContents AWS API Documentation
@@ -769,6 +1326,11 @@ module Aws::WorkDocs
 
     # Describes the permissions of a specified resource.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
     #
@@ -787,6 +1349,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_resource_permissions({
+    #     authentication_token: "AuthenticationHeaderType",
     #     resource_id: "ResourceIdType", # required
     #     limit: 1,
     #     marker: "PageMarkerType",
@@ -811,12 +1374,73 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Describes the current user's special folders; the `RootFolder` and
+    # the `RecyleBin`. `RootFolder` is the root of user's files and folders
+    # and `RecyleBin` is the root of recycled items. This is not a valid
+    # action for SigV4 (administrative API) clients.
+    #
+    # @option params [required, String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @return [Types::DescribeRootFoldersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRootFoldersResponse#folders #folders} => Array&lt;Types::FolderMetadata&gt;
+    #   * {Types::DescribeRootFoldersResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_root_folders({
+    #     authentication_token: "AuthenticationHeaderType", # required
+    #     limit: 1,
+    #     marker: "PageMarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.folders #=> Array
+    #   resp.folders[0].id #=> String
+    #   resp.folders[0].name #=> String
+    #   resp.folders[0].creator_id #=> String
+    #   resp.folders[0].parent_folder_id #=> String
+    #   resp.folders[0].created_timestamp #=> Time
+    #   resp.folders[0].modified_timestamp #=> Time
+    #   resp.folders[0].resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.folders[0].signature #=> String
+    #   resp.folders[0].labels #=> Array
+    #   resp.folders[0].labels[0] #=> String
+    #   resp.folders[0].size #=> Integer
+    #   resp.folders[0].latest_version_size #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFolders AWS API Documentation
+    #
+    # @overload describe_root_folders(params = {})
+    # @param [Hash] params ({})
+    def describe_root_folders(params = {}, options = {})
+      req = build_request(:describe_root_folders, params)
+      req.send_request(options)
+    end
+
     # Describes the specified users. You can describe all users or filter
     # the results (for example, by status or organization).
     #
     # By default, Amazon WorkDocs returns the first 24 active or pending
     # users. If there are more results, the response includes a marker that
     # you can use to request the next set of results.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [String] :organization_id
     #   The ID of the organization.
@@ -856,6 +1480,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_users({
+    #     authentication_token: "AuthenticationHeaderType",
     #     organization_id: "IdType",
     #     user_ids: "UserIdsType",
     #     query: "SearchQueryType",
@@ -899,19 +1524,76 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
-    # Retrieves the specified document object.
+    # Retrieves details of the current user for whom the authentication
+    # token was generated. This is not a valid action for SigV4
+    # (administrative API) clients.
+    #
+    # @option params [required, String] :authentication_token
+    #   Amazon WorkDocs authentication token.
+    #
+    # @return [Types::GetCurrentUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCurrentUserResponse#user #user} => Types::User
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_current_user({
+    #     authentication_token: "AuthenticationHeaderType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user.id #=> String
+    #   resp.user.username #=> String
+    #   resp.user.email_address #=> String
+    #   resp.user.given_name #=> String
+    #   resp.user.surname #=> String
+    #   resp.user.organization_id #=> String
+    #   resp.user.root_folder_id #=> String
+    #   resp.user.recycle_bin_folder_id #=> String
+    #   resp.user.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
+    #   resp.user.type #=> String, one of "USER", "ADMIN"
+    #   resp.user.created_timestamp #=> Time
+    #   resp.user.modified_timestamp #=> Time
+    #   resp.user.time_zone_id #=> String
+    #   resp.user.locale #=> String, one of "en", "fr", "ko", "de", "es", "ja", "ru", "zh_CN", "zh_TW", "pt_BR", "default"
+    #   resp.user.storage.storage_utilized_in_bytes #=> Integer
+    #   resp.user.storage.storage_rule.storage_allocated_in_bytes #=> Integer
+    #   resp.user.storage.storage_rule.storage_type #=> String, one of "UNLIMITED", "QUOTA"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUser AWS API Documentation
+    #
+    # @overload get_current_user(params = {})
+    # @param [Hash] params ({})
+    def get_current_user(params = {}, options = {})
+      req = build_request(:get_current_user, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details of a document.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :document_id
-    #   The ID of the document object.
+    #   The ID of the document.
+    #
+    # @option params [Boolean] :include_custom_metadata
+    #   Set this to `TRUE` to include custom metadata in the response.
     #
     # @return [Types::GetDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDocumentResponse#metadata #metadata} => Types::DocumentMetadata
+    #   * {Types::GetDocumentResponse#custom_metadata #custom_metadata} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_document({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
+    #     include_custom_metadata: false,
     #   })
     #
     # @example Response structure
@@ -937,6 +1619,10 @@ module Aws::WorkDocs
     #   resp.metadata.latest_version_metadata.source #=> Hash
     #   resp.metadata.latest_version_metadata.source["DocumentSourceType"] #=> String
     #   resp.metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.metadata.labels #=> Array
+    #   resp.metadata.labels[0] #=> String
+    #   resp.custom_metadata #=> Hash
+    #   resp.custom_metadata["CustomMetadataKeyType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocument AWS API Documentation
     #
@@ -955,6 +1641,11 @@ module Aws::WorkDocs
     # folders in the path. You can limit the maximum number of levels. You
     # can also request the names of the parent folders.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :document_id
     #   The ID of the document.
     #
@@ -962,8 +1653,8 @@ module Aws::WorkDocs
     #   The maximum number of levels in the hierarchy to return.
     #
     # @option params [String] :fields
-    #   A comma-separated list of values. Specify "NAME" to include the
-    #   names of the parent folders.
+    #   A comma-separated list of values. Specify `NAME` to include the names
+    #   of the parent folders.
     #
     # @option params [String] :marker
     #   This value is not supported.
@@ -975,6 +1666,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_document_path({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "IdType", # required
     #     limit: 1,
     #     fields: "FieldNamesType",
@@ -998,6 +1690,11 @@ module Aws::WorkDocs
 
     # Retrieves version metadata for the specified document.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :document_id
     #   The ID of the document.
     #
@@ -1008,16 +1705,22 @@ module Aws::WorkDocs
     #   A comma-separated list of values. Specify "SOURCE" to include a URL
     #   for the source document.
     #
+    # @option params [Boolean] :include_custom_metadata
+    #   Set this to TRUE to include custom metadata in the response.
+    #
     # @return [Types::GetDocumentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDocumentVersionResponse#metadata #metadata} => Types::DocumentVersionMetadata
+    #   * {Types::GetDocumentVersionResponse#custom_metadata #custom_metadata} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_document_version({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #     version_id: "DocumentVersionIdType", # required
     #     fields: "FieldNamesType",
+    #     include_custom_metadata: false,
     #   })
     #
     # @example Response structure
@@ -1037,6 +1740,8 @@ module Aws::WorkDocs
     #   resp.metadata.thumbnail["DocumentThumbnailType"] #=> String
     #   resp.metadata.source #=> Hash
     #   resp.metadata.source["DocumentSourceType"] #=> String
+    #   resp.custom_metadata #=> Hash
+    #   resp.custom_metadata["CustomMetadataKeyType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersion AWS API Documentation
     #
@@ -1049,17 +1754,28 @@ module Aws::WorkDocs
 
     # Retrieves the metadata of the specified folder.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
+    #
+    # @option params [Boolean] :include_custom_metadata
+    #   Set to TRUE to include custom metadata in the response.
     #
     # @return [Types::GetFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFolderResponse#metadata #metadata} => Types::FolderMetadata
+    #   * {Types::GetFolderResponse#custom_metadata #custom_metadata} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_folder({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "ResourceIdType", # required
+    #     include_custom_metadata: false,
     #   })
     #
     # @example Response structure
@@ -1072,6 +1788,12 @@ module Aws::WorkDocs
     #   resp.metadata.modified_timestamp #=> Time
     #   resp.metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
     #   resp.metadata.signature #=> String
+    #   resp.metadata.labels #=> Array
+    #   resp.metadata.labels[0] #=> String
+    #   resp.metadata.size #=> Integer
+    #   resp.metadata.latest_version_size #=> Integer
+    #   resp.custom_metadata #=> Hash
+    #   resp.custom_metadata["CustomMetadataKeyType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolder AWS API Documentation
     #
@@ -1089,6 +1811,11 @@ module Aws::WorkDocs
     # from the requested folder and only includes the IDs of the parent
     # folders in the path. You can limit the maximum number of levels. You
     # can also request the parent folder names.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -1110,6 +1837,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_folder_path({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "IdType", # required
     #     limit: 1,
     #     fields: "FieldNamesType",
@@ -1141,6 +1869,11 @@ module Aws::WorkDocs
     #
     # To cancel the document upload, call AbortDocumentVersionUpload.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [String] :id
     #   The ID of the document.
     #
@@ -1171,6 +1904,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_document_version_upload({
+    #     authentication_token: "AuthenticationHeaderType",
     #     id: "ResourceIdType",
     #     name: "ResourceNameType",
     #     content_created_timestamp: Time.now,
@@ -1203,6 +1937,8 @@ module Aws::WorkDocs
     #   resp.metadata.latest_version_metadata.source #=> Hash
     #   resp.metadata.latest_version_metadata.source["DocumentSourceType"] #=> String
     #   resp.metadata.resource_state #=> String, one of "ACTIVE", "RESTORING", "RECYCLING", "RECYCLED"
+    #   resp.metadata.labels #=> Array
+    #   resp.metadata.labels[0] #=> String
     #   resp.upload_metadata.upload_url #=> String
     #   resp.upload_metadata.signed_headers #=> Hash
     #   resp.upload_metadata.signed_headers["HeaderNameType"] #=> String
@@ -1218,6 +1954,11 @@ module Aws::WorkDocs
 
     # Removes all the permissions from the specified resource.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
     #
@@ -1226,6 +1967,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_all_resource_permissions({
+    #     authentication_token: "AuthenticationHeaderType",
     #     resource_id: "ResourceIdType", # required
     #   })
     #
@@ -1241,6 +1983,11 @@ module Aws::WorkDocs
     # Removes the permission for the specified principal from the specified
     # resource.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
     #
@@ -1255,6 +2002,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_resource_permission({
+    #     authentication_token: "AuthenticationHeaderType",
     #     resource_id: "ResourceIdType", # required
     #     principal_id: "IdType", # required
     #     principal_type: "USER", # accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
@@ -1269,9 +2017,13 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
-    # Updates the specified attributes of the specified document. The user
-    # must have access to both the document and its parent folder, if
-    # applicable.
+    # Updates the specified attributes of a document. The user must have
+    # access to both the document and its parent folder, if applicable.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1291,6 +2043,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_document({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #     name: "ResourceNameType",
     #     parent_folder_id: "ResourceIdType",
@@ -1313,6 +2066,11 @@ module Aws::WorkDocs
     # document to an S3-presigned URL returned by
     # InitiateDocumentVersionUpload.
     #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
+    #
     # @option params [required, String] :document_id
     #   The ID of the document.
     #
@@ -1327,6 +2085,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_document_version({
+    #     authentication_token: "AuthenticationHeaderType",
     #     document_id: "ResourceIdType", # required
     #     version_id: "DocumentVersionIdType", # required
     #     version_status: "ACTIVE", # accepts ACTIVE
@@ -1344,6 +2103,11 @@ module Aws::WorkDocs
     # Updates the specified attributes of the specified folder. The user
     # must have access to both the folder and its parent folder, if
     # applicable.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -1363,6 +2127,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_folder({
+    #     authentication_token: "AuthenticationHeaderType",
     #     folder_id: "ResourceIdType", # required
     #     name: "ResourceNameType",
     #     parent_folder_id: "ResourceIdType",
@@ -1380,6 +2145,11 @@ module Aws::WorkDocs
 
     # Updates the specified attributes of the specified user, and grants or
     # revokes administrative privileges to the Amazon WorkDocs site.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. This field should not be set
+    #   when using administrative API actions, as in accessing the API using
+    #   AWS credentials.
     #
     # @option params [required, String] :user_id
     #   The ID of the user.
@@ -1409,6 +2179,7 @@ module Aws::WorkDocs
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_user({
+    #     authentication_token: "AuthenticationHeaderType",
     #     user_id: "IdType", # required
     #     given_name: "UserAttributeValueType",
     #     surname: "UserAttributeValueType",
@@ -1463,7 +2234,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

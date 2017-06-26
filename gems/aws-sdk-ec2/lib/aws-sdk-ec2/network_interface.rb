@@ -31,16 +31,10 @@ module Aws::EC2
     end
     alias :network_interface_id :id
 
-    # The ID of the subnet.
-    # @return [String]
-    def subnet_id
-      data.subnet_id
-    end
-
-    # The ID of the VPC.
-    # @return [String]
-    def vpc_id
-      data.vpc_id
+    # The network interface attachment.
+    # @return [Types::NetworkInterfaceAttachment]
+    def attachment
+      data.attachment
     end
 
     # The Availability Zone.
@@ -55,10 +49,52 @@ module Aws::EC2
       data.description
     end
 
+    # Any security groups for the network interface.
+    # @return [Array<Types::GroupIdentifier>]
+    def groups
+      data.groups
+    end
+
+    # The type of interface.
+    # @return [String]
+    def interface_type
+      data.interface_type
+    end
+
+    # The IPv6 addresses associated with the network interface.
+    # @return [Array<Types::NetworkInterfaceIpv6Address>]
+    def ipv_6_addresses
+      data.ipv_6_addresses
+    end
+
+    # The MAC address.
+    # @return [String]
+    def mac_address
+      data.mac_address
+    end
+
     # The AWS account ID of the owner of the network interface.
     # @return [String]
     def owner_id
       data.owner_id
+    end
+
+    # The private DNS name.
+    # @return [String]
+    def private_dns_name
+      data.private_dns_name
+    end
+
+    # The IPv4 address of the network interface within the subnet.
+    # @return [String]
+    def private_ip_address
+      data.private_ip_address
+    end
+
+    # The private IPv4 addresses associated with the network interface.
+    # @return [Array<Types::NetworkInterfacePrivateIpAddress>]
+    def private_ip_addresses
+      data.private_ip_addresses
     end
 
     # The ID of the entity that launched the instance on your behalf (for
@@ -74,46 +110,22 @@ module Aws::EC2
       data.requester_managed
     end
 
-    # The status of the network interface.
-    # @return [String]
-    def status
-      data.status
-    end
-
-    # The MAC address.
-    # @return [String]
-    def mac_address
-      data.mac_address
-    end
-
-    # The IPv4 address of the network interface within the subnet.
-    # @return [String]
-    def private_ip_address
-      data.private_ip_address
-    end
-
-    # The private DNS name.
-    # @return [String]
-    def private_dns_name
-      data.private_dns_name
-    end
-
     # Indicates whether traffic to or from the instance is validated.
     # @return [Boolean]
     def source_dest_check
       data.source_dest_check
     end
 
-    # Any security groups for the network interface.
-    # @return [Array<Types::GroupIdentifier>]
-    def groups
-      data.groups
+    # The status of the network interface.
+    # @return [String]
+    def status
+      data.status
     end
 
-    # The network interface attachment.
-    # @return [Types::NetworkInterfaceAttachment]
-    def attachment
-      data.attachment
+    # The ID of the subnet.
+    # @return [String]
+    def subnet_id
+      data.subnet_id
     end
 
     # Any tags assigned to the network interface.
@@ -122,22 +134,10 @@ module Aws::EC2
       data.tag_set
     end
 
-    # The private IPv4 addresses associated with the network interface.
-    # @return [Array<Types::NetworkInterfacePrivateIpAddress>]
-    def private_ip_addresses
-      data.private_ip_addresses
-    end
-
-    # The IPv6 addresses associated with the network interface.
-    # @return [Array<Types::NetworkInterfaceIpv6Address>]
-    def ipv_6_addresses
-      data.ipv_6_addresses
-    end
-
-    # The type of interface.
+    # The ID of the VPC.
     # @return [String]
-    def interface_type
-      data.interface_type
+    def vpc_id
+      data.vpc_id
     end
 
     # @!endgroup
@@ -180,11 +180,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.assign_private_ip_addresses({
+    #     allow_reassignment: false,
     #     private_ip_addresses: ["String"],
     #     secondary_private_ip_address_count: 1,
-    #     allow_reassignment: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :allow_reassignment
+    #   Indicates whether to allow an IP address that is already assigned to
+    #   another network interface or instance to be reassigned to the
+    #   specified network interface.
     # @option options [Array<String>] :private_ip_addresses
     #   One or more IP addresses to be assigned as a secondary private IP
     #   address to the network interface. You can't specify this parameter
@@ -196,10 +200,6 @@ module Aws::EC2
     #   The number of secondary IP addresses to assign to the network
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
-    # @option options [Boolean] :allow_reassignment
-    #   Indicates whether to allow an IP address that is already assigned to
-    #   another network interface or instance to be reassigned to the
-    #   specified network interface.
     # @return [EmptyStructure]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
@@ -210,11 +210,13 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.attach({
+    #     device_index: 1, # required
     #     dry_run: false,
     #     instance_id: "String", # required
-    #     device_index: 1, # required
     #   })
     # @param [Hash] options ({})
+    # @option options [required, Integer] :device_index
+    #   The index of the device for the network interface attachment.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -222,8 +224,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :instance_id
     #   The ID of the instance.
-    # @option options [required, Integer] :device_index
-    #   The index of the device for the network interface attachment.
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
@@ -289,17 +289,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.describe_attribute({
-    #     dry_run: false,
     #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :attribute
+    #   The attribute of the network interface. This parameter is required.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :attribute
-    #   The attribute of the network interface. This parameter is required.
     # @return [Types::DescribeNetworkInterfaceAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(network_interface_id: @id)
@@ -331,25 +331,34 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.modify_attribute({
-    #     dry_run: false,
-    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     source_dest_check: {
-    #       value: false,
-    #     },
-    #     groups: ["String"],
     #     attachment: {
     #       attachment_id: "String",
     #       delete_on_termination: false,
     #     },
+    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     dry_run: false,
+    #     groups: ["String"],
+    #     source_dest_check: {
+    #       value: false,
+    #     },
     #   })
     # @param [Hash] options ({})
+    # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
+    #   Information about the interface attachment. If modifying the 'delete
+    #   on termination' attribute, you must specify the ID of the interface
+    #   attachment.
+    # @option options [Types::AttributeValue] :description
+    #   A description for the network interface.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Types::AttributeValue] :description
-    #   A description for the network interface.
+    # @option options [Array<String>] :groups
+    #   Changes the security groups for the network interface. The new set of
+    #   groups you specify replaces the current set. You must specify at least
+    #   one group, even if it's just the default security group in the VPC.
+    #   You must specify the ID of the security group, not the name.
     # @option options [Types::AttributeBooleanValue] :source_dest_check
     #   Indicates whether source/destination checking is enabled. A value of
     #   `true` means checking is enabled, and `false` means checking is
@@ -360,15 +369,6 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
-    # @option options [Array<String>] :groups
-    #   Changes the security groups for the network interface. The new set of
-    #   groups you specify replaces the current set. You must specify at least
-    #   one group, even if it's just the default security group in the VPC.
-    #   You must specify the ID of the security group, not the name.
-    # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
-    #   Information about the interface attachment. If modifying the 'delete
-    #   on termination' attribute, you must specify the ID of the interface
-    #   attachment.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

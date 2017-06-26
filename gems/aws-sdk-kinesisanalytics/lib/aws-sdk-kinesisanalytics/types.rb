@@ -8,6 +8,45 @@
 module Aws::KinesisAnalytics
   module Types
 
+    # @note When making an API call, you may pass AddApplicationCloudWatchLoggingOptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         cloud_watch_logging_option: { # required
+    #           log_stream_arn: "LogStreamARN", # required
+    #           role_arn: "RoleARN", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The Amazon Kinesis Analytics application name.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The version ID of the Amazon Kinesis Analytics application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cloud_watch_logging_option
+    #   Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To
+    #   write application messages to CloudWatch, the IAM role used must
+    #   have the `PutLogEvents` policy action enabled.
+    #   @return [Types::CloudWatchLoggingOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionRequest AWS API Documentation
+    #
+    class AddApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :cloud_watch_logging_option)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionResponse AWS API Documentation
+    #
+    class AddApplicationCloudWatchLoggingOptionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AddApplicationInputRequest
     #   data as a hash:
     #
@@ -64,14 +103,6 @@ module Aws::KinesisAnalytics
     #   @return [Integer]
     #
     # @!attribute [rw] input
-    #   When you configure the application input, you specify the streaming
-    #   source, the in-application stream name that is created, and the
-    #   mapping between the two. For more information, see [Configuring
-    #   Application Input][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Types::Input]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputRequest AWS API Documentation
@@ -269,6 +300,17 @@ module Aws::KinesisAnalytics
     #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     #
+    # @!attribute [rw] cloud_watch_logging_option_descriptions
+    #   Describes the CloudWatch log streams configured to receive
+    #   application messages. For more information about using CloudWatch
+    #   log streams with Amazon Kinesis Analytics applications, see
+    #   [Monitoring Configuration Errors][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
+    #
     # @!attribute [rw] application_code
     #   Returns the application code that you provided to perform data
     #   analysis on any of the in-application streams in your application.
@@ -290,6 +332,7 @@ module Aws::KinesisAnalytics
       :input_descriptions,
       :output_descriptions,
       :reference_data_source_descriptions,
+      :cloud_watch_logging_option_descriptions,
       :application_code,
       :application_version_id)
       include Aws::Structure
@@ -319,7 +362,7 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # Describes updates to apply to an existing Kinesis Analytics
+    # Describes updates to apply to an existing Amazon Kinesis Analytics
     # application.
     #
     # @note When making an API call, you may pass ApplicationUpdate
@@ -416,6 +459,13 @@ module Aws::KinesisAnalytics
     #             },
     #           },
     #         ],
+    #         cloud_watch_logging_option_updates: [
+    #           {
+    #             cloud_watch_logging_option_id: "Id", # required
+    #             log_stream_arn_update: "LogStreamARN",
+    #             role_arn_update: "RoleARN",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_updates
@@ -434,13 +484,18 @@ module Aws::KinesisAnalytics
     #   Describes application reference data source updates.
     #   @return [Array<Types::ReferenceDataSourceUpdate>]
     #
+    # @!attribute [rw] cloud_watch_logging_option_updates
+    #   Describes application CloudWatch logging option updates.
+    #   @return [Array<Types::CloudWatchLoggingOptionUpdate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationUpdate AWS API Documentation
     #
     class ApplicationUpdate < Struct.new(
       :input_updates,
       :application_code_update,
       :output_updates,
-      :reference_data_source_updates)
+      :reference_data_source_updates,
+      :cloud_watch_logging_option_updates)
       include Aws::Structure
     end
 
@@ -476,6 +531,94 @@ module Aws::KinesisAnalytics
     class CSVMappingParameters < Struct.new(
       :record_row_delimiter,
       :record_column_delimiter)
+      include Aws::Structure
+    end
+
+    # Provides a description of CloudWatch logging options, including the
+    # log stream ARN and the role ARN.
+    #
+    # @note When making an API call, you may pass CloudWatchLoggingOption
+    #   data as a hash:
+    #
+    #       {
+    #         log_stream_arn: "LogStreamARN", # required
+    #         role_arn: "RoleARN", # required
+    #       }
+    #
+    # @!attribute [rw] log_stream_arn
+    #   ARN of the CloudWatch log to receive application messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   IAM ARN of the role to use to send application messages. Note: To
+    #   write application messages to CloudWatch, the IAM role used must
+    #   have the `PutLogEvents` policy action enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOption AWS API Documentation
+    #
+    class CloudWatchLoggingOption < Struct.new(
+      :log_stream_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Description of the CloudWatch logging option.
+    #
+    # @!attribute [rw] cloud_watch_logging_option_id
+    #   ID of the CloudWatch logging option description.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_arn
+    #   ARN of the CloudWatch log to receive application messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   IAM ARN of the role to use to send application messages. Note: To
+    #   write application messages to CloudWatch, the IAM role used must
+    #   have the `PutLogEvents` policy action enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOptionDescription AWS API Documentation
+    #
+    class CloudWatchLoggingOptionDescription < Struct.new(
+      :cloud_watch_logging_option_id,
+      :log_stream_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Describes CloudWatch logging option updates.
+    #
+    # @note When making an API call, you may pass CloudWatchLoggingOptionUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logging_option_id: "Id", # required
+    #         log_stream_arn_update: "LogStreamARN",
+    #         role_arn_update: "RoleARN",
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logging_option_id
+    #   ID of the CloudWatch logging option to update
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_arn_update
+    #   ARN of the CloudWatch log to receive application messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn_update
+    #   IAM ARN of the role to use to send application messages. Note: To
+    #   write application messages to CloudWatch, the IAM role used must
+    #   have the `PutLogEvents` policy action enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOptionUpdate AWS API Documentation
+    #
+    class CloudWatchLoggingOptionUpdate < Struct.new(
+      :cloud_watch_logging_option_id,
+      :log_stream_arn_update,
+      :role_arn_update)
       include Aws::Structure
     end
 
@@ -541,6 +684,12 @@ module Aws::KinesisAnalytics
     #             },
     #           },
     #         ],
+    #         cloud_watch_logging_options: [
+    #           {
+    #             log_stream_arn: "LogStreamARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
+    #         ],
     #         application_code: "ApplicationCode",
     #       }
     #
@@ -592,20 +741,38 @@ module Aws::KinesisAnalytics
     #   Kinesis Analytics can assume to write to this stream on your behalf.
     #   @return [Array<Types::Output>]
     #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Use this parameter to configure a CloudWatch log stream to monitor
+    #   application configuration errors. For more information, see
+    #   [Monitoring Configuration Errors][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #   @return [Array<Types::CloudWatchLoggingOption>]
+    #
     # @!attribute [rw] application_code
     #   One or more SQL statements that read input data, transform it, and
     #   generate output. For example, you can write a SQL statement that
-    #   reads input data and generates a running average of the number of
-    #   advertisement clicks by vendor.
+    #   reads data from one in-application stream, generates a running
+    #   average of the number of advertisement clicks by vendor, and insert
+    #   resulting rows in another in-application stream using pumps. For
+    #   more inforamtion about the typical pattern, see [Application
+    #   Code][1].
     #
-    #   You can also provide a series of SQL statements, where output of one
-    #   statement can be used as the input for the next statement.
+    #   You can provide such series of SQL statements, where output of one
+    #   statement can be used as the input for the next statement. You store
+    #   intermediate results by creating in-application streams and pumps.
     #
     #   Note that the application code must create the streams with names
     #   specified in the `Outputs`. For example, if your `Outputs` defines
     #   output streams named `ExampleOutputStream1` and
     #   `ExampleOutputStream2`, then your application code must create these
     #   streams.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationRequest AWS API Documentation
@@ -615,6 +782,7 @@ module Aws::KinesisAnalytics
       :application_description,
       :inputs,
       :outputs,
+      :cloud_watch_logging_options,
       :application_code)
       include Aws::Structure
     end
@@ -634,6 +802,42 @@ module Aws::KinesisAnalytics
       :application_summary)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteApplicationCloudWatchLoggingOptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         cloud_watch_logging_option_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The Amazon Kinesis Analytics application name.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The version ID of the Amazon Kinesis Analytics application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cloud_watch_logging_option_id
+    #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
+    #   delete. You can use the DescribeApplication operation to get the
+    #   `CloudWatchLoggingOptionId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOptionRequest AWS API Documentation
+    #
+    class DeleteApplicationCloudWatchLoggingOptionRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :cloud_watch_logging_option_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOptionResponse AWS API Documentation
+    #
+    class DeleteApplicationCloudWatchLoggingOptionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteApplicationOutputRequest
     #   data as a hash:
@@ -913,9 +1117,9 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] name_prefix
     #   Name prefix to use when creating in-application stream. Suppose you
-    #   specify a prefix "MyInApplicationStream". Kinesis Analytics will
-    #   then create one or more (as per the `InputParallelism` count you
-    #   specified) in-application streams with names
+    #   specify a prefix "MyInApplicationStream". Amazon Kinesis Analytics
+    #   will then create one or more (as per the `InputParallelism` count
+    #   you specified) in-application streams with names
     #   "MyInApplicationStream\_001", "MyInApplicationStream\_002" and
     #   so on.
     #   @return [String]
@@ -1063,7 +1267,7 @@ module Aws::KinesisAnalytics
     end
 
     # Describes the number of in-application streams to create for a given
-    # streaming source. For information about parallellism, see [Configuring
+    # streaming source. For information about parallelism, see [Configuring
     # Application Input][1].
     #
     #
@@ -1179,8 +1383,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] input_starting_position
     #   The starting position on the stream.
     #
-    #   * `LATEST` - Start reading just after the most recent record in the
-    #     stream.
+    #   * `NOW` - Start reading just after the most recent record in the
+    #     stream, start at the request timestamp that the customer issued.
     #
     #   * `TRIM_HORIZON` - Start reading at the last untrimmed record in the
     #     stream, which is the oldest record available in the stream. This
@@ -1247,7 +1451,7 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] name_prefix_update
-    #   Name prefix for in-application stream(s) that Kinesis Analytics
+    #   Name prefix for in-application streams that Amazon Kinesis Analytics
     #   creates for the specific streaming source.
     #   @return [String]
     #
@@ -1270,7 +1474,7 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] input_parallelism_update
     #   Describes the parallelism updates (the number in-application streams
-    #   Kinesis Analytics creates for the specific streaming source).
+    #   Amazon Kinesis Analytics creates for the specific streaming source).
     #   @return [Types::InputParallelismUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputUpdate AWS API Documentation
@@ -1728,8 +1932,12 @@ module Aws::KinesisAnalytics
     #
     #
     #
-    # You can configure your application to write output to up to five
-    # destinations.
+    # For limits on how many destinations an application can write and other
+    # limitations, see [Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
     #
     # @note When making an API call, you may pass Output
     #   data as a hash:
@@ -2449,11 +2657,18 @@ module Aws::KinesisAnalytics
     #               },
     #             },
     #           ],
+    #           cloud_watch_logging_option_updates: [
+    #             {
+    #               cloud_watch_logging_option_id: "Id", # required
+    #               log_stream_arn_update: "LogStreamARN",
+    #               role_arn_update: "RoleARN",
+    #             },
+    #           ],
     #         },
     #       }
     #
     # @!attribute [rw] application_name
-    #   Name of the Kinesis Analytics application to update.
+    #   Name of the Amazon Kinesis Analytics application to update.
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id

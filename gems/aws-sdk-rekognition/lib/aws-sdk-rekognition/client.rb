@@ -159,51 +159,62 @@ module Aws::Rekognition
     # the *target* input image.
     #
     # <note markdown="1"> If the source image contains multiple faces, the service detects the
-    # largest face and uses it to compare with each face detected in the
-    # target image.
+    # largest face and compares it with each face detected in the target
+    # image.
     #
     #  </note>
     #
     # In response, the operation returns an array of face matches ordered by
-    # similarity score with the highest similarity scores first. For each
-    # face match, the response provides a bounding box of the face and
-    # `confidence` value (indicating the level of confidence that the
-    # bounding box contains a face). The response also provides a
-    # `similarity` score, which indicates how closely the faces match.
+    # similarity score in descending order. For each face match, the
+    # response provides a bounding box of the face, facial landmarks, pose
+    # details (pitch, role, and yaw), quality (brightness and sharpness),
+    # and confidence value (indicating the level of confidence that the
+    # bounding box contains a face). The response also provides a similarity
+    # score, which indicates how closely the faces match.
     #
-    # <note markdown="1"> By default, only faces with the similarity score of greater than or
-    # equal to 80% are returned in the response. You can change this value.
-    #
-    #  </note>
-    #
-    # In addition to the face matches, the response returns information
-    # about the face in the source image, including the bounding box of the
-    # face and confidence value.
-    #
-    # <note markdown="1"> This is a stateless API operation. That is, the operation does not
-    # persist any data.
+    # <note markdown="1"> By default, only faces with a similarity score of greater than or
+    # equal to 80% are returned in the response. You can change this value
+    # by specifying the `SimilarityThreshold` parameter.
     #
     #  </note>
     #
-    # For an example, see get-started-exercise-compare-faces
+    # `CompareFaces` also returns an array of faces that don't match the
+    # source image. For each face, it returns a bounding box, confidence
+    # value, landmarks, pose details, and quality. The response also returns
+    # information about the face in the source image, including the bounding
+    # box of the face and confidence value.
+    #
+    # If the image doesn't contain Exif metadata, `CompareFaces` returns
+    # orientation information for the source and target images. Use these
+    # values to display the images with the correct image orientation.
+    #
+    # <note markdown="1"> This is a stateless API operation. That is, data returned by this
+    # operation doesn't persist.
+    #
+    #  </note>
+    #
+    # For an example, see get-started-exercise-compare-faces.
     #
     # This operation requires permissions to perform the
     # `rekognition:CompareFaces` action.
     #
     # @option params [required, Types::Image] :source_image
-    #   Source image either as bytes or an S3 object
+    #   The source image, either as bytes or as an S3 object.
     #
     # @option params [required, Types::Image] :target_image
-    #   Target image either as bytes or an S3 object
+    #   The target image, either as bytes or as an S3 object.
     #
     # @option params [Float] :similarity_threshold
-    #   The minimum level of confidence in the match you want included in the
-    #   result.
+    #   The minimum level of confidence in the face matches that a match must
+    #   meet to be included in the `FaceMatches` array.
     #
     # @return [Types::CompareFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CompareFacesResponse#source_image_face #source_image_face} => Types::ComparedSourceImageFace
     #   * {Types::CompareFacesResponse#face_matches #face_matches} => Array&lt;Types::CompareFacesMatch&gt;
+    #   * {Types::CompareFacesResponse#unmatched_faces #unmatched_faces} => Array&lt;Types::ComparedFace&gt;
+    #   * {Types::CompareFacesResponse#source_image_orientation_correction #source_image_orientation_correction} => String
+    #   * {Types::CompareFacesResponse#target_image_orientation_correction #target_image_orientation_correction} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -241,6 +252,32 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.bounding_box.left #=> Float
     #   resp.face_matches[0].face.bounding_box.top #=> Float
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.landmarks #=> Array
+    #   resp.face_matches[0].face.landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.face_matches[0].face.landmarks[0].x #=> Float
+    #   resp.face_matches[0].face.landmarks[0].y #=> Float
+    #   resp.face_matches[0].face.pose.roll #=> Float
+    #   resp.face_matches[0].face.pose.yaw #=> Float
+    #   resp.face_matches[0].face.pose.pitch #=> Float
+    #   resp.face_matches[0].face.quality.brightness #=> Float
+    #   resp.face_matches[0].face.quality.sharpness #=> Float
+    #   resp.unmatched_faces #=> Array
+    #   resp.unmatched_faces[0].bounding_box.width #=> Float
+    #   resp.unmatched_faces[0].bounding_box.height #=> Float
+    #   resp.unmatched_faces[0].bounding_box.left #=> Float
+    #   resp.unmatched_faces[0].bounding_box.top #=> Float
+    #   resp.unmatched_faces[0].confidence #=> Float
+    #   resp.unmatched_faces[0].landmarks #=> Array
+    #   resp.unmatched_faces[0].landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.unmatched_faces[0].landmarks[0].x #=> Float
+    #   resp.unmatched_faces[0].landmarks[0].y #=> Float
+    #   resp.unmatched_faces[0].pose.roll #=> Float
+    #   resp.unmatched_faces[0].pose.yaw #=> Float
+    #   resp.unmatched_faces[0].pose.pitch #=> Float
+    #   resp.unmatched_faces[0].quality.brightness #=> Float
+    #   resp.unmatched_faces[0].quality.sharpness #=> Float
+    #   resp.source_image_orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+    #   resp.target_image_orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
     # @overload compare_faces(params = {})
     # @param [Hash] params ({})
@@ -256,6 +293,10 @@ module Aws::Rekognition
     # application users. A user can then index faces using the `IndexFaces`
     # operation and persist results in a specific collection. Then, a user
     # can search the collection for faces in the user-specific container.
+    #
+    # <note markdown="1"> Collection names are case-sensitive.
+    #
+    #  </note>
     #
     # For an example, see example1.
     #
@@ -380,7 +421,7 @@ module Aws::Rekognition
     #   an S3 object.
     #
     # @option params [Array<String>] :attributes
-    #   A list of facial attributes you want to be returned. This can be the
+    #   An array of facial attributes you want to be returned. This can be the
     #   default list of attributes or all attributes. If you don't specify a
     #   value for `Attributes` or if you specify `["DEFAULT"]`, the API
     #   returns the following subset of facial attributes: `BoundingBox`,
@@ -560,33 +601,18 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Detects explicit or suggestive adult content in a specified .jpeg or
-    # .png image. Use `DetectModerationLabels` to moderate images depending
-    # on your requirements. For example, you might want to filter images
-    # that contain nudity, but not images containing suggestive content.
+    # Detects explicit or suggestive adult content in a specified JPEG or
+    # PNG format image. Use `DetectModerationLabels` to moderate images
+    # depending on your requirements. For example, you might want to filter
+    # images that contain nudity, but not images containing suggestive
+    # content.
     #
     # To filter images, use the labels returned by `DetectModerationLabels`
     # to determine which types of content are appropriate. For information
-    # about moderation labels, see howitworks-moderateimage.
+    # about moderation labels, see image-moderation.
     #
     # @option params [required, Types::Image] :image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence level for the labels to return.
@@ -628,6 +654,43 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Gets the name and additional information about a celebrity based on
+    # his or her Rekognition ID. The additional information is returned as
+    # an array of URLs. If there is no additional information about the
+    # celebrity, this list is empty. For more information, see
+    # celebrity-recognition.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:GetCelebrityInfo` action.
+    #
+    # @option params [required, String] :id
+    #   The ID for the celebrity. You get the celebrity ID from a call to the
+    #   operation, which recognizes celebrities in an image.
+    #
+    # @return [Types::GetCelebrityInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCelebrityInfoResponse#urls #urls} => Array&lt;String&gt;
+    #   * {Types::GetCelebrityInfoResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_celebrity_info({
+    #     id: "RekognitionUniqueId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.urls #=> Array
+    #   resp.urls[0] #=> String
+    #   resp.name #=> String
+    #
+    # @overload get_celebrity_info(params = {})
+    # @param [Hash] params ({})
+    def get_celebrity_info(params = {}, options = {})
+      req = build_request(:get_celebrity_info, params)
+      req.send_request(options)
+    end
+
     # Detects faces in the input image and adds them to the specified
     # collection.
     #
@@ -649,7 +712,7 @@ module Aws::Rekognition
     # detected faces. This includes, the bounding box of the detected face,
     # confidence value (indicating the bounding box contains a face), a face
     # ID assigned by the service for each face that is detected and stored,
-    # and an image ID assigned by the service for the input image If you
+    # and an image ID assigned by the service for the input image. If you
     # request all facial attributes (using the `detectionAttributes`
     # parameter, Amazon Rekognition returns detailed facial attributes such
     # as facial landmarks (for example, location of eye and mount) and other
@@ -667,30 +730,14 @@ module Aws::Rekognition
     #   that are detected in the input images.
     #
     # @option params [required, Types::Image] :image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #
     # @option params [String] :external_image_id
     #   ID you want to assign to all the faces detected in the image.
     #
     # @option params [Array<String>] :detection_attributes
-    #   A list of facial attributes that you want to be returned. This can be
-    #   the default list of attributes or all attributes. If you don't
+    #   An array of facial attributes that you want to be returned. This can
+    #   be the default list of attributes or all attributes. If you don't
     #   specify a value for `Attributes` or if you specify `["DEFAULT"]`, the
     #   API returns the following subset of facial attributes: `BoundingBox`,
     #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
@@ -870,6 +917,102 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Returns an array of celebrities recognized in the input image. The
+    # image is passed either as base64-encoded image bytes or as a reference
+    # to an image in an Amazon S3 bucket. The image must be either a PNG or
+    # JPEG formatted file. For more information, see celebrity-recognition.
+    #
+    # `RecognizeCelebrities` returns the 15 largest faces in the image. It
+    # lists recognized celebrities in the `CelebrityFaces` list and
+    # unrecognized faces in the `UnrecognizedFaces` list. The operation
+    # doesn't return celebrities whose face sizes are smaller than the
+    # largest 15 faces in the image.
+    #
+    # For each celebrity recognized, the API returns a `Celebrity` object.
+    # The `Celebrity` object contains the celebrity name, ID, URL links to
+    # additional information, match confidence, and a `ComparedFace` object
+    # that you can use to locate the celebrity's face on the image.
+    #
+    # Rekognition does not retain information about which images a celebrity
+    # has been recognized in. Your application must store this information
+    # and use the `Celebrity` ID property as a unique identifier for the
+    # celebrity. If you don't store the celebrity name or additional
+    # information URLs returned by `RecognizeCelebrities`, you will need the
+    # ID to identify the celebrity in a call to the operation.
+    #
+    # For an example, see recognize-celebrities-tutorial.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:RecognizeCelebrities` operation.
+    #
+    # @option params [required, Types::Image] :image
+    #   The input image to use for celebrity recognition.
+    #
+    # @return [Types::RecognizeCelebritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RecognizeCelebritiesResponse#celebrity_faces #celebrity_faces} => Array&lt;Types::Celebrity&gt;
+    #   * {Types::RecognizeCelebritiesResponse#unrecognized_faces #unrecognized_faces} => Array&lt;Types::ComparedFace&gt;
+    #   * {Types::RecognizeCelebritiesResponse#orientation_correction #orientation_correction} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.recognize_celebrities({
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.celebrity_faces #=> Array
+    #   resp.celebrity_faces[0].urls #=> Array
+    #   resp.celebrity_faces[0].urls[0] #=> String
+    #   resp.celebrity_faces[0].name #=> String
+    #   resp.celebrity_faces[0].id #=> String
+    #   resp.celebrity_faces[0].face.bounding_box.width #=> Float
+    #   resp.celebrity_faces[0].face.bounding_box.height #=> Float
+    #   resp.celebrity_faces[0].face.bounding_box.left #=> Float
+    #   resp.celebrity_faces[0].face.bounding_box.top #=> Float
+    #   resp.celebrity_faces[0].face.confidence #=> Float
+    #   resp.celebrity_faces[0].face.landmarks #=> Array
+    #   resp.celebrity_faces[0].face.landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.celebrity_faces[0].face.landmarks[0].x #=> Float
+    #   resp.celebrity_faces[0].face.landmarks[0].y #=> Float
+    #   resp.celebrity_faces[0].face.pose.roll #=> Float
+    #   resp.celebrity_faces[0].face.pose.yaw #=> Float
+    #   resp.celebrity_faces[0].face.pose.pitch #=> Float
+    #   resp.celebrity_faces[0].face.quality.brightness #=> Float
+    #   resp.celebrity_faces[0].face.quality.sharpness #=> Float
+    #   resp.celebrity_faces[0].match_confidence #=> Float
+    #   resp.unrecognized_faces #=> Array
+    #   resp.unrecognized_faces[0].bounding_box.width #=> Float
+    #   resp.unrecognized_faces[0].bounding_box.height #=> Float
+    #   resp.unrecognized_faces[0].bounding_box.left #=> Float
+    #   resp.unrecognized_faces[0].bounding_box.top #=> Float
+    #   resp.unrecognized_faces[0].confidence #=> Float
+    #   resp.unrecognized_faces[0].landmarks #=> Array
+    #   resp.unrecognized_faces[0].landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.unrecognized_faces[0].landmarks[0].x #=> Float
+    #   resp.unrecognized_faces[0].landmarks[0].y #=> Float
+    #   resp.unrecognized_faces[0].pose.roll #=> Float
+    #   resp.unrecognized_faces[0].pose.yaw #=> Float
+    #   resp.unrecognized_faces[0].pose.pitch #=> Float
+    #   resp.unrecognized_faces[0].quality.brightness #=> Float
+    #   resp.unrecognized_faces[0].quality.sharpness #=> Float
+    #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+    #
+    # @overload recognize_celebrities(params = {})
+    # @param [Hash] params ({})
+    def recognize_celebrities(params = {}, options = {})
+      req = build_request(:recognize_celebrities, params)
+      req.send_request(options)
+    end
+
     # For a given input face ID, searches for matching faces in the
     # collection the face belongs to. You get a face ID when you add a face
     # to the collection using the IndexFaces operation. The operation
@@ -976,23 +1119,7 @@ module Aws::Rekognition
     #   ID of the collection to search.
     #
     # @option params [required, Types::Image] :image
-    #   Provides the source image either as bytes or an S3 object.
-    #
-    #   The region for the S3 bucket containing the S3 object must match the
-    #   region you use for Amazon Rekognition operations.
-    #
-    #   You may need to Base64-encode the image bytes depending on the
-    #   language you are using and whether or not you are using the AWS SDK.
-    #   For more information, see example4.
-    #
-    #   If you use the Amazon CLI to call Amazon Rekognition operations,
-    #   passing image bytes using the Bytes property is not supported. You
-    #   must first upload the image to an Amazon S3 bucket and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   manage-access-resource-policies.
+    #   The input image as bytes or an S3 object.
     #
     # @option params [Integer] :max_faces
     #   Maximum number of faces to return. The operation returns the maximum
@@ -1063,7 +1190,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -217,6 +217,7 @@ module Aws::StorageGateway
     TapeRecoveryPointStatus = Shapes::StringShape.new(name: 'TapeRecoveryPointStatus')
     TapeSize = Shapes::IntegerShape.new(name: 'TapeSize')
     TapeStatus = Shapes::StringShape.new(name: 'TapeStatus')
+    TapeUsage = Shapes::IntegerShape.new(name: 'TapeUsage')
     Tapes = Shapes::ListShape.new(name: 'Tapes')
     TargetARN = Shapes::StringShape.new(name: 'TargetARN')
     TargetName = Shapes::StringShape.new(name: 'TargetName')
@@ -833,6 +834,7 @@ module Aws::StorageGateway
     Tape.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
     Tape.add_member(:vtl_device, Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDevice"))
     Tape.add_member(:progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "Progress"))
+    Tape.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     Tape.struct_class = Types::Tape
 
     TapeARNs.member = Shapes::ShapeRef.new(shape: TapeARN)
@@ -844,6 +846,7 @@ module Aws::StorageGateway
     TapeArchive.add_member(:completion_time, Shapes::ShapeRef.new(shape: Time, location_name: "CompletionTime"))
     TapeArchive.add_member(:retrieved_to, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "RetrievedTo"))
     TapeArchive.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeArchiveStatus, location_name: "TapeStatus"))
+    TapeArchive.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
     TapeArchive.struct_class = Types::TapeArchive
 
     TapeArchives.member = Shapes::ShapeRef.new(shape: TapeArchive)

@@ -531,8 +531,8 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1010,25 +1010,29 @@ module Aws::OpsWorks
     # @!attribute [rw] type
     #   The command type:
     #
+    #   * `configure`
+    #
     #   * `deploy`
     #
+    #   * `execute_recipes`
+    #
+    #   * `install_dependencies`
+    #
+    #   * `restart`
+    #
     #   * `rollback`
+    #
+    #   * `setup`
     #
     #   * `start`
     #
     #   * `stop`
     #
-    #   * `restart`
-    #
     #   * `undeploy`
-    #
-    #   * `update_dependencies`
-    #
-    #   * `install_dependencies`
     #
     #   * `update_custom_cookbooks`
     #
-    #   * `execute_recipes`
+    #   * `update_dependencies`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Command AWS API Documentation
@@ -1355,8 +1359,8 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1903,8 +1907,8 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -2505,17 +2509,17 @@ module Aws::OpsWorks
     #
     #   * `upgrade_os_to` - Specifies the desired Amazon Linux version for
     #     instances whose OS you want to upgrade, such as `Amazon Linux
-    #     2014.09`. You must also set the `allow_reboot` argument to true.
+    #     2016.09`. You must also set the `allow_reboot` argument to true.
     #
     #   * `allow_reboot` - Specifies whether to allow AWS OpsWorks Stacks to
     #     reboot the instances if necessary, after installing the updates.
     #     This argument can be set to either `true` or `false`. The default
     #     value is `false`.
     #
-    #   For example, to upgrade an instance to Amazon Linux 2014.09, set
+    #   For example, to upgrade an instance to Amazon Linux 2016.09, set
     #   `Args` to the following.
     #
-    #   ` \{ "upgrade_os_to":["Amazon Linux 2014.09"],
+    #   ` \{ "upgrade_os_to":["Amazon Linux 2016.09"],
     #   "allow_reboot":["true"] \} `
     #   @return [Hash<String,Array<String>>]
     #
@@ -3866,6 +3870,9 @@ module Aws::OpsWorks
     #   The instance architecture: "i386" or "x86\_64".
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_type
     #   For load-based or time-based instances, the type.
     #   @return [String]
@@ -3970,7 +3977,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] private_dns
-    #   The The instance's private DNS name.
+    #   The instance's private DNS name.
     #   @return [String]
     #
     # @!attribute [rw] private_ip
@@ -4083,6 +4090,7 @@ module Aws::OpsWorks
       :agent_version,
       :ami_id,
       :architecture,
+      :arn,
       :auto_scaling_type,
       :availability_zone,
       :block_device_mappings,
@@ -4261,6 +4269,9 @@ module Aws::OpsWorks
 
     # Describes a layer.
     #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
     # @!attribute [rw] stack_id
     #   The layer stack ID.
     #   @return [String]
@@ -4405,6 +4416,7 @@ module Aws::OpsWorks
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Layer AWS API Documentation
     #
     class Layer < Struct.new(
+      :arn,
       :stack_id,
       :layer_id,
       :type,
@@ -4451,6 +4463,61 @@ module Aws::OpsWorks
     #
     class LifecycleEventConfiguration < Struct.new(
       :shutdown)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Do not use. A validation exception occurs if you add a `MaxResults`
+    #   parameter to a `ListTagsRequest` call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Do not use. A validation exception occurs if you add a `NextToken`
+    #   parameter to a `ListTagsRequest` call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTagsRequest AWS API Documentation
+    #
+    class ListTagsRequest < Struct.new(
+      :resource_arn,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Contains the response to a `ListTags` request.
+    #
+    # @!attribute [rw] tags
+    #   A set of key-value pairs that contain tag keys and tag values that
+    #   are attached to a stack or layer.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   If a paginated request does not return all of the remaining results,
+    #   this parameter is set to a token that you can assign to the request
+    #   object's `NextToken` parameter to get the next set of results. If
+    #   the previous paginated request returned all of the remaining
+    #   results, this parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTagsResult AWS API Documentation
+    #
+    class ListTagsResult < Struct.new(
+      :tags,
+      :next_token)
       include Aws::Structure
     end
 
@@ -5289,7 +5356,9 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The source URL.
+    #   The source URL. The following is an example of an Amazon S3 source
+    #   URL:
+    #   `https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -5692,6 +5761,48 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to a
+    #   stack or layer.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key
+    #     and value.
+    #
+    #   * A maximum of 40 tags is allowed for any resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # Contains the data needed by RDP clients such as the Microsoft Remote
     # Desktop Connection to log in to the instance.
     #
@@ -5775,6 +5886,30 @@ module Aws::OpsWorks
     #
     class UnassignVolumeRequest < Struct.new(
       :volume_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The stack or layer's Amazon Resource Number (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the keys of tags to be removed from a stack or layer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 
@@ -5981,8 +6116,8 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -6421,8 +6556,8 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.

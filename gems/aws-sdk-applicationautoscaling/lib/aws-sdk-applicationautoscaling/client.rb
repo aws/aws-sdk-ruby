@@ -194,6 +194,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -210,15 +217,27 @@ module Aws::ApplicationAutoScaling
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
     #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scaling_policy({
     #     policy_name: "ResourceIdMaxLen1600", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy AWS API Documentation
@@ -265,6 +284,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -282,14 +308,26 @@ module Aws::ApplicationAutoScaling
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
     #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget AWS API Documentation
@@ -339,6 +377,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -356,6 +401,18 @@ module Aws::ApplicationAutoScaling
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -378,9 +435,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scalable_targets({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_ids: ["ResourceIdMaxLen1600"],
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -388,9 +445,9 @@ module Aws::ApplicationAutoScaling
     # @example Response structure
     #
     #   resp.scalable_targets #=> Array
-    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
+    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
     #   resp.scalable_targets[0].resource_id #=> String
-    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
+    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
     #   resp.scalable_targets[0].min_capacity #=> Integer
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
@@ -445,6 +502,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -461,6 +525,18 @@ module Aws::ApplicationAutoScaling
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -483,9 +559,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scaling_activities({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -494,9 +570,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp.scaling_activities #=> Array
     #   resp.scaling_activities[0].activity_id #=> String
-    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
+    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
     #   resp.scaling_activities[0].resource_id #=> String
-    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
+    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
     #   resp.scaling_activities[0].description #=> String
     #   resp.scaling_activities[0].cause #=> String
     #   resp.scaling_activities[0].start_time #=> Time
@@ -556,6 +632,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -572,6 +655,18 @@ module Aws::ApplicationAutoScaling
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -595,9 +690,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.describe_scaling_policies({
     #     policy_names: ["ResourceIdMaxLen1600"],
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -607,10 +702,10 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies #=> Array
     #   resp.scaling_policies[0].policy_arn #=> String
     #   resp.scaling_policies[0].policy_name #=> String
-    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
+    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
     #   resp.scaling_policies[0].resource_id #=> String
-    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
-    #   resp.scaling_policies[0].policy_type #=> String, one of "StepScaling"
+    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
+    #   resp.scaling_policies[0].policy_type #=> String, one of "StepScaling", "TargetTrackingScaling"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.adjustment_type #=> String, one of "ChangeInCapacity", "PercentChangeInCapacity", "ExactCapacity"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.step_adjustments #=> Array
     #   resp.scaling_policies[0].step_scaling_policy_configuration.step_adjustments[0].metric_interval_lower_bound #=> Float
@@ -619,6 +714,18 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].step_scaling_policy_configuration.min_adjustment_magnitude #=> Integer
     #   resp.scaling_policies[0].step_scaling_policy_configuration.cooldown #=> Integer
     #   resp.scaling_policies[0].step_scaling_policy_configuration.metric_aggregation_type #=> String, one of "Average", "Minimum", "Maximum"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.resource_label #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metric_name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.namespace #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions #=> Array
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.scaling_policies[0].alarms #=> Array
     #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
     #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
@@ -681,6 +788,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -697,29 +811,51 @@ module Aws::ApplicationAutoScaling
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
     #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
     # @option params [String] :policy_type
     #   The policy type. If you are creating a new policy, this parameter is
     #   required. If you are updating a policy, this parameter is not
     #   required.
     #
+    #   For DynamoDB, only `TargetTrackingScaling` is supported. For any other
+    #   service, only `StepScaling` is supported.
+    #
     # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
-    #   The configuration for the step scaling policy. If you are creating a
-    #   new policy, this parameter is required. If you are updating a policy,
-    #   this parameter is not required. For more information, see
-    #   StepScalingPolicyConfiguration and StepAdjustment.
+    #   A step scaling policy.
+    #
+    #   This parameter is required if you are creating a policy and the policy
+    #   type is `StepScaling`.
+    #
+    # @option params [Types::TargetTrackingScalingPolicyConfiguration] :target_tracking_scaling_policy_configuration
+    #   A target tracking policy.
+    #
+    #   This parameter is required if you are creating a new policy and the
+    #   policy type is `TargetTrackingScaling`.
     #
     # @return [Types::PutScalingPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutScalingPolicyResponse#policy_arn #policy_arn} => String
+    #   * {Types::PutScalingPolicyResponse#alarms #alarms} => Array&lt;Types::Alarm&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "PolicyName", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
-    #     policy_type: "StepScaling", # accepts StepScaling
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #     step_scaling_policy_configuration: {
     #       adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
     #       step_adjustments: [
@@ -733,11 +869,35 @@ module Aws::ApplicationAutoScaling
     #       cooldown: 1,
     #       metric_aggregation_type: "Average", # accepts Average, Minimum, Maximum
     #     },
+    #     target_tracking_scaling_policy_configuration: {
+    #       target_value: 1.0, # required
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization
+    #         resource_label: "ResourceLabel",
+    #       },
+    #       customized_metric_specification: {
+    #         metric_name: "MetricName", # required
+    #         namespace: "MetricNamespace", # required
+    #         dimensions: [
+    #           {
+    #             name: "MetricDimensionName", # required
+    #             value: "MetricDimensionValue", # required
+    #           },
+    #         ],
+    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         unit: "MetricUnit",
+    #       },
+    #       scale_out_cooldown: 1,
+    #       scale_in_cooldown: 1,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.policy_arn #=> String
+    #   resp.alarms #=> Array
+    #   resp.alarms[0].alarm_name #=> String
+    #   resp.alarms[0].alarm_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy AWS API Documentation
     #
@@ -787,6 +947,13 @@ module Aws::ApplicationAutoScaling
     #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
     #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -803,6 +970,18 @@ module Aws::ApplicationAutoScaling
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
     #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
@@ -824,9 +1003,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
@@ -854,7 +1033,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

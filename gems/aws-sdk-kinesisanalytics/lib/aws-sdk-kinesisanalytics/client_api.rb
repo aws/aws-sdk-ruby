@@ -11,6 +11,8 @@ module Aws::KinesisAnalytics
 
     include Seahorse::Model
 
+    AddApplicationCloudWatchLoggingOptionRequest = Shapes::StructureShape.new(name: 'AddApplicationCloudWatchLoggingOptionRequest')
+    AddApplicationCloudWatchLoggingOptionResponse = Shapes::StructureShape.new(name: 'AddApplicationCloudWatchLoggingOptionResponse')
     AddApplicationInputRequest = Shapes::StructureShape.new(name: 'AddApplicationInputRequest')
     AddApplicationInputResponse = Shapes::StructureShape.new(name: 'AddApplicationInputResponse')
     AddApplicationOutputRequest = Shapes::StructureShape.new(name: 'AddApplicationOutputRequest')
@@ -29,10 +31,18 @@ module Aws::KinesisAnalytics
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     CSVMappingParameters = Shapes::StructureShape.new(name: 'CSVMappingParameters')
+    CloudWatchLoggingOption = Shapes::StructureShape.new(name: 'CloudWatchLoggingOption')
+    CloudWatchLoggingOptionDescription = Shapes::StructureShape.new(name: 'CloudWatchLoggingOptionDescription')
+    CloudWatchLoggingOptionDescriptions = Shapes::ListShape.new(name: 'CloudWatchLoggingOptionDescriptions')
+    CloudWatchLoggingOptionUpdate = Shapes::StructureShape.new(name: 'CloudWatchLoggingOptionUpdate')
+    CloudWatchLoggingOptionUpdates = Shapes::ListShape.new(name: 'CloudWatchLoggingOptionUpdates')
+    CloudWatchLoggingOptions = Shapes::ListShape.new(name: 'CloudWatchLoggingOptions')
     CodeValidationException = Shapes::StructureShape.new(name: 'CodeValidationException')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
+    DeleteApplicationCloudWatchLoggingOptionRequest = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionRequest')
+    DeleteApplicationCloudWatchLoggingOptionResponse = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionResponse')
     DeleteApplicationOutputRequest = Shapes::StructureShape.new(name: 'DeleteApplicationOutputRequest')
     DeleteApplicationOutputResponse = Shapes::StructureShape.new(name: 'DeleteApplicationOutputResponse')
     DeleteApplicationReferenceDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteApplicationReferenceDataSourceRequest')
@@ -83,6 +93,7 @@ module Aws::KinesisAnalytics
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    LogStreamARN = Shapes::StringShape.new(name: 'LogStreamARN')
     MappingParameters = Shapes::StructureShape.new(name: 'MappingParameters')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputDescription = Shapes::StructureShape.new(name: 'OutputDescription')
@@ -129,6 +140,13 @@ module Aws::KinesisAnalytics
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
 
+    AddApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    AddApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    AddApplicationCloudWatchLoggingOptionRequest.add_member(:cloud_watch_logging_option, Shapes::ShapeRef.new(shape: CloudWatchLoggingOption, required: true, location_name: "CloudWatchLoggingOption"))
+    AddApplicationCloudWatchLoggingOptionRequest.struct_class = Types::AddApplicationCloudWatchLoggingOptionRequest
+
+    AddApplicationCloudWatchLoggingOptionResponse.struct_class = Types::AddApplicationCloudWatchLoggingOptionResponse
+
     AddApplicationInputRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     AddApplicationInputRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
     AddApplicationInputRequest.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
@@ -159,6 +177,7 @@ module Aws::KinesisAnalytics
     ApplicationDetail.add_member(:input_descriptions, Shapes::ShapeRef.new(shape: InputDescriptions, location_name: "InputDescriptions"))
     ApplicationDetail.add_member(:output_descriptions, Shapes::ShapeRef.new(shape: OutputDescriptions, location_name: "OutputDescriptions"))
     ApplicationDetail.add_member(:reference_data_source_descriptions, Shapes::ShapeRef.new(shape: ReferenceDataSourceDescriptions, location_name: "ReferenceDataSourceDescriptions"))
+    ApplicationDetail.add_member(:cloud_watch_logging_option_descriptions, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionDescriptions, location_name: "CloudWatchLoggingOptionDescriptions"))
     ApplicationDetail.add_member(:application_code, Shapes::ShapeRef.new(shape: ApplicationCode, location_name: "ApplicationCode"))
     ApplicationDetail.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
     ApplicationDetail.struct_class = Types::ApplicationDetail
@@ -174,21 +193,50 @@ module Aws::KinesisAnalytics
     ApplicationUpdate.add_member(:application_code_update, Shapes::ShapeRef.new(shape: ApplicationCode, location_name: "ApplicationCodeUpdate"))
     ApplicationUpdate.add_member(:output_updates, Shapes::ShapeRef.new(shape: OutputUpdates, location_name: "OutputUpdates"))
     ApplicationUpdate.add_member(:reference_data_source_updates, Shapes::ShapeRef.new(shape: ReferenceDataSourceUpdates, location_name: "ReferenceDataSourceUpdates"))
+    ApplicationUpdate.add_member(:cloud_watch_logging_option_updates, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionUpdates, location_name: "CloudWatchLoggingOptionUpdates"))
     ApplicationUpdate.struct_class = Types::ApplicationUpdate
 
     CSVMappingParameters.add_member(:record_row_delimiter, Shapes::ShapeRef.new(shape: RecordRowDelimiter, required: true, location_name: "RecordRowDelimiter"))
     CSVMappingParameters.add_member(:record_column_delimiter, Shapes::ShapeRef.new(shape: RecordColumnDelimiter, required: true, location_name: "RecordColumnDelimiter"))
     CSVMappingParameters.struct_class = Types::CSVMappingParameters
 
+    CloudWatchLoggingOption.add_member(:log_stream_arn, Shapes::ShapeRef.new(shape: LogStreamARN, required: true, location_name: "LogStreamARN"))
+    CloudWatchLoggingOption.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    CloudWatchLoggingOption.struct_class = Types::CloudWatchLoggingOption
+
+    CloudWatchLoggingOptionDescription.add_member(:cloud_watch_logging_option_id, Shapes::ShapeRef.new(shape: Id, location_name: "CloudWatchLoggingOptionId"))
+    CloudWatchLoggingOptionDescription.add_member(:log_stream_arn, Shapes::ShapeRef.new(shape: LogStreamARN, required: true, location_name: "LogStreamARN"))
+    CloudWatchLoggingOptionDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    CloudWatchLoggingOptionDescription.struct_class = Types::CloudWatchLoggingOptionDescription
+
+    CloudWatchLoggingOptionDescriptions.member = Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionDescription)
+
+    CloudWatchLoggingOptionUpdate.add_member(:cloud_watch_logging_option_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "CloudWatchLoggingOptionId"))
+    CloudWatchLoggingOptionUpdate.add_member(:log_stream_arn_update, Shapes::ShapeRef.new(shape: LogStreamARN, location_name: "LogStreamARNUpdate"))
+    CloudWatchLoggingOptionUpdate.add_member(:role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARNUpdate"))
+    CloudWatchLoggingOptionUpdate.struct_class = Types::CloudWatchLoggingOptionUpdate
+
+    CloudWatchLoggingOptionUpdates.member = Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionUpdate)
+
+    CloudWatchLoggingOptions.member = Shapes::ShapeRef.new(shape: CloudWatchLoggingOption)
+
     CreateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "ApplicationDescription"))
     CreateApplicationRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: Inputs, location_name: "Inputs"))
     CreateApplicationRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: Outputs, location_name: "Outputs"))
+    CreateApplicationRequest.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     CreateApplicationRequest.add_member(:application_code, Shapes::ShapeRef.new(shape: ApplicationCode, location_name: "ApplicationCode"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_summary, Shapes::ShapeRef.new(shape: ApplicationSummary, required: true, location_name: "ApplicationSummary"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
+
+    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:cloud_watch_logging_option_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "CloudWatchLoggingOptionId"))
+    DeleteApplicationCloudWatchLoggingOptionRequest.struct_class = Types::DeleteApplicationCloudWatchLoggingOptionRequest
+
+    DeleteApplicationCloudWatchLoggingOptionResponse.struct_class = Types::DeleteApplicationCloudWatchLoggingOptionResponse
 
     DeleteApplicationOutputRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteApplicationOutputRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
@@ -463,6 +511,18 @@ module Aws::KinesisAnalytics
         "timestampFormat" => "unixTimestamp",
       }
 
+      api.add_operation(:add_application_cloud_watch_logging_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddApplicationCloudWatchLoggingOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddApplicationCloudWatchLoggingOptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddApplicationCloudWatchLoggingOptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:add_application_input, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddApplicationInput"
         o.http_method = "POST"
@@ -522,6 +582,18 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_application_cloud_watch_logging_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplicationCloudWatchLoggingOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationCloudWatchLoggingOptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationCloudWatchLoggingOptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_application_output, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApplicationOutput"
         o.http_method = "POST"
@@ -530,6 +602,7 @@ module Aws::KinesisAnalytics
         o.output = Shapes::ShapeRef.new(shape: DeleteApplicationOutputResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 

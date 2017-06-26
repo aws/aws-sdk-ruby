@@ -31,29 +31,28 @@ module Aws::EC2
     end
     alias :image_id :id
 
-    # The location of the AMI.
+    # The architecture of the image.
     # @return [String]
-    def image_location
-      data.image_location
-    end
-
-    # The current state of the AMI. If the state is `available`, the image
-    # is successfully registered and can be used to launch an instance.
-    # @return [String]
-    def state
-      data.state
-    end
-
-    # The AWS account ID of the image owner.
-    # @return [String]
-    def owner_id
-      data.owner_id
+    def architecture
+      data.architecture
     end
 
     # The date and time the image was created.
     # @return [String]
     def creation_date
       data.creation_date
+    end
+
+    # The location of the AMI.
+    # @return [String]
+    def image_location
+      data.image_location
+    end
+
+    # The type of image.
+    # @return [String]
+    def image_type
+      data.image_type
     end
 
     # Indicates whether the image has public launch permissions. The value
@@ -64,29 +63,29 @@ module Aws::EC2
       data.public
     end
 
-    # Any product codes associated with the AMI.
-    # @return [Array<Types::ProductCode>]
-    def product_codes
-      data.product_codes
-    end
-
-    # The architecture of the image.
-    # @return [String]
-    def architecture
-      data.architecture
-    end
-
-    # The type of image.
-    # @return [String]
-    def image_type
-      data.image_type
-    end
-
     # The kernel associated with the image, if any. Only applicable for
     # machine images.
     # @return [String]
     def kernel_id
       data.kernel_id
+    end
+
+    # The AWS account ID of the image owner.
+    # @return [String]
+    def owner_id
+      data.owner_id
+    end
+
+    # The value is `Windows` for Windows AMIs; otherwise blank.
+    # @return [String]
+    def platform
+      data.platform
+    end
+
+    # Any product codes associated with the AMI.
+    # @return [Array<Types::ProductCode>]
+    def product_codes
+      data.product_codes
     end
 
     # The RAM disk associated with the image, if any. Only applicable for
@@ -96,17 +95,23 @@ module Aws::EC2
       data.ramdisk_id
     end
 
-    # The value is `Windows` for Windows AMIs; otherwise blank.
+    # The current state of the AMI. If the state is `available`, the image
+    # is successfully registered and can be used to launch an instance.
     # @return [String]
-    def platform
-      data.platform
+    def state
+      data.state
     end
 
-    # Specifies whether enhanced networking with the Intel 82599 Virtual
-    # Function interface is enabled.
+    # Any block device mapping entries.
+    # @return [Array<Types::BlockDeviceMapping>]
+    def block_device_mappings
+      data.block_device_mappings
+    end
+
+    # The description of the AMI that was provided during image creation.
     # @return [String]
-    def sriov_net_support
-      data.sriov_net_support
+    def description
+      data.description
     end
 
     # Specifies whether enhanced networking with ENA is enabled.
@@ -115,10 +120,10 @@ module Aws::EC2
       data.ena_support
     end
 
-    # The reason for the state change.
-    # @return [Types::StateReason]
-    def state_reason
-      data.state_reason
+    # The hypervisor type of the image.
+    # @return [String]
+    def hypervisor
+      data.hypervisor
     end
 
     # The AWS account alias (for example, `amazon`, `self`) or the AWS
@@ -134,10 +139,11 @@ module Aws::EC2
       data.name
     end
 
-    # The description of the AMI that was provided during image creation.
+    # The device name of the root device (for example, `/dev/sda1` or
+    # `/dev/xvda`).
     # @return [String]
-    def description
-      data.description
+    def root_device_name
+      data.root_device_name
     end
 
     # The type of root device used by the AMI. The AMI can use an EBS volume
@@ -147,23 +153,17 @@ module Aws::EC2
       data.root_device_type
     end
 
-    # The device name of the root device (for example, `/dev/sda1` or
-    # `/dev/xvda`).
+    # Specifies whether enhanced networking with the Intel 82599 Virtual
+    # Function interface is enabled.
     # @return [String]
-    def root_device_name
-      data.root_device_name
+    def sriov_net_support
+      data.sriov_net_support
     end
 
-    # Any block device mapping entries.
-    # @return [Array<Types::BlockDeviceMapping>]
-    def block_device_mappings
-      data.block_device_mappings
-    end
-
-    # The type of virtualization of the AMI.
-    # @return [String]
-    def virtualization_type
-      data.virtualization_type
+    # The reason for the state change.
+    # @return [Types::StateReason]
+    def state_reason
+      data.state_reason
     end
 
     # Any tags assigned to the image.
@@ -172,10 +172,10 @@ module Aws::EC2
       data.tags
     end
 
-    # The hypervisor type of the image.
+    # The type of virtualization of the AMI.
     # @return [String]
-    def hypervisor
-      data.hypervisor
+    def virtualization_type
+      data.virtualization_type
     end
 
     # @!endgroup
@@ -305,15 +305,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     dry_run: false,
     #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :attribute
     #   The AMI attribute.
     #
@@ -321,6 +316,11 @@ module Aws::EC2
     #   `blockDeviceMapping` attribute may return a `Client.AuthFailure`
     #   error. If this happens, use DescribeImages to get information about
     #   the block device mapping for the AMI.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::ImageAttribute]
     def describe_attribute(options = {})
       options = options.merge(image_id: @id)
@@ -331,56 +331,56 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.modify_attribute({
-    #     dry_run: false,
     #     attribute: "String",
-    #     operation_type: "add", # accepts add, remove
-    #     user_ids: ["String"],
-    #     user_groups: ["String"],
-    #     product_codes: ["String"],
-    #     value: "String",
+    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     launch_permission: {
     #       add: [
     #         {
-    #           user_id: "String",
     #           group: "all", # accepts all
+    #           user_id: "String",
     #         },
     #       ],
     #       remove: [
     #         {
-    #           user_id: "String",
     #           group: "all", # accepts all
+    #           user_id: "String",
     #         },
     #       ],
     #     },
-    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     operation_type: "add", # accepts add, remove
+    #     product_codes: ["String"],
+    #     user_groups: ["String"],
+    #     user_ids: ["String"],
+    #     value: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :attribute
+    #   The name of the attribute to modify.
+    # @option options [Types::AttributeValue] :description
+    #   A description for the AMI.
+    # @option options [Types::LaunchPermissionModifications] :launch_permission
+    #   A launch permission modification.
+    # @option options [String] :operation_type
+    #   The operation type.
+    # @option options [Array<String>] :product_codes
+    #   One or more product codes. After you add a product code to an AMI, it
+    #   can't be removed. This is only valid when modifying the
+    #   `productCodes` attribute.
+    # @option options [Array<String>] :user_groups
+    #   One or more user groups. This is only valid when modifying the
+    #   `launchPermission` attribute.
+    # @option options [Array<String>] :user_ids
+    #   One or more AWS account IDs. This is only valid when modifying the
+    #   `launchPermission` attribute.
+    # @option options [String] :value
+    #   The value of the attribute being modified. This is only valid when
+    #   modifying the `description` attribute.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :attribute
-    #   The name of the attribute to modify.
-    # @option options [String] :operation_type
-    #   The operation type.
-    # @option options [Array<String>] :user_ids
-    #   One or more AWS account IDs. This is only valid when modifying the
-    #   `launchPermission` attribute.
-    # @option options [Array<String>] :user_groups
-    #   One or more user groups. This is only valid when modifying the
-    #   `launchPermission` attribute.
-    # @option options [Array<String>] :product_codes
-    #   One or more product codes. After you add a product code to an AMI, it
-    #   can't be removed. This is only valid when modifying the
-    #   `productCodes` attribute.
-    # @option options [String] :value
-    #   The value of the attribute being modified. This is only valid when
-    #   modifying the `description` attribute.
-    # @option options [Types::LaunchPermissionModifications] :launch_permission
-    #   A launch permission modification.
-    # @option options [Types::AttributeValue] :description
-    #   A description for the AMI.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(image_id: @id)
@@ -391,18 +391,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.reset_attribute({
-    #     dry_run: false,
     #     attribute: "launchPermission", # required, accepts launchPermission
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :attribute
+    #   The attribute to reset (currently you can only reset the launch
+    #   permission attribute).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :attribute
-    #   The attribute to reset (currently you can only reset the launch
-    #   permission attribute).
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(image_id: @id)

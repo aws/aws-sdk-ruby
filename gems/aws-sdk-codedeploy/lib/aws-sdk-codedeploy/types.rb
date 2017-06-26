@@ -128,13 +128,18 @@ module Aws::CodeDeploy
     #   application; otherwise, false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] git_hub_account_name
+    #   The name for a connection to a GitHub account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationInfo AWS API Documentation
     #
     class ApplicationInfo < Struct.new(
       :application_id,
       :application_name,
       :create_time,
-      :linked_to_git_hub)
+      :linked_to_git_hub,
+      :git_hub_account_name)
       include Aws::Structure
     end
 
@@ -185,7 +190,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get application revisions operation.
+    # Represents the input of a BatchGetApplicationRevisions operation.
     #
     # @note When making an API call, you may pass BatchGetApplicationRevisionsInput
     #   data as a hash:
@@ -228,7 +233,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get application revisions operation.
+    # Represents the output of a BatchGetApplicationRevisions operation.
     #
     # @!attribute [rw] application_name
     #   The name of the application that corresponds to the revisions.
@@ -252,7 +257,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get applications operation.
+    # Represents the input of a BatchGetApplications operation.
     #
     # @note When making an API call, you may pass BatchGetApplicationsInput
     #   data as a hash:
@@ -272,7 +277,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get applications operation.
+    # Represents the output of a BatchGetApplications operation.
     #
     # @!attribute [rw] applications_info
     #   Information about the applications.
@@ -285,7 +290,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get deployment groups operation.
+    # Represents the input of a BatchGetDeploymentGroups operation.
     #
     # @note When making an API call, you may pass BatchGetDeploymentGroupsInput
     #   data as a hash:
@@ -312,7 +317,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get deployment groups operation.
+    # Represents the output of a BatchGetDeploymentGroups operation.
     #
     # @!attribute [rw] deployment_groups_info
     #   Information about the deployment groups.
@@ -330,7 +335,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get deployment instances operation.
+    # Represents the input of a BatchGetDeploymentInstances operation.
     #
     # @note When making an API call, you may pass BatchGetDeploymentInstancesInput
     #   data as a hash:
@@ -356,7 +361,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get deployment instance operation.
+    # Represents the output of a BatchGetDeploymentInstances operation.
     #
     # @!attribute [rw] instances_summary
     #   Information about the instance.
@@ -374,7 +379,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get deployments operation.
+    # Represents the input of a BatchGetDeployments operation.
     #
     # @note When making an API call, you may pass BatchGetDeploymentsInput
     #   data as a hash:
@@ -394,7 +399,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get deployments operation.
+    # Represents the output of a BatchGetDeployments operation.
     #
     # @!attribute [rw] deployments_info
     #   Information about the deployments.
@@ -407,7 +412,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a batch get on-premises instances operation.
+    # Represents the input of a BatchGetOnPremisesInstances operation.
     #
     # @note When making an API call, you may pass BatchGetOnPremisesInstancesInput
     #   data as a hash:
@@ -428,7 +433,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a batch get on-premises instances operation.
+    # Represents the output of a BatchGetOnPremisesInstances operation.
     #
     # @!attribute [rw] instance_infos
     #   Information about the on-premises instances.
@@ -540,7 +545,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a create application operation.
+    # Represents the input of a CreateApplication operation.
     #
     # @note When making an API call, you may pass CreateApplicationInput
     #   data as a hash:
@@ -561,7 +566,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a create application operation.
+    # Represents the output of a CreateApplication operation.
     #
     # @!attribute [rw] application_id
     #   A unique application ID.
@@ -574,7 +579,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a create deployment configuration operation.
+    # Represents the input of a CreateDeploymentConfig operation.
     #
     # @note When making an API call, you may pass CreateDeploymentConfigInput
     #   data as a hash:
@@ -622,7 +627,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a create deployment configuration operation.
+    # Represents the output of a CreateDeploymentConfig operation.
     #
     # @!attribute [rw] deployment_config_id
     #   A unique deployment configuration ID.
@@ -635,7 +640,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a create deployment group operation.
+    # Represents the input of a CreateDeploymentGroup operation.
     #
     # @note When making an API call, you may pass CreateDeploymentGroupInput
     #   data as a hash:
@@ -808,7 +813,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a create deployment group operation.
+    # Represents the output of a CreateDeploymentGroup operation.
     #
     # @!attribute [rw] deployment_group_id
     #   A unique deployment group ID.
@@ -821,7 +826,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a create deployment operation.
+    # Represents the input of a CreateDeployment operation.
     #
     # @note When making an API call, you may pass CreateDeploymentInput
     #   data as a hash:
@@ -953,7 +958,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a create deployment operation.
+    # Represents the output of a CreateDeployment operation.
     #
     # @!attribute [rw] deployment_id
     #   A unique deployment ID.
@@ -966,7 +971,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a delete application operation.
+    # Represents the input of a DeleteApplication operation.
     #
     # @note When making an API call, you may pass DeleteApplicationInput
     #   data as a hash:
@@ -987,7 +992,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a delete deployment configuration operation.
+    # Represents the input of a DeleteDeploymentConfig operation.
     #
     # @note When making an API call, you may pass DeleteDeploymentConfigInput
     #   data as a hash:
@@ -1008,7 +1013,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a delete deployment group operation.
+    # Represents the input of a DeleteDeploymentGroup operation.
     #
     # @note When making an API call, you may pass DeleteDeploymentGroupInput
     #   data as a hash:
@@ -1036,7 +1041,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a delete deployment group operation.
+    # Represents the output of a DeleteDeploymentGroup operation.
     #
     # @!attribute [rw] hooks_not_cleaned_up
     #   If the output contains no data, and the corresponding deployment
@@ -1151,6 +1156,16 @@ module Aws::CodeDeploy
     #   Information about the load balancer to use in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
+    # @!attribute [rw] last_successful_deployment
+    #   Information about the most recent successful deployment to the
+    #   deployment group.
+    #   @return [Types::LastDeploymentInfo]
+    #
+    # @!attribute [rw] last_attempted_deployment
+    #   Information about the most recent attempted deployment to the
+    #   deployment group.
+    #   @return [Types::LastDeploymentInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
@@ -1168,7 +1183,9 @@ module Aws::CodeDeploy
       :auto_rollback_configuration,
       :deployment_style,
       :blue_green_deployment_configuration,
-      :load_balancer_info)
+      :load_balancer_info,
+      :last_successful_deployment,
+      :last_attempted_deployment)
       include Aws::Structure
     end
 
@@ -1461,7 +1478,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a deregister on-premises instance operation.
+    # Represents the input of a DeregisterOnPremisesInstance operation.
     #
     # @note When making an API call, you may pass DeregisterOnPremisesInstanceInput
     #   data as a hash:
@@ -1691,7 +1708,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get application operation.
+    # Represents the input of a GetApplication operation.
     #
     # @note When making an API call, you may pass GetApplicationInput
     #   data as a hash:
@@ -1712,7 +1729,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get application operation.
+    # Represents the output of a GetApplication operation.
     #
     # @!attribute [rw] application
     #   Information about the application.
@@ -1725,7 +1742,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get application revision operation.
+    # Represents the input of a GetApplicationRevision operation.
     #
     # @note When making an API call, you may pass GetApplicationRevisionInput
     #   data as a hash:
@@ -1765,7 +1782,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get application revision operation.
+    # Represents the output of a GetApplicationRevision operation.
     #
     # @!attribute [rw] application_name
     #   The name of the application that corresponds to the revision.
@@ -1789,7 +1806,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get deployment configuration operation.
+    # Represents the input of a GetDeploymentConfig operation.
     #
     # @note When making an API call, you may pass GetDeploymentConfigInput
     #   data as a hash:
@@ -1810,7 +1827,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get deployment configuration operation.
+    # Represents the output of a GetDeploymentConfig operation.
     #
     # @!attribute [rw] deployment_config_info
     #   Information about the deployment configuration.
@@ -1823,7 +1840,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get deployment group operation.
+    # Represents the input of a GetDeploymentGroup operation.
     #
     # @note When making an API call, you may pass GetDeploymentGroupInput
     #   data as a hash:
@@ -1851,7 +1868,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get deployment group operation.
+    # Represents the output of a GetDeploymentGroup operation.
     #
     # @!attribute [rw] deployment_group_info
     #   Information about the deployment group.
@@ -1864,7 +1881,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get deployment operation.
+    # Represents the input of a GetDeployment operation.
     #
     # @note When making an API call, you may pass GetDeploymentInput
     #   data as a hash:
@@ -1885,7 +1902,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get deployment instance operation.
+    # Represents the input of a GetDeploymentInstance operation.
     #
     # @note When making an API call, you may pass GetDeploymentInstanceInput
     #   data as a hash:
@@ -1911,7 +1928,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get deployment instance operation.
+    # Represents the output of a GetDeploymentInstance operation.
     #
     # @!attribute [rw] instance_summary
     #   Information about the instance.
@@ -1924,7 +1941,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get deployment operation.
+    # Represents the output of a GetDeployment operation.
     #
     # @!attribute [rw] deployment_info
     #   Information about the deployment.
@@ -1937,7 +1954,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a get on-premises instance operation.
+    # Represents the input of a GetOnPremisesInstance operation.
     #
     # @note When making an API call, you may pass GetOnPremisesInstanceInput
     #   data as a hash:
@@ -1957,7 +1974,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a get on-premises instance operation.
+    # Represents the output of a GetOnPremisesInstance operation.
     #
     # @!attribute [rw] instance_info
     #   Information about the on-premises instance.
@@ -2130,6 +2147,37 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about the most recent attempted or successful deployment
+    # to a deployment group.
+    #
+    # @!attribute [rw] deployment_id
+    #   The deployment ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the most recent deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   A timestamp indicating when the most recent deployment to the
+    #   deployment group completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] create_time
+    #   A timestamp indicating when the most recent deployment to the
+    #   deployment group started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LastDeploymentInfo AWS API Documentation
+    #
+    class LastDeploymentInfo < Struct.new(
+      :deployment_id,
+      :status,
+      :end_time,
+      :create_time)
+      include Aws::Structure
+    end
+
     # Information about a deployment lifecycle event.
     #
     # @!attribute [rw] lifecycle_event_name
@@ -2176,7 +2224,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list application revisions operation.
+    # Represents the input of a ListApplicationRevisions operation.
     #
     # @note When making an API call, you may pass ListApplicationRevisionsInput
     #   data as a hash:
@@ -2267,7 +2315,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list application revisions operation.
+    # Represents the output of a ListApplicationRevisions operation.
     #
     # @!attribute [rw] revisions
     #   A list of locations that contain the matching revisions.
@@ -2288,7 +2336,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list applications operation.
+    # Represents the input of a ListApplications operation.
     #
     # @note When making an API call, you may pass ListApplicationsInput
     #   data as a hash:
@@ -2309,7 +2357,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list applications operation.
+    # Represents the output of a ListApplications operation.
     #
     # @!attribute [rw] applications
     #   A list of application names.
@@ -2330,7 +2378,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list deployment configurations operation.
+    # Represents the input of a ListDeploymentConfigs operation.
     #
     # @note When making an API call, you may pass ListDeploymentConfigsInput
     #   data as a hash:
@@ -2352,7 +2400,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list deployment configurations operation.
+    # Represents the output of a ListDeploymentConfigs operation.
     #
     # @!attribute [rw] deployment_configs_list
     #   A list of deployment configurations, including built-in
@@ -2374,7 +2422,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list deployment groups operation.
+    # Represents the input of a ListDeploymentGroups operation.
     #
     # @note When making an API call, you may pass ListDeploymentGroupsInput
     #   data as a hash:
@@ -2403,7 +2451,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list deployment groups operation.
+    # Represents the output of a ListDeploymentGroups operation.
     #
     # @!attribute [rw] application_name
     #   The application name.
@@ -2428,7 +2476,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list deployment instances operation.
+    # Represents the input of a ListDeploymentInstances operation.
     #
     # @note When making an API call, you may pass ListDeploymentInstancesInput
     #   data as a hash:
@@ -2485,7 +2533,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list deployment instances operation.
+    # Represents the output of a ListDeploymentInstances operation.
     #
     # @!attribute [rw] instances_list
     #   A list of instance IDs.
@@ -2505,7 +2553,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list deployments operation.
+    # Represents the input of a ListDeployments operation.
     #
     # @note When making an API call, you may pass ListDeploymentsInput
     #   data as a hash:
@@ -2569,7 +2617,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a list deployments operation.
+    # Represents the output of a ListDeployments operation.
     #
     # @!attribute [rw] deployments
     #   A list of deployment IDs.
@@ -2589,7 +2637,48 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a list on-premises instances operation.
+    # Represents the input of a ListGitHubAccountTokenNames operation.
+    #
+    # @note When making an API call, you may pass ListGitHubAccountTokenNamesInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   An identifier returned from the previous ListGitHubAccountTokenNames
+    #   call. It can be used to return the next set of names in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNamesInput AWS API Documentation
+    #
+    class ListGitHubAccountTokenNamesInput < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListGitHubAccountTokenNames operation.
+    #
+    # @!attribute [rw] token_name_list
+    #   A list of names of connections to GitHub accounts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If a large amount of information is returned, an identifier is also
+    #   returned. It can be used in a subsequent ListGitHubAccountTokenNames
+    #   call to return the next set of names in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNamesOutput AWS API Documentation
+    #
+    class ListGitHubAccountTokenNamesOutput < Struct.new(
+      :token_name_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the input of a ListOnPremisesInstances operation.
     #
     # @note When making an API call, you may pass ListOnPremisesInstancesInput
     #   data as a hash:
@@ -2742,7 +2831,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a register application revision operation.
+    # Represents the input of a RegisterApplicationRevision operation.
     #
     # @note When making an API call, you may pass RegisterApplicationRevisionInput
     #   data as a hash:
@@ -2822,8 +2911,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a remove tags from on-premises instances
-    # operation.
+    # Represents the input of a RemoveTagsFromOnPremisesInstances operation.
     #
     # @note When making an API call, you may pass RemoveTagsFromOnPremisesInstancesInput
     #   data as a hash:
@@ -3027,7 +3115,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of a stop deployment operation.
+    # Represents the input of a StopDeployment operation.
     #
     # @note When making an API call, you may pass StopDeploymentInput
     #   data as a hash:
@@ -3055,7 +3143,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of a stop deployment operation.
+    # Represents the output of a StopDeployment operation.
     #
     # @!attribute [rw] status
     #   The status of the stop deployment operation:
@@ -3243,7 +3331,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of an update application operation.
+    # Represents the input of an UpdateApplication operation.
     #
     # @note When making an API call, you may pass UpdateApplicationInput
     #   data as a hash:
@@ -3269,7 +3357,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the input of an update deployment group operation.
+    # Represents the input of an UpdateDeploymentGroup operation.
     #
     # @note When making an API call, you may pass UpdateDeploymentGroupInput
     #   data as a hash:
@@ -3437,7 +3525,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Represents the output of an update deployment group operation.
+    # Represents the output of an UpdateDeploymentGroup operation.
     #
     # @!attribute [rw] hooks_not_cleaned_up
     #   If the output contains no data, and the corresponding deployment

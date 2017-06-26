@@ -497,7 +497,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] custom_image_name
-    #   The name for your custom image.
+    #   (Deprecated) The name for your custom image.
+    #
+    #   <note markdown="1"> In releases prior to June 12, 2017, this parameter was ignored by
+    #   the API. It is now deprecated.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] blueprint_id
@@ -1616,14 +1621,27 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     #
     # @!attribute [rw] next_page_count
-    #   Returns the number of pages of results that remain.
+    #   (Deprecated) Returns the number of pages of results that remain.
+    #
+    #   <note markdown="1"> In releases prior to June 12, 2017, this parameter returned `null`
+    #   by the API. It is now deprecated, and the API returns the
+    #   `nextPageToken` parameter instead.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] next_page_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResourceResult AWS API Documentation
     #
     class GetOperationsForResourceResult < Struct.new(
       :operations,
-      :next_page_count)
+      :next_page_count,
+      :next_page_token)
       include Aws::Structure
     end
 

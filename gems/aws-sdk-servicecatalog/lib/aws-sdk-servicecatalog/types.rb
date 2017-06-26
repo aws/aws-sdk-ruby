@@ -259,11 +259,20 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The constraint parameters.
+    #   The constraint parameters. Expected values vary depending on which
+    #   **Type** is specified. For examples, see the bottom of this topic.
+    #
+    #   For Type `LAUNCH`, the `RoleArn` property is required.
+    #
+    #   For Type `NOTIFICATION`, the `NotificationArns` property is
+    #   required.
+    #
+    #   For Type `TEMPLATE`, the `Rules` property is required.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the constraint.
+    #   The type of the constraint. Case-sensitive valid values are:
+    #   `LAUNCH`, `NOTIFICATION`, or `TEMPLATE`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -451,7 +460,7 @@ module Aws::ServiceCatalog
     #         support_description: "SupportDescription",
     #         support_email: "SupportEmail",
     #         support_url: "SupportUrl",
-    #         product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE
+    #         product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -464,7 +473,7 @@ module Aws::ServiceCatalog
     #           info: { # required
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
-    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -582,7 +591,7 @@ module Aws::ServiceCatalog
     #           info: { # required
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
-    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+    #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #         },
     #         idempotency_token: "IdempotencyToken", # required
     #       }
@@ -632,8 +641,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   Additional information about the provisioning artifact create
-    #   request.
+    #   Additional information about the creation request for the
+    #   provisioning artifact.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -831,6 +840,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioning_artifact_id
     #   The identifier of the provisioning artifact for the delete request.
+    #   This is sometimes referred to as the product version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactInput AWS API Documentation
@@ -986,6 +996,10 @@ module Aws::ServiceCatalog
     #   Detailed product view information.
     #   @return [Types::ProductViewDetail]
     #
+    # @!attribute [rw] provisioning_artifact_summaries
+    #   A list of provisioning artifact summaries for the product.
+    #   @return [Array<Types::ProvisioningArtifactSummary>]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the product.
     #   @return [Array<Types::Tag>]
@@ -994,6 +1008,7 @@ module Aws::ServiceCatalog
     #
     class DescribeProductAsAdminOutput < Struct.new(
       :product_view_detail,
+      :provisioning_artifact_summaries,
       :tags)
       include Aws::Structure
     end
@@ -1100,6 +1115,50 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code to use for this operation. Supported language
+    #   codes are as follows:
+    #
+    #   "en" (English)
+    #
+    #   "jp" (Japanese)
+    #
+    #   "zh" (Chinese)
+    #
+    #   If no code is specified, "en" is used as the default.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The provisioned product identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductInput AWS API Documentation
+    #
+    class DescribeProvisionedProductInput < Struct.new(
+      :accept_language,
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_detail
+    #   Detailed provisioned product information.
+    #   @return [Types::ProvisionedProductDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductOutput AWS API Documentation
+    #
+    class DescribeProvisionedProductOutput < Struct.new(
+      :provisioned_product_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProvisioningArtifactInput
     #   data as a hash:
     #
@@ -1107,6 +1166,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         provisioning_artifact_id: "Id", # required
     #         product_id: "Id", # required
+    #         verbose: false,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1123,19 +1183,26 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    #   The identifier of the provisioning artifact. This is sometimes
+    #   referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] product_id
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] verbose
+    #   Selects verbose results. If set to true, the CloudFormation template
+    #   is returned.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput AWS API Documentation
     #
     class DescribeProvisioningArtifactInput < Struct.new(
       :accept_language,
       :provisioning_artifact_id,
-      :product_id)
+      :product_id,
+      :verbose)
       include Aws::Structure
     end
 
@@ -1188,7 +1255,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] path_id
@@ -2112,6 +2180,12 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] status
     #   Current status of the product.
+    #
+    #   `AVAILABLE` - Product is available for use.
+    #
+    #   `CREATING` - Creation of product started, not ready for use.
+    #
+    #   `FAILED` - Action on product failed.
     #   @return [String]
     #
     # @!attribute [rw] product_arn
@@ -2157,7 +2231,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] type
     #   The product type. Contact the product administrator for the
-    #   significance of this value.
+    #   significance of this value. If this value is `MARKETPLACE`, the
+    #   product was created by AWS Marketplace.
     #   @return [String]
     #
     # @!attribute [rw] distributor
@@ -2246,7 +2321,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] path_id
@@ -2332,6 +2408,23 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] status
     #   The current status of the ProvisionedProduct.
+    #
+    #   `AVAILABLE` - Stable state, ready to perform any operation. The most
+    #   recent action request succeeded and completed.
+    #
+    #   `UNDER_CHANGE` - Transitive state, operations performed may or may
+    #   not have valid results. Wait for an `AVAILABLE` status before
+    #   performing operations.
+    #
+    #   `TAINTED` - Stable state, ready to perform any operation. The stack
+    #   has completed the requested operation but is not exactly what was
+    #   requested. For example, a request to update to a new version failed
+    #   and the stack rolled back to the current version.
+    #
+    #   `ERROR` - Something unexpected happened such that the provisioned
+    #   product exists but the stack is not running. For example,
+    #   CloudFormation received an invalid parameter value and could not
+    #   launch the stack.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -2372,7 +2465,8 @@ module Aws::ServiceCatalog
     # provisioned.
     #
     # @!attribute [rw] id
-    #   The identifier for the artifact.
+    #   The identifier for the artifact. This is sometimes referred to as
+    #   the product version.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2400,7 +2494,8 @@ module Aws::ServiceCatalog
     # Detailed provisioning artifact information.
     #
     # @!attribute [rw] id
-    #   The identifier of the provisioning artifact.
+    #   The identifier of the provisioning artifact. This is sometimes
+    #   referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2412,7 +2507,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the provisioning artifact.
+    #   The type of the provisioning artifact. The following provisioning
+    #   artifact types are used by AWS Marketplace products:
+    #
+    #   `MARKETPLACE_AMI` - AMI products.
+    #
+    #   `MARKETPLACE_CAR` - CAR (Cluster and AWS Resources) products.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2472,7 +2572,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Provisioning artifact properties.
+    # Provisioning artifact properties. For example request JSON, see
+    # CreateProvisioningArtifact.
     #
     # @note When making an API call, you may pass ProvisioningArtifactProperties
     #   data as a hash:
@@ -2483,7 +2584,7 @@ module Aws::ServiceCatalog
     #         info: { # required
     #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #         },
-    #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+    #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #       }
     #
     # @!attribute [rw] name
@@ -2496,10 +2597,19 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] info
     #   Additional information about the provisioning artifact properties.
+    #   When using this element in a request, you must specify
+    #   `LoadTemplateFromURL`. For more information, see
+    #   CreateProvisioningArtifact.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The type of the provisioning artifact properties.
+    #   The type of the provisioning artifact properties. The following
+    #   provisioning artifact property types are used by AWS Marketplace
+    #   products:
+    #
+    #   `MARKETPLACE_AMI` - AMI products.
+    #
+    #   `MARKETPLACE_CAR` - CAR (Cluster and AWS Resources) products.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
@@ -2512,7 +2622,41 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The arameter key/value pairs used to provision a product.
+    # Summary information about a provisioning artifact.
+    #
+    # @!attribute [rw] id
+    #   The provisioning artifact identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The provisioning artifact name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The provisioning artifact description.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The UTC timestamp of the creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] provisioning_artifact_metadata
+    #   The provisioning artifact metadata. This data is used with products
+    #   created by AWS Marketplace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary AWS API Documentation
+    #
+    class ProvisioningArtifactSummary < Struct.new(
+      :id,
+      :name,
+      :description,
+      :created_time,
+      :provisioning_artifact_metadata)
+      include Aws::Structure
+    end
+
+    # The parameter key-value pairs used to provision a product.
     #
     # @note When making an API call, you may pass ProvisioningParameter
     #   data as a hash:
@@ -2552,6 +2696,19 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] status
     #   The status of the ProvisionedProduct object.
+    #
+    #   `CREATED` - Request created but the operation has not yet started.
+    #
+    #   `IN_PROGRESS` - The requested operation is in-progress.
+    #
+    #   `IN_PROGRESS_IN_ERROR` - The provisioned product is under change but
+    #   the requested operation failed and some remediation is occurring.
+    #   For example, a roll-back.
+    #
+    #   `SUCCEEDED` - The requested operation has successfully completed.
+    #
+    #   `FAILED` - The requested operation has completed but has failed.
+    #   Investigate using the error messages returned.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2580,7 +2737,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] path_id
@@ -2982,7 +3140,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The esired value for this key.
+    #   The desired value for this key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag AWS API Documentation
@@ -3005,15 +3163,15 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] provisioned_product_name
-    #   The name of the ProvisionedProduct object to terminate. You must
-    #   specify either `ProvisionedProductName` or `ProvisionedProductId`,
-    #   but not both.
+    #   The name of the ProvisionedProduct object to terminate. Specify
+    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to terminate. You
-    #   must specify either `ProvisionedProductName` or
-    #   `ProvisionedProductId`, but not both.
+    #   The identifier of the ProvisionedProduct object to terminate.
+    #   Specify either `ProvisionedProductName` or `ProvisionedProductId`,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] terminate_token
@@ -3361,15 +3519,14 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The updated name of the ProvisionedProduct object . You must specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The updated name of the ProvisionedProduct object. Specify either
+    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to update. You must
-    #   specify either `ProvisionedProductName` or `ProvisionedProductId`,
-    #   but not both.
+    #   The identifier of the ProvisionedProduct object to update. Specify
+    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
+    #   both.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -3377,7 +3534,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] path_id
@@ -3458,6 +3616,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioning_artifact_id
     #   The identifier of the provisioning artifact for the update request.
+    #   This is sometimes referred to as the product version.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3501,7 +3660,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The parameter key/value pair used to update a ProvisionedProduct
+    # The parameter key-value pair used to update a ProvisionedProduct
     # object. If `UsePreviousValue` is set to true, `Value` is ignored and
     # the value for `Key` is kept as previously set (current value).
     #
