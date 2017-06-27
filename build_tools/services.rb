@@ -55,6 +55,7 @@ module BuildTools
         paginators: model_path('paginators-1.json', config['models']),
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
+        examples: model_path('examples-1.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []

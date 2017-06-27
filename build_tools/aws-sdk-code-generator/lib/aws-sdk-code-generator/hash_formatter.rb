@@ -15,10 +15,11 @@ module AwsSdkCodeGenerator
       @wrap = options.fetch(:wrap, true)
       @inline = options.fetch(:inline, false)
       @quote_strings = options.fetch(:quote_strings, false)
+      @indent = options.fetch(:indent, '')
     end
 
     def format(obj)
-      result = hash(obj, i:'', inline:@inline)
+      result = hash(obj, i: @indent, inline:@inline)
       result = unwrap(result, obj.size) if !@wrap
       result = result.strip if @inline && result.lines.to_a.length == 1
       result

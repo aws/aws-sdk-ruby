@@ -94,6 +94,7 @@ module AwsSdkCodeGenerator
         remove_plugins: @service.remove_plugins,
         api: @service.api,
         waiters: @service.waiters,
+        examples: @service.examples,
       ).render
     end
 
