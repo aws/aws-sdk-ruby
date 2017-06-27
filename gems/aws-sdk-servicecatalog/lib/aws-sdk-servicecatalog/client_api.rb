@@ -68,6 +68,8 @@ module Aws::ServiceCatalog
     DescribeProductOutput = Shapes::StructureShape.new(name: 'DescribeProductOutput')
     DescribeProductViewInput = Shapes::StructureShape.new(name: 'DescribeProductViewInput')
     DescribeProductViewOutput = Shapes::StructureShape.new(name: 'DescribeProductViewOutput')
+    DescribeProvisionedProductInput = Shapes::StructureShape.new(name: 'DescribeProvisionedProductInput')
+    DescribeProvisionedProductOutput = Shapes::StructureShape.new(name: 'DescribeProvisionedProductOutput')
     DescribeProvisioningArtifactInput = Shapes::StructureShape.new(name: 'DescribeProvisioningArtifactInput')
     DescribeProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'DescribeProvisioningArtifactOutput')
     DescribeProvisioningParametersInput = Shapes::StructureShape.new(name: 'DescribeProvisioningParametersInput')
@@ -159,6 +161,7 @@ module Aws::ServiceCatalog
     ProvisionedProductId = Shapes::StringShape.new(name: 'ProvisionedProductId')
     ProvisionedProductName = Shapes::StringShape.new(name: 'ProvisionedProductName')
     ProvisionedProductNameOrArn = Shapes::StringShape.new(name: 'ProvisionedProductNameOrArn')
+    ProvisionedProductStatus = Shapes::StringShape.new(name: 'ProvisionedProductStatus')
     ProvisionedProductStatusMessage = Shapes::StringShape.new(name: 'ProvisionedProductStatusMessage')
     ProvisionedProductType = Shapes::StringShape.new(name: 'ProvisionedProductType')
     ProvisioningArtifact = Shapes::StructureShape.new(name: 'ProvisioningArtifact')
@@ -173,6 +176,8 @@ module Aws::ServiceCatalog
     ProvisioningArtifactParameter = Shapes::StructureShape.new(name: 'ProvisioningArtifactParameter')
     ProvisioningArtifactParameters = Shapes::ListShape.new(name: 'ProvisioningArtifactParameters')
     ProvisioningArtifactProperties = Shapes::StructureShape.new(name: 'ProvisioningArtifactProperties')
+    ProvisioningArtifactSummaries = Shapes::ListShape.new(name: 'ProvisioningArtifactSummaries')
+    ProvisioningArtifactSummary = Shapes::StructureShape.new(name: 'ProvisioningArtifactSummary')
     ProvisioningArtifactType = Shapes::StringShape.new(name: 'ProvisioningArtifactType')
     ProvisioningArtifacts = Shapes::ListShape.new(name: 'ProvisioningArtifacts')
     ProvisioningParameter = Shapes::StructureShape.new(name: 'ProvisioningParameter')
@@ -230,6 +235,7 @@ module Aws::ServiceCatalog
     UsageInstruction = Shapes::StructureShape.new(name: 'UsageInstruction')
     UsageInstructions = Shapes::ListShape.new(name: 'UsageInstructions')
     UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
+    Verbose = Shapes::BooleanShape.new(name: 'Verbose')
 
     AcceptPortfolioShareInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     AcceptPortfolioShareInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -394,6 +400,7 @@ module Aws::ServiceCatalog
     DescribeProductAsAdminInput.struct_class = Types::DescribeProductAsAdminInput
 
     DescribeProductAsAdminOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
+    DescribeProductAsAdminOutput.add_member(:provisioning_artifact_summaries, Shapes::ShapeRef.new(shape: ProvisioningArtifactSummaries, location_name: "ProvisioningArtifactSummaries"))
     DescribeProductAsAdminOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeProductAsAdminOutput.struct_class = Types::DescribeProductAsAdminOutput
 
@@ -413,9 +420,17 @@ module Aws::ServiceCatalog
     DescribeProductViewOutput.add_member(:provisioning_artifacts, Shapes::ShapeRef.new(shape: ProvisioningArtifacts, location_name: "ProvisioningArtifacts"))
     DescribeProductViewOutput.struct_class = Types::DescribeProductViewOutput
 
+    DescribeProvisionedProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DescribeProvisionedProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProvisionedProductInput.struct_class = Types::DescribeProvisionedProductInput
+
+    DescribeProvisionedProductOutput.add_member(:provisioned_product_detail, Shapes::ShapeRef.new(shape: ProvisionedProductDetail, location_name: "ProvisionedProductDetail"))
+    DescribeProvisionedProductOutput.struct_class = Types::DescribeProvisionedProductOutput
+
     DescribeProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     DescribeProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
+    DescribeProvisioningArtifactInput.add_member(:verbose, Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose"))
     DescribeProvisioningArtifactInput.struct_class = Types::DescribeProvisioningArtifactInput
 
     DescribeProvisioningArtifactOutput.add_member(:provisioning_artifact_detail, Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail, location_name: "ProvisioningArtifactDetail"))
@@ -633,7 +648,7 @@ module Aws::ServiceCatalog
     ProvisionedProductDetail.add_member(:arn, Shapes::ShapeRef.new(shape: ProvisionedProductNameOrArn, location_name: "Arn"))
     ProvisionedProductDetail.add_member(:type, Shapes::ShapeRef.new(shape: ProvisionedProductType, location_name: "Type"))
     ProvisionedProductDetail.add_member(:id, Shapes::ShapeRef.new(shape: ProvisionedProductId, location_name: "Id"))
-    ProvisionedProductDetail.add_member(:status, Shapes::ShapeRef.new(shape: RecordStatus, location_name: "Status"))
+    ProvisionedProductDetail.add_member(:status, Shapes::ShapeRef.new(shape: ProvisionedProductStatus, location_name: "Status"))
     ProvisionedProductDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: ProvisionedProductStatusMessage, location_name: "StatusMessage"))
     ProvisionedProductDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
     ProvisionedProductDetail.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
@@ -675,6 +690,15 @@ module Aws::ServiceCatalog
     ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, required: true, location_name: "Info"))
     ProvisioningArtifactProperties.add_member(:type, Shapes::ShapeRef.new(shape: ProvisioningArtifactType, location_name: "Type"))
     ProvisioningArtifactProperties.struct_class = Types::ProvisioningArtifactProperties
+
+    ProvisioningArtifactSummaries.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactSummary)
+
+    ProvisioningArtifactSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    ProvisioningArtifactSummary.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "Name"))
+    ProvisioningArtifactSummary.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
+    ProvisioningArtifactSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: ProvisioningArtifactCreatedTime, location_name: "CreatedTime"))
+    ProvisioningArtifactSummary.add_member(:provisioning_artifact_metadata, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, location_name: "ProvisioningArtifactMetadata"))
+    ProvisioningArtifactSummary.struct_class = Types::ProvisioningArtifactSummary
 
     ProvisioningArtifacts.member = Shapes::ShapeRef.new(shape: ProvisioningArtifact)
 
@@ -1058,6 +1082,15 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: DescribeProductViewOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
+      api.add_operation(:describe_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProvisionedProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProvisionedProductInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProvisionedProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_provisioning_artifact, Seahorse::Model::Operation.new.tap do |o|

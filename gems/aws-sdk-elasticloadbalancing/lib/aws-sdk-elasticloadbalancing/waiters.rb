@@ -104,12 +104,19 @@ module Aws::ElasticLoadBalancing
           delay: 15,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_instance_health,
-            acceptors: [{
-              "argument" => "instance_states[].state",
-              "expected" => "InService",
-              "matcher" => "pathAll",
-              "state" => "success"
-            }]
+            acceptors: [
+              {
+                "argument" => "instance_states[].state",
+                "expected" => "InService",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "InvalidInstance",
+                "state" => "retry"
+              }
+            ]
           )
         }.merge(options))
       end

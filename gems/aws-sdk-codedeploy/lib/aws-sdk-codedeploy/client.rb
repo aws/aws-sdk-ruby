@@ -278,6 +278,7 @@ module Aws::CodeDeploy
     #   resp.applications_info[0].application_name #=> String
     #   resp.applications_info[0].create_time #=> Time
     #   resp.applications_info[0].linked_to_git_hub #=> Boolean
+    #   resp.applications_info[0].git_hub_account_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications AWS API Documentation
     #
@@ -357,6 +358,14 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_groups_info[0].last_successful_deployment.deployment_id #=> String
+    #   resp.deployment_groups_info[0].last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
+    #   resp.deployment_groups_info[0].last_successful_deployment.end_time #=> Time
+    #   resp.deployment_groups_info[0].last_successful_deployment.create_time #=> Time
+    #   resp.deployment_groups_info[0].last_attempted_deployment.deployment_id #=> String
+    #   resp.deployment_groups_info[0].last_attempted_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
+    #   resp.deployment_groups_info[0].last_attempted_deployment.end_time #=> Time
+    #   resp.deployment_groups_info[0].last_attempted_deployment.create_time #=> Time
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -1062,6 +1071,7 @@ module Aws::CodeDeploy
     #   resp.application.application_name #=> String
     #   resp.application.create_time #=> Time
     #   resp.application.linked_to_git_hub #=> Boolean
+    #   resp.application.git_hub_account_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication AWS API Documentation
     #
@@ -1323,6 +1333,14 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployment_group_info.load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_group_info.load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_group_info.last_successful_deployment.deployment_id #=> String
+    #   resp.deployment_group_info.last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
+    #   resp.deployment_group_info.last_successful_deployment.end_time #=> Time
+    #   resp.deployment_group_info.last_successful_deployment.create_time #=> Time
+    #   resp.deployment_group_info.last_attempted_deployment.deployment_id #=> String
+    #   resp.deployment_group_info.last_attempted_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
+    #   resp.deployment_group_info.last_attempted_deployment.end_time #=> Time
+    #   resp.deployment_group_info.last_attempted_deployment.create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -1749,6 +1767,38 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Lists the names of stored connections to GitHub accounts.
+    #
+    # @option params [String] :next_token
+    #   An identifier returned from the previous ListGitHubAccountTokenNames
+    #   call. It can be used to return the next set of names in the list.
+    #
+    # @return [Types::ListGitHubAccountTokenNamesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGitHubAccountTokenNamesOutput#token_name_list #token_name_list} => Array&lt;String&gt;
+    #   * {Types::ListGitHubAccountTokenNamesOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_git_hub_account_token_names({
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_name_list #=> Array
+    #   resp.token_name_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames AWS API Documentation
+    #
+    # @overload list_git_hub_account_token_names(params = {})
+    # @param [Hash] params ({})
+    def list_git_hub_account_token_names(params = {}, options = {})
+      req = build_request(:list_git_hub_account_token_names, params)
+      req.send_request(options)
+    end
+
     # Gets a list of names for one or more on-premises instances.
     #
     # Unless otherwise specified, both registered and deregistered
@@ -2171,7 +2221,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

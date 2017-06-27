@@ -125,9 +125,12 @@ module Aws::CodePipeline
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListActionTypesInput = Shapes::StructureShape.new(name: 'ListActionTypesInput')
     ListActionTypesOutput = Shapes::StructureShape.new(name: 'ListActionTypesOutput')
+    ListPipelineExecutionsInput = Shapes::StructureShape.new(name: 'ListPipelineExecutionsInput')
+    ListPipelineExecutionsOutput = Shapes::StructureShape.new(name: 'ListPipelineExecutionsOutput')
     ListPipelinesInput = Shapes::StructureShape.new(name: 'ListPipelinesInput')
     ListPipelinesOutput = Shapes::StructureShape.new(name: 'ListPipelinesOutput')
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumArtifactCount = Shapes::IntegerShape.new(name: 'MaximumArtifactCount')
     Message = Shapes::StringShape.new(name: 'Message')
     MinimumArtifactCount = Shapes::IntegerShape.new(name: 'MinimumArtifactCount')
@@ -143,6 +146,8 @@ module Aws::CodePipeline
     PipelineExecutionId = Shapes::StringShape.new(name: 'PipelineExecutionId')
     PipelineExecutionNotFoundException = Shapes::StructureShape.new(name: 'PipelineExecutionNotFoundException')
     PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
+    PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
+    PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
     PipelineList = Shapes::ListShape.new(name: 'PipelineList')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineNameInUseException = Shapes::StructureShape.new(name: 'PipelineNameInUseException')
@@ -472,6 +477,15 @@ module Aws::CodePipeline
     ListActionTypesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListActionTypesOutput.struct_class = Types::ListActionTypesOutput
 
+    ListPipelineExecutionsInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+    ListPipelineExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPipelineExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPipelineExecutionsInput.struct_class = Types::ListPipelineExecutionsInput
+
+    ListPipelineExecutionsOutput.add_member(:pipeline_execution_summaries, Shapes::ShapeRef.new(shape: PipelineExecutionSummaryList, location_name: "pipelineExecutionSummaries"))
+    ListPipelineExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPipelineExecutionsOutput.struct_class = Types::ListPipelineExecutionsOutput
+
     ListPipelinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPipelinesInput.struct_class = Types::ListPipelinesInput
 
@@ -502,6 +516,14 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
     PipelineExecution.struct_class = Types::PipelineExecution
+
+    PipelineExecutionSummary.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+    PipelineExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
+    PipelineExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    PipelineExecutionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
+
+    PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
 
     PipelineList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
 
@@ -813,6 +835,17 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: ListActionTypesInput)
         o.output = Shapes::ShapeRef.new(shape: ListActionTypesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:list_pipeline_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPipelineExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPipelineExecutionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPipelineExecutionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 

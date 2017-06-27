@@ -69,6 +69,7 @@ module Aws::Lambda
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidRequestContentException = Shapes::StructureShape.new(name: 'InvalidRequestContentException')
+    InvalidRuntimeException = Shapes::StructureShape.new(name: 'InvalidRuntimeException')
     InvalidSecurityGroupIDException = Shapes::StructureShape.new(name: 'InvalidSecurityGroupIDException')
     InvalidSubnetIDException = Shapes::StructureShape.new(name: 'InvalidSubnetIDException')
     InvalidZipFileException = Shapes::StructureShape.new(name: 'InvalidZipFileException')
@@ -654,6 +655,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
       end)
 
       api.add_operation(:invoke_async, Seahorse::Model::Operation.new.tap do |o|
@@ -666,6 +668,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
       end)
 
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|
@@ -835,6 +838,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
     end
 

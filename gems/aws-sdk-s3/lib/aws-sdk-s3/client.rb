@@ -1604,7 +1604,7 @@ module Aws::S3
     #
     # @return [Types::GetBucketPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetBucketPolicyOutput#policy #policy} => String
+    #   * {Types::GetBucketPolicyOutput#policy #policy} => IO
     #
     # @example Request syntax with placeholder values
     #
@@ -4365,7 +4365,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

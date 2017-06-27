@@ -54,22 +54,25 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_timezone
     #   A value that indicates the time zone you want to set for the
-    #   gateway. The time zone is used, for example, for scheduling
-    #   snapshots and your gateway's maintenance schedule.
+    #   gateway. The time zone is of the format "GMT-hr:mm" or
+    #   "GMT+hr:mm". For example, GMT-4:00 indicates the time is 4 hours
+    #   behind GMT. GMT+2:00 indicates the time is 2 hours ahead of GMT. The
+    #   time zone is used, for example, for scheduling snapshots and your
+    #   gateway's maintenance schedule.
     #   @return [String]
     #
     # @!attribute [rw] gateway_region
-    #   A value that indicates the region where you want to store the
-    #   snapshot backups. The gateway region specified must be the same
-    #   region as the region in your `Host` header in the request. For more
-    #   information about available regions and endpoints for AWS Storage
-    #   Gateway, see [Regions and Endpoints][1] in the *Amazon Web Services
-    #   Glossary*.
+    #   A value that indicates the region where you want to store your data.
+    #   The gateway region specified must be the same region as the region
+    #   in your `Host` header in the request. For more information about
+    #   available regions and endpoints for AWS Storage Gateway, see
+    #   [Regions and Endpoints][1] in the *Amazon Web Services Glossary*.
     #
     #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
     #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
     #   "eu-west-2", "ap-northeast-1", "ap-northeast-2",
-    #   "ap-southeast-1", "ap-southeast-2", "sa-east-1"
+    #   "ap-southeast-1", "ap-southeast-2", "ap-south-1",
+    #   "sa-east-1"
     #
     #
     #
@@ -351,6 +354,8 @@ module Aws::StorageGateway
     #   @return [Types::VolumeiSCSIAttributes]
     #
     # @!attribute [rw] created_date
+    #   The date the volume was created. Volumes created prior to March 28,
+    #   2017 don’t have this time stamp.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume AWS API Documentation
@@ -609,7 +614,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The ARN of the backend storage used for storing file data.
+    #   The ARN of the backed storage used for storing file data.
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
@@ -625,15 +630,18 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   Maps a user to anonymous user. Valid options: "RootSquash" - Only
-    #   root is mapped to anonymous user, "NoSquash" - No one is mapped to
-    #   anonymous user or "AllSquash" - Everyone is mapped to anonymous
-    #   user.
+    #   Maps a user to anonymous user. Valid options are the following:
+    #
+    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #
+    #   * "NoSquash" - No one is mapped to anonymous user.
+    #
+    #   * "AllSquash" - Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   Sets the write status of a file share. "true", if the write status
-    #   is read-only; otherwise "false.
+    #   Sets the write status of a file share: "true" if the write status
+    #   is read-only, and otherwise "false".
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
@@ -1910,8 +1918,8 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_arns
     #   Specifies one or more unique Amazon Resource Names (ARNs) that
     #   represent the virtual tapes you want to describe. If this parameter
-    #   is not specified, AWS Storage Gateway returns a description of all
-    #   virtual tapes associated with the specified gateway.
+    #   is not specified, Tape gateway returns a description of all virtual
+    #   tapes associated with the specified gateway.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marker
@@ -2713,7 +2721,7 @@ module Aws::StorageGateway
     # permissions assigned to them. Upon discovery in an S3 bucket by
     # Storage Gateway, the S3 objects that represent files and folders are
     # assigned these default Unix permissions. This operation is only
-    # supported in file gateways.
+    # supported in the file gateway architecture.
     #
     # @note When making an API call, you may pass NFSFileShareDefaults
     #   data as a hash:
@@ -2758,8 +2766,8 @@ module Aws::StorageGateway
     end
 
     # The Unix file permissions and ownership information assigned, by
-    # default, to native S3 objects when Storage Gateway discovers them in
-    # S3 buckets. This operation is only supported in file gateways.
+    # default, to native S3 objects when file gateway discovers them in S3
+    # buckets. This operation is only supported in file gateways.
     #
     # @!attribute [rw] nfs_file_share_defaults
     #   Describes file share default values. Files and folders stored as
@@ -2767,7 +2775,7 @@ module Aws::StorageGateway
     #   permissions assigned to them. Upon discovery in an S3 bucket by
     #   Storage Gateway, the S3 objects that represent files and folders are
     #   assigned these default Unix permissions. This operation is only
-    #   supported in file gateways.
+    #   supported in the file gateway architecture.
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] file_share_arn
@@ -2824,15 +2832,19 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   Indicates the user mapped to anonymous user. Valid options:
-    #   "RootSquash" - Only root is mapped to anonymous user, "NoSquash"
-    #   - No one is mapped to anonymous user or "AllSquash" - Everyone is
-    #   mapped to anonymous user.
+    #   The user mapped to anonymous user. Valid options are the following:
+    #
+    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #
+    #   * "NoSquash" - No one is mapped to anonymous user
+    #
+    #   * "AllSquash" - Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   Indicates whether the write status of a file share is read-only.
-    #   "true", if write status is read-only; otherwise "false".
+    #   A value that indicates whether the write status of a file share is
+    #   read-only: "true" if write status is read-only, and otherwise
+    #   "false".
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
@@ -3257,6 +3269,8 @@ module Aws::StorageGateway
     #   @return [Types::VolumeiSCSIAttributes]
     #
     # @!attribute [rw] created_date
+    #   The date the volume was created. Volumes created prior to March 28,
+    #   2017 don’t have this time stamp.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorediSCSIVolume AWS API Documentation
@@ -3309,10 +3323,11 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tape_created_date
+    #   The date the virtual tape was created.
     #   @return [Time]
     #
     # @!attribute [rw] tape_size_in_bytes
-    #   The size, in bytes, of the virtual tape.
+    #   The size, in bytes, of the virtual tape capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] tape_status
@@ -3331,6 +3346,14 @@ module Aws::StorageGateway
     #   Range: 0 (not started) to 100 (complete).
     #   @return [Float]
     #
+    # @!attribute [rw] tape_used_in_bytes
+    #   The size, in bytes, of data written to the virtual tape.
+    #
+    #   <note markdown="1"> This value is not available for tapes created prior to May,13 2015.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
     #
     class Tape < Struct.new(
@@ -3340,7 +3363,8 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :tape_status,
       :vtl_device,
-      :progress)
+      :progress,
+      :tape_used_in_bytes)
       include Aws::Structure
     end
 
@@ -3380,6 +3404,14 @@ module Aws::StorageGateway
     #   The current state of the archived virtual tape.
     #   @return [String]
     #
+    # @!attribute [rw] tape_used_in_bytes
+    #   The size, in bytes, of data written to the virtual tape.
+    #
+    #   <note markdown="1"> This value is not available for tapes created prior to May,13 2015.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
     #
     class TapeArchive < Struct.new(
@@ -3389,7 +3421,8 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :completion_time,
       :retrieved_to,
-      :tape_status)
+      :tape_status,
+      :tape_used_in_bytes)
       include Aws::Structure
     end
 
@@ -3792,15 +3825,18 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
-    #   Indicates the user mapped to anonymous user. Valid options:
-    #   "RootSquash" - Only root is mapped to anonymous user, "NoSquash"
-    #   - No one is mapped to anonymous user or "AllSquash" - Everyone is
-    #   mapped to anonymous user.
+    #   The user mapped to anonymous user. Valid options are the following:
+    #
+    #   * "RootSquash" - Only root is mapped to anonymous user.
+    #
+    #   * "NoSquash" - No one is mapped to anonymous user
+    #
+    #   * "AllSquash" - Everyone is mapped to anonymous user.
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   Sets the write status of a file share. "true", if the write status
-    #   is read-only; otherwise "false.
+    #   Sets the write status of a file share: "true" if the write status
+    #   is read-only, and otherwise "false".
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation

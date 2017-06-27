@@ -286,8 +286,8 @@ module Aws::Route53
     # DNS servers. While your changes are propagating, `GetChange` returns a
     # status of `PENDING`. When propagation is complete, `GetChange` returns
     # a status of `INSYNC`. Changes generally propagate to all Amazon Route
-    # 53 name servers in a few minutes. In rare circumstances, propagation
-    # can take up to 30 minutes. For more information, see GetChange.
+    # 53 name servers within 60 seconds. For more information, see
+    # GetChange.
     #
     # **Limits on ChangeResourceRecordSets Requests**
     #
@@ -332,6 +332,7 @@ module Aws::Route53
     #               subdivision_code: "GeoLocationSubdivisionCode",
     #             },
     #             failover: "PRIMARY", # accepts PRIMARY, SECONDARY
+    #             multi_value_answer: false,
     #             ttl: 1,
     #             resource_records: [
     #               {
@@ -2299,6 +2300,7 @@ module Aws::Route53
     #   resp.resource_record_sets[0].geo_location.country_code #=> String
     #   resp.resource_record_sets[0].geo_location.subdivision_code #=> String
     #   resp.resource_record_sets[0].failover #=> String, one of "PRIMARY", "SECONDARY"
+    #   resp.resource_record_sets[0].multi_value_answer #=> Boolean
     #   resp.resource_record_sets[0].ttl #=> Integer
     #   resp.resource_record_sets[0].resource_records #=> Array
     #   resp.resource_record_sets[0].resource_records[0].value #=> String
@@ -3571,7 +3573,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

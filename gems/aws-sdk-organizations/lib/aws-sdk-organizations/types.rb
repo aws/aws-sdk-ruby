@@ -1047,6 +1047,10 @@ module Aws::Organizations
     # account (the recipient) to join its organization, the two accounts
     # exchange information as a series of handshake requests and responses.
     #
+    # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
+    # in lists for only 30 days after entering that state After that they
+    # are deleted.
+    #
     # @!attribute [rw] id
     #   The unique identifier (ID) of a handshake. The originating account
     #   creates the ID when it initiates the handshake.

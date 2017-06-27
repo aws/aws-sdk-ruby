@@ -139,9 +139,13 @@ module Aws::OpsWorks
     LayerType = Shapes::StringShape.new(name: 'LayerType')
     Layers = Shapes::ListShape.new(name: 'Layers')
     LifecycleEventConfiguration = Shapes::StructureShape.new(name: 'LifecycleEventConfiguration')
+    ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
+    ListTagsResult = Shapes::StructureShape.new(name: 'ListTagsResult')
     LoadBasedAutoScalingConfiguration = Shapes::StructureShape.new(name: 'LoadBasedAutoScalingConfiguration')
     LoadBasedAutoScalingConfigurations = Shapes::ListShape.new(name: 'LoadBasedAutoScalingConfigurations')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Minute = Shapes::IntegerShape.new(name: 'Minute')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
@@ -161,6 +165,7 @@ module Aws::OpsWorks
     RegisterVolumeRequest = Shapes::StructureShape.new(name: 'RegisterVolumeRequest')
     RegisterVolumeResult = Shapes::StructureShape.new(name: 'RegisterVolumeResult')
     ReportedOs = Shapes::StructureShape.new(name: 'ReportedOs')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RootDeviceType = Shapes::StringShape.new(name: 'RootDeviceType')
     SelfUserProfile = Shapes::StructureShape.new(name: 'SelfUserProfile')
@@ -186,11 +191,17 @@ module Aws::OpsWorks
     String = Shapes::StringShape.new(name: 'String')
     Strings = Shapes::ListShape.new(name: 'Strings')
     Switch = Shapes::StringShape.new(name: 'Switch')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     TemporaryCredential = Shapes::StructureShape.new(name: 'TemporaryCredential')
     TimeBasedAutoScalingConfiguration = Shapes::StructureShape.new(name: 'TimeBasedAutoScalingConfiguration')
     TimeBasedAutoScalingConfigurations = Shapes::ListShape.new(name: 'TimeBasedAutoScalingConfigurations')
     UnassignInstanceRequest = Shapes::StructureShape.new(name: 'UnassignInstanceRequest')
     UnassignVolumeRequest = Shapes::StructureShape.new(name: 'UnassignVolumeRequest')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAppRequest = Shapes::StructureShape.new(name: 'UpdateAppRequest')
     UpdateElasticIpRequest = Shapes::StructureShape.new(name: 'UpdateElasticIpRequest')
     UpdateInstanceRequest = Shapes::StructureShape.new(name: 'UpdateInstanceRequest')
@@ -726,6 +737,7 @@ module Aws::OpsWorks
     Instance.add_member(:agent_version, Shapes::ShapeRef.new(shape: String, location_name: "AgentVersion"))
     Instance.add_member(:ami_id, Shapes::ShapeRef.new(shape: String, location_name: "AmiId"))
     Instance.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "Architecture"))
+    Instance.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     Instance.add_member(:auto_scaling_type, Shapes::ShapeRef.new(shape: AutoScalingType, location_name: "AutoScalingType"))
     Instance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     Instance.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappings, location_name: "BlockDeviceMappings"))
@@ -792,6 +804,7 @@ module Aws::OpsWorks
     InstancesCount.add_member(:unassigning, Shapes::ShapeRef.new(shape: Integer, location_name: "Unassigning"))
     InstancesCount.struct_class = Types::InstancesCount
 
+    Layer.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     Layer.add_member(:stack_id, Shapes::ShapeRef.new(shape: String, location_name: "StackId"))
     Layer.add_member(:layer_id, Shapes::ShapeRef.new(shape: String, location_name: "LayerId"))
     Layer.add_member(:type, Shapes::ShapeRef.new(shape: LayerType, location_name: "Type"))
@@ -823,6 +836,15 @@ module Aws::OpsWorks
 
     LifecycleEventConfiguration.add_member(:shutdown, Shapes::ShapeRef.new(shape: ShutdownEventConfiguration, location_name: "Shutdown"))
     LifecycleEventConfiguration.struct_class = Types::LifecycleEventConfiguration
+
+    ListTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsRequest.struct_class = Types::ListTagsRequest
+
+    ListTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsResult.struct_class = Types::ListTagsResult
 
     LoadBasedAutoScalingConfiguration.add_member(:layer_id, Shapes::ShapeRef.new(shape: String, location_name: "LayerId"))
     LoadBasedAutoScalingConfiguration.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enable"))
@@ -1033,6 +1055,15 @@ module Aws::OpsWorks
 
     Strings.member = Shapes::ShapeRef.new(shape: String)
 
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TemporaryCredential.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     TemporaryCredential.add_member(:password, Shapes::ShapeRef.new(shape: String, location_name: "Password"))
     TemporaryCredential.add_member(:valid_for_in_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "ValidForInMinutes"))
@@ -1050,6 +1081,10 @@ module Aws::OpsWorks
 
     UnassignVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeId"))
     UnassignVolumeRequest.struct_class = Types::UnassignVolumeRequest
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AppId"))
     UpdateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1661,6 +1696,16 @@ module Aws::OpsWorks
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:reboot_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RebootInstance"
         o.http_method = "POST"
@@ -1791,6 +1836,16 @@ module Aws::OpsWorks
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:unassign_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UnassignInstance"
         o.http_method = "POST"
@@ -1806,6 +1861,16 @@ module Aws::OpsWorks
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnassignVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

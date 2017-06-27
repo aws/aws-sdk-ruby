@@ -31,6 +31,8 @@ module Aws::WAF
     CreateByteMatchSetResponse = Shapes::StructureShape.new(name: 'CreateByteMatchSetResponse')
     CreateIPSetRequest = Shapes::StructureShape.new(name: 'CreateIPSetRequest')
     CreateIPSetResponse = Shapes::StructureShape.new(name: 'CreateIPSetResponse')
+    CreateRateBasedRuleRequest = Shapes::StructureShape.new(name: 'CreateRateBasedRuleRequest')
+    CreateRateBasedRuleResponse = Shapes::StructureShape.new(name: 'CreateRateBasedRuleResponse')
     CreateRuleRequest = Shapes::StructureShape.new(name: 'CreateRuleRequest')
     CreateRuleResponse = Shapes::StructureShape.new(name: 'CreateRuleResponse')
     CreateSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'CreateSizeConstraintSetRequest')
@@ -45,6 +47,8 @@ module Aws::WAF
     DeleteByteMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteByteMatchSetResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
+    DeleteRateBasedRuleRequest = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleRequest')
+    DeleteRateBasedRuleResponse = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleResponse')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteRuleResponse = Shapes::StructureShape.new(name: 'DeleteRuleResponse')
     DeleteSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'DeleteSizeConstraintSetRequest')
@@ -64,6 +68,10 @@ module Aws::WAF
     GetChangeTokenStatusResponse = Shapes::StructureShape.new(name: 'GetChangeTokenStatusResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
+    GetRateBasedRuleManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysRequest')
+    GetRateBasedRuleManagedKeysResponse = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysResponse')
+    GetRateBasedRuleRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleRequest')
+    GetRateBasedRuleResponse = Shapes::StructureShape.new(name: 'GetRateBasedRuleResponse')
     GetRuleRequest = Shapes::StructureShape.new(name: 'GetRuleRequest')
     GetRuleResponse = Shapes::StructureShape.new(name: 'GetRuleResponse')
     GetSampledRequestsMaxItems = Shapes::IntegerShape.new(name: 'GetSampledRequestsMaxItems')
@@ -98,6 +106,8 @@ module Aws::WAF
     ListByteMatchSetsResponse = Shapes::StructureShape.new(name: 'ListByteMatchSetsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
+    ListRateBasedRulesRequest = Shapes::StructureShape.new(name: 'ListRateBasedRulesRequest')
+    ListRateBasedRulesResponse = Shapes::StructureShape.new(name: 'ListRateBasedRulesResponse')
     ListRulesRequest = Shapes::StructureShape.new(name: 'ListRulesRequest')
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListSizeConstraintSetsRequest = Shapes::StructureShape.new(name: 'ListSizeConstraintSetsRequest')
@@ -108,6 +118,8 @@ module Aws::WAF
     ListWebACLsResponse = Shapes::StructureShape.new(name: 'ListWebACLsResponse')
     ListXssMatchSetsRequest = Shapes::StructureShape.new(name: 'ListXssMatchSetsRequest')
     ListXssMatchSetsResponse = Shapes::StructureShape.new(name: 'ListXssMatchSetsResponse')
+    ManagedKey = Shapes::StringShape.new(name: 'ManagedKey')
+    ManagedKeys = Shapes::ListShape.new(name: 'ManagedKeys')
     MatchFieldData = Shapes::StringShape.new(name: 'MatchFieldData')
     MatchFieldType = Shapes::StringShape.new(name: 'MatchFieldType')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -122,6 +134,9 @@ module Aws::WAF
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateType = Shapes::StringShape.new(name: 'PredicateType')
     Predicates = Shapes::ListShape.new(name: 'Predicates')
+    RateBasedRule = Shapes::StructureShape.new(name: 'RateBasedRule')
+    RateKey = Shapes::StringShape.new(name: 'RateKey')
+    RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     Rule = Shapes::StructureShape.new(name: 'Rule')
@@ -156,6 +171,8 @@ module Aws::WAF
     UpdateByteMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateByteMatchSetResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
+    UpdateRateBasedRuleRequest = Shapes::StructureShape.new(name: 'UpdateRateBasedRuleRequest')
+    UpdateRateBasedRuleResponse = Shapes::StructureShape.new(name: 'UpdateRateBasedRuleResponse')
     UpdateRuleRequest = Shapes::StructureShape.new(name: 'UpdateRuleRequest')
     UpdateRuleResponse = Shapes::StructureShape.new(name: 'UpdateRuleResponse')
     UpdateSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'UpdateSizeConstraintSetRequest')
@@ -179,6 +196,7 @@ module Aws::WAF
     WAFStaleDataException = Shapes::StructureShape.new(name: 'WAFStaleDataException')
     WafAction = Shapes::StructureShape.new(name: 'WafAction')
     WafActionType = Shapes::StringShape.new(name: 'WafActionType')
+    WafRuleType = Shapes::StringShape.new(name: 'WafRuleType')
     WebACL = Shapes::StructureShape.new(name: 'WebACL')
     WebACLSummaries = Shapes::ListShape.new(name: 'WebACLSummaries')
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
@@ -196,6 +214,7 @@ module Aws::WAF
     ActivatedRule.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "Priority"))
     ActivatedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     ActivatedRule.add_member(:action, Shapes::ShapeRef.new(shape: WafAction, required: true, location_name: "Action"))
+    ActivatedRule.add_member(:type, Shapes::ShapeRef.new(shape: WafRuleType, location_name: "Type"))
     ActivatedRule.struct_class = Types::ActivatedRule
 
     ActivatedRules.member = Shapes::ShapeRef.new(shape: ActivatedRule)
@@ -240,6 +259,17 @@ module Aws::WAF
     CreateIPSetResponse.add_member(:ip_set, Shapes::ShapeRef.new(shape: IPSet, location_name: "IPSet"))
     CreateIPSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     CreateIPSetResponse.struct_class = Types::CreateIPSetResponse
+
+    CreateRateBasedRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateRateBasedRuleRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    CreateRateBasedRuleRequest.add_member(:rate_key, Shapes::ShapeRef.new(shape: RateKey, required: true, location_name: "RateKey"))
+    CreateRateBasedRuleRequest.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
+    CreateRateBasedRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRateBasedRuleRequest.struct_class = Types::CreateRateBasedRuleRequest
+
+    CreateRateBasedRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RateBasedRule, location_name: "Rule"))
+    CreateRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    CreateRateBasedRuleResponse.struct_class = Types::CreateRateBasedRuleResponse
 
     CreateRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateRuleRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
@@ -297,6 +327,13 @@ module Aws::WAF
 
     DeleteIPSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
+
+    DeleteRateBasedRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    DeleteRateBasedRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    DeleteRateBasedRuleRequest.struct_class = Types::DeleteRateBasedRuleRequest
+
+    DeleteRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    DeleteRateBasedRuleResponse.struct_class = Types::DeleteRateBasedRuleResponse
 
     DeleteRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     DeleteRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
@@ -359,6 +396,20 @@ module Aws::WAF
 
     GetIPSetResponse.add_member(:ip_set, Shapes::ShapeRef.new(shape: IPSet, location_name: "IPSet"))
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
+
+    GetRateBasedRuleManagedKeysRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    GetRateBasedRuleManagedKeysRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    GetRateBasedRuleManagedKeysRequest.struct_class = Types::GetRateBasedRuleManagedKeysRequest
+
+    GetRateBasedRuleManagedKeysResponse.add_member(:managed_keys, Shapes::ShapeRef.new(shape: ManagedKeys, location_name: "ManagedKeys"))
+    GetRateBasedRuleManagedKeysResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    GetRateBasedRuleManagedKeysResponse.struct_class = Types::GetRateBasedRuleManagedKeysResponse
+
+    GetRateBasedRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    GetRateBasedRuleRequest.struct_class = Types::GetRateBasedRuleRequest
+
+    GetRateBasedRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RateBasedRule, location_name: "Rule"))
+    GetRateBasedRuleResponse.struct_class = Types::GetRateBasedRuleResponse
 
     GetRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     GetRuleRequest.struct_class = Types::GetRuleRequest
@@ -454,6 +505,14 @@ module Aws::WAF
     ListIPSetsResponse.add_member(:ip_sets, Shapes::ShapeRef.new(shape: IPSetSummaries, location_name: "IPSets"))
     ListIPSetsResponse.struct_class = Types::ListIPSetsResponse
 
+    ListRateBasedRulesRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRateBasedRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListRateBasedRulesRequest.struct_class = Types::ListRateBasedRulesRequest
+
+    ListRateBasedRulesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRateBasedRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: RuleSummaries, location_name: "Rules"))
+    ListRateBasedRulesResponse.struct_class = Types::ListRateBasedRulesResponse
+
     ListRulesRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
     ListRulesRequest.struct_class = Types::ListRulesRequest
@@ -494,12 +553,22 @@ module Aws::WAF
     ListXssMatchSetsResponse.add_member(:xss_match_sets, Shapes::ShapeRef.new(shape: XssMatchSetSummaries, location_name: "XssMatchSets"))
     ListXssMatchSetsResponse.struct_class = Types::ListXssMatchSetsResponse
 
+    ManagedKeys.member = Shapes::ShapeRef.new(shape: ManagedKey)
+
     Predicate.add_member(:negated, Shapes::ShapeRef.new(shape: Negated, required: true, location_name: "Negated"))
     Predicate.add_member(:type, Shapes::ShapeRef.new(shape: PredicateType, required: true, location_name: "Type"))
     Predicate.add_member(:data_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DataId"))
     Predicate.struct_class = Types::Predicate
 
     Predicates.member = Shapes::ShapeRef.new(shape: Predicate)
+
+    RateBasedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    RateBasedRule.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    RateBasedRule.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    RateBasedRule.add_member(:match_predicates, Shapes::ShapeRef.new(shape: Predicates, required: true, location_name: "MatchPredicates"))
+    RateBasedRule.add_member(:rate_key, Shapes::ShapeRef.new(shape: RateKey, required: true, location_name: "RateKey"))
+    RateBasedRule.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
+    RateBasedRule.struct_class = Types::RateBasedRule
 
     Rule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -594,6 +663,15 @@ module Aws::WAF
 
     UpdateIPSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
+
+    UpdateRateBasedRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
+    UpdateRateBasedRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    UpdateRateBasedRuleRequest.add_member(:updates, Shapes::ShapeRef.new(shape: RuleUpdates, required: true, location_name: "Updates"))
+    UpdateRateBasedRuleRequest.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
+    UpdateRateBasedRuleRequest.struct_class = Types::UpdateRateBasedRuleRequest
+
+    UpdateRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    UpdateRateBasedRuleResponse.struct_class = Types::UpdateRateBasedRuleResponse
 
     UpdateRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     UpdateRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
@@ -724,6 +802,19 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
+      api.add_operation(:create_rate_based_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRateBasedRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRateBasedRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRateBasedRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
       api.add_operation(:create_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRule"
         o.http_method = "POST"
@@ -813,6 +904,20 @@ module Aws::WAF
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteIPSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteIPSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+      end)
+
+      api.add_operation(:delete_rate_based_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRateBasedRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRateBasedRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRateBasedRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
@@ -932,6 +1037,29 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
       end)
 
+      api.add_operation(:get_rate_based_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRateBasedRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRateBasedRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRateBasedRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
+      api.add_operation(:get_rate_based_rule_managed_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRateBasedRuleManagedKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRateBasedRuleManagedKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRateBasedRuleManagedKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+      end)
+
       api.add_operation(:get_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRule"
         o.http_method = "POST"
@@ -1017,6 +1145,16 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
       end)
 
+      api.add_operation(:list_rate_based_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRateBasedRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRateBasedRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRateBasedRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
       api.add_operation(:list_rules, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRules"
         o.http_method = "POST"
@@ -1089,6 +1227,23 @@ module Aws::WAF
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateIPSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateIPSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentContainerException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
+      api.add_operation(:update_rate_based_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRateBasedRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRateBasedRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRateBasedRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)

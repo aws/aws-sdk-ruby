@@ -336,7 +336,7 @@ module Aws::STS
     #   The regex used to validated this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:\\/-
+    #   characters: =,.@:/-
     #
     #
     #
@@ -1194,10 +1194,10 @@ module Aws::STS
     #   device for an IAM user by going to the AWS Management Console and
     #   viewing the user's security credentials.
     #
-    #   The regex used to validate this parameter is a string of characters
+    #   The regex used to validated this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@-
+    #   characters: =,.@:/-
     #
     # @option params [String] :token_code
     #   The value provided by the MFA device, if MFA is required. If any
@@ -1251,7 +1251,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.0.0.rc11'
+      context[:gem_version] = '3.0.0.rc12'
       Seahorse::Client::Request.new(handlers, context)
     end
 

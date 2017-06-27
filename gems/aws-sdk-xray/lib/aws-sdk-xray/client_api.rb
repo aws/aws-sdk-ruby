@@ -214,6 +214,7 @@ module Aws::XRay
     Service.add_member(:edges, Shapes::ShapeRef.new(shape: EdgeList, location_name: "Edges"))
     Service.add_member(:summary_statistics, Shapes::ShapeRef.new(shape: ServiceStatistics, location_name: "SummaryStatistics"))
     Service.add_member(:duration_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "DurationHistogram"))
+    Service.add_member(:response_time_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "ResponseTimeHistogram"))
     Service.struct_class = Types::Service
 
     ServiceId.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))

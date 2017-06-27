@@ -136,6 +136,9 @@ module Aws::CodeDeploy
     GetDeploymentOutput = Shapes::StructureShape.new(name: 'GetDeploymentOutput')
     GetOnPremisesInstanceInput = Shapes::StructureShape.new(name: 'GetOnPremisesInstanceInput')
     GetOnPremisesInstanceOutput = Shapes::StructureShape.new(name: 'GetOnPremisesInstanceOutput')
+    GitHubAccountTokenDoesNotExistException = Shapes::StructureShape.new(name: 'GitHubAccountTokenDoesNotExistException')
+    GitHubAccountTokenName = Shapes::StringShape.new(name: 'GitHubAccountTokenName')
+    GitHubAccountTokenNameList = Shapes::ListShape.new(name: 'GitHubAccountTokenNameList')
     GitHubLocation = Shapes::StructureShape.new(name: 'GitHubLocation')
     GreenFleetProvisioningAction = Shapes::StringShape.new(name: 'GreenFleetProvisioningAction')
     GreenFleetProvisioningOption = Shapes::StructureShape.new(name: 'GreenFleetProvisioningOption')
@@ -202,6 +205,7 @@ module Aws::CodeDeploy
     InvalidTimeRangeException = Shapes::StructureShape.new(name: 'InvalidTimeRangeException')
     InvalidTriggerConfigException = Shapes::StructureShape.new(name: 'InvalidTriggerConfigException')
     Key = Shapes::StringShape.new(name: 'Key')
+    LastDeploymentInfo = Shapes::StructureShape.new(name: 'LastDeploymentInfo')
     LifecycleErrorCode = Shapes::StringShape.new(name: 'LifecycleErrorCode')
     LifecycleEvent = Shapes::StructureShape.new(name: 'LifecycleEvent')
     LifecycleEventList = Shapes::ListShape.new(name: 'LifecycleEventList')
@@ -221,6 +225,8 @@ module Aws::CodeDeploy
     ListDeploymentInstancesOutput = Shapes::StructureShape.new(name: 'ListDeploymentInstancesOutput')
     ListDeploymentsInput = Shapes::StructureShape.new(name: 'ListDeploymentsInput')
     ListDeploymentsOutput = Shapes::StructureShape.new(name: 'ListDeploymentsOutput')
+    ListGitHubAccountTokenNamesInput = Shapes::StructureShape.new(name: 'ListGitHubAccountTokenNamesInput')
+    ListGitHubAccountTokenNamesOutput = Shapes::StructureShape.new(name: 'ListGitHubAccountTokenNamesOutput')
     ListOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'ListOnPremisesInstancesInput')
     ListOnPremisesInstancesOutput = Shapes::StructureShape.new(name: 'ListOnPremisesInstancesOutput')
     ListStateFilterAction = Shapes::StringShape.new(name: 'ListStateFilterAction')
@@ -238,6 +244,7 @@ module Aws::CodeDeploy
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
     RemoveTagsFromOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'RemoveTagsFromOnPremisesInstancesInput')
     Repository = Shapes::StringShape.new(name: 'Repository')
+    ResourceValidationException = Shapes::StructureShape.new(name: 'ResourceValidationException')
     RevisionDoesNotExistException = Shapes::StructureShape.new(name: 'RevisionDoesNotExistException')
     RevisionInfo = Shapes::StructureShape.new(name: 'RevisionInfo')
     RevisionInfoList = Shapes::ListShape.new(name: 'RevisionInfoList')
@@ -299,6 +306,7 @@ module Aws::CodeDeploy
     ApplicationInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     ApplicationInfo.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
     ApplicationInfo.add_member(:linked_to_git_hub, Shapes::ShapeRef.new(shape: Boolean, location_name: "linkedToGitHub"))
+    ApplicationInfo.add_member(:git_hub_account_name, Shapes::ShapeRef.new(shape: GitHubAccountTokenName, location_name: "gitHubAccountName"))
     ApplicationInfo.struct_class = Types::ApplicationInfo
 
     ApplicationsInfoList.member = Shapes::ShapeRef.new(shape: ApplicationInfo)
@@ -456,6 +464,8 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
     DeploymentGroupInfo.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     DeploymentGroupInfo.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
+    DeploymentGroupInfo.add_member(:last_successful_deployment, Shapes::ShapeRef.new(shape: LastDeploymentInfo, location_name: "lastSuccessfulDeployment"))
+    DeploymentGroupInfo.add_member(:last_attempted_deployment, Shapes::ShapeRef.new(shape: LastDeploymentInfo, location_name: "lastAttemptedDeployment"))
     DeploymentGroupInfo.struct_class = Types::DeploymentGroupInfo
 
     DeploymentGroupInfoList.member = Shapes::ShapeRef.new(shape: DeploymentGroupInfo)
@@ -590,6 +600,8 @@ module Aws::CodeDeploy
     GetOnPremisesInstanceOutput.add_member(:instance_info, Shapes::ShapeRef.new(shape: InstanceInfo, location_name: "instanceInfo"))
     GetOnPremisesInstanceOutput.struct_class = Types::GetOnPremisesInstanceOutput
 
+    GitHubAccountTokenNameList.member = Shapes::ShapeRef.new(shape: GitHubAccountTokenName)
+
     GitHubLocation.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     GitHubLocation.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId"))
     GitHubLocation.struct_class = Types::GitHubLocation
@@ -625,6 +637,12 @@ module Aws::CodeDeploy
     InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
 
     InstancesList.member = Shapes::ShapeRef.new(shape: InstanceId)
+
+    LastDeploymentInfo.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    LastDeploymentInfo.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
+    LastDeploymentInfo.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    LastDeploymentInfo.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
+    LastDeploymentInfo.struct_class = Types::LastDeploymentInfo
 
     LifecycleEvent.add_member(:lifecycle_event_name, Shapes::ShapeRef.new(shape: LifecycleEventName, location_name: "lifecycleEventName"))
     LifecycleEvent.add_member(:diagnostics, Shapes::ShapeRef.new(shape: Diagnostics, location_name: "diagnostics"))
@@ -691,6 +709,13 @@ module Aws::CodeDeploy
     ListDeploymentsOutput.add_member(:deployments, Shapes::ShapeRef.new(shape: DeploymentsList, location_name: "deployments"))
     ListDeploymentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDeploymentsOutput.struct_class = Types::ListDeploymentsOutput
+
+    ListGitHubAccountTokenNamesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListGitHubAccountTokenNamesInput.struct_class = Types::ListGitHubAccountTokenNamesInput
+
+    ListGitHubAccountTokenNamesOutput.add_member(:token_name_list, Shapes::ShapeRef.new(shape: GitHubAccountTokenNameList, location_name: "tokenNameList"))
+    ListGitHubAccountTokenNamesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListGitHubAccountTokenNamesOutput.struct_class = Types::ListGitHubAccountTokenNamesOutput
 
     ListOnPremisesInstancesInput.add_member(:registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, location_name: "registrationStatus"))
     ListOnPremisesInstancesInput.add_member(:tag_filters, Shapes::ShapeRef.new(shape: TagFilterList, location_name: "tagFilters"))
@@ -1252,6 +1277,16 @@ module Aws::CodeDeploy
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_git_hub_account_token_names, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGitHubAccountTokenNames"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGitHubAccountTokenNamesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListGitHubAccountTokenNamesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceValidationException)
       end)
 
       api.add_operation(:list_on_premises_instances, Seahorse::Model::Operation.new.tap do |o|

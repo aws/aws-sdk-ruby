@@ -73,11 +73,17 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_tags(filters: [{
-        name: "key",
-        values: [@key]
-      }])
-      @data = resp.tags[]
+      resp = @client.describe_tags(filters: [
+        {
+          name: "key",
+          values: [@key]
+        },
+        {
+          name: @resource_type,
+          values: [@resource_id]
+        }
+      ])
+      @data = resp.tags[0]
       self
     end
     alias :reload :load

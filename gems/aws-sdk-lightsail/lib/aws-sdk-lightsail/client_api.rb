@@ -275,7 +275,7 @@ module Aws::Lightsail
 
     CreateInstancesRequest.add_member(:instance_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceNames"))
     CreateInstancesRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, required: true, location_name: "availabilityZone"))
-    CreateInstancesRequest.add_member(:custom_image_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "customImageName"))
+    CreateInstancesRequest.add_member(:custom_image_name, Shapes::ShapeRef.new(shape: ResourceName, deprecated: true, location_name: "customImageName"))
     CreateInstancesRequest.add_member(:blueprint_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "blueprintId"))
     CreateInstancesRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "bundleId"))
     CreateInstancesRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: string, location_name: "userData"))
@@ -496,7 +496,8 @@ module Aws::Lightsail
     GetOperationsForResourceRequest.struct_class = Types::GetOperationsForResourceRequest
 
     GetOperationsForResourceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    GetOperationsForResourceResult.add_member(:next_page_count, Shapes::ShapeRef.new(shape: string, location_name: "nextPageCount"))
+    GetOperationsForResourceResult.add_member(:next_page_count, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "nextPageCount"))
+    GetOperationsForResourceResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetOperationsForResourceResult.struct_class = Types::GetOperationsForResourceResult
 
     GetOperationsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))

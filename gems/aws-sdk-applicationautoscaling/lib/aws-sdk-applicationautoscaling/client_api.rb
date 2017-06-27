@@ -16,6 +16,7 @@ module Aws::ApplicationAutoScaling
     Alarms = Shapes::ListShape.new(name: 'Alarms')
     ConcurrentUpdateException = Shapes::StructureShape.new(name: 'ConcurrentUpdateException')
     Cooldown = Shapes::IntegerShape.new(name: 'Cooldown')
+    CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
     DeleteScalingPolicyRequest = Shapes::StructureShape.new(name: 'DeleteScalingPolicyRequest')
     DeleteScalingPolicyResponse = Shapes::StructureShape.new(name: 'DeleteScalingPolicyResponse')
     DeregisterScalableTargetRequest = Shapes::StructureShape.new(name: 'DeregisterScalableTargetRequest')
@@ -33,11 +34,21 @@ module Aws::ApplicationAutoScaling
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricAggregationType = Shapes::StringShape.new(name: 'MetricAggregationType')
+    MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
+    MetricDimensionName = Shapes::StringShape.new(name: 'MetricDimensionName')
+    MetricDimensionValue = Shapes::StringShape.new(name: 'MetricDimensionValue')
+    MetricDimensions = Shapes::ListShape.new(name: 'MetricDimensions')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricNamespace = Shapes::StringShape.new(name: 'MetricNamespace')
     MetricScale = Shapes::FloatShape.new(name: 'MetricScale')
+    MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
+    MetricType = Shapes::StringShape.new(name: 'MetricType')
+    MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     MinAdjustmentMagnitude = Shapes::IntegerShape.new(name: 'MinAdjustmentMagnitude')
     ObjectNotFoundException = Shapes::StructureShape.new(name: 'ObjectNotFoundException')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
+    PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     PutScalingPolicyRequest = Shapes::StructureShape.new(name: 'PutScalingPolicyRequest')
     PutScalingPolicyResponse = Shapes::StructureShape.new(name: 'PutScalingPolicyResponse')
     RegisterScalableTargetRequest = Shapes::StructureShape.new(name: 'RegisterScalableTargetRequest')
@@ -46,6 +57,7 @@ module Aws::ApplicationAutoScaling
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdMaxLen1600 = Shapes::StringShape.new(name: 'ResourceIdMaxLen1600')
     ResourceIdsMaxLen1600 = Shapes::ListShape.new(name: 'ResourceIdsMaxLen1600')
+    ResourceLabel = Shapes::StringShape.new(name: 'ResourceLabel')
     ScalableDimension = Shapes::StringShape.new(name: 'ScalableDimension')
     ScalableTarget = Shapes::StructureShape.new(name: 'ScalableTarget')
     ScalableTargets = Shapes::ListShape.new(name: 'ScalableTargets')
@@ -59,6 +71,7 @@ module Aws::ApplicationAutoScaling
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
     StepScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'StepScalingPolicyConfiguration')
+    TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
@@ -68,6 +81,13 @@ module Aws::ApplicationAutoScaling
     Alarm.struct_class = Types::Alarm
 
     Alarms.member = Shapes::ShapeRef.new(shape: Alarm)
+
+    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
+    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "Statistic"))
+    CustomizedMetricSpecification.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    CustomizedMetricSpecification.struct_class = Types::CustomizedMetricSpecification
 
     DeleteScalingPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "PolicyName"))
     DeleteScalingPolicyRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
@@ -118,15 +138,27 @@ module Aws::ApplicationAutoScaling
     DescribeScalingPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScalingPoliciesResponse.struct_class = Types::DescribeScalingPoliciesResponse
 
+    MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
+    MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
+    MetricDimension.struct_class = Types::MetricDimension
+
+    MetricDimensions.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
+    PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: MetricType, required: true, location_name: "PredefinedMetricType"))
+    PredefinedMetricSpecification.add_member(:resource_label, Shapes::ShapeRef.new(shape: ResourceLabel, location_name: "ResourceLabel"))
+    PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
+
     PutScalingPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
     PutScalingPolicyRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     PutScalingPolicyRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
     PutScalingPolicyRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, required: true, location_name: "ScalableDimension"))
     PutScalingPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "PolicyType"))
     PutScalingPolicyRequest.add_member(:step_scaling_policy_configuration, Shapes::ShapeRef.new(shape: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
+    PutScalingPolicyRequest.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
     PutScalingPolicyRequest.struct_class = Types::PutScalingPolicyRequest
 
     PutScalingPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "PolicyARN"))
+    PutScalingPolicyResponse.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     PutScalingPolicyResponse.struct_class = Types::PutScalingPolicyResponse
 
     RegisterScalableTargetRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
@@ -176,6 +208,7 @@ module Aws::ApplicationAutoScaling
     ScalingPolicy.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, required: true, location_name: "ScalableDimension"))
     ScalingPolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "PolicyType"))
     ScalingPolicy.add_member(:step_scaling_policy_configuration, Shapes::ShapeRef.new(shape: StepScalingPolicyConfiguration, location_name: "StepScalingPolicyConfiguration"))
+    ScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTrackingScalingPolicyConfiguration"))
     ScalingPolicy.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     ScalingPolicy.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
@@ -193,6 +226,13 @@ module Aws::ApplicationAutoScaling
     StepScalingPolicyConfiguration.add_member(:cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "Cooldown"))
     StepScalingPolicyConfiguration.add_member(:metric_aggregation_type, Shapes::ShapeRef.new(shape: MetricAggregationType, location_name: "MetricAggregationType"))
     StepScalingPolicyConfiguration.struct_class = Types::StepScalingPolicyConfiguration
+
+    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:predefined_metric_specification, Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:customized_metric_specification, Shapes::ShapeRef.new(shape: CustomizedMetricSpecification, location_name: "CustomizedMetricSpecification"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleOutCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleInCooldown"))
+    TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
 
 
     # @api private
@@ -299,6 +339,7 @@ module Aws::ApplicationAutoScaling
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: FailedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 

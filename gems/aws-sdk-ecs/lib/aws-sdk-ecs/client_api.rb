@@ -245,6 +245,9 @@ module Aws::ECS
     ContainerOverride.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverride.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "cpu"))
+    ContainerOverride.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
+    ContainerOverride.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
     ContainerOverride.struct_class = Types::ContainerOverride
 
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)

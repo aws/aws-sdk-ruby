@@ -129,8 +129,8 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon Linux
-    #     2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.

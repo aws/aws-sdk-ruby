@@ -161,7 +161,8 @@ module Aws::XRay
     #   @return [Types::EdgeStatistics]
     #
     # @!attribute [rw] response_time_histogram
-    #   Histogram describing the prominence of response times on the edge.
+    #   A histogram that maps the spread of client response times on an
+    #   edge.
     #   @return [Array<Types::HistogramEntry>]
     #
     # @!attribute [rw] aliases
@@ -550,47 +551,8 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] trace_segment_documents
-    #   A JSON document defining one or more segments or subsegments.
-    #   Segments must include the following fields.
-    #
-    #   **Required Segment Document Fields**
-    #
-    #   * `name` - The name of the service that handled the request.
-    #
-    #   * `id` - A 64-bit identifier for the segment, unique among segments
-    #     in the same trace, in 16 hexadecimal digits.
-    #
-    #   * `trace_id` - A unique identifier that connects all segments and
-    #     subsegments originating from a single client request.
-    #
-    #   * `start_time` - Time the segment or subsegment was created, in
-    #     floating point seconds in epoch time, accurate to milliseconds.
-    #     For example, `1480615200.010` or `1.480615200010E9`.
-    #
-    #   * `end_time` - Time the segment or subsegment was closed. For
-    #     example, `1480615200.090` or `1.480615200090E9`. Specify either an
-    #     `end_time` or `in_progress`.
-    #
-    #   * `in_progress` - Set to `true` instead of specifying an `end_time`
-    #     to record that a segment has been started, but is not complete.
-    #     Send an in progress segment when your application receives a
-    #     request that will take a long time to serve, to trace the fact
-    #     that the request was received. When the response is sent, send the
-    #     complete segment to overwrite the in-progress segment.
-    #
-    #   A `trace_id` consists of three numbers separated by hyphens. For
-    #   example, 1-58406520-a006649127e371903a2de979. This includes:
-    #
-    #   **Trace ID Format**
-    #
-    #   * The version number, i.e. `1`.
-    #
-    #   * The time of the original request, in Unix epoch time, in 8
-    #     hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in
-    #     epoch time is `1480615200` seconds, or `58406520` in hexadecimal.
-    #
-    #   * A 96-bit identifier for the trace, globally unique, in 24
-    #     hexadecimal digits.
+    #   A string containing a JSON document defining one or more segments or
+    #   subsegments.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsRequest AWS API Documentation
@@ -611,14 +573,17 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # Information about a segment
+    # A segment from a trace that has been ingested by the X-Ray service.
+    # The segment can be compiled from documents uploaded with
+    # PutTraceSegments, or an `inferred` segment for a downstream service,
+    # generated from a subsegment sent by the service that called it.
     #
     # @!attribute [rw] id
     #   The segment's ID.
     #   @return [String]
     #
     # @!attribute [rw] document
-    #   The segment document.
+    #   The segment document
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Segment AWS API Documentation
@@ -693,7 +658,11 @@ module Aws::XRay
     #   @return [Types::ServiceStatistics]
     #
     # @!attribute [rw] duration_histogram
-    #   Histogram mapping the spread of trace durations
+    #   A histogram that maps the spread of service durations.
+    #   @return [Array<Types::HistogramEntry>]
+    #
+    # @!attribute [rw] response_time_histogram
+    #   A histogram that maps the spread of service response times.
     #   @return [Array<Types::HistogramEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Service AWS API Documentation
@@ -710,7 +679,8 @@ module Aws::XRay
       :end_time,
       :edges,
       :summary_statistics,
-      :duration_histogram)
+      :duration_histogram,
+      :response_time_histogram)
       include Aws::Structure
     end
 

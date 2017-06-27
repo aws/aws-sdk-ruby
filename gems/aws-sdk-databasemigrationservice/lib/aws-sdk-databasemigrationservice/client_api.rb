@@ -16,16 +16,21 @@ module Aws::DatabaseMigrationService
     AccountQuotaList = Shapes::ListShape.new(name: 'AccountQuotaList')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
     AddTagsToResourceResponse = Shapes::StructureShape.new(name: 'AddTagsToResourceResponse')
+    AuthMechanismValue = Shapes::StringShape.new(name: 'AuthMechanismValue')
+    AuthTypeValue = Shapes::StringShape.new(name: 'AuthTypeValue')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
     CertificateWallet = Shapes::BlobShape.new(name: 'CertificateWallet')
+    CompressionTypeValue = Shapes::StringShape.new(name: 'CompressionTypeValue')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     CreateEndpointMessage = Shapes::StructureShape.new(name: 'CreateEndpointMessage')
     CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
+    CreateEventSubscriptionMessage = Shapes::StructureShape.new(name: 'CreateEventSubscriptionMessage')
+    CreateEventSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResponse')
     CreateReplicationInstanceMessage = Shapes::StructureShape.new(name: 'CreateReplicationInstanceMessage')
     CreateReplicationInstanceResponse = Shapes::StructureShape.new(name: 'CreateReplicationInstanceResponse')
     CreateReplicationSubnetGroupMessage = Shapes::StructureShape.new(name: 'CreateReplicationSubnetGroupMessage')
@@ -36,6 +41,8 @@ module Aws::DatabaseMigrationService
     DeleteCertificateResponse = Shapes::StructureShape.new(name: 'DeleteCertificateResponse')
     DeleteEndpointMessage = Shapes::StructureShape.new(name: 'DeleteEndpointMessage')
     DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
+    DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
+    DeleteEventSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResponse')
     DeleteReplicationInstanceMessage = Shapes::StructureShape.new(name: 'DeleteReplicationInstanceMessage')
     DeleteReplicationInstanceResponse = Shapes::StructureShape.new(name: 'DeleteReplicationInstanceResponse')
     DeleteReplicationSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteReplicationSubnetGroupMessage')
@@ -52,6 +59,12 @@ module Aws::DatabaseMigrationService
     DescribeEndpointTypesResponse = Shapes::StructureShape.new(name: 'DescribeEndpointTypesResponse')
     DescribeEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointsMessage')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
+    DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
+    DescribeEventCategoriesResponse = Shapes::StructureShape.new(name: 'DescribeEventCategoriesResponse')
+    DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
+    DescribeEventSubscriptionsResponse = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsResponse')
+    DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
+    DescribeEventsResponse = Shapes::StructureShape.new(name: 'DescribeEventsResponse')
     DescribeOrderableReplicationInstancesMessage = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesMessage')
     DescribeOrderableReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesResponse')
     DescribeRefreshSchemasStatusMessage = Shapes::StructureShape.new(name: 'DescribeRefreshSchemasStatusMessage')
@@ -67,8 +80,16 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsMessage = Shapes::StructureShape.new(name: 'DescribeTableStatisticsMessage')
     DescribeTableStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeTableStatisticsResponse')
     DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
+    DynamoDbSettings = Shapes::StructureShape.new(name: 'DynamoDbSettings')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointList = Shapes::ListShape.new(name: 'EndpointList')
+    Event = Shapes::StructureShape.new(name: 'Event')
+    EventCategoriesList = Shapes::ListShape.new(name: 'EventCategoriesList')
+    EventCategoryGroup = Shapes::StructureShape.new(name: 'EventCategoryGroup')
+    EventCategoryGroupList = Shapes::ListShape.new(name: 'EventCategoryGroupList')
+    EventList = Shapes::ListShape.new(name: 'EventList')
+    EventSubscription = Shapes::StructureShape.new(name: 'EventSubscription')
+    EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
@@ -89,18 +110,24 @@ module Aws::DatabaseMigrationService
     MigrationTypeValue = Shapes::StringShape.new(name: 'MigrationTypeValue')
     ModifyEndpointMessage = Shapes::StructureShape.new(name: 'ModifyEndpointMessage')
     ModifyEndpointResponse = Shapes::StructureShape.new(name: 'ModifyEndpointResponse')
+    ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
+    ModifyEventSubscriptionResponse = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResponse')
     ModifyReplicationInstanceMessage = Shapes::StructureShape.new(name: 'ModifyReplicationInstanceMessage')
     ModifyReplicationInstanceResponse = Shapes::StructureShape.new(name: 'ModifyReplicationInstanceResponse')
     ModifyReplicationSubnetGroupMessage = Shapes::StructureShape.new(name: 'ModifyReplicationSubnetGroupMessage')
     ModifyReplicationSubnetGroupResponse = Shapes::StructureShape.new(name: 'ModifyReplicationSubnetGroupResponse')
     ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
     ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
+    MongoDbSettings = Shapes::StructureShape.new(name: 'MongoDbSettings')
+    NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
     RefreshSchemasMessage = Shapes::StructureShape.new(name: 'RefreshSchemasMessage')
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
     RefreshSchemasStatus = Shapes::StructureShape.new(name: 'RefreshSchemasStatus')
     RefreshSchemasStatusTypeValue = Shapes::StringShape.new(name: 'RefreshSchemasStatusTypeValue')
+    ReloadTablesMessage = Shapes::StructureShape.new(name: 'ReloadTablesMessage')
+    ReloadTablesResponse = Shapes::StructureShape.new(name: 'ReloadTablesResponse')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
     RemoveTagsFromResourceResponse = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResponse')
     ReplicationEndpointTypeValue = Shapes::StringShape.new(name: 'ReplicationEndpointTypeValue')
@@ -118,8 +145,13 @@ module Aws::DatabaseMigrationService
     ResourceAlreadyExistsFault = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsFault')
     ResourceNotFoundFault = Shapes::StructureShape.new(name: 'ResourceNotFoundFault')
     ResourceQuotaExceededFault = Shapes::StructureShape.new(name: 'ResourceQuotaExceededFault')
+    S3Settings = Shapes::StructureShape.new(name: 'S3Settings')
+    SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
+    SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
     SecretString = Shapes::StringShape.new(name: 'SecretString')
+    SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartReplicationTaskMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskMessage')
     StartReplicationTaskResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskResponse')
     StartReplicationTaskTypeValue = Shapes::StringShape.new(name: 'StartReplicationTaskTypeValue')
@@ -134,8 +166,10 @@ module Aws::DatabaseMigrationService
     SupportedEndpointType = Shapes::StructureShape.new(name: 'SupportedEndpointType')
     SupportedEndpointTypeList = Shapes::ListShape.new(name: 'SupportedEndpointTypeList')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
+    TableListToReload = Shapes::ListShape.new(name: 'TableListToReload')
     TableStatistics = Shapes::StructureShape.new(name: 'TableStatistics')
     TableStatisticsList = Shapes::ListShape.new(name: 'TableStatisticsList')
+    TableToReload = Shapes::StructureShape.new(name: 'TableToReload')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TestConnectionMessage = Shapes::StructureShape.new(name: 'TestConnectionMessage')
@@ -198,10 +232,25 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEndpointMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
     CreateEndpointMessage.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    CreateEndpointMessage.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
+    CreateEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    CreateEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
     CreateEndpointResponse.struct_class = Types::CreateEndpointResponse
+
+    CreateEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    CreateEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnsTopicArn"))
+    CreateEventSubscriptionMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    CreateEventSubscriptionMessage.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    CreateEventSubscriptionMessage.add_member(:source_ids, Shapes::ShapeRef.new(shape: SourceIdsList, location_name: "SourceIds"))
+    CreateEventSubscriptionMessage.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enabled"))
+    CreateEventSubscriptionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEventSubscriptionMessage.struct_class = Types::CreateEventSubscriptionMessage
+
+    CreateEventSubscriptionResponse.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    CreateEventSubscriptionResponse.struct_class = Types::CreateEventSubscriptionResponse
 
     CreateReplicationInstanceMessage.add_member(:replication_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceIdentifier"))
     CreateReplicationInstanceMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
@@ -255,6 +304,12 @@ module Aws::DatabaseMigrationService
 
     DeleteEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
     DeleteEndpointResponse.struct_class = Types::DeleteEndpointResponse
+
+    DeleteEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    DeleteEventSubscriptionMessage.struct_class = Types::DeleteEventSubscriptionMessage
+
+    DeleteEventSubscriptionResponse.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    DeleteEventSubscriptionResponse.struct_class = Types::DeleteEventSubscriptionResponse
 
     DeleteReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     DeleteReplicationInstanceMessage.struct_class = Types::DeleteReplicationInstanceMessage
@@ -313,6 +368,38 @@ module Aws::DatabaseMigrationService
     DescribeEndpointsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointList, location_name: "Endpoints"))
     DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
+
+    DescribeEventCategoriesMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    DescribeEventCategoriesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeEventCategoriesMessage.struct_class = Types::DescribeEventCategoriesMessage
+
+    DescribeEventCategoriesResponse.add_member(:event_category_group_list, Shapes::ShapeRef.new(shape: EventCategoryGroupList, location_name: "EventCategoryGroupList"))
+    DescribeEventCategoriesResponse.struct_class = Types::DescribeEventCategoriesResponse
+
+    DescribeEventSubscriptionsMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionName"))
+    DescribeEventSubscriptionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeEventSubscriptionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventSubscriptionsMessage.struct_class = Types::DescribeEventSubscriptionsMessage
+
+    DescribeEventSubscriptionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventSubscriptionsResponse.add_member(:event_subscriptions_list, Shapes::ShapeRef.new(shape: EventSubscriptionsList, location_name: "EventSubscriptionsList"))
+    DescribeEventSubscriptionsResponse.struct_class = Types::DescribeEventSubscriptionsResponse
+
+    DescribeEventsMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
+    DescribeEventsMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
+    DescribeEventsMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    DescribeEventsMessage.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    DescribeEventsMessage.add_member(:duration, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Duration"))
+    DescribeEventsMessage.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    DescribeEventsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeEventsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventsMessage.struct_class = Types::DescribeEventsMessage
+
+    DescribeEventsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
+    DescribeEventsResponse.struct_class = Types::DescribeEventsResponse
 
     DescribeOrderableReplicationInstancesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeOrderableReplicationInstancesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -374,6 +461,9 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeTableStatisticsResponse.struct_class = Types::DescribeTableStatisticsResponse
 
+    DynamoDbSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
+    DynamoDbSettings.struct_class = Types::DynamoDbSettings
+
     Endpoint.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, location_name: "EndpointIdentifier"))
     Endpoint.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, location_name: "EndpointType"))
     Endpoint.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
@@ -387,9 +477,43 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
     Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
     Endpoint.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    Endpoint.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalId"))
+    Endpoint.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
+    Endpoint.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    Endpoint.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint")
+
+    Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
+    Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
+    Event.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    Event.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    Event.add_member(:date, Shapes::ShapeRef.new(shape: TStamp, location_name: "Date"))
+    Event.struct_class = Types::Event
+
+    EventCategoriesList.member = Shapes::ShapeRef.new(shape: String, location_name: "EventCategory")
+
+    EventCategoryGroup.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    EventCategoryGroup.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    EventCategoryGroup.struct_class = Types::EventCategoryGroup
+
+    EventCategoryGroupList.member = Shapes::ShapeRef.new(shape: EventCategoryGroup, location_name: "EventCategoryGroup")
+
+    EventList.member = Shapes::ShapeRef.new(shape: Event, location_name: "Event")
+
+    EventSubscription.add_member(:customer_aws_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomerAwsId"))
+    EventSubscription.add_member(:cust_subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "CustSubscriptionId"))
+    EventSubscription.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
+    EventSubscription.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    EventSubscription.add_member(:subscription_creation_time, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionCreationTime"))
+    EventSubscription.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    EventSubscription.add_member(:source_ids_list, Shapes::ShapeRef.new(shape: SourceIdsList, location_name: "SourceIdsList"))
+    EventSubscription.add_member(:event_categories_list, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategoriesList"))
+    EventSubscription.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    EventSubscription.struct_class = Types::EventSubscription
+
+    EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription")
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
@@ -402,6 +526,7 @@ module Aws::DatabaseMigrationService
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
     ImportCertificateMessage.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
+    ImportCertificateMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
 
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
@@ -427,10 +552,23 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:extra_connection_attributes, Shapes::ShapeRef.new(shape: String, location_name: "ExtraConnectionAttributes"))
     ModifyEndpointMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
     ModifyEndpointMessage.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    ModifyEndpointMessage.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
+    ModifyEndpointMessage.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
+    ModifyEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
     ModifyEndpointResponse.struct_class = Types::ModifyEndpointResponse
+
+    ModifyEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    ModifyEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
+    ModifyEventSubscriptionMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    ModifyEventSubscriptionMessage.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    ModifyEventSubscriptionMessage.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enabled"))
+    ModifyEventSubscriptionMessage.struct_class = Types::ModifyEventSubscriptionMessage
+
+    ModifyEventSubscriptionResponse.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    ModifyEventSubscriptionResponse.struct_class = Types::ModifyEventSubscriptionResponse
 
     ModifyReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     ModifyReplicationInstanceMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
@@ -467,6 +605,19 @@ module Aws::DatabaseMigrationService
     ModifyReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     ModifyReplicationTaskResponse.struct_class = Types::ModifyReplicationTaskResponse
 
+    MongoDbSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    MongoDbSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    MongoDbSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MongoDbSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MongoDbSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    MongoDbSettings.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthTypeValue, location_name: "AuthType"))
+    MongoDbSettings.add_member(:auth_mechanism, Shapes::ShapeRef.new(shape: AuthMechanismValue, location_name: "AuthMechanism"))
+    MongoDbSettings.add_member(:nesting_level, Shapes::ShapeRef.new(shape: NestingLevelValue, location_name: "NestingLevel"))
+    MongoDbSettings.add_member(:extract_doc_id, Shapes::ShapeRef.new(shape: String, location_name: "ExtractDocId"))
+    MongoDbSettings.add_member(:docs_to_investigate, Shapes::ShapeRef.new(shape: String, location_name: "DocsToInvestigate"))
+    MongoDbSettings.add_member(:auth_source, Shapes::ShapeRef.new(shape: String, location_name: "AuthSource"))
+    MongoDbSettings.struct_class = Types::MongoDbSettings
+
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     OrderableReplicationInstance.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
     OrderableReplicationInstance.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
@@ -491,6 +642,13 @@ module Aws::DatabaseMigrationService
     RefreshSchemasStatus.add_member(:last_refresh_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastRefreshDate"))
     RefreshSchemasStatus.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
     RefreshSchemasStatus.struct_class = Types::RefreshSchemasStatus
+
+    ReloadTablesMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
+    ReloadTablesMessage.add_member(:tables_to_reload, Shapes::ShapeRef.new(shape: TableListToReload, required: true, location_name: "TablesToReload"))
+    ReloadTablesMessage.struct_class = Types::ReloadTablesMessage
+
+    ReloadTablesResponse.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    ReloadTablesResponse.struct_class = Types::ReloadTablesResponse
 
     RemoveTagsFromResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     RemoveTagsFromResourceMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: KeyList, required: true, location_name: "TagKeys"))
@@ -568,7 +726,18 @@ module Aws::DatabaseMigrationService
     ReplicationTaskStats.add_member(:tables_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesErrored"))
     ReplicationTaskStats.struct_class = Types::ReplicationTaskStats
 
+    S3Settings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    S3Settings.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
+    S3Settings.add_member(:csv_row_delimiter, Shapes::ShapeRef.new(shape: String, location_name: "CsvRowDelimiter"))
+    S3Settings.add_member(:csv_delimiter, Shapes::ShapeRef.new(shape: String, location_name: "CsvDelimiter"))
+    S3Settings.add_member(:bucket_folder, Shapes::ShapeRef.new(shape: String, location_name: "BucketFolder"))
+    S3Settings.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    S3Settings.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionTypeValue, location_name: "CompressionType"))
+    S3Settings.struct_class = Types::S3Settings
+
     SchemaList.member = Shapes::ShapeRef.new(shape: String)
+
+    SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
 
     StartReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     StartReplicationTaskMessage.add_member(:start_replication_task_type, Shapes::ShapeRef.new(shape: StartReplicationTaskTypeValue, required: true, location_name: "StartReplicationTaskType"))
@@ -600,6 +769,8 @@ module Aws::DatabaseMigrationService
 
     SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType, location_name: "SupportedEndpointType")
 
+    TableListToReload.member = Shapes::ShapeRef.new(shape: TableToReload)
+
     TableStatistics.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
     TableStatistics.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "TableName"))
     TableStatistics.add_member(:inserts, Shapes::ShapeRef.new(shape: Long, location_name: "Inserts"))
@@ -607,11 +778,17 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:updates, Shapes::ShapeRef.new(shape: Long, location_name: "Updates"))
     TableStatistics.add_member(:ddls, Shapes::ShapeRef.new(shape: Long, location_name: "Ddls"))
     TableStatistics.add_member(:full_load_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadRows"))
+    TableStatistics.add_member(:full_load_condtnl_chk_failed_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadCondtnlChkFailedRows"))
+    TableStatistics.add_member(:full_load_error_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadErrorRows"))
     TableStatistics.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastUpdateTime"))
     TableStatistics.add_member(:table_state, Shapes::ShapeRef.new(shape: String, location_name: "TableState"))
     TableStatistics.struct_class = Types::TableStatistics
 
     TableStatisticsList.member = Shapes::ShapeRef.new(shape: TableStatistics)
+
+    TableToReload.add_member(:schema_name, Shapes::ShapeRef.new(shape: String, location_name: "SchemaName"))
+    TableToReload.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "TableName"))
+    TableToReload.struct_class = Types::TableToReload
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -672,6 +849,19 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
+      api.add_operation(:create_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
       api.add_operation(:create_replication_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationInstance"
         o.http_method = "POST"
@@ -710,6 +900,7 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateReplicationTaskMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateReplicationTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
@@ -733,6 +924,16 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEndpointMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
+      api.add_operation(:delete_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
@@ -782,6 +983,12 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeCertificatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -791,6 +998,12 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectionsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeConnectionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_endpoint_types, Seahorse::Model::Operation.new.tap do |o|
@@ -799,6 +1012,12 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointTypesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointTypesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
@@ -808,6 +1027,49 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_event_categories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventCategories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventCategoriesMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventCategoriesResponse)
+      end)
+
+      api.add_operation(:describe_event_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventSubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventSubscriptionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventSubscriptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_orderable_replication_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -816,6 +1078,12 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeOrderableReplicationInstancesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeOrderableReplicationInstancesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_refresh_schemas_status, Seahorse::Model::Operation.new.tap do |o|
@@ -835,6 +1103,12 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeReplicationInstancesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeReplicationInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_replication_subnet_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -844,6 +1118,12 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeReplicationSubnetGroupsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeReplicationSubnetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_replication_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -853,6 +1133,12 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeReplicationTasksMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeReplicationTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_schemas, Seahorse::Model::Operation.new.tap do |o|
@@ -863,6 +1149,12 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DescribeSchemasResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_table_statistics, Seahorse::Model::Operation.new.tap do |o|
@@ -873,6 +1165,12 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DescribeTableStatisticsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -904,6 +1202,19 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+      end)
+
+      api.add_operation(:modify_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
       end)
 
       api.add_operation(:modify_replication_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -956,6 +1267,16 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+      end)
+
+      api.add_operation(:reload_tables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReloadTables"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReloadTablesMessage)
+        o.output = Shapes::ShapeRef.new(shape: ReloadTablesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|

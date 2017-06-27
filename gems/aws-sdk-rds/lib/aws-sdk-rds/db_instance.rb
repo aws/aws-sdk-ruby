@@ -539,7 +539,9 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   The Oracle System ID (SID) of the created DB instance.
+    #   The Oracle System ID (SID) of the created DB instance. If you specify
+    #   `null`, the default value `ORCL` is used. You can't specify the
+    #   string NULL, or any other reserved word, for `DBName`.
     #
     #   Default: `ORCL`
     #
@@ -611,11 +613,33 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
-    #   Valid Values: `mysql` \| `mariadb` \| `oracle-se1` \| `oracle-se2` \|
-    #   `oracle-se` \| `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \|
-    #   `sqlserver-ex` \| `sqlserver-web` \| `postgres` \| `aurora`
-    #
     #   Not every database engine is available for every AWS region.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [String] :master_username
     #   The name for the master database user.
     #
@@ -856,97 +880,117 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
+    #   * Version 5.6 (available in these AWS regions: ap-northeast-1,
     #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
-    #     us-east-2, us-west-2):** ` 5.6.10a`
+    #     us-east-2, us-west-2): ` 5.6.10a`
     #
     #   ^
     #
     #   **MariaDB**
     #
-    #   * **Version 10.1 (available in these AWS regions: us-east-2):** `
-    #     10.1.16`
+    #   * `10.1.19` (supported in all AWS regions)
     #
-    #   * **Version 10.1 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-    #     us-west-2):** ` 10.1.14`
+    #   * `10.1.14` (supported in all regions except us-east-2)
     #
-    #   * **Version 10.0 (available in all AWS regions):** ` 10.0.24`
     #
-    #   * **Version 10.0 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 10.0.17`
+    #
+    #   * `10.0.28` (supported in all AWS regions)
+    #
+    #   * `10.0.24` (supported in all AWS regions)
+    #
+    #   * `10.0.17` (supported in all regions except us-east-2, ca-central-1,
+    #     eu-west-2)
     #
     #   **Microsoft SQL Server 2016**
     #
-    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS regions
-    #     except sa-east-1)
+    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS regions)
     #
-    #   ^
+    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS regions)
     #
     #   **Microsoft SQL Server 2014**
+    #
+    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS regions)
     #
     #   * `12.00.5000.0.v1` (supported for all editions, and all AWS regions)
     #
     #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
-    #     Edition, and all AWS regions except us-east-2)
+    #     Edition, and all AWS regions except ca-central-1 and eu-west-2)
     #
     #   **Microsoft SQL Server 2012**
+    #
+    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS regions)
     #
     #   * `11.00.6020.0.v1` (supported for all editions, and all AWS regions)
     #
     #   * `11.00.5058.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `11.00.2100.60.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **Microsoft SQL Server 2008 R2**
     #
     #   * `10.50.6529.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `10.50.6000.34.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `10.50.2789.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **MySQL**
     #
-    #   * **Version 5.7 (available in all AWS regions):** ` 5.7.11`
+    #   * `5.7.17` (supported in all AWS regions)
     #
-    #   * **Version 5.7 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 5.7.10`
+    #   * `5.7.16` (supported in all AWS regions)
     #
-    #   * **Version 5.6 (available in all AWS regions):** ` 5.6.29`
+    #   * `5.7.11` (supported in all AWS regions)
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 5.6.27`
+    #   * `5.7.10` (supported in all regions except us-east-2, ca-central-1,
+    #     eu-west-2)
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-    #     us-west-2):** ` 5.6.23`
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 5.6.19a |
-    #     5.6.19b | 5.6.21 | 5.6.21b | 5.6.22`
     #
-    #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
+    #   * `5.6.35` (supported in all AWS regions)
     #
-    #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
+    #   * `5.6.34` (supported in all AWS regions)
+    #
+    #   * `5.6.29` (supported in all AWS regions)
+    #
+    #   * `5.6.27` (supported in all regions except us-east-2, ca-central-1,
+    #     eu-west-2)
+    #
+    #   * `5.6.23` (supported in all regions except us-east-2, ap-south-1,
+    #     ca-central-1, eu-west-2)
+    #
+    #   * `5.6.22` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.21b` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.21` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.19b` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.19a` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #
+    #
+    #   * `5.5.54` (supported in all AWS regions)
+    #
+    #   * `5.5.53` (supported in all AWS regions)
+    #
+    #   * `5.5.46` (supported in all AWS regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v7` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -971,6 +1015,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
@@ -993,14 +1039,13 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6:** ` 9.6.1`
+    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2`
     #
-    #   * **Version 9.5:** `9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
+    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 | 9.3.5
-    #     | 9.3.3 | 9.3.2 | 9.3.1`
+    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades will be applied automatically to
     #   the DB instance during the maintenance window.
@@ -1147,7 +1192,7 @@ module Aws::RDS
     #   accounts to database accounts; otherwise false.
     #
     #   You can enable IAM database authentication for the following database
-    #   engines
+    #   engines:
     #
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #

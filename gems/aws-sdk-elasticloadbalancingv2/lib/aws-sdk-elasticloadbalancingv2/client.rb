@@ -946,15 +946,25 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<String>] :rule_arns
     #   The Amazon Resource Names (ARN) of the rules.
     #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return with this call.
+    #
     # @return [Types::DescribeRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRulesOutput#rules #rules} => Array&lt;Types::Rule&gt;
+    #   * {Types::DescribeRulesOutput#next_marker #next_marker} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rules({
     #     listener_arn: "ListenerArn",
     #     rule_arns: ["RuleArn"],
+    #     marker: "Marker",
+    #     page_size: 1,
     #   })
     #
     # @example Response structure
@@ -970,6 +980,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].type #=> String, one of "forward"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules AWS API Documentation
     #
@@ -1756,7 +1767,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

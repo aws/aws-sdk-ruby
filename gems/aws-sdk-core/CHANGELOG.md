@@ -1,7 +1,15 @@
 Unreleased Changes
 ------------------
 
-* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment variable before using `default` profile.
+3.0.0.rc13 (2017-06-26)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment
+  variable before using `default` profile.
 
 3.0.0.rc12 (2017-05-23)
 ------------------

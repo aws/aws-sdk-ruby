@@ -288,6 +288,143 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Creates a RateBasedRule. The `RateBasedRule` contains a `RateLimit`,
+    # which specifies the maximum number of requests that AWS WAF allows
+    # from a specified IP address in a five-minute period. The
+    # `RateBasedRule` also contains the `IPSet` objects, `ByteMatchSet`
+    # objects, and other predicates that identify the requests that you want
+    # to count or block if these requests exceed the `RateLimit`.
+    #
+    # If you add more than one predicate to a `RateBasedRule`, a request not
+    # only must exceed the `RateLimit`, but it also must match all the
+    # specifications to be counted or blocked. For example, suppose you add
+    # the following to a `RateBasedRule`\:
+    #
+    # * An `IPSet` that matches the IP address `192.0.2.44/32`
+    #
+    # * A `ByteMatchSet` that matches `BadBot` in the `User-Agent` header
+    #
+    # Further, you specify a `RateLimit` of 15,000.
+    #
+    # You then add the `RateBasedRule` to a `WebACL` and specify that you
+    # want to block requests that meet the conditions in the rule. For a
+    # request to be blocked, it must come from the IP address 192.0.2.44
+    # *and* the `User-Agent` header in the request must contain the value
+    # `BadBot`. Further, requests that match these two conditions must be
+    # received at a rate of more than 15,000 requests every five minutes. If
+    # both conditions are met and the rate is exceeded, AWS WAF blocks the
+    # requests. If the rate drops below 15,000 for a five-minute period, AWS
+    # WAF no longer blocks the requests.
+    #
+    # As a second example, suppose you want to limit requests to a
+    # particular page on your site. To do this, you could add the following
+    # to a `RateBasedRule`\:
+    #
+    # * A `ByteMatchSet` with `FieldToMatch` of `URI`
+    #
+    # * A `PositionalConstraint` of `STARTS_WITH`
+    #
+    # * A `TargetString` of `login`
+    #
+    # Further, you specify a `RateLimit` of 15,000.
+    #
+    # By adding this `RateBasedRule` to a `WebACL`, you could limit requests
+    # to your login page without affecting the rest of your site.
+    #
+    # To create and configure a `RateBasedRule`, perform the following
+    # steps:
+    #
+    # 1.  Create and update the predicates that you want to include in the
+    #     rule. For more information, see CreateByteMatchSet, CreateIPSet,
+    #     and CreateSqlInjectionMatchSet.
+    #
+    # 2.  Use GetChangeToken to get the change token that you provide in the
+    #     `ChangeToken` parameter of a `CreateRule` request.
+    #
+    # 3.  Submit a `CreateRateBasedRule` request.
+    #
+    # 4.  Use `GetChangeToken` to get the change token that you provide in
+    #     the `ChangeToken` parameter of an UpdateRule request.
+    #
+    # 5.  Submit an `UpdateRateBasedRule` request to specify the predicates
+    #     that you want to include in the rule.
+    #
+    # 6.  Create and update a `WebACL` that contains the `RateBasedRule`.
+    #     For more information, see CreateWebACL.
+    #
+    # For more information about how to use the AWS WAF API to allow or
+    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :name
+    #   A friendly name or description of the RateBasedRule. You can't change
+    #   the name of a `RateBasedRule` after you create it.
+    #
+    # @option params [required, String] :metric_name
+    #   A friendly name or description for the metrics for this
+    #   `RateBasedRule`. The name can contain only alphanumeric characters
+    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change
+    #   the name of the metric after you create the `RateBasedRule`.
+    #
+    # @option params [required, String] :rate_key
+    #   The field that AWS WAF uses to determine if requests are likely
+    #   arriving from a single source and thus subject to rate monitoring. The
+    #   only valid value for `RateKey` is `IP`. `IP` indicates that requests
+    #   that arrive from the same IP address are subject to the `RateLimit`
+    #   that is specified in the `RateBasedRule`.
+    #
+    # @option params [required, Integer] :rate_limit
+    #   The maximum number of requests, which have an identical value in the
+    #   field that is specified by `RateKey`, allowed in a five-minute period.
+    #   If the number of requests exceeds the `RateLimit` and the other
+    #   predicates specified in the rule are also met, AWS WAF triggers the
+    #   action that is specified for this rule.
+    #
+    # @option params [required, String] :change_token
+    #   The `ChangeToken` that you used to submit the `CreateRateBasedRule`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #
+    # @return [Types::CreateRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRateBasedRuleResponse#rule #rule} => Types::RateBasedRule
+    #   * {Types::CreateRateBasedRuleResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_rate_based_rule({
+    #     name: "ResourceName", # required
+    #     metric_name: "MetricName", # required
+    #     rate_key: "IP", # required, accepts IP
+    #     rate_limit: 1, # required
+    #     change_token: "ChangeToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule.rule_id #=> String
+    #   resp.rule.name #=> String
+    #   resp.rule.metric_name #=> String
+    #   resp.rule.match_predicates #=> Array
+    #   resp.rule.match_predicates[0].negated #=> Boolean
+    #   resp.rule.match_predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
+    #   resp.rule.match_predicates[0].data_id #=> String
+    #   resp.rule.rate_key #=> String, one of "IP"
+    #   resp.rule.rate_limit #=> Integer
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRule AWS API Documentation
+    #
+    # @overload create_rate_based_rule(params = {})
+    # @param [Hash] params ({})
+    def create_rate_based_rule(params = {}, options = {})
+      req = build_request(:create_rate_based_rule, params)
+      req.send_request(options)
+    end
+
     # Creates a `Rule`, which contains the `IPSet` objects, `ByteMatchSet`
     # objects, and other predicates that identify the requests that you want
     # to block. If you add more than one predicate to a `Rule`, a request
@@ -596,6 +733,7 @@ module Aws::WAF
     #   resp.web_acl.rules[0].priority #=> Integer
     #   resp.web_acl.rules[0].rule_id #=> String
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
+    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED"
     #   resp.change_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL AWS API Documentation
@@ -764,6 +902,54 @@ module Aws::WAF
     # @param [Hash] params ({})
     def delete_ip_set(params = {}, options = {})
       req = build_request(:delete_ip_set, params)
+      req.send_request(options)
+    end
+
+    # Permanently deletes a RateBasedRule. You can't delete a rule if it's
+    # still used in any `WebACL` objects or if it still includes any
+    # predicates, such as `ByteMatchSet` objects.
+    #
+    # If you just want to remove a rule from a `WebACL`, use UpdateWebACL.
+    #
+    # To permanently delete a `RateBasedRule` from AWS WAF, perform the
+    # following steps:
+    #
+    # 1.  Update the `RateBasedRule` to remove predicates, if any. For more
+    #     information, see UpdateRateBasedRule.
+    #
+    # 2.  Use GetChangeToken to get the change token that you provide in the
+    #     `ChangeToken` parameter of a `DeleteRateBasedRule` request.
+    #
+    # 3.  Submit a `DeleteRateBasedRule` request.
+    #
+    # @option params [required, String] :rule_id
+    #   The `RuleId` of the RateBasedRule that you want to delete. `RuleId` is
+    #   returned by CreateRateBasedRule and by ListRateBasedRules.
+    #
+    # @option params [required, String] :change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @return [Types::DeleteRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRateBasedRuleResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rate_based_rule({
+    #     rule_id: "ResourceId", # required
+    #     change_token: "ChangeToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRule AWS API Documentation
+    #
+    # @overload delete_rate_based_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_rate_based_rule(params = {}, options = {})
+      req = build_request(:delete_rate_based_rule, params)
       req.send_request(options)
     end
 
@@ -1151,6 +1337,86 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Returns the RateBasedRule that is specified by the `RuleId` that you
+    # included in the `GetRateBasedRule` request.
+    #
+    # @option params [required, String] :rule_id
+    #   The `RuleId` of the RateBasedRule that you want to get. `RuleId` is
+    #   returned by CreateRateBasedRule and by ListRateBasedRules.
+    #
+    # @return [Types::GetRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRateBasedRuleResponse#rule #rule} => Types::RateBasedRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_rate_based_rule({
+    #     rule_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule.rule_id #=> String
+    #   resp.rule.name #=> String
+    #   resp.rule.metric_name #=> String
+    #   resp.rule.match_predicates #=> Array
+    #   resp.rule.match_predicates[0].negated #=> Boolean
+    #   resp.rule.match_predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
+    #   resp.rule.match_predicates[0].data_id #=> String
+    #   resp.rule.rate_key #=> String, one of "IP"
+    #   resp.rule.rate_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRule AWS API Documentation
+    #
+    # @overload get_rate_based_rule(params = {})
+    # @param [Hash] params ({})
+    def get_rate_based_rule(params = {}, options = {})
+      req = build_request(:get_rate_based_rule, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of IP addresses currently being blocked by the
+    # RateBasedRule that is specified by the `RuleId`. The maximum number of
+    # managed keys that will be blocked is 10,000. If more than 10,000
+    # addresses exceed the rate limit, the 10,000 addresses with the highest
+    # rates will be blocked.
+    #
+    # @option params [required, String] :rule_id
+    #   The `RuleId` of the RateBasedRule for which you want to get a list of
+    #   `ManagedKeys`. `RuleId` is returned by CreateRateBasedRule and by
+    #   ListRateBasedRules.
+    #
+    # @option params [String] :next_marker
+    #   A null value and not currently used. Do not include this in your
+    #   request.
+    #
+    # @return [Types::GetRateBasedRuleManagedKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRateBasedRuleManagedKeysResponse#managed_keys #managed_keys} => Array&lt;String&gt;
+    #   * {Types::GetRateBasedRuleManagedKeysResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_rate_based_rule_managed_keys({
+    #     rule_id: "ResourceId", # required
+    #     next_marker: "NextMarker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_keys #=> Array
+    #   resp.managed_keys[0] #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeys AWS API Documentation
+    #
+    # @overload get_rate_based_rule_managed_keys(params = {})
+    # @param [Hash] params ({})
+    def get_rate_based_rule_managed_keys(params = {}, options = {})
+      req = build_request(:get_rate_based_rule_managed_keys, params)
+      req.send_request(options)
+    end
+
     # Returns the Rule that is specified by the `RuleId` that you included
     # in the `GetRule` request.
     #
@@ -1372,6 +1638,7 @@ module Aws::WAF
     #   resp.web_acl.rules[0].priority #=> Integer
     #   resp.web_acl.rules[0].rule_id #=> String
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
+    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL AWS API Documentation
     #
@@ -1503,6 +1770,50 @@ module Aws::WAF
     # @param [Hash] params ({})
     def list_ip_sets(params = {}, options = {})
       req = build_request(:list_ip_sets, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of RuleSummary objects.
+    #
+    # @option params [String] :next_marker
+    #   If you specify a value for `Limit` and you have more `Rules` than the
+    #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
+    #   that allows you to list another group of `Rules`. For the second and
+    #   subsequent `ListRateBasedRules` requests, specify the value of
+    #   `NextMarker` from the previous response to get information about
+    #   another batch of `Rules`.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of `Rules` that you want AWS WAF to return for
+    #   this request. If you have more `Rules` than the number that you
+    #   specify for `Limit`, the response includes a `NextMarker` value that
+    #   you can use to get another batch of `Rules`.
+    #
+    # @return [Types::ListRateBasedRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRateBasedRulesResponse#next_marker #next_marker} => String
+    #   * {Types::ListRateBasedRulesResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rate_based_rules({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.rules #=> Array
+    #   resp.rules[0].rule_id #=> String
+    #   resp.rules[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRules AWS API Documentation
+    #
+    # @overload list_rate_based_rules(params = {})
+    # @param [Hash] params ({})
+    def list_rate_based_rules(params = {}, options = {})
+      req = build_request(:list_rate_based_rules, params)
       req.send_request(options)
     end
 
@@ -1941,6 +2252,101 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Inserts or deletes Predicate objects in a rule and updates the
+    # `RateLimit` in the rule.
+    #
+    # Each `Predicate` object identifies a predicate, such as a ByteMatchSet
+    # or an IPSet, that specifies the web requests that you want to block or
+    # count. The `RateLimit` specifies the number of requests every five
+    # minutes that triggers the rule.
+    #
+    # If you add more than one predicate to a `RateBasedRule`, a request
+    # must match all the predicates and exceed the `RateLimit` to be counted
+    # or blocked. For example, suppose you add the following to a
+    # `RateBasedRule`\:
+    #
+    # * An `IPSet` that matches the IP address `192.0.2.44/32`
+    #
+    # * A `ByteMatchSet` that matches `BadBot` in the `User-Agent` header
+    #
+    # Further, you specify a `RateLimit` of 15,000.
+    #
+    # You then add the `RateBasedRule` to a `WebACL` and specify that you
+    # want to block requests that satisfy the rule. For a request to be
+    # blocked, it must come from the IP address 192.0.2.44 *and* the
+    # `User-Agent` header in the request must contain the value `BadBot`.
+    # Further, requests that match these two conditions much be received at
+    # a rate of more than 15,000 every five minutes. If the rate drops below
+    # this limit, AWS WAF no longer blocks the requests.
+    #
+    # As a second example, suppose you want to limit requests to a
+    # particular page on your site. To do this, you could add the following
+    # to a `RateBasedRule`\:
+    #
+    # * A `ByteMatchSet` with `FieldToMatch` of `URI`
+    #
+    # * A `PositionalConstraint` of `STARTS_WITH`
+    #
+    # * A `TargetString` of `login`
+    #
+    # Further, you specify a `RateLimit` of 15,000.
+    #
+    # By adding this `RateBasedRule` to a `WebACL`, you could limit requests
+    # to your login page without affecting the rest of your site.
+    #
+    # @option params [required, String] :rule_id
+    #   The `RuleId` of the `RateBasedRule` that you want to update. `RuleId`
+    #   is returned by `CreateRateBasedRule` and by ListRateBasedRules.
+    #
+    # @option params [required, String] :change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @option params [required, Array<Types::RuleUpdate>] :updates
+    #   An array of `RuleUpdate` objects that you want to insert into or
+    #   delete from a RateBasedRule.
+    #
+    # @option params [required, Integer] :rate_limit
+    #   The maximum number of requests, which have an identical value in the
+    #   field specified by the `RateKey`, allowed in a five-minute period. If
+    #   the number of requests exceeds the `RateLimit` and the other
+    #   predicates specified in the rule are also met, AWS WAF triggers the
+    #   action that is specified for this rule.
+    #
+    # @return [Types::UpdateRateBasedRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRateBasedRuleResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rate_based_rule({
+    #     rule_id: "ResourceId", # required
+    #     change_token: "ChangeToken", # required
+    #     updates: [ # required
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         predicate: { # required
+    #           negated: false, # required
+    #           type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #           data_id: "ResourceId", # required
+    #         },
+    #       },
+    #     ],
+    #     rate_limit: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRule AWS API Documentation
+    #
+    # @overload update_rate_based_rule(params = {})
+    # @param [Hash] params ({})
+    def update_rate_based_rule(params = {}, options = {})
+      req = build_request(:update_rate_based_rule, params)
+      req.send_request(options)
+    end
+
     # Inserts or deletes Predicate objects in a `Rule`. Each `Predicate`
     # object identifies a predicate, such as a ByteMatchSet or an IPSet,
     # that specifies the web requests that you want to allow, block, or
@@ -2288,6 +2694,12 @@ module Aws::WAF
     #     want to include in the `WebACL`, to specify the default action,
     #     and to associate the `WebACL` with a CloudFront distribution.
     #
+    # Be aware that if you try to add a RATE\_BASED rule to a web ACL
+    # without setting the rule type when first creating the rule, the
+    # UpdateWebACL request will fail because the request tries to add a
+    # REGULAR rule (the default rule type) with the specified ID, which does
+    # not exist.
+    #
     # For more information about how to use the AWS WAF API to allow or
     # block HTTP requests, see the [AWS WAF Developer Guide][1].
     #
@@ -2311,7 +2723,7 @@ module Aws::WAF
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, and `RuleId`
+    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`
     #
     #   * WafAction: Contains `Type`
     #
@@ -2338,6 +2750,7 @@ module Aws::WAF
     #           action: { # required
     #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED
     #         },
     #       },
     #     ],
@@ -2467,7 +2880,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

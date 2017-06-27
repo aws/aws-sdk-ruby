@@ -202,8 +202,9 @@ module Aws::DatabaseMigrationService
     #   The type of endpoint.
     #
     # @option params [required, String] :engine_name
-    #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+    #   The type of engine for the endpoint. Valid values, depending on the
+    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
+    #   REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -244,6 +245,37 @@ module Aws::DatabaseMigrationService
     #
     #   The default value is none.
     #
+    # @option params [Types::DynamoDbSettings] :dynamo_db_settings
+    #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
+    #   more information about the available settings, see the **Using Object
+    #   Mapping to Migrate Data to DynamoDB** section at [ Using an Amazon
+    #   DynamoDB Database as a Target for AWS Database Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #
+    # @option params [Types::S3Settings] :s3_settings
+    #   Settings in JSON format for the target S3 endpoint. For more
+    #   information about the available settings, see the **Extra Connection
+    #   Attributes** section at [ Using Amazon S3 as a Target for AWS Database
+    #   Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #
+    # @option params [Types::MongoDbSettings] :mongo_db_settings
+    #   Settings in JSON format for the source MongoDB endpoint. For more
+    #   information about the available settings, see the **Configuration
+    #   Properties When Using MongoDB as a Source for AWS Database Migration
+    #   Service** section at [ Using Amazon S3 as a Target for AWS Database
+    #   Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -269,6 +301,31 @@ module Aws::DatabaseMigrationService
     #     ],
     #     certificate_arn: "String",
     #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #     dynamo_db_settings: {
+    #       service_access_role_arn: "String", # required
+    #     },
+    #     s3_settings: {
+    #       service_access_role_arn: "String",
+    #       external_table_definition: "String",
+    #       csv_row_delimiter: "String",
+    #       csv_delimiter: "String",
+    #       bucket_folder: "String",
+    #       bucket_name: "String",
+    #       compression_type: "none", # accepts none, gzip
+    #     },
+    #     mongo_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       auth_type: "no", # accepts no, password
+    #       auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: "String",
+    #       docs_to_investigate: "String",
+    #       auth_source: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -286,6 +343,26 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.external_table_definition #=> String
+    #   resp.endpoint.s3_settings.csv_row_delimiter #=> String
+    #   resp.endpoint.s3_settings.csv_delimiter #=> String
+    #   resp.endpoint.s3_settings.bucket_folder #=> String
+    #   resp.endpoint.s3_settings.bucket_name #=> String
+    #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.mongo_db_settings.username #=> String
+    #   resp.endpoint.mongo_db_settings.password #=> String
+    #   resp.endpoint.mongo_db_settings.server_name #=> String
+    #   resp.endpoint.mongo_db_settings.port #=> Integer
+    #   resp.endpoint.mongo_db_settings.database_name #=> String
+    #   resp.endpoint.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.endpoint.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
+    #   resp.endpoint.mongo_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
+    #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
+    #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -293,6 +370,116 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def create_endpoint(params = {}, options = {})
       req = build_request(:create_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Creates an AWS DMS event notification subscription.
+    #
+    # You can specify the type of source (`SourceType`) you want to be
+    # notified of, provide a list of AWS DMS source IDs (`SourceIds`) that
+    # triggers the events, and provide a list of event categories
+    # (`EventCategories`) for events you want to be notified of. If you
+    # specify both the `SourceType` and `SourceIds`, such as `SourceType =
+    # replication-instance` and `SourceIdentifier = my-replinstance`, you
+    # will be notified of all the replication instance events for the
+    # specified source. If you specify a `SourceType` but don't specify a
+    # `SourceIdentifier`, you receive notice of the events for that source
+    # type for all your AWS DMS sources. If you don't specify either
+    # `SourceType` nor `SourceIdentifier`, you will be notified of events
+    # generated from all AWS DMS sources belonging to your customer account.
+    #
+    # For more information about AWS DMS events, see [ Working with Events
+    # and Notifications ][1] in the AWS Database MIgration Service User
+    # Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the DMS event notification subscription.
+    #
+    #   Constraints: The name must be less than 255 characters.
+    #
+    # @option params [required, String] :sns_topic_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic created for
+    #   event notification. The ARN is created by Amazon SNS when you create a
+    #   topic and subscribe to it.
+    #
+    # @option params [String] :source_type
+    #   The type of AWS DMS resource that generates the events. For example,
+    #   if you want to be notified of events generated by a replication
+    #   instance, you set this parameter to `replication-instance`. If this
+    #   value is not specified, all events are returned.
+    #
+    #   Valid values: replication-instance \| migration-task
+    #
+    # @option params [Array<String>] :event_categories
+    #   A list of event categories for a source type that you want to
+    #   subscribe to. You can see a list of the categories for a given source
+    #   type by calling the **DescribeEventCategories** action or in the topic
+    #   [ Working with Events and Notifications][1] in the AWS Database
+    #   Migration Service User Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #
+    # @option params [Array<String>] :source_ids
+    #   The list of identifiers of the event sources for which events will be
+    #   returned. If not specified, then all sources are included in the
+    #   response. An identifier must begin with a letter and must contain only
+    #   ASCII letters, digits, and hyphens; it cannot end with a hyphen or
+    #   contain two consecutive hyphens.
+    #
+    # @option params [Boolean] :enabled
+    #   A Boolean value; set to **true** to activate the subscription, or set
+    #   to **false** to create the subscription but not activate it.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A tag to be attached to the event subscription.
+    #
+    # @return [Types::CreateEventSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventSubscriptionResponse#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_subscription({
+    #     subscription_name: "String", # required
+    #     sns_topic_arn: "String", # required
+    #     source_type: "String",
+    #     event_categories: ["String"],
+    #     source_ids: ["String"],
+    #     enabled: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscription AWS API Documentation
+    #
+    # @overload create_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_event_subscription(params = {}, options = {})
+      req = build_request(:create_event_subscription, params)
       req.send_request(options)
     end
 
@@ -524,7 +711,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -545,8 +732,10 @@ module Aws::DatabaseMigrationService
     #   The migration type.
     #
     # @option params [required, String] :table_mappings
-    #   The path of the JSON file that contains the table mappings. Preceed
-    #   the path with "file://".
+    #   When using the AWS CLI or boto3, provide the path of the JSON file
+    #   that contains the table mappings. Precede the path with "file://".
+    #   When working with the DMS API, provide the JSON as the parameter
+    #   value.
     #
     #   For example, --table-mappings file://mappingfile.json
     #
@@ -692,6 +881,26 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.external_table_definition #=> String
+    #   resp.endpoint.s3_settings.csv_row_delimiter #=> String
+    #   resp.endpoint.s3_settings.csv_delimiter #=> String
+    #   resp.endpoint.s3_settings.bucket_folder #=> String
+    #   resp.endpoint.s3_settings.bucket_name #=> String
+    #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.mongo_db_settings.username #=> String
+    #   resp.endpoint.mongo_db_settings.password #=> String
+    #   resp.endpoint.mongo_db_settings.server_name #=> String
+    #   resp.endpoint.mongo_db_settings.port #=> Integer
+    #   resp.endpoint.mongo_db_settings.database_name #=> String
+    #   resp.endpoint.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.endpoint.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
+    #   resp.endpoint.mongo_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
+    #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
+    #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -699,6 +908,44 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_endpoint(params = {}, options = {})
       req = build_request(:delete_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes an AWS DMS event subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the DMS event notification subscription to be deleted.
+    #
+    # @return [Types::DeleteEventSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEventSubscriptionResponse#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_subscription({
+    #     subscription_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscription AWS API Documentation
+    #
+    # @overload delete_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_event_subscription(params = {}, options = {})
+      req = build_request(:delete_event_subscription, params)
       req.send_request(options)
     end
 
@@ -1105,6 +1352,26 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].certificate_arn #=> String
     #   resp.endpoints[0].ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoints[0].external_id #=> String
+    #   resp.endpoints[0].dynamo_db_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].s3_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].s3_settings.external_table_definition #=> String
+    #   resp.endpoints[0].s3_settings.csv_row_delimiter #=> String
+    #   resp.endpoints[0].s3_settings.csv_delimiter #=> String
+    #   resp.endpoints[0].s3_settings.bucket_folder #=> String
+    #   resp.endpoints[0].s3_settings.bucket_name #=> String
+    #   resp.endpoints[0].s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoints[0].mongo_db_settings.username #=> String
+    #   resp.endpoints[0].mongo_db_settings.password #=> String
+    #   resp.endpoints[0].mongo_db_settings.server_name #=> String
+    #   resp.endpoints[0].mongo_db_settings.port #=> Integer
+    #   resp.endpoints[0].mongo_db_settings.database_name #=> String
+    #   resp.endpoints[0].mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.endpoints[0].mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
+    #   resp.endpoints[0].mongo_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoints[0].mongo_db_settings.extract_doc_id #=> String
+    #   resp.endpoints[0].mongo_db_settings.docs_to_investigate #=> String
+    #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
     #
@@ -1112,6 +1379,221 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_endpoints(params = {}, options = {})
       req = build_request(:describe_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Lists categories for all event source types, or, if specified, for a
+    # specified source type. You can see a list of the event categories and
+    # source types in [ Working with Events and Notifications ][1] in the
+    # AWS Database Migration Service User Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #
+    # @option params [String] :source_type
+    #   The type of AWS DMS resource that generates events.
+    #
+    #   Valid values: replication-instance \| migration-task
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the action.
+    #
+    # @return [Types::DescribeEventCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventCategoriesResponse#event_category_group_list #event_category_group_list} => Array&lt;Types::EventCategoryGroup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_event_categories({
+    #     source_type: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_category_group_list #=> Array
+    #   resp.event_category_group_list[0].source_type #=> String
+    #   resp.event_category_group_list[0].event_categories #=> Array
+    #   resp.event_category_group_list[0].event_categories[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategories AWS API Documentation
+    #
+    # @overload describe_event_categories(params = {})
+    # @param [Hash] params ({})
+    def describe_event_categories(params = {}, options = {})
+      req = build_request(:describe_event_categories, params)
+      req.send_request(options)
+    end
+
+    # Lists all the event subscriptions for a customer account. The
+    # description of a subscription includes `SubscriptionName`,
+    # `SNSTopicARN`, `CustomerID`, `SourceType`, `SourceID`, `CreationTime`,
+    # and `Status`.
+    #
+    # If you specify `SubscriptionName`, this action lists the description
+    # for that subscription.
+    #
+    # @option params [String] :subscription_name
+    #   The name of the AWS DMS event subscription to be described.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the action.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeEventSubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventSubscriptionsResponse#marker #marker} => String
+    #   * {Types::DescribeEventSubscriptionsResponse#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_event_subscriptions({
+    #     subscription_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.event_subscriptions_list #=> Array
+    #   resp.event_subscriptions_list[0].customer_aws_id #=> String
+    #   resp.event_subscriptions_list[0].cust_subscription_id #=> String
+    #   resp.event_subscriptions_list[0].sns_topic_arn #=> String
+    #   resp.event_subscriptions_list[0].status #=> String
+    #   resp.event_subscriptions_list[0].subscription_creation_time #=> String
+    #   resp.event_subscriptions_list[0].source_type #=> String
+    #   resp.event_subscriptions_list[0].source_ids_list #=> Array
+    #   resp.event_subscriptions_list[0].source_ids_list[0] #=> String
+    #   resp.event_subscriptions_list[0].event_categories_list #=> Array
+    #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
+    #   resp.event_subscriptions_list[0].enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptions AWS API Documentation
+    #
+    # @overload describe_event_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def describe_event_subscriptions(params = {}, options = {})
+      req = build_request(:describe_event_subscriptions, params)
+      req.send_request(options)
+    end
+
+    # Lists events for a given source identifier and source type. You can
+    # also specify a start and end time. For more information on AWS DMS
+    # events, see [ Working with Events and Notifications ][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
+    #
+    # @option params [String] :source_identifier
+    #   The identifier of the event source. An identifier must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens. It
+    #   cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [String] :source_type
+    #   The type of AWS DMS resource that generates events.
+    #
+    #   Valid values: replication-instance \| migration-task
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time for the events to be listed.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time for the events to be listed.
+    #
+    # @option params [Integer] :duration
+    #   The duration of the events to be listed.
+    #
+    # @option params [Array<String>] :event_categories
+    #   A list of event categories for a source type that you want to
+    #   subscribe to.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the action.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventsResponse#marker #marker} => String
+    #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_events({
+    #     source_identifier: "String",
+    #     source_type: "replication-instance", # accepts replication-instance
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     duration: 1,
+    #     event_categories: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.events #=> Array
+    #   resp.events[0].source_identifier #=> String
+    #   resp.events[0].source_type #=> String, one of "replication-instance"
+    #   resp.events[0].message #=> String
+    #   resp.events[0].event_categories #=> Array
+    #   resp.events[0].event_categories[0] #=> String
+    #   resp.events[0].date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEvents AWS API Documentation
+    #
+    # @overload describe_events(params = {})
+    # @param [Hash] params ({})
+    def describe_events(params = {}, options = {})
+      req = build_request(:describe_events, params)
       req.send_request(options)
     end
 
@@ -1521,6 +2003,8 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].updates #=> Integer
     #   resp.table_statistics[0].ddls #=> Integer
     #   resp.table_statistics[0].full_load_rows #=> Integer
+    #   resp.table_statistics[0].full_load_condtnl_chk_failed_rows #=> Integer
+    #   resp.table_statistics[0].full_load_error_rows #=> Integer
     #   resp.table_statistics[0].last_update_time #=> Time
     #   resp.table_statistics[0].table_state #=> String
     #   resp.marker #=> String
@@ -1547,6 +2031,9 @@ module Aws::DatabaseMigrationService
     #   The location of the imported Oracle Wallet certificate for use with
     #   SSL.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the certificate.
+    #
     # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportCertificateResponse#certificate #certificate} => Types::Certificate
@@ -1557,6 +2044,12 @@ module Aws::DatabaseMigrationService
     #     certificate_identifier: "String", # required
     #     certificate_pem: "String",
     #     certificate_wallet: "data",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1627,8 +2120,9 @@ module Aws::DatabaseMigrationService
     #   The type of endpoint.
     #
     # @option params [String] :engine_name
-    #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+    #   The type of engine for the endpoint. Valid values, depending on the
+    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
+    #   REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -1660,6 +2154,37 @@ module Aws::DatabaseMigrationService
     #
     #   The default value is none.
     #
+    # @option params [Types::DynamoDbSettings] :dynamo_db_settings
+    #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
+    #   more information about the available settings, see the **Using Object
+    #   Mapping to Migrate Data to DynamoDB** section at [ Using an Amazon
+    #   DynamoDB Database as a Target for AWS Database Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #
+    # @option params [Types::S3Settings] :s3_settings
+    #   Settings in JSON format for the target S3 endpoint. For more
+    #   information about the available settings, see the **Extra Connection
+    #   Attributes** section at [ Using Amazon S3 as a Target for AWS Database
+    #   Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html
+    #
+    # @option params [Types::MongoDbSettings] :mongo_db_settings
+    #   Settings in JSON format for the source MongoDB endpoint. For more
+    #   information about the available settings, see the **Configuration
+    #   Properties When Using MongoDB as a Source for AWS Database Migration
+    #   Service** section at [ Using Amazon S3 as a Target for AWS Database
+    #   Migration Service][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -1679,6 +2204,31 @@ module Aws::DatabaseMigrationService
     #     extra_connection_attributes: "String",
     #     certificate_arn: "String",
     #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #     dynamo_db_settings: {
+    #       service_access_role_arn: "String", # required
+    #     },
+    #     s3_settings: {
+    #       service_access_role_arn: "String",
+    #       external_table_definition: "String",
+    #       csv_row_delimiter: "String",
+    #       csv_delimiter: "String",
+    #       bucket_folder: "String",
+    #       bucket_name: "String",
+    #       compression_type: "none", # accepts none, gzip
+    #     },
+    #     mongo_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       auth_type: "no", # accepts no, password
+    #       auth_mechanism: "default", # accepts default, mongodb_cr, scram_sha_1
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: "String",
+    #       docs_to_investigate: "String",
+    #       auth_source: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1696,6 +2246,26 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.service_access_role_arn #=> String
+    #   resp.endpoint.s3_settings.external_table_definition #=> String
+    #   resp.endpoint.s3_settings.csv_row_delimiter #=> String
+    #   resp.endpoint.s3_settings.csv_delimiter #=> String
+    #   resp.endpoint.s3_settings.bucket_folder #=> String
+    #   resp.endpoint.s3_settings.bucket_name #=> String
+    #   resp.endpoint.s3_settings.compression_type #=> String, one of "none", "gzip"
+    #   resp.endpoint.mongo_db_settings.username #=> String
+    #   resp.endpoint.mongo_db_settings.password #=> String
+    #   resp.endpoint.mongo_db_settings.server_name #=> String
+    #   resp.endpoint.mongo_db_settings.port #=> Integer
+    #   resp.endpoint.mongo_db_settings.database_name #=> String
+    #   resp.endpoint.mongo_db_settings.auth_type #=> String, one of "no", "password"
+    #   resp.endpoint.mongo_db_settings.auth_mechanism #=> String, one of "default", "mongodb_cr", "scram_sha_1"
+    #   resp.endpoint.mongo_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
+    #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
+    #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -1703,6 +2273,68 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_endpoint(params = {}, options = {})
       req = build_request(:modify_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Modifies an existing AWS DMS event notification subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the AWS DMS event notification subscription to be
+    #   modified.
+    #
+    # @option params [String] :sns_topic_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic created for
+    #   event notification. The ARN is created by Amazon SNS when you create a
+    #   topic and subscribe to it.
+    #
+    # @option params [String] :source_type
+    #   The type of AWS DMS resource that generates the events you want to
+    #   subscribe to.
+    #
+    #   Valid values: replication-instance \| migration-task
+    #
+    # @option params [Array<String>] :event_categories
+    #   A list of event categories for a source type that you want to
+    #   subscribe to. Use the `DescribeEventCategories` action to see a list
+    #   of event categories.
+    #
+    # @option params [Boolean] :enabled
+    #   A Boolean value; set to **true** to activate the subscription.
+    #
+    # @return [Types::ModifyEventSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyEventSubscriptionResponse#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_event_subscription({
+    #     subscription_name: "String", # required
+    #     sns_topic_arn: "String",
+    #     source_type: "String",
+    #     event_categories: ["String"],
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscription AWS API Documentation
+    #
+    # @overload modify_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def modify_event_subscription(params = {}, options = {})
+      req = build_request(:modify_event_subscription, params)
       req.send_request(options)
     end
 
@@ -1897,6 +2529,13 @@ module Aws::DatabaseMigrationService
     # You can't modify the task endpoints. The task must be stopped before
     # you can modify it.
     #
+    # For more information about AWS DMS tasks, see the AWS DMS user guide
+    # at [ Working with Migration Tasks ][1]
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
+    #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #
@@ -1905,7 +2544,7 @@ module Aws::DatabaseMigrationService
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1917,8 +2556,10 @@ module Aws::DatabaseMigrationService
     #   Valid values: full-load \| cdc \| full-load-and-cdc
     #
     # @option params [String] :table_mappings
-    #   The path of the JSON file that contains the table mappings. Preceed
-    #   the path with "file://".
+    #   When using the AWS CLI or boto3, provide the path of the JSON file
+    #   that contains the table mappings. Precede the path with "file://".
+    #   When working with the DMS API, provide the JSON as the parameter
+    #   value.
     #
     #   For example, --table-mappings file://mappingfile.json
     #
@@ -2015,6 +2656,43 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Reloads the target database table with the source data.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @option params [required, Array<Types::TableToReload>] :tables_to_reload
+    #   The name and schema of the table to be reloaded.
+    #
+    # @return [Types::ReloadTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReloadTablesResponse#replication_task_arn #replication_task_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reload_tables({
+    #     replication_task_arn: "String", # required
+    #     tables_to_reload: [ # required
+    #       {
+    #         schema_name: "String",
+    #         table_name: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTables AWS API Documentation
+    #
+    # @overload reload_tables(params = {})
+    # @param [Hash] params ({})
+    def reload_tables(params = {}, options = {})
+      req = build_request(:reload_tables, params)
+      req.send_request(options)
+    end
+
     # Removes metadata tags from a DMS resource.
     #
     # @option params [required, String] :resource_arn
@@ -2043,6 +2721,13 @@ module Aws::DatabaseMigrationService
     end
 
     # Starts the replication task.
+    #
+    # For more information about AWS DMS tasks, see the AWS DMS user guide
+    # at [ Working with Migration Tasks ][1]
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
     #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Number (ARN) of the replication task to be
@@ -2195,7 +2880,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

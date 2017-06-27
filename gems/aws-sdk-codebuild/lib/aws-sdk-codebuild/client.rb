@@ -205,6 +205,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables #=> Array
     #   resp.builds[0].environment.environment_variables[0].name #=> String
     #   resp.builds[0].environment.environment_variables[0].value #=> String
+    #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
@@ -262,6 +263,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables #=> Array
     #   resp.projects[0].environment.environment_variables[0].name #=> String
     #   resp.projects[0].environment.environment_variables[0].value #=> String
+    #   resp.projects[0].environment.privileged_mode #=> Boolean
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].encryption_key #=> String
@@ -358,6 +360,7 @@ module Aws::CodeBuild
     #           value: "String", # required
     #         },
     #       ],
+    #       privileged_mode: false,
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -392,6 +395,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
+    #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.encryption_key #=> String
@@ -712,6 +716,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
+    #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -776,6 +781,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
+    #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -875,6 +881,7 @@ module Aws::CodeBuild
     #           value: "String", # required
     #         },
     #       ],
+    #       privileged_mode: false,
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -909,6 +916,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
+    #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.encryption_key #=> String
@@ -940,7 +948,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,11 @@ module Aws::OpsWorks
       @id
     end
 
+    # @return [String]
+    def arn
+      data.arn
+    end
+
     # The layer stack ID.
     # @return [String]
     def stack_id

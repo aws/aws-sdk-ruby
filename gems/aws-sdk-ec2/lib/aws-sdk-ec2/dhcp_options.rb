@@ -83,17 +83,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options.associate_with_vpc({
-    #     dry_run: false,
     #     vpc_id: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :vpc_id
+    #   The ID of the VPC.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :vpc_id
-    #   The ID of the VPC.
     # @return [EmptyStructure]
     def associate_with_vpc(options = {})
       options = options.merge(dhcp_options_id: @id)

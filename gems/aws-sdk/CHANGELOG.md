@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc9 (2017-06-26)
+------------------
+
+* Feature - Now `aws-sdk` gem is the wrapper gem of `aws-sdk-resources` gem.
+
 3.0.0.rc8 (2017-05-23)
 ------------------
 

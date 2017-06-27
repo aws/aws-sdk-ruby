@@ -114,7 +114,7 @@ module Aws::STS
     #   The regex used to validated this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:\\/-
+    #   characters: =,.@:/-
     #
     #
     #
@@ -866,10 +866,10 @@ module Aws::STS
     #   the device for an IAM user by going to the AWS Management Console
     #   and viewing the user's security credentials.
     #
-    #   The regex used to validate this parameter is a string of characters
+    #   The regex used to validated this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@-
+    #   characters: =,.@:/-
     #   @return [String]
     #
     # @!attribute [rw] token_code

@@ -789,6 +789,8 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         listener_arn: "ListenerArn",
     #         rule_arns: ["RuleArn"],
+    #         marker: "Marker",
+    #         page_size: 1,
     #       }
     #
     # @!attribute [rw] listener_arn
@@ -799,11 +801,22 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Names (ARN) of the rules.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesInput AWS API Documentation
     #
     class DescribeRulesInput < Struct.new(
       :listener_arn,
-      :rule_arns)
+      :rule_arns,
+      :marker,
+      :page_size)
       include Aws::Structure
     end
 
@@ -811,10 +824,16 @@ module Aws::ElasticLoadBalancingV2
     #   Information about the rules.
     #   @return [Array<Types::Rule>]
     #
+    # @!attribute [rw] next_marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesOutput AWS API Documentation
     #
     class DescribeRulesOutput < Struct.new(
-      :rules)
+      :rules,
+      :next_marker)
       include Aws::Structure
     end
 

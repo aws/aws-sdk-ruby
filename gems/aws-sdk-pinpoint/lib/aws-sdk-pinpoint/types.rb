@@ -15,6 +15,7 @@ module Aws::Pinpoint
     #
     #       {
     #         certificate: "__string",
+    #         enabled: false,
     #         private_key: "__string",
     #       }
     #
@@ -22,12 +23,17 @@ module Aws::Pinpoint
     #   The distribution certificate from Apple.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] private_key
     #   The certificate private key.
     #   @return [String]
     #
     class APNSChannelRequest < Struct.new(
       :certificate,
+      :enabled,
       :private_key)
       include Aws::Structure
     end
@@ -42,8 +48,12 @@ module Aws::Pinpoint
     #   When was this segment created
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
-    #   The unique channel ID.
+    #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -69,6 +79,205 @@ module Aws::Pinpoint
     class APNSChannelResponse < Struct.new(
       :application_id,
       :creation_date,
+      :enabled,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # APNS Message.
+    #
+    # @note When making an API call, you may pass APNSMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         badge: 1,
+    #         body: "__string",
+    #         category: "__string",
+    #         data: {
+    #           "__string" => "__string",
+    #         },
+    #         media_url: "__string",
+    #         raw_content: "__string",
+    #         silent_push: false,
+    #         sound: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         thread_id: "__string",
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL - The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
+    #   Possible values include: OPEN\_APP \| DEEP\_LINK \| URL
+    #   @return [String]
+    #
+    # @!attribute [rw] badge
+    #   Include this key when you want the system to modify the badge of
+    #   your app icon. If this key is not included in the dictionary, the
+    #   badge is not changed. To remove the badge, set the value of this key
+    #   to 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Provide this key with a string value that represents the
+    #   notification's type. This value corresponds to the value in the
+    #   identifier property of one of your app's registered categories.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] media_url
+    #   The URL that points to a video used in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] silent_push
+    #   Indicates if the message should display on the users device. Silent
+    #   pushes can be used for Remote Configuration and Phone Home use
+    #   cases.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sound
+    #   Include this key when you want the system to play a sound. The value
+    #   of this key is the name of a sound file in your app's main bundle
+    #   or in the Library/Sounds folder of your app's data container. If
+    #   the sound file cannot be found, or if you specify defaultfor the
+    #   value, the system plays the default alert sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] thread_id
+    #   Provide this key with a string value that represents the
+    #   app-specific identifier for grouping notifications. If you provide a
+    #   Notification Content app extension, you can use this value to group
+    #   your notifications together.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The message title that displays above the message on the user's
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the user's mobile browser. Used if the value for
+    #   Action is URL.
+    #   @return [String]
+    #
+    class APNSMessage < Struct.new(
+      :action,
+      :badge,
+      :body,
+      :category,
+      :data,
+      :media_url,
+      :raw_content,
+      :silent_push,
+      :sound,
+      :substitutions,
+      :thread_id,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
+    # Apple Development Push Notification Service channel definition.
+    #
+    # @note When making an API call, you may pass APNSSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate: "__string",
+    #         enabled: false,
+    #         private_key: "__string",
+    #       }
+    #
+    # @!attribute [rw] certificate
+    #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_key
+    #   The certificate private key.
+    #   @return [String]
+    #
+    class APNSSandboxChannelRequest < Struct.new(
+      :certificate,
+      :enabled,
+      :private_key)
+      include Aws::Structure
+    end
+
+    # Apple Development Push Notification Service channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who last updated this entry
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be APNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    class APNSSandboxChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :enabled,
       :id,
       :is_archived,
       :last_modified_by,
@@ -165,6 +374,58 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Address configuration.
+    #
+    # @note When making an API call, you may pass AddressConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         body_override: "__string",
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #         context: {
+    #           "__string" => "__string",
+    #         },
+    #         raw_content: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title_override: "__string",
+    #       }
+    #
+    # @!attribute [rw] body_override
+    #   Body override. If specified will override default body.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_type
+    #   Type of channel of this address
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title_override
+    #   Title override. If specified will override default title if
+    #   applicable.
+    #   @return [String]
+    #
+    class AddressConfiguration < Struct.new(
+      :body_override,
+      :channel_type,
+      :context,
+      :raw_content,
+      :substitutions,
+      :title_override)
+      include Aws::Structure
+    end
+
     # Application settings.
     #
     # @!attribute [rw] application_id
@@ -206,8 +467,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] attribute_type
-    #   The type of dimension: INCLUSIVE – Endpoints that match the criteria
-    #   are included in the segment. EXCLUSIVE – Endpoints that match the
+    #   The type of dimension: INCLUSIVE - Endpoints that match the criteria
+    #   are included in the segment. EXCLUSIVE - Endpoints that match the
     #   criteria are excluded from the segment.
     #   @return [String]
     #
@@ -217,6 +478,36 @@ module Aws::Pinpoint
     class AttributeDimension < Struct.new(
       :attribute_type,
       :values)
+      include Aws::Structure
+    end
+
+    # The email message configuration.
+    #
+    # @note When making an API call, you may pass CampaignEmailMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         html_body: "__string",
+    #         title: "__string",
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The email text body.
+    #   @return [String]
+    #
+    # @!attribute [rw] html_body
+    #   The email html body.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The email title (Or subject).
+    #   @return [String]
+    #
+    class CampaignEmailMessage < Struct.new(
+      :body,
+      :html_body,
+      :title)
       include Aws::Structure
     end
 
@@ -350,6 +641,37 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # SMS message configuration.
+    #
+    # @note When making an API call, you may pass CampaignSmsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         sender_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The SMS text body.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_type
+    #   Is this is a transactional SMS message, otherwise a promotional
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   Sender ID of sent message.
+    #   @return [String]
+    #
+    class CampaignSmsMessage < Struct.new(
+      :body,
+      :message_type,
+      :sender_id)
+      include Aws::Structure
+    end
+
     # State of the Campaign
     #
     # @!attribute [rw] campaign_status
@@ -393,6 +715,7 @@ module Aws::Pinpoint
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
@@ -404,6 +727,7 @@ module Aws::Pinpoint
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
@@ -411,16 +735,27 @@ module Aws::Pinpoint
     #                   title: "__string",
     #                   url: "__string",
     #                 },
+    #                 email_message: {
+    #                   body: "__string",
+    #                   html_body: "__string",
+    #                   title: "__string",
+    #                 },
     #                 gcm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
+    #                 },
+    #                 sms_message: {
+    #                   body: "__string",
+    #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   sender_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -451,6 +786,7 @@ module Aws::Pinpoint
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
@@ -462,6 +798,7 @@ module Aws::Pinpoint
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
@@ -469,16 +806,27 @@ module Aws::Pinpoint
     #               title: "__string",
     #               url: "__string",
     #             },
+    #             email_message: {
+    #               body: "__string",
+    #               html_body: "__string",
+    #               title: "__string",
+    #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             sms_message: {
+    #               body: "__string",
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -583,6 +931,10 @@ module Aws::Pinpoint
     #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #                 values: ["__string"],
     #               },
+    #               channel: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
     #               device_type: {
     #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #                 values: ["__string"],
@@ -639,6 +991,100 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Default Message across push notification, email, and sms.
+    #
+    # @note When making an API call, you may pass DefaultMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    class DefaultMessage < Struct.new(
+      :body,
+      :substitutions)
+      include Aws::Structure
+    end
+
+    # Default Push Notification Message.
+    #
+    # @note When making an API call, you may pass DefaultPushNotificationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         data: {
+    #           "__string" => "__string",
+    #         },
+    #         silent_push: false,
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL - The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
+    #   Possible values include: OPEN\_APP \| DEEP\_LINK \| URL
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] silent_push
+    #   Indicates if the message should display on the users device. Silent
+    #   pushes can be used for Remote Configuration and Phone Home use
+    #   cases.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title
+    #   The message title that displays above the message on the user's
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the user's mobile browser. Used if the value for
+    #   Action is URL.
+    #   @return [String]
+    #
+    class DefaultPushNotificationMessage < Struct.new(
+      :action,
+      :body,
+      :data,
+      :silent_push,
+      :substitutions,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteApnsChannelRequest
     #   data as a hash:
     #
@@ -660,6 +1106,30 @@ module Aws::Pinpoint
     #
     class DeleteApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApnsSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class DeleteApnsSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_sandbox_channel_response
+    #   Apple Development Push Notification Service channel definition.
+    #   @return [Types::APNSSandboxChannelResponse]
+    #
+    class DeleteApnsSandboxChannelResponse < Struct.new(
+      :apns_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -689,6 +1159,30 @@ module Aws::Pinpoint
     #
     class DeleteCampaignResponse < Struct.new(
       :campaign_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEmailChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class DeleteEmailChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] email_channel_response
+    #   Email Channel Response.
+    #   @return [Types::EmailChannelResponse]
+    #
+    class DeleteEmailChannelResponse < Struct.new(
+      :email_channel_response)
       include Aws::Structure
     end
 
@@ -770,6 +1264,240 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteSmsChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class DeleteSmsChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sms_channel_response
+    #   SMS Channel Response.
+    #   @return [Types::SMSChannelResponse]
+    #
+    class DeleteSmsChannelResponse < Struct.new(
+      :sms_channel_response)
+      include Aws::Structure
+    end
+
+    # The message configuration.
+    #
+    # @note When making an API call, you may pass DirectMessageConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         apns_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           badge: 1,
+    #           body: "__string",
+    #           category: "__string",
+    #           data: {
+    #             "__string" => "__string",
+    #           },
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           sound: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           thread_id: "__string",
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         default_message: {
+    #           body: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #         },
+    #         default_push_notification_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           data: {
+    #             "__string" => "__string",
+    #           },
+    #           silent_push: false,
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         gcm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           collapse_key: "__string",
+    #           data: {
+    #             "__string" => "__string",
+    #           },
+    #           icon_reference: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           raw_content: "__string",
+    #           restricted_package_name: "__string",
+    #           silent_push: false,
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         sms_message: {
+    #           body: "__string",
+    #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           sender_id: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] apns_message
+    #   The message to APNS channels. Overrides the default push
+    #   notification message.
+    #   @return [Types::APNSMessage]
+    #
+    # @!attribute [rw] default_message
+    #   The default message for all channels.
+    #   @return [Types::DefaultMessage]
+    #
+    # @!attribute [rw] default_push_notification_message
+    #   The default push notification message for all push channels.
+    #   @return [Types::DefaultPushNotificationMessage]
+    #
+    # @!attribute [rw] gcm_message
+    #   The message to GCM channels. Overrides the default push notification
+    #   message.
+    #   @return [Types::GCMMessage]
+    #
+    # @!attribute [rw] sms_message
+    #   The message to SMS channels. Overrides the default message.
+    #   @return [Types::SMSMessage]
+    #
+    class DirectMessageConfiguration < Struct.new(
+      :apns_message,
+      :default_message,
+      :default_push_notification_message,
+      :gcm_message,
+      :sms_message)
+      include Aws::Structure
+    end
+
+    # Email Channel Request
+    #
+    # @note When making an API call, you may pass EmailChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         from_address: "__string",
+    #         identity: "__string",
+    #         role_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] from_address
+    #   The email address used to send emails from.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity
+    #   The ARN of an identity verified with SES.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM Role used to submit events to Mobile Analytics'
+    #   event ingestion service
+    #   @return [String]
+    #
+    class EmailChannelRequest < Struct.new(
+      :enabled,
+      :from_address,
+      :identity,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Email Channel Response.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the settings were last updated in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] from_address
+    #   The email address used to send emails from.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity
+    #   The ARN of an identity verified with SES.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who last updated this entry
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   Platform type. Will be "EMAIL"
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM Role used to submit events to Mobile Analytics'
+    #   event ingestion service
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    class EmailChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :enabled,
+      :from_address,
+      :id,
+      :identity,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :role_arn,
+      :version)
+      include Aws::Structure
+    end
+
     # Endpoint update request
     #
     # @note When making an API call, you may pass EndpointBatchItem
@@ -780,7 +1508,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "APNS", # accepts APNS, GCM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -895,7 +1623,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "APNS", # accepts APNS, GCM
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -1065,7 +1793,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "APNS", # accepts APNS, GCM
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -1229,14 +1957,13 @@ module Aws::Pinpoint
     #   The unique ID for the most recent request to update the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] shard_id
+    #   @return [String]
+    #
     # @!attribute [rw] user
     #   Custom user-specific attributes that your app reports to Amazon
     #   Pinpoint.
     #   @return [Types::EndpointUser]
-    #
-    # @!attribute [rw] shard_id
-    #   The ShardId of endpoint
-    #   @return [String]
     #
     class EndpointResponse < Struct.new(
       :address,
@@ -1253,8 +1980,8 @@ module Aws::Pinpoint
       :metrics,
       :opt_out,
       :request_id,
-      :user,
-      :shard_id)
+      :shard_id,
+      :user)
       include Aws::Structure
     end
 
@@ -1332,14 +2059,20 @@ module Aws::Pinpoint
     #
     #       {
     #         api_key: "__string",
+    #         enabled: false,
     #       }
     #
     # @!attribute [rw] api_key
     #   Platform credential API key from Google.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
     class GCMChannelRequest < Struct.new(
-      :api_key)
+      :api_key,
+      :enabled)
       include Aws::Structure
     end
 
@@ -1357,8 +2090,12 @@ module Aws::Pinpoint
     #   The GCM API key from Google.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
-    #   The unique channel ID.
+    #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -1385,12 +2122,140 @@ module Aws::Pinpoint
       :application_id,
       :creation_date,
       :credential,
+      :enabled,
       :id,
       :is_archived,
       :last_modified_by,
       :last_modified_date,
       :platform,
       :version)
+      include Aws::Structure
+    end
+
+    # GCM Message.
+    #
+    # @note When making an API call, you may pass GCMMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         collapse_key: "__string",
+    #         data: {
+    #           "__string" => "__string",
+    #         },
+    #         icon_reference: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         raw_content: "__string",
+    #         restricted_package_name: "__string",
+    #         silent_push: false,
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL - The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
+    #   Possible values include: OPEN\_APP \| DEEP\_LINK \| URL
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] collapse_key
+    #   This parameter identifies a group of messages (e.g., with
+    #   collapse\_key: "Updates Available") that can be collapsed, so that
+    #   only the last message gets sent when delivery can be resumed. This
+    #   is intended to avoid sending too many of the same messages when the
+    #   device comes back online or becomes active.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] icon_reference
+    #   The icon image name of the asset saved in your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL that points to an image used as the large icon to the
+    #   notification content view.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL that points to an image used in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] restricted_package_name
+    #   This parameter specifies the package name of the application where
+    #   the registration tokens must match in order to receive the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] silent_push
+    #   Indicates if the message should display on the users device. Silent
+    #   pushes can be used for Remote Configuration and Phone Home use
+    #   cases.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL that points to an image used as the small icon for the
+    #   notification which will be used to represent the notification in the
+    #   status bar and content view
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   Indicates a sound to play when the device receives the notification.
+    #   Supports default, or the filename of a sound resource bundled in the
+    #   app. Android sound files must reside in /res/raw/
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title
+    #   The message title that displays above the message on the user's
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the user's mobile browser. Used if the value for
+    #   Action is URL.
+    #   @return [String]
+    #
+    class GCMMessage < Struct.new(
+      :action,
+      :body,
+      :collapse_key,
+      :data,
+      :icon_reference,
+      :image_icon_url,
+      :image_url,
+      :raw_content,
+      :restricted_package_name,
+      :silent_push,
+      :small_image_icon_url,
+      :sound,
+      :substitutions,
+      :title,
+      :url)
       include Aws::Structure
     end
 
@@ -1415,6 +2280,30 @@ module Aws::Pinpoint
     #
     class GetApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetApnsSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class GetApnsSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_sandbox_channel_response
+    #   Apple Development Push Notification Service channel definition.
+    #   @return [Types::APNSSandboxChannelResponse]
+    #
+    class GetApnsSandboxChannelResponse < Struct.new(
+      :apns_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -1614,6 +2503,30 @@ module Aws::Pinpoint
     #
     class GetCampaignsResponse < Struct.new(
       :campaigns_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEmailChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class GetEmailChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] email_channel_response
+    #   Email Channel Response.
+    #   @return [Types::EmailChannelResponse]
+    #
+    class GetEmailChannelResponse < Struct.new(
+      :email_channel_response)
       include Aws::Structure
     end
 
@@ -1932,6 +2845,30 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSmsChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class GetSmsChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sms_channel_response
+    #   SMS Channel Response.
+    #   @return [Types::SMSChannelResponse]
+    #
+    class GetSmsChannelResponse < Struct.new(
+      :sms_channel_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportJobRequest
     #   data as a hash:
     #
@@ -2155,6 +3092,7 @@ module Aws::Pinpoint
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #         body: "__string",
     #         image_icon_url: "__string",
+    #         image_small_icon_url: "__string",
     #         image_url: "__string",
     #         json_body: "__string",
     #         media_url: "__string",
@@ -2165,11 +3103,11 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] action
     #   The action that occurs if the user taps a push notification
-    #   delivered by the campaign: OPEN\_APP – Your app launches, or it
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
     #   becomes the foreground app if it has been sent to the background.
-    #   This is the default action. DEEP\_LINK – Uses deep linking features
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
     #   in iOS and Android to open your app and display a designated user
-    #   interface within the app. URL – The default mobile browser on the
+    #   interface within the app. URL - The default mobile browser on the
     #   user's device launches and opens a web page at the URL you specify.
     #   @return [String]
     #
@@ -2180,6 +3118,11 @@ module Aws::Pinpoint
     # @!attribute [rw] image_icon_url
     #   The URL that points to the icon image for the push notification
     #   icon, for example, the app icon.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_small_icon_url
+    #   The URL that points to the small icon image for the push
+    #   notification icon, for example, the app icon.
     #   @return [String]
     #
     # @!attribute [rw] image_url
@@ -2215,6 +3158,7 @@ module Aws::Pinpoint
       :action,
       :body,
       :image_icon_url,
+      :image_small_icon_url,
       :image_url,
       :json_body,
       :media_url,
@@ -2250,6 +3194,7 @@ module Aws::Pinpoint
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
@@ -2261,6 +3206,7 @@ module Aws::Pinpoint
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
@@ -2268,16 +3214,27 @@ module Aws::Pinpoint
     #           title: "__string",
     #           url: "__string",
     #         },
+    #         email_message: {
+    #           body: "__string",
+    #           html_body: "__string",
+    #           title: "__string",
+    #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
     #           silent_push: false,
     #           title: "__string",
     #           url: "__string",
+    #         },
+    #         sms_message: {
+    #           body: "__string",
+    #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           sender_id: "__string",
     #         },
     #       }
     #
@@ -2290,15 +3247,188 @@ module Aws::Pinpoint
     #   The default message for all channels.
     #   @return [Types::Message]
     #
+    # @!attribute [rw] email_message
+    #   The email message configuration.
+    #   @return [Types::CampaignEmailMessage]
+    #
     # @!attribute [rw] gcm_message
     #   The message that the campaign delivers to GCM channels. Overrides
     #   the default message.
     #   @return [Types::Message]
     #
+    # @!attribute [rw] sms_message
+    #   The SMS message configuration.
+    #   @return [Types::CampaignSmsMessage]
+    #
     class MessageConfiguration < Struct.new(
       :apns_message,
       :default_message,
-      :gcm_message)
+      :email_message,
+      :gcm_message,
+      :sms_message)
+      include Aws::Structure
+    end
+
+    # Send message request.
+    #
+    # @note When making an API call, you may pass MessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         addresses: {
+    #           "__string" => {
+    #             body_override: "__string",
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #             context: {
+    #               "__string" => "__string",
+    #             },
+    #             raw_content: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title_override: "__string",
+    #           },
+    #         },
+    #         context: {
+    #           "__string" => "__string",
+    #         },
+    #         message_configuration: {
+    #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             badge: 1,
+    #             body: "__string",
+    #             category: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             thread_id: "__string",
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default_message: {
+    #             body: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #           },
+    #           default_push_notification_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             silent_push: false,
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             collapse_key: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             raw_content: "__string",
+    #             restricted_package_name: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           sms_message: {
+    #             body: "__string",
+    #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             sender_id: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] addresses
+    #   A map of destination addresses, with the address as the key(Email
+    #   address, phone number or push token) and the Address Configuration
+    #   as the value.
+    #   @return [Hash<String,Types::AddressConfiguration>]
+    #
+    # @!attribute [rw] context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] message_configuration
+    #   Message configuration.
+    #   @return [Types::DirectMessageConfiguration]
+    #
+    class MessageRequest < Struct.new(
+      :addresses,
+      :context,
+      :message_configuration)
+      include Aws::Structure
+    end
+
+    # Send message response.
+    #
+    # @!attribute [rw] application_id
+    #   Application id of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   Original request Id for which this message was delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   A map containing a multi part response for each address, with the
+    #   address as the key(Email address, phone number or push token) and
+    #   the result as the value.
+    #   @return [Hash<String,Types::MessageResult>]
+    #
+    class MessageResponse < Struct.new(
+      :application_id,
+      :request_id,
+      :result)
+      include Aws::Structure
+    end
+
+    # The result from sending a message to an address.
+    #
+    # @!attribute [rw] delivery_status
+    #   Delivery status of message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   Downstream service status code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_message
+    #   Status message for message delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_token
+    #   If token was updated as part of delivery. (This is GCM Specific)
+    #   @return [String]
+    #
+    class MessageResult < Struct.new(
+      :delivery_status,
+      :status_code,
+      :status_message,
+      :updated_token)
       include Aws::Structure
     end
 
@@ -2309,7 +3439,6 @@ module Aws::Pinpoint
     #         application_id: "__string", # required
     #         write_event_stream: { # required
     #           destination_stream_arn: "__string",
-    #           external_id: "__string",
     #           role_arn: "__string",
     #         },
     #       }
@@ -2377,15 +3506,138 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] recency_type
-    #   The recency dimension type: ACTIVE – Users who have used your app
+    #   The recency dimension type: ACTIVE - Users who have used your app
     #   within the specified duration are included in the segment. INACTIVE
-    #   – Users who have not used your app within the specified duration are
+    #   - Users who have not used your app within the specified duration are
     #   included in the segment.
     #   @return [String]
     #
     class RecencyDimension < Struct.new(
       :duration,
       :recency_type)
+      include Aws::Structure
+    end
+
+    # SMS Channel Request
+    #
+    # @note When making an API call, you may pass SMSChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         sender_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sender_id
+    #   Sender identifier of your messages.
+    #   @return [String]
+    #
+    class SMSChannelRequest < Struct.new(
+      :enabled,
+      :sender_id)
+      include Aws::Structure
+    end
+
+    # SMS Channel Response.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the settings were last updated in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who last updated this entry
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   Platform type. Will be "SMS"
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   Sender identifier of your messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_code
+    #   The short code registered with the phone provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    class SMSChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :enabled,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :sender_id,
+      :short_code,
+      :version)
+      include Aws::Structure
+    end
+
+    # SMS Message.
+    #
+    # @note When making an API call, you may pass SMSMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         sender_id: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_type
+    #   Is this a transaction priority message or lower priority.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   Sender ID of sent message.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    class SMSMessage < Struct.new(
+      :body,
+      :message_type,
+      :sender_id,
+      :substitutions)
       include Aws::Structure
     end
 
@@ -2477,6 +3729,10 @@ module Aws::Pinpoint
     #           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #           values: ["__string"],
     #         },
+    #         channel: {
+    #           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #           values: ["__string"],
+    #         },
     #         device_type: {
     #           dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #           values: ["__string"],
@@ -2499,6 +3755,10 @@ module Aws::Pinpoint
     #   The app version criteria for the segment.
     #   @return [Types::SetDimension]
     #
+    # @!attribute [rw] channel
+    #   The channel criteria for the segment.
+    #   @return [Types::SetDimension]
+    #
     # @!attribute [rw] device_type
     #   The device type criteria for the segment.
     #   @return [Types::SetDimension]
@@ -2517,6 +3777,7 @@ module Aws::Pinpoint
     #
     class SegmentDemographics < Struct.new(
       :app_version,
+      :channel,
       :device_type,
       :make,
       :model,
@@ -2544,6 +3805,10 @@ module Aws::Pinpoint
     #         },
     #         demographic: {
     #           app_version: {
+    #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #           channel: {
     #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #             values: ["__string"],
     #           },
@@ -2609,6 +3874,9 @@ module Aws::Pinpoint
 
     # Segment import definition.
     #
+    # @!attribute [rw] channel_counts
+    #   @return [Hash<String,Integer>]
+    #
     # @!attribute [rw] external_id
     #   A unique, custom ID assigned to the IAM role that restricts who can
     #   assume the role.
@@ -2635,6 +3903,7 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     class SegmentImportResource < Struct.new(
+      :channel_counts,
       :external_id,
       :format,
       :role_arn,
@@ -2695,11 +3964,11 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] segment_type
-    #   The segment type: DIMENSIONAL – A dynamic segment built from
+    #   The segment type: DIMENSIONAL - A dynamic segment built from
     #   selection criteria based on endpoint data reported by your app. You
     #   create this type of segment by using the segment builder in the
     #   Amazon Pinpoint console or by making a POST request to the segments
-    #   resource. IMPORT – A static segment built from an imported set of
+    #   resource. IMPORT - A static segment built from an imported set of
     #   endpoint definitions. You create this type of segment by importing a
     #   segment in the Amazon Pinpoint console or by making a POST request
     #   to the jobs/import resource.
@@ -2739,6 +4008,123 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         message_request: { # required
+    #           addresses: {
+    #             "__string" => {
+    #               body_override: "__string",
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #               context: {
+    #                 "__string" => "__string",
+    #               },
+    #               raw_content: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title_override: "__string",
+    #             },
+    #           },
+    #           context: {
+    #             "__string" => "__string",
+    #           },
+    #           message_configuration: {
+    #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               badge: 1,
+    #               body: "__string",
+    #               category: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               thread_id: "__string",
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             default_message: {
+    #               body: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #             },
+    #             default_push_notification_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               silent_push: false,
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             gcm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               collapse_key: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               raw_content: "__string",
+    #               restricted_package_name: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             sms_message: {
+    #               body: "__string",
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] message_request
+    #   Send message request.
+    #   @return [Types::MessageRequest]
+    #
+    class SendMessagesRequest < Struct.new(
+      :application_id,
+      :message_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_response
+    #   Send message response.
+    #   @return [Types::MessageResponse]
+    #
+    class SendMessagesResponse < Struct.new(
+      :message_response)
+      include Aws::Structure
+    end
+
     # Dimension specification of a segment.
     #
     # @note When making an API call, you may pass SetDimension
@@ -2750,8 +4136,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] dimension_type
-    #   The type of dimension: INCLUSIVE – Endpoints that match the criteria
-    #   are included in the segment. EXCLUSIVE – Endpoints that match the
+    #   The type of dimension: INCLUSIVE - Endpoints that match the criteria
+    #   are included in the segment. EXCLUSIVE - Endpoints that match the
     #   criteria are excluded from the segment.
     #   @return [String]
     #
@@ -2811,6 +4197,7 @@ module Aws::Pinpoint
     #       {
     #         apns_channel_request: { # required
     #           certificate: "__string",
+    #           enabled: false,
     #           private_key: "__string",
     #         },
     #         application_id: "__string", # required
@@ -2835,6 +4222,40 @@ module Aws::Pinpoint
     #
     class UpdateApnsChannelResponse < Struct.new(
       :apns_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateApnsSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         apns_sandbox_channel_request: { # required
+    #           certificate: "__string",
+    #           enabled: false,
+    #           private_key: "__string",
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] apns_sandbox_channel_request
+    #   Apple Development Push Notification Service channel definition.
+    #   @return [Types::APNSSandboxChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class UpdateApnsSandboxChannelRequest < Struct.new(
+      :apns_sandbox_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_sandbox_channel_response
+    #   Apple Development Push Notification Service channel definition.
+    #   @return [Types::APNSSandboxChannelResponse]
+    #
+    class UpdateApnsSandboxChannelResponse < Struct.new(
+      :apns_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -2891,6 +4312,7 @@ module Aws::Pinpoint
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
@@ -2902,6 +4324,7 @@ module Aws::Pinpoint
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
@@ -2909,16 +4332,27 @@ module Aws::Pinpoint
     #                   title: "__string",
     #                   url: "__string",
     #                 },
+    #                 email_message: {
+    #                   body: "__string",
+    #                   html_body: "__string",
+    #                   title: "__string",
+    #                 },
     #                 gcm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
+    #                 },
+    #                 sms_message: {
+    #                   body: "__string",
+    #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   sender_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -2949,6 +4383,7 @@ module Aws::Pinpoint
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
@@ -2960,6 +4395,7 @@ module Aws::Pinpoint
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
@@ -2967,16 +4403,27 @@ module Aws::Pinpoint
     #               title: "__string",
     #               url: "__string",
     #             },
+    #             email_message: {
+    #               body: "__string",
+    #               html_body: "__string",
+    #               title: "__string",
+    #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             sms_message: {
+    #               body: "__string",
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -3024,6 +4471,41 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateEmailChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         email_channel_request: { # required
+    #           enabled: false,
+    #           from_address: "__string",
+    #           identity: "__string",
+    #           role_arn: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] email_channel_request
+    #   Email Channel Request
+    #   @return [Types::EmailChannelRequest]
+    #
+    class UpdateEmailChannelRequest < Struct.new(
+      :application_id,
+      :email_channel_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] email_channel_response
+    #   Email Channel Response.
+    #   @return [Types::EmailChannelResponse]
+    #
+    class UpdateEmailChannelResponse < Struct.new(
+      :email_channel_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateEndpointRequest
     #   data as a hash:
     #
@@ -3035,7 +4517,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "APNS", # accepts APNS, GCM
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -3108,7 +4590,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "APNS", # accepts APNS, GCM
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -3175,6 +4657,7 @@ module Aws::Pinpoint
     #         application_id: "__string", # required
     #         gcm_channel_request: { # required
     #           api_key: "__string",
+    #           enabled: false,
     #         },
     #       }
     #
@@ -3222,6 +4705,10 @@ module Aws::Pinpoint
     #             },
     #             demographic: {
     #               app_version: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #               channel: {
     #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #                 values: ["__string"],
     #               },
@@ -3285,6 +4772,39 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSmsChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         sms_channel_request: { # required
+    #           enabled: false,
+    #           sender_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] sms_channel_request
+    #   SMS Channel Request
+    #   @return [Types::SMSChannelRequest]
+    #
+    class UpdateSmsChannelRequest < Struct.new(
+      :application_id,
+      :sms_channel_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sms_channel_response
+    #   SMS Channel Response.
+    #   @return [Types::SMSChannelResponse]
+    #
+    class UpdateSmsChannelResponse < Struct.new(
+      :sms_channel_response)
+      include Aws::Structure
+    end
+
     # Creating application setting request
     #
     # @note When making an API call, you may pass WriteApplicationSettingsRequest
@@ -3332,6 +4852,7 @@ module Aws::Pinpoint
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                 body: "__string",
     #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
@@ -3343,6 +4864,7 @@ module Aws::Pinpoint
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                 body: "__string",
     #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
@@ -3350,16 +4872,27 @@ module Aws::Pinpoint
     #                 title: "__string",
     #                 url: "__string",
     #               },
+    #               email_message: {
+    #                 body: "__string",
+    #                 html_body: "__string",
+    #                 title: "__string",
+    #               },
     #               gcm_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                 body: "__string",
     #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
     #                 silent_push: false,
     #                 title: "__string",
     #                 url: "__string",
+    #               },
+    #               sms_message: {
+    #                 body: "__string",
+    #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 sender_id: "__string",
     #               },
     #             },
     #             schedule: {
@@ -3390,6 +4923,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
@@ -3401,6 +4935,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
@@ -3408,16 +4943,27 @@ module Aws::Pinpoint
     #             title: "__string",
     #             url: "__string",
     #           },
+    #           email_message: {
+    #             body: "__string",
+    #             html_body: "__string",
+    #             title: "__string",
+    #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
+    #           },
+    #           sms_message: {
+    #             body: "__string",
+    #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             sender_id: "__string",
     #           },
     #         },
     #         name: "__string",
@@ -3511,7 +5057,6 @@ module Aws::Pinpoint
     #
     #       {
     #         destination_stream_arn: "__string",
-    #         external_id: "__string",
     #         role_arn: "__string",
     #       }
     #
@@ -3523,11 +5068,6 @@ module Aws::Pinpoint
     #   Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT\_ID:stream/STREAM\_NAME
     #   @return [String]
     #
-    # @!attribute [rw] external_id
-    #   The external ID assigned the IAM role that authorizes Amazon
-    #   Pinpoint to publish to the stream.
-    #   @return [String]
-    #
     # @!attribute [rw] role_arn
     #   The IAM role that authorizes Amazon Pinpoint to publish events to
     #   the stream in your account.
@@ -3535,7 +5075,6 @@ module Aws::Pinpoint
     #
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
-      :external_id,
       :role_arn)
       include Aws::Structure
     end
@@ -3561,6 +5100,10 @@ module Aws::Pinpoint
     #           },
     #           demographic: {
     #             app_version: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #             channel: {
     #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
     #               values: ["__string"],
     #             },
@@ -3622,6 +5165,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
@@ -3633,6 +5177,7 @@ module Aws::Pinpoint
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
@@ -3640,16 +5185,27 @@ module Aws::Pinpoint
     #             title: "__string",
     #             url: "__string",
     #           },
+    #           email_message: {
+    #             body: "__string",
+    #             html_body: "__string",
+    #             title: "__string",
+    #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
+    #           },
+    #           sms_message: {
+    #             body: "__string",
+    #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             sender_id: "__string",
     #           },
     #         },
     #         schedule: {

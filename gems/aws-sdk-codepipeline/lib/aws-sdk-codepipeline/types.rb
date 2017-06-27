@@ -700,14 +700,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The Amazon S3 location where artifacts are stored for the pipeline. If
-    # this Amazon S3 bucket is created manually, it must meet the
-    # requirements for AWS CodePipeline. For more information, see the
-    # [Concepts][1].
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket
+    # The Amazon S3 bucket where artifacts are stored for the pipeline.
     #
     # @note When making an API call, you may pass ArtifactStore
     #   data as a hash:
@@ -726,8 +719,12 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The location for storing the artifacts for a pipeline, such as an S3
-    #   bucket or folder.
+    #   The Amazon S3 bucket used for storing the artifacts for a pipeline.
+    #   You can specify the name of an S3 bucket but not a folder within the
+    #   bucket. A folder to contain the pipeline artifacts is created for
+    #   you based on the name of the pipeline. You can use any Amazon S3
+    #   bucket in the same AWS Region as the pipeline to store your pipeline
+    #   artifacts.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -847,11 +844,13 @@ module Aws::CodePipeline
     #   @return [Array<Types::ActionConfigurationProperty>]
     #
     # @!attribute [rw] input_artifact_details
-    #   Returns information about the details of an artifact.
+    #   The details of the input artifact for the action, such as its commit
+    #   ID.
     #   @return [Types::ArtifactDetails]
     #
     # @!attribute [rw] output_artifact_details
-    #   Returns information about the details of an artifact.
+    #   The details of the output artifact of the action, such as its commit
+    #   ID.
     #   @return [Types::ArtifactDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeInput AWS API Documentation
@@ -1667,6 +1666,66 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Represents the input of a list pipeline executions action.
+    #
+    # @note When making an API call, you may pass ListPipelineExecutionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_name: "PipelineName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline for which you want to get execution summary
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. The available pipeline execution history is limited
+    #   to the most recent 12 months, based on pipeline execution start
+    #   times. Default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous list pipeline
+    #   executions call, which can be used to return the next set of
+    #   pipeline executions in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutionsInput AWS API Documentation
+    #
+    class ListPipelineExecutionsInput < Struct.new(
+      :pipeline_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the output of a list pipeline executions action.
+    #
+    # @!attribute [rw] pipeline_execution_summaries
+    #   A list of executions in the history of a pipeline.
+    #   @return [Array<Types::PipelineExecutionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used in the next list pipeline executions call
+    #   to return the next set of pipeline executions. To view all items in
+    #   the list, continue to call this operation with each subsequent token
+    #   until no more nextToken values are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutionsOutput AWS API Documentation
+    #
+    class ListPipelineExecutionsOutput < Struct.new(
+      :pipeline_execution_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Represents the input of a list pipelines action.
     #
     # @note When making an API call, you may pass ListPipelinesInput
@@ -1751,8 +1810,6 @@ module Aws::CodePipeline
     #   @return [Types::StageContext]
     #
     # @!attribute [rw] action
-    #   Represents the context of an action within the stage of a pipeline
-    #   to a job worker.
     #   @return [Types::ActionContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineContext AWS API Documentation
@@ -1832,14 +1889,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] artifact_store
-    #   The Amazon S3 location where artifacts are stored for the pipeline.
-    #   If this Amazon S3 bucket is created manually, it must meet the
-    #   requirements for AWS CodePipeline. For more information, see the
-    #   [Concepts][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket
+    #   Represents the context of an action within the stage of a pipeline
+    #   to a job worker.
     #   @return [Types::ArtifactStore]
     #
     # @!attribute [rw] stages
@@ -1888,7 +1939,7 @@ module Aws::CodePipeline
     #     stage to be completed, a newer pipeline execution caught up and
     #     continued through the pipeline instead.
     #
-    #   * Failed: The pipeline did not complete successfully.
+    #   * Failed: The pipeline execution did not complete successfully.
     #   @return [String]
     #
     # @!attribute [rw] artifact_revisions
@@ -1903,6 +1954,46 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :status,
       :artifact_revisions)
+      include Aws::Structure
+    end
+
+    # Summary information about a pipeline execution.
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The ID of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the pipeline execution.
+    #
+    #   * InProgress: The pipeline execution is currently running.
+    #
+    #   * Succeeded: The pipeline execution completed successfully.
+    #
+    #   * Superseded: While this pipeline execution was waiting for the next
+    #     stage to be completed, a newer pipeline execution caught up and
+    #     continued through the pipeline instead.
+    #
+    #   * Failed: The pipeline execution did not complete successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time when the pipeline execution began, in timestamp
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The date and time of the last change to the pipeline execution, in
+    #   timestamp format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
+    #
+    class PipelineExecutionSummary < Struct.new(
+      :pipeline_execution_id,
+      :status,
+      :start_time,
+      :last_update_time)
       include Aws::Structure
     end
 

@@ -31,7 +31,7 @@ module Aws::S3
     end
 
     # The bucket policy as a JSON document.
-    # @return [String]
+    # @return [IO]
     def policy
       data.policy
     end

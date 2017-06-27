@@ -203,6 +203,7 @@ module Aws::IoT
     RegisterCertificateResponse = Shapes::StructureShape.new(name: 'RegisterCertificateResponse')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
     RegistrationCodeValidationException = Shapes::StructureShape.new(name: 'RegistrationCodeValidationException')
+    RegistryMaxResults = Shapes::IntegerShape.new(name: 'RegistryMaxResults')
     RejectCertificateTransferRequest = Shapes::StructureShape.new(name: 'RejectCertificateTransferRequest')
     RemoveThingType = Shapes::BooleanShape.new(name: 'RemoveThingType')
     ReplaceTopicRuleRequest = Shapes::StructureShape.new(name: 'ReplaceTopicRuleRequest')
@@ -213,6 +214,9 @@ module Aws::IoT
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     S3Action = Shapes::StructureShape.new(name: 'S3Action')
     SQL = Shapes::StringShape.new(name: 'SQL')
+    SalesforceAction = Shapes::StructureShape.new(name: 'SalesforceAction')
+    SalesforceEndpoint = Shapes::StringShape.new(name: 'SalesforceEndpoint')
+    SalesforceToken = Shapes::StringShape.new(name: 'SalesforceToken')
     SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetAsActive = Shapes::BooleanShape.new(name: 'SetAsActive')
@@ -281,6 +285,7 @@ module Aws::IoT
     Action.add_member(:cloudwatch_metric, Shapes::ShapeRef.new(shape: CloudwatchMetricAction, location_name: "cloudwatchMetric"))
     Action.add_member(:cloudwatch_alarm, Shapes::ShapeRef.new(shape: CloudwatchAlarmAction, location_name: "cloudwatchAlarm"))
     Action.add_member(:elasticsearch, Shapes::ShapeRef.new(shape: ElasticsearchAction, location_name: "elasticsearch"))
+    Action.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceAction, location_name: "salesforce"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -659,7 +664,7 @@ module Aws::IoT
     ListPrincipalPoliciesResponse.struct_class = Types::ListPrincipalPoliciesResponse
 
     ListPrincipalThingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListPrincipalThingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPrincipalThingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RegistryMaxResults, location: "querystring", location_name: "maxResults"))
     ListPrincipalThingsRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, required: true, location: "header", location_name: "x-amzn-principal"))
     ListPrincipalThingsRequest.struct_class = Types::ListPrincipalThingsRequest
 
@@ -674,7 +679,7 @@ module Aws::IoT
     ListThingPrincipalsResponse.struct_class = Types::ListThingPrincipalsResponse
 
     ListThingTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListThingTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListThingTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RegistryMaxResults, location: "querystring", location_name: "maxResults"))
     ListThingTypesRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location: "querystring", location_name: "thingTypeName"))
     ListThingTypesRequest.struct_class = Types::ListThingTypesRequest
 
@@ -683,7 +688,7 @@ module Aws::IoT
     ListThingTypesResponse.struct_class = Types::ListThingTypesResponse
 
     ListThingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListThingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListThingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RegistryMaxResults, location: "querystring", location_name: "maxResults"))
     ListThingsRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeName, location: "querystring", location_name: "attributeName"))
     ListThingsRequest.add_member(:attribute_value, Shapes::ShapeRef.new(shape: AttributeValue, location: "querystring", location_name: "attributeValue"))
     ListThingsRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location: "querystring", location_name: "thingTypeName"))
@@ -774,6 +779,10 @@ module Aws::IoT
     S3Action.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
     S3Action.add_member(:canned_acl, Shapes::ShapeRef.new(shape: CannedAccessControlList, location_name: "cannedAcl"))
     S3Action.struct_class = Types::S3Action
+
+    SalesforceAction.add_member(:token, Shapes::ShapeRef.new(shape: SalesforceToken, required: true, location_name: "token"))
+    SalesforceAction.add_member(:url, Shapes::ShapeRef.new(shape: SalesforceEndpoint, required: true, location_name: "url"))
+    SalesforceAction.struct_class = Types::SalesforceAction
 
     SearchableAttributes.member = Shapes::ShapeRef.new(shape: AttributeName)
 

@@ -25,6 +25,7 @@ module Aws::WAF
     #         action: { # required
     #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #         },
+    #         type: "REGULAR", # accepts REGULAR, RATE_BASED
     #       }
     #
     # @!attribute [rw] priority
@@ -59,12 +60,22 @@ module Aws::WAF
     #     request based on the remaining rules in the web ACL.
     #   @return [Types::WafAction]
     #
+    # @!attribute [rw] type
+    #   The rule type, either `REGULAR`, as defined by Rule, or
+    #   `RATE_BASED`, as defined by RateBasedRule. The default is REGULAR.
+    #   Although this field is optional, be aware that if you try to add a
+    #   RATE\_BASED rule to a web ACL without setting the type, the
+    #   UpdateWebACL request will fail because the request tries to add a
+    #   REGULAR rule with the specified ID, which does not exist.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ActivatedRule AWS API Documentation
     #
     class ActivatedRule < Struct.new(
       :priority,
       :rule_id,
-      :action)
+      :action,
+      :type)
       include Aws::Structure
     end
 
@@ -476,6 +487,81 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRateBasedRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         metric_name: "MetricName", # required
+    #         rate_key: "IP", # required, accepts IP
+    #         rate_limit: 1, # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RateBasedRule. You can't
+    #   change the name of a `RateBasedRule` after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   A friendly name or description for the metrics for this
+    #   `RateBasedRule`. The name can contain only alphanumeric characters
+    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
+    #   change the name of the metric after you create the `RateBasedRule`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_key
+    #   The field that AWS WAF uses to determine if requests are likely
+    #   arriving from a single source and thus subject to rate monitoring.
+    #   The only valid value for `RateKey` is `IP`. `IP` indicates that
+    #   requests that arrive from the same IP address are subject to the
+    #   `RateLimit` that is specified in the `RateBasedRule`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit
+    #   The maximum number of requests, which have an identical value in the
+    #   field that is specified by `RateKey`, allowed in a five-minute
+    #   period. If the number of requests exceeds the `RateLimit` and the
+    #   other predicates specified in the rule are also met, AWS WAF
+    #   triggers the action that is specified for this rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `CreateRateBasedRule`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleRequest AWS API Documentation
+    #
+    class CreateRateBasedRuleRequest < Struct.new(
+      :name,
+      :metric_name,
+      :rate_key,
+      :rate_limit,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule
+    #   The RateBasedRule that is returned in the `CreateRateBasedRule`
+    #   response.
+    #   @return [Types::RateBasedRule]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `CreateRateBasedRule`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleResponse AWS API Documentation
+    #
+    class CreateRateBasedRuleResponse < Struct.new(
+      :rule,
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRuleRequest
     #   data as a hash:
     #
@@ -804,6 +890,44 @@ module Aws::WAF
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSetResponse AWS API Documentation
     #
     class DeleteIPSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRateBasedRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The `RuleId` of the RateBasedRule that you want to delete. `RuleId`
+    #   is returned by CreateRateBasedRule and by ListRateBasedRules.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRuleRequest AWS API Documentation
+    #
+    class DeleteRateBasedRuleRequest < Struct.new(
+      :rule_id,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `DeleteRateBasedRule`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRuleResponse AWS API Documentation
+    #
+    class DeleteRateBasedRuleResponse < Struct.new(
       :change_token)
       include Aws::Structure
     end
@@ -1192,6 +1316,81 @@ module Aws::WAF
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRateBasedRuleManagedKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #         next_marker: "NextMarker",
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The `RuleId` of the RateBasedRule for which you want to get a list
+    #   of `ManagedKeys`. `RuleId` is returned by CreateRateBasedRule and by
+    #   ListRateBasedRules.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   A null value and not currently used. Do not include this in your
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeysRequest AWS API Documentation
+    #
+    class GetRateBasedRuleManagedKeysRequest < Struct.new(
+      :rule_id,
+      :next_marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_keys
+    #   An array of IP addresses that currently are blocked by the specified
+    #   RateBasedRule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_marker
+    #   A null value and not currently used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeysResponse AWS API Documentation
+    #
+    class GetRateBasedRuleManagedKeysResponse < Struct.new(
+      :managed_keys,
+      :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRateBasedRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The `RuleId` of the RateBasedRule that you want to get. `RuleId` is
+    #   returned by CreateRateBasedRule and by ListRateBasedRules.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleRequest AWS API Documentation
+    #
+    class GetRateBasedRuleRequest < Struct.new(
+      :rule_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule
+    #   Information about the RateBasedRule that you specified in the
+    #   `GetRateBasedRule` request.
+    #   @return [Types::RateBasedRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleResponse AWS API Documentation
+    #
+    class GetRateBasedRuleResponse < Struct.new(
+      :rule)
       include Aws::Structure
     end
 
@@ -1605,14 +1804,9 @@ module Aws::WAF
     # @!attribute [rw] ip_set_descriptors
     #   The IP address type (`IPV4` or `IPV6`) and the IP address range (in
     #   CIDR notation) that web requests originate from. If the `WebACL` is
-    #   associated with a CloudFront distribution, this is the value of one
-    #   of the following fields in CloudFront access logs:
-    #
-    #   * `c-ip`, if the viewer did not use an HTTP proxy or a load balancer
-    #     to send the request
-    #
-    #   * `x-forwarded-for`, if the viewer did use an HTTP proxy or a load
-    #     balancer to send the request
+    #   associated with a CloudFront distribution and the viewer did not use
+    #   an HTTP proxy or a load balancer to send the request, this is the
+    #   value of the c-ip field in the CloudFront access logs.
     #   @return [Array<Types::IPSetDescriptor>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/IPSet AWS API Documentation
@@ -1833,6 +2027,58 @@ module Aws::WAF
     class ListIPSetsResponse < Struct.new(
       :next_marker,
       :ip_sets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRateBasedRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more `Rules` than
+    #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
+    #   response that allows you to list another group of `Rules`. For the
+    #   second and subsequent `ListRateBasedRules` requests, specify the
+    #   value of `NextMarker` from the previous response to get information
+    #   about another batch of `Rules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `Rules` that you want AWS WAF to return for
+    #   this request. If you have more `Rules` than the number that you
+    #   specify for `Limit`, the response includes a `NextMarker` value that
+    #   you can use to get another batch of `Rules`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRulesRequest AWS API Documentation
+    #
+    class ListRateBasedRulesRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `Rules` than the number that you specified for
+    #   `Limit` in the request, the response includes a `NextMarker` value.
+    #   To list more `Rules`, submit another `ListRateBasedRules` request,
+    #   and specify the `NextMarker` value from the response in the
+    #   `NextMarker` value in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   An array of RuleSummary objects.
+    #   @return [Array<Types::RuleSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRulesResponse AWS API Documentation
+    #
+    class ListRateBasedRulesResponse < Struct.new(
+      :next_marker,
+      :rules)
       include Aws::Structure
     end
 
@@ -2162,6 +2408,77 @@ module Aws::WAF
       :negated,
       :type,
       :data_id)
+      include Aws::Structure
+    end
+
+    # A `RateBasedRule` is identical to a regular Rule, with one addition: a
+    # `RateBasedRule` counts the number of requests that arrive from a
+    # specified IP address every five minutes. For example, based on recent
+    # requests that you've seen from an attacker, you might create a
+    # `RateBasedRule` that includes the following conditions:
+    #
+    # * The requests come from 192.0.2.44.
+    #
+    # * They contain the value `BadBot` in the `User-Agent` header.
+    #
+    # In the rule, you also define the rate limit as 15,000.
+    #
+    # Requests that meet both of these conditions and exceed 15,000 requests
+    # every five minutes trigger the rule's action (block or count), which
+    # is defined in the web ACL.
+    #
+    # @!attribute [rw] rule_id
+    #   A unique identifier for a `RateBasedRule`. You use `RuleId` to get
+    #   more information about a `RateBasedRule` (see GetRateBasedRule),
+    #   update a `RateBasedRule` (see UpdateRateBasedRule), insert a
+    #   `RateBasedRule` into a `WebACL` or delete one from a `WebACL` (see
+    #   UpdateWebACL), or delete a `RateBasedRule` from AWS WAF (see
+    #   DeleteRateBasedRule).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description for a `RateBasedRule`. You can't
+    #   change the name of a `RateBasedRule` after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   A friendly name or description for the metrics for a
+    #   `RateBasedRule`. The name can contain only alphanumeric characters
+    #   (A-Z, a-z, 0-9); the name can't contain whitespace. You can't
+    #   change the name of the metric after you create the `RateBasedRule`.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_predicates
+    #   The `Predicates` object contains one `Predicate` element for each
+    #   ByteMatchSet, IPSet, or SqlInjectionMatchSet object that you want to
+    #   include in a `RateBasedRule`.
+    #   @return [Array<Types::Predicate>]
+    #
+    # @!attribute [rw] rate_key
+    #   The field that AWS WAF uses to determine if requests are likely
+    #   arriving from single source and thus subject to rate monitoring. The
+    #   only valid value for `RateKey` is `IP`. `IP` indicates that requests
+    #   arriving from the same IP address are subject to the `RateLimit`
+    #   that is specified in the `RateBasedRule`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_limit
+    #   The maximum number of requests, which have an identical value in the
+    #   field specified by the `RateKey`, allowed in a five-minute period.
+    #   If the number of requests exceeds the `RateLimit` and the other
+    #   predicates specified in the rule are also met, AWS WAF triggers the
+    #   action that is specified for this rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RateBasedRule AWS API Documentation
+    #
+    class RateBasedRule < Struct.new(
+      :rule_id,
+      :name,
+      :metric_name,
+      :match_predicates,
+      :rate_key,
+      :rate_limit)
       include Aws::Structure
     end
 
@@ -2951,6 +3268,71 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateRateBasedRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #         updates: [ # required
+    #           {
+    #             action: "INSERT", # required, accepts INSERT, DELETE
+    #             predicate: { # required
+    #               negated: false, # required
+    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #               data_id: "ResourceId", # required
+    #             },
+    #           },
+    #         ],
+    #         rate_limit: 1, # required
+    #       }
+    #
+    # @!attribute [rw] rule_id
+    #   The `RuleId` of the `RateBasedRule` that you want to update.
+    #   `RuleId` is returned by `CreateRateBasedRule` and by
+    #   ListRateBasedRules.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   An array of `RuleUpdate` objects that you want to insert into or
+    #   delete from a RateBasedRule.
+    #   @return [Array<Types::RuleUpdate>]
+    #
+    # @!attribute [rw] rate_limit
+    #   The maximum number of requests, which have an identical value in the
+    #   field specified by the `RateKey`, allowed in a five-minute period.
+    #   If the number of requests exceeds the `RateLimit` and the other
+    #   predicates specified in the rule are also met, AWS WAF triggers the
+    #   action that is specified for this rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRuleRequest AWS API Documentation
+    #
+    class UpdateRateBasedRuleRequest < Struct.new(
+      :rule_id,
+      :change_token,
+      :updates,
+      :rate_limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `UpdateRateBasedRule`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRuleResponse AWS API Documentation
+    #
+    class UpdateRateBasedRuleResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateRuleRequest
     #   data as a hash:
     #
@@ -3166,6 +3548,7 @@ module Aws::WAF
     #               action: { # required
     #                 type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #               },
+    #               type: "REGULAR", # accepts REGULAR, RATE_BASED
     #             },
     #           },
     #         ],
@@ -3192,7 +3575,7 @@ module Aws::WAF
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, and `RuleId`
+    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`
     #
     #   * WafAction: Contains `Type`
     #   @return [Array<Types::WebACLUpdate>]
@@ -3421,6 +3804,7 @@ module Aws::WAF
     #           action: { # required
     #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED
     #         },
     #       }
     #

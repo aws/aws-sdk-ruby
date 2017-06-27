@@ -1848,7 +1848,7 @@
         "locationName":"Region"
       },
       "max":64,
-      "min":1
+      "min":3
     },
     "HealthCheckType":{
       "type":"string",
@@ -2734,6 +2734,7 @@
         "Region":{"shape":"ResourceRecordSetRegion"},
         "GeoLocation":{"shape":"GeoLocation"},
         "Failover":{"shape":"ResourceRecordSetFailover"},
+        "MultiValueAnswer":{"shape":"ResourceRecordSetMultiValueAnswer"},
         "TTL":{"shape":"TTL"},
         "ResourceRecords":{"shape":"ResourceRecords"},
         "AliasTarget":{"shape":"AliasTarget"},
@@ -2753,6 +2754,7 @@
       "max":128,
       "min":1
     },
+    "ResourceRecordSetMultiValueAnswer":{"type":"boolean"},
     "ResourceRecordSetRegion":{
       "type":"string",
       "enum":[

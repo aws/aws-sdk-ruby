@@ -31,10 +31,8 @@ module Aws::EC2
     end
     alias :vpc_peering_connection_id :id
 
-    # Information about the accepter VPC. CIDR block information is not
-    # returned when creating a VPC peering connection, or when describing a
-    # VPC peering connection that's in the `initiating-request` or
-    # `pending-acceptance` state.
+    # Information about the accepter VPC. CIDR block information is only
+    # returned when describing an active VPC peering connection.
     # @return [Types::VpcPeeringConnectionVpcInfo]
     def accepter_vpc_info
       data.accepter_vpc_info
@@ -46,7 +44,8 @@ module Aws::EC2
       data.expiration_time
     end
 
-    # Information about the requester VPC.
+    # Information about the requester VPC. CIDR block information is only
+    # returned when describing an active VPC peering connection.
     # @return [Types::VpcPeeringConnectionVpcInfo]
     def requester_vpc_info
       data.requester_vpc_info

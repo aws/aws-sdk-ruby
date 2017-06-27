@@ -760,41 +760,42 @@ module Aws::RDS
     #         ],
     #         copy_tags: false,
     #         pre_signed_url: "String",
+    #         option_group_name: "String",
     #         source_region: "String",
     #       }
     #
     # @!attribute [rw] source_db_snapshot_identifier
     #   The identifier for the source DB snapshot.
     #
-    #   If you are copying from a shared manual DB snapshot, this must be
-    #   the ARN of the shared DB snapshot.
+    #   If the source snapshot is in the same region as the copy, specify a
+    #   valid DB snapshot identifier. For example,
+    #   `rds:mysql-instance1-snapshot-20130805`.
     #
-    #   You cannot copy an encrypted, shared DB snapshot from one AWS region
-    #   to another.
+    #   If the source snapshot is in a different region than the copy,
+    #   specify a valid DB snapshot ARN. For example,
+    #   `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`.
+    #
+    #   If you are copying from a shared manual DB snapshot, this parameter
+    #   must be the Amazon Resource Name (ARN) of the shared DB snapshot.
+    #
+    #   If you are copying an encrypted snapshot this parameter must be in
+    #   the ARN format for the source region, and must match the
+    #   `SourceDBSnapshotIdentifier` in the `PreSignedUrl` parameter.
     #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
     #
-    #   * If the source snapshot is in the same region as the copy, specify
-    #     a valid DB snapshot identifier.
-    #
-    #   * If the source snapshot is in a different region than the copy,
-    #     specify a valid DB snapshot ARN. For more information, go to [
-    #     Copying a DB Snapshot or DB Cluster Snapshot][1].
+    #   ^
     #
     #   Example: `rds:mydb-2012-04-02-00-01`
     #
     #   Example:
     #   `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html
     #   @return [String]
     #
     # @!attribute [rw] target_db_snapshot_identifier
-    #   The identifier for the copied snapshot.
+    #   The identifier for the copy of the snapshot.
     #
     #   Constraints:
     #
@@ -814,27 +815,23 @@ module Aws::RDS
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB snapshot and specify a value for the
-    #   `KmsKeyId` parameter, Amazon RDS encrypts the target DB snapshot
-    #   using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-    #   encryption key. If you don't specify a value for `KmsKeyId`, then
-    #   the copy of the DB snapshot is encrypted with the same KMS key as
-    #   the source DB snapshot.
-    #
-    #   If you copy an encrypted snapshot to a different AWS region, then
-    #   you must specify a KMS key for the destination AWS region.
+    #   specify a value for this parameter to encrypt the copy with a new
+    #   KMS encryption key. If you don't specify a value for this
+    #   parameter, then the copy of the DB snapshot is encrypted with the
+    #   same KMS key as the source DB snapshot.
     #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
-    #   account, then you must specify a value for `KmsKeyId`.
+    #   account, then you must specify a value for this parameter.
     #
-    #   To copy an encrypted DB snapshot to another region, you must set
-    #   `KmsKeyId` to the KMS key ID used to encrypt the copy of the DB
-    #   snapshot in the destination region. KMS encryption keys are specific
-    #   to the region that they are created in, and you cannot use
-    #   encryption keys from one region in another region.
+    #   If you specify this parameter when you copy an unencrypted snapshot,
+    #   the copy is encrypted.
+    #
+    #   If you copy an encrypted snapshot to a different AWS region, then
+    #   you must specify a KMS key for the destination AWS region. KMS
+    #   encryption keys are specific to the region that they are created in,
+    #   and you cannot use encryption keys from one region in another
+    #   region.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -848,9 +845,14 @@ module Aws::RDS
     #
     # @!attribute [rw] pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBSnapshot` API action in the AWS region that contains the
-    #   source DB snapshot to copy. The `PreSignedUrl` parameter must be
-    #   used when copying an encrypted DB snapshot from another AWS region.
+    #   `CopyDBSnapshot` API action in the source AWS region that contains
+    #   the source DB snapshot to copy.
+    #
+    #   You must specify this parameter when you copy an encrypted DB
+    #   snapshot from another AWS region by using the Amazon RDS API. You
+    #   can specify the source region option instead of this parameter when
+    #   you copy an encrypted DB snapshot from another AWS region by using
+    #   the AWS CLI.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot`
     #   API action that can be executed in the source region that contains
@@ -883,14 +885,29 @@ module Aws::RDS
     #     like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature
-    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
+    #   To learn how to generate a Signature Version 4 signed request, see
+    #   [Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [Signature Version 4 Signing Process][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [String]
+    #
+    # @!attribute [rw] option_group_name
+    #   The name of an option group to associate with the copy.
+    #
+    #   Specify this option if you are copying a snapshot from one AWS
+    #   region to another, and your DB instance uses a non-default option
+    #   group. If your source DB instance uses Transparent Data Encryption
+    #   for Oracle or Microsoft SQL Server, you must specify this option
+    #   when copying across regions. For more information, see [Option Group
+    #   Considerations][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -910,6 +927,7 @@ module Aws::RDS
       :tags,
       :copy_tags,
       :pre_signed_url,
+      :option_group_name,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -1078,7 +1096,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name for your database of up to 8 alpha-numeric characters. If
+    #   The name for your database of up to 64 alpha-numeric characters. If
     #   you do not provide a name, Amazon RDS will not create a database in
     #   the DB cluster you are creating.
     #   @return [String]
@@ -1613,7 +1631,9 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   The Oracle System ID (SID) of the created DB instance.
+    #   The Oracle System ID (SID) of the created DB instance. If you
+    #   specify `null`, the default value `ORCL` is used. You can't specify
+    #   the string NULL, or any other reserved word, for `DBName`.
     #
     #   Default: `ORCL`
     #
@@ -1708,11 +1728,33 @@ module Aws::RDS
     # @!attribute [rw] engine
     #   The name of the database engine to be used for this instance.
     #
-    #   Valid Values: `mysql` \| `mariadb` \| `oracle-se1` \| `oracle-se2`
-    #   \| `oracle-se` \| `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \|
-    #   `sqlserver-ex` \| `sqlserver-web` \| `postgres` \| `aurora`
-    #
     #   Not every database engine is available for every AWS region.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     #   @return [String]
     #
     # @!attribute [rw] master_username
@@ -1980,99 +2022,123 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
+    #   * Version 5.6 (available in these AWS regions: ap-northeast-1,
     #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
-    #     us-east-2, us-west-2):** ` 5.6.10a`
+    #     us-east-2, us-west-2): ` 5.6.10a`
     #
     #   ^
     #
     #   **MariaDB**
     #
-    #   * **Version 10.1 (available in these AWS regions: us-east-2):** `
-    #     10.1.16`
+    #   * `10.1.19` (supported in all AWS regions)
     #
-    #   * **Version 10.1 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-    #     us-west-2):** ` 10.1.14`
+    #   * `10.1.14` (supported in all regions except us-east-2)
     #
-    #   * **Version 10.0 (available in all AWS regions):** ` 10.0.24`
     #
-    #   * **Version 10.0 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 10.0.17`
+    #
+    #   * `10.0.28` (supported in all AWS regions)
+    #
+    #   * `10.0.24` (supported in all AWS regions)
+    #
+    #   * `10.0.17` (supported in all regions except us-east-2,
+    #     ca-central-1, eu-west-2)
     #
     #   **Microsoft SQL Server 2016**
     #
-    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS regions
-    #     except sa-east-1)
+    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS
+    #     regions)
     #
-    #   ^
+    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS
+    #     regions)
     #
     #   **Microsoft SQL Server 2014**
+    #
+    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS
+    #     regions)
     #
     #   * `12.00.5000.0.v1` (supported for all editions, and all AWS
     #     regions)
     #
     #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
-    #     Edition, and all AWS regions except us-east-2)
+    #     Edition, and all AWS regions except ca-central-1 and eu-west-2)
     #
     #   **Microsoft SQL Server 2012**
+    #
+    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS
+    #     regions)
     #
     #   * `11.00.6020.0.v1` (supported for all editions, and all AWS
     #     regions)
     #
     #   * `11.00.5058.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `11.00.2100.60.v1` (supported for all editions, and all AWS
-    #     regions except us-east-2)
+    #     regions except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **Microsoft SQL Server 2008 R2**
     #
     #   * `10.50.6529.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `10.50.6000.34.v1` (supported for all editions, and all AWS
-    #     regions except us-east-2)
+    #     regions except us-east-2, ca-central-1, and eu-west-2)
     #
     #   * `10.50.2789.0.v1` (supported for all editions, and all AWS regions
-    #     except us-east-2)
+    #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **MySQL**
     #
-    #   * **Version 5.7 (available in all AWS regions):** ` 5.7.11`
+    #   * `5.7.17` (supported in all AWS regions)
     #
-    #   * **Version 5.7 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 5.7.10`
+    #   * `5.7.16` (supported in all AWS regions)
     #
-    #   * **Version 5.6 (available in all AWS regions):** ` 5.6.29`
+    #   * `5.7.11` (supported in all AWS regions)
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 5.6.27`
+    #   * `5.7.10` (supported in all regions except us-east-2, ca-central-1,
+    #     eu-west-2)
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-    #     us-west-2):** ` 5.6.23`
     #
-    #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-    #     sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):** `
-    #     5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22`
     #
-    #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
+    #   * `5.6.35` (supported in all AWS regions)
     #
-    #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
+    #   * `5.6.34` (supported in all AWS regions)
+    #
+    #   * `5.6.29` (supported in all AWS regions)
+    #
+    #   * `5.6.27` (supported in all regions except us-east-2, ca-central-1,
+    #     eu-west-2)
+    #
+    #   * `5.6.23` (supported in all regions except us-east-2, ap-south-1,
+    #     ca-central-1, eu-west-2)
+    #
+    #   * `5.6.22` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.21b` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.21` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.19b` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #   * `5.6.19a` (supported in all regions except us-east-2, ap-south-1,
+    #     ap-northeast-2, ca-central-1, eu-west-2)
+    #
+    #
+    #
+    #   * `5.5.54` (supported in all AWS regions)
+    #
+    #   * `5.5.53` (supported in all AWS regions)
+    #
+    #   * `5.5.46` (supported in all AWS regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v7` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -2097,6 +2163,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
@@ -2119,14 +2187,13 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6:** ` 9.6.1`
+    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2`
     #
-    #   * **Version 9.5:** `9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
+    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 |
-    #     9.3.5 | 9.3.3 | 9.3.2 | 9.3.1`
+    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2315,7 +2382,7 @@ module Aws::RDS
     #   accounts to database accounts; otherwise false.
     #
     #   You can enable IAM database authentication for the following
-    #   database engines
+    #   database engines:
     #
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
@@ -2716,6 +2783,10 @@ module Aws::RDS
     #
     #   * ModifyDBInstance
     #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
@@ -2736,6 +2807,10 @@ module Aws::RDS
     #   * DeleteDBInstance
     #
     #   * ModifyDBInstance
+    #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
     #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
@@ -3409,6 +3484,10 @@ module Aws::RDS
     #   to database accounts is enabled; otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] clone_group_id
+    #   Identifies the clone group to which the DB cluster is associated.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_create_time
     #   Specifies the time when the DB cluster was created, in Universal
     #   Coordinated Time (UTC).
@@ -3450,6 +3529,7 @@ module Aws::RDS
       :db_cluster_arn,
       :associated_roles,
       :iam_database_authentication_enabled,
+      :clone_group_id,
       :cluster_create_time)
       include Aws::Structure
     end
@@ -3955,6 +4035,10 @@ module Aws::RDS
     # * DeleteDBInstance
     #
     # * ModifyDBInstance
+    #
+    # * StopDBInstance
+    #
+    # * StartDBInstance
     #
     # This data type is used as a response element in the
     # DescribeDBInstances action.
@@ -5124,6 +5208,10 @@ module Aws::RDS
     #   * DeleteDBInstance
     #
     #   * ModifyDBInstance
+    #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
     #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
@@ -8834,6 +8922,10 @@ module Aws::RDS
     #
     #   * ModifyDBInstance
     #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
@@ -10152,6 +10244,10 @@ module Aws::RDS
     #
     #   * ModifyDBInstance
     #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
@@ -10269,6 +10365,10 @@ module Aws::RDS
     #   * DeleteDBInstance
     #
     #   * ModifyDBInstance
+    #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
     #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
@@ -11233,6 +11333,7 @@ module Aws::RDS
     #
     #       {
     #         db_cluster_identifier: "String", # required
+    #         restore_type: "String",
     #         source_db_cluster_identifier: "String", # required
     #         restore_to_time: Time.now,
     #         use_latest_restorable_time: false,
@@ -11262,6 +11363,23 @@ module Aws::RDS
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
+    # @!attribute [rw] restore_type
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   Constraints: You cannot specify `copy-on-write` if the engine
+    #   version of the source DB cluster is earlier than 1.11.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] source_db_cluster_identifier
     #   The identifier of the source DB cluster from which to restore.
     #
@@ -11286,7 +11404,12 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
+    #   * Must be specified if `UseLatestRestorableTime` parameter is not
+    #     provided
+    #
     #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
+    #
+    #   * Cannot be specified if `RestoreType` parameter is `copy-on-write`
     #
     #   Example: `2015-03-07T23:45:00Z`
     #   @return [Time]
@@ -11323,7 +11446,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A lst of VPC security groups that the new DB cluster belongs to.
+    #   A list of VPC security groups that the new DB cluster belongs to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -11355,7 +11478,7 @@ module Aws::RDS
     #   * If the DB cluster is not encrypted, then the restored DB cluster
     #     is not encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is note
+    #   If `DBClusterIdentifier` refers to a DB cluster that is not
     #   encrypted, then the restore request is rejected.
     #   @return [String]
     #
@@ -11371,6 +11494,7 @@ module Aws::RDS
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
       :db_cluster_identifier,
+      :restore_type,
       :source_db_cluster_identifier,
       :restore_to_time,
       :use_latest_restorable_time,
@@ -11702,6 +11826,10 @@ module Aws::RDS
     #
     #   * ModifyDBInstance
     #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
@@ -12023,6 +12151,10 @@ module Aws::RDS
     #
     #   * ModifyDBInstance
     #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
@@ -12156,6 +12288,99 @@ module Aws::RDS
     class SourceRegionMessage < Struct.new(
       :marker,
       :source_regions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartDBInstanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied instance identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceMessage AWS API Documentation
+    #
+    class StartDBInstanceMessage < Struct.new(
+      :db_instance_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance
+    #   Contains the result of a successful invocation of the following
+    #   actions:
+    #
+    #   * CreateDBInstance
+    #
+    #   * DeleteDBInstance
+    #
+    #   * ModifyDBInstance
+    #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBInstances action.
+    #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceResult AWS API Documentation
+    #
+    class StartDBInstanceResult < Struct.new(
+      :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopDBInstanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #         db_snapshot_identifier: "String",
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   The user-supplied instance identifier of the DB Snapshot created
+    #   immediately before the DB instance is stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceMessage AWS API Documentation
+    #
+    class StopDBInstanceMessage < Struct.new(
+      :db_instance_identifier,
+      :db_snapshot_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance
+    #   Contains the result of a successful invocation of the following
+    #   actions:
+    #
+    #   * CreateDBInstance
+    #
+    #   * DeleteDBInstance
+    #
+    #   * ModifyDBInstance
+    #
+    #   * StopDBInstance
+    #
+    #   * StartDBInstance
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBInstances action.
+    #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceResult AWS API Documentation
+    #
+    class StopDBInstanceResult < Struct.new(
+      :db_instance)
       include Aws::Structure
     end
 

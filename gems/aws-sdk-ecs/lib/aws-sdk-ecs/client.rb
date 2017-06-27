@@ -1154,6 +1154,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
     #   resp.tasks[0].desired_status #=> String
@@ -2297,6 +2300,9 @@ module Aws::ECS
     #               value: "String",
     #             },
     #           ],
+    #           cpu: 1,
+    #           memory: 1,
+    #           memory_reservation: 1,
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -2332,6 +2338,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
     #   resp.tasks[0].desired_status #=> String
@@ -2446,6 +2455,9 @@ module Aws::ECS
     #               value: "String",
     #             },
     #           ],
+    #           cpu: 1,
+    #           memory: 1,
+    #           memory_reservation: 1,
     #         },
     #       ],
     #       task_role_arn: "String",
@@ -2469,6 +2481,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].last_status #=> String
     #   resp.tasks[0].desired_status #=> String
@@ -2565,6 +2580,9 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].environment #=> Array
     #   resp.task.overrides.container_overrides[0].environment[0].name #=> String
     #   resp.task.overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].cpu #=> Integer
+    #   resp.task.overrides.container_overrides[0].memory #=> Integer
+    #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.last_status #=> String
     #   resp.task.desired_status #=> String
@@ -3096,7 +3114,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

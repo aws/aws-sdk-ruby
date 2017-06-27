@@ -276,7 +276,12 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a new constraint.
+    # Creates a new constraint. For more information, see [Using
+    # Constraints][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html
     #
     # @option params [String] :accept_language
     #   The language code to use for this operation. Supported language codes
@@ -297,10 +302,18 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :parameters
-    #   The constraint parameters.
+    #   The constraint parameters. Expected values vary depending on which
+    #   **Type** is specified. For examples, see the bottom of this topic.
+    #
+    #   For Type `LAUNCH`, the `RoleArn` property is required.
+    #
+    #   For Type `NOTIFICATION`, the `NotificationArns` property is required.
+    #
+    #   For Type `TEMPLATE`, the `Rules` property is required.
     #
     # @option params [required, String] :type
-    #   The type of the constraint.
+    #   The type of the constraint. Case-sensitive valid values are: `LAUNCH`,
+    #   `NOTIFICATION`, or `TEMPLATE`.
     #
     # @option params [String] :description
     #   The text description of the constraint.
@@ -533,7 +546,7 @@ module Aws::ServiceCatalog
     #     support_description: "SupportDescription",
     #     support_email: "SupportEmail",
     #     support_url: "SupportUrl",
-    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE
+    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -546,7 +559,7 @@ module Aws::ServiceCatalog
     #       info: { # required
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #     },
     #     idempotency_token: "IdempotencyToken", # required
     #   })
@@ -558,7 +571,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -570,7 +583,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
@@ -586,7 +599,9 @@ module Aws::ServiceCatalog
     end
 
     # Create a new provisioning artifact for the specified product. This
-    # operation will not work with a product that has been shared with you.
+    # operation does not work with a product that has been shared with you.
+    #
+    # See the bottom of this topic for an example JSON request.
     #
     # @option params [String] :accept_language
     #   The language code to use for this operation. Supported language codes
@@ -631,7 +646,7 @@ module Aws::ServiceCatalog
     #       info: { # required
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #     },
     #     idempotency_token: "IdempotencyToken", # required
     #   })
@@ -641,7 +656,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
@@ -691,7 +706,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified portfolio. This operation will not work with a
+    # Deletes the specified portfolio. This operation does not work with a
     # portfolio that has been shared with you or if it has products, users,
     # constraints, or shared accounts associated with it.
     #
@@ -767,7 +782,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified product. This operation will not work with a
+    # Deletes the specified product. This operation does not work with a
     # product that has been shared with you or is associated with a
     # portfolio.
     #
@@ -804,7 +819,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified provisioning artifact. This operation will not
+    # Deletes the specified provisioning artifact. This operation does not
     # work on a provisioning artifact associated with a product that has
     # been shared with you, or on the last provisioning artifact associated
     # with a product (a product must have at least one provisioning
@@ -827,6 +842,7 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact for the delete request.
+    #   This is sometimes referred to as the product version.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -985,7 +1001,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -1027,6 +1043,7 @@ module Aws::ServiceCatalog
     # @return [Types::DescribeProductAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProductAsAdminOutput#product_view_detail #product_view_detail} => Types::ProductViewDetail
+    #   * {Types::DescribeProductAsAdminOutput#provisioning_artifact_summaries #provisioning_artifact_summaries} => Array&lt;Types::ProvisioningArtifactSummary&gt;
     #   * {Types::DescribeProductAsAdminOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
@@ -1043,7 +1060,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -1052,6 +1069,13 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #   resp.product_view_detail.product_arn #=> String
     #   resp.product_view_detail.created_time #=> Time
+    #   resp.provisioning_artifact_summaries #=> Array
+    #   resp.provisioning_artifact_summaries[0].id #=> String
+    #   resp.provisioning_artifact_summaries[0].name #=> String
+    #   resp.provisioning_artifact_summaries[0].description #=> String
+    #   resp.provisioning_artifact_summaries[0].created_time #=> Time
+    #   resp.provisioning_artifact_summaries[0].provisioning_artifact_metadata #=> Hash
+    #   resp.provisioning_artifact_summaries[0].provisioning_artifact_metadata["ProvisioningArtifactInfoKey"] #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1104,7 +1128,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -1125,6 +1149,55 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Retrieve detailed information about the provisioned product.
+    #
+    # @option params [String] :accept_language
+    #   The language code to use for this operation. Supported language codes
+    #   are as follows:
+    #
+    #   "en" (English)
+    #
+    #   "jp" (Japanese)
+    #
+    #   "zh" (Chinese)
+    #
+    #   If no code is specified, "en" is used as the default.
+    #
+    # @option params [required, String] :id
+    #   The provisioned product identifier.
+    #
+    # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProvisionedProductOutput#provisioned_product_detail #provisioned_product_detail} => Types::ProvisionedProductDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_provisioned_product({
+    #     accept_language: "AcceptLanguage",
+    #     id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_product_detail.name #=> String
+    #   resp.provisioned_product_detail.arn #=> String
+    #   resp.provisioned_product_detail.type #=> String
+    #   resp.provisioned_product_detail.id #=> String
+    #   resp.provisioned_product_detail.status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR"
+    #   resp.provisioned_product_detail.status_message #=> String
+    #   resp.provisioned_product_detail.created_time #=> Time
+    #   resp.provisioned_product_detail.idempotency_token #=> String
+    #   resp.provisioned_product_detail.last_record_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct AWS API Documentation
+    #
+    # @overload describe_provisioned_product(params = {})
+    # @param [Hash] params ({})
+    def describe_provisioned_product(params = {}, options = {})
+      req = build_request(:describe_provisioned_product, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information about the specified provisioning
     # artifact.
     #
@@ -1141,10 +1214,15 @@ module Aws::ServiceCatalog
     #   If no code is specified, "en" is used as the default.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact.
+    #   The identifier of the provisioning artifact. This is sometimes
+    #   referred to as the product version.
     #
     # @option params [required, String] :product_id
     #   The product identifier.
+    #
+    # @option params [Boolean] :verbose
+    #   Selects verbose results. If set to true, the CloudFormation template
+    #   is returned.
     #
     # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1158,6 +1236,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     provisioning_artifact_id: "Id", # required
     #     product_id: "Id", # required
+    #     verbose: false,
     #   })
     #
     # @example Response structure
@@ -1165,7 +1244,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
@@ -1201,7 +1280,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #
     # @option params [String] :path_id
     #   The identifier of the path for this product's provisioning. This
@@ -1299,7 +1379,7 @@ module Aws::ServiceCatalog
     #
     #   resp.record_detail.record_id #=> String
     #   resp.record_detail.provisioned_product_name #=> String
-    #   resp.record_detail.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
     #   resp.record_detail.created_time #=> Time
     #   resp.record_detail.updated_time #=> Time
     #   resp.record_detail.provisioned_product_type #=> String
@@ -1847,7 +1927,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].id #=> String
     #   resp.provisioning_artifact_details[0].name #=> String
     #   resp.provisioning_artifact_details[0].description #=> String
-    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.next_page_token #=> String
     #
@@ -1917,7 +1997,7 @@ module Aws::ServiceCatalog
     #   resp.record_details #=> Array
     #   resp.record_details[0].record_id #=> String
     #   resp.record_details[0].provisioned_product_name #=> String
-    #   resp.record_details[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.record_details[0].status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
     #   resp.record_details[0].created_time #=> Time
     #   resp.record_details[0].updated_time #=> Time
     #   resp.record_details[0].provisioned_product_type #=> String
@@ -1943,7 +2023,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Requests a *Provision* of a specified product. A *ProvisionedProduct*
+    # Requests a *provision* of a specified product. A *provisioned product*
     # is a resourced instance for a product. For example, provisioning a
     # CloudFormation-template-backed product results in launching a
     # CloudFormation stack and all the underlying resources that come with
@@ -1968,7 +2048,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #
     # @option params [String] :path_id
     #   The identifier of the path for this product's provisioning. This
@@ -2030,7 +2111,7 @@ module Aws::ServiceCatalog
     #
     #   resp.record_detail.record_id #=> String
     #   resp.record_detail.provisioned_product_name #=> String
-    #   resp.record_detail.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
     #   resp.record_detail.created_time #=> Time
     #   resp.record_detail.updated_time #=> Time
     #   resp.record_detail.provisioned_product_type #=> String
@@ -2142,7 +2223,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].arn #=> String
     #   resp.provisioned_products[0].type #=> String
     #   resp.provisioned_products[0].id #=> String
-    #   resp.provisioned_products[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.provisioned_products[0].status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR"
     #   resp.provisioned_products[0].status_message #=> String
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
@@ -2225,7 +2306,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summaries[0].name #=> String
     #   resp.product_view_summaries[0].owner #=> String
     #   resp.product_view_summaries[0].short_description #=> String
-    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_summaries[0].distributor #=> String
     #   resp.product_view_summaries[0].has_default_path #=> Boolean
     #   resp.product_view_summaries[0].support_email #=> String
@@ -2319,7 +2400,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].product_view_summary.name #=> String
     #   resp.product_view_details[0].product_view_summary.owner #=> String
     #   resp.product_view_details[0].product_view_summary.short_description #=> String
-    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_details[0].product_view_summary.distributor #=> String
     #   resp.product_view_details[0].product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_details[0].product_view_summary.support_email #=> String
@@ -2350,14 +2431,13 @@ module Aws::ServiceCatalog
     # operation.
     #
     # @option params [String] :provisioned_product_name
-    #   The name of the ProvisionedProduct object to terminate. You must
-    #   specify either `ProvisionedProductName` or `ProvisionedProductId`, but
-    #   not both.
+    #   The name of the ProvisionedProduct object to terminate. Specify either
+    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
     #
     # @option params [String] :provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to terminate. You must
-    #   specify either `ProvisionedProductName` or `ProvisionedProductId`, but
-    #   not both.
+    #   The identifier of the ProvisionedProduct object to terminate. Specify
+    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
+    #   both.
     #
     # @option params [required, String] :terminate_token
     #   An idempotency token that uniquely identifies the termination request.
@@ -2404,7 +2484,7 @@ module Aws::ServiceCatalog
     #
     #   resp.record_detail.record_id #=> String
     #   resp.record_detail.provisioned_product_name #=> String
-    #   resp.record_detail.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
     #   resp.record_detail.created_time #=> Time
     #   resp.record_detail.updated_time #=> Time
     #   resp.record_detail.provisioned_product_type #=> String
@@ -2481,7 +2561,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates the specified portfolio's details. This operation will not
+    # Updates the specified portfolio's details. This operation does not
     # work with a product that has been shared with you.
     #
     # @option params [String] :accept_language
@@ -2637,7 +2717,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -2682,20 +2762,20 @@ module Aws::ServiceCatalog
     #   If no code is specified, "en" is used as the default.
     #
     # @option params [String] :provisioned_product_name
-    #   The updated name of the ProvisionedProduct object . You must specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The updated name of the ProvisionedProduct object. Specify either
+    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
     #
     # @option params [String] :provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to update. You must
-    #   specify either `ProvisionedProductName` or `ProvisionedProductId`, but
-    #   not both.
+    #   The identifier of the ProvisionedProduct object to update. Specify
+    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
+    #   both.
     #
     # @option params [String] :product_id
     #   The identifier of the ProvisionedProduct object.
     #
     # @option params [String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product.
+    #   The provisioning artifact identifier for this product. This is
+    #   sometimes referred to as the product version.
     #
     # @option params [String] :path_id
     #   The identifier of the path to use in the updated ProvisionedProduct
@@ -2740,7 +2820,7 @@ module Aws::ServiceCatalog
     #
     #   resp.record_detail.record_id #=> String
     #   resp.record_detail.provisioned_product_name #=> String
-    #   resp.record_detail.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "ERROR"
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
     #   resp.record_detail.created_time #=> Time
     #   resp.record_detail.updated_time #=> Time
     #   resp.record_detail.provisioned_product_type #=> String
@@ -2766,7 +2846,7 @@ module Aws::ServiceCatalog
     end
 
     # Updates an existing provisioning artifact's information. This
-    # operation will not work on a provisioning artifact associated with a
+    # operation does not work on a provisioning artifact associated with a
     # product that has been shared with you.
     #
     # @option params [String] :accept_language
@@ -2786,6 +2866,7 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact for the update request.
+    #   This is sometimes referred to as the product version.
     #
     # @option params [String] :name
     #   The updated name of the provisioning artifact.
@@ -2814,7 +2895,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
@@ -2842,7 +2923,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

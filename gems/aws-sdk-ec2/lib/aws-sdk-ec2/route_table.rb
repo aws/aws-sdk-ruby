@@ -31,10 +31,10 @@ module Aws::EC2
     end
     alias :route_table_id :id
 
-    # The ID of the VPC.
-    # @return [String]
-    def vpc_id
-      data.vpc_id
+    # Any virtual private gateway (VGW) propagating routes.
+    # @return [Array<Types::PropagatingVgw>]
+    def propagating_vgws
+      data.propagating_vgws
     end
 
     # Any tags assigned to the route table.
@@ -43,10 +43,10 @@ module Aws::EC2
       data.tags
     end
 
-    # Any virtual private gateway (VGW) propagating routes.
-    # @return [Array<Types::PropagatingVgw>]
-    def propagating_vgws
-      data.propagating_vgws
+    # The ID of the VPC.
+    # @return [String]
+    def vpc_id
+      data.vpc_id
     end
 
     # @!endgroup
@@ -113,43 +113,43 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route = route_table.create_route({
-    #     dry_run: false,
     #     destination_cidr_block: "String",
-    #     gateway_id: "String",
     #     destination_ipv_6_cidr_block: "String",
+    #     dry_run: false,
     #     egress_only_internet_gateway_id: "String",
+    #     gateway_id: "String",
     #     instance_id: "String",
+    #     nat_gateway_id: "String",
     #     network_interface_id: "String",
     #     vpc_peering_connection_id: "String",
-    #     nat_gateway_id: "String",
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :destination_cidr_block
+    #   The IPv4 CIDR address block used for the destination match. Routing
+    #   decisions are based on the most specific match.
+    # @option options [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR block used for the destination match. Routing decisions
+    #   are based on the most specific match.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :destination_cidr_block
-    #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match.
+    # @option options [String] :egress_only_internet_gateway_id
+    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
     # @option options [String] :gateway_id
     #   The ID of an Internet gateway or virtual private gateway attached to
     #   your VPC.
-    # @option options [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR block used for the destination match. Routing decisions
-    #   are based on the most specific match.
-    # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC. The operation fails if you
     #   specify an instance ID unless exactly one network interface is
     #   attached.
+    # @option options [String] :nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
-    # @option options [String] :nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)

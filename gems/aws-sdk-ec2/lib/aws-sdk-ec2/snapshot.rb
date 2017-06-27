@@ -31,12 +31,54 @@ module Aws::EC2
     end
     alias :snapshot_id :id
 
-    # The ID of the volume that was used to create the snapshot. Snapshots
-    # created by the CopySnapshot action have an arbitrary volume ID that
-    # should not be used for any purpose.
+    # The data encryption key identifier for the snapshot. This value is a
+    # unique identifier that corresponds to the data encryption key that was
+    # used to encrypt the original volume or snapshot copy. Because data
+    # encryption keys are inherited by volumes created from snapshots, and
+    # vice versa, if snapshots share the same data encryption key
+    # identifier, then they belong to the same volume/snapshot lineage. This
+    # parameter is only returned by the DescribeSnapshots API operation.
     # @return [String]
-    def volume_id
-      data.volume_id
+    def data_encryption_key_id
+      data.data_encryption_key_id
+    end
+
+    # The description for the snapshot.
+    # @return [String]
+    def description
+      data.description
+    end
+
+    # Indicates whether the snapshot is encrypted.
+    # @return [Boolean]
+    def encrypted
+      data.encrypted
+    end
+
+    # The full ARN of the AWS Key Management Service (AWS KMS) customer
+    # master key (CMK) that was used to protect the volume encryption key
+    # for the parent volume.
+    # @return [String]
+    def kms_key_id
+      data.kms_key_id
+    end
+
+    # The AWS account ID of the EBS snapshot owner.
+    # @return [String]
+    def owner_id
+      data.owner_id
+    end
+
+    # The progress of the snapshot, as a percentage.
+    # @return [String]
+    def progress
+      data.progress
+    end
+
+    # The time stamp when the snapshot was initiated.
+    # @return [Time]
+    def start_time
+      data.start_time
     end
 
     # The snapshot state.
@@ -56,28 +98,12 @@ module Aws::EC2
       data.state_message
     end
 
-    # The time stamp when the snapshot was initiated.
-    # @return [Time]
-    def start_time
-      data.start_time
-    end
-
-    # The progress of the snapshot, as a percentage.
+    # The ID of the volume that was used to create the snapshot. Snapshots
+    # created by the CopySnapshot action have an arbitrary volume ID that
+    # should not be used for any purpose.
     # @return [String]
-    def progress
-      data.progress
-    end
-
-    # The AWS account ID of the EBS snapshot owner.
-    # @return [String]
-    def owner_id
-      data.owner_id
-    end
-
-    # The description for the snapshot.
-    # @return [String]
-    def description
-      data.description
+    def volume_id
+      data.volume_id
     end
 
     # The size of the volume, in GiB.
@@ -98,32 +124,6 @@ module Aws::EC2
     # @return [Array<Types::Tag>]
     def tags
       data.tags
-    end
-
-    # Indicates whether the snapshot is encrypted.
-    # @return [Boolean]
-    def encrypted
-      data.encrypted
-    end
-
-    # The full ARN of the AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) that was used to protect the volume encryption key
-    # for the parent volume.
-    # @return [String]
-    def kms_key_id
-      data.kms_key_id
-    end
-
-    # The data encryption key identifier for the snapshot. This value is a
-    # unique identifier that corresponds to the data encryption key that was
-    # used to encrypt the original volume or snapshot copy. Because data
-    # encryption keys are inherited by volumes created from snapshots, and
-    # vice versa, if snapshots share the same data encryption key
-    # identifier, then they belong to the same volume/snapshot lineage. This
-    # parameter is only returned by the DescribeSnapshots API operation.
-    # @return [String]
-    def data_encryption_key_id
-      data.data_encryption_key_id
     end
 
     # @!endgroup
@@ -184,22 +184,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot.copy({
-    #     dry_run: false,
-    #     source_region: "String", # required
     #     description: "String",
     #     destination_region: "String",
-    #     presigned_url: "String",
     #     encrypted: false,
     #     kms_key_id: "String",
+    #     presigned_url: "String",
+    #     source_region: "String", # required
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :source_region
-    #   The ID of the region that contains the snapshot to be copied.
     # @option options [String] :description
     #   A description for the EBS snapshot.
     # @option options [String] :destination_region
@@ -214,25 +207,6 @@ module Aws::EC2
     #   the default region in your AWS configuration file).
     #
     #    </note>
-    # @option options [String] :presigned_url
-    #   The pre-signed URL that facilitates copying an encrypted snapshot.
-    #   This parameter is only required when copying an encrypted snapshot
-    #   with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. The `PresignedUrl` should use the
-    #   snapshot source endpoint, the `CopySnapshot` action, and include the
-    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
-    #   parameters. The `PresignedUrl` must be signed using AWS Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-    #   algorithm for this parameter uses the same logic that is described in
-    #   [Authenticating Requests by Using Query Parameters (AWS Signature
-    #   Version 4)][1] in the *Amazon Simple Storage Service API Reference*.
-    #   An invalid or improperly signed `PresignedUrl` will cause the copy
-    #   operation to fail asynchronously, and the snapshot will move to an
-    #   `error` state.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     # @option options [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
     #   can encrypt a copy of an unencrypted snapshot using this flag, but you
@@ -256,6 +230,32 @@ module Aws::EC2
     #   The specified CMK must exist in the region that the snapshot is being
     #   copied to. If a `KmsKeyId` is specified, the `Encrypted` flag must
     #   also be set.
+    # @option options [String] :presigned_url
+    #   The pre-signed URL that facilitates copying an encrypted snapshot.
+    #   This parameter is only required when copying an encrypted snapshot
+    #   with the Amazon EC2 Query API; it is available as an optional
+    #   parameter in all other cases. The `PresignedUrl` should use the
+    #   snapshot source endpoint, the `CopySnapshot` action, and include the
+    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
+    #   parameters. The `PresignedUrl` must be signed using AWS Signature
+    #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
+    #   algorithm for this parameter uses the same logic that is described in
+    #   [Authenticating Requests by Using Query Parameters (AWS Signature
+    #   Version 4)][1] in the *Amazon Simple Storage Service API Reference*.
+    #   An invalid or improperly signed `PresignedUrl` will cause the copy
+    #   operation to fail asynchronously, and the snapshot will move to an
+    #   `error` state.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    # @option options [required, String] :source_region
+    #   The ID of the region that contains the snapshot to be copied.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::CopySnapshotResult]
     def copy(options = {})
       options = options.merge(source_snapshot_id: @id)
@@ -321,17 +321,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot.describe_attribute({
-    #     dry_run: false,
     #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :attribute
+    #   The snapshot attribute you would like to view.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :attribute
-    #   The snapshot attribute you would like to view.
     # @return [Types::DescribeSnapshotAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(snapshot_id: @id)
@@ -342,32 +342,27 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot.modify_attribute({
-    #     dry_run: false,
     #     attribute: "productCodes", # accepts productCodes, createVolumePermission
-    #     operation_type: "add", # accepts add, remove
-    #     user_ids: ["String"],
-    #     group_names: ["String"],
     #     create_volume_permission: {
     #       add: [
     #         {
-    #           user_id: "String",
     #           group: "all", # accepts all
+    #           user_id: "String",
     #         },
     #       ],
     #       remove: [
     #         {
-    #           user_id: "String",
     #           group: "all", # accepts all
+    #           user_id: "String",
     #         },
     #       ],
     #     },
+    #     group_names: ["String"],
+    #     operation_type: "add", # accepts add, remove
+    #     user_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :attribute
     #   The snapshot attribute to modify.
     #
@@ -375,14 +370,19 @@ module Aws::EC2
     #   level.
     #
     #    </note>
+    # @option options [Types::CreateVolumePermissionModifications] :create_volume_permission
+    #   A JSON representation of the snapshot attribute modification.
+    # @option options [Array<String>] :group_names
+    #   The group to modify for the snapshot.
     # @option options [String] :operation_type
     #   The type of operation to perform to the attribute.
     # @option options [Array<String>] :user_ids
     #   The account ID to modify for the snapshot.
-    # @option options [Array<String>] :group_names
-    #   The group to modify for the snapshot.
-    # @option options [Types::CreateVolumePermissionModifications] :create_volume_permission
-    #   A JSON representation of the snapshot attribute modification.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(snapshot_id: @id)
@@ -393,18 +393,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshot.reset_attribute({
-    #     dry_run: false,
     #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [required, String] :attribute
+    #   The attribute to reset. Currently, only the attribute for permission
+    #   to create volumes can be reset.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :attribute
-    #   The attribute to reset. Currently, only the attribute for permission
-    #   to create volumes can be reset.
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(snapshot_id: @id)

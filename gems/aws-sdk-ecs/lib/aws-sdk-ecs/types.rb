@@ -259,12 +259,6 @@ module Aws::ECS
     #   `Image` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `IMAGE` parameter of [docker run][3].
     #
-    #   <note markdown="1"> Amazon ECS task definitions currently only support tags as image
-    #   identifiers within a specified repository (and not `sha256`
-    #   digests).
-    #
-    #    </note>
-    #
     #   * Images in Amazon ECR repositories use the full registry and
     #     repository URI (for example,
     #     `012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>`).
@@ -919,11 +913,14 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         cpu: 1,
+    #         memory: 1,
+    #         memory_reservation: 1,
     #       }
     #
     # @!attribute [rw] name
     #   The name of the container that receives the override. This parameter
-    #   is required if a command or environment variable is specified.
+    #   is required if any override is specified.
     #   @return [String]
     #
     # @!attribute [rw] command
@@ -940,12 +937,34 @@ module Aws::ECS
     #   container name.
     #   @return [Array<Types::KeyValuePair>]
     #
+    # @!attribute [rw] cpu
+    #   The number of `cpu` units reserved for the container, instead of the
+    #   default value from the task definition. You must also specify a
+    #   container name.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory
+    #   The hard limit (in MiB) of memory to present to the container,
+    #   instead of the default value from the task definition. If your
+    #   container attempts to exceed the memory specified here, the
+    #   container is killed. You must also specify a container name.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_reservation
+    #   The soft limit (in MiB) of memory to reserve for the container,
+    #   instead of the default value from the task definition. You must also
+    #   specify a container name.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride AWS API Documentation
     #
     class ContainerOverride < Struct.new(
       :name,
       :command,
-      :environment)
+      :environment,
+      :cpu,
+      :memory,
+      :memory_reservation)
       include Aws::Structure
     end
 
@@ -2699,14 +2718,19 @@ module Aws::ECS
     #   automatically receives a port in the ephemeral port range for your
     #   container instance operating system and Docker version.
     #
-    #   The default ephemeral port range is 49153 to 65535, and this range
-    #   is used for Docker versions prior to 1.6.0. For Docker version 1.6.0
-    #   and later, the Docker daemon tries to read the ephemeral port range
-    #   from `/proc/sys/net/ipv4/ip_local_port_range`; if this kernel
-    #   parameter is unavailable, the default ephemeral port range is used.
-    #   You should not attempt to specify a host port in the ephemeral port
-    #   range, because these are reserved for automatic assignment. In
-    #   general, ports below 32768 are outside of the ephemeral port range.
+    #   The default ephemeral port range for Docker version 1.6.0 and later
+    #   is listed on the instance under
+    #   `/proc/sys/net/ipv4/ip_local_port_range`; if this kernel parameter
+    #   is unavailable, the default ephemeral port range of 49153 to 65535
+    #   is used. You should not attempt to specify a host port in the
+    #   ephemeral port range as these are reserved for automatic assignment.
+    #   In general, ports below 32768 are outside of the ephemeral port
+    #   range.
+    #
+    #   <note markdown="1"> The default ephemeral port range of 49153 to 65535 will always be
+    #   used for Docker versions prior to 1.6.0.
+    #
+    #    </note>
     #
     #   The default reserved ports are 22 for SSH, the Docker ports 2375 and
     #   2376, and the Amazon ECS container agent ports 51678 and 51679. Any
@@ -3124,6 +3148,9 @@ module Aws::ECS
     #                   value: "String",
     #                 },
     #               ],
+    #               cpu: 1,
+    #               memory: 1,
+    #               memory_reservation: 1,
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -3391,6 +3418,9 @@ module Aws::ECS
     #                   value: "String",
     #                 },
     #               ],
+    #               cpu: 1,
+    #               memory: 1,
+    #               memory_reservation: 1,
     #             },
     #           ],
     #           task_role_arn: "String",
@@ -3901,6 +3931,9 @@ module Aws::ECS
     #                 value: "String",
     #               },
     #             ],
+    #             cpu: 1,
+    #             memory: 1,
+    #             memory_reservation: 1,
     #           },
     #         ],
     #         task_role_arn: "String",

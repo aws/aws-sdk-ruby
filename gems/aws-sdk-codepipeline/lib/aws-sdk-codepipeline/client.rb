@@ -271,10 +271,12 @@ module Aws::CodePipeline
     #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
     #
     # @option params [required, Types::ArtifactDetails] :input_artifact_details
-    #   Returns information about the details of an artifact.
+    #   The details of the input artifact for the action, such as its commit
+    #   ID.
     #
     # @option params [required, Types::ArtifactDetails] :output_artifact_details
-    #   Returns information about the details of an artifact.
+    #   The details of the output artifact of the action, such as its commit
+    #   ID.
     #
     # @return [Types::CreateCustomActionTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -945,6 +947,55 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Gets a summary of the most recent executions for a pipeline.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which you want to get execution summary
+    #   information.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value. The available pipeline execution history is limited to the most
+    #   recent 12 months, based on pipeline execution start times. Default
+    #   value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous list pipeline executions
+    #   call, which can be used to return the next set of pipeline executions
+    #   in the list.
+    #
+    # @return [Types::ListPipelineExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPipelineExecutionsOutput#pipeline_execution_summaries #pipeline_execution_summaries} => Array&lt;Types::PipelineExecutionSummary&gt;
+    #   * {Types::ListPipelineExecutionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pipeline_executions({
+    #     pipeline_name: "PipelineName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_summaries #=> Array
+    #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
+    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].start_time #=> Time
+    #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
+    #
+    # @overload list_pipeline_executions(params = {})
+    # @param [Hash] params ({})
+    def list_pipeline_executions(params = {}, options = {})
+      req = build_request(:list_pipeline_executions, params)
+      req.send_request(options)
+    end
+
     # Gets a summary of all of the pipelines associated with your account.
     #
     # @option params [String] :next_token
@@ -1580,7 +1631,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

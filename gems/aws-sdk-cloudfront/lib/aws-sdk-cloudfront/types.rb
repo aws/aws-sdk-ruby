@@ -4567,7 +4567,7 @@ module Aws::CloudFront
     #   viewers can *only* access objects in an Amazon S3 bucket through
     #   CloudFront. The format of the value is:
     #
-    #   origin-access-identity/CloudFront/*ID-of-origin-access-identity*
+    #   origin-access-identity/cloudfront/*ID-of-origin-access-identity*
     #
     #   where ` ID-of-origin-access-identity ` is the value that CloudFront
     #   returned in the `ID` element when you created the origin access

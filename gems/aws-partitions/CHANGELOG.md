@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2017-06-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Greengrass`.
+
+* Feature - Added support for enumerating regions for `Aws::DAX`.
+
 1.8.0 (2017-05-23)
 ------------------
 

@@ -685,6 +685,22 @@ module Aws::ACM
     #   asterisk (*) to create a wildcard certificate that protects several
     #   sites in the same domain. For example, *.example.com protects
     #   www.example.com, site.example.com, and images.example.com.
+    #
+    #   The maximum length of a DNS name is 253 octets. The name is made up
+    #   of multiple labels separated by periods. No label can be longer than
+    #   63 octets. Consider the following examples:
+    #
+    #   `(63 octets).(63 octets).(63 octets).(61 octets)` is legal because
+    #   the total length is 253 octets (63+1+63+1+63+1+61) and no label
+    #   exceeds 63 octets.
+    #
+    #   `(64 octets).(63 octets).(63 octets).(61 octets)` is not legal
+    #   because the total length exceeds 253 octets (64+1+63+1+63+1+61) and
+    #   the first label exceeds 63 octets.
+    #
+    #   `(63 octets).(63 octets).(63 octets).(62 octets)` is not legal
+    #   because the total length of the DNS name (63+1+63+1+63+1+62) exceeds
+    #   253 octets.
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -692,6 +708,14 @@ module Aws::ACM
     #   extension of the ACM Certificate. For example, add the name
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name.
+    #   The maximum number of domain names that you can add to an ACM
+    #   Certificate is 100. However, the initial limit is 10 domain names.
+    #   If you need more than 10 names, you must request a limit increase.
+    #   For more information, see [Limits][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token

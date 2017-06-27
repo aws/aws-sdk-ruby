@@ -340,6 +340,7 @@ module Aws::CodeBuild
     #               value: "String", # required
     #             },
     #           ],
+    #           privileged_mode: false,
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,
@@ -522,6 +523,12 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] value
     #   The value of the environment variable.
+    #
+    #   We strongly discourage using environment variables to store
+    #   sensitive values, especially AWS secret key IDs and secret access
+    #   keys. Environment variables can be displayed in plain text using
+    #   tools such as the AWS CodeBuild console and the AWS Command Line
+    #   Interface (AWS CLI).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
@@ -1019,6 +1026,7 @@ module Aws::CodeBuild
     #             value: "String", # required
     #           },
     #         ],
+    #         privileged_mode: false,
     #       }
     #
     # @!attribute [rw] type
@@ -1048,13 +1056,33 @@ module Aws::CodeBuild
     #   build project.
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @!attribute [rw] privileged_mode
+    #   If set to true, enables running the Docker daemon inside a Docker
+    #   container; otherwise, false or not specified (the default). This
+    #   value must be set to true only if this build project will be used to
+    #   build Docker images, and the specified build environment image is
+    #   not one provided by AWS CodeBuild with Docker support. Otherwise,
+    #   all associated builds that attempt to interact with the Docker
+    #   daemon will fail. Note that you must also start the Docker daemon so
+    #   that your builds can interact with it as needed. One way to do this
+    #   is to initialize the Docker daemon in the install phase of your
+    #   build spec by running the following build commands. (Do not run the
+    #   following build commands if the specified build environment image is
+    #   provided by AWS CodeBuild with Docker support.)
+    #
+    #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=vfs& - timeout -t 15 sh
+    #   -c "until docker info; do echo .; sleep 1; done"`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
       :type,
       :image,
       :compute_type,
-      :environment_variables)
+      :environment_variables,
+      :privileged_mode)
       include Aws::Structure
     end
 
@@ -1111,13 +1139,16 @@ module Aws::CodeBuild
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the build spec. Also, you
     #     must connect your AWS account to your GitHub account. To do this,
-    #     use the AWS CodeBuild console to begin creating a build project,
-    #     and follow the on-screen instructions to complete the connection.
-    #     (After you have connected to your GitHub account, you do not need
-    #     to finish creating the build project, and you may then leave the
-    #     AWS CodeBuild console.) To instruct AWS CodeBuild to then use this
-    #     connection, in the `source` object, set the `auth` object's
-    #     `type` value to `OAUTH`.
+    #     use the AWS CodeBuild console to begin creating a build project.
+    #     When you use the console to connect (or reconnect) with GitHub, on
+    #     the GitHub **Authorize application** page that displays, for
+    #     **Organization access**, choose **Request access** next to each
+    #     repository you want to allow AWS CodeBuild to have access to. Then
+    #     choose **Authorize application**. (After you have connected to
+    #     your GitHub account, you do not need to finish creating the build
+    #     project, and you may then leave the AWS CodeBuild console.) To
+    #     instruct AWS CodeBuild to then use this connection, in the
+    #     `source` object, set the `auth` object's `type` value to `OAUTH`.
     #   @return [String]
     #
     # @!attribute [rw] buildspec
@@ -1353,6 +1384,7 @@ module Aws::CodeBuild
     #               value: "String", # required
     #             },
     #           ],
+    #           privileged_mode: false,
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,

@@ -18,13 +18,17 @@ module Aws::Rekognition
     Beard = Shapes::StructureShape.new(name: 'Beard')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
+    Celebrity = Shapes::StructureShape.new(name: 'Celebrity')
+    CelebrityList = Shapes::ListShape.new(name: 'CelebrityList')
     CollectionId = Shapes::StringShape.new(name: 'CollectionId')
     CollectionIdList = Shapes::ListShape.new(name: 'CollectionIdList')
     CompareFacesMatch = Shapes::StructureShape.new(name: 'CompareFacesMatch')
     CompareFacesMatchList = Shapes::ListShape.new(name: 'CompareFacesMatchList')
     CompareFacesRequest = Shapes::StructureShape.new(name: 'CompareFacesRequest')
     CompareFacesResponse = Shapes::StructureShape.new(name: 'CompareFacesResponse')
+    CompareFacesUnmatchList = Shapes::ListShape.new(name: 'CompareFacesUnmatchList')
     ComparedFace = Shapes::StructureShape.new(name: 'ComparedFace')
+    ComparedFaceList = Shapes::ListShape.new(name: 'ComparedFaceList')
     ComparedSourceImageFace = Shapes::StructureShape.new(name: 'ComparedSourceImageFace')
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
@@ -58,6 +62,8 @@ module Aws::Rekognition
     Float = Shapes::FloatShape.new(name: 'Float')
     Gender = Shapes::StructureShape.new(name: 'Gender')
     GenderType = Shapes::StringShape.new(name: 'GenderType')
+    GetCelebrityInfoRequest = Shapes::StructureShape.new(name: 'GetCelebrityInfoRequest')
+    GetCelebrityInfoResponse = Shapes::StructureShape.new(name: 'GetCelebrityInfoResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
@@ -90,6 +96,9 @@ module Aws::Rekognition
     Percent = Shapes::FloatShape.new(name: 'Percent')
     Pose = Shapes::StructureShape.new(name: 'Pose')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
+    RecognizeCelebritiesRequest = Shapes::StructureShape.new(name: 'RecognizeCelebritiesRequest')
+    RecognizeCelebritiesResponse = Shapes::StructureShape.new(name: 'RecognizeCelebritiesResponse')
+    RekognitionUniqueId = Shapes::StringShape.new(name: 'RekognitionUniqueId')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
@@ -105,6 +114,8 @@ module Aws::Rekognition
     Sunglasses = Shapes::StructureShape.new(name: 'Sunglasses')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
+    Url = Shapes::StringShape.new(name: 'Url')
+    Urls = Shapes::ListShape.new(name: 'Urls')
 
     AgeRange.add_member(:low, Shapes::ShapeRef.new(shape: UInteger, location_name: "Low"))
     AgeRange.add_member(:high, Shapes::ShapeRef.new(shape: UInteger, location_name: "High"))
@@ -122,6 +133,15 @@ module Aws::Rekognition
     BoundingBox.add_member(:top, Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
     BoundingBox.struct_class = Types::BoundingBox
 
+    Celebrity.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
+    Celebrity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Celebrity.add_member(:id, Shapes::ShapeRef.new(shape: RekognitionUniqueId, location_name: "Id"))
+    Celebrity.add_member(:face, Shapes::ShapeRef.new(shape: ComparedFace, location_name: "Face"))
+    Celebrity.add_member(:match_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MatchConfidence"))
+    Celebrity.struct_class = Types::Celebrity
+
+    CelebrityList.member = Shapes::ShapeRef.new(shape: Celebrity)
+
     CollectionIdList.member = Shapes::ShapeRef.new(shape: CollectionId)
 
     CompareFacesMatch.add_member(:similarity, Shapes::ShapeRef.new(shape: Percent, location_name: "Similarity"))
@@ -137,11 +157,21 @@ module Aws::Rekognition
 
     CompareFacesResponse.add_member(:source_image_face, Shapes::ShapeRef.new(shape: ComparedSourceImageFace, location_name: "SourceImageFace"))
     CompareFacesResponse.add_member(:face_matches, Shapes::ShapeRef.new(shape: CompareFacesMatchList, location_name: "FaceMatches"))
+    CompareFacesResponse.add_member(:unmatched_faces, Shapes::ShapeRef.new(shape: CompareFacesUnmatchList, location_name: "UnmatchedFaces"))
+    CompareFacesResponse.add_member(:source_image_orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "SourceImageOrientationCorrection"))
+    CompareFacesResponse.add_member(:target_image_orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "TargetImageOrientationCorrection"))
     CompareFacesResponse.struct_class = Types::CompareFacesResponse
+
+    CompareFacesUnmatchList.member = Shapes::ShapeRef.new(shape: ComparedFace)
 
     ComparedFace.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     ComparedFace.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ComparedFace.add_member(:landmarks, Shapes::ShapeRef.new(shape: Landmarks, location_name: "Landmarks"))
+    ComparedFace.add_member(:pose, Shapes::ShapeRef.new(shape: Pose, location_name: "Pose"))
+    ComparedFace.add_member(:quality, Shapes::ShapeRef.new(shape: ImageQuality, location_name: "Quality"))
     ComparedFace.struct_class = Types::ComparedFace
+
+    ComparedFaceList.member = Shapes::ShapeRef.new(shape: ComparedFace)
 
     ComparedSourceImageFace.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     ComparedSourceImageFace.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -251,6 +281,13 @@ module Aws::Rekognition
     Gender.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Gender.struct_class = Types::Gender
 
+    GetCelebrityInfoRequest.add_member(:id, Shapes::ShapeRef.new(shape: RekognitionUniqueId, required: true, location_name: "Id"))
+    GetCelebrityInfoRequest.struct_class = Types::GetCelebrityInfoRequest
+
+    GetCelebrityInfoResponse.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
+    GetCelebrityInfoResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    GetCelebrityInfoResponse.struct_class = Types::GetCelebrityInfoResponse
+
     Image.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
     Image.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Image.struct_class = Types::Image
@@ -319,6 +356,14 @@ module Aws::Rekognition
     Pose.add_member(:pitch, Shapes::ShapeRef.new(shape: Degree, location_name: "Pitch"))
     Pose.struct_class = Types::Pose
 
+    RecognizeCelebritiesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    RecognizeCelebritiesRequest.struct_class = Types::RecognizeCelebritiesRequest
+
+    RecognizeCelebritiesResponse.add_member(:celebrity_faces, Shapes::ShapeRef.new(shape: CelebrityList, location_name: "CelebrityFaces"))
+    RecognizeCelebritiesResponse.add_member(:unrecognized_faces, Shapes::ShapeRef.new(shape: ComparedFaceList, location_name: "UnrecognizedFaces"))
+    RecognizeCelebritiesResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
+    RecognizeCelebritiesResponse.struct_class = Types::RecognizeCelebritiesResponse
+
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
     S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "Version"))
@@ -352,6 +397,8 @@ module Aws::Rekognition
     Sunglasses.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Sunglasses.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Sunglasses.struct_class = Types::Sunglasses
+
+    Urls.member = Shapes::ShapeRef.new(shape: Url)
 
 
     # @api private
@@ -474,6 +521,20 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
       end)
 
+      api.add_operation(:get_celebrity_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCelebrityInfo"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCelebrityInfoRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCelebrityInfoResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:index_faces, Seahorse::Model::Operation.new.tap do |o|
         o.name = "IndexFaces"
         o.http_method = "POST"
@@ -531,6 +592,23 @@ module Aws::Rekognition
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:recognize_celebrities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RecognizeCelebrities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RecognizeCelebritiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: RecognizeCelebritiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
       end)
 
       api.add_operation(:search_faces, Seahorse::Model::Operation.new.tap do |o|

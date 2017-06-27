@@ -995,7 +995,9 @@ module Aws::LexModelBuildingService
     # @option params [String] :name_contains
     #   Substring to match in channel association names. An association will
     #   be returned if any part of its name matches the substring. For
-    #   example, "xyz" matches both "xyzabc" and "abcxyz."
+    #   example, "xyz" matches both "xyzabc" and "abcxyz." To return all
+    #   bot channel associations, use a hyphen ("-") as the `nameContains`
+    #   parameter.
     #
     # @return [Types::GetBotChannelAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1845,7 +1847,7 @@ module Aws::LexModelBuildingService
     #   The default is 300 seconds (5 minutes).
     #
     # @option params [String] :voice_id
-    #   The Amazon Parrot voice ID that you want Amazon Lex to use for voice
+    #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
     #   match the locale of the bot. For more information, see [Voice][1] in
     #   the *Amazon Polly Developer Guide*.
@@ -2527,7 +2529,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

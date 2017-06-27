@@ -263,6 +263,12 @@ module Aws::RDS
       data.iam_database_authentication_enabled
     end
 
+    # Identifies the clone group to which the DB cluster is associated.
+    # @return [String]
+    def clone_group_id
+      data.clone_group_id
+    end
+
     # Specifies the time when the DB cluster was created, in Universal
     # Coordinated Time (UTC).
     # @return [Time]
@@ -362,9 +368,9 @@ module Aws::RDS
     #   A value that indicates that the DB cluster should be associated with
     #   the specified CharacterSet.
     # @option options [String] :database_name
-    #   The name for your database of up to 8 alpha-numeric characters. If you
-    #   do not provide a name, Amazon RDS will not create a database in the DB
-    #   cluster you are creating.
+    #   The name for your database of up to 64 alpha-numeric characters. If
+    #   you do not provide a name, Amazon RDS will not create a database in
+    #   the DB cluster you are creating.
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
     #   cluster. If this argument is omitted, `default.aurora5.6` will be
@@ -801,6 +807,7 @@ module Aws::RDS
     #
     #   dbcluster = db_cluster.restore({
     #     db_cluster_identifier: "String", # required
+    #     restore_type: "String",
     #     restore_to_time: Time.now,
     #     use_latest_restorable_time: false,
     #     port: 1,
@@ -827,6 +834,21 @@ module Aws::RDS
     #   * First character must be a letter
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens
+    # @option options [String] :restore_type
+    #   The type of restore to be performed. You can specify one of the
+    #   following values:
+    #
+    #   * `full-copy` - The new DB cluster is restored as a full copy of the
+    #     source DB cluster.
+    #
+    #   * `copy-on-write` - The new DB cluster is restored as a clone of the
+    #     source DB cluster.
+    #
+    #   Constraints: You cannot specify `copy-on-write` if the engine version
+    #   of the source DB cluster is earlier than 1.11.
+    #
+    #   If you don't specify a `RestoreType` value, then the new DB cluster
+    #   is restored as a full copy of the source DB cluster.
     # @option options [Time,DateTime,Date,Integer,String] :restore_to_time
     #   The date and time to restore the DB cluster to.
     #
@@ -837,7 +859,12 @@ module Aws::RDS
     #
     #   * Must be before the latest restorable time for the DB instance
     #
+    #   * Must be specified if `UseLatestRestorableTime` parameter is not
+    #     provided
+    #
     #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
+    #
+    #   * Cannot be specified if `RestoreType` parameter is `copy-on-write`
     #
     #   Example: `2015-03-07T23:45:00Z`
     # @option options [Boolean] :use_latest_restorable_time
@@ -864,7 +891,7 @@ module Aws::RDS
     # @option options [String] :option_group_name
     #   The name of the option group for the new DB cluster.
     # @option options [Array<String>] :vpc_security_group_ids
-    #   A lst of VPC security groups that the new DB cluster belongs to.
+    #   A list of VPC security groups that the new DB cluster belongs to.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [String] :kms_key_id
@@ -892,8 +919,8 @@ module Aws::RDS
     #   * If the DB cluster is not encrypted, then the restored DB cluster is
     #     not encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is note
-    #   encrypted, then the restore request is rejected.
+    #   If `DBClusterIdentifier` refers to a DB cluster that is not encrypted,
+    #   then the restore request is rejected.
     # @option options [Boolean] :enable_iam_database_authentication
     #   A Boolean value that is true to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts, and otherwise

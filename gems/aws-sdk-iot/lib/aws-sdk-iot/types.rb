@@ -110,6 +110,10 @@ module Aws::IoT
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
     #         },
+    #         salesforce: {
+    #           token: "SalesforceToken", # required
+    #           url: "SalesforceEndpoint", # required
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -162,6 +166,10 @@ module Aws::IoT
     #   Write data to an Amazon Elasticsearch Service domain.
     #   @return [Types::ElasticsearchAction]
     #
+    # @!attribute [rw] salesforce
+    #   Send a message to a Salesforce IoT Cloud Input Stream.
+    #   @return [Types::SalesforceAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -174,7 +182,8 @@ module Aws::IoT
       :firehose,
       :cloudwatch_metric,
       :cloudwatch_alarm,
-      :elasticsearch)
+      :elasticsearch,
+      :salesforce)
       include Aws::Structure
     end
 
@@ -247,7 +256,7 @@ module Aws::IoT
     #   A JSON string containing up to three key-value pair in JSON format.
     #   For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\})`
+    #   `\{"attributes":\{"string1":"string2"\}\}`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] merge
@@ -769,7 +778,7 @@ module Aws::IoT
     #   The attribute payload, which consists of up to three name/value
     #   pairs in a JSON document. For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\})`
+    #   `\{"attributes":\{"string1":"string2"\}\}`
     #   @return [Types::AttributePayload]
     #
     class CreateThingRequest < Struct.new(
@@ -923,6 +932,10 @@ module Aws::IoT
     #                 index: "ElasticsearchIndex", # required
     #                 type: "ElasticsearchType", # required
     #                 id: "ElasticsearchId", # required
+    #               },
+    #               salesforce: {
+    #                 token: "SalesforceToken", # required
+    #                 url: "SalesforceEndpoint", # required
     #               },
     #             },
     #           ],
@@ -1302,7 +1315,7 @@ module Aws::IoT
     # @!attribute [rw] thing_type_metadata
     #   The ThingTypeMetadata contains additional information about the
     #   thing type including: creation date and time, a value indicating
-    #   whether the thing type is deprecated, and a date and time when time
+    #   whether the thing type is deprecated, and a date and time when it
     #   was deprecated.
     #   @return [Types::ThingTypeMetadata]
     #
@@ -2664,6 +2677,7 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] status
+    #   The status of the register certificate request.
     #   @return [String]
     #
     class RegisterCertificateRequest < Struct.new(
@@ -2798,6 +2812,10 @@ module Aws::IoT
     #                 type: "ElasticsearchType", # required
     #                 id: "ElasticsearchId", # required
     #               },
+    #               salesforce: {
+    #                 token: "SalesforceToken", # required
+    #                 url: "SalesforceEndpoint", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -2885,6 +2903,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes an action to write a message to a Salesforce IoT Cloud Input
+    # Stream.
+    #
+    # @note When making an API call, you may pass SalesforceAction
+    #   data as a hash:
+    #
+    #       {
+    #         token: "SalesforceToken", # required
+    #         url: "SalesforceEndpoint", # required
+    #       }
+    #
+    # @!attribute [rw] token
+    #   The token used to authenticate access to the Salesforce IoT Cloud
+    #   Input Stream. The token is available from the Salesforce IoT Cloud
+    #   platform after creation of the Input Stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is
+    #   available from the Salesforce IoT Cloud platform after creation of
+    #   the Input Stream.
+    #   @return [String]
+    #
+    class SalesforceAction < Struct.new(
+      :token,
+      :url)
+      include Aws::Structure
+    end
+
     # The input for the SetDefaultPolicyVersion operation.
     #
     # @note When making an API call, you may pass SetDefaultPolicyVersionRequest
@@ -2954,7 +3001,8 @@ module Aws::IoT
     #   values are "JSON" and "RAW". The default value of the attribute
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should
-    #   be extracted. To read more about SNS message formats, see [][1]
+    #   be extracted. To read more about SNS message formats, see
+    #   [http://docs.aws.amazon.com/sns/latest/dg/json-formats.html][1]
     #   refer to their official documentation.
     #
     #
@@ -3041,7 +3089,7 @@ module Aws::IoT
     # @!attribute [rw] thing_type_metadata
     #   The ThingTypeMetadata contains additional information about the
     #   thing type including: creation date and time, a value indicating
-    #   whether the thing type is deprecated, and a date and time when time
+    #   whether the thing type is deprecated, and a date and time when it
     #   was deprecated.
     #   @return [Types::ThingTypeMetadata]
     #
@@ -3258,6 +3306,10 @@ module Aws::IoT
     #               type: "ElasticsearchType", # required
     #               id: "ElasticsearchId", # required
     #             },
+    #             salesforce: {
+    #               token: "SalesforceToken", # required
+    #               url: "SalesforceEndpoint", # required
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -3465,7 +3517,7 @@ module Aws::IoT
     #   A list of thing attributes, a JSON string containing name-value
     #   pairs. For example:
     #
-    #   `\{"attributes":\{"name1":"value2"\}\})`
+    #   `\{"attributes":\{"name1":"value2"\}\}`
     #
     #   This data is used to add new attributes or update existing
     #   attributes.
