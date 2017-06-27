@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.4 (2017-06-27)
+------------------
+
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
 
 2.10.3 (2017-06-23)
