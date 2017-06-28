@@ -8,8 +8,7 @@ Unreleased Changes
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment
-  variable before using `default` profile.
+* Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment variable before using `default` profile.
 
 3.0.0.rc12 (2017-05-23)
 ------------------
