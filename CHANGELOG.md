@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.5 (2017-06-29)
+------------------
+
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
 
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
