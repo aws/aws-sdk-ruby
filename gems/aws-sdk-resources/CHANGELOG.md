@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added a dependency on the new `aws-sdk-dax` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-greengrass` gem.
+
 3.0.0.rc2 (2017-06-26)
 ------------------
 
