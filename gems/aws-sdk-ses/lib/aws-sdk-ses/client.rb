@@ -173,6 +173,16 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: CloneReceiptRuleSet
+    #
+    #   # The following example creates a receipt rule set by cloning an existing one:
+    #
+    #   resp = client.clone_receipt_rule_set({
+    #     original_rule_set_name: "RuleSetToClone", 
+    #     rule_set_name: "RuleSetToCreate", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.clone_receipt_rule_set({
@@ -304,6 +314,21 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: CreateReceiptFilter
+    #
+    #   # The following example creates a new IP address filter:
+    #
+    #   resp = client.create_receipt_filter({
+    #     filter: {
+    #       ip_filter: {
+    #         cidr: "1.2.3.4/24", 
+    #         policy: "Allow", 
+    #       }, 
+    #       name: "MyFilter", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_receipt_filter({
@@ -349,6 +374,30 @@ module Aws::SES
     #   recipients, domains, enabled status, scan status, and TLS policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: CreateReceiptRule
+    #
+    #   # The following example creates a new receipt rule:
+    #
+    #   resp = client.create_receipt_rule({
+    #     after: "", 
+    #     rule: {
+    #       actions: [
+    #         {
+    #           s3_action: {
+    #             bucket_name: "MyBucket", 
+    #             object_key_prefix: "email", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       enabled: true, 
+    #       name: "MyRule", 
+    #       scan_enabled: true, 
+    #       tls_policy: "Optional", 
+    #     }, 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -433,6 +482,15 @@ module Aws::SES
     #   * Contain less than 64 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: CreateReceiptRuleSet
+    #
+    #   # The following example creates an empty receipt rule set:
+    #
+    #   resp = client.create_receipt_rule_set({
+    #     rule_set_name: "MyRuleSet", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -530,6 +588,15 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: DeleteIdentity
+    #
+    #   # The following example deletes an identity from the list of identities that have been submitted for verification with Amazon SES:
+    #
+    #   resp = client.delete_identity({
+    #     identity: "user@example.com", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_identity({
@@ -578,6 +645,16 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: DeleteIdentityPolicy
+    #
+    #   # The following example deletes a sending authorization policy for an identity:
+    #
+    #   resp = client.delete_identity_policy({
+    #     identity: "user@example.com", 
+    #     policy_name: "MyPolicy", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_identity_policy({
@@ -609,6 +686,15 @@ module Aws::SES
     #   The name of the IP address filter to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteReceiptFilter
+    #
+    #   # The following example deletes an IP address filter:
+    #
+    #   resp = client.delete_receipt_filter({
+    #     filter_name: "MyFilter", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -644,6 +730,16 @@ module Aws::SES
     #   The name of the receipt rule to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteReceiptRule
+    #
+    #   # The following example deletes a receipt rule:
+    #
+    #   resp = client.delete_receipt_rule({
+    #     rule_name: "MyRule", 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -682,6 +778,15 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: DeleteReceiptRuleSet
+    #
+    #   # The following example deletes a receipt rule set:
+    #
+    #   resp = client.delete_receipt_rule_set({
+    #     rule_set_name: "MyRuleSet", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_receipt_rule_set({
@@ -710,6 +815,15 @@ module Aws::SES
     #   An email address to be removed from the list of verified addresses.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteVerifiedEmailAddress
+    #
+    #   # The following example deletes an email address from the list of identities that have been submitted for verification with Amazon SES:
+    #
+    #   resp = client.delete_verified_email_address({
+    #     email_address: "user@example.com", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -742,6 +856,38 @@ module Aws::SES
     #
     #   * {Types::DescribeActiveReceiptRuleSetResponse#metadata #metadata} => Types::ReceiptRuleSetMetadata
     #   * {Types::DescribeActiveReceiptRuleSetResponse#rules #rules} => Array&lt;Types::ReceiptRule&gt;
+    #
+    #
+    # @example Example: DescribeActiveReceiptRuleSet
+    #
+    #   # The following example returns the metadata and receipt rules for the receipt rule set that is currently active:
+    #
+    #   resp = client.describe_active_receipt_rule_set({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     metadata: {
+    #       created_timestamp: Time.parse("2016-07-15T16:25:59.607Z"), 
+    #       name: "default-rule-set", 
+    #     }, 
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             s3_action: {
+    #               bucket_name: "MyBucket", 
+    #               object_key_prefix: "email", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         name: "MyRule", 
+    #         scan_enabled: true, 
+    #         tls_policy: "Optional", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -860,6 +1006,34 @@ module Aws::SES
     #
     #   * {Types::DescribeReceiptRuleResponse#rule #rule} => Types::ReceiptRule
     #
+    #
+    # @example Example: DescribeReceiptRule
+    #
+    #   # The following example returns the details of a receipt rule:
+    #
+    #   resp = client.describe_receipt_rule({
+    #     rule_name: "MyRule", 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rule: {
+    #       actions: [
+    #         {
+    #           s3_action: {
+    #             bucket_name: "MyBucket", 
+    #             object_key_prefix: "email", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       enabled: true, 
+    #       name: "MyRule", 
+    #       scan_enabled: true, 
+    #       tls_policy: "Optional", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_receipt_rule({
@@ -924,6 +1098,39 @@ module Aws::SES
     #
     #   * {Types::DescribeReceiptRuleSetResponse#metadata #metadata} => Types::ReceiptRuleSetMetadata
     #   * {Types::DescribeReceiptRuleSetResponse#rules #rules} => Array&lt;Types::ReceiptRule&gt;
+    #
+    #
+    # @example Example: DescribeReceiptRuleSet
+    #
+    #   # The following example returns the metadata and receipt rules of a receipt rule set:
+    #
+    #   resp = client.describe_receipt_rule_set({
+    #     rule_set_name: "MyRuleSet", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     metadata: {
+    #       created_timestamp: Time.parse("2016-07-15T16:25:59.607Z"), 
+    #       name: "MyRuleSet", 
+    #     }, 
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             s3_action: {
+    #               bucket_name: "MyBucket", 
+    #               object_key_prefix: "email", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         name: "MyRule", 
+    #         scan_enabled: true, 
+    #         tls_policy: "Optional", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1008,6 +1215,37 @@ module Aws::SES
     #
     #   * {Types::GetIdentityDkimAttributesResponse#dkim_attributes #dkim_attributes} => Hash&lt;String,Types::IdentityDkimAttributes&gt;
     #
+    #
+    # @example Example: GetIdentityDkimAttributes
+    #
+    #   # The following example retrieves the Amazon SES Easy DKIM attributes for a list of identities:
+    #
+    #   resp = client.get_identity_dkim_attributes({
+    #     identities: [
+    #       "example.com", 
+    #       "user@example.com", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dkim_attributes: {
+    #       "example.com" => {
+    #         dkim_enabled: true, 
+    #         dkim_tokens: [
+    #           "EXAMPLEjcs5xoyqytjsotsijas7236gr", 
+    #           "EXAMPLEjr76cvoc6mysspnioorxsn6ep", 
+    #           "EXAMPLEkbmkqkhlm2lyz77ppkulerm4k", 
+    #         ], 
+    #         dkim_verification_status: "Success", 
+    #       }, 
+    #       "user@example.com" => {
+    #         dkim_enabled: false, 
+    #         dkim_verification_status: "NotStarted", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_identity_dkim_attributes({
@@ -1043,6 +1281,28 @@ module Aws::SES
     # @return [Types::GetIdentityMailFromDomainAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIdentityMailFromDomainAttributesResponse#mail_from_domain_attributes #mail_from_domain_attributes} => Hash&lt;String,Types::IdentityMailFromDomainAttributes&gt;
+    #
+    #
+    # @example Example: GetIdentityMailFromDomainAttributes
+    #
+    #   # The following example returns the custom MAIL FROM attributes for an identity:
+    #
+    #   resp = client.get_identity_mail_from_domain_attributes({
+    #     identities: [
+    #       "example.com", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mail_from_domain_attributes: {
+    #       "example.com" => {
+    #         behavior_on_mx_failure: "UseDefaultValue", 
+    #         mail_from_domain: "bounces.example.com", 
+    #         mail_from_domain_status: "Success", 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1088,6 +1348,30 @@ module Aws::SES
     # @return [Types::GetIdentityNotificationAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIdentityNotificationAttributesResponse#notification_attributes #notification_attributes} => Hash&lt;String,Types::IdentityNotificationAttributes&gt;
+    #
+    #
+    # @example Example: GetIdentityNotificationAttributes
+    #
+    #   # The following example returns the notification attributes for an identity:
+    #
+    #   resp = client.get_identity_notification_attributes({
+    #     identities: [
+    #       "example.com", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     notification_attributes: {
+    #       "example.com" => {
+    #         bounce_topic: "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic", 
+    #         forwarding_enabled: true, 
+    #         headers_in_bounce_notifications_enabled: false, 
+    #         headers_in_complaint_notifications_enabled: false, 
+    #         headers_in_delivery_notifications_enabled: false, 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1153,6 +1437,25 @@ module Aws::SES
     #
     #   * {Types::GetIdentityPoliciesResponse#policies #policies} => Hash&lt;String,String&gt;
     #
+    #
+    # @example Example: GetIdentityPolicies
+    #
+    #   # The following example returns a sending authorization policy for an identity:
+    #
+    #   resp = client.get_identity_policies({
+    #     identity: "example.com", 
+    #     policy_names: [
+    #       "MyPolicy", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: {
+    #       "MyPolicy" => "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"stmt1469123904194\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":[\"ses:SendEmail\",\"ses:SendRawEmail\"],\"Resource\":\"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com\"}]}", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_identity_policies({
@@ -1188,6 +1491,27 @@ module Aws::SES
     #
     #   * {Types::GetIdentityVerificationAttributesResponse#verification_attributes #verification_attributes} => Hash&lt;String,Types::IdentityVerificationAttributes&gt;
     #
+    #
+    # @example Example: GetIdentityVerificationAttributes
+    #
+    #   # The following example returns the verification status and the verification token for a domain identity:
+    #
+    #   resp = client.get_identity_verification_attributes({
+    #     identities: [
+    #       "example.com", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     verification_attributes: {
+    #       "example.com" => {
+    #         verification_status: "Success", 
+    #         verification_token: "EXAMPLE3VYb9EDI2nTOQRi/Tf6MI/6bD6THIGiP1MVY=", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_identity_verification_attributes({
@@ -1219,6 +1543,21 @@ module Aws::SES
     #   * {Types::GetSendQuotaResponse#max_send_rate #max_send_rate} => Float
     #   * {Types::GetSendQuotaResponse#sent_last_24_hours #sent_last_24_hours} => Float
     #
+    #
+    # @example Example: GetSendQuota
+    #
+    #   # The following example returns the Amazon SES sending limits for an AWS account:
+    #
+    #   resp = client.get_send_quota({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     max_24_hour_send: 200, 
+    #     max_send_rate: 1, 
+    #     sent_last_24_hours: 1, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.max_24_hour_send #=> Float
@@ -1245,6 +1584,41 @@ module Aws::SES
     # @return [Types::GetSendStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSendStatisticsResponse#send_data_points #send_data_points} => Array&lt;Types::SendDataPoint&gt;
+    #
+    #
+    # @example Example: GetSendStatistics
+    #
+    #   # The following example returns Amazon SES sending statistics:
+    #
+    #   resp = client.get_send_statistics({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     send_data_points: [
+    #       {
+    #         bounces: 0, 
+    #         complaints: 0, 
+    #         delivery_attempts: 5, 
+    #         rejects: 0, 
+    #         timestamp: Time.parse("2016-07-13T22:43:00Z"), 
+    #       }, 
+    #       {
+    #         bounces: 0, 
+    #         complaints: 0, 
+    #         delivery_attempts: 3, 
+    #         rejects: 0, 
+    #         timestamp: Time.parse("2016-07-13T23:13:00Z"), 
+    #       }, 
+    #       {
+    #         bounces: 0, 
+    #         complaints: 0, 
+    #         delivery_attempts: 1, 
+    #         rejects: 0, 
+    #         timestamp: Time.parse("2016-07-13T21:13:00Z"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1334,6 +1708,25 @@ module Aws::SES
     #   * {Types::ListIdentitiesResponse#identities #identities} => Array&lt;String&gt;
     #   * {Types::ListIdentitiesResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: ListIdentities
+    #
+    #   # The following example lists the email address identities that have been submitted for verification with Amazon SES:
+    #
+    #   resp = client.list_identities({
+    #     identity_type: "EmailAddress", 
+    #     max_items: 123, 
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     identities: [
+    #       "user@example.com", 
+    #     ], 
+    #     next_token: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identities({
@@ -1390,6 +1783,22 @@ module Aws::SES
     #
     #   * {Types::ListIdentityPoliciesResponse#policy_names #policy_names} => Array&lt;String&gt;
     #
+    #
+    # @example Example: ListIdentityPolicies
+    #
+    #   # The following example returns a list of sending authorization policies that are attached to an identity:
+    #
+    #   resp = client.list_identity_policies({
+    #     identity: "example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_names: [
+    #       "MyPolicy", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identity_policies({
@@ -1424,6 +1833,27 @@ module Aws::SES
     # @return [Types::ListReceiptFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListReceiptFiltersResponse#filters #filters} => Array&lt;Types::ReceiptFilter&gt;
+    #
+    #
+    # @example Example: ListReceiptFilters
+    #
+    #   # The following example lists the IP address filters that are associated with an AWS account:
+    #
+    #   resp = client.list_receipt_filters({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     filters: [
+    #       {
+    #         ip_filter: {
+    #           cidr: "1.2.3.4/24", 
+    #           policy: "Block", 
+    #         }, 
+    #         name: "MyFilter", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1464,6 +1894,26 @@ module Aws::SES
     #   * {Types::ListReceiptRuleSetsResponse#rule_sets #rule_sets} => Array&lt;Types::ReceiptRuleSetMetadata&gt;
     #   * {Types::ListReceiptRuleSetsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: ListReceiptRuleSets
+    #
+    #   # The following example lists the receipt rule sets that exist under an AWS account:
+    #
+    #   resp = client.list_receipt_rule_sets({
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     rule_sets: [
+    #       {
+    #         created_timestamp: Time.parse("2016-07-15T16:25:59.607Z"), 
+    #         name: "MyRuleSet", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_receipt_rule_sets({
@@ -1498,6 +1948,22 @@ module Aws::SES
     # @return [Types::ListVerifiedEmailAddressesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListVerifiedEmailAddressesResponse#verified_email_addresses #verified_email_addresses} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: ListVerifiedEmailAddresses
+    #
+    #   # The following example lists all email addresses that have been submitted for verification with Amazon SES:
+    #
+    #   resp = client.list_verified_email_addresses({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     verified_email_addresses: [
+    #       "user1@example.com", 
+    #       "user2@example.com", 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1557,6 +2023,17 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: PutIdentityPolicy
+    #
+    #   # The following example adds a sending authorization policy to an identity:
+    #
+    #   resp = client.put_identity_policy({
+    #     identity: "example.com", 
+    #     policy: "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"stmt1469123904194\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":[\"ses:SendEmail\",\"ses:SendRawEmail\"],\"Resource\":\"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com\"}]}", 
+    #     policy_name: "MyPolicy", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_identity_policy({
@@ -1599,6 +2076,19 @@ module Aws::SES
     #   that you want to put them.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: ReorderReceiptRuleSet
+    #
+    #   # The following example reorders the receipt rules within a receipt rule set:
+    #
+    #   resp = client.reorder_receipt_rule_set({
+    #     rule_names: [
+    #       "MyRule", 
+    #       "MyOtherRule", 
+    #     ], 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1854,6 +2344,52 @@ module Aws::SES
     #
     #   * {Types::SendEmailResponse#message_id #message_id} => String
     #
+    #
+    # @example Example: SendEmail
+    #
+    #   # The following example sends a formatted email:
+    #
+    #   resp = client.send_email({
+    #     destination: {
+    #       bcc_addresses: [
+    #       ], 
+    #       cc_addresses: [
+    #         "recipient3@example.com", 
+    #       ], 
+    #       to_addresses: [
+    #         "recipient1@example.com", 
+    #         "recipient2@example.com", 
+    #       ], 
+    #     }, 
+    #     message: {
+    #       body: {
+    #         html: {
+    #           charset: "UTF-8", 
+    #           data: "This message body contains HTML formatting. It can, for example, contain links like this one: <a class=\"ulink\" href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide\" target=\"_blank\">Amazon SES Developer Guide</a>.", 
+    #         }, 
+    #         text: {
+    #           charset: "UTF-8", 
+    #           data: "This is the message body in text format.", 
+    #         }, 
+    #       }, 
+    #       subject: {
+    #         charset: "UTF-8", 
+    #         data: "Test email", 
+    #       }, 
+    #     }, 
+    #     reply_to_addresses: [
+    #     ], 
+    #     return_path: "", 
+    #     return_path_arn: "", 
+    #     source: "sender@example.com", 
+    #     source_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message_id: "EXAMPLE78603177f-7a5433e7-8edb-42ae-af10-f0181f34d6ee-000000", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.send_email({
@@ -2108,6 +2644,28 @@ module Aws::SES
     #
     #   * {Types::SendRawEmailResponse#message_id #message_id} => String
     #
+    #
+    # @example Example: SendRawEmail
+    #
+    #   # The following example sends an email with an attachment:
+    #
+    #   resp = client.send_raw_email({
+    #     destinations: [
+    #     ], 
+    #     from_arn: "", 
+    #     raw_message: {
+    #       data: "From: sender@example.com\\nTo: recipient@example.com\\nSubject: Test email (contains an attachment)\\nMIME-Version: 1.0\\nContent-type: Multipart/Mixed; boundary=\"NextPart\"\\n\\n--NextPart\\nContent-Type: text/plain\\n\\nThis is the message body.\\n\\n--NextPart\\nContent-Type: text/plain;\\nContent-Disposition: attachment; filename=\"attachment.txt\"\\n\\nThis is the text in the attachment.\\n\\n--NextPart--", 
+    #     }, 
+    #     return_path_arn: "", 
+    #     source: "", 
+    #     source_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message_id: "EXAMPLEf3f73d99b-c63fb06f-d263-41f8-a0fb-d0dc67d56c07-000000", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.send_raw_email({
@@ -2163,6 +2721,15 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: SetActiveReceiptRuleSet
+    #
+    #   # The following example sets the active receipt rule set:
+    #
+    #   resp = client.set_active_receipt_rule_set({
+    #     rule_set_name: "RuleSetToActivate", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_active_receipt_rule_set({
@@ -2209,6 +2776,16 @@ module Aws::SES
     #   enable DKIM signing for this identity; `false` to disable it.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: SetIdentityDkimEnabled
+    #
+    #   # The following example configures Amazon SES to Easy DKIM-sign the email sent from an identity:
+    #
+    #   resp = client.set_identity_dkim_enabled({
+    #     dkim_enabled: true, 
+    #     identity: "user@example.com", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2262,6 +2839,16 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: SetIdentityFeedbackForwardingEnabled
+    #
+    #   # The following example configures Amazon SES to forward an identity's bounces and complaints via email:
+    #
+    #   resp = client.set_identity_feedback_forwarding_enabled({
+    #     forwarding_enabled: true, 
+    #     identity: "user@example.com", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_identity_feedback_forwarding_enabled({
@@ -2310,6 +2897,17 @@ module Aws::SES
     #   use a particular Amazon SNS topic.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: SetIdentityHeadersInNotificationsEnabled
+    #
+    #   # The following example configures Amazon SES to include the original email headers in the Amazon SNS bounce notifications for an identity:
+    #
+    #   resp = client.set_identity_headers_in_notifications_enabled({
+    #     enabled: true, 
+    #     identity: "user@example.com", 
+    #     notification_type: "Bounce", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2374,6 +2972,17 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: SetIdentityMailFromDomain
+    #
+    #   # The following example configures Amazon SES to use a custom MAIL FROM domain for an identity:
+    #
+    #   resp = client.set_identity_mail_from_domain({
+    #     behavior_on_mx_failure: "UseDefaultValue", 
+    #     identity: "user@example.com", 
+    #     mail_from_domain: "bounces.example.com", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_identity_mail_from_domain({
@@ -2428,6 +3037,17 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: SetIdentityNotificationTopic
+    #
+    #   # The following example sets the Amazon SNS topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with the specified identity as the Source:
+    #
+    #   resp = client.set_identity_notification_topic({
+    #     identity: "user@example.com", 
+    #     notification_type: "Bounce", 
+    #     sns_topic: "arn:aws:sns:us-west-2:111122223333:MyTopic", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_identity_notification_topic({
@@ -2469,6 +3089,17 @@ module Aws::SES
     #   receipt rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: SetReceiptRulePosition
+    #
+    #   # The following example sets the position of a receipt rule in a receipt rule set:
+    #
+    #   resp = client.set_receipt_rule_position({
+    #     after: "PutRuleAfterThisRule", 
+    #     rule_name: "RuleToReposition", 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2567,6 +3198,29 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: UpdateReceiptRule
+    #
+    #   # The following example updates a receipt rule to use an Amazon S3 action:
+    #
+    #   resp = client.update_receipt_rule({
+    #     rule: {
+    #       actions: [
+    #         {
+    #           s3_action: {
+    #             bucket_name: "MyBucket", 
+    #             object_key_prefix: "email", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       enabled: true, 
+    #       name: "MyRule", 
+    #       scan_enabled: true, 
+    #       tls_policy: "Optional", 
+    #     }, 
+    #     rule_set_name: "MyRuleSet", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_receipt_rule({
@@ -2654,6 +3308,24 @@ module Aws::SES
     #
     #   * {Types::VerifyDomainDkimResponse#dkim_tokens #dkim_tokens} => Array&lt;String&gt;
     #
+    #
+    # @example Example: VerifyDomainDkim
+    #
+    #   # The following example generates DKIM tokens for a domain that has been verified with Amazon SES:
+    #
+    #   resp = client.verify_domain_dkim({
+    #     domain: "example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dkim_tokens: [
+    #       "EXAMPLEq76owjnks3lnluwg65scbemvw", 
+    #       "EXAMPLEi3dnsj67hstzaj673klariwx2", 
+    #       "EXAMPLEwfbtcukvimehexktmdtaz6naj", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify_domain_dkim({
@@ -2684,6 +3356,20 @@ module Aws::SES
     # @return [Types::VerifyDomainIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VerifyDomainIdentityResponse#verification_token #verification_token} => String
+    #
+    #
+    # @example Example: VerifyDomainIdentity
+    #
+    #   # The following example starts the domain verification process with Amazon SES:
+    #
+    #   resp = client.verify_domain_identity({
+    #     domain: "example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     verification_token: "eoEmxw+YaYhb3h3iVJHuXMJXqeu1q1/wwmvjuEXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2718,6 +3404,15 @@ module Aws::SES
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: VerifyEmailAddress
+    #
+    #   # The following example starts the email address verification process with Amazon SES:
+    #
+    #   resp = client.verify_email_address({
+    #     email_address: "user@example.com", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify_email_address({
@@ -2742,6 +3437,15 @@ module Aws::SES
     #   The email address to be verified.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: VerifyEmailIdentity
+    #
+    #   # The following example starts the email address verification process with Amazon SES:
+    #
+    #   resp = client.verify_email_identity({
+    #     email_address: "user@example.com", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2771,7 +3475,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -165,6 +165,15 @@ module Aws::Snowball
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To cancel a cluster job
+    #
+    #   # This operation cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status.
+    #
+    #   resp = client.cancel_cluster({
+    #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_cluster({
@@ -190,6 +199,15 @@ module Aws::Snowball
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To cancel a job for a Snowball device
+    #
+    #   # This operation cancels a job. You can only cancel a job before its JobState value changes to PreparingAppliance.
+    #
+    #   resp = client.cancel_job({
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -217,6 +235,29 @@ module Aws::Snowball
     # @return [Types::CreateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAddressResult#address_id #address_id} => String
+    #
+    #
+    # @example Example: To create an address for a job
+    #
+    #   # This operation creates an address for a job. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+    #
+    #   resp = client.create_address({
+    #     address: {
+    #       city: "Seattle", 
+    #       company: "My Company's Name", 
+    #       country: "USA", 
+    #       name: "My Name", 
+    #       phone_number: "425-555-5555", 
+    #       postal_code: "98101", 
+    #       state_or_province: "WA", 
+    #       street_1: "123 Main Street", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -324,6 +365,40 @@ module Aws::Snowball
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster_id #cluster_id} => String
+    #
+    #
+    # @example Example: To create a cluster
+    #
+    #   # Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
+    #
+    #   resp = client.create_cluster({
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #     description: "MyCluster", 
+    #     job_type: "LOCAL_USE", 
+    #     kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456", 
+    #     notification: {
+    #       job_states_to_notify: [
+    #       ], 
+    #       notify_all: false, 
+    #     }, 
+    #     resources: {
+    #       s3_resources: [
+    #         {
+    #           bucket_arn: "arn:aws:s3:::MyBucket", 
+    #           key_range: {
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     role_arn: "arn:aws:iam::123456789012:role/snowball-import-S3-role", 
+    #     shipping_option: "SECOND_DAY", 
+    #     snowball_type: "EDGE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -469,6 +544,41 @@ module Aws::Snowball
     #
     #   * {Types::CreateJobResult#job_id #job_id} => String
     #
+    #
+    # @example Example: To create a job
+    #
+    #   # Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.
+    #
+    #   resp = client.create_job({
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #     description: "My Job", 
+    #     job_type: "IMPORT", 
+    #     kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456", 
+    #     notification: {
+    #       job_states_to_notify: [
+    #       ], 
+    #       notify_all: false, 
+    #     }, 
+    #     resources: {
+    #       s3_resources: [
+    #         {
+    #           bucket_arn: "arn:aws:s3:::MyBucket", 
+    #           key_range: {
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     role_arn: "arn:aws:iam::123456789012:role/snowball-import-S3-role", 
+    #     shipping_option: "SECOND_DAY", 
+    #     snowball_capacity_preference: "T80", 
+    #     snowball_type: "STANDARD", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
@@ -533,6 +643,30 @@ module Aws::Snowball
     #
     #   * {Types::DescribeAddressResult#address #address} => Types::Address
     #
+    #
+    # @example Example: To describe an address for a job
+    #
+    #   # This operation describes an address for a job.
+    #
+    #   resp = client.describe_address({
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     address: {
+    #       address_id: "ADID5643ec50-3eec-4eb3-9be6-9374c10eb51b", 
+    #       city: "Seattle", 
+    #       company: "My Company", 
+    #       country: "US", 
+    #       name: "My Name", 
+    #       phone_number: "425-555-5555", 
+    #       postal_code: "98101", 
+    #       state_or_province: "WA", 
+    #       street_1: "123 Main Street", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_address({
@@ -583,6 +717,31 @@ module Aws::Snowball
     #   * {Types::DescribeAddressesResult#addresses #addresses} => Array&lt;Types::Address&gt;
     #   * {Types::DescribeAddressesResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe all the addresses you've created for AWS Snowball
+    #
+    #   # This operation describes all the addresses that you've created for AWS Snowball. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
+    #
+    #   resp = client.describe_addresses({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     addresses: [
+    #       {
+    #         address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #         city: "Seattle", 
+    #         company: "My Company", 
+    #         country: "US", 
+    #         name: "My Name", 
+    #         phone_number: "425-555-5555", 
+    #         postal_code: "98101", 
+    #         state_or_province: "WA", 
+    #         street_1: "123 Main Street", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_addresses({
@@ -627,6 +786,44 @@ module Aws::Snowball
     # @return [Types::DescribeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeClusterResult#cluster_metadata #cluster_metadata} => Types::ClusterMetadata
+    #
+    #
+    # @example Example: To describe a cluster
+    #
+    #   # Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+    #
+    #   resp = client.describe_cluster({
+    #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_metadata: {
+    #       address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #       cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #       cluster_state: "Pending", 
+    #       creation_date: Time.parse("1480475517.0"), 
+    #       description: "MyCluster", 
+    #       job_type: "LOCAL_USE", 
+    #       kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456", 
+    #       notification: {
+    #         job_states_to_notify: [
+    #         ], 
+    #         notify_all: false, 
+    #       }, 
+    #       resources: {
+    #         s3_resources: [
+    #           {
+    #             bucket_arn: "arn:aws:s3:::MyBucket", 
+    #             key_range: {
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       role_arn: "arn:aws:iam::123456789012:role/snowball-import-S3-role", 
+    #       shipping_option: "SECOND_DAY", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -680,6 +877,48 @@ module Aws::Snowball
     #
     #   * {Types::DescribeJobResult#job_metadata #job_metadata} => Types::JobMetadata
     #   * {Types::DescribeJobResult#sub_job_metadata #sub_job_metadata} => Array&lt;Types::JobMetadata&gt;
+    #
+    #
+    # @example Example: To describe a job you've created for AWS Snowball
+    #
+    #   # This operation describes a job you've created for AWS Snowball.
+    #
+    #   resp = client.describe_job({
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_metadata: {
+    #       address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #       creation_date: Time.parse("1475626164"), 
+    #       description: "My Job", 
+    #       job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #       job_state: "New", 
+    #       job_type: "IMPORT", 
+    #       kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456", 
+    #       notification: {
+    #         job_states_to_notify: [
+    #         ], 
+    #         notify_all: false, 
+    #       }, 
+    #       resources: {
+    #         s3_resources: [
+    #           {
+    #             bucket_arn: "arn:aws:s3:::MyBucket", 
+    #             key_range: {
+    #             }, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       role_arn: "arn:aws:iam::123456789012:role/snowball-import-S3-role", 
+    #       shipping_details: {
+    #         shipping_option: "SECOND_DAY", 
+    #       }, 
+    #       snowball_capacity_preference: "T80", 
+    #       snowball_type: "STANDARD", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -800,6 +1039,26 @@ module Aws::Snowball
     #
     #   * {Types::GetJobManifestResult#manifest_uri #manifest_uri} => String
     #
+    #
+    # @example Example: To get the manifest for a job you've created for AWS Snowball
+    #
+    #   # Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action.
+    
+    The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.
+    
+    As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
+    
+    The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+    #
+    #   resp = client.get_job_manifest({
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     manifest_uri: "https://awsie-frosty-manifests-prod.s3.amazonaws.com/JID123e4567-e89b-12d3-a456-426655440000_manifest.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20161224T005115Z&X-Amz-SignedHeaders=...", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job_manifest({
@@ -841,6 +1100,24 @@ module Aws::Snowball
     #
     #   * {Types::GetJobUnlockCodeResult#unlock_code #unlock_code} => String
     #
+    #
+    # @example Example: To get the unlock code for a job you've created for AWS Snowball
+    #
+    #   # Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.
+    
+    The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.
+    
+    As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
+    #
+    #   resp = client.get_job_unlock_code({
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unlock_code: "12345-abcde-56789-fghij-01234", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job_unlock_code({
@@ -871,6 +1148,22 @@ module Aws::Snowball
     #
     #   * {Types::GetSnowballUsageResult#snowball_limit #snowball_limit} => Integer
     #   * {Types::GetSnowballUsageResult#snowballs_in_use #snowballs_in_use} => Integer
+    #
+    #
+    # @example Example: To see your Snowball service limit and the number of Snowballs you have in use
+    #
+    #   # Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.
+    
+    The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+    #
+    #   resp = client.get_snowball_usage({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snowball_limit: 1, 
+    #     snowballs_in_use: 0, 
+    #   }
     #
     # @example Response structure
     #
@@ -906,6 +1199,66 @@ module Aws::Snowball
     #
     #   * {Types::ListClusterJobsResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #   * {Types::ListClusterJobsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of jobs in a cluster that you've created for AWS Snowball
+    #
+    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
+    #
+    #   resp = client.list_cluster_jobs({
+    #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_list_entries: [
+    #       {
+    #         creation_date: Time.parse("1480475524.0"), 
+    #         description: "MyClustrer-node-001", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #         job_state: "New", 
+    #         job_type: "LOCAL_USE", 
+    #         snowball_type: "EDGE", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("1480475525.0"), 
+    #         description: "MyClustrer-node-002", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440001", 
+    #         job_state: "New", 
+    #         job_type: "LOCAL_USE", 
+    #         snowball_type: "EDGE", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("1480475525.0"), 
+    #         description: "MyClustrer-node-003", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440002", 
+    #         job_state: "New", 
+    #         job_type: "LOCAL_USE", 
+    #         snowball_type: "EDGE", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("1480475525.0"), 
+    #         description: "MyClustrer-node-004", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440003", 
+    #         job_state: "New", 
+    #         job_type: "LOCAL_USE", 
+    #         snowball_type: "EDGE", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("1480475525.0"), 
+    #         description: "MyClustrer-node-005", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440004", 
+    #         job_state: "New", 
+    #         job_type: "LOCAL_USE", 
+    #         snowball_type: "EDGE", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -953,6 +1306,26 @@ module Aws::Snowball
     #   * {Types::ListClustersResult#cluster_list_entries #cluster_list_entries} => Array&lt;Types::ClusterListEntry&gt;
     #   * {Types::ListClustersResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get a list of clusters that you've created for AWS Snowball
+    #
+    #   # Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+    #
+    #   resp = client.list_clusters({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_list_entries: [
+    #       {
+    #         cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #         cluster_state: "Pending", 
+    #         creation_date: Time.parse("1480475517.0"), 
+    #         description: "MyCluster", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_clusters({
@@ -997,6 +1370,29 @@ module Aws::Snowball
     #
     #   * {Types::ListJobsResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of jobs that you've created for AWS Snowball
+    #
+    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
+    #
+    #   resp = client.list_jobs({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_list_entries: [
+    #       {
+    #         creation_date: Time.parse("1460678186.0"), 
+    #         description: "MyJob", 
+    #         is_master: false, 
+    #         job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #         job_state: "New", 
+    #         job_type: "IMPORT", 
+    #         snowball_type: "STANDARD", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1067,6 +1463,17 @@ module Aws::Snowball
     #   not supported in most regions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update a cluster
+    #
+    #   # This action allows you to update certain parameters for a cluster. Once the cluster changes to a different state, usually within 60 minutes of it being created, this action is no longer available.
+    #
+    #   resp = client.update_cluster({
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
+    #     description: "Updated the address to send this to image processing - RJ", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1160,6 +1567,19 @@ module Aws::Snowball
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update a job
+    #
+    #   # This action allows you to update certain parameters for a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
+    #
+    #   resp = client.update_job({
+    #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #     description: "Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.", 
+    #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
+    #     shipping_option: "NEXT_DAY", 
+    #     snowball_capacity_preference: "T100", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job({
@@ -1220,7 +1640,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

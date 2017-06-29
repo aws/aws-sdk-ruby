@@ -162,6 +162,19 @@ module Aws::Polly
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a lexicon
+    #
+    #   # Deletes a specified pronunciation lexicon stored in an AWS Region.
+    #
+    #   resp = client.delete_lexicon({
+    #     name: "example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_lexicon({
@@ -213,6 +226,42 @@ module Aws::Polly
     #   * {Types::DescribeVoicesOutput#voices #voices} => Array&lt;Types::Voice&gt;
     #   * {Types::DescribeVoicesOutput#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe available voices
+    #
+    #   # Returns the list of voices that are available for use when requesting speech synthesis. Displayed languages are those within the specified language code. If no language code is specified, voices for all available languages are displayed.
+    #
+    #   resp = client.describe_voices({
+    #     language_code: "en-GB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     voices: [
+    #       {
+    #         gender: "Female", 
+    #         id: "Emma", 
+    #         language_code: "en-GB", 
+    #         language_name: "British English", 
+    #         name: "Emma", 
+    #       }, 
+    #       {
+    #         gender: "Male", 
+    #         id: "Brian", 
+    #         language_code: "en-GB", 
+    #         language_name: "British English", 
+    #         name: "Brian", 
+    #       }, 
+    #       {
+    #         gender: "Female", 
+    #         id: "Amy", 
+    #         language_code: "en-GB", 
+    #         language_name: "British English", 
+    #         name: "Amy", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_voices({
@@ -253,6 +302,31 @@ module Aws::Polly
     #
     #   * {Types::GetLexiconOutput#lexicon #lexicon} => Types::Lexicon
     #   * {Types::GetLexiconOutput#lexicon_attributes #lexicon_attributes} => Types::LexiconAttributes
+    #
+    #
+    # @example Example: To retrieve a lexicon
+    #
+    #   # Returns the content of the specified pronunciation lexicon stored in an AWS Region.
+    #
+    #   resp = client.get_lexicon({
+    #     name: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lexicon: {
+    #       content: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<lexicon version=\"1.0\" \r\n      xmlns=\"http://www.w3.org/2005/01/pronunciation-lexicon\"\r\n      xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\n      xsi:schemaLocation=\"http://www.w3.org/2005/01/pronunciation-lexicon \r\n        http://www.w3.org/TR/2007/CR-pronunciation-lexicon-20071212/pls.xsd\"\r\n      alphabet=\"ipa\" \r\n      xml:lang=\"en-US\">\r\n  <lexeme>\r\n    <grapheme>W3C</grapheme>\r\n    <alias>World Wide Web Consortium</alias>\r\n  </lexeme>\r\n</lexicon>", 
+    #       name: "example", 
+    #     }, 
+    #     lexicon_attributes: {
+    #       alphabet: "ipa", 
+    #       language_code: "en-US", 
+    #       last_modified: Time.parse(1478542980.117), 
+    #       lexemes_count: 1, 
+    #       lexicon_arn: "arn:aws:polly:us-east-1:123456789012:lexicon/example", 
+    #       size: 503, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -296,6 +370,31 @@ module Aws::Polly
     #
     #   * {Types::ListLexiconsOutput#lexicons #lexicons} => Array&lt;Types::LexiconDescription&gt;
     #   * {Types::ListLexiconsOutput#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list all lexicons in a region
+    #
+    #   # Returns a list of pronunciation lexicons stored in an AWS Region.
+    #
+    #   resp = client.list_lexicons({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lexicons: [
+    #       {
+    #         attributes: {
+    #           alphabet: "ipa", 
+    #           language_code: "en-US", 
+    #           last_modified: Time.parse(1478542980.117), 
+    #           lexemes_count: 1, 
+    #           lexicon_arn: "arn:aws:polly:us-east-1:123456789012:lexicon/example", 
+    #           size: 503, 
+    #         }, 
+    #         name: "example", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -345,6 +444,20 @@ module Aws::Polly
     #   Content of the PLS lexicon as string data.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To save a lexicon
+    #
+    #   # Stores a pronunciation lexicon in an AWS Region.
+    #
+    #   resp = client.put_lexicon({
+    #     content: "file://example.pls", 
+    #     name: "W3C", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -425,6 +538,29 @@ module Aws::Polly
     #   * {Types::SynthesizeSpeechOutput#content_type #content_type} => String
     #   * {Types::SynthesizeSpeechOutput#request_characters #request_characters} => Integer
     #
+    #
+    # @example Example: To synthesize speech
+    #
+    #   # Synthesizes plain text or SSML into a file of human-like speech.
+    #
+    #   resp = client.synthesize_speech({
+    #     lexicon_names: [
+    #       "example", 
+    #     ], 
+    #     output_format: "mp3", 
+    #     sample_rate: "8000", 
+    #     text: "All Gaul is divided into three parts", 
+    #     text_type: "text", 
+    #     voice_id: "Joanna", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     audio_stream: "TEXT", 
+    #     content_type: "audio/mpeg", 
+    #     request_characters: 37, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.synthesize_speech({
@@ -465,7 +601,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

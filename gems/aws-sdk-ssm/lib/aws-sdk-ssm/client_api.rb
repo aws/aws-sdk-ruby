@@ -104,6 +104,8 @@ module Aws::SSM
     CreateMaintenanceWindowResult = Shapes::StructureShape.new(name: 'CreateMaintenanceWindowResult')
     CreatePatchBaselineRequest = Shapes::StructureShape.new(name: 'CreatePatchBaselineRequest')
     CreatePatchBaselineResult = Shapes::StructureShape.new(name: 'CreatePatchBaselineResult')
+    CreateResourceDataSyncRequest = Shapes::StructureShape.new(name: 'CreateResourceDataSyncRequest')
+    CreateResourceDataSyncResult = Shapes::StructureShape.new(name: 'CreateResourceDataSyncResult')
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     CustomSchemaCountLimitExceededException = Shapes::StructureShape.new(name: 'CustomSchemaCountLimitExceededException')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
@@ -123,6 +125,8 @@ module Aws::SSM
     DeleteParametersResult = Shapes::StructureShape.new(name: 'DeleteParametersResult')
     DeletePatchBaselineRequest = Shapes::StructureShape.new(name: 'DeletePatchBaselineRequest')
     DeletePatchBaselineResult = Shapes::StructureShape.new(name: 'DeletePatchBaselineResult')
+    DeleteResourceDataSyncRequest = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncRequest')
+    DeleteResourceDataSyncResult = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncResult')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
     DeregisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupRequest')
@@ -364,6 +368,9 @@ module Aws::SSM
     ItemContentMismatchException = Shapes::StructureShape.new(name: 'ItemContentMismatchException')
     ItemSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemSizeLimitExceededException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    LastResourceDataSyncStatus = Shapes::StringShape.new(name: 'LastResourceDataSyncStatus')
+    LastResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastResourceDataSyncTime')
+    LastSuccessfulResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastSuccessfulResourceDataSyncTime')
     ListAssociationsRequest = Shapes::StructureShape.new(name: 'ListAssociationsRequest')
     ListAssociationsResult = Shapes::StructureShape.new(name: 'ListAssociationsResult')
     ListCommandInvocationsRequest = Shapes::StructureShape.new(name: 'ListCommandInvocationsRequest')
@@ -376,6 +383,8 @@ module Aws::SSM
     ListDocumentsResult = Shapes::StructureShape.new(name: 'ListDocumentsResult')
     ListInventoryEntriesRequest = Shapes::StructureShape.new(name: 'ListInventoryEntriesRequest')
     ListInventoryEntriesResult = Shapes::StructureShape.new(name: 'ListInventoryEntriesResult')
+    ListResourceDataSyncRequest = Shapes::StructureShape.new(name: 'ListResourceDataSyncRequest')
+    ListResourceDataSyncResult = Shapes::StructureShape.new(name: 'ListResourceDataSyncResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
@@ -543,6 +552,19 @@ module Aws::SSM
     RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    ResourceDataSyncAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceDataSyncAlreadyExistsException')
+    ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
+    ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
+    ResourceDataSyncInvalidConfigurationException = Shapes::StructureShape.new(name: 'ResourceDataSyncInvalidConfigurationException')
+    ResourceDataSyncItem = Shapes::StructureShape.new(name: 'ResourceDataSyncItem')
+    ResourceDataSyncItemList = Shapes::ListShape.new(name: 'ResourceDataSyncItemList')
+    ResourceDataSyncName = Shapes::StringShape.new(name: 'ResourceDataSyncName')
+    ResourceDataSyncNotFoundException = Shapes::StructureShape.new(name: 'ResourceDataSyncNotFoundException')
+    ResourceDataSyncS3BucketName = Shapes::StringShape.new(name: 'ResourceDataSyncS3BucketName')
+    ResourceDataSyncS3Destination = Shapes::StructureShape.new(name: 'ResourceDataSyncS3Destination')
+    ResourceDataSyncS3Format = Shapes::StringShape.new(name: 'ResourceDataSyncS3Format')
+    ResourceDataSyncS3Prefix = Shapes::StringShape.new(name: 'ResourceDataSyncS3Prefix')
+    ResourceDataSyncS3Region = Shapes::StringShape.new(name: 'ResourceDataSyncS3Region')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
@@ -864,6 +886,12 @@ module Aws::SSM
     CreatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     CreatePatchBaselineResult.struct_class = Types::CreatePatchBaselineResult
 
+    CreateResourceDataSyncRequest.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, required: true, location_name: "SyncName"))
+    CreateResourceDataSyncRequest.add_member(:s3_destination, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Destination, required: true, location_name: "S3Destination"))
+    CreateResourceDataSyncRequest.struct_class = Types::CreateResourceDataSyncRequest
+
+    CreateResourceDataSyncResult.struct_class = Types::CreateResourceDataSyncResult
+
     DeleteActivationRequest.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, required: true, location_name: "ActivationId"))
     DeleteActivationRequest.struct_class = Types::DeleteActivationRequest
 
@@ -904,6 +932,11 @@ module Aws::SSM
 
     DeletePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     DeletePatchBaselineResult.struct_class = Types::DeletePatchBaselineResult
+
+    DeleteResourceDataSyncRequest.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, required: true, location_name: "SyncName"))
+    DeleteResourceDataSyncRequest.struct_class = Types::DeleteResourceDataSyncRequest
+
+    DeleteResourceDataSyncResult.struct_class = Types::DeleteResourceDataSyncResult
 
     DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
@@ -1618,6 +1651,14 @@ module Aws::SSM
     ListInventoryEntriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInventoryEntriesResult.struct_class = Types::ListInventoryEntriesResult
 
+    ListResourceDataSyncRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceDataSyncRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListResourceDataSyncRequest.struct_class = Types::ListResourceDataSyncRequest
+
+    ListResourceDataSyncResult.add_member(:resource_data_sync_items, Shapes::ShapeRef.new(shape: ResourceDataSyncItemList, location_name: "ResourceDataSyncItems"))
+    ListResourceDataSyncResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceDataSyncResult.struct_class = Types::ListResourceDataSyncResult
+
     ListTagsForResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeForTagging, required: true, location_name: "ResourceType"))
     ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1935,6 +1976,22 @@ module Aws::SSM
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
 
+    ResourceDataSyncItem.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, location_name: "SyncName"))
+    ResourceDataSyncItem.add_member(:s3_destination, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Destination, location_name: "S3Destination"))
+    ResourceDataSyncItem.add_member(:last_sync_time, Shapes::ShapeRef.new(shape: LastResourceDataSyncTime, location_name: "LastSyncTime"))
+    ResourceDataSyncItem.add_member(:last_successful_sync_time, Shapes::ShapeRef.new(shape: LastSuccessfulResourceDataSyncTime, location_name: "LastSuccessfulSyncTime"))
+    ResourceDataSyncItem.add_member(:last_status, Shapes::ShapeRef.new(shape: LastResourceDataSyncStatus, location_name: "LastStatus"))
+    ResourceDataSyncItem.add_member(:sync_created_time, Shapes::ShapeRef.new(shape: ResourceDataSyncCreatedTime, location_name: "SyncCreatedTime"))
+    ResourceDataSyncItem.struct_class = Types::ResourceDataSyncItem
+
+    ResourceDataSyncItemList.member = Shapes::ShapeRef.new(shape: ResourceDataSyncItem)
+
+    ResourceDataSyncS3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: ResourceDataSyncS3BucketName, required: true, location_name: "BucketName"))
+    ResourceDataSyncS3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Prefix, location_name: "Prefix"))
+    ResourceDataSyncS3Destination.add_member(:sync_format, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Format, required: true, location_name: "SyncFormat"))
+    ResourceDataSyncS3Destination.add_member(:region, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Region, required: true, location_name: "Region"))
+    ResourceDataSyncS3Destination.struct_class = Types::ResourceDataSyncS3Destination
+
     ResultAttribute.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     ResultAttribute.struct_class = Types::ResultAttribute
 
@@ -2213,6 +2270,18 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourceDataSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourceDataSyncRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResourceDataSyncResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncCountExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncInvalidConfigurationException)
+      end)
+
       api.add_operation(:delete_activation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteActivation"
         o.http_method = "POST"
@@ -2285,6 +2354,16 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DeletePatchBaselineResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceDataSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceDataSyncRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourceDataSyncResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncNotFoundException)
       end)
 
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -2864,6 +2943,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:list_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceDataSync"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceDataSyncRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceDataSyncResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 

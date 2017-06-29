@@ -158,6 +158,15 @@ module Aws::ElasticBeanstalk
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To abort a deployment
+    #
+    #   # The following code aborts a running application version deployment for an environment named my-env:
+    #
+    #   resp = client.abort_environment_update({
+    #     environment_name: "my-env", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.abort_environment_update({
@@ -227,6 +236,21 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::CheckDNSAvailabilityResultMessage#available #available} => Boolean
     #   * {Types::CheckDNSAvailabilityResultMessage#fully_qualified_cname #fully_qualified_cname} => String
+    #
+    #
+    # @example Example: To check the availability of a CNAME
+    #
+    #   # The following operation checks the availability of the subdomain my-cname:
+    #
+    #   resp = client.check_dns_availability({
+    #     cname_prefix: "my-cname", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     available: true, 
+    #     fully_qualified_cname: "my-cname.us-west-2.elasticbeanstalk.com", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -353,6 +377,28 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
     #
+    #
+    # @example Example: To create a new application
+    #
+    #   # The following operation creates a new application named my-app:
+    #
+    #   resp = client.create_application({
+    #     application_name: "my-app", 
+    #     description: "my application", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application: {
+    #       application_name: "my-app", 
+    #       configuration_templates: [
+    #       ], 
+    #       date_created: Time.parse("2015-02-12T18:32:21.181Z"), 
+    #       date_updated: Time.parse("2015-02-12T18:32:21.181Z"), 
+    #       description: "my application", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
@@ -473,6 +519,38 @@ module Aws::ElasticBeanstalk
     # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationVersionDescriptionMessage#application_version #application_version} => Types::ApplicationVersionDescription
+    #
+    #
+    # @example Example: To create a new application
+    #
+    #   # The following operation creates a new version (v1) of an application named my-app:
+    #
+    #   resp = client.create_application_version({
+    #     application_name: "my-app", 
+    #     auto_create_application: true, 
+    #     description: "my-app-v1", 
+    #     process: true, 
+    #     source_bundle: {
+    #       s3_bucket: "my-bucket", 
+    #       s3_key: "sample.war", 
+    #     }, 
+    #     version_label: "v1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_version: {
+    #       application_name: "my-app", 
+    #       date_created: Time.parse("2015-02-03T23:01:25.412Z"), 
+    #       date_updated: Time.parse("2015-02-03T23:01:25.412Z"), 
+    #       description: "my-app-v1", 
+    #       source_bundle: {
+    #         s3_bucket: "my-bucket", 
+    #         s3_key: "sample.war", 
+    #       }, 
+    #       version_label: "v1", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -608,6 +686,26 @@ module Aws::ElasticBeanstalk
     #   * {Types::ConfigurationSettingsDescription#date_created #date_created} => Time
     #   * {Types::ConfigurationSettingsDescription#date_updated #date_updated} => Time
     #   * {Types::ConfigurationSettingsDescription#option_settings #option_settings} => Array&lt;Types::ConfigurationOptionSetting&gt;
+    #
+    #
+    # @example Example: To create a configuration template
+    #
+    #   # The following operation creates a configuration template named my-app-v1 from the settings applied to an environment with the id e-rpqsewtp2j:
+    #
+    #   resp = client.create_configuration_template({
+    #     application_name: "my-app", 
+    #     environment_id: "e-rpqsewtp2j", 
+    #     template_name: "my-app-v1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_name: "my-app", 
+    #     date_created: Time.parse("2015-08-12T18:40:39Z"), 
+    #     date_updated: Time.parse("2015-08-12T18:40:39Z"), 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     template_name: "my-app-v1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -759,6 +857,38 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
+    #
+    #
+    # @example Example: To create a new environment for an application
+    #
+    #   # The following operation creates a new environment for version v1 of a java application named my-app:
+    #
+    #   resp = client.create_environment({
+    #     application_name: "my-app", 
+    #     cname_prefix: "my-app", 
+    #     environment_name: "my-env", 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     version_label: "v1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_name: "my-app", 
+    #     cname: "my-app.elasticbeanstalk.com", 
+    #     date_created: Time.parse("2015-02-03T23:04:54.479Z"), 
+    #     date_updated: Time.parse("2015-02-03T23:04:54.479Z"), 
+    #     environment_id: "e-izqpassy4h", 
+    #     environment_name: "my-env", 
+    #     health: "Grey", 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     status: "Launching", 
+    #     tier: {
+    #       name: "WebServer", 
+    #       type: "Standard", 
+    #       version: " ", 
+    #     }, 
+    #     version_label: "v1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -912,6 +1042,19 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::CreateStorageLocationResultMessage#s3_bucket #s3_bucket} => String
     #
+    #
+    # @example Example: To create a new environment for an application
+    #
+    #   # The following operation creates a new environment for version v1 of a java application named my-app:
+    #
+    #   resp = client.create_storage_location({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     s3_bucket: "elasticbeanstalk-us-west-2-0123456789012", 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.s3_bucket #=> String
@@ -941,6 +1084,15 @@ module Aws::ElasticBeanstalk
     #   deleting the application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an application
+    #
+    #   # The following operation deletes an application named my-app:
+    #
+    #   resp = client.delete_application({
+    #     application_name: "my-app", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -978,6 +1130,17 @@ module Aws::ElasticBeanstalk
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an application version
+    #
+    #   # The following operation deletes an application version named 22a0-stage-150819_182129 for an application named my-app:
+    #
+    #   resp = client.delete_application_version({
+    #     application_name: "my-app", 
+    #     delete_source_bundle: true, 
+    #     version_label: "22a0-stage-150819_182129", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_application_version({
@@ -1011,6 +1174,16 @@ module Aws::ElasticBeanstalk
     #   The name of the configuration template to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a configuration template
+    #
+    #   # The following operation deletes a configuration template named my-template for an application named my-app:
+    #
+    #   resp = client.delete_configuration_template({
+    #     application_name: "my-app", 
+    #     template_name: "my-template", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1046,6 +1219,16 @@ module Aws::ElasticBeanstalk
     #   The name of the environment to delete the draft configuration from.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a draft configuration
+    #
+    #   # The following operation deletes a draft configuration for an environment named my-env:
+    #
+    #   resp = client.delete_environment_configuration({
+    #     application_name: "my-app", 
+    #     environment_name: "my-env", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1121,6 +1304,46 @@ module Aws::ElasticBeanstalk
     #   * {Types::ApplicationVersionDescriptionsMessage#application_versions #application_versions} => Array&lt;Types::ApplicationVersionDescription&gt;
     #   * {Types::ApplicationVersionDescriptionsMessage#next_token #next_token} => String
     #
+    #
+    # @example Example: To view information about an application version
+    #
+    #   # The following operation retrieves information about an application version labeled v2:
+    #
+    #   resp = client.describe_application_versions({
+    #     application_name: "my-app", 
+    #     version_labels: [
+    #       "v2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_versions: [
+    #       {
+    #         application_name: "my-app", 
+    #         date_created: Time.parse("2015-07-23T01:32:26.079Z"), 
+    #         date_updated: Time.parse("2015-07-23T01:32:26.079Z"), 
+    #         description: "update cover page", 
+    #         source_bundle: {
+    #           s3_bucket: "elasticbeanstalk-us-west-2-015321684451", 
+    #           s3_key: "my-app/5026-stage-150723_224258.war", 
+    #         }, 
+    #         version_label: "v2", 
+    #       }, 
+    #       {
+    #         application_name: "my-app", 
+    #         date_created: Time.parse("2015-07-23T22:26:10.816Z"), 
+    #         date_updated: Time.parse("2015-07-23T22:26:10.816Z"), 
+    #         description: "initial version", 
+    #         source_bundle: {
+    #           s3_bucket: "elasticbeanstalk-us-west-2-015321684451", 
+    #           s3_key: "my-app/5026-stage-150723_222618.war", 
+    #         }, 
+    #         version_label: "v1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_application_versions({
@@ -1165,6 +1388,52 @@ module Aws::ElasticBeanstalk
     # @return [Types::ApplicationDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationDescriptionsMessage#applications #applications} => Array&lt;Types::ApplicationDescription&gt;
+    #
+    #
+    # @example Example: To view a list of applications
+    #
+    #   # The following operation retrieves information about applications in the current region:
+    #
+    #   resp = client.describe_applications({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     applications: [
+    #       {
+    #         application_name: "ruby", 
+    #         configuration_templates: [
+    #         ], 
+    #         date_created: Time.parse("2015-08-13T21:05:44.376Z"), 
+    #         date_updated: Time.parse("2015-08-13T21:05:44.376Z"), 
+    #         versions: [
+    #           "Sample Application", 
+    #         ], 
+    #       }, 
+    #       {
+    #         application_name: "pythonsample", 
+    #         configuration_templates: [
+    #         ], 
+    #         date_created: Time.parse("2015-08-13T19:05:43.637Z"), 
+    #         date_updated: Time.parse("2015-08-13T19:05:43.637Z"), 
+    #         description: "Application created from the EB CLI using \"eb init\"", 
+    #         versions: [
+    #           "Sample Application", 
+    #         ], 
+    #       }, 
+    #       {
+    #         application_name: "nodejs-example", 
+    #         configuration_templates: [
+    #         ], 
+    #         date_created: Time.parse("2015-08-06T17:50:02.486Z"), 
+    #         date_updated: Time.parse("2015-08-06T17:50:02.486Z"), 
+    #         versions: [
+    #           "add elasticache", 
+    #           "First Release", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1236,6 +1505,41 @@ module Aws::ElasticBeanstalk
     #   * {Types::ConfigurationOptionsDescription#solution_stack_name #solution_stack_name} => String
     #   * {Types::ConfigurationOptionsDescription#platform_arn #platform_arn} => String
     #   * {Types::ConfigurationOptionsDescription#options #options} => Array&lt;Types::ConfigurationOptionDescription&gt;
+    #
+    #
+    # @example Example: To view configuration options for an environment
+    #
+    #   # The following operation retrieves descriptions of all available configuration options for an environment named my-env:
+    #
+    #   resp = client.describe_configuration_options({
+    #     application_name: "my-app", 
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     options: [
+    #       {
+    #         change_severity: "NoInterruption", 
+    #         default_value: "30", 
+    #         max_value: 300, 
+    #         min_value: 5, 
+    #         name: "Interval", 
+    #         namespace: "aws:elb:healthcheck", 
+    #         user_defined: false, 
+    #         value_type: "Scalar", 
+    #       }, 
+    #       {
+    #         change_severity: "NoInterruption", 
+    #         default_value: "2000000", 
+    #         min_value: 0, 
+    #         name: "LowerThreshold", 
+    #         namespace: "aws:autoscaling:trigger", 
+    #         user_defined: false, 
+    #         value_type: "Scalar", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1322,6 +1626,57 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::ConfigurationSettingsDescriptions#configuration_settings #configuration_settings} => Array&lt;Types::ConfigurationSettingsDescription&gt;
     #
+    #
+    # @example Example: To view configurations settings for an environment
+    #
+    #   # The following operation retrieves configuration settings for an environment named my-env:
+    #
+    #   resp = client.describe_configuration_settings({
+    #     application_name: "my-app", 
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_settings: [
+    #       {
+    #         application_name: "my-app", 
+    #         date_created: Time.parse("2015-08-13T19:16:25Z"), 
+    #         date_updated: Time.parse("2015-08-13T23:30:07Z"), 
+    #         deployment_status: "deployed", 
+    #         description: "Environment created from the EB CLI using \"eb create\"", 
+    #         environment_name: "my-env", 
+    #         option_settings: [
+    #           {
+    #             namespace: "aws:autoscaling:asg", 
+    #             option_name: "Availability Zones", 
+    #             resource_name: "AWSEBAutoScalingGroup", 
+    #             value: "Any", 
+    #           }, 
+    #           {
+    #             namespace: "aws:autoscaling:asg", 
+    #             option_name: "Cooldown", 
+    #             resource_name: "AWSEBAutoScalingGroup", 
+    #             value: "360", 
+    #           }, 
+    #           {
+    #             namespace: "aws:elb:policies", 
+    #             option_name: "ConnectionDrainingTimeout", 
+    #             resource_name: "AWSEBLoadBalancer", 
+    #             value: "20", 
+    #           }, 
+    #           {
+    #             namespace: "aws:elb:policies", 
+    #             option_name: "ConnectionSettingIdleTimeout", 
+    #             resource_name: "AWSEBLoadBalancer", 
+    #             value: "60", 
+    #           }, 
+    #         ], 
+    #         solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_configuration_settings({
@@ -1386,6 +1741,58 @@ module Aws::ElasticBeanstalk
     #   * {Types::DescribeEnvironmentHealthResult#application_metrics #application_metrics} => Types::ApplicationMetrics
     #   * {Types::DescribeEnvironmentHealthResult#instances_health #instances_health} => Types::InstanceHealthSummary
     #   * {Types::DescribeEnvironmentHealthResult#refreshed_at #refreshed_at} => Time
+    #
+    #
+    # @example Example: To view environment health
+    #
+    #   # The following operation retrieves overall health information for an environment named my-env:
+    #
+    #   resp = client.describe_environment_health({
+    #     attribute_names: [
+    #       "All", 
+    #     ], 
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_metrics: {
+    #       duration: 10, 
+    #       latency: {
+    #         p10: 0.001, 
+    #         p50: 0.001, 
+    #         p75: 0.002, 
+    #         p85: 0.003, 
+    #         p90: 0.003, 
+    #         p95: 0.004, 
+    #         p99: 0.004, 
+    #         p999: 0.004, 
+    #       }, 
+    #       request_count: 45, 
+    #       status_codes: {
+    #         status_2xx: 45, 
+    #         status_3xx: 0, 
+    #         status_4xx: 0, 
+    #         status_5xx: 0, 
+    #       }, 
+    #     }, 
+    #     causes: [
+    #     ], 
+    #     color: "Green", 
+    #     environment_name: "my-env", 
+    #     health_status: "Ok", 
+    #     instances_health: {
+    #       degraded: 0, 
+    #       info: 0, 
+    #       no_data: 0, 
+    #       ok: 1, 
+    #       pending: 0, 
+    #       severe: 0, 
+    #       unknown: 0, 
+    #       warning: 0, 
+    #     }, 
+    #     refreshed_at: Time.parse("2015-08-20T21:09:18Z"), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1547,6 +1954,46 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::EnvironmentResourceDescriptionsMessage#environment_resources #environment_resources} => Types::EnvironmentResourceDescription
     #
+    #
+    # @example Example: To view information about the AWS resources in your environment
+    #
+    #   # The following operation retrieves information about resources in an environment named my-env:
+    #
+    #   resp = client.describe_environment_resources({
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environment_resources: {
+    #       auto_scaling_groups: [
+    #         {
+    #           name: "awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingGroup-QSB2ZO88SXZT", 
+    #         }, 
+    #       ], 
+    #       environment_name: "my-env", 
+    #       instances: [
+    #         {
+    #           id: "i-0c91c786", 
+    #         }, 
+    #       ], 
+    #       launch_configurations: [
+    #         {
+    #           name: "awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingLaunchConfiguration-1UUVQIBC96TQ2", 
+    #         }, 
+    #       ], 
+    #       load_balancers: [
+    #         {
+    #           name: "awseb-e-q-AWSEBLoa-1EEPZ0K98BIF0", 
+    #         }, 
+    #       ], 
+    #       queues: [
+    #       ], 
+    #       triggers: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_environment_resources({
@@ -1615,6 +2062,42 @@ module Aws::ElasticBeanstalk
     # @return [Types::EnvironmentDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnvironmentDescriptionsMessage#environments #environments} => Array&lt;Types::EnvironmentDescription&gt;
+    #
+    #
+    # @example Example: To view information about an environment
+    #
+    #   # The following operation retrieves information about an environment named my-env:
+    #
+    #   resp = client.describe_environments({
+    #     environment_names: [
+    #       "my-env", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environments: [
+    #       {
+    #         abortable_operation_in_progress: false, 
+    #         application_name: "my-app", 
+    #         cname: "my-env.elasticbeanstalk.com", 
+    #         date_created: Time.parse("2015-08-07T20:48:49.599Z"), 
+    #         date_updated: Time.parse("2015-08-12T18:16:55.019Z"), 
+    #         endpoint_url: "awseb-e-w-AWSEBLoa-1483140XB0Q4L-109QXY8121.us-west-2.elb.amazonaws.com", 
+    #         environment_id: "e-rpqsewtp2j", 
+    #         environment_name: "my-env", 
+    #         health: "Green", 
+    #         solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #         status: "Ready", 
+    #         tier: {
+    #           name: "WebServer", 
+    #           type: "Standard", 
+    #           version: " ", 
+    #         }, 
+    #         version_label: "7f58-stage-150812_025409", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1729,6 +2212,52 @@ module Aws::ElasticBeanstalk
     #   * {Types::EventDescriptionsMessage#events #events} => Array&lt;Types::EventDescription&gt;
     #   * {Types::EventDescriptionsMessage#next_token #next_token} => String
     #
+    #
+    # @example Example: To view events for an environment
+    #
+    #   # The following operation retrieves events for an environment named my-env:
+    #
+    #   resp = client.describe_events({
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     events: [
+    #       {
+    #         application_name: "my-app", 
+    #         environment_name: "my-env", 
+    #         event_date: Time.parse("2015-08-20T07:06:53.535Z"), 
+    #         message: "Environment health has transitioned from Info to Ok.", 
+    #         severity: "INFO", 
+    #       }, 
+    #       {
+    #         application_name: "my-app", 
+    #         environment_name: "my-env", 
+    #         event_date: Time.parse("2015-08-20T07:06:02.049Z"), 
+    #         message: "Environment update completed successfully.", 
+    #         request_id: "b7f3960b-4709-11e5-ba1e-07e16200da41", 
+    #         severity: "INFO", 
+    #       }, 
+    #       {
+    #         application_name: "my-app", 
+    #         environment_name: "my-env", 
+    #         event_date: Time.parse("2015-08-13T19:16:27.561Z"), 
+    #         message: "Using elasticbeanstalk-us-west-2-012445113685 as Amazon S3 storage bucket for environment data.", 
+    #         request_id: "ca8dfbf6-41ef-11e5-988b-651aa638f46b", 
+    #         severity: "INFO", 
+    #       }, 
+    #       {
+    #         application_name: "my-app", 
+    #         environment_name: "my-env", 
+    #         event_date: Time.parse("2015-08-13T19:16:26.581Z"), 
+    #         message: "createEnvironment is starting.", 
+    #         request_id: "cdfba8f6-41ef-11e5-988b-65638f41aa6b", 
+    #         severity: "INFO", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -1796,6 +2325,69 @@ module Aws::ElasticBeanstalk
     #   * {Types::DescribeInstancesHealthResult#instance_health_list #instance_health_list} => Array&lt;Types::SingleInstanceHealth&gt;
     #   * {Types::DescribeInstancesHealthResult#refreshed_at #refreshed_at} => Time
     #   * {Types::DescribeInstancesHealthResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To view environment health
+    #
+    #   # The following operation retrieves health information for instances in an environment named my-env:
+    #
+    #   resp = client.describe_instances_health({
+    #     attribute_names: [
+    #       "All", 
+    #     ], 
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_health_list: [
+    #       {
+    #         application_metrics: {
+    #           duration: 10, 
+    #           latency: {
+    #             p10: 0, 
+    #             p50: 0.001, 
+    #             p75: 0.002, 
+    #             p85: 0.003, 
+    #             p90: 0.004, 
+    #             p95: 0.005, 
+    #             p99: 0.006, 
+    #             p999: 0.006, 
+    #           }, 
+    #           request_count: 48, 
+    #           status_codes: {
+    #             status_2xx: 47, 
+    #             status_3xx: 0, 
+    #             status_4xx: 1, 
+    #             status_5xx: 0, 
+    #           }, 
+    #         }, 
+    #         causes: [
+    #         ], 
+    #         color: "Green", 
+    #         health_status: "Ok", 
+    #         instance_id: "i-08691cc7", 
+    #         launched_at: Time.parse("2015-08-13T19:17:09Z"), 
+    #         system: {
+    #           cpu_utilization: {
+    #             io_wait: 0.2, 
+    #             irq: 0, 
+    #             idle: 97.8, 
+    #             nice: 0.1, 
+    #             soft_irq: 0.1, 
+    #             system: 0.3, 
+    #             user: 1.5, 
+    #           }, 
+    #           load_average: [
+    #             0, 
+    #             0.02, 
+    #             0.05, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     refreshed_at: Time.parse("2015-08-20T21:09:08Z"), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1917,6 +2509,56 @@ module Aws::ElasticBeanstalk
     #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stacks #solution_stacks} => Array&lt;String&gt;
     #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stack_details #solution_stack_details} => Array&lt;Types::SolutionStackDescription&gt;
     #
+    #
+    # @example Example: To view solution stacks
+    #
+    #   # The following operation lists solution stacks for all currently available platform configurations and any that you have used in the past:
+    #
+    #   resp = client.list_available_solution_stacks({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     solution_stack_details: [
+    #       {
+    #         permitted_file_types: [
+    #           "zip", 
+    #         ], 
+    #         solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Node.js", 
+    #       }, 
+    #     ], 
+    #     solution_stacks: [
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Node.js", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.6", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.5", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.4", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Python 3.4", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Python 2.7", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Python", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Puma)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Passenger Standalone)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Puma)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Passenger Standalone)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Puma)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Passenger Standalone)", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 1.9.3", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 7", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 6", 
+    #       "64bit Windows Server Core 2012 R2 running IIS 8.5", 
+    #       "64bit Windows Server 2012 R2 running IIS 8.5", 
+    #       "64bit Windows Server 2012 running IIS 8", 
+    #       "64bit Windows Server 2008 R2 running IIS 7.5", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Docker 1.6.2", 
+    #       "64bit Amazon Linux 2015.03 v2.0.0 running Multi-container Docker 1.6.2 (Generic)", 
+    #       "64bit Debian jessie v2.0.0 running GlassFish 4.1 Java 8 (Preconfigured - Docker)", 
+    #       "64bit Debian jessie v2.0.0 running GlassFish 4.0 Java 7 (Preconfigured - Docker)", 
+    #       "64bit Debian jessie v2.0.0 running Go 1.4 (Preconfigured - Docker)", 
+    #       "64bit Debian jessie v2.0.0 running Go 1.3 (Preconfigured - Docker)", 
+    #       "64bit Debian jessie v2.0.0 running Python 3.4 (Preconfigured - Docker)", 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.solution_stacks #=> Array
@@ -2011,6 +2653,15 @@ module Aws::ElasticBeanstalk
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To rebuild an environment
+    #
+    #   # The following operation terminates and recreates the resources in an environment named my-env:
+    #
+    #   resp = client.rebuild_environment({
+    #     environment_name: "my-env", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.rebuild_environment({
@@ -2071,6 +2722,16 @@ module Aws::ElasticBeanstalk
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To request tailed logs
+    #
+    #   # The following operation requests logs from an environment named my-env:
+    #
+    #   resp = client.request_environment_info({
+    #     environment_name: "my-env", 
+    #     info_type: "tail", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.request_environment_info({
@@ -2106,6 +2767,15 @@ module Aws::ElasticBeanstalk
     #   `MissingRequiredParameter` error.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To restart application servers
+    #
+    #   # The following operation restarts application servers on all instances in an environment named my-env:
+    #
+    #   resp = client.restart_app_server({
+    #     environment_name: "my-env", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2158,6 +2828,28 @@ module Aws::ElasticBeanstalk
     # @return [Types::RetrieveEnvironmentInfoResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetrieveEnvironmentInfoResultMessage#environment_info #environment_info} => Array&lt;Types::EnvironmentInfoDescription&gt;
+    #
+    #
+    # @example Example: To retrieve tailed logs
+    #
+    #   # The following operation retrieves a link to logs from an environment named my-env:
+    #
+    #   resp = client.retrieve_environment_info({
+    #     environment_name: "my-env", 
+    #     info_type: "tail", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environment_info: [
+    #       {
+    #         ec2_instance_id: "i-09c1c867", 
+    #         info_type: "tail", 
+    #         message: "https://elasticbeanstalk-us-west-2-0123456789012.s3.amazonaws.com/resources/environments/logs/tail/e-fyqyju3yjs/i-09c1c867/TailLogs-1440109397703.out?AWSAccessKeyId=AKGPT4J56IAJ2EUBL5CQ&Expires=1440195891&Signature=n%2BEalOV6A2HIOx4Rcfb7LT16bBM%3D", 
+    #         sample_timestamp: Time.parse("2015-08-20T22:23:17.703Z"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2218,6 +2910,16 @@ module Aws::ElasticBeanstalk
     #   `DestinationEnvironmentName`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To swap environment CNAMES
+    #
+    #   # The following operation swaps the assigned subdomains of two environments:
+    #
+    #   resp = client.swap_environment_cnames({
+    #     destination_environment_name: "my-env-green", 
+    #     source_environment_name: "my-env-blue", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2300,6 +3002,35 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
     #
+    #
+    # @example Example: To terminate an environment
+    #
+    #   # The following operation terminates an Elastic Beanstalk environment named my-env:
+    #
+    #   resp = client.terminate_environment({
+    #     environment_name: "my-env", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     abortable_operation_in_progress: false, 
+    #     application_name: "my-app", 
+    #     cname: "my-env.elasticbeanstalk.com", 
+    #     date_created: Time.parse("2015-08-12T18:52:53.622Z"), 
+    #     date_updated: Time.parse("2015-08-12T19:05:54.744Z"), 
+    #     endpoint_url: "awseb-e-f-AWSEBLoa-1I9XUMP4-8492WNUP202574.us-west-2.elb.amazonaws.com", 
+    #     environment_id: "e-fh2eravpns", 
+    #     environment_name: "my-env", 
+    #     health: "Grey", 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     status: "Terminating", 
+    #     tier: {
+    #       name: "WebServer", 
+    #       type: "Standard", 
+    #       version: " ", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_environment({
@@ -2368,6 +3099,35 @@ module Aws::ElasticBeanstalk
     # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
+    #
+    #
+    # @example Example: To change an application's description
+    #
+    #   # The following operation updates the description of an application named my-app:
+    #
+    #   resp = client.update_application({
+    #     application_name: "my-app", 
+    #     description: "my Elastic Beanstalk application", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application: {
+    #       application_name: "my-app", 
+    #       configuration_templates: [
+    #       ], 
+    #       date_created: Time.parse("2015-08-13T19:15:50.449Z"), 
+    #       date_updated: Time.parse("2015-08-20T22:34:56.195Z"), 
+    #       description: "my Elastic Beanstalk application", 
+    #       versions: [
+    #         "2fba-stage-150819_234450", 
+    #         "bf07-stage-150820_214945", 
+    #         "93f8", 
+    #         "fd7c-stage-150820_000431", 
+    #         "22a0-stage-150819_185942", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2484,6 +3244,32 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::ApplicationVersionDescriptionMessage#application_version #application_version} => Types::ApplicationVersionDescription
     #
+    #
+    # @example Example: To change an application version's description
+    #
+    #   # The following operation updates the description of an application version named 22a0-stage-150819_185942:
+    #
+    #   resp = client.update_application_version({
+    #     application_name: "my-app", 
+    #     description: "new description", 
+    #     version_label: "22a0-stage-150819_185942", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_version: {
+    #       application_name: "my-app", 
+    #       date_created: Time.parse("2015-08-19T18:59:17.646Z"), 
+    #       date_updated: Time.parse("2015-08-20T22:53:28.871Z"), 
+    #       description: "new description", 
+    #       source_bundle: {
+    #         s3_bucket: "elasticbeanstalk-us-west-2-0123456789012", 
+    #         s3_key: "my-app/22a0-stage-150819_185942.war", 
+    #       }, 
+    #       version_label: "22a0-stage-150819_185942", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_application_version({
@@ -2570,6 +3356,31 @@ module Aws::ElasticBeanstalk
     #   * {Types::ConfigurationSettingsDescription#date_created #date_created} => Time
     #   * {Types::ConfigurationSettingsDescription#date_updated #date_updated} => Time
     #   * {Types::ConfigurationSettingsDescription#option_settings #option_settings} => Array&lt;Types::ConfigurationOptionSetting&gt;
+    #
+    #
+    # @example Example: To update a configuration template
+    #
+    #   # The following operation removes the configured CloudWatch custom health metrics configuration ConfigDocument from a saved configuration template named my-template:
+    #
+    #   resp = client.update_configuration_template({
+    #     application_name: "my-app", 
+    #     options_to_remove: [
+    #       {
+    #         namespace: "aws:elasticbeanstalk:healthreporting:system", 
+    #         option_name: "ConfigDocument", 
+    #       }, 
+    #     ], 
+    #     template_name: "my-template", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_name: "my-app", 
+    #     date_created: Time.parse("2015-08-20T22:39:31Z"), 
+    #     date_updated: Time.parse("2015-08-20T22:43:11Z"), 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     template_name: "my-template", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2725,6 +3536,87 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
     #
+    #
+    # @example Example: To update an environment to a new version
+    #
+    #   # The following operation updates an environment named "my-env" to version "v2" of the application to which it belongs:
+    #
+    #   resp = client.update_environment({
+    #     environment_name: "my-env", 
+    #     version_label: "v2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_name: "my-app", 
+    #     cname: "my-env.elasticbeanstalk.com", 
+    #     date_created: Time.parse("2015-02-03T23:04:54.453Z"), 
+    #     date_updated: Time.parse("2015-02-03T23:12:29.119Z"), 
+    #     endpoint_url: "awseb-e-i-AWSEBLoa-1RDLX6TC9VUAO-0123456789.us-west-2.elb.amazonaws.com", 
+    #     environment_id: "e-szqipays4h", 
+    #     environment_name: "my-env", 
+    #     health: "Grey", 
+    #     solution_stack_name: "64bit Amazon Linux running Tomcat 7", 
+    #     status: "Updating", 
+    #     tier: {
+    #       name: "WebServer", 
+    #       type: "Standard", 
+    #       version: " ", 
+    #     }, 
+    #     version_label: "v2", 
+    #   }
+    #
+    # @example Example: To configure option settings
+    #
+    #   # The following operation configures several options in the aws:elb:loadbalancer namespace:
+    #
+    #   resp = client.update_environment({
+    #     environment_name: "my-env", 
+    #     option_settings: [
+    #       {
+    #         namespace: "aws:elb:healthcheck", 
+    #         option_name: "Interval", 
+    #         value: "15", 
+    #       }, 
+    #       {
+    #         namespace: "aws:elb:healthcheck", 
+    #         option_name: "Timeout", 
+    #         value: "8", 
+    #       }, 
+    #       {
+    #         namespace: "aws:elb:healthcheck", 
+    #         option_name: "HealthyThreshold", 
+    #         value: "2", 
+    #       }, 
+    #       {
+    #         namespace: "aws:elb:healthcheck", 
+    #         option_name: "UnhealthyThreshold", 
+    #         value: "3", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     abortable_operation_in_progress: true, 
+    #     application_name: "my-app", 
+    #     cname: "my-env.elasticbeanstalk.com", 
+    #     date_created: Time.parse("2015-08-07T20:48:49.599Z"), 
+    #     date_updated: Time.parse("2015-08-12T18:15:23.804Z"), 
+    #     endpoint_url: "awseb-e-w-AWSEBLoa-14XB83101Q4L-104QXY80921.sa-east-1.elb.amazonaws.com", 
+    #     environment_id: "e-wtp2rpqsej", 
+    #     environment_name: "my-env", 
+    #     health: "Grey", 
+    #     solution_stack_name: "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8", 
+    #     status: "Updating", 
+    #     tier: {
+    #       name: "WebServer", 
+    #       type: "Standard", 
+    #       version: " ", 
+    #     }, 
+    #     version_label: "7f58-stage-150812_025409", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment({
@@ -2828,6 +3720,29 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::ConfigurationSettingsValidationMessages#messages #messages} => Array&lt;Types::ValidationMessage&gt;
     #
+    #
+    # @example Example: To validate configuration settings
+    #
+    #   # The following operation validates a CloudWatch custom metrics config document:
+    #
+    #   resp = client.validate_configuration_settings({
+    #     application_name: "my-app", 
+    #     environment_name: "my-env", 
+    #     option_settings: [
+    #       {
+    #         namespace: "aws:elasticbeanstalk:healthreporting:system", 
+    #         option_name: "ConfigDocument", 
+    #         value: "{\"CloudWatchMetrics\": {\"Environment\": {\"ApplicationLatencyP99.9\": null,\"InstancesSevere\": 60,\"ApplicationLatencyP90\": 60,\"ApplicationLatencyP99\": null,\"ApplicationLatencyP95\": 60,\"InstancesUnknown\": 60,\"ApplicationLatencyP85\": 60,\"InstancesInfo\": null,\"ApplicationRequests2xx\": null,\"InstancesDegraded\": null,\"InstancesWarning\": 60,\"ApplicationLatencyP50\": 60,\"ApplicationRequestsTotal\": null,\"InstancesNoData\": null,\"InstancesPending\": 60,\"ApplicationLatencyP10\": null,\"ApplicationRequests5xx\": null,\"ApplicationLatencyP75\": null,\"InstancesOk\": 60,\"ApplicationRequests3xx\": null,\"ApplicationRequests4xx\": null},\"Instance\": {\"ApplicationLatencyP99.9\": null,\"ApplicationLatencyP90\": 60,\"ApplicationLatencyP99\": null,\"ApplicationLatencyP95\": null,\"ApplicationLatencyP85\": null,\"CPUUser\": 60,\"ApplicationRequests2xx\": null,\"CPUIdle\": null,\"ApplicationLatencyP50\": null,\"ApplicationRequestsTotal\": 60,\"RootFilesystemUtil\": null,\"LoadAverage1min\": null,\"CPUIrq\": null,\"CPUNice\": 60,\"CPUIowait\": 60,\"ApplicationLatencyP10\": null,\"LoadAverage5min\": null,\"ApplicationRequests5xx\": null,\"ApplicationLatencyP75\": 60,\"CPUSystem\": 60,\"ApplicationRequests3xx\": 60,\"ApplicationRequests4xx\": null,\"InstanceHealth\": null,\"CPUSoftirq\": 60}},\"Version\": 1}", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     messages: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.validate_configuration_settings({
@@ -2874,7 +3789,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

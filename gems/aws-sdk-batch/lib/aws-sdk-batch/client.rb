@@ -161,6 +161,20 @@ module Aws::Batch
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To cancel a job
+    #
+    #   # This example cancels a job with the specified job ID.
+    #
+    #   resp = client.cancel_job({
+    #     job_id: "1d828f65-7a4d-42e8-996d-3b900ed59dc4", 
+    #     reason: "Cancelling job.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_job({
@@ -230,6 +244,91 @@ module Aws::Batch
     #
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_arn #compute_environment_arn} => String
+    #
+    #
+    # @example Example: To create a managed EC2 compute environment
+    #
+    #   # This example creates a managed compute environment with specific C4 instance types that are launched on demand. The compute environment is called C4OnDemand.
+    #
+    #   resp = client.create_compute_environment({
+    #     type: "MANAGED", 
+    #     compute_environment_name: "C4OnDemand", 
+    #     compute_resources: {
+    #       type: "EC2", 
+    #       desiredv_cpus: 48, 
+    #       ec2_key_pair: "id_rsa", 
+    #       instance_role: "ecsInstanceRole", 
+    #       instance_types: [
+    #         "c4.large", 
+    #         "c4.xlarge", 
+    #         "c4.2xlarge", 
+    #         "c4.4xlarge", 
+    #         "c4.8xlarge", 
+    #       ], 
+    #       maxv_cpus: 128, 
+    #       minv_cpus: 0, 
+    #       security_group_ids: [
+    #         "sg-cf5093b2", 
+    #       ], 
+    #       subnets: [
+    #         "subnet-220c0e0a", 
+    #         "subnet-1a95556d", 
+    #         "subnet-978f6dce", 
+    #       ], 
+    #       tags: {
+    #         "Name" => "Batch Instance - C4OnDemand", 
+    #       }, 
+    #     }, 
+    #     service_role: "arn:aws:iam::012345678910:role/AWSBatchServiceRole", 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:012345678910:compute-environment/C4OnDemand", 
+    #     compute_environment_name: "C4OnDemand", 
+    #   }
+    #
+    # @example Example: To create a managed EC2 Spot compute environment
+    #
+    #   # This example creates a managed compute environment with the M4 instance type that is launched when the Spot bid price is at or below 20% of the On-Demand price for the instance type. The compute environment is called M4Spot.
+    #
+    #   resp = client.create_compute_environment({
+    #     type: "MANAGED", 
+    #     compute_environment_name: "M4Spot", 
+    #     compute_resources: {
+    #       type: "SPOT", 
+    #       bid_percentage: 20, 
+    #       desiredv_cpus: 4, 
+    #       ec2_key_pair: "id_rsa", 
+    #       instance_role: "ecsInstanceRole", 
+    #       instance_types: [
+    #         "m4", 
+    #       ], 
+    #       maxv_cpus: 128, 
+    #       minv_cpus: 0, 
+    #       security_group_ids: [
+    #         "sg-cf5093b2", 
+    #       ], 
+    #       spot_iam_fleet_role: "arn:aws:iam::012345678910:role/aws-ec2-spot-fleet-role", 
+    #       subnets: [
+    #         "subnet-220c0e0a", 
+    #         "subnet-1a95556d", 
+    #         "subnet-978f6dce", 
+    #       ], 
+    #       tags: {
+    #         "Name" => "Batch Instance - M4Spot", 
+    #       }, 
+    #     }, 
+    #     service_role: "arn:aws:iam::012345678910:role/AWSBatchServiceRole", 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:012345678910:compute-environment/M4Spot", 
+    #     compute_environment_name: "M4Spot", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -309,6 +408,55 @@ module Aws::Batch
     #   * {Types::CreateJobQueueResponse#job_queue_name #job_queue_name} => String
     #   * {Types::CreateJobQueueResponse#job_queue_arn #job_queue_arn} => String
     #
+    #
+    # @example Example: To create a job queue with a single compute environment
+    #
+    #   # This example creates a job queue called LowPriority that uses the M4Spot compute environment.
+    #
+    #   resp = client.create_job_queue({
+    #     compute_environment_order: [
+    #       {
+    #         compute_environment: "M4Spot", 
+    #         order: 1, 
+    #       }, 
+    #     ], 
+    #     job_queue_name: "LowPriority", 
+    #     priority: 10, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queue_arn: "arn:aws:batch:us-east-1:012345678910:job-queue/LowPriority", 
+    #     job_queue_name: "LowPriority", 
+    #   }
+    #
+    # @example Example: To create a job queue with multiple compute environments
+    #
+    #   # This example creates a job queue called HighPriority that uses the C4OnDemand compute environment with an order of 1 and the M4Spot compute environment with an order of 2.
+    #
+    #   resp = client.create_job_queue({
+    #     compute_environment_order: [
+    #       {
+    #         compute_environment: "C4OnDemand", 
+    #         order: 1, 
+    #       }, 
+    #       {
+    #         compute_environment: "M4Spot", 
+    #         order: 2, 
+    #       }, 
+    #     ], 
+    #     job_queue_name: "HighPriority", 
+    #     priority: 1, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queue_arn: "arn:aws:batch:us-east-1:012345678910:job-queue/HighPriority", 
+    #     job_queue_name: "HighPriority", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job_queue({
@@ -350,6 +498,19 @@ module Aws::Batch
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a compute environment
+    #
+    #   # This example deletes the P2OnDemand compute environment.
+    #
+    #   resp = client.delete_compute_environment({
+    #     compute_environment: "P2OnDemand", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_compute_environment({
@@ -378,6 +539,19 @@ module Aws::Batch
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a job queue
+    #
+    #   # This example deletes the GPGPU job queue.
+    #
+    #   resp = client.delete_job_queue({
+    #     job_queue: "GPGPU", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_job_queue({
@@ -400,6 +574,19 @@ module Aws::Batch
     #   (ARN) of the job definition to deregister.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To deregister a job definition
+    #
+    #   # This example deregisters a job definition called sleep10.
+    #
+    #   resp = client.deregister_job_definition({
+    #     job_definition: "sleep10", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -455,6 +642,55 @@ module Aws::Batch
     #
     #   * {Types::DescribeComputeEnvironmentsResponse#compute_environments #compute_environments} => Array&lt;Types::ComputeEnvironmentDetail&gt;
     #   * {Types::DescribeComputeEnvironmentsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe a compute environment
+    #
+    #   # This example describes the P2OnDemand compute environment.
+    #
+    #   resp = client.describe_compute_environments({
+    #     compute_environments: [
+    #       "P2OnDemand", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environments: [
+    #       {
+    #         type: "MANAGED", 
+    #         compute_environment_arn: "arn:aws:batch:us-east-1:012345678910:compute-environment/P2OnDemand", 
+    #         compute_environment_name: "P2OnDemand", 
+    #         compute_resources: {
+    #           type: "EC2", 
+    #           desiredv_cpus: 48, 
+    #           ec2_key_pair: "id_rsa", 
+    #           instance_role: "ecsInstanceRole", 
+    #           instance_types: [
+    #             "p2", 
+    #           ], 
+    #           maxv_cpus: 128, 
+    #           minv_cpus: 0, 
+    #           security_group_ids: [
+    #             "sg-cf5093b2", 
+    #           ], 
+    #           subnets: [
+    #             "subnet-220c0e0a", 
+    #             "subnet-1a95556d", 
+    #             "subnet-978f6dce", 
+    #           ], 
+    #           tags: {
+    #             "Name" => "Batch Instance - P2OnDemand", 
+    #           }, 
+    #         }, 
+    #         ecs_cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/P2OnDemand_Batch_2c06f29d-d1fe-3a49-879d-42394c86effc", 
+    #         service_role: "arn:aws:iam::012345678910:role/AWSBatchServiceRole", 
+    #         state: "ENABLED", 
+    #         status: "VALID", 
+    #         status_reason: "ComputeEnvironment Healthy", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -545,6 +781,45 @@ module Aws::Batch
     #   * {Types::DescribeJobDefinitionsResponse#job_definitions #job_definitions} => Array&lt;Types::JobDefinition&gt;
     #   * {Types::DescribeJobDefinitionsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe active job definitions
+    #
+    #   # This example describes all of your active job definitions.
+    #
+    #   resp = client.describe_job_definitions({
+    #     status: "ACTIVE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definitions: [
+    #       {
+    #         type: "container", 
+    #         container_properties: {
+    #           command: [
+    #             "sleep", 
+    #             "60", 
+    #           ], 
+    #           environment: [
+    #           ], 
+    #           image: "busybox", 
+    #           memory: 128, 
+    #           mount_points: [
+    #           ], 
+    #           ulimits: [
+    #           ], 
+    #           vcpus: 1, 
+    #           volumes: [
+    #           ], 
+    #         }, 
+    #         job_definition_arn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep60:1", 
+    #         job_definition_name: "sleep60", 
+    #         revision: 1, 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_definitions({
@@ -634,6 +909,37 @@ module Aws::Batch
     #   * {Types::DescribeJobQueuesResponse#job_queues #job_queues} => Array&lt;Types::JobQueueDetail&gt;
     #   * {Types::DescribeJobQueuesResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe a job queue
+    #
+    #   # This example describes the HighPriority job queue.
+    #
+    #   resp = client.describe_job_queues({
+    #     job_queues: [
+    #       "HighPriority", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queues: [
+    #       {
+    #         compute_environment_order: [
+    #           {
+    #             compute_environment: "arn:aws:batch:us-east-1:012345678910:compute-environment/C4OnDemand", 
+    #             order: 1, 
+    #           }, 
+    #         ], 
+    #         job_queue_arn: "arn:aws:batch:us-east-1:012345678910:job-queue/HighPriority", 
+    #         job_queue_name: "HighPriority", 
+    #         priority: 1, 
+    #         state: "ENABLED", 
+    #         status: "VALID", 
+    #         status_reason: "JobQueue Healthy", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_queues({
@@ -673,6 +979,56 @@ module Aws::Batch
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeJobsResponse#jobs #jobs} => Array&lt;Types::JobDetail&gt;
+    #
+    #
+    # @example Example: To describe a specific job
+    #
+    #   # This example describes a job with the specified job ID.
+    #
+    #   resp = client.describe_jobs({
+    #     jobs: [
+    #       "24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     jobs: [
+    #       {
+    #         container: {
+    #           command: [
+    #             "sleep", 
+    #             "60", 
+    #           ], 
+    #           container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/5406d7cd-58bd-4b8f-9936-48d7c6b1526c", 
+    #           environment: [
+    #           ], 
+    #           exit_code: 0, 
+    #           image: "busybox", 
+    #           memory: 128, 
+    #           mount_points: [
+    #           ], 
+    #           ulimits: [
+    #           ], 
+    #           vcpus: 1, 
+    #           volumes: [
+    #           ], 
+    #         }, 
+    #         created_at: 1480460782010, 
+    #         depends_on: [
+    #         ], 
+    #         job_definition: "sleep60", 
+    #         job_id: "24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9", 
+    #         job_name: "example", 
+    #         job_queue: "arn:aws:batch:us-east-1:012345678910:job-queue/HighPriority", 
+    #         parameters: {
+    #         }, 
+    #         started_at: 1480460816500, 
+    #         status: "SUCCEEDED", 
+    #         stopped_at: 1480460880699, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -780,6 +1136,44 @@ module Aws::Batch
     #   * {Types::ListJobsResponse#job_summary_list #job_summary_list} => Array&lt;Types::JobSummary&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To list running jobs
+    #
+    #   # This example lists the running jobs in the HighPriority job queue.
+    #
+    #   resp = client.list_jobs({
+    #     job_queue: "HighPriority", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_summary_list: [
+    #       {
+    #         job_id: "e66ff5fd-a1ff-4640-b1a2-0b0a142f49bb", 
+    #         job_name: "example", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list submitted jobs
+    #
+    #   # This example lists jobs in the HighPriority job queue that are in the SUBMITTED job status.
+    #
+    #   resp = client.list_jobs({
+    #     job_queue: "HighPriority", 
+    #     job_status: "SUBMITTED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_summary_list: [
+    #       {
+    #         job_id: "68f0c163-fbd4-44e6-9fd1-25b14a434786", 
+    #         job_name: "example", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
@@ -833,6 +1227,32 @@ module Aws::Batch
     #   * {Types::RegisterJobDefinitionResponse#job_definition_name #job_definition_name} => String
     #   * {Types::RegisterJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
     #   * {Types::RegisterJobDefinitionResponse#revision #revision} => Integer
+    #
+    #
+    # @example Example: To register a job definition
+    #
+    #   # This example registers a job definition for a simple container job.
+    #
+    #   resp = client.register_job_definition({
+    #     type: "container", 
+    #     container_properties: {
+    #       command: [
+    #         "sleep", 
+    #         "10", 
+    #       ], 
+    #       image: "busybox", 
+    #       memory: 128, 
+    #       vcpus: 1, 
+    #     }, 
+    #     job_definition_name: "sleep10", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definition_arn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1", 
+    #     job_definition_name: "sleep10", 
+    #     revision: 1, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -948,6 +1368,23 @@ module Aws::Batch
     #   * {Types::SubmitJobResponse#job_name #job_name} => String
     #   * {Types::SubmitJobResponse#job_id #job_id} => String
     #
+    #
+    # @example Example: To submit a job to a queue
+    #
+    #   # This example submits a simple container job called example to the HighPriority job queue.
+    #
+    #   resp = client.submit_job({
+    #     job_definition: "sleep60", 
+    #     job_name: "example", 
+    #     job_queue: "HighPriority", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "876da822-4198-45f2-a252-6cea32512ea8", 
+    #     job_name: "example", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.submit_job({
@@ -1007,6 +1444,20 @@ module Aws::Batch
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To terminate a job
+    #
+    #   # This example terminates a job with the specified job ID.
+    #
+    #   resp = client.terminate_job({
+    #     job_id: "61e743ed-35e4-48da-b2de-5c8333821c84", 
+    #     reason: "Terminating job.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_job({
@@ -1047,6 +1498,22 @@ module Aws::Batch
     #
     #   * {Types::UpdateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
     #   * {Types::UpdateComputeEnvironmentResponse#compute_environment_arn #compute_environment_arn} => String
+    #
+    #
+    # @example Example: To update a compute environment
+    #
+    #   # This example disables the P2OnDemand compute environment so it can be deleted.
+    #
+    #   resp = client.update_compute_environment({
+    #     compute_environment: "P2OnDemand", 
+    #     state: "DISABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:012345678910:compute-environment/P2OnDemand", 
+    #     compute_environment_name: "P2OnDemand", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1102,6 +1569,22 @@ module Aws::Batch
     #   * {Types::UpdateJobQueueResponse#job_queue_name #job_queue_name} => String
     #   * {Types::UpdateJobQueueResponse#job_queue_arn #job_queue_arn} => String
     #
+    #
+    # @example Example: To update a job queue
+    #
+    #   # This example disables a job queue so that it can be deleted.
+    #
+    #   resp = client.update_job_queue({
+    #     job_queue: "GPGPU", 
+    #     state: "DISABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queue_arn: "arn:aws:batch:us-east-1:012345678910:job-queue/GPGPU", 
+    #     job_queue_name: "GPGPU", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job_queue({
@@ -1143,7 +1626,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

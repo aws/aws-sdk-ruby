@@ -246,6 +246,25 @@ module Aws::Lambda
     #
     #   * {Types::AddPermissionResponse#statement #statement} => String
     #
+    #
+    # @example Example: add-permission
+    #
+    #   # This example adds a permission for an S3 bucket to invoke a Lambda function.
+    #
+    #   resp = client.add_permission({
+    #     action: "lambda:InvokeFunction", 
+    #     function_name: "MyFunction", 
+    #     principal: "s3.amazonaws.com", 
+    #     source_account: "123456789012", 
+    #     source_arn: "arn:aws:s3:::examplebucket/*", 
+    #     statement_id: "ID-1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     statement: "ID-1", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_permission({
@@ -601,6 +620,44 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #
+    #
+    # @example Example: create-function
+    #
+    #   # This example creates a Lambda function.
+    #
+    #   resp = client.create_function({
+    #     code: {
+    #     }, 
+    #     description: "", 
+    #     function_name: "MyFunction", 
+    #     handler: "souce_file.handler_name", # is of the form of the name of your source file and then name of your function handler
+    #     memory_size: 128, 
+    #     publish: true, 
+    #     role: "arn:aws:iam::123456789012:role/service-role/role-name", # replace with the actual arn of the execution role you created
+    #     runtime: "nodejs4.3", 
+    #     timeout: 15, 
+    #     vpc_config: {
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code_sha_256: "", 
+    #     code_size: 123, 
+    #     description: "", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:MyFunction", 
+    #     function_name: "MyFunction", 
+    #     handler: "source_file.handler_name", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/service-role/role-name", 
+    #     runtime: "nodejs4.3", 
+    #     timeout: 123, 
+    #     version: "1", 
+    #     vpc_config: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
@@ -696,6 +753,16 @@ module Aws::Lambda
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a Lambda function alias
+    #
+    #   # This operation deletes a Lambda function alias
+    #
+    #   resp = client.delete_alias({
+    #     function_name: "myFunction", 
+    #     name: "alias", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_alias({
@@ -731,6 +798,27 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #
+    #
+    # @example Example: To delete a Lambda function event source mapping
+    #
+    #   # This operation deletes a Lambda function event source mapping
+    #
+    #   resp = client.delete_event_source_mapping({
+    #     uuid: "12345kxodurf3443", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     batch_size: 123, 
+    #     event_source_arn: "arn:aws:s3:::examplebucket/*", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     last_processing_result: "", 
+    #     state: "", 
+    #     state_transition_reason: "", 
+    #     uuid: "12345kxodurf3443", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -809,6 +897,16 @@ module Aws::Lambda
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a Lambda function
+    #
+    #   # This operation deletes a Lambda function
+    #
+    #   resp = client.delete_function({
+    #     function_name: "myFunction", 
+    #     qualifier: "1", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_function({
@@ -840,6 +938,22 @@ module Aws::Lambda
     #
     #   * {Types::GetAccountSettingsResponse#account_limit #account_limit} => Types::AccountLimit
     #   * {Types::GetAccountSettingsResponse#account_usage #account_usage} => Types::AccountUsage
+    #
+    #
+    # @example Example: To retrieves a Lambda customer's account settings
+    #
+    #   # This operation retrieves a Lambda customer's account settings
+    #
+    #   resp = client.get_account_settings({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_limit: {
+    #     }, 
+    #     account_usage: {
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -886,6 +1000,24 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
     #
+    #
+    # @example Example: To retrieve a Lambda function alias
+    #
+    #   # This operation retrieves a Lambda function alias
+    #
+    #   resp = client.get_alias({
+    #     function_name: "myFunction", 
+    #     name: "myFunctionAlias", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunctionAlias", 
+    #     description: "", 
+    #     function_version: "1", 
+    #     name: "myFunctionAlias", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_alias({
@@ -928,6 +1060,27 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #
+    #
+    # @example Example: To retrieve a Lambda function's event source mapping
+    #
+    #   # This operation retrieves a Lambda function's event source mapping
+    #
+    #   resp = client.get_event_source_mapping({
+    #     uuid: "123489-xxxxx-kdla8d89d7", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     batch_size: 123, 
+    #     event_source_arn: "arn:aws:iam::123456789012:eventsource", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     last_processing_result: "", 
+    #     state: "", 
+    #     state_transition_reason: "", 
+    #     uuid: "123489-xxxxx-kdla8d89d7", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1001,6 +1154,49 @@ module Aws::Lambda
     #   * {Types::GetFunctionResponse#configuration #configuration} => Types::FunctionConfiguration
     #   * {Types::GetFunctionResponse#code #code} => Types::FunctionCodeLocation
     #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To retrieve a Lambda function's event source mapping
+    #
+    #   # This operation retrieves a Lambda function's event source mapping
+    #
+    #   resp = client.get_function({
+    #     function_name: "myFunction", 
+    #     qualifier: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code: {
+    #       location: "somelocation", 
+    #       repository_type: "S3", 
+    #     }, 
+    #     configuration: {
+    #       code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
+    #       code_size: 262, 
+    #       description: "A starter AWS Lambda function.", 
+    #       environment: {
+    #         variables: {
+    #           "S3_BUCKET" => "test", 
+    #         }, 
+    #       }, 
+    #       function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #       function_name: "myFunction", 
+    #       handler: "index.handler", 
+    #       last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #       memory_size: 128, 
+    #       role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #       runtime: "nodejs4.3", 
+    #       timeout: 3, 
+    #       version: "$LATEST", 
+    #       vpc_config: {
+    #         security_group_ids: [
+    #         ], 
+    #         subnet_ids: [
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1112,6 +1308,39 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #
+    #
+    # @example Example: To retrieve a Lambda function's event source mapping
+    #
+    #   # This operation retrieves a Lambda function's event source mapping
+    #
+    #   resp = client.get_function_configuration({
+    #     function_name: "myFunction", 
+    #     qualifier: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
+    #     code_size: 123, 
+    #     dead_letter_config: {
+    #     }, 
+    #     description: "", 
+    #     environment: {
+    #     }, 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     function_name: "myFunction", 
+    #     handler: "index.handler", 
+    #     kms_key_arn: "", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #     runtime: "python2.7", 
+    #     timeout: 123, 
+    #     version: "1", 
+    #     vpc_config: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_function_configuration({
@@ -1193,6 +1422,21 @@ module Aws::Lambda
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPolicyResponse#policy #policy} => String
+    #
+    #
+    # @example Example: To retrieve a Lambda function policy
+    #
+    #   # This operation retrieves a Lambda function policy
+    #
+    #   resp = client.get_policy({
+    #     function_name: "myFunction", 
+    #     qualifier: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1296,6 +1540,28 @@ module Aws::Lambda
     #   * {Types::InvocationResponse#log_result #log_result} => String
     #   * {Types::InvocationResponse#payload #payload} => String
     #
+    #
+    # @example Example: To invoke a Lambda function
+    #
+    #   # This operation invokes a Lambda function
+    #
+    #   resp = client.invoke({
+    #     client_context: "MyApp", 
+    #     function_name: "MyFunction", 
+    #     invocation_type: "Event", 
+    #     log_type: "Tail", 
+    #     payload: "fileb://file-path/input.json", 
+    #     qualifier: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     function_error: "", 
+    #     log_result: "", 
+    #     payload: "?", 
+    #     status_code: 123, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke({
@@ -1345,6 +1611,21 @@ module Aws::Lambda
     # @return [Types::InvokeAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeAsyncResponse#status #status} => Integer
+    #
+    #
+    # @example Example: To invoke a Lambda function asynchronously
+    #
+    #   # This operation invokes a Lambda function asynchronously
+    #
+    #   resp = client.invoke_async({
+    #     function_name: "myFunction", 
+    #     invoke_args: "fileb://file-path/input.json", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: 123, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1401,6 +1682,25 @@ module Aws::Lambda
     #
     #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
     #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;Types::AliasConfiguration&gt;
+    #
+    #
+    # @example Example: To retrieve a Lambda function aliases
+    #
+    #   # This operation retrieves a Lambda function's aliases
+    #
+    #   resp = client.list_aliases({
+    #     function_name: "myFunction", 
+    #     function_version: "1", 
+    #     marker: "", 
+    #     max_items: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     aliases: [
+    #     ], 
+    #     next_marker: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1540,6 +1840,23 @@ module Aws::Lambda
     #   * {Types::ListFunctionsResponse#next_marker #next_marker} => String
     #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
     #
+    #
+    # @example Example: To retrieve a list of Lambda functions
+    #
+    #   # This operation retrieves a Lambda functions
+    #
+    #   resp = client.list_functions({
+    #     marker: "", 
+    #     max_items: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     functions: [
+    #     ], 
+    #     next_marker: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_functions({
@@ -1647,6 +1964,24 @@ module Aws::Lambda
     #   * {Types::ListVersionsByFunctionResponse#next_marker #next_marker} => String
     #   * {Types::ListVersionsByFunctionResponse#versions #versions} => Array&lt;Types::FunctionConfiguration&gt;
     #
+    #
+    # @example Example: To retrieve a list of Lambda function versions
+    #
+    #   # This operation retrieves a Lambda function versions
+    #
+    #   resp = client.list_versions_by_function({
+    #     function_name: "myFunction", 
+    #     marker: "", 
+    #     max_items: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_marker: "", 
+    #     versions: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_versions_by_function({
@@ -1744,6 +2079,35 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #
+    #
+    # @example Example: To publish a version of a Lambda function
+    #
+    #   # This operation publishes a version of a Lambda function
+    #
+    #   resp = client.publish_version({
+    #     code_sha_256: "", 
+    #     description: "", 
+    #     function_name: "myFunction", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code_sha_256: "", 
+    #     code_size: 123, 
+    #     description: "", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     function_name: "myFunction", 
+    #     handler: "index.handler", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #     runtime: "python2.7", 
+    #     timeout: 123, 
+    #     version: "1", 
+    #     vpc_config: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.publish_version({
@@ -1829,6 +2193,17 @@ module Aws::Lambda
     #   with the unqualified function ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a Lambda function's permissions
+    #
+    #   # This operation removes a Lambda function's permissions
+    #
+    #   resp = client.remove_permission({
+    #     function_name: "myFunction", 
+    #     qualifier: "1", 
+    #     statement_id: "role-statement-id", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1938,6 +2313,26 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
     #
+    #
+    # @example Example: To update a Lambda function alias
+    #
+    #   # This operation updates a Lambda function alias
+    #
+    #   resp = client.update_alias({
+    #     description: "", 
+    #     function_name: "myFunction", 
+    #     function_version: "1", 
+    #     name: "functionAlias", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:functionAlias", 
+    #     description: "", 
+    #     function_version: "1", 
+    #     name: "functionAlias", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_alias({
@@ -2032,6 +2427,30 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #
+    #
+    # @example Example: To update a Lambda function event source mapping
+    #
+    #   # This operation updates a Lambda function event source mapping
+    #
+    #   resp = client.update_event_source_mapping({
+    #     batch_size: 123, 
+    #     enabled: true, 
+    #     function_name: "myFunction", 
+    #     uuid: "1234xCy789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     batch_size: 123, 
+    #     event_source_arn: "arn:aws:s3:::examplebucket/*", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     last_processing_result: "", 
+    #     state: "", 
+    #     state_transition_reason: "", 
+    #     uuid: "1234xCy789012", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2145,6 +2564,38 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #
+    #
+    # @example Example: To update a Lambda function's code
+    #
+    #   # This operation updates a Lambda function's code
+    #
+    #   resp = client.update_function_code({
+    #     function_name: "myFunction", 
+    #     publish: true, 
+    #     s3_bucket: "myBucket", 
+    #     s3_key: "myKey", 
+    #     s3_object_version: "1", 
+    #     zip_file: "fileb://file-path/file.zip", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
+    #     code_size: 123, 
+    #     description: "", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     function_name: "myFunction", 
+    #     handler: "index.handler", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #     runtime: "python2.7", 
+    #     timeout: 123, 
+    #     version: "1", 
+    #     vpc_config: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2313,6 +2764,41 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #
+    #
+    # @example Example: To update a Lambda function's configuration
+    #
+    #   # This operation updates a Lambda function's configuration
+    #
+    #   resp = client.update_function_configuration({
+    #     description: "", 
+    #     function_name: "myFunction", 
+    #     handler: "index.handler", 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #     runtime: "python2.7", 
+    #     timeout: 123, 
+    #     vpc_config: {
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
+    #     code_size: 123, 
+    #     description: "", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
+    #     function_name: "myFunction", 
+    #     handler: "index.handler", 
+    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     memory_size: 128, 
+    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #     runtime: "python2.7", 
+    #     timeout: 123, 
+    #     version: "1", 
+    #     vpc_config: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_function_configuration({
@@ -2390,7 +2876,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -163,6 +163,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a client ID (audience) to an Open-ID Connect (OIDC) provider
+    #
+    #   # The following add-client-id-to-open-id-connect-provider command adds the client ID my-application-ID to the OIDC provider named server.example.com:
+    #
+    #   resp = client.add_client_id_to_open_id_connect_provider({
+    #     client_id: "my-application-ID", 
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_client_id_to_open_id_connect_provider({
@@ -223,6 +233,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a role to an instance profile
+    #
+    #   # The following command adds the role named S3Access to the instance profile named Webserver:
+    #
+    #   resp = client.add_role_to_instance_profile({
+    #     instance_profile_name: "Webserver", 
+    #     role_name: "S3Access", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_role_to_instance_profile({
@@ -266,6 +286,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add a user to an IAM group
+    #
+    #   # The following command adds an IAM user named Bob to the IAM group named Admins:
+    #
+    #   resp = client.add_user_to_group({
+    #     group_name: "Admins", 
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -319,6 +349,16 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To attach a managed policy to an IAM group
+    #
+    #   # The following command attaches the AWS managed policy named ReadOnlyAccess to the IAM group named Finance.
+    #
+    #   resp = client.attach_group_policy({
+    #     group_name: "Finance", 
+    #     policy_arn: "arn:aws:iam::aws:policy/ReadOnlyAccess", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -380,6 +420,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a managed policy to an IAM role
+    #
+    #   # The following command attaches the AWS managed policy named ReadOnlyAccess to the IAM role named ReadOnlyRole.
+    #
+    #   resp = client.attach_role_policy({
+    #     policy_arn: "arn:aws:iam::aws:policy/ReadOnlyAccess", 
+    #     role_name: "ReadOnlyRole", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_role_policy({
@@ -433,6 +483,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a managed policy to an IAM user
+    #
+    #   # The following command attaches the AWS managed policy named AdministratorAccess to the IAM user named Alice.
+    #
+    #   resp = client.attach_user_policy({
+    #     policy_arn: "arn:aws:iam::aws:policy/AdministratorAccess", 
+    #     user_name: "Alice", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_user_policy({
@@ -481,6 +541,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To change the password for your IAM user
+    #
+    #   # The following command changes the password for the current IAM user.
+    #
+    #   resp = client.change_password({
+    #     new_password: "]35d/{pB9Fo9wJ", 
+    #     old_password: "3s0K_;xh4~8XXI", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -537,6 +607,26 @@ module Aws::IAM
     #
     #   * {Types::CreateAccessKeyResponse#access_key #access_key} => Types::AccessKey
     #
+    #
+    # @example Example: To create an access key for an IAM user
+    #
+    #   # The following command creates an access key (access key ID and secret access key) for the IAM user named Bob.
+    #
+    #   resp = client.create_access_key({
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_key: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       create_date: Time.parse("2015-03-09T18:39:23.411Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       status: "Active", 
+    #       user_name: "Bob", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_key({
@@ -581,6 +671,15 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create an account alias
+    #
+    #   # The following command associates the alias examplecorp to your AWS account.
+    #
+    #   resp = client.create_account_alias({
+    #     account_alias: "examplecorp", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -643,6 +742,26 @@ module Aws::IAM
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGroupResponse#group #group} => Types::Group
+    #
+    #
+    # @example Example: To create an IAM group
+    #
+    #   # The following command creates an IAM group named Admins.
+    #
+    #   resp = client.create_group({
+    #     group_name: "Admins", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     group: {
+    #       arn: "arn:aws:iam::123456789012:group/Admins", 
+    #       create_date: Time.parse("2015-03-09T20:30:24.940Z"), 
+    #       group_id: "AIDGPMS9RO4H3FEXAMPLE", 
+    #       group_name: "Admins", 
+    #       path: "/", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -713,6 +832,28 @@ module Aws::IAM
     # @return [Types::CreateInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    #
+    # @example Example: To create an instance profile
+    #
+    #   # The following command creates an instance profile named Webserver that is ready to have a role attached and then be associated with an EC2 instance.
+    #
+    #   resp = client.create_instance_profile({
+    #     instance_profile_name: "Webserver", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profile: {
+    #       arn: "arn:aws:iam::123456789012:instance-profile/Webserver", 
+    #       create_date: Time.parse("2015-03-09T20:33:19.626Z"), 
+    #       instance_profile_id: "AIPAJMBYC7DLSPEXAMPLE", 
+    #       instance_profile_name: "Webserver", 
+    #       path: "/", 
+    #       roles: [
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -791,6 +932,26 @@ module Aws::IAM
     # @return [Types::CreateLoginProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoginProfileResponse#login_profile #login_profile} => Types::LoginProfile
+    #
+    #
+    # @example Example: To create an instance profile
+    #
+    #   # The following command changes IAM user Bob's password and sets the flag that required Bob to change the password the next time he signs in.
+    #
+    #   resp = client.create_login_profile({
+    #     password: "h]6EszR}vJ*m", 
+    #     password_reset_required: true, 
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     login_profile: {
+    #       create_date: Time.parse("2015-03-10T20:55:40.274Z"), 
+    #       password_reset_required: true, 
+    #       user_name: "Bob", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -897,6 +1058,26 @@ module Aws::IAM
     # @return [Types::CreateOpenIDConnectProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOpenIDConnectProviderResponse#open_id_connect_provider_arn #open_id_connect_provider_arn} => String
+    #
+    #
+    # @example Example: To create an instance profile
+    #
+    #   # The following example defines a new OIDC provider in IAM with a client ID of my-application-id and pointing at the server with a URL of https://server.example.com.
+    #
+    #   resp = client.create_open_id_connect_provider({
+    #     client_id_list: [
+    #       "my-application-id", 
+    #     ], 
+    #     thumbprint_list: [
+    #       "3768084dfb3d2b68b7897bf5f565da8efEXAMPLE", 
+    #     ], 
+    #     url: "https://server.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1181,6 +1362,29 @@ module Aws::IAM
     # @return [Types::CreateRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoleResponse#role #role} => Types::Role
+    #
+    #
+    # @example Example: To create an IAM role
+    #
+    #   # The following command creates a role named Test-Role and attaches a trust policy to it that is provided as a URL-encoded JSON string.
+    #
+    #   resp = client.create_role({
+    #     assume_role_policy_document: "<URL-encoded-JSON>", 
+    #     path: "/", 
+    #     role_name: "Test-Role", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     role: {
+    #       arn: "arn:aws:iam::123456789012:role/Test-Role", 
+    #       assume_role_policy_document: "<URL-encoded-JSON>", 
+    #       create_date: Time.parse("2013-06-07T20:43:32.821Z"), 
+    #       path: "/", 
+    #       role_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       role_name: "Test-Role", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1469,6 +1673,26 @@ module Aws::IAM
     #
     #   * {Types::CreateUserResponse#user #user} => Types::User
     #
+    #
+    # @example Example: To create an IAM user
+    #
+    #   # The following create-user command creates an IAM user named Bob in the current account.
+    #
+    #   resp = client.create_user({
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     user: {
+    #       arn: "arn:aws:iam::123456789012:user/Bob", 
+    #       create_date: Time.parse("2013-06-08T03:20:41.270Z"), 
+    #       path: "/", 
+    #       user_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       user_name: "Bob", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user({
@@ -1667,6 +1891,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an access key for an IAM user
+    #
+    #   # The following command deletes one access key (access key ID and secret access key) assigned to the IAM user named Bob.
+    #
+    #   resp = client.delete_access_key({
+    #     access_key_id: "AKIDPMS9RO4H3FEXAMPLE", 
+    #     user_name: "Bob", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_key({
@@ -1705,6 +1939,15 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an account alias
+    #
+    #   # The following command removes the alias mycompany from the current AWS account:
+    #
+    #   resp = client.delete_account_alias({
+    #     account_alias: "mycompany", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_alias({
@@ -1724,6 +1967,14 @@ module Aws::IAM
     # parameters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete the current account password policy
+    #
+    #   # The following command removes the password policy from the current AWS account:
+    #
+    #   resp = client.delete_account_password_policy({
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicy AWS API Documentation
     #
@@ -1805,6 +2056,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a policy from an IAM group
+    #
+    #   # The following command deletes the policy named ExamplePolicy from the group named Admins:
+    #
+    #   resp = client.delete_group_policy({
+    #     group_name: "Admins", 
+    #     policy_name: "ExamplePolicy", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_group_policy({
@@ -1850,6 +2111,15 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an instance profile
+    #
+    #   # The following command deletes the instance profile named ExampleInstanceProfile
+    #
+    #   resp = client.delete_instance_profile({
+    #     instance_profile_name: "ExampleInstanceProfile", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_instance_profile({
@@ -1888,6 +2158,15 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a password for an IAM user
+    #
+    #   # The following command deletes the password for the IAM user named Bob.
+    #
+    #   resp = client.delete_login_profile({
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2077,6 +2356,15 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an IAM role
+    #
+    #   # The following command removes the role named Test-Role.
+    #
+    #   resp = client.delete_role({
+    #     role_name: "Test-Role", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_role({
@@ -2130,6 +2418,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a policy from an IAM role
+    #
+    #   # The following command removes the policy named ExamplePolicy from the role named Test-Role.
+    #
+    #   resp = client.delete_role_policy({
+    #     policy_name: "ExamplePolicy", 
+    #     role_name: "Test-Role", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2365,6 +2663,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a signing certificate for an IAM user
+    #
+    #   # The following command deletes the specified signing certificate for the IAM user named Anika.
+    #
+    #   resp = client.delete_signing_certificate({
+    #     certificate_id: "TA7SMP42TDN5Z26OBPJE7EXAMPLE", 
+    #     user_name: "Anika", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_signing_certificate({
@@ -2397,6 +2705,15 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an IAM user
+    #
+    #   # The following command removes the IAM user named Bob from the current account.
+    #
+    #   resp = client.delete_user({
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2452,6 +2769,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove a policy from an IAM user
+    #
+    #   # The following delete-user-policy command removes the specified policy from the IAM user named Juan:
+    #
+    #   resp = client.delete_user_policy({
+    #     policy_name: "ExamplePolicy", 
+    #     user_name: "Juan", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_user_policy({
@@ -2490,6 +2817,15 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a virtual MFA device
+    #
+    #   # The following delete-virtual-mfa-device command removes the specified MFA device from the current AWS account.
+    #
+    #   resp = client.delete_virtual_mfa_device({
+    #     serial_number: "arn:aws:iam::123456789012:mfa/ExampleName", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2961,6 +3297,30 @@ module Aws::IAM
     #
     #   * {Types::GetAccountPasswordPolicyResponse#password_policy #password_policy} => Types::PasswordPolicy
     #
+    #
+    # @example Example: To see the current account password policy
+    #
+    #   # The following command displays details about the password policy for the current AWS account.
+    #
+    #   resp = client.get_account_password_policy({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     password_policy: {
+    #       allow_users_to_change_password: false, 
+    #       expire_passwords: false, 
+    #       hard_expiry: false, 
+    #       max_password_age: 90, 
+    #       minimum_password_length: 8, 
+    #       password_reuse_prevention: 12, 
+    #       require_lowercase_characters: false, 
+    #       require_numbers: true, 
+    #       require_symbols: true, 
+    #       require_uppercase_characters: false, 
+    #     }, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.password_policy.minimum_password_length #=> Integer
@@ -2996,6 +3356,45 @@ module Aws::IAM
     # @return [Types::GetAccountSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccountSummaryResponse#summary_map #summary_map} => Hash&lt;String,Integer&gt;
+    #
+    #
+    # @example Example: To get information about IAM entity quotas and usage in the current account
+    #
+    #   # The following command returns information about the IAM entity quotas and usage in the current AWS account.
+    #
+    #   resp = client.get_account_summary({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     summary_map: {
+    #       "AccessKeysPerUserQuota" => 2, 
+    #       "AccountAccessKeysPresent" => 1, 
+    #       "AccountMFAEnabled" => 0, 
+    #       "AccountSigningCertificatesPresent" => 0, 
+    #       "AttachedPoliciesPerGroupQuota" => 10, 
+    #       "AttachedPoliciesPerRoleQuota" => 10, 
+    #       "AttachedPoliciesPerUserQuota" => 10, 
+    #       "GroupPolicySizeQuota" => 5120, 
+    #       "Groups" => 15, 
+    #       "GroupsPerUserQuota" => 10, 
+    #       "GroupsQuota" => 100, 
+    #       "MFADevices" => 6, 
+    #       "MFADevicesInUse" => 3, 
+    #       "Policies" => 8, 
+    #       "PoliciesQuota" => 1000, 
+    #       "PolicySizeQuota" => 5120, 
+    #       "PolicyVersionsInUse" => 22, 
+    #       "PolicyVersionsInUseQuota" => 10000, 
+    #       "ServerCertificates" => 1, 
+    #       "ServerCertificatesQuota" => 20, 
+    #       "SigningCertificatesPerUserQuota" => 2, 
+    #       "UserPolicySizeQuota" => 2048, 
+    #       "Users" => 27, 
+    #       "UsersQuota" => 5000, 
+    #       "VersionsPerPolicyQuota" => 5, 
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -3348,6 +3747,36 @@ module Aws::IAM
     #
     #   * {Types::GetInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
     #
+    #
+    # @example Example: To get information about an instance profile
+    #
+    #   # The following command gets information about the instance profile named ExampleInstanceProfile.
+    #
+    #   resp = client.get_instance_profile({
+    #     instance_profile_name: "ExampleInstanceProfile", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_profile: {
+    #       arn: "arn:aws:iam::336924118301:instance-profile/ExampleInstanceProfile", 
+    #       create_date: Time.parse("2013-06-12T23:52:02Z"), 
+    #       instance_profile_id: "AID2MAB8DPLSRHEXAMPLE", 
+    #       instance_profile_name: "ExampleInstanceProfile", 
+    #       path: "/", 
+    #       roles: [
+    #         {
+    #           arn: "arn:aws:iam::336924118301:role/Test-Role", 
+    #           assume_role_policy_document: "<URL-encoded-JSON>", 
+    #           create_date: Time.parse("2013-01-09T06:33:26Z"), 
+    #           path: "/", 
+    #           role_id: "AIDGPMS9RO4H3FEXAMPLE", 
+    #           role_name: "Test-Role", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_instance_profile({
@@ -3398,6 +3827,23 @@ module Aws::IAM
     # @return [Types::GetLoginProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLoginProfileResponse#login_profile #login_profile} => Types::LoginProfile
+    #
+    #
+    # @example Example: To get password information for an IAM user
+    #
+    #   # The following command gets information about the password for the IAM user named Anika.
+    #
+    #   resp = client.get_login_profile({
+    #     user_name: "Anika", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     login_profile: {
+    #       create_date: Time.parse("2012-09-21T23:03:39Z"), 
+    #       user_name: "Anika", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3641,6 +4087,27 @@ module Aws::IAM
     # @return [Types::GetRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRoleResponse#role #role} => Types::Role
+    #
+    #
+    # @example Example: To get information about an IAM role
+    #
+    #   # The following command gets information about the role named Test-Role.
+    #
+    #   resp = client.get_role({
+    #     role_name: "Test-Role", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     role: {
+    #       arn: "arn:aws:iam::123456789012:role/Test-Role", 
+    #       assume_role_policy_document: "<URL-encoded-JSON>", 
+    #       create_date: Time.parse("2013-04-18T05:01:58Z"), 
+    #       path: "/", 
+    #       role_id: "AIDIODR4TAW7CSEXAMPLE", 
+    #       role_name: "Test-Role", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3946,6 +4413,26 @@ module Aws::IAM
     #
     #   * {Types::GetUserResponse#user #user} => Types::User
     #
+    #
+    # @example Example: To get information about an IAM user
+    #
+    #   # The following command gets information about the IAM user named Bob.
+    #
+    #   resp = client.get_user({
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     user: {
+    #       arn: "arn:aws:iam::123456789012:user/Bob", 
+    #       create_date: Time.parse("2012-09-21T23:03:13Z"), 
+    #       path: "/", 
+    #       user_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       user_name: "Bob", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_user({
@@ -4100,6 +4587,33 @@ module Aws::IAM
     #   * {Types::ListAccessKeysResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAccessKeysResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list the access key IDs for an IAM user
+    #
+    #   # The following command lists the access keys IDs for the IAM user named Alice.
+    #
+    #   resp = client.list_access_keys({
+    #     user_name: "Alice", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_key_metadata: [
+    #       {
+    #         access_key_id: "AKIA111111111EXAMPLE", 
+    #         create_date: Time.parse("2016-12-01T22:19:58Z"), 
+    #         status: "Active", 
+    #         user_name: "Alice", 
+    #       }, 
+    #       {
+    #         access_key_id: "AKIA222222222EXAMPLE", 
+    #         create_date: Time.parse("2016-12-01T22:20:01Z"), 
+    #         status: "Active", 
+    #         user_name: "Alice", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_keys({
@@ -4158,6 +4672,21 @@ module Aws::IAM
     #   * {Types::ListAccountAliasesResponse#account_aliases #account_aliases} => Array&lt;String&gt;
     #   * {Types::ListAccountAliasesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAccountAliasesResponse#marker #marker} => String
+    #
+    #
+    # @example Example: To list account aliases
+    #
+    #   # The following command lists the aliases for the current account.
+    #
+    #   resp = client.list_account_aliases({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_aliases: [
+    #       "exmaple-corporation", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4631,6 +5160,23 @@ module Aws::IAM
     #   * {Types::ListGroupPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupPoliciesResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list the in-line policies for an IAM group
+    #
+    #   # The following command lists the names of in-line policies that are embedded in the IAM group named Admins.
+    #
+    #   resp = client.list_group_policies({
+    #     group_name: "Admins", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_names: [
+    #       "AdminRoot", 
+    #       "KeyPolicy", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_policies({
@@ -4701,6 +5247,41 @@ module Aws::IAM
     #   * {Types::ListGroupsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupsResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list the IAM groups for the current account
+    #
+    #   # The following command lists the IAM groups in the current account:
+    #
+    #   resp = client.list_groups({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     groups: [
+    #       {
+    #         arn: "arn:aws:iam::123456789012:group/Admins", 
+    #         create_date: Time.parse("2016-12-15T21:40:08.121Z"), 
+    #         group_id: "AGPA1111111111EXAMPLE", 
+    #         group_name: "Admins", 
+    #         path: "/division_abc/subdivision_xyz/", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:group/division_abc/subdivision_xyz/product_1234/engineering/Test", 
+    #         create_date: Time.parse("2016-11-30T14:10:01.156Z"), 
+    #         group_id: "AGP22222222222EXAMPLE", 
+    #         group_name: "Test", 
+    #         path: "/division_abc/subdivision_xyz/product_1234/engineering/", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:group/division_abc/subdivision_xyz/product_1234/Managers", 
+    #         create_date: Time.parse("2016-06-12T20:14:52.032Z"), 
+    #         group_id: "AGPI3333333333EXAMPLE", 
+    #         group_name: "Managers", 
+    #         path: "/division_abc/subdivision_xyz/product_1234/", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
@@ -4769,6 +5350,35 @@ module Aws::IAM
     #   * {Types::ListGroupsForUserResponse#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsForUserResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupsForUserResponse#marker #marker} => String
+    #
+    #
+    # @example Example: To list the groups that an IAM user belongs to
+    #
+    #   # The following command displays the groups that the IAM user named Bob belongs to.
+    #
+    #   resp = client.list_groups_for_user({
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     groups: [
+    #       {
+    #         arn: "arn:aws:iam::123456789012:group/division_abc/subdivision_xyz/product_1234/engineering/Test", 
+    #         create_date: Time.parse("2016-11-30T14:10:01.156Z"), 
+    #         group_id: "AGP2111111111EXAMPLE", 
+    #         group_name: "Test", 
+    #         path: "/division_abc/subdivision_xyz/product_1234/engineering/", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:group/division_abc/subdivision_xyz/product_1234/Managers", 
+    #         create_date: Time.parse("2016-06-12T20:14:52.032Z"), 
+    #         group_id: "AGPI222222222SEXAMPLE", 
+    #         group_name: "Managers", 
+    #         path: "/division_abc/subdivision_xyz/product_1234/", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5714,6 +6324,28 @@ module Aws::IAM
     #   * {Types::ListSigningCertificatesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListSigningCertificatesResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list the signing certificates for an IAM user
+    #
+    #   # The following command lists the signing certificates for the IAM user named Bob.
+    #
+    #   resp = client.list_signing_certificates({
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificates: [
+    #       {
+    #         certificate_body: "-----BEGIN CERTIFICATE-----<certificate-body>-----END CERTIFICATE-----", 
+    #         certificate_id: "TA7SMP42TDN5Z26OBPJE7EXAMPLE", 
+    #         status: "Active", 
+    #         upload_date: Time.parse("2013-06-06T21:40:08Z"), 
+    #         user_name: "Bob", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_signing_certificates({
@@ -5866,6 +6498,36 @@ module Aws::IAM
     #   * {Types::ListUsersResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListUsersResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list IAM users
+    #
+    #   # The following command lists the IAM users in the current account.
+    #
+    #   resp = client.list_users({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     users: [
+    #       {
+    #         arn: "arn:aws:iam::123456789012:user/division_abc/subdivision_xyz/engineering/Juan", 
+    #         create_date: Time.parse("2012-09-05T19:38:48Z"), 
+    #         password_last_used: Time.parse("2016-09-08T21:47:36Z"), 
+    #         path: "/division_abc/subdivision_xyz/engineering/", 
+    #         user_id: "AID2MAB8DPLSRHEXAMPLE", 
+    #         user_name: "Juan", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:user/division_abc/subdivision_xyz/engineering/Anika", 
+    #         create_date: Time.parse("2014-04-09T15:43:45Z"), 
+    #         password_last_used: Time.parse("2016-09-24T16:18:07Z"), 
+    #         path: "/division_abc/subdivision_xyz/engineering/", 
+    #         user_id: "AIDIODR4TAW7CSEXAMPLE", 
+    #         user_name: "Anika", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_users({
@@ -5931,6 +6593,26 @@ module Aws::IAM
     #   * {Types::ListVirtualMFADevicesResponse#virtual_mfa_devices #virtual_mfa_devices} => Array&lt;Types::VirtualMFADevice&gt;
     #   * {Types::ListVirtualMFADevicesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListVirtualMFADevicesResponse#marker #marker} => String
+    #
+    #
+    # @example Example: To list virtual MFA devices
+    #
+    #   # The following command lists the virtual MFA devices that have been configured for the current account.
+    #
+    #   resp = client.list_virtual_mfa_devices({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     virtual_mfa_devices: [
+    #       {
+    #         serial_number: "arn:aws:iam::123456789012:mfa/ExampleMFADevice", 
+    #       }, 
+    #       {
+    #         serial_number: "arn:aws:iam::123456789012:mfa/Juan", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6031,6 +6713,17 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a policy to a group
+    #
+    #   # The following command adds a policy named AllPerms to the IAM group named Admins.
+    #
+    #   resp = client.put_group_policy({
+    #     group_name: "Admins", 
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}}", 
+    #     policy_name: "AllPerms", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_group_policy({
@@ -6122,6 +6815,17 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a permissions policy to an IAM role
+    #
+    #   # The following command adds a permissions policy to the role named Test-Role.
+    #
+    #   resp = client.put_role_policy({
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}}", 
+    #     policy_name: "S3AccessPolicy", 
+    #     role_name: "S3Access", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_role_policy({
@@ -6204,6 +6908,17 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To attach a policy to an IAM user
+    #
+    #   # The following command attaches a policy to the IAM user named Bob.
+    #
+    #   resp = client.put_user_policy({
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}}", 
+    #     policy_name: "AllAccessPolicy", 
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -6307,6 +7022,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove a role from an instance profile
+    #
+    #   # The following command removes the role named Test-Role from the instance profile named ExampleInstanceProfile.
+    #
+    #   resp = client.remove_role_from_instance_profile({
+    #     instance_profile_name: "ExampleInstanceProfile", 
+    #     role_name: "Test-Role", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_role_from_instance_profile({
@@ -6350,6 +7075,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a user from an IAM group
+    #
+    #   # The following command removes the user named Bob from the IAM group named Admins.
+    #
+    #   resp = client.remove_user_from_group({
+    #     group_name: "Admins", 
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -7131,6 +7866,17 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To activate or deactivate an access key for an IAM user
+    #
+    #   # The following command deactivates the specified access key (access key ID and secret access key) for the IAM user named Bob.
+    #
+    #   resp = client.update_access_key({
+    #     access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #     status: "Inactive", 
+    #     user_name: "Bob", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_access_key({
@@ -7227,6 +7973,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To set or change the current account password policy
+    #
+    #   # The following command sets the password policy to require a minimum length of eight characters and to require one or more numbers in the password:
+    #
+    #   resp = client.update_account_password_policy({
+    #     minimum_password_length: 8, 
+    #     require_numbers: true, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_account_password_policy({
@@ -7287,6 +8043,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update the trust policy for an IAM role
+    #
+    #   # The following command updates the role trust policy for the role named Test-Role:
+    #
+    #   resp = client.update_assume_role_policy({
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"ec2.amazonaws.com\"]},\"Action\":[\"sts:AssumeRole\"]}]}", 
+    #     role_name: "S3AccessForEC2Instances", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -7367,6 +8133,16 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To rename an IAM group
+    #
+    #   # The following command changes the name of the IAM group Test to Test-1.
+    #
+    #   resp = client.update_group({
+    #     group_name: "Test", 
+    #     new_group_name: "Test-1", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_group({
@@ -7428,6 +8204,16 @@ module Aws::IAM
     #   specified IAM user to set a new password on next sign-in.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To change the password for an IAM user
+    #
+    #   # The following command creates or changes the password for the IAM user named Bob.
+    #
+    #   resp = client.update_login_profile({
+    #     password: "SomeKindOfPassword123!@#", 
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -7837,6 +8623,17 @@ module Aws::IAM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To change the active status of a signing certificate for an IAM user
+    #
+    #   # The following command changes the status of a signing certificate for a user named Bob to Inactive.
+    #
+    #   resp = client.update_signing_certificate({
+    #     certificate_id: "TA7SMP42TDN5Z26OBPJE7EXAMPLE", 
+    #     status: "Inactive", 
+    #     user_name: "Bob", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_signing_certificate({
@@ -7916,6 +8713,16 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To change an IAM user's name
+    #
+    #   # The following command changes the name of the IAM user Bob to Robert. It does not change the user's path.
+    #
+    #   resp = client.update_user({
+    #     new_user_name: "Robert", 
+    #     user_name: "Bob", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -8130,6 +8937,30 @@ module Aws::IAM
     #
     #   * {Types::UploadServerCertificateResponse#server_certificate_metadata #server_certificate_metadata} => Types::ServerCertificateMetadata
     #
+    #
+    # @example Example: To upload a server certificate to your AWS account
+    #
+    #   # The following upload-server-certificate command uploads a server certificate to your AWS account:
+    #
+    #   resp = client.upload_server_certificate({
+    #     certificate_body: "-----BEGIN CERTIFICATE-----<a very long certificate text string>-----END CERTIFICATE-----", 
+    #     path: "/company/servercerts/", 
+    #     private_key: "-----BEGIN DSA PRIVATE KEY-----<a very long private key string>-----END DSA PRIVATE KEY-----", 
+    #     server_certificate_name: "ProdServerCert", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     server_certificate_metadata: {
+    #       arn: "arn:aws:iam::123456789012:server-certificate/company/servercerts/ProdServerCert", 
+    #       expiration: Time.parse("2012-05-08T01:02:03.004Z"), 
+    #       path: "/company/servercerts/", 
+    #       server_certificate_id: "ASCA1111111111EXAMPLE", 
+    #       server_certificate_name: "ProdServerCert", 
+    #       upload_date: Time.parse("2010-05-08T01:02:03.004Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.upload_server_certificate({
@@ -8214,6 +9045,27 @@ module Aws::IAM
     #
     #   * {Types::UploadSigningCertificateResponse#certificate #certificate} => Types::SigningCertificate
     #
+    #
+    # @example Example: To upload a signing certificate for an IAM user
+    #
+    #   # The following command uploads a signing certificate for the IAM user named Bob.
+    #
+    #   resp = client.upload_signing_certificate({
+    #     certificate_body: "-----BEGIN CERTIFICATE-----<certificate-body>-----END CERTIFICATE-----", 
+    #     user_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate: {
+    #       certificate_body: "-----BEGIN CERTIFICATE-----<certificate-body>-----END CERTIFICATE-----", 
+    #       certificate_id: "ID123456789012345EXAMPLE", 
+    #       status: "Active", 
+    #       upload_date: Time.parse("2015-06-06T21:40:08.121Z"), 
+    #       user_name: "Bob", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.upload_signing_certificate({
@@ -8251,7 +9103,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

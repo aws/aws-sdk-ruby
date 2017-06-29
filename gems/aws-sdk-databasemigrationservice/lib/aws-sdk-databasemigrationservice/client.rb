@@ -170,6 +170,25 @@ module Aws::DatabaseMigrationService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Add tags to resource
+    #
+    #   # Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with AWS DMS resources, or used in a Condition statement in an IAM policy for AWS DMS.
+    #
+    #   resp = client.add_tags_to_resource({
+    #     resource_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", # Required. Use the ARN of the resource you want to tag.
+    #     tags: [
+    #       {
+    #         key: "Acount", 
+    #         value: "1633456", 
+    #       }, 
+    #     ], # Required. Use the Key/Value pair format.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
@@ -279,6 +298,47 @@ module Aws::DatabaseMigrationService
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
+    #
+    #
+    # @example Example: Create endpoint
+    #
+    #   # Creates an endpoint using the provided settings.
+    #
+    #   resp = client.create_endpoint({
+    #     certificate_arn: "", 
+    #     database_name: "testdb", 
+    #     endpoint_identifier: "test-endpoint-1", 
+    #     endpoint_type: "source", 
+    #     engine_name: "mysql", 
+    #     extra_connection_attributes: "", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #     password: "pasword", 
+    #     port: 3306, 
+    #     server_name: "mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com", 
+    #     ssl_mode: "require", 
+    #     tags: [
+    #       {
+    #         key: "Acount", 
+    #         value: "143327655", 
+    #       }, 
+    #     ], 
+    #     username: "username", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     endpoint: {
+    #       endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #       endpoint_identifier: "test-endpoint-1", 
+    #       endpoint_type: "source", 
+    #       engine_name: "mysql", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #       port: 3306, 
+    #       server_name: "mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com", 
+    #       status: "active", 
+    #       username: "username", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -575,6 +635,87 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::CreateReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
     #
+    #
+    # @example Example: Create replication instance
+    #
+    #   # Creates the replication instance using the specified parameters.
+    #
+    #   resp = client.create_replication_instance({
+    #     allocated_storage: 123, 
+    #     auto_minor_version_upgrade: true, 
+    #     availability_zone: "", 
+    #     engine_version: "", 
+    #     kms_key_id: "", 
+    #     multi_az: true, 
+    #     preferred_maintenance_window: "", 
+    #     publicly_accessible: true, 
+    #     replication_instance_class: "", 
+    #     replication_instance_identifier: "", 
+    #     replication_subnet_group_identifier: "", 
+    #     tags: [
+    #       {
+    #         key: "string", 
+    #         value: "string", 
+    #       }, 
+    #     ], 
+    #     vpc_security_group_ids: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_instance: {
+    #       allocated_storage: 5, 
+    #       auto_minor_version_upgrade: true, 
+    #       engine_version: "1.5.0", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_maintenance_window: "sun:06:00-sun:14:00", 
+    #       publicly_accessible: true, 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_instance_class: "dms.t2.micro", 
+    #       replication_instance_identifier: "test-rep-1", 
+    #       replication_instance_status: "creating", 
+    #       replication_subnet_group: {
+    #         replication_subnet_group_description: "default", 
+    #         replication_subnet_group_identifier: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1d", 
+    #             }, 
+    #             subnet_identifier: "subnet-f6dd91af", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1b", 
+    #             }, 
+    #             subnet_identifier: "subnet-3605751d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1c", 
+    #             }, 
+    #             subnet_identifier: "subnet-c2daefb5", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1e", 
+    #             }, 
+    #             subnet_identifier: "subnet-85e90cb8", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-6741a603", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_replication_instance({
@@ -670,6 +811,32 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::CreateReplicationSubnetGroupResponse#replication_subnet_group #replication_subnet_group} => Types::ReplicationSubnetGroup
     #
+    #
+    # @example Example: Create replication subnet group
+    #
+    #   # Creates a replication subnet group given a list of the subnet IDs in a VPC.
+    #
+    #   resp = client.create_replication_subnet_group({
+    #     replication_subnet_group_description: "US West subnet group", 
+    #     replication_subnet_group_identifier: "us-west-2ab-vpc-215ds366", 
+    #     subnet_ids: [
+    #       "subnet-e145356n", 
+    #       "subnet-58f79200", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "Acount", 
+    #         value: "145235", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_subnet_group: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_replication_subnet_group({
@@ -758,6 +925,44 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::CreateReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
     #
+    #
+    # @example Example: Create replication task
+    #
+    #   # Creates a replication task using the specified parameters.
+    #
+    #   resp = client.create_replication_task({
+    #     cdc_start_time: Time.parse("2016-12-14T18:25:43Z"), 
+    #     migration_type: "full-load", 
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #     replication_task_identifier: "task1", 
+    #     replication_task_settings: "", 
+    #     source_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #     table_mappings: "file://mappingfile.json", 
+    #     tags: [
+    #       {
+    #         key: "Acount", 
+    #         value: "24352226", 
+    #       }, 
+    #     ], 
+    #     target_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_task: {
+    #       migration_type: "full-load", 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_task_arn: "arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM", 
+    #       replication_task_creation_date: Time.parse("2016-12-14T18:25:43Z"), 
+    #       replication_task_identifier: "task1", 
+    #       replication_task_settings: "{\"TargetMetadata\":{\"TargetSchema\":\"\",\"SupportLobs\":true,\"FullLobMode\":true,\"LobChunkSize\":64,\"LimitedSizeLobMode\":false,\"LobMaxSize\":0},\"FullLoadSettings\":{\"FullLoadEnabled\":true,\"ApplyChangesEnabled\":false,\"TargetTablePrepMode\":\"DROP_AND_CREATE\",\"CreatePkAfterFullLoad\":false,\"StopTaskCachedChangesApplied\":false,\"StopTaskCachedChangesNotApplied\":false,\"ResumeEnabled\":false,\"ResumeMinTableSize\":100000,\"ResumeOnlyClusteredPKTables\":true,\"MaxFullLoadSubTasks\":8,\"TransactionConsistencyTimeout\":600,\"CommitRate\":10000},\"Logging\":{\"EnableLogging\":false}}", 
+    #       source_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #       status: "creating", 
+    #       table_mappings: "file://mappingfile.json", 
+    #       target_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_replication_task({
@@ -817,6 +1022,21 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DeleteCertificateResponse#certificate #certificate} => Types::Certificate
     #
+    #
+    # @example Example: Delete Certificate
+    #
+    #   # Deletes the specified certificate.
+    #
+    #   resp = client.delete_certificate({
+    #     certificate_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUSM457DE6XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_certificate({
@@ -859,6 +1079,31 @@ module Aws::DatabaseMigrationService
     # @return [Types::DeleteEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteEndpointResponse#endpoint #endpoint} => Types::Endpoint
+    #
+    #
+    # @example Example: Delete Endpoint
+    #
+    #   # Deletes the specified endpoint. All tasks associated with the endpoint must be deleted before you can delete the endpoint.
+    
+    #
+    #   resp = client.delete_endpoint({
+    #     endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     endpoint: {
+    #       endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #       endpoint_identifier: "test-endpoint-1", 
+    #       endpoint_type: "source", 
+    #       engine_name: "mysql", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #       port: 3306, 
+    #       server_name: "mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com", 
+    #       status: "active", 
+    #       username: "username", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -964,6 +1209,71 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DeleteReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
     #
+    #
+    # @example Example: Delete Replication Instance
+    #
+    #   # Deletes the specified replication instance. You must delete any migration tasks that are associated with the replication instance before you can delete it.
+    
+    
+    #
+    #   resp = client.delete_replication_instance({
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_instance: {
+    #       allocated_storage: 5, 
+    #       auto_minor_version_upgrade: true, 
+    #       engine_version: "1.5.0", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_maintenance_window: "sun:06:00-sun:14:00", 
+    #       publicly_accessible: true, 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_instance_class: "dms.t2.micro", 
+    #       replication_instance_identifier: "test-rep-1", 
+    #       replication_instance_status: "creating", 
+    #       replication_subnet_group: {
+    #         replication_subnet_group_description: "default", 
+    #         replication_subnet_group_identifier: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1d", 
+    #             }, 
+    #             subnet_identifier: "subnet-f6dd91af", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1b", 
+    #             }, 
+    #             subnet_identifier: "subnet-3605751d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1c", 
+    #             }, 
+    #             subnet_identifier: "subnet-c2daefb5", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1e", 
+    #             }, 
+    #             subnet_identifier: "subnet-85e90cb8", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-6741a603", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_replication_instance({
@@ -1024,6 +1334,19 @@ module Aws::DatabaseMigrationService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Delete Replication Subnet Group
+    #
+    #   # Deletes a replication subnet group.
+    #
+    #   resp = client.delete_replication_subnet_group({
+    #     replication_subnet_group_identifier: "us-west-2ab-vpc-215ds366", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_replication_subnet_group({
@@ -1047,6 +1370,31 @@ module Aws::DatabaseMigrationService
     # @return [Types::DeleteReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    #
+    # @example Example: Delete Replication Task
+    #
+    #   # Deletes the specified replication task.
+    #
+    #   resp = client.delete_replication_task({
+    #     replication_task_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_task: {
+    #       migration_type: "full-load", 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_task_arn: "arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM", 
+    #       replication_task_creation_date: Time.parse("2016-12-14T18:25:43Z"), 
+    #       replication_task_identifier: "task1", 
+    #       replication_task_settings: "{\"TargetMetadata\":{\"TargetSchema\":\"\",\"SupportLobs\":true,\"FullLobMode\":true,\"LobChunkSize\":64,\"LimitedSizeLobMode\":false,\"LobMaxSize\":0},\"FullLoadSettings\":{\"FullLoadEnabled\":true,\"ApplyChangesEnabled\":false,\"TargetTablePrepMode\":\"DROP_AND_CREATE\",\"CreatePkAfterFullLoad\":false,\"StopTaskCachedChangesApplied\":false,\"StopTaskCachedChangesNotApplied\":false,\"ResumeEnabled\":false,\"ResumeMinTableSize\":100000,\"ResumeOnlyClusteredPKTables\":true,\"MaxFullLoadSubTasks\":8,\"TransactionConsistencyTimeout\":600,\"CommitRate\":10000},\"Logging\":{\"EnableLogging\":false}}", 
+    #       source_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #       status: "creating", 
+    #       table_mappings: "file://mappingfile.json", 
+    #       target_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1097,6 +1445,35 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeAccountAttributesResponse#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
     #
+    #
+    # @example Example: Describe acount attributes
+    #
+    #   # Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This operation does not take any parameters.
+    #
+    #   resp = client.describe_account_attributes({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_quotas: [
+    #       {
+    #         account_quota_name: "ReplicationInstances", 
+    #         max: 20, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "AllocatedStorage", 
+    #         max: 20, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "Endpoints", 
+    #         max: 20, 
+    #         used: 0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.account_quotas #=> Array
@@ -1136,6 +1513,32 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeCertificatesResponse#marker #marker} => String
     #   * {Types::DescribeCertificatesResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #
+    #
+    # @example Example: Describe certificates
+    #
+    #   # Provides a description of the certificate.
+    #
+    #   resp = client.describe_certificates({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificates: [
+    #     ], 
+    #     marker: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1203,6 +1606,39 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeConnectionsResponse#marker #marker} => String
     #   * {Types::DescribeConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
     #
+    #
+    # @example Example: Describe connections
+    #
+    #   # Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.
+    #
+    #   resp = client.describe_connections({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connections: [
+    #       {
+    #         endpoint_arn: "arn:aws:dms:us-east-arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #         endpoint_identifier: "testsrc1", 
+    #         replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #         replication_instance_identifier: "test", 
+    #         status: "successful", 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_connections({
@@ -1263,6 +1699,32 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeEndpointTypesResponse#marker #marker} => String
     #   * {Types::DescribeEndpointTypesResponse#supported_endpoint_types #supported_endpoint_types} => Array&lt;Types::SupportedEndpointType&gt;
     #
+    #
+    # @example Example: Describe endpoint types
+    #
+    #   # Returns information about the type of endpoints available.
+    #
+    #   resp = client.describe_endpoint_types({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     supported_endpoint_types: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_endpoint_types({
@@ -1321,6 +1783,32 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEndpointsResponse#marker #marker} => String
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    #
+    # @example Example: Describe endpoints
+    #
+    #   # Returns information about the endpoints for your account in the current region.
+    #
+    #   resp = client.describe_endpoints({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     endpoints: [
+    #     ], 
+    #     marker: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1620,6 +2108,23 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeOrderableReplicationInstancesResponse#orderable_replication_instances #orderable_replication_instances} => Array&lt;Types::OrderableReplicationInstance&gt;
     #   * {Types::DescribeOrderableReplicationInstancesResponse#marker #marker} => String
     #
+    #
+    # @example Example: Describe orderable replication instances
+    #
+    #   # Returns information about the replication instance types that can be created in the specified region.
+    #
+    #   resp = client.describe_orderable_replication_instances({
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     orderable_replication_instances: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_orderable_replication_instances({
@@ -1657,6 +2162,21 @@ module Aws::DatabaseMigrationService
     # @return [Types::DescribeRefreshSchemasStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRefreshSchemasStatusResponse#refresh_schemas_status #refresh_schemas_status} => Types::RefreshSchemasStatus
+    #
+    #
+    # @example Example: Describe refresh schema status
+    #
+    #   # Returns the status of the refresh-schemas operation.
+    #
+    #   resp = client.describe_refresh_schemas_status({
+    #     endpoint_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     refresh_schemas_status: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1710,6 +2230,32 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationInstancesResponse#marker #marker} => String
     #   * {Types::DescribeReplicationInstancesResponse#replication_instances #replication_instances} => Array&lt;Types::ReplicationInstance&gt;
+    #
+    #
+    # @example Example: Describe replication instances
+    #
+    #   # Returns the status of the refresh-schemas operation.
+    #
+    #   resp = client.describe_replication_instances({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     replication_instances: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1798,6 +2344,32 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeReplicationSubnetGroupsResponse#marker #marker} => String
     #   * {Types::DescribeReplicationSubnetGroupsResponse#replication_subnet_groups #replication_subnet_groups} => Array&lt;Types::ReplicationSubnetGroup&gt;
     #
+    #
+    # @example Example: Describe replication subnet groups
+    #
+    #   # Returns information about the replication subnet groups.
+    #
+    #   resp = client.describe_replication_subnet_groups({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     replication_subnet_groups: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_replication_subnet_groups({
@@ -1861,6 +2433,32 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationTasksResponse#marker #marker} => String
     #   * {Types::DescribeReplicationTasksResponse#replication_tasks #replication_tasks} => Array&lt;Types::ReplicationTask&gt;
+    #
+    #
+    # @example Example: Describe replication tasks
+    #
+    #   # Returns information about replication tasks for your account in the current region.
+    #
+    #   resp = client.describe_replication_tasks({
+    #     filters: [
+    #       {
+    #         name: "string", 
+    #         values: [
+    #           "string", 
+    #           "string", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     replication_tasks: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1934,6 +2532,24 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeSchemasResponse#marker #marker} => String
     #   * {Types::DescribeSchemasResponse#schemas #schemas} => Array&lt;String&gt;
     #
+    #
+    # @example Example: Describe schemas
+    #
+    #   # Returns information about the schema for the specified endpoint.
+    #
+    #   resp = client.describe_schemas({
+    #     endpoint_arn: "", 
+    #     marker: "", 
+    #     max_records: 123, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     schemas: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_schemas({
@@ -1983,6 +2599,25 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeTableStatisticsResponse#replication_task_arn #replication_task_arn} => String
     #   * {Types::DescribeTableStatisticsResponse#table_statistics #table_statistics} => Array&lt;Types::TableStatistics&gt;
     #   * {Types::DescribeTableStatisticsResponse#marker #marker} => String
+    #
+    #
+    # @example Example: Describe table statistics
+    #
+    #   # Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+    #
+    #   resp = client.describe_table_statistics({
+    #     marker: "", 
+    #     max_records: 123, 
+    #     replication_task_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     replication_task_arn: "", 
+    #     table_statistics: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2038,6 +2673,22 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::ImportCertificateResponse#certificate #certificate} => Types::Certificate
     #
+    #
+    # @example Example: Import certificate
+    #
+    #   # Uploads the specified certificate.
+    #
+    #   resp = client.import_certificate({
+    #     certificate_identifier: "", 
+    #     certificate_pem: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_certificate({
@@ -2083,6 +2734,21 @@ module Aws::DatabaseMigrationService
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: List tags for resource
+    #
+    #   # Lists all tags for an AWS DMS resource.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_list: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2188,6 +2854,32 @@ module Aws::DatabaseMigrationService
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
+    #
+    #
+    # @example Example: Modify endpoint
+    #
+    #   # Modifies the specified endpoint.
+    #
+    #   resp = client.modify_endpoint({
+    #     certificate_arn: "", 
+    #     database_name: "", 
+    #     endpoint_arn: "", 
+    #     endpoint_identifier: "", 
+    #     endpoint_type: "source", 
+    #     engine_name: "", 
+    #     extra_connection_attributes: "", 
+    #     password: "", 
+    #     port: 123, 
+    #     server_name: "", 
+    #     ssl_mode: "require", 
+    #     username: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     endpoint: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2418,6 +3110,80 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::ModifyReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
     #
+    #
+    # @example Example: Modify replication instance
+    #
+    #   # Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window.
+    #
+    #   resp = client.modify_replication_instance({
+    #     allocated_storage: 123, 
+    #     allow_major_version_upgrade: true, 
+    #     apply_immediately: true, 
+    #     auto_minor_version_upgrade: true, 
+    #     engine_version: "1.5.0", 
+    #     multi_az: true, 
+    #     preferred_maintenance_window: "sun:06:00-sun:14:00", 
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #     replication_instance_class: "dms.t2.micro", 
+    #     replication_instance_identifier: "test-rep-1", 
+    #     vpc_security_group_ids: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_instance: {
+    #       allocated_storage: 5, 
+    #       auto_minor_version_upgrade: true, 
+    #       engine_version: "1.5.0", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd", 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_maintenance_window: "sun:06:00-sun:14:00", 
+    #       publicly_accessible: true, 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_instance_class: "dms.t2.micro", 
+    #       replication_instance_identifier: "test-rep-1", 
+    #       replication_instance_status: "available", 
+    #       replication_subnet_group: {
+    #         replication_subnet_group_description: "default", 
+    #         replication_subnet_group_identifier: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1d", 
+    #             }, 
+    #             subnet_identifier: "subnet-f6dd91af", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1b", 
+    #             }, 
+    #             subnet_identifier: "subnet-3605751d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1c", 
+    #             }, 
+    #             subnet_identifier: "subnet-c2daefb5", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1e", 
+    #             }, 
+    #             subnet_identifier: "subnet-85e90cb8", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-6741a603", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_replication_instance({
@@ -2495,6 +3261,24 @@ module Aws::DatabaseMigrationService
     # @return [Types::ModifyReplicationSubnetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationSubnetGroupResponse#replication_subnet_group #replication_subnet_group} => Types::ReplicationSubnetGroup
+    #
+    #
+    # @example Example: Modify replication subnet group
+    #
+    #   # Modifies the settings for the specified replication subnet group.
+    #
+    #   resp = client.modify_replication_subnet_group({
+    #     replication_subnet_group_description: "", 
+    #     replication_subnet_group_identifier: "", 
+    #     subnet_ids: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_subnet_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2632,6 +3416,22 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::RefreshSchemasResponse#refresh_schemas_status #refresh_schemas_status} => Types::RefreshSchemasStatus
     #
+    #
+    # @example Example: Refresh schema
+    #
+    #   # Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the describe-refresh-schemas-status operation.
+    #
+    #   resp = client.refresh_schemas({
+    #     endpoint_arn: "", 
+    #     replication_instance_arn: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     refresh_schemas_status: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.refresh_schemas({
@@ -2704,6 +3504,21 @@ module Aws::DatabaseMigrationService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Remove tags from resource
+    #
+    #   # Removes metadata tags from an AWS DMS resource.
+    #
+    #   resp = client.remove_tags_from_resource({
+    #     resource_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #     tag_keys: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
@@ -2742,6 +3557,33 @@ module Aws::DatabaseMigrationService
     # @return [Types::StartReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    #
+    # @example Example: Start replication task
+    #
+    #   # Starts the replication task.
+    #
+    #   resp = client.start_replication_task({
+    #     cdc_start_time: Time.parse("2016-12-14T13:33:20Z"), 
+    #     replication_task_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #     start_replication_task_type: "start-replication", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_task: {
+    #       migration_type: "full-load", 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_task_arn: "arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM", 
+    #       replication_task_creation_date: Time.parse("2016-12-14T18:25:43Z"), 
+    #       replication_task_identifier: "task1", 
+    #       replication_task_settings: "{\"TargetMetadata\":{\"TargetSchema\":\"\",\"SupportLobs\":true,\"FullLobMode\":true,\"LobChunkSize\":64,\"LimitedSizeLobMode\":false,\"LobMaxSize\":0},\"FullLoadSettings\":{\"FullLoadEnabled\":true,\"ApplyChangesEnabled\":false,\"TargetTablePrepMode\":\"DROP_AND_CREATE\",\"CreatePkAfterFullLoad\":false,\"StopTaskCachedChangesApplied\":false,\"StopTaskCachedChangesNotApplied\":false,\"ResumeEnabled\":false,\"ResumeMinTableSize\":100000,\"ResumeOnlyClusteredPKTables\":true,\"MaxFullLoadSubTasks\":8,\"TransactionConsistencyTimeout\":600,\"CommitRate\":10000},\"Logging\":{\"EnableLogging\":false}}", 
+    #       source_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #       status: "creating", 
+    #       table_mappings: "file://mappingfile.json", 
+    #       target_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2790,6 +3632,31 @@ module Aws::DatabaseMigrationService
     # @return [Types::StopReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    #
+    # @example Example: Stop replication task
+    #
+    #   # Stops the replication task.
+    #
+    #   resp = client.stop_replication_task({
+    #     replication_task_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_task: {
+    #       migration_type: "full-load", 
+    #       replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #       replication_task_arn: "arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM", 
+    #       replication_task_creation_date: Time.parse("2016-12-14T18:25:43Z"), 
+    #       replication_task_identifier: "task1", 
+    #       replication_task_settings: "{\"TargetMetadata\":{\"TargetSchema\":\"\",\"SupportLobs\":true,\"FullLobMode\":true,\"LobChunkSize\":64,\"LimitedSizeLobMode\":false,\"LobMaxSize\":0},\"FullLoadSettings\":{\"FullLoadEnabled\":true,\"ApplyChangesEnabled\":false,\"TargetTablePrepMode\":\"DROP_AND_CREATE\",\"CreatePkAfterFullLoad\":false,\"StopTaskCachedChangesApplied\":false,\"StopTaskCachedChangesNotApplied\":false,\"ResumeEnabled\":false,\"ResumeMinTableSize\":100000,\"ResumeOnlyClusteredPKTables\":true,\"MaxFullLoadSubTasks\":8,\"TransactionConsistencyTimeout\":600,\"CommitRate\":10000},\"Logging\":{\"EnableLogging\":false}}", 
+    #       source_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE", 
+    #       status: "creating", 
+    #       table_mappings: "file://mappingfile.json", 
+    #       target_endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2842,6 +3709,22 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::TestConnectionResponse#connection #connection} => Types::Connection
     #
+    #
+    # @example Example: Test conection
+    #
+    #   # Tests the connection between the replication instance and the endpoint.
+    #
+    #   resp = client.test_connection({
+    #     endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
+    #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     connection: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.test_connection({
@@ -2880,7 +3763,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

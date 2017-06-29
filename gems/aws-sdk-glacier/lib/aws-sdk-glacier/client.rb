@@ -199,6 +199,17 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To abort a multipart upload identified by the upload ID
+    #
+    #   # The example deletes an in-progress multipart upload to a vault named my-vault:
+    #
+    #   resp = client.abort_multipart_upload({
+    #     account_id: "-", 
+    #     upload_id: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.abort_multipart_upload({
@@ -251,6 +262,16 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To abort a vault lock
+    #
+    #   # The example aborts the vault locking process if the vault lock is not in the Locked state for the vault named examplevault.
+    #
+    #   resp = client.abort_vault_lock({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.abort_vault_lock({
@@ -293,6 +314,20 @@ module Aws::Glacier
     #   value. The value can be an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add tags to a vault
+    #
+    #   # The example adds two tags to a my-vault.
+    #
+    #   resp = client.add_tags_to_vault({
+    #     tags: {
+    #       "examplekey1" => "examplevalue1", 
+    #       "examplekey2" => "examplevalue2", 
+    #     }, 
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -395,6 +430,26 @@ module Aws::Glacier
     #   * {Types::ArchiveCreationOutput#checksum #checksum} => String
     #   * {Types::ArchiveCreationOutput#archive_id #archive_id} => String
     #
+    #
+    # @example Example: To complete a multipart upload
+    #
+    #   # The example completes a multipart upload for a 3 MiB archive.
+    #
+    #   resp = client.complete_multipart_upload({
+    #     account_id: "-", 
+    #     archive_size: 3145728, 
+    #     checksum: "9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67", 
+    #     upload_id: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     archive_id: "NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId", 
+    #     checksum: "9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67", 
+    #     location: "/111122223333/vaults/my-vault/archives/NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.complete_multipart_upload({
@@ -458,6 +513,17 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To complete a vault lock
+    #
+    #   # The example completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked state.
+    #
+    #   resp = client.complete_vault_lock({
+    #     account_id: "-", 
+    #     lock_id: "AE863rKkWZU53SLW5be4DUcW", 
+    #     vault_name: "example-vault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.complete_vault_lock({
@@ -518,6 +584,21 @@ module Aws::Glacier
     # @return [Types::CreateVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVaultOutput#location #location} => String
+    #
+    #
+    # @example Example: To create a new vault
+    #
+    #   # The following example creates a new vault named my-vault.
+    #
+    #   resp = client.create_vault({
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/111122223333/vaults/my-vault", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -585,6 +666,17 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an archive
+    #
+    #   # The example deletes the archive specified by the archive ID.
+    #
+    #   resp = client.delete_archive({
+    #     account_id: "-", 
+    #     archive_id: "NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_archive({
@@ -644,6 +736,16 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a vault
+    #
+    #   # The example deletes a vault named my-vault:
+    #
+    #   resp = client.delete_vault({
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_vault({
@@ -685,6 +787,16 @@ module Aws::Glacier
     #   The name of the vault.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete the vault access policy
+    #
+    #   # The example deletes the access policy associated with the vault named examplevault.
+    #
+    #   resp = client.delete_vault_access_policy({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -734,6 +846,16 @@ module Aws::Glacier
     #   The name of the vault.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete the notification configuration set for a vault
+    #
+    #   # The example deletes the notification configuration set for the vault named examplevault.
+    #
+    #   resp = client.delete_vault_notifications({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -814,6 +936,30 @@ module Aws::Glacier
     #   * {Types::GlacierJobDescription#retrieval_byte_range #retrieval_byte_range} => String
     #   * {Types::GlacierJobDescription#tier #tier} => String
     #   * {Types::GlacierJobDescription#inventory_retrieval_parameters #inventory_retrieval_parameters} => Types::InventoryRetrievalJobDescription
+    #
+    #
+    # @example Example: To get information about a previously initiated job
+    #
+    #   # The example returns information about the previously initiated job specified by the job ID.
+    #
+    #   resp = client.describe_job({
+    #     account_id: "-", 
+    #     job_id: "zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4Cn", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     action: "InventoryRetrieval", 
+    #     completed: false, 
+    #     creation_date: Time.parse("2015-07-17T20:23:41.616Z"), 
+    #     inventory_retrieval_parameters: {
+    #       format: "JSON", 
+    #     }, 
+    #     job_id: "zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW", 
+    #     status_code: "InProgress", 
+    #     vault_arn: "arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -904,6 +1050,25 @@ module Aws::Glacier
     #   * {Types::DescribeVaultOutput#number_of_archives #number_of_archives} => Integer
     #   * {Types::DescribeVaultOutput#size_in_bytes #size_in_bytes} => Integer
     #
+    #
+    # @example Example: To retrieve information about a vault
+    #
+    #   # The example retrieves data about a vault named my-vault.
+    #
+    #   resp = client.describe_vault({
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     creation_date: Time.parse("2016-09-23T19:27:18.665Z"), 
+    #     number_of_archives: 0, 
+    #     size_in_bytes: 0, 
+    #     vault_arn: "arn:aws:glacier:us-west-2:111122223333:vaults/my-vault", 
+    #     vault_name: "my-vault", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vault({
@@ -948,6 +1113,27 @@ module Aws::Glacier
     # @return [Types::GetDataRetrievalPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataRetrievalPolicyOutput#policy #policy} => Types::DataRetrievalPolicy
+    #
+    #
+    # @example Example: To get the current data retrieval policy for an account
+    #
+    #   # The example returns the current data retrieval policy for the account.
+    #
+    #   resp = client.get_data_retrieval_policy({
+    #     account_id: "-", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       rules: [
+    #         {
+    #           bytes_per_hour: 10737418240, 
+    #           strategy: "BytesPerHour", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1078,6 +1264,26 @@ module Aws::Glacier
     #   * {Types::GetJobOutputOutput#content_type #content_type} => String
     #   * {Types::GetJobOutputOutput#archive_description #archive_description} => String
     #
+    #
+    # @example Example: To get the output of a previously initiated job
+    #
+    #   # The example downloads the output of a previously initiated inventory retrieval job that is identified by the job ID.
+    #
+    #   resp = client.get_job_output({
+    #     account_id: "-", 
+    #     job_id: "zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW", 
+    #     range: "", 
+    #     vault_name: "my-vaul", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     body: "inventory-data", 
+    #     content_type: "application/json", 
+    #     status: 200, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job_output({
@@ -1130,6 +1336,23 @@ module Aws::Glacier
     # @return [Types::GetVaultAccessPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetVaultAccessPolicyOutput#policy #policy} => Types::VaultAccessPolicy
+    #
+    #
+    # @example Example: To  get the access-policy set on the vault
+    #
+    #   # The example retrieves the access-policy set on the vault named example-vault.
+    #
+    #   resp = client.get_vault_access_policy({
+    #     account_id: "-", 
+    #     vault_name: "example-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-owner-access-rights\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\"}]}", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1196,6 +1419,24 @@ module Aws::Glacier
     #   * {Types::GetVaultLockOutput#expiration_date #expiration_date} => Time
     #   * {Types::GetVaultLockOutput#creation_date #creation_date} => Time
     #
+    #
+    # @example Example: To retrieve vault lock-policy related attributes that are set on a vault
+    #
+    #   # The example retrieves the attributes from the lock-policy subresource set on the vault named examplevault.
+    #
+    #   resp = client.get_vault_lock({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     creation_date: Time.parse("exampledate"), 
+    #     expiration_date: Time.parse("exampledate"), 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-vault-lock\",\"Effect\":\"Deny\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\",\"Condition\":{\"NumericLessThanEquals\":{\"glacier:ArchiveAgeinDays\":\"365\"}}}]}", 
+    #     state: "InProgress", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_vault_lock({
@@ -1256,6 +1497,27 @@ module Aws::Glacier
     # @return [Types::GetVaultNotificationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetVaultNotificationsOutput#vault_notification_config #vault_notification_config} => Types::VaultNotificationConfig
+    #
+    #
+    # @example Example: To get the notification-configuration for the specified vault
+    #
+    #   # The example retrieves the notification-configuration for the vault named my-vault.
+    #
+    #   resp = client.get_vault_notifications({
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     vault_notification_config: {
+    #       events: [
+    #         "InventoryRetrievalCompleted", 
+    #         "ArchiveRetrievalCompleted", 
+    #       ], 
+    #       sns_topic: "arn:aws:sns:us-west-2:0123456789012:my-vault", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1455,6 +1717,28 @@ module Aws::Glacier
     #   * {Types::InitiateJobOutput#location #location} => String
     #   * {Types::InitiateJobOutput#job_id #job_id} => String
     #
+    #
+    # @example Example: To initiate an inventory-retrieval job
+    #
+    #   # The example initiates an inventory-retrieval job for the vault named examplevault.
+    #
+    #   resp = client.initiate_job({
+    #     account_id: "-", 
+    #     job_parameters: {
+    #       description: "My inventory job", 
+    #       format: "CSV", 
+    #       sns_topic: "arn:aws:sns:us-west-2:111111111111:Glacier-InventoryRetrieval-topic-Example", 
+    #       type: "inventory-retrieval", 
+    #     }, 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: " HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID", 
+    #     location: "/111122223333/vaults/examplevault/jobs/HkF9p6o7yjhFx-K3CGl6fuSm6VzW9T7esGQfco8nUXVYwS0jlb5gq1JZ55yHgt5vP54ZShjoQzQVVh7vEXAMPLEjobID", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_job({
@@ -1562,6 +1846,23 @@ module Aws::Glacier
     #   * {Types::InitiateMultipartUploadOutput#location #location} => String
     #   * {Types::InitiateMultipartUploadOutput#upload_id #upload_id} => String
     #
+    #
+    # @example Example: To initiate a multipart upload
+    #
+    #   # The example initiates a multipart upload to a vault named my-vault with a part size of 1 MiB (1024 x 1024 bytes) per file.
+    #
+    #   resp = client.initiate_multipart_upload({
+    #     account_id: "-", 
+    #     part_size: 1048576, 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/111122223333/vaults/my-vault/multipart-uploads/19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ", 
+    #     upload_id: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_multipart_upload({
@@ -1642,6 +1943,24 @@ module Aws::Glacier
     # @return [Types::InitiateVaultLockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InitiateVaultLockOutput#lock_id #lock_id} => String
+    #
+    #
+    # @example Example: To initiate the vault locking process
+    #
+    #   # The example initiates the vault locking process for the vault named my-vault.
+    #
+    #   resp = client.initiate_vault_lock({
+    #     account_id: "-", 
+    #     policy: {
+    #       policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-vault-lock\",\"Effect\":\"Deny\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\",\"Condition\":{\"NumericLessThanEquals\":{\"glacier:ArchiveAgeinDays\":\"365\"}}}]}", 
+    #     }, 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lock_id: "AE863rKkWZU53SLW5be4DUcW", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1749,6 +2068,48 @@ module Aws::Glacier
     #
     #   * {Types::ListJobsOutput#job_list #job_list} => Array&lt;Types::GlacierJobDescription&gt;
     #   * {Types::ListJobsOutput#marker #marker} => String
+    #
+    #
+    # @example Example: To list jobs for a vault
+    #
+    #   # The example lists jobs for the vault named my-vault.
+    #
+    #   resp = client.list_jobs({
+    #     account_id: "-", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_list: [
+    #       {
+    #         action: "ArchiveRetrieval", 
+    #         archive_id: "kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw", 
+    #         archive_sha256_tree_hash: "9628195fcdbcbbe76cdde932d4646fa7de5f219fb39823836d81f0cc0e18aa67", 
+    #         archive_size_in_bytes: 3145728, 
+    #         completed: false, 
+    #         creation_date: Time.parse("2015-07-17T21:16:13.840Z"), 
+    #         job_description: "Retrieve archive on 2015-07-17", 
+    #         job_id: "l7IL5-EkXyEY9Ws95fClzIbk2O5uLYaFdAYOi-azsX_Z8V6NH4yERHzars8wTKYQMX6nBDI9cMNHzyZJO59-8N9aHWav", 
+    #         retrieval_byte_range: "0-3145727", 
+    #         sha256_tree_hash: "9628195fcdbcbbe76cdde932d4646fa7de5f219fb39823836d81f0cc0e18aa67", 
+    #         sns_topic: "arn:aws:sns:us-west-2:0123456789012:my-vault", 
+    #         status_code: "InProgress", 
+    #         vault_arn: "arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault", 
+    #       }, 
+    #       {
+    #         action: "InventoryRetrieval", 
+    #         completed: false, 
+    #         creation_date: Time.parse("2015-07-17T20:23:41.616Z"), 
+    #         inventory_retrieval_parameters: {
+    #           format: "JSON", 
+    #         }, 
+    #         job_id: "zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW", 
+    #         status_code: "InProgress", 
+    #         vault_arn: "arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1861,6 +2222,44 @@ module Aws::Glacier
     #   * {Types::ListMultipartUploadsOutput#uploads_list #uploads_list} => Array&lt;Types::UploadListElement&gt;
     #   * {Types::ListMultipartUploadsOutput#marker #marker} => String
     #
+    #
+    # @example Example: To list all the in-progress multipart uploads for a vault
+    #
+    #   # The example lists all the in-progress multipart uploads for the vault named examplevault.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "null", 
+    #     uploads_list: [
+    #       {
+    #         archive_description: "archive 1", 
+    #         creation_date: Time.parse("2012-03-19T23:20:59.130Z"), 
+    #         multipart_upload_id: "xsQdFIRsfJr20CW2AbZBKpRZAFTZSJIMtL2hYf8mvp8dM0m4RUzlaqoEye6g3h3ecqB_zqwB7zLDMeSWhwo65re4C4Ev", 
+    #         part_size_in_bytes: 4194304, 
+    #         vault_arn: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault", 
+    #       }, 
+    #       {
+    #         archive_description: "archive 2", 
+    #         creation_date: Time.parse("2012-04-01T15:00:00.000Z"), 
+    #         multipart_upload_id: "nPyGOnyFcx67qqX7E-0tSGiRi88hHMOwOxR-_jNyM6RjVMFfV29lFqZ3rNsSaWBugg6OP92pRtufeHdQH7ClIpSF6uJc", 
+    #         part_size_in_bytes: 4194304, 
+    #         vault_arn: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault", 
+    #       }, 
+    #       {
+    #         archive_description: "archive 3", 
+    #         creation_date: Time.parse("2012-03-20T17:03:43.221Z"), 
+    #         multipart_upload_id: "qt-RBst_7yO8gVIonIBsAxr2t-db0pE4s8MNeGjKjGdNpuU-cdSAcqG62guwV9r5jh5mLyFPzFEitTpNE7iQfHiu1XoV", 
+    #         part_size_in_bytes: 4194304, 
+    #         vault_arn: "arn:aws:glacier:us-west-2:012345678901:vaults/examplevault", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_multipart_uploads({
@@ -1955,6 +2354,37 @@ module Aws::Glacier
     #   * {Types::ListPartsOutput#parts #parts} => Array&lt;Types::PartListElement&gt;
     #   * {Types::ListPartsOutput#marker #marker} => String
     #
+    #
+    # @example Example: To list the parts of an archive that have been uploaded in a multipart upload
+    #
+    #   # The example lists all the parts of a multipart upload.
+    #
+    #   resp = client.list_parts({
+    #     account_id: "-", 
+    #     upload_id: "OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     archive_description: "archive description", 
+    #     creation_date: Time.parse("2012-03-20T17:03:43.221Z"), 
+    #     marker: "null", 
+    #     multipart_upload_id: "OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE", 
+    #     part_size_in_bytes: 4194304, 
+    #     parts: [
+    #       {
+    #         range_in_bytes: "0-4194303", 
+    #         sha256_tree_hash: "01d34dabf7be316472c93b1ef80721f5d4", 
+    #       }, 
+    #       {
+    #         range_in_bytes: "4194304-8388607", 
+    #         sha256_tree_hash: "0195875365afda349fc21c84c099987164", 
+    #       }, 
+    #     ], 
+    #     vault_arn: "arn:aws:glacier:us-west-2:012345678901:vaults/demo1-vault", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_parts({
@@ -1999,6 +2429,31 @@ module Aws::Glacier
     #
     #   * {Types::ListProvisionedCapacityOutput#provisioned_capacity_list #provisioned_capacity_list} => Array&lt;Types::ProvisionedCapacityDescription&gt;
     #
+    #
+    # @example Example: To list the provisioned capacity units for an account
+    #
+    #   # The example lists the provisioned capacity units for an account.
+    #
+    #   resp = client.list_provisioned_capacity({
+    #     account_id: "-", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     provisioned_capacity_list: [
+    #       {
+    #         capacity_id: "zSaq7NzHFQDANTfQkDen4V7z", 
+    #         expiration_date: Time.parse("2016-12-12T00:00:00.000Z"), 
+    #         start_date: Time.parse("2016-11-11T20:11:51.095Z"), 
+    #       }, 
+    #       {
+    #         capacity_id: "yXaq7NzHFQNADTfQkDen4V7z", 
+    #         expiration_date: Time.parse("2017-01-15T00:00:00.000Z"), 
+    #         start_date: Time.parse("2016-12-13T20:11:51.095Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_provisioned_capacity({
@@ -2041,6 +2496,24 @@ module Aws::Glacier
     # @return [Types::ListTagsForVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForVaultOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list the tags for a vault
+    #
+    #   # The example lists all the tags attached to the vault examplevault.
+    #
+    #   resp = client.list_tags_for_vault({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "date" => "july2015", 
+    #       "id" => "1234", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2113,6 +2586,31 @@ module Aws::Glacier
     #   * {Types::ListVaultsOutput#vault_list #vault_list} => Array&lt;Types::DescribeVaultOutput&gt;
     #   * {Types::ListVaultsOutput#marker #marker} => String
     #
+    #
+    # @example Example: To list all vaults owned by the calling user's account
+    #
+    #   # The example lists all vaults owned by the specified AWS account.
+    #
+    #   resp = client.list_vaults({
+    #     account_id: "-", 
+    #     limit: , 
+    #     marker: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     vault_list: [
+    #       {
+    #         creation_date: Time.parse("2015-04-06T21:23:45.708Z"), 
+    #         last_inventory_date: Time.parse("2015-04-07T00:26:19.028Z"), 
+    #         number_of_archives: 1, 
+    #         size_in_bytes: 3178496, 
+    #         vault_arn: "arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault", 
+    #         vault_name: "my-vault", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_vaults({
@@ -2152,6 +2650,20 @@ module Aws::Glacier
     # @return [Types::PurchaseProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseProvisionedCapacityOutput#capacity_id #capacity_id} => String
+    #
+    #
+    # @example Example: To purchases a provisioned capacity unit for an AWS account
+    #
+    #   # The example purchases provisioned capacity unit for an AWS account.
+    #
+    #   resp = client.purchase_provisioned_capacity({
+    #     account_id: "-", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     capacity_id: "zSaq7NzHFQDANTfQkDen4V7z", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2195,6 +2707,20 @@ module Aws::Glacier
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove tags from a vault
+    #
+    #   # The example removes two tags from the vault named examplevault.
+    #
+    #   resp = client.remove_tags_from_vault({
+    #     tag_keys: [
+    #       "examplekey1", 
+    #       "examplekey2", 
+    #     ], 
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_vault({
@@ -2237,6 +2763,23 @@ module Aws::Glacier
     #   The data retrieval policy in JSON format.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To set and then enact a data retrieval policy 
+    #
+    #   # The example sets and then enacts a data retrieval policy.
+    #
+    #   resp = client.set_data_retrieval_policy({
+    #     policy: {
+    #       rules: [
+    #         {
+    #           bytes_per_hour: 10737418240, 
+    #           strategy: "BytesPerHour", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     account_id: "-", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2287,6 +2830,19 @@ module Aws::Glacier
     #   The vault access policy as a JSON string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To set the access-policy on a vault
+    #
+    #   # The example configures an access policy for the vault named examplevault.
+    #
+    #   resp = client.set_vault_access_policy({
+    #     account_id: "-", 
+    #     policy: {
+    #       policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-owner-access-rights\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\"}]}", 
+    #     }, 
+    #     vault_name: "examplevault", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2362,6 +2918,23 @@ module Aws::Glacier
     #   Provides options for specifying notification configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To configure a vault to post a message to an Amazon SNS topic when jobs complete
+    #
+    #   # The example sets the examplevault notification configuration.
+    #
+    #   resp = client.set_vault_notifications({
+    #     account_id: "-", 
+    #     vault_name: "examplevault", 
+    #     vault_notification_config: {
+    #       events: [
+    #         "ArchiveRetrievalCompleted", 
+    #         "InventoryRetrievalCompleted", 
+    #       ], 
+    #       sns_topic: "arn:aws:sns:us-west-2:012345678901:mytopic", 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2453,6 +3026,26 @@ module Aws::Glacier
     #   * {Types::ArchiveCreationOutput#location #location} => String
     #   * {Types::ArchiveCreationOutput#checksum #checksum} => String
     #   * {Types::ArchiveCreationOutput#archive_id #archive_id} => String
+    #
+    #
+    # @example Example: To upload an archive
+    #
+    #   # The example adds an archive to a vault.
+    #
+    #   resp = client.upload_archive({
+    #     account_id: "-", 
+    #     archive_description: "", 
+    #     body: "example-data-to-upload", 
+    #     checksum: "", 
+    #     vault_name: "my-vault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     archive_id: "kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw", 
+    #     checksum: "969fb39823836d81f0cc028195fcdbcbbe76cdde932d4646fa7de5f21e18aa67", 
+    #     location: "/0123456789012/vaults/my-vault/archives/kKB7ymWJVpPSwhGP6ycSOAekp9ZYe_--zM_mw6k76ZFGEIWQX-ybtRDvc2VkPSDtfKmQrj0IRQLSGsNuDp-AJVlu2ccmDSyDUmZwKbwbpAdGATGDiB3hHO0bjbGehXTcApVud_wyDw", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2563,6 +3156,25 @@ module Aws::Glacier
     #
     #   * {Types::UploadMultipartPartOutput#checksum #checksum} => String
     #
+    #
+    # @example Example: To upload the first part of an archive
+    #
+    #   # The example uploads the first 1 MiB (1024 x 1024 bytes) part of an archive.
+    #
+    #   resp = client.upload_multipart_part({
+    #     account_id: "-", 
+    #     body: "part1", 
+    #     checksum: "c06f7cd4baacb087002a99a5f48bf953", 
+    #     range: "bytes 0-1048575/*", 
+    #     upload_id: "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ", 
+    #     vault_name: "examplevault", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     checksum: "c06f7cd4baacb087002a99a5f48bf953", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.upload_multipart_part({
@@ -2598,7 +3210,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -170,6 +170,28 @@ module Aws::ECS
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
     #
+    #
+    # @example Example: To create a new cluster
+    #
+    #   # This example creates a cluster in your default region.
+    #
+    #   resp = client.create_cluster({
+    #     cluster_name: "my_cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster: {
+    #       active_services_count: 0, 
+    #       cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster", 
+    #       cluster_name: "my_cluster", 
+    #       pending_tasks_count: 0, 
+    #       registered_container_instances_count: 0, 
+    #       running_tasks_count: 0, 
+    #       status: "ACTIVE", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cluster({
@@ -346,6 +368,121 @@ module Aws::ECS
     #
     #   * {Types::CreateServiceResponse#service #service} => Types::Service
     #
+    #
+    # @example Example: To create a new service
+    #
+    #   # This example creates a service in your default region called ``ecs-simple-service``. The service uses the ``hello_world`` task definition and it maintains 10 copies of that task.
+    #
+    #   resp = client.create_service({
+    #     desired_count: 10, 
+    #     service_name: "ecs-simple-service", 
+    #     task_definition: "hello_world", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service: {
+    #       cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/default", 
+    #       created_at: Time.parse("2016-08-29T16:13:47.298Z"), 
+    #       deployment_configuration: {
+    #         maximum_percent: 200, 
+    #         minimum_healthy_percent: 100, 
+    #       }, 
+    #       deployments: [
+    #         {
+    #           created_at: Time.parse("2016-08-29T16:13:47.298Z"), 
+    #           desired_count: 10, 
+    #           id: "ecs-svc/9223370564342348388", 
+    #           pending_count: 0, 
+    #           running_count: 0, 
+    #           status: "PRIMARY", 
+    #           task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #           updated_at: Time.parse("2016-08-29T16:13:47.298Z"), 
+    #         }, 
+    #         {
+    #           created_at: Time.parse("2016-08-29T15:52:44.481Z"), 
+    #           desired_count: 0, 
+    #           id: "ecs-svc/9223370564343611322", 
+    #           pending_count: 0, 
+    #           running_count: 0, 
+    #           status: "ACTIVE", 
+    #           task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #           updated_at: Time.parse("2016-08-29T16:11:38.941Z"), 
+    #         }, 
+    #       ], 
+    #       desired_count: 10, 
+    #       events: [
+    #       ], 
+    #       load_balancers: [
+    #       ], 
+    #       pending_count: 0, 
+    #       running_count: 0, 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #       service_name: "ecs-simple-service", 
+    #       status: "ACTIVE", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a new service behind a load balancer
+    #
+    #   # This example creates a service in your default region called ``ecs-simple-service-elb``. The service uses the ``ecs-demo`` task definition and it maintains 10 copies of that task. You must reference an existing load balancer in the same region by its name.
+    #
+    #   resp = client.create_service({
+    #     desired_count: 10, 
+    #     load_balancers: [
+    #       {
+    #         container_name: "simple-app", 
+    #         container_port: 80, 
+    #         load_balancer_name: "EC2Contai-EcsElast-15DCDAURT3ZO2", 
+    #       }, 
+    #     ], 
+    #     role: "ecsServiceRole", 
+    #     service_name: "ecs-simple-service-elb", 
+    #     task_definition: "console-sample-app-static", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service: {
+    #       cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/default", 
+    #       created_at: Time.parse("2016-08-29T16:02:54.884Z"), 
+    #       deployment_configuration: {
+    #         maximum_percent: 200, 
+    #         minimum_healthy_percent: 100, 
+    #       }, 
+    #       deployments: [
+    #         {
+    #           created_at: Time.parse("2016-08-29T16:02:54.884Z"), 
+    #           desired_count: 10, 
+    #           id: "ecs-svc/9223370564343000923", 
+    #           pending_count: 0, 
+    #           running_count: 0, 
+    #           status: "PRIMARY", 
+    #           task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6", 
+    #           updated_at: Time.parse("2016-08-29T16:02:54.884Z"), 
+    #         }, 
+    #       ], 
+    #       desired_count: 10, 
+    #       events: [
+    #       ], 
+    #       load_balancers: [
+    #         {
+    #           container_name: "simple-app", 
+    #           container_port: 80, 
+    #           load_balancer_name: "EC2Contai-EcsElast-15DCDAURT3ZO2", 
+    #         }, 
+    #       ], 
+    #       pending_count: 0, 
+    #       role_arn: "arn:aws:iam::012345678910:role/ecsServiceRole", 
+    #       running_count: 0, 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service-elb", 
+    #       service_name: "ecs-simple-service-elb", 
+    #       status: "ACTIVE", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_service({
@@ -490,6 +627,28 @@ module Aws::ECS
     #
     #   * {Types::DeleteClusterResponse#cluster #cluster} => Types::Cluster
     #
+    #
+    # @example Example: To delete an empty cluster
+    #
+    #   # This example deletes an empty cluster in your default region.
+    #
+    #   resp = client.delete_cluster({
+    #     cluster: "my_cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster: {
+    #       active_services_count: 0, 
+    #       cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster", 
+    #       cluster_name: "my_cluster", 
+    #       pending_tasks_count: 0, 
+    #       registered_container_instances_count: 0, 
+    #       running_tasks_count: 0, 
+    #       status: "INACTIVE", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_cluster({
@@ -545,6 +704,19 @@ module Aws::ECS
     # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteServiceResponse#service #service} => Types::Service
+    #
+    #
+    # @example Example: To delete a service
+    #
+    #   # This example deletes the my-http-service service. The service must have a desired count and running count of 0 before you can delete it.
+    #
+    #   resp = client.delete_service({
+    #     service: "my-http-service", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -653,6 +825,21 @@ module Aws::ECS
     # @return [Types::DeregisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterContainerInstanceResponse#container_instance #container_instance} => Types::ContainerInstance
+    #
+    #
+    # @example Example: To deregister a container instance from a cluster
+    #
+    #   # This example deregisters a container instance from the specified cluster in your default region. If there are still tasks running on the container instance, you must either stop those tasks before deregistering, or use the force option.
+    #
+    #   resp = client.deregister_container_instance({
+    #     cluster: "default", 
+    #     container_instance: "container_instance_UUID", 
+    #     force: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -834,6 +1021,30 @@ module Aws::ECS
     #   * {Types::DescribeClustersResponse#clusters #clusters} => Array&lt;Types::Cluster&gt;
     #   * {Types::DescribeClustersResponse#failures #failures} => Array&lt;Types::Failure&gt;
     #
+    #
+    # @example Example: To describe a cluster
+    #
+    #   # This example provides a description of the specified cluster in your default region.
+    #
+    #   resp = client.describe_clusters({
+    #     clusters: [
+    #       "default", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     clusters: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:aws_account_id:cluster/default", 
+    #         cluster_name: "default", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #     failures: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_clusters({
@@ -880,6 +1091,93 @@ module Aws::ECS
     #
     #   * {Types::DescribeContainerInstancesResponse#container_instances #container_instances} => Array&lt;Types::ContainerInstance&gt;
     #   * {Types::DescribeContainerInstancesResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To describe container instance
+    #
+    #   # This example provides a description of the specified container instance in your default region, using the container instance UUID as an identifier.
+    #
+    #   resp = client.describe_container_instances({
+    #     cluster: "default", 
+    #     container_instances: [
+    #       "f2756532-8f13-4d53-87c9-aed50dc94cd7", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_instances: [
+    #       {
+    #         agent_connected: true, 
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7", 
+    #         ec2_instance_id: "i-807f3249", 
+    #         pending_tasks_count: 0, 
+    #         registered_resources: [
+    #           {
+    #             name: "CPU", 
+    #             type: "INTEGER", 
+    #             double_value: 0.0, 
+    #             integer_value: 2048, 
+    #             long_value: 0, 
+    #           }, 
+    #           {
+    #             name: "MEMORY", 
+    #             type: "INTEGER", 
+    #             double_value: 0.0, 
+    #             integer_value: 3768, 
+    #             long_value: 0, 
+    #           }, 
+    #           {
+    #             name: "PORTS", 
+    #             type: "STRINGSET", 
+    #             double_value: 0.0, 
+    #             integer_value: 0, 
+    #             long_value: 0, 
+    #             string_set_value: [
+    #               "2376", 
+    #               "22", 
+    #               "51678", 
+    #               "2375", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         remaining_resources: [
+    #           {
+    #             name: "CPU", 
+    #             type: "INTEGER", 
+    #             double_value: 0.0, 
+    #             integer_value: 1948, 
+    #             long_value: 0, 
+    #           }, 
+    #           {
+    #             name: "MEMORY", 
+    #             type: "INTEGER", 
+    #             double_value: 0.0, 
+    #             integer_value: 3668, 
+    #             long_value: 0, 
+    #           }, 
+    #           {
+    #             name: "PORTS", 
+    #             type: "STRINGSET", 
+    #             double_value: 0.0, 
+    #             integer_value: 0, 
+    #             long_value: 0, 
+    #             string_set_value: [
+    #               "2376", 
+    #               "22", 
+    #               "80", 
+    #               "51678", 
+    #               "2375", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         running_tasks_count: 1, 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #     failures: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -952,6 +1250,61 @@ module Aws::ECS
     #
     #   * {Types::DescribeServicesResponse#services #services} => Array&lt;Types::Service&gt;
     #   * {Types::DescribeServicesResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To describe a service
+    #
+    #   # This example provides descriptive information about the service named ``ecs-simple-service``.
+    #
+    #   resp = client.describe_services({
+    #     services: [
+    #       "ecs-simple-service", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     services: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/default", 
+    #         created_at: Time.parse("2016-08-29T16:25:52.130Z"), 
+    #         deployment_configuration: {
+    #           maximum_percent: 200, 
+    #           minimum_healthy_percent: 100, 
+    #         }, 
+    #         deployments: [
+    #           {
+    #             created_at: Time.parse("2016-08-29T16:25:52.130Z"), 
+    #             desired_count: 1, 
+    #             id: "ecs-svc/9223370564341623665", 
+    #             pending_count: 0, 
+    #             running_count: 0, 
+    #             status: "PRIMARY", 
+    #             task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #             updated_at: Time.parse("2016-08-29T16:25:52.130Z"), 
+    #           }, 
+    #         ], 
+    #         desired_count: 1, 
+    #         events: [
+    #           {
+    #             created_at: Time.parse("2016-08-29T16:25:58.520Z"), 
+    #             id: "38c285e5-d335-4b68-8b15-e46dedc8e88d", 
+    #             message: "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", # In this example, there is a service event that shows unavailable cluster resources.
+    #           }, 
+    #         ], 
+    #         load_balancers: [
+    #         ], 
+    #         pending_count: 0, 
+    #         running_count: 0, 
+    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #         service_name: "ecs-simple-service", 
+    #         status: "ACTIVE", 
+    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1030,6 +1383,69 @@ module Aws::ECS
     # @return [Types::DescribeTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
+    #
+    #
+    # @example Example: To describe a task definition
+    #
+    #   # This example provides a description of the specified task definition.
+    #
+    #   resp = client.describe_task_definition({
+    #     task_definition: "hello_world:8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_definition: {
+    #       container_definitions: [
+    #         {
+    #           name: "wordpress", 
+    #           cpu: 10, 
+    #           environment: [
+    #           ], 
+    #           essential: true, 
+    #           image: "wordpress", 
+    #           links: [
+    #             "mysql", 
+    #           ], 
+    #           memory: 500, 
+    #           mount_points: [
+    #           ], 
+    #           port_mappings: [
+    #             {
+    #               container_port: 80, 
+    #               host_port: 80, 
+    #             }, 
+    #           ], 
+    #           volumes_from: [
+    #           ], 
+    #         }, 
+    #         {
+    #           name: "mysql", 
+    #           cpu: 10, 
+    #           environment: [
+    #             {
+    #               name: "MYSQL_ROOT_PASSWORD", 
+    #               value: "password", 
+    #             }, 
+    #           ], 
+    #           essential: true, 
+    #           image: "mysql", 
+    #           memory: 500, 
+    #           mount_points: [
+    #           ], 
+    #           port_mappings: [
+    #           ], 
+    #           volumes_from: [
+    #           ], 
+    #         }, 
+    #       ], 
+    #       family: "hello_world", 
+    #       revision: 8, 
+    #       task_definition_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/hello_world:8", 
+    #       volumes: [
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1132,6 +1548,56 @@ module Aws::ECS
     #
     #   * {Types::DescribeTasksResponse#tasks #tasks} => Array&lt;Types::Task&gt;
     #   * {Types::DescribeTasksResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To describe a task
+    #
+    #   # This example provides a description of the specified task, using the task UUID as an identifier.
+    #
+    #   resp = client.describe_tasks({
+    #     tasks: [
+    #       "c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     tasks: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:<region>:<aws_account_id>:cluster/default", 
+    #         container_instance_arn: "arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb", 
+    #         containers: [
+    #           {
+    #             name: "ecs-demo", 
+    #             container_arn: "arn:aws:ecs:<region>:<aws_account_id>:container/7c01765b-c588-45b3-8290-4ba38bd6c5a6", 
+    #             last_status: "RUNNING", 
+    #             network_bindings: [
+    #               {
+    #                 bind_ip: "0.0.0.0", 
+    #                 container_port: 80, 
+    #                 host_port: 80, 
+    #               }, 
+    #             ], 
+    #             task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #           }, 
+    #         ], 
+    #         desired_status: "RUNNING", 
+    #         last_status: "RUNNING", 
+    #         overrides: {
+    #           container_overrides: [
+    #             {
+    #               name: "ecs-demo", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         started_by: "ecs-svc/9223370608528463088", 
+    #         task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #         task_definition_arn: "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1350,6 +1816,22 @@ module Aws::ECS
     #   * {Types::ListClustersResponse#cluster_arns #cluster_arns} => Array&lt;String&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To list your available clusters
+    #
+    #   # This example lists all of your available clusters in your default region.
+    #
+    #   resp = client.list_clusters({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_arns: [
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:cluster/test", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:cluster/default", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_clusters({
@@ -1433,6 +1915,23 @@ module Aws::ECS
     #   * {Types::ListContainerInstancesResponse#container_instance_arns #container_instance_arns} => Array&lt;String&gt;
     #   * {Types::ListContainerInstancesResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To list your available container instances in a cluster
+    #
+    #   # This example lists all of your available container instances in the specified cluster in your default region.
+    #
+    #   resp = client.list_container_instances({
+    #     cluster: "default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_instance_arns: [
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_container_instances({
@@ -1492,6 +1991,21 @@ module Aws::ECS
     #
     #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
     #   * {Types::ListServicesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list the services in a cluster
+    #
+    #   # This example lists the services running in the default cluster for an account.
+    #
+    #   resp = client.list_services({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service_arns: [
+    #       "arn:aws:ecs:us-east-1:012345678910:service/my-http-service", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1570,6 +2084,40 @@ module Aws::ECS
     #
     #   * {Types::ListTaskDefinitionFamiliesResponse#families #families} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionFamiliesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list your registered task definition families
+    #
+    #   # This example lists all of your registered task definition families.
+    #
+    #   resp = client.list_task_definition_families({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     families: [
+    #       "node-js-app", 
+    #       "web-timer", 
+    #       "hpcc", 
+    #       "hpcc-c4-8xlarge", 
+    #     ], 
+    #   }
+    #
+    # @example Example: To filter your registered task definition families
+    #
+    #   # This example lists the task definition revisions that start with "hpcc".
+    #
+    #   resp = client.list_task_definition_families({
+    #     family_prefix: "hpcc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     families: [
+    #       "hpcc", 
+    #       "hpcc-c4-8xlarge", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1650,6 +2198,44 @@ module Aws::ECS
     #
     #   * {Types::ListTaskDefinitionsResponse#task_definition_arns #task_definition_arns} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list your registered task definitions
+    #
+    #   # This example lists all of your registered task definitions.
+    #
+    #   resp = client.list_task_definitions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_definition_arns: [
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep300:2", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:6", 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list the registered task definitions in a family
+    #
+    #   # This example lists the task definition revisions of a specified family.
+    #
+    #   resp = client.list_task_definitions({
+    #     family_prefix: "wordpress", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_definition_arns: [
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:6", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1753,6 +2339,39 @@ module Aws::ECS
     #
     #   * {Types::ListTasksResponse#task_arns #task_arns} => Array&lt;String&gt;
     #   * {Types::ListTasksResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list the tasks in a cluster
+    #
+    #   # This example lists all of the tasks in a cluster.
+    #
+    #   resp = client.list_tasks({
+    #     cluster: "default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_arns: [
+    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/6b809ef6-c67e-4467-921f-ee261c15a0a1", 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list the tasks on a particular container instance
+    #
+    #   # This example lists the tasks of a specified container instance. Specifying a ``containerInstance`` value limits  the  results  to  tasks  that belong to that container instance.
+    #
+    #   resp = client.list_tasks({
+    #     cluster: "default", 
+    #     container_instance: "f6bbb147-5370-4ace-8c73-c7181ded911f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_arns: [
+    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2038,6 +2657,63 @@ module Aws::ECS
     #
     #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
     #
+    #
+    # @example Example: To register a task definition
+    #
+    #   # This example registers a task definition to the specified family.
+    #
+    #   resp = client.register_task_definition({
+    #     container_definitions: [
+    #       {
+    #         name: "sleep", 
+    #         command: [
+    #           "sleep", 
+    #           "360", 
+    #         ], 
+    #         cpu: 10, 
+    #         essential: true, 
+    #         image: "busybox", 
+    #         memory: 10, 
+    #       }, 
+    #     ], 
+    #     family: "sleep360", 
+    #     task_role_arn: "", 
+    #     volumes: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     task_definition: {
+    #       container_definitions: [
+    #         {
+    #           name: "sleep", 
+    #           command: [
+    #             "sleep", 
+    #             "360", 
+    #           ], 
+    #           cpu: 10, 
+    #           environment: [
+    #           ], 
+    #           essential: true, 
+    #           image: "busybox", 
+    #           memory: 10, 
+    #           mount_points: [
+    #           ], 
+    #           port_mappings: [
+    #           ], 
+    #           volumes_from: [
+    #           ], 
+    #         }, 
+    #       ], 
+    #       family: "sleep360", 
+    #       revision: 1, 
+    #       task_definition_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:19", 
+    #       volumes: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_task_definition({
@@ -2283,6 +2959,44 @@ module Aws::ECS
     #
     #   * {Types::RunTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
     #   * {Types::RunTaskResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To run a task on your default cluster
+    #
+    #   # This example runs the specified task definition on your default cluster.
+    #
+    #   resp = client.run_task({
+    #     cluster: "default", 
+    #     task_definition: "sleep360:1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tasks: [
+    #       {
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #         containers: [
+    #           {
+    #             name: "sleep", 
+    #             container_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd", 
+    #             last_status: "PENDING", 
+    #             task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #           }, 
+    #         ], 
+    #         desired_status: "RUNNING", 
+    #         last_status: "PENDING", 
+    #         overrides: {
+    #           container_overrides: [
+    #             {
+    #               name: "sleep", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #         task_definition_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3040,6 +3754,33 @@ module Aws::ECS
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
     #
+    #
+    # @example Example: To change the task definition used in a service
+    #
+    #   # This example updates the my-http-service service to use the amazon-ecs-sample task definition.
+    #
+    #   resp = client.update_service({
+    #     service: "my-http-service", 
+    #     task_definition: "amazon-ecs-sample", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To change the number of tasks in a service
+    #
+    #   # This example updates the desired count of the my-http-service service to 10.
+    #
+    #   resp = client.update_service({
+    #     desired_count: 10, 
+    #     service: "my-http-service", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service({
@@ -3114,7 +3855,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

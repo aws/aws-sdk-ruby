@@ -162,6 +162,27 @@ module Aws::ElasticLoadBalancingV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to a load balancer
+    #
+    #   # This example adds the specified tags to the specified load balancer.
+    #
+    #   resp = client.add_tags({
+    #     resource_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "project", 
+    #         value: "lima", 
+    #       }, 
+    #       {
+    #         key: "department", 
+    #         value: "digital-media", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags({
@@ -222,6 +243,87 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateListenerOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
+    #
+    #
+    # @example Example: To create an HTTP listener
+    #
+    #   # This example creates an HTTP listener for the specified load balancer that forwards requests to the specified target group.
+    #
+    #   resp = client.create_listener({
+    #     default_actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     port: 80, 
+    #     protocol: "HTTP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listeners: [
+    #       {
+    #         default_actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To create an HTTPS listener
+    #
+    #   # This example creates an HTTPS listener for the specified load balancer that forwards requests to the specified target group. Note that you must specify an SSL certificate for an HTTPS listener. You can create and manage certificates using AWS Certificate Manager (ACM). Alternatively, you can create a certificate using SSL/TLS tools, get the certificate signed by a certificate authority (CA), and upload the certificate to AWS Identity and Access Management (IAM).
+    #
+    #   resp = client.create_listener({
+    #     certificates: [
+    #       {
+    #         certificate_arn: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #       }, 
+    #     ], 
+    #     default_actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     port: 443, 
+    #     protocol: "HTTPS", 
+    #     ssl_policy: "ELBSecurityPolicy-2015-05", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listeners: [
+    #       {
+    #         certificates: [
+    #           {
+    #             certificate_arn: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #           }, 
+    #         ], 
+    #         default_actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         port: 443, 
+    #         protocol: "HTTPS", 
+    #         ssl_policy: "ELBSecurityPolicy-2015-05", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -333,6 +435,98 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::CreateLoadBalancerOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
     #
+    #
+    # @example Example: To create an Internet-facing load balancer
+    #
+    #   # This example creates an Internet-facing load balancer and enables the Availability Zones for the specified subnets.
+    #
+    #   resp = client.create_load_balancer({
+    #     name: "my-load-balancer", 
+    #     subnets: [
+    #       "subnet-b7d581c0", 
+    #       "subnet-8360a9e7", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancers: [
+    #       {
+    #         availability_zones: [
+    #           {
+    #             subnet_id: "subnet-8360a9e7", 
+    #             zone_name: "us-west-2a", 
+    #           }, 
+    #           {
+    #             subnet_id: "subnet-b7d581c0", 
+    #             zone_name: "us-west-2b", 
+    #           }, 
+    #         ], 
+    #         canonical_hosted_zone_id: "Z2P70J7EXAMPLE", 
+    #         created_time: Time.parse("2016-03-25T21:26:12.920Z"), 
+    #         dns_name: "my-load-balancer-424835706.us-west-2.elb.amazonaws.com", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         load_balancer_name: "my-load-balancer", 
+    #         scheme: "internet-facing", 
+    #         security_groups: [
+    #           "sg-5943793c", 
+    #         ], 
+    #         state: {
+    #           code: "provisioning", 
+    #         }, 
+    #         type: "application", 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To create an internal load balancer
+    #
+    #   # This example creates an internal load balancer and enables the Availability Zones for the specified subnets.
+    #
+    #   resp = client.create_load_balancer({
+    #     name: "my-internal-load-balancer", 
+    #     scheme: "internal", 
+    #     security_groups: [
+    #     ], 
+    #     subnets: [
+    #       "subnet-b7d581c0", 
+    #       "subnet-8360a9e7", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancers: [
+    #       {
+    #         availability_zones: [
+    #           {
+    #             subnet_id: "subnet-8360a9e7", 
+    #             zone_name: "us-west-2a", 
+    #           }, 
+    #           {
+    #             subnet_id: "subnet-b7d581c0", 
+    #             zone_name: "us-west-2b", 
+    #           }, 
+    #         ], 
+    #         canonical_hosted_zone_id: "Z2P70J7EXAMPLE", 
+    #         created_time: Time.parse("2016-03-25T21:29:48.850Z"), 
+    #         dns_name: "internal-my-internal-load-balancer-1529930873.us-west-2.elb.amazonaws.com", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-internal-load-balancer/5b49b8d4303115c2", 
+    #         load_balancer_name: "my-internal-load-balancer", 
+    #         scheme: "internal", 
+    #         security_groups: [
+    #           "sg-5943793c", 
+    #         ], 
+    #         state: {
+    #           code: "provisioning", 
+    #         }, 
+    #         type: "application", 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_load_balancer({
@@ -440,6 +634,55 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleOutput#rules #rules} => Array&lt;Types::Rule&gt;
+    #
+    #
+    # @example Example: To create a rule
+    #
+    #   # This example creates a rule that forwards requests to the specified target group if the URL contains the specified pattern (for example, /img/*).
+    #
+    #   resp = client.create_rule({
+    #     actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     conditions: [
+    #       {
+    #         field: "path-pattern", 
+    #         values: [
+    #           "/img/*", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #     priority: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "path-pattern", 
+    #             values: [
+    #               "/img/*", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -556,6 +799,41 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::CreateTargetGroupOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #
+    #
+    # @example Example: To create a target group
+    #
+    #   # This example creates a target group that you can use to route traffic to targets using HTTP on port 80. This target group uses the default health check configuration.
+    #
+    #   resp = client.create_target_group({
+    #     name: "my-targets", 
+    #     port: 80, 
+    #     protocol: "HTTP", 
+    #     vpc_id: "vpc-3ac0fb5f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_groups: [
+    #       {
+    #         health_check_interval_seconds: 30, 
+    #         health_check_path: "/", 
+    #         health_check_port: "traffic-port", 
+    #         health_check_protocol: "HTTP", 
+    #         health_check_timeout_seconds: 5, 
+    #         healthy_threshold_count: 5, 
+    #         matcher: {
+    #           http_code: "200", 
+    #         }, 
+    #         port: 80, 
+    #         protocol: "HTTP", 
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         target_group_name: "my-targets", 
+    #         unhealthy_threshold_count: 2, 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_target_group({
@@ -613,6 +891,15 @@ module Aws::ElasticLoadBalancingV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a listener
+    #
+    #   # This example deletes the specified listener.
+    #
+    #   resp = client.delete_listener({
+    #     listener_arn: "arn:aws:elasticloadbalancing:ua-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_listener({
@@ -645,6 +932,15 @@ module Aws::ElasticLoadBalancingV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a load balancer
+    #
+    #   # This example deletes the specified load balancer.
+    #
+    #   resp = client.delete_load_balancer({
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_load_balancer({
@@ -666,6 +962,15 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a rule
+    #
+    #   # This example deletes the specified rule.
+    #
+    #   resp = client.delete_rule({
+    #     rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -691,6 +996,15 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a target group
+    #
+    #   # This example deletes the specified target group.
+    #
+    #   resp = client.delete_target_group({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -720,6 +1034,20 @@ module Aws::ElasticLoadBalancingV2
     #   deregister it.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To deregister a target from a target group
+    #
+    #   # This example deregisters the specified instance from the specified target group.
+    #
+    #   resp = client.deregister_targets({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     targets: [
+    #       {
+    #         id: "i-0f76fade", 
+    #       }, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -809,6 +1137,35 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenersOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
     #   * {Types::DescribeListenersOutput#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe a listener
+    #
+    #   # This example describes the specified listener.
+    #
+    #   resp = client.describe_listeners({
+    #     listener_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listeners: [
+    #       {
+    #         default_actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_listeners({
@@ -850,6 +1207,41 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::DescribeLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLoadBalancerAttributesOutput#attributes #attributes} => Array&lt;Types::LoadBalancerAttribute&gt;
+    #
+    #
+    # @example Example: To describe load balancer attributes
+    #
+    #   # This example describes the attributes of the specified load balancer.
+    #
+    #   resp = client.describe_load_balancer_attributes({
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "access_logs.s3.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "idle_timeout.timeout_seconds", 
+    #         value: "60", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.prefix", 
+    #         value: "", 
+    #       }, 
+    #       {
+    #         key: "deletion_protection.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.bucket", 
+    #         value: "", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -897,6 +1289,49 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeLoadBalancersOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
     #   * {Types::DescribeLoadBalancersOutput#next_marker #next_marker} => String
+    #
+    #
+    # @example Example: To describe a load balancer
+    #
+    #   # This example describes the specified load balancer.
+    #
+    #   resp = client.describe_load_balancers({
+    #     load_balancer_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancers: [
+    #       {
+    #         availability_zones: [
+    #           {
+    #             subnet_id: "subnet-8360a9e7", 
+    #             zone_name: "us-west-2a", 
+    #           }, 
+    #           {
+    #             subnet_id: "subnet-b7d581c0", 
+    #             zone_name: "us-west-2b", 
+    #           }, 
+    #         ], 
+    #         canonical_hosted_zone_id: "Z2P70J7EXAMPLE", 
+    #         created_time: Time.parse("2016-03-25T21:26:12.920Z"), 
+    #         dns_name: "my-load-balancer-424835706.us-west-2.elb.amazonaws.com", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         load_balancer_name: "my-load-balancer", 
+    #         scheme: "internet-facing", 
+    #         security_groups: [
+    #           "sg-5943793c", 
+    #         ], 
+    #         state: {
+    #           code: "active", 
+    #         }, 
+    #         type: "application", 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -958,6 +1393,42 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeRulesOutput#rules #rules} => Array&lt;Types::Rule&gt;
     #   * {Types::DescribeRulesOutput#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe a rule
+    #
+    #   # This example describes the specified rule.
+    #
+    #   resp = client.describe_rules({
+    #     rule_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "path-pattern", 
+    #             values: [
+    #               "/img/*", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rules({
@@ -1016,6 +1487,109 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeSSLPoliciesOutput#ssl_policies #ssl_policies} => Array&lt;Types::SslPolicy&gt;
     #   * {Types::DescribeSSLPoliciesOutput#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe a policy used for SSL negotiation
+    #
+    #   # This example describes the specified policy used for SSL negotiation.
+    #
+    #   resp = client.describe_ssl_policies({
+    #     names: [
+    #       "ELBSecurityPolicy-2015-05", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ssl_policies: [
+    #       {
+    #         ciphers: [
+    #           {
+    #             name: "ECDHE-ECDSA-AES128-GCM-SHA256", 
+    #             priority: 1, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES128-GCM-SHA256", 
+    #             priority: 2, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-ECDSA-AES128-SHA256", 
+    #             priority: 3, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES128-SHA256", 
+    #             priority: 4, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-ECDSA-AES128-SHA", 
+    #             priority: 5, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES128-SHA", 
+    #             priority: 6, 
+    #           }, 
+    #           {
+    #             name: "DHE-RSA-AES128-SHA", 
+    #             priority: 7, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-ECDSA-AES256-GCM-SHA384", 
+    #             priority: 8, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES256-GCM-SHA384", 
+    #             priority: 9, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-ECDSA-AES256-SHA384", 
+    #             priority: 10, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES256-SHA384", 
+    #             priority: 11, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-RSA-AES256-SHA", 
+    #             priority: 12, 
+    #           }, 
+    #           {
+    #             name: "ECDHE-ECDSA-AES256-SHA", 
+    #             priority: 13, 
+    #           }, 
+    #           {
+    #             name: "AES128-GCM-SHA256", 
+    #             priority: 14, 
+    #           }, 
+    #           {
+    #             name: "AES128-SHA256", 
+    #             priority: 15, 
+    #           }, 
+    #           {
+    #             name: "AES128-SHA", 
+    #             priority: 16, 
+    #           }, 
+    #           {
+    #             name: "AES256-GCM-SHA384", 
+    #             priority: 17, 
+    #           }, 
+    #           {
+    #             name: "AES256-SHA256", 
+    #             priority: 18, 
+    #           }, 
+    #           {
+    #             name: "AES256-SHA", 
+    #             priority: 19, 
+    #           }, 
+    #         ], 
+    #         name: "ELBSecurityPolicy-2015-05", 
+    #         ssl_protocols: [
+    #           "TLSv1", 
+    #           "TLSv1.1", 
+    #           "TLSv1.2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ssl_policies({
@@ -1054,6 +1628,36 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeTagsOutput#tag_descriptions #tag_descriptions} => Array&lt;Types::TagDescription&gt;
     #
+    #
+    # @example Example: To describe the tags assigned to a load balancer
+    #
+    #   # This example describes the tags assigned to the specified load balancer.
+    #
+    #   resp = client.describe_tags({
+    #     resource_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_descriptions: [
+    #       {
+    #         resource_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         tags: [
+    #           {
+    #             key: "project", 
+    #             value: "lima", 
+    #           }, 
+    #           {
+    #             key: "department", 
+    #             value: "digital-media", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tags({
@@ -1085,6 +1689,37 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::DescribeTargetGroupAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTargetGroupAttributesOutput#attributes #attributes} => Array&lt;Types::TargetGroupAttribute&gt;
+    #
+    #
+    # @example Example: To describe target group attributes
+    #
+    #   # This example describes the attributes of the specified target group.
+    #
+    #   resp = client.describe_target_group_attributes({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "stickiness.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "deregistration_delay.timeout_seconds", 
+    #         value: "300", 
+    #       }, 
+    #       {
+    #         key: "stickiness.type", 
+    #         value: "lb_cookie", 
+    #       }, 
+    #       {
+    #         key: "stickiness.lb_cookie.duration_seconds", 
+    #         value: "86400", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1138,6 +1773,43 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeTargetGroupsOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #   * {Types::DescribeTargetGroupsOutput#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe a target group
+    #
+    #   # This example describes the specified target group.
+    #
+    #   resp = client.describe_target_groups({
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_groups: [
+    #       {
+    #         health_check_interval_seconds: 30, 
+    #         health_check_path: "/", 
+    #         health_check_port: "traffic-port", 
+    #         health_check_protocol: "HTTP", 
+    #         health_check_timeout_seconds: 5, 
+    #         healthy_threshold_count: 5, 
+    #         load_balancer_arns: [
+    #           "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         ], 
+    #         matcher: {
+    #           http_code: "200", 
+    #         }, 
+    #         port: 80, 
+    #         protocol: "HTTP", 
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         target_group_name: "my-targets", 
+    #         unhealthy_threshold_count: 2, 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_target_groups({
@@ -1188,6 +1860,72 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::DescribeTargetHealthOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTargetHealthOutput#target_health_descriptions #target_health_descriptions} => Array&lt;Types::TargetHealthDescription&gt;
+    #
+    #
+    # @example Example: To describe the health of the targets for a target group
+    #
+    #   # This example describes the health of the targets for the specified target group. One target is healthy but the other is not specified in an action, so it can't receive traffic from the load balancer.
+    #
+    #   resp = client.describe_target_health({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_health_descriptions: [
+    #       {
+    #         target: {
+    #           id: "i-0f76fade", 
+    #           port: 80, 
+    #         }, 
+    #         target_health: {
+    #           description: "Given target group is not configured to receive traffic from ELB", 
+    #           reason: "Target.NotInUse", 
+    #           state: "unused", 
+    #         }, 
+    #       }, 
+    #       {
+    #         health_check_port: "80", 
+    #         target: {
+    #           id: "i-0f76fade", 
+    #           port: 80, 
+    #         }, 
+    #         target_health: {
+    #           state: "healthy", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe the health of a target
+    #
+    #   # This example describes the health of the specified target. This target is healthy.
+    #
+    #   resp = client.describe_target_health({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     targets: [
+    #       {
+    #         id: "i-0f76fade", 
+    #         port: 80, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_health_descriptions: [
+    #       {
+    #         health_check_port: "80", 
+    #         target: {
+    #           id: "i-0f76fade", 
+    #           port: 80, 
+    #         }, 
+    #         target_health: {
+    #           state: "healthy", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1256,6 +1994,76 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::ModifyListenerOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
     #
+    #
+    # @example Example: To change the default action for a listener
+    #
+    #   # This example changes the default action for the specified listener.
+    #
+    #   resp = client.modify_listener({
+    #     default_actions: [
+    #       {
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f", 
+    #         type: "forward", 
+    #       }, 
+    #     ], 
+    #     listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listeners: [
+    #       {
+    #         default_actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To change the server certificate
+    #
+    #   # This example changes the server certificate for the specified HTTPS listener.
+    #
+    #   resp = client.modify_listener({
+    #     certificates: [
+    #       {
+    #         certificate_arn: "arn:aws:iam::123456789012:server-certificate/my-new-server-cert", 
+    #       }, 
+    #     ], 
+    #     listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listeners: [
+    #       {
+    #         certificates: [
+    #           {
+    #             certificate_arn: "arn:aws:iam::123456789012:server-certificate/my-new-server-cert", 
+    #           }, 
+    #         ], 
+    #         default_actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         listener_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/0467ef3c8400ae65", 
+    #         load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         port: 443, 
+    #         protocol: "HTTPS", 
+    #         ssl_policy: "ELBSecurityPolicy-2015-05", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_listener({
@@ -1316,6 +2124,135 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::ModifyLoadBalancerAttributesOutput#attributes #attributes} => Array&lt;Types::LoadBalancerAttribute&gt;
     #
+    #
+    # @example Example: To enable deletion protection
+    #
+    #   # This example enables deletion protection for the specified load balancer.
+    #
+    #   resp = client.modify_load_balancer_attributes({
+    #     attributes: [
+    #       {
+    #         key: "deletion_protection.enabled", 
+    #         value: "true", 
+    #       }, 
+    #     ], 
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "deletion_protection.enabled", 
+    #         value: "true", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "idle_timeout.timeout_seconds", 
+    #         value: "60", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.prefix", 
+    #         value: "", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.bucket", 
+    #         value: "", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To change the idle timeout
+    #
+    #   # This example changes the idle timeout value for the specified load balancer.
+    #
+    #   resp = client.modify_load_balancer_attributes({
+    #     attributes: [
+    #       {
+    #         key: "idle_timeout.timeout_seconds", 
+    #         value: "30", 
+    #       }, 
+    #     ], 
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "idle_timeout.timeout_seconds", 
+    #         value: "30", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.prefix", 
+    #         value: "", 
+    #       }, 
+    #       {
+    #         key: "deletion_protection.enabled", 
+    #         value: "true", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.bucket", 
+    #         value: "", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To enable access logs
+    #
+    #   # This example enables access logs for the specified load balancer. Note that the S3 bucket must exist in the same region as the load balancer and must have a policy attached that grants access to the Elastic Load Balancing service.
+    #
+    #   resp = client.modify_load_balancer_attributes({
+    #     attributes: [
+    #       {
+    #         key: "access_logs.s3.enabled", 
+    #         value: "true", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.bucket", 
+    #         value: "my-loadbalancer-logs", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.prefix", 
+    #         value: "myapp", 
+    #       }, 
+    #     ], 
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "access_logs.s3.enabled", 
+    #         value: "true", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.bucket", 
+    #         value: "my-load-balancer-logs", 
+    #       }, 
+    #       {
+    #         key: "access_logs.s3.prefix", 
+    #         value: "myapp", 
+    #       }, 
+    #       {
+    #         key: "idle_timeout.timeout_seconds", 
+    #         value: "60", 
+    #       }, 
+    #       {
+    #         key: "deletion_protection.enabled", 
+    #         value: "false", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_load_balancer_attributes({
@@ -1362,6 +2299,48 @@ module Aws::ElasticLoadBalancingV2
     # @return [Types::ModifyRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyRuleOutput#rules #rules} => Array&lt;Types::Rule&gt;
+    #
+    #
+    # @example Example: To modify a rule
+    #
+    #   # This example modifies the condition for the specified rule.
+    #
+    #   resp = client.modify_rule({
+    #     conditions: [
+    #       {
+    #         field: "path-pattern", 
+    #         values: [
+    #           "/images/*", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "path-pattern", 
+    #             values: [
+    #               "/images/*", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "10", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1445,6 +2424,42 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::ModifyTargetGroupOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #
+    #
+    # @example Example: To modify the health check configuration for a target group
+    #
+    #   # This example changes the configuration of the health checks used to evaluate the health of the targets for the specified target group.
+    #
+    #   resp = client.modify_target_group({
+    #     health_check_port: "443", 
+    #     health_check_protocol: "HTTPS", 
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_groups: [
+    #       {
+    #         health_check_interval_seconds: 30, 
+    #         health_check_port: "443", 
+    #         health_check_protocol: "HTTPS", 
+    #         health_check_timeout_seconds: 5, 
+    #         healthy_threshold_count: 5, 
+    #         load_balancer_arns: [
+    #           "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #         ], 
+    #         matcher: {
+    #           http_code: "200", 
+    #         }, 
+    #         port: 443, 
+    #         protocol: "HTTPS", 
+    #         target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f", 
+    #         target_group_name: "my-https-targets", 
+    #         unhealthy_threshold_count: 2, 
+    #         vpc_id: "vpc-3ac0fb5f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_target_group({
@@ -1501,6 +2516,43 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::ModifyTargetGroupAttributesOutput#attributes #attributes} => Array&lt;Types::TargetGroupAttribute&gt;
     #
+    #
+    # @example Example: To modify the deregistration delay timeout
+    #
+    #   # This example sets the deregistration delay timeout to the specified value for the specified target group.
+    #
+    #   resp = client.modify_target_group_attributes({
+    #     attributes: [
+    #       {
+    #         key: "deregistration_delay.timeout_seconds", 
+    #         value: "600", 
+    #       }, 
+    #     ], 
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: "stickiness.enabled", 
+    #         value: "false", 
+    #       }, 
+    #       {
+    #         key: "deregistration_delay.timeout_seconds", 
+    #         value: "600", 
+    #       }, 
+    #       {
+    #         key: "stickiness.type", 
+    #         value: "lb_cookie", 
+    #       }, 
+    #       {
+    #         key: "stickiness.lb_cookie.duration_seconds", 
+    #         value: "86400", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_target_group_attributes({
@@ -1551,6 +2603,41 @@ module Aws::ElasticLoadBalancingV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To register targets with a target group
+    #
+    #   # This example registers the specified instances with the specified target group.
+    #
+    #   resp = client.register_targets({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     targets: [
+    #       {
+    #         id: "i-80c8dd94", 
+    #       }, 
+    #       {
+    #         id: "i-ceddcd4d", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    # @example Example: To register targets with a target group using port overrides
+    #
+    #   # This example registers the specified instance with the specified target group using multiple ports. This enables you to register ECS containers on the same instance as targets in the target group.
+    #
+    #   resp = client.register_targets({
+    #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9", 
+    #     targets: [
+    #       {
+    #         id: "i-80c8dd94", 
+    #         port: 80, 
+    #       }, 
+    #       {
+    #         id: "i-80c8dd94", 
+    #         port: 766, 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_targets({
@@ -1583,6 +2670,21 @@ module Aws::ElasticLoadBalancingV2
     #   The tag keys for the tags to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a load balancer
+    #
+    #   # This example removes the specified tags from the specified load balancer.
+    #
+    #   resp = client.remove_tags({
+    #     resource_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     ], 
+    #     tag_keys: [
+    #       "project", 
+    #       "department", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1648,6 +2750,45 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::SetRulePrioritiesOutput#rules #rules} => Array&lt;Types::Rule&gt;
     #
+    #
+    # @example Example: To set the rule priority
+    #
+    #   # This example sets the priority of the specified rule.
+    #
+    #   resp = client.set_rule_priorities({
+    #     rule_priorities: [
+    #       {
+    #         priority: 5, 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #             type: "forward", 
+    #           }, 
+    #         ], 
+    #         conditions: [
+    #           {
+    #             field: "path-pattern", 
+    #             values: [
+    #               "/img/*", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         priority: "5", 
+    #         rule_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_rule_priorities({
@@ -1696,6 +2837,25 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::SetSecurityGroupsOutput#security_group_ids #security_group_ids} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To associate a security group with a load balancer
+    #
+    #   # This example associates the specified security group with the specified load balancer.
+    #
+    #   resp = client.set_security_groups({
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     security_groups: [
+    #       "sg-5943793c", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_group_ids: [
+    #       "sg-5943793c", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_security_groups({
@@ -1732,6 +2892,33 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::SetSubnetsOutput#availability_zones #availability_zones} => Array&lt;Types::AvailabilityZone&gt;
     #
+    #
+    # @example Example: To enable Availability Zones for a load balancer
+    #
+    #   # This example enables the Availability Zones for the specified subnets for the specified load balancer.
+    #
+    #   resp = client.set_subnets({
+    #     load_balancer_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188", 
+    #     subnets: [
+    #       "subnet-8360a9e7", 
+    #       "subnet-b7d581c0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     availability_zones: [
+    #       {
+    #         subnet_id: "subnet-8360a9e7", 
+    #         zone_name: "us-west-2a", 
+    #       }, 
+    #       {
+    #         subnet_id: "subnet-b7d581c0", 
+    #         zone_name: "us-west-2b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_subnets({
@@ -1767,7 +2954,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1491,6 +1491,39 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateResourceDataSyncRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sync_name: "ResourceDataSyncName", # required
+    #         s3_destination: { # required
+    #           bucket_name: "ResourceDataSyncS3BucketName", # required
+    #           prefix: "ResourceDataSyncS3Prefix",
+    #           sync_format: "JsonSerDe", # required, accepts JsonSerDe
+    #           region: "ResourceDataSyncS3Region", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sync_name
+    #   A name for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Amazon S3 configuration details for the sync.
+    #   @return [Types::ResourceDataSyncS3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSyncRequest AWS API Documentation
+    #
+    class CreateResourceDataSyncRequest < Struct.new(
+      :sync_name,
+      :s3_destination)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSyncResult AWS API Documentation
+    #
+    class CreateResourceDataSyncResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteActivationRequest
     #   data as a hash:
     #
@@ -1683,6 +1716,28 @@ module Aws::SSM
       :baseline_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteResourceDataSyncRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sync_name: "ResourceDataSyncName", # required
+    #       }
+    #
+    # @!attribute [rw] sync_name
+    #   The name of the configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSyncRequest AWS API Documentation
+    #
+    class DeleteResourceDataSyncRequest < Struct.new(
+      :sync_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSyncResult AWS API Documentation
+    #
+    class DeleteResourceDataSyncResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterManagedInstanceRequest
     #   data as a hash:
@@ -5517,6 +5572,51 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResourceDataSyncRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSyncRequest AWS API Documentation
+    #
+    class ListResourceDataSyncRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_data_sync_items
+    #   A list of your current Resource Data Sync configurations and their
+    #   statuses.
+    #   @return [Array<Types::ResourceDataSyncItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSyncResult AWS API Documentation
+    #
+    class ListResourceDataSyncResult < Struct.new(
+      :resource_data_sync_items,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -6932,6 +7032,88 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceResult AWS API Documentation
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
+    # Information about a Resource Data Sync configuration, including its
+    # current status and last successful sync.
+    #
+    # @!attribute [rw] sync_name
+    #   The name of the Resource Data Sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Configuration information for the target Amazon S3 bucket.
+    #   @return [Types::ResourceDataSyncS3Destination]
+    #
+    # @!attribute [rw] last_sync_time
+    #   The last time the configuration attempted to sync (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_sync_time
+    #   The last time the sync operations returned a status of `SUCCESSFUL`
+    #   (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_status
+    #   The status reported by the last sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_created_time
+    #   The date and time the configuration was created (UTC).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncItem AWS API Documentation
+    #
+    class ResourceDataSyncItem < Struct.new(
+      :sync_name,
+      :s3_destination,
+      :last_sync_time,
+      :last_successful_sync_time,
+      :last_status,
+      :sync_created_time)
+      include Aws::Structure
+    end
+
+    # Information about the target Amazon S3 bucket for the Resource Data
+    # Sync.
+    #
+    # @note When making an API call, you may pass ResourceDataSyncS3Destination
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "ResourceDataSyncS3BucketName", # required
+    #         prefix: "ResourceDataSyncS3Prefix",
+    #         sync_format: "JsonSerDe", # required, accepts JsonSerDe
+    #         region: "ResourceDataSyncS3Region", # required
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the Amazon S3 bucket where the aggregated data is
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   An Amazon S3 prefix for the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_format
+    #   A supported sync format. The following format is currently
+    #   supported: JsonSerDe
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region with the Amazon S3 bucket targeted by the Resource
+    #   Data Sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination AWS API Documentation
+    #
+    class ResourceDataSyncS3Destination < Struct.new(
+      :bucket_name,
+      :prefix,
+      :sync_format,
+      :region)
+      include Aws::Structure
+    end
 
     # The inventory item result attribute.
     #

@@ -177,6 +177,34 @@ module Aws::ServiceCatalog
     #
     class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AssociateTagOptionWithResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         tag_option_id: "TagOptionId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_option_id
+    #   The TagOption identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceInput AWS API Documentation
+    #
+    class AssociateTagOptionWithResourceInput < Struct.new(
+      :resource_id,
+      :tag_option_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceOutput AWS API Documentation
+    #
+    class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
+
     # Detailed constraint information.
     #
     # @!attribute [rw] constraint_id
@@ -658,6 +686,41 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTagOptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagOptionKey", # required
+    #         value: "TagOptionValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The TagOption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The TagOption value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOptionInput AWS API Documentation
+    #
+    class CreateTagOptionInput < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_option_detail
+    #   The resulting detailed TagOption information.
+    #   @return [Types::TagOptionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOptionOutput AWS API Documentation
+    #
+    class CreateTagOptionOutput < Struct.new(
+      :tag_option_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteConstraintInput
     #   data as a hash:
     #
@@ -951,11 +1014,16 @@ module Aws::ServiceCatalog
     #   Tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tag_options
+    #   TagOptions associated with the portfolio.
+    #   @return [Array<Types::TagOptionDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput AWS API Documentation
     #
     class DescribePortfolioOutput < Struct.new(
       :portfolio_detail,
-      :tags)
+      :tags,
+      :tag_options)
       include Aws::Structure
     end
 
@@ -1004,12 +1072,17 @@ module Aws::ServiceCatalog
     #   Tags associated with the product.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tag_options
+    #   List of TagOptions associated with the product.
+    #   @return [Array<Types::TagOptionDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput AWS API Documentation
     #
     class DescribeProductAsAdminOutput < Struct.new(
       :product_view_detail,
       :provisioning_artifact_summaries,
-      :tags)
+      :tags,
+      :tag_options)
       include Aws::Structure
     end
 
@@ -1192,8 +1265,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] verbose
-    #   Selects verbose results. If set to true, the CloudFormation template
-    #   is returned.
+    #   Enable a verbose level of details for the provisioning artifact.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput AWS API Documentation
@@ -1292,12 +1364,18 @@ module Aws::ServiceCatalog
     #   CloudFormation template.
     #   @return [Array<Types::UsageInstruction>]
     #
+    # @!attribute [rw] tag_options
+    #   List of TagOptions associated with the provisioned provisioning
+    #   parameters.
+    #   @return [Array<Types::TagOptionSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
       :provisioning_artifact_parameters,
       :constraint_summaries,
-      :usage_instructions)
+      :usage_instructions,
+      :tag_options)
       include Aws::Structure
     end
 
@@ -1373,6 +1451,35 @@ module Aws::ServiceCatalog
       :record_detail,
       :record_outputs,
       :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTagOptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TagOptionId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the TagOption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionInput AWS API Documentation
+    #
+    class DescribeTagOptionInput < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_option_detail
+    #   The resulting detailed TagOption information.
+    #   @return [Types::TagOptionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionOutput AWS API Documentation
+    #
+    class DescribeTagOptionOutput < Struct.new(
+      :tag_option_detail)
       include Aws::Structure
     end
 
@@ -1461,6 +1568,34 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioOutput AWS API Documentation
     #
     class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateTagOptionFromResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         tag_option_id: "TagOptionId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   Identifier of the resource from which to disassociate the TagOption.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_option_id
+    #   Identifier of the TagOption to disassociate from the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceInput AWS API Documentation
+    #
+    class DisassociateTagOptionFromResourceInput < Struct.new(
+      :resource_id,
+      :tag_option_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceOutput AWS API Documentation
+    #
+    class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
 
     # Summary information about a path for a user to have access to a
     # specified product.
@@ -1646,8 +1781,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The product identifier.. Identifies the product for which to
-    #   retrieve `LaunchPathSummaries` information.
+    #   The product identifier. Identifies the product for which to retrieve
+    #   `LaunchPathSummaries` information.
     #   @return [String]
     #
     # @!attribute [rw] page_size
@@ -2081,6 +2216,149 @@ module Aws::ServiceCatalog
     class ListRecordHistorySearchFilter < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourcesForTagOptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         tag_option_id: "TagOptionId", # required
+    #         resource_type: "ResourceType",
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] tag_option_id
+    #   Identifier of the TagOption.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return in the results. If more
+    #   results exist than fit in the specified `PageSize`, the value of
+    #   `NextPageToken` in the response is non-null.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionInput AWS API Documentation
+    #
+    class ListResourcesForTagOptionInput < Struct.new(
+      :tag_option_id,
+      :resource_type,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_details
+    #   The resulting detailed resource information.
+    #   @return [Array<Types::ResourceDetail>]
+    #
+    # @!attribute [rw] page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionOutput AWS API Documentation
+    #
+    class ListResourcesForTagOptionOutput < Struct.new(
+      :resource_details,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # The ListTagOptions filters.
+    #
+    # @note When making an API call, you may pass ListTagOptionsFilters
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagOptionKey",
+    #         value: "TagOptionValue",
+    #         active: false,
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The ListTagOptionsFilters key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The ListTagOptionsFilters value.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   The ListTagOptionsFilters active state.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsFilters AWS API Documentation
+    #
+    class ListTagOptionsFilters < Struct.new(
+      :key,
+      :value,
+      :active)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         filters: {
+    #           key: "TagOptionKey",
+    #           value: "TagOptionValue",
+    #           active: false,
+    #         },
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   The list of filters with which to limit search results. If no search
+    #   filters are specified, the output is all TagOptions.
+    #   @return [Types::ListTagOptionsFilters]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return in the results. If more
+    #   results exist than fit in the specified `PageSize`, the value of
+    #   `NextPageToken` in the response is non-null.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsInput AWS API Documentation
+    #
+    class ListTagOptionsInput < Struct.new(
+      :filters,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_option_details
+    #   The resulting detailed TagOption information.
+    #   @return [Array<Types::TagOptionDetail>]
+    #
+    # @!attribute [rw] page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsOutput AWS API Documentation
+    #
+    class ListTagOptionsOutput < Struct.new(
+      :tag_option_details,
+      :page_token)
       include Aws::Structure
     end
 
@@ -2622,18 +2900,18 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Summary information about a provisioning artifact.
+    # Stores summary information about a provisioning artifact.
     #
     # @!attribute [rw] id
-    #   The provisioning artifact identifier.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The provisioning artifact name.
+    #   The name of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The provisioning artifact description.
+    #   The description of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2703,7 +2981,7 @@ module Aws::ServiceCatalog
     #
     #   `IN_PROGRESS_IN_ERROR` - The provisioned product is under change but
     #   the requested operation failed and some remediation is occurring.
-    #   For example, a roll-back.
+    #   For example, a rollback.
     #
     #   `SUCCEEDED` - The requested operation has successfully completed.
     #
@@ -2869,6 +3147,39 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareOutput AWS API Documentation
     #
     class RejectPortfolioShareOutput < Aws::EmptyStructure; end
+
+    # Detailed resource information.
+    #
+    # @!attribute [rw] id
+    #   Identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   Creation time of the resource.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceDetail AWS API Documentation
+    #
+    class ResourceDetail < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :created_time)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ScanProvisionedProductsInput
     #   data as a hash:
@@ -3122,7 +3433,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Key/value pairs to associate with this provisioning. These tags are
+    # Key-value pairs to associate with this provisioning. These tags are
     # entirely discretionary and are propagated to the resources created in
     # the provisioning.
     #
@@ -3148,6 +3459,52 @@ module Aws::ServiceCatalog
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The TagOption details.
+    #
+    # @!attribute [rw] key
+    #   The TagOptionDetail key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The TagOptionDetail value.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   The TagOptionDetail active state.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   The TagOptionDetail identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail AWS API Documentation
+    #
+    class TagOptionDetail < Struct.new(
+      :key,
+      :value,
+      :active,
+      :id)
+      include Aws::Structure
+    end
+
+    # The TagOption summary key-value pair.
+    #
+    # @!attribute [rw] key
+    #   The TagOptionSummary key.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The TagOptionSummary value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionSummary AWS API Documentation
+    #
+    class TagOptionSummary < Struct.new(
+      :key,
+      :values)
       include Aws::Structure
     end
 
@@ -3695,6 +4052,47 @@ module Aws::ServiceCatalog
       :key,
       :value,
       :use_previous_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTagOptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TagOptionId", # required
+    #         value: "TagOptionValue",
+    #         active: false,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the constraint to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The updated value.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   The updated active state.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOptionInput AWS API Documentation
+    #
+    class UpdateTagOptionInput < Struct.new(
+      :id,
+      :value,
+      :active)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_option_detail
+    #   The resulting detailed TagOption information.
+    #   @return [Types::TagOptionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOptionOutput AWS API Documentation
+    #
+    class UpdateTagOptionOutput < Struct.new(
+      :tag_option_detail)
       include Aws::Structure
     end
 

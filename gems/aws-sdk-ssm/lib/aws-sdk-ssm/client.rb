@@ -705,6 +705,53 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Creates a resource data sync configuration to a single bucket in
+    # Amazon S3. This is an asynchronous operation that returns immediately.
+    # After a successful initial sync is completed, the system continuously
+    # syncs data to the Amazon S3 bucket. To check the status of the sync,
+    # use the [ListResourceDataSync](API_ListResourceDataSync.html)
+    # operation.
+    #
+    # By default, data is not encrypted in Amazon S3. We strongly recommend
+    # that you enable encryption in Amazon S3 to ensure secure data storage.
+    # We also recommend that you secure access to the Amazon S3 bucket by
+    # creating a restrictive bucket policy. To view an example of a
+    # restrictive Amazon S3 bucket policy for Resource Data Sync, see
+    # [Creating a Resource Data Sync][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
+    #
+    # @option params [required, String] :sync_name
+    #   A name for the configuration.
+    #
+    # @option params [required, Types::ResourceDataSyncS3Destination] :s3_destination
+    #   Amazon S3 configuration details for the sync.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_data_sync({
+    #     sync_name: "ResourceDataSyncName", # required
+    #     s3_destination: { # required
+    #       bucket_name: "ResourceDataSyncS3BucketName", # required
+    #       prefix: "ResourceDataSyncS3Prefix",
+    #       sync_format: "JsonSerDe", # required, accepts JsonSerDe
+    #       region: "ResourceDataSyncS3Region", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSync AWS API Documentation
+    #
+    # @overload create_resource_data_sync(params = {})
+    # @param [Hash] params ({})
+    def create_resource_data_sync(params = {}, options = {})
+      req = build_request(:create_resource_data_sync, params)
+      req.send_request(options)
+    end
+
     # Deletes an activation. You are not required to delete an activation.
     # If you delete an activation, you can no longer use it to register
     # additional managed instances. Deleting an activation does not
@@ -902,6 +949,31 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_patch_baseline(params = {}, options = {})
       req = build_request(:delete_patch_baseline, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Resource Data Sync configuration. After the configuration is
+    # deleted, changes to inventory data on managed instances are no longer
+    # synced with the target Amazon S3 bucket. Deleting a sync configuration
+    # does not delete data in the target Amazon S3 bucket.
+    #
+    # @option params [required, String] :sync_name
+    #   The name of the configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_data_sync({
+    #     sync_name: "ResourceDataSyncName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync AWS API Documentation
+    #
+    # @overload delete_resource_data_sync(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_data_sync(params = {}, options = {})
+      req = build_request(:delete_resource_data_sync, params)
       req.send_request(options)
     end
 
@@ -2965,11 +3037,11 @@ module Aws::SSM
     end
 
     # Retrieve parameters in a specific hierarchy. For more information, see
-    # [Using Parameter Hierarchies][1].
+    # [Working with Systems Manager Parameters][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
@@ -3525,6 +3597,63 @@ module Aws::SSM
     # @param [Hash] params ({})
     def list_inventory_entries(params = {}, options = {})
       req = build_request(:list_inventory_entries, params)
+      req.send_request(options)
+    end
+
+    # Lists your resource data sync configurations. Includes information
+    # about the last time a sync attempted to start, the last sync status,
+    # and the last time a sync successfully completed.
+    #
+    # The number of sync configurations might be too large to return using a
+    # single call to `ListResourceDataSync`. You can limit the number of
+    # sync configurations returned by using the `MaxResults` parameter. To
+    # determine whether there are more sync configurations to list, check
+    # the value of `NextToken` in the output. If there are more sync
+    # configurations to list, you can request them by specifying the
+    # `NextToken` returned in the call to the parameter of a subsequent
+    # call.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::ListResourceDataSyncResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceDataSyncResult#resource_data_sync_items #resource_data_sync_items} => Array&lt;Types::ResourceDataSyncItem&gt;
+    #   * {Types::ListResourceDataSyncResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_data_sync({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_data_sync_items #=> Array
+    #   resp.resource_data_sync_items[0].sync_name #=> String
+    #   resp.resource_data_sync_items[0].s3_destination.bucket_name #=> String
+    #   resp.resource_data_sync_items[0].s3_destination.prefix #=> String
+    #   resp.resource_data_sync_items[0].s3_destination.sync_format #=> String, one of "JsonSerDe"
+    #   resp.resource_data_sync_items[0].s3_destination.region #=> String
+    #   resp.resource_data_sync_items[0].last_sync_time #=> Time
+    #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
+    #   resp.resource_data_sync_items[0].last_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.resource_data_sync_items[0].sync_created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync AWS API Documentation
+    #
+    # @overload list_resource_data_sync(params = {})
+    # @param [Hash] params ({})
+    def list_resource_data_sync(params = {}, options = {})
+      req = build_request(:list_resource_data_sync, params)
       req.send_request(options)
     end
 
@@ -4633,7 +4762,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

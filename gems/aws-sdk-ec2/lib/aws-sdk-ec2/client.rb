@@ -283,6 +283,35 @@ module Aws::EC2
     #   * {Types::AllocateAddressResult#allocation_id #allocation_id} => String
     #   * {Types::AllocateAddressResult#domain #domain} => String
     #
+    #
+    # @example Example: To allocate an Elastic IP address for EC2-VPC
+    #
+    #   # This example allocates an Elastic IP address to use with an instance in a VPC.
+    #
+    #   resp = client.allocate_address({
+    #     domain: "vpc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     allocation_id: "eipalloc-64d5890a", 
+    #     domain: "vpc", 
+    #     public_ip: "203.0.113.0", 
+    #   }
+    #
+    # @example Example: To allocate an Elastic IP address for EC2-Classic
+    #
+    #   # This example allocates an Elastic IP address to use with an instance in EC2-Classic.
+    #
+    #   resp = client.allocate_address({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     domain: "standard", 
+    #     public_ip: "198.51.100.0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.allocate_address({
@@ -460,6 +489,27 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To assign a specific secondary private IP address to an interface
+    #
+    #   # This example assigns the specified secondary private IP address to the specified network interface.
+    #
+    #   resp = client.assign_private_ip_addresses({
+    #     network_interface_id: "eni-e5aa89a3", 
+    #     private_ip_addresses: [
+    #       "10.0.0.82", 
+    #     ], 
+    #   })
+    #
+    # @example Example: To assign secondary private IP addresses that Amazon EC2 selects to an interface
+    #
+    #   # This example assigns two secondary private IP addresses to the specified network interface. Amazon EC2 automatically assigns these IP addresses from the available IP addresses in the CIDR block range of the subnet the network interface is associated with.
+    #
+    #   resp = client.assign_private_ip_addresses({
+    #     network_interface_id: "eni-e5aa89a3", 
+    #     secondary_private_ip_address_count: 2, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.assign_private_ip_addresses({
@@ -553,6 +603,44 @@ module Aws::EC2
     #
     #   * {Types::AssociateAddressResult#association_id #association_id} => String
     #
+    #
+    # @example Example: To associate an Elastic IP address in EC2-VPC
+    #
+    #   # This example associates the specified Elastic IP address with the specified instance in a VPC.
+    #
+    #   resp = client.associate_address({
+    #     allocation_id: "eipalloc-64d5890a", 
+    #     instance_id: "i-0b263919b6498b123", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     association_id: "eipassoc-2bebb745", 
+    #   }
+    #
+    # @example Example: To associate an Elastic IP address with a network interface
+    #
+    #   # This example associates the specified Elastic IP address with the specified network interface.
+    #
+    #   resp = client.associate_address({
+    #     allocation_id: "eipalloc-64d5890a", 
+    #     network_interface_id: "eni-1a2b3c4d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     association_id: "eipassoc-2bebb745", 
+    #   }
+    #
+    # @example Example: To associate an Elastic IP address in EC2-Classic
+    #
+    #   # This example associates an Elastic IP address with an instance in EC2-Classic.
+    #
+    #   resp = client.associate_address({
+    #     instance_id: "i-07ffe74c7330ebf53", 
+    #     public_ip: "198.51.100.0", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_address({
@@ -609,6 +697,25 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To associate a DHCP options set with a VPC
+    #
+    #   # This example associates the specified DHCP options set with the specified VPC.
+    #
+    #   resp = client.associate_dhcp_options({
+    #     dhcp_options_id: "dopt-d9070ebb", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    # @example Example: To associate the default DHCP options set with a VPC
+    #
+    #   # This example associates the default DHCP options set with the specified VPC.
+    #
+    #   resp = client.associate_dhcp_options({
+    #     dhcp_options_id: "default", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -698,6 +805,21 @@ module Aws::EC2
     # @return [Types::AssociateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateRouteTableResult#association_id #association_id} => String
+    #
+    #
+    # @example Example: To associate a route table with a subnet
+    #
+    #   # This example associates the specified route table with the specified subnet.
+    #
+    #   resp = client.associate_route_table({
+    #     route_table_id: "rtb-22574640", 
+    #     subnet_id: "subnet-9d4a7b6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     association_id: "rtbassoc-781d0d1a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -881,6 +1003,16 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach an Internet gateway to a VPC
+    #
+    #   # This example attaches the specified Internet gateway to the specified VPC.
+    #
+    #   resp = client.attach_internet_gateway({
+    #     internet_gateway_id: "igw-c0a643a9", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_internet_gateway({
@@ -918,6 +1050,22 @@ module Aws::EC2
     # @return [Types::AttachNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AttachNetworkInterfaceResult#attachment_id #attachment_id} => String
+    #
+    #
+    # @example Example: To attach a network interface to an instance
+    #
+    #   # This example attaches the specified network interface to the specified instance.
+    #
+    #   resp = client.attach_network_interface({
+    #     device_index: 1, 
+    #     instance_id: "i-1234567890abcdef0", 
+    #     network_interface_id: "eni-e5aa89a3", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attachment_id: "eni-attach-66c4350a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1005,6 +1153,26 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #
+    #
+    # @example Example: To attach a volume to an instance
+    #
+    #   # This example attaches a volume (``vol-1234567890abcdef0``) to an instance (``i-01474ef662b89480``) as ``/dev/sdf``.
+    #
+    #   resp = client.attach_volume({
+    #     device: "/dev/sdf", 
+    #     instance_id: "i-01474ef662b89480", 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attach_time: Time.parse("2016-08-29T18:52:32.724Z"), 
+    #     device: "/dev/sdf", 
+    #     instance_id: "i-01474ef662b89480", 
+    #     state: "attaching", 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1668,6 +1836,51 @@ module Aws::EC2
     #   * {Types::CancelSpotFleetRequestsResponse#successful_fleet_requests #successful_fleet_requests} => Array&lt;Types::CancelSpotFleetRequestsSuccessItem&gt;
     #   * {Types::CancelSpotFleetRequestsResponse#unsuccessful_fleet_requests #unsuccessful_fleet_requests} => Array&lt;Types::CancelSpotFleetRequestsErrorItem&gt;
     #
+    #
+    # @example Example: To cancel a Spot fleet request
+    #
+    #   # This example cancels the specified Spot fleet request and terminates its associated Spot Instances.
+    #
+    #   resp = client.cancel_spot_fleet_requests({
+    #     spot_fleet_request_ids: [
+    #       "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     ], 
+    #     terminate_instances: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     successful_fleet_requests: [
+    #       {
+    #         current_spot_fleet_request_state: "cancelled_running", 
+    #         previous_spot_fleet_request_state: "active", 
+    #         spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To cancel a Spot fleet request without terminating its Spot Instances
+    #
+    #   # This example cancels the specified Spot fleet request without terminating its associated Spot Instances.
+    #
+    #   resp = client.cancel_spot_fleet_requests({
+    #     spot_fleet_request_ids: [
+    #       "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     ], 
+    #     terminate_instances: false, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     successful_fleet_requests: [
+    #       {
+    #         current_spot_fleet_request_state: "cancelled_terminating", 
+    #         previous_spot_fleet_request_state: "active", 
+    #         spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_spot_fleet_requests({
@@ -1724,6 +1937,27 @@ module Aws::EC2
     #
     #   * {Types::CancelSpotInstanceRequestsResult#cancelled_spot_instance_requests #cancelled_spot_instance_requests} => Array&lt;Types::CancelledSpotInstanceRequest&gt;
     #
+    #
+    # @example Example: To cancel Spot Instance requests
+    #
+    #   # This example cancels a Spot Instance request.
+    #
+    #   resp = client.cancel_spot_instance_requests({
+    #     spot_instance_request_ids: [
+    #       "sir-08b93456", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cancelled_spot_instance_requests: [
+    #       {
+    #         spot_instance_request_id: "sir-08b93456", 
+    #         state: "cancelled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_spot_instance_requests({
@@ -1767,6 +2001,21 @@ module Aws::EC2
     #
     #   * {Types::ConfirmProductInstanceResult#owner_id #owner_id} => String
     #   * {Types::ConfirmProductInstanceResult#return #return} => Boolean
+    #
+    #
+    # @example Example: To confirm the product instance
+    #
+    #   # This example determines whether the specified product code is associated with the specified instance.
+    #
+    #   resp = client.confirm_product_instance({
+    #     instance_id: "i-1234567890abcdef0", 
+    #     product_code: "774F4FF8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     owner_id: "123456789012", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1991,6 +2240,23 @@ module Aws::EC2
     #
     #   * {Types::CopySnapshotResult#snapshot_id #snapshot_id} => String
     #
+    #
+    # @example Example: To copy a snapshot
+    #
+    #   # This example copies a snapshot with the snapshot ID of ``snap-066877671789bd71b`` from the ``us-west-2`` region to the ``us-east-1`` region and adds a short description to identify the snapshot.
+    #
+    #   resp = client.copy_snapshot({
+    #     description: "This is my copied snapshot.", 
+    #     destination_region: "us-east-1", 
+    #     source_region: "us-west-2", 
+    #     source_snapshot_id: "snap-066877671789bd71b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #   }
+    #
     # @example Copy snapshot example
     #   source_snapshot_id = 'snapshot-id'
     #   source_region = 'us-east-1'
@@ -2099,6 +2365,28 @@ module Aws::EC2
     #
     #   * {Types::CreateCustomerGatewayResult#customer_gateway #customer_gateway} => Types::CustomerGateway
     #
+    #
+    # @example Example: To create a customer gateway
+    #
+    #   # This example creates a customer gateway with the specified IP address for its outside interface.
+    #
+    #   resp = client.create_customer_gateway({
+    #     bgp_asn: 65534, 
+    #     public_ip: "12.1.2.3", 
+    #     type: "ipsec.1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     customer_gateway: {
+    #       bgp_asn: "65534", 
+    #       customer_gateway_id: "cgw-0e11f167", 
+    #       ip_address: "12.1.2.3", 
+    #       state: "available", 
+    #       type: "ipsec.1", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_customer_gateway({
@@ -2190,6 +2478,43 @@ module Aws::EC2
     # @return [Types::CreateDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDhcpOptionsResult#dhcp_options #dhcp_options} => Types::DhcpOptions
+    #
+    #
+    # @example Example: To create a DHCP options set
+    #
+    #   # This example creates a DHCP options set.
+    #
+    #   resp = client.create_dhcp_options({
+    #     dhcp_configurations: [
+    #       {
+    #         key: "domain-name-servers", 
+    #         values: [
+    #           "10.2.5.1", 
+    #           "10.2.5.2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dhcp_options: {
+    #       dhcp_configurations: [
+    #         {
+    #           key: "domain-name-servers", 
+    #           values: [
+    #             {
+    #               value: "10.2.5.2", 
+    #             }, 
+    #             {
+    #               value: "10.2.5.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       dhcp_options_id: "dopt-d9070ebb", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2603,6 +2928,25 @@ module Aws::EC2
     #
     #   * {Types::CreateInternetGatewayResult#internet_gateway #internet_gateway} => Types::InternetGateway
     #
+    #
+    # @example Example: To create an Internet gateway
+    #
+    #   # This example creates an Internet gateway.
+    #
+    #   resp = client.create_internet_gateway({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     internet_gateway: {
+    #       attachments: [
+    #       ], 
+    #       internet_gateway_id: "igw-c0a643a9", 
+    #       tags: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_internet_gateway({
@@ -2664,6 +3008,15 @@ module Aws::EC2
     #   * {Types::KeyPair#key_material #key_material} => String
     #   * {Types::KeyPair#key_name #key_name} => String
     #
+    #
+    # @example Example: To create a key pair
+    #
+    #   # This example creates a key pair named my-key-pair.
+    #
+    #   resp = client.create_key_pair({
+    #     key_name: "my-key-pair", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_key_pair({
@@ -2720,6 +3073,32 @@ module Aws::EC2
     #
     #   * {Types::CreateNatGatewayResult#client_token #client_token} => String
     #   * {Types::CreateNatGatewayResult#nat_gateway #nat_gateway} => Types::NatGateway
+    #
+    #
+    # @example Example: To create a NAT gateway
+    #
+    #   # This example creates a NAT gateway in subnet subnet-1a2b3c4d and associates an Elastic IP address with the allocation ID eipalloc-37fc1a52 with the NAT gateway.
+    #
+    #   resp = client.create_nat_gateway({
+    #     allocation_id: "eipalloc-37fc1a52", 
+    #     subnet_id: "subnet-1a2b3c4d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     nat_gateway: {
+    #       create_time: Time.parse("2015-12-17T12:45:26.732Z"), 
+    #       nat_gateway_addresses: [
+    #         {
+    #           allocation_id: "eipalloc-37fc1a52", 
+    #         }, 
+    #       ], 
+    #       nat_gateway_id: "nat-08d48af2a8e83edfd", 
+    #       state: "pending", 
+    #       subnet_id: "subnet-1a2b3c4d", 
+    #       vpc_id: "vpc-1122aabb", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2783,6 +3162,44 @@ module Aws::EC2
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkAclResult#network_acl #network_acl} => Types::NetworkAcl
+    #
+    #
+    # @example Example: To create a network ACL
+    #
+    #   # This example creates a network ACL for the specified VPC.
+    #
+    #   resp = client.create_network_acl({
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     network_acl: {
+    #       associations: [
+    #       ], 
+    #       entries: [
+    #         {
+    #           cidr_block: "0.0.0.0/0", 
+    #           egress: true, 
+    #           protocol: "-1", 
+    #           rule_action: "deny", 
+    #           rule_number: 32767, 
+    #         }, 
+    #         {
+    #           cidr_block: "0.0.0.0/0", 
+    #           egress: false, 
+    #           protocol: "-1", 
+    #           rule_action: "deny", 
+    #           rule_number: 32767, 
+    #         }, 
+    #       ], 
+    #       is_default: false, 
+    #       network_acl_id: "acl-5fb85d36", 
+    #       tags: [
+    #       ], 
+    #       vpc_id: "vpc-a01106c2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2898,6 +3315,24 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a network ACL entry
+    #
+    #   # This example creates an entry for the specified network ACL. The rule allows ingress traffic from anywhere (0.0.0.0/0) on UDP port 53 (DNS) into any associated subnet.
+    #
+    #   resp = client.create_network_acl_entry({
+    #     cidr_block: "0.0.0.0/0", 
+    #     egress: false, 
+    #     network_acl_id: "acl-5fb85d36", 
+    #     port_range: {
+    #       from: 53, 
+    #       to: 53, 
+    #     }, 
+    #     protocol: "udp", 
+    #     rule_action: "allow", 
+    #     rule_number: 100, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_acl_entry({
@@ -2993,6 +3428,51 @@ module Aws::EC2
     # @return [Types::CreateNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkInterfaceResult#network_interface #network_interface} => Types::NetworkInterface
+    #
+    #
+    # @example Example: To create a network interface
+    #
+    #   # This example creates a network interface for the specified subnet.
+    #
+    #   resp = client.create_network_interface({
+    #     description: "my network interface", 
+    #     groups: [
+    #       "sg-903004f8", 
+    #     ], 
+    #     private_ip_address: "10.0.2.17", 
+    #     subnet_id: "subnet-9d4a7b6c", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     network_interface: {
+    #       availability_zone: "us-east-1d", 
+    #       description: "my network interface", 
+    #       groups: [
+    #         {
+    #           group_id: "sg-903004f8", 
+    #           group_name: "default", 
+    #         }, 
+    #       ], 
+    #       mac_address: "02:1a:80:41:52:9c", 
+    #       network_interface_id: "eni-e5aa89a3", 
+    #       owner_id: "123456789012", 
+    #       private_ip_address: "10.0.2.17", 
+    #       private_ip_addresses: [
+    #         {
+    #           primary: true, 
+    #           private_ip_address: "10.0.2.17", 
+    #         }, 
+    #       ], 
+    #       requester_managed: false, 
+    #       source_dest_check: true, 
+    #       status: "pending", 
+    #       subnet_id: "subnet-9d4a7b6c", 
+    #       tag_set: [
+    #       ], 
+    #       vpc_id: "vpc-a01106c2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3099,6 +3579,20 @@ module Aws::EC2
     #   The placement strategy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a placement group
+    #
+    #   # This example creates a placement group with the specified name.
+    #
+    #   resp = client.create_placement_group({
+    #     group_name: "my-cluster", 
+    #     strategy: "cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3293,6 +3787,17 @@ module Aws::EC2
     #
     #   * {Types::CreateRouteResult#return #return} => Boolean
     #
+    #
+    # @example Example: To create a route
+    #
+    #   # This example creates a route for the specified route table. The route matches all traffic (0.0.0.0/0) and routes it to the specified Internet gateway.
+    #
+    #   resp = client.create_route({
+    #     destination_cidr_block: "0.0.0.0/0", 
+    #     gateway_id: "igw-c0a643a9", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_route({
@@ -3343,6 +3848,36 @@ module Aws::EC2
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteTableResult#route_table #route_table} => Types::RouteTable
+    #
+    #
+    # @example Example: To create a route table
+    #
+    #   # This example creates a route table for the specified VPC.
+    #
+    #   resp = client.create_route_table({
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     route_table: {
+    #       associations: [
+    #       ], 
+    #       propagating_vgws: [
+    #       ], 
+    #       route_table_id: "rtb-22574640", 
+    #       routes: [
+    #         {
+    #           destination_cidr_block: "10.0.0.0/16", 
+    #           gateway_id: "local", 
+    #           state: "active", 
+    #         }, 
+    #       ], 
+    #       tags: [
+    #       ], 
+    #       vpc_id: "vpc-a01106c2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3540,6 +4075,29 @@ module Aws::EC2
     #   * {Types::Snapshot#owner_alias #owner_alias} => String
     #   * {Types::Snapshot#tags #tags} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: To create a snapshot
+    #
+    #   # This example creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0`` and a short description to identify the snapshot.
+    #
+    #   resp = client.create_snapshot({
+    #     description: "This is my root volume snapshot.", 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     description: "This is my root volume snapshot.", 
+    #     owner_id: "012345678910", 
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #     start_time: Time.parse("2014-02-28T21:06:01.000Z"), 
+    #     state: "pending", 
+    #     tags: [
+    #     ], 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #     volume_size: 8, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_snapshot({
@@ -3600,6 +4158,26 @@ module Aws::EC2
     # @return [Types::CreateSpotDatafeedSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSpotDatafeedSubscriptionResult#spot_datafeed_subscription #spot_datafeed_subscription} => Types::SpotDatafeedSubscription
+    #
+    #
+    # @example Example: To create a Spot Instance datafeed
+    #
+    #   # This example creates a Spot Instance data feed for your AWS account.
+    #
+    #   resp = client.create_spot_datafeed_subscription({
+    #     bucket: "my-s3-bucket", 
+    #     prefix: "spotdata", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_datafeed_subscription: {
+    #       bucket: "my-s3-bucket", 
+    #       owner_id: "123456789012", 
+    #       prefix: "spotdata", 
+    #       state: "Active", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3690,6 +4268,28 @@ module Aws::EC2
     #
     #   * {Types::CreateSubnetResult#subnet #subnet} => Types::Subnet
     #
+    #
+    # @example Example: To create a subnet
+    #
+    #   # This example creates a subnet in the specified VPC with the specified CIDR block. We recommend that you let us select an Availability Zone for you.
+    #
+    #   resp = client.create_subnet({
+    #     cidr_block: "10.0.1.0/24", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     subnet: {
+    #       availability_zone: "us-west-2c", 
+    #       available_ip_address_count: 251, 
+    #       cidr_block: "10.0.1.0/24", 
+    #       state: "pending", 
+    #       subnet_id: "subnet-9d4a7b6c", 
+    #       vpc_id: "vpc-a01106c2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_subnet({
@@ -3760,6 +4360,23 @@ module Aws::EC2
     #   we set the value to an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add a tag to a resource
+    #
+    #   # This example adds the tag Stack=production to the specified image, or overwrites an existing tag for the AMI where the tag key is Stack.
+    #
+    #   resp = client.create_tags({
+    #     resources: [
+    #       "ami-78a54011", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "Stack", 
+    #         value: "production", 
+    #       }, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3894,6 +4511,57 @@ module Aws::EC2
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
     #
+    #
+    # @example Example: To create a new volume
+    #
+    #   # This example creates an 80 GiB General Purpose (SSD) volume in the Availability Zone ``us-east-1a``.
+    #
+    #   resp = client.create_volume({
+    #     availability_zone: "us-east-1a", 
+    #     size: 80, 
+    #     volume_type: "gp2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     availability_zone: "us-east-1a", 
+    #     create_time: Time.parse("2016-08-29T18:52:32.724Z"), 
+    #     encrypted: false, 
+    #     iops: 240, 
+    #     size: 80, 
+    #     snapshot_id: "", 
+    #     state: "creating", 
+    #     volume_id: "vol-6b60b7c7", 
+    #     volume_type: "gp2", 
+    #   }
+    #
+    # @example Example: To create a new Provisioned IOPS (SSD) volume from a snapshot
+    #
+    #   # This example creates a new Provisioned IOPS (SSD) volume with 1000 provisioned IOPS from a snapshot in the Availability Zone ``us-east-1a``.
+    #
+    #   resp = client.create_volume({
+    #     availability_zone: "us-east-1a", 
+    #     iops: 1000, 
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #     volume_type: "io1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attachments: [
+    #     ], 
+    #     availability_zone: "us-east-1a", 
+    #     create_time: Time.parse("2016-08-29T18:52:32.724Z"), 
+    #     iops: 1000, 
+    #     size: 500, 
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #     state: "creating", 
+    #     tags: [
+    #     ], 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #     volume_type: "io1", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_volume({
@@ -4009,6 +4677,26 @@ module Aws::EC2
     # @return [Types::CreateVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcResult#vpc #vpc} => Types::Vpc
+    #
+    #
+    # @example Example: To create a VPC
+    #
+    #   # This example creates a VPC with the specified CIDR block.
+    #
+    #   resp = client.create_vpc({
+    #     cidr_block: "10.0.0.0/16", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     vpc: {
+    #       cidr_block: "10.0.0.0/16", 
+    #       dhcp_options_id: "dopt-7a8b9c2d", 
+    #       instance_tenancy: "default", 
+    #       state: "pending", 
+    #       vpc_id: "vpc-a01106c2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4409,6 +5097,15 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a customer gateway
+    #
+    #   # This example deletes the specified customer gateway.
+    #
+    #   resp = client.delete_customer_gateway({
+    #     customer_gateway_id: "cgw-0e11f167", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_customer_gateway({
@@ -4440,6 +5137,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a DHCP options set
+    #
+    #   # This example deletes the specified DHCP options set.
+    #
+    #   resp = client.delete_dhcp_options({
+    #     dhcp_options_id: "dopt-d9070ebb", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4537,6 +5243,15 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an Internet gateway
+    #
+    #   # This example deletes the specified Internet gateway.
+    #
+    #   resp = client.delete_internet_gateway({
+    #     internet_gateway_id: "igw-c0a643a9", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_internet_gateway({
@@ -4567,6 +5282,15 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a key pair
+    #
+    #   # This example deletes the specified key pair.
+    #
+    #   resp = client.delete_key_pair({
+    #     key_name: "my-key-pair", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_key_pair({
@@ -4594,6 +5318,20 @@ module Aws::EC2
     # @return [Types::DeleteNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteNatGatewayResult#nat_gateway_id #nat_gateway_id} => String
+    #
+    #
+    # @example Example: To delete a NAT gateway
+    #
+    #   # This example deletes the specified NAT gateway.
+    #
+    #   resp = client.delete_nat_gateway({
+    #     nat_gateway_id: "nat-04ae55e711cec5680", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     nat_gateway_id: "nat-04ae55e711cec5680", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4628,6 +5366,15 @@ module Aws::EC2
     #   The ID of the network ACL.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a network ACL
+    #
+    #   # This example deletes the specified network ACL.
+    #
+    #   resp = client.delete_network_acl({
+    #     network_acl_id: "acl-5fb85d36", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4665,6 +5412,17 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a network ACL entry
+    #
+    #   # This example deletes ingress rule number 100 from the specified network ACL.
+    #
+    #   resp = client.delete_network_acl_entry({
+    #     egress: true, 
+    #     network_acl_id: "acl-5fb85d36", 
+    #     rule_number: 100, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_network_acl_entry({
@@ -4696,6 +5454,15 @@ module Aws::EC2
     #   The ID of the network interface.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a network interface
+    #
+    #   # This example deletes the specified network interface.
+    #
+    #   resp = client.delete_network_interface({
+    #     network_interface_id: "eni-e5aa89a3", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4734,6 +5501,20 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a placement group
+    #
+    #   # This example deletes the specified placement group.
+    
+    #
+    #   resp = client.delete_placement_group({
+    #     group_name: "my-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_placement_group({
@@ -4771,6 +5552,16 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a route
+    #
+    #   # This example deletes the specified route from the specified route table.
+    #
+    #   resp = client.delete_route({
+    #     destination_cidr_block: "0.0.0.0/0", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_route({
@@ -4803,6 +5594,15 @@ module Aws::EC2
     #   The ID of the route table.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a route table
+    #
+    #   # This example deletes the specified route table.
+    #
+    #   resp = client.delete_route_table({
+    #     route_table_id: "rtb-22574640", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4891,6 +5691,19 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a snapshot
+    #
+    #   # This example deletes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``. If the command succeeds, no output is returned.
+    #
+    #   resp = client.delete_snapshot({
+    #     snapshot_id: "snap-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_snapshot({
@@ -4916,6 +5729,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To cancel a Spot Instance data feed subscription
+    #
+    #   # This example deletes a Spot data feed subscription for the account.
+    #
+    #   resp = client.delete_spot_datafeed_subscription({
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4945,6 +5766,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a subnet
+    #
+    #   # This example deletes the specified subnet.
+    #
+    #   resp = client.delete_subnet({
+    #     subnet_id: "subnet-9d4a7b6c", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4989,6 +5819,23 @@ module Aws::EC2
     #   is an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a tag from a resource
+    #
+    #   # This example deletes the tag Stack=test from the specified image.
+    #
+    #   resp = client.delete_tags({
+    #     resources: [
+    #       "ami-78a54011", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "Stack", 
+    #         value: "test", 
+    #       }, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -5037,6 +5884,19 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a volume
+    #
+    #   # This example deletes an available volume with the volume ID of ``vol-049df61146c4d7901``. If the command succeeds, no output is returned.
+    #
+    #   resp = client.delete_volume({
+    #     volume_id: "vol-049df61146c4d7901", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_volume({
@@ -5070,6 +5930,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a VPC
+    #
+    #   # This example deletes the specified VPC.
+    #
+    #   resp = client.delete_vpc({
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -5333,6 +6202,98 @@ module Aws::EC2
     #
     #   * {Types::DescribeAccountAttributesResult#account_attributes #account_attributes} => Array&lt;Types::AccountAttribute&gt;
     #
+    #
+    # @example Example: To describe a single attribute for your AWS account
+    #
+    #   # This example describes the supported-platforms attribute for your AWS account.
+    #
+    #   resp = client.describe_account_attributes({
+    #     attribute_names: [
+    #       "supported-platforms", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_attributes: [
+    #       {
+    #         attribute_name: "supported-platforms", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "EC2", 
+    #           }, 
+    #           {
+    #             attribute_value: "VPC", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe all attributes for your AWS account
+    #
+    #   # This example describes the attributes for your AWS account.
+    #
+    #   resp = client.describe_account_attributes({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_attributes: [
+    #       {
+    #         attribute_name: "supported-platforms", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "EC2", 
+    #           }, 
+    #           {
+    #             attribute_value: "VPC", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         attribute_name: "vpc-max-security-groups-per-interface", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "5", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         attribute_name: "max-elastic-ips", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "5", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         attribute_name: "max-instances", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "20", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         attribute_name: "vpc-max-elastic-ips", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "5", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         attribute_name: "default-vpc", 
+    #         attribute_values: [
+    #           {
+    #             attribute_value: "none", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_attributes({
@@ -5409,6 +6370,92 @@ module Aws::EC2
     #
     #   * {Types::DescribeAddressesResult#addresses #addresses} => Array&lt;Types::Address&gt;
     #
+    #
+    # @example Example: To describe your Elastic IP addresses
+    #
+    #   # This example describes your Elastic IP addresses.
+    #
+    #   resp = client.describe_addresses({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     addresses: [
+    #       {
+    #         domain: "standard", 
+    #         instance_id: "i-1234567890abcdef0", 
+    #         public_ip: "198.51.100.0", 
+    #       }, 
+    #       {
+    #         allocation_id: "eipalloc-12345678", 
+    #         association_id: "eipassoc-12345678", 
+    #         domain: "vpc", 
+    #         instance_id: "i-1234567890abcdef0", 
+    #         network_interface_id: "eni-12345678", 
+    #         network_interface_owner_id: "123456789012", 
+    #         private_ip_address: "10.0.1.241", 
+    #         public_ip: "203.0.113.0", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe your Elastic IP addresses for EC2-VPC
+    #
+    #   # This example describes your Elastic IP addresses for use with instances in a VPC.
+    #
+    #   resp = client.describe_addresses({
+    #     filters: [
+    #       {
+    #         name: "domain", 
+    #         values: [
+    #           "vpc", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     addresses: [
+    #       {
+    #         allocation_id: "eipalloc-12345678", 
+    #         association_id: "eipassoc-12345678", 
+    #         domain: "vpc", 
+    #         instance_id: "i-1234567890abcdef0", 
+    #         network_interface_id: "eni-12345678", 
+    #         network_interface_owner_id: "123456789012", 
+    #         private_ip_address: "10.0.1.241", 
+    #         public_ip: "203.0.113.0", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe your Elastic IP addresses for EC2-Classic
+    #
+    #   # This example describes your Elastic IP addresses for use with instances in EC2-Classic.
+    #
+    #   resp = client.describe_addresses({
+    #     filters: [
+    #       {
+    #         name: "domain", 
+    #         values: [
+    #           "standard", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     addresses: [
+    #       {
+    #         domain: "standard", 
+    #         instance_id: "i-1234567890abcdef0", 
+    #         public_ip: "198.51.100.0", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_addresses({
@@ -5483,6 +6530,48 @@ module Aws::EC2
     # @return [Types::DescribeAvailabilityZonesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAvailabilityZonesResult#availability_zones #availability_zones} => Array&lt;Types::AvailabilityZone&gt;
+    #
+    #
+    # @example Example: To describe your Availability Zones
+    #
+    #   # This example describes the Availability Zones that are available to you. The response includes Availability Zones only for the current region.
+    #
+    #   resp = client.describe_availability_zones({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     availability_zones: [
+    #       {
+    #         messages: [
+    #         ], 
+    #         region_name: "us-east-1", 
+    #         state: "available", 
+    #         zone_name: "us-east-1b", 
+    #       }, 
+    #       {
+    #         messages: [
+    #         ], 
+    #         region_name: "us-east-1", 
+    #         state: "available", 
+    #         zone_name: "us-east-1c", 
+    #       }, 
+    #       {
+    #         messages: [
+    #         ], 
+    #         region_name: "us-east-1", 
+    #         state: "available", 
+    #         zone_name: "us-east-1d", 
+    #       }, 
+    #       {
+    #         messages: [
+    #         ], 
+    #         region_name: "us-east-1", 
+    #         state: "available", 
+    #         zone_name: "us-east-1e", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5834,6 +6923,30 @@ module Aws::EC2
     #
     #   * {Types::DescribeCustomerGatewaysResult#customer_gateways #customer_gateways} => Array&lt;Types::CustomerGateway&gt;
     #
+    #
+    # @example Example: To describe a customer gateway
+    #
+    #   # This example describes the specified customer gateway.
+    #
+    #   resp = client.describe_customer_gateways({
+    #     customer_gateway_ids: [
+    #       "cgw-0e11f167", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     customer_gateways: [
+    #       {
+    #         bgp_asn: "65534", 
+    #         customer_gateway_id: "cgw-0e11f167", 
+    #         ip_address: "12.1.2.3", 
+    #         state: "available", 
+    #         type: "ipsec.1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_customer_gateways({
@@ -5917,6 +7030,39 @@ module Aws::EC2
     # @return [Types::DescribeDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
+    #
+    #
+    # @example Example: To describe a DHCP options set
+    #
+    #   # This example describes the specified DHCP options set.
+    #
+    #   resp = client.describe_dhcp_options({
+    #     dhcp_options_ids: [
+    #       "dopt-d9070ebb", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dhcp_options: [
+    #       {
+    #         dhcp_configurations: [
+    #           {
+    #             key: "domain-name-servers", 
+    #             values: [
+    #               {
+    #                 value: "10.2.5.2", 
+    #               }, 
+    #               {
+    #                 value: "10.2.5.1", 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         dhcp_options_id: "dopt-d9070ebb", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7111,6 +8257,78 @@ module Aws::EC2
     #   * {Types::InstanceAttribute#sriov_net_support #sriov_net_support} => Types::AttributeValue
     #   * {Types::InstanceAttribute#user_data #user_data} => Types::AttributeValue
     #
+    #
+    # @example Example: To describe the instance type
+    #
+    #   # This example describes the instance type of the specified instance.
+    
+    #
+    #   resp = client.describe_instance_attribute({
+    #     attribute: "instanceType", 
+    #     instance_id: "i-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_id: "i-1234567890abcdef0", 
+    #     instance_type: {
+    #       value: "t1.micro", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To describe the disableApiTermination attribute
+    #
+    #   # This example describes the ``disableApiTermination`` attribute of the specified instance.
+    
+    #
+    #   resp = client.describe_instance_attribute({
+    #     attribute: "disableApiTermination", 
+    #     instance_id: "i-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disable_api_termination: {
+    #       value: false, 
+    #     }, 
+    #     instance_id: "i-1234567890abcdef0", 
+    #   }
+    #
+    # @example Example: To describe the block device mapping for an instance
+    #
+    #   # This example describes the ``blockDeviceMapping`` attribute of the specified instance.
+    
+    #
+    #   resp = client.describe_instance_attribute({
+    #     attribute: "blockDeviceMapping", 
+    #     instance_id: "i-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     block_device_mappings: [
+    #       {
+    #         device_name: "/dev/sda1", 
+    #         ebs: {
+    #           attach_time: Time.parse("2013-05-17T22:42:34.000Z"), 
+    #           delete_on_termination: true, 
+    #           status: "attached", 
+    #           volume_id: "vol-049df61146c4d7901", 
+    #         }, 
+    #       }, 
+    #       {
+    #         device_name: "/dev/sdf", 
+    #         ebs: {
+    #           attach_time: Time.parse("2013-09-10T23:07:00.000Z"), 
+    #           delete_on_termination: false, 
+    #           status: "attached", 
+    #           volume_id: "vol-049df61146c4d7901", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     instance_id: "i-1234567890abcdef0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_attribute({
@@ -7794,6 +9012,39 @@ module Aws::EC2
     #
     #   * {Types::DescribeInternetGatewaysResult#internet_gateways #internet_gateways} => Array&lt;Types::InternetGateway&gt;
     #
+    #
+    # @example Example: To describe the Internet gateway for a VPC
+    #
+    #   # This example describes the Internet gateway for the specified VPC.
+    #
+    #   resp = client.describe_internet_gateways({
+    #     filters: [
+    #       {
+    #         name: "attachment.vpc-id", 
+    #         values: [
+    #           "vpc-a01106c2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     internet_gateways: [
+    #       {
+    #         attachments: [
+    #           {
+    #             state: "available", 
+    #             vpc_id: "vpc-a01106c2", 
+    #           }, 
+    #         ], 
+    #         internet_gateway_id: "igw-c0a643a9", 
+    #         tags: [
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_internet_gateways({
@@ -7857,6 +9108,27 @@ module Aws::EC2
     # @return [Types::DescribeKeyPairsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeKeyPairsResult#key_pairs #key_pairs} => Array&lt;Types::KeyPairInfo&gt;
+    #
+    #
+    # @example Example: To display a key pair
+    #
+    #   # This example displays the fingerprint for the specified key.
+    #
+    #   resp = client.describe_key_pairs({
+    #     key_names: [
+    #       "my-key-pair", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_pairs: [
+    #       {
+    #         key_fingerprint: "1f:51:ae:28:bf:89:e9:d8:1f:25:5d:37:2d:7d:b8:ca:9f:f5:f1:6f", 
+    #         key_name: "my-key-pair", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7925,6 +9197,24 @@ module Aws::EC2
     #   * {Types::DescribeMovingAddressesResult#moving_address_statuses #moving_address_statuses} => Array&lt;Types::MovingAddressStatus&gt;
     #   * {Types::DescribeMovingAddressesResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe your moving addresses
+    #
+    #   # This example describes all of your moving Elastic IP addresses.
+    #
+    #   resp = client.describe_moving_addresses({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     moving_address_statuses: [
+    #       {
+    #         move_status: "MovingToVpc", 
+    #         public_ip: "198.51.100.0", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_moving_addresses({
@@ -7988,6 +9278,43 @@ module Aws::EC2
     #
     #   * {Types::DescribeNatGatewaysResult#nat_gateways #nat_gateways} => Array&lt;Types::NatGateway&gt;
     #   * {Types::DescribeNatGatewaysResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe a NAT gateway
+    #
+    #   # This example describes the NAT gateway for the specified VPC.
+    #
+    #   resp = client.describe_nat_gateways({
+    #     filter: [
+    #       {
+    #         name: "vpc-id", 
+    #         values: [
+    #           "vpc-1a2b3c4d", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     nat_gateways: [
+    #       {
+    #         create_time: Time.parse("2015-12-01T12:26:55.983Z"), 
+    #         nat_gateway_addresses: [
+    #           {
+    #             allocation_id: "eipalloc-89c620ec", 
+    #             network_interface_id: "eni-9dec76cd", 
+    #             private_ip: "10.0.0.149", 
+    #             public_ip: "198.11.222.333", 
+    #           }, 
+    #         ], 
+    #         nat_gateway_id: "nat-05dba92075d71c408", 
+    #         state: "available", 
+    #         subnet_id: "subnet-847e4dc2", 
+    #         vpc_id: "vpc-1a2b3c4d", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8121,6 +9448,53 @@ module Aws::EC2
     #
     #   * {Types::DescribeNetworkAclsResult#network_acls #network_acls} => Array&lt;Types::NetworkAcl&gt;
     #
+    #
+    # @example Example: To describe a network ACL
+    #
+    #   # This example describes the specified network ACL.
+    #
+    #   resp = client.describe_network_acls({
+    #     network_acl_ids: [
+    #       "acl-5fb85d36", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     network_acls: [
+    #       {
+    #         associations: [
+    #           {
+    #             network_acl_association_id: "aclassoc-66ea5f0b", 
+    #             network_acl_id: "acl-9aeb5ef7", 
+    #             subnet_id: "subnet-65ea5f08", 
+    #           }, 
+    #         ], 
+    #         entries: [
+    #           {
+    #             cidr_block: "0.0.0.0/0", 
+    #             egress: true, 
+    #             protocol: "-1", 
+    #             rule_action: "deny", 
+    #             rule_number: 32767, 
+    #           }, 
+    #           {
+    #             cidr_block: "0.0.0.0/0", 
+    #             egress: false, 
+    #             protocol: "-1", 
+    #             rule_action: "deny", 
+    #             rule_number: 32767, 
+    #           }, 
+    #         ], 
+    #         is_default: false, 
+    #         network_acl_id: "acl-5fb85d36", 
+    #         tags: [
+    #         ], 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_acls({
@@ -8190,6 +9564,84 @@ module Aws::EC2
     #   * {Types::DescribeNetworkInterfaceAttributeResult#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
     #   * {Types::DescribeNetworkInterfaceAttributeResult#network_interface_id #network_interface_id} => String
     #   * {Types::DescribeNetworkInterfaceAttributeResult#source_dest_check #source_dest_check} => Types::AttributeBooleanValue
+    #
+    #
+    # @example Example: To describe the attachment attribute of a network interface
+    #
+    #   # This example describes the attachment attribute of the specified network interface.
+    #
+    #   resp = client.describe_network_interface_attribute({
+    #     attribute: "attachment", 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attachment: {
+    #       attach_time: Time.parse("2015-05-21T20:02:20.000Z"), 
+    #       attachment_id: "eni-attach-43348162", 
+    #       delete_on_termination: true, 
+    #       device_index: 0, 
+    #       instance_id: "i-1234567890abcdef0", 
+    #       instance_owner_id: "123456789012", 
+    #       status: "attached", 
+    #     }, 
+    #     network_interface_id: "eni-686ea200", 
+    #   }
+    #
+    # @example Example: To describe the description attribute of a network interface
+    #
+    #   # This example describes the description attribute of the specified network interface.
+    #
+    #   resp = client.describe_network_interface_attribute({
+    #     attribute: "description", 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     description: {
+    #       value: "My description", 
+    #     }, 
+    #     network_interface_id: "eni-686ea200", 
+    #   }
+    #
+    # @example Example: To describe the groupSet attribute of a network interface
+    #
+    #   # This example describes the groupSet attribute of the specified network interface.
+    #
+    #   resp = client.describe_network_interface_attribute({
+    #     attribute: "groupSet", 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     groups: [
+    #       {
+    #         group_id: "sg-903004f8", 
+    #         group_name: "my-security-group", 
+    #       }, 
+    #     ], 
+    #     network_interface_id: "eni-686ea200", 
+    #   }
+    #
+    # @example Example: To describe the sourceDestCheck attribute of a network interface
+    #
+    #   # This example describes the sourceDestCheck attribute of the specified network interface.
+    #
+    #   resp = client.describe_network_interface_attribute({
+    #     attribute: "sourceDestCheck", 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     network_interface_id: "eni-686ea200", 
+    #     source_dest_check: {
+    #       value: true, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8360,6 +9812,73 @@ module Aws::EC2
     # @return [Types::DescribeNetworkInterfacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkInterfacesResult#network_interfaces #network_interfaces} => Array&lt;Types::NetworkInterface&gt;
+    #
+    #
+    # @example Example: To describe a network interface
+    #
+    #   # 
+    #
+    #   resp = client.describe_network_interfaces({
+    #     network_interface_ids: [
+    #       "eni-e5aa89a3", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     network_interfaces: [
+    #       {
+    #         association: {
+    #           association_id: "eipassoc-0fbb766a", 
+    #           ip_owner_id: "123456789012", 
+    #           public_dns_name: "ec2-203-0-113-12.compute-1.amazonaws.com", 
+    #           public_ip: "203.0.113.12", 
+    #         }, 
+    #         attachment: {
+    #           attach_time: Time.parse("2013-11-30T23:36:42.000Z"), 
+    #           attachment_id: "eni-attach-66c4350a", 
+    #           delete_on_termination: false, 
+    #           device_index: 1, 
+    #           instance_id: "i-1234567890abcdef0", 
+    #           instance_owner_id: "123456789012", 
+    #           status: "attached", 
+    #         }, 
+    #         availability_zone: "us-east-1d", 
+    #         description: "my network interface", 
+    #         groups: [
+    #           {
+    #             group_id: "sg-8637d3e3", 
+    #             group_name: "default", 
+    #           }, 
+    #         ], 
+    #         mac_address: "02:2f:8f:b0:cf:75", 
+    #         network_interface_id: "eni-e5aa89a3", 
+    #         owner_id: "123456789012", 
+    #         private_dns_name: "ip-10-0-1-17.ec2.internal", 
+    #         private_ip_address: "10.0.1.17", 
+    #         private_ip_addresses: [
+    #           {
+    #             association: {
+    #               association_id: "eipassoc-0fbb766a", 
+    #               ip_owner_id: "123456789012", 
+    #               public_dns_name: "ec2-203-0-113-12.compute-1.amazonaws.com", 
+    #               public_ip: "203.0.113.12", 
+    #             }, 
+    #             primary: true, 
+    #             private_dns_name: "ip-10-0-1-17.ec2.internal", 
+    #             private_ip_address: "10.0.1.17", 
+    #           }, 
+    #         ], 
+    #         requester_managed: false, 
+    #         source_dest_check: true, 
+    #         status: "in-use", 
+    #         subnet_id: "subnet-b61f49f0", 
+    #         tag_set: [
+    #         ], 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8594,6 +10113,64 @@ module Aws::EC2
     # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRegionsResult#regions #regions} => Array&lt;Types::Region&gt;
+    #
+    #
+    # @example Example: To describe your regions
+    #
+    #   # This example describes all the regions that are available to you.
+    #
+    #   resp = client.describe_regions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     regions: [
+    #       {
+    #         endpoint: "ec2.ap-south-1.amazonaws.com", 
+    #         region_name: "ap-south-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.eu-west-1.amazonaws.com", 
+    #         region_name: "eu-west-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.ap-southeast-1.amazonaws.com", 
+    #         region_name: "ap-southeast-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.ap-southeast-2.amazonaws.com", 
+    #         region_name: "ap-southeast-2", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.eu-central-1.amazonaws.com", 
+    #         region_name: "eu-central-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.ap-northeast-2.amazonaws.com", 
+    #         region_name: "ap-northeast-2", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.ap-northeast-1.amazonaws.com", 
+    #         region_name: "ap-northeast-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.us-east-1.amazonaws.com", 
+    #         region_name: "us-east-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.sa-east-1.amazonaws.com", 
+    #         region_name: "sa-east-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.us-west-1.amazonaws.com", 
+    #         region_name: "us-west-1", 
+    #       }, 
+    #       {
+    #         endpoint: "ec2.us-west-2.amazonaws.com", 
+    #         region_name: "us-west-2", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9267,6 +10844,45 @@ module Aws::EC2
     #
     #   * {Types::DescribeRouteTablesResult#route_tables #route_tables} => Array&lt;Types::RouteTable&gt;
     #
+    #
+    # @example Example: To describe a route table
+    #
+    #   # This example describes the specified route table.
+    #
+    #   resp = client.describe_route_tables({
+    #     route_table_ids: [
+    #       "rtb-1f382e7d", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     route_tables: [
+    #       {
+    #         associations: [
+    #           {
+    #             main: true, 
+    #             route_table_association_id: "rtbassoc-d8ccddba", 
+    #             route_table_id: "rtb-1f382e7d", 
+    #           }, 
+    #         ], 
+    #         propagating_vgws: [
+    #         ], 
+    #         route_table_id: "rtb-1f382e7d", 
+    #         routes: [
+    #           {
+    #             destination_cidr_block: "10.0.0.0/16", 
+    #             gateway_id: "local", 
+    #             state: "active", 
+    #           }, 
+    #         ], 
+    #         tags: [
+    #         ], 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_route_tables({
@@ -9379,6 +10995,53 @@ module Aws::EC2
     #   * {Types::DescribeScheduledInstanceAvailabilityResult#next_token #next_token} => String
     #   * {Types::DescribeScheduledInstanceAvailabilityResult#scheduled_instance_availability_set #scheduled_instance_availability_set} => Array&lt;Types::ScheduledInstanceAvailability&gt;
     #
+    #
+    # @example Example: To describe an available schedule
+    #
+    #   # This example describes a schedule that occurs every week on Sunday, starting on the specified date. Note that the output contains a single schedule as an example.
+    #
+    #   resp = client.describe_scheduled_instance_availability({
+    #     first_slot_start_time_range: {
+    #       earliest_time: Time.parse("2016-01-31T00:00:00Z"), 
+    #       latest_time: Time.parse("2016-01-31T04:00:00Z"), 
+    #     }, 
+    #     recurrence: {
+    #       frequency: "Weekly", 
+    #       interval: 1, 
+    #       occurrence_days: [
+    #         1, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scheduled_instance_availability_set: [
+    #       {
+    #         availability_zone: "us-west-2b", 
+    #         available_instance_count: 20, 
+    #         first_slot_start_time: Time.parse("2016-01-31T00:00:00Z"), 
+    #         hourly_price: "0.095", 
+    #         instance_type: "c4.large", 
+    #         max_term_duration_in_days: 366, 
+    #         min_term_duration_in_days: 366, 
+    #         network_platform: "EC2-VPC", 
+    #         platform: "Linux/UNIX", 
+    #         purchase_token: "eyJ2IjoiMSIsInMiOjEsImMiOi...", 
+    #         recurrence: {
+    #           frequency: "Weekly", 
+    #           interval: 1, 
+    #           occurrence_day_set: [
+    #             1, 
+    #           ], 
+    #           occurrence_relative_to_end: false, 
+    #         }, 
+    #         slot_duration_in_hours: 23, 
+    #         total_scheduled_instance_hours: 1219, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scheduled_instance_availability({
@@ -9478,6 +11141,47 @@ module Aws::EC2
     #
     #   * {Types::DescribeScheduledInstancesResult#next_token #next_token} => String
     #   * {Types::DescribeScheduledInstancesResult#scheduled_instance_set #scheduled_instance_set} => Array&lt;Types::ScheduledInstance&gt;
+    #
+    #
+    # @example Example: To describe your Scheduled Instances
+    #
+    #   # This example describes the specified Scheduled Instance.
+    #
+    #   resp = client.describe_scheduled_instances({
+    #     scheduled_instance_ids: [
+    #       "sci-1234-1234-1234-1234-123456789012", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scheduled_instance_set: [
+    #       {
+    #         availability_zone: "us-west-2b", 
+    #         create_date: Time.parse("2016-01-25T21:43:38.612Z"), 
+    #         hourly_price: "0.095", 
+    #         instance_count: 1, 
+    #         instance_type: "c4.large", 
+    #         network_platform: "EC2-VPC", 
+    #         next_slot_start_time: Time.parse("2016-01-31T09:00:00Z"), 
+    #         platform: "Linux/UNIX", 
+    #         recurrence: {
+    #           frequency: "Weekly", 
+    #           interval: 1, 
+    #           occurrence_day_set: [
+    #             1, 
+    #           ], 
+    #           occurrence_relative_to_end: false, 
+    #           occurrence_unit: "", 
+    #         }, 
+    #         scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
+    #         slot_duration_in_hours: 32, 
+    #         term_end_date: Time.parse("2017-01-31T09:00:00Z"), 
+    #         term_start_date: Time.parse("2016-01-31T09:00:00Z"), 
+    #         total_scheduled_instance_hours: 1696, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9753,6 +11457,23 @@ module Aws::EC2
     #   * {Types::DescribeSnapshotAttributeResult#product_codes #product_codes} => Array&lt;Types::ProductCode&gt;
     #   * {Types::DescribeSnapshotAttributeResult#snapshot_id #snapshot_id} => String
     #
+    #
+    # @example Example: To describe snapshot attributes
+    #
+    #   # This example describes the ``createVolumePermission`` attribute on a snapshot with the snapshot ID of ``snap-066877671789bd71b``.
+    #
+    #   resp = client.describe_snapshot_attribute({
+    #     attribute: "createVolumePermission", 
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_volume_permissions: [
+    #     ], 
+    #     snapshot_id: "snap-066877671789bd71b", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshot_attribute({
@@ -9920,6 +11641,69 @@ module Aws::EC2
     #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #   * {Types::DescribeSnapshotsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe a snapshot
+    #
+    #   # This example describes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``.
+    #
+    #   resp = client.describe_snapshots({
+    #     snapshot_ids: [
+    #       "snap-1234567890abcdef0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     snapshots: [
+    #       {
+    #         description: "This is my snapshot.", 
+    #         owner_id: "012345678910", 
+    #         progress: "100%", 
+    #         snapshot_id: "snap-1234567890abcdef0", 
+    #         start_time: Time.parse("2014-02-28T21:28:32.000Z"), 
+    #         state: "completed", 
+    #         volume_id: "vol-049df61146c4d7901", 
+    #         volume_size: 8, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe snapshots using filters
+    #
+    #   # This example describes all snapshots owned by the ID 012345678910 that are in the ``pending`` status.
+    #
+    #   resp = client.describe_snapshots({
+    #     filters: [
+    #       {
+    #         name: "status", 
+    #         values: [
+    #           "pending", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     owner_ids: [
+    #       "012345678910", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     snapshots: [
+    #       {
+    #         description: "This is my copied snapshot.", 
+    #         owner_id: "012345678910", 
+    #         progress: "87%", 
+    #         snapshot_id: "snap-066877671789bd71b", 
+    #         start_time: Time.parse("2014-02-28T21:37:27.000Z"), 
+    #         state: "pending", 
+    #         volume_id: "vol-1234567890abcdef0", 
+    #         volume_size: 8, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshots({
@@ -9985,6 +11769,24 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotDatafeedSubscriptionResult#spot_datafeed_subscription #spot_datafeed_subscription} => Types::SpotDatafeedSubscription
     #
+    #
+    # @example Example: To describe the datafeed for your AWS account
+    #
+    #   # This example describes the Spot Instance datafeed subscription for your AWS account.
+    #
+    #   resp = client.describe_spot_datafeed_subscription({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_datafeed_subscription: {
+    #       bucket: "my-s3-bucket", 
+    #       owner_id: "123456789012", 
+    #       prefix: "spotdata", 
+    #       state: "Active", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_datafeed_subscription({
@@ -10034,6 +11836,27 @@ module Aws::EC2
     #   * {Types::DescribeSpotFleetInstancesResponse#active_instances #active_instances} => Array&lt;Types::ActiveInstance&gt;
     #   * {Types::DescribeSpotFleetInstancesResponse#next_token #next_token} => String
     #   * {Types::DescribeSpotFleetInstancesResponse#spot_fleet_request_id #spot_fleet_request_id} => String
+    #
+    #
+    # @example Example: To describe the Spot Instances associated with a Spot fleet
+    #
+    #   # This example lists the Spot Instances associated with the specified Spot fleet.
+    #
+    #   resp = client.describe_spot_fleet_instances({
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     active_instances: [
+    #       {
+    #         instance_id: "i-1234567890abcdef0", 
+    #         instance_type: "m3.medium", 
+    #         spot_instance_request_id: "sir-08b93456", 
+    #       }, 
+    #     ], 
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10103,6 +11926,55 @@ module Aws::EC2
     #   * {Types::DescribeSpotFleetRequestHistoryResponse#spot_fleet_request_id #spot_fleet_request_id} => String
     #   * {Types::DescribeSpotFleetRequestHistoryResponse#start_time #start_time} => Time
     #
+    #
+    # @example Example: To describe Spot fleet history
+    #
+    #   # This example returns the history for the specified Spot fleet starting at the specified time.
+    #
+    #   resp = client.describe_spot_fleet_request_history({
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     start_time: Time.parse("2015-05-26T00:00:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     history_records: [
+    #       {
+    #         event_information: {
+    #           event_sub_type: "submitted", 
+    #         }, 
+    #         event_type: "fleetRequestChange", 
+    #         timestamp: Time.parse("2015-05-26T23:17:20.697Z"), 
+    #       }, 
+    #       {
+    #         event_information: {
+    #           event_sub_type: "active", 
+    #         }, 
+    #         event_type: "fleetRequestChange", 
+    #         timestamp: Time.parse("2015-05-26T23:17:20.873Z"), 
+    #       }, 
+    #       {
+    #         event_information: {
+    #           event_sub_type: "launched", 
+    #           instance_id: "i-1234567890abcdef0", 
+    #         }, 
+    #         event_type: "instanceChange", 
+    #         timestamp: Time.parse("2015-05-26T23:21:21.712Z"), 
+    #       }, 
+    #       {
+    #         event_information: {
+    #           event_sub_type: "launched", 
+    #           instance_id: "i-1234567890abcdef1", 
+    #         }, 
+    #         event_type: "instanceChange", 
+    #         timestamp: Time.parse("2015-05-26T23:21:21.816Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "CpHNsscimcV5oH7bSbub03CI2Qms5+ypNpNm+53MNlR0YcXAkp0xFlfKf91yVxSExmbtma3awYxMFzNA663ZskT0AHtJ6TCb2Z8bQC2EnZgyELbymtWPfpZ1ZbauVg+P+TfGlWxWWB/Vr5dk5d4LfdgA/DRAHUrYgxzrEXAMPLE=", 
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     start_time: Time.parse("2015-05-26T00:00:00Z"), 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_fleet_request_history({
@@ -10163,6 +12035,62 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotFleetRequestsResponse#next_token #next_token} => String
     #   * {Types::DescribeSpotFleetRequestsResponse#spot_fleet_request_configs #spot_fleet_request_configs} => Array&lt;Types::SpotFleetRequestConfig&gt;
+    #
+    #
+    # @example Example: To describe a Spot fleet request
+    #
+    #   # This example describes the specified Spot fleet request.
+    #
+    #   resp = client.describe_spot_fleet_requests({
+    #     spot_fleet_request_ids: [
+    #       "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_fleet_request_configs: [
+    #       {
+    #         spot_fleet_request_config: {
+    #           iam_fleet_role: "arn:aws:iam::123456789012:role/my-spot-fleet-role", 
+    #           launch_specifications: [
+    #             {
+    #               ebs_optimized: false, 
+    #               image_id: "ami-1a2b3c4d", 
+    #               instance_type: "cc2.8xlarge", 
+    #               network_interfaces: [
+    #                 {
+    #                   associate_public_ip_address: true, 
+    #                   delete_on_termination: false, 
+    #                   device_index: 0, 
+    #                   secondary_private_ip_address_count: 0, 
+    #                   subnet_id: "subnet-a61dafcf", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #             {
+    #               ebs_optimized: false, 
+    #               image_id: "ami-1a2b3c4d", 
+    #               instance_type: "r3.8xlarge", 
+    #               network_interfaces: [
+    #                 {
+    #                   associate_public_ip_address: true, 
+    #                   delete_on_termination: false, 
+    #                   device_index: 0, 
+    #                   secondary_private_ip_address_count: 0, 
+    #                   subnet_id: "subnet-a61dafcf", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           spot_price: "0.05", 
+    #           target_capacity: 20, 
+    #         }, 
+    #         spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #         spot_fleet_request_state: "active", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10414,6 +12342,60 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotInstanceRequestsResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
     #
+    #
+    # @example Example: To describe a Spot Instance request
+    #
+    #   # This example describes the specified Spot Instance request.
+    #
+    #   resp = client.describe_spot_instance_requests({
+    #     spot_instance_request_ids: [
+    #       "sir-08b93456", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_instance_requests: [
+    #       {
+    #         create_time: Time.parse("2014-04-30T18:14:55.000Z"), 
+    #         instance_id: "i-1234567890abcdef0", 
+    #         launch_specification: {
+    #           block_device_mappings: [
+    #             {
+    #               device_name: "/dev/sda1", 
+    #               ebs: {
+    #                 delete_on_termination: true, 
+    #                 volume_size: 8, 
+    #                 volume_type: "standard", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           ebs_optimized: false, 
+    #           image_id: "ami-7aba833f", 
+    #           instance_type: "m1.small", 
+    #           key_name: "my-key-pair", 
+    #           security_groups: [
+    #             {
+    #               group_id: "sg-e38f24a7", 
+    #               group_name: "my-security-group", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         launched_availability_zone: "us-west-1b", 
+    #         product_description: "Linux/UNIX", 
+    #         spot_instance_request_id: "sir-08b93456", 
+    #         spot_price: "0.010000", 
+    #         state: "active", 
+    #         status: {
+    #           code: "fulfilled", 
+    #           message: "Your Spot request is fulfilled.", 
+    #           update_time: Time.parse("2014-04-30T18:16:21.000Z"), 
+    #         }, 
+    #         type: "one-time", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_instance_requests({
@@ -10580,6 +12562,42 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotPriceHistoryResult#next_token #next_token} => String
     #   * {Types::DescribeSpotPriceHistoryResult#spot_price_history #spot_price_history} => Array&lt;Types::SpotPrice&gt;
+    #
+    #
+    # @example Example: To describe Spot price history for Linux/UNIX (Amazon VPC)
+    #
+    #   # This example returns the Spot Price history for m1.xlarge, Linux/UNIX (Amazon VPC) instances for a particular day in January.
+    #
+    #   resp = client.describe_spot_price_history({
+    #     end_time: Time.parse("2014-01-06T08:09:10"), 
+    #     instance_types: [
+    #       "m1.xlarge", 
+    #     ], 
+    #     product_descriptions: [
+    #       "Linux/UNIX (Amazon VPC)", 
+    #     ], 
+    #     start_time: Time.parse("2014-01-06T07:08:09"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_price_history: [
+    #       {
+    #         availability_zone: "us-west-1a", 
+    #         instance_type: "m1.xlarge", 
+    #         product_description: "Linux/UNIX (Amazon VPC)", 
+    #         spot_price: "0.080000", 
+    #         timestamp: Time.parse("2014-01-06T04:32:53.000Z"), 
+    #       }, 
+    #       {
+    #         availability_zone: "us-west-1c", 
+    #         instance_type: "m1.xlarge", 
+    #         product_description: "Linux/UNIX (Amazon VPC)", 
+    #         spot_price: "0.080000", 
+    #         timestamp: Time.parse("2014-01-05T11:28:26.000Z"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10778,6 +12796,38 @@ module Aws::EC2
     #
     #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
     #
+    #
+    # @example Example: To describe the subnets for a VPC
+    #
+    #   # This example describes the subnets for the specified VPC.
+    #
+    #   resp = client.describe_subnets({
+    #     filters: [
+    #       {
+    #         name: "vpc-id", 
+    #         values: [
+    #           "vpc-a01106c2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     subnets: [
+    #       {
+    #         availability_zone: "us-east-1c", 
+    #         available_ip_address_count: 251, 
+    #         cidr_block: "10.0.1.0/24", 
+    #         default_for_az: false, 
+    #         map_public_ip_on_launch: false, 
+    #         state: "available", 
+    #         subnet_id: "subnet-9d4a7b6c", 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_subnets({
@@ -10865,6 +12915,40 @@ module Aws::EC2
     #   * {Types::DescribeTagsResult#next_token #next_token} => String
     #   * {Types::DescribeTagsResult#tags #tags} => Array&lt;Types::TagDescription&gt;
     #
+    #
+    # @example Example: To describe the tags for a single resource
+    #
+    #   # This example describes the tags for the specified instance.
+    #
+    #   resp = client.describe_tags({
+    #     filters: [
+    #       {
+    #         name: "resource-id", 
+    #         values: [
+    #           "i-1234567890abcdef8", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "Stack", 
+    #         resource_id: "i-1234567890abcdef8", 
+    #         resource_type: "instance", 
+    #         value: "test", 
+    #       }, 
+    #       {
+    #         key: "Name", 
+    #         resource_id: "i-1234567890abcdef8", 
+    #         resource_type: "instance", 
+    #         value: "Beta Server", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tags({
@@ -10924,6 +13008,24 @@ module Aws::EC2
     #   * {Types::DescribeVolumeAttributeResult#auto_enable_io #auto_enable_io} => Types::AttributeBooleanValue
     #   * {Types::DescribeVolumeAttributeResult#product_codes #product_codes} => Array&lt;Types::ProductCode&gt;
     #   * {Types::DescribeVolumeAttributeResult#volume_id #volume_id} => String
+    #
+    #
+    # @example Example: To describe a volume attribute
+    #
+    #   # This example describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-049df61146c4d7901``.
+    #
+    #   resp = client.describe_volume_attribute({
+    #     attribute: "autoEnableIO", 
+    #     volume_id: "vol-049df61146c4d7901", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_enable_io: {
+    #       value: false, 
+    #     }, 
+    #     volume_id: "vol-049df61146c4d7901", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11065,6 +13167,65 @@ module Aws::EC2
     #
     #   * {Types::DescribeVolumeStatusResult#next_token #next_token} => String
     #   * {Types::DescribeVolumeStatusResult#volume_statuses #volume_statuses} => Array&lt;Types::VolumeStatusItem&gt;
+    #
+    #
+    # @example Example: To describe the status of a single volume
+    #
+    #   # This example describes the status for the volume ``vol-1234567890abcdef0``.
+    #
+    #   resp = client.describe_volume_status({
+    #     volume_ids: [
+    #       "vol-1234567890abcdef0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volume_statuses: [
+    #       {
+    #         actions: [
+    #         ], 
+    #         availability_zone: "us-east-1a", 
+    #         events: [
+    #         ], 
+    #         volume_id: "vol-1234567890abcdef0", 
+    #         volume_status: {
+    #           details: [
+    #             {
+    #               name: "io-enabled", 
+    #               status: "passed", 
+    #             }, 
+    #             {
+    #               name: "io-performance", 
+    #               status: "not-applicable", 
+    #             }, 
+    #           ], 
+    #           status: "ok", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe the status of impaired volumes
+    #
+    #   # This example describes the status for all volumes that are impaired. In this example output, there are no impaired volumes.
+    #
+    #   resp = client.describe_volume_status({
+    #     filters: [
+    #       {
+    #         name: "volume-status.status", 
+    #         values: [
+    #           "impaired", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volume_statuses: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11217,6 +13378,86 @@ module Aws::EC2
     #
     #   * {Types::DescribeVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
     #   * {Types::DescribeVolumesResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe all volumes
+    #
+    #   # This example describes all of your volumes in the default region.
+    #
+    #   resp = client.describe_volumes({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     volumes: [
+    #       {
+    #         attachments: [
+    #           {
+    #             attach_time: Time.parse("2013-12-18T22:35:00.000Z"), 
+    #             delete_on_termination: true, 
+    #             device: "/dev/sda1", 
+    #             instance_id: "i-1234567890abcdef0", 
+    #             state: "attached", 
+    #             volume_id: "vol-049df61146c4d7901", 
+    #           }, 
+    #         ], 
+    #         availability_zone: "us-east-1a", 
+    #         create_time: Time.parse("2013-12-18T22:35:00.084Z"), 
+    #         size: 8, 
+    #         snapshot_id: "snap-1234567890abcdef0", 
+    #         state: "in-use", 
+    #         volume_id: "vol-049df61146c4d7901", 
+    #         volume_type: "standard", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe volumes that are attached to a specific instance
+    #
+    #   # This example describes all volumes that are both attached to the instance with the ID i-1234567890abcdef0 and set to delete when the instance terminates.
+    #
+    #   resp = client.describe_volumes({
+    #     filters: [
+    #       {
+    #         name: "attachment.instance-id", 
+    #         values: [
+    #           "i-1234567890abcdef0", 
+    #         ], 
+    #       }, 
+    #       {
+    #         name: "attachment.delete-on-termination", 
+    #         values: [
+    #           "true", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volumes: [
+    #       {
+    #         attachments: [
+    #           {
+    #             attach_time: Time.parse("2013-12-18T22:35:00.000Z"), 
+    #             delete_on_termination: true, 
+    #             device: "/dev/sda1", 
+    #             instance_id: "i-1234567890abcdef0", 
+    #             state: "attached", 
+    #             volume_id: "vol-049df61146c4d7901", 
+    #           }, 
+    #         ], 
+    #         availability_zone: "us-east-1a", 
+    #         create_time: Time.parse("2013-12-18T22:35:00.084Z"), 
+    #         size: 8, 
+    #         snapshot_id: "snap-1234567890abcdef0", 
+    #         state: "in-use", 
+    #         volume_id: "vol-049df61146c4d7901", 
+    #         volume_type: "standard", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11376,6 +13617,41 @@ module Aws::EC2
     #   * {Types::DescribeVpcAttributeResult#vpc_id #vpc_id} => String
     #   * {Types::DescribeVpcAttributeResult#enable_dns_hostnames #enable_dns_hostnames} => Types::AttributeBooleanValue
     #   * {Types::DescribeVpcAttributeResult#enable_dns_support #enable_dns_support} => Types::AttributeBooleanValue
+    #
+    #
+    # @example Example: To describe the enableDnsSupport attribute
+    #
+    #   # This example describes the enableDnsSupport attribute. This attribute indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.
+    #
+    #   resp = client.describe_vpc_attribute({
+    #     attribute: "enableDnsSupport", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enable_dns_support: {
+    #       value: true, 
+    #     }, 
+    #     vpc_id: "vpc-a01106c2", 
+    #   }
+    #
+    # @example Example: To describe the enableDnsHostnames attribute
+    #
+    #   # This example describes the enableDnsHostnames attribute. This attribute indicates whether the instances launched in the VPC get DNS hostnames. If this attribute is true, instances in the VPC get DNS hostnames; otherwise, they do not.
+    #
+    #   resp = client.describe_vpc_attribute({
+    #     attribute: "enableDnsHostnames", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enable_dns_hostnames: {
+    #       value: true, 
+    #     }, 
+    #     vpc_id: "vpc-a01106c2", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11822,6 +14098,37 @@ module Aws::EC2
     #
     #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
     #
+    #
+    # @example Example: To describe a VPC
+    #
+    #   # This example describes the specified VPC.
+    #
+    #   resp = client.describe_vpcs({
+    #     vpc_ids: [
+    #       "vpc-a01106c2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     vpcs: [
+    #       {
+    #         cidr_block: "10.0.0.0/16", 
+    #         dhcp_options_id: "dopt-7a8b9c2d", 
+    #         instance_tenancy: "default", 
+    #         is_default: false, 
+    #         state: "available", 
+    #         tags: [
+    #           {
+    #             key: "Name", 
+    #             value: "MyVPC", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpcs({
@@ -12138,6 +14445,16 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To detach an Internet gateway from a VPC
+    #
+    #   # This example detaches the specified Internet gateway from the specified VPC.
+    #
+    #   resp = client.detach_internet_gateway({
+    #     internet_gateway_id: "igw-c0a643a9", 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_internet_gateway({
@@ -12170,6 +14487,15 @@ module Aws::EC2
     #   Specifies whether to force a detachment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To detach a network interface from an instance
+    #
+    #   # This example detaches the specified network interface from its attached instance.
+    #
+    #   resp = client.detach_network_interface({
+    #     attachment_id: "eni-attach-66c4350a", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -12240,6 +14566,24 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #
+    #
+    # @example Example: To detach a volume from an instance
+    #
+    #   # This example detaches the volume (``vol-049df61146c4d7901``) from the instance it is attached to.
+    #
+    #   resp = client.detach_volume({
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attach_time: Time.parse("2014-02-27T19:23:06.000Z"), 
+    #     device: "/dev/sdb", 
+    #     instance_id: "i-1234567890abcdef0", 
+    #     state: "detaching", 
+    #     volume_id: "vol-049df61146c4d7901", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -12320,6 +14664,16 @@ module Aws::EC2
     #   The ID of the route table.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disable route propagation
+    #
+    #   # This example disables the specified virtual private gateway from propagating static routes to the specified route table.
+    #
+    #   resp = client.disable_vgw_route_propagation({
+    #     gateway_id: "vgw-9a4cacf3", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -12437,6 +14791,23 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To disassociate an Elastic IP address in EC2-VPC
+    #
+    #   # This example disassociates an Elastic IP address from an instance in a VPC.
+    #
+    #   resp = client.disassociate_address({
+    #     association_id: "eipassoc-2bebb745", 
+    #   })
+    #
+    # @example Example: To disassociate an Elastic IP addresses in EC2-Classic
+    #
+    #   # This example disassociates an Elastic IP address from an instance in EC2-Classic.
+    #
+    #   resp = client.disassociate_address({
+    #     public_ip: "198.51.100.0", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_address({
@@ -12512,6 +14883,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disassociate a route table
+    #
+    #   # This example disassociates the specified route table from its associated subnet.
+    #
+    #   resp = client.disassociate_route_table({
+    #     association_id: "rtbassoc-781d0d1a", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -12612,6 +14992,16 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To enable route propagation
+    #
+    #   # This example enables the specified virtual private gateway to propagate static routes to the specified route table.
+    #
+    #   resp = client.enable_vgw_route_propagation({
+    #     gateway_id: "vgw-9a4cacf3", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_vgw_route_propagation({
@@ -12641,6 +15031,15 @@ module Aws::EC2
     #   The ID of the volume.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To enable I/O for a volume
+    #
+    #   # This example enables I/O on volume ``vol-1234567890abcdef0``.
+    #
+    #   resp = client.enable_volume_io({
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -14026,6 +16425,53 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To modify the attachment attribute of a network interface
+    #
+    #   # This example modifies the attachment attribute of the specified network interface.
+    #
+    #   resp = client.modify_network_interface_attribute({
+    #     attachment: {
+    #       attachment_id: "eni-attach-43348162", 
+    #       delete_on_termination: false, 
+    #     }, 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    # @example Example: To modify the description attribute of a network interface
+    #
+    #   # This example modifies the description attribute of the specified network interface.
+    #
+    #   resp = client.modify_network_interface_attribute({
+    #     description: {
+    #       value: "My description", 
+    #     }, 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    # @example Example: To modify the groupSet attribute of a network interface
+    #
+    #   # This example command modifies the groupSet attribute of the specified network interface.
+    #
+    #   resp = client.modify_network_interface_attribute({
+    #     groups: [
+    #       "sg-903004f8", 
+    #       "sg-1a2b3c4d", 
+    #     ], 
+    #     network_interface_id: "eni-686ea200", 
+    #   })
+    #
+    # @example Example: To modify the sourceDestCheck attribute of a network interface
+    #
+    #   # This example command modifies the sourceDestCheck attribute of the specified network interface.
+    #
+    #   resp = client.modify_network_interface_attribute({
+    #     network_interface_id: "eni-686ea200", 
+    #     source_dest_check: {
+    #       value: false, 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_network_interface_attribute({
@@ -14161,6 +16607,41 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To modify a snapshot attribute
+    #
+    #   # This example modifies snapshot ``snap-1234567890abcdef0`` to remove the create volume permission for a user with the account ID ``123456789012``. If the command succeeds, no output is returned.
+    #
+    #   resp = client.modify_snapshot_attribute({
+    #     attribute: "createVolumePermission", 
+    #     operation_type: "remove", 
+    #     snapshot_id: "snap-1234567890abcdef0", 
+    #     user_ids: [
+    #       "123456789012", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To make a snapshot public
+    #
+    #   # This example makes the snapshot ``snap-1234567890abcdef0`` public.
+    #
+    #   resp = client.modify_snapshot_attribute({
+    #     attribute: "createVolumePermission", 
+    #     group_names: [
+    #       "all", 
+    #     ], 
+    #     operation_type: "add", 
+    #     snapshot_id: "snap-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_snapshot_attribute({
@@ -14234,6 +16715,36 @@ module Aws::EC2
     #
     #   * {Types::ModifySpotFleetRequestResponse#return #return} => Boolean
     #
+    #
+    # @example Example: To increase the target capacity of a Spot fleet request
+    #
+    #   # This example increases the target capacity of the specified Spot fleet request.
+    #
+    #   resp = client.modify_spot_fleet_request({
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     target_capacity: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     return: true, 
+    #   }
+    #
+    # @example Example: To decrease the target capacity of a Spot fleet request
+    #
+    #   # This example decreases the target capacity of the specified Spot fleet request without terminating any Spot Instances as a result.
+    #
+    #   resp = client.modify_spot_fleet_request({
+    #     excess_capacity_termination_policy: "NoTermination ", 
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #     target_capacity: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     return: true, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_spot_fleet_request({
@@ -14279,6 +16790,18 @@ module Aws::EC2
     #   The ID of the subnet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To change a subnet's public IP addressing behavior
+    #
+    #   # This example modifies the specified subnet so that all instances launched into this subnet are assigned a public IP address.
+    #
+    #   resp = client.modify_subnet_attribute({
+    #     map_public_ip_on_launch: {
+    #       value: true, 
+    #     }, 
+    #     subnet_id: "subnet-1a2b3c4d", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -14457,6 +16980,23 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To modify a volume attribute
+    #
+    #   # This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1234567890abcdef0`` to ``true``. If the command succeeds, no output is returned.
+    #
+    #   resp = client.modify_volume_attribute({
+    #     auto_enable_io: {
+    #       value: true, 
+    #     }, 
+    #     dry_run: true, 
+    #     volume_id: "vol-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_volume_attribute({
@@ -14502,6 +17042,29 @@ module Aws::EC2
     #   The ID of the VPC.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To modify the enableDnsSupport attribute
+    #
+    #   # This example modifies the enableDnsSupport attribute. This attribute indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for instances in the VPC to their corresponding IP addresses; otherwise, it does not.
+    #
+    #   resp = client.modify_vpc_attribute({
+    #     enable_dns_support: {
+    #       value: false, 
+    #     }, 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
+    #
+    # @example Example: To modify the enableDnsHostnames attribute
+    #
+    #   # This example modifies the enableDnsHostnames attribute. This attribute indicates whether instances launched in the VPC get DNS hostnames. If this attribute is true, instances in the VPC get DNS hostnames; otherwise, they do not.
+    #
+    #   resp = client.modify_vpc_attribute({
+    #     enable_dns_hostnames: {
+    #       value: false, 
+    #     }, 
+    #     vpc_id: "vpc-a01106c2", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -14725,6 +17288,20 @@ module Aws::EC2
     #   * {Types::MoveAddressToVpcResult#allocation_id #allocation_id} => String
     #   * {Types::MoveAddressToVpcResult#status #status} => String
     #
+    #
+    # @example Example: To move an address to EC2-VPC
+    #
+    #   # This example moves the specified Elastic IP address to the EC2-VPC platform.
+    #
+    #   resp = client.move_address_to_vpc({
+    #     public_ip: "54.123.4.56", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "MoveInProgress", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.move_address_to_vpc({
@@ -14924,6 +17501,50 @@ module Aws::EC2
     # @return [Types::PurchaseScheduledInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseScheduledInstancesResult#scheduled_instance_set #scheduled_instance_set} => Array&lt;Types::ScheduledInstance&gt;
+    #
+    #
+    # @example Example: To purchase a Scheduled Instance
+    #
+    #   # This example purchases a Scheduled Instance.
+    #
+    #   resp = client.purchase_scheduled_instances({
+    #     purchase_requests: [
+    #       {
+    #         instance_count: 1, 
+    #         purchase_token: "eyJ2IjoiMSIsInMiOjEsImMiOi...", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scheduled_instance_set: [
+    #       {
+    #         availability_zone: "us-west-2b", 
+    #         create_date: Time.parse("2016-01-25T21:43:38.612Z"), 
+    #         hourly_price: "0.095", 
+    #         instance_count: 1, 
+    #         instance_type: "c4.large", 
+    #         network_platform: "EC2-VPC", 
+    #         next_slot_start_time: Time.parse("2016-01-31T09:00:00Z"), 
+    #         platform: "Linux/UNIX", 
+    #         recurrence: {
+    #           frequency: "Weekly", 
+    #           interval: 1, 
+    #           occurrence_day_set: [
+    #             1, 
+    #           ], 
+    #           occurrence_relative_to_end: false, 
+    #           occurrence_unit: "", 
+    #         }, 
+    #         scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
+    #         slot_duration_in_hours: 32, 
+    #         term_end_date: Time.parse("2017-01-31T09:00:00Z"), 
+    #         term_start_date: Time.parse("2016-01-31T09:00:00Z"), 
+    #         total_scheduled_instance_hours: 1696, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -15238,6 +17859,23 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To release an Elastic IP address for EC2-VPC
+    #
+    #   # This example releases an Elastic IP address for use with instances in a VPC.
+    #
+    #   resp = client.release_address({
+    #     allocation_id: "eipalloc-64d5890a", 
+    #   })
+    #
+    # @example Example: To release an Elastic IP addresses for EC2-Classic
+    #
+    #   # This example releases an Elastic IP address for use with instances in EC2-Classic.
+    #
+    #   resp = client.release_address({
+    #     public_ip: "198.51.100.0", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.release_address({
@@ -15372,6 +18010,21 @@ module Aws::EC2
     #
     #   * {Types::ReplaceNetworkAclAssociationResult#new_association_id #new_association_id} => String
     #
+    #
+    # @example Example: To replace the network ACL associated with a subnet
+    #
+    #   # This example associates the specified network ACL with the subnet for the specified network ACL association.
+    #
+    #   resp = client.replace_network_acl_association({
+    #     association_id: "aclassoc-e5b95c8c", 
+    #     network_acl_id: "acl-5fb85d36", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     new_association_id: "aclassoc-3999875b", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_network_acl_association({
@@ -15449,6 +18102,24 @@ module Aws::EC2
     #   The rule number of the entry to replace.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To replace a network ACL entry
+    #
+    #   # This example replaces an entry for the specified network ACL. The new rule 100 allows ingress traffic from 203.0.113.12/24 on UDP port 53 (DNS) into any associated subnet.
+    #
+    #   resp = client.replace_network_acl_entry({
+    #     cidr_block: "203.0.113.12/24", 
+    #     egress: false, 
+    #     network_acl_id: "acl-5fb85d36", 
+    #     port_range: {
+    #       from: 53, 
+    #       to: 53, 
+    #     }, 
+    #     protocol: "udp", 
+    #     rule_action: "allow", 
+    #     rule_number: 100, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -15529,6 +18200,17 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To replace a route
+    #
+    #   # This example replaces the specified route in the specified table table. The new route matches the specified CIDR and sends the traffic to the specified virtual private gateway.
+    #
+    #   resp = client.replace_route({
+    #     destination_cidr_block: "10.0.0.0/16", 
+    #     gateway_id: "vgw-9a4cacf3", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_route({
@@ -15583,6 +18265,21 @@ module Aws::EC2
     # @return [Types::ReplaceRouteTableAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplaceRouteTableAssociationResult#new_association_id #new_association_id} => String
+    #
+    #
+    # @example Example: To replace the route table associated with a subnet
+    #
+    #   # This example associates the specified route table with the subnet for the specified route table association.
+    #
+    #   resp = client.replace_route_table_association({
+    #     association_id: "rtbassoc-781d0d1a", 
+    #     route_table_id: "rtb-22574640", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     new_association_id: "rtbassoc-3a1f0f58", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -15724,6 +18421,147 @@ module Aws::EC2
     # @return [Types::RequestSpotFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestSpotFleetResponse#spot_fleet_request_id #spot_fleet_request_id} => String
+    #
+    #
+    # @example Example: To request a Spot fleet in the subnet with the lowest price
+    #
+    #   # This example creates a Spot fleet request with two launch specifications that differ only by subnet. The Spot fleet launches the instances in the specified subnet with the lowest price. If the instances are launched in a default VPC, they receive a public IP address by default. If the instances are launched in a nondefault VPC, they do not receive a public IP address by default. Note that you can't specify different subnets from the same Availability Zone in a Spot fleet request.
+    #
+    #   resp = client.request_spot_fleet({
+    #     spot_fleet_request_config: {
+    #       iam_fleet_role: "arn:aws:iam::123456789012:role/my-spot-fleet-role", 
+    #       launch_specifications: [
+    #         {
+    #           iam_instance_profile: {
+    #             arn: "arn:aws:iam::123456789012:instance-profile/my-iam-role", 
+    #           }, 
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "m3.medium", 
+    #           key_name: "my-key-pair", 
+    #           security_groups: [
+    #             {
+    #               group_id: "sg-1a2b3c4d", 
+    #             }, 
+    #           ], 
+    #           subnet_id: "subnet-1a2b3c4d, subnet-3c4d5e6f", 
+    #         }, 
+    #       ], 
+    #       spot_price: "0.04", 
+    #       target_capacity: 2, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   }
+    #
+    # @example Example: To request a Spot fleet in the Availability Zone with the lowest price
+    #
+    #   # This example creates a Spot fleet request with two launch specifications that differ only by Availability Zone. The Spot fleet launches the instances in the specified Availability Zone with the lowest price. If your account supports EC2-VPC only, Amazon EC2 launches the Spot instances in the default subnet of the Availability Zone. If your account supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the Availability Zone.
+    #
+    #   resp = client.request_spot_fleet({
+    #     spot_fleet_request_config: {
+    #       iam_fleet_role: "arn:aws:iam::123456789012:role/my-spot-fleet-role", 
+    #       launch_specifications: [
+    #         {
+    #           iam_instance_profile: {
+    #             arn: "arn:aws:iam::123456789012:instance-profile/my-iam-role", 
+    #           }, 
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "m3.medium", 
+    #           key_name: "my-key-pair", 
+    #           placement: {
+    #             availability_zone: "us-west-2a, us-west-2b", 
+    #           }, 
+    #           security_groups: [
+    #             {
+    #               group_id: "sg-1a2b3c4d", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       spot_price: "0.04", 
+    #       target_capacity: 2, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   }
+    #
+    # @example Example: To launch Spot instances in a subnet and assign them public IP addresses
+    #
+    #   # This example assigns public addresses to instances launched in a nondefault VPC. Note that when you specify a network interface, you must include the subnet ID and security group ID using the network interface.
+    #
+    #   resp = client.request_spot_fleet({
+    #     spot_fleet_request_config: {
+    #       iam_fleet_role: "arn:aws:iam::123456789012:role/my-spot-fleet-role", 
+    #       launch_specifications: [
+    #         {
+    #           iam_instance_profile: {
+    #             arn: "arn:aws:iam::880185128111:instance-profile/my-iam-role", 
+    #           }, 
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "m3.medium", 
+    #           key_name: "my-key-pair", 
+    #           network_interfaces: [
+    #             {
+    #               associate_public_ip_address: true, 
+    #               device_index: 0, 
+    #               groups: [
+    #                 "sg-1a2b3c4d", 
+    #               ], 
+    #               subnet_id: "subnet-1a2b3c4d", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       spot_price: "0.04", 
+    #       target_capacity: 2, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   }
+    #
+    # @example Example: To request a Spot fleet using the diversified allocation strategy
+    #
+    #   # This example creates a Spot fleet request that launches 30 instances using the diversified allocation strategy. The launch specifications differ by instance type. The Spot fleet distributes the instances across the launch specifications such that there are 10 instances of each type.
+    #
+    #   resp = client.request_spot_fleet({
+    #     spot_fleet_request_config: {
+    #       allocation_strategy: "diversified", 
+    #       iam_fleet_role: "arn:aws:iam::123456789012:role/my-spot-fleet-role", 
+    #       launch_specifications: [
+    #         {
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "c4.2xlarge", 
+    #           subnet_id: "subnet-1a2b3c4d", 
+    #         }, 
+    #         {
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "m3.2xlarge", 
+    #           subnet_id: "subnet-1a2b3c4d", 
+    #         }, 
+    #         {
+    #           image_id: "ami-1a2b3c4d", 
+    #           instance_type: "r3.2xlarge", 
+    #           subnet_id: "subnet-1a2b3c4d", 
+    #         }, 
+    #       ], 
+    #       spot_price: "0.70", 
+    #       target_capacity: 30, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     spot_fleet_request_id: "sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -15937,6 +18775,52 @@ module Aws::EC2
     # @return [Types::RequestSpotInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestSpotInstancesResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
+    #
+    #
+    # @example Example: To create a one-time Spot Instance request
+    #
+    #   # This example creates a one-time Spot Instance request for five instances in the specified Availability Zone. If your account supports EC2-VPC only, Amazon EC2 launches the instances in the default subnet of the specified Availability Zone. If your account supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the specified Availability Zone.
+    #
+    #   resp = client.request_spot_instances({
+    #     instance_count: 5, 
+    #     launch_specification: {
+    #       iam_instance_profile: {
+    #         arn: "arn:aws:iam::123456789012:instance-profile/my-iam-role", 
+    #       }, 
+    #       image_id: "ami-1a2b3c4d", 
+    #       instance_type: "m3.medium", 
+    #       key_name: "my-key-pair", 
+    #       placement: {
+    #         availability_zone: "us-west-2a", 
+    #       }, 
+    #       security_group_ids: [
+    #         "sg-1a2b3c4d", 
+    #       ], 
+    #     }, 
+    #     spot_price: "0.03", 
+    #     type: "one-time", 
+    #   })
+    #
+    # @example Example: To create a one-time Spot Instance request
+    #
+    #   # This example command creates a one-time Spot Instance request for five instances in the specified subnet. Amazon EC2 launches the instances in the specified subnet. If the VPC is a nondefault VPC, the instances do not receive a public IP address by default.
+    #
+    #   resp = client.request_spot_instances({
+    #     instance_count: 5, 
+    #     launch_specification: {
+    #       iam_instance_profile: {
+    #         arn: "arn:aws:iam::123456789012:instance-profile/my-iam-role", 
+    #       }, 
+    #       image_id: "ami-1a2b3c4d", 
+    #       instance_type: "m3.medium", 
+    #       security_group_ids: [
+    #         "sg-1a2b3c4d", 
+    #       ], 
+    #       subnet_id: "subnet-1a2b3c4d", 
+    #     }, 
+    #     spot_price: "0.050", 
+    #     type: "one-time", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -16244,6 +19128,20 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To reset a snapshot attribute
+    #
+    #   # This example resets the create volume permissions for snapshot ``snap-1234567890abcdef0``. If the command succeeds, no output is returned.
+    #
+    #   resp = client.reset_snapshot_attribute({
+    #     attribute: "createVolumePermission", 
+    #     snapshot_id: "snap-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_snapshot_attribute({
@@ -16280,6 +19178,21 @@ module Aws::EC2
     #
     #   * {Types::RestoreAddressToClassicResult#public_ip #public_ip} => String
     #   * {Types::RestoreAddressToClassicResult#status #status} => String
+    #
+    #
+    # @example Example: To restore an address to EC2-Classic
+    #
+    #   # This example restores the specified Elastic IP address to the EC2-Classic platform.
+    #
+    #   resp = client.restore_address_to_classic({
+    #     public_ip: "198.51.100.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     public_ip: "198.51.100.0", 
+    #     status: "MoveInProgress", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -17055,6 +19968,71 @@ module Aws::EC2
     #
     #   * {Types::RunScheduledInstancesResult#instance_id_set #instance_id_set} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To launch a Scheduled Instance in a VPC
+    #
+    #   # This example launches the specified Scheduled Instance in a VPC.
+    #
+    #   resp = client.run_scheduled_instances({
+    #     instance_count: 1, 
+    #     launch_specification: {
+    #       iam_instance_profile: {
+    #         name: "my-iam-role", 
+    #       }, 
+    #       image_id: "ami-12345678", 
+    #       instance_type: "c4.large", 
+    #       key_name: "my-key-pair", 
+    #       network_interfaces: [
+    #         {
+    #           associate_public_ip_address: true, 
+    #           device_index: 0, 
+    #           groups: [
+    #             "sg-12345678", 
+    #           ], 
+    #           subnet_id: "subnet-12345678", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_id_set: [
+    #       "i-1234567890abcdef0", 
+    #     ], 
+    #   }
+    #
+    # @example Example: To launch a Scheduled Instance in EC2-Classic
+    #
+    #   # This example launches the specified Scheduled Instance in EC2-Classic.
+    #
+    #   resp = client.run_scheduled_instances({
+    #     instance_count: 1, 
+    #     launch_specification: {
+    #       iam_instance_profile: {
+    #         name: "my-iam-role", 
+    #       }, 
+    #       image_id: "ami-12345678", 
+    #       instance_type: "c4.large", 
+    #       key_name: "my-key-pair", 
+    #       placement: {
+    #         availability_zone: "us-west-2b", 
+    #       }, 
+    #       security_group_ids: [
+    #         "sg-12345678", 
+    #       ], 
+    #     }, 
+    #     scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_id_set: [
+    #       "i-1234567890abcdef0", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.run_scheduled_instances({
@@ -17415,6 +20393,18 @@ module Aws::EC2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To unassign a secondary private IP address from a network interface
+    #
+    #   # This example unassigns the specified private IP address from the specified network interface.
+    #
+    #   resp = client.unassign_private_ip_addresses({
+    #     network_interface_id: "eni-e5aa89a3", 
+    #     private_ip_addresses: [
+    #       "10.0.0.82", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_private_ip_addresses({
@@ -17487,7 +20477,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

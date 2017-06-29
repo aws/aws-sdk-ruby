@@ -231,6 +231,22 @@ module Aws::ApplicationAutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a scaling policy
+    #
+    #   # This example deletes a scaling policy for the Amazon ECS service called web-app, which is running in the default cluster.
+    #
+    #   resp = client.delete_scaling_policy({
+    #     policy_name: "web-app-cpu-lt-25", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scaling_policy({
@@ -321,6 +337,21 @@ module Aws::ApplicationAutoScaling
     #     for a DynamoDB global secondary index.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To deregister a scalable target
+    #
+    #   # This example deregisters a scalable target for an Amazon ECS service called web-app that is running in the default cluster.
+    #
+    #   resp = client.deregister_scalable_target({
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -431,6 +462,30 @@ module Aws::ApplicationAutoScaling
     #
     #   * {Types::DescribeScalableTargetsResponse#scalable_targets #scalable_targets} => Array&lt;Types::ScalableTarget&gt;
     #   * {Types::DescribeScalableTargetsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe scalable targets
+    #
+    #   # This example describes the scalable targets for the ecs service namespace.
+    #
+    #   resp = client.describe_scalable_targets({
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scalable_targets: [
+    #       {
+    #         creation_time: Time.parse("2016-05-06T11:21:46.199Z"), 
+    #         max_capacity: 10, 
+    #         min_capacity: 1, 
+    #         resource_id: "service/default/web-app", 
+    #         role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
+    #         scalable_dimension: "ecs:service:DesiredCount", 
+    #         service_namespace: "ecs", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -555,6 +610,35 @@ module Aws::ApplicationAutoScaling
     #
     #   * {Types::DescribeScalingActivitiesResponse#scaling_activities #scaling_activities} => Array&lt;Types::ScalingActivity&gt;
     #   * {Types::DescribeScalingActivitiesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe scaling activities for a scalable target
+    #
+    #   # This example describes the scaling activities for an Amazon ECS service called web-app that is running in the default cluster.
+    #
+    #   resp = client.describe_scaling_activities({
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scaling_activities: [
+    #       {
+    #         activity_id: "e6c5f7d1-dbbb-4a3f-89b2-51f33e766399", 
+    #         cause: "monitor alarm web-app-cpu-lt-25 in state ALARM triggered policy web-app-cpu-lt-25", 
+    #         description: "Setting desired count to 1.", 
+    #         end_time: Time.parse("2016-05-06T16:04:32.111Z"), 
+    #         resource_id: "service/default/web-app", 
+    #         scalable_dimension: "ecs:service:DesiredCount", 
+    #         service_namespace: "ecs", 
+    #         start_time: Time.parse("2016-05-06T16:03:58.171Z"), 
+    #         status_code: "Successful", 
+    #         status_message: "Successfully set desired count to 1. Change successfully fulfilled by ecs.", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -685,6 +769,47 @@ module Aws::ApplicationAutoScaling
     #
     #   * {Types::DescribeScalingPoliciesResponse#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
     #   * {Types::DescribeScalingPoliciesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe scaling policies
+    #
+    #   # This example describes the scaling policies for the ecs service namespace.
+    #
+    #   resp = client.describe_scaling_policies({
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     scaling_policies: [
+    #       {
+    #         alarms: [
+    #           {
+    #             alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:web-app-cpu-gt-75", 
+    #             alarm_name: "web-app-cpu-gt-75", 
+    #           }, 
+    #         ], 
+    #         creation_time: Time.parse("2016-05-06T12:11:39.230Z"), 
+    #         policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
+    #         policy_name: "web-app-cpu-gt-75", 
+    #         policy_type: "StepScaling", 
+    #         resource_id: "service/default/web-app", 
+    #         scalable_dimension: "ecs:service:DesiredCount", 
+    #         service_namespace: "ecs", 
+    #         step_scaling_policy_configuration: {
+    #           adjustment_type: "PercentChangeInCapacity", 
+    #           cooldown: 60, 
+    #           step_adjustments: [
+    #             {
+    #               metric_interval_lower_bound: 0, 
+    #               scaling_adjustment: 200, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -848,6 +973,62 @@ module Aws::ApplicationAutoScaling
     #   * {Types::PutScalingPolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::PutScalingPolicyResponse#alarms #alarms} => Array&lt;Types::Alarm&gt;
     #
+    #
+    # @example Example: To apply a scaling policy to an Amazon ECS service
+    #
+    #   # This example applies a scaling policy to an Amazon ECS service called web-app in the default cluster. The policy increases the desired count of the service by 200%, with a cool down period of 60 seconds.
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "web-app-cpu-gt-75", 
+    #     policy_type: "StepScaling", 
+    #     resource_id: "service/default/web-app", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #     step_scaling_policy_configuration: {
+    #       adjustment_type: "PercentChangeInCapacity", 
+    #       cooldown: 60, 
+    #       step_adjustments: [
+    #         {
+    #           metric_interval_lower_bound: 0, 
+    #           scaling_adjustment: 200, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
+    #   }
+    #
+    # @example Example: To apply a scaling policy to an Amazon EC2 Spot fleet
+    #
+    #   # This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the spot fleet by 200%, with a cool down period of 180 seconds.",
+       
+    #
+    #   resp = client.put_scaling_policy({
+    #     policy_name: "fleet-cpu-gt-75", 
+    #     policy_type: "StepScaling", 
+    #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
+    #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
+    #     service_namespace: "ec2", 
+    #     step_scaling_policy_configuration: {
+    #       adjustment_type: "PercentChangeInCapacity", 
+    #       cooldown: 180, 
+    #       step_adjustments: [
+    #         {
+    #           metric_interval_lower_bound: 0, 
+    #           scaling_adjustment: 200, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_arn: "arn:aws:autoscaling:us-east-1:012345678910:scalingPolicy:89406401-0cb7-4130-b770-d97cca0e446b:resource/ec2/spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3:policyName/fleet-cpu-gt-75", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scaling_policy({
@@ -1000,6 +1181,37 @@ module Aws::ApplicationAutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To register an ECS service as a scalable target
+    #
+    #   # This example registers a scalable target from an Amazon ECS service called web-app that is running on the default cluster, with a minimum desired count of 1 task and a maximum desired count of 10 tasks.
+    #
+    #   resp = client.register_scalable_target({
+    #     max_capacity: 10, 
+    #     min_capacity: 1, 
+    #     resource_id: "service/default/web-app", 
+    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole", 
+    #     scalable_dimension: "ecs:service:DesiredCount", 
+    #     service_namespace: "ecs", 
+    #   })
+    #
+    # @example Example: To register an EC2 Spot fleet as a scalable target
+    #
+    #   # This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum target capacity of 1 and a maximum of 10.
+    #
+    #   resp = client.register_scalable_target({
+    #     max_capacity: 10, 
+    #     min_capacity: 1, 
+    #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
+    #     role_arn: "arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole", 
+    #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
+    #     service_namespace: "ec2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_scalable_target({
@@ -1033,7 +1245,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

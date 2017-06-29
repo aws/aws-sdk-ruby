@@ -289,6 +289,31 @@ module Aws::WAFRegional
     #   * {Types::CreateIPSetResponse#ip_set #ip_set} => Types::IPSet
     #   * {Types::CreateIPSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To create an IP set
+    #
+    #   # The following example creates an IP match set named MyIPSetFriendlyName.
+    #
+    #   resp = client.create_ip_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     name: "MyIPSetFriendlyName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     ip_set: {
+    #       ip_set_descriptors: [
+    #         {
+    #           type: "IPV4", 
+    #           value: "192.0.2.44/32", 
+    #         }, 
+    #       ], 
+    #       ip_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       name: "MyIPSetFriendlyName", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ip_set({
@@ -511,6 +536,34 @@ module Aws::WAFRegional
     #   * {Types::CreateRuleResponse#rule #rule} => Types::Rule
     #   * {Types::CreateRuleResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To create a rule
+    #
+    #   # The following example creates a rule named WAFByteHeaderRule.
+    #
+    #   resp = client.create_rule({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     metric_name: "WAFByteHeaderRule", 
+    #     name: "WAFByteHeaderRule", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     rule: {
+    #       metric_name: "WAFByteHeaderRule", 
+    #       name: "WAFByteHeaderRule", 
+    #       predicates: [
+    #         {
+    #           data_id: "MyByteMatchSetID", 
+    #           negated: false, 
+    #           type: "ByteMatch", 
+    #         }, 
+    #       ], 
+    #       rule_id: "WAFRule-1-Example", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_rule({
@@ -582,6 +635,35 @@ module Aws::WAFRegional
     #   * {Types::CreateSizeConstraintSetResponse#size_constraint_set #size_constraint_set} => Types::SizeConstraintSet
     #   * {Types::CreateSizeConstraintSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To create a size constraint
+    #
+    #   # The following example creates size constraint set named MySampleSizeConstraintSet.
+    #
+    #   resp = client.create_size_constraint_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     name: "MySampleSizeConstraintSet", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     size_constraint_set: {
+    #       name: "MySampleSizeConstraintSet", 
+    #       size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       size_constraints: [
+    #         {
+    #           comparison_operator: "GT", 
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           size: 0, 
+    #           text_transformation: "NONE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_size_constraint_set({
@@ -650,6 +732,33 @@ module Aws::WAFRegional
     #
     #   * {Types::CreateSqlInjectionMatchSetResponse#sql_injection_match_set #sql_injection_match_set} => Types::SqlInjectionMatchSet
     #   * {Types::CreateSqlInjectionMatchSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To create a SQL injection match set
+    #
+    #   # The following example creates a SQL injection match set named MySQLInjectionMatchSet.
+    #
+    #   resp = client.create_sql_injection_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     name: "MySQLInjectionMatchSet", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     sql_injection_match_set: {
+    #       name: "MySQLInjectionMatchSet", 
+    #       sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       sql_injection_match_tuples: [
+    #         {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -738,6 +847,42 @@ module Aws::WAFRegional
     #   * {Types::CreateWebACLResponse#web_acl #web_acl} => Types::WebACL
     #   * {Types::CreateWebACLResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To create a web ACL
+    #
+    #   # The following example creates a web ACL named CreateExample.
+    #
+    #   resp = client.create_web_acl({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     default_action: {
+    #       type: "ALLOW", 
+    #     }, 
+    #     metric_name: "CreateExample", 
+    #     name: "CreateExample", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     web_acl: {
+    #       default_action: {
+    #         type: "ALLOW", 
+    #       }, 
+    #       metric_name: "CreateExample", 
+    #       name: "CreateExample", 
+    #       rules: [
+    #         {
+    #           action: {
+    #             type: "ALLOW", 
+    #           }, 
+    #           priority: 1, 
+    #           rule_id: "WAFRule-1-Example", 
+    #         }, 
+    #       ], 
+    #       web_acl_id: "example-46da-4444-5555-example", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_web_acl({
@@ -809,6 +954,33 @@ module Aws::WAFRegional
     #   * {Types::CreateXssMatchSetResponse#xss_match_set #xss_match_set} => Types::XssMatchSet
     #   * {Types::CreateXssMatchSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To create an XSS match set
+    #
+    #   # The following example creates an XSS match set named MySampleXssMatchSet.
+    #
+    #   resp = client.create_xss_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     name: "MySampleXssMatchSet", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     xss_match_set: {
+    #       name: "MySampleXssMatchSet", 
+    #       xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       xss_match_tuples: [
+    #         {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_xss_match_set({
@@ -864,6 +1036,21 @@ module Aws::WAFRegional
     #
     #   * {Types::DeleteByteMatchSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To delete a byte match set
+    #
+    #   # The following example deletes a byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.delete_byte_match_set({
+    #     byte_match_set_id: "exampleIDs3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_byte_match_set({
@@ -910,6 +1097,21 @@ module Aws::WAFRegional
     # @return [Types::DeleteIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteIPSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To delete an IP set
+    #
+    #   # The following example deletes an IP match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.delete_ip_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     ip_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1007,6 +1209,21 @@ module Aws::WAFRegional
     #
     #   * {Types::DeleteRuleResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To delete a rule
+    #
+    #   # The following example deletes a rule with the ID WAFRule-1-Example.
+    #
+    #   resp = client.delete_rule({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     rule_id: "WAFRule-1-Example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_rule({
@@ -1056,6 +1273,21 @@ module Aws::WAFRegional
     # @return [Types::DeleteSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteSizeConstraintSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To delete a size constraint set
+    #
+    #   # The following example deletes a size constraint set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.delete_size_constraint_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1107,6 +1339,21 @@ module Aws::WAFRegional
     #
     #   * {Types::DeleteSqlInjectionMatchSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To delete a SQL injection match set
+    #
+    #   # The following example deletes a SQL injection match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.delete_sql_injection_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_sql_injection_match_set({
@@ -1150,6 +1397,21 @@ module Aws::WAFRegional
     # @return [Types::DeleteWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteWebACLResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To delete a web ACL
+    #
+    #   # The following example deletes a web ACL with the ID example-46da-4444-5555-example.
+    #
+    #   resp = client.delete_web_acl({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     web_acl_id: "example-46da-4444-5555-example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1200,6 +1462,21 @@ module Aws::WAFRegional
     # @return [Types::DeleteXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteXssMatchSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To delete an XSS match set
+    #
+    #   # The following example deletes an XSS match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.delete_xss_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1255,6 +1532,34 @@ module Aws::WAFRegional
     #
     #   * {Types::GetByteMatchSetResponse#byte_match_set #byte_match_set} => Types::ByteMatchSet
     #
+    #
+    # @example Example: To get a byte match set
+    #
+    #   # The following example returns the details of a byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_byte_match_set({
+    #     byte_match_set_id: "exampleIDs3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     byte_match_set: {
+    #       byte_match_set_id: "exampleIDs3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       byte_match_tuples: [
+    #         {
+    #           field_to_match: {
+    #             data: "referer", 
+    #             type: "HEADER", 
+    #           }, 
+    #           positional_constraint: "CONTAINS", 
+    #           target_string: "badrefer1", 
+    #           text_transformation: "NONE", 
+    #         }, 
+    #       ], 
+    #       name: "ByteMatchNameExample", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_byte_match_set({
@@ -1301,6 +1606,19 @@ module Aws::WAFRegional
     #
     #   * {Types::GetChangeTokenResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To get a change token
+    #
+    #   # The following example returns a change token to use for a create, update or delete operation.
+    #
+    #   resp = client.get_change_token({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.change_token #=> String
@@ -1334,6 +1652,20 @@ module Aws::WAFRegional
     #
     #   * {Types::GetChangeTokenStatusResponse#change_token_status #change_token_status} => String
     #
+    #
+    # @example Example: To get the change token status
+    #
+    #   # The following example returns the status of a change token with the ID abcd12f2-46da-4fdb-b8d5-fbd4c466928f.
+    #
+    #   resp = client.get_change_token_status({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token_status: "PENDING", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_change_token_status({
@@ -1362,6 +1694,29 @@ module Aws::WAFRegional
     # @return [Types::GetIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIPSetResponse#ip_set #ip_set} => Types::IPSet
+    #
+    #
+    # @example Example: To get an IP set
+    #
+    #   # The following example returns the details of an IP match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_ip_set({
+    #     ip_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ip_set: {
+    #       ip_set_descriptors: [
+    #         {
+    #           type: "IPV4", 
+    #           value: "192.0.2.44/32", 
+    #         }, 
+    #       ], 
+    #       ip_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       name: "MyIPSetFriendlyName", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1477,6 +1832,31 @@ module Aws::WAFRegional
     #
     #   * {Types::GetRuleResponse#rule #rule} => Types::Rule
     #
+    #
+    # @example Example: To get a rule
+    #
+    #   # The following example returns the details of a rule with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_rule({
+    #     rule_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rule: {
+    #       metric_name: "WAFByteHeaderRule", 
+    #       name: "WAFByteHeaderRule", 
+    #       predicates: [
+    #         {
+    #           data_id: "MyByteMatchSetID", 
+    #           negated: false, 
+    #           type: "ByteMatch", 
+    #         }, 
+    #       ], 
+    #       rule_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_rule({
@@ -1549,6 +1929,49 @@ module Aws::WAFRegional
     #   * {Types::GetSampledRequestsResponse#population_size #population_size} => Integer
     #   * {Types::GetSampledRequestsResponse#time_window #time_window} => Types::TimeWindow
     #
+    #
+    # @example Example: To get a sampled requests
+    #
+    #   # The following example returns detailed information about 100 requests --a sample-- that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource received between the time period 2016-09-27T15:50Z to 2016-09-27T15:50Z.
+    #
+    #   resp = client.get_sampled_requests({
+    #     max_items: 100, 
+    #     rule_id: "WAFRule-1-Example", 
+    #     time_window: {
+    #       end_time: Time.parse("2016-09-27T15:50Z"), 
+    #       start_time: Time.parse("2016-09-27T15:50Z"), 
+    #     }, 
+    #     web_acl_id: "createwebacl-1472061481310", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     population_size: 50, 
+    #     sampled_requests: [
+    #       {
+    #         action: "BLOCK", 
+    #         request: {
+    #           client_ip: "192.0.2.44", 
+    #           country: "US", 
+    #           http_version: "HTTP/1.1", 
+    #           headers: [
+    #             {
+    #               name: "User-Agent", 
+    #               value: "BadBot ", 
+    #             }, 
+    #           ], 
+    #           method: "HEAD", 
+    #         }, 
+    #         timestamp: Time.parse("2016-09-27T14:55Z"), 
+    #         weight: 1, 
+    #       }, 
+    #     ], 
+    #     time_window: {
+    #       end_time: Time.parse("2016-09-27T15:50Z"), 
+    #       start_time: Time.parse("2016-09-27T14:50Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_sampled_requests({
@@ -1599,6 +2022,33 @@ module Aws::WAFRegional
     #
     #   * {Types::GetSizeConstraintSetResponse#size_constraint_set #size_constraint_set} => Types::SizeConstraintSet
     #
+    #
+    # @example Example: To get a size constraint set
+    #
+    #   # The following example returns the details of a size constraint match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_size_constraint_set({
+    #     size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     size_constraint_set: {
+    #       name: "MySampleSizeConstraintSet", 
+    #       size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       size_constraints: [
+    #         {
+    #           comparison_operator: "GT", 
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           size: 0, 
+    #           text_transformation: "NONE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_size_constraint_set({
@@ -1637,6 +2087,31 @@ module Aws::WAFRegional
     #
     #   * {Types::GetSqlInjectionMatchSetResponse#sql_injection_match_set #sql_injection_match_set} => Types::SqlInjectionMatchSet
     #
+    #
+    # @example Example: To get a SQL injection match set
+    #
+    #   # The following example returns the details of a SQL injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_sql_injection_match_set({
+    #     sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     sql_injection_match_set: {
+    #       name: "MySQLInjectionMatchSet", 
+    #       sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       sql_injection_match_tuples: [
+    #         {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_sql_injection_match_set({
@@ -1670,6 +2145,36 @@ module Aws::WAFRegional
     # @return [Types::GetWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWebACLResponse#web_acl #web_acl} => Types::WebACL
+    #
+    #
+    # @example Example: To get a web ACL
+    #
+    #   # The following example returns the details of a web ACL with the ID createwebacl-1472061481310.
+    #
+    #   resp = client.get_web_acl({
+    #     web_acl_id: "createwebacl-1472061481310", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     web_acl: {
+    #       default_action: {
+    #         type: "ALLOW", 
+    #       }, 
+    #       metric_name: "CreateExample", 
+    #       name: "CreateExample", 
+    #       rules: [
+    #         {
+    #           action: {
+    #             type: "ALLOW", 
+    #           }, 
+    #           priority: 1, 
+    #           rule_id: "WAFRule-1-Example", 
+    #         }, 
+    #       ], 
+    #       web_acl_id: "createwebacl-1472061481310", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1738,6 +2243,31 @@ module Aws::WAFRegional
     # @return [Types::GetXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetXssMatchSetResponse#xss_match_set #xss_match_set} => Types::XssMatchSet
+    #
+    #
+    # @example Example: To get an XSS match set
+    #
+    #   # The following example returns the details of an XSS match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.get_xss_match_set({
+    #     xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     xss_match_set: {
+    #       name: "MySampleXssMatchSet", 
+    #       xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       xss_match_tuples: [
+    #         {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1828,6 +2358,25 @@ module Aws::WAFRegional
     #
     #   * {Types::ListIPSetsResponse#next_marker #next_marker} => String
     #   * {Types::ListIPSetsResponse#ip_sets #ip_sets} => Array&lt;Types::IPSetSummary&gt;
+    #
+    #
+    # @example Example: To list IP sets
+    #
+    #   # The following example returns an array of up to 100 IP match sets.
+    #
+    #   resp = client.list_ip_sets({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ip_sets: [
+    #       {
+    #         ip_set_id: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #         name: "MyIPSetFriendlyName", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1947,6 +2496,25 @@ module Aws::WAFRegional
     #   * {Types::ListRulesResponse#next_marker #next_marker} => String
     #   * {Types::ListRulesResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
     #
+    #
+    # @example Example: To list rules
+    #
+    #   # The following example returns an array of up to 100 rules.
+    #
+    #   resp = client.list_rules({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         name: "WAFByteHeaderRule", 
+    #         rule_id: "WAFRule-1-Example", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rules({
@@ -1992,6 +2560,25 @@ module Aws::WAFRegional
     #
     #   * {Types::ListSizeConstraintSetsResponse#next_marker #next_marker} => String
     #   * {Types::ListSizeConstraintSetsResponse#size_constraint_sets #size_constraint_sets} => Array&lt;Types::SizeConstraintSetSummary&gt;
+    #
+    #
+    # @example Example: To list a size constraint sets
+    #
+    #   # The following example returns an array of up to 100 size contraint match sets.
+    #
+    #   resp = client.list_size_constraint_sets({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     size_constraint_sets: [
+    #       {
+    #         name: "MySampleSizeConstraintSet", 
+    #         size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2039,6 +2626,25 @@ module Aws::WAFRegional
     #   * {Types::ListSqlInjectionMatchSetsResponse#next_marker #next_marker} => String
     #   * {Types::ListSqlInjectionMatchSetsResponse#sql_injection_match_sets #sql_injection_match_sets} => Array&lt;Types::SqlInjectionMatchSetSummary&gt;
     #
+    #
+    # @example Example: To list SQL injection match sets
+    #
+    #   # The following example returns an array of up to 100 SQL injection match sets.
+    #
+    #   resp = client.list_sql_injection_match_sets({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     sql_injection_match_sets: [
+    #       {
+    #         name: "MySQLInjectionMatchSet", 
+    #         sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_sql_injection_match_sets({
@@ -2084,6 +2690,25 @@ module Aws::WAFRegional
     #   * {Types::ListWebACLsResponse#next_marker #next_marker} => String
     #   * {Types::ListWebACLsResponse#web_acls #web_acls} => Array&lt;Types::WebACLSummary&gt;
     #
+    #
+    # @example Example: To list Web ACLs
+    #
+    #   # The following example returns an array of up to 100 web ACLs.
+    #
+    #   resp = client.list_web_acls({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     web_acls: [
+    #       {
+    #         name: "WebACLexample", 
+    #         web_acl_id: "webacl-1472061481310", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_web_acls({
@@ -2127,6 +2752,25 @@ module Aws::WAFRegional
     #
     #   * {Types::ListXssMatchSetsResponse#next_marker #next_marker} => String
     #   * {Types::ListXssMatchSetsResponse#xss_match_sets #xss_match_sets} => Array&lt;Types::XssMatchSetSummary&gt;
+    #
+    #
+    # @example Example: To list XSS match sets
+    #
+    #   # The following example returns an array of up to 100 XSS match sets.
+    #
+    #   resp = client.list_xss_match_sets({
+    #     limit: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     xss_match_sets: [
+    #       {
+    #         name: "MySampleXssMatchSet", 
+    #         xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2219,6 +2863,35 @@ module Aws::WAFRegional
     # @return [Types::UpdateByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateByteMatchSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To update a byte match set
+    #
+    #   # The following example deletes a ByteMatchTuple object (filters) in an byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_byte_match_set({
+    #     byte_match_set_id: "exampleIDs3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         byte_match_tuple: {
+    #           field_to_match: {
+    #             data: "referer", 
+    #             type: "HEADER", 
+    #           }, 
+    #           positional_constraint: "CONTAINS", 
+    #           target_string: "badrefer1", 
+    #           text_transformation: "NONE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2331,6 +3004,30 @@ module Aws::WAFRegional
     # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIPSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To update an IP set
+    #
+    #   # The following example deletes an IPSetDescriptor object in an IP match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_ip_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     ip_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         ip_set_descriptor: {
+    #           type: "IPV4", 
+    #           value: "192.0.2.44/32", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2520,6 +3217,31 @@ module Aws::WAFRegional
     #
     #   * {Types::UpdateRuleResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To update a rule
+    #
+    #   # The following example deletes a Predicate object in a rule with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_rule({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     rule_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         predicate: {
+    #           data_id: "MyByteMatchSetID", 
+    #           negated: false, 
+    #           type: "ByteMatch", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_rule({
@@ -2626,6 +3348,34 @@ module Aws::WAFRegional
     #
     #   * {Types::UpdateSizeConstraintSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To update a size constraint set
+    #
+    #   # The following example deletes a SizeConstraint object (filters) in a size constraint set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_size_constraint_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         size_constraint: {
+    #           comparison_operator: "GT", 
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           size: 0, 
+    #           text_transformation: "NONE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_size_constraint_set({
@@ -2726,6 +3476,32 @@ module Aws::WAFRegional
     # @return [Types::UpdateSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSqlInjectionMatchSetResponse#change_token #change_token} => String
+    #
+    #
+    # @example Example: To update a SQL injection match set
+    #
+    #   # The following example deletes a SqlInjectionMatchTuple object (filters) in a SQL injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_sql_injection_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         sql_injection_match_tuple: {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2845,6 +3621,36 @@ module Aws::WAFRegional
     #
     #   * {Types::UpdateWebACLResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To update a Web ACL
+    #
+    #   # The following example deletes an ActivatedRule object in a WebACL with the ID webacl-1472061481310.
+    #
+    #   resp = client.update_web_acl({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     default_action: {
+    #       type: "ALLOW", 
+    #     }, 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         activated_rule: {
+    #           action: {
+    #             type: "ALLOW", 
+    #           }, 
+    #           priority: 1, 
+    #           rule_id: "WAFRule-1-Example", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     web_acl_id: "webacl-1472061481310", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_web_acl({
@@ -2944,6 +3750,32 @@ module Aws::WAFRegional
     #
     #   * {Types::UpdateXssMatchSetResponse#change_token #change_token} => String
     #
+    #
+    # @example Example: To update an XSS match set
+    #
+    #   # The following example deletes an XssMatchTuple object (filters) in an XssMatchSet with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #
+    #   resp = client.update_xss_match_set({
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #     updates: [
+    #       {
+    #         action: "DELETE", 
+    #         xss_match_tuple: {
+    #           field_to_match: {
+    #             type: "QUERY_STRING", 
+    #           }, 
+    #           text_transformation: "URL_DECODE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     xss_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_xss_match_set({
@@ -2989,7 +3821,7 @@ module Aws::WAFRegional
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafregional'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -232,6 +232,26 @@ module Aws::StorageGateway
     #
     #   * {Types::ActivateGatewayOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To activate the gateway
+    #
+    #   # Activates the gateway you previously deployed on your host.
+    #
+    #   resp = client.activate_gateway({
+    #     activation_key: "29AV1-3OFV9-VVIUB-NKT0I-LRO6V", 
+    #     gateway_name: "My_Gateway", 
+    #     gateway_region: "us-east-1", 
+    #     gateway_timezone: "GMT-12:00", 
+    #     gateway_type: "STORED", 
+    #     medium_changer_type: "AWS-Gateway-VTL", 
+    #     tape_drive_type: "IBM-ULT3580-TD5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.activate_gateway({
@@ -278,6 +298,24 @@ module Aws::StorageGateway
     # @return [Types::AddCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddCacheOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To add a cache
+    #
+    #   # The following example shows a request that activates a gateway-stored volume.
+    #
+    #   resp = client.add_cache({
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:03:00.0-scsi-0:0:1:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -342,6 +380,26 @@ module Aws::StorageGateway
     #
     #   * {Types::AddTagsToResourceOutput#resource_arn #resource_arn} => String
     #
+    #
+    # @example Example: To add tags to resource
+    #
+    #   # Adds one or more tags to the specified resource.
+    #
+    #   resp = client.add_tags_to_resource({
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #     tags: [
+    #       {
+    #         key: "Dev Gatgeway Region", 
+    #         value: "East Coast", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
@@ -384,6 +442,24 @@ module Aws::StorageGateway
     # @return [Types::AddUploadBufferOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddUploadBufferOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To add upload buffer on local disk
+    #
+    #   # Configures one or more gateway local disks as upload buffer for a specified gateway.
+    #
+    #   resp = client.add_upload_buffer({
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:03:00.0-scsi-0:0:1:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -433,6 +509,24 @@ module Aws::StorageGateway
     #
     #   * {Types::AddWorkingStorageOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To add storage on local disk
+    #
+    #   # Configures one or more gateway local disks as working storage for a gateway. (Working storage is also referred to as upload buffer.)
+    #
+    #   resp = client.add_working_storage({
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:03:00.0-scsi-0:0:1:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_working_storage({
@@ -469,6 +563,21 @@ module Aws::StorageGateway
     #
     #   * {Types::CancelArchivalOutput#tape_arn #tape_arn} => String
     #
+    #
+    # @example Example: To cancel virtual tape archiving
+    #
+    #   # Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated.
+    #
+    #   resp = client.cancel_archival({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_archival({
@@ -504,6 +613,21 @@ module Aws::StorageGateway
     # @return [Types::CancelRetrievalOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelRetrievalOutput#tape_arn #tape_arn} => String
+    #
+    #
+    # @example Example: To cancel virtual tape retrieval
+    #
+    #   # Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated.
+    #
+    #   resp = client.cancel_retrieval({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -571,6 +695,26 @@ module Aws::StorageGateway
     #
     #   * {Types::CreateCachediSCSIVolumeOutput#volume_arn #volume_arn} => String
     #   * {Types::CreateCachediSCSIVolumeOutput#target_arn #target_arn} => String
+    #
+    #
+    # @example Example: To create a cached iSCSI volume
+    #
+    #   # Creates a cached volume on a specified cached gateway.
+    #
+    #   resp = client.create_cached_iscsi_volume({
+    #     client_token: "cachedvol112233", 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     network_interface_id: "10.1.1.1", 
+    #     snapshot_id: "snap-f47b7b94", 
+    #     target_name: "my-volume", 
+    #     volume_size_in_bytes: 536870912000, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -751,6 +895,22 @@ module Aws::StorageGateway
     #   * {Types::CreateSnapshotOutput#volume_arn #volume_arn} => String
     #   * {Types::CreateSnapshotOutput#snapshot_id #snapshot_id} => String
     #
+    #
+    # @example Example: To create a snapshot of a gateway volume
+    #
+    #   # Initiates an ad-hoc snapshot of a gateway volume.
+    #
+    #   resp = client.create_snapshot({
+    #     snapshot_description: "My root volume snapshot as of 10/03/2017", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_id: "snap-78e22663", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_snapshot({
@@ -803,6 +963,23 @@ module Aws::StorageGateway
     #   * {Types::CreateSnapshotFromVolumeRecoveryPointOutput#snapshot_id #snapshot_id} => String
     #   * {Types::CreateSnapshotFromVolumeRecoveryPointOutput#volume_arn #volume_arn} => String
     #   * {Types::CreateSnapshotFromVolumeRecoveryPointOutput#volume_recovery_point_time #volume_recovery_point_time} => String
+    #
+    #
+    # @example Example: To create a snapshot of a gateway volume
+    #
+    #   # Initiates a snapshot of a gateway from a volume recovery point.
+    #
+    #   resp = client.create_snapshot_from_volume_recovery_point({
+    #     snapshot_description: "My root volume snapshot as of 2017-06-30T10:10:10.000Z", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_id: "snap-78e22663", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #     volume_recovery_point_time: "2017-06-30T10:10:10.000Z", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -893,6 +1070,27 @@ module Aws::StorageGateway
     #   * {Types::CreateStorediSCSIVolumeOutput#volume_size_in_bytes #volume_size_in_bytes} => Integer
     #   * {Types::CreateStorediSCSIVolumeOutput#target_arn #target_arn} => String
     #
+    #
+    # @example Example: To create a stored iSCSI volume
+    #
+    #   # Creates a stored volume on a specified stored gateway.
+    #
+    #   resp = client.create_stored_iscsi_volume({
+    #     disk_id: "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     network_interface_id: "10.1.1.1", 
+    #     preserve_existing_data: true, 
+    #     snapshot_id: "snap-f47b7b94", 
+    #     target_name: "my-volume", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #     volume_size_in_bytes: 1099511627776, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_stored_iscsi_volume({
@@ -947,6 +1145,22 @@ module Aws::StorageGateway
     # @return [Types::CreateTapeWithBarcodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTapeWithBarcodeOutput#tape_arn #tape_arn} => String
+    #
+    #
+    # @example Example: To create a virtual tape using a barcode
+    #
+    #   # Creates a virtual tape by using your own barcode.
+    #
+    #   resp = client.create_tape_with_barcode({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     tape_barcode: "TEST12345", 
+    #     tape_size_in_bytes: 107374182400, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST12345", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1231,28 @@ module Aws::StorageGateway
     #
     #   * {Types::CreateTapesOutput#tape_arns #tape_arns} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To create a virtual tape
+    #
+    #   # Creates one or more virtual tapes.
+    #
+    #   resp = client.create_tapes({
+    #     client_token: "77777", 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     num_tapes_to_create: 3, 
+    #     tape_barcode_prefix: "TEST", 
+    #     tape_size_in_bytes: 107374182400, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arns: [
+    #       "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST38A29D", 
+    #       "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3AA29F", 
+    #       "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST3BA29E", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_tapes({
@@ -1061,6 +1297,21 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteBandwidthRateLimitOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To delete bandwidth rate limits of gateway
+    #
+    #   # Deletes the bandwidth rate limits of a gateway; either the upload or download limit, or both.
+    #
+    #   resp = client.delete_bandwidth_rate_limit({
+    #     bandwidth_type: "All", 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bandwidth_rate_limit({
@@ -1096,6 +1347,22 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteChapCredentialsOutput#target_arn #target_arn} => String
     #   * {Types::DeleteChapCredentialsOutput#initiator_name #initiator_name} => String
+    #
+    #
+    # @example Example: To delete CHAP credentials
+    #
+    #   # Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.
+    #
+    #   resp = client.delete_chap_credentials({
+    #     initiator_name: "iqn.1991-05.com.microsoft:computername.domain.example.com", 
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     initiator_name: "iqn.1991-05.com.microsoft:computername.domain.example.com", 
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1179,6 +1446,20 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteGatewayOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To delete a gatgeway
+    #
+    #   # This operation deletes the gateway, but not the gateway's VM from the host computer.
+    #
+    #   resp = client.delete_gateway({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_gateway({
@@ -1221,6 +1502,20 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteSnapshotScheduleOutput#volume_arn #volume_arn} => String
     #
+    #
+    # @example Example: To delete a snapshot of a volume
+    #
+    #   # This action enables you to delete a snapshot schedule for a volume.
+    #
+    #   resp = client.delete_snapshot_schedule({
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_snapshot_schedule({
@@ -1255,6 +1550,21 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteTapeOutput#tape_arn #tape_arn} => String
     #
+    #
+    # @example Example: To delete a virtual tape
+    #
+    #   # This example deletes the specified virtual tape.
+    #
+    #   resp = client.delete_tape({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:204469490176:gateway/sgw-12A3456B", 
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_tape({
@@ -1285,6 +1595,20 @@ module Aws::StorageGateway
     # @return [Types::DeleteTapeArchiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteTapeArchiveOutput#tape_arn #tape_arn} => String
+    #
+    #
+    # @example Example: To delete a virtual tape from the shelf (VTS)
+    #
+    #   # Deletes the specified virtual tape from the virtual tape shelf (VTS).
+    #
+    #   resp = client.delete_tape_archive({
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1335,6 +1659,20 @@ module Aws::StorageGateway
     #
     #   * {Types::DeleteVolumeOutput#volume_arn #volume_arn} => String
     #
+    #
+    # @example Example: To delete a gateway volume
+    #
+    #   # Deletes the specified gateway volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API.
+    #
+    #   resp = client.delete_volume({
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_volume({
@@ -1373,6 +1711,22 @@ module Aws::StorageGateway
     #   * {Types::DescribeBandwidthRateLimitOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeBandwidthRateLimitOutput#average_upload_rate_limit_in_bits_per_sec #average_upload_rate_limit_in_bits_per_sec} => Integer
     #   * {Types::DescribeBandwidthRateLimitOutput#average_download_rate_limit_in_bits_per_sec #average_download_rate_limit_in_bits_per_sec} => Integer
+    #
+    #
+    # @example Example: To describe the bandwidth rate limits of a gateway
+    #
+    #   # Returns a value for a bandwidth rate limit if set. If not set, then only the gateway ARN is returned.
+    #
+    #   resp = client.describe_bandwidth_rate_limit({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     average_download_rate_limit_in_bits_per_sec: 204800, 
+    #     average_upload_rate_limit_in_bits_per_sec: 102400, 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1416,6 +1770,29 @@ module Aws::StorageGateway
     #   * {Types::DescribeCacheOutput#cache_hit_percentage #cache_hit_percentage} => Float
     #   * {Types::DescribeCacheOutput#cache_miss_percentage #cache_miss_percentage} => Float
     #
+    #
+    # @example Example: To describe cache information
+    #
+    #   # Returns information about the cache of a gateway.
+    #
+    #   resp = client.describe_cache({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_allocated_in_bytes: 2199023255552, 
+    #     cache_dirty_percentage: 0.07, 
+    #     cache_hit_percentage: 99.68, 
+    #     cache_miss_percentage: 0.32, 
+    #     cache_used_percentage: 0.07, 
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:04:00.0-scsi-0:1:0:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cache({
@@ -1455,6 +1832,37 @@ module Aws::StorageGateway
     # @return [Types::DescribeCachediSCSIVolumesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeCachediSCSIVolumesOutput#cached_iscsi_volumes #cached_iscsi_volumes} => Array&lt;Types::CachediSCSIVolume&gt;
+    #
+    #
+    # @example Example: To describe gateway cached iSCSI volumes
+    #
+    #   # Returns a description of the gateway cached iSCSI volumes specified in the request.
+    #
+    #   resp = client.describe_cached_iscsi_volumes({
+    #     volume_arns: [
+    #       "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cached_iscsi_volumes: [
+    #       {
+    #         volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #         volume_id: "vol-1122AABB", 
+    #         volume_size_in_bytes: 1099511627776, 
+    #         volume_status: "AVAILABLE", 
+    #         volume_type: "CACHED iSCSI", 
+    #         volume_iscsi_attributes: {
+    #           chap_enabled: true, 
+    #           lun_number: 1, 
+    #           network_interface_id: "10.243.43.207", 
+    #           network_interface_port: 3260, 
+    #           target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1501,6 +1909,27 @@ module Aws::StorageGateway
     #
     #   * {Types::DescribeChapCredentialsOutput#chap_credentials #chap_credentials} => Array&lt;Types::ChapInfo&gt;
     #
+    #
+    # @example Example: To describe CHAP credetnitals for an iSCSI
+    #
+    #   # Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.
+    #
+    #   resp = client.describe_chap_credentials({
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     chap_credentials: [
+    #       {
+    #         initiator_name: "iqn.1991-05.com.microsoft:computername.domain.example.com", 
+    #         secret_to_authenticate_initiator: "111111111111", 
+    #         secret_to_authenticate_target: "222222222222", 
+    #         target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_chap_credentials({
@@ -1544,6 +1973,32 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#gateway_type #gateway_type} => String
     #   * {Types::DescribeGatewayInformationOutput#next_update_availability_date #next_update_availability_date} => String
     #   * {Types::DescribeGatewayInformationOutput#last_software_update #last_software_update} => String
+    #
+    #
+    # @example Example: To describe metadata about the gateway
+    #
+    #   # Returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the gateway is running or not).
+    #
+    #   resp = client.describe_gateway_information({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     gateway_id: "sgw-AABB1122", 
+    #     gateway_name: "My_Gateway", 
+    #     gateway_network_interfaces: [
+    #       {
+    #         ipv_4_address: "10.35.69.216", 
+    #       }, 
+    #     ], 
+    #     gateway_state: "STATE_RUNNING", 
+    #     gateway_timezone: "GMT-8:00", 
+    #     gateway_type: "STORED", 
+    #     last_software_update: "2016-01-02T16:00:00", 
+    #     next_update_availability_date: "2017-01-02T16:00:00", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1590,6 +2045,24 @@ module Aws::StorageGateway
     #   * {Types::DescribeMaintenanceStartTimeOutput#minute_of_hour #minute_of_hour} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_week #day_of_week} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#timezone #timezone} => String
+    #
+    #
+    # @example Example: To describe gateway's maintenance start time
+    #
+    #   # Returns your gateway's weekly maintenance start time including the day and time of the week.
+    #
+    #   resp = client.describe_maintenance_start_time({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     day_of_week: 2, 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     hour_of_day: 15, 
+    #     minute_of_hour: 35, 
+    #     timezone: "GMT+7:00", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1679,6 +2152,24 @@ module Aws::StorageGateway
     #   * {Types::DescribeSnapshotScheduleOutput#description #description} => String
     #   * {Types::DescribeSnapshotScheduleOutput#timezone #timezone} => String
     #
+    #
+    # @example Example: To describe snapshot schedule for gateway volume
+    #
+    #   # Describes the snapshot schedule for the specified gateway volume including intervals at which snapshots are automatically initiated.
+    #
+    #   resp = client.describe_snapshot_schedule({
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     description: "sgw-AABB1122:vol-AABB1122:Schedule", 
+    #     recurrence_in_hours: 24, 
+    #     start_at: 6, 
+    #     timezone: "GMT+7:00", 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshot_schedule({
@@ -1717,6 +2208,38 @@ module Aws::StorageGateway
     # @return [Types::DescribeStorediSCSIVolumesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStorediSCSIVolumesOutput#stored_iscsi_volumes #stored_iscsi_volumes} => Array&lt;Types::StorediSCSIVolume&gt;
+    #
+    #
+    # @example Example: To describe the volumes of a gateway
+    #
+    #   # Returns the description of the gateway volumes specified in the request belonging to the same gateway.
+    #
+    #   resp = client.describe_stored_iscsi_volumes({
+    #     volume_arns: [
+    #       "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     stored_iscsi_volumes: [
+    #       {
+    #         preserved_existing_data: false, 
+    #         volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #         volume_disk_id: "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #         volume_id: "vol-1122AABB", 
+    #         volume_progress: 23.7, 
+    #         volume_size_in_bytes: 1099511627776, 
+    #         volume_status: "BOOTSTRAPPING", 
+    #         volume_iscsi_attributes: {
+    #           chap_enabled: true, 
+    #           network_interface_id: "10.243.43.207", 
+    #           network_interface_port: 3260, 
+    #           target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1777,6 +2300,41 @@ module Aws::StorageGateway
     #   * {Types::DescribeTapeArchivesOutput#tape_archives #tape_archives} => Array&lt;Types::TapeArchive&gt;
     #   * {Types::DescribeTapeArchivesOutput#marker #marker} => String
     #
+    #
+    # @example Example: To describe virtual tapes in the VTS
+    #
+    #   # Returns a description of specified virtual tapes in the virtual tape shelf (VTS).
+    #
+    #   resp = client.describe_tape_archives({
+    #     limit: 123, 
+    #     marker: "1", 
+    #     tape_arns: [
+    #       "arn:aws:storagegateway:us-east-1:999999999999:tape/AM08A1AD", 
+    #       "arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "1", 
+    #     tape_archives: [
+    #       {
+    #         completion_time: Time.parse("2016-12-16T13:50Z"), 
+    #         tape_arn: "arn:aws:storagegateway:us-east-1:999999999:tape/AM08A1AD", 
+    #         tape_barcode: "AM08A1AD", 
+    #         tape_size_in_bytes: 107374182400, 
+    #         tape_status: "ARCHIVED", 
+    #       }, 
+    #       {
+    #         completion_time: Time.parse("2016-12-16T13:59Z"), 
+    #         tape_arn: "arn:aws:storagegateway:us-east-1:999999999:tape/AMZN01A2A4", 
+    #         tape_barcode: "AMZN01A2A4", 
+    #         tape_size_in_bytes: 429496729600, 
+    #         tape_status: "ARCHIVED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tape_archives({
@@ -1833,6 +2391,31 @@ module Aws::StorageGateway
     #   * {Types::DescribeTapeRecoveryPointsOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeTapeRecoveryPointsOutput#tape_recovery_point_infos #tape_recovery_point_infos} => Array&lt;Types::TapeRecoveryPointInfo&gt;
     #   * {Types::DescribeTapeRecoveryPointsOutput#marker #marker} => String
+    #
+    #
+    # @example Example: To describe virtual tape recovery points
+    #
+    #   # Returns a list of virtual tape recovery points that are available for the specified gateway-VTL.
+    #
+    #   resp = client.describe_tape_recovery_points({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     limit: 1, 
+    #     marker: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     marker: "1", 
+    #     tape_recovery_point_infos: [
+    #       {
+    #         tape_arn: "arn:aws:storagegateway:us-east-1:999999999:tape/AMZN01A2A4", 
+    #         tape_recovery_point_time: Time.parse("2016-12-16T13:50Z"), 
+    #         tape_size_in_bytes: 1471550497, 
+    #         tape_status: "AVAILABLE", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1896,6 +2479,40 @@ module Aws::StorageGateway
     #   * {Types::DescribeTapesOutput#tapes #tapes} => Array&lt;Types::Tape&gt;
     #   * {Types::DescribeTapesOutput#marker #marker} => String
     #
+    #
+    # @example Example: To describe virtual tape(s) associated with gateway
+    #
+    #   # Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes.
+    #
+    #   resp = client.describe_tapes({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     limit: 2, 
+    #     marker: "1", 
+    #     tape_arns: [
+    #       "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1", 
+    #       "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "1", 
+    #     tapes: [
+    #       {
+    #         tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST04A2A1", 
+    #         tape_barcode: "TEST04A2A1", 
+    #         tape_size_in_bytes: 107374182400, 
+    #         tape_status: "AVAILABLE", 
+    #       }, 
+    #       {
+    #         tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST05A2A0", 
+    #         tape_barcode: "TEST05A2A0", 
+    #         tape_size_in_bytes: 107374182400, 
+    #         tape_status: "AVAILABLE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tapes({
@@ -1945,6 +2562,45 @@ module Aws::StorageGateway
     #   * {Types::DescribeUploadBufferOutput#disk_ids #disk_ids} => Array&lt;String&gt;
     #   * {Types::DescribeUploadBufferOutput#upload_buffer_used_in_bytes #upload_buffer_used_in_bytes} => Integer
     #   * {Types::DescribeUploadBufferOutput#upload_buffer_allocated_in_bytes #upload_buffer_allocated_in_bytes} => Integer
+    #
+    #
+    # @example Example: To describe upload buffer of gateway
+    #
+    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated/used.
+    #
+    #   resp = client.describe_upload_buffer({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:04:00.0-scsi-0:1:0:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     upload_buffer_allocated_in_bytes: 0, 
+    #     upload_buffer_used_in_bytes: 161061273600, 
+    #   }
+    #
+    # @example Example: To describe upload buffer of a gateway
+    #
+    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated and used.
+    #
+    #   resp = client.describe_upload_buffer({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:04:00.0-scsi-0:1:0:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     upload_buffer_allocated_in_bytes: 161061273600, 
+    #     upload_buffer_used_in_bytes: 0, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2003,6 +2659,63 @@ module Aws::StorageGateway
     #   * {Types::DescribeVTLDevicesOutput#vtl_devices #vtl_devices} => Array&lt;Types::VTLDevice&gt;
     #   * {Types::DescribeVTLDevicesOutput#marker #marker} => String
     #
+    #
+    # @example Example: To describe virtual tape library (VTL) devices of a single gateway
+    #
+    #   # Returns a description of virtual tape library (VTL) devices for the specified gateway.
+    #
+    #   resp = client.describe_vtl_devices({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     limit: 123, 
+    #     marker: "1", 
+    #     vtl_device_arns: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     marker: "1", 
+    #     vtl_devices: [
+    #       {
+    #         device_iscsi_attributes: {
+    #           chap_enabled: false, 
+    #           network_interface_id: "10.243.43.207", 
+    #           network_interface_port: 3260, 
+    #           target_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:sgw-1fad4876-mediachanger", 
+    #         }, 
+    #         vtl_device_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001", 
+    #         vtl_device_product_identifier: "L700", 
+    #         vtl_device_type: "Medium Changer", 
+    #         vtl_device_vendor: "STK", 
+    #       }, 
+    #       {
+    #         device_iscsi_attributes: {
+    #           chap_enabled: false, 
+    #           network_interface_id: "10.243.43.209", 
+    #           network_interface_port: 3260, 
+    #           target_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:sgw-1fad4876-tapedrive-01", 
+    #         }, 
+    #         vtl_device_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_TAPEDRIVE_00001", 
+    #         vtl_device_product_identifier: "ULT3580-TD5", 
+    #         vtl_device_type: "Tape Drive", 
+    #         vtl_device_vendor: "IBM", 
+    #       }, 
+    #       {
+    #         device_iscsi_attributes: {
+    #           chap_enabled: false, 
+    #           network_interface_id: "10.243.43.209", 
+    #           network_interface_port: 3260, 
+    #           target_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:sgw-1fad4876-tapedrive-02", 
+    #         }, 
+    #         vtl_device_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_TAPEDRIVE_00002", 
+    #         vtl_device_product_identifier: "ULT3580-TD5", 
+    #         vtl_device_type: "Tape Drive", 
+    #         vtl_device_vendor: "IBM", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vtl_devices({
@@ -2060,6 +2773,26 @@ module Aws::StorageGateway
     #   * {Types::DescribeWorkingStorageOutput#working_storage_used_in_bytes #working_storage_used_in_bytes} => Integer
     #   * {Types::DescribeWorkingStorageOutput#working_storage_allocated_in_bytes #working_storage_allocated_in_bytes} => Integer
     #
+    #
+    # @example Example: To describe the working storage of a gateway [Depreciated]
+    #
+    #   # This operation is supported only for the gateway-stored volume architecture. This operation is deprecated in cached-volumes API version (20120630). Use DescribeUploadBuffer instead.
+    #
+    #   resp = client.describe_working_storage({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disk_ids: [
+    #       "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #       "pci-0000:03:00.0-scsi-0:0:1:0", 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     working_storage_allocated_in_bytes: 2199023255552, 
+    #     working_storage_used_in_bytes: 789207040, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_working_storage({
@@ -2100,6 +2833,20 @@ module Aws::StorageGateway
     # @return [Types::DisableGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisableGatewayOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To disable a gateway when it is no longer functioning
+    #
+    #   # Disables a gateway when the gateway is no longer functioning. Use this operation for a gateway-VTL that is not reachable or not functioning.
+    #
+    #   resp = client.disable_gateway({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2197,6 +2944,29 @@ module Aws::StorageGateway
     #   * {Types::ListGatewaysOutput#gateways #gateways} => Array&lt;Types::GatewayInfo&gt;
     #   * {Types::ListGatewaysOutput#marker #marker} => String
     #
+    #
+    # @example Example: To lists region specific gateways per AWS account
+    #
+    #   # Lists gateways owned by an AWS account in a specified region as requested. Results are sorted by gateway ARN up to a maximum of 100 gateways.
+    #
+    #   resp = client.list_gateways({
+    #     limit: 2, 
+    #     marker: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateways: [
+    #       {
+    #         gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #       }, 
+    #       {
+    #         gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-23A4567C", 
+    #       }, 
+    #     ], 
+    #     marker: "1", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_gateways({
@@ -2243,6 +3013,39 @@ module Aws::StorageGateway
     #
     #   * {Types::ListLocalDisksOutput#gateway_arn #gateway_arn} => String
     #   * {Types::ListLocalDisksOutput#disks #disks} => Array&lt;Types::Disk&gt;
+    #
+    #
+    # @example Example: To list the gateway's local disks
+    #
+    #   # The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all.
+    #
+    #   resp = client.list_local_disks({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disks: [
+    #       {
+    #         disk_allocation_type: "CACHE_STORAGE", 
+    #         disk_id: "pci-0000:03:00.0-scsi-0:0:0:0", 
+    #         disk_node: "SCSI(0:0)", 
+    #         disk_path: "/dev/sda", 
+    #         disk_size_in_bytes: 1099511627776, 
+    #         disk_status: "missing", 
+    #       }, 
+    #       {
+    #         disk_allocation_resource: "", 
+    #         disk_allocation_type: "UPLOAD_BUFFER", 
+    #         disk_id: "pci-0000:03:00.0-scsi-0:0:1:0", 
+    #         disk_node: "SCSI(0:1)", 
+    #         disk_path: "/dev/sdb", 
+    #         disk_size_in_bytes: 1099511627776, 
+    #         disk_status: "present", 
+    #       }, 
+    #     ], 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2292,6 +3095,29 @@ module Aws::StorageGateway
     #   * {Types::ListTagsForResourceOutput#resource_arn #resource_arn} => String
     #   * {Types::ListTagsForResourceOutput#marker #marker} => String
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To list tags that have been added to a resource
+    #
+    #   # Lists the tags that have been added to the specified resource.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     limit: 1, 
+    #     marker: "1", 
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "1", 
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #     tags: [
+    #       {
+    #         key: "Dev Gatgeway Region", 
+    #         value: "East Coast", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2428,6 +3254,27 @@ module Aws::StorageGateway
     #   * {Types::ListVolumeRecoveryPointsOutput#gateway_arn #gateway_arn} => String
     #   * {Types::ListVolumeRecoveryPointsOutput#volume_recovery_point_infos #volume_recovery_point_infos} => Array&lt;Types::VolumeRecoveryPointInfo&gt;
     #
+    #
+    # @example Example: To list recovery points for a gateway
+    #
+    #   # Lists the recovery points for a specified gateway in which all data of the volume is consistent and can be used to create a snapshot.
+    #
+    #   resp = client.list_volume_recovery_points({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     volume_recovery_point_infos: [
+    #       {
+    #         volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #         volume_recovery_point_time: "2012-09-04T21:08:44.627Z", 
+    #         volume_size_in_bytes: 536870912000, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_volume_recovery_points({
@@ -2484,6 +3331,41 @@ module Aws::StorageGateway
     #   * {Types::ListVolumesOutput#gateway_arn #gateway_arn} => String
     #   * {Types::ListVolumesOutput#marker #marker} => String
     #   * {Types::ListVolumesOutput#volume_infos #volume_infos} => Array&lt;Types::VolumeInfo&gt;
+    #
+    #
+    # @example Example: To list the iSCSI stored volumes of a gateway
+    #
+    #   # Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN up to a maximum of 100 volumes.
+    #
+    #   resp = client.list_volumes({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     limit: 2, 
+    #     marker: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     marker: "1", 
+    #     volume_infos: [
+    #       {
+    #         gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #         gateway_id: "sgw-12A3456B", 
+    #         volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #         volume_id: "vol-1122AABB", 
+    #         volume_size_in_bytes: 107374182400, 
+    #         volume_type: "STORED", 
+    #       }, 
+    #       {
+    #         gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C", 
+    #         gateway_id: "sgw-gw-13B4567C", 
+    #         volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C/volume/vol-3344CCDD", 
+    #         volume_id: "vol-1122AABB", 
+    #         volume_size_in_bytes: 107374182400, 
+    #         volume_type: "STORED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2560,6 +3442,24 @@ module Aws::StorageGateway
     #
     #   * {Types::RemoveTagsFromResourceOutput#resource_arn #resource_arn} => String
     #
+    #
+    # @example Example: To remove tags from a resource
+    #
+    #   # Lists the iSCSI stored volumes of a gateway. Removes one or more tags from the specified resource.
+    #
+    #   resp = client.remove_tags_from_resource({
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #     tag_keys: [
+    #       "Dev Gatgeway Region", 
+    #       "East Coast", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     resource_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
@@ -2602,6 +3502,20 @@ module Aws::StorageGateway
     # @return [Types::ResetCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResetCacheOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To reset cache disks in error status
+    #
+    #   # Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage.
+    #
+    #   resp = client.reset_cache({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2650,6 +3564,21 @@ module Aws::StorageGateway
     #
     #   * {Types::RetrieveTapeArchiveOutput#tape_arn #tape_arn} => String
     #
+    #
+    # @example Example: To retrieve an archived tape from the VTS
+    #
+    #   # Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL. Virtual tapes archived in the VTS are not associated with any gateway.
+    #
+    #   resp = client.retrieve_tape_archive({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve_tape_archive({
@@ -2696,6 +3625,21 @@ module Aws::StorageGateway
     #
     #   * {Types::RetrieveTapeRecoveryPointOutput#tape_arn #tape_arn} => String
     #
+    #
+    # @example Example: To retrieve the recovery point of a virtual tape
+    #
+    #   # Retrieves the recovery point for the specified virtual tape.
+    #
+    #   resp = client.retrieve_tape_recovery_point({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tape_arn: "arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve_tape_recovery_point({
@@ -2731,6 +3675,21 @@ module Aws::StorageGateway
     # @return [Types::SetLocalConsolePasswordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SetLocalConsolePasswordOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To set a password for your VM
+    #
+    #   # Sets the password for your VM local console.
+    #
+    #   resp = client.set_local_console_password({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #     local_console_password: "PassWordMustBeAtLeast6Chars.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2789,6 +3748,20 @@ module Aws::StorageGateway
     #
     #   * {Types::ShutdownGatewayOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To shut down a gateway service
+    #
+    #   # This operation shuts down the gateway service component running in the storage gateway's virtual machine (VM) and not the VM.
+    #
+    #   resp = client.shutdown_gateway({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.shutdown_gateway({
@@ -2831,6 +3804,20 @@ module Aws::StorageGateway
     # @return [Types::StartGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartGatewayOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To start a gateway service
+    #
+    #   # Starts a gateway service that was previously shut down.
+    #
+    #   resp = client.start_gateway({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2877,6 +3864,22 @@ module Aws::StorageGateway
     # @return [Types::UpdateBandwidthRateLimitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBandwidthRateLimitOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To update the bandwidth rate limits of a gateway
+    #
+    #   # Updates the bandwidth rate limits of a gateway. Both the upload and download bandwidth rate limit can be set, or either one of the two. If a new limit is not set, the existing rate limit remains.
+    #
+    #   resp = client.update_bandwidth_rate_limit({
+    #     average_download_rate_limit_in_bits_per_sec: 102400, 
+    #     average_upload_rate_limit_in_bits_per_sec: 51200, 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2938,6 +3941,24 @@ module Aws::StorageGateway
     #   * {Types::UpdateChapCredentialsOutput#target_arn #target_arn} => String
     #   * {Types::UpdateChapCredentialsOutput#initiator_name #initiator_name} => String
     #
+    #
+    # @example Example: To update CHAP credentials for an iSCSI target
+    #
+    #   # Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target.
+    #
+    #   resp = client.update_chap_credentials({
+    #     initiator_name: "iqn.1991-05.com.microsoft:computername.domain.example.com", 
+    #     secret_to_authenticate_initiator: "111111111111", 
+    #     secret_to_authenticate_target: "222222222222", 
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     initiator_name: "iqn.1991-05.com.microsoft:computername.domain.example.com", 
+    #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_chap_credentials({
@@ -2984,6 +4005,23 @@ module Aws::StorageGateway
     #
     #   * {Types::UpdateGatewayInformationOutput#gateway_arn #gateway_arn} => String
     #   * {Types::UpdateGatewayInformationOutput#gateway_name #gateway_name} => String
+    #
+    #
+    # @example Example: To update a gateway's metadata
+    #
+    #   # Updates a gateway's metadata, which includes the gateway's name and time zone.
+    #
+    #   resp = client.update_gateway_information({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     gateway_name: "MyGateway2", 
+    #     gateway_timezone: "GMT-12:00", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     gateway_name: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3037,6 +4075,20 @@ module Aws::StorageGateway
     #
     #   * {Types::UpdateGatewaySoftwareNowOutput#gateway_arn #gateway_arn} => String
     #
+    #
+    # @example Example: To update a gateway's VM software
+    #
+    #   # Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.
+    #
+    #   resp = client.update_gateway_software_now({
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_gateway_software_now({
@@ -3081,6 +4133,23 @@ module Aws::StorageGateway
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMaintenanceStartTimeOutput#gateway_arn #gateway_arn} => String
+    #
+    #
+    # @example Example: To update a gateway's maintenance start time
+    #
+    #   # Updates a gateway's weekly maintenance start time information, including day and time of the week. The maintenance time is in your gateway's time zone.
+    #
+    #   resp = client.update_maintenance_start_time({
+    #     day_of_week: 2, 
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #     hour_of_day: 0, 
+    #     minute_of_hour: 30, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3234,6 +4303,23 @@ module Aws::StorageGateway
     #
     #   * {Types::UpdateSnapshotScheduleOutput#volume_arn #volume_arn} => String
     #
+    #
+    # @example Example: To update a volume snapshot schedule
+    #
+    #   # Updates a snapshot schedule configured for a gateway volume.
+    #
+    #   resp = client.update_snapshot_schedule({
+    #     description: "Hourly snapshot", 
+    #     recurrence_in_hours: 1, 
+    #     start_at: 0, 
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_snapshot_schedule({
@@ -3275,6 +4361,21 @@ module Aws::StorageGateway
     #
     #   * {Types::UpdateVTLDeviceTypeOutput#vtl_device_arn #vtl_device_arn} => String
     #
+    #
+    # @example Example: To update a VTL device type
+    #
+    #   # Updates the type of medium changer in a gateway-VTL after a gateway-VTL is activated.
+    #
+    #   resp = client.update_vtl_device_type({
+    #     device_type: "Medium Changer", 
+    #     vtl_device_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     vtl_device_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_vtl_device_type({
@@ -3308,7 +4409,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

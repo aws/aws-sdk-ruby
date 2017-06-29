@@ -186,6 +186,20 @@ module Aws::KMS
     #
     #   * {Types::CancelKeyDeletionResponse#key_id #key_id} => String
     #
+    #
+    # @example Example: To cancel deletion of a customer master key (CMK)
+    #
+    #   # The following example cancels deletion of the specified CMK.
+    #
+    #   resp = client.cancel_key_deletion({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose deletion you are canceling. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK whose deletion you canceled.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_key_deletion({
@@ -236,6 +250,16 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create an alias
+    #
+    #   # The following example creates an alias for the specified customer master key (CMK).
+    #
+    #   resp = client.create_alias({
+    #     alias_name: "alias/ExampleAlias", # The alias to create. Aliases must begin with 'alias/'. Do not use aliases that begin with 'alias/aws' because they are reserved for use by AWS.
+    #     target_key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose alias you are creating. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -351,6 +375,26 @@ module Aws::KMS
     #
     #   * {Types::CreateGrantResponse#grant_token #grant_token} => String
     #   * {Types::CreateGrantResponse#grant_id #grant_id} => String
+    #
+    #
+    # @example Example: To create a grant
+    #
+    #   # The following example creates a grant that allows the specified IAM role to encrypt data with the specified customer master key (CMK).
+    #
+    #   resp = client.create_grant({
+    #     grantee_principal: "arn:aws:iam::111122223333:role/ExampleRole", # The identity that is given permission to perform the operations specified in the grant.
+    #     key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to which the grant applies. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     operations: [
+    #       "Encrypt", 
+    #       "Decrypt", 
+    #     ], # A list of operations that the grant allows.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grant_id: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60", # The unique identifier of the grant.
+    #     grant_token: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA", # The grant token.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -496,6 +540,35 @@ module Aws::KMS
     #
     #   * {Types::CreateKeyResponse#key_metadata #key_metadata} => Types::KeyMetadata
     #
+    #
+    # @example Example: To create a customer master key (CMK)
+    #
+    #   # The following example creates a CMK.
+    #
+    #   resp = client.create_key({
+    #     tags: [
+    #       {
+    #         tag_key: "CreatedBy", 
+    #         tag_value: "ExampleUser", 
+    #       }, 
+    #     ], # One or more tags. Each tag consists of a tag key and a tag value.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse("2017-01-09T12:00:07-08:00"), 
+    #       description: "", 
+    #       enabled: true, 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       origin: "AWS_KMS", 
+    #     }, # An object that contains information about the CMK created by this operation.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_key({
@@ -582,6 +655,21 @@ module Aws::KMS
     #   * {Types::DecryptResponse#key_id #key_id} => String
     #   * {Types::DecryptResponse#plaintext #plaintext} => String
     #
+    #
+    # @example Example: To decrypt data
+    #
+    #   # The following example decrypts data that was encrypted with a customer master key (CMK) in AWS KMS.
+    #
+    #   resp = client.decrypt({
+    #     ciphertext_blob: "<binary data>", # The encrypted data (ciphertext).
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the CMK that was used to decrypt the data.
+    #     plaintext: "<binary data>", # The decrypted (plaintext) data.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.decrypt({
@@ -615,6 +703,15 @@ module Aws::KMS
     #   "alias/AWS" are reserved.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an alias
+    #
+    #   # The following example deletes the specified alias.
+    #
+    #   resp = client.delete_alias({
+    #     alias_name: "alias/ExampleAlias", # The alias to delete.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -660,6 +757,15 @@ module Aws::KMS
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete imported key material
+    #
+    #   # The following example deletes the imported key material from the specified customer master key (CMK).
+    #
+    #   resp = client.delete_imported_key_material({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose imported key material you are deleting. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -707,6 +813,30 @@ module Aws::KMS
     # @return [Types::DescribeKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeKeyResponse#key_metadata #key_metadata} => Types::KeyMetadata
+    #
+    #
+    # @example Example: To obtain information about a customer master key (CMK)
+    #
+    #   # The following example returns information (metadata) about the specified CMK.
+    #
+    #   resp = client.describe_key({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK that you want information about. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse("2015-10-12T11:45:07-07:00"), 
+    #       description: "", 
+    #       enabled: true, 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       origin: "AWS_KMS", 
+    #     }, # An object that contains information about the specified CMK.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -762,6 +892,15 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To disable a customer master key (CMK)
+    #
+    #   # The following example disables the specified CMK.
+    #
+    #   resp = client.disable_key({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to disable. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_key({
@@ -790,6 +929,15 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disable automatic rotation of key material
+    #
+    #   # The following example disables automatic annual rotation of the key material for the specified CMK.
+    #
+    #   resp = client.disable_key_rotation({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose key material will no longer be rotated. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -820,6 +968,15 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To enable a customer master key (CMK)
+    #
+    #   # The following example enables the specified CMK.
+    #
+    #   resp = client.enable_key({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to enable. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_key({
@@ -848,6 +1005,15 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To enable automatic rotation of key material
+    #
+    #   # The following example enables automatic annual rotation of the key material for the specified CMK.
+    #
+    #   resp = client.enable_key_rotation({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose key material will be rotated annually. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -931,6 +1097,22 @@ module Aws::KMS
     #
     #   * {Types::EncryptResponse#ciphertext_blob #ciphertext_blob} => String
     #   * {Types::EncryptResponse#key_id #key_id} => String
+    #
+    #
+    # @example Example: To encrypt data
+    #
+    #   # The following example encrypts data with the specified customer master key (CMK).
+    #
+    #   resp = client.encrypt({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to use for encryption. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
+    #     plaintext: "<binary data>", # The data to encrypt.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ciphertext_blob: "<binary data>", # The encrypted data (ciphertext).
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that was used to encrypt the data.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1063,6 +1245,23 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyResponse#plaintext #plaintext} => String
     #   * {Types::GenerateDataKeyResponse#key_id #key_id} => String
     #
+    #
+    # @example Example: To generate a data key
+    #
+    #   # The following example generates a 256-bit symmetric data encryption key (data key) in two formats. One is the unencrypted (plainext) data key, and the other is the data key encrypted with the specified customer master key (CMK).
+    #
+    #   resp = client.generate_data_key({
+    #     key_id: "alias/ExampleAlias", # The identifier of the CMK to use to encrypt the data key. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
+    #     key_spec: "AES_256", # Specifies the type of data key to return.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ciphertext_blob: "<binary data>", # The encrypted data key.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that was used to encrypt the data key.
+    #     plaintext: "<binary data>", # The unencrypted (plaintext) data key.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_data_key({
@@ -1162,6 +1361,22 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyWithoutPlaintextResponse#ciphertext_blob #ciphertext_blob} => String
     #   * {Types::GenerateDataKeyWithoutPlaintextResponse#key_id #key_id} => String
     #
+    #
+    # @example Example: To generate an encrypted data key
+    #
+    #   # The following example generates an encrypted copy of a 256-bit symmetric data encryption key (data key). The data key is encrypted with the specified customer master key (CMK).
+    #
+    #   resp = client.generate_data_key_without_plaintext({
+    #     key_id: "alias/ExampleAlias", # The identifier of the CMK to use to encrypt the data key. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
+    #     key_spec: "AES_256", # Specifies the type of data key to return.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ciphertext_blob: "<binary data>", # The encrypted data key.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that was used to encrypt the data key.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_data_key_without_plaintext({
@@ -1204,6 +1419,20 @@ module Aws::KMS
     #
     #   * {Types::GenerateRandomResponse#plaintext #plaintext} => String
     #
+    #
+    # @example Example: To generate random data
+    #
+    #   # The following example uses AWS KMS to generate 32 bytes of random data.
+    #
+    #   resp = client.generate_random({
+    #     number_of_bytes: 32, # The length of the random data, specified in number of bytes.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     plaintext: "<binary data>", # The random data.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_random({
@@ -1244,6 +1473,21 @@ module Aws::KMS
     #
     #   * {Types::GetKeyPolicyResponse#policy #policy} => String
     #
+    #
+    # @example Example: To retrieve a key policy
+    #
+    #   # The following example retrieves the key policy for the specified customer master key (CMK).
+    #
+    #   resp = client.get_key_policy({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose key policy you want to retrieve. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     policy_name: "default", # The name of the key policy to retrieve.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\n  \"Version\" : \"2012-10-17\",\n  \"Id\" : \"key-default-1\",\n  \"Statement\" : [ {\n    \"Sid\" : \"Enable IAM User Permissions\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:aws:iam::111122223333:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}", # The key policy document.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_key_policy({
@@ -1280,6 +1524,20 @@ module Aws::KMS
     # @return [Types::GetKeyRotationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetKeyRotationStatusResponse#key_rotation_enabled #key_rotation_enabled} => Boolean
+    #
+    #
+    # @example Example: To retrieve the rotation status for a customer master key (CMK)
+    #
+    #   # The following example retrieves the status of automatic annual rotation of the key material for the specified CMK.
+    #
+    #   resp = client.get_key_rotation_status({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose key material rotation status you want to retrieve. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_rotation_enabled: true, # A boolean that indicates the key material rotation status. Returns true when automatic annual rotation of the key material is enabled, or false when it is not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1355,6 +1613,25 @@ module Aws::KMS
     #   * {Types::GetParametersForImportResponse#import_token #import_token} => String
     #   * {Types::GetParametersForImportResponse#public_key #public_key} => String
     #   * {Types::GetParametersForImportResponse#parameters_valid_to #parameters_valid_to} => Time
+    #
+    #
+    # @example Example: To retrieve the public key and import token for a customer master key (CMK)
+    #
+    #   # The following example retrieves the public key and import token for the specified CMK.
+    #
+    #   resp = client.get_parameters_for_import({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK for which to retrieve the public key and import token. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     wrapping_algorithm: "RSAES_OAEP_SHA_1", # The algorithm that you will use to encrypt the key material before importing it.
+    #     wrapping_key_spec: "RSA_2048", # The type of wrapping key (public key) to return in the response.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     import_token: "<binary data>", # The import token to send with a subsequent ImportKeyMaterial request.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK for which you are retrieving the public key and import token. This is the same CMK specified in the request.
+    #     parameters_valid_to: Time.parse("2016-12-01T14:52:17-08:00"), # The time at which the import token and public key are no longer valid.
+    #     public_key: "<binary data>", # The public key to use to encrypt the key material before importing it.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1446,6 +1723,18 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To import key material into a customer master key (CMK)
+    #
+    #   # The following example imports key material into the specified CMK.
+    #
+    #   resp = client.import_key_material({
+    #     encrypted_key_material: "<binary data>", # The encrypted key material to import.
+    #     expiration_model: "KEY_MATERIAL_DOES_NOT_EXPIRE", # A value that specifies whether the key material expires.
+    #     import_token: "<binary data>", # The import token that you received in the response to a previous GetParametersForImport request.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to import the key material into. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_key_material({
@@ -1485,6 +1774,61 @@ module Aws::KMS
     #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;Types::AliasListEntry&gt;
     #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
     #   * {Types::ListAliasesResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To list aliases
+    #
+    #   # The following example lists aliases.
+    #
+    #   resp = client.list_aliases({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     aliases: [
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/aws/acm", 
+    #         alias_name: "alias/aws/acm", 
+    #         target_key_id: "da03f6f7-d279-427a-9cae-de48d07e5b66", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/aws/ebs", 
+    #         alias_name: "alias/aws/ebs", 
+    #         target_key_id: "25a217e7-7170-4b8c-8bf6-045ea5f70e5b", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/aws/rds", 
+    #         alias_name: "alias/aws/rds", 
+    #         target_key_id: "7ec3104e-c3f2-4b5c-bf42-bfc4772c6685", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/aws/redshift", 
+    #         alias_name: "alias/aws/redshift", 
+    #         target_key_id: "08f7a25a-69e2-4fb5-8f10-393db27326fa", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/aws/s3", 
+    #         alias_name: "alias/aws/s3", 
+    #         target_key_id: "d2b0f1a3-580d-4f79-b836-bc983be8cfa5", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/example1", 
+    #         alias_name: "alias/example1", 
+    #         target_key_id: "4da1e216-62d0-46c5-a7c0-5f3a3d2f8046", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/example2", 
+    #         alias_name: "alias/example2", 
+    #         target_key_id: "f32fef59-2cc2-445b-8573-2d73328acbee", 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:kms:us-east-2:111122223333:alias/example3", 
+    #         alias_name: "alias/example3", 
+    #         target_key_id: "1374ef38-d34e-4d5f-b2c9-4e0daee38855", 
+    #       }, 
+    #     ], # A list of aliases, including the key ID of the customer master key (CMK) that each alias refers to.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1541,6 +1885,73 @@ module Aws::KMS
     #   * {Types::ListGrantsResponse#grants #grants} => Array&lt;Types::GrantListEntry&gt;
     #   * {Types::ListGrantsResponse#next_marker #next_marker} => String
     #   * {Types::ListGrantsResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To list grants for a customer master key (CMK)
+    #
+    #   # The following example lists grants for the specified CMK.
+    #
+    #   resp = client.list_grants({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose grants you want to list. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grants: [
+    #       {
+    #         creation_date: Time.parse("2016-10-25T14:37:41-07:00"), 
+    #         grant_id: "91ad875e49b04a9d1f3bdeb84d821f9db6ea95e1098813f6d47f0c65fbe2a172", 
+    #         grantee_principal: "acm.us-east-2.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::111122223333:root", 
+    #         key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Encrypt", 
+    #           "ReEncryptFrom", 
+    #           "ReEncryptTo", 
+    #         ], 
+    #         retiring_principal: "acm.us-east-2.amazonaws.com", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2016-10-25T14:37:41-07:00"), 
+    #         grant_id: "a5d67d3e207a8fc1f4928749ee3e52eb0440493a8b9cf05bbfad91655b056200", 
+    #         grantee_principal: "acm.us-east-2.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::111122223333:root", 
+    #         key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "ReEncryptFrom", 
+    #           "ReEncryptTo", 
+    #         ], 
+    #         retiring_principal: "acm.us-east-2.amazonaws.com", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2016-10-25T14:37:41-07:00"), 
+    #         grant_id: "c541aaf05d90cb78846a73b346fc43e65be28b7163129488c738e0c9e0628f4f", 
+    #         grantee_principal: "acm.us-east-2.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::111122223333:root", 
+    #         key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Encrypt", 
+    #           "ReEncryptFrom", 
+    #           "ReEncryptTo", 
+    #         ], 
+    #         retiring_principal: "acm.us-east-2.amazonaws.com", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2016-10-25T14:37:41-07:00"), 
+    #         grant_id: "dd2052c67b4c76ee45caf1dc6a1e2d24e8dc744a51b36ae2f067dc540ce0105c", 
+    #         grantee_principal: "acm.us-east-2.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::111122223333:root", 
+    #         key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Encrypt", 
+    #           "ReEncryptFrom", 
+    #           "ReEncryptTo", 
+    #         ], 
+    #         retiring_principal: "acm.us-east-2.amazonaws.com", 
+    #       }, 
+    #     ], # A list of grants.
+    #     truncated: true, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1611,6 +2022,23 @@ module Aws::KMS
     #   * {Types::ListKeyPoliciesResponse#next_marker #next_marker} => String
     #   * {Types::ListKeyPoliciesResponse#truncated #truncated} => Boolean
     #
+    #
+    # @example Example: To list key policies for a customer master key (CMK)
+    #
+    #   # The following example lists key policies for the specified CMK.
+    #
+    #   resp = client.list_key_policies({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose key policies you want to list. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_names: [
+    #       "default", 
+    #     ], # A list of key policy names.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_key_policies({
@@ -1656,6 +2084,49 @@ module Aws::KMS
     #   * {Types::ListKeysResponse#keys #keys} => Array&lt;Types::KeyListEntry&gt;
     #   * {Types::ListKeysResponse#next_marker #next_marker} => String
     #   * {Types::ListKeysResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To list customer master keys (CMKs)
+    #
+    #   # The following example lists CMKs.
+    #
+    #   resp = client.list_keys({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     keys: [
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/0d990263-018e-4e65-a703-eff731de951e", 
+    #         key_id: "0d990263-018e-4e65-a703-eff731de951e", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/144be297-0ae1-44ac-9c8f-93cd8c82f841", 
+    #         key_id: "144be297-0ae1-44ac-9c8f-93cd8c82f841", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/21184251-b765-428e-b852-2c7353e72571", 
+    #         key_id: "21184251-b765-428e-b852-2c7353e72571", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/214fe92f-5b03-4ae1-b350-db2a45dbe10c", 
+    #         key_id: "214fe92f-5b03-4ae1-b350-db2a45dbe10c", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/339963f2-e523-49d3-af24-a0fe752aa458", 
+    #         key_id: "339963f2-e523-49d3-af24-a0fe752aa458", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/b776a44b-df37-4438-9be4-a27494e4271a", 
+    #         key_id: "b776a44b-df37-4438-9be4-a27494e4271a", 
+    #       }, 
+    #       {
+    #         key_arn: "arn:aws:kms:us-east-2:111122223333:key/deaf6c9e-cf2c-46a6-bf6d-0b6d487cffbb", 
+    #         key_id: "deaf6c9e-cf2c-46a6-bf6d-0b6d487cffbb", 
+    #       }, 
+    #     ], # A list of CMKs, including the key ID and Amazon Resource Name (ARN) of each one.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1715,6 +2186,34 @@ module Aws::KMS
     #   * {Types::ListResourceTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListResourceTagsResponse#next_marker #next_marker} => String
     #   * {Types::ListResourceTagsResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To list tags for a customer master key (CMK)
+    #
+    #   # The following example lists tags for a CMK.
+    #
+    #   resp = client.list_resource_tags({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose tags you are listing. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         tag_key: "CostCenter", 
+    #         tag_value: "87654", 
+    #       }, 
+    #       {
+    #         tag_key: "CreatedBy", 
+    #         tag_value: "ExampleUser", 
+    #       }, 
+    #       {
+    #         tag_key: "Purpose", 
+    #         tag_value: "Test", 
+    #       }, 
+    #     ], # A list of tags.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1780,6 +2279,34 @@ module Aws::KMS
     #   * {Types::ListGrantsResponse#grants #grants} => Array&lt;Types::GrantListEntry&gt;
     #   * {Types::ListGrantsResponse#next_marker #next_marker} => String
     #   * {Types::ListGrantsResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To list grants that the specified principal can retire
+    #
+    #   # The following example lists the grants that the specified principal (identity) can retire.
+    #
+    #   resp = client.list_retirable_grants({
+    #     retiring_principal: "arn:aws:iam::111122223333:role/ExampleRole", # The retiring principal whose grants you want to list. Use the Amazon Resource Name (ARN) of an AWS principal such as an AWS account (root), IAM user, federated user, or assumed role user.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grants: [
+    #       {
+    #         creation_date: Time.parse("2016-12-07T11:09:35-08:00"), 
+    #         grant_id: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60", 
+    #         grantee_principal: "arn:aws:iam::111122223333:role/ExampleRole", 
+    #         issuing_account: "arn:aws:iam::444455556666:root", 
+    #         key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Decrypt", 
+    #           "Encrypt", 
+    #         ], 
+    #         retiring_principal: "arn:aws:iam::111122223333:role/ExampleRole", 
+    #       }, 
+    #     ], # A list of grants that the specified principal can retire.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1892,6 +2419,17 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a key policy to a customer master key (CMK)
+    #
+    #   # The following example attaches a key policy to the specified CMK.
+    #
+    #   resp = client.put_key_policy({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to attach the key policy to. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     policy: "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"custom-policy-2016-12-07\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow access for Key Administrators\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"arn:aws:iam::111122223333:user/ExampleAdminUser\",\n                    \"arn:aws:iam::111122223333:role/ExampleAdminRole\"\n                ]\n            },\n            \"Action\": [\n                \"kms:Create*\",\n                \"kms:Describe*\",\n                \"kms:Enable*\",\n                \"kms:List*\",\n                \"kms:Put*\",\n                \"kms:Update*\",\n                \"kms:Revoke*\",\n                \"kms:Disable*\",\n                \"kms:Get*\",\n                \"kms:Delete*\",\n                \"kms:ScheduleKeyDeletion\",\n                \"kms:CancelKeyDeletion\"\n            ],\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow use of the key\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:role/ExamplePowerUserRole\"\n            },\n            \"Action\": [\n                \"kms:Encrypt\",\n                \"kms:Decrypt\",\n                \"kms:ReEncrypt*\",\n                \"kms:GenerateDataKey*\",\n                \"kms:DescribeKey\"\n            ],\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow attachment of persistent resources\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:role/ExamplePowerUserRole\"\n            },\n            \"Action\": [\n                \"kms:CreateGrant\",\n                \"kms:ListGrants\",\n                \"kms:RevokeGrant\"\n            ],\n            \"Resource\": \"*\",\n            \"Condition\": {\n                \"Bool\": {\n                    \"kms:GrantIsForAWSResource\": \"true\"\n                }\n            }\n        }\n    ]\n}\n", # The key policy document.
+    #     policy_name: "default", # The name of the key policy.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_key_policy({
@@ -1970,6 +2508,23 @@ module Aws::KMS
     #   * {Types::ReEncryptResponse#source_key_id #source_key_id} => String
     #   * {Types::ReEncryptResponse#key_id #key_id} => String
     #
+    #
+    # @example Example: To reencrypt data
+    #
+    #   # The following example reencrypts data with the specified CMK.
+    #
+    #   resp = client.re_encrypt({
+    #     ciphertext_blob: "<binary data>", # The data to reencrypt.
+    #     destination_key_id: "0987dcba-09fe-87dc-65ba-ab0987654321", # The identifier of the CMK to use to reencrypt the data. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ciphertext_blob: "<binary data>", # The reencrypted data.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321", # The ARN of the CMK that was used to reencrypt the data.
+    #     source_key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that was used to originally encrypt the data.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.re_encrypt({
@@ -2039,6 +2594,16 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To retire a grant
+    #
+    #   # The following example retires a grant.
+    #
+    #   resp = client.retire_grant({
+    #     grant_id: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60", # The identifier of the grant to retire.
+    #     key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the customer master key (CMK) associated with the grant.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retire_grant({
@@ -2074,6 +2639,16 @@ module Aws::KMS
     #   Identifier of the grant to be revoked.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To revoke a grant
+    #
+    #   # The following example revokes a grant.
+    #
+    #   resp = client.revoke_grant({
+    #     grant_id: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60", # The identifier of the grant to revoke.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the customer master key (CMK) associated with the grant. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2139,6 +2714,22 @@ module Aws::KMS
     #   * {Types::ScheduleKeyDeletionResponse#key_id #key_id} => String
     #   * {Types::ScheduleKeyDeletionResponse#deletion_date #deletion_date} => Time
     #
+    #
+    # @example Example: To schedule a customer master key (CMK) for deletion
+    #
+    #   # The following example schedules the specified CMK for deletion.
+    #
+    #   resp = client.schedule_key_deletion({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK to schedule for deletion. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     pending_window_in_days: 7, # The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the CMK.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deletion_date: Time.parse("2016-12-17T16:00:00-08:00"), # The date and time after which AWS KMS deletes the CMK.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the CMK that is scheduled for deletion.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.schedule_key_deletion({
@@ -2187,6 +2778,21 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To tag a customer master key (CMK)
+    #
+    #   # The following example tags a CMK.
+    #
+    #   resp = client.tag_resource({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK you are tagging. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #     tags: [
+    #       {
+    #         tag_key: "Purpose", 
+    #         tag_value: "Test", 
+    #       }, 
+    #     ], # A list of tags.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -2229,6 +2835,19 @@ module Aws::KMS
     #   One or more tag keys. Specify only the tag keys, not the tag values.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a customer master key (CMK)
+    #
+    #   # The following example removes tags from a CMK.
+    #
+    #   resp = client.untag_resource({
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose tags you are removing.
+    #     tag_keys: [
+    #       "Purpose", 
+    #       "CostCenter", 
+    #     ], # A list of tag keys. Provide only the tag keys, not the tag values.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2282,6 +2901,16 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update an alias
+    #
+    #   # The following example updates the specified alias to refer to the specified customer master key (CMK).
+    #
+    #   resp = client.update_alias({
+    #     alias_name: "alias/ExampleAlias", # The alias to update.
+    #     target_key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK that the alias will refer to after this operation succeeds. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_alias({
@@ -2315,6 +2944,16 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update the description of a customer master key (CMK)
+    #
+    #   # The following example updates the description of the specified CMK.
+    #
+    #   resp = client.update_key_description({
+    #     description: "Example description that indicates the intended use of this CMK.", # The updated description.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK whose description you are updating. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_key_description({
@@ -2344,7 +2983,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

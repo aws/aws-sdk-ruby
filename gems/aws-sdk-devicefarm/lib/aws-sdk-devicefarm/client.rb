@@ -173,6 +173,25 @@ module Aws::DeviceFarm
     #
     #   * {Types::CreateDevicePoolResult#device_pool #device_pool} => Types::DevicePool
     #
+    #
+    # @example Example: To create a new device pool
+    #
+    #   # The following example creates a new device pool named MyDevicePool inside an existing project.
+    #
+    #   resp = client.create_device_pool({
+    #     name: "MyDevicePool", # A device pool contains related devices, such as devices that run only on Android or that run only on iOS.
+    #     description: "My Android devices", 
+    #     project_arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #     rules: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device_pool: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_device_pool({
@@ -315,6 +334,24 @@ module Aws::DeviceFarm
     #
     #   * {Types::CreateProjectResult#project #project} => Types::Project
     #
+    #
+    # @example Example: To create a new project
+    #
+    #   # The following example creates a new project named MyProject.
+    #
+    #   resp = client.create_project({
+    #     name: "MyProject", # A project in Device Farm is a workspace that contains test runs. A run is a test of a single app against one or more devices.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project: {
+    #       name: "MyProject", 
+    #       arn: "arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE", 
+    #       created: Time.parse("1472660939.152"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_project({
@@ -357,6 +394,26 @@ module Aws::DeviceFarm
     # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
+    #
+    #
+    # @example Example: To create a remote access session
+    #
+    #   # The following example creates a remote access session named MySession.
+    #
+    #   resp = client.create_remote_access_session({
+    #     name: "MySession", 
+    #     configuration: {
+    #       billing_method: "METERED", 
+    #     }, 
+    #     device_arn: "arn:aws:devicefarm:us-west-2::device:123EXAMPLE", # You can get the device ARN by using the list-devices CLI command.
+    #     project_arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     remote_access_session: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -479,6 +536,29 @@ module Aws::DeviceFarm
     #
     #   * {Types::CreateUploadResult#upload #upload} => Types::Upload
     #
+    #
+    # @example Example: To create a new test package upload
+    #
+    #   # The following example creates a new Appium Python test package upload inside an existing project.
+    #
+    #   resp = client.create_upload({
+    #     name: "MyAppiumPythonUpload", 
+    #     type: "APPIUM_PYTHON_TEST_PACKAGE", 
+    #     project_arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     upload: {
+    #       name: "MyAppiumPythonUpload", 
+    #       type: "APPIUM_PYTHON_TEST_PACKAGE", 
+    #       arn: "arn:aws:devicefarm:us-west-2:123456789101:upload:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/b5340a65-3da7-4da6-a26e-12345EXAMPLE", 
+    #       created: Time.parse("1472661404.186"), 
+    #       status: "INITIALIZED", 
+    #       url: "https://prod-us-west-2-uploads.s3-us-west-2.amazonaws.com/arn%3Aaws%3Adevicefarm%3Aus-west-2%3A123456789101%3Aproject%3A5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE/uploads/arn%3Aaws%3Adevicefarm%3Aus-west-2%3A123456789101%3Aupload%3A5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/b5340a65-3da7-4da6-a26e-12345EXAMPLE/MyAppiumPythonUpload?AWSAccessKeyId=1234567891011EXAMPLE&Expires=1472747804&Signature=1234567891011EXAMPLE", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_upload({
@@ -517,6 +597,19 @@ module Aws::DeviceFarm
     #   pool you wish to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a device pool
+    #
+    #   # The following example deletes a specific device pool.
+    #
+    #   resp = client.delete_device_pool({
+    #     arn: "arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID", # You can get the device pool ARN by using the list-device-pools CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -566,6 +659,19 @@ module Aws::DeviceFarm
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a project
+    #
+    #   # The following example deletes a specific project.
+    #
+    #   resp = client.delete_project({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_project({
@@ -588,6 +694,19 @@ module Aws::DeviceFarm
     #   delete remote access.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a specific remote access session
+    #
+    #   # The following example deletes a specific remote access session.
+    #
+    #   resp = client.delete_remote_access_session({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456", # You can get the remote access session ARN by using the list-remote-access-sessions CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -613,6 +732,19 @@ module Aws::DeviceFarm
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a run
+    #
+    #   # The following example deletes a specific test run.
+    #
+    #   resp = client.delete_run({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456", # You can get the run ARN by using the list-runs CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_run({
@@ -636,6 +768,19 @@ module Aws::DeviceFarm
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a specific upload
+    #
+    #   # The following example deletes a specific upload.
+    #
+    #   resp = client.delete_upload({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456", # You can get the upload ARN by using the list-uploads CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_upload({
@@ -657,6 +802,25 @@ module Aws::DeviceFarm
     # @return [Types::GetAccountSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccountSettingsResult#account_settings #account_settings} => Types::AccountSettings
+    #
+    #
+    # @example Example: To get information about account settings
+    #
+    #   # The following example returns information about your Device Farm account settings.
+    #
+    #   resp = client.get_account_settings({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_settings: {
+    #       aws_account_number: "123456789101", 
+    #       unmetered_devices: {
+    #         "ANDROID" => 1, 
+    #         "IOS" => 2, 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -689,6 +853,40 @@ module Aws::DeviceFarm
     # @return [Types::GetDeviceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDeviceResult#device #device} => Types::Device
+    #
+    #
+    # @example Example: To get information about a device
+    #
+    #   # The following example returns information about a specific device.
+    #
+    #   resp = client.get_device({
+    #     arn: "arn:aws:devicefarm:us-west-2::device:123EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device: {
+    #       name: "LG G2 (Sprint)", 
+    #       arn: "arn:aws:devicefarm:us-west-2::device:A0E6E6E1059E45918208DF75B2B7EF6C", 
+    #       cpu: {
+    #         architecture: "armeabi-v7a", 
+    #         clock: 2265.6, 
+    #         frequency: "MHz", 
+    #       }, 
+    #       form_factor: "PHONE", 
+    #       heap_size: 256000000, 
+    #       image: "75B2B7EF6C12345EXAMPLE", 
+    #       manufacturer: "LG", 
+    #       memory: 16000000000, 
+    #       model: "G2 (Sprint)", 
+    #       os: "4.2.2", 
+    #       platform: "ANDROID", 
+    #       resolution: {
+    #         height: 1920, 
+    #         width: 1080, 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -736,6 +934,21 @@ module Aws::DeviceFarm
     # @return [Types::GetDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDevicePoolResult#device_pool #device_pool} => Types::DevicePool
+    #
+    #
+    # @example Example: To get information about a device pool
+    #
+    #   # The following example returns information about a specific device pool, given a project ARN.
+    #
+    #   resp = client.get_device_pool({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can obtain the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device_pool: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -813,6 +1026,25 @@ module Aws::DeviceFarm
     #
     #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
     #   * {Types::GetDevicePoolCompatibilityResult#incompatible_devices #incompatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
+    #
+    #
+    # @example Example: To get information about the compatibility of a device pool
+    #
+    #   # The following example returns information about the compatibility of a specific device pool, given its ARN.
+    #
+    #   resp = client.get_device_pool_compatibility({
+    #     app_arn: "arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID", 
+    #     device_pool_arn: "arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID", # You can get the device pool ARN by using the list-device-pools CLI command.
+    #     test_type: "APPIUM_PYTHON", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compatible_devices: [
+    #     ], 
+    #     incompatible_devices: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -900,6 +1132,21 @@ module Aws::DeviceFarm
     # @return [Types::GetJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobResult#job #job} => Types::Job
+    #
+    #
+    # @example Example: To get information about a job
+    #
+    #   # The following example returns information about a specific job.
+    #
+    #   resp = client.get_job({
+    #     arn: "arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID", # You can get the job ARN by using the list-jobs CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1264,42 @@ module Aws::DeviceFarm
     #   * {Types::GetOfferingStatusResult#next_period #next_period} => Hash&lt;String,Types::OfferingStatus&gt;
     #   * {Types::GetOfferingStatusResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get status information about device offerings
+    #
+    #   # The following example returns information about Device Farm offerings available to your account.
+    #
+    #   resp = client.get_offering_status({
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     current: {
+    #       "D68B3C05-1BA6-4360-BC69-12345EXAMPLE" => {
+    #         offering: {
+    #           type: "RECURRING", 
+    #           description: "Android Remote Access Unmetered Device Slot", 
+    #           id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #           platform: "ANDROID", 
+    #         }, 
+    #         quantity: 1, 
+    #       }, 
+    #     }, 
+    #     next_period: {
+    #       "D68B3C05-1BA6-4360-BC69-12345EXAMPLE" => {
+    #         effective_on: Time.parse("1472688000"), 
+    #         offering: {
+    #           type: "RECURRING", 
+    #           description: "Android Remote Access Unmetered Device Slot", 
+    #           id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #           platform: "ANDROID", 
+    #         }, 
+    #         quantity: 1, 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_offering_status({
@@ -1069,6 +1352,24 @@ module Aws::DeviceFarm
     #
     #   * {Types::GetProjectResult#project #project} => Types::Project
     #
+    #
+    # @example Example: To get information about a project
+    #
+    #   # The following example gets information about a specific project.
+    #
+    #   resp = client.get_project({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project: {
+    #       name: "My Project", 
+    #       arn: "arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE", 
+    #       created: Time.parse("1472660939.152"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_project({
@@ -1100,6 +1401,21 @@ module Aws::DeviceFarm
     # @return [Types::GetRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
+    #
+    #
+    # @example Example: To get a remote access session
+    #
+    #   # The following example gets a specific remote access session.
+    #
+    #   resp = client.get_remote_access_session({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456", # You can get the remote access session ARN by using the list-remote-access-sessions CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     remote_access_session: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1160,6 +1476,45 @@ module Aws::DeviceFarm
     # @return [Types::GetRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRunResult#run #run} => Types::Run
+    #
+    #
+    # @example Example: To get information about a test run
+    #
+    #   # The following example gets information about a specific test run.
+    #
+    #   resp = client.get_run({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE", # You can get the run ARN by using the list-runs CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     run: {
+    #       name: "My Test Run", 
+    #       type: "BUILTIN_EXPLORER", 
+    #       arn: "arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE", 
+    #       billing_method: "METERED", 
+    #       completed_jobs: 0, 
+    #       counters: {
+    #         errored: 0, 
+    #         failed: 0, 
+    #         passed: 0, 
+    #         skipped: 0, 
+    #         stopped: 0, 
+    #         total: 0, 
+    #         warned: 0, 
+    #       }, 
+    #       created: Time.parse("1472667509.852"), 
+    #       device_minutes: {
+    #         metered: 0.0, 
+    #         total: 0.0, 
+    #         unmetered: 0.0, 
+    #       }, 
+    #       platform: "ANDROID", 
+    #       result: "PENDING", 
+    #       status: "RUNNING", 
+    #       total_jobs: 3, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1223,6 +1578,21 @@ module Aws::DeviceFarm
     #
     #   * {Types::GetSuiteResult#suite #suite} => Types::Suite
     #
+    #
+    # @example Example: To get information about a test suite
+    #
+    #   # The following example gets information about a specific test suite.
+    #
+    #   resp = client.get_suite({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456", # You can get the suite ARN by using the list-suites CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     suite: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_suite({
@@ -1268,6 +1638,21 @@ module Aws::DeviceFarm
     # @return [Types::GetTestResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTestResult#test #test} => Types::Test
+    #
+    #
+    # @example Example: To get information about a specific test
+    #
+    #   # The following example gets information about a specific test.
+    #
+    #   resp = client.get_test({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456", # You can get the test ARN by using the list-tests CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     test: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1315,6 +1700,21 @@ module Aws::DeviceFarm
     #
     #   * {Types::GetUploadResult#upload #upload} => Types::Upload
     #
+    #
+    # @example Example: To get information about a specific upload
+    #
+    #   # The following example gets information about a specific upload.
+    #
+    #   resp = client.get_upload({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456", # You can get the test ARN by using the list-uploads CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     upload: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_upload({
@@ -1357,6 +1757,22 @@ module Aws::DeviceFarm
     # @return [Types::InstallToRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InstallToRemoteAccessSessionResult#app_upload #app_upload} => Types::Upload
+    #
+    #
+    # @example Example: To install to a remote access session
+    #
+    #   # The following example installs a specific app to a device in a specific remote access session.
+    #
+    #   resp = client.install_to_remote_access_session({
+    #     app_arn: "arn:aws:devicefarm:us-west-2:123456789101:app:EXAMPLE-GUID-123-456", 
+    #     remote_access_session_arn: "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456", # You can get the remote access session ARN by using the list-remote-access-sessions CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     app_upload: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1412,6 +1828,16 @@ module Aws::DeviceFarm
     #   * {Types::ListArtifactsResult#artifacts #artifacts} => Array&lt;Types::Artifact&gt;
     #   * {Types::ListArtifactsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To list artifacts for a resource
+    #
+    #   # The following example lists screenshot artifacts for a specific run.
+    #
+    #   resp = client.list_artifacts({
+    #     type: "SCREENSHOT", 
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456", # Can also be used to list artifacts for a Job, Suite, or Test ARN.
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_artifacts({
@@ -1465,6 +1891,46 @@ module Aws::DeviceFarm
     #   * {Types::ListDevicePoolsResult#device_pools #device_pools} => Array&lt;Types::DevicePool&gt;
     #   * {Types::ListDevicePoolsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about device pools
+    #
+    #   # The following example returns information about the private device pools in a specific project.
+    #
+    #   resp = client.list_device_pools({
+    #     type: "PRIVATE", 
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device_pools: [
+    #       {
+    #         name: "Top Devices", 
+    #         arn: "arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE", 
+    #         description: "Top devices", 
+    #         rules: [
+    #           {
+    #             value: "[\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\"]", 
+    #             attribute: "ARN", 
+    #             operator: "IN", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         name: "My Android Device Pool", 
+    #         arn: "arn:aws:devicefarm:us-west-2:123456789101:devicepool:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/bf96e75a-28f6-4e61-b6a7-12345EXAMPLE", 
+    #         description: "Samsung Galaxy Android devices", 
+    #         rules: [
+    #           {
+    #             value: "[\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\"]", 
+    #             attribute: "ARN", 
+    #             operator: "IN", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_device_pools({
@@ -1509,6 +1975,19 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListDevicesResult#devices #devices} => Array&lt;Types::Device&gt;
     #   * {Types::ListDevicesResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about devices
+    #
+    #   # The following example returns information about the available devices in a specific project.
+    #
+    #   resp = client.list_devices({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1565,6 +2044,15 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about jobs
+    #
+    #   # The following example returns information about jobs in a specific project.
+    #
+    #   resp = client.list_jobs({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the project ARN by using the list-jobs CLI command.
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1737,6 +2225,97 @@ module Aws::DeviceFarm
     #   * {Types::ListOfferingTransactionsResult#offering_transactions #offering_transactions} => Array&lt;Types::OfferingTransaction&gt;
     #   * {Types::ListOfferingTransactionsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about device offering transactions
+    #
+    #   # The following example returns information about Device Farm offering transactions.
+    #
+    #   resp = client.list_offering_transactions({
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offering_transactions: [
+    #       {
+    #         cost: {
+    #           amount: 0, 
+    #           currency_code: "USD", 
+    #         }, 
+    #         created_on: Time.parse("1470021420"), 
+    #         offering_status: {
+    #           type: "RENEW", 
+    #           effective_on: Time.parse("1472688000"), 
+    #           offering: {
+    #             type: "RECURRING", 
+    #             description: "Android Remote Access Unmetered Device Slot", 
+    #             id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #             platform: "ANDROID", 
+    #           }, 
+    #           quantity: 0, 
+    #         }, 
+    #         transaction_id: "03728003-d1ea-4851-abd6-12345EXAMPLE", 
+    #       }, 
+    #       {
+    #         cost: {
+    #           amount: 250, 
+    #           currency_code: "USD", 
+    #         }, 
+    #         created_on: Time.parse("1470021420"), 
+    #         offering_status: {
+    #           type: "PURCHASE", 
+    #           effective_on: Time.parse("1470021420"), 
+    #           offering: {
+    #             type: "RECURRING", 
+    #             description: "Android Remote Access Unmetered Device Slot", 
+    #             id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #             platform: "ANDROID", 
+    #           }, 
+    #           quantity: 1, 
+    #         }, 
+    #         transaction_id: "56820b6e-06bd-473a-8ff8-12345EXAMPLE", 
+    #       }, 
+    #       {
+    #         cost: {
+    #           amount: 175, 
+    #           currency_code: "USD", 
+    #         }, 
+    #         created_on: Time.parse("1465538520"), 
+    #         offering_status: {
+    #           type: "PURCHASE", 
+    #           effective_on: Time.parse("1465538520"), 
+    #           offering: {
+    #             type: "RECURRING", 
+    #             description: "Android Unmetered Device Slot", 
+    #             id: "8980F81C-00D7-469D-8EC6-12345EXAMPLE", 
+    #             platform: "ANDROID", 
+    #           }, 
+    #           quantity: 1, 
+    #         }, 
+    #         transaction_id: "953ae2c6-d760-4a04-9597-12345EXAMPLE", 
+    #       }, 
+    #       {
+    #         cost: {
+    #           amount: 8.07, 
+    #           currency_code: "USD", 
+    #         }, 
+    #         created_on: Time.parse("1459344300"), 
+    #         offering_status: {
+    #           type: "PURCHASE", 
+    #           effective_on: Time.parse("1459344300"), 
+    #           offering: {
+    #             type: "RECURRING", 
+    #             description: "iOS Unmetered Device Slot", 
+    #             id: "A53D4D73-A6F6-4B82-A0B0-12345EXAMPLE", 
+    #             platform: "IOS", 
+    #           }, 
+    #           quantity: 1, 
+    #         }, 
+    #         transaction_id: "2baf9021-ae3e-47f5-ab52-12345EXAMPLE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_offering_transactions({
@@ -1791,6 +2370,81 @@ module Aws::DeviceFarm
     #   * {Types::ListOfferingsResult#offerings #offerings} => Array&lt;Types::Offering&gt;
     #   * {Types::ListOfferingsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about device offerings
+    #
+    #   # The following example returns information about available device offerings.
+    #
+    #   resp = client.list_offerings({
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offerings: [
+    #       {
+    #         type: "RECURRING", 
+    #         description: "iOS Unmetered Device Slot", 
+    #         id: "A53D4D73-A6F6-4B82-A0B0-12345EXAMPLE", 
+    #         platform: "IOS", 
+    #         recurring_charges: [
+    #           {
+    #             cost: {
+    #               amount: 250, 
+    #               currency_code: "USD", 
+    #             }, 
+    #             frequency: "MONTHLY", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         type: "RECURRING", 
+    #         description: "Android Unmetered Device Slot", 
+    #         id: "8980F81C-00D7-469D-8EC6-12345EXAMPLE", 
+    #         platform: "ANDROID", 
+    #         recurring_charges: [
+    #           {
+    #             cost: {
+    #               amount: 250, 
+    #               currency_code: "USD", 
+    #             }, 
+    #             frequency: "MONTHLY", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         type: "RECURRING", 
+    #         description: "Android Remote Access Unmetered Device Slot", 
+    #         id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #         platform: "ANDROID", 
+    #         recurring_charges: [
+    #           {
+    #             cost: {
+    #               amount: 250, 
+    #               currency_code: "USD", 
+    #             }, 
+    #             frequency: "MONTHLY", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       {
+    #         type: "RECURRING", 
+    #         description: "iOS Remote Access Unmetered Device Slot", 
+    #         id: "552B4DAD-A6C9-45C4-94FB-12345EXAMPLE", 
+    #         platform: "IOS", 
+    #         recurring_charges: [
+    #           {
+    #             cost: {
+    #               amount: 250, 
+    #               currency_code: "USD", 
+    #             }, 
+    #             frequency: "MONTHLY", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_offerings({
@@ -1836,6 +2490,32 @@ module Aws::DeviceFarm
     #   * {Types::ListProjectsResult#projects #projects} => Array&lt;Types::Project&gt;
     #   * {Types::ListProjectsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about a Device Farm project
+    #
+    #   # The following example returns information about the specified project in Device Farm.
+    #
+    #   resp = client.list_projects({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE", 
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     projects: [
+    #       {
+    #         name: "My Test Project", 
+    #         arn: "arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE", 
+    #         created: Time.parse("1453163262.105"), 
+    #       }, 
+    #       {
+    #         name: "Hello World", 
+    #         arn: "arn:aws:devicefarm:us-west-2:123456789101:project:d6b087d9-56db-4e44-b9ec-12345EXAMPLE", 
+    #         created: Time.parse("1470350112.439"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_projects({
@@ -1876,6 +2556,22 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListRemoteAccessSessionsResult#remote_access_sessions #remote_access_sessions} => Array&lt;Types::RemoteAccessSession&gt;
     #   * {Types::ListRemoteAccessSessionsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about a remote access session
+    #
+    #   # The following example returns information about a specific Device Farm remote access session.
+    #
+    #   resp = client.list_remote_access_sessions({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the session by using the list-sessions CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     remote_access_sessions: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1946,6 +2642,48 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListRunsResult#runs #runs} => Array&lt;Types::Run&gt;
     #   * {Types::ListRunsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about a test run
+    #
+    #   # The following example returns information about a specific test run.
+    #
+    #   resp = client.list_runs({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE", # You can get the Amazon Resource Name (ARN) of the run by using the list-runs CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     runs: [
+    #       {
+    #         name: "My Test Run", 
+    #         type: "BUILTIN_EXPLORER", 
+    #         arn: "arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE", 
+    #         billing_method: "METERED", 
+    #         completed_jobs: 0, 
+    #         counters: {
+    #           errored: 0, 
+    #           failed: 0, 
+    #           passed: 0, 
+    #           skipped: 0, 
+    #           stopped: 0, 
+    #           total: 0, 
+    #           warned: 0, 
+    #         }, 
+    #         created: Time.parse("1472667509.852"), 
+    #         device_minutes: {
+    #           metered: 0.0, 
+    #           total: 0.0, 
+    #           unmetered: 0.0, 
+    #         }, 
+    #         platform: "ANDROID", 
+    #         result: "PENDING", 
+    #         status: "RUNNING", 
+    #         total_jobs: 3, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2019,6 +2757,22 @@ module Aws::DeviceFarm
     #   * {Types::ListSamplesResult#samples #samples} => Array&lt;Types::Sample&gt;
     #   * {Types::ListSamplesResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about samples
+    #
+    #   # The following example returns information about samples, given a specific Device Farm project.
+    #
+    #   resp = client.list_samples({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     samples: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_samples({
@@ -2057,6 +2811,22 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListSuitesResult#suites #suites} => Array&lt;Types::Suite&gt;
     #   * {Types::ListSuitesResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about suites
+    #
+    #   # The following example returns information about suites, given a specific Device Farm project.
+    #
+    #   resp = client.list_suites({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     suites: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2113,6 +2883,22 @@ module Aws::DeviceFarm
     #   * {Types::ListTestsResult#tests #tests} => Array&lt;Types::Test&gt;
     #   * {Types::ListTestsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about tests
+    #
+    #   # The following example returns information about tests, given a specific Device Farm project.
+    #
+    #   resp = client.list_tests({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tests: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tests({
@@ -2167,6 +2953,22 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListUniqueProblemsResult#unique_problems #unique_problems} => Hash&lt;String,Array&lt;Types::UniqueProblem&gt;&gt;
     #   * {Types::ListUniqueProblemsResult#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get information about unique problems
+    #
+    #   # The following example returns information about unique problems, given a specific Device Farm project.
+    #
+    #   resp = client.list_unique_problems({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unique_problems: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2238,6 +3040,22 @@ module Aws::DeviceFarm
     #   * {Types::ListUploadsResult#uploads #uploads} => Array&lt;Types::Upload&gt;
     #   * {Types::ListUploadsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: To get information about uploads
+    #
+    #   # The following example returns information about uploads, given a specific Device Farm project.
+    #
+    #   resp = client.list_uploads({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     next_token: "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE", # A dynamically generated value, used for paginating results.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_uploads({
@@ -2288,6 +3106,39 @@ module Aws::DeviceFarm
     # @return [Types::PurchaseOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseOfferingResult#offering_transaction #offering_transaction} => Types::OfferingTransaction
+    #
+    #
+    # @example Example: To purchase a device slot offering
+    #
+    #   # The following example purchases a specific device slot offering.
+    #
+    #   resp = client.purchase_offering({
+    #     offering_id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", # You can get the offering ID by using the list-offerings CLI command.
+    #     quantity: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offering_transaction: {
+    #       cost: {
+    #         amount: 8.07, 
+    #         currency_code: "USD", 
+    #       }, 
+    #       created_on: Time.parse("1472648340"), 
+    #       offering_status: {
+    #         type: "PURCHASE", 
+    #         effective_on: Time.parse("1472648340"), 
+    #         offering: {
+    #           type: "RECURRING", 
+    #           description: "Android Remote Access Unmetered Device Slot", 
+    #           id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #           platform: "ANDROID", 
+    #         }, 
+    #         quantity: 1, 
+    #       }, 
+    #       transaction_id: "d30614ed-1b03-404c-9893-12345EXAMPLE", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2341,6 +3192,39 @@ module Aws::DeviceFarm
     # @return [Types::RenewOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RenewOfferingResult#offering_transaction #offering_transaction} => Types::OfferingTransaction
+    #
+    #
+    # @example Example: To renew a device slot offering
+    #
+    #   # The following example renews a specific device slot offering.
+    #
+    #   resp = client.renew_offering({
+    #     offering_id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", # You can get the offering ID by using the list-offerings CLI command.
+    #     quantity: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offering_transaction: {
+    #       cost: {
+    #         amount: 250, 
+    #         currency_code: "USD", 
+    #       }, 
+    #       created_on: Time.parse("1472648880"), 
+    #       offering_status: {
+    #         type: "RENEW", 
+    #         effective_on: Time.parse("1472688000"), 
+    #         offering: {
+    #           type: "RECURRING", 
+    #           description: "Android Remote Access Unmetered Device Slot", 
+    #           id: "D68B3C05-1BA6-4360-BC69-12345EXAMPLE", 
+    #           platform: "ANDROID", 
+    #         }, 
+    #         quantity: 1, 
+    #       }, 
+    #       transaction_id: "e90f1405-8c35-4561-be43-12345EXAMPLE", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2404,6 +3288,27 @@ module Aws::DeviceFarm
     # @return [Types::ScheduleRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ScheduleRunResult#run #run} => Types::Run
+    #
+    #
+    # @example Example: To schedule a test run
+    #
+    #   # The following example schedules a test run named MyRun.
+    #
+    #   resp = client.schedule_run({
+    #     name: "MyRun", 
+    #     device_pool_arn: "arn:aws:devicefarm:us-west-2:123456789101:pool:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the device pool by using the list-pools CLI command.
+    #     project_arn: "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #     test: {
+    #       type: "APPIUM_JAVA_JUNIT", 
+    #       test_package_arn: "arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     run: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2568,6 +3473,21 @@ module Aws::DeviceFarm
     #
     #   * {Types::StopRunResult#run #run} => Types::Run
     #
+    #
+    # @example Example: To stop a test run
+    #
+    #   # The following example stops a specific test run.
+    #
+    #   resp = client.stop_run({
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456", # You can get the Amazon Resource Name (ARN) of the test run by using the list-runs CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     run: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_run({
@@ -2643,6 +3563,30 @@ module Aws::DeviceFarm
     # @return [Types::UpdateDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDevicePoolResult#device_pool #device_pool} => Types::DevicePool
+    #
+    #
+    # @example Example: To update a device pool
+    #
+    #   # The following example updates the specified device pool with a new name and description. It also enables remote access of devices in the device pool.
+    #
+    #   resp = client.update_device_pool({
+    #     name: "NewName", 
+    #     arn: "arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE", # You can get the Amazon Resource Name (ARN) of the device pool by using the list-pools CLI command.
+    #     description: "NewDescription", 
+    #     rules: [
+    #       {
+    #         value: "True", 
+    #         attribute: "REMOTE_ACCESS_ENABLED", 
+    #         operator: "EQUALS", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device_pool: {
+    #     }, # Note: you cannot update curated device pools.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2793,6 +3737,25 @@ module Aws::DeviceFarm
     #
     #   * {Types::UpdateProjectResult#project #project} => Types::Project
     #
+    #
+    # @example Example: To update a device pool
+    #
+    #   # The following example updates the specified project with a new name.
+    #
+    #   resp = client.update_project({
+    #     name: "NewName", 
+    #     arn: "arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE", # You can get the Amazon Resource Name (ARN) of the project by using the list-projects CLI command.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project: {
+    #       name: "NewName", 
+    #       arn: "arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE", 
+    #       created: Time.parse("1448400709.927"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_project({
@@ -2830,7 +3793,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

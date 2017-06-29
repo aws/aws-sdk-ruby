@@ -229,6 +229,30 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#size_in_bytes #size_in_bytes} => Types::FileSystemSize
     #   * {Types::FileSystemDescription#performance_mode #performance_mode} => String
     #
+    #
+    # @example Example: To create a new file system
+    #
+    #   # This operation creates a new file system with the default generalpurpose performance mode.
+    #
+    #   resp = client.create_file_system({
+    #     creation_token: "tokenstring", 
+    #     performance_mode: "generalPurpose", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     creation_time: Time.parse("1481841524.0"), 
+    #     creation_token: "tokenstring", 
+    #     file_system_id: "fs-01234567", 
+    #     life_cycle_state: "creating", 
+    #     number_of_mount_targets: 0, 
+    #     owner_id: "012345678912", 
+    #     performance_mode: "generalPurpose", 
+    #     size_in_bytes: {
+    #       value: 0, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_file_system({
@@ -397,6 +421,27 @@ module Aws::EFS
     #   * {Types::MountTargetDescription#ip_address #ip_address} => String
     #   * {Types::MountTargetDescription#network_interface_id #network_interface_id} => String
     #
+    #
+    # @example Example: To create a new mount target
+    #
+    #   # This operation creates a new mount target for an EFS file system.
+    #
+    #   resp = client.create_mount_target({
+    #     file_system_id: "fs-01234567", 
+    #     subnet_id: "subnet-1234abcd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     file_system_id: "fs-01234567", 
+    #     ip_address: "192.0.0.2", 
+    #     life_cycle_state: "creating", 
+    #     mount_target_id: "fsmt-12340abc", 
+    #     network_interface_id: "eni-cedf6789", 
+    #     owner_id: "012345678912", 
+    #     subnet_id: "subnet-1234abcd", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_mount_target({
@@ -444,6 +489,21 @@ module Aws::EFS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a new tag
+    #
+    #   # This operation creates a new tag for an EFS file system.
+    #
+    #   resp = client.create_tags({
+    #     file_system_id: "fs-01234567", 
+    #     tags: [
+    #       {
+    #         key: "Name", 
+    #         value: "MyFileSystem", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_tags({
@@ -489,6 +549,15 @@ module Aws::EFS
     #   ID of the file system you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a file system
+    #
+    #   # This operation deletes an EFS file system.
+    #
+    #   resp = client.delete_file_system({
+    #     file_system_id: "fs-01234567", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -543,6 +612,15 @@ module Aws::EFS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a mount target
+    #
+    #   # This operation deletes a mount target.
+    #
+    #   resp = client.delete_mount_target({
+    #     mount_target_id: "fsmt-12340abc", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_mount_target({
@@ -578,6 +656,18 @@ module Aws::EFS
     #   List of tag keys to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete tags for an EFS file system
+    #
+    #   # This operation deletes tags for an EFS file system.
+    #
+    #   resp = client.delete_tags({
+    #     file_system_id: "fs-01234567", 
+    #     tag_keys: [
+    #       "Name", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -651,6 +741,33 @@ module Aws::EFS
     #   * {Types::DescribeFileSystemsResponse#file_systems #file_systems} => Array&lt;Types::FileSystemDescription&gt;
     #   * {Types::DescribeFileSystemsResponse#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe an EFS file system
+    #
+    #   # This operation describes all of the EFS file systems in an account.
+    #
+    #   resp = client.describe_file_systems({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     file_systems: [
+    #       {
+    #         creation_time: Time.parse("1481841524.0"), 
+    #         creation_token: "tokenstring", 
+    #         file_system_id: "fs-01234567", 
+    #         life_cycle_state: "available", 
+    #         name: "MyFileSystem", 
+    #         number_of_mount_targets: 1, 
+    #         owner_id: "012345678912", 
+    #         performance_mode: "generalPurpose", 
+    #         size_in_bytes: {
+    #           value: 6144, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_file_systems({
@@ -704,6 +821,22 @@ module Aws::EFS
     # @return [Types::DescribeMountTargetSecurityGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeMountTargetSecurityGroupsResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To describe the security groups for a mount target
+    #
+    #   # This operation describes all of the security groups for a file system's mount target.
+    #
+    #   resp = client.describe_mount_target_security_groups({
+    #     mount_target_id: "fsmt-12340abc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_groups: [
+    #       "sg-fghi4567", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -759,6 +892,30 @@ module Aws::EFS
     #   * {Types::DescribeMountTargetsResponse#marker #marker} => String
     #   * {Types::DescribeMountTargetsResponse#mount_targets #mount_targets} => Array&lt;Types::MountTargetDescription&gt;
     #   * {Types::DescribeMountTargetsResponse#next_marker #next_marker} => String
+    #
+    #
+    # @example Example: To describe the mount targets for a file system
+    #
+    #   # This operation describes all of a file system's mount targets.
+    #
+    #   resp = client.describe_mount_targets({
+    #     file_system_id: "fs-01234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mount_targets: [
+    #       {
+    #         file_system_id: "fs-01234567", 
+    #         ip_address: "192.0.0.2", 
+    #         life_cycle_state: "available", 
+    #         mount_target_id: "fsmt-12340abc", 
+    #         network_interface_id: "eni-cedf6789", 
+    #         owner_id: "012345678912", 
+    #         subnet_id: "subnet-1234abcd", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -817,6 +974,25 @@ module Aws::EFS
     #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeTagsResponse#next_marker #next_marker} => String
     #
+    #
+    # @example Example: To describe the tags for a file system
+    #
+    #   # This operation describes all of a file system's tags.
+    #
+    #   resp = client.describe_tags({
+    #     file_system_id: "fs-01234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "Name", 
+    #         value: "MyFileSystem", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tags({
@@ -868,6 +1044,18 @@ module Aws::EFS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To modify the security groups associated with a mount target for a file system
+    #
+    #   # This operation modifies the security groups associated with a mount target for a file system.
+    #
+    #   resp = client.modify_mount_target_security_groups({
+    #     mount_target_id: "fsmt-12340abc", 
+    #     security_groups: [
+    #       "sg-abcd1234", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_mount_target_security_groups({
@@ -897,7 +1085,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

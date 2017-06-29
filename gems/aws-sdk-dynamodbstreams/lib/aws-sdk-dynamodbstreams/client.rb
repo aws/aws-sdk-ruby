@@ -186,6 +186,69 @@ module Aws::DynamoDBStreams
     #
     #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
     #
+    #
+    # @example Example: To describe a stream with a given stream ARN
+    #
+    #   # The following example describes a stream with a given stream ARN.
+    #
+    #   resp = client.describe_stream({
+    #     stream_arn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     stream_description: {
+    #       creation_request_date_time: Time.parse("Wed May 20 13:51:10 PDT 2015"), 
+    #       key_schema: [
+    #         {
+    #           attribute_name: "ForumName", 
+    #           key_type: "HASH", 
+    #         }, 
+    #         {
+    #           attribute_name: "Subject", 
+    #           key_type: "RANGE", 
+    #         }, 
+    #       ], 
+    #       shards: [
+    #         {
+    #           sequence_number_range: {
+    #             ending_sequence_number: "20500000000000000910398", 
+    #             starting_sequence_number: "20500000000000000910398", 
+    #           }, 
+    #           shard_id: "shardId-00000001414562045508-2bac9cd2", 
+    #         }, 
+    #         {
+    #           parent_shard_id: "shardId-00000001414562045508-2bac9cd2", 
+    #           sequence_number_range: {
+    #             ending_sequence_number: "820400000000000001192334", 
+    #             starting_sequence_number: "820400000000000001192334", 
+    #           }, 
+    #           shard_id: "shardId-00000001414576573621-f55eea83", 
+    #         }, 
+    #         {
+    #           parent_shard_id: "shardId-00000001414576573621-f55eea83", 
+    #           sequence_number_range: {
+    #             ending_sequence_number: "1683700000000000001135967", 
+    #             starting_sequence_number: "1683700000000000001135967", 
+    #           }, 
+    #           shard_id: "shardId-00000001414592258131-674fd923", 
+    #         }, 
+    #         {
+    #           parent_shard_id: "shardId-00000001414592258131-674fd923", 
+    #           sequence_number_range: {
+    #             starting_sequence_number: "2574600000000000000935255", 
+    #           }, 
+    #           shard_id: "shardId-00000001414608446368-3a1afbaf", 
+    #         }, 
+    #       ], 
+    #       stream_arn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252", 
+    #       stream_label: "2015-05-20T20:51:10.252", 
+    #       stream_status: "ENABLED", 
+    #       stream_view_type: "NEW_AND_OLD_IMAGES", 
+    #       table_name: "Forum", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stream({
@@ -249,6 +312,85 @@ module Aws::DynamoDBStreams
     #
     #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
     #   * {Types::GetRecordsOutput#next_shard_iterator #next_shard_iterator} => String
+    #
+    #
+    # @example Example: To retrieve all the stream records from a shard
+    #
+    #   # The following example retrieves all the stream records from a shard.
+    #
+    #   resp = client.get_records({
+    #     shard_iterator: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ...", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_shard_iterator: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAGQBYshYDEe ... <remaining characters omitted> ...", 
+    #     records: [
+    #       {
+    #         aws_region: "us-west-2", 
+    #         dynamodb: {
+    #           approximate_creation_date_time: Time.parse("1.46480646E9"), 
+    #           keys: {
+    #             "ForumName" => {
+    #               s: "DynamoDB", 
+    #             }, 
+    #             "Subject" => {
+    #               s: "DynamoDB Thread 3", 
+    #             }, 
+    #           }, 
+    #           sequence_number: "300000000000000499659", 
+    #           size_bytes: 41, 
+    #           stream_view_type: "KEYS_ONLY", 
+    #         }, 
+    #         event_id: "e2fd9c34eff2d779b297b26f5fef4206", 
+    #         event_name: "INSERT", 
+    #         event_source: "aws:dynamodb", 
+    #         event_version: "1.0", 
+    #       }, 
+    #       {
+    #         aws_region: "us-west-2", 
+    #         dynamodb: {
+    #           approximate_creation_date_time: Time.parse("1.46480527E9"), 
+    #           keys: {
+    #             "ForumName" => {
+    #               s: "DynamoDB", 
+    #             }, 
+    #             "Subject" => {
+    #               s: "DynamoDB Thread 1", 
+    #             }, 
+    #           }, 
+    #           sequence_number: "400000000000000499660", 
+    #           size_bytes: 41, 
+    #           stream_view_type: "KEYS_ONLY", 
+    #         }, 
+    #         event_id: "4b25bd0da9a181a155114127e4837252", 
+    #         event_name: "MODIFY", 
+    #         event_source: "aws:dynamodb", 
+    #         event_version: "1.0", 
+    #       }, 
+    #       {
+    #         aws_region: "us-west-2", 
+    #         dynamodb: {
+    #           approximate_creation_date_time: Time.parse("1.46480646E9"), 
+    #           keys: {
+    #             "ForumName" => {
+    #               s: "DynamoDB", 
+    #             }, 
+    #             "Subject" => {
+    #               s: "DynamoDB Thread 2", 
+    #             }, 
+    #           }, 
+    #           sequence_number: "500000000000000499661", 
+    #           size_bytes: 41, 
+    #           stream_view_type: "KEYS_ONLY", 
+    #         }, 
+    #         event_id: "740280c73a3df7842edab3548a1b08ad", 
+    #         event_name: "REMOVE", 
+    #         event_source: "aws:dynamodb", 
+    #         event_version: "1.0", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -333,6 +475,22 @@ module Aws::DynamoDBStreams
     #
     #   * {Types::GetShardIteratorOutput#shard_iterator #shard_iterator} => String
     #
+    #
+    # @example Example: To obtain a shard iterator for the provided stream ARN and shard ID
+    #
+    #   # The following example returns a shard iterator for the provided stream ARN and shard ID.
+    #
+    #   resp = client.get_shard_iterator({
+    #     shard_id: "00000001414576573621-f55eea83", 
+    #     shard_iterator_type: "TRIM_HORIZON", 
+    #     stream_arn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     shard_iterator: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ...", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_shard_iterator({
@@ -380,6 +538,35 @@ module Aws::DynamoDBStreams
     #   * {Types::ListStreamsOutput#streams #streams} => Array&lt;Types::Stream&gt;
     #   * {Types::ListStreamsOutput#last_evaluated_stream_arn #last_evaluated_stream_arn} => String
     #
+    #
+    # @example Example: To list all of the stream ARNs 
+    #
+    #   # The following example lists all of the stream ARNs.
+    #
+    #   resp = client.list_streams({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     streams: [
+    #       {
+    #         stream_arn: "arn:aws:dynamodb:us-wesst-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252", 
+    #         stream_label: "2015-05-20T20:51:10.252", 
+    #         table_name: "Forum", 
+    #       }, 
+    #       {
+    #         stream_arn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:50:02.714", 
+    #         stream_label: "2015-05-20T20:50:02.714", 
+    #         table_name: "Forum", 
+    #       }, 
+    #       {
+    #         stream_arn: "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-19T23:03:50.641", 
+    #         stream_label: "2015-05-19T23:03:50.641", 
+    #         table_name: "Forum", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_streams({
@@ -418,7 +605,7 @@ module Aws::DynamoDBStreams
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

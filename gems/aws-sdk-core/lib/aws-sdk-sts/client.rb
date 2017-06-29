@@ -372,6 +372,34 @@ module Aws::STS
     #   * {Types::AssumeRoleResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
     #   * {Types::AssumeRoleResponse#packed_policy_size #packed_policy_size} => Integer
     #
+    #
+    # @example Example: To assume a role
+    #
+    #   # 
+    #
+    #   resp = client.assume_role({
+    #     duration_seconds: 3600, 
+    #     external_id: "123ABC", 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}", 
+    #     role_arn: "arn:aws:iam::123456789012:role/demo", 
+    #     role_session_name: "Bob", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     assumed_role_user: {
+    #       arn: "arn:aws:sts::123456789012:assumed-role/demo/Bob", 
+    #       assumed_role_id: "ARO123EXAMPLE123:Bob", 
+    #     }, 
+    #     credentials: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2011-07-15T23:28:33.359Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       session_token: "AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==", 
+    #     }, 
+    #     packed_policy_size: 6, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.assume_role({
@@ -804,6 +832,37 @@ module Aws::STS
     #   * {Types::AssumeRoleWithWebIdentityResponse#provider #provider} => String
     #   * {Types::AssumeRoleWithWebIdentityResponse#audience #audience} => String
     #
+    #
+    # @example Example: To assume a role as an OpenID Connect-federated user
+    #
+    #   # 
+    #
+    #   resp = client.assume_role_with_web_identity({
+    #     duration_seconds: 3600, 
+    #     provider_id: "www.amazon.com", 
+    #     role_arn: "arn:aws:iam::123456789012:role/FederatedWebIdentityRole", 
+    #     role_session_name: "app1", 
+    #     web_identity_token: "Atza%7CIQEBLjAsAhRFiXuWpUXuRvQ9PZL3GMFcYevydwIUFAHZwXZXXXXXXXXJnrulxKDHwy87oGKPznh0D6bEQZTSCzyoCtL_8S07pLpr0zMbn6w1lfVZKNTBdDansFBmtGnIsIapjI6xKR02Yc_2bQ8LZbUXSGm6Ry6_BG7PrtLZtj_dfCTj92xNGed-CrKqjG7nPBjNIL016GGvuS5gSvPRUxWES3VYfm1wl7WTI7jn-Pcb6M-buCgHhFOzTQxod27L9CqnOLio7N3gZAGpsp6n1-AJBOCJckcyXe2c6uD0srOJeZlKUm2eTDVMf8IehDVI0r1QOnTV6KzzAI3OY87Vd_cVMQ", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     assumed_role_user: {
+    #       arn: "arn:aws:sts::123456789012:assumed-role/FederatedWebIdentityRole/app1", 
+    #       assumed_role_id: "AROACLKWSDQRAOEXAMPLE:app1", 
+    #     }, 
+    #     audience: "client.5498841531868486423.1548@apps.example.com", 
+    #     credentials: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2014-10-24T23:00:23Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       session_token: "AQoDYXdzEE0a8ANXXXXXXXXNO1ewxE5TijQyp+IEXAMPLE", 
+    #     }, 
+    #     packed_policy_size: 123, 
+    #     provider: "www.amazon.com", 
+    #     subject_from_web_identity_token: "amzn1.account.AF6RHO7KZU5XRVQJGXK6HEXAMPLE", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.assume_role_with_web_identity({
@@ -885,6 +944,20 @@ module Aws::STS
     #
     #   * {Types::DecodeAuthorizationMessageResponse#decoded_message #decoded_message} => String
     #
+    #
+    # @example Example: To decode information about an authorization status of a request
+    #
+    #   # 
+    #
+    #   resp = client.decode_authorization_message({
+    #     encoded_message: "<encoded-message>", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     decoded_message: "{\"allowed\": \"false\",\"explicitDeny\": \"false\",\"matchedStatements\": \"\",\"failures\": \"\",\"context\": {\"principal\": {\"id\": \"AIDACKCEVSQ6C2EXAMPLE\",\"name\": \"Bob\",\"arn\": \"arn:aws:iam::123456789012:user/Bob\"},\"action\": \"ec2:StopInstances\",\"resource\": \"arn:aws:ec2:us-east-1:123456789012:instance/i-dd01c9bd\",\"conditions\": [{\"item\": {\"key\": \"ec2:Tenancy\",\"values\": [\"default\"]},{\"item\": {\"key\": \"ec2:ResourceTag/elasticbeanstalk:environment-name\",\"values\": [\"Default-Environment\"]}},(Additional items ...)]}}", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.decode_authorization_message({
@@ -912,6 +985,49 @@ module Aws::STS
     #   * {Types::GetCallerIdentityResponse#user_id #user_id} => String
     #   * {Types::GetCallerIdentityResponse#account #account} => String
     #   * {Types::GetCallerIdentityResponse#arn #arn} => String
+    #
+    #
+    # @example Example: To get details about a calling IAM user
+    #
+    #   # This example shows a request and response made with the credentials for a user named Alice in the AWS account 123456789012.
+    #
+    #   resp = client.get_caller_identity({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account: "123456789012", 
+    #     arn: "arn:aws:iam::123456789012:user/Alice", 
+    #     user_id: "AKIAI44QH8DHBEXAMPLE", 
+    #   }
+    #
+    # @example Example: To get details about a calling user federated with AssumeRole
+    #
+    #   # This example shows a request and response made with temporary credentials created by AssumeRole. The name of the assumed role is my-role-name, and the RoleSessionName is set to my-role-session-name.
+    #
+    #   resp = client.get_caller_identity({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account: "123456789012", 
+    #     arn: "arn:aws:sts::123456789012:assumed-role/my-role-name/my-role-session-name", 
+    #     user_id: "AKIAI44QH8DHBEXAMPLE:my-role-session-name", 
+    #   }
+    #
+    # @example Example: To get details about a calling user federated with GetFederationToken
+    #
+    #   # This example shows a request and response made with temporary credentials created by using GetFederationToken. The Name parameter is set to my-federated-user-name.
+    #
+    #   resp = client.get_caller_identity({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account: "123456789012", 
+    #     arn: "arn:aws:sts::123456789012:federated-user/my-federated-user-name", 
+    #     user_id: "123456789012:my-federated-user-name", 
+    #   }
     #
     # @example Response structure
     #
@@ -1090,6 +1206,32 @@ module Aws::STS
     #   * {Types::GetFederationTokenResponse#federated_user #federated_user} => Types::FederatedUser
     #   * {Types::GetFederationTokenResponse#packed_policy_size #packed_policy_size} => Integer
     #
+    #
+    # @example Example: To get temporary credentials for a role by using GetFederationToken
+    #
+    #   # 
+    #
+    #   resp = client.get_federation_token({
+    #     duration_seconds: 3600, 
+    #     name: "Bob", 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     credentials: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2011-07-15T23:28:33.359Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       session_token: "AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==", 
+    #     }, 
+    #     federated_user: {
+    #       arn: "arn:aws:sts::123456789012:federated-user/Bob", 
+    #       federated_user_id: "123456789012:Bob", 
+    #     }, 
+    #     packed_policy_size: 6, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_federation_token({
@@ -1214,6 +1356,27 @@ module Aws::STS
     #
     #   * {Types::GetSessionTokenResponse#credentials #credentials} => Types::Credentials
     #
+    #
+    # @example Example: To get temporary credentials for an IAM user or an AWS account
+    #
+    #   # 
+    #
+    #   resp = client.get_session_token({
+    #     duration_seconds: 3600, 
+    #     serial_number: "YourMFASerialNumber", 
+    #     token_code: "123456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     credentials: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2011-07-11T19:55:29.611Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       session_token: "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtpZ3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_session_token({
@@ -1251,7 +1414,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.0.0.rc12'
+      context[:gem_version] = '3.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -216,6 +216,54 @@ module Aws::Rekognition
     #   * {Types::CompareFacesResponse#source_image_orientation_correction #source_image_orientation_correction} => String
     #   * {Types::CompareFacesResponse#target_image_orientation_correction #target_image_orientation_correction} => String
     #
+    #
+    # @example Example: To compare two images
+    #
+    #   # This operation compares the largest face detected in the source image with each face detected in the target image.
+    #
+    #   resp = client.compare_faces({
+    #     similarity_threshold: 90, 
+    #     source_image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "mysourceimage", 
+    #       }, 
+    #     }, 
+    #     target_image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "mytargetimage", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_matches: [
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.33481481671333313, 
+    #             left: 0.31888890266418457, 
+    #             top: 0.4933333396911621, 
+    #             width: 0.25, 
+    #           }, 
+    #           confidence: 99.9991226196289, 
+    #         }, 
+    #         similarity: 100, 
+    #       }, 
+    #     ], 
+    #     source_image_face: {
+    #       bounding_box: {
+    #         height: 0.33481481671333313, 
+    #         left: 0.31888890266418457, 
+    #         top: 0.4933333396911621, 
+    #         width: 0.25, 
+    #       }, 
+    #       confidence: 99.9991226196289, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.compare_faces({
@@ -311,6 +359,21 @@ module Aws::Rekognition
     #   * {Types::CreateCollectionResponse#status_code #status_code} => Integer
     #   * {Types::CreateCollectionResponse#collection_arn #collection_arn} => String
     #
+    #
+    # @example Example: To create a collection
+    #
+    #   # This operation creates a Rekognition collection for storing image data.
+    #
+    #   resp = client.create_collection({
+    #     collection_id: "myphotos", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     collection_arn: "aws:rekognition:us-west-2:123456789012:collection/myphotos", 
+    #     status_code: 200, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_collection({
@@ -341,6 +404,20 @@ module Aws::Rekognition
     # @return [Types::DeleteCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteCollectionResponse#status_code #status_code} => Integer
+    #
+    #
+    # @example Example: To delete a collection
+    #
+    #   # This operation deletes a Rekognition collection.
+    #
+    #   resp = client.delete_collection({
+    #     collection_id: "myphotos", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status_code: 200, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -374,6 +451,25 @@ module Aws::Rekognition
     # @return [Types::DeleteFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFacesResponse#deleted_faces #deleted_faces} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To delete a face
+    #
+    #   # This operation deletes one or more faces from a Rekognition collection.
+    #
+    #   resp = client.delete_faces({
+    #     collection_id: "myphotos", 
+    #     face_ids: [
+    #       "ff43d742-0c13-5d16-a3e8-03d3f58e980b", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted_faces: [
+    #       "ff43d742-0c13-5d16-a3e8-03d3f58e980b", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -437,6 +533,72 @@ module Aws::Rekognition
     #
     #   * {Types::DetectFacesResponse#face_details #face_details} => Array&lt;Types::FaceDetail&gt;
     #   * {Types::DetectFacesResponse#orientation_correction #orientation_correction} => String
+    #
+    #
+    # @example Example: To detect faces in an image
+    #
+    #   # This operation detects faces in an image stored in an AWS S3 bucket.
+    #
+    #   resp = client.detect_faces({
+    #     image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "myphoto", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_details: [
+    #       {
+    #         bounding_box: {
+    #           height: 0.18000000715255737, 
+    #           left: 0.5555555820465088, 
+    #           top: 0.33666667342185974, 
+    #           width: 0.23999999463558197, 
+    #         }, 
+    #         confidence: 100, 
+    #         landmarks: [
+    #           {
+    #             type: "EYE_LEFT", 
+    #             x: 0.6394737362861633, 
+    #             y: 0.40819624066352844, 
+    #           }, 
+    #           {
+    #             type: "EYE_RIGHT", 
+    #             x: 0.7266660928726196, 
+    #             y: 0.41039225459098816, 
+    #           }, 
+    #           {
+    #             type: "NOSE_LEFT", 
+    #             x: 0.6912462115287781, 
+    #             y: 0.44240960478782654, 
+    #           }, 
+    #           {
+    #             type: "MOUTH_DOWN", 
+    #             x: 0.6306198239326477, 
+    #             y: 0.46700039505958557, 
+    #           }, 
+    #           {
+    #             type: "MOUTH_UP", 
+    #             x: 0.7215608954429626, 
+    #             y: 0.47114261984825134, 
+    #           }, 
+    #         ], 
+    #         pose: {
+    #           pitch: 4.050806522369385, 
+    #           roll: 0.9950747489929199, 
+    #           yaw: 13.693790435791016, 
+    #         }, 
+    #         quality: {
+    #           brightness: 37.60169982910156, 
+    #           sharpness: 80, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     orientation_correction: "ROTATE_0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -571,6 +733,36 @@ module Aws::Rekognition
     #
     #   * {Types::DetectLabelsResponse#labels #labels} => Array&lt;Types::Label&gt;
     #   * {Types::DetectLabelsResponse#orientation_correction #orientation_correction} => String
+    #
+    #
+    # @example Example: To detect labels
+    #
+    #   # This operation detects labels in the supplied image
+    #
+    #   resp = client.detect_labels({
+    #     image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "myphoto", 
+    #       }, 
+    #     }, 
+    #     max_labels: 123, 
+    #     min_confidence: 70, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     labels: [
+    #       {
+    #         confidence: 99.25072479248047, 
+    #         name: "People", 
+    #       }, 
+    #       {
+    #         confidence: 99.25074005126953, 
+    #         name: "Person", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -753,6 +945,147 @@ module Aws::Rekognition
     #   * {Types::IndexFacesResponse#face_records #face_records} => Array&lt;Types::FaceRecord&gt;
     #   * {Types::IndexFacesResponse#orientation_correction #orientation_correction} => String
     #
+    #
+    # @example Example: To add a face to a collection
+    #
+    #   # This operation detects faces in an image and adds them to the specified Rekognition collection.
+    #
+    #   resp = client.index_faces({
+    #     collection_id: "myphotos", 
+    #     detection_attributes: [
+    #     ], 
+    #     external_image_id: "myphotoid", 
+    #     image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "myphoto", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_records: [
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.33481481671333313, 
+    #             left: 0.31888890266418457, 
+    #             top: 0.4933333396911621, 
+    #             width: 0.25, 
+    #           }, 
+    #           confidence: 99.9991226196289, 
+    #           face_id: "ff43d742-0c13-5d16-a3e8-03d3f58e980b", 
+    #           image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #         }, 
+    #         face_detail: {
+    #           bounding_box: {
+    #             height: 0.33481481671333313, 
+    #             left: 0.31888890266418457, 
+    #             top: 0.4933333396911621, 
+    #             width: 0.25, 
+    #           }, 
+    #           confidence: 99.9991226196289, 
+    #           landmarks: [
+    #             {
+    #               type: "EYE_LEFT", 
+    #               x: 0.3976764678955078, 
+    #               y: 0.6248345971107483, 
+    #             }, 
+    #             {
+    #               type: "EYE_RIGHT", 
+    #               x: 0.4810936450958252, 
+    #               y: 0.6317117214202881, 
+    #             }, 
+    #             {
+    #               type: "NOSE_LEFT", 
+    #               x: 0.41986238956451416, 
+    #               y: 0.7111940383911133, 
+    #             }, 
+    #             {
+    #               type: "MOUTH_DOWN", 
+    #               x: 0.40525302290916443, 
+    #               y: 0.7497701048851013, 
+    #             }, 
+    #             {
+    #               type: "MOUTH_UP", 
+    #               x: 0.4753248989582062, 
+    #               y: 0.7558549642562866, 
+    #             }, 
+    #           ], 
+    #           pose: {
+    #             pitch: -9.713645935058594, 
+    #             roll: 4.707281112670898, 
+    #             yaw: -24.438663482666016, 
+    #           }, 
+    #           quality: {
+    #             brightness: 29.23358917236328, 
+    #             sharpness: 80, 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.32592591643333435, 
+    #             left: 0.5144444704055786, 
+    #             top: 0.15111111104488373, 
+    #             width: 0.24444444477558136, 
+    #           }, 
+    #           confidence: 99.99950408935547, 
+    #           face_id: "8be04dba-4e58-520d-850e-9eae4af70eb2", 
+    #           image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #         }, 
+    #         face_detail: {
+    #           bounding_box: {
+    #             height: 0.32592591643333435, 
+    #             left: 0.5144444704055786, 
+    #             top: 0.15111111104488373, 
+    #             width: 0.24444444477558136, 
+    #           }, 
+    #           confidence: 99.99950408935547, 
+    #           landmarks: [
+    #             {
+    #               type: "EYE_LEFT", 
+    #               x: 0.6006892323493958, 
+    #               y: 0.290842205286026, 
+    #             }, 
+    #             {
+    #               type: "EYE_RIGHT", 
+    #               x: 0.6808141469955444, 
+    #               y: 0.29609042406082153, 
+    #             }, 
+    #             {
+    #               type: "NOSE_LEFT", 
+    #               x: 0.6395332217216492, 
+    #               y: 0.3522595763206482, 
+    #             }, 
+    #             {
+    #               type: "MOUTH_DOWN", 
+    #               x: 0.5892083048820496, 
+    #               y: 0.38689887523651123, 
+    #             }, 
+    #             {
+    #               type: "MOUTH_UP", 
+    #               x: 0.674560010433197, 
+    #               y: 0.394125759601593, 
+    #             }, 
+    #           ], 
+    #           pose: {
+    #             pitch: -4.683138370513916, 
+    #             roll: 2.1029529571533203, 
+    #             yaw: 6.716655254364014, 
+    #           }, 
+    #           quality: {
+    #             brightness: 34.951698303222656, 
+    #             sharpness: 160, 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     orientation_correction: "ROTATE_0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.index_faces({
@@ -844,6 +1177,21 @@ module Aws::Rekognition
     #   * {Types::ListCollectionsResponse#collection_ids #collection_ids} => Array&lt;String&gt;
     #   * {Types::ListCollectionsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To list the collections
+    #
+    #   # This operation returns a list of Rekognition collections.
+    #
+    #   resp = client.list_collections({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     collection_ids: [
+    #       "myphotos", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_collections({
@@ -888,6 +1236,143 @@ module Aws::Rekognition
     #
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
     #   * {Types::ListFacesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list the faces in a collection
+    #
+    #   # This operation lists the faces in a Rekognition collection.
+    #
+    #   resp = client.list_faces({
+    #     collection_id: "myphotos", 
+    #     max_results: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     faces: [
+    #       {
+    #         bounding_box: {
+    #           height: 0.18000000715255737, 
+    #           left: 0.5555559992790222, 
+    #           top: 0.336667001247406, 
+    #           width: 0.23999999463558197, 
+    #         }, 
+    #         confidence: 100, 
+    #         face_id: "1c62e8b5-69a7-5b7d-b3cd-db4338a8a7e7", 
+    #         image_id: "147fdf82-7a71-52cf-819b-e786c7b9746e", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.16555599868297577, 
+    #           left: 0.30963000655174255, 
+    #           top: 0.7066670060157776, 
+    #           width: 0.22074100375175476, 
+    #         }, 
+    #         confidence: 100, 
+    #         face_id: "29a75abe-397b-5101-ba4f-706783b2246c", 
+    #         image_id: "147fdf82-7a71-52cf-819b-e786c7b9746e", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.3234420120716095, 
+    #           left: 0.3233329951763153, 
+    #           top: 0.5, 
+    #           width: 0.24222199618816376, 
+    #         }, 
+    #         confidence: 99.99829864501953, 
+    #         face_id: "38271d79-7bc2-5efb-b752-398a8d575b85", 
+    #         image_id: "d5631190-d039-54e4-b267-abd22c8647c5", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.03555560111999512, 
+    #           left: 0.37388700246810913, 
+    #           top: 0.2477779984474182, 
+    #           width: 0.04747769981622696, 
+    #         }, 
+    #         confidence: 99.99210357666016, 
+    #         face_id: "3b01bef0-c883-5654-ba42-d5ad28b720b3", 
+    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.05333330109715462, 
+    #           left: 0.2937690019607544, 
+    #           top: 0.35666701197624207, 
+    #           width: 0.07121659815311432, 
+    #         }, 
+    #         confidence: 99.99919891357422, 
+    #         face_id: "4839a608-49d0-566c-8301-509d71b534d1", 
+    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.3249259889125824, 
+    #           left: 0.5155559778213501, 
+    #           top: 0.1513350009918213, 
+    #           width: 0.24333299696445465, 
+    #         }, 
+    #         confidence: 99.99949645996094, 
+    #         face_id: "70008e50-75e4-55d0-8e80-363fb73b3a14", 
+    #         image_id: "d5631190-d039-54e4-b267-abd22c8647c5", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.03777780011296272, 
+    #           left: 0.7002969980239868, 
+    #           top: 0.18777799606323242, 
+    #           width: 0.05044509842991829, 
+    #         }, 
+    #         confidence: 99.92639923095703, 
+    #         face_id: "7f5f88ed-d684-5a88-b0df-01e4a521552b", 
+    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.05555560067296028, 
+    #           left: 0.13946600258350372, 
+    #           top: 0.46333301067352295, 
+    #           width: 0.07270029932260513, 
+    #         }, 
+    #         confidence: 99.99469757080078, 
+    #         face_id: "895b4e2c-81de-5902-a4bd-d1792bda00b2", 
+    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.3259260058403015, 
+    #           left: 0.5144439935684204, 
+    #           top: 0.15111100673675537, 
+    #           width: 0.24444399774074554, 
+    #         }, 
+    #         confidence: 99.99949645996094, 
+    #         face_id: "8be04dba-4e58-520d-850e-9eae4af70eb2", 
+    #         image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.18888899683952332, 
+    #           left: 0.3783380091190338, 
+    #           top: 0.2355560064315796, 
+    #           width: 0.25222599506378174, 
+    #         }, 
+    #         confidence: 99.9999008178711, 
+    #         face_id: "908544ad-edc3-59df-8faf-6a87cc256cf5", 
+    #         image_id: "3c731605-d772-541a-a5e7-0375dbc68a07", 
+    #       }, 
+    #       {
+    #         bounding_box: {
+    #           height: 0.33481499552726746, 
+    #           left: 0.31888899207115173, 
+    #           top: 0.49333301186561584, 
+    #           width: 0.25, 
+    #         }, 
+    #         confidence: 99.99909973144531, 
+    #         face_id: "ff43d742-0c13-5d16-a3e8-03d3f58e980b", 
+    #         image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1056,6 +1541,67 @@ module Aws::Rekognition
     #   * {Types::SearchFacesResponse#searched_face_id #searched_face_id} => String
     #   * {Types::SearchFacesResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
     #
+    #
+    # @example Example: To delete a face
+    #
+    #   # This operation searches for matching faces in the collection the supplied face belongs to.
+    #
+    #   resp = client.search_faces({
+    #     collection_id: "myphotos", 
+    #     face_id: "70008e50-75e4-55d0-8e80-363fb73b3a14", 
+    #     face_match_threshold: 90, 
+    #     max_faces: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_matches: [
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.3259260058403015, 
+    #             left: 0.5144439935684204, 
+    #             top: 0.15111100673675537, 
+    #             width: 0.24444399774074554, 
+    #           }, 
+    #           confidence: 99.99949645996094, 
+    #           face_id: "8be04dba-4e58-520d-850e-9eae4af70eb2", 
+    #           image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #         }, 
+    #         similarity: 99.97222137451172, 
+    #       }, 
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.16555599868297577, 
+    #             left: 0.30963000655174255, 
+    #             top: 0.7066670060157776, 
+    #             width: 0.22074100375175476, 
+    #           }, 
+    #           confidence: 100, 
+    #           face_id: "29a75abe-397b-5101-ba4f-706783b2246c", 
+    #           image_id: "147fdf82-7a71-52cf-819b-e786c7b9746e", 
+    #         }, 
+    #         similarity: 97.04154968261719, 
+    #       }, 
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.18888899683952332, 
+    #             left: 0.3783380091190338, 
+    #             top: 0.2355560064315796, 
+    #             width: 0.25222599506378174, 
+    #           }, 
+    #           confidence: 99.9999008178711, 
+    #           face_id: "908544ad-edc3-59df-8faf-6a87cc256cf5", 
+    #           image_id: "3c731605-d772-541a-a5e7-0375dbc68a07", 
+    #         }, 
+    #         similarity: 95.94520568847656, 
+    #       }, 
+    #     ], 
+    #     searched_face_id: "70008e50-75e4-55d0-8e80-363fb73b3a14", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_faces({
@@ -1136,6 +1682,50 @@ module Aws::Rekognition
     #   * {Types::SearchFacesByImageResponse#searched_face_confidence #searched_face_confidence} => Float
     #   * {Types::SearchFacesByImageResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
     #
+    #
+    # @example Example: To search for faces matching a supplied image
+    #
+    #   # This operation searches for faces in a Rekognition collection that match the largest face in an S3 bucket stored image.
+    #
+    #   resp = client.search_faces_by_image({
+    #     collection_id: "myphotos", 
+    #     face_match_threshold: 95, 
+    #     image: {
+    #       s3_object: {
+    #         bucket: "mybucket", 
+    #         name: "myphoto", 
+    #       }, 
+    #     }, 
+    #     max_faces: 5, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_matches: [
+    #       {
+    #         face: {
+    #           bounding_box: {
+    #             height: 0.3234420120716095, 
+    #             left: 0.3233329951763153, 
+    #             top: 0.5, 
+    #             width: 0.24222199618816376, 
+    #           }, 
+    #           confidence: 99.99829864501953, 
+    #           face_id: "38271d79-7bc2-5efb-b752-398a8d575b85", 
+    #           image_id: "d5631190-d039-54e4-b267-abd22c8647c5", 
+    #         }, 
+    #         similarity: 99.97036743164062, 
+    #       }, 
+    #     ], 
+    #     searched_face_bounding_box: {
+    #       height: 0.33481481671333313, 
+    #       left: 0.31888890266418457, 
+    #       top: 0.4933333396911621, 
+    #       width: 0.25, 
+    #     }, 
+    #     searched_face_confidence: 99.9991226196289, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_faces_by_image({
@@ -1190,7 +1780,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -167,6 +167,27 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to a load balancer
+    #
+    #   # This example adds two tags to the specified load balancer.
+    #
+    #   resp = client.add_tags({
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "project", 
+    #         value: "lima", 
+    #       }, 
+    #       {
+    #         key: "department", 
+    #         value: "digital-media", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags({
@@ -209,6 +230,25 @@ module Aws::ElasticLoadBalancing
     # @return [Types::ApplySecurityGroupsToLoadBalancerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplySecurityGroupsToLoadBalancerOutput#security_groups #security_groups} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To associate a security group with a load balancer in a VPC
+    #
+    #   # This example associates a security group with the specified load balancer in a VPC.
+    #
+    #   resp = client.apply_security_groups_to_load_balancer({
+    #     load_balancer_name: "my-load-balancer", 
+    #     security_groups: [
+    #       "sg-fc448899", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_groups: [
+    #       "sg-fc448899", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -253,6 +293,26 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::AttachLoadBalancerToSubnetsOutput#subnets #subnets} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To attach subnets to a load balancer
+    #
+    #   # This example adds the specified subnet to the set of configured subnets for the specified load balancer.
+    #
+    #   resp = client.attach_load_balancer_to_subnets({
+    #     load_balancer_name: "my-load-balancer", 
+    #     subnets: [
+    #       "subnet-0ecac448", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     subnets: [
+    #       "subnet-15aaab61", 
+    #       "subnet-0ecac448", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_load_balancer_to_subnets({
@@ -293,6 +353,33 @@ module Aws::ElasticLoadBalancing
     # @return [Types::ConfigureHealthCheckOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigureHealthCheckOutput#health_check #health_check} => Types::HealthCheck
+    #
+    #
+    # @example Example: To specify the health check settings for your backend EC2 instances
+    #
+    #   # This example specifies the health check settings used to evaluate the health of your backend EC2 instances.
+    #
+    #   resp = client.configure_health_check({
+    #     health_check: {
+    #       healthy_threshold: 2, 
+    #       interval: 30, 
+    #       target: "HTTP:80/png", 
+    #       timeout: 3, 
+    #       unhealthy_threshold: 2, 
+    #     }, 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     health_check: {
+    #       healthy_threshold: 2, 
+    #       interval: 30, 
+    #       target: "HTTP:80/png", 
+    #       timeout: 3, 
+    #       unhealthy_threshold: 2, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -358,6 +445,17 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To generate a stickiness policy for your load balancer
+    #
+    #   # This example generates a stickiness policy that follows the sticky session lifetimes of the application-generated cookie.
+    #
+    #   resp = client.create_app_cookie_stickiness_policy({
+    #     cookie_name: "my-app-cookie", 
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_name: "my-app-cookie-policy", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_app_cookie_stickiness_policy({
@@ -414,6 +512,17 @@ module Aws::ElasticLoadBalancing
     #   the duration of the browser session.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To generate a duration-based stickiness policy for your load balancer
+    #
+    #   # This example generates a stickiness policy with sticky session lifetimes controlled by the specified expiration period.
+    #
+    #   resp = client.create_lb_cookie_stickiness_policy({
+    #     cookie_expiration_period: 60, 
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_name: "my-duration-cookie-policy", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -517,6 +626,151 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::CreateAccessPointOutput#dns_name #dns_name} => String
     #
+    #
+    # @example Example: To create an HTTP load balancer in a VPC
+    #
+    #   # This example creates a load balancer with an HTTP listener in a VPC.
+    #
+    #   resp = client.create_load_balancer({
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #     security_groups: [
+    #       "sg-a61988c3", 
+    #     ], 
+    #     subnets: [
+    #       "subnet-15aaab61", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dns_name: "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com", 
+    #   }
+    #
+    # @example Example: To create an HTTP load balancer in EC2-Classic
+    #
+    #   # This example creates a load balancer with an HTTP listener in EC2-Classic.
+    #
+    #   resp = client.create_load_balancer({
+    #     availability_zones: [
+    #       "us-west-2a", 
+    #     ], 
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dns_name: "my-load-balancer-123456789.us-west-2.elb.amazonaws.com", 
+    #   }
+    #
+    # @example Example: To create an HTTPS load balancer in a VPC
+    #
+    #   # This example creates a load balancer with an HTTPS listener in a VPC.
+    #
+    #   resp = client.create_load_balancer({
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 443, 
+    #         protocol: "HTTPS", 
+    #         ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #     security_groups: [
+    #       "sg-a61988c3", 
+    #     ], 
+    #     subnets: [
+    #       "subnet-15aaab61", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dns_name: "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com", 
+    #   }
+    #
+    # @example Example: To create an HTTPS load balancer in EC2-Classic
+    #
+    #   # This example creates a load balancer with an HTTPS listener in EC2-Classic.
+    #
+    #   resp = client.create_load_balancer({
+    #     availability_zones: [
+    #       "us-west-2a", 
+    #     ], 
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 443, 
+    #         protocol: "HTTPS", 
+    #         ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dns_name: "my-load-balancer-123456789.us-west-2.elb.amazonaws.com", 
+    #   }
+    #
+    # @example Example: To create an internal load balancer
+    #
+    #   # This example creates an internal load balancer with an HTTP listener in a VPC.
+    #
+    #   resp = client.create_load_balancer({
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #     scheme: "internal", 
+    #     security_groups: [
+    #       "sg-a61988c3", 
+    #     ], 
+    #     subnets: [
+    #       "subnet-15aaab61", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dns_name: "internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_load_balancer({
@@ -575,6 +829,40 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create an HTTP listener for a load balancer
+    #
+    #   # This example creates a listener for your load balancer at port 80 using the HTTP protocol.
+    #
+    #   resp = client.create_load_balancer_listeners({
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 80, 
+    #         protocol: "HTTP", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    # @example Example: To create an HTTPS listener for a load balancer
+    #
+    #   # This example creates a listener for your load balancer at port 443 using the HTTPS protocol.
+    #
+    #   resp = client.create_load_balancer_listeners({
+    #     listeners: [
+    #       {
+    #         instance_port: 80, 
+    #         instance_protocol: "HTTP", 
+    #         load_balancer_port: 443, 
+    #         protocol: "HTTPS", 
+    #         ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_load_balancer_listeners({
@@ -622,6 +910,55 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a policy that enables Proxy Protocol on a load balancer
+    #
+    #   # This example creates a policy that enables Proxy Protocol on the specified load balancer.
+    #
+    #   resp = client.create_load_balancer_policy({
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_attributes: [
+    #       {
+    #         attribute_name: "ProxyProtocol", 
+    #         attribute_value: "true", 
+    #       }, 
+    #     ], 
+    #     policy_name: "my-ProxyProtocol-policy", 
+    #     policy_type_name: "ProxyProtocolPolicyType", 
+    #   })
+    #
+    # @example Example: To create a public key policy
+    #
+    #   # This example creates a public key policy.
+    #
+    #   resp = client.create_load_balancer_policy({
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_attributes: [
+    #       {
+    #         attribute_name: "PublicKey", 
+    #         attribute_value: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwAYUjnfyEyXr1pxjhFWBpMlggUcqoi3kl+dS74kj//c6x7ROtusUaeQCTgIUkayttRDWchuqo1pHC1u+n5xxXnBBe2ejbb2WRsKIQ5rXEeixsjFpFsojpSQKkzhVGI6mJVZBJDVKSHmswnwLBdofLhzvllpovBPTHe+o4haAWvDBALJU0pkSI1FecPHcs2hwxf14zHoXy1e2k36A64nXW43wtfx5qcVSIxtCEOjnYRg7RPvybaGfQ+v6Iaxb/+7J5kEvZhTFQId+bSiJImF1FSUT1W1xwzBZPUbcUkkXDj45vC2s3Z8E+Lk7a3uZhvsQHLZnrfuWjBWGWvZ/MhZYgEXAMPLE", 
+    #       }, 
+    #     ], 
+    #     policy_name: "my-PublicKey-policy", 
+    #     policy_type_name: "PublicKeyPolicyType", 
+    #   })
+    #
+    # @example Example: To create a backend server authentication policy
+    #
+    #   # This example creates a backend server authentication policy that enables authentication on your backend instance using a public key policy.
+    #
+    #   resp = client.create_load_balancer_policy({
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_attributes: [
+    #       {
+    #         attribute_name: "PublicKeyPolicyName", 
+    #         attribute_value: "my-PublicKey-policy", 
+    #       }, 
+    #     ], 
+    #     policy_name: "my-authentication-policy", 
+    #     policy_type_name: "BackendServerAuthenticationPolicyType", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_load_balancer_policy({
@@ -661,6 +998,15 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a load balancer
+    #
+    #   # This example deletes the specified load balancer.
+    #
+    #   resp = client.delete_load_balancer({
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_load_balancer({
@@ -685,6 +1031,18 @@ module Aws::ElasticLoadBalancing
     #   The client port numbers of the listeners.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a listener from your load balancer
+    #
+    #   # This example deletes the listener for the specified port from the specified load balancer.
+    #
+    #   resp = client.delete_load_balancer_listeners({
+    #     load_balancer_name: "my-load-balancer", 
+    #     load_balancer_ports: [
+    #       80, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -712,6 +1070,16 @@ module Aws::ElasticLoadBalancing
     #   The name of the policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a policy from your load balancer
+    #
+    #   # This example deletes the specified policy from the specified load balancer. The policy must not be enabled on any listener.
+    #
+    #   resp = client.delete_load_balancer_policy({
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_name: "my-duration-cookie-policy", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -752,6 +1120,32 @@ module Aws::ElasticLoadBalancing
     # @return [Types::DeregisterEndPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterEndPointsOutput#instances #instances} => Array&lt;Types::Instance&gt;
+    #
+    #
+    # @example Example: To deregister instances from a load balancer
+    #
+    #   # This example deregisters the specified instance from the specified load balancer.
+    #
+    #   resp = client.deregister_instances_from_load_balancer({
+    #     instances: [
+    #       {
+    #         instance_id: "i-d6f6fae3", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         instance_id: "i-207d9717", 
+    #       }, 
+    #       {
+    #         instance_id: "i-afefb49b", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -840,6 +1234,33 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeEndPointStateOutput#instance_states #instance_states} => Array&lt;Types::InstanceState&gt;
     #
+    #
+    # @example Example: To describe the health of the instances for a load balancer
+    #
+    #   # This example describes the health of the instances for the specified load balancer.
+    #
+    #   resp = client.describe_instance_health({
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance_states: [
+    #       {
+    #         description: "N/A", 
+    #         instance_id: "i-207d9717", 
+    #         reason_code: "N/A", 
+    #         state: "InService", 
+    #       }, 
+    #       {
+    #         description: "N/A", 
+    #         instance_id: "i-afefb49b", 
+    #         reason_code: "N/A", 
+    #         state: "InService", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_health({
@@ -876,6 +1297,34 @@ module Aws::ElasticLoadBalancing
     # @return [Types::DescribeLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLoadBalancerAttributesOutput#load_balancer_attributes #load_balancer_attributes} => Types::LoadBalancerAttributes
+    #
+    #
+    # @example Example: To describe the attributes of a load balancer
+    #
+    #   # This example describes the attributes of the specified load balancer.
+    #
+    #   resp = client.describe_load_balancer_attributes({
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancer_attributes: {
+    #       access_log: {
+    #         enabled: false, 
+    #       }, 
+    #       connection_draining: {
+    #         enabled: false, 
+    #         timeout: 300, 
+    #       }, 
+    #       connection_settings: {
+    #         idle_timeout: 60, 
+    #       }, 
+    #       cross_zone_load_balancing: {
+    #         enabled: false, 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -926,6 +1375,34 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeLoadBalancerPoliciesOutput#policy_descriptions #policy_descriptions} => Array&lt;Types::PolicyDescription&gt;
     #
+    #
+    # @example Example: To describe a policy associated with a load balancer
+    #
+    #   # This example describes the specified policy associated with the specified load balancer.
+    #
+    #   resp = client.describe_load_balancer_policies({
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_names: [
+    #       "my-authentication-policy", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_descriptions: [
+    #       {
+    #         policy_attribute_descriptions: [
+    #           {
+    #             attribute_name: "PublicKeyPolicyName", 
+    #             attribute_value: "my-PublicKey-policy", 
+    #           }, 
+    #         ], 
+    #         policy_name: "my-authentication-policy", 
+    #         policy_type_name: "BackendServerAuthenticationPolicyType", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_load_balancer_policies({
@@ -972,6 +1449,34 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeLoadBalancerPolicyTypesOutput#policy_type_descriptions #policy_type_descriptions} => Array&lt;Types::PolicyTypeDescription&gt;
     #
+    #
+    # @example Example: To describe a load balancer policy type defined by Elastic Load Balancing
+    #
+    #   # This example describes the specified load balancer policy type.
+    #
+    #   resp = client.describe_load_balancer_policy_types({
+    #     policy_type_names: [
+    #       "ProxyProtocolPolicyType", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_type_descriptions: [
+    #       {
+    #         description: "Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only.", 
+    #         policy_attribute_type_descriptions: [
+    #           {
+    #             attribute_name: "ProxyProtocol", 
+    #             attribute_type: "Boolean", 
+    #             cardinality: "ONE", 
+    #           }, 
+    #         ], 
+    #         policy_type_name: "ProxyProtocolPolicyType", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_load_balancer_policy_types({
@@ -1017,6 +1522,109 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeAccessPointsOutput#load_balancer_descriptions #load_balancer_descriptions} => Array&lt;Types::LoadBalancerDescription&gt;
     #   * {Types::DescribeAccessPointsOutput#next_marker #next_marker} => String
+    #
+    #
+    # @example Example: To describe one of your load balancers
+    #
+    #   # This example describes the specified load balancer.
+    #
+    #   resp = client.describe_load_balancers({
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancer_descriptions: [
+    #       {
+    #         availability_zones: [
+    #           "us-west-2a", 
+    #         ], 
+    #         backend_server_descriptions: [
+    #           {
+    #             instance_port: 80, 
+    #             policy_names: [
+    #               "my-ProxyProtocol-policy", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         canonical_hosted_zone_name: "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com", 
+    #         canonical_hosted_zone_name_id: "Z3DZXE0EXAMPLE", 
+    #         created_time: Time.parse("2015-03-19T03:24:02.650Z"), 
+    #         dns_name: "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com", 
+    #         health_check: {
+    #           healthy_threshold: 2, 
+    #           interval: 30, 
+    #           target: "HTTP:80/png", 
+    #           timeout: 3, 
+    #           unhealthy_threshold: 2, 
+    #         }, 
+    #         instances: [
+    #           {
+    #             instance_id: "i-207d9717", 
+    #           }, 
+    #           {
+    #             instance_id: "i-afefb49b", 
+    #           }, 
+    #         ], 
+    #         listener_descriptions: [
+    #           {
+    #             listener: {
+    #               instance_port: 80, 
+    #               instance_protocol: "HTTP", 
+    #               load_balancer_port: 80, 
+    #               protocol: "HTTP", 
+    #             }, 
+    #             policy_names: [
+    #             ], 
+    #           }, 
+    #           {
+    #             listener: {
+    #               instance_port: 443, 
+    #               instance_protocol: "HTTPS", 
+    #               load_balancer_port: 443, 
+    #               protocol: "HTTPS", 
+    #               ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/my-server-cert", 
+    #             }, 
+    #             policy_names: [
+    #               "ELBSecurityPolicy-2015-03", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         load_balancer_name: "my-load-balancer", 
+    #         policies: {
+    #           app_cookie_stickiness_policies: [
+    #           ], 
+    #           lb_cookie_stickiness_policies: [
+    #             {
+    #               cookie_expiration_period: 60, 
+    #               policy_name: "my-duration-cookie-policy", 
+    #             }, 
+    #           ], 
+    #           other_policies: [
+    #             "my-PublicKey-policy", 
+    #             "my-authentication-policy", 
+    #             "my-SSLNegotiation-policy", 
+    #             "my-ProxyProtocol-policy", 
+    #             "ELBSecurityPolicy-2015-03", 
+    #           ], 
+    #         }, 
+    #         scheme: "internet-facing", 
+    #         security_groups: [
+    #           "sg-a61988c3", 
+    #         ], 
+    #         source_security_group: {
+    #           group_name: "my-elb-sg", 
+    #           owner_alias: "123456789012", 
+    #         }, 
+    #         subnets: [
+    #           "subnet-15aaab61", 
+    #         ], 
+    #         vpc_id: "vpc-a01106c2", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1091,6 +1699,36 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeTagsOutput#tag_descriptions #tag_descriptions} => Array&lt;Types::TagDescription&gt;
     #
+    #
+    # @example Example: To describe the tags for a load balancer
+    #
+    #   # This example describes the tags for the specified load balancer.
+    #
+    #   resp = client.describe_tags({
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_descriptions: [
+    #       {
+    #         load_balancer_name: "my-load-balancer", 
+    #         tags: [
+    #           {
+    #             key: "project", 
+    #             value: "lima", 
+    #           }, 
+    #           {
+    #             key: "department", 
+    #             value: "digital-media", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tags({
@@ -1131,6 +1769,25 @@ module Aws::ElasticLoadBalancing
     # @return [Types::DetachLoadBalancerFromSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetachLoadBalancerFromSubnetsOutput#subnets #subnets} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To detach a load balancer from a subnet
+    #
+    #   # This example detaches the specified load balancer from the specified subnet.
+    #
+    #   resp = client.detach_load_balancer_from_subnets({
+    #     load_balancer_name: "my-load-balancer", 
+    #     subnets: [
+    #       "subnet-0ecac448", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     subnets: [
+    #       "subnet-15aaab61", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1180,6 +1837,25 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::RemoveAvailabilityZonesOutput#availability_zones #availability_zones} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To disable an Availability Zone for a load balancer
+    #
+    #   # This example removes the specified Availability Zone from the set of Availability Zones for the specified load balancer.
+    #
+    #   resp = client.disable_availability_zones_for_load_balancer({
+    #     availability_zones: [
+    #       "us-west-2a", 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     availability_zones: [
+    #       "us-west-2b", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_availability_zones_for_load_balancer({
@@ -1224,6 +1900,26 @@ module Aws::ElasticLoadBalancing
     # @return [Types::AddAvailabilityZonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddAvailabilityZonesOutput#availability_zones #availability_zones} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To enable an Availability Zone for a load balancer
+    #
+    #   # This example adds the specified Availability Zone to the specified load balancer.
+    #
+    #   resp = client.enable_availability_zones_for_load_balancer({
+    #     availability_zones: [
+    #       "us-west-2b", 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     availability_zones: [
+    #       "us-west-2a", 
+    #       "us-west-2b", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1282,6 +1978,55 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_name #load_balancer_name} => String
     #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_attributes #load_balancer_attributes} => Types::LoadBalancerAttributes
+    #
+    #
+    # @example Example: To enable cross-zone load balancing
+    #
+    #   # This example enables cross-zone load balancing for the specified load balancer.
+    #
+    #   resp = client.modify_load_balancer_attributes({
+    #     load_balancer_attributes: {
+    #       cross_zone_load_balancing: {
+    #         enabled: true, 
+    #       }, 
+    #     }, 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancer_attributes: {
+    #       cross_zone_load_balancing: {
+    #         enabled: true, 
+    #       }, 
+    #     }, 
+    #     load_balancer_name: "my-load-balancer", 
+    #   }
+    #
+    # @example Example: To enable connection draining
+    #
+    #   # This example enables connection draining for the specified load balancer.
+    #
+    #   resp = client.modify_load_balancer_attributes({
+    #     load_balancer_attributes: {
+    #       connection_draining: {
+    #         enabled: true, 
+    #         timeout: 300, 
+    #       }, 
+    #     }, 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancer_attributes: {
+    #       connection_draining: {
+    #         enabled: true, 
+    #         timeout: 300, 
+    #       }, 
+    #     }, 
+    #     load_balancer_name: "my-load-balancer", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1377,6 +2122,35 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::RegisterEndPointsOutput#instances #instances} => Array&lt;Types::Instance&gt;
     #
+    #
+    # @example Example: To register instances with a load balancer
+    #
+    #   # This example registers the specified instance with the specified load balancer.
+    #
+    #   resp = client.register_instances_with_load_balancer({
+    #     instances: [
+    #       {
+    #         instance_id: "i-d6f6fae3", 
+    #       }, 
+    #     ], 
+    #     load_balancer_name: "my-load-balancer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         instance_id: "i-d6f6fae3", 
+    #       }, 
+    #       {
+    #         instance_id: "i-207d9717", 
+    #       }, 
+    #       {
+    #         instance_id: "i-afefb49b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_instances_with_load_balancer({
@@ -1412,6 +2186,22 @@ module Aws::ElasticLoadBalancing
     #   The list of tag keys to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a load balancer
+    #
+    #   # This example removes the specified tag from the specified load balancer.
+    #
+    #   resp = client.remove_tags({
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "project", 
+    #       }, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1455,6 +2245,17 @@ module Aws::ElasticLoadBalancing
     #   The Amazon Resource Name (ARN) of the SSL certificate.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update the SSL certificate for an HTTPS listener
+    #
+    #   # This example replaces the existing SSL certificate for the specified HTTPS listener.
+    #
+    #   resp = client.set_load_balancer_listener_ssl_certificate({
+    #     load_balancer_name: "my-load-balancer", 
+    #     load_balancer_port: 443, 
+    #     ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/new-server-cert", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1509,6 +2310,19 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To replace the policies associated with a port for a backend instance
+    #
+    #   # This example replaces the policies that are currently associated with the specified port.
+    #
+    #   resp = client.set_load_balancer_policies_for_backend_server({
+    #     instance_port: 80, 
+    #     load_balancer_name: "my-load-balancer", 
+    #     policy_names: [
+    #       "my-ProxyProtocol-policy", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_load_balancer_policies_for_backend_server({
@@ -1556,6 +2370,19 @@ module Aws::ElasticLoadBalancing
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To replace the policies associated with a listener
+    #
+    #   # This example replaces the policies that are currently associated with the specified listener.
+    #
+    #   resp = client.set_load_balancer_policies_of_listener({
+    #     load_balancer_name: "my-load-balancer", 
+    #     load_balancer_port: 80, 
+    #     policy_names: [
+    #       "my-SSLNegotiation-policy", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_load_balancer_policies_of_listener({
@@ -1586,7 +2413,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

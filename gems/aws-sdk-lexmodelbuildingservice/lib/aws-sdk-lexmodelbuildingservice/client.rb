@@ -766,6 +766,61 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotResponse#locale #locale} => String
     #   * {Types::GetBotResponse#child_directed #child_directed} => Boolean
     #
+    #
+    # @example Example: To get information about a bot
+    #
+    #   # This example shows how to get configuration information for a bot.
+    #
+    #   resp = client.get_bot({
+    #     name: "DocOrderPizza", 
+    #     version_or_alias: "$LATEST", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocOrderPizzaBot", 
+    #     abort_statement: {
+    #       messages: [
+    #         {
+    #           content: "I don't understand. Can you try again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I'm sorry, I don't understand.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     checksum: "20172ee3-fa06-49b2-bbc5-667c090303e9", 
+    #     child_directed: true, 
+    #     clarification_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "I'm sorry, I didn't hear that. Can you repeate what you just said?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "Can you say that again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     created_date: Time.parse(1494360160.133), 
+    #     description: "Orders a pizza from a local pizzeria.", 
+    #     idle_session_ttl_in_seconds: 300, 
+    #     intents: [
+    #       {
+    #         intent_name: "DocOrderPizza", 
+    #         intent_version: "$LATEST", 
+    #       }, 
+    #     ], 
+    #     last_updated_date: Time.parse(1494360160.133), 
+    #     locale: "en-US", 
+    #     status: "NOT_BUILT", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bot({
@@ -1127,6 +1182,30 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotsResponse#bots #bots} => Array&lt;Types::BotMetadata&gt;
     #   * {Types::GetBotsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To get a list of bots
+    #
+    #   # This example shows how to get a list of all of the bots in your account.
+    #
+    #   resp = client.get_bots({
+    #     max_results: 5, 
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     bots: [
+    #       {
+    #         version: "$LATEST", 
+    #         name: "DocOrderPizzaBot", 
+    #         created_date: Time.parse(1494360160.133), 
+    #         description: "Orders a pizza from a local pizzeria.", 
+    #         last_updated_date: Time.parse(1494360160.133), 
+    #         status: "NOT_BUILT", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bots({
@@ -1349,6 +1428,151 @@ module Aws::LexModelBuildingService
     #   * {Types::GetIntentResponse#version #version} => String
     #   * {Types::GetIntentResponse#checksum #checksum} => String
     #
+    #
+    # @example Example: To get a information about an intent
+    #
+    #   # This example shows how to get information about an intent.
+    #
+    #   resp = client.get_intent({
+    #     version: "$LATEST", 
+    #     name: "DocOrderPizza", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocOrderPizza", 
+    #     checksum: "ca9bc13d-afc8-4706-bbaf-091f7a5935d6", 
+    #     conclusion_statement: {
+    #       messages: [
+    #         {
+    #           content: "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #       response_card: "foo", 
+    #     }, 
+    #     confirmation_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     created_date: Time.parse(1494359783.453), 
+    #     description: "Order a pizza from a local pizzeria.", 
+    #     fulfillment_activity: {
+    #       type: "ReturnIntent", 
+    #     }, 
+    #     last_updated_date: Time.parse(1494359783.453), 
+    #     rejection_statement: {
+    #       messages: [
+    #         {
+    #           content: "Ok, I'll cancel your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I cancelled your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     sample_utterances: [
+    #       "Order me a pizza.", 
+    #       "Order me a {Type} pizza.", 
+    #       "I want a {Crust} crust {Type} pizza", 
+    #       "I want a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #     ], 
+    #     slots: [
+    #       {
+    #         name: "Type", 
+    #         description: "The type of pizza to order.", 
+    #         priority: 1, 
+    #         sample_utterances: [
+    #           "Get me a {Type} pizza.", 
+    #           "A {Type} pizza please.", 
+    #           "I'd like a {Type} pizza.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of pizza would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Vegie or cheese pizza?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "I can get you a vegie or a cheese pizza.", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Crust", 
+    #         description: "The type of pizza crust to order.", 
+    #         priority: 2, 
+    #         sample_utterances: [
+    #           "Make it a {Crust} crust.", 
+    #           "I'd like a {Crust} crust.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaCrustType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of crust would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Thick or thin crust?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Sauce", 
+    #         description: "The type of sauce to use on the pizza.", 
+    #         priority: 3, 
+    #         sample_utterances: [
+    #           "Make it {Sauce} sauce.", 
+    #           "I'd like {Sauce} sauce.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaSauceType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "White or red sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Garlic or tomato sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_intent({
@@ -1508,6 +1732,29 @@ module Aws::LexModelBuildingService
     #   * {Types::GetIntentsResponse#intents #intents} => Array&lt;Types::IntentMetadata&gt;
     #   * {Types::GetIntentsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To get a list of intents
+    #
+    #   # This example shows how to get a list of all of the intents in your account.
+    #
+    #   resp = client.get_intents({
+    #     max_results: 10, 
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     intents: [
+    #       {
+    #         version: "$LATEST", 
+    #         name: "DocOrderPizza", 
+    #         created_date: Time.parse(1494359783.453), 
+    #         description: "Order a pizza from a local pizzeria.", 
+    #         last_updated_date: Time.parse(1494359783.453), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_intents({
@@ -1556,6 +1803,34 @@ module Aws::LexModelBuildingService
     #   * {Types::GetSlotTypeResponse#created_date #created_date} => Time
     #   * {Types::GetSlotTypeResponse#version #version} => String
     #   * {Types::GetSlotTypeResponse#checksum #checksum} => String
+    #
+    #
+    # @example Example: To get information about a slot type
+    #
+    #   # This example shows how to get information about a slot type.
+    #
+    #   resp = client.get_slot_type({
+    #     version: "$LATEST", 
+    #     name: "DocPizzaCrustType", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocPizzaCrustType", 
+    #     checksum: "210b3d5a-90a3-4b22-ac7e-f50c2c71095f", 
+    #     created_date: Time.parse(1494359274.403), 
+    #     description: "Available crust types", 
+    #     enumeration_values: [
+    #       {
+    #         value: "thick", 
+    #       }, 
+    #       {
+    #         value: "thin", 
+    #       }, 
+    #     ], 
+    #     last_updated_date: Time.parse(1494359274.403), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1672,6 +1947,43 @@ module Aws::LexModelBuildingService
     #
     #   * {Types::GetSlotTypesResponse#slot_types #slot_types} => Array&lt;Types::SlotTypeMetadata&gt;
     #   * {Types::GetSlotTypesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of slot types
+    #
+    #   # This example shows how to get a list of all of the slot types in your account.
+    #
+    #   resp = client.get_slot_types({
+    #     max_results: 10, 
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     slot_types: [
+    #       {
+    #         version: "$LATEST", 
+    #         name: "DocPizzaCrustType", 
+    #         created_date: Time.parse(1494359274.403), 
+    #         description: "Available crust types", 
+    #         last_updated_date: Time.parse(1494359274.403), 
+    #       }, 
+    #       {
+    #         version: "$LATEST", 
+    #         name: "DocPizzaSauceType", 
+    #         created_date: Time.parse(1494356442.23), 
+    #         description: "Available pizza sauces", 
+    #         last_updated_date: Time.parse(1494356442.23), 
+    #       }, 
+    #       {
+    #         version: "$LATEST", 
+    #         name: "DocPizzaType", 
+    #         created_date: Time.parse(1494359198.656), 
+    #         description: "Available pizzas", 
+    #         last_updated_date: Time.parse(1494359198.656), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1929,6 +2241,96 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#version #version} => String
     #   * {Types::PutBotResponse#locale #locale} => String
     #   * {Types::PutBotResponse#child_directed #child_directed} => Boolean
+    #
+    #
+    # @example Example: To create a bot
+    #
+    #   # This example shows how to create a bot for ordering pizzas.
+    #
+    #   resp = client.put_bot({
+    #     name: "DocOrderPizzaBot", 
+    #     abort_statement: {
+    #       messages: [
+    #         {
+    #           content: "I don't understand. Can you try again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I'm sorry, I don't understand.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     child_directed: true, 
+    #     clarification_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "I'm sorry, I didn't hear that. Can you repeate what you just said?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "Can you say that again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     description: "Orders a pizza from a local pizzeria.", 
+    #     idle_session_ttl_in_seconds: 300, 
+    #     intents: [
+    #       {
+    #         intent_name: "DocOrderPizza", 
+    #         intent_version: "$LATEST", 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #     process_behavior: "SAVE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocOrderPizzaBot", 
+    #     abort_statement: {
+    #       messages: [
+    #         {
+    #           content: "I don't understand. Can you try again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I'm sorry, I don't understand.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     checksum: "20172ee3-fa06-49b2-bbc5-667c090303e9", 
+    #     child_directed: true, 
+    #     clarification_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "I'm sorry, I didn't hear that. Can you repeate what you just said?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "Can you say that again?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     created_date: Time.parse(1494360160.133), 
+    #     description: "Orders a pizza from a local pizzeria.", 
+    #     idle_session_ttl_in_seconds: 300, 
+    #     intents: [
+    #       {
+    #         intent_name: "DocOrderPizza", 
+    #         intent_version: "$LATEST", 
+    #       }, 
+    #     ], 
+    #     last_updated_date: Time.parse(1494360160.133), 
+    #     locale: "en-US", 
+    #     status: "NOT_BUILT", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2270,6 +2672,276 @@ module Aws::LexModelBuildingService
     #   * {Types::PutIntentResponse#version #version} => String
     #   * {Types::PutIntentResponse#checksum #checksum} => String
     #
+    #
+    # @example Example: To create an intent
+    #
+    #   # This example shows how to create an intent for ordering pizzas.
+    #
+    #   resp = client.put_intent({
+    #     name: "DocOrderPizza", 
+    #     conclusion_statement: {
+    #       messages: [
+    #         {
+    #           content: "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #       response_card: "foo", 
+    #     }, 
+    #     confirmation_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     description: "Order a pizza from a local pizzeria.", 
+    #     fulfillment_activity: {
+    #       type: "ReturnIntent", 
+    #     }, 
+    #     rejection_statement: {
+    #       messages: [
+    #         {
+    #           content: "Ok, I'll cancel your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I cancelled your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     sample_utterances: [
+    #       "Order me a pizza.", 
+    #       "Order me a {Type} pizza.", 
+    #       "I want a {Crust} crust {Type} pizza", 
+    #       "I want a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #     ], 
+    #     slots: [
+    #       {
+    #         name: "Type", 
+    #         description: "The type of pizza to order.", 
+    #         priority: 1, 
+    #         sample_utterances: [
+    #           "Get me a {Type} pizza.", 
+    #           "A {Type} pizza please.", 
+    #           "I'd like a {Type} pizza.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of pizza would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Vegie or cheese pizza?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "I can get you a vegie or a cheese pizza.", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Crust", 
+    #         description: "The type of pizza crust to order.", 
+    #         priority: 2, 
+    #         sample_utterances: [
+    #           "Make it a {Crust} crust.", 
+    #           "I'd like a {Crust} crust.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaCrustType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of crust would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Thick or thin crust?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Sauce", 
+    #         description: "The type of sauce to use on the pizza.", 
+    #         priority: 3, 
+    #         sample_utterances: [
+    #           "Make it {Sauce} sauce.", 
+    #           "I'd like {Sauce} sauce.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaSauceType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "White or red sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Garlic or tomato sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocOrderPizza", 
+    #     checksum: "ca9bc13d-afc8-4706-bbaf-091f7a5935d6", 
+    #     conclusion_statement: {
+    #       messages: [
+    #         {
+    #           content: "All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #       response_card: "foo", 
+    #     }, 
+    #     confirmation_prompt: {
+    #       max_attempts: 1, 
+    #       messages: [
+    #         {
+    #           content: "Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     created_date: Time.parse(1494359783.453), 
+    #     description: "Order a pizza from a local pizzeria.", 
+    #     fulfillment_activity: {
+    #       type: "ReturnIntent", 
+    #     }, 
+    #     last_updated_date: Time.parse(1494359783.453), 
+    #     rejection_statement: {
+    #       messages: [
+    #         {
+    #           content: "Ok, I'll cancel your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #         {
+    #           content: "I cancelled your order.", 
+    #           content_type: "PlainText", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     sample_utterances: [
+    #       "Order me a pizza.", 
+    #       "Order me a {Type} pizza.", 
+    #       "I want a {Crust} crust {Type} pizza", 
+    #       "I want a {Crust} crust {Type} pizza with {Sauce} sauce.", 
+    #     ], 
+    #     slots: [
+    #       {
+    #         name: "Sauce", 
+    #         description: "The type of sauce to use on the pizza.", 
+    #         priority: 3, 
+    #         sample_utterances: [
+    #           "Make it {Sauce} sauce.", 
+    #           "I'd like {Sauce} sauce.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaSauceType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "White or red sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Garlic or tomato sauce?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Type", 
+    #         description: "The type of pizza to order.", 
+    #         priority: 1, 
+    #         sample_utterances: [
+    #           "Get me a {Type} pizza.", 
+    #           "A {Type} pizza please.", 
+    #           "I'd like a {Type} pizza.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of pizza would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Vegie or cheese pizza?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "I can get you a vegie or a cheese pizza.", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "Crust", 
+    #         description: "The type of pizza crust to order.", 
+    #         priority: 2, 
+    #         sample_utterances: [
+    #           "Make it a {Crust} crust.", 
+    #           "I'd like a {Crust} crust.", 
+    #         ], 
+    #         slot_constraint: "Required", 
+    #         slot_type: "DocPizzaCrustType", 
+    #         slot_type_version: "$LATEST", 
+    #         value_elicitation_prompt: {
+    #           max_attempts: 1, 
+    #           messages: [
+    #             {
+    #               content: "What type of crust would you like?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #             {
+    #               content: "Thick or thin crust?", 
+    #               content_type: "PlainText", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_intent({
@@ -2483,6 +3155,42 @@ module Aws::LexModelBuildingService
     #   * {Types::PutSlotTypeResponse#version #version} => String
     #   * {Types::PutSlotTypeResponse#checksum #checksum} => String
     #
+    #
+    # @example Example: To Create a Slot Type
+    #
+    #   # This example shows how to create a slot type that describes pizza sauces.
+    #
+    #   resp = client.put_slot_type({
+    #     name: "PizzaSauceType", 
+    #     description: "Available pizza sauces", 
+    #     enumeration_values: [
+    #       {
+    #         value: "red", 
+    #       }, 
+    #       {
+    #         value: "white", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "$LATEST", 
+    #     name: "DocPizzaSauceType", 
+    #     checksum: "cfd00ed1-775d-4357-947c-aca7e73b44ba", 
+    #     created_date: Time.parse(1494356442.23), 
+    #     description: "Available pizza sauces", 
+    #     enumeration_values: [
+    #       {
+    #         value: "red", 
+    #       }, 
+    #       {
+    #         value: "white", 
+    #       }, 
+    #     ], 
+    #     last_updated_date: Time.parse(1494356442.23), 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_slot_type({
@@ -2529,7 +3237,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

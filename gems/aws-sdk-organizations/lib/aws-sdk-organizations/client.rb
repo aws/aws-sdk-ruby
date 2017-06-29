@@ -195,6 +195,61 @@ module Aws::Organizations
     #
     #   * {Types::AcceptHandshakeResponse#handshake #handshake} => Types::Handshake
     #
+    #
+    # @example Example: To accept a handshake from another account
+    #
+    #   # Bill is the owner of an organization, and he invites Juan's account (222222222222) to join his organization. The following example shows Juan's account accepting the handshake and thus agreeing to the invitation.
+    #
+    #   resp = client.accept_handshake({
+    #     handshake_id: "h-examplehandshakeid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "INVITE", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("20170228T1215Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #         {
+    #           id: "juan@example.com", 
+    #           type: "EMAIL", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("20170214T1215Z"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MASTER_EMAIL", 
+    #               value: "bill@amazon.com", 
+    #             }, 
+    #             {
+    #               type: "MASTER_NAME", 
+    #               value: "Org Master Account", 
+    #             }, 
+    #             {
+    #               type: "ORGANIZATION_FEATURE_SET", 
+    #               value: "ALL", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "ACCOUNT", 
+    #           value: "222222222222", 
+    #         }, 
+    #       ], 
+    #       state: "ACCEPTED", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_handshake({
@@ -312,6 +367,27 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a policy to an OU
+    #
+    #   # The following example shows how to attach a service control policy (SCP) to an OU:
+    
+    #
+    #   resp = client.attach_policy({
+    #     policy_id: "p-examplepolicyid111", 
+    #     target_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
+    # @example Example: To attach a policy to an account
+    #
+    #   # The following example shows how to attach a service control policy (SCP) to an account:
+    
+    #
+    #   resp = client.attach_policy({
+    #     policy_id: "p-examplepolicyid111", 
+    #     target_id: "333333333333", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_policy({
@@ -353,6 +429,66 @@ module Aws::Organizations
     # @return [Types::CancelHandshakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelHandshakeResponse#handshake #handshake} => Types::Handshake
+    #
+    #
+    # @example Example: To cancel a handshake sent to a member account
+    #
+    #   # Bill previously sent an invitation to Susan's account to join his organization. He changes his mind and decides to cancel the invitation before Susan accepts it. The following example shows Bill's cancellation:
+    
+    #
+    #   resp = client.cancel_handshake({
+    #     handshake_id: "h-examplehandshakeid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "INVITE", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("20170228T1215Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #         {
+    #           id: "susan@example.com", 
+    #           type: "EMAIL", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("20170214T1215Z"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MASTER_EMAIL", 
+    #               value: "bill@example.com", 
+    #             }, 
+    #             {
+    #               type: "MASTER_NAME", 
+    #               value: "Master Account", 
+    #             }, 
+    #             {
+    #               type: "ORGANIZATION_FEATURE_SET", 
+    #               value: "CONSOLIDATED_BILLING", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "ACCOUNT", 
+    #           value: "222222222222", 
+    #         }, 
+    #         {
+    #           type: "NOTES", 
+    #           value: "This is a request for Susan's account to join Bob's organization.", 
+    #         }, 
+    #       ], 
+    #       state: "CANCELED", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -484,6 +620,26 @@ module Aws::Organizations
     #
     #   * {Types::CreateAccountResponse#create_account_status #create_account_status} => Types::CreateAccountStatus
     #
+    #
+    # @example Example: To create a new account that is automatically part of the organization
+    #
+    #   # The owner of an organization creates a member account in the organization. The following example shows that when the organization owner creates the member account, the account is preconfigured with the name "Production Account" and an owner email address of susan@example.com.  An IAM role is automatically created using the default name because the roleName parameter is not used. AWS Organizations sends Susan a "Welcome to AWS" email:
+    
+    
+    #
+    #   resp = client.create_account({
+    #     account_name: "Production Account", 
+    #     email: "susan@example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_account_status: {
+    #       id: "car-examplecreateaccountrequestid111", 
+    #       state: "IN_PROGRESS", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_account({
@@ -556,6 +712,58 @@ module Aws::Organizations
     #
     #   * {Types::CreateOrganizationResponse#organization #organization} => Types::Organization
     #
+    #
+    # @example Example: To create a new organization with all features enabled
+    #
+    #   # Bill wants to create an organization using credentials from account 111111111111. The following example shows that the account becomes the master account in the new organization. Because he does not specify a feature set, the new organization defaults to all features enabled and service control policies enabled on the root:
+    
+    
+    #
+    #   resp = client.create_organization({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organization: {
+    #       arn: "arn:aws:organizations::111111111111:organization/o-exampleorgid", 
+    #       available_policy_types: [
+    #         {
+    #           status: "ENABLED", 
+    #           type: "SERVICE_CONTROL_POLICY", 
+    #         }, 
+    #       ], 
+    #       feature_set: "ALL", 
+    #       id: "o-exampleorgid", 
+    #       master_account_arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/111111111111", 
+    #       master_account_email: "bill@example.com", 
+    #       master_account_id: "111111111111", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a new organization with consolidated billing features only
+    #
+    #   # In the following example, Bill creates an organization using credentials from account 111111111111, and configures the organization to support only the consolidated billing feature set:
+    
+    
+    #
+    #   resp = client.create_organization({
+    #     feature_set: "CONSOLIDATED_BILLING", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organization: {
+    #       arn: "arn:aws:organizations::111111111111:organization/o-exampleorgid", 
+    #       available_policy_types: [
+    #       ], 
+    #       feature_set: "CONSOLIDATED_BILLING", 
+    #       id: "o-exampleorgid", 
+    #       master_account_arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/111111111111", 
+    #       master_account_email: "bill@example.com", 
+    #       master_account_id: "111111111111", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_organization({
@@ -625,6 +833,27 @@ module Aws::Organizations
     # @return [Types::CreateOrganizationalUnitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOrganizationalUnitResponse#organizational_unit #organizational_unit} => Types::OrganizationalUnit
+    #
+    #
+    # @example Example: To create a new organization unit
+    #
+    #   # The following example shows how to create an OU that is named AccountingOU. The new OU is directly under the root.:
+    
+    
+    #
+    #   resp = client.create_organizational_unit({
+    #     name: "AccountingOU", 
+    #     parent_id: "r-examplerootid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organizational_unit: {
+    #       arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111", 
+    #       id: "ou-examplerootid111-exampleouid111", 
+    #       name: "AccountingOU", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -699,6 +928,33 @@ module Aws::Organizations
     #
     #   * {Types::CreatePolicyResponse#policy #policy} => Types::Policy
     #
+    #
+    # @example Example: To create a service control policy
+    #
+    #   # The following example shows how to create a service control policy (SCP) that is named AllowAllS3Actions. The JSON string in the content parameter specifies the content in the policy. The parameter string is escaped with backslashes to ensure that the embedded double quotes in the JSON policy are treated as literals in the parameter, which itself is surrounded by double quotes:
+    
+    
+    #
+    #   resp = client.create_policy({
+    #     content: "{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":\\\"s3:*\\\"}}", 
+    #     description: "Enables admins of attached accounts to delegate all S3 permissions", 
+    #     name: "AllowAllS3Actions", 
+    #     type: "SERVICE_CONTROL_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       content: "{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"s3:*\"}}", 
+    #       policy_summary: {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111", 
+    #         description: "Allows delegation of all S3 actions", 
+    #         name: "AllowAllS3Actions", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_policy({
@@ -752,6 +1008,61 @@ module Aws::Organizations
     # @return [Types::DeclineHandshakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeclineHandshakeResponse#handshake #handshake} => Types::Handshake
+    #
+    #
+    # @example Example: To decline a handshake sent from the master account
+    #
+    #   # The following example shows Susan declining an invitation to join Bill's organization. The DeclineHandshake operation returns a handshake object, showing that the state is now DECLINED:
+    #
+    #   resp = client.decline_handshake({
+    #     handshake_id: "h-examplehandshakeid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "INVITE", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("2016-12-15T19:27:58Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "222222222222", 
+    #           type: "ACCOUNT", 
+    #         }, 
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("2016-11-30T19:27:58Z"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MASTER_EMAIL", 
+    #               value: "bill@example.com", 
+    #             }, 
+    #             {
+    #               type: "MASTER_NAME", 
+    #               value: "Master Account", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "ACCOUNT", 
+    #           value: "222222222222", 
+    #         }, 
+    #         {
+    #           type: "NOTES", 
+    #           value: "This is an invitation to Susan's account to join the Bill's organization.", 
+    #         }, 
+    #       ], 
+    #       state: "DECLINED", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -826,6 +1137,17 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an organization unit
+    #
+    #   # The following example shows how to delete an OU. The example assumes that you previously removed all accounts and other OUs from the OU:
+    
+    
+    #
+    #   resp = client.delete_organizational_unit({
+    #     organizational_unit_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_organizational_unit({
@@ -861,6 +1183,17 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a policy
+    #
+    #   # The following example shows how to delete a policy from an organization. The example assumes that you previously detached the policy from all entities:
+    
+    
+    #
+    #   resp = client.delete_policy({
+    #     policy_id: "p-examplepolicyid111", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -898,6 +1231,25 @@ module Aws::Organizations
     # @return [Types::DescribeAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAccountResponse#account #account} => Types::Account
+    #
+    #
+    # @example Example: To get the details about an account
+    #
+    #   # The following example shows a user in the master account (111111111111) asking for details about account 555555555555:
+    #
+    #   resp = client.describe_account({
+    #     account_id: "555555555555", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account: {
+    #       arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/555555555555", 
+    #       email: "anika@example.com", 
+    #       id: "555555555555", 
+    #       name: "Beta Account", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -946,6 +1298,24 @@ module Aws::Organizations
     # @return [Types::DescribeCreateAccountStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeCreateAccountStatusResponse#create_account_status #create_account_status} => Types::CreateAccountStatus
+    #
+    #
+    # @example Example: To get information about a request to create an account
+    #
+    #   # The following example shows how to request the status about a previous request to create an account in an organization. This operation can be called only by a principal from the organization's master account. In the example, the specified "createAccountRequestId" comes from the response of the original call to "CreateAccount":
+    #
+    #   resp = client.describe_create_account_status({
+    #     create_account_request_id: "car-exampleaccountcreationrequestid", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_account_status: {
+    #       account_id: "333333333333", 
+    #       id: "car-exampleaccountcreationrequestid", 
+    #       state: "SUCCEEDED", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -999,6 +1369,57 @@ module Aws::Organizations
     #
     #   * {Types::DescribeHandshakeResponse#handshake #handshake} => Types::Handshake
     #
+    #
+    # @example Example: To get information about a handshake
+    #
+    #   # The following example shows you how to request details about a handshake. The handshake ID comes either from the original call to "InviteAccountToOrganization", or from a call to "ListHandshakesForAccount" or "ListHandshakesForOrganization":
+    #
+    #   resp = client.describe_handshake({
+    #     handshake_id: "h-examplehandshakeid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "INVITE", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("2016-11-30T17:24:58.046Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #         {
+    #           id: "333333333333", 
+    #           type: "ACCOUNT", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("2016-11-30T17:24:58.046Z"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MASTER_EMAIL", 
+    #               value: "bill@example.com", 
+    #             }, 
+    #             {
+    #               type: "MASTER_NAME", 
+    #               value: "Master Account", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "ACCOUNT", 
+    #           value: "333333333333", 
+    #         }, 
+    #       ], 
+    #       state: "OPEN", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_handshake({
@@ -1038,6 +1459,31 @@ module Aws::Organizations
     # @return [Types::DescribeOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOrganizationResponse#organization #organization} => Types::Organization
+    #
+    #
+    # @example Example: To get information about an organization
+    #
+    #   # The following example shows how to request information about the current user's organization:/n/n
+    #
+    #   resp = client.describe_organization({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organization: {
+    #       arn: "arn:aws:organizations::111111111111:organization/o-exampleorgid", 
+    #       available_policy_types: [
+    #         {
+    #           status: "ENABLED", 
+    #           type: "SERVICE_CONTROL_POLICY", 
+    #         }, 
+    #       ], 
+    #       feature_set: "ALL", 
+    #       id: "o-exampleorgid", 
+    #       master_account_arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/111111111111", 
+    #       master_account_email: "bill@example.com", 
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -1083,6 +1529,24 @@ module Aws::Organizations
     #
     #   * {Types::DescribeOrganizationalUnitResponse#organizational_unit #organizational_unit} => Types::OrganizationalUnit
     #
+    #
+    # @example Example: To get information about an organizational unit
+    #
+    #   # The following example shows how to request details about an OU:/n/n
+    #
+    #   resp = client.describe_organizational_unit({
+    #     organizational_unit_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organizational_unit: {
+    #       arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111", 
+    #       id: "ou-examplerootid111-exampleouid111", 
+    #       name: "Accounting Group", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organizational_unit({
@@ -1124,6 +1588,30 @@ module Aws::Organizations
     # @return [Types::DescribePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePolicyResponse#policy #policy} => Types::Policy
+    #
+    #
+    # @example Example: To get information about a policy
+    #
+    #   # The following example shows how to request information about a policy:/n/n
+    #
+    #   resp = client.describe_policy({
+    #     policy_id: "p-examplepolicyid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       content: "{\\n  \\\"Version\\\": \\\"2012-10-17\\\",\\n  \\\"Statement\\\": [\\n    {\\n      \\\"Effect\\\": \\\"Allow\\\",\\n      \\\"Action\\\": \\\"*\\\",\\n      \\\"Resource\\\": \\\"*\\\"\\n    }\\n  ]\\n}", 
+    #       policy_summary: {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111", 
+    #         aws_managed: false, 
+    #         description: "Enables admins to delegate S3 permissions", 
+    #         id: "p-examplepolicyid111", 
+    #         name: "AllowAllS3Actions", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1209,6 +1697,16 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To detach a policy from a root, OU, or account
+    #
+    #   # The following example shows how to detach a policy from an OU:/n/n
+    #
+    #   resp = client.detach_policy({
+    #     policy_id: "p-examplepolicyid111", 
+    #     target_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_policy({
@@ -1252,6 +1750,27 @@ module Aws::Organizations
     # @return [Types::DisablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisablePolicyTypeResponse#root #root} => Types::Root
+    #
+    #
+    # @example Example: To disable a policy type in a root
+    #
+    #   # The following example shows how to disable the service control policy (SCP) policy type in a root. The response shows that the PolicyTypes response element no longer includes SERVICE_CONTROL_POLICY:/n/n
+    #
+    #   resp = client.disable_policy_type({
+    #     policy_type: "SERVICE_CONTROL_POLICY", 
+    #     root_id: "r-examplerootid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     root: {
+    #       arn: "arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111", 
+    #       id: "r-examplerootid111", 
+    #       name: "Root", 
+    #       policy_types: [
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1317,6 +1836,38 @@ module Aws::Organizations
     #
     #   * {Types::EnableAllFeaturesResponse#handshake #handshake} => Types::Handshake
     #
+    #
+    # @example Example: To enable all features in an organization
+    #
+    #   # This example shows the administrator asking all the invited accounts in the organization to approve enabling all features in the organization. AWS Organizations sends an email to the address that is registered with every invited member account asking the owner to approve the change by accepting the handshake that is sent. After all invited member accounts accept the handshake, the organization administrator can finalize the change to enable all features, and those with appropriate permissions can create policies and apply them to roots, OUs, and accounts:/n/n
+    #
+    #   resp = client.enable_all_features({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "ENABLE_ALL_FEATURES", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/enable_all_features/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("2017-02-28T09:35:40.05Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("2017-02-13T09:35:40.05Z"), 
+    #       resources: [
+    #         {
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #       ], 
+    #       state: "REQUESTED", 
+    #     }, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.handshake.id #=> String
@@ -1367,6 +1918,31 @@ module Aws::Organizations
     # @return [Types::EnablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnablePolicyTypeResponse#root #root} => Types::Root
+    #
+    #
+    # @example Example: To enable a policy type in a root
+    #
+    #   # The following example shows how to enable the service control policy (SCP) policy type in a root. The output shows a root object with a PolicyTypes response element showing that SCPs are now enabled:/n/n
+    #
+    #   resp = client.enable_policy_type({
+    #     policy_type: "SERVICE_CONTROL_POLICY", 
+    #     root_id: "r-examplerootid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     root: {
+    #       arn: "arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111", 
+    #       id: "r-examplerootid111", 
+    #       name: "Root", 
+    #       policy_types: [
+    #         {
+    #           status: "ENABLED", 
+    #           type: "SERVICE_CONTROL_POLICY", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1440,6 +2016,65 @@ module Aws::Organizations
     #
     #   * {Types::InviteAccountToOrganizationResponse#handshake #handshake} => Types::Handshake
     #
+    #
+    # @example Example: To invite an account to join an organization
+    #
+    #   # The following example shows the admin of the master account owned by bill@example.com inviting the account owned by juan@example.com to join an organization.
+    #
+    #   resp = client.invite_account_to_organization({
+    #     notes: "This is a request for Juan's account to join Bill's organization", 
+    #     target: {
+    #       id: "juan@example.com", 
+    #       type: "EMAIL", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "INVITE", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("2017-02-16T09:36:05.02Z"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #         {
+    #           id: "juan@example.com", 
+    #           type: "EMAIL", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("2017-02-01T09:36:05.02Z"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MASTER_EMAIL", 
+    #               value: "bill@amazon.com", 
+    #             }, 
+    #             {
+    #               type: "MASTER_NAME", 
+    #               value: "Org Master Account", 
+    #             }, 
+    #             {
+    #               type: "ORGANIZATION_FEATURE_SET", 
+    #               value: "FULL", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "EMAIL", 
+    #           value: "juan@example.com", 
+    #         }, 
+    #       ], 
+    #       state: "OPEN", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_account_to_organization({
@@ -1504,6 +2139,14 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To leave an organization as a member account
+    #
+    #   # TThe following example shows how to remove your member account from an organization:
+    #
+    #   resp = client.leave_organization({
+    #   })
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization AWS API Documentation
     #
     # @overload leave_organization(params = {})
@@ -1542,6 +2185,56 @@ module Aws::Organizations
     #
     #   * {Types::ListAccountsResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of all of the accounts in an organization
+    #
+    #   # The following example shows you how to request a list of the accounts in an organization:
+    #
+    #   resp = client.list_accounts({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accounts: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/111111111111", 
+    #         email: "bill@example.com", 
+    #         id: "111111111111", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse("20161215T193015Z"), 
+    #         name: "Master Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/222222222222", 
+    #         email: "alice@example.com", 
+    #         id: "222222222222", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse("20161215T210221Z"), 
+    #         name: "Developer Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333", 
+    #         email: "juan@example.com", 
+    #         id: "333333333333", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse("20161215T210347Z"), 
+    #         name: "Test Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444", 
+    #         email: "anika@example.com", 
+    #         id: "444444444444", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse("20161215T210332Z"), 
+    #         name: "Production Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1604,6 +2297,39 @@ module Aws::Organizations
     #
     #   * {Types::ListAccountsForParentResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsForParentResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of all of the accounts in a root or OU
+    #
+    #   # The following example shows how to request a list of the accounts in an OU:/n/n
+    #
+    #   resp = client.list_accounts_for_parent({
+    #     parent_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accounts: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333", 
+    #         email: "juan@example.com", 
+    #         id: "333333333333", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse(1481835795.536), 
+    #         name: "Development Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/444444444444", 
+    #         email: "anika@example.com", 
+    #         id: "444444444444", 
+    #         joined_method: "INVITED", 
+    #         joined_timestamp: Time.parse(1481835812.143), 
+    #         name: "Test Account", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1683,6 +2409,30 @@ module Aws::Organizations
     #   * {Types::ListChildrenResponse#children #children} => Array&lt;Types::Child&gt;
     #   * {Types::ListChildrenResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To retrieve a list of all of the child accounts and OUs in a parent root or OU
+    #
+    #   # The following example shows how to request a list of the child OUs in a parent root or OU:/n/n
+    #
+    #   resp = client.list_children({
+    #     child_type: "ORGANIZATIONAL_UNIT", 
+    #     parent_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     children: [
+    #       {
+    #         id: "ou-examplerootid111-exampleouid111", 
+    #         type: "ORGANIZATIONAL_UNIT", 
+    #       }, 
+    #       {
+    #         id: "ou-examplerootid111-exampleouid222", 
+    #         type: "ORGANIZATIONAL_UNIT", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_children({
@@ -1741,6 +2491,53 @@ module Aws::Organizations
     #
     #   * {Types::ListCreateAccountStatusResponse#create_account_statuses #create_account_statuses} => Array&lt;Types::CreateAccountStatus&gt;
     #   * {Types::ListCreateAccountStatusResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of completed account creation requests made in the organization
+    #
+    #   # The following example shows a user requesting a list of only the completed account creation requests made for the current organization:
+    #
+    #   resp = client.list_create_account_status({
+    #     states: [
+    #       "SUCCEEDED", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_account_statuses: [
+    #       {
+    #         account_id: "444444444444", 
+    #         account_name: "Developer Test Account", 
+    #         completed_timestamp: Time.parse("2017-01-15T13:45:23.6Z"), 
+    #         id: "car-exampleaccountcreationrequestid1", 
+    #         requested_timestamp: Time.parse("2017-01-15T13:45:23.01Z"), 
+    #         state: "SUCCEEDED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To get a list of all account creation requests made in the organization
+    #
+    #   # The following example shows a user requesting a list of only the in-progress account creation requests made for the current organization:
+    #
+    #   resp = client.list_create_account_status({
+    #     states: [
+    #       "IN_PROGRESS", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_account_statuses: [
+    #       {
+    #         account_name: "Production Account", 
+    #         id: "car-exampleaccountcreationrequestid2", 
+    #         requested_timestamp: Time.parse("2017-01-15T13:45:23.01Z"), 
+    #         state: "IN_PROGRESS", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1811,6 +2608,62 @@ module Aws::Organizations
     #
     #   * {Types::ListHandshakesForAccountResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForAccountResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of the handshakes sent to an account
+    #
+    #   # The following example shows you how to get a list of handshakes that are associated with the account of the credentials used to call the operation:
+    #
+    #   resp = client.list_handshakes_for_account({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshakes: [
+    #       {
+    #         action: "INVITE", 
+    #         arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #         expiration_timestamp: Time.parse("2017-01-28T14:35:23.3Z"), 
+    #         id: "h-examplehandshakeid111", 
+    #         parties: [
+    #           {
+    #             id: "o-exampleorgid", 
+    #             type: "ORGANIZATION", 
+    #           }, 
+    #           {
+    #             id: "juan@example.com", 
+    #             type: "EMAIL", 
+    #           }, 
+    #         ], 
+    #         requested_timestamp: Time.parse("2017-01-13T14:35:23.3Z"), 
+    #         resources: [
+    #           {
+    #             resources: [
+    #               {
+    #                 type: "MASTER_EMAIL", 
+    #                 value: "bill@amazon.com", 
+    #               }, 
+    #               {
+    #                 type: "MASTER_NAME", 
+    #                 value: "Org Master Account", 
+    #               }, 
+    #               {
+    #                 type: "ORGANIZATION_FEATURE_SET", 
+    #                 value: "FULL", 
+    #               }, 
+    #             ], 
+    #             type: "ORGANIZATION", 
+    #             value: "o-exampleorgid", 
+    #           }, 
+    #           {
+    #             type: "EMAIL", 
+    #             value: "juan@example.com", 
+    #           }, 
+    #         ], 
+    #         state: "OPEN", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1893,6 +2746,104 @@ module Aws::Organizations
     #
     #   * {Types::ListHandshakesForOrganizationResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForOrganizationResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of the handshakes associated with an organization
+    #
+    #   # The following example shows you how to get a list of handshakes associated with the current organization:
+    #
+    #   resp = client.list_handshakes_for_organization({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshakes: [
+    #       {
+    #         action: "INVITE", 
+    #         arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #         expiration_timestamp: Time.parse("2017-01-28T14:35:23.3Z"), 
+    #         id: "h-examplehandshakeid111", 
+    #         parties: [
+    #           {
+    #             id: "o-exampleorgid", 
+    #             type: "ORGANIZATION", 
+    #           }, 
+    #           {
+    #             id: "juan@example.com", 
+    #             type: "EMAIL", 
+    #           }, 
+    #         ], 
+    #         requested_timestamp: Time.parse("2017-01-13T14:35:23.3Z"), 
+    #         resources: [
+    #           {
+    #             resources: [
+    #               {
+    #                 type: "MASTER_EMAIL", 
+    #                 value: "bill@amazon.com", 
+    #               }, 
+    #               {
+    #                 type: "MASTER_NAME", 
+    #                 value: "Org Master Account", 
+    #               }, 
+    #               {
+    #                 type: "ORGANIZATION_FEATURE_SET", 
+    #                 value: "FULL", 
+    #               }, 
+    #             ], 
+    #             type: "ORGANIZATION", 
+    #             value: "o-exampleorgid", 
+    #           }, 
+    #           {
+    #             type: "EMAIL", 
+    #             value: "juan@example.com", 
+    #           }, 
+    #         ], 
+    #         state: "OPEN", 
+    #       }, 
+    #       {
+    #         action: "INVITE", 
+    #         arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/invite/h-examplehandshakeid111", 
+    #         expiration_timestamp: Time.parse("2017-01-28T14:35:23.3Z"), 
+    #         id: "h-examplehandshakeid222", 
+    #         parties: [
+    #           {
+    #             id: "o-exampleorgid", 
+    #             type: "ORGANIZATION", 
+    #           }, 
+    #           {
+    #             id: "anika@example.com", 
+    #             type: "EMAIL", 
+    #           }, 
+    #         ], 
+    #         requested_timestamp: Time.parse("2017-01-13T14:35:23.3Z"), 
+    #         resources: [
+    #           {
+    #             resources: [
+    #               {
+    #                 type: "MASTER_EMAIL", 
+    #                 value: "bill@example.com", 
+    #               }, 
+    #               {
+    #                 type: "MASTER_NAME", 
+    #                 value: "Master Account", 
+    #               }, 
+    #             ], 
+    #             type: "ORGANIZATION", 
+    #             value: "o-exampleorgid", 
+    #           }, 
+    #           {
+    #             type: "EMAIL", 
+    #             value: "anika@example.com", 
+    #           }, 
+    #           {
+    #             type: "NOTES", 
+    #             value: "This is an invitation to Anika's account to join Bill's organization.", 
+    #           }, 
+    #         ], 
+    #         state: "ACCEPTED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1980,6 +2931,31 @@ module Aws::Organizations
     #   * {Types::ListOrganizationalUnitsForParentResponse#organizational_units #organizational_units} => Array&lt;Types::OrganizationalUnit&gt;
     #   * {Types::ListOrganizationalUnitsForParentResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To retrieve a list of all of the child OUs in a parent root or OU
+    #
+    #   # The following example shows how to get a list of OUs in a specified root:/n/n
+    #
+    #   resp = client.list_organizational_units_for_parent({
+    #     parent_id: "r-examplerootid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organizational_units: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examlerootid111-exampleouid111", 
+    #         id: "ou-examplerootid111-exampleouid111", 
+    #         name: "Development", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examlerootid111-exampleouid222", 
+    #         id: "ou-examplerootid111-exampleouid222", 
+    #         name: "Production", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organizational_units_for_parent({
@@ -2058,6 +3034,25 @@ module Aws::Organizations
     #   * {Types::ListParentsResponse#parents #parents} => Array&lt;Types::Parent&gt;
     #   * {Types::ListParentsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To retrieve a list of all of the parents of a child OU or account
+    #
+    #   # The following example shows how to list the root or OUs that contain account 444444444444:/n/n
+    #
+    #   resp = client.list_parents({
+    #     child_id: "444444444444", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     parents: [
+    #       {
+    #         id: "ou-examplerootid111-exampleouid111", 
+    #         type: "ORGANIZATIONAL_UNIT", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_parents({
@@ -2113,6 +3108,45 @@ module Aws::Organizations
     #
     #   * {Types::ListPoliciesResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list policies in the organization
+    #
+    #   # The following example shows how to get a list of service control policies (SCPs):/n/n
+    #
+    #   resp = client.list_policies({
+    #     filter: "SERVICE_CONTROL_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111", 
+    #         aws_managed: false, 
+    #         description: "Enables account admins to delegate permissions for any S3 actions to users and roles in their accounts.", 
+    #         id: "p-examplepolicyid111", 
+    #         name: "AllowAllS3Actions", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid222", 
+    #         aws_managed: false, 
+    #         description: "Enables account admins to delegate permissions for any EC2 actions to users and roles in their accounts.", 
+    #         id: "p-examplepolicyid222", 
+    #         name: "AllowAllEC2Actions", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::aws:policy/service_control_policy/p-FullAWSAccess", 
+    #         aws_managed: true, 
+    #         description: "Allows access to every operation", 
+    #         id: "p-FullAWSAccess", 
+    #         name: "FullAWSAccess", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2196,6 +3230,30 @@ module Aws::Organizations
     #   * {Types::ListPoliciesForTargetResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesForTargetResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To retrieve a list policies attached to a root, OU, or account
+    #
+    #   # The following example shows how to get a list of all service control policies (SCPs) of the type specified by the Filter parameter, that are directly attached to an account. The returned list does not include policies that apply to the account because of inheritance from its location in an OU hierarchy:/n/n
+    #
+    #   resp = client.list_policies_for_target({
+    #     filter: "SERVICE_CONTROL_POLICY", 
+    #     target_id: "444444444444", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid222", 
+    #         aws_managed: false, 
+    #         description: "Enables account admins to delegate permissions for any EC2 actions to users and roles in their accounts.", 
+    #         id: "p-examplepolicyid222", 
+    #         name: "AllowAllEC2Actions", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies_for_target({
@@ -2252,6 +3310,31 @@ module Aws::Organizations
     #
     #   * {Types::ListRootsResponse#roots #roots} => Array&lt;Types::Root&gt;
     #   * {Types::ListRootsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of roots in the organization
+    #
+    #   # The following example shows how to get the list of the roots in the current organization:/n/n
+    #
+    #   resp = client.list_roots({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     roots: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111", 
+    #         id: "r-examplerootid111", 
+    #         name: "Root", 
+    #         policy_types: [
+    #           {
+    #             status: "ENABLED", 
+    #             type: "SERVICE_CONTROL_POLICY", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2319,6 +3402,39 @@ module Aws::Organizations
     #
     #   * {Types::ListTargetsForPolicyResponse#targets #targets} => Array&lt;Types::PolicyTargetSummary&gt;
     #   * {Types::ListTargetsForPolicyResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To retrieve a list of roots, OUs, and accounts to which a policy is attached
+    #
+    #   # The following example shows how to get the list of roots, OUs, and accounts to which the specified policy is attached:/n/n
+    #
+    #   resp = client.list_targets_for_policy({
+    #     policy_id: "p-FullAWSAccess", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     targets: [
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:root/o-exampleorgid/r-examplerootid111", 
+    #         name: "Root", 
+    #         target_id: "r-examplerootid111", 
+    #         type: "ROOT", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:account/o-exampleorgid/333333333333;", 
+    #         name: "Developer Test Account", 
+    #         target_id: "333333333333", 
+    #         type: "ACCOUNT", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111", 
+    #         name: "Accounting", 
+    #         target_id: "ou-examplerootid111-exampleouid111", 
+    #         type: "ORGANIZATIONAL_UNIT", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2402,6 +3518,17 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To move an OU or account to another OU or the root
+    #
+    #   # The following example shows how to move a member account from the root to an OU:/n/n
+    #
+    #   resp = client.move_account({
+    #     account_id: "333333333333", 
+    #     destination_parent_id: "ou-examplerootid111-exampleouid111", 
+    #     source_parent_id: "r-examplerootid111", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.move_account({
@@ -2458,6 +3585,15 @@ module Aws::Organizations
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove an account from an organization as the master account
+    #
+    #   # The following example shows you how to remove an account from an organization:
+    #
+    #   resp = client.remove_account_from_organization({
+    #     account_id: "333333333333", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_account_from_organization({
@@ -2506,6 +3642,25 @@ module Aws::Organizations
     # @return [Types::UpdateOrganizationalUnitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOrganizationalUnitResponse#organizational_unit #organizational_unit} => Types::OrganizationalUnit
+    #
+    #
+    # @example Example: To rename an organizational unit
+    #
+    #   # The following example shows how to rename an OU. The output confirms the new name:/n/n
+    #
+    #   resp = client.update_organizational_unit({
+    #     name: "AccountingOU", 
+    #     organizational_unit_id: "ou-examplerootid111-exampleouid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organizational_unit: {
+    #       arn: "arn:aws:organizations::111111111111:ou/o-exampleorgid/ou-examplerootid111-exampleouid111", 
+    #       id: "ou-examplerootid111-exampleouid111", 
+    #       name: "AccountingOU", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2573,6 +3728,56 @@ module Aws::Organizations
     #
     #   * {Types::UpdatePolicyResponse#policy #policy} => Types::Policy
     #
+    #
+    # @example Example: To update the details of a policy
+    #
+    #   # The following example shows how to rename a policy and give it a new description and new content. The output confirms the new name and description text:/n/n
+    #
+    #   resp = client.update_policy({
+    #     description: "This description replaces the original.", 
+    #     name: "Renamed-Policy", 
+    #     policy_id: "p-examplepolicyid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       content: "{ \"Version\": \"2012-10-17\", \"Statement\": { \"Effect\": \"Allow\", \"Action\": \"ec2:*\", \"Resource\": \"*\" } }", 
+    #       policy_summary: {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111", 
+    #         aws_managed: false, 
+    #         description: "This description replaces the original.", 
+    #         id: "p-examplepolicyid111", 
+    #         name: "Renamed-Policy", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: To update the content of a policy
+    #
+    #   # The following example shows how to replace the JSON text of the SCP from the preceding example with a new JSON policy text string that allows S3 actions instead of EC2 actions:/n/n
+    #
+    #   resp = client.update_policy({
+    #     content: "{ \\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\": {\\\"Effect\\\": \\\"Allow\\\", \\\"Action\\\": \\\"s3:*\\\", \\\"Resource\\\": \\\"*\\\" } }", 
+    #     policy_id: "p-examplepolicyid111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: {
+    #       content: "{ \\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\": { \\\"Effect\\\": \\\"Allow\\\", \\\"Action\\\": \\\"s3:*\\\", \\\"Resource\\\": \\\"*\\\" } }", 
+    #       policy_summary: {
+    #         arn: "arn:aws:organizations::111111111111:policy/o-exampleorgid/service_control_policy/p-examplepolicyid111", 
+    #         aws_managed: false, 
+    #         description: "This description replaces the original.", 
+    #         id: "p-examplepolicyid111", 
+    #         name: "Renamed-Policy", 
+    #         type: "SERVICE_CONTROL_POLICY", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_policy({
@@ -2614,7 +3819,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

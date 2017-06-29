@@ -212,6 +212,22 @@ module Aws::RDS
     #
     #   * {Types::AddSourceIdentifierToSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
+    #
+    # @example Example: To add a source identifier to an event notification subscription
+    #
+    #   # This example add a source identifier to an event notification subscription.
+    #
+    #   resp = client.add_source_identifier_to_subscription({
+    #     source_identifier: "mymysqlinstance", 
+    #     subscription_name: "mymysqleventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_subscription: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_source_identifier_to_subscription({
@@ -269,6 +285,21 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to a resource
+    #
+    #   # This example adds a tag to an option group.
+    #
+    #   resp = client.add_tags_to_resource({
+    #     resource_name: "arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup", 
+    #     tags: [
+    #       {
+    #         key: "Staging", 
+    #         value: "LocationDB", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
@@ -324,6 +355,23 @@ module Aws::RDS
     # @return [Types::ApplyPendingMaintenanceActionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplyPendingMaintenanceActionResult#resource_pending_maintenance_actions #resource_pending_maintenance_actions} => Types::ResourcePendingMaintenanceActions
+    #
+    #
+    # @example Example: To apply a pending maintenance action
+    #
+    #   # This example immediately applies a pending system update to a DB instance.
+    #
+    #   resp = client.apply_pending_maintenance_action({
+    #     apply_action: "system-update", 
+    #     opt_in_type: "immediate", 
+    #     resource_identifier: "arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     resource_pending_maintenance_actions: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -403,6 +451,22 @@ module Aws::RDS
     # @return [Types::AuthorizeDBSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AuthorizeDBSecurityGroupIngressResult#db_security_group #db_security_group} => Types::DBSecurityGroup
+    #
+    #
+    # @example Example: To authorize DB security group integress
+    #
+    #   # This example authorizes access to the specified security group by the specified CIDR block.
+    #
+    #   resp = client.authorize_db_security_group_ingress({
+    #     cidrip: "203.0.113.5/32", 
+    #     db_security_group_name: "mydbsecuritygroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_security_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -486,6 +550,23 @@ module Aws::RDS
     # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyDBClusterParameterGroupResult#db_cluster_parameter_group #db_cluster_parameter_group} => Types::DBClusterParameterGroup
+    #
+    #
+    # @example Example: To copy a DB cluster parameter group
+    #
+    #   # This example copies a DB cluster parameter group.
+    #
+    #   resp = client.copy_db_cluster_parameter_group({
+    #     source_db_cluster_parameter_group_identifier: "mydbclusterparametergroup", 
+    #     target_db_cluster_parameter_group_description: "My DB cluster parameter group copy", 
+    #     target_db_cluster_parameter_group_identifier: "mydbclusterparametergroup-copy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_parameter_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -717,6 +798,22 @@ module Aws::RDS
     #
     #   * {Types::CopyDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
     #
+    #
+    # @example Example: To copy a DB cluster snapshot
+    #
+    #   # The following example copies an automated snapshot of a DB cluster to a new DB cluster snapshot.
+    #
+    #   resp = client.copy_db_cluster_snapshot({
+    #     source_db_cluster_snapshot_identifier: "rds:sample-cluster-2016-09-14-10-38", 
+    #     target_db_cluster_snapshot_identifier: "cluster-snapshot-copy-1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_snapshot: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.copy_db_cluster_snapshot({
@@ -809,6 +906,23 @@ module Aws::RDS
     # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyDBParameterGroupResult#db_parameter_group #db_parameter_group} => Types::DBParameterGroup
+    #
+    #
+    # @example Example: To copy a DB parameter group
+    #
+    #   # This example copies a DB parameter group.
+    #
+    #   resp = client.copy_db_parameter_group({
+    #     source_db_parameter_group_identifier: "mymysqlparametergroup", 
+    #     target_db_parameter_group_description: "My MySQL parameter group copy", 
+    #     target_db_parameter_group_identifier: "mymysqlparametergroup-copy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_parameter_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1000,6 +1114,22 @@ module Aws::RDS
     #
     #   * {Types::CopyDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
     #
+    #
+    # @example Example: To copy a DB snapshot
+    #
+    #   # This example copies a DB snapshot.
+    #
+    #   resp = client.copy_db_snapshot({
+    #     source_db_snapshot_identifier: "mydbsnapshot", 
+    #     target_db_snapshot_identifier: "mydbsnapshot-copy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.copy_db_snapshot({
@@ -1103,6 +1233,23 @@ module Aws::RDS
     # @return [Types::CopyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyOptionGroupResult#option_group #option_group} => Types::OptionGroup
+    #
+    #
+    # @example Example: To copy an option group
+    #
+    #   # This example copies an option group.
+    #
+    #   resp = client.copy_option_group({
+    #     source_option_group_identifier: "mymysqloptiongroup", 
+    #     target_option_group_description: "My MySQL option group copy", 
+    #     target_option_group_identifier: "mymysqloptiongroup-copy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     option_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1413,6 +1560,33 @@ module Aws::RDS
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
+    #
+    # @example Example: To create a DB cluster
+    #
+    #   # This example creates a DB cluster.
+    #
+    #   resp = client.create_db_cluster({
+    #     availability_zones: [
+    #       "us-east-1a", 
+    #     ], 
+    #     backup_retention_period: 1, 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     database_name: "myauroradb", 
+    #     engine: "aurora", 
+    #     engine_version: "5.6.10a", 
+    #     master_user_password: "mypassword", 
+    #     master_username: "myuser", 
+    #     port: 3306, 
+    #     storage_encrypted: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_cluster({
@@ -1573,6 +1747,23 @@ module Aws::RDS
     #
     #   * {Types::CreateDBClusterParameterGroupResult#db_cluster_parameter_group #db_cluster_parameter_group} => Types::DBClusterParameterGroup
     #
+    #
+    # @example Example: To create a DB cluster parameter group
+    #
+    #   # This example creates a DB cluster parameter group.
+    #
+    #   resp = client.create_db_cluster_parameter_group({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     db_parameter_group_family: "aurora5.6", 
+    #     description: "My DB cluster parameter group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_parameter_group: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_cluster_parameter_group({
@@ -1644,6 +1835,22 @@ module Aws::RDS
     # @return [Types::CreateDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
+    #
+    #
+    # @example Example: To create a DB cluster snapshot
+    #
+    #   # This example creates a DB cluster snapshot.
+    #
+    #   resp = client.create_db_cluster_snapshot({
+    #     db_cluster_identifier: "mydbcluster", 
+    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_snapshot: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2457,6 +2664,26 @@ module Aws::RDS
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
+    #
+    # @example Example: To create a DB instance.
+    #
+    #   # This example creates a DB instance.
+    #
+    #   resp = client.create_db_instance({
+    #     allocated_storage: 5, 
+    #     db_instance_class: "db.t2.micro", 
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     engine: "MySQL", 
+    #     master_user_password: "MyPassword", 
+    #     master_username: "MyUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_instance({
@@ -2949,6 +3176,33 @@ module Aws::RDS
     #
     #   * {Types::CreateDBInstanceReadReplicaResult#db_instance #db_instance} => Types::DBInstance
     #
+    #
+    # @example Example: To create a DB instance read replica.
+    #
+    #   # This example creates a DB instance read replica.
+    #
+    #   resp = client.create_db_instance_read_replica({
+    #     availability_zone: "us-east-1a", 
+    #     copy_tags_to_snapshot: true, 
+    #     db_instance_class: "db.t2.micro", 
+    #     db_instance_identifier: "mydbreadreplica", 
+    #     publicly_accessible: true, 
+    #     source_db_instance_identifier: "mymysqlinstance", 
+    #     storage_type: "gp2", 
+    #     tags: [
+    #       {
+    #         key: "mydbreadreplicakey", 
+    #         value: "mydbreadreplicavalue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_instance_read_replica({
@@ -3138,6 +3392,23 @@ module Aws::RDS
     #
     #   * {Types::CreateDBParameterGroupResult#db_parameter_group #db_parameter_group} => Types::DBParameterGroup
     #
+    #
+    # @example Example: To create a DB parameter group.
+    #
+    #   # This example creates a DB parameter group.
+    #
+    #   resp = client.create_db_parameter_group({
+    #     db_parameter_group_family: "mysql5.6", 
+    #     db_parameter_group_name: "mymysqlparametergroup", 
+    #     description: "My MySQL parameter group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_parameter_group: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_parameter_group({
@@ -3196,6 +3467,22 @@ module Aws::RDS
     # @return [Types::CreateDBSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBSecurityGroupResult#db_security_group #db_security_group} => Types::DBSecurityGroup
+    #
+    #
+    # @example Example: To create a DB security group.
+    #
+    #   # This example creates a DB security group.
+    #
+    #   resp = client.create_db_security_group({
+    #     db_security_group_description: "My DB security group", 
+    #     db_security_group_name: "mydbsecuritygroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_security_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3272,6 +3559,22 @@ module Aws::RDS
     #
     #   * {Types::CreateDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
     #
+    #
+    # @example Example: To create a DB snapshot.
+    #
+    #   # This example creates a DB snapshot.
+    #
+    #   resp = client.create_db_snapshot({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     db_snapshot_identifier: "mydbsnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_snapshot({
@@ -3347,6 +3650,26 @@ module Aws::RDS
     # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
+    #
+    #
+    # @example Example: To create a DB subnet group.
+    #
+    #   # This example creates a DB subnet group.
+    #
+    #   resp = client.create_db_subnet_group({
+    #     db_subnet_group_description: "My DB subnet group", 
+    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #     subnet_ids: [
+    #       "subnet-1fab8a69", 
+    #       "subnet-d43a468c", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_subnet_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3468,6 +3791,30 @@ module Aws::RDS
     #
     #   * {Types::CreateEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
+    #
+    # @example Example: To create an event notification subscription
+    #
+    #   # This example creates an event notification subscription.
+    #
+    #   resp = client.create_event_subscription({
+    #     enabled: true, 
+    #     event_categories: [
+    #       "availability", 
+    #     ], 
+    #     sns_topic_arn: "arn:aws:sns:us-east-1:992648334831:MyDemoSNSTopic", 
+    #     source_ids: [
+    #       "mymysqlinstance", 
+    #     ], 
+    #     source_type: "db-instance", 
+    #     subscription_name: "mymysqleventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_subscription: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_event_subscription({
@@ -3541,6 +3888,24 @@ module Aws::RDS
     # @return [Types::CreateOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOptionGroupResult#option_group #option_group} => Types::OptionGroup
+    #
+    #
+    # @example Example: To create an option group
+    #
+    #   # This example creates an option group.
+    #
+    #   resp = client.create_option_group({
+    #     engine_name: "MySQL", 
+    #     major_engine_version: "5.6", 
+    #     option_group_description: "My MySQL 5.6 option group", 
+    #     option_group_name: "mymysqloptiongroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     option_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3659,6 +4024,22 @@ module Aws::RDS
     #
     #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
+    #
+    # @example Example: To delete a DB cluster.
+    #
+    #   # This example deletes the specified DB cluster.
+    #
+    #   resp = client.delete_db_cluster({
+    #     db_cluster_identifier: "mydbcluster", 
+    #     skip_final_snapshot: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_cluster({
@@ -3750,6 +4131,15 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a DB cluster parameter group.
+    #
+    #   # This example deletes the specified DB cluster parameter group.
+    #
+    #   resp = client.delete_db_cluster_parameter_group({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_cluster_parameter_group({
@@ -3789,6 +4179,21 @@ module Aws::RDS
     # @return [Types::DeleteDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
+    #
+    #
+    # @example Example: To delete a DB cluster snapshot.
+    #
+    #   # This example deletes the specified DB cluster snapshot.
+    #
+    #   resp = client.delete_db_cluster_snapshot({
+    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_snapshot: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3913,6 +4318,22 @@ module Aws::RDS
     # @return [Types::DeleteDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBInstanceResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To delete a DB instance.
+    #
+    #   # This example deletes the specified DB instance.
+    #
+    #   resp = client.delete_db_instance({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     skip_final_snapshot: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4039,6 +4460,15 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a DB parameter group
+    #
+    #   # The following example deletes a DB parameter group.
+    #
+    #   resp = client.delete_db_parameter_group({
+    #     db_parameter_group_name: "mydbparamgroup3", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_parameter_group({
@@ -4080,6 +4510,15 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a DB security group
+    #
+    #   # The following example deletes a DB security group.
+    #
+    #   resp = client.delete_db_security_group({
+    #     db_security_group_name: "mysecgroup", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_security_group({
@@ -4111,6 +4550,21 @@ module Aws::RDS
     # @return [Types::DeleteDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
+    #
+    #
+    # @example Example: To delete a DB cluster snapshot.
+    #
+    #   # This example deletes the specified DB snapshot.
+    #
+    #   resp = client.delete_db_snapshot({
+    #     db_snapshot_identifier: "mydbsnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4179,6 +4633,15 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a DB subnet group.
+    #
+    #   # This example deletes the specified DB subnetgroup.
+    #
+    #   resp = client.delete_db_subnet_group({
+    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_subnet_group({
@@ -4203,6 +4666,21 @@ module Aws::RDS
     # @return [Types::DeleteEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    #
+    # @example Example: To delete a DB event subscription.
+    #
+    #   # This example deletes the specified DB event subscription.
+    #
+    #   resp = client.delete_event_subscription({
+    #     subscription_name: "myeventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_subscription: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4245,6 +4723,15 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an option group.
+    #
+    #   # This example deletes the specified option group.
+    #
+    #   resp = client.delete_option_group({
+    #     option_group_name: "mydboptiongroup", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_option_group({
@@ -4270,6 +4757,18 @@ module Aws::RDS
     # @return [Types::AccountAttributesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AccountAttributesMessage#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
+    #
+    #
+    # @example Example: To list account attributes
+    #
+    #   # This example lists account attributes.
+    #
+    #   resp = client.describe_account_attributes({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Response structure
     #
@@ -4326,6 +4825,20 @@ module Aws::RDS
     #
     #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::CertificateMessage#marker #marker} => String
+    #
+    #
+    # @example Example: To list certificates
+    #
+    #   # This example lists up to 20 certificates for the specified certificate identifier.
+    #
+    #   resp = client.describe_certificates({
+    #     certificate_identifier: "rds-ca-2015", 
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4409,6 +4922,19 @@ module Aws::RDS
     #   * {Types::DBClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #db_cluster_parameter_groups} => Array&lt;Types::DBClusterParameterGroup&gt;
     #
+    #
+    # @example Example: To list DB cluster parameter group settings
+    #
+    #   # This example lists settings for the specified DB cluster parameter group.
+    #
+    #   resp = client.describe_db_cluster_parameter_groups({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_parameter_groups({
@@ -4491,6 +5017,20 @@ module Aws::RDS
     #   * {Types::DBClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBClusterParameterGroupDetails#marker #marker} => String
     #
+    #
+    # @example Example: To list DB cluster parameters
+    #
+    #   # This example lists system parameters for the specified DB cluster parameter group.
+    #
+    #   resp = client.describe_db_cluster_parameters({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     source: "system", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_parameters({
@@ -4551,6 +5091,21 @@ module Aws::RDS
     # @return [Types::DescribeDBClusterSnapshotAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDBClusterSnapshotAttributesResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
+    #
+    #
+    # @example Example: To list DB cluster snapshot attributes
+    #
+    #   # This example lists attributes for the specified DB cluster snapshot.
+    #
+    #   resp = client.describe_db_cluster_snapshot_attributes({
+    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_snapshot_attributes_result: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4686,6 +5241,20 @@ module Aws::RDS
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
     #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #db_cluster_snapshots} => Array&lt;Types::DBClusterSnapshot&gt;
     #
+    #
+    # @example Example: To list DB cluster snapshots
+    #
+    #   # This example lists settings for the specified, manually-created cluster snapshot.
+    #
+    #   resp = client.describe_db_cluster_snapshots({
+    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #     snapshot_type: "manual", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_snapshots({
@@ -4792,6 +5361,19 @@ module Aws::RDS
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
     #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
+    #
+    #
+    # @example Example: To list DB clusters
+    #
+    #   # This example lists settings for the specified DB cluster.
+    #
+    #   resp = client.describe_db_clusters({
+    #     db_cluster_identifier: "mynewdbcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4927,6 +5509,23 @@ module Aws::RDS
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
     #
+    #
+    # @example Example: To list DB engine version settings
+    #
+    #   # This example lists settings for the specified DB engine version.
+    #
+    #   resp = client.describe_db_engine_versions({
+    #     db_parameter_group_family: "mysql5.6", 
+    #     default_only: true, 
+    #     engine: "mysql", 
+    #     engine_version: "5.6", 
+    #     list_supported_character_sets: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_engine_versions({
@@ -5028,6 +5627,19 @@ module Aws::RDS
     #
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
+    #
+    #
+    # @example Example: To list DB instance settings
+    #
+    #   # This example lists settings for the specified DB instance.
+    #
+    #   resp = client.describe_db_instances({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5191,6 +5803,22 @@ module Aws::RDS
     #   * {Types::DescribeDBLogFilesResponse#describe_db_log_files #describe_db_log_files} => Array&lt;Types::DescribeDBLogFilesDetails&gt;
     #   * {Types::DescribeDBLogFilesResponse#marker #marker} => String
     #
+    #
+    # @example Example: To list DB log file names
+    #
+    #   # This example lists matching log file names for the specified DB instance, file name pattern, last write date in POSIX time with milleseconds, and minimum file size.
+    #
+    #   resp = client.describe_db_log_files({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     file_last_written: 1470873600000, 
+    #     file_size: 0, 
+    #     filename_contains: "error", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_log_files({
@@ -5263,6 +5891,19 @@ module Aws::RDS
     #
     #   * {Types::DBParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
+    #
+    #
+    # @example Example: To list information about DB parameter groups
+    #
+    #   # This example lists information about the specified DB parameter group.
+    #
+    #   resp = client.describe_db_parameter_groups({
+    #     db_parameter_group_name: "mymysqlparametergroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5341,6 +5982,21 @@ module Aws::RDS
     #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBParameterGroupDetails#marker #marker} => String
     #
+    #
+    # @example Example: To list information about DB parameters
+    #
+    #   # This example lists information for up to the first 20 system parameters for the specified DB parameter group.
+    #
+    #   resp = client.describe_db_parameters({
+    #     db_parameter_group_name: "mymysqlparametergroup", 
+    #     max_records: 20, 
+    #     source: "system", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_parameters({
@@ -5411,6 +6067,19 @@ module Aws::RDS
     #   * {Types::DBSecurityGroupMessage#marker #marker} => String
     #   * {Types::DBSecurityGroupMessage#db_security_groups #db_security_groups} => Array&lt;Types::DBSecurityGroup&gt;
     #
+    #
+    # @example Example: To list DB security group settings
+    #
+    #   # This example lists settings for the specified security group.
+    #
+    #   resp = client.describe_db_security_groups({
+    #     db_security_group_name: "mydbsecuritygroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_security_groups({
@@ -5472,6 +6141,21 @@ module Aws::RDS
     # @return [Types::DescribeDBSnapshotAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDBSnapshotAttributesResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
+    #
+    #
+    # @example Example: To list DB snapshot attributes
+    #
+    #   # This example lists attributes for the specified DB snapshot.
+    #
+    #   resp = client.describe_db_snapshot_attributes({
+    #     db_snapshot_identifier: "mydbsnapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot_attributes_result: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5598,6 +6282,22 @@ module Aws::RDS
     #   * {Types::DBSnapshotMessage#marker #marker} => String
     #   * {Types::DBSnapshotMessage#db_snapshots #db_snapshots} => Array&lt;Types::DBSnapshot&gt;
     #
+    #
+    # @example Example: To list DB snapshot attributes
+    #
+    #   # This example lists all manually-created, shared snapshots for the specified DB instance.
+    #
+    #   resp = client.describe_db_snapshots({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     include_public: false, 
+    #     include_shared: true, 
+    #     snapshot_type: "manual", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_snapshots({
@@ -5693,6 +6393,19 @@ module Aws::RDS
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
     #
+    #
+    # @example Example: To list information about DB subnet groups
+    #
+    #   # This example lists information about the specified DB subnet group.
+    #
+    #   resp = client.describe_db_subnet_groups({
+    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_subnet_groups({
@@ -5767,6 +6480,21 @@ module Aws::RDS
     #
     #   * {Types::DescribeEngineDefaultClusterParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    #
+    # @example Example: To list default parameters for a DB cluster engine
+    #
+    #   # This example lists default parameters for the specified DB cluster engine.
+    #
+    #   resp = client.describe_engine_default_cluster_parameters({
+    #     db_parameter_group_family: "aurora5.6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engine_defaults: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_default_cluster_parameters({
@@ -5835,6 +6563,21 @@ module Aws::RDS
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    #
+    # @example Example: To list default parameters for a DB engine
+    #
+    #   # This example lists default parameters for the specified DB engine.
+    #
+    #   resp = client.describe_engine_default_parameters({
+    #     db_parameter_group_family: "mysql5.6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engine_defaults: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_default_parameters({
@@ -5895,6 +6638,19 @@ module Aws::RDS
     # @return [Types::EventCategoriesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventCategoriesMessage#event_categories_map_list #event_categories_map_list} => Array&lt;Types::EventCategoriesMap&gt;
+    #
+    #
+    # @example Example: To list event categories.
+    #
+    #   # This example lists all DB instance event categories.
+    #
+    #   resp = client.describe_event_categories({
+    #     source_type: "db-instance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5958,6 +6714,19 @@ module Aws::RDS
     #
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
+    #
+    #
+    # @example Example: To list information about DB event notification subscriptions
+    #
+    #   # This example lists information for the specified DB event notification subscription.
+    #
+    #   resp = client.describe_event_subscriptions({
+    #     subscription_name: "mymysqleventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6085,6 +6854,24 @@ module Aws::RDS
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    #
+    # @example Example: To list information about events
+    #
+    #   # This example lists information for all backup-related events for the specified DB instance for the past 7 days (7 days * 24 hours * 60 minutes = 10,080 minutes).
+    #
+    #   resp = client.describe_events({
+    #     duration: 10080, 
+    #     event_categories: [
+    #       "backup", 
+    #     ], 
+    #     source_identifier: "mymysqlinstance", 
+    #     source_type: "db-instance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -6157,6 +6944,20 @@ module Aws::RDS
     #
     #   * {Types::OptionGroupOptionsMessage#option_group_options #option_group_options} => Array&lt;Types::OptionGroupOption&gt;
     #   * {Types::OptionGroupOptionsMessage#marker #marker} => String
+    #
+    #
+    # @example Example: To list information about DB option group options
+    #
+    #   # This example lists information for all option group options for the specified DB engine.
+    #
+    #   resp = client.describe_option_group_options({
+    #     engine_name: "mysql", 
+    #     major_engine_version: "5.6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6248,6 +7049,20 @@ module Aws::RDS
     #
     #   * {Types::OptionGroups#option_groups_list #option_groups_list} => Array&lt;Types::OptionGroup&gt;
     #   * {Types::OptionGroups#marker #marker} => String
+    #
+    #
+    # @example Example: To list information about DB option groups
+    #
+    #   # This example lists information for all option groups for the specified DB engine.
+    #
+    #   resp = client.describe_option_groups({
+    #     engine_name: "mysql", 
+    #     major_engine_version: "5.6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6355,6 +7170,23 @@ module Aws::RDS
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
     #
+    #
+    # @example Example: To list information about orderable DB instance options
+    #
+    #   # This example lists information for all orderable DB instance options for the specified DB engine, engine version, DB instance class, license model, and VPC settings.
+    #
+    #   resp = client.describe_orderable_db_instance_options({
+    #     db_instance_class: "db.t2.micro", 
+    #     engine: "mysql", 
+    #     engine_version: "5.6.27", 
+    #     license_model: "general-public-license", 
+    #     vpc: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_orderable_db_instance_options({
@@ -6442,6 +7274,19 @@ module Aws::RDS
     #
     #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
     #   * {Types::PendingMaintenanceActionsMessage#marker #marker} => String
+    #
+    #
+    # @example Example: To list information about pending maintenance actions
+    #
+    #   # This example lists information for all pending maintenance actions for the specified DB instance.
+    #
+    #   resp = client.describe_pending_maintenance_actions({
+    #     resource_identifier: "arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6538,6 +7383,23 @@ module Aws::RDS
     #
     #   * {Types::ReservedDBInstanceMessage#marker #marker} => String
     #   * {Types::ReservedDBInstanceMessage#reserved_db_instances #reserved_db_instances} => Array&lt;Types::ReservedDBInstance&gt;
+    #
+    #
+    # @example Example: To list information about reserved DB instances
+    #
+    #   # This example lists information for all reserved DB instances for the specified DB instance class, duration, product, offering type, and availability zone settings.
+    #
+    #   resp = client.describe_reserved_db_instances({
+    #     db_instance_class: "db.t2.micro", 
+    #     duration: "1y", 
+    #     multi_az: false, 
+    #     offering_type: "No Upfront", 
+    #     product_description: "mysql", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6646,6 +7508,23 @@ module Aws::RDS
     #   * {Types::ReservedDBInstancesOfferingMessage#marker #marker} => String
     #   * {Types::ReservedDBInstancesOfferingMessage#reserved_db_instances_offerings #reserved_db_instances_offerings} => Array&lt;Types::ReservedDBInstancesOffering&gt;
     #
+    #
+    # @example Example: To list information about reserved DB instance offerings
+    #
+    #   # This example lists information for all reserved DB instance offerings for the specified DB instance class, duration, product, offering type, and availability zone settings.
+    #
+    #   resp = client.describe_reserved_db_instances_offerings({
+    #     db_instance_class: "db.t2.micro", 
+    #     duration: "1y", 
+    #     multi_az: false, 
+    #     offering_type: "No Upfront", 
+    #     product_description: "mysql", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_db_instances_offerings({
@@ -6727,6 +7606,70 @@ module Aws::RDS
     #
     #   * {Types::SourceRegionMessage#marker #marker} => String
     #   * {Types::SourceRegionMessage#source_regions #source_regions} => Array&lt;Types::SourceRegion&gt;
+    #
+    #
+    # @example Example: To describe source regions
+    #
+    #   # To list the AWS regions where a Read Replica can be created.
+    #
+    #   resp = client.describe_source_regions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     source_regions: [
+    #       {
+    #         endpoint: "https://rds.ap-northeast-1.amazonaws.com", 
+    #         region_name: "ap-northeast-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-northeast-2.amazonaws.com", 
+    #         region_name: "ap-northeast-2", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-south-1.amazonaws.com", 
+    #         region_name: "ap-south-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-southeast-1.amazonaws.com", 
+    #         region_name: "ap-southeast-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-southeast-2.amazonaws.com", 
+    #         region_name: "ap-southeast-2", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-central-1.amazonaws.com", 
+    #         region_name: "eu-central-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-west-1.amazonaws.com", 
+    #         region_name: "eu-west-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.sa-east-1.amazonaws.com", 
+    #         region_name: "sa-east-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.us-west-1.amazonaws.com", 
+    #         region_name: "us-west-1", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.us-west-2.amazonaws.com", 
+    #         region_name: "us-west-2", 
+    #         status: "available", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6814,6 +7757,20 @@ module Aws::RDS
     #   * {Types::DownloadDBLogFilePortionDetails#marker #marker} => String
     #   * {Types::DownloadDBLogFilePortionDetails#additional_data_pending #additional_data_pending} => Boolean
     #
+    #
+    # @example Example: To list information about DB log files
+    #
+    #   # This example lists information for the specified log file for the specified DB instance.
+    #
+    #   resp = client.download_db_log_file_portion({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     log_file_name: "mysqlUpgrade", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.download_db_log_file_portion({
@@ -6879,6 +7836,22 @@ module Aws::RDS
     # @return [Types::FailoverDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FailoverDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    #
+    # @example Example: To perform a failover for a DB cluster
+    #
+    #   # This example performs a failover for the specified DB cluster to the specified DB instance.
+    #
+    #   resp = client.failover_db_cluster({
+    #     db_cluster_identifier: "myaurorainstance-cluster", 
+    #     target_db_instance_identifier: "myaurorareplica", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6970,6 +7943,19 @@ module Aws::RDS
     # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To list information about tags associated with a resource
+    #
+    #   # This example lists information about all tags associated with the specified DB option group.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_name: "arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7151,6 +8137,26 @@ module Aws::RDS
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
+    #
+    # @example Example: To change DB cluster settings
+    #
+    #   # This example changes the specified settings for the specified DB cluster.
+    #
+    #   resp = client.modify_db_cluster({
+    #     apply_immediately: true, 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     master_user_password: "mynewpassword", 
+    #     new_db_cluster_identifier: "mynewdbcluster", 
+    #     preferred_backup_window: "04:00-04:30", 
+    #     preferred_maintenance_window: "Tue:05:00-Tue:05:30", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_cluster({
@@ -7268,6 +8274,26 @@ module Aws::RDS
     #
     #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
     #
+    #
+    # @example Example: To change DB cluster parameter group settings
+    #
+    #   # This example immediately changes the specified setting for the specified DB cluster parameter group.
+    #
+    #   resp = client.modify_db_cluster_parameter_group({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     parameters: [
+    #       {
+    #         apply_method: "immediate", 
+    #         parameter_name: "time_zone", 
+    #         parameter_value: "America/Phoenix", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_cluster_parameter_group({
@@ -7356,6 +8382,29 @@ module Aws::RDS
     # @return [Types::ModifyDBClusterSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterSnapshotAttributeResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
+    #
+    #
+    # @example Example: To add or remove access to a manual DB cluster snapshot
+    #
+    #   # The following example gives two AWS accounts access to a manual DB cluster snapshot and ensures that the DB cluster snapshot is private by removing the value "all".
+    #
+    #   resp = client.modify_db_cluster_snapshot_attribute({
+    #     attribute_name: "restore", 
+    #     db_cluster_snapshot_identifier: "manual-cluster-snapshot1", 
+    #     values_to_add: [
+    #       "123451234512", 
+    #       "123456789012", 
+    #     ], 
+    #     values_to_remove: [
+    #       "all", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_snapshot_attributes_result: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7932,6 +8981,28 @@ module Aws::RDS
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
+    #
+    # @example Example: To change DB instance settings
+    #
+    #   # This example immediately changes the specified settings for the specified DB instance.
+    #
+    #   resp = client.modify_db_instance({
+    #     allocated_storage: 10, 
+    #     apply_immediately: true, 
+    #     backup_retention_period: 1, 
+    #     db_instance_class: "db.t2.small", 
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     master_user_password: "mynewpassword", 
+    #     preferred_backup_window: "04:00-04:30", 
+    #     preferred_maintenance_window: "Tue:05:00-Tue:05:30", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_instance({
@@ -8131,6 +9202,26 @@ module Aws::RDS
     #
     #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
     #
+    #
+    # @example Example: To change DB parameter group settings
+    #
+    #   # This example immediately changes the specified setting for the specified DB parameter group.
+    #
+    #   resp = client.modify_db_parameter_group({
+    #     db_parameter_group_name: "mymysqlparametergroup", 
+    #     parameters: [
+    #       {
+    #         apply_method: "immediate", 
+    #         parameter_name: "time_zone", 
+    #         parameter_value: "America/Phoenix", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_parameter_group({
@@ -8279,6 +9370,25 @@ module Aws::RDS
     #
     #   * {Types::ModifyDBSnapshotAttributeResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
     #
+    #
+    # @example Example: To change DB snapshot attributes
+    #
+    #   # This example adds the specified attribute for the specified DB snapshot.
+    #
+    #   resp = client.modify_db_snapshot_attribute({
+    #     attribute_name: "restore", 
+    #     db_snapshot_identifier: "mydbsnapshot", 
+    #     values_to_add: [
+    #       "all", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot_attributes_result: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_snapshot_attribute({
@@ -8326,6 +9436,25 @@ module Aws::RDS
     # @return [Types::ModifyDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
+    #
+    #
+    # @example Example: To change DB subnet group settings
+    #
+    #   # This example changes the specified setting for the specified DB subnet group.
+    #
+    #   resp = client.modify_db_subnet_group({
+    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #     subnet_ids: [
+    #       "subnet-70e1975a", 
+    #       "subnet-747a5c49", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_subnet_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8404,6 +9533,27 @@ module Aws::RDS
     #
     #   * {Types::ModifyEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
+    #
+    # @example Example: To change event notification subscription settings
+    #
+    #   # This example changes the specified setting for the specified event notification subscription.
+    #
+    #   resp = client.modify_event_subscription({
+    #     enabled: true, 
+    #     event_categories: [
+    #       "deletion", 
+    #       "low storage", 
+    #     ], 
+    #     source_type: "db-instance", 
+    #     subscription_name: "mymysqleventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_subscription: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_event_subscription({
@@ -8464,6 +9614,30 @@ module Aws::RDS
     # @return [Types::ModifyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyOptionGroupResult#option_group #option_group} => Types::OptionGroup
+    #
+    #
+    # @example Example: To modify an option group
+    #
+    #   # The following example adds an option to an option group.
+    #
+    #   resp = client.modify_option_group({
+    #     apply_immediately: true, 
+    #     option_group_name: "myawsuser-og02", 
+    #     options_to_include: [
+    #       {
+    #         db_security_group_memberships: [
+    #           "default", 
+    #         ], 
+    #         option_name: "MEMCACHED", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     option_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8601,6 +9775,23 @@ module Aws::RDS
     # @return [Types::PromoteReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PromoteReadReplicaResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To promote a read replica
+    #
+    #   # This example promotes the specified read replica and sets its backup retention period and preferred backup window.
+    #
+    #   resp = client.promote_read_replica({
+    #     backup_retention_period: 1, 
+    #     db_instance_identifier: "mydbreadreplica", 
+    #     preferred_backup_window: "03:30-04:00", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8820,6 +10011,22 @@ module Aws::RDS
     #
     #   * {Types::PurchaseReservedDBInstancesOfferingResult#reserved_db_instance #reserved_db_instance} => Types::ReservedDBInstance
     #
+    #
+    # @example Example: To purchase a reserved DB instance offering
+    #
+    #   # This example purchases a reserved DB instance offering that matches the specified settings.
+    #
+    #   resp = client.purchase_reserved_db_instances_offering({
+    #     reserved_db_instance_id: "myreservationid", 
+    #     reserved_db_instances_offering_id: "fb29428a-646d-4390-850e-5fe89926e727", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     reserved_db_instance: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_reserved_db_instances_offering({
@@ -8904,6 +10111,22 @@ module Aws::RDS
     # @return [Types::RebootDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RebootDBInstanceResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To reboot a DB instance
+    #
+    #   # This example reboots the specified DB instance without forcing a failover.
+    #
+    #   resp = client.reboot_db_instance({
+    #     db_instance_identifier: "mymysqlinstance", 
+    #     force_failover: false, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9063,6 +10286,22 @@ module Aws::RDS
     #
     #   * {Types::RemoveSourceIdentifierFromSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
+    #
+    # @example Example: To remove a source identifier from a DB event subscription
+    #
+    #   # This example removes the specified source identifier from the specified DB event subscription.
+    #
+    #   resp = client.remove_source_identifier_from_subscription({
+    #     source_identifier: "mymysqlinstance", 
+    #     subscription_name: "myeventsubscription", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_subscription: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_source_identifier_from_subscription({
@@ -9117,6 +10356,18 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove tags from a resource
+    #
+    #   # This example removes the specified tag associated with the specified DB option group.
+    #
+    #   resp = client.remove_tags_from_resource({
+    #     resource_name: "arn:aws:rds:us-east-1:992648334831:og:mydboptiongroup", 
+    #     tag_keys: [
+    #       "MyKey", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
@@ -9169,6 +10420,20 @@ module Aws::RDS
     # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
+    #
+    #
+    # @example Example: To reset the values of a DB cluster parameter group
+    #
+    #   # This example resets all parameters for the specified DB cluster parameter group to their default values.
+    #
+    #   resp = client.reset_db_cluster_parameter_group({
+    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     reset_all_parameters: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9260,6 +10525,20 @@ module Aws::RDS
     # @return [Types::DBParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
+    #
+    #
+    # @example Example: To reset the values of a DB parameter group
+    #
+    #   # This example resets all parameters for the specified DB parameter group to their default values.
+    #
+    #   resp = client.reset_db_parameter_group({
+    #     db_parameter_group_name: "mydbparametergroup", 
+    #     reset_all_parameters: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9716,6 +10995,23 @@ module Aws::RDS
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
     #
+    #
+    # @example Example: To restore an Amazon Aurora DB cluster from a DB cluster snapshot
+    #
+    #   # The following example restores an Amazon Aurora DB cluster from a DB cluster snapshot.
+    #
+    #   resp = client.restore_db_cluster_from_snapshot({
+    #     db_cluster_identifier: "restored-cluster1", 
+    #     engine: "aurora", 
+    #     snapshot_identifier: "sample-cluster-snapshot1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_db_cluster_from_snapshot({
@@ -9942,6 +11238,23 @@ module Aws::RDS
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    #
+    # @example Example: To restore a DB cluster to a point in time.
+    #
+    #   # The following example restores a DB cluster to a new DB cluster at a point in time from the source DB cluster.
+    #
+    #   resp = client.restore_db_cluster_to_point_in_time({
+    #     db_cluster_identifier: "sample-restored-cluster1", 
+    #     restore_to_time: Time.parse("2016-09-13T18:45:00Z"), 
+    #     source_db_cluster_identifier: "sample-cluster1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10246,6 +11559,101 @@ module Aws::RDS
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To restore a DB instance from a DB snapshot.
+    #
+    #   # The following example restores a DB instance from a DB snapshot.
+    #
+    #   resp = client.restore_db_instance_from_db_snapshot({
+    #     db_instance_identifier: "mysqldb-restored", 
+    #     db_snapshot_identifier: "rds:mysqldb-2014-04-22-08-15", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #       allocated_storage: 200, 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zone: "us-west-2b", 
+    #       backup_retention_period: 7, 
+    #       ca_certificate_identifier: "rds-ca-2015", 
+    #       copy_tags_to_snapshot: false, 
+    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:mysqldb-restored", 
+    #       db_instance_class: "db.t2.small", 
+    #       db_instance_identifier: "mysqldb-restored", 
+    #       db_instance_status: "available", 
+    #       db_name: "sample", 
+    #       db_parameter_groups: [
+    #         {
+    #           db_parameter_group_name: "default.mysql5.6", 
+    #           parameter_apply_status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       db_security_groups: [
+    #       ], 
+    #       db_subnet_group: {
+    #         db_subnet_group_description: "default", 
+    #         db_subnet_group_name: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2a", 
+    #             }, 
+    #             subnet_identifier: "subnet-77e8db03", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2b", 
+    #             }, 
+    #             subnet_identifier: "subnet-c39989a1", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2c", 
+    #             }, 
+    #             subnet_identifier: "subnet-4b267b0d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-c1c5b3a3", 
+    #       }, 
+    #       db_instance_port: 0, 
+    #       dbi_resource_id: "db-VNZUCCBTEDC4WR7THXNJO72HVQ", 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "mysql", 
+    #       engine_version: "5.6.27", 
+    #       license_model: "general-public-license", 
+    #       master_username: "mymasteruser", 
+    #       monitoring_interval: 0, 
+    #       multi_az: false, 
+    #       option_group_memberships: [
+    #         {
+    #           option_group_name: "default:mysql-5-6", 
+    #           status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_backup_window: "12:58-13:28", 
+    #       preferred_maintenance_window: "tue:10:16-tue:10:46", 
+    #       publicly_accessible: true, 
+    #       read_replica_db_instance_identifiers: [
+    #       ], 
+    #       storage_encrypted: false, 
+    #       storage_type: "gp2", 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-e5e5b0d2", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -10607,6 +12015,102 @@ module Aws::RDS
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
     #
+    #
+    # @example Example: To restore a DB instance to a point in time.
+    #
+    #   # The following example restores a DB instance to a new DB instance at a point in time from the source DB instance.
+    #
+    #   resp = client.restore_db_instance_to_point_in_time({
+    #     restore_time: Time.parse("2016-09-13T18:45:00Z"), 
+    #     source_db_instance_identifier: "mysql-sample", 
+    #     target_db_instance_identifier: "mysql-sample-restored", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #       allocated_storage: 200, 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zone: "us-west-2b", 
+    #       backup_retention_period: 7, 
+    #       ca_certificate_identifier: "rds-ca-2015", 
+    #       copy_tags_to_snapshot: false, 
+    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:mysql-sample-restored", 
+    #       db_instance_class: "db.t2.small", 
+    #       db_instance_identifier: "mysql-sample-restored", 
+    #       db_instance_status: "available", 
+    #       db_name: "sample", 
+    #       db_parameter_groups: [
+    #         {
+    #           db_parameter_group_name: "default.mysql5.6", 
+    #           parameter_apply_status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       db_security_groups: [
+    #       ], 
+    #       db_subnet_group: {
+    #         db_subnet_group_description: "default", 
+    #         db_subnet_group_name: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2a", 
+    #             }, 
+    #             subnet_identifier: "subnet-77e8db03", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2b", 
+    #             }, 
+    #             subnet_identifier: "subnet-c39989a1", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2c", 
+    #             }, 
+    #             subnet_identifier: "subnet-4b267b0d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-c1c5b3a3", 
+    #       }, 
+    #       db_instance_port: 0, 
+    #       dbi_resource_id: "db-VNZUCCBTEDC4WR7THXNJO72HVQ", 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "mysql", 
+    #       engine_version: "5.6.27", 
+    #       license_model: "general-public-license", 
+    #       master_username: "mymasteruser", 
+    #       monitoring_interval: 0, 
+    #       multi_az: false, 
+    #       option_group_memberships: [
+    #         {
+    #           option_group_name: "default:mysql-5-6", 
+    #           status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_backup_window: "12:58-13:28", 
+    #       preferred_maintenance_window: "tue:10:16-tue:10:46", 
+    #       publicly_accessible: true, 
+    #       read_replica_db_instance_identifiers: [
+    #       ], 
+    #       storage_encrypted: false, 
+    #       storage_type: "gp2", 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-e5e5b0d2", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_db_instance_to_point_in_time({
@@ -10779,6 +12283,22 @@ module Aws::RDS
     # @return [Types::RevokeDBSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RevokeDBSecurityGroupIngressResult#db_security_group #db_security_group} => Types::DBSecurityGroup
+    #
+    #
+    # @example Example: To revoke ingress for a DB security group
+    #
+    #   # This example revokes ingress for the specified CIDR block associated with the specified DB security group.
+    #
+    #   resp = client.revoke_db_security_group_ingress({
+    #     cidrip: "203.0.113.5/32", 
+    #     db_security_group_name: "mydbsecuritygroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_security_group: {
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11073,7 +12593,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 

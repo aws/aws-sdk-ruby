@@ -183,6 +183,39 @@ module Aws::ElastiCache
     #
     #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: AddTagsToResource
+    #
+    #   # Adds up to 10 tags, key/value pairs, to a cluster or snapshot resource.
+    #
+    #   resp = client.add_tags_to_resource({
+    #     resource_name: "arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster", 
+    #     tags: [
+    #       {
+    #         key: "APIVersion", 
+    #         value: "20150202", 
+    #       }, 
+    #       {
+    #         key: "Service", 
+    #         value: "ElastiCache", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_list: [
+    #       {
+    #         key: "APIVersion", 
+    #         value: "20150202", 
+    #       }, 
+    #       {
+    #         key: "Service", 
+    #         value: "ElastiCache", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
@@ -234,6 +267,17 @@ module Aws::ElastiCache
     # @return [Types::AuthorizeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AuthorizeCacheSecurityGroupIngressResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
+    #
+    #
+    # @example Example: AuthorizeCacheCacheSecurityGroupIngress
+    #
+    #   # Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2. Amazon EC2 security groups are used as the authorization mechanism.
+    #
+    #   resp = client.authorize_cache_security_group_ingress({
+    #     cache_security_group_name: "my-sec-grp", 
+    #     ec2_security_group_name: "my-ec2-sec-grp", 
+    #     ec2_security_group_owner_id: "1234567890", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -368,6 +412,49 @@ module Aws::ElastiCache
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopySnapshotResult#snapshot #snapshot} => Types::Snapshot
+    #
+    #
+    # @example Example: CopySnapshot
+    #
+    #   # Copies a snapshot to a specified name.
+    #
+    #   resp = client.copy_snapshot({
+    #     source_snapshot_name: "my-snapshot", 
+    #     target_bucket: "", 
+    #     target_snapshot_name: "my-snapshot-copy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2016-12-21T22:24:04.955Z"), 
+    #       cache_cluster_id: "my-redis4", 
+    #       cache_node_type: "cache.m3.large", 
+    #       cache_parameter_group_name: "default.redis3.2", 
+    #       cache_subnet_group_name: "default", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       node_snapshots: [
+    #         {
+    #           cache_node_create_time: Time.parse("2016-12-21T22:24:04.955Z"), 
+    #           cache_node_id: "0001", 
+    #           cache_size: "3 MB", 
+    #           snapshot_create_time: Time.parse("2016-12-28T07:00:52Z"), 
+    #         }, 
+    #       ], 
+    #       num_cache_nodes: 1, 
+    #       port: 6379, 
+    #       preferred_availability_zone: "us-east-1c", 
+    #       preferred_maintenance_window: "tue:09:30-tue:10:30", 
+    #       snapshot_name: "my-snapshot-copy", 
+    #       snapshot_retention_limit: 7, 
+    #       snapshot_source: "manual", 
+    #       snapshot_status: "creating", 
+    #       snapshot_window: "07:00-08:00", 
+    #       vpc_id: "vpc-3820329f3", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -737,6 +824,95 @@ module Aws::ElastiCache
     #
     #   * {Types::CreateCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
     #
+    #
+    # @example Example: CreateCacheCluster
+    #
+    #   # Creates a Memcached cluster with 2 nodes. 
+    #
+    #   resp = client.create_cache_cluster({
+    #     az_mode: "cross-az", 
+    #     cache_cluster_id: "my-memcached-cluster", 
+    #     cache_node_type: "cache.r3.large", 
+    #     cache_subnet_group_name: "default", 
+    #     engine: "memcached", 
+    #     engine_version: "1.4.24", 
+    #     num_cache_nodes: 2, 
+    #     port: 11211, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_cluster: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_id: "my-memcached-cluster", 
+    #       cache_cluster_status: "creating", 
+    #       cache_node_type: "cache.r3.large", 
+    #       cache_parameter_group: {
+    #         cache_node_ids_to_reboot: [
+    #         ], 
+    #         cache_parameter_group_name: "default.memcached1.4", 
+    #         parameter_apply_status: "in-sync", 
+    #       }, 
+    #       cache_security_groups: [
+    #       ], 
+    #       cache_subnet_group_name: "default", 
+    #       client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #       engine: "memcached", 
+    #       engine_version: "1.4.24", 
+    #       num_cache_nodes: 2, 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_availability_zone: "Multiple", 
+    #       preferred_maintenance_window: "wed:09:00-wed:10:00", 
+    #     }, 
+    #   }
+    #
+    # @example Example: CreateCacheCluster
+    #
+    #   # Creates a Redis cluster with 1 node. 
+    #
+    #   resp = client.create_cache_cluster({
+    #     auto_minor_version_upgrade: true, 
+    #     cache_cluster_id: "my-redis", 
+    #     cache_node_type: "cache.r3.larage", 
+    #     cache_subnet_group_name: "default", 
+    #     engine: "redis", 
+    #     engine_version: "3.2.4", 
+    #     num_cache_nodes: 1, 
+    #     port: 6379, 
+    #     preferred_availability_zone: "us-east-1c", 
+    #     snapshot_retention_limit: 7, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_cluster: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_id: "my-redis", 
+    #       cache_cluster_status: "creating", 
+    #       cache_node_type: "cache.m3.large", 
+    #       cache_parameter_group: {
+    #         cache_node_ids_to_reboot: [
+    #         ], 
+    #         cache_parameter_group_name: "default.redis3.2", 
+    #         parameter_apply_status: "in-sync", 
+    #       }, 
+    #       cache_security_groups: [
+    #       ], 
+    #       cache_subnet_group_name: "default", 
+    #       client_download_landing_page: "https: //console.aws.amazon.com/elasticache/home#client-download: ", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       num_cache_nodes: 1, 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_availability_zone: "us-east-1c", 
+    #       preferred_maintenance_window: "fri: 05: 30-fri: 06: 30", 
+    #       snapshot_retention_limit: 7, 
+    #       snapshot_window: "10: 00-11: 00", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cache_cluster({
@@ -861,6 +1037,26 @@ module Aws::ElastiCache
     #
     #   * {Types::CreateCacheParameterGroupResult#cache_parameter_group #cache_parameter_group} => Types::CacheParameterGroup
     #
+    #
+    # @example Example: CreateCacheParameterGroup
+    #
+    #   # Creates the Amazon ElastiCache parameter group custom-redis2-8.
+    #
+    #   resp = client.create_cache_parameter_group({
+    #     cache_parameter_group_family: "redis2.8", 
+    #     cache_parameter_group_name: "custom-redis2-8", 
+    #     description: "Custom Redis 2.8 parameter group.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_parameter_group: {
+    #       cache_parameter_group_family: "redis2.8", 
+    #       cache_parameter_group_name: "custom-redis2-8", 
+    #       description: "Custom Redis 2.8 parameter group.", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cache_parameter_group({
@@ -912,6 +1108,16 @@ module Aws::ElastiCache
     #
     #   * {Types::CreateCacheSecurityGroupResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
     #
+    #
+    # @example Example: CreateCacheSecurityGroup
+    #
+    #   # Creates an ElastiCache security group. ElastiCache security groups are only for clusters not running in an AWS VPC.
+    #
+    #   resp = client.create_cache_security_group({
+    #     cache_security_group_name: "my-cache-sec-grp", 
+    #     description: "Example ElastiCache security group.", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cache_security_group({
@@ -961,6 +1167,50 @@ module Aws::ElastiCache
     # @return [Types::CreateCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheSubnetGroupResult#cache_subnet_group #cache_subnet_group} => Types::CacheSubnetGroup
+    #
+    #
+    # @example Example: CreateCacheSubnet
+    #
+    #   # Creates a new cache subnet group.
+    #
+    #   resp = client.create_cache_subnet_group({
+    #     cache_subnet_group_description: "Sample subnet group", 
+    #     cache_subnet_group_name: "my-sn-grp2", 
+    #     subnet_ids: [
+    #       "subnet-6f28c982", 
+    #       "subnet-bcd382f3", 
+    #       "subnet-845b3e7c0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_subnet_group: {
+    #       cache_subnet_group_description: "My subnet group.", 
+    #       cache_subnet_group_name: "my-sn-grp", 
+    #       subnets: [
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1a", 
+    #           }, 
+    #           subnet_identifier: "subnet-6f28c982", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1c", 
+    #           }, 
+    #           subnet_identifier: "subnet-bcd382f3", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1b", 
+    #           }, 
+    #           subnet_identifier: "subnet-845b3e7c0", 
+    #         }, 
+    #       ], 
+    #       vpc_id: "vpc-91280df6", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1353,6 +1603,96 @@ module Aws::ElastiCache
     #
     #   * {Types::CreateReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
     #
+    #
+    # @example Example: CreateCacheReplicationGroup
+    #
+    #   # Creates a Redis replication group with 3 nodes.
+    #
+    #   resp = client.create_replication_group({
+    #     automatic_failover_enabled: true, 
+    #     cache_node_type: "cache.m3.medium", 
+    #     engine: "redis", 
+    #     engine_version: "2.8.24", 
+    #     num_cache_clusters: 3, 
+    #     replication_group_description: "A Redis replication group.", 
+    #     replication_group_id: "my-redis-rg", 
+    #     snapshot_retention_limit: 30, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_group: {
+    #       automatic_failover: "enabling", 
+    #       description: "A Redis replication group.", 
+    #       member_clusters: [
+    #         "my-redis-rg-001", 
+    #         "my-redis-rg-002", 
+    #         "my-redis-rg-003", 
+    #       ], 
+    #       pending_modified_values: {
+    #       }, 
+    #       replication_group_id: "my-redis-rg", 
+    #       snapshotting_cluster_id: "my-redis-rg-002", 
+    #       status: "creating", 
+    #     }, 
+    #   }
+    #
+    # @example Example: CreateReplicationGroup
+    #
+    #   # Creates a Redis (cluster mode enabled) replication group with two shards. One shard has one read replica node and the other shard has two read replicas.
+    #
+    #   resp = client.create_replication_group({
+    #     auto_minor_version_upgrade: true, 
+    #     cache_node_type: "cache.m3.medium", 
+    #     cache_parameter_group_name: "default.redis3.2.cluster.on", 
+    #     engine: "redis", 
+    #     engine_version: "3.2.4", 
+    #     node_group_configuration: [
+    #       {
+    #         primary_availability_zone: "us-east-1c", 
+    #         replica_availability_zones: [
+    #           "us-east-1b", 
+    #         ], 
+    #         replica_count: 1, 
+    #         slots: "0-8999", 
+    #       }, 
+    #       {
+    #         primary_availability_zone: "us-east-1a", 
+    #         replica_availability_zones: [
+    #           "us-east-1a", 
+    #           "us-east-1c", 
+    #         ], 
+    #         replica_count: 2, 
+    #         slots: "9000-16383", 
+    #       }, 
+    #     ], 
+    #     num_node_groups: 2, 
+    #     replication_group_description: "A multi-sharded replication group", 
+    #     replication_group_id: "clustered-redis-rg", 
+    #     snapshot_retention_limit: 8, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_group: {
+    #       automatic_failover: "enabled", 
+    #       description: "Sharded replication group", 
+    #       member_clusters: [
+    #         "rc-rg3-0001-001", 
+    #         "rc-rg3-0001-002", 
+    #         "rc-rg3-0002-001", 
+    #         "rc-rg3-0002-002", 
+    #         "rc-rg3-0002-003", 
+    #       ], 
+    #       pending_modified_values: {
+    #       }, 
+    #       replication_group_id: "clustered-redis-rg", 
+    #       snapshot_retention_limit: 8, 
+    #       snapshot_window: "05:30-06:30", 
+    #       status: "creating", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_replication_group({
@@ -1541,6 +1881,47 @@ module Aws::ElastiCache
     #
     #   * {Types::DeleteCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
     #
+    #
+    # @example Example: DeleteCacheCluster
+    #
+    #   # Deletes an Amazon ElastiCache cluster.
+    #
+    #   resp = client.delete_cache_cluster({
+    #     cache_cluster_id: "my-memcached", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_cluster: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2016-12-22T16:05:17.314Z"), 
+    #       cache_cluster_id: "my-memcached", 
+    #       cache_cluster_status: "deleting", 
+    #       cache_node_type: "cache.r3.large", 
+    #       cache_parameter_group: {
+    #         cache_node_ids_to_reboot: [
+    #         ], 
+    #         cache_parameter_group_name: "default.memcached1.4", 
+    #         parameter_apply_status: "in-sync", 
+    #       }, 
+    #       cache_security_groups: [
+    #       ], 
+    #       cache_subnet_group_name: "default", 
+    #       client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #       configuration_endpoint: {
+    #         address: "my-memcached2.ameaqx.cfg.use1.cache.amazonaws.com", 
+    #         port: 11211, 
+    #       }, 
+    #       engine: "memcached", 
+    #       engine_version: "1.4.24", 
+    #       num_cache_nodes: 2, 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_availability_zone: "Multiple", 
+    #       preferred_maintenance_window: "tue:07:30-tue:08:30", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_cache_cluster({
@@ -1616,6 +1997,15 @@ module Aws::ElastiCache
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: DeleteCacheParameterGroup
+    #
+    #   # Deletes the Amazon ElastiCache parameter group custom-mem1-4.
+    #
+    #   resp = client.delete_cache_parameter_group({
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_cache_parameter_group({
@@ -1647,6 +2037,15 @@ module Aws::ElastiCache
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: DeleteCacheSecurityGroup
+    #
+    #   # Deletes a cache security group.
+    #
+    #   resp = client.delete_cache_security_group({
+    #     cache_security_group_name: "my-sec-group", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_cache_security_group({
@@ -1676,6 +2075,15 @@ module Aws::ElastiCache
     #   hyphens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteCacheSubnetGroup
+    #
+    #   # Deletes the Amazon ElastiCache subnet group my-subnet-group.
+    #
+    #   resp = client.delete_cache_subnet_group({
+    #     cache_subnet_group_name: "my-subnet-group", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1724,6 +2132,28 @@ module Aws::ElastiCache
     # @return [Types::DeleteReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
+    #
+    #
+    # @example Example: DeleteReplicationGroup
+    #
+    #   # Deletes the Amazon ElastiCache replication group my-redis-rg.
+    #
+    #   resp = client.delete_replication_group({
+    #     replication_group_id: "my-redis-rg", 
+    #     retain_primary_cluster: false, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_group: {
+    #       automatic_failover: "disabled", 
+    #       description: "simple redis cluster", 
+    #       pending_modified_values: {
+    #       }, 
+    #       replication_group_id: "my-redis-rg", 
+    #       status: "deleting", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1787,6 +2217,47 @@ module Aws::ElastiCache
     # @return [Types::DeleteSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteSnapshotResult#snapshot #snapshot} => Types::Snapshot
+    #
+    #
+    # @example Example: DeleteSnapshot
+    #
+    #   # Deletes the Redis snapshot snapshot-20160822.
+    #
+    #   resp = client.delete_snapshot({
+    #     snapshot_name: "snapshot-20161212", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2016-12-21T22:27:12.543Z"), 
+    #       cache_cluster_id: "my-redis5", 
+    #       cache_node_type: "cache.m3.large", 
+    #       cache_parameter_group_name: "default.redis3.2", 
+    #       cache_subnet_group_name: "default", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       node_snapshots: [
+    #         {
+    #           cache_node_create_time: Time.parse("2016-12-21T22:27:12.543Z"), 
+    #           cache_node_id: "0001", 
+    #           cache_size: "3 MB", 
+    #           snapshot_create_time: Time.parse("2016-12-21T22:30:26Z"), 
+    #         }, 
+    #       ], 
+    #       num_cache_nodes: 1, 
+    #       port: 6379, 
+    #       preferred_availability_zone: "us-east-1c", 
+    #       preferred_maintenance_window: "fri:05:30-fri:06:30", 
+    #       snapshot_name: "snapshot-20161212", 
+    #       snapshot_retention_limit: 7, 
+    #       snapshot_source: "manual", 
+    #       snapshot_status: "deleting", 
+    #       snapshot_window: "10:00-11:00", 
+    #       vpc_id: "vpc-91280df6", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1901,6 +2372,116 @@ module Aws::ElastiCache
     #
     #   * {Types::CacheClusterMessage#marker #marker} => String
     #   * {Types::CacheClusterMessage#cache_clusters #cache_clusters} => Array&lt;Types::CacheCluster&gt;
+    #
+    #
+    # @example Example: DescribeCacheClusters
+    #
+    #   # Lists the details for up to 50 cache clusters.
+    #
+    #   resp = client.describe_cache_clusters({
+    #     cache_cluster_id: "my-mem-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_clusters: [
+    #       {
+    #         auto_minor_version_upgrade: true, 
+    #         cache_cluster_create_time: Time.parse("2016-12-21T21:59:43.794Z"), 
+    #         cache_cluster_id: "my-mem-cluster", 
+    #         cache_cluster_status: "available", 
+    #         cache_node_type: "cache.t2.medium", 
+    #         cache_parameter_group: {
+    #           cache_node_ids_to_reboot: [
+    #           ], 
+    #           cache_parameter_group_name: "default.memcached1.4", 
+    #           parameter_apply_status: "in-sync", 
+    #         }, 
+    #         cache_security_groups: [
+    #         ], 
+    #         cache_subnet_group_name: "default", 
+    #         client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #         configuration_endpoint: {
+    #           address: "my-mem-cluster.abcdef.cfg.use1.cache.amazonaws.com", 
+    #           port: 11211, 
+    #         }, 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.24", 
+    #         num_cache_nodes: 2, 
+    #         pending_modified_values: {
+    #         }, 
+    #         preferred_availability_zone: "Multiple", 
+    #         preferred_maintenance_window: "wed:06:00-wed:07:00", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeCacheClusters
+    #
+    #   # Lists the details for the cache cluster my-mem-cluster.
+    #
+    #   resp = client.describe_cache_clusters({
+    #     cache_cluster_id: "my-mem-cluster", 
+    #     show_cache_node_info: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_clusters: [
+    #       {
+    #         auto_minor_version_upgrade: true, 
+    #         cache_cluster_create_time: Time.parse("2016-12-21T21:59:43.794Z"), 
+    #         cache_cluster_id: "my-mem-cluster", 
+    #         cache_cluster_status: "available", 
+    #         cache_node_type: "cache.t2.medium", 
+    #         cache_nodes: [
+    #           {
+    #             cache_node_create_time: Time.parse("2016-12-21T21:59:43.794Z"), 
+    #             cache_node_id: "0001", 
+    #             cache_node_status: "available", 
+    #             customer_availability_zone: "us-east-1b", 
+    #             endpoint: {
+    #               address: "my-mem-cluster.ameaqx.0001.use1.cache.amazonaws.com", 
+    #               port: 11211, 
+    #             }, 
+    #             parameter_group_status: "in-sync", 
+    #           }, 
+    #           {
+    #             cache_node_create_time: Time.parse("2016-12-21T21:59:43.794Z"), 
+    #             cache_node_id: "0002", 
+    #             cache_node_status: "available", 
+    #             customer_availability_zone: "us-east-1a", 
+    #             endpoint: {
+    #               address: "my-mem-cluster.ameaqx.0002.use1.cache.amazonaws.com", 
+    #               port: 11211, 
+    #             }, 
+    #             parameter_group_status: "in-sync", 
+    #           }, 
+    #         ], 
+    #         cache_parameter_group: {
+    #           cache_node_ids_to_reboot: [
+    #           ], 
+    #           cache_parameter_group_name: "default.memcached1.4", 
+    #           parameter_apply_status: "in-sync", 
+    #         }, 
+    #         cache_security_groups: [
+    #         ], 
+    #         cache_subnet_group_name: "default", 
+    #         client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #         configuration_endpoint: {
+    #           address: "my-mem-cluster.ameaqx.cfg.use1.cache.amazonaws.com", 
+    #           port: 11211, 
+    #         }, 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.24", 
+    #         num_cache_nodes: 2, 
+    #         pending_modified_values: {
+    #         }, 
+    #         preferred_availability_zone: "Multiple", 
+    #         preferred_maintenance_window: "wed:06:00-wed:07:00", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2019,6 +2600,177 @@ module Aws::ElastiCache
     #   * {Types::CacheEngineVersionMessage#marker #marker} => String
     #   * {Types::CacheEngineVersionMessage#cache_engine_versions #cache_engine_versions} => Array&lt;Types::CacheEngineVersion&gt;
     #
+    #
+    # @example Example: DescribeCacheEngineVersions
+    #
+    #   # Lists the details for up to 25 Memcached and Redis cache engine versions.
+    #
+    #   resp = client.describe_cache_engine_versions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_engine_versions: [
+    #       {
+    #         cache_engine_description: "memcached", 
+    #         cache_engine_version_description: "memcached version 1.4.14", 
+    #         cache_parameter_group_family: "memcached1.4", 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.14", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "memcached", 
+    #         cache_engine_version_description: "memcached version 1.4.24", 
+    #         cache_parameter_group_family: "memcached1.4", 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.24", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "memcached", 
+    #         cache_engine_version_description: "memcached version 1.4.33", 
+    #         cache_parameter_group_family: "memcached1.4", 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.33", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "memcached", 
+    #         cache_engine_version_description: "memcached version 1.4.5", 
+    #         cache_parameter_group_family: "memcached1.4", 
+    #         engine: "memcached", 
+    #         engine_version: "1.4.5", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.6.13", 
+    #         cache_parameter_group_family: "redis2.6", 
+    #         engine: "redis", 
+    #         engine_version: "2.6.13", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.19", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.19", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.21", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.21", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.22 R5", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.22", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.23 R4", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.23", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.24 R3", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.24", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.6", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.6", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 3.2.4", 
+    #         cache_parameter_group_family: "redis3.2", 
+    #         engine: "redis", 
+    #         engine_version: "3.2.4", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeCacheEngineVersions
+    #
+    #   # Lists the details for up to 50 Redis cache engine versions.
+    #
+    #   resp = client.describe_cache_engine_versions({
+    #     default_only: false, 
+    #     engine: "redis", 
+    #     max_records: 50, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_engine_versions: [
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.6.13", 
+    #         cache_parameter_group_family: "redis2.6", 
+    #         engine: "redis", 
+    #         engine_version: "2.6.13", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.19", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.19", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.21", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.21", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.22 R5", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.22", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.23 R4", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.23", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.24 R3", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.24", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 2.8.6", 
+    #         cache_parameter_group_family: "redis2.8", 
+    #         engine: "redis", 
+    #         engine_version: "2.8.6", 
+    #       }, 
+    #       {
+    #         cache_engine_description: "Redis", 
+    #         cache_engine_version_description: "redis version 3.2.4", 
+    #         cache_parameter_group_family: "redis3.2", 
+    #         engine: "redis", 
+    #         engine_version: "3.2.4", 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cache_engine_versions({
@@ -2077,6 +2829,26 @@ module Aws::ElastiCache
     #   * {Types::CacheParameterGroupsMessage#marker #marker} => String
     #   * {Types::CacheParameterGroupsMessage#cache_parameter_groups #cache_parameter_groups} => Array&lt;Types::CacheParameterGroup&gt;
     #
+    #
+    # @example Example: DescribeCacheParameterGroups
+    #
+    #   # Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.
+    #
+    #   resp = client.describe_cache_parameter_groups({
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_parameter_groups: [
+    #       {
+    #         cache_parameter_group_family: "memcached1.4", 
+    #         cache_parameter_group_name: "custom-mem1-4", 
+    #         description: "Custom memcache param group", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cache_parameter_groups({
@@ -2134,6 +2906,407 @@ module Aws::ElastiCache
     #   * {Types::CacheParameterGroupDetails#marker #marker} => String
     #   * {Types::CacheParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::CacheParameterGroupDetails#cache_node_type_specific_parameters #cache_node_type_specific_parameters} => Array&lt;Types::CacheNodeTypeSpecificParameter&gt;
+    #
+    #
+    # @example Example: DescribeCacheParameters
+    #
+    #   # Lists up to 100 user parameter values for the parameter group custom.redis2.8.
+    #
+    #   resp = client.describe_cache_parameters({
+    #     cache_parameter_group_name: "custom-redis2-8", 
+    #     max_records: 100, 
+    #     source: "user", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     parameters: [
+    #       {
+    #         allowed_values: "yes,no", 
+    #         change_type: "requires-reboot", 
+    #         data_type: "string", 
+    #         description: "Apply rehashing or not.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "activerehashing", 
+    #         parameter_value: "yes", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "always,everysec,no", 
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "fsync policy for AOF persistence", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "appendfsync", 
+    #         parameter_value: "everysec", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "yes,no", 
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "Enable Redis persistence.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "appendonly", 
+    #         parameter_value: "no", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Normal client output buffer hard limit in bytes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-normal-hard-limit", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Normal client output buffer soft limit in bytes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-normal-soft-limit", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Normal client output buffer soft limit in seconds.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-normal-soft-seconds", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Pubsub client output buffer hard limit in bytes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-pubsub-hard-limit", 
+    #         parameter_value: "33554432", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Pubsub client output buffer soft limit in bytes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-pubsub-soft-limit", 
+    #         parameter_value: "8388608", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Pubsub client output buffer soft limit in seconds.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-pubsub-soft-seconds", 
+    #         parameter_value: "60", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Slave client output buffer soft limit in seconds.", 
+    #         is_modifiable: false, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "client-output-buffer-limit-slave-soft-seconds", 
+    #         parameter_value: "60", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "yes,no", 
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "If enabled, clients who attempt to write to a read-only slave will be disconnected. Applicable to 2.8.23 and higher.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.23", 
+    #         parameter_name: "close-on-slave-write", 
+    #         parameter_value: "yes", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "1-1200000", 
+    #         change_type: "requires-reboot", 
+    #         data_type: "integer", 
+    #         description: "Set the number of databases.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "databases", 
+    #         parameter_value: "16", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The maximum number of hash entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "hash-max-ziplist-entries", 
+    #         parameter_value: "512", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The threshold of biggest hash entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "hash-max-ziplist-value", 
+    #         parameter_value: "64", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The maximum number of list entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "list-max-ziplist-entries", 
+    #         parameter_value: "512", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The threshold of biggest list entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "list-max-ziplist-value", 
+    #         parameter_value: "64", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "5000", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Max execution time of a Lua script in milliseconds. 0 for unlimited execution without warnings.", 
+    #         is_modifiable: false, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "lua-time-limit", 
+    #         parameter_value: "5000", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "1-65000", 
+    #         change_type: "requires-reboot", 
+    #         data_type: "integer", 
+    #         description: "The maximum number of Redis clients.", 
+    #         is_modifiable: false, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "maxclients", 
+    #         parameter_value: "65000", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "volatile-lru,allkeys-lru,volatile-random,allkeys-random,volatile-ttl,noeviction", 
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "Max memory policy.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "maxmemory-policy", 
+    #         parameter_value: "volatile-lru", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "1-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Max memory samples.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "maxmemory-samples", 
+    #         parameter_value: "3", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Maximum number of seconds within which the master must receive a ping from a slave to take writes. Use this parameter together with min-slaves-to-write to regulate when the master stops accepting writes. Setting this value to 0 means the master always takes writes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "min-slaves-max-lag", 
+    #         parameter_value: "10", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Number of slaves that must be connected in order for master to take writes. Use this parameter together with min-slaves-max-lag to regulate when the master stops accepting writes. Setting this to 0 means the master always takes writes.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "min-slaves-to-write", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "The keyspace events for Redis to notify Pub/Sub clients about. By default all notifications are disabled", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "notify-keyspace-events", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "16384-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The replication backlog size in bytes for PSYNC. This is the size of the buffer which accumulates slave data when slave is disconnected for some time, so that when slave reconnects again, only transfer the portion of data which the slave missed. Minimum value is 16K.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "repl-backlog-size", 
+    #         parameter_value: "1048576", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The amount of time in seconds after the master no longer have any slaves connected for the master to free the replication backlog. A value of 0 means to never release the backlog.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "repl-backlog-ttl", 
+    #         parameter_value: "3600", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "11-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The timeout in seconds for bulk transfer I/O during sync and master timeout from the perspective of the slave, and slave timeout from the perspective of the master.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "repl-timeout", 
+    #         parameter_value: "60", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The amount of memory reserved for non-cache memory usage, in bytes. You may want to increase this parameter for nodes with read replicas, AOF enabled, etc, to reduce swap usage.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "reserved-memory", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The limit in the size of the set in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "set-max-intset-entries", 
+    #         parameter_value: "512", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "yes,no", 
+    #         change_type: "immediate", 
+    #         data_type: "string", 
+    #         description: "Configures if chaining of slaves is allowed", 
+    #         is_modifiable: false, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "slave-allow-chaining", 
+    #         parameter_value: "no", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The execution time, in microseconds, to exceed in order for the command to get logged. Note that a negative number disables the slow log, while a value of zero forces the logging of every command.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "slowlog-log-slower-than", 
+    #         parameter_value: "10000", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The length of the slow log. There is no limit to this length. Just be aware that it will consume memory. You can reclaim memory used by the slow log with SLOWLOG RESET.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "slowlog-max-len", 
+    #         parameter_value: "128", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "If non-zero, send ACKs every given number of seconds.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "tcp-keepalive", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0,20-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "Close connection if client is idle for a given number of seconds, or never if 0.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "timeout", 
+    #         parameter_value: "0", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The maximum number of sorted set entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "zset-max-ziplist-entries", 
+    #         parameter_value: "128", 
+    #         source: "system", 
+    #       }, 
+    #       {
+    #         allowed_values: "0-", 
+    #         change_type: "immediate", 
+    #         data_type: "integer", 
+    #         description: "The threshold of biggest sorted set entries in order for the dataset to be compressed.", 
+    #         is_modifiable: true, 
+    #         minimum_engine_version: "2.8.6", 
+    #         parameter_name: "zset-max-ziplist-value", 
+    #         parameter_value: "64", 
+    #         source: "system", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2207,6 +3380,15 @@ module Aws::ElastiCache
     #   * {Types::CacheSecurityGroupMessage#marker #marker} => String
     #   * {Types::CacheSecurityGroupMessage#cache_security_groups #cache_security_groups} => Array&lt;Types::CacheSecurityGroup&gt;
     #
+    #
+    # @example Example: DescribeCacheSecurityGroups
+    #
+    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group.
+    #
+    #   resp = client.describe_cache_security_groups({
+    #     cache_security_group_name: "my-sec-group", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cache_security_groups({
@@ -2264,6 +3446,53 @@ module Aws::ElastiCache
     #   * {Types::CacheSubnetGroupMessage#marker #marker} => String
     #   * {Types::CacheSubnetGroupMessage#cache_subnet_groups #cache_subnet_groups} => Array&lt;Types::CacheSubnetGroup&gt;
     #
+    #
+    # @example Example: DescribeCacheSubnetGroups
+    #
+    #   # Describes up to 25 cache subnet groups.
+    #
+    #   resp = client.describe_cache_subnet_groups({
+    #     max_records: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_subnet_groups: [
+    #       {
+    #         cache_subnet_group_description: "Default CacheSubnetGroup", 
+    #         cache_subnet_group_name: "default", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1a", 
+    #             }, 
+    #             subnet_identifier: "subnet-1a2b3c4d", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1c", 
+    #             }, 
+    #             subnet_identifier: "subnet-a1b2c3d4", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1e", 
+    #             }, 
+    #             subnet_identifier: "subnet-abcd1234", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1b", 
+    #             }, 
+    #             subnet_identifier: "subnet-1234abcd", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-91280df6", 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cache_subnet_groups({
@@ -2320,6 +3549,618 @@ module Aws::ElastiCache
     # @return [Types::DescribeEngineDefaultParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
+    #
+    #
+    # @example Example: DescribeEngineDefaultParameters
+    #
+    #   # Returns the default engine and system parameter information for the specified cache engine.
+    #
+    #   resp = client.describe_engine_default_parameters({
+    #     cache_parameter_group_family: "redis2.8", 
+    #     max_records: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engine_defaults: {
+    #       cache_node_type_specific_parameters: [
+    #         {
+    #           allowed_values: "0-", 
+    #           cache_node_type_specific_values: [
+    #             {
+    #               cache_node_type: "cache.c1.xlarge", 
+    #               value: "650117120", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.large", 
+    #               value: "702545920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.medium", 
+    #               value: "309329920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.small", 
+    #               value: "94371840", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.xlarge", 
+    #               value: "1488977920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.2xlarge", 
+    #               value: "3502243840", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.4xlarge", 
+    #               value: "7088373760", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.xlarge", 
+    #               value: "1709178880", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.2xlarge", 
+    #               value: "2998927360", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.large", 
+    #               value: "650117120", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.medium", 
+    #               value: "309329920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.xlarge", 
+    #               value: "1426063360", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.10xlarge", 
+    #               value: "16604761424", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.2xlarge", 
+    #               value: "3188912636", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.4xlarge", 
+    #               value: "6525729063", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.large", 
+    #               value: "689259315", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.xlarge", 
+    #               value: "1532850176", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.2xlarge", 
+    #               value: "6081740800", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.4xlarge", 
+    #               value: "12268339200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.8xlarge", 
+    #               value: "24536678400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.large", 
+    #               value: "1468006400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.xlarge", 
+    #               value: "3040870400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t1.micro", 
+    #               value: "14260633", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.medium", 
+    #               value: "346134937", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.micro", 
+    #               value: "58195968", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.small", 
+    #               value: "166513868", 
+    #             }, 
+    #           ], 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Slave client output buffer hard limit in bytes.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-slave-hard-limit", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           cache_node_type_specific_values: [
+    #             {
+    #               cache_node_type: "cache.c1.xlarge", 
+    #               value: "650117120", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.large", 
+    #               value: "702545920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.medium", 
+    #               value: "309329920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.small", 
+    #               value: "94371840", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.xlarge", 
+    #               value: "1488977920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.2xlarge", 
+    #               value: "3502243840", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.4xlarge", 
+    #               value: "7088373760", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.xlarge", 
+    #               value: "1709178880", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.2xlarge", 
+    #               value: "2998927360", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.large", 
+    #               value: "650117120", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.medium", 
+    #               value: "309329920", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.xlarge", 
+    #               value: "1426063360", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.10xlarge", 
+    #               value: "16604761424", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.2xlarge", 
+    #               value: "3188912636", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.4xlarge", 
+    #               value: "6525729063", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.large", 
+    #               value: "689259315", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.xlarge", 
+    #               value: "1532850176", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.2xlarge", 
+    #               value: "6081740800", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.4xlarge", 
+    #               value: "12268339200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.8xlarge", 
+    #               value: "24536678400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.large", 
+    #               value: "1468006400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.xlarge", 
+    #               value: "3040870400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t1.micro", 
+    #               value: "14260633", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.medium", 
+    #               value: "346134937", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.micro", 
+    #               value: "58195968", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.small", 
+    #               value: "166513868", 
+    #             }, 
+    #           ], 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Slave client output buffer soft limit in bytes.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-slave-soft-limit", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           cache_node_type_specific_values: [
+    #             {
+    #               cache_node_type: "cache.c1.xlarge", 
+    #               value: "6501171200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.large", 
+    #               value: "7025459200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.medium", 
+    #               value: "3093299200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.small", 
+    #               value: "943718400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m1.xlarge", 
+    #               value: "14889779200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.2xlarge", 
+    #               value: "35022438400", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.4xlarge", 
+    #               value: "70883737600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m2.xlarge", 
+    #               value: "17091788800", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.2xlarge", 
+    #               value: "29989273600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.large", 
+    #               value: "6501171200", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.medium", 
+    #               value: "2988441600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m3.xlarge", 
+    #               value: "14260633600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.10xlarge", 
+    #               value: "166047614239", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.2xlarge", 
+    #               value: "31889126359", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.4xlarge", 
+    #               value: "65257290629", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.large", 
+    #               value: "6892593152", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.m4.xlarge", 
+    #               value: "15328501760", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.2xlarge", 
+    #               value: "62495129600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.4xlarge", 
+    #               value: "126458265600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.8xlarge", 
+    #               value: "254384537600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.large", 
+    #               value: "14470348800", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.r3.xlarge", 
+    #               value: "30513561600", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t1.micro", 
+    #               value: "142606336", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.medium", 
+    #               value: "3461349376", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.micro", 
+    #               value: "581959680", 
+    #             }, 
+    #             {
+    #               cache_node_type: "cache.t2.small", 
+    #               value: "1665138688", 
+    #             }, 
+    #           ], 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "The maximum configurable amount of memory to use to store items, in bytes.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "maxmemory", 
+    #           source: "system", 
+    #         }, 
+    #       ], 
+    #       cache_parameter_group_family: "redis2.8", 
+    #       marker: "bWluLXNsYXZlcy10by13cml0ZQ==", 
+    #       parameters: [
+    #         {
+    #           allowed_values: "yes,no", 
+    #           change_type: "requires-reboot", 
+    #           data_type: "string", 
+    #           description: "Apply rehashing or not.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "activerehashing", 
+    #           parameter_value: "yes", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "always,everysec,no", 
+    #           change_type: "immediate", 
+    #           data_type: "string", 
+    #           description: "fsync policy for AOF persistence", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "appendfsync", 
+    #           parameter_value: "everysec", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "yes,no", 
+    #           change_type: "immediate", 
+    #           data_type: "string", 
+    #           description: "Enable Redis persistence.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "appendonly", 
+    #           parameter_value: "no", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Normal client output buffer hard limit in bytes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-normal-hard-limit", 
+    #           parameter_value: "0", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Normal client output buffer soft limit in bytes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-normal-soft-limit", 
+    #           parameter_value: "0", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Normal client output buffer soft limit in seconds.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-normal-soft-seconds", 
+    #           parameter_value: "0", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Pubsub client output buffer hard limit in bytes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-pubsub-hard-limit", 
+    #           parameter_value: "33554432", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Pubsub client output buffer soft limit in bytes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-pubsub-soft-limit", 
+    #           parameter_value: "8388608", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Pubsub client output buffer soft limit in seconds.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-pubsub-soft-seconds", 
+    #           parameter_value: "60", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Slave client output buffer soft limit in seconds.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "client-output-buffer-limit-slave-soft-seconds", 
+    #           parameter_value: "60", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "yes,no", 
+    #           change_type: "immediate", 
+    #           data_type: "string", 
+    #           description: "If enabled, clients who attempt to write to a read-only slave will be disconnected. Applicable to 2.8.23 and higher.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.23", 
+    #           parameter_name: "close-on-slave-write", 
+    #           parameter_value: "yes", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "1-1200000", 
+    #           change_type: "requires-reboot", 
+    #           data_type: "integer", 
+    #           description: "Set the number of databases.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "databases", 
+    #           parameter_value: "16", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "The maximum number of hash entries in order for the dataset to be compressed.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "hash-max-ziplist-entries", 
+    #           parameter_value: "512", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "The threshold of biggest hash entries in order for the dataset to be compressed.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "hash-max-ziplist-value", 
+    #           parameter_value: "64", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "The maximum number of list entries in order for the dataset to be compressed.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "list-max-ziplist-entries", 
+    #           parameter_value: "512", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "The threshold of biggest list entries in order for the dataset to be compressed.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "list-max-ziplist-value", 
+    #           parameter_value: "64", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "5000", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Max execution time of a Lua script in milliseconds. 0 for unlimited execution without warnings.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "lua-time-limit", 
+    #           parameter_value: "5000", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "1-65000", 
+    #           change_type: "requires-reboot", 
+    #           data_type: "integer", 
+    #           description: "The maximum number of Redis clients.", 
+    #           is_modifiable: false, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "maxclients", 
+    #           parameter_value: "65000", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "volatile-lru,allkeys-lru,volatile-random,allkeys-random,volatile-ttl,noeviction", 
+    #           change_type: "immediate", 
+    #           data_type: "string", 
+    #           description: "Max memory policy.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "maxmemory-policy", 
+    #           parameter_value: "volatile-lru", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "1-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Max memory samples.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "maxmemory-samples", 
+    #           parameter_value: "3", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Maximum number of seconds within which the master must receive a ping from a slave to take writes. Use this parameter together with min-slaves-to-write to regulate when the master stops accepting writes. Setting this value to 0 means the master always takes writes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "min-slaves-max-lag", 
+    #           parameter_value: "10", 
+    #           source: "system", 
+    #         }, 
+    #         {
+    #           allowed_values: "0-", 
+    #           change_type: "immediate", 
+    #           data_type: "integer", 
+    #           description: "Number of slaves that must be connected in order for master to take writes. Use this parameter together with min-slaves-max-lag to regulate when the master stops accepting writes. Setting this to 0 means the master always takes writes.", 
+    #           is_modifiable: true, 
+    #           minimum_engine_version: "2.8.6", 
+    #           parameter_name: "min-slaves-to-write", 
+    #           parameter_value: "0", 
+    #           source: "system", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2418,6 +4259,104 @@ module Aws::ElastiCache
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    #
+    # @example Example: DescribeEvents
+    #
+    #   # Describes all the cache-cluster events for the past 120 minutes.
+    #
+    #   resp = client.describe_events({
+    #     duration: 360, 
+    #     source_type: "cache-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     events: [
+    #       {
+    #         date: Time.parse("2016-12-22T16:27:56.088Z"), 
+    #         message: "Added cache node 0001 in availability zone us-east-1e", 
+    #         source_identifier: "redis-cluster", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:27:56.078Z"), 
+    #         message: "Cache cluster created", 
+    #         source_identifier: "redis-cluster", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.326Z"), 
+    #         message: "Added cache node 0002 in availability zone us-east-1c", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.323Z"), 
+    #         message: "Added cache node 0001 in availability zone us-east-1e", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.314Z"), 
+    #         message: "Cache cluster created", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #   }
+    #
+    # @example Example: DescribeEvents
+    #
+    #   # Describes all the replication-group events from 3:00P to 5:00P on November 11, 2016.
+    #
+    #   resp = client.describe_events({
+    #     start_time: Time.parse("2016-12-22T15:00:00.000Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     events: [
+    #       {
+    #         date: Time.parse("2016-12-22T21:35:46.674Z"), 
+    #         message: "Snapshot succeeded for snapshot with ID 'cr-bkup' of replication group with ID 'clustered-redis'", 
+    #         source_identifier: "clustered-redis-0001-001", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:27:56.088Z"), 
+    #         message: "Added cache node 0001 in availability zone us-east-1e", 
+    #         source_identifier: "redis-cluster", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:27:56.078Z"), 
+    #         message: "Cache cluster created", 
+    #         source_identifier: "redis-cluster", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.326Z"), 
+    #         message: "Added cache node 0002 in availability zone us-east-1c", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.323Z"), 
+    #         message: "Added cache node 0001 in availability zone us-east-1e", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2016-12-22T16:05:17.314Z"), 
+    #         message: "Cache cluster created", 
+    #         source_identifier: "my-memcached2", 
+    #         source_type: "cache-cluster", 
+    #       }, 
+    #     ], 
+    #     marker: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -2483,6 +4422,69 @@ module Aws::ElastiCache
     #
     #   * {Types::ReplicationGroupMessage#marker #marker} => String
     #   * {Types::ReplicationGroupMessage#replication_groups #replication_groups} => Array&lt;Types::ReplicationGroup&gt;
+    #
+    #
+    # @example Example: DescribeReplicationGroups
+    #
+    #   # Returns information about the replication group myreplgroup.
+    #
+    #   resp = client.describe_replication_groups({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     replication_groups: [
+    #       {
+    #         automatic_failover: "enabled", 
+    #         description: "Test cluster", 
+    #         member_clusters: [
+    #           "clustered-redis-0001-001", 
+    #           "clustered-redis-0001-002", 
+    #           "clustered-redis-0002-001", 
+    #           "clustered-redis-0002-002", 
+    #         ], 
+    #         node_groups: [
+    #           {
+    #             node_group_id: "0001", 
+    #             node_group_members: [
+    #               {
+    #                 cache_cluster_id: "clustered-redis-0001-001", 
+    #                 cache_node_id: "0001", 
+    #                 preferred_availability_zone: "us-east-1e", 
+    #               }, 
+    #               {
+    #                 cache_cluster_id: "clustered-redis-0001-002", 
+    #                 cache_node_id: "0001", 
+    #                 preferred_availability_zone: "us-east-1c", 
+    #               }, 
+    #             ], 
+    #             status: "available", 
+    #           }, 
+    #           {
+    #             node_group_id: "0002", 
+    #             node_group_members: [
+    #               {
+    #                 cache_cluster_id: "clustered-redis-0002-001", 
+    #                 cache_node_id: "0001", 
+    #                 preferred_availability_zone: "us-east-1c", 
+    #               }, 
+    #               {
+    #                 cache_cluster_id: "clustered-redis-0002-002", 
+    #                 cache_node_id: "0001", 
+    #                 preferred_availability_zone: "us-east-1b", 
+    #               }, 
+    #             ], 
+    #             status: "available", 
+    #           }, 
+    #         ], 
+    #         pending_modified_values: {
+    #         }, 
+    #         replication_group_id: "clustered-redis", 
+    #         status: "available", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2633,6 +4635,15 @@ module Aws::ElastiCache
     #   * {Types::ReservedCacheNodeMessage#marker #marker} => String
     #   * {Types::ReservedCacheNodeMessage#reserved_cache_nodes #reserved_cache_nodes} => Array&lt;Types::ReservedCacheNode&gt;
     #
+    #
+    # @example Example: DescribeReservedCacheNodes
+    #
+    #   # Returns information about reserved cache nodes for this account, or about a specified reserved cache node. If the account has no reserved cache nodes, the operation returns an empty list, as shown here.
+    #
+    #   resp = client.describe_reserved_cache_nodes({
+    #     max_records: 25, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_cache_nodes({
@@ -2771,6 +4782,326 @@ module Aws::ElastiCache
     #   * {Types::ReservedCacheNodesOfferingMessage#marker #marker} => String
     #   * {Types::ReservedCacheNodesOfferingMessage#reserved_cache_nodes_offerings #reserved_cache_nodes_offerings} => Array&lt;Types::ReservedCacheNodesOffering&gt;
     #
+    #
+    # @example Example: DescribeReseredCacheNodeOfferings
+    #
+    #   # Lists available reserved cache node offerings.
+    #
+    #   resp = client.describe_reserved_cache_nodes_offerings({
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "1ef01f5b-433f-94ff-a530-61a56bfc8e7a", 
+    #     reserved_cache_nodes_offerings: [
+    #       {
+    #         cache_node_type: "cache.m1.small", 
+    #         duration: 94608000, 
+    #         fixed_price: 157.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0167633d-37f6-4222-b872-b1f22eb79ba4", 
+    #         usage_price: 0.017, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m4.xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 1248.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.077, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "02c04e13-baca-4e71-9ceb-620eed94827d", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m2.4xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 2381.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "02e1755e-76e8-48e3-8d82-820a5726a458", 
+    #         usage_price: 0.276, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m1.small", 
+    #         duration: 94608000, 
+    #         fixed_price: 188.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.013, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "03315215-7b87-421a-a3dd-785021e4113f", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m4.10xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 6158.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 1.125, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "05ffbb44-2ace-4476-a2a5-8ec99f866fb3", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m1.small", 
+    #         duration: 31536000, 
+    #         fixed_price: 101.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "065c71ae-4a4e-4f1e-bebf-37525f4c6cb2", 
+    #         usage_price: 0.023, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m1.medium", 
+    #         duration: 94608000, 
+    #         fixed_price: 314.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "06774b12-7f5e-48c1-907a-f286c63f327d", 
+    #         usage_price: 0.034, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m2.xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 163.0, 
+    #         offering_type: "Light Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0924ac6b-847f-4761-ba6b-4290b2adf719", 
+    #         usage_price: 0.137, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m2.xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 719.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.049, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "09eeb126-69b6-4d3f-8f94-ca3510629f53", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.r3.2xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 4132.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.182, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0a516ad8-557f-4310-9dd0-2448c2ff4d62", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.c1.xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 875.0, 
+    #         offering_type: "Light Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0b0c1cc5-2177-4150-95d7-c67ec34dcb19", 
+    #         usage_price: 0.363, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m4.10xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 12483.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.76, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0c2b139b-1cff-43d0-8fba-0c753f9b1950", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.c1.xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 1620.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.207, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "0c52115b-38cb-47a2-8dbc-e02e40b6a13f", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m2.4xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 2381.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "12fcb19c-5416-4e1d-934f-28f1e2cb8599", 
+    #         usage_price: 0.276, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m4.xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 616.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.112, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "13af20ad-914d-4d8b-9763-fa2e565f3549", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.r3.8xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 16528.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.729, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "14da3d3f-b526-4dbf-b09b-355578b2a576", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m1.medium", 
+    #         duration: 94608000, 
+    #         fixed_price: 140.0, 
+    #         offering_type: "Light Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "15d7018c-71fb-4717-8409-4bdcdca18da7", 
+    #         usage_price: 0.052, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m4.4xlarge", 
+    #         duration: 94608000, 
+    #         fixed_price: 4993.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.304, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "1ae7ec5f-a76e-49b6-822b-629b1768a13a", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.m3.2xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 1772.0, 
+    #         offering_type: "Heavy Utilization", 
+    #         product_description: "redis", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.25, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "1d31242b-3925-48d1-b882-ce03204e6013", 
+    #         usage_price: 0.0, 
+    #       }, 
+    #       {
+    #         cache_node_type: "cache.t1.micro", 
+    #         duration: 31536000, 
+    #         fixed_price: 54.0, 
+    #         offering_type: "Medium Utilization", 
+    #         product_description: "memcached", 
+    #         recurring_charges: [
+    #         ], 
+    #         reserved_cache_nodes_offering_id: "1ef01f5b-94ff-433f-a530-61a56bfc8e7a", 
+    #         usage_price: 0.008, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeReseredCacheNodeOfferings
+    #
+    #   # Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year commitment.
+    #
+    #   resp = client.describe_reserved_cache_nodes_offerings({
+    #     cache_node_type: "cache.r3.large", 
+    #     duration: "3", 
+    #     max_records: 25, 
+    #     offering_type: "Light Utilization", 
+    #     reserved_cache_nodes_offering_id: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     reserved_cache_nodes_offerings: [
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeReseredCacheNodeOfferings
+    #
+    #   # Lists available reserved cache node offerings.
+    #
+    #   resp = client.describe_reserved_cache_nodes_offerings({
+    #     cache_node_type: "", 
+    #     duration: "", 
+    #     marker: "", 
+    #     max_records: 25, 
+    #     offering_type: "", 
+    #     product_description: "", 
+    #     reserved_cache_nodes_offering_id: "438012d3-4052-4cc7-b2e3-8d3372e0e706", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     reserved_cache_nodes_offerings: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_cache_nodes_offerings({
@@ -2860,6 +5191,50 @@ module Aws::ElastiCache
     #
     #   * {Types::DescribeSnapshotsListMessage#marker #marker} => String
     #   * {Types::DescribeSnapshotsListMessage#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
+    #
+    #
+    # @example Example: DescribeSnapshots
+    #
+    #   # Returns information about the snapshot mysnapshot. By default.
+    #
+    #   resp = client.describe_snapshots({
+    #     snapshot_name: "snapshot-20161212", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     marker: "", 
+    #     snapshots: [
+    #       {
+    #         auto_minor_version_upgrade: true, 
+    #         cache_cluster_create_time: Time.parse("2016-12-21T22:27:12.543Z"), 
+    #         cache_cluster_id: "my-redis5", 
+    #         cache_node_type: "cache.m3.large", 
+    #         cache_parameter_group_name: "default.redis3.2", 
+    #         cache_subnet_group_name: "default", 
+    #         engine: "redis", 
+    #         engine_version: "3.2.4", 
+    #         node_snapshots: [
+    #           {
+    #             cache_node_create_time: Time.parse("2016-12-21T22:27:12.543Z"), 
+    #             cache_node_id: "0001", 
+    #             cache_size: "3 MB", 
+    #             snapshot_create_time: Time.parse("2016-12-21T22:30:26Z"), 
+    #           }, 
+    #         ], 
+    #         num_cache_nodes: 1, 
+    #         port: 6379, 
+    #         preferred_availability_zone: "us-east-1c", 
+    #         preferred_maintenance_window: "fri:05:30-fri:06:30", 
+    #         snapshot_name: "snapshot-20161212", 
+    #         snapshot_retention_limit: 7, 
+    #         snapshot_source: "manual", 
+    #         snapshot_status: "available", 
+    #         snapshot_window: "10:00-11:00", 
+    #         vpc_id: "vpc-91280df6", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2952,6 +5327,43 @@ module Aws::ElastiCache
     #
     #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #scale_up_modifications} => Array&lt;String&gt;
     #
+    #
+    # @example Example: ListAllowedNodeTypeModifications
+    #
+    #   # Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.
+    #
+    #   resp = client.list_allowed_node_type_modifications({
+    #     replication_group_id: "myreplgroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scale_up_modifications: [
+    #       "cache.m4.10xlarge", 
+    #       "cache.m4.2xlarge", 
+    #       "cache.m4.4xlarge", 
+    #       "cache.m4.xlarge", 
+    #       "cache.r3.2xlarge", 
+    #       "cache.r3.4xlarge", 
+    #       "cache.r3.8xlarge", 
+    #       "cache.r3.xlarge", 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListAllowedNodeTypeModifications
+    #
+    #   # Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.
+    #
+    #   resp = client.list_allowed_node_type_modifications({
+    #     cache_cluster_id: "mycluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scale_up_modifications: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_allowed_node_type_modifications({
@@ -3002,6 +5414,29 @@ module Aws::ElastiCache
     # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: ListTagsForResource
+    #
+    #   # Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_name: "arn:aws:elasticache:us-west-2:<my-account-id>:cluster:mycluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_list: [
+    #       {
+    #         key: "APIVersion", 
+    #         value: "20150202", 
+    #       }, 
+    #       {
+    #         key: "Service", 
+    #         value: "ElastiCache", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3308,6 +5743,47 @@ module Aws::ElastiCache
     #
     #   * {Types::ModifyCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
     #
+    #
+    # @example Example: ModifyCacheCluster
+    #
+    #   # Copies a snapshot to a specified name.
+    #
+    #   resp = client.modify_cache_cluster({
+    #     apply_immediately: true, 
+    #     cache_cluster_id: "redis-cluster", 
+    #     snapshot_retention_limit: 14, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_cluster: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2016-12-22T16:27:56.078Z"), 
+    #       cache_cluster_id: "redis-cluster", 
+    #       cache_cluster_status: "available", 
+    #       cache_node_type: "cache.r3.large", 
+    #       cache_parameter_group: {
+    #         cache_node_ids_to_reboot: [
+    #         ], 
+    #         cache_parameter_group_name: "default.redis3.2", 
+    #         parameter_apply_status: "in-sync", 
+    #       }, 
+    #       cache_security_groups: [
+    #       ], 
+    #       cache_subnet_group_name: "default", 
+    #       client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       num_cache_nodes: 1, 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_availability_zone: "us-east-1e", 
+    #       preferred_maintenance_window: "fri:09:00-fri:10:00", 
+    #       snapshot_retention_limit: 14, 
+    #       snapshot_window: "07:00-08:00", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_cache_cluster({
@@ -3402,6 +5878,30 @@ module Aws::ElastiCache
     #
     #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #cache_parameter_group_name} => String
     #
+    #
+    # @example Example: ModifyCacheParameterGroup
+    #
+    #   # Modifies one or more parameter values in the specified parameter group. You cannot modify any default parameter group.
+    #
+    #   resp = client.modify_cache_parameter_group({
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #     parameter_name_values: [
+    #       {
+    #         parameter_name: "binding_protocol", 
+    #         parameter_value: "ascii", 
+    #       }, 
+    #       {
+    #         parameter_name: "chunk_size", 
+    #         parameter_value: "96", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_cache_parameter_group({
@@ -3447,6 +5947,59 @@ module Aws::ElastiCache
     # @return [Types::ModifyCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyCacheSubnetGroupResult#cache_subnet_group #cache_subnet_group} => Types::CacheSubnetGroup
+    #
+    #
+    # @example Example: ModifyCacheSubnetGroup
+    #
+    #   # Modifies an existing ElastiCache subnet group.
+    #
+    #   resp = client.modify_cache_subnet_group({
+    #     cache_subnet_group_name: "my-sn-grp", 
+    #     subnet_ids: [
+    #       "subnet-bcde2345", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_subnet_group: {
+    #       cache_subnet_group_description: "My subnet group.", 
+    #       cache_subnet_group_name: "my-sn-grp", 
+    #       subnets: [
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1c", 
+    #           }, 
+    #           subnet_identifier: "subnet-a1b2c3d4", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1e", 
+    #           }, 
+    #           subnet_identifier: "subnet-1a2b3c4d", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1e", 
+    #           }, 
+    #           subnet_identifier: "subnet-bcde2345", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1c", 
+    #           }, 
+    #           subnet_identifier: "subnet-1234abcd", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-east-1b", 
+    #           }, 
+    #           subnet_identifier: "subnet-abcd1234", 
+    #         }, 
+    #       ], 
+    #       vpc_id: "vpc-91280df6", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3644,6 +6197,79 @@ module Aws::ElastiCache
     #
     #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
     #
+    #
+    # @example Example: ModifyReplicationGroup
+    #
+    #   # 
+    #
+    #   resp = client.modify_replication_group({
+    #     apply_immediately: true, 
+    #     replication_group_description: "Modified replication group", 
+    #     replication_group_id: "my-redis-rg", 
+    #     snapshot_retention_limit: 30, 
+    #     snapshotting_cluster_id: "my-redis-rg-001", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_group: {
+    #       automatic_failover: "enabled", 
+    #       description: "Modified replication group", 
+    #       member_clusters: [
+    #         "my-redis-rg-001", 
+    #         "my-redis-rg-002", 
+    #         "my-redis-rg-003", 
+    #       ], 
+    #       node_groups: [
+    #         {
+    #           node_group_id: "0001", 
+    #           node_group_members: [
+    #             {
+    #               cache_cluster_id: "my-redis-rg-001", 
+    #               cache_node_id: "0001", 
+    #               current_role: "primary", 
+    #               preferred_availability_zone: "us-east-1b", 
+    #               read_endpoint: {
+    #                 address: "my-redis-rg-001.abcdef.0001.use1.cache.amazonaws.com", 
+    #                 port: 6379, 
+    #               }, 
+    #             }, 
+    #             {
+    #               cache_cluster_id: "my-redis-rg-002", 
+    #               cache_node_id: "0001", 
+    #               current_role: "replica", 
+    #               preferred_availability_zone: "us-east-1a", 
+    #               read_endpoint: {
+    #                 address: "my-redis-rg-002.abcdef.0001.use1.cache.amazonaws.com", 
+    #                 port: 6379, 
+    #               }, 
+    #             }, 
+    #             {
+    #               cache_cluster_id: "my-redis-rg-003", 
+    #               cache_node_id: "0001", 
+    #               current_role: "replica", 
+    #               preferred_availability_zone: "us-east-1c", 
+    #               read_endpoint: {
+    #                 address: "my-redis-rg-003.abcdef.0001.use1.cache.amazonaws.com", 
+    #                 port: 6379, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           primary_endpoint: {
+    #             address: "my-redis-rg.abcdef.ng.0001.use1.cache.amazonaws.com", 
+    #             port: 6379, 
+    #           }, 
+    #           status: "available", 
+    #         }, 
+    #       ], 
+    #       pending_modified_values: {
+    #       }, 
+    #       replication_group_id: "my-redis-rg", 
+    #       snapshotting_cluster_id: "my-redis-rg-002", 
+    #       status: "available", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_replication_group({
@@ -3734,6 +6360,15 @@ module Aws::ElastiCache
     #
     #   * {Types::PurchaseReservedCacheNodesOfferingResult#reserved_cache_node #reserved_cache_node} => Types::ReservedCacheNode
     #
+    #
+    # @example Example: PurchaseReservedCacheNodesOfferings
+    #
+    #   # Allows you to purchase a reserved cache node offering.
+    #
+    #   resp = client.purchase_reserved_cache_nodes_offering({
+    #     reserved_cache_nodes_offering_id: "1ef01f5b-94ff-433f-a530-61a56bfc8e7a", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_reserved_cache_nodes_offering({
@@ -3791,6 +6426,51 @@ module Aws::ElastiCache
     # @return [Types::RebootCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RebootCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
+    #
+    #
+    # @example Example: RebootCacheCluster
+    #
+    #   # Reboots the specified nodes in the names cluster.
+    #
+    #   resp = client.reboot_cache_cluster({
+    #     cache_cluster_id: "custom-mem1-4  ", 
+    #     cache_node_ids_to_reboot: [
+    #       "0001", 
+    #       "0002", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_cluster: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2016-12-21T21:59:43.794Z"), 
+    #       cache_cluster_id: "my-mem-cluster", 
+    #       cache_cluster_status: "rebooting cache cluster nodes", 
+    #       cache_node_type: "cache.t2.medium", 
+    #       cache_parameter_group: {
+    #         cache_node_ids_to_reboot: [
+    #         ], 
+    #         cache_parameter_group_name: "default.memcached1.4", 
+    #         parameter_apply_status: "in-sync", 
+    #       }, 
+    #       cache_security_groups: [
+    #       ], 
+    #       cache_subnet_group_name: "default", 
+    #       client_download_landing_page: "https://console.aws.amazon.com/elasticache/home#client-download:", 
+    #       configuration_endpoint: {
+    #         address: "my-mem-cluster.abcdef.cfg.use1.cache.amazonaws.com", 
+    #         port: 11211, 
+    #       }, 
+    #       engine: "memcached", 
+    #       engine_version: "1.4.24", 
+    #       num_cache_nodes: 2, 
+    #       pending_modified_values: {
+    #       }, 
+    #       preferred_availability_zone: "Multiple", 
+    #       preferred_maintenance_window: "wed:06:00-wed:07:00", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3878,6 +6558,46 @@ module Aws::ElastiCache
     #
     #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: RemoveTagsFromResource
+    #
+    #   # Removes tags identified by a list of tag keys from the list of tags on the specified resource.
+    #
+    #   resp = client.remove_tags_from_resource({
+    #     resource_name: "arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster", 
+    #     tag_keys: [
+    #       "A", 
+    #       "C", 
+    #       "E", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_list: [
+    #       {
+    #         key: "B", 
+    #         value: "Banana", 
+    #       }, 
+    #       {
+    #         key: "D", 
+    #         value: "Dog", 
+    #       }, 
+    #       {
+    #         key: "F", 
+    #         value: "Fox", 
+    #       }, 
+    #       {
+    #         key: "I", 
+    #         value: "", 
+    #       }, 
+    #       {
+    #         key: "K", 
+    #         value: "Kite", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
@@ -3926,6 +6646,21 @@ module Aws::ElastiCache
     #
     #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #cache_parameter_group_name} => String
     #
+    #
+    # @example Example: ResetCacheParameterGroup
+    #
+    #   # Modifies the parameters of a cache parameter group to the engine or system default value.
+    #
+    #   resp = client.reset_cache_parameter_group({
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #     reset_all_parameters: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cache_parameter_group_name: "custom-mem1-4", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_cache_parameter_group({
@@ -3970,6 +6705,17 @@ module Aws::ElastiCache
     # @return [Types::RevokeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RevokeCacheSecurityGroupIngressResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
+    #
+    #
+    # @example Example: DescribeCacheSecurityGroups
+    #
+    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group.
+    #
+    #   resp = client.revoke_cache_security_group_ingress({
+    #     cache_security_group_name: "my-sec-grp", 
+    #     ec2_security_group_name: "my-ec2-sec-grp", 
+    #     ec2_security_group_owner_id: "1234567890", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4126,7 +6872,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -222,6 +222,21 @@ module Aws::S3
     #
     #   * {Types::AbortMultipartUploadOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To abort a multipart upload
+    #
+    #   # The following example aborts a multipart upload.
+    #
+    #   resp = client.abort_multipart_upload({
+    #     bucket: "examplebucket", 
+    #     key: "bigobject", 
+    #     upload_id: "xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.abort_multipart_upload({
@@ -272,6 +287,37 @@ module Aws::S3
     #   * {Types::CompleteMultipartUploadOutput#version_id #version_id} => String
     #   * {Types::CompleteMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CompleteMultipartUploadOutput#request_charged #request_charged} => String
+    #
+    #
+    # @example Example: To complete multipart upload
+    #
+    #   # The following example completes a multipart upload.
+    #
+    #   resp = client.complete_multipart_upload({
+    #     bucket: "examplebucket", 
+    #     key: "bigobject", 
+    #     multipart_upload: {
+    #       parts: [
+    #         {
+    #           etag: "\"d8c2eafd90c266e19ab9dcacc479f8af\"", 
+    #           part_number: 1, 
+    #         }, 
+    #         {
+    #           etag: "\"d8c2eafd90c266e19ab9dcacc479f8af\"", 
+    #           part_number: 2, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     upload_id: "7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     bucket: "acexamplebucket", 
+    #     etag: "\"4d9031c7644d8081c2829f4ea23c55f7-2\"", 
+    #     key: "bigobject", 
+    #     location: "https://examplebucket.s3.amazonaws.com/bigobject", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -455,6 +501,25 @@ module Aws::S3
     #   * {Types::CopyObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CopyObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To copy an object
+    #
+    #   # The following example copies an object from one bucket to another.
+    #
+    #   resp = client.copy_object({
+    #     bucket: "destinationbucket", 
+    #     copy_source: "/sourcebucket/HappyFacejpg", 
+    #     key: "HappyFaceCopyjpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_object_result: {
+    #       etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #       last_modified: Time.parse("2016-12-15T17:38:53.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.copy_object({
@@ -546,6 +611,36 @@ module Aws::S3
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBucketOutput#location #location} => String
+    #
+    #
+    # @example Example: To create a bucket in a specific region
+    #
+    #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #     create_bucket_configuration: {
+    #       location_constraint: "eu-west-1", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "http://examplebucket.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -681,6 +776,23 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To initiate a multipart upload
+    #
+    #   # The following example initiates a multipart upload.
+    #
+    #   resp = client.create_multipart_upload({
+    #     bucket: "examplebucket", 
+    #     key: "largeobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     bucket: "examplebucket", 
+    #     key: "largeobject", 
+    #     upload_id: "ibZBv_75gd9r8lH_gqXatLdxMVpAlj6ZQjEs.OwyF3953YdwbcQnMA2BLGn8Lx12fQNICtMw5KyteFeHw.Sjng--", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_multipart_upload({
@@ -740,6 +852,15 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a bucket
+    #
+    #   # The following example deletes the specified bucket.
+    #
+    #   resp = client.delete_bucket({
+    #     bucket: "forrandall2", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket({
@@ -788,6 +909,15 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete cors configuration on a bucket.
+    #
+    #   # The following example deletes CORS configuration on a bucket.
+    #
+    #   resp = client.delete_bucket_cors({
+    #     bucket: "examplebucket", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -838,6 +968,15 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete lifecycle configuration on a bucket.
+    #
+    #   # The following example deletes lifecycle configuration on a bucket.
+    #
+    #   resp = client.delete_bucket_lifecycle({
+    #     bucket: "examplebucket", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_lifecycle({
@@ -886,6 +1025,15 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete bucket policy
+    #
+    #   # The following example deletes bucket policy on the specified bucket.
+    #
+    #   resp = client.delete_bucket_policy({
+    #     bucket: "examplebucket", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_policy({
@@ -906,6 +1054,15 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete bucket replication configuration
+    #
+    #   # The following example deletes replication configuration set on bucket.
+    #
+    #   resp = client.delete_bucket_replication({
+    #     bucket: "example", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -928,6 +1085,15 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete bucket tags
+    #
+    #   # The following example deletes bucket tags.
+    #
+    #   resp = client.delete_bucket_tagging({
+    #     bucket: "examplebucket", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bucket_tagging({
@@ -948,6 +1114,15 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete bucket website configuration
+    #
+    #   # The following example deletes bucket website configuration.
+    #
+    #   resp = client.delete_bucket_website({
+    #     bucket: "examplebucket", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -992,6 +1167,29 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#version_id #version_id} => String
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    # @example Example: To delete an object
+    #
+    #   # The following example deletes an object from an S3 bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "examplebucket", 
+    #     key: "objectkey.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_object({
@@ -1029,6 +1227,36 @@ module Aws::S3
     # @return [Types::DeleteObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
+    #
+    #
+    # @example Example: To remove tag set from an object version
+    #
+    #   # The following example removes tag set associated with the specified object version. The request specifies both the object key and object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1074,6 +1302,77 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#deleted #deleted} => Array&lt;Types::DeletedObject&gt;
     #   * {Types::DeleteObjectsOutput#request_charged #request_charged} => String
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
+    #
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple objects from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "objectkey1", 
+    #         }, 
+    #         {
+    #           key: "objectkey2", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
+    #         key: "objectkey1", 
+    #       }, 
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
+    #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1234,6 +1533,33 @@ module Aws::S3
     #
     #   * {Types::GetBucketCorsOutput#cors_rules #cors_rules} => Array&lt;Types::CORSRule&gt;
     #
+    #
+    # @example Example: To get cors configuration set on a bucket
+    #
+    #   # The following example returns cross-origin resource sharing (CORS) configuration set on a bucket.
+    #
+    #   resp = client.get_bucket_cors({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cors_rules: [
+    #       {
+    #         allowed_headers: [
+    #           "Authorization", 
+    #         ], 
+    #         allowed_methods: [
+    #           "GET", 
+    #         ], 
+    #         allowed_origins: [
+    #           "*", 
+    #         ], 
+    #         max_age_seconds: 3000, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_cors({
@@ -1314,6 +1640,29 @@ module Aws::S3
     #
     #   * {Types::GetBucketLifecycleOutput#rules #rules} => Array&lt;Types::Rule&gt;
     #
+    #
+    # @example Example: To get a bucket acl
+    #
+    #   # The following example gets ACL on the specified bucket.
+    #
+    #   resp = client.get_bucket_lifecycle({
+    #     bucket: "acl1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         expiration: {
+    #           days: 1, 
+    #         }, 
+    #         id: "delete logs", 
+    #         prefix: "123/", 
+    #         status: "Enabled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_lifecycle({
@@ -1353,6 +1702,32 @@ module Aws::S3
     # @return [Types::GetBucketLifecycleConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketLifecycleConfigurationOutput#rules #rules} => Array&lt;Types::LifecycleRule&gt;
+    #
+    #
+    # @example Example: To get lifecycle configuration on a bucket
+    #
+    #   # The following example retrieves lifecycle configuration on set on a bucket. 
+    #
+    #   resp = client.get_bucket_lifecycle_configuration({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         id: "Rule for TaxDocs/", 
+    #         prefix: "TaxDocs", 
+    #         status: "Enabled", 
+    #         transitions: [
+    #           {
+    #             days: 365, 
+    #             storage_class: "STANDARD_IA", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1402,6 +1777,20 @@ module Aws::S3
     # @return [Types::GetBucketLocationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketLocationOutput#location_constraint #location_constraint} => String
+    #
+    #
+    # @example Example: To get bucket location
+    #
+    #   # The following example returns bucket location.
+    #
+    #   resp = client.get_bucket_location({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location_constraint: "us-west-2", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1511,6 +1900,63 @@ module Aws::S3
     #   * {Types::NotificationConfigurationDeprecated#queue_configuration #queue_configuration} => Types::QueueConfigurationDeprecated
     #   * {Types::NotificationConfigurationDeprecated#cloud_function_configuration #cloud_function_configuration} => Types::CloudFunctionConfiguration
     #
+    #
+    # @example Example: To get notification configuration set on a bucket
+    #
+    #   # The following example returns notification configuration set on a bucket.
+    #
+    #   resp = client.get_bucket_notification({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     queue_configuration: {
+    #       event: "s3:ObjectCreated:Put", 
+    #       events: [
+    #         "s3:ObjectCreated:Put", 
+    #       ], 
+    #       id: "MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx", 
+    #       queue: "arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue", 
+    #     }, 
+    #     topic_configuration: {
+    #       event: "s3:ObjectCreated:Copy", 
+    #       events: [
+    #         "s3:ObjectCreated:Copy", 
+    #       ], 
+    #       id: "YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi", 
+    #       topic: "arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To get notification configuration set on a bucket
+    #
+    #   # The following example returns notification configuration set on a bucket.
+    #
+    #   resp = client.get_bucket_notification({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     queue_configuration: {
+    #       event: "s3:ObjectCreated:Put", 
+    #       events: [
+    #         "s3:ObjectCreated:Put", 
+    #       ], 
+    #       id: "MDQ2OGQ4NDEtOTBmNi00YTM4LTk0NzYtZDIwN2I3NWQ1NjIx", 
+    #       queue: "arn:aws:sqs:us-east-1:acct-id:S3ObjectCreatedEventQueue", 
+    #     }, 
+    #     topic_configuration: {
+    #       event: "s3:ObjectCreated:Copy", 
+    #       events: [
+    #         "s3:ObjectCreated:Copy", 
+    #       ], 
+    #       id: "YTVkMWEzZGUtNTY1NS00ZmE2LWJjYjktMmRlY2QwODFkNTJi", 
+    #       topic: "arn:aws:sns:us-east-1:acct-id:S3ObjectCreatedEventTopic", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_notification({
@@ -1606,6 +2052,20 @@ module Aws::S3
     #
     #   * {Types::GetBucketPolicyOutput#policy #policy} => IO
     #
+    #
+    # @example Example: To get bucket policy
+    #
+    #   # The following example returns bucket policy associated with a bucket.
+    #
+    #   resp = client.get_bucket_policy({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\"Version\":\"2008-10-17\",\"Id\":\"LogPolicy\",\"Statement\":[{\"Sid\":\"Enables the log delivery group to publish logs to your bucket \",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"111122223333\"},\"Action\":[\"s3:GetBucketAcl\",\"s3:GetObjectAcl\",\"s3:PutObject\"],\"Resource\":[\"arn:aws:s3:::policytest1/*\",\"arn:aws:s3:::policytest1\"]}]}", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_policy({
@@ -1632,6 +2092,32 @@ module Aws::S3
     # @return [Types::GetBucketReplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketReplicationOutput#replication_configuration #replication_configuration} => Types::ReplicationConfiguration
+    #
+    #
+    # @example Example: To get replication configuration set on a bucket
+    #
+    #   # The following example returns replication configuration set on a bucket.
+    #
+    #   resp = client.get_bucket_replication({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replication_configuration: {
+    #       role: "arn:aws:iam::acct-id:role/example-role", 
+    #       rules: [
+    #         {
+    #           destination: {
+    #             bucket: "arn:aws:s3:::destination-bucket", 
+    #           }, 
+    #           id: "MWIwNTkwZmItMTE3MS00ZTc3LWJkZDEtNzRmODQwYzc1OTQy", 
+    #           prefix: "Tax", 
+    #           status: "Enabled", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1666,6 +2152,20 @@ module Aws::S3
     #
     #   * {Types::GetBucketRequestPaymentOutput#payer #payer} => String
     #
+    #
+    # @example Example: To get bucket versioning configuration
+    #
+    #   # The following example retrieves bucket versioning configuration.
+    #
+    #   resp = client.get_bucket_request_payment({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     payer: "BucketOwner", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_request_payment({
@@ -1692,6 +2192,29 @@ module Aws::S3
     # @return [Types::GetBucketTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To get tag set associated with a bucket
+    #
+    #   # The following example returns tag set associated with a bucket
+    #
+    #   resp = client.get_bucket_tagging({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "key1", 
+    #         value: "value1", 
+    #       }, 
+    #       {
+    #         key: "key2", 
+    #         value: "value2", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1723,6 +2246,21 @@ module Aws::S3
     #   * {Types::GetBucketVersioningOutput#status #status} => String
     #   * {Types::GetBucketVersioningOutput#mfa_delete #mfa_delete} => String
     #
+    #
+    # @example Example: To get bucket versioning configuration
+    #
+    #   # The following example retrieves bucket versioning configuration.
+    #
+    #   resp = client.get_bucket_versioning({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mfa_delete: "Disabled", 
+    #     status: "Enabled", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket_versioning({
@@ -1753,6 +2291,25 @@ module Aws::S3
     #   * {Types::GetBucketWebsiteOutput#index_document #index_document} => Types::IndexDocument
     #   * {Types::GetBucketWebsiteOutput#error_document #error_document} => Types::ErrorDocument
     #   * {Types::GetBucketWebsiteOutput#routing_rules #routing_rules} => Array&lt;Types::RoutingRule&gt;
+    #
+    #
+    # @example Example: To get bucket website configuration
+    #
+    #   # The following example retrieves website configuration of a bucket.
+    #
+    #   resp = client.get_bucket_website({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     error_document: {
+    #       key: "error.html", 
+    #     }, 
+    #     index_document: {
+    #       suffix: "index.html", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1896,6 +2453,52 @@ module Aws::S3
     #   * {Types::GetObjectOutput#parts_count #parts_count} => Integer
     #   * {Types::GetObjectOutput#tag_count #tag_count} => Integer
     #
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve a byte range of an object 
+    #
+    #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a specific byte range.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "SampleFile.txt", 
+    #     range: "bytes=0-9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 10, 
+    #     content_range: "bytes 0-9/43", 
+    #     content_type: "text/plain", 
+    #     etag: "\"0d94420ffd0bc68cd3d152506b97a9cc\"", 
+    #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Download an object to disk
     #   # stream object directly to disk
     #   resp = s3.get_object(
@@ -2011,6 +2614,58 @@ module Aws::S3
     #   * {Types::GetObjectAclOutput#grants #grants} => Array&lt;Types::Grant&gt;
     #   * {Types::GetObjectAclOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To retrieve object ACL
+    #
+    #   # The following example retrieves access control list (ACL) of an object.
+    #
+    #   resp = client.get_object_acl({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grants: [
+    #       {
+    #         grantee: {
+    #           display_name: "owner-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #           type: "CanonicalUser", 
+    #         }, 
+    #         permission: "WRITE", 
+    #       }, 
+    #       {
+    #         grantee: {
+    #           display_name: "owner-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #           type: "CanonicalUser", 
+    #         }, 
+    #         permission: "WRITE_ACP", 
+    #       }, 
+    #       {
+    #         grantee: {
+    #           display_name: "owner-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #           type: "CanonicalUser", 
+    #         }, 
+    #         permission: "READ", 
+    #       }, 
+    #       {
+    #         grantee: {
+    #           display_name: "owner-display-name", 
+    #           id: "852b113eexamplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #           type: "CanonicalUser", 
+    #         }, 
+    #         permission: "READ_ACP", 
+    #       }, 
+    #     ], 
+    #     owner: {
+    #       display_name: "owner-display-name", 
+    #       id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_object_acl({
@@ -2054,6 +2709,52 @@ module Aws::S3
     #
     #   * {Types::GetObjectTaggingOutput#version_id #version_id} => String
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To retrieve tag set of an object
+    #
+    #   # The following example retrieves tag set of an object.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key4", 
+    #         value: "Value4", 
+    #       }, 
+    #       {
+    #         key: "Key3", 
+    #         value: "Value3", 
+    #       }, 
+    #     ], 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2100,6 +2801,20 @@ module Aws::S3
     #   * {Types::GetObjectTorrentOutput#body #body} => IO
     #   * {Types::GetObjectTorrentOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To retrieve torrent files for an object
+    #
+    #   # The following example retrieves torrent files of an object.
+    #
+    #   resp = client.get_object_torrent({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_object_torrent({
@@ -2128,6 +2843,15 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To determine if bucket exists
+    #
+    #   # This operation checks to see if a bucket exists.
+    #
+    #   resp = client.head_bucket({
+    #     bucket: "acl1", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2234,6 +2958,28 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#request_charged #request_charged} => String
     #   * {Types::HeadObjectOutput#replication_status #replication_status} => String
     #   * {Types::HeadObjectOutput#parts_count #parts_count} => Integer
+    #
+    #
+    # @example Example: To retrieve metadata of an object without returning the object itself
+    #
+    #   # The following example retrieves an object metadata.
+    #
+    #   resp = client.head_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     version_id: "null", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2456,6 +3202,36 @@ module Aws::S3
     #   * {Types::ListBucketsOutput#buckets #buckets} => Array&lt;Types::Bucket&gt;
     #   * {Types::ListBucketsOutput#owner #owner} => Types::Owner
     #
+    #
+    # @example Example: To list object versions
+    #
+    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.
+    #
+    #   resp = client.list_buckets({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     buckets: [
+    #       {
+    #         creation_date: Time.parse("2012-02-15T21: 03: 02.000Z"), 
+    #         name: "examplebucket", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2011-07-24T19: 33: 50.000Z"), 
+    #         name: "examplebucket2", 
+    #       }, 
+    #       {
+    #         creation_date: Time.parse("2010-12-17T00: 56: 49.000Z"), 
+    #         name: "examplebucket3", 
+    #       }, 
+    #     ], 
+    #     owner: {
+    #       display_name: "own-display-name", 
+    #       id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31", 
+    #     }, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.buckets #=> Array
@@ -2520,6 +3296,101 @@ module Aws::S3
     #   * {Types::ListMultipartUploadsOutput#uploads #uploads} => Array&lt;Types::MultipartUpload&gt;
     #   * {Types::ListMultipartUploadsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListMultipartUploadsOutput#encoding_type #encoding_type} => String
+    #
+    #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List next set of multipart uploads when previous result is truncated
+    #
+    #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next setup of multipart uploads.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #     key_marker: "nextkeyfrompreviousresponse", 
+    #     max_uploads: 2, 
+    #     upload_id_marker: "valuefrompreviousresponse", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     bucket: "acl1", 
+    #     is_truncated: true, 
+    #     key_marker: "", 
+    #     max_uploads: 2, 
+    #     next_key_marker: "someobjectkey", 
+    #     next_upload_id_marker: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #     upload_id_marker: "", 
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "ownder-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "mohanataws", 
+    #           id: "852b113e7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "gZ30jIqlUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "ownder-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "ownder-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2609,6 +3480,48 @@ module Aws::S3
     #   * {Types::ListObjectVersionsOutput#max_keys #max_keys} => Integer
     #   * {Types::ListObjectVersionsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectVersionsOutput#encoding_type #encoding_type} => String
+    #
+    #
+    # @example Example: To list object versions
+    #
+    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.
+    #
+    #   resp = client.list_object_versions({
+    #     bucket: "examplebucket", 
+    #     prefix: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     versions: [
+    #       {
+    #         etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #         is_latest: true, 
+    #         key: "HappyFace.jpg", 
+    #         last_modified: Time.parse("2016-12-15T01:19:41.000Z"), 
+    #         owner: {
+    #           display_name: "owner-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         size: 3191, 
+    #         storage_class: "STANDARD", 
+    #         version_id: "null", 
+    #       }, 
+    #       {
+    #         etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #         is_latest: false, 
+    #         key: "HappyFace.jpg", 
+    #         last_modified: Time.parse("2016-12-13T00:58:26.000Z"), 
+    #         owner: {
+    #           display_name: "owner-display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         size: 3191, 
+    #         storage_class: "STANDARD", 
+    #         version_id: "PHtexPGjH2y.zBgT8LmB7wwLI2mpbz.k", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2707,6 +3620,45 @@ module Aws::S3
     #   * {Types::ListObjectsOutput#max_keys #max_keys} => Integer
     #   * {Types::ListObjectsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectsOutput#encoding_type #encoding_type} => String
+    #
+    #
+    # @example Example: To list objects in a bucket
+    #
+    #   # The following example list two objects in a bucket.
+    #
+    #   resp = client.list_objects({
+    #     bucket: "examplebucket", 
+    #     max_keys: 2, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contents: [
+    #       {
+    #         etag: "\"70ee1738b6b21e2c8a43f3a5ab0eee71\"", 
+    #         key: "example1.jpg", 
+    #         last_modified: Time.parse("2014-11-21T19:40:05.000Z"), 
+    #         owner: {
+    #           display_name: "myname", 
+    #           id: "12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         size: 11, 
+    #         storage_class: "STANDARD", 
+    #       }, 
+    #       {
+    #         etag: "\"9c8af9a76df052144598c115ef33e511\"", 
+    #         key: "example2.jpg", 
+    #         last_modified: Time.parse("2013-11-15T01:10:49.000Z"), 
+    #         owner: {
+    #           display_name: "myname", 
+    #           id: "12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         size: 713193, 
+    #         storage_class: "STANDARD", 
+    #       }, 
+    #     ], 
+    #     next_marker: "eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAyfQ==", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2807,6 +3759,42 @@ module Aws::S3
     #   * {Types::ListObjectsV2Output#next_continuation_token #next_continuation_token} => String
     #   * {Types::ListObjectsV2Output#start_after #start_after} => String
     #
+    #
+    # @example Example: To get object list
+    #
+    #   # The following example retrieves object list. The request specifies max keys to limit response to include only 2 object keys. 
+    #
+    #   resp = client.list_objects_v2({
+    #     bucket: "examplebucket", 
+    #     max_keys: 2, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contents: [
+    #       {
+    #         etag: "\"70ee1738b6b21e2c8a43f3a5ab0eee71\"", 
+    #         key: "happyface.jpg", 
+    #         last_modified: Time.parse("2014-11-21T19:40:05.000Z"), 
+    #         size: 11, 
+    #         storage_class: "STANDARD", 
+    #       }, 
+    #       {
+    #         etag: "\"becf17f89c30367a9a44495d62ed521a-1\"", 
+    #         key: "test.jpg", 
+    #         last_modified: Time.parse("2014-05-02T04:51:50.000Z"), 
+    #         size: 4192256, 
+    #         storage_class: "STANDARD", 
+    #       }, 
+    #     ], 
+    #     is_truncated: true, 
+    #     key_count: 2, 
+    #     max_keys: 2, 
+    #     name: "examplebucket", 
+    #     next_continuation_token: "1w41l63U0xa8q7smH50vCxyTQqdxo69O3EmK28Bi5PcROI4wI/EyIJg==", 
+    #     prefix: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_objects_v2({
@@ -2894,6 +3882,44 @@ module Aws::S3
     #   * {Types::ListPartsOutput#owner #owner} => Types::Owner
     #   * {Types::ListPartsOutput#storage_class #storage_class} => String
     #   * {Types::ListPartsOutput#request_charged #request_charged} => String
+    #
+    #
+    # @example Example: To list parts of a multipart upload.
+    #
+    #   # The following example lists parts uploaded for a specific multipart upload.
+    #
+    #   resp = client.list_parts({
+    #     bucket: "examplebucket", 
+    #     key: "bigobject", 
+    #     upload_id: "example7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     initiator: {
+    #       display_name: "owner-display-name", 
+    #       id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #     }, 
+    #     owner: {
+    #       display_name: "owner-display-name", 
+    #       id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #     }, 
+    #     parts: [
+    #       {
+    #         etag: "\"d8c2eafd90c266e19ab9dcacc479f8af\"", 
+    #         last_modified: Time.parse("2016-12-16T00:11:42.000Z"), 
+    #         part_number: 1, 
+    #         size: 26246026, 
+    #       }, 
+    #       {
+    #         etag: "\"d8c2eafd90c266e19ab9dcacc479f8af\"", 
+    #         last_modified: Time.parse("2016-12-16T00:15:01.000Z"), 
+    #         part_number: 2, 
+    #         size: 26246026, 
+    #       }, 
+    #     ], 
+    #     storage_class: "STANDARD", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2995,6 +4021,17 @@ module Aws::S3
     #   Allows grantee to write the ACL for the applicable bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Put bucket acl
+    #
+    #   # The following example replaces existing ACL on a bucket. The ACL grants the bucket owner (specified using the owner ID) and write permission to the LogDelivery group. Because this is a replace operation, you must specify all the grants in your request. To incrementally add or remove ACL grants, you might use the console.
+    #
+    #   resp = client.put_bucket_acl({
+    #     bucket: "examplebucket", 
+    #     grant_full_control: "id=examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484", 
+    #     grant_write: "uri=http://acs.amazonaws.com/groups/s3/LogDelivery", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3107,6 +4144,49 @@ module Aws::S3
     # @option params [String] :content_md5
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To set cors configuration on a bucket.
+    #
+    #   # The following example enables PUT, POST, and DELETE requests from www.example.com, and enables GET requests from any domain.
+    #
+    #   resp = client.put_bucket_cors({
+    #     bucket: "", 
+    #     cors_configuration: {
+    #       cors_rules: [
+    #         {
+    #           allowed_headers: [
+    #             "*", 
+    #           ], 
+    #           allowed_methods: [
+    #             "PUT", 
+    #             "POST", 
+    #             "DELETE", 
+    #           ], 
+    #           allowed_origins: [
+    #             "http://www.example.com", 
+    #           ], 
+    #           expose_headers: [
+    #             "x-amz-server-side-encryption", 
+    #           ], 
+    #           max_age_seconds: 3000, 
+    #         }, 
+    #         {
+    #           allowed_headers: [
+    #             "Authorization", 
+    #           ], 
+    #           allowed_methods: [
+    #             "GET", 
+    #           ], 
+    #           allowed_origins: [
+    #             "*", 
+    #           ], 
+    #           max_age_seconds: 3000, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     content_md5: "", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3250,6 +4330,35 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Put bucket lifecycle
+    #
+    #   # The following example replaces existing lifecycle configuration, if any, on the specified bucket. 
+    #
+    #   resp = client.put_bucket_lifecycle_configuration({
+    #     bucket: "examplebucket", 
+    #     lifecycle_configuration: {
+    #       rules: [
+    #         {
+    #           expiration: {
+    #             days: 3650, 
+    #           }, 
+    #           filter: {
+    #             prefix: "documents/", 
+    #           }, 
+    #           id: "TestOnly", 
+    #           status: "Enabled", 
+    #           transitions: [
+    #             {
+    #               days: 365, 
+    #               storage_class: "GLACIER", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_lifecycle_configuration({
@@ -3325,6 +4434,30 @@ module Aws::S3
     # @option params [String] :content_md5
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Set logging configuration for a bucket
+    #
+    #   # The following example sets logging policy on a bucket. For the Log Delivery group to deliver logs to the destination bucket, it needs permission for the READ_ACP action which the policy grants.
+    #
+    #   resp = client.put_bucket_logging({
+    #     bucket: "sourcebucket", 
+    #     bucket_logging_status: {
+    #       logging_enabled: {
+    #         target_bucket: "targetbucket", 
+    #         target_grants: [
+    #           {
+    #             grantee: {
+    #               type: "Group", 
+    #               uri: "http://acs.amazonaws.com/groups/global/AllUsers", 
+    #             }, 
+    #             permission: "READ", 
+    #           }, 
+    #         ], 
+    #         target_prefix: "MyBucketLogs/", 
+    #       }, 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3466,6 +4599,25 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Set notification configuration for a bucket
+    #
+    #   # The following example sets notification configuration on a bucket to publish the object created events to an SNS topic.
+    #
+    #   resp = client.put_bucket_notification_configuration({
+    #     bucket: "examplebucket", 
+    #     notification_configuration: {
+    #       topic_configurations: [
+    #         {
+    #           events: [
+    #             "s3:ObjectCreated:*", 
+    #           ], 
+    #           topic_arn: "arn:aws:sns:us-west-2:123456789012:s3-notification-topic", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_notification_configuration({
@@ -3546,6 +4698,16 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Set bucket policy
+    #
+    #   # The following example sets a permission policy on a bucket.
+    #
+    #   resp = client.put_bucket_policy({
+    #     bucket: "examplebucket", 
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{ \"Sid\": \"id-1\",\"Effect\": \"Allow\",\"Principal\": {\"AWS\": \"arn:aws:iam::123456789012:root\"}, \"Action\": [ \"s3:PutObject\",\"s3:PutObjectAcl\"], \"Resource\": [\"arn:aws:s3:::acl3/*\" ] } ]}", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_policy({
@@ -3575,6 +4737,28 @@ module Aws::S3
     #   Total replication configuration size can be up to 2 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Set replication configuration on a bucket
+    #
+    #   # The following example sets replication configuration on a bucket.
+    #
+    #   resp = client.put_bucket_replication({
+    #     bucket: "examplebucket", 
+    #     replication_configuration: {
+    #       role: "arn:aws:iam::123456789012:role/examplerole", 
+    #       rules: [
+    #         {
+    #           destination: {
+    #             bucket: "arn:aws:s3:::destinationbucket", 
+    #             storage_class: "STANDARD", 
+    #           }, 
+    #           prefix: "", 
+    #           status: "Enabled", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3621,6 +4805,18 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Set request payment configuration on a bucket.
+    #
+    #   # The following example sets request payment configuration on a bucket so that person requesting the download is charged.
+    #
+    #   resp = client.put_bucket_request_payment({
+    #     bucket: "examplebucket", 
+    #     request_payment_configuration: {
+    #       payer: "Requester", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_request_payment({
@@ -3649,6 +4845,27 @@ module Aws::S3
     # @option params [required, Types::Tagging] :tagging
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Set tags on a bucket
+    #
+    #   # The following example sets tags on a bucket. Any existing tags are replaced.
+    #
+    #   resp = client.put_bucket_tagging({
+    #     bucket: "examplebucket", 
+    #     tagging: {
+    #       tag_set: [
+    #         {
+    #           key: "Key1", 
+    #           value: "Value1", 
+    #         }, 
+    #         {
+    #           key: "Key2", 
+    #           value: "Value2", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3689,6 +4906,19 @@ module Aws::S3
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Set versioning configuration on a bucket
+    #
+    #   # The following example sets versioning configuration on bucket. The configuration enables versioning on the bucket.
+    #
+    #   resp = client.put_bucket_versioning({
+    #     bucket: "examplebucket", 
+    #     versioning_configuration: {
+    #       mfa_delete: "Disabled", 
+    #       status: "Enabled", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bucket_versioning({
@@ -3719,6 +4949,24 @@ module Aws::S3
     # @option params [required, Types::WebsiteConfiguration] :website_configuration
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Set website configuration on a bucket
+    #
+    #   # The following example adds website configuration to a bucket.
+    #
+    #   resp = client.put_bucket_website({
+    #     bucket: "examplebucket", 
+    #     content_md5: "", 
+    #     website_configuration: {
+    #       error_document: {
+    #         key: "error.html", 
+    #       }, 
+    #       index_document: {
+    #         suffix: "index.html", 
+    #       }, 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3877,6 +5125,131 @@ module Aws::S3
     #   * {Types::PutObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
     # @example Streaming a file from disk
     #   # upload file from disk in a single request, may not exceed 5GB
     #   File.open('/source/file/path', 'rb') do |file|
@@ -3981,6 +5354,24 @@ module Aws::S3
     #
     #   * {Types::PutObjectAclOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To grant permissions using object ACL
+    #
+    #   # The following example adds grants to an object ACL. The first permission grants user1 and user2 FULL_CONTROL and the AllUsers group READ permission.
+    #
+    #   resp = client.put_object_acl({
+    #     access_control_policy: {
+    #     }, 
+    #     bucket: "examplebucket", 
+    #     grant_full_control: "emailaddress=user1@example.com,emailaddress=user2@example.com", 
+    #     grant_read: "uri=http://acs.amazonaws.com/groups/global/AllUsers", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_object_acl({
@@ -4044,6 +5435,33 @@ module Aws::S3
     #
     #   * {Types::PutObjectTaggingOutput#version_id #version_id} => String
     #
+    #
+    # @example Example: To add tags to an existing object
+    #
+    #   # The following example adds tags to an existing object.
+    #
+    #   resp = client.put_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: {
+    #       tag_set: [
+    #         {
+    #           key: "Key3", 
+    #           value: "Value3", 
+    #         }, 
+    #         {
+    #           key: "Key4", 
+    #           value: "Value4", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_object_tagging({
@@ -4094,6 +5512,26 @@ module Aws::S3
     # @return [Types::RestoreObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreObjectOutput#request_charged #request_charged} => String
+    #
+    #
+    # @example Example: To restore an archived object
+    #
+    #   # The following example restores for one day an archived copy of an object back into Amazon S3 bucket.
+    #
+    #   resp = client.restore_object({
+    #     bucket: "examplebucket", 
+    #     key: "archivedobjectkey", 
+    #     restore_request: {
+    #       days: 1, 
+    #       glacier_job_parameters: {
+    #         tier: "Expedited", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4188,6 +5626,24 @@ module Aws::S3
     #   * {Types::UploadPartOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::UploadPartOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::UploadPartOutput#request_charged #request_charged} => String
+    #
+    #
+    # @example Example: To upload a part
+    #
+    #   # The following example uploads part 1 of a multipart upload. The example specifies a file name for the part data. The Upload ID is same that is returned by the initiate multipart upload.
+    #
+    #   resp = client.upload_part({
+    #     body: "fileToUpload", 
+    #     bucket: "examplebucket", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"d8c2eafd90c266e19ab9dcacc479f8af\"", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4310,6 +5766,48 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload a part by copying byte range from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     copy_source_range: "bytes=1-100000", 
+    #     key: "examplelargeobject", 
+    #     part_number: 2, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
+    #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.upload_part_copy({
@@ -4365,7 +5863,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

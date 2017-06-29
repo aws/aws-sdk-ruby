@@ -354,6 +354,68 @@ module Aws::DynamoDB
     #   * {Types::BatchGetItemOutput#unprocessed_keys #unprocessed_keys} => Hash&lt;String,Types::KeysAndAttributes&gt;
     #   * {Types::BatchGetItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
     #
+    #
+    # @example Example: To retrieve multiple items from a table
+    #
+    #   # This example reads multiple items from the Music table using a batch of three GetItem requests.  Only the AlbumTitle attribute is returned.
+    #
+    #   resp = client.batch_get_item({
+    #     request_items: {
+    #       "Music" => {
+    #         keys: [
+    #           {
+    #             "Artist" => {
+    #               s: "No One You Know", 
+    #             }, 
+    #             "SongTitle" => {
+    #               s: "Call Me Today", 
+    #             }, 
+    #           }, 
+    #           {
+    #             "Artist" => {
+    #               s: "Acme Band", 
+    #             }, 
+    #             "SongTitle" => {
+    #               s: "Happy Day", 
+    #             }, 
+    #           }, 
+    #           {
+    #             "Artist" => {
+    #               s: "No One You Know", 
+    #             }, 
+    #             "SongTitle" => {
+    #               s: "Scared of My Shadow", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         projection_expression: "AlbumTitle", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responses: {
+    #       "Music" => [
+    #         {
+    #           "AlbumTitle" => {
+    #             s: "Somewhat Famous", 
+    #           }, 
+    #         }, 
+    #         {
+    #           "AlbumTitle" => {
+    #             s: "Blue Sky Blues", 
+    #           }, 
+    #         }, 
+    #         {
+    #           "AlbumTitle" => {
+    #             s: "Louder Than Ever", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_item({
@@ -552,6 +614,67 @@ module Aws::DynamoDB
     #   * {Types::BatchWriteItemOutput#unprocessed_items #unprocessed_items} => Hash&lt;String,Array&lt;Types::WriteRequest&gt;&gt;
     #   * {Types::BatchWriteItemOutput#item_collection_metrics #item_collection_metrics} => Hash&lt;String,Array&lt;Types::ItemCollectionMetrics&gt;&gt;
     #   * {Types::BatchWriteItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #
+    #
+    # @example Example: To add multiple items to a table
+    #
+    #   # This example adds three new items to the Music table using a batch of three PutItem requests.
+    #
+    #   resp = client.batch_write_item({
+    #     request_items: {
+    #       "Music" => [
+    #         {
+    #           put_request: {
+    #             item: {
+    #               "AlbumTitle" => {
+    #                 s: "Somewhat Famous", 
+    #               }, 
+    #               "Artist" => {
+    #                 s: "No One You Know", 
+    #               }, 
+    #               "SongTitle" => {
+    #                 s: "Call Me Today", 
+    #               }, 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         {
+    #           put_request: {
+    #             item: {
+    #               "AlbumTitle" => {
+    #                 s: "Songs About Life", 
+    #               }, 
+    #               "Artist" => {
+    #                 s: "Acme Band", 
+    #               }, 
+    #               "SongTitle" => {
+    #                 s: "Happy Day", 
+    #               }, 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         {
+    #           put_request: {
+    #             item: {
+    #               "AlbumTitle" => {
+    #                 s: "Blue Sky Blues", 
+    #               }, 
+    #               "Artist" => {
+    #                 s: "No One You Know", 
+    #               }, 
+    #               "SongTitle" => {
+    #                 s: "Scared of My Shadow", 
+    #               }, 
+    #             }, 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -798,6 +921,74 @@ module Aws::DynamoDB
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
+    #
+    #
+    # @example Example: To create a table
+    #
+    #   # This example creates a table named Music.
+    #
+    #   resp = client.create_table({
+    #     attribute_definitions: [
+    #       {
+    #         attribute_name: "Artist", 
+    #         attribute_type: "S", 
+    #       }, 
+    #       {
+    #         attribute_name: "SongTitle", 
+    #         attribute_type: "S", 
+    #       }, 
+    #     ], 
+    #     key_schema: [
+    #       {
+    #         attribute_name: "Artist", 
+    #         key_type: "HASH", 
+    #       }, 
+    #       {
+    #         attribute_name: "SongTitle", 
+    #         key_type: "RANGE", 
+    #       }, 
+    #     ], 
+    #     provisioned_throughput: {
+    #       read_capacity_units: 5, 
+    #       write_capacity_units: 5, 
+    #     }, 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_description: {
+    #       attribute_definitions: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           attribute_type: "S", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           attribute_type: "S", 
+    #         }, 
+    #       ], 
+    #       creation_date_time: Time.parse("1421866952.062"), 
+    #       item_count: 0, 
+    #       key_schema: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           key_type: "HASH", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           key_type: "RANGE", 
+    #         }, 
+    #       ], 
+    #       provisioned_throughput: {
+    #         read_capacity_units: 5, 
+    #         write_capacity_units: 5, 
+    #       }, 
+    #       table_name: "Music", 
+    #       table_size_bytes: 0, 
+    #       table_status: "CREATING", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1112,6 +1303,31 @@ module Aws::DynamoDB
     #   * {Types::DeleteItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #   * {Types::DeleteItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
     #
+    #
+    # @example Example: To delete an item
+    #
+    #   # This example deletes an item from the Music table.
+    #
+    #   resp = client.delete_item({
+    #     key: {
+    #       "Artist" => {
+    #         s: "No One You Know", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Scared of My Shadow", 
+    #       }, 
+    #     }, 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     consumed_capacity: {
+    #       capacity_units: 1, 
+    #       table_name: "Music", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_item({
@@ -1194,6 +1410,30 @@ module Aws::DynamoDB
     # @return [Types::DeleteTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteTableOutput#table_description #table_description} => Types::TableDescription
+    #
+    #
+    # @example Example: To delete a table
+    #
+    #   # This example deletes the Music table.
+    #
+    #   resp = client.delete_table({
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_description: {
+    #       item_count: 0, 
+    #       provisioned_throughput: {
+    #         number_of_decreases_today: 1, 
+    #         read_capacity_units: 5, 
+    #         write_capacity_units: 5, 
+    #       }, 
+    #       table_name: "Music", 
+    #       table_size_bytes: 0, 
+    #       table_status: "DELETING", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1339,6 +1579,22 @@ module Aws::DynamoDB
     #   * {Types::DescribeLimitsOutput#table_max_read_capacity_units #table_max_read_capacity_units} => Integer
     #   * {Types::DescribeLimitsOutput#table_max_write_capacity_units #table_max_write_capacity_units} => Integer
     #
+    #
+    # @example Example: To determine capacity limits per table and account, in the current AWS region
+    #
+    #   # The following example returns the maximum read and write capacity units per table, and for the AWS account, in the current AWS region.
+    #
+    #   resp = client.describe_limits({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_max_read_capacity_units: 20000, 
+    #     account_max_write_capacity_units: 20000, 
+    #     table_max_read_capacity_units: 10000, 
+    #     table_max_write_capacity_units: 10000, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.account_max_read_capacity_units #=> Integer
@@ -1374,6 +1630,51 @@ module Aws::DynamoDB
     # @return [Types::DescribeTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTableOutput#table #table} => Types::TableDescription
+    #
+    #
+    # @example Example: To describe a table
+    #
+    #   # This example describes the Music table.
+    #
+    #   resp = client.describe_table({
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table: {
+    #       attribute_definitions: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           attribute_type: "S", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           attribute_type: "S", 
+    #         }, 
+    #       ], 
+    #       creation_date_time: Time.parse("1421866952.062"), 
+    #       item_count: 0, 
+    #       key_schema: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           key_type: "HASH", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           key_type: "RANGE", 
+    #         }, 
+    #       ], 
+    #       provisioned_throughput: {
+    #         number_of_decreases_today: 1, 
+    #         read_capacity_units: 5, 
+    #         write_capacity_units: 5, 
+    #       }, 
+    #       table_name: "Music", 
+    #       table_size_bytes: 0, 
+    #       table_status: "ACTIVE", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1600,6 +1901,38 @@ module Aws::DynamoDB
     #   * {Types::GetItemOutput#item #item} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::GetItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #
+    #
+    # @example Example: To read an item from a table
+    #
+    #   # This example retrieves an item from the Music table. The table has a partition key and a sort key (Artist and SongTitle), so you must specify both of these attributes.
+    #
+    #   resp = client.get_item({
+    #     key: {
+    #       "Artist" => {
+    #         s: "Acme Band", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Happy Day", 
+    #       }, 
+    #     }, 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     item: {
+    #       "AlbumTitle" => {
+    #         s: "Songs About Life", 
+    #       }, 
+    #       "Artist" => {
+    #         s: "Acme Band", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Happy Day", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_item({
@@ -1654,6 +1987,24 @@ module Aws::DynamoDB
     #
     #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
     #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
+    #
+    #
+    # @example Example: To list tables
+    #
+    #   # This example lists all of the tables associated with the current AWS account and endpoint.
+    #
+    #   resp = client.list_tables({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_names: [
+    #       "Forum", 
+    #       "ProductCatalog", 
+    #       "Reply", 
+    #       "Thread", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1946,6 +2297,35 @@ module Aws::DynamoDB
     #   * {Types::PutItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::PutItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #   * {Types::PutItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
+    #
+    #
+    # @example Example: To add an item to a table
+    #
+    #   # This example adds a new item to the Music table.
+    #
+    #   resp = client.put_item({
+    #     item: {
+    #       "AlbumTitle" => {
+    #         s: "Somewhat Famous", 
+    #       }, 
+    #       "Artist" => {
+    #         s: "No One You Know", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Call Me Today", 
+    #       }, 
+    #     }, 
+    #     return_consumed_capacity: "TOTAL", 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     consumed_capacity: {
+    #       capacity_units: 1, 
+    #       table_name: "Music", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2398,6 +2778,37 @@ module Aws::DynamoDB
     #   * {Types::QueryOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::QueryOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #
+    #
+    # @example Example: To query an item
+    #
+    #   # This example queries items in the Music table. The table has a partition key and sort key (Artist and SongTitle), but this query only specifies the partition key value. It returns song titles by the artist named "No One You Know".
+    #
+    #   resp = client.query({
+    #     expression_attribute_values: {
+    #       ":v1" => {
+    #         s: "No One You Know", 
+    #       }, 
+    #     }, 
+    #     key_condition_expression: "Artist = :v1", 
+    #     projection_expression: "SongTitle", 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     consumed_capacity: {
+    #     }, 
+    #     count: 2, 
+    #     items: [
+    #       {
+    #         "SongTitle" => {
+    #           s: "Call Me Today", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     scanned_count: 2, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.query({
@@ -2790,6 +3201,52 @@ module Aws::DynamoDB
     #   * {Types::ScanOutput#scanned_count #scanned_count} => Integer
     #   * {Types::ScanOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::ScanOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #
+    #
+    # @example Example: To scan a table
+    #
+    #   # This example scans the entire Music table, and then narrows the results to songs by the artist "No One You Know". For each item, only the album title and song title are returned.
+    #
+    #   resp = client.scan({
+    #     expression_attribute_names: {
+    #       "AT" => "AlbumTitle", 
+    #       "ST" => "SongTitle", 
+    #     }, 
+    #     expression_attribute_values: {
+    #       ":a" => {
+    #         s: "No One You Know", 
+    #       }, 
+    #     }, 
+    #     filter_expression: "Artist = :a", 
+    #     projection_expression: "#ST, #AT", 
+    #     table_name: "Music", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     consumed_capacity: {
+    #     }, 
+    #     count: 2, 
+    #     items: [
+    #       {
+    #         "AlbumTitle" => {
+    #           s: "Somewhat Famous", 
+    #         }, 
+    #         "SongTitle" => {
+    #           s: "Call Me Today", 
+    #         }, 
+    #       }, 
+    #       {
+    #         "AlbumTitle" => {
+    #           s: "Blue Sky Blues", 
+    #         }, 
+    #         "SongTitle" => {
+    #           s: "Scared of My Shadow", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     scanned_count: 3, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3220,6 +3677,52 @@ module Aws::DynamoDB
     #   * {Types::UpdateItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #   * {Types::UpdateItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
     #
+    #
+    # @example Example: To update an item in a table
+    #
+    #   # This example updates an item in the Music table. It adds a new attribute (Year) and modifies the AlbumTitle attribute.  All of the attributes in the item, as they appear after the update, are returned in the response.
+    #
+    #   resp = client.update_item({
+    #     expression_attribute_names: {
+    #       "#AT" => "AlbumTitle", 
+    #       "#Y" => "Year", 
+    #     }, 
+    #     expression_attribute_values: {
+    #       ":t" => {
+    #         s: "Louder Than Ever", 
+    #       }, 
+    #       ":y" => {
+    #         n: "2015", 
+    #       }, 
+    #     }, 
+    #     key: {
+    #       "Artist" => {
+    #         s: "Acme Band", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Happy Day", 
+    #       }, 
+    #     }, 
+    #     return_values: "ALL_NEW", 
+    #     table_name: "Music", 
+    #     update_expression: "SET #Y = :y, #AT = :t", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: {
+    #       "AlbumTitle" => {
+    #         s: "Songs About Life", 
+    #       }, 
+    #       "Artist" => {
+    #         s: "Acme Band", 
+    #       }, 
+    #       "SongTitle" => {
+    #         s: "Happy Day", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_item({
@@ -3344,6 +3847,56 @@ module Aws::DynamoDB
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
+    #
+    #
+    # @example Example: To modify a table's provisioned throughput
+    #
+    #   # This example increases the provisioned read and write capacity on the Music table.
+    #
+    #   resp = client.update_table({
+    #     provisioned_throughput: {
+    #       read_capacity_units: 10, 
+    #       write_capacity_units: 10, 
+    #     }, 
+    #     table_name: "MusicCollection", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_description: {
+    #       attribute_definitions: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           attribute_type: "S", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           attribute_type: "S", 
+    #         }, 
+    #       ], 
+    #       creation_date_time: Time.parse("1421866952.062"), 
+    #       item_count: 0, 
+    #       key_schema: [
+    #         {
+    #           attribute_name: "Artist", 
+    #           key_type: "HASH", 
+    #         }, 
+    #         {
+    #           attribute_name: "SongTitle", 
+    #           key_type: "RANGE", 
+    #         }, 
+    #       ], 
+    #       provisioned_throughput: {
+    #         last_increase_date_time: Time.parse("1421874759.194"), 
+    #         number_of_decreases_today: 1, 
+    #         read_capacity_units: 1, 
+    #         write_capacity_units: 1, 
+    #       }, 
+    #       table_name: "MusicCollection", 
+    #       table_size_bytes: 0, 
+    #       table_status: "UPDATING", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3543,7 +4096,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

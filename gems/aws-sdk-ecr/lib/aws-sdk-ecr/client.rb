@@ -238,6 +238,32 @@ module Aws::ECR
     #   * {Types::BatchDeleteImageResponse#image_ids #image_ids} => Array&lt;Types::ImageIdentifier&gt;
     #   * {Types::BatchDeleteImageResponse#failures #failures} => Array&lt;Types::ImageFailure&gt;
     #
+    #
+    # @example Example: To delete multiple images
+    #
+    #   # This example deletes images with the tags precise and trusty in a repository called ubuntu in the default registry for an account.
+    #
+    #   resp = client.batch_delete_image({
+    #     image_ids: [
+    #       {
+    #         image_tag: "precise", 
+    #       }, 
+    #     ], 
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     image_ids: [
+    #       {
+    #         image_digest: "sha256:examplee6d1e504117a17000003d3753086354a38375961f2e665416ef4b1b2f", 
+    #         image_tag: "precise", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_delete_image({
@@ -299,6 +325,37 @@ module Aws::ECR
     #
     #   * {Types::BatchGetImageResponse#images #images} => Array&lt;Types::Image&gt;
     #   * {Types::BatchGetImageResponse#failures #failures} => Array&lt;Types::ImageFailure&gt;
+    #
+    #
+    # @example Example: To obtain multiple images in a single request
+    #
+    #   # This example obtains information for an image with a specified image digest ID from the repository named ubuntu in the current account.
+    #
+    #   resp = client.batch_get_image({
+    #     image_ids: [
+    #       {
+    #         image_tag: "precise", 
+    #       }, 
+    #     ], 
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     images: [
+    #       {
+    #         image_id: {
+    #           image_digest: "sha256:example76bdff6d83a09ba2a818f0d00000063724a9ac3ba5019c56f74ebf42a", 
+    #           image_tag: "precise", 
+    #         }, 
+    #         image_manifest: "{\n \"schemaVersion\": 1,\n \"name\": \"ubuntu\",\n \"tag\": \"precise\",\n...", 
+    #         registry_id: "244698725403", 
+    #         repository_name: "ubuntu", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -407,6 +464,24 @@ module Aws::ECR
     #
     #   * {Types::CreateRepositoryResponse#repository #repository} => Types::Repository
     #
+    #
+    # @example Example: To create a new repository
+    #
+    #   # This example creates a repository called nginx-web-app inside the project-a namespace in the default registry for an account.
+    #
+    #   resp = client.create_repository({
+    #     repository_name: "project-a/nginx-web-app", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     repository: {
+    #       registry_id: "012345678901", 
+    #       repository_arn: "arn:aws:ecr:us-west-2:012345678901:repository/project-a/nginx-web-app", 
+    #       repository_name: "project-a/nginx-web-app", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_repository({
@@ -447,6 +522,25 @@ module Aws::ECR
     # @return [Types::DeleteRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteRepositoryResponse#repository #repository} => Types::Repository
+    #
+    #
+    # @example Example: To force delete a repository
+    #
+    #   # This example force deletes a repository named ubuntu in the default registry for an account. The force parameter is required if the repository contains images.
+    #
+    #   resp = client.delete_repository({
+    #     force: true, 
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     repository: {
+    #       registry_id: "012345678901", 
+    #       repository_arn: "arn:aws:ecr:us-west-2:012345678901:repository/ubuntu", 
+    #       repository_name: "ubuntu", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -489,6 +583,22 @@ module Aws::ECR
     #   * {Types::DeleteRepositoryPolicyResponse#registry_id #registry_id} => String
     #   * {Types::DeleteRepositoryPolicyResponse#repository_name #repository_name} => String
     #   * {Types::DeleteRepositoryPolicyResponse#policy_text #policy_text} => String
+    #
+    #
+    # @example Example: To delete the policy associated with a repository
+    #
+    #   # This example deletes the policy associated with the repository named ubuntu in the current account.
+    #
+    #   resp = client.delete_repository_policy({
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_text: "{ ... }", 
+    #     registry_id: "012345678901", 
+    #     repository_name: "ubuntu", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -640,6 +750,30 @@ module Aws::ECR
     #   * {Types::DescribeRepositoriesResponse#repositories #repositories} => Array&lt;Types::Repository&gt;
     #   * {Types::DescribeRepositoriesResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe all repositories in the current account
+    #
+    #   # The following example obtains a list and description of all repositories in the default registry to which the current user has access.
+    #
+    #   resp = client.describe_repositories({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     repositories: [
+    #       {
+    #         registry_id: "012345678910", 
+    #         repository_arn: "arn:aws:ecr:us-west-2:012345678910:repository/ubuntu", 
+    #         repository_name: "ubuntu", 
+    #       }, 
+    #       {
+    #         registry_id: "012345678910", 
+    #         repository_arn: "arn:aws:ecr:us-west-2:012345678910:repository/test", 
+    #         repository_name: "test", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_repositories({
@@ -686,6 +820,25 @@ module Aws::ECR
     # @return [Types::GetAuthorizationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAuthorizationTokenResponse#authorization_data #authorization_data} => Array&lt;Types::AuthorizationData&gt;
+    #
+    #
+    # @example Example: To obtain an authorization token
+    #
+    #   # This example gets an authorization token for your default registry.
+    #
+    #   resp = client.get_authorization_token({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     authorization_data: [
+    #       {
+    #         authorization_token: "QVdTOkN...", 
+    #         expires_at: Time.parse("1470951892432"), 
+    #         proxy_endpoint: "https://012345678901.dkr.ecr.us-west-2.amazonaws.com", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -773,6 +926,22 @@ module Aws::ECR
     #   * {Types::GetRepositoryPolicyResponse#registry_id #registry_id} => String
     #   * {Types::GetRepositoryPolicyResponse#repository_name #repository_name} => String
     #   * {Types::GetRepositoryPolicyResponse#policy_text #policy_text} => String
+    #
+    #
+    # @example Example: To get the current policy for a repository
+    #
+    #   # This example obtains the repository policy for the repository named ubuntu.
+    #
+    #   resp = client.get_repository_policy({
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_text: "{\n  \"Version\" : \"2008-10-17\",\n  \"Statement\" : [ {\n    \"Sid\" : \"new statement\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n     \"AWS\" : \"arn:aws:iam::012345678901:role/CodeDeployDemo\"\n    },\n\"Action\" : [ \"ecr:GetDownloadUrlForLayer\", \"ecr:BatchGetImage\", \"ecr:BatchCheckLayerAvailability\" ]\n } ]\n}", 
+    #     registry_id: "012345678901", 
+    #     repository_name: "ubuntu", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -886,6 +1055,25 @@ module Aws::ECR
     #
     #   * {Types::ListImagesResponse#image_ids #image_ids} => Array&lt;Types::ImageIdentifier&gt;
     #   * {Types::ListImagesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list all images in a repository
+    #
+    #   # This example lists all of the images in the repository named ubuntu in the default registry in the current account. 
+    #
+    #   resp = client.list_images({
+    #     repository_name: "ubuntu", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_ids: [
+    #       {
+    #         image_digest: "sha256:764f63476bdff6d83a09ba2a818f0d35757063724a9ac3ba5019c56f74ebf42a", 
+    #         image_tag: "precise", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1095,7 +1283,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

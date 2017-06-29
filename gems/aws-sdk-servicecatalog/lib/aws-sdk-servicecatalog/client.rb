@@ -276,6 +276,32 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Associate a TagOption identifier with a resource identifier.
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifier.
+    #
+    # @option params [required, String] :tag_option_id
+    #   The TagOption identifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_tag_option_with_resource({
+    #     resource_id: "ResourceId", # required
+    #     tag_option_id: "TagOptionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResource AWS API Documentation
+    #
+    # @overload associate_tag_option_with_resource(params = {})
+    # @param [Hash] params ({})
+    def associate_tag_option_with_resource(params = {}, options = {})
+      req = build_request(:associate_tag_option_with_resource, params)
+      req.send_request(options)
+    end
+
     # Creates a new constraint. For more information, see [Using
     # Constraints][1].
     #
@@ -671,6 +697,41 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Create a new TagOption.
+    #
+    # @option params [required, String] :key
+    #   The TagOption key.
+    #
+    # @option params [required, String] :value
+    #   The TagOption value.
+    #
+    # @return [Types::CreateTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTagOptionOutput#tag_option_detail #tag_option_detail} => Types::TagOptionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tag_option({
+    #     key: "TagOptionKey", # required
+    #     value: "TagOptionValue", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_option_detail.key #=> String
+    #   resp.tag_option_detail.value #=> String
+    #   resp.tag_option_detail.active #=> Boolean
+    #   resp.tag_option_detail.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption AWS API Documentation
+    #
+    # @overload create_tag_option(params = {})
+    # @param [Hash] params ({})
+    def create_tag_option(params = {}, options = {})
+      req = build_request(:create_tag_option, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified constraint.
     #
     # @option params [String] :accept_language
@@ -933,6 +994,7 @@ module Aws::ServiceCatalog
     #
     #   * {Types::DescribePortfolioOutput#portfolio_detail #portfolio_detail} => Types::PortfolioDetail
     #   * {Types::DescribePortfolioOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::DescribePortfolioOutput#tag_options #tag_options} => Array&lt;Types::TagOptionDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -952,6 +1014,11 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.tag_options #=> Array
+    #   resp.tag_options[0].key #=> String
+    #   resp.tag_options[0].value #=> String
+    #   resp.tag_options[0].active #=> Boolean
+    #   resp.tag_options[0].id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio AWS API Documentation
     #
@@ -1045,6 +1112,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProductAsAdminOutput#product_view_detail #product_view_detail} => Types::ProductViewDetail
     #   * {Types::DescribeProductAsAdminOutput#provisioning_artifact_summaries #provisioning_artifact_summaries} => Array&lt;Types::ProvisioningArtifactSummary&gt;
     #   * {Types::DescribeProductAsAdminOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::DescribeProductAsAdminOutput#tag_options #tag_options} => Array&lt;Types::TagOptionDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1079,6 +1147,11 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.tag_options #=> Array
+    #   resp.tag_options[0].key #=> String
+    #   resp.tag_options[0].value #=> String
+    #   resp.tag_options[0].active #=> Boolean
+    #   resp.tag_options[0].id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin AWS API Documentation
     #
@@ -1221,8 +1294,7 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [Boolean] :verbose
-    #   Selects verbose results. If set to true, the CloudFormation template
-    #   is returned.
+    #   Enable a verbose level of details for the provisioning artifact.
     #
     # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1264,6 +1336,17 @@ module Aws::ServiceCatalog
     # the list of `ProvisioningArtifactParameters` parameters available to
     # call the ProvisionProduct operation for the specified product.
     #
+    # If the output contains a TagOption key with an empty list of values,
+    # there is a TagOption conflict for that key. The end user cannot take
+    # action to fix the conflict, and launch is not blocked. In subsequent
+    # calls to the `ProvisionProduct` operation, do not include conflicted
+    # TagOption keys as tags. Calls to `ProvisionProduct` with empty
+    # TagOption values cause the error "Parameter validation failed:
+    # Missing required parameter in Tags\[*N*\]:*Value* ". Calls to
+    # `ProvisionProduct` with conflicted TagOption keys automatically tag
+    # the provisioned product with the conflicted keys with the value
+    # "`sc-tagoption-conflict-portfolioId-productId`".
+    #
     # @option params [String] :accept_language
     #   The language code to use for this operation. Supported language codes
     #   are as follows:
@@ -1293,6 +1376,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_parameters #provisioning_artifact_parameters} => Array&lt;Types::ProvisioningArtifactParameter&gt;
     #   * {Types::DescribeProvisioningParametersOutput#constraint_summaries #constraint_summaries} => Array&lt;Types::ConstraintSummary&gt;
     #   * {Types::DescribeProvisioningParametersOutput#usage_instructions #usage_instructions} => Array&lt;Types::UsageInstruction&gt;
+    #   * {Types::DescribeProvisioningParametersOutput#tag_options #tag_options} => Array&lt;Types::TagOptionSummary&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1319,6 +1403,10 @@ module Aws::ServiceCatalog
     #   resp.usage_instructions #=> Array
     #   resp.usage_instructions[0].type #=> String
     #   resp.usage_instructions[0].value #=> String
+    #   resp.tag_options #=> Array
+    #   resp.tag_options[0].key #=> String
+    #   resp.tag_options[0].values #=> Array
+    #   resp.tag_options[0].values[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
@@ -1409,6 +1497,37 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Describes a TagOption.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the TagOption.
+    #
+    # @return [Types::DescribeTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagOptionOutput#tag_option_detail #tag_option_detail} => Types::TagOptionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tag_option({
+    #     id: "TagOptionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_option_detail.key #=> String
+    #   resp.tag_option_detail.value #=> String
+    #   resp.tag_option_detail.active #=> Boolean
+    #   resp.tag_option_detail.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption AWS API Documentation
+    #
+    # @overload describe_tag_option(params = {})
+    # @param [Hash] params ({})
+    def describe_tag_option(params = {}, options = {})
+      req = build_request(:describe_tag_option, params)
+      req.send_request(options)
+    end
+
     # Disassociates a previously associated principal ARN from a specified
     # portfolio.
     #
@@ -1485,6 +1604,32 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def disassociate_product_from_portfolio(params = {}, options = {})
       req = build_request(:disassociate_product_from_portfolio, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a TagOption from a resource.
+    #
+    # @option params [required, String] :resource_id
+    #   Identifier of the resource from which to disassociate the TagOption.
+    #
+    # @option params [required, String] :tag_option_id
+    #   Identifier of the TagOption to disassociate from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_tag_option_from_resource({
+    #     resource_id: "ResourceId", # required
+    #     tag_option_id: "TagOptionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResource AWS API Documentation
+    #
+    # @overload disassociate_tag_option_from_resource(params = {})
+    # @param [Hash] params ({})
+    def disassociate_tag_option_from_resource(params = {}, options = {})
+      req = build_request(:disassociate_tag_option_from_resource, params)
       req.send_request(options)
     end
 
@@ -1626,7 +1771,7 @@ module Aws::ServiceCatalog
     #   If no code is specified, "en" is used as the default.
     #
     # @option params [required, String] :product_id
-    #   The product identifier.. Identifies the product for which to retrieve
+    #   The product identifier. Identifies the product for which to retrieve
     #   `LaunchPathSummaries` information.
     #
     # @option params [Integer] :page_size
@@ -2023,6 +2168,106 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Lists resources associated with a TagOption.
+    #
+    # @option params [required, String] :tag_option_id
+    #   Identifier of the TagOption.
+    #
+    # @option params [String] :resource_type
+    #   Resource type.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return in the results. If more results
+    #   exist than fit in the specified `PageSize`, the value of
+    #   `NextPageToken` in the response is non-null.
+    #
+    # @option params [String] :page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #
+    # @return [Types::ListResourcesForTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcesForTagOptionOutput#resource_details #resource_details} => Array&lt;Types::ResourceDetail&gt;
+    #   * {Types::ListResourcesForTagOptionOutput#page_token #page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resources_for_tag_option({
+    #     tag_option_id: "TagOptionId", # required
+    #     resource_type: "ResourceType",
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_details #=> Array
+    #   resp.resource_details[0].id #=> String
+    #   resp.resource_details[0].arn #=> String
+    #   resp.resource_details[0].name #=> String
+    #   resp.resource_details[0].description #=> String
+    #   resp.resource_details[0].created_time #=> Time
+    #   resp.page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOption AWS API Documentation
+    #
+    # @overload list_resources_for_tag_option(params = {})
+    # @param [Hash] params ({})
+    def list_resources_for_tag_option(params = {}, options = {})
+      req = build_request(:list_resources_for_tag_option, params)
+      req.send_request(options)
+    end
+
+    # Lists detailed TagOptions information.
+    #
+    # @option params [Types::ListTagOptionsFilters] :filters
+    #   The list of filters with which to limit search results. If no search
+    #   filters are specified, the output is all TagOptions.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return in the results. If more results
+    #   exist than fit in the specified `PageSize`, the value of
+    #   `NextPageToken` in the response is non-null.
+    #
+    # @option params [String] :page_token
+    #   The page token of the first page retrieved. If null, this retrieves
+    #   the first page of size `PageSize`.
+    #
+    # @return [Types::ListTagOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagOptionsOutput#tag_option_details #tag_option_details} => Array&lt;Types::TagOptionDetail&gt;
+    #   * {Types::ListTagOptionsOutput#page_token #page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tag_options({
+    #     filters: {
+    #       key: "TagOptionKey",
+    #       value: "TagOptionValue",
+    #       active: false,
+    #     },
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_option_details #=> Array
+    #   resp.tag_option_details[0].key #=> String
+    #   resp.tag_option_details[0].value #=> String
+    #   resp.tag_option_details[0].active #=> Boolean
+    #   resp.tag_option_details[0].id #=> String
+    #   resp.page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions AWS API Documentation
+    #
+    # @overload list_tag_options(params = {})
+    # @param [Hash] params ({})
+    def list_tag_options(params = {}, options = {})
+      req = build_request(:list_tag_options, params)
+      req.send_request(options)
+    end
+
     # Requests a *provision* of a specified product. A *provisioned product*
     # is a resourced instance for a product. For example, provisioning a
     # CloudFormation-template-backed product results in launching a
@@ -2030,7 +2275,13 @@ module Aws::ServiceCatalog
     # it.
     #
     # You can check the status of this request using the DescribeRecord
-    # operation.
+    # operation. The error "Parameter validation failed: Missing required
+    # parameter in Tags\[*N*\]:*Value*" indicates that your request
+    # contains a tag which has a tag key but no corresponding tag value
+    # (value is empty or null). Your call may have included values returned
+    # from a `DescribeProvisioningParameters` call that resulted in a
+    # TagOption key with an empty list. This happens when TagOption keys are
+    # in conflict. For more information, see DescribeProvisioningParameters.
     #
     # @option params [String] :accept_language
     #   The language code to use for this operation. Supported language codes
@@ -2910,6 +3161,45 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Updates an existing TagOption.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the constraint to update.
+    #
+    # @option params [String] :value
+    #   The updated value.
+    #
+    # @option params [Boolean] :active
+    #   The updated active state.
+    #
+    # @return [Types::UpdateTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTagOptionOutput#tag_option_detail #tag_option_detail} => Types::TagOptionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_tag_option({
+    #     id: "TagOptionId", # required
+    #     value: "TagOptionValue",
+    #     active: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_option_detail.key #=> String
+    #   resp.tag_option_detail.value #=> String
+    #   resp.tag_option_detail.active #=> Boolean
+    #   resp.tag_option_detail.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOption AWS API Documentation
+    #
+    # @overload update_tag_option(params = {})
+    # @param [Hash] params ({})
+    def update_tag_option(params = {}, options = {})
+      req = build_request(:update_tag_option, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2923,7 +3213,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

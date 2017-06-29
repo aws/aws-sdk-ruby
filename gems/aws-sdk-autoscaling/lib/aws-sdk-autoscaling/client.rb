@@ -173,6 +173,18 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach an instance to an Auto Scaling group
+    #
+    #   # This example attaches the specified instance to the specified Auto Scaling group.
+    #
+    #   resp = client.attach_instances({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_instances({
@@ -210,6 +222,18 @@ module Aws::AutoScaling
     #   The Amazon Resource Names (ARN) of the target groups.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To attach a target group to an Auto Scaling group
+    #
+    #   # This example attaches the specified target group to the specified Auto Scaling group.
+    #
+    #   resp = client.attach_load_balancer_target_groups({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -251,6 +275,18 @@ module Aws::AutoScaling
     #   One or more load balancer names.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To attach a load balancer to an Auto Scaling group
+    #
+    #   # This example attaches the specified load balancer to the specified Auto Scaling group.
+    #
+    #   resp = client.attach_load_balancers({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -319,6 +355,18 @@ module Aws::AutoScaling
     #   The ID of the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To complete the lifecycle action
+    #
+    #   # This example notifies Auto Scaling that the specified lifecycle action is complete so that it can finish launching or terminating the instance.
+    #
+    #   resp = client.complete_lifecycle_action({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     lifecycle_action_result: "CONTINUE", 
+    #     lifecycle_action_token: "bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635", 
+    #     lifecycle_hook_name: "my-lifecycle-hook", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -497,6 +545,55 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create an Auto Scaling group
+    #
+    #   # This example creates an Auto Scaling group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     launch_configuration_name: "my-launch-config", 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     vpc_zone_identifier: "subnet-4176792c", 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with an attached load balancer
+    #
+    #   # This example creates an Auto Scaling group and attaches the specified Classic Load Balancer.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     availability_zones: [
+    #       "us-west-2c", 
+    #     ], 
+    #     health_check_grace_period: 120, 
+    #     health_check_type: "ELB", 
+    #     launch_configuration_name: "my-launch-config", 
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #   })
+    #
+    # @example Example: To create an Auto Scaling group with an attached target group
+    #
+    #   # This example creates an Auto Scaling group and attaches the specified target group.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     health_check_grace_period: 120, 
+    #     health_check_type: "ELB", 
+    #     launch_configuration_name: "my-launch-config", 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #     vpc_zone_identifier: "subnet-4176792c, subnet-65ea5f08", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -752,6 +849,21 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a launch configuration
+    #
+    #   # This example creates a launch configuration.
+    #
+    #   resp = client.create_launch_configuration({
+    #     iam_instance_profile: "my-iam-role", 
+    #     image_id: "ami-12345678", 
+    #     instance_type: "m3.medium", 
+    #     launch_configuration_name: "my-launch-config", 
+    #     security_groups: [
+    #       "sg-eb2af88e", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_launch_configuration({
@@ -818,6 +930,30 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create or update tags for an Auto Scaling group
+    #
+    #   # This example adds two tags to the specified Auto Scaling group.
+    #
+    #   resp = client.create_or_update_tags({
+    #     tags: [
+    #       {
+    #         key: "Role", 
+    #         propagate_at_launch: true, 
+    #         resource_id: "my-auto-scaling-group", 
+    #         resource_type: "auto-scaling-group", 
+    #         value: "WebServer", 
+    #       }, 
+    #       {
+    #         key: "Dept", 
+    #         propagate_at_launch: true, 
+    #         resource_id: "my-auto-scaling-group", 
+    #         resource_type: "auto-scaling-group", 
+    #         value: "Research", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_or_update_tags({
@@ -870,6 +1006,24 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an Auto Scaling group
+    #
+    #   # This example deletes the specified Auto Scaling group.
+    #
+    #   resp = client.delete_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    # @example Example: To delete an Auto Scaling group and all its instances
+    #
+    #   # This example deletes the specified Auto Scaling group and all its instances.
+    #
+    #   resp = client.delete_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     force_delete: true, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_auto_scaling_group({
@@ -896,6 +1050,15 @@ module Aws::AutoScaling
     #   The name of the launch configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a launch configuration
+    #
+    #   # This example deletes the specified launch configuration.
+    #
+    #   resp = client.delete_launch_configuration({
+    #     launch_configuration_name: "my-launch-config", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -926,6 +1089,16 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a lifecycle hook
+    #
+    #   # This example deletes the specified lifecycle hook.
+    #
+    #   resp = client.delete_lifecycle_hook({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     lifecycle_hook_name: "my-lifecycle-hook", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_lifecycle_hook({
@@ -952,6 +1125,16 @@ module Aws::AutoScaling
     #   Service (SNS) topic.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an Auto Scaling notification
+    #
+    #   # This example deletes the specified notification from the specified Auto Scaling group.
+    #
+    #   resp = client.delete_notification_configuration({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     topic_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -982,6 +1165,16 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an Auto Scaling policy
+    #
+    #   # This example deletes the specified Auto Scaling policy.
+    #
+    #   resp = client.delete_policy({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     policy_name: "ScaleIn", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_policy({
@@ -1008,6 +1201,16 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a scheduled action from an Auto Scaling group
+    #
+    #   # This example deletes the specified scheduled action from the specified Auto Scaling group.
+    #
+    #   resp = client.delete_scheduled_action({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     scheduled_action_name: "my-scheduled-action", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scheduled_action({
@@ -1030,6 +1233,22 @@ module Aws::AutoScaling
     #   One or more tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a tag from an Auto Scaling group
+    #
+    #   # This example deletes the specified tag from the specified Auto Scaling group.
+    #
+    #   resp = client.delete_tags({
+    #     tags: [
+    #       {
+    #         key: "Dept", 
+    #         resource_id: "my-auto-scaling-group", 
+    #         resource_type: "auto-scaling-group", 
+    #         value: "Research", 
+    #       }, 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1071,6 +1290,22 @@ module Aws::AutoScaling
     #   * {Types::DescribeAccountLimitsAnswer#number_of_auto_scaling_groups #number_of_auto_scaling_groups} => Integer
     #   * {Types::DescribeAccountLimitsAnswer#number_of_launch_configurations #number_of_launch_configurations} => Integer
     #
+    #
+    # @example Example: To describe your Auto Scaling account limits
+    #
+    #   # This example describes the Auto Scaling limits for your AWS account.
+    #
+    #   resp = client.describe_account_limits({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     max_number_of_auto_scaling_groups: 20, 
+    #     max_number_of_launch_configurations: 100, 
+    #     number_of_auto_scaling_groups: 3, 
+    #     number_of_launch_configurations: 5, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.max_number_of_auto_scaling_groups #=> Integer
@@ -1092,6 +1327,29 @@ module Aws::AutoScaling
     # @return [Types::DescribeAdjustmentTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAdjustmentTypesAnswer#adjustment_types #adjustment_types} => Array&lt;Types::AdjustmentType&gt;
+    #
+    #
+    # @example Example: To describe the Auto Scaling adjustment types
+    #
+    #   # This example describes the available adjustment types.
+    #
+    #   resp = client.describe_adjustment_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     adjustment_types: [
+    #       {
+    #         adjustment_type: "ChangeInCapacity", 
+    #       }, 
+    #       {
+    #         adjustment_type: "ExactCapcity", 
+    #       }, 
+    #       {
+    #         adjustment_type: "PercentChangeInCapacity", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1125,6 +1383,61 @@ module Aws::AutoScaling
     #
     #   * {Types::AutoScalingGroupsType#auto_scaling_groups #auto_scaling_groups} => Array&lt;Types::AutoScalingGroup&gt;
     #   * {Types::AutoScalingGroupsType#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe an Auto Scaling group
+    #
+    #   # This example describes the specified Auto Scaling group.
+    #
+    #   resp = client.describe_auto_scaling_groups({
+    #     auto_scaling_group_names: [
+    #       "my-auto-scaling-group", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_scaling_groups: [
+    #       {
+    #         auto_scaling_group_arn: "arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:930d940e-891e-4781-a11a-7b0acd480f03:autoScalingGroupName/my-auto-scaling-group", 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         availability_zones: [
+    #           "us-west-2c", 
+    #         ], 
+    #         created_time: Time.parse("2013-08-19T20:53:25.584Z"), 
+    #         default_cooldown: 300, 
+    #         desired_capacity: 1, 
+    #         enabled_metrics: [
+    #         ], 
+    #         health_check_grace_period: 300, 
+    #         health_check_type: "EC2", 
+    #         instances: [
+    #           {
+    #             availability_zone: "us-west-2c", 
+    #             health_status: "Healthy", 
+    #             instance_id: "i-4ba0837f", 
+    #             launch_configuration_name: "my-launch-config", 
+    #             lifecycle_state: "InService", 
+    #             protected_from_scale_in: false, 
+    #           }, 
+    #         ], 
+    #         launch_configuration_name: "my-launch-config", 
+    #         load_balancer_names: [
+    #         ], 
+    #         max_size: 1, 
+    #         min_size: 0, 
+    #         new_instances_protected_from_scale_in: false, 
+    #         suspended_processes: [
+    #         ], 
+    #         tags: [
+    #         ], 
+    #         termination_policies: [
+    #           "Default", 
+    #         ], 
+    #         vpc_zone_identifier: "subnet-12345678", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1209,6 +1522,32 @@ module Aws::AutoScaling
     #   * {Types::AutoScalingInstancesType#auto_scaling_instances #auto_scaling_instances} => Array&lt;Types::AutoScalingInstanceDetails&gt;
     #   * {Types::AutoScalingInstancesType#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe one or more Auto Scaling instances
+    #
+    #   # This example describes the specified Auto Scaling instance.
+    #
+    #   resp = client.describe_auto_scaling_instances({
+    #     instance_ids: [
+    #       "i-4ba0837f", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_scaling_instances: [
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         availability_zone: "us-west-2c", 
+    #         health_status: "HEALTHY", 
+    #         instance_id: "i-4ba0837f", 
+    #         launch_configuration_name: "my-launch-config", 
+    #         lifecycle_state: "InService", 
+    #         protected_from_scale_in: false, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_auto_scaling_instances({
@@ -1244,6 +1583,25 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeAutoScalingNotificationTypesAnswer#auto_scaling_notification_types #auto_scaling_notification_types} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To describe the Auto Scaling notification types
+    #
+    #   # This example describes the available notification types.
+    #
+    #   resp = client.describe_auto_scaling_notification_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_scaling_notification_types: [
+    #       "autoscaling:EC2_INSTANCE_LAUNCH", 
+    #       "autoscaling:EC2_INSTANCE_LAUNCH_ERROR", 
+    #       "autoscaling:EC2_INSTANCE_TERMINATE", 
+    #       "autoscaling:EC2_INSTANCE_TERMINATE_ERROR", 
+    #       "autoscaling:TEST_NOTIFICATION", 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.auto_scaling_notification_types #=> Array
@@ -1276,6 +1634,40 @@ module Aws::AutoScaling
     #
     #   * {Types::LaunchConfigurationsType#launch_configurations #launch_configurations} => Array&lt;Types::LaunchConfiguration&gt;
     #   * {Types::LaunchConfigurationsType#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe Auto Scaling launch configurations
+    #
+    #   # This example describes the specified launch configuration.
+    #
+    #   resp = client.describe_launch_configurations({
+    #     launch_configuration_names: [
+    #       "my-launch-config", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     launch_configurations: [
+    #       {
+    #         associate_public_ip_address: true, 
+    #         block_device_mappings: [
+    #         ], 
+    #         created_time: Time.parse("2014-05-07T17:39:28.599Z"), 
+    #         ebs_optimized: false, 
+    #         image_id: "ami-043a5034", 
+    #         instance_monitoring: {
+    #           enabled: true, 
+    #         }, 
+    #         instance_type: "t1.micro", 
+    #         launch_configuration_arn: "arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config", 
+    #         launch_configuration_name: "my-launch-config", 
+    #         security_groups: [
+    #           "sg-67ef0308", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1335,6 +1727,22 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeLifecycleHookTypesAnswer#lifecycle_hook_types #lifecycle_hook_types} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To describe the available types of lifecycle hooks
+    #
+    #   # This example describes the available lifecycle hook types.
+    #
+    #   resp = client.describe_lifecycle_hook_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_hook_types: [
+    #       "autoscaling:EC2_INSTANCE_LAUNCHING", 
+    #       "autoscaling:EC2_INSTANCE_TERMINATING", 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.lifecycle_hook_types #=> Array
@@ -1361,6 +1769,31 @@ module Aws::AutoScaling
     # @return [Types::DescribeLifecycleHooksAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLifecycleHooksAnswer#lifecycle_hooks #lifecycle_hooks} => Array&lt;Types::LifecycleHook&gt;
+    #
+    #
+    # @example Example: To describe your lifecycle hooks
+    #
+    #   # This example describes the lifecycle hooks for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_lifecycle_hooks({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_hooks: [
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         default_result: "ABANDON", 
+    #         global_timeout: 172800, 
+    #         heartbeat_timeout: 3600, 
+    #         lifecycle_hook_name: "my-lifecycle-hook", 
+    #         lifecycle_transition: "autoscaling:EC2_INSTANCE_LAUNCHING", 
+    #         notification_target_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic", 
+    #         role_arn: "arn:aws:iam::123456789012:role/my-auto-scaling-role", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1409,6 +1842,25 @@ module Aws::AutoScaling
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #load_balancer_target_groups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
     #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe the target groups for an Auto Scaling group
+    #
+    #   # This example describes the target groups attached to the specified Auto Scaling group.
+    #
+    #   resp = client.describe_load_balancer_target_groups({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancer_target_groups: [
+    #       {
+    #         load_balancer_target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #         state: "Added", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_load_balancer_target_groups({
@@ -1455,6 +1907,25 @@ module Aws::AutoScaling
     #   * {Types::DescribeLoadBalancersResponse#load_balancers #load_balancers} => Array&lt;Types::LoadBalancerState&gt;
     #   * {Types::DescribeLoadBalancersResponse#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe the load balancers for an Auto Scaling group
+    #
+    #   # This example describes the load balancers attached to the specified Auto Scaling group.
+    #
+    #   resp = client.describe_load_balancers({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     load_balancers: [
+    #       {
+    #         load_balancer_name: "my-load-balancer", 
+    #         state: "Added", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_load_balancers({
@@ -1490,6 +1961,49 @@ module Aws::AutoScaling
     #   * {Types::DescribeMetricCollectionTypesAnswer#metrics #metrics} => Array&lt;Types::MetricCollectionType&gt;
     #   * {Types::DescribeMetricCollectionTypesAnswer#granularities #granularities} => Array&lt;Types::MetricGranularityType&gt;
     #
+    #
+    # @example Example: To describe the Auto Scaling metric collection types
+    #
+    #   # This example describes the available metric collection types.
+    #
+    #   resp = client.describe_metric_collection_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     granularities: [
+    #       {
+    #         granularity: "1Minute", 
+    #       }, 
+    #     ], 
+    #     metrics: [
+    #       {
+    #         metric: "GroupMinSize", 
+    #       }, 
+    #       {
+    #         metric: "GroupMaxSize", 
+    #       }, 
+    #       {
+    #         metric: "GroupDesiredCapacity", 
+    #       }, 
+    #       {
+    #         metric: "GroupInServiceInstances", 
+    #       }, 
+    #       {
+    #         metric: "GroupPendingInstances", 
+    #       }, 
+    #       {
+    #         metric: "GroupTerminatingInstances", 
+    #       }, 
+    #       {
+    #         metric: "GroupStandbyInstances", 
+    #       }, 
+    #       {
+    #         metric: "GroupTotalInstances", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.metrics #=> Array
@@ -1524,6 +2038,33 @@ module Aws::AutoScaling
     #
     #   * {Types::DescribeNotificationConfigurationsAnswer#notification_configurations #notification_configurations} => Array&lt;Types::NotificationConfiguration&gt;
     #   * {Types::DescribeNotificationConfigurationsAnswer#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe Auto Scaling notification configurations
+    #
+    #   # This example describes the notification configurations for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_notification_configurations({
+    #     auto_scaling_group_names: [
+    #       "my-auto-scaling-group", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     notification_configurations: [
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         notification_type: "autoscaling:TEST_NOTIFICATION", 
+    #         topic_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic-2", 
+    #       }, 
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         notification_type: "autoscaling:TEST_NOTIFICATION", 
+    #         topic_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1578,6 +2119,41 @@ module Aws::AutoScaling
     #
     #   * {Types::PoliciesType#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
     #   * {Types::PoliciesType#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe Auto Scaling policies
+    #
+    #   # This example describes the policies for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_policies({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scaling_policies: [
+    #       {
+    #         adjustment_type: "ChangeInCapacity", 
+    #         alarms: [
+    #         ], 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         policy_arn: "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn", 
+    #         policy_name: "ScaleIn", 
+    #         scaling_adjustment: -1, 
+    #       }, 
+    #       {
+    #         adjustment_type: "PercentChangeInCapacity", 
+    #         alarms: [
+    #         ], 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         cooldown: 60, 
+    #         min_adjustment_step: 2, 
+    #         policy_arn: "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2b435159-cf77-4e89-8c0e-d63b497baad7:autoScalingGroupName/my-auto-scaling-group:policyName/ScalePercentChange", 
+    #         policy_name: "ScalePercentChange", 
+    #         scaling_adjustment: 25, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1647,6 +2223,32 @@ module Aws::AutoScaling
     #   * {Types::ActivitiesType#activities #activities} => Array&lt;Types::Activity&gt;
     #   * {Types::ActivitiesType#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe the scaling activities for an Auto Scaling group
+    #
+    #   # This example describes the scaling activities for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_scaling_activities({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "f9f2d65b-f1f2-43e7-b46d-d86756459699", 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         cause: "At 2013-08-19T20:53:25Z a user request created an AutoScalingGroup changing the desired capacity from 0 to 1.  At 2013-08-19T20:53:29Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.", 
+    #         description: "Launching a new EC2 instance: i-4ba0837f", 
+    #         details: "details", 
+    #         end_time: Time.parse("2013-08-19T20:54:02Z"), 
+    #         progress: 100, 
+    #         start_time: Time.parse("2013-08-19T20:53:29.930Z"), 
+    #         status_code: "Successful", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scaling_activities({
@@ -1686,6 +2288,44 @@ module Aws::AutoScaling
     # @return [Types::ProcessesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProcessesType#processes #processes} => Array&lt;Types::ProcessType&gt;
+    #
+    #
+    # @example Example: To describe the Auto Scaling process types
+    #
+    #   # This example describes the Auto Scaling process types.
+    #
+    #   resp = client.describe_scaling_process_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     processes: [
+    #       {
+    #         process_name: "AZRebalance", 
+    #       }, 
+    #       {
+    #         process_name: "AddToLoadBalancer", 
+    #       }, 
+    #       {
+    #         process_name: "AlarmNotification", 
+    #       }, 
+    #       {
+    #         process_name: "HealthCheck", 
+    #       }, 
+    #       {
+    #         process_name: "Launch", 
+    #       }, 
+    #       {
+    #         process_name: "ReplaceUnhealthy", 
+    #       }, 
+    #       {
+    #         process_name: "ScheduledActions", 
+    #       }, 
+    #       {
+    #         process_name: "Terminate", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1737,6 +2377,32 @@ module Aws::AutoScaling
     #
     #   * {Types::ScheduledActionsType#scheduled_update_group_actions #scheduled_update_group_actions} => Array&lt;Types::ScheduledUpdateGroupAction&gt;
     #   * {Types::ScheduledActionsType#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe scheduled actions
+    #
+    #   # This example describes the scheduled actions for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_scheduled_actions({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     scheduled_update_group_actions: [
+    #       {
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         desired_capacity: 4, 
+    #         max_size: 6, 
+    #         min_size: 2, 
+    #         recurrence: "30 0 1 12 0", 
+    #         scheduled_action_arn: "arn:aws:autoscaling:us-west-2:123456789012:scheduledUpdateGroupAction:8e86b655-b2e6-4410-8f29-b4f094d6871c:autoScalingGroupName/my-auto-scaling-group:scheduledActionName/my-scheduled-action", 
+    #         scheduled_action_name: "my-scheduled-action", 
+    #         start_time: Time.parse("2016-12-01T00:30:00Z"), 
+    #         time: Time.parse("2016-12-01T00:30:00Z"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1800,6 +2466,42 @@ module Aws::AutoScaling
     #   * {Types::TagsType#tags #tags} => Array&lt;Types::TagDescription&gt;
     #   * {Types::TagsType#next_token #next_token} => String
     #
+    #
+    # @example Example: To describe tags
+    #
+    #   # This example describes the tags for the specified Auto Scaling group.
+    #
+    #   resp = client.describe_tags({
+    #     filters: [
+    #       {
+    #         name: "auto-scaling-group", 
+    #         values: [
+    #           "my-auto-scaling-group", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "Dept", 
+    #         propagate_at_launch: true, 
+    #         resource_id: "my-auto-scaling-group", 
+    #         resource_type: "auto-scaling-group", 
+    #         value: "Research", 
+    #       }, 
+    #       {
+    #         key: "Role", 
+    #         propagate_at_launch: true, 
+    #         resource_id: "my-auto-scaling-group", 
+    #         resource_type: "auto-scaling-group", 
+    #         value: "WebServer", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_tags({
@@ -1837,6 +2539,25 @@ module Aws::AutoScaling
     # @return [Types::DescribeTerminationPolicyTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTerminationPolicyTypesAnswer#termination_policy_types #termination_policy_types} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To describe termination policy types
+    #
+    #   # This example describes the available termination policy types.
+    #
+    #   resp = client.describe_termination_policy_types({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     termination_policy_types: [
+    #       "ClosestToNextInstanceHour", 
+    #       "Default", 
+    #       "NewestInstance", 
+    #       "OldestInstance", 
+    #       "OldestLaunchConfiguration", 
+    #     ], 
+    #   }
     #
     # @example Response structure
     #
@@ -1886,6 +2607,35 @@ module Aws::AutoScaling
     #
     #   * {Types::DetachInstancesAnswer#activities #activities} => Array&lt;Types::Activity&gt;
     #
+    #
+    # @example Example: To detach an instance from an Auto Scaling group
+    #
+    #   # This example detaches the specified instance from the specified Auto Scaling group.
+    #
+    #   resp = client.detach_instances({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #     should_decrement_desired_capacity: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "5091cb52-547a-47ce-a236-c9ccbc2cb2c9", 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         cause: "At 2015-04-12T15:02:16Z instance i-93633f9b was detached in response to a user request, shrinking the capacity from 2 to 1.", 
+    #         description: "Detaching EC2 instance: i-93633f9b", 
+    #         details: "details", 
+    #         progress: 50, 
+    #         start_time: Time.parse("2015-04-12T15:02:16.179Z"), 
+    #         status_code: "InProgress", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_instances({
@@ -1928,6 +2678,18 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To detach a target group from an Auto Scaling group
+    #
+    #   # This example detaches the specified target group from the specified Auto Scaling group
+    #
+    #   resp = client.detach_load_balancer_target_groups({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     target_group_arns: [
+    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_load_balancer_target_groups({
@@ -1963,6 +2725,18 @@ module Aws::AutoScaling
     #   One or more load balancer names.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To detach a load balancer from an Auto Scaling group
+    #
+    #   # This example detaches the specified load balancer from the specified Auto Scaling group.
+    #
+    #   resp = client.detach_load_balancers({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     load_balancer_names: [
+    #       "my-load-balancer", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2006,6 +2780,18 @@ module Aws::AutoScaling
     #   * `GroupTotalInstances`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disable metrics collection for an Auto Scaling group
+    #
+    #   # This example disables collecting data for the GroupDesiredCapacity metric for the specified Auto Scaling group.
+    #
+    #   resp = client.disable_metrics_collection({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     metrics: [
+    #       "GroupDesiredCapacity", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2060,6 +2846,16 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To enable metrics collection for an Auto Scaling group
+    #
+    #   # This example enables data collection for the specified Auto Scaling group.
+    #
+    #   resp = client.enable_metrics_collection({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     granularity: "1Minute", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_metrics_collection({
@@ -2102,6 +2898,35 @@ module Aws::AutoScaling
     # @return [Types::EnterStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnterStandbyAnswer#activities #activities} => Array&lt;Types::Activity&gt;
+    #
+    #
+    # @example Example: To move instances into standby mode
+    #
+    #   # This example puts the specified instance into standby mode.
+    #
+    #   resp = client.enter_standby({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #     should_decrement_desired_capacity: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "ffa056b4-6ed3-41ba-ae7c-249dfae6eba1", 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         cause: "At 2015-04-12T15:10:23Z instance i-93633f9b was moved to standby in response to a user request, shrinking the capacity from 2 to 1.", 
+    #         description: "Moving EC2 instance to Standby: i-93633f9b", 
+    #         details: "details", 
+    #         progress: 50, 
+    #         start_time: Time.parse("2015-04-12T15:10:23.640Z"), 
+    #         status_code: "InProgress", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2178,6 +3003,17 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To execute an Auto Scaling policy
+    #
+    #   # This example executes the specified Auto Scaling policy for the specified Auto Scaling group.
+    #
+    #   resp = client.execute_policy({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     honor_cooldown: true, 
+    #     policy_name: "ScaleIn", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_policy({
@@ -2215,6 +3051,34 @@ module Aws::AutoScaling
     # @return [Types::ExitStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExitStandbyAnswer#activities #activities} => Array&lt;Types::Activity&gt;
+    #
+    #
+    # @example Example: To move instances out of standby mode
+    #
+    #   # This example moves the specified instance out of standby mode.
+    #
+    #   resp = client.exit_standby({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activities: [
+    #       {
+    #         activity_id: "142928e1-a2dc-453a-9b24-b85ad6735928", 
+    #         auto_scaling_group_name: "my-auto-scaling-group", 
+    #         cause: "At 2015-04-12T15:14:29Z instance i-93633f9b was moved out of standby in response to a user request, increasing the capacity from 1 to 2.", 
+    #         description: "Moving EC2 instance out of Standby: i-93633f9b", 
+    #         details: "details", 
+    #         progress: 30, 
+    #         start_time: Time.parse("2015-04-12T15:14:29.886Z"), 
+    #         status_code: "PreInService", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2341,6 +3205,19 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To create a lifecycle hook
+    #
+    #   # This example creates a lifecycle hook.
+    #
+    #   resp = client.put_lifecycle_hook({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     lifecycle_hook_name: "my-lifecycle-hook", 
+    #     lifecycle_transition: "autoscaling:EC2_INSTANCE_LAUNCHING", 
+    #     notification_target_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic --role-arn", 
+    #     role_arn: "arn:aws:iam::123456789012:role/my-auto-scaling-role", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_lifecycle_hook({
@@ -2390,6 +3267,19 @@ module Aws::AutoScaling
     #   DescribeAutoScalingNotificationTypes.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add an Auto Scaling notification
+    #
+    #   # This example adds the specified notification to the specified Auto Scaling group.
+    #
+    #   resp = client.put_notification_configuration({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     notification_types: [
+    #       "autoscaling:TEST_NOTIFICATION", 
+    #     ], 
+    #     topic_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2501,6 +3391,23 @@ module Aws::AutoScaling
     #
     #   * {Types::PolicyARNType#policy_arn #policy_arn} => String
     #
+    #
+    # @example Example: To add a scaling policy to an Auto Scaling group
+    #
+    #   # This example adds the specified policy to the specified Auto Scaling group.
+    #
+    #   resp = client.put_scaling_policy({
+    #     adjustment_type: "ChangeInCapacity", 
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     policy_name: "ScaleIn", 
+    #     scaling_adjustment: -1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_arn: "arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scaling_policy({
@@ -2590,6 +3497,21 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a scheduled action to an Auto Scaling group
+    #
+    #   # This example adds the specified scheduled action to the specified Auto Scaling group.
+    #
+    #   resp = client.put_scheduled_update_group_action({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     desired_capacity: 4, 
+    #     end_time: Time.parse("2014-05-12T08:00:00Z"), 
+    #     max_size: 6, 
+    #     min_size: 2, 
+    #     scheduled_action_name: "my-scheduled-action", 
+    #     start_time: Time.parse("2014-05-12T08:00:00Z"), 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scheduled_update_group_action({
@@ -2661,6 +3583,17 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To record a lifecycle action heartbeat
+    #
+    #   # This example records a lifecycle action heartbeat to keep the instance in a pending state.
+    #
+    #   resp = client.record_lifecycle_action_heartbeat({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     lifecycle_action_token: "bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635", 
+    #     lifecycle_hook_name: "my-lifecycle-hook", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.record_lifecycle_action_heartbeat({
@@ -2714,6 +3647,18 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To resume Auto Scaling processes
+    #
+    #   # This example resumes the specified suspended scaling process for the specified Auto Scaling group.
+    #
+    #   resp = client.resume_processes({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     scaling_processes: [
+    #       "AlarmNotification", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.resume_processes({
@@ -2754,6 +3699,17 @@ module Aws::AutoScaling
     #   your Auto Scaling group to its new capacity.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To set the desired capacity for an Auto Scaling group
+    #
+    #   # This example sets the desired capacity for the specified Auto Scaling group.
+    #
+    #   resp = client.set_desired_capacity({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     desired_capacity: 2, 
+    #     honor_cooldown: true, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2801,6 +3757,16 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To set the health status of an instance
+    #
+    #   # This example sets the health status of the specified instance to Unhealthy.
+    #
+    #   resp = client.set_instance_health({
+    #     health_status: "Unhealthy", 
+    #     instance_id: "i-93633f9b", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.set_instance_health({
@@ -2838,6 +3804,31 @@ module Aws::AutoScaling
     #   Scaling when scaling in.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To enable instance protection for an instance
+    #
+    #   # This example enables instance protection for the specified instance.
+    #
+    #   resp = client.set_instance_protection({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #     protected_from_scale_in: true, 
+    #   })
+    #
+    # @example Example: To disable instance protection for an instance
+    #
+    #   # This example disables instance protection for the specified instance.
+    #
+    #   resp = client.set_instance_protection({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_ids: [
+    #       "i-93633f9b", 
+    #     ], 
+    #     protected_from_scale_in: false, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2896,6 +3887,18 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To suspend Auto Scaling processes
+    #
+    #   # This example suspends the specified scaling process for the specified Auto Scaling group.
+    #
+    #   resp = client.suspend_processes({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     scaling_processes: [
+    #       "AlarmNotification", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.suspend_processes({
@@ -2928,6 +3931,16 @@ module Aws::AutoScaling
     # @return [Types::ActivityType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ActivityType#activity #activity} => Types::Activity
+    #
+    #
+    # @example Example: To terminate an instance in an Auto Scaling group
+    #
+    #   # This example terminates the specified instance from the specified Auto Scaling group without updating the size of the group. Auto Scaling launches a replacement instance after the specified instance terminates.
+    #
+    #   resp = client.terminate_instance_in_auto_scaling_group({
+    #     instance_id: "i-93633f9b", 
+    #     should_decrement_desired_capacity: false, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3073,6 +4086,35 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update the launch configuration
+    #
+    #   # This example updates the launch configuration of the specified Auto Scaling group.
+    #
+    #   resp = client.update_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     launch_configuration_name: "new-launch-config", 
+    #   })
+    #
+    # @example Example: To update the minimum and maximum size
+    #
+    #   # This example updates the minimum size and maximum size of the specified Auto Scaling group.
+    #
+    #   resp = client.update_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     max_size: 3, 
+    #     min_size: 1, 
+    #   })
+    #
+    # @example Example: To enable instance protection
+    #
+    #   # This example enables instance protection for the specified Auto Scaling group.
+    #
+    #   resp = client.update_auto_scaling_group({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     new_instances_protected_from_scale_in: true, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_auto_scaling_group({
@@ -3113,7 +4155,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,8 @@ module Aws::ServiceCatalog
     AssociatePrincipalWithPortfolioOutput = Shapes::StructureShape.new(name: 'AssociatePrincipalWithPortfolioOutput')
     AssociateProductWithPortfolioInput = Shapes::StructureShape.new(name: 'AssociateProductWithPortfolioInput')
     AssociateProductWithPortfolioOutput = Shapes::StructureShape.new(name: 'AssociateProductWithPortfolioOutput')
+    AssociateTagOptionWithResourceInput = Shapes::StructureShape.new(name: 'AssociateTagOptionWithResourceInput')
+    AssociateTagOptionWithResourceOutput = Shapes::StructureShape.new(name: 'AssociateTagOptionWithResourceOutput')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     ConstraintDescription = Shapes::StringShape.new(name: 'ConstraintDescription')
     ConstraintDetail = Shapes::StructureShape.new(name: 'ConstraintDetail')
@@ -45,6 +47,8 @@ module Aws::ServiceCatalog
     CreateProductOutput = Shapes::StructureShape.new(name: 'CreateProductOutput')
     CreateProvisioningArtifactInput = Shapes::StructureShape.new(name: 'CreateProvisioningArtifactInput')
     CreateProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'CreateProvisioningArtifactOutput')
+    CreateTagOptionInput = Shapes::StructureShape.new(name: 'CreateTagOptionInput')
+    CreateTagOptionOutput = Shapes::StructureShape.new(name: 'CreateTagOptionOutput')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     DefaultValue = Shapes::StringShape.new(name: 'DefaultValue')
@@ -76,11 +80,15 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput = Shapes::StructureShape.new(name: 'DescribeProvisioningParametersOutput')
     DescribeRecordInput = Shapes::StructureShape.new(name: 'DescribeRecordInput')
     DescribeRecordOutput = Shapes::StructureShape.new(name: 'DescribeRecordOutput')
+    DescribeTagOptionInput = Shapes::StructureShape.new(name: 'DescribeTagOptionInput')
+    DescribeTagOptionOutput = Shapes::StructureShape.new(name: 'DescribeTagOptionOutput')
     Description = Shapes::StringShape.new(name: 'Description')
     DisassociatePrincipalFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioInput')
     DisassociatePrincipalFromPortfolioOutput = Shapes::StructureShape.new(name: 'DisassociatePrincipalFromPortfolioOutput')
     DisassociateProductFromPortfolioInput = Shapes::StructureShape.new(name: 'DisassociateProductFromPortfolioInput')
     DisassociateProductFromPortfolioOutput = Shapes::StructureShape.new(name: 'DisassociateProductFromPortfolioOutput')
+    DisassociateTagOptionFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateTagOptionFromResourceInput')
+    DisassociateTagOptionFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateTagOptionFromResourceOutput')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDescription = Shapes::StringShape.new(name: 'ErrorDescription')
@@ -91,6 +99,7 @@ module Aws::ServiceCatalog
     InstructionType = Shapes::StringShape.new(name: 'InstructionType')
     InstructionValue = Shapes::StringShape.new(name: 'InstructionValue')
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
+    InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     LastRequestId = Shapes::StringShape.new(name: 'LastRequestId')
     LaunchPathSummaries = Shapes::ListShape.new(name: 'LaunchPathSummaries')
     LaunchPathSummary = Shapes::StructureShape.new(name: 'LaunchPathSummary')
@@ -114,6 +123,11 @@ module Aws::ServiceCatalog
     ListRecordHistoryInput = Shapes::StructureShape.new(name: 'ListRecordHistoryInput')
     ListRecordHistoryOutput = Shapes::StructureShape.new(name: 'ListRecordHistoryOutput')
     ListRecordHistorySearchFilter = Shapes::StructureShape.new(name: 'ListRecordHistorySearchFilter')
+    ListResourcesForTagOptionInput = Shapes::StructureShape.new(name: 'ListResourcesForTagOptionInput')
+    ListResourcesForTagOptionOutput = Shapes::StructureShape.new(name: 'ListResourcesForTagOptionOutput')
+    ListTagOptionsFilters = Shapes::StructureShape.new(name: 'ListTagOptionsFilters')
+    ListTagOptionsInput = Shapes::StructureShape.new(name: 'ListTagOptionsInput')
+    ListTagOptionsOutput = Shapes::StructureShape.new(name: 'ListTagOptionsOutput')
     NoEcho = Shapes::BooleanShape.new(name: 'NoEcho')
     NotificationArn = Shapes::StringShape.new(name: 'NotificationArn')
     NotificationArns = Shapes::ListShape.new(name: 'NotificationArns')
@@ -197,8 +211,17 @@ module Aws::ServiceCatalog
     RejectPortfolioShareInput = Shapes::StructureShape.new(name: 'RejectPortfolioShareInput')
     RejectPortfolioShareOutput = Shapes::StructureShape.new(name: 'RejectPortfolioShareOutput')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    ResourceDetail = Shapes::StructureShape.new(name: 'ResourceDetail')
+    ResourceDetailARN = Shapes::StringShape.new(name: 'ResourceDetailARN')
+    ResourceDetailCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDetailCreatedTime')
+    ResourceDetailDescription = Shapes::StringShape.new(name: 'ResourceDetailDescription')
+    ResourceDetailId = Shapes::StringShape.new(name: 'ResourceDetailId')
+    ResourceDetailName = Shapes::StringShape.new(name: 'ResourceDetailName')
+    ResourceDetails = Shapes::ListShape.new(name: 'ResourceDetails')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ScanProvisionedProductsInput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsInput')
     ScanProvisionedProductsOutput = Shapes::StructureShape.new(name: 'ScanProvisionedProductsOutput')
     SearchFilterKey = Shapes::StringShape.new(name: 'SearchFilterKey')
@@ -215,6 +238,16 @@ module Aws::ServiceCatalog
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagOptionActive = Shapes::BooleanShape.new(name: 'TagOptionActive')
+    TagOptionDetail = Shapes::StructureShape.new(name: 'TagOptionDetail')
+    TagOptionDetails = Shapes::ListShape.new(name: 'TagOptionDetails')
+    TagOptionId = Shapes::StringShape.new(name: 'TagOptionId')
+    TagOptionKey = Shapes::StringShape.new(name: 'TagOptionKey')
+    TagOptionNotMigratedException = Shapes::StructureShape.new(name: 'TagOptionNotMigratedException')
+    TagOptionSummaries = Shapes::ListShape.new(name: 'TagOptionSummaries')
+    TagOptionSummary = Shapes::StructureShape.new(name: 'TagOptionSummary')
+    TagOptionValue = Shapes::StringShape.new(name: 'TagOptionValue')
+    TagOptionValues = Shapes::ListShape.new(name: 'TagOptionValues')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
     TerminateProvisionedProductInput = Shapes::StructureShape.new(name: 'TerminateProvisionedProductInput')
@@ -231,6 +264,8 @@ module Aws::ServiceCatalog
     UpdateProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'UpdateProvisioningArtifactOutput')
     UpdateProvisioningParameter = Shapes::StructureShape.new(name: 'UpdateProvisioningParameter')
     UpdateProvisioningParameters = Shapes::ListShape.new(name: 'UpdateProvisioningParameters')
+    UpdateTagOptionInput = Shapes::StructureShape.new(name: 'UpdateTagOptionInput')
+    UpdateTagOptionOutput = Shapes::StructureShape.new(name: 'UpdateTagOptionOutput')
     UpdatedTime = Shapes::TimestampShape.new(name: 'UpdatedTime')
     UsageInstruction = Shapes::StructureShape.new(name: 'UsageInstruction')
     UsageInstructions = Shapes::ListShape.new(name: 'UsageInstructions')
@@ -268,6 +303,12 @@ module Aws::ServiceCatalog
     AssociateProductWithPortfolioInput.struct_class = Types::AssociateProductWithPortfolioInput
 
     AssociateProductWithPortfolioOutput.struct_class = Types::AssociateProductWithPortfolioOutput
+
+    AssociateTagOptionWithResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    AssociateTagOptionWithResourceInput.add_member(:tag_option_id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "TagOptionId"))
+    AssociateTagOptionWithResourceInput.struct_class = Types::AssociateTagOptionWithResourceInput
+
+    AssociateTagOptionWithResourceOutput.struct_class = Types::AssociateTagOptionWithResourceOutput
 
     ConstraintDetail.add_member(:constraint_id, Shapes::ShapeRef.new(shape: Id, location_name: "ConstraintId"))
     ConstraintDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, location_name: "Type"))
@@ -346,6 +387,13 @@ module Aws::ServiceCatalog
     CreateProvisioningArtifactOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     CreateProvisioningArtifactOutput.struct_class = Types::CreateProvisioningArtifactOutput
 
+    CreateTagOptionInput.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, required: true, location_name: "Key"))
+    CreateTagOptionInput.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, required: true, location_name: "Value"))
+    CreateTagOptionInput.struct_class = Types::CreateTagOptionInput
+
+    CreateTagOptionOutput.add_member(:tag_option_detail, Shapes::ShapeRef.new(shape: TagOptionDetail, location_name: "TagOptionDetail"))
+    CreateTagOptionOutput.struct_class = Types::CreateTagOptionOutput
+
     DeleteConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DeleteConstraintInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DeleteConstraintInput.struct_class = Types::DeleteConstraintInput
@@ -393,6 +441,7 @@ module Aws::ServiceCatalog
 
     DescribePortfolioOutput.add_member(:portfolio_detail, Shapes::ShapeRef.new(shape: PortfolioDetail, location_name: "PortfolioDetail"))
     DescribePortfolioOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribePortfolioOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
     DescribePortfolioOutput.struct_class = Types::DescribePortfolioOutput
 
     DescribeProductAsAdminInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -402,6 +451,7 @@ module Aws::ServiceCatalog
     DescribeProductAsAdminOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
     DescribeProductAsAdminOutput.add_member(:provisioning_artifact_summaries, Shapes::ShapeRef.new(shape: ProvisioningArtifactSummaries, location_name: "ProvisioningArtifactSummaries"))
     DescribeProductAsAdminOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribeProductAsAdminOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptions"))
     DescribeProductAsAdminOutput.struct_class = Types::DescribeProductAsAdminOutput
 
     DescribeProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -447,6 +497,7 @@ module Aws::ServiceCatalog
     DescribeProvisioningParametersOutput.add_member(:provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactParameters, location_name: "ProvisioningArtifactParameters"))
     DescribeProvisioningParametersOutput.add_member(:constraint_summaries, Shapes::ShapeRef.new(shape: ConstraintSummaries, location_name: "ConstraintSummaries"))
     DescribeProvisioningParametersOutput.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: UsageInstructions, location_name: "UsageInstructions"))
+    DescribeProvisioningParametersOutput.add_member(:tag_options, Shapes::ShapeRef.new(shape: TagOptionSummaries, location_name: "TagOptions"))
     DescribeProvisioningParametersOutput.struct_class = Types::DescribeProvisioningParametersOutput
 
     DescribeRecordInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -459,6 +510,12 @@ module Aws::ServiceCatalog
     DescribeRecordOutput.add_member(:record_outputs, Shapes::ShapeRef.new(shape: RecordOutputs, location_name: "RecordOutputs"))
     DescribeRecordOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     DescribeRecordOutput.struct_class = Types::DescribeRecordOutput
+
+    DescribeTagOptionInput.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "Id"))
+    DescribeTagOptionInput.struct_class = Types::DescribeTagOptionInput
+
+    DescribeTagOptionOutput.add_member(:tag_option_detail, Shapes::ShapeRef.new(shape: TagOptionDetail, location_name: "TagOptionDetail"))
+    DescribeTagOptionOutput.struct_class = Types::DescribeTagOptionOutput
 
     DisassociatePrincipalFromPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DisassociatePrincipalFromPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -473,6 +530,12 @@ module Aws::ServiceCatalog
     DisassociateProductFromPortfolioInput.struct_class = Types::DisassociateProductFromPortfolioInput
 
     DisassociateProductFromPortfolioOutput.struct_class = Types::DisassociateProductFromPortfolioOutput
+
+    DisassociateTagOptionFromResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    DisassociateTagOptionFromResourceInput.add_member(:tag_option_id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "TagOptionId"))
+    DisassociateTagOptionFromResourceInput.struct_class = Types::DisassociateTagOptionFromResourceInput
+
+    DisassociateTagOptionFromResourceOutput.struct_class = Types::DisassociateTagOptionFromResourceOutput
 
     LaunchPathSummaries.member = Shapes::ShapeRef.new(shape: LaunchPathSummary)
 
@@ -571,6 +634,30 @@ module Aws::ServiceCatalog
     ListRecordHistorySearchFilter.add_member(:key, Shapes::ShapeRef.new(shape: SearchFilterKey, location_name: "Key"))
     ListRecordHistorySearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: SearchFilterValue, location_name: "Value"))
     ListRecordHistorySearchFilter.struct_class = Types::ListRecordHistorySearchFilter
+
+    ListResourcesForTagOptionInput.add_member(:tag_option_id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "TagOptionId"))
+    ListResourcesForTagOptionInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ListResourcesForTagOptionInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListResourcesForTagOptionInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListResourcesForTagOptionInput.struct_class = Types::ListResourcesForTagOptionInput
+
+    ListResourcesForTagOptionOutput.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
+    ListResourcesForTagOptionOutput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListResourcesForTagOptionOutput.struct_class = Types::ListResourcesForTagOptionOutput
+
+    ListTagOptionsFilters.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, location_name: "Key"))
+    ListTagOptionsFilters.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
+    ListTagOptionsFilters.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
+    ListTagOptionsFilters.struct_class = Types::ListTagOptionsFilters
+
+    ListTagOptionsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ListTagOptionsFilters, location_name: "Filters"))
+    ListTagOptionsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListTagOptionsInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListTagOptionsInput.struct_class = Types::ListTagOptionsInput
+
+    ListTagOptionsOutput.add_member(:tag_option_details, Shapes::ShapeRef.new(shape: TagOptionDetails, location_name: "TagOptionDetails"))
+    ListTagOptionsOutput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListTagOptionsOutput.struct_class = Types::ListTagOptionsOutput
 
     NotificationArns.member = Shapes::ShapeRef.new(shape: NotificationArn)
 
@@ -750,6 +837,15 @@ module Aws::ServiceCatalog
 
     RejectPortfolioShareOutput.struct_class = Types::RejectPortfolioShareOutput
 
+    ResourceDetail.add_member(:id, Shapes::ShapeRef.new(shape: ResourceDetailId, location_name: "Id"))
+    ResourceDetail.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceDetailARN, location_name: "ARN"))
+    ResourceDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceDetailName, location_name: "Name"))
+    ResourceDetail.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDetailDescription, location_name: "Description"))
+    ResourceDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: ResourceDetailCreatedTime, location_name: "CreatedTime"))
+    ResourceDetail.struct_class = Types::ResourceDetail
+
+    ResourceDetails.member = Shapes::ShapeRef.new(shape: ResourceDetail)
+
     ScanProvisionedProductsInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ScanProvisionedProductsInput.add_member(:access_level_filter, Shapes::ShapeRef.new(shape: AccessLevelFilter, location_name: "AccessLevelFilter"))
     ScanProvisionedProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
@@ -792,6 +888,22 @@ module Aws::ServiceCatalog
     Tag.struct_class = Types::Tag
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagOptionDetail.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, location_name: "Key"))
+    TagOptionDetail.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
+    TagOptionDetail.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
+    TagOptionDetail.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, location_name: "Id"))
+    TagOptionDetail.struct_class = Types::TagOptionDetail
+
+    TagOptionDetails.member = Shapes::ShapeRef.new(shape: TagOptionDetail)
+
+    TagOptionSummaries.member = Shapes::ShapeRef.new(shape: TagOptionSummary)
+
+    TagOptionSummary.add_member(:key, Shapes::ShapeRef.new(shape: TagOptionKey, location_name: "Key"))
+    TagOptionSummary.add_member(:values, Shapes::ShapeRef.new(shape: TagOptionValues, location_name: "Values"))
+    TagOptionSummary.struct_class = Types::TagOptionSummary
+
+    TagOptionValues.member = Shapes::ShapeRef.new(shape: TagOptionValue)
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
@@ -877,6 +989,14 @@ module Aws::ServiceCatalog
 
     UpdateProvisioningParameters.member = Shapes::ShapeRef.new(shape: UpdateProvisioningParameter)
 
+    UpdateTagOptionInput.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "Id"))
+    UpdateTagOptionInput.add_member(:value, Shapes::ShapeRef.new(shape: TagOptionValue, location_name: "Value"))
+    UpdateTagOptionInput.add_member(:active, Shapes::ShapeRef.new(shape: TagOptionActive, location_name: "Active"))
+    UpdateTagOptionInput.struct_class = Types::UpdateTagOptionInput
+
+    UpdateTagOptionOutput.add_member(:tag_option_detail, Shapes::ShapeRef.new(shape: TagOptionDetail, location_name: "TagOptionDetail"))
+    UpdateTagOptionOutput.struct_class = Types::UpdateTagOptionOutput
+
     UsageInstruction.add_member(:type, Shapes::ShapeRef.new(shape: InstructionType, location_name: "Type"))
     UsageInstruction.add_member(:value, Shapes::ShapeRef.new(shape: InstructionValue, location_name: "Value"))
     UsageInstruction.struct_class = Types::UsageInstruction
@@ -931,6 +1051,20 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:associate_tag_option_with_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateTagOptionWithResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateTagOptionWithResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateTagOptionWithResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
       api.add_operation(:create_constraint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConstraint"
         o.http_method = "POST"
@@ -951,6 +1085,7 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: CreatePortfolioOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:create_portfolio_share, Seahorse::Model::Operation.new.tap do |o|
@@ -972,6 +1107,7 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: CreateProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:create_provisioning_artifact, Seahorse::Model::Operation.new.tap do |o|
@@ -982,6 +1118,17 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: CreateProvisioningArtifactOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -1004,6 +1151,7 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:delete_portfolio_share, Seahorse::Model::Operation.new.tap do |o|
@@ -1024,6 +1172,7 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:delete_provisioning_artifact, Seahorse::Model::Operation.new.tap do |o|
@@ -1121,6 +1270,16 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disassociate_principal_from_portfolio, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociatePrincipalFromPortfolio"
         o.http_method = "POST"
@@ -1138,7 +1297,18 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DisassociateProductFromPortfolioInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateProductFromPortfolioOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
+      api.add_operation(:disassociate_tag_option_from_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTagOptionFromResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTagOptionFromResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateTagOptionFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_accepted_portfolio_shares, Seahorse::Model::Operation.new.tap do |o|
@@ -1227,6 +1397,39 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
+      api.add_operation(:list_resources_for_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourcesForTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcesForTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcesForTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "page_token" => "page_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tag_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagOptionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagOptionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "page_token" => "page_token"
+          }
+        )
+      end)
+
       api.add_operation(:provision_product, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ProvisionProduct"
         o.http_method = "POST"
@@ -1303,6 +1506,7 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:update_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1313,6 +1517,7 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: UpdateProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
       end)
 
       api.add_operation(:update_provisioned_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1332,6 +1537,18 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: UpdateProvisioningArtifactInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateProvisioningArtifactOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
+      api.add_operation(:update_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
     end

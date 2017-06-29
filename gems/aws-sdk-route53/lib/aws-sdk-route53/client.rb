@@ -180,6 +180,30 @@ module Aws::Route53
     #
     #   * {Types::AssociateVPCWithHostedZoneResponse#change_info #change_info} => Types::ChangeInfo
     #
+    #
+    # @example Example: To associate a VPC with a hosted zone
+    #
+    #   # The following example associates the VPC with ID vpc-1a2b3c4d with the hosted zone with ID Z3M3LMPEXAMPLE.
+    #
+    #   resp = client.associate_vpc_with_hosted_zone({
+    #     comment: "", 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #     vpc: {
+    #       vpc_id: "vpc-1a2b3c4d", 
+    #       vpc_region: "us-east-2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "", 
+    #       id: "/change/C3HC6WDB2UANE2", 
+    #       status: "INSYNC", 
+    #       submitted_at: Time.parse("2017-01-31T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_vpc_with_hosted_zone({
@@ -311,6 +335,574 @@ module Aws::Route53
     #
     #   * {Types::ChangeResourceRecordSetsResponse#change_info #change_info} => Types::ChangeInfo
     #
+    #
+    # @example Example: To create a basic resource record set
+    #
+    #   # The following example creates a resource record set that routes Internet traffic to a resource with an IP address of 192.0.2.44.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.44", 
+    #               }, 
+    #             ], 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Web server for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Web server for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create weighted resource record sets
+    #
+    #   # The following example creates two weighted resource record sets. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             health_check_id: "abcdef11-2222-3333-4444-555555fedcba", 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.44", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Seattle data center", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #             weight: 100, 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             health_check_id: "abcdef66-7777-8888-9999-000000fedcba", 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.45", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Portland data center", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #             weight: 200, 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Web servers for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Web servers for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create an alias resource record set
+    #
+    #   # The following example creates an alias resource record set that routes traffic to a CloudFront distribution.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "d123rk29d0stfj.cloudfront.net", 
+    #               evaluate_target_health: false, 
+    #               hosted_zone_id: "Z2FDTNDATAQYW2", 
+    #             }, 
+    #             name: "example.com", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "CloudFront distribution for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", # Depends on the type of resource that you want to route traffic to
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "CloudFront distribution for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create weighted alias resource record sets
+    #
+    #   # The following example creates two weighted alias resource record sets that route traffic to ELB load balancers. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-123456789.us-east-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z3AADJGX6KTTL2", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "Ohio region", 
+    #             type: "A", 
+    #             weight: 100, 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-987654321.us-west-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z1H1FL5HABSF5", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "Oregon region", 
+    #             type: "A", 
+    #             weight: 200, 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "ELB load balancers for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", # Depends on the type of resource that you want to route traffic to
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "ELB load balancers for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create latency resource record sets
+    #
+    #   # The following example creates two latency resource record sets that route traffic to EC2 instances. Traffic for example.com is routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             health_check_id: "abcdef11-2222-3333-4444-555555fedcba", 
+    #             name: "example.com", 
+    #             region: "us-east-2", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.44", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Ohio region", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             health_check_id: "abcdef66-7777-8888-9999-000000fedcba", 
+    #             name: "example.com", 
+    #             region: "us-west-2", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.45", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Oregon region", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "EC2 instances for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "EC2 instances for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create latency alias resource record sets
+    #
+    #   # The following example creates two latency alias resource record sets that route traffic for example.com to ELB load balancers. Requests are routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-123456789.us-east-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z3AADJGX6KTTL2", 
+    #             }, 
+    #             name: "example.com", 
+    #             region: "us-east-2", 
+    #             set_identifier: "Ohio region", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-987654321.us-west-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z1H1FL5HABSF5", 
+    #             }, 
+    #             name: "example.com", 
+    #             region: "us-west-2", 
+    #             set_identifier: "Oregon region", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "ELB load balancers for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", # Depends on the type of resource that you want to route traffic to
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "ELB load balancers for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create failover resource record sets
+    #
+    #   # The following example creates primary and secondary failover resource record sets that route traffic to EC2 instances. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             failover: "PRIMARY", 
+    #             health_check_id: "abcdef11-2222-3333-4444-555555fedcba", 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.44", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Ohio region", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             failover: "SECONDARY", 
+    #             health_check_id: "abcdef66-7777-8888-9999-000000fedcba", 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.45", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Oregon region", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Failover configuration for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Failover configuration for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create failover alias resource record sets
+    #
+    #   # The following example creates primary and secondary failover alias resource record sets that route traffic to ELB load balancers. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-123456789.us-east-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z3AADJGX6KTTL2", 
+    #             }, 
+    #             failover: "PRIMARY", 
+    #             name: "example.com", 
+    #             set_identifier: "Ohio region", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-987654321.us-west-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z1H1FL5HABSF5", 
+    #             }, 
+    #             failover: "SECONDARY", 
+    #             name: "example.com", 
+    #             set_identifier: "Oregon region", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Failover alias configuration for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", # Depends on the type of resource that you want to route traffic to
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Failover alias configuration for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create geolocation resource record sets
+    #
+    #   # The following example creates four geolocation resource record sets that use IPv4 addresses to route traffic to resources such as web servers running on EC2 instances. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             geo_location: {
+    #               continent_code: "NA", 
+    #             }, 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.44", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "North America", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             geo_location: {
+    #               continent_code: "SA", 
+    #             }, 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.45", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "South America", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             geo_location: {
+    #               continent_code: "EU", 
+    #             }, 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.46", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Europe", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             geo_location: {
+    #               country_code: "*", 
+    #             }, 
+    #             name: "example.com", 
+    #             resource_records: [
+    #               {
+    #                 value: "192.0.2.47", 
+    #               }, 
+    #             ], 
+    #             set_identifier: "Other locations", 
+    #             ttl: 60, 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Geolocation configuration for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Geolocation configuration for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create geolocation alias resource record sets
+    #
+    #   # The following example creates four geolocation alias resource record sets that route traffic to ELB load balancers. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-123456789.us-east-2.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z3AADJGX6KTTL2", 
+    #             }, 
+    #             geo_location: {
+    #               continent_code: "NA", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "North America", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-234567890.sa-east-1.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z2P70J7HTTTPLU", 
+    #             }, 
+    #             geo_location: {
+    #               continent_code: "SA", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "South America", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-234567890.eu-central-1.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z215JYRZR1TBD5", 
+    #             }, 
+    #             geo_location: {
+    #               continent_code: "EU", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "Europe", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             alias_target: {
+    #               dns_name: "example-com-234567890.ap-southeast-1.elb.amazonaws.com ", 
+    #               evaluate_target_health: true, 
+    #               hosted_zone_id: "Z1LMS91P8CMLE5", 
+    #             }, 
+    #             geo_location: {
+    #               country_code: "*", 
+    #             }, 
+    #             name: "example.com", 
+    #             set_identifier: "Other locations", 
+    #             type: "A", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       comment: "Geolocation alias configuration for example.com", 
+    #     }, 
+    #     hosted_zone_id: "Z3M3LMPEXAMPLE", # Depends on the type of resource that you want to route traffic to
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       comment: "Geolocation alias configuration for example.com", 
+    #       id: "/change/C2682N5HXP0BZ4", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2017-02-10T01:36:41.958Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.change_resource_record_sets({
@@ -402,6 +994,33 @@ module Aws::Route53
     #   up to 10 keys.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add or remove tags from a hosted zone or health check
+    #
+    #   # The following example adds two tags and removes one tag from the hosted zone with ID Z3M3LMPEXAMPLE.
+    #
+    #   resp = client.change_tags_for_resource({
+    #     add_tags: [
+    #       {
+    #         key: "apex", 
+    #         value: "3874", 
+    #       }, 
+    #       {
+    #         key: "acme", 
+    #         value: "4938", 
+    #       }, 
+    #     ], 
+    #     remove_tag_keys: [
+    #       "Nadir", 
+    #     ], 
+    #     resource_id: "Z3M3LMPEXAMPLE", 
+    #     resource_type: "hostedzone", # Valid values are healthcheck and hostedzone.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1597,6 +2216,36 @@ module Aws::Route53
     #   * {Types::GetHostedZoneResponse#hosted_zone #hosted_zone} => Types::HostedZone
     #   * {Types::GetHostedZoneResponse#delegation_set #delegation_set} => Types::DelegationSet
     #   * {Types::GetHostedZoneResponse#vp_cs #vp_cs} => Array&lt;Types::VPC&gt;
+    #
+    #
+    # @example Example: To get information about a hosted zone
+    #
+    #   # The following example gets information about the Z3M3LMPEXAMPLE hosted zone.
+    #
+    #   resp = client.get_hosted_zone({
+    #     id: "Z3M3LMPEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     delegation_set: {
+    #       name_servers: [
+    #         "ns-2048.awsdns-64.com", 
+    #         "ns-2049.awsdns-65.net", 
+    #         "ns-2050.awsdns-66.org", 
+    #         "ns-2051.awsdns-67.co.uk", 
+    #       ], 
+    #     }, 
+    #     hosted_zone: {
+    #       caller_reference: "C741617D-04E4-F8DE-B9D7-0D150FC61C2E", 
+    #       config: {
+    #         private_zone: false, 
+    #       }, 
+    #       id: "/hostedzone/Z3M3LMPEXAMPLE", 
+    #       name: "myawsbucket.com.", 
+    #       resource_record_set_count: 8, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3573,7 +4222,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 
