@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.7 (2017-06-30)
+------------------
+
 * Feature - Aws::MarketplaceCommerceAnalytics - Updated the documentation for AWS Marketplace Commerce Analytics.
 
 * Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
