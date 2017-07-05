@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.8 (2017-07-05)
+------------------
+
 * Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
 
 * Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
