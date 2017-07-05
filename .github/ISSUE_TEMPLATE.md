@@ -2,8 +2,8 @@ Please fill out the sections below to help us address your issue
 
 ### issue description
 
-### version of AWS SDK for Ruby
+### gem name ('aws-sdk', 'aws-sdk-resources' or service gems like `aws-sdk-s3`) and its version
 
-### version of Ruby
+### version of Ruby, OS environment
 
 ### code snippets / steps to reproduce
