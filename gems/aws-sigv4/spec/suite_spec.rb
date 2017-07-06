@@ -26,7 +26,7 @@ module Aws
             }
 
             let(:request) {
-              raw_request = File.read("#{prefix}.req")
+              raw_request = File.read("#{prefix}.req", encoding: "utf-8")
               request = SpecHelper.parse_reqeust(raw_request)
               SpecHelper.debug("GIVEN REQUEST: |#{raw_request}|")
               SpecHelper.debug("PARSED REQUEST: #{request.inspect}")
@@ -36,7 +36,7 @@ module Aws
             it 'computes the canonical request' do # creq
               signature = signer.sign_request(request)
               computed = signature.canonical_request
-              expected = File.read("#{prefix}.creq")
+              expected = File.read("#{prefix}.creq", encoding: "utf-8")
               SpecHelper.debug("EXPECTED CANONICAL_REQUEST: |#{expected}|")
               SpecHelper.debug("COMPUTED CANONICAL_REQUEST: |#{computed}|")
               expect(computed).to eq(expected)
@@ -45,7 +45,7 @@ module Aws
             it 'computes the string to sign' do # sts
               signature = signer.sign_request(request)
               computed = signature.string_to_sign
-              expected = File.read("#{prefix}.sts")
+              expected = File.read("#{prefix}.sts", encoding: "utf-8")
               SpecHelper.debug("EXPECTED STRING_TO_SIGN: |#{expected}|")
               SpecHelper.debug("COMPUTED STRING_TO_SIGN: |#{computed}|")
               expect(computed).to eq(expected)
@@ -54,7 +54,7 @@ module Aws
             it 'computes the authorization header' do # authz
               signature = signer.sign_request(request)
               computed = signature.headers['authorization']
-              expected = File.read("#{prefix}.authz")
+              expected = File.read("#{prefix}.authz", encoding: "utf-8")
               SpecHelper.debug("EXPECTED AUTHORIZATION: |#{expected}|")
               SpecHelper.debug("COMPUTED AUTHORIZATION: |#{computed}|")
               expect(computed).to eq(expected)
