@@ -66,11 +66,14 @@ module Aws::MarketplaceCommerceAnalytics
     #   * *disbursed\_amount\_by\_age\_of\_disbursed\_funds* - Available
     #     every 30 days by 5:00 PM Pacific Time since 2015-01-26.
     #   * *customer\_profile\_by\_industry* - Available daily by 5:00 PM
-    #     Pacific Time since 2015-10-01.
+    #     Pacific Time from 2015-10-01 to 2017-06-29. After 2017-06-29 this
+    #     data set will no longer be published.
     #   * *customer\_profile\_by\_revenue* - Available daily by 5:00 PM
-    #     Pacific Time since 2015-10-01.
+    #     Pacific Time from 2015-10-01 to 2017-06-29. After 2017-06-29 this
+    #     data set will no longer be published.
     #   * *customer\_profile\_by\_geography* - Available daily by 5:00 PM
-    #     Pacific Time since 2015-10-01.
+    #     Pacific Time from 2015-10-01 to 2017-06-29. After 2017-06-29 this
+    #     data set will no longer be published.
     #   * *sales\_compensation\_billed\_revenue* - Available monthly on the
     #     4th day of the month by 5:00 PM Pacific Time since 2016-12.
     #   * *us\_sales\_and\_use\_tax\_records* - Available monthly on the

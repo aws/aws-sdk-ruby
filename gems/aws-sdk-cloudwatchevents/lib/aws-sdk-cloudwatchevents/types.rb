@@ -26,6 +26,35 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest AWS API Documentation
+    #
+    class DescribeEventBusRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the event bus. Currently, this is always `default`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the account permitted to write
+    #   events to the current account.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy that enables the external account to send events to your
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusResponse AWS API Documentation
+    #
+    class DescribeEventBusResponse < Struct.new(
+      :name,
+      :arn,
+      :policy)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRuleRequest
     #   data as a hash:
     #
@@ -487,6 +516,48 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: "Action", # required
+    #         principal: "Principal", # required
+    #         statement_id: "StatementId", # required
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that you are enabling the other account to perform.
+    #   Currently, this must be `events:PutEvents`.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The 12-digit AWS account ID that you are permitting to put events to
+    #   your default event bus. Specify "*" to permit any account to put
+    #   events to your default event bus.
+    #
+    #   If you specify "*", avoid creating rules that may match
+    #   undesirable events. To create more secure rules, make sure that the
+    #   event pattern for each rule contains an `account` field with a
+    #   specific account ID from which to receive events. Rules with an
+    #   account field do not match any events sent from other accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_id
+    #   An identifier string for the external account that you are granting
+    #   permissions to. If you later want to revoke the permission for this
+    #   external account, specify this `StatementId` when you run
+    #   RemovePermission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest AWS API Documentation
+    #
+    class PutPermissionRequest < Struct.new(
+      :action,
+      :principal,
+      :statement_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutRuleRequest
     #   data as a hash:
     #
@@ -504,7 +575,7 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression. For example, "cron(0 20 * * ? *)",
+    #   The scheduling expression. For example, "cron(0 20 * * ? *)" or
     #   "rate(5 minutes)".
     #   @return [String]
     #
@@ -644,6 +715,25 @@ module Aws::CloudWatchEvents
       :target_id,
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemovePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         statement_id: "StatementId", # required
+    #       }
+    #
+    # @!attribute [rw] statement_id
+    #   The statement ID corresponding to the account that is no longer
+    #   allowed to put events to the default event bus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionRequest AWS API Documentation
+    #
+    class RemovePermissionRequest < Struct.new(
+      :statement_id)
       include Aws::Structure
     end
 

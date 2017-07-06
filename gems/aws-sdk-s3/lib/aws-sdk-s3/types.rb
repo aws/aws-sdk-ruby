@@ -1267,6 +1267,7 @@ module Aws::S3
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
     #         ssekms_key_id: "SSEKMSKeyId",
     #         request_payer: "requester", # accepts requester
+    #         tagging: "TaggingHeader",
     #       }
     #
     # @!attribute [rw] acl
@@ -1377,6 +1378,11 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] tagging
+    #   The tag-set for the object. The tag-set must be encoded as URL Query
+    #   parameters
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadRequest AWS API Documentation
     #
     class CreateMultipartUploadRequest < Struct.new(
@@ -1401,7 +1407,8 @@ module Aws::S3
       :sse_customer_key,
       :sse_customer_key_md5,
       :ssekms_key_id,
-      :request_payer)
+      :request_payer,
+      :tagging)
       include Aws::Structure
     end
 

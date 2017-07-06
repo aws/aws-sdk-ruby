@@ -763,6 +763,10 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
+    # @option params [String] :tagging
+    #   The tag-set for the object. The tag-set must be encoded as URL Query
+    #   parameters
+    #
     # @return [Types::CreateMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMultipartUploadOutput#abort_date #abort_date} => Time
@@ -820,6 +824,7 @@ module Aws::S3
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     request_payer: "requester", # accepts requester
+    #     tagging: "TaggingHeader",
     #   })
     #
     # @example Response structure
@@ -5863,7 +5868,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 

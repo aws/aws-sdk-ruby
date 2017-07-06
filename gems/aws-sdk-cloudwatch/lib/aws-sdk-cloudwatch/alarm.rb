@@ -169,11 +169,18 @@ module Aws::CloudWatch
       data.comparison_operator
     end
 
+    # Sets how this alarm is to handle missing data points. If this
+    # parameter is omitted, the default behavior of `missing` is used.
     # @return [String]
     def treat_missing_data
       data.treat_missing_data
     end
 
+    # Used only for alarms based on percentiles. If `ignore`, the alarm
+    # state does not change during periods with too few data points to be
+    # statistically significant. If `evaluate` or this parameter is not
+    # used, the alarm will always be evaluated and possibly change state no
+    # matter how many data points are available.
     # @return [String]
     def evaluate_low_sample_count_percentile
       data.evaluate_low_sample_count_percentile

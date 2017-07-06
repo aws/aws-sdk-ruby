@@ -184,6 +184,32 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Displays the external AWS accounts that are permitted to write events
+    # to your account using your account's event bus, and the associated
+    # policy. To enable your account to receive events from other accounts,
+    # use PutPermission.
+    #
+    # @return [Types::DescribeEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventBusResponse#name #name} => String
+    #   * {Types::DescribeEventBusResponse#arn #arn} => String
+    #   * {Types::DescribeEventBusResponse#policy #policy} => String
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBus AWS API Documentation
+    #
+    # @overload describe_event_bus(params = {})
+    # @param [Hash] params ({})
+    def describe_event_bus(params = {}, options = {})
+      req = build_request(:describe_event_bus, params)
+      req.send_request(options)
+    end
+
     # Describes the specified rule.
     #
     # @option params [required, String] :name
@@ -465,6 +491,58 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Running `PutPermission` permits the specified AWS account to put
+    # events to your account's default *event bus*. CloudWatch Events rules
+    # in your account are triggered by these events arriving to your default
+    # event bus.
+    #
+    # For another account to send events to your account, that external
+    # account must have a CloudWatch Events rule with your account's
+    # default event bus as a target.
+    #
+    # To enable multiple AWS accounts to put events to your default event
+    # bus, run `PutPermission` once for each of these accounts.
+    #
+    # @option params [required, String] :action
+    #   The action that you are enabling the other account to perform.
+    #   Currently, this must be `events:PutEvents`.
+    #
+    # @option params [required, String] :principal
+    #   The 12-digit AWS account ID that you are permitting to put events to
+    #   your default event bus. Specify "*" to permit any account to put
+    #   events to your default event bus.
+    #
+    #   If you specify "*", avoid creating rules that may match undesirable
+    #   events. To create more secure rules, make sure that the event pattern
+    #   for each rule contains an `account` field with a specific account ID
+    #   from which to receive events. Rules with an account field do not match
+    #   any events sent from other accounts.
+    #
+    # @option params [required, String] :statement_id
+    #   An identifier string for the external account that you are granting
+    #   permissions to. If you later want to revoke the permission for this
+    #   external account, specify this `StatementId` when you run
+    #   RemovePermission.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_permission({
+    #     action: "Action", # required
+    #     principal: "Principal", # required
+    #     statement_id: "StatementId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission AWS API Documentation
+    #
+    # @overload put_permission(params = {})
+    # @param [Hash] params ({})
+    def put_permission(params = {}, options = {})
+      req = build_request(:put_permission, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the specified rule. Rules are enabled by default,
     # or based on value of the state. You can disable a rule using
     # DisableRule.
@@ -490,7 +568,7 @@ module Aws::CloudWatchEvents
     #   The name of the rule that you are creating or updating.
     #
     # @option params [String] :schedule_expression
-    #   The scheduling expression. For example, "cron(0 20 * * ? *)",
+    #   The scheduling expression. For example, "cron(0 20 * * ? *)" or
     #   "rate(5 minutes)".
     #
     # @option params [String] :event_pattern
@@ -543,10 +621,27 @@ module Aws::CloudWatchEvents
     # targets if they are already associated with the rule.
     #
     # Targets are the resources that are invoked when a rule is triggered.
-    # Example targets include EC2 instances, AWS Lambda functions, Amazon
-    # Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines,
-    # and built-in targets. Note that creating rules with built-in targets
-    # is supported only in the AWS Management Console.
+    #
+    # You can configure the following as targets for CloudWatch Events:
+    #
+    # * EC2 instances
+    #
+    # * AWS Lambda functions
+    #
+    # * Streams in Amazon Kinesis Streams
+    #
+    # * Delivery streams in Amazon Kinesis Firehose
+    #
+    # * Amazon ECS tasks
+    #
+    # * AWS Step Functions state machines
+    #
+    # * Amazon SNS topics
+    #
+    # * Amazon SQS queues
+    #
+    # Note that creating rules with built-in targets is supported only in
+    # the AWS Management Console.
     #
     # For some target types, `PutTargets` provides target-specific
     # parameters. If the target is an Amazon Kinesis stream, you can
@@ -559,9 +654,16 @@ module Aws::CloudWatchEvents
     # Lambda and Amazon SNS resources, CloudWatch Events relies on
     # resource-based policies. For EC2 instances, Amazon Kinesis streams,
     # and AWS Step Functions state machines, CloudWatch Events relies on IAM
-    # roles that you specify in the `RoleARN` argument in `PutTarget`. For
+    # roles that you specify in the `RoleARN` argument in `PutTargets`. For
     # more information, see [Authentication and Access Control][1] in the
     # *Amazon CloudWatch Events User Guide*.
+    #
+    # If another AWS account is in the same region and has granted you
+    # permission (using `PutPermission`), you can set that account's event
+    # bus as a target of the rules in your account. To send the matched
+    # events to the other account, specify that account's event bus as the
+    # `Arn` when you run `PutTargets`. For more information about enabling
+    # cross-account events, see PutPermission.
     #
     # **Input**, **InputPath** and **InputTransformer** are mutually
     # exclusive and optional parameters of a target. When a rule is
@@ -661,6 +763,33 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def put_targets(params = {}, options = {})
       req = build_request(:put_targets, params)
+      req.send_request(options)
+    end
+
+    # Revokes the permission of another AWS account to be able to put events
+    # to your default event bus. Specify the account to revoke by the
+    # `StatementId` value that you associated with the account when you
+    # granted it permission with `PutPermission`. You can find the
+    # `StatementId` by using DescribeEventBus.
+    #
+    # @option params [required, String] :statement_id
+    #   The statement ID corresponding to the account that is no longer
+    #   allowed to put events to the default event bus.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_permission({
+    #     statement_id: "StatementId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermission AWS API Documentation
+    #
+    # @overload remove_permission(params = {})
+    # @param [Hash] params ({})
+    def remove_permission(params = {}, options = {})
+      req = build_request(:remove_permission, params)
       req.send_request(options)
     end
 
@@ -767,7 +896,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

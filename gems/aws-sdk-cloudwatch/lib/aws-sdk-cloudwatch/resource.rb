@@ -42,8 +42,8 @@ module Aws::CloudWatch
     # @option options [Array<String>] :alarm_names
     #   The names of the alarms.
     # @option options [String] :alarm_name_prefix
-    #   The alarm name prefix. You cannot specify `AlarmNames` if this
-    #   parameter is specified.
+    #   The alarm name prefix. If this parameter is specified, you cannot
+    #   specify `AlarmNames`.
     # @option options [String] :state_value
     #   The state value to be used in matching alarms.
     # @option options [String] :action_prefix

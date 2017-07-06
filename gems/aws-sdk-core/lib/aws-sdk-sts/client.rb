@@ -1414,7 +1414,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.0.0.rc13'
+      context[:gem_version] = '3.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -168,12 +168,36 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Deletes all dashboards that you specify. You may specify up to 100
+    # dashboards to delete. If there is an error during this call, no
+    # dashboards are deleted.
+    #
+    # @option params [Array<String>] :dashboard_names
+    #   The dashboards to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dashboards({
+    #     dashboard_names: ["DashboardName"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards AWS API Documentation
+    #
+    # @overload delete_dashboards(params = {})
+    # @param [Hash] params ({})
+    def delete_dashboards(params = {}, options = {})
+      req = build_request(:delete_dashboards, params)
+      req.send_request(options)
+    end
+
     # Retrieves the history for the specified alarm. You can filter the
     # results by date range or item type. If an alarm name is not specified,
     # the histories for all alarms are returned.
     #
-    # Note that Amazon CloudWatch retains the history of an alarm even if
-    # you delete the alarm.
+    # CloudWatch retains the history of an alarm even if you delete the
+    # alarm.
     #
     # @option params [String] :alarm_name
     #   The name of the alarm.
@@ -237,8 +261,8 @@ module Aws::CloudWatch
     #   The names of the alarms.
     #
     # @option params [String] :alarm_name_prefix
-    #   The alarm name prefix. You cannot specify `AlarmNames` if this
-    #   parameter is specified.
+    #   The alarm name prefix. If this parameter is specified, you cannot
+    #   specify `AlarmNames`.
     #
     # @option params [String] :state_value
     #   The state value to be used in matching alarms.
@@ -312,8 +336,8 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Retrieves the alarms for the specified metric. Specify a statistic,
-    # period, or unit to filter the results.
+    # Retrieves the alarms for the specified metric. To filter the results,
+    # specify a statistic, period, or unit.
     #
     # @option params [required, String] :metric_name
     #   The name of the metric.
@@ -449,45 +473,81 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Displays the details of the dashboard that you specify.
+    #
+    # To copy an existing dashboard, use `GetDashboard`, and then use the
+    # data returned within `DashboardBody` as the template for the new
+    # dashboard when you call `PutDashboard` to create the copy.
+    #
+    # @option params [String] :dashboard_name
+    #   The name of the dashboard to be described.
+    #
+    # @return [Types::GetDashboardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDashboardOutput#dashboard_arn #dashboard_arn} => String
+    #   * {Types::GetDashboardOutput#dashboard_body #dashboard_body} => String
+    #   * {Types::GetDashboardOutput#dashboard_name #dashboard_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dashboard({
+    #     dashboard_name: "DashboardName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_arn #=> String
+    #   resp.dashboard_body #=> String
+    #   resp.dashboard_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboard AWS API Documentation
+    #
+    # @overload get_dashboard(params = {})
+    # @param [Hash] params ({})
+    def get_dashboard(params = {}, options = {})
+      req = build_request(:get_dashboard, params)
+      req.send_request(options)
+    end
+
     # Gets statistics for the specified metric.
     #
     # Amazon CloudWatch retains metric data as follows:
     #
-    # * Data points with a period of 60 seconds (1 minute) are available for
+    # * Data points with a period of 60 seconds (1-minute) are available for
     #   15 days
     #
-    # * Data points with a period of 300 seconds (5 minute) are available
+    # * Data points with a period of 300 seconds (5-minute) are available
     #   for 63 days
     #
     # * Data points with a period of 3600 seconds (1 hour) are available for
     #   455 days (15 months)
     #
-    # Note that CloudWatch started retaining 5-minute and 1-hour metric data
-    # as of 9 July 2016.
+    # CloudWatch started retaining 5-minute and 1-hour metric data as of
+    # July 9, 2016.
     #
     # The maximum number of data points returned from a single call is
-    # 1,440. If you request more than 1,440 data points, Amazon CloudWatch
-    # returns an error. To reduce the number of data points, you can narrow
-    # the specified time range and make multiple requests across adjacent
-    # time ranges, or you can increase the specified period. A period can be
-    # as short as one minute (60 seconds). Note that data points are not
-    # returned in chronological order.
+    # 1,440. If you request more than 1,440 data points, CloudWatch returns
+    # an error. To reduce the number of data points, you can narrow the
+    # specified time range and make multiple requests across adjacent time
+    # ranges, or you can increase the specified period. A period can be as
+    # short as one minute (60 seconds). Data points are not returned in
+    # chronological order.
     #
-    # Amazon CloudWatch aggregates data points based on the length of the
-    # period that you specify. For example, if you request statistics with a
-    # one-hour period, Amazon CloudWatch aggregates all data points with
-    # time stamps that fall within each one-hour period. Therefore, the
-    # number of values aggregated by CloudWatch is larger than the number of
-    # data points returned.
+    # CloudWatch aggregates data points based on the length of the period
+    # that you specify. For example, if you request statistics with a
+    # one-hour period, CloudWatch aggregates all data points with time
+    # stamps that fall within each one-hour period. Therefore, the number of
+    # values aggregated by CloudWatch is larger than the number of data
+    # points returned.
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
-    # If you publish data using a statistic set instead, you cannot retrieve
-    # percentile statistics for this data unless one of the following
+    # If you publish data using a statistic set instead, you can only
+    # retrieve percentile statistics for this data if one of the following
     # conditions is true:
     #
-    # * The SampleCount of the statistic set is 1
+    # * The SampleCount value of the statistic set is 1.
     #
-    # * The Min and the Max of the statistic set are equal
+    # * The Min and the Max values of the statistic set are equal.
     #
     # For a list of metrics and dimensions supported by AWS services, see
     # the [Amazon CloudWatch Metrics and Dimensions Reference][1] in the
@@ -506,13 +566,13 @@ module Aws::CloudWatch
     # @option params [Array<Types::Dimension>] :dimensions
     #   The dimensions. If the metric contains multiple dimensions, you must
     #   include a value for each dimension. CloudWatch treats each unique
-    #   combination of dimensions as a separate metric. You can't retrieve
-    #   statistics using combinations of dimensions that were not specially
-    #   published. You must specify the same dimensions that were used when
-    #   the metrics were created. For an example, see [Dimension
+    #   combination of dimensions as a separate metric. If a specific
+    #   combination of dimensions was not published, you can't retrieve
+    #   statistics for it. You must specify the same dimensions that were used
+    #   when the metrics were created. For an example, see [Dimension
     #   Combinations][1] in the *Amazon CloudWatch User Guide*. For more
-    #   information on specifying dimensions, see [Publishing Metrics][2] in
-    #   the *Amazon CloudWatch User Guide*.
+    #   information about specifying dimensions, see [Publishing Metrics][2]
+    #   in the *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -520,9 +580,9 @@ module Aws::CloudWatch
     #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The time stamp that determines the first data point to return. Note
-    #   that start times are evaluated relative to the time that CloudWatch
-    #   receives the request.
+    #   The time stamp that determines the first data point to return. Start
+    #   times are evaluated relative to the time that CloudWatch receives the
+    #   request.
     #
     #   The value specified is inclusive; results include data points with the
     #   specified time stamp. The time stamp must be in ISO 8601 UTC format
@@ -544,14 +604,13 @@ module Aws::CloudWatch
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
     #
-    #   The value specified is exclusive; results will include data points up
-    #   to the specified time stamp. The time stamp must be in ISO 8601 UTC
+    #   The value specified is exclusive; results include data points up to
+    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
     #   format (for example, 2016-10-10T23:00:00Z).
     #
     # @option params [required, Integer] :period
     #   The granularity, in seconds, of the returned data points. A period can
     #   be as short as one minute (60 seconds) and must be a multiple of 60.
-    #   The default value is 60.
     #
     #   If the `StartTime` parameter specifies a time stamp that is greater
     #   than 15 days ago, you must specify the period as follows or no data
@@ -565,10 +624,14 @@ module Aws::CloudWatch
     #
     # @option params [Array<String>] :statistics
     #   The metric statistics, other than percentile. For percentile
-    #   statistics, use `ExtendedStatistic`.
+    #   statistics, use `ExtendedStatistics`. When calling
+    #   `GetMetricStatistics`, you must specify either `Statistics` or
+    #   `ExtendedStatistics`, but not both.
     #
     # @option params [Array<String>] :extended_statistics
-    #   The percentile statistics. Specify values between p0.0 and p100.
+    #   The percentile statistics. Specify values between p0.0 and p100. When
+    #   calling `GetMetricStatistics`, you must specify either `Statistics` or
+    #   `ExtendedStatistics`, but not both.
     #
     # @option params [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
@@ -620,6 +683,50 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def get_metric_statistics(params = {}, options = {})
       req = build_request(:get_metric_statistics, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the dashboards for your account. If you include
+    # `DashboardNamePrefix`, only those dashboards with names starting with
+    # the prefix are listed. Otherwise, all dashboards in your account are
+    # listed.
+    #
+    # @option params [String] :dashboard_name_prefix
+    #   If you specify this parameter, only the dashboards with names starting
+    #   with the specified string are listed. The maximum length is 255, and
+    #   valid characters are A-Z, a-z, 0-9, ".", "-", and "\_".
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to indicate that there is more
+    #   data available.
+    #
+    # @return [Types::ListDashboardsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDashboardsOutput#dashboard_entries #dashboard_entries} => Array&lt;Types::DashboardEntry&gt;
+    #   * {Types::ListDashboardsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dashboards({
+    #     dashboard_name_prefix: "DashboardNamePrefix",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_entries #=> Array
+    #   resp.dashboard_entries[0].dashboard_name #=> String
+    #   resp.dashboard_entries[0].dashboard_arn #=> String
+    #   resp.dashboard_entries[0].last_modified #=> Time
+    #   resp.dashboard_entries[0].size #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboards AWS API Documentation
+    #
+    # @overload list_dashboards(params = {})
+    # @param [Hash] params ({})
+    def list_dashboards(params = {}, options = {})
+      req = build_request(:list_dashboards, params)
       req.send_request(options)
     end
 
@@ -684,6 +791,56 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates a dashboard if it does not already exist, or updates an
+    # existing dashboard. If you update a dashboard, the entire contents are
+    # replaced with what you specify here.
+    #
+    # You can have up to 500 dashboards per account. All dashboards in your
+    # account are global, not region-specific.
+    #
+    # To copy an existing dashboard, use `GetDashboard`, and then use the
+    # data returned within `DashboardBody` as the template for the new
+    # dashboard when you call `PutDashboard` to create the copy.
+    #
+    # @option params [String] :dashboard_name
+    #   The name of the dashboard. If a dashboard with this name already
+    #   exists, this call modifies that dashboard, replacing its current
+    #   contents. Otherwise, a new dashboard is created. The maximum length is
+    #   255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "\_".
+    #
+    # @option params [String] :dashboard_body
+    #   The detailed information about the dashboard in JSON format, including
+    #   the widgets to include and their location on the dashboard.
+    #
+    #   For more information about the syntax, see
+    #   CloudWatch-Dashboard-Body-Structure.
+    #
+    # @return [Types::PutDashboardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDashboardOutput#dashboard_validation_messages #dashboard_validation_messages} => Array&lt;Types::DashboardValidationMessage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_dashboard({
+    #     dashboard_name: "DashboardName",
+    #     dashboard_body: "DashboardBody",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_validation_messages #=> Array
+    #   resp.dashboard_validation_messages[0].data_path #=> String
+    #   resp.dashboard_validation_messages[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboard AWS API Documentation
+    #
+    # @overload put_dashboard(params = {})
+    # @param [Hash] params ({})
+    def put_dashboard(params = {}, options = {})
+      req = build_request(:put_dashboard, params)
+      req.send_request(options)
+    end
+
     # Creates or updates an alarm and associates it with the specified
     # metric. Optionally, this operation can associate one or more Amazon
     # SNS resources with the alarm.
@@ -697,8 +854,8 @@ module Aws::CloudWatch
     # the update completely overwrites the previous configuration of the
     # alarm.
     #
-    # If you are an AWS Identity and Access Management (IAM) user, you must
-    # have Amazon EC2 permissions for some operations:
+    # If you are an IAM user, you must have Amazon EC2 permissions for some
+    # operations:
     #
     # * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
     #   alarms on EC2 instance status metrics
@@ -712,25 +869,23 @@ module Aws::CloudWatch
     #
     # If you have read/write permissions for Amazon CloudWatch but not for
     # Amazon EC2, you can still create an alarm, but the stop or terminate
-    # actions won't be performed. However, if you are later granted the
-    # required permissions, the alarm actions that you created earlier will
-    # be performed.
+    # actions are not performed. However, if you are later granted the
+    # required permissions, the alarm actions that you created earlier are
+    # performed.
     #
-    # If you are using an IAM role (for example, an Amazon EC2 instance
-    # profile), you cannot stop or terminate the instance using alarm
-    # actions. However, you can still see the alarm state and perform any
-    # other actions such as Amazon SNS notifications or Auto Scaling
-    # policies.
+    # If you are using an IAM role (for example, an EC2 instance profile),
+    # you cannot stop or terminate the instance using alarm actions.
+    # However, you can still see the alarm state and perform any other
+    # actions such as Amazon SNS notifications or Auto Scaling policies.
     #
-    # If you are using temporary security credentials granted using the AWS
-    # Security Token Service (AWS STS), you cannot stop or terminate an
-    # Amazon EC2 instance using alarm actions.
+    # If you are using temporary security credentials granted using AWS STS,
+    # you cannot stop or terminate an EC2 instance using alarm actions.
     #
-    # Note that you must create at least one stop, terminate, or reboot
-    # alarm using the Amazon EC2 or CloudWatch console to create the
+    # You must create at least one stop, terminate, or reboot alarm using
+    # either the Amazon EC2 or CloudWatch consoles to create the
     # **EC2ActionsAccess** IAM role. After this IAM role is created, you can
     # create stop, terminate, or reboot alarms using a command-line
-    # interface or an API.
+    # interface or API.
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the AWS
@@ -810,6 +965,9 @@ module Aws::CloudWatch
     #
     # @option params [required, Integer] :period
     #   The period, in seconds, over which the specified statistic is applied.
+    #   An alarm's total current evaluation period can be no longer than one
+    #   day, so this number multiplied by `EvaluationPeriods` must be 86,400
+    #   or less.
     #
     # @option params [String] :unit
     #   The unit of measure for the statistic. For example, the units for the
@@ -820,12 +978,14 @@ module Aws::CloudWatch
     #   specify a unit of measure, such as Percent, are aggregated separately.
     #
     #   If you specify a unit, you must use a unit that is appropriate for the
-    #   metric. Otherwise, the Amazon CloudWatch alarm can get stuck in the
+    #   metric. Otherwise, the CloudWatch alarm can get stuck in the
     #   `INSUFFICIENT DATA` state.
     #
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold.
+    #   threshold. An alarm's total current evaluation period can be no
+    #   longer than one day, so this number multiplied by `Period` must be
+    #   86,400 or less.
     #
     # @option params [required, Float] :threshold
     #   The value against which the specified statistic is compared.
@@ -849,10 +1009,10 @@ module Aws::CloudWatch
     #
     # @option params [String] :evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
-    #   the alarm state will not change during periods with too few data
+    #   the alarm state does not change during periods with too few data
     #   points to be statistically significant. If you specify `evaluate` or
-    #   omit this parameter, the alarm will always be evaluated and possibly
-    #   change state no matter how many data points are available. For more
+    #   omit this parameter, the alarm is always evaluated and possibly
+    #   changes state no matter how many data points are available. For more
     #   information, see [Percentile-Based CloudWatch Alarms and Low Data
     #   Samples][1].
     #
@@ -901,23 +1061,23 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Publishes metric data points to Amazon CloudWatch. Amazon CloudWatch
+    # Publishes metric data points to Amazon CloudWatch. CloudWatch
     # associates the data points with the specified metric. If the specified
-    # metric does not exist, Amazon CloudWatch creates the metric. When
-    # Amazon CloudWatch creates a metric, it can take up to fifteen minutes
-    # for the metric to appear in calls to ListMetrics.
+    # metric does not exist, CloudWatch creates the metric. When CloudWatch
+    # creates a metric, it can take up to fifteen minutes for the metric to
+    # appear in calls to ListMetrics.
     #
     # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
     # requests.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
-    # Amazon CloudWatch rejects values that are either too small or too
-    # large. Values must be in the range of 8.515920e-109 to 1.174271e+108
-    # (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
-    # (e.g., NaN, +Infinity, -Infinity) are not supported.
+    # CloudWatch rejects values that are either too small or too large.
+    # Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
+    # 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
+    # example, NaN, +Infinity, -Infinity) are not supported.
     #
     # You can use up to 10 dimensions per metric to further clarify what
-    # data the metric collects. For more information on specifying
+    # data the metric collects. For more information about specifying
     # dimensions, see [Publishing Metrics][1] in the *Amazon CloudWatch User
     # Guide*.
     #
@@ -926,13 +1086,13 @@ module Aws::CloudWatch
     # time they are submitted.
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
-    # If you publish data using a statistic set instead, you cannot retrieve
-    # percentile statistics for this data unless one of the following
+    # If you publish data using a statistic set instead, you can only
+    # retrieve percentile statistics for this data if one of the following
     # conditions is true:
     #
-    # * The SampleCount of the statistic set is 1
+    # * The SampleCount value of the statistic set is 1
     #
-    # * The Min and the Max of the statistic set are equal
+    # * The Min and the Max values of the statistic set are equal
     #
     #
     #
@@ -972,6 +1132,7 @@ module Aws::CloudWatch
     #           maximum: 1.0, # required
     #         },
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         storage_resolution: 1,
     #       },
     #     ],
     #   })
@@ -989,11 +1150,11 @@ module Aws::CloudWatch
     # updated state differs from the previous value, the action configured
     # for the appropriate state is invoked. For example, if your alarm is
     # configured to send an Amazon SNS message when an alarm is triggered,
-    # temporarily changing the alarm state to `ALARM` sends an Amazon SNS
-    # message. The alarm returns to its actual state (often within seconds).
-    # Because the alarm state change happens very quickly, it is typically
-    # only visible in the alarm's **History** tab in the Amazon CloudWatch
-    # console or through DescribeAlarmHistory.
+    # temporarily changing the alarm state to `ALARM` sends an SNS message.
+    # The alarm returns to its actual state (often within seconds). Because
+    # the alarm state change happens quickly, it is typically only visible
+    # in the alarm's **History** tab in the Amazon CloudWatch console or
+    # through DescribeAlarmHistory.
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the AWS
@@ -1043,7 +1204,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

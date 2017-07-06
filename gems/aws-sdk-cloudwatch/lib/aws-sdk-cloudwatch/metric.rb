@@ -105,22 +105,22 @@ module Aws::CloudWatch
     # @option options [Array<Types::Dimension>] :dimensions
     #   The dimensions. If the metric contains multiple dimensions, you must
     #   include a value for each dimension. CloudWatch treats each unique
-    #   combination of dimensions as a separate metric. You can't retrieve
-    #   statistics using combinations of dimensions that were not specially
-    #   published. You must specify the same dimensions that were used when
-    #   the metrics were created. For an example, see [Dimension
+    #   combination of dimensions as a separate metric. If a specific
+    #   combination of dimensions was not published, you can't retrieve
+    #   statistics for it. You must specify the same dimensions that were used
+    #   when the metrics were created. For an example, see [Dimension
     #   Combinations][1] in the *Amazon CloudWatch User Guide*. For more
-    #   information on specifying dimensions, see [Publishing Metrics][2] in
-    #   the *Amazon CloudWatch User Guide*.
+    #   information about specifying dimensions, see [Publishing Metrics][2]
+    #   in the *Amazon CloudWatch User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
     #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # @option options [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The time stamp that determines the first data point to return. Note
-    #   that start times are evaluated relative to the time that CloudWatch
-    #   receives the request.
+    #   The time stamp that determines the first data point to return. Start
+    #   times are evaluated relative to the time that CloudWatch receives the
+    #   request.
     #
     #   The value specified is inclusive; results include data points with the
     #   specified time stamp. The time stamp must be in ISO 8601 UTC format
@@ -141,13 +141,12 @@ module Aws::CloudWatch
     # @option options [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
     #
-    #   The value specified is exclusive; results will include data points up
-    #   to the specified time stamp. The time stamp must be in ISO 8601 UTC
+    #   The value specified is exclusive; results include data points up to
+    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
     #   format (for example, 2016-10-10T23:00:00Z).
     # @option options [required, Integer] :period
     #   The granularity, in seconds, of the returned data points. A period can
     #   be as short as one minute (60 seconds) and must be a multiple of 60.
-    #   The default value is 60.
     #
     #   If the `StartTime` parameter specifies a time stamp that is greater
     #   than 15 days ago, you must specify the period as follows or no data
@@ -160,9 +159,13 @@ module Aws::CloudWatch
     #     (1 hour).
     # @option options [Array<String>] :statistics
     #   The metric statistics, other than percentile. For percentile
-    #   statistics, use `ExtendedStatistic`.
+    #   statistics, use `ExtendedStatistics`. When calling
+    #   `GetMetricStatistics`, you must specify either `Statistics` or
+    #   `ExtendedStatistics`, but not both.
     # @option options [Array<String>] :extended_statistics
-    #   The percentile statistics. Specify values between p0.0 and p100.
+    #   The percentile statistics. Specify values between p0.0 and p100. When
+    #   calling `GetMetricStatistics`, you must specify either `Statistics` or
+    #   `ExtendedStatistics`, but not both.
     # @option options [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
     #   units. Not supplying a unit results in all units being returned. If
@@ -267,6 +270,9 @@ module Aws::CloudWatch
     #   The dimensions for the metric associated with the alarm.
     # @option options [required, Integer] :period
     #   The period, in seconds, over which the specified statistic is applied.
+    #   An alarm's total current evaluation period can be no longer than one
+    #   day, so this number multiplied by `EvaluationPeriods` must be 86,400
+    #   or less.
     # @option options [String] :unit
     #   The unit of measure for the statistic. For example, the units for the
     #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
@@ -276,11 +282,13 @@ module Aws::CloudWatch
     #   specify a unit of measure, such as Percent, are aggregated separately.
     #
     #   If you specify a unit, you must use a unit that is appropriate for the
-    #   metric. Otherwise, the Amazon CloudWatch alarm can get stuck in the
+    #   metric. Otherwise, the CloudWatch alarm can get stuck in the
     #   `INSUFFICIENT DATA` state.
     # @option options [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold.
+    #   threshold. An alarm's total current evaluation period can be no
+    #   longer than one day, so this number multiplied by `Period` must be
+    #   86,400 or less.
     # @option options [required, Float] :threshold
     #   The value against which the specified statistic is compared.
     # @option options [required, String] :comparison_operator
@@ -300,10 +308,10 @@ module Aws::CloudWatch
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     # @option options [String] :evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
-    #   the alarm state will not change during periods with too few data
+    #   the alarm state does not change during periods with too few data
     #   points to be statistically significant. If you specify `evaluate` or
-    #   omit this parameter, the alarm will always be evaluated and possibly
-    #   change state no matter how many data points are available. For more
+    #   omit this parameter, the alarm is always evaluated and possibly
+    #   changes state no matter how many data points are available. For more
     #   information, see [Percentile-Based CloudWatch Alarms and Low Data
     #   Samples][1].
     #
@@ -346,6 +354,7 @@ module Aws::CloudWatch
     #           maximum: 1.0, # required
     #         },
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         storage_resolution: 1,
     #       },
     #     ],
     #   })

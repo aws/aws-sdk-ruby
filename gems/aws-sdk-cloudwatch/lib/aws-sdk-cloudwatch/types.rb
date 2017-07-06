@@ -41,8 +41,56 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
-    # Encapsulates the statistical data that Amazon CloudWatch computes from
-    # metric data.
+    # Represents a specific dashboard.
+    #
+    # @!attribute [rw] dashboard_name
+    #   The name of the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The Amazon Resource Name (ARN) of the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The time stamp of when the dashboard was last modified, either by an
+    #   API call or through the console. This number is expressed as the
+    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   @return [Time]
+    #
+    # @!attribute [rw] size
+    #   The size of the dashboard, in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardEntry AWS API Documentation
+    #
+    class DashboardEntry < Struct.new(
+      :dashboard_name,
+      :dashboard_arn,
+      :last_modified,
+      :size)
+      include Aws::Structure
+    end
+
+    # An error or warning for the operation.
+    #
+    # @!attribute [rw] data_path
+    #   The data path related to the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the error or warning.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardValidationMessage AWS API Documentation
+    #
+    class DashboardValidationMessage < Struct.new(
+      :data_path,
+      :message)
+      include Aws::Structure
+    end
+
+    # Encapsulates the statistical data that CloudWatch computes from metric
+    # data.
     #
     # @!attribute [rw] timestamp
     #   The time stamp used for the data point.
@@ -108,6 +156,28 @@ module Aws::CloudWatch
       :alarm_names)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDashboardsInput
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_names: ["DashboardName"],
+    #       }
+    #
+    # @!attribute [rw] dashboard_names
+    #   The dashboards to be deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsInput AWS API Documentation
+    #
+    class DeleteDashboardsInput < Struct.new(
+      :dashboard_names)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsOutput AWS API Documentation
+    #
+    class DeleteDashboardsOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeAlarmHistoryInput
     #   data as a hash:
@@ -266,8 +336,8 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_name_prefix
-    #   The alarm name prefix. You cannot specify `AlarmNames` if this
-    #   parameter is specified.
+    #   The alarm name prefix. If this parameter is specified, you cannot
+    #   specify `AlarmNames`.
     #   @return [String]
     #
     # @!attribute [rw] state_value
@@ -404,6 +474,48 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDashboardInput
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_name: "DashboardName",
+    #       }
+    #
+    # @!attribute [rw] dashboard_name
+    #   The name of the dashboard to be described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboardInput AWS API Documentation
+    #
+    class GetDashboardInput < Struct.new(
+      :dashboard_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dashboard_arn
+    #   The Amazon Resource Name (ARN) of the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_body
+    #   The detailed information about the dashboard, including what widgets
+    #   are included and their location on the dashboard. For more
+    #   information about the `DashboardBody` syntax, see
+    #   CloudWatch-Dashboard-Body-Structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_name
+    #   The name of the dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboardOutput AWS API Documentation
+    #
+    class GetDashboardOutput < Struct.new(
+      :dashboard_arn,
+      :dashboard_body,
+      :dashboard_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMetricStatisticsInput
     #   data as a hash:
     #
@@ -435,13 +547,13 @@ module Aws::CloudWatch
     # @!attribute [rw] dimensions
     #   The dimensions. If the metric contains multiple dimensions, you must
     #   include a value for each dimension. CloudWatch treats each unique
-    #   combination of dimensions as a separate metric. You can't retrieve
-    #   statistics using combinations of dimensions that were not specially
-    #   published. You must specify the same dimensions that were used when
-    #   the metrics were created. For an example, see [Dimension
+    #   combination of dimensions as a separate metric. If a specific
+    #   combination of dimensions was not published, you can't retrieve
+    #   statistics for it. You must specify the same dimensions that were
+    #   used when the metrics were created. For an example, see [Dimension
     #   Combinations][1] in the *Amazon CloudWatch User Guide*. For more
-    #   information on specifying dimensions, see [Publishing Metrics][2] in
-    #   the *Amazon CloudWatch User Guide*.
+    #   information about specifying dimensions, see [Publishing Metrics][2]
+    #   in the *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -450,9 +562,9 @@ module Aws::CloudWatch
     #   @return [Array<Types::Dimension>]
     #
     # @!attribute [rw] start_time
-    #   The time stamp that determines the first data point to return. Note
-    #   that start times are evaluated relative to the time that CloudWatch
-    #   receives the request.
+    #   The time stamp that determines the first data point to return. Start
+    #   times are evaluated relative to the time that CloudWatch receives
+    #   the request.
     #
     #   The value specified is inclusive; results include data points with
     #   the specified time stamp. The time stamp must be in ISO 8601 UTC
@@ -475,15 +587,15 @@ module Aws::CloudWatch
     # @!attribute [rw] end_time
     #   The time stamp that determines the last data point to return.
     #
-    #   The value specified is exclusive; results will include data points
-    #   up to the specified time stamp. The time stamp must be in ISO 8601
-    #   UTC format (for example, 2016-10-10T23:00:00Z).
+    #   The value specified is exclusive; results include data points up to
+    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
+    #   format (for example, 2016-10-10T23:00:00Z).
     #   @return [Time]
     #
     # @!attribute [rw] period
     #   The granularity, in seconds, of the returned data points. A period
     #   can be as short as one minute (60 seconds) and must be a multiple of
-    #   60. The default value is 60.
+    #   60.
     #
     #   If the `StartTime` parameter specifies a time stamp that is greater
     #   than 15 days ago, you must specify the period as follows or no data
@@ -498,11 +610,15 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] statistics
     #   The metric statistics, other than percentile. For percentile
-    #   statistics, use `ExtendedStatistic`.
+    #   statistics, use `ExtendedStatistics`. When calling
+    #   `GetMetricStatistics`, you must specify either `Statistics` or
+    #   `ExtendedStatistics`, but not both.
     #   @return [Array<String>]
     #
     # @!attribute [rw] extended_statistics
     #   The percentile statistics. Specify values between p0.0 and p100.
+    #   When calling `GetMetricStatistics`, you must specify either
+    #   `Statistics` or `ExtendedStatistics`, but not both.
     #   @return [Array<String>]
     #
     # @!attribute [rw] unit
@@ -540,6 +656,51 @@ module Aws::CloudWatch
     class GetMetricStatisticsOutput < Struct.new(
       :label,
       :datapoints)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDashboardsInput
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_name_prefix: "DashboardNamePrefix",
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] dashboard_name_prefix
+    #   If you specify this parameter, only the dashboards with names
+    #   starting with the specified string are listed. The maximum length is
+    #   255, and valid characters are A-Z, a-z, 0-9, ".", "-", and
+    #   "\_".
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to indicate that there is more
+    #   data available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsInput AWS API Documentation
+    #
+    class ListDashboardsInput < Struct.new(
+      :dashboard_name_prefix,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dashboard_entries
+    #   The list of matching dashboards.
+    #   @return [Array<Types::DashboardEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that marks the start of the next batch of returned
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsOutput AWS API Documentation
+    #
+    class ListDashboardsOutput < Struct.new(
+      :dashboard_entries,
+      :next_token)
       include Aws::Structure
     end
 
@@ -728,9 +889,16 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] treat_missing_data
+    #   Sets how this alarm is to handle missing data points. If this
+    #   parameter is omitted, the default behavior of `missing` is used.
     #   @return [String]
     #
     # @!attribute [rw] evaluate_low_sample_count_percentile
+    #   Used only for alarms based on percentiles. If `ignore`, the alarm
+    #   state does not change during periods with too few data points to be
+    #   statistically significant. If `evaluate` or this parameter is not
+    #   used, the alarm will always be evaluated and possibly change state
+    #   no matter how many data points are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
@@ -786,6 +954,7 @@ module Aws::CloudWatch
     #           maximum: 1.0, # required
     #         },
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         storage_resolution: 1,
     #       }
     #
     # @!attribute [rw] metric_name
@@ -804,11 +973,11 @@ module Aws::CloudWatch
     # @!attribute [rw] value
     #   The value for the metric.
     #
-    #   Although the parameter accepts numbers of type Double, Amazon
-    #   CloudWatch rejects values that are either too small or too large.
-    #   Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
-    #   10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
-    #   example, NaN, +Infinity, -Infinity) are not supported.
+    #   Although the parameter accepts numbers of type Double, CloudWatch
+    #   rejects values that are either too small or too large. Values must
+    #   be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or
+    #   2e-360 to 2e360 (Base 2). In addition, special values (for example,
+    #   NaN, +Infinity, -Infinity) are not supported.
     #   @return [Float]
     #
     # @!attribute [rw] statistic_values
@@ -819,6 +988,9 @@ module Aws::CloudWatch
     #   The unit of the metric.
     #   @return [String]
     #
+    # @!attribute [rw] storage_resolution
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum AWS API Documentation
     #
     class MetricDatum < Struct.new(
@@ -827,7 +999,60 @@ module Aws::CloudWatch
       :timestamp,
       :value,
       :statistic_values,
-      :unit)
+      :unit,
+      :storage_resolution)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutDashboardInput
+    #   data as a hash:
+    #
+    #       {
+    #         dashboard_name: "DashboardName",
+    #         dashboard_body: "DashboardBody",
+    #       }
+    #
+    # @!attribute [rw] dashboard_name
+    #   The name of the dashboard. If a dashboard with this name already
+    #   exists, this call modifies that dashboard, replacing its current
+    #   contents. Otherwise, a new dashboard is created. The maximum length
+    #   is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and
+    #   "\_".
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_body
+    #   The detailed information about the dashboard in JSON format,
+    #   including the widgets to include and their location on the
+    #   dashboard.
+    #
+    #   For more information about the syntax, see
+    #   CloudWatch-Dashboard-Body-Structure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboardInput AWS API Documentation
+    #
+    class PutDashboardInput < Struct.new(
+      :dashboard_name,
+      :dashboard_body)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dashboard_validation_messages
+    #   If the input for `PutDashboard` was correct and the dashboard was
+    #   successfully created or modified, this result is empty.
+    #
+    #   If this result includes only warning messages, then the input was
+    #   valid enough for the dashboard to be created or modified, but some
+    #   elements of the dashboard may not render.
+    #
+    #   If this result includes error messages, the input was not valid and
+    #   the operation failed.
+    #   @return [Array<Types::DashboardValidationMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboardOutput AWS API Documentation
+    #
+    class PutDashboardOutput < Struct.new(
+      :dashboard_validation_messages)
       include Aws::Structure
     end
 
@@ -949,7 +1174,9 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] period
     #   The period, in seconds, over which the specified statistic is
-    #   applied.
+    #   applied. An alarm's total current evaluation period can be no
+    #   longer than one day, so this number multiplied by
+    #   `EvaluationPeriods` must be 86,400 or less.
     #   @return [Integer]
     #
     # @!attribute [rw] unit
@@ -962,13 +1189,15 @@ module Aws::CloudWatch
     #   aggregated separately.
     #
     #   If you specify a unit, you must use a unit that is appropriate for
-    #   the metric. Otherwise, the Amazon CloudWatch alarm can get stuck in
-    #   the `INSUFFICIENT DATA` state.
+    #   the metric. Otherwise, the CloudWatch alarm can get stuck in the
+    #   `INSUFFICIENT DATA` state.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold.
+    #   threshold. An alarm's total current evaluation period can be no
+    #   longer than one day, so this number multiplied by `Period` must be
+    #   86,400 or less.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold
@@ -996,10 +1225,10 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] evaluate_low_sample_count_percentile
     #   Used only for alarms based on percentiles. If you specify `ignore`,
-    #   the alarm state will not change during periods with too few data
+    #   the alarm state does not change during periods with too few data
     #   points to be statistically significant. If you specify `evaluate` or
-    #   omit this parameter, the alarm will always be evaluated and possibly
-    #   change state no matter how many data points are available. For more
+    #   omit this parameter, the alarm is always evaluated and possibly
+    #   changes state no matter how many data points are available. For more
     #   information, see [Percentile-Based CloudWatch Alarms and Low Data
     #   Samples][1].
     #
@@ -1057,6 +1286,7 @@ module Aws::CloudWatch
     #               maximum: 1.0, # required
     #             },
     #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             storage_resolution: 1,
     #           },
     #         ],
     #       }

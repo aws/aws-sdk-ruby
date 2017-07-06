@@ -155,25 +155,40 @@ module Aws::GameLift
 
     # @!group API Operations
 
-    # Creates an alias and sets a target fleet. A fleet alias can be used in
-    # place of a fleet ID, such as when calling `CreateGameSession` from a
-    # game client or game service or adding destinations to a game session
-    # queue. By changing an alias's target fleet, you can switch your
-    # players to the new fleet without changing any other component. In
-    # production, this feature is particularly useful to redirect your
-    # player base seamlessly to the latest game server update.
+    # Creates an alias for a fleet. In most situations, you can use an alias
+    # ID in place of a fleet ID. By using a fleet alias instead of a
+    # specific fleet ID, you can switch gameplay and players to a new fleet
+    # without changing your game client or other game components. For
+    # example, for games in production, using an alias allows you to
+    # seamlessly redirect your player base to a new game server update.
     #
     # Amazon GameLift supports two types of routing strategies for aliases:
-    # simple and terminal. Use a simple alias to point to an active fleet.
-    # Use a terminal alias to display a message to incoming traffic instead
-    # of routing players to an active fleet. This option is useful when a
-    # game server is no longer supported but you want to provide better
-    # messaging than a standard 404 error.
+    # simple and terminal. A simple alias points to an active fleet. A
+    # terminal alias is used to display messaging or link to a URL instead
+    # of routing players to an active fleet. For example, you might use a
+    # terminal alias when a game version is no longer supported and you want
+    # to direct players to an upgrade site.
     #
     # To create a fleet alias, specify an alias name, routing strategy, and
-    # optional description. If successful, a new alias record is returned,
-    # including an alias ID, which you can reference when creating a game
-    # session. To reassign the alias to another fleet ID, call UpdateAlias.
+    # optional description. Each simple alias can point to only one fleet,
+    # but a fleet can have multiple aliases. If successful, a new alias
+    # record is returned, including an alias ID, which you can reference
+    # when creating a game session. You can reassign an alias to another
+    # fleet by calling `UpdateAlias`.
+    #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with an alias. Alias names do not
@@ -224,16 +239,15 @@ module Aws::GameLift
 
     # Creates a new Amazon GameLift build from a set of game server binary
     # files stored in an Amazon Simple Storage Service (Amazon S3) location.
-    # When using this API call, you must create a `.zip` file containing all
-    # of the build files and store it in an Amazon S3 bucket under your AWS
+    # To use this API call, create a `.zip` file containing all of the files
+    # for the build and store it in an Amazon S3 bucket under your AWS
     # account. For help on packaging your build files and creating a build,
     # see [Uploading Your Game to Amazon GameLift][1].
     #
     # Use this API action ONLY if you are storing your game build files in
-    # an Amazon S3 bucket in your AWS account. To create a build using files
-    # stored in a directory, use the CLI command [ `upload-build` ][2],
-    # which uploads the build files from a file location you specify and
-    # creates a build.
+    # an Amazon S3 bucket. To create a build using files stored locally, use
+    # the CLI command [ `upload-build` ][2], which uploads the build files
+    # from a file location you specify.
     #
     # To create a new build using `CreateBuild`, identify the storage
     # location and operating system of your game build. You also have the
@@ -242,6 +256,18 @@ module Aws::GameLift
     # `INITIALIZED` status. Use the API call DescribeBuild to check the
     # status of your build. A build must be in `READY` status before it can
     # be used to create fleets to host your game.
+    #
+    # Build-related operations include:
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
     #
     #
     #
@@ -329,16 +355,25 @@ module Aws::GameLift
     #
     # To create a new fleet, you must specify the following: (1) fleet name,
     # (2) build ID of an uploaded game build, (3) an EC2 instance type, and
-    # (4) a runtime configuration that describes which server processes to
-    # run on each instance in the fleet. (Although the runtime configuration
-    # is not a required parameter, the fleet cannot be successfully created
-    # without it.) You can also configure the new fleet with the following
-    # settings: fleet description, access permissions for inbound traffic,
-    # fleet-wide game session protection, and resource creation limit. If
-    # you use Amazon CloudWatch for metrics, you can add the new fleet to a
-    # metric group, which allows you to view aggregated metrics for a set of
-    # fleets. Once you specify a metric group, the new fleet's metrics are
-    # included in the metric group's data.
+    # (4) a run-time configuration that describes which server processes to
+    # run on each instance in the fleet. (Although the run-time
+    # configuration is not a required parameter, the fleet cannot be
+    # successfully activated without it.)
+    #
+    # You can also configure the new fleet with the following settings:
+    #
+    # * Fleet description
+    #
+    # * Access permissions for inbound traffic
+    #
+    # * Fleetwide game session protection
+    #
+    # * Resource creation limit
+    #
+    # If you use Amazon CloudWatch for metrics, you can add the new fleet to
+    # a metric group. This allows you to view aggregated metrics for a set
+    # of fleets. Once you specify a metric group, the new fleet's metrics
+    # are included in the metric group's data.
     #
     # If the CreateFleet call is successful, Amazon GameLift performs the
     # following tasks:
@@ -346,8 +381,8 @@ module Aws::GameLift
     # * Creates a fleet record and sets the status to `NEW` (followed by
     #   other statuses as the fleet is activated).
     #
-    # * Sets the fleet's capacity to 1 "desired", which causes Amazon
-    #   GameLift to start one new EC2 instance.
+    # * Sets the fleet's target capacity to 1 (desired instances), which
+    #   causes Amazon GameLift to start one new EC2 instance.
     #
     # * Starts launching server processes on the instance. If the fleet is
     #   configured to run multiple server processes per instance, Amazon
@@ -356,27 +391,52 @@ module Aws::GameLift
     # * Begins writing events to the fleet event log, which can be accessed
     #   in the Amazon GameLift console.
     #
-    # * Sets the fleet's status to `ACTIVE` once one server process in the
-    #   fleet is ready to host a game session.
+    # * Sets the fleet's status to `ACTIVE` as soon as one server process
+    #   in the fleet is ready to host a game session.
     #
-    # After a fleet is created, use the following actions to change fleet
-    # properties and configuration:
+    # Fleet-related operations include:
     #
-    # * UpdateFleetAttributes -- Update fleet metadata, including name and
-    #   description.
+    # * CreateFleet
     #
-    # * UpdateFleetCapacity -- Increase or decrease the number of instances
-    #   you want the fleet to maintain.
+    # * ListFleets
     #
-    # * UpdateFleetPortSettings -- Change the IP address and port ranges
-    #   that allow access to incoming traffic.
+    # * Describe fleets:
     #
-    # * UpdateRuntimeConfiguration -- Change how server processes are
-    #   launched in the fleet, including launch path, launch parameters, and
-    #   the number of concurrent processes.
+    #   * DescribeFleetAttributes
     #
-    # * PutScalingPolicy -- Create or update rules that are used to set the
-    #   fleet's capacity (autoscaling).
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     #
     #
@@ -399,13 +459,13 @@ module Aws::GameLift
     #   This parameter is no longer used. Instead, specify a server launch
     #   path using the `RuntimeConfiguration` parameter. (Requests that
     #   specify a server launch path and launch parameters instead of a
-    #   runtime configuration will continue to work.)
+    #   run-time configuration will continue to work.)
     #
     # @option params [String] :server_launch_parameters
     #   This parameter is no longer used. Instead, specify server launch
     #   parameters in the `RuntimeConfiguration` parameter. (Requests that
     #   specify a server launch path and launch parameters instead of a
-    #   runtime configuration will continue to work.)
+    #   run-time configuration will continue to work.)
     #
     # @option params [Array<String>] :log_paths
     #   This parameter is no longer used. Instead, to specify where Amazon
@@ -452,16 +512,16 @@ module Aws::GameLift
     #
     # @option params [Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The runtime configuration for a fleet has a collection of
+    #   fleet. The run-time configuration for a fleet has a collection of
     #   server process configurations, one for each type of server process to
     #   run on an instance. A server process configuration specifies the
     #   location of the server executable, launch parameters, and the number
     #   of concurrent processes with that configuration to maintain on each
-    #   instance. A CreateFleet request must include a runtime configuration
+    #   instance. A CreateFleet request must include a run-time configuration
     #   with at least one server process configuration; otherwise the request
-    #   will fail with an invalid request exception. (This parameter replaces
-    #   the parameters `ServerLaunchPath` and `ServerLaunchParameters`;
-    #   requests that contain values for these parameters instead of a runtime
+    #   fails with an invalid request exception. (This parameter replaces the
+    #   parameters `ServerLaunchPath` and `ServerLaunchParameters`; requests
+    #   that contain values for these parameters instead of a run-time
     #   configuration will continue to work.)
     #
     # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
@@ -470,9 +530,9 @@ module Aws::GameLift
     #
     # @option params [Array<String>] :metric_groups
     #   Names of metric groups to add this fleet to. Use an existing metric
-    #   group name to add this fleet to the group, or use a new name to create
-    #   a new metric group. Currently, a fleet can only be included in one
-    #   metric group at a time.
+    #   group name to add this fleet to the group. Or use a new name to create
+    #   a new metric group. A fleet can only be included in one metric group
+    #   at a time.
     #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -574,6 +634,28 @@ module Aws::GameLift
     # creation policy.
     #
     # *Available in Amazon GameLift Local.*
+    #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
     #
     # @option params [String] :fleet_id
     #   Unique identifier for a fleet to create a game session in. Each
@@ -703,6 +785,16 @@ module Aws::GameLift
     # destinations and, if desired, a set of latency policies. If
     # successful, a new queue object is returned.
     #
+    # Queue-related operations include:
+    #
+    # * CreateGameSessionQueue
+    #
+    # * DescribeGameSessionQueues
+    #
+    # * UpdateGameSessionQueue
+    #
+    # * DeleteGameSessionQueue
+    #
     # @option params [required, String] :name
     #   Descriptive label that is associated with queue. Queue names must be
     #   unique within each region.
@@ -786,6 +878,22 @@ module Aws::GameLift
     #
     # *Available in Amazon GameLift Local.*
     #
+    # Player-session-related operations include:
+    #
+    # * CreatePlayerSession
+    #
+    # * CreatePlayerSessions
+    #
+    # * DescribePlayerSessions
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [required, String] :game_session_id
     #   Unique identifier for the game session to add a player to.
     #
@@ -844,6 +952,22 @@ module Aws::GameLift
     #
     # *Available in Amazon GameLift Local.*
     #
+    # Player-session-related operations include:
+    #
+    # * CreatePlayerSession
+    #
+    # * CreatePlayerSessions
+    #
+    # * DescribePlayerSessions
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [required, String] :game_session_id
     #   Unique identifier for the game session to add players to.
     #
@@ -894,10 +1018,24 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a fleet alias. This action removes all record of the alias.
-    # Game clients attempting to access a server process using the deleted
-    # alias receive an error. To delete an alias, specify the alias ID to be
+    # Deletes an alias. This action removes all record of the alias. Game
+    # clients attempting to access a server process using the deleted alias
+    # receive an error. To delete an alias, specify the alias ID to be
     # deleted.
+    #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
     #
     # @option params [required, String] :alias_id
     #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -927,6 +1065,18 @@ module Aws::GameLift
     # the status of any active fleets using the build, but you can no longer
     # create new fleets with the deleted build.
     #
+    # Build-related operations include:
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
+    #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to delete.
     #
@@ -954,6 +1104,50 @@ module Aws::GameLift
     # This action removes the fleet's resources and the fleet record. Once
     # a fleet is deleted, you can no longer use that fleet.
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to be deleted.
     #
@@ -977,6 +1171,16 @@ module Aws::GameLift
     # Deletes a game session queue. This action means that any
     # StartGameSessionPlacement requests that reference this queue will
     # fail. To delete a queue, specify the queue name.
+    #
+    # Queue-related operations include:
+    #
+    # * CreateGameSessionQueue
+    #
+    # * DescribeGameSessionQueues
+    #
+    # * UpdateGameSessionQueue
+    #
+    # * DeleteGameSessionQueue
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with queue. Queue names must be
@@ -1004,6 +1208,50 @@ module Aws::GameLift
     # policy, specify both the scaling policy name and the fleet ID it is
     # associated with.
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [required, String] :name
     #   Descriptive label that is associated with a scaling policy. Policy
     #   names do not need to be unique.
@@ -1029,12 +1277,26 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves properties for a fleet alias. This operation returns all
-    # alias metadata and settings. To get just the fleet ID an alias is
-    # currently pointing to, use ResolveAlias.
+    # Retrieves properties for an alias. This operation returns all alias
+    # metadata and settings. To get an alias's target fleet ID only, use
+    # `ResolveAlias`.
     #
-    # To get alias properties, specify the alias ID. If successful, an Alias
-    # object is returned.
+    # To get alias properties, specify the alias ID. If successful, the
+    # requested alias record is returned.
+    #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
     #
     # @option params [required, String] :alias_id
     #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -1074,6 +1336,18 @@ module Aws::GameLift
     # Retrieves properties for a build. To get a build record, specify a
     # build ID. If successful, an object containing the build properties is
     # returned.
+    #
+    # Build-related operations include:
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to retrieve properties for.
@@ -1117,6 +1391,50 @@ module Aws::GameLift
     # Service limits vary depending on region. Available regions for Amazon
     # GameLift can be found in the AWS Management Console for Amazon
     # GameLift (see the drop-down list in the upper right corner).
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [String] :ec2_instance_type
     #   Name of an EC2 instance type that is supported in Amazon GameLift. A
@@ -1170,6 +1488,50 @@ module Aws::GameLift
     # error message includes the maximum allowed.
     #
     #  </note>
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve attributes for. To
@@ -1249,6 +1611,50 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve capacity information for.
     #   To request capacity information for all fleets, leave this parameter
@@ -1309,6 +1715,50 @@ module Aws::GameLift
     # successful, a collection of event log entries matching the request are
     # returned.
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to get event logs for.
     #
@@ -1353,9 +1803,10 @@ module Aws::GameLift
     #   resp.events #=> Array
     #   resp.events[0].event_id #=> String
     #   resp.events[0].resource_id #=> String
-    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT"
+    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_time #=> Time
+    #   resp.events[0].pre_signed_log_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents AWS API Documentation
@@ -1374,6 +1825,50 @@ module Aws::GameLift
     # successful, a collection of IpPermission objects is returned for the
     # requested fleet ID. If the requested fleet has been deleted, the
     # result set is empty.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to retrieve port settings for.
@@ -1418,6 +1913,50 @@ module Aws::GameLift
     # error message includes the maximum allowed.
     #
     #  </note>
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [Array<String>] :fleet_ids
     #   Unique identifier for a fleet(s) to retrieve utilization data for. To
@@ -1481,6 +2020,28 @@ module Aws::GameLift
     # set of sequential pages. If successful, a GameSessionDetail object is
     # returned for each session matching the request.
     #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [String] :fleet_id
     #   Unique identifier for a fleet to retrieve all game sessions active on
     #   the fleet.
@@ -1494,8 +2055,8 @@ module Aws::GameLift
     #
     # @option params [String] :status_filter
     #   Game session status to filter results on. Possible game session
-    #   statuses include ACTIVE, `TERMINATED`, `ACTIVATING` and `TERMINATING`
-    #   (the last two are transitory).
+    #   statuses include `ACTIVE`, `TERMINATED`, `ACTIVATING` and
+    #   `TERMINATING` (the last two are transitory).
     #
     # @option params [Integer] :limit
     #   Maximum number of results to return. Use this parameter with
@@ -1556,6 +2117,28 @@ module Aws::GameLift
     # request. To get game session placement details, specify the placement
     # ID. If successful, a GameSessionPlacement object is returned.
     #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [required, String] :placement_id
     #   Unique identifier for a game session placement to retrieve.
     #
@@ -1609,6 +2192,16 @@ module Aws::GameLift
     # GameSessionQueue object is returned for each requested queue. When
     # specifying a list of queues, objects are returned only for queues that
     # currently exist in the region.
+    #
+    # Queue-related operations include:
+    #
+    # * CreateGameSessionQueue
+    #
+    # * DescribeGameSessionQueues
+    #
+    # * UpdateGameSessionQueue
+    #
+    # * DeleteGameSessionQueue
     #
     # @option params [Array<String>] :names
     #   List of queue names to retrieve information for. To request settings
@@ -1671,6 +2264,28 @@ module Aws::GameLift
     # each game session matching the request.
     #
     # *Available in Amazon GameLift Local.*
+    #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
     #
     # @option params [String] :fleet_id
     #   Unique identifier for a fleet to retrieve all game sessions for.
@@ -1818,6 +2433,22 @@ module Aws::GameLift
     #
     # *Available in Amazon GameLift Local.*
     #
+    # Player-session-related operations include:
+    #
+    # * CreatePlayerSession
+    #
+    # * CreatePlayerSessions
+    #
+    # * DescribePlayerSessions
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [String] :game_session_id
     #   Unique identifier for the game session to retrieve player sessions
     #   for.
@@ -1897,12 +2528,56 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the current runtime configuration for the specified fleet.
-    # The runtime configuration tells Amazon GameLift how to launch server
+    # Retrieves the current run-time configuration for the specified fleet.
+    # The run-time configuration tells Amazon GameLift how to launch server
     # processes on instances in the fleet.
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [required, String] :fleet_id
-    #   Unique identifier for a fleet to get the runtime configuration for.
+    #   Unique identifier for a fleet to get the run-time configuration for.
     #
     # @return [Types::DescribeRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1939,6 +2614,50 @@ module Aws::GameLift
     # scaling policies. Use the pagination parameters to retrieve results as
     # a set of sequential pages. If successful, set of ScalingPolicy objects
     # is returned for the fleet.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to retrieve scaling policies for.
@@ -2019,6 +2738,28 @@ module Aws::GameLift
     # files that exceed this limit are not saved.
     #
     #  </note>
+    #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
     #
     #
     #
@@ -2113,13 +2854,27 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves a collection of alias records for this AWS account. You can
-    # filter the result set by alias name and/or routing strategy type. Use
-    # the pagination parameters to retrieve results in sequential pages.
+    # Retrieves all aliases for this AWS account. You can filter the result
+    # set by alias name and/or routing strategy type. Use the pagination
+    # parameters to retrieve results in sequential pages.
     #
-    # <note markdown="1"> Aliases are not listed in any particular order.
+    # <note markdown="1"> Returned aliases are not listed in any particular order.
     #
     #  </note>
+    #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
     #
     # @option params [String] :routing_strategy_type
     #   Type of routing to filter results on. Use this parameter to retrieve
@@ -2195,6 +2950,18 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # Build-related operations include:
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
+    #
     # @option params [String] :status
     #   Build status to filter results by. To retrieve all builds, leave this
     #   parameter empty.
@@ -2263,6 +3030,50 @@ module Aws::GameLift
     #
     #  </note>
     #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
+    #
     # @option params [String] :build_id
     #   Unique identifier for a build to return fleets for. Use this parameter
     #   to return only fleets using the specified build. To retrieve all
@@ -2329,6 +3140,50 @@ module Aws::GameLift
     # action are required. If successful, the policy name is returned.
     # Scaling policies cannot be suspended or made inactive. To stop
     # enforcing a scaling policy, call DeleteScalingPolicy.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :name
     #   Descriptive label that is associated with a scaling policy. Policy
@@ -2464,6 +3319,20 @@ module Aws::GameLift
     # Retrieves the fleet ID that a specified alias is currently pointing
     # to.
     #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
+    #
     # @option params [required, String] :alias_id
     #   Unique identifier for the alias you want to resolve.
     #
@@ -2491,11 +3360,11 @@ module Aws::GameLift
     end
 
     # Retrieves a set of game sessions that match a set of search criteria
-    # and sorts them in a specified order. Currently a game session search
-    # is limited to a single fleet. Search results include only game
-    # sessions that are in `ACTIVE` status. If you need to retrieve game
-    # sessions with a status other than active, use DescribeGameSessions. If
-    # you need to retrieve the protection policy for each game session, use
+    # and sorts them in a specified order. A game session search is limited
+    # to a single fleet. Search results include only game sessions that are
+    # in `ACTIVE` status. If you need to retrieve game sessions with a
+    # status other than active, use DescribeGameSessions. If you need to
+    # retrieve the protection policy for each game session, use
     # DescribeGameSessionDetails.
     #
     # You can search or sort by the following game session attributes:
@@ -2519,12 +3388,12 @@ module Aws::GameLift
     #   a game session. This value is set when requesting a new game session
     #   with CreateGameSession or updating with UpdateGameSession.
     #
-    # * **hasAvailablePlayerSessions** -- Boolean value indicating whether
-    #   or not a game session has reached its maximum number of players.
-    #   When searching with this attribute, the search value must be `true`
-    #   or `false`. It is highly recommended that all search requests
-    #   include this filter attribute to optimize search performance and
-    #   return only sessions that players can join.
+    # * **hasAvailablePlayerSessions** -- Boolean value indicating whether a
+    #   game session has reached its maximum number of players. When
+    #   searching with this attribute, the search value must be `true` or
+    #   `false`. It is highly recommended that all search requests include
+    #   this filter attribute to optimize search performance and return only
+    #   sessions that players can join.
     #
     # To search or sort, specify either a fleet ID or an alias ID, and
     # provide a search filter expression, a sort expression, or both. Use
@@ -2540,7 +3409,27 @@ module Aws::GameLift
     #
     #  </note>
     #
-    # *Available in Amazon GameLift Local.*
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
     #
     # @option params [String] :fleet_id
     #   Unique identifier for a fleet to search for active game sessions. Each
@@ -2713,6 +3602,28 @@ module Aws::GameLift
     # session ARN and region are referenced. If the placement request times
     # out, you can resubmit the request or retry it with a different queue.
     #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [required, String] :placement_id
     #   Unique identifier to assign to the new game session placement. This
     #   value is developer-defined. The value must be unique across all
@@ -2813,6 +3724,28 @@ module Aws::GameLift
     # placement, provide the placement ID values. If successful, the
     # placement is moved to Cancelled status.
     #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
+    #
     # @option params [required, String] :placement_id
     #   Unique identifier for a game session placement to cancel.
     #
@@ -2860,10 +3793,24 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates properties for a fleet alias. To update properties, specify
-    # the alias ID to be updated and provide the information to be changed.
-    # To reassign an alias to another fleet, provide an updated routing
+    # Updates properties for an alias. To update properties, specify the
+    # alias ID to be updated and provide the information to be changed. To
+    # reassign an alias to another fleet, provide an updated routing
     # strategy. If successful, the updated alias record is returned.
+    #
+    # Alias-related operations include:
+    #
+    # * CreateAlias
+    #
+    # * ListAliases
+    #
+    # * DescribeAlias
+    #
+    # * UpdateAlias
+    #
+    # * DeleteAlias
+    #
+    # * ResolveAlias
     #
     # @option params [required, String] :alias_id
     #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -2922,6 +3869,18 @@ module Aws::GameLift
     # provide the new values. If successful, a build object containing the
     # updated metadata is returned.
     #
+    # Build-related operations include:
+    #
+    # * CreateBuild
+    #
+    # * ListBuilds
+    #
+    # * DescribeBuild
+    #
+    # * UpdateBuild
+    #
+    # * DeleteBuild
+    #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to update.
     #
@@ -2965,9 +3924,53 @@ module Aws::GameLift
     end
 
     # Updates fleet properties, including name and description, for a fleet.
-    # To update metadata, specify the fleet ID and the property values you
-    # want to change. If successful, the fleet ID for the updated fleet is
-    # returned.
+    # To update metadata, specify the fleet ID and the property values that
+    # you want to change. If successful, the fleet ID for the updated fleet
+    # is returned.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update attribute metadata for.
@@ -2995,11 +3998,11 @@ module Aws::GameLift
     #   can create over a span of time.
     #
     # @option params [Array<String>] :metric_groups
-    #   Names of metric groups to include this fleet with. A fleet metric
-    #   group is used in Amazon CloudWatch to aggregate metrics from multiple
+    #   Names of metric groups to include this fleet in. Amazon CloudWatch
+    #   uses a fleet metric group is to aggregate metrics from multiple
     #   fleets. Use an existing metric group name to add this fleet to the
-    #   group, or use a new name to create a new metric group. Currently, a
-    #   fleet can only be included in one metric group at a time.
+    #   group. Or use a new name to create a new metric group. A fleet can
+    #   only be included in one metric group at a time.
     #
     # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3050,6 +4053,50 @@ module Aws::GameLift
     # current capacity information by calling DescribeFleetCapacity. If the
     # desired instance count is higher than the instance type's limit, the
     # "Limit Exceeded" exception occurs.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     #
     #
@@ -3102,6 +4149,50 @@ module Aws::GameLift
     # in `InboundPermissionRevocations`. Permissions to be removed must
     # match existing fleet permissions. If successful, the fleet ID for the
     # updated fleet is returned.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :fleet_id
     #   Unique identifier for a fleet to update port settings for.
@@ -3158,6 +4249,28 @@ module Aws::GameLift
     # new players can join the session. To update a game session, specify
     # the game session ID and the values you want to change. If successful,
     # an updated GameSession object is returned.
+    #
+    # Game-session-related operations include:
+    #
+    # * CreateGameSession
+    #
+    # * DescribeGameSessions
+    #
+    # * DescribeGameSessionDetails
+    #
+    # * SearchGameSessions
+    #
+    # * UpdateGameSession
+    #
+    # * GetGameSessionLogUrl
+    #
+    # * Game session placements
+    #
+    #   * StartGameSessionPlacement
+    #
+    #   * DescribeGameSessionPlacement
+    #
+    #   * StopGameSessionPlacement
     #
     # @option params [required, String] :game_session_id
     #   Unique identifier for the game session to update.
@@ -3229,6 +4342,16 @@ module Aws::GameLift
     # specify the queue name to be updated and provide the new settings.
     # When updating destinations, provide a complete list of destinations.
     #
+    # Queue-related operations include:
+    #
+    # * CreateGameSessionQueue
+    #
+    # * DescribeGameSessionQueues
+    #
+    # * UpdateGameSessionQueue
+    #
+    # * DeleteGameSessionQueue
+    #
     # @option params [required, String] :name
     #   Descriptive label that is associated with queue. Queue names must be
     #   unique within each region.
@@ -3299,32 +4422,76 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates the current runtime configuration for the specified fleet,
+    # Updates the current run-time configuration for the specified fleet,
     # which tells Amazon GameLift how to launch server processes on
-    # instances in the fleet. You can update a fleet's runtime
+    # instances in the fleet. You can update a fleet's run-time
     # configuration at any time after the fleet is created; it does not need
     # to be in an `ACTIVE` status.
     #
-    # To update runtime configuration, specify the fleet ID and provide a
+    # To update run-time configuration, specify the fleet ID and provide a
     # `RuntimeConfiguration` object with the updated collection of server
     # process configurations.
     #
     # Each instance in a Amazon GameLift fleet checks regularly for an
-    # updated runtime configuration and changes how it launches server
+    # updated run-time configuration and changes how it launches server
     # processes to comply with the latest version. Existing server processes
     # are not affected by the update; they continue to run until they end,
     # while Amazon GameLift simply adds new server processes to fit the
-    # current runtime configuration. As a result, the runtime configuration
-    # changes are applied gradually as existing processes shut down and new
-    # processes are launched in Amazon GameLift's normal process recycling
-    # activity.
+    # current run-time configuration. As a result, the run-time
+    # configuration changes are applied gradually as existing processes shut
+    # down and new processes are launched in Amazon GameLift's normal
+    # process recycling activity.
+    #
+    # Fleet-related operations include:
+    #
+    # * CreateFleet
+    #
+    # * ListFleets
+    #
+    # * Describe fleets:
+    #
+    #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetPortSettings
+    #
+    #   * DescribeFleetUtilization
+    #
+    #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeFleetEvents
+    #
+    # * Update fleets:
+    #
+    #   * UpdateFleetAttributes
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * UpdateFleetPortSettings
+    #
+    #   * UpdateRuntimeConfiguration
+    #
+    # * Manage fleet capacity:
+    #
+    #   * DescribeFleetCapacity
+    #
+    #   * UpdateFleetCapacity
+    #
+    #   * PutScalingPolicy (automatic scaling)
+    #
+    #   * DescribeScalingPolicies (automatic scaling)
+    #
+    #   * DeleteScalingPolicy (automatic scaling)
+    #
+    #   * DescribeEC2InstanceLimits
+    #
+    # * DeleteFleet
     #
     # @option params [required, String] :fleet_id
-    #   Unique identifier for a fleet to update runtime configuration for.
+    #   Unique identifier for a fleet to update run-time configuration for.
     #
     # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for launching server processes on each instance in the
-    #   fleet. The runtime configuration for a fleet has a collection of
+    #   fleet. The run-time configuration for a fleet has a collection of
     #   server process configurations, one for each type of server process to
     #   run on an instance. A server process configuration specifies the
     #   location of the server executable, launch parameters, and the number
@@ -3383,7 +4550,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('aws-sdk-kms', '1.0.0.rc8')
   spec.add_dependency('aws-sigv4', '~> 1.0')
-  spec.add_dependency('aws-sdk-core', '~> 3.0.0.rc14')
+  spec.add_dependency('aws-sdk-core', '~> 3.0.0.rc15')
 
 end

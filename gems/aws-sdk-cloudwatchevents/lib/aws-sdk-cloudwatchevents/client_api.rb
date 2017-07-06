@@ -11,10 +11,13 @@ module Aws::CloudWatchEvents
 
     include Seahorse::Model
 
+    Action = Shapes::StringShape.new(name: 'Action')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
+    DescribeEventBusRequest = Shapes::StructureShape.new(name: 'DescribeEventBusRequest')
+    DescribeEventBusResponse = Shapes::StructureShape.new(name: 'DescribeEventBusResponse')
     DescribeRuleRequest = Shapes::StructureShape.new(name: 'DescribeRuleRequest')
     DescribeRuleResponse = Shapes::StructureShape.new(name: 'DescribeRuleResponse')
     DisableRuleRequest = Shapes::StructureShape.new(name: 'DisableRuleRequest')
@@ -43,18 +46,22 @@ module Aws::CloudWatchEvents
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
+    Principal = Shapes::StringShape.new(name: 'Principal')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutEventsRequestEntry = Shapes::StructureShape.new(name: 'PutEventsRequestEntry')
     PutEventsRequestEntryList = Shapes::ListShape.new(name: 'PutEventsRequestEntryList')
     PutEventsResponse = Shapes::StructureShape.new(name: 'PutEventsResponse')
     PutEventsResultEntry = Shapes::StructureShape.new(name: 'PutEventsResultEntry')
     PutEventsResultEntryList = Shapes::ListShape.new(name: 'PutEventsResultEntryList')
+    PutPermissionRequest = Shapes::StructureShape.new(name: 'PutPermissionRequest')
     PutRuleRequest = Shapes::StructureShape.new(name: 'PutRuleRequest')
     PutRuleResponse = Shapes::StructureShape.new(name: 'PutRuleResponse')
     PutTargetsRequest = Shapes::StructureShape.new(name: 'PutTargetsRequest')
     PutTargetsResponse = Shapes::StructureShape.new(name: 'PutTargetsResponse')
     PutTargetsResultEntry = Shapes::StructureShape.new(name: 'PutTargetsResultEntry')
     PutTargetsResultEntryList = Shapes::ListShape.new(name: 'PutTargetsResultEntryList')
+    RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RemoveTargetsRequest = Shapes::StructureShape.new(name: 'RemoveTargetsRequest')
     RemoveTargetsResponse = Shapes::StructureShape.new(name: 'RemoveTargetsResponse')
     RemoveTargetsResultEntry = Shapes::StructureShape.new(name: 'RemoveTargetsResultEntry')
@@ -75,6 +82,7 @@ module Aws::CloudWatchEvents
     RunCommandTargetValues = Shapes::ListShape.new(name: 'RunCommandTargetValues')
     RunCommandTargets = Shapes::ListShape.new(name: 'RunCommandTargets')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
     Target = Shapes::StructureShape.new(name: 'Target')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
@@ -91,6 +99,13 @@ module Aws::CloudWatchEvents
 
     DeleteRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
+
+    DescribeEventBusRequest.struct_class = Types::DescribeEventBusRequest
+
+    DescribeEventBusResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    DescribeEventBusResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    DescribeEventBusResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    DescribeEventBusResponse.struct_class = Types::DescribeEventBusResponse
 
     DescribeRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DescribeRuleRequest.struct_class = Types::DescribeRuleRequest
@@ -173,6 +188,11 @@ module Aws::CloudWatchEvents
 
     PutEventsResultEntryList.member = Shapes::ShapeRef.new(shape: PutEventsResultEntry)
 
+    PutPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    PutPermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, required: true, location_name: "Principal"))
+    PutPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
+    PutPermissionRequest.struct_class = Types::PutPermissionRequest
+
     PutRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     PutRuleRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     PutRuleRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
@@ -198,6 +218,9 @@ module Aws::CloudWatchEvents
     PutTargetsResultEntry.struct_class = Types::PutTargetsResultEntry
 
     PutTargetsResultEntryList.member = Shapes::ShapeRef.new(shape: PutTargetsResultEntry)
+
+    RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
+    RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
     RemoveTargetsRequest.add_member(:rule, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Rule"))
     RemoveTargetsRequest.add_member(:ids, Shapes::ShapeRef.new(shape: TargetIdList, required: true, location_name: "Ids"))
@@ -288,6 +311,16 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:describe_event_bus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventBus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventBusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventBusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:describe_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRule"
         o.http_method = "POST"
@@ -357,6 +390,17 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:put_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:put_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRule"
         o.http_method = "POST"
@@ -378,6 +422,16 @@ module Aws::CloudWatchEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemovePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemovePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
