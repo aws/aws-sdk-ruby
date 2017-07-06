@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.9 (2017-07-06)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
 
 * Feature - Aws::Kinesis - Updated the API, and documentation for Amazon Kinesis.
