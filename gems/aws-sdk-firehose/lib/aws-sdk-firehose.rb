@@ -42,6 +42,6 @@ require_relative 'aws-sdk-firehose/customizations'
 # @service
 module Aws::Firehose
 
-  GEM_VERSION = '1.0.0.rc8'
+  GEM_VERSION = '1.0.0.rc9'
 
 end

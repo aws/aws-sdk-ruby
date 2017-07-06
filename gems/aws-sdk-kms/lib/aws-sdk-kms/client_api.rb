@@ -87,6 +87,7 @@ module Aws::KMS
     KeyIdType = Shapes::StringShape.new(name: 'KeyIdType')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KeyListEntry = Shapes::StructureShape.new(name: 'KeyListEntry')
+    KeyManagerType = Shapes::StringShape.new(name: 'KeyManagerType')
     KeyMetadata = Shapes::StructureShape.new(name: 'KeyMetadata')
     KeyState = Shapes::StringShape.new(name: 'KeyState')
     KeyUnavailableException = Shapes::StructureShape.new(name: 'KeyUnavailableException')
@@ -324,6 +325,7 @@ module Aws::KMS
     KeyMetadata.add_member(:valid_to, Shapes::ShapeRef.new(shape: DateType, location_name: "ValidTo"))
     KeyMetadata.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
     KeyMetadata.add_member(:expiration_model, Shapes::ShapeRef.new(shape: ExpirationModelType, location_name: "ExpirationModel"))
+    KeyMetadata.add_member(:key_manager, Shapes::ShapeRef.new(shape: KeyManagerType, location_name: "KeyManager"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
     ListAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))

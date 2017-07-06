@@ -599,6 +599,7 @@ module Aws::KMS
     #   resp.key_metadata.valid_to #=> Time
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
+    #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey AWS API Documentation
     #
@@ -859,6 +860,7 @@ module Aws::KMS
     #   resp.key_metadata.valid_to #=> Time
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
+    #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey AWS API Documentation
     #
@@ -2983,7 +2985,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -763,11 +763,22 @@ module Aws::Kinesis
     #   associated with every record put into the stream.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type to use on the record. This parameter can be one
+    #   of the following values:
+    #
+    #   * `NONE`\: Do not encrypt the records in the stream.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordOutput AWS API Documentation
     #
     class PutRecordOutput < Struct.new(
       :shard_id,
-      :sequence_number)
+      :sequence_number,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -818,11 +829,22 @@ module Aws::Kinesis
     #   includes `ErrorCode` and `ErrorMessage` in the result.
     #   @return [Array<Types::PutRecordsResultEntry>]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type used on the records. This parameter can be one
+    #   of the following values:
+    #
+    #   * `NONE`\: Do not encrypt the records.
+    #
+    #   * `KMS`\: Use server-side encryption on the records using a
+    #     customer-managed KMS key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsOutput AWS API Documentation
     #
     class PutRecordsOutput < Struct.new(
       :failed_record_count,
-      :records)
+      :records,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -912,7 +934,7 @@ module Aws::Kinesis
     # sequence number, a partition key, and a data blob.
     #
     # @!attribute [rw] sequence_number
-    #   The unique identifier of the record in the stream.
+    #   The unique identifier of the record within its shard.
     #   @return [String]
     #
     # @!attribute [rw] approximate_arrival_timestamp
@@ -931,13 +953,24 @@ module Aws::Kinesis
     #   Identifies which shard in the stream the data record is assigned to.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_type
+    #   The encryption type used on the record. This parameter can be one of
+    #   the following values:
+    #
+    #   * `NONE`\: Do not encrypt the records in the stream.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Record AWS API Documentation
     #
     class Record < Struct.new(
       :sequence_number,
       :approximate_arrival_timestamp,
       :data,
-      :partition_key)
+      :partition_key,
+      :encryption_type)
       include Aws::Structure
     end
 
@@ -1061,6 +1094,82 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartStreamEncryptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName", # required
+    #         encryption_type: "NONE", # required, accepts NONE, KMS
+    #         key_id: "KeyId", # required
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream for which to start encrypting records.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type to use. This parameter can be one of the
+    #   following values:
+    #
+    #   * `NONE`\: Not valid for this operation. An
+    #     `InvalidOperationException` will be thrown.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The GUID for the customer-managed KMS key to use for encryption. You
+    #   can also use a Kinesis-owned master key by specifying the alias
+    #   `aws/kinesis`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryptionInput AWS API Documentation
+    #
+    class StartStreamEncryptionInput < Struct.new(
+      :stream_name,
+      :encryption_type,
+      :key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopStreamEncryptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName", # required
+    #         encryption_type: "NONE", # required, accepts NONE, KMS
+    #         key_id: "KeyId", # required
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream on which to stop encrypting records.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type. This parameter can be one of the following
+    #   values:
+    #
+    #   * `NONE`\: Not valid for this operation. An
+    #     `InvalidOperationException` will be thrown.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The GUID for the customer-managed key that was used for encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionInput AWS API Documentation
+    #
+    class StopStreamEncryptionInput < Struct.new(
+      :stream_name,
+      :encryption_type,
+      :key_id)
+      include Aws::Structure
+    end
+
     # Represents the output for DescribeStream.
     #
     # @!attribute [rw] stream_name
@@ -1112,6 +1221,21 @@ module Aws::Kinesis
     #   Represents the current enhanced monitoring settings of the stream.
     #   @return [Array<Types::EnhancedMetrics>]
     #
+    # @!attribute [rw] encryption_type
+    #   The server-side encryption type used on the stream. This parameter
+    #   can be one of the following values:
+    #
+    #   * `NONE`\: Do not encrypt the records in the stream.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The GUID for the customer-managed KMS key used for encryption on the
+    #   stream.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescription AWS API Documentation
     #
     class StreamDescription < Struct.new(
@@ -1122,7 +1246,9 @@ module Aws::Kinesis
       :has_more_shards,
       :retention_period_hours,
       :stream_creation_timestamp,
-      :enhanced_monitoring)
+      :enhanced_monitoring,
+      :encryption_type,
+      :key_id)
       include Aws::Structure
     end
 

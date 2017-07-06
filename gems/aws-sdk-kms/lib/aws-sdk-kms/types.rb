@@ -1407,6 +1407,16 @@ module Aws::KMS
     #   omitted.
     #   @return [String]
     #
+    # @!attribute [rw] key_manager
+    #   The CMK's manager. CMKs are either customer-managed or AWS-managed.
+    #   For more information about the difference, see [Customer Master
+    #   Keys][1] in the *AWS Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
     #
     class KeyMetadata < Struct.new(
@@ -1421,7 +1431,8 @@ module Aws::KMS
       :deletion_date,
       :valid_to,
       :origin,
-      :expiration_model)
+      :expiration_model,
+      :key_manager)
       include Aws::Structure
     end
 

@@ -44,6 +44,6 @@ require_relative 'aws-sdk-sqs/customizations'
 # @service
 module Aws::SQS
 
-  GEM_VERSION = '1.0.0.rc9'
+  GEM_VERSION = '1.0.0.rc10'
 
 end

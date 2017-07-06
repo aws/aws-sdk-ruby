@@ -1038,6 +1038,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].radius_status #=> String, one of "Creating", "Completed", "Failed"
     #   resp.directory_descriptions[0].stage_reason #=> String
     #   resp.directory_descriptions[0].sso_enabled #=> Boolean
+    #   resp.directory_descriptions[0].desired_number_of_domain_controllers #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -1046,6 +1047,61 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def describe_directories(params = {}, options = {})
       req = build_request(:describe_directories, params)
+      req.send_request(options)
+    end
+
+    # Provides information about any domain controllers in your directory.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier of the directory for which to retrieve the domain
+    #   controller information.
+    #
+    # @option params [Array<String>] :domain_controller_ids
+    #   A list of identifiers for the domain controllers whose information
+    #   will be provided.
+    #
+    # @option params [String] :next_token
+    #   The *DescribeDomainControllers.NextToken* value from a previous call
+    #   to DescribeDomainControllers. Pass null if this is the first call.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @return [Types::DescribeDomainControllersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainControllersResult#domain_controllers #domain_controllers} => Array&lt;Types::DomainController&gt;
+    #   * {Types::DescribeDomainControllersResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_controllers({
+    #     directory_id: "DirectoryId", # required
+    #     domain_controller_ids: ["DomainControllerId"],
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_controllers #=> Array
+    #   resp.domain_controllers[0].directory_id #=> String
+    #   resp.domain_controllers[0].domain_controller_id #=> String
+    #   resp.domain_controllers[0].dns_ip_addr #=> String
+    #   resp.domain_controllers[0].vpc_id #=> String
+    #   resp.domain_controllers[0].subnet_id #=> String
+    #   resp.domain_controllers[0].availability_zone #=> String
+    #   resp.domain_controllers[0].status #=> String, one of "Creating", "Active", "Impaired", "Restoring", "Deleting", "Deleted", "Failed"
+    #   resp.domain_controllers[0].status_reason #=> String
+    #   resp.domain_controllers[0].launch_time #=> Time
+    #   resp.domain_controllers[0].status_last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllers AWS API Documentation
+    #
+    # @overload describe_domain_controllers(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_controllers(params = {}, options = {})
+      req = build_request(:describe_domain_controllers, params)
       req.send_request(options)
     end
 
@@ -1748,6 +1804,38 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Adds or removes domain controllers to or from the directory. Based on
+    # the difference between current value and new value (provided through
+    # this API call), domain controllers will be added or removed. It may
+    # take up to 45 minutes for any new domain controllers to become fully
+    # active once the requested number of domain controllers is updated.
+    # During this time, you cannot make another update request.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier of the directory to which the domain controllers will be
+    #   added or removed.
+    #
+    # @option params [required, Integer] :desired_number
+    #   The number of domain controllers desired in the directory.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_number_of_domain_controllers({
+    #     directory_id: "DirectoryId", # required
+    #     desired_number: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllers AWS API Documentation
+    #
+    # @overload update_number_of_domain_controllers(params = {})
+    # @param [Hash] params ({})
+    def update_number_of_domain_controllers(params = {}, options = {})
+      req = build_request(:update_number_of_domain_controllers, params)
+      req.send_request(options)
+    end
+
     # Updates the Remote Authentication Dial In User Service (RADIUS) server
     # information for an AD Connector directory.
     #
@@ -1831,7 +1919,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

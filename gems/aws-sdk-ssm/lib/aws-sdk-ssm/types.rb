@@ -1406,11 +1406,12 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -1421,20 +1422,28 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],
     #               },
+    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1, # required
     #             },
     #           ],
     #         },
     #         approved_patches: ["PatchId"],
+    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         rejected_patches: ["PatchId"],
     #         description: "BaselineDescription",
     #         client_token: "ClientToken",
     #       }
+    #
+    # @!attribute [rw] operating_system
+    #   Defines the operating system the patch baseline applies to.
+    #   Supported operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU
+    #   and REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the patch baseline.
@@ -1451,6 +1460,14 @@ module Aws::SSM
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] approved_patches_compliance_level
+    #   Defines the compliance level for approved patches. This means that
+    #   if an approved patch is reported as missing, this is the severity of
+    #   the compliance violation. Valid compliance severity levels include
+    #   the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL,
+    #   UNSPECIFIED. The default value is UNSPECIFIED.
+    #   @return [String]
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -1470,10 +1487,12 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaselineRequest AWS API Documentation
     #
     class CreatePatchBaselineRequest < Struct.new(
+      :operating_system,
       :name,
       :global_filters,
       :approval_rules,
       :approved_patches,
+      :approved_patches_compliance_level,
       :rejected_patches,
       :description,
       :client_token)
@@ -3175,12 +3194,23 @@ module Aws::SSM
     #
     #       {
     #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
     #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] max_results
     #   The maximum number of patch groups to return (per page).
     #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
@@ -3191,6 +3221,7 @@ module Aws::SSM
     #
     class DescribePatchGroupsRequest < Struct.new(
       :max_results,
+      :filters,
       :next_token)
       include Aws::Structure
     end
@@ -3758,20 +3789,38 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # @api private
+    # @note When making an API call, you may pass GetDefaultPatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #       }
+    #
+    # @!attribute [rw] operating_system
+    #   Returns the default patch baseline for the specified operating
+    #   system.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaselineRequest AWS API Documentation
     #
-    class GetDefaultPatchBaselineRequest < Aws::EmptyStructure; end
+    class GetDefaultPatchBaselineRequest < Struct.new(
+      :operating_system)
+      include Aws::Structure
+    end
 
     # @!attribute [rw] baseline_id
     #   The ID of the default patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   The operating system for the returned patch baseline.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaselineResult AWS API Documentation
     #
     class GetDefaultPatchBaselineResult < Struct.new(
-      :baseline_id)
+      :baseline_id,
+      :operating_system)
       include Aws::Structure
     end
 
@@ -3813,12 +3862,19 @@ module Aws::SSM
     #   snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] product
+    #   Returns the specific operating system (for example Windows Server
+    #   2012 or Amazon Linux 2015.09) on the instance for the specified
+    #   patch snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstanceResult AWS API Documentation
     #
     class GetDeployablePatchSnapshotForInstanceResult < Struct.new(
       :instance_id,
       :snapshot_id,
-      :snapshot_download_url)
+      :snapshot_download_url,
+      :product)
       include Aws::Structure
     end
 
@@ -4442,6 +4498,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
     #       }
     #
     # @!attribute [rw] patch_group
@@ -4449,10 +4506,16 @@ module Aws::SSM
     #   retrieved.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   Returns he operating system rule specified for patch groups using
+    #   the patch baseline.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroupRequest AWS API Documentation
     #
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
-      :patch_group)
+      :patch_group,
+      :operating_system)
       include Aws::Structure
     end
 
@@ -4465,11 +4528,17 @@ module Aws::SSM
     #   The name of the patch group.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   The operating system rule specified for patch groups using the patch
+    #   baseline.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroupResult AWS API Documentation
     #
     class GetPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
-      :patch_group)
+      :patch_group,
+      :operating_system)
       include Aws::Structure
     end
 
@@ -4499,6 +4568,10 @@ module Aws::SSM
     #   The name of the patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   Returns the operating system specified for the patch baseline.
+    #   @return [String]
+    #
     # @!attribute [rw] global_filters
     #   A set of global filters used to exclude patches from the baseline.
     #   @return [Types::PatchFilterGroup]
@@ -4510,6 +4583,11 @@ module Aws::SSM
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] approved_patches_compliance_level
+    #   Returns the specified compliance severity level for approved patches
+    #   in the patch baseline.
+    #   @return [String]
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -4536,9 +4614,11 @@ module Aws::SSM
     class GetPatchBaselineResult < Struct.new(
       :baseline_id,
       :name,
+      :operating_system,
       :global_filters,
       :approval_rules,
       :approved_patches,
+      :approved_patches_compliance_level,
       :rejected_patches,
       :patch_groups,
       :created_date,
@@ -6400,12 +6480,20 @@ module Aws::SSM
     #   The name of the patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   Defines the operating system the patch baseline applies to.
+    #   Supported operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU
+    #   and REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #   @return [String]
+    #
     # @!attribute [rw] baseline_description
     #   The description of the patch baseline.
     #   @return [String]
     #
     # @!attribute [rw] default_baseline
-    #   Whether this is the default baseline.
+    #   Whether this is the default baseline. Note that Systems Manager
+    #   supports creating multiple default patch baselines. For example, you
+    #   can create a default patch baseline for each operating system.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchBaselineIdentity AWS API Documentation
@@ -6413,6 +6501,7 @@ module Aws::SSM
     class PatchBaselineIdentity < Struct.new(
       :baseline_id,
       :baseline_name,
+      :operating_system,
       :baseline_description,
       :default_baseline)
       include Aws::Structure
@@ -6426,7 +6515,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] kb_id
-    #   The Microsoft Knowledge Base ID of the patch.
+    #   The operating system-specific ID of the patch.
     #   @return [String]
     #
     # @!attribute [rw] classification
@@ -6445,7 +6534,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] installed_time
-    #   The date/time the patch was installed on the instance.
+    #   The date/time the patch was installed on the instance. Note that not
+    #   all operating systems provide this level of information.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData AWS API Documentation
@@ -6466,7 +6556,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #         key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #         values: ["PatchFilterValue"], # required
     #       }
     #
@@ -6495,7 +6585,7 @@ module Aws::SSM
     #       {
     #         patch_filters: [ # required
     #           {
-    #             key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #             key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #             values: ["PatchFilterValue"], # required
     #           },
     #         ],
@@ -6566,17 +6656,24 @@ module Aws::SSM
     #         patch_filter_group: { # required
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
     #         },
+    #         compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approve_after_days: 1, # required
     #       }
     #
     # @!attribute [rw] patch_filter_group
     #   The patch filter group that defines the criteria for the rule.
     #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] compliance_level
+    #   A compliance severity level for all approved patches in a patch
+    #   baseline. Valid compliance severity levels include the following:
+    #   Unspecified, Critical, High, Medium, Low, and Informational.
+    #   @return [String]
     #
     # @!attribute [rw] approve_after_days
     #   The number of days after the release date of each patch matched by
@@ -6587,6 +6684,7 @@ module Aws::SSM
     #
     class PatchRule < Struct.new(
       :patch_filter_group,
+      :compliance_level,
       :approve_after_days)
       include Aws::Structure
     end
@@ -6602,11 +6700,12 @@ module Aws::SSM
     #             patch_filter_group: { # required
     #               patch_filters: [ # required
     #                 {
-    #                   key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                   key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                   values: ["PatchFilterValue"], # required
     #                 },
     #               ],
     #             },
+    #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #             approve_after_days: 1, # required
     #           },
     #         ],
@@ -6630,6 +6729,10 @@ module Aws::SSM
     #   EXPLICIT\_APPROVED, EXPLICIT\_REJECTED).
     #   @return [String]
     #
+    # @!attribute [rw] compliance_level
+    #   The compliance severity level for a patch.
+    #   @return [String]
+    #
     # @!attribute [rw] approval_date
     #   The date the patch was approved (or will be approved if the status
     #   is PENDING\_APPROVAL).
@@ -6639,6 +6742,7 @@ module Aws::SSM
     #
     class PatchStatus < Struct.new(
       :deployment_status,
+      :compliance_level,
       :approval_date)
       include Aws::Structure
     end
@@ -7915,7 +8019,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -7926,16 +8030,18 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],
     #               },
+    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1, # required
     #             },
     #           ],
     #         },
     #         approved_patches: ["PatchId"],
+    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         rejected_patches: ["PatchId"],
     #         description: "BaselineDescription",
     #       }
@@ -7960,6 +8066,11 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] approved_patches_compliance_level
+    #   Assigns a new compliance severity level to an existing patch
+    #   baseline.
+    #   @return [String]
+    #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
@@ -7976,6 +8087,7 @@ module Aws::SSM
       :global_filters,
       :approval_rules,
       :approved_patches,
+      :approved_patches_compliance_level,
       :rejected_patches,
       :description)
       include Aws::Structure
@@ -7989,6 +8101,10 @@ module Aws::SSM
     #   The name of the patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system
+    #   The operating system rule used by the updated patch baseline.
+    #   @return [String]
+    #
     # @!attribute [rw] global_filters
     #   A set of global filters used to exclude patches from the baseline.
     #   @return [Types::PatchFilterGroup]
@@ -8000,6 +8116,11 @@ module Aws::SSM
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] approved_patches_compliance_level
+    #   The compliance severity level assigned to the patch baseline after
+    #   the update completed.
+    #   @return [String]
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -8022,9 +8143,11 @@ module Aws::SSM
     class UpdatePatchBaselineResult < Struct.new(
       :baseline_id,
       :name,
+      :operating_system,
       :global_filters,
       :approval_rules,
       :approved_patches,
+      :approved_patches_compliance_level,
       :rejected_patches,
       :created_date,
       :modified_date,

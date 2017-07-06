@@ -24,6 +24,7 @@ module Aws::Kinesis
     DescribeStreamOutput = Shapes::StructureShape.new(name: 'DescribeStreamOutput')
     DisableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'DisableEnhancedMonitoringInput')
     EnableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'EnableEnhancedMonitoringInput')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EnhancedMetrics = Shapes::StructureShape.new(name: 'EnhancedMetrics')
     EnhancedMonitoringList = Shapes::ListShape.new(name: 'EnhancedMonitoringList')
     EnhancedMonitoringOutput = Shapes::StructureShape.new(name: 'EnhancedMonitoringOutput')
@@ -39,6 +40,13 @@ module Aws::Kinesis
     HashKeyRange = Shapes::StructureShape.new(name: 'HashKeyRange')
     IncreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'IncreaseStreamRetentionPeriodInput')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
+    KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
+    KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
+    KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
+    KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
+    KMSOptInRequired = Shapes::StructureShape.new(name: 'KMSOptInRequired')
+    KMSThrottlingException = Shapes::StructureShape.new(name: 'KMSThrottlingException')
+    KeyId = Shapes::StringShape.new(name: 'KeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListStreamsInput = Shapes::StructureShape.new(name: 'ListStreamsInput')
     ListStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListStreamsInputLimit')
@@ -76,6 +84,8 @@ module Aws::Kinesis
     ShardIteratorType = Shapes::StringShape.new(name: 'ShardIteratorType')
     ShardList = Shapes::ListShape.new(name: 'ShardList')
     SplitShardInput = Shapes::StructureShape.new(name: 'SplitShardInput')
+    StartStreamEncryptionInput = Shapes::StructureShape.new(name: 'StartStreamEncryptionInput')
+    StopStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopStreamEncryptionInput')
     StreamARN = Shapes::StringShape.new(name: 'StreamARN')
     StreamDescription = Shapes::StructureShape.new(name: 'StreamDescription')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
@@ -198,6 +208,7 @@ module Aws::Kinesis
 
     PutRecordOutput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     PutRecordOutput.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
+    PutRecordOutput.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     PutRecordOutput.struct_class = Types::PutRecordOutput
 
     PutRecordsInput.add_member(:records, Shapes::ShapeRef.new(shape: PutRecordsRequestEntryList, required: true, location_name: "Records"))
@@ -206,6 +217,7 @@ module Aws::Kinesis
 
     PutRecordsOutput.add_member(:failed_record_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "FailedRecordCount"))
     PutRecordsOutput.add_member(:records, Shapes::ShapeRef.new(shape: PutRecordsResultEntryList, required: true, location_name: "Records"))
+    PutRecordsOutput.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     PutRecordsOutput.struct_class = Types::PutRecordsOutput
 
     PutRecordsRequestEntry.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
@@ -227,6 +239,7 @@ module Aws::Kinesis
     Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
     Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    Record.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     Record.struct_class = Types::Record
 
     RecordList.member = Shapes::ShapeRef.new(shape: Record)
@@ -253,6 +266,16 @@ module Aws::Kinesis
     SplitShardInput.add_member(:new_starting_hash_key, Shapes::ShapeRef.new(shape: HashKey, required: true, location_name: "NewStartingHashKey"))
     SplitShardInput.struct_class = Types::SplitShardInput
 
+    StartStreamEncryptionInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    StartStreamEncryptionInput.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "EncryptionType"))
+    StartStreamEncryptionInput.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
+    StartStreamEncryptionInput.struct_class = Types::StartStreamEncryptionInput
+
+    StopStreamEncryptionInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    StopStreamEncryptionInput.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "EncryptionType"))
+    StopStreamEncryptionInput.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
+    StopStreamEncryptionInput.struct_class = Types::StopStreamEncryptionInput
+
     StreamDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     StreamDescription.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
     StreamDescription.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
@@ -261,6 +284,8 @@ module Aws::Kinesis
     StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
     StreamDescription.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
     StreamDescription.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
+    StreamDescription.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    StreamDescription.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
     StreamDescription.struct_class = Types::StreamDescription
 
     StreamNameList.member = Shapes::ShapeRef.new(shape: StreamName)
@@ -405,6 +430,12 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredIteratorException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
       end)
 
       api.add_operation(:get_shard_iterator, Seahorse::Model::Operation.new.tap do |o|
@@ -477,6 +508,12 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
       end)
 
       api.add_operation(:put_records, Seahorse::Model::Operation.new.tap do |o|
@@ -488,6 +525,12 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
       end)
 
       api.add_operation(:remove_tags_from_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -512,6 +555,36 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+      end)
+
+      api.add_operation(:stop_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopStreamEncryption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopStreamEncryptionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_shard_count, Seahorse::Model::Operation.new.tap do |o|

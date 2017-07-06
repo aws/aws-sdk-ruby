@@ -71,6 +71,8 @@ module Aws::DirectoryService
     DescribeConditionalForwardersResult = Shapes::StructureShape.new(name: 'DescribeConditionalForwardersResult')
     DescribeDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeDirectoriesRequest')
     DescribeDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeDirectoriesResult')
+    DescribeDomainControllersRequest = Shapes::StructureShape.new(name: 'DescribeDomainControllersRequest')
+    DescribeDomainControllersResult = Shapes::StructureShape.new(name: 'DescribeDomainControllersResult')
     DescribeEventTopicsRequest = Shapes::StructureShape.new(name: 'DescribeEventTopicsRequest')
     DescribeEventTopicsResult = Shapes::StructureShape.new(name: 'DescribeEventTopicsResult')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
@@ -78,6 +80,7 @@ module Aws::DirectoryService
     DescribeTrustsRequest = Shapes::StructureShape.new(name: 'DescribeTrustsRequest')
     DescribeTrustsResult = Shapes::StructureShape.new(name: 'DescribeTrustsResult')
     Description = Shapes::StringShape.new(name: 'Description')
+    DesiredNumberOfDomainControllers = Shapes::IntegerShape.new(name: 'DesiredNumberOfDomainControllers')
     DirectoryConnectSettings = Shapes::StructureShape.new(name: 'DirectoryConnectSettings')
     DirectoryConnectSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryConnectSettingsDescription')
     DirectoryDescription = Shapes::StructureShape.new(name: 'DirectoryDescription')
@@ -99,6 +102,13 @@ module Aws::DirectoryService
     DisableSsoRequest = Shapes::StructureShape.new(name: 'DisableSsoRequest')
     DisableSsoResult = Shapes::StructureShape.new(name: 'DisableSsoResult')
     DnsIpAddrs = Shapes::ListShape.new(name: 'DnsIpAddrs')
+    DomainController = Shapes::StructureShape.new(name: 'DomainController')
+    DomainControllerId = Shapes::StringShape.new(name: 'DomainControllerId')
+    DomainControllerIds = Shapes::ListShape.new(name: 'DomainControllerIds')
+    DomainControllerLimitExceededException = Shapes::StructureShape.new(name: 'DomainControllerLimitExceededException')
+    DomainControllerStatus = Shapes::StringShape.new(name: 'DomainControllerStatus')
+    DomainControllerStatusReason = Shapes::StringShape.new(name: 'DomainControllerStatusReason')
+    DomainControllers = Shapes::ListShape.new(name: 'DomainControllers')
     EnableRadiusRequest = Shapes::StructureShape.new(name: 'EnableRadiusRequest')
     EnableRadiusResult = Shapes::StructureShape.new(name: 'EnableRadiusResult')
     EnableSsoRequest = Shapes::StructureShape.new(name: 'EnableSsoRequest')
@@ -210,6 +220,8 @@ module Aws::DirectoryService
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UpdateConditionalForwarderRequest = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderRequest')
     UpdateConditionalForwarderResult = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderResult')
+    UpdateNumberOfDomainControllersRequest = Shapes::StructureShape.new(name: 'UpdateNumberOfDomainControllersRequest')
+    UpdateNumberOfDomainControllersResult = Shapes::StructureShape.new(name: 'UpdateNumberOfDomainControllersResult')
     UpdateRadiusRequest = Shapes::StructureShape.new(name: 'UpdateRadiusRequest')
     UpdateRadiusResult = Shapes::StructureShape.new(name: 'UpdateRadiusResult')
     UpdateSecurityGroupForDirectoryControllers = Shapes::BooleanShape.new(name: 'UpdateSecurityGroupForDirectoryControllers')
@@ -382,6 +394,16 @@ module Aws::DirectoryService
     DescribeDirectoriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDirectoriesResult.struct_class = Types::DescribeDirectoriesResult
 
+    DescribeDomainControllersRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeDomainControllersRequest.add_member(:domain_controller_ids, Shapes::ShapeRef.new(shape: DomainControllerIds, location_name: "DomainControllerIds"))
+    DescribeDomainControllersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDomainControllersRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeDomainControllersRequest.struct_class = Types::DescribeDomainControllersRequest
+
+    DescribeDomainControllersResult.add_member(:domain_controllers, Shapes::ShapeRef.new(shape: DomainControllers, location_name: "DomainControllers"))
+    DescribeDomainControllersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDomainControllersResult.struct_class = Types::DescribeDomainControllersResult
+
     DescribeEventTopicsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     DescribeEventTopicsRequest.add_member(:topic_names, Shapes::ShapeRef.new(shape: TopicNames, location_name: "TopicNames"))
     DescribeEventTopicsRequest.struct_class = Types::DescribeEventTopicsRequest
@@ -441,6 +463,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:radius_status, Shapes::ShapeRef.new(shape: RadiusStatus, location_name: "RadiusStatus"))
     DirectoryDescription.add_member(:stage_reason, Shapes::ShapeRef.new(shape: StageReason, location_name: "StageReason"))
     DirectoryDescription.add_member(:sso_enabled, Shapes::ShapeRef.new(shape: SsoEnabled, location_name: "SsoEnabled"))
+    DirectoryDescription.add_member(:desired_number_of_domain_controllers, Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, location_name: "DesiredNumberOfDomainControllers"))
     DirectoryDescription.struct_class = Types::DirectoryDescription
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
@@ -481,6 +504,22 @@ module Aws::DirectoryService
     DisableSsoResult.struct_class = Types::DisableSsoResult
 
     DnsIpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
+
+    DomainController.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    DomainController.add_member(:domain_controller_id, Shapes::ShapeRef.new(shape: DomainControllerId, location_name: "DomainControllerId"))
+    DomainController.add_member(:dns_ip_addr, Shapes::ShapeRef.new(shape: IpAddr, location_name: "DnsIpAddr"))
+    DomainController.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    DomainController.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    DomainController.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DomainController.add_member(:status, Shapes::ShapeRef.new(shape: DomainControllerStatus, location_name: "Status"))
+    DomainController.add_member(:status_reason, Shapes::ShapeRef.new(shape: DomainControllerStatusReason, location_name: "StatusReason"))
+    DomainController.add_member(:launch_time, Shapes::ShapeRef.new(shape: LaunchTime, location_name: "LaunchTime"))
+    DomainController.add_member(:status_last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "StatusLastUpdatedDateTime"))
+    DomainController.struct_class = Types::DomainController
+
+    DomainControllerIds.member = Shapes::ShapeRef.new(shape: DomainControllerId)
+
+    DomainControllers.member = Shapes::ShapeRef.new(shape: DomainController)
 
     EnableRadiusRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     EnableRadiusRequest.add_member(:radius_settings, Shapes::ShapeRef.new(shape: RadiusSettings, required: true, location_name: "RadiusSettings"))
@@ -668,6 +707,12 @@ module Aws::DirectoryService
     UpdateConditionalForwarderRequest.struct_class = Types::UpdateConditionalForwarderRequest
 
     UpdateConditionalForwarderResult.struct_class = Types::UpdateConditionalForwarderResult
+
+    UpdateNumberOfDomainControllersRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    UpdateNumberOfDomainControllersRequest.add_member(:desired_number, Shapes::ShapeRef.new(shape: DesiredNumberOfDomainControllers, required: true, location_name: "DesiredNumber"))
+    UpdateNumberOfDomainControllersRequest.struct_class = Types::UpdateNumberOfDomainControllersRequest
+
+    UpdateNumberOfDomainControllersResult.struct_class = Types::UpdateNumberOfDomainControllersResult
 
     UpdateRadiusRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateRadiusRequest.add_member(:radius_settings, Shapes::ShapeRef.new(shape: RadiusSettings, required: true, location_name: "RadiusSettings"))
@@ -932,6 +977,26 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:describe_domain_controllers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainControllers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainControllersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainControllersResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_event_topics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEventTopics"
         o.http_method = "POST"
@@ -1152,6 +1217,21 @@ module Aws::DirectoryService
         o.output = Shapes::ShapeRef.new(shape: UpdateConditionalForwarderResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:update_number_of_domain_controllers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNumberOfDomainControllers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNumberOfDomainControllersRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNumberOfDomainControllersResult)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DomainControllerLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)

@@ -1017,6 +1017,63 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDomainControllersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         domain_controller_ids: ["DomainControllerId"],
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the directory for which to retrieve the domain
+    #   controller information.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_controller_ids
+    #   A list of identifiers for the domain controllers whose information
+    #   will be provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The *DescribeDomainControllers.NextToken* value from a previous call
+    #   to DescribeDomainControllers. Pass null if this is the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllersRequest AWS API Documentation
+    #
+    class DescribeDomainControllersRequest < Struct.new(
+      :directory_id,
+      :domain_controller_ids,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_controllers
+    #   List of the DomainController objects that were retrieved.
+    #   @return [Array<Types::DomainController>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. Pass this value for the
+    #   `NextToken` parameter in a subsequent call to
+    #   DescribeDomainControllers retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllersResult AWS API Documentation
+    #
+    class DescribeDomainControllersResult < Struct.new(
+      :domain_controllers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Describes event topics.
     #
     # @note When making an API call, you may pass DescribeEventTopicsRequest
@@ -1379,6 +1436,11 @@ module Aws::DirectoryService
     #   information, see EnableSso and DisableSso.
     #   @return [Boolean]
     #
+    # @!attribute [rw] desired_number_of_domain_controllers
+    #   The desired number of domain controllers in the directory if the
+    #   directory is Microsoft AD.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
     class DirectoryDescription < Struct.new(
@@ -1399,7 +1461,8 @@ module Aws::DirectoryService
       :radius_settings,
       :radius_status,
       :stage_reason,
-      :sso_enabled)
+      :sso_enabled,
+      :desired_number_of_domain_controllers)
       include Aws::Structure
     end
 
@@ -1593,6 +1656,66 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoResult AWS API Documentation
     #
     class DisableSsoResult < Aws::EmptyStructure; end
+
+    # Contains information about the domain controllers for a specified
+    # directory.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the directory where the domain controller resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_controller_id
+    #   Identifies a specific domain controller in the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ip_addr
+    #   The IP address of the domain controller.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that contains the domain controller.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   Identifier of the subnet in the VPC that contains the domain
+    #   controller.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the domain controller is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the domain controller.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A description of the domain controller state.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_time
+    #   Specifies when the domain controller was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_last_updated_date_time
+    #   The date and time that the status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DomainController AWS API Documentation
+    #
+    class DomainController < Struct.new(
+      :directory_id,
+      :domain_controller_id,
+      :dns_ip_addr,
+      :vpc_id,
+      :subnet_id,
+      :availability_zone,
+      :status,
+      :status_reason,
+      :launch_time,
+      :status_last_updated_date_time)
+      include Aws::Structure
+    end
 
     # Contains the inputs for the EnableRadius operation.
     #
@@ -2474,6 +2597,35 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderResult AWS API Documentation
     #
     class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNumberOfDomainControllersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         desired_number: 1, # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the directory to which the domain controllers will be
+    #   added or removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_number
+    #   The number of domain controllers desired in the directory.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllersRequest AWS API Documentation
+    #
+    class UpdateNumberOfDomainControllersRequest < Struct.new(
+      :directory_id,
+      :desired_number)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllersResult AWS API Documentation
+    #
+    class UpdateNumberOfDomainControllersResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the UpdateRadius operation.
     #

@@ -449,6 +449,7 @@ module Aws::SSM
     NotificationEvent = Shapes::StringShape.new(name: 'NotificationEvent')
     NotificationEventList = Shapes::ListShape.new(name: 'NotificationEventList')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
+    OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     OwnerInformation = Shapes::StringShape.new(name: 'OwnerInformation')
     PSParameterName = Shapes::StringShape.new(name: 'PSParameterName')
     PSParameterValue = Shapes::StringShape.new(name: 'PSParameterValue')
@@ -489,6 +490,7 @@ module Aws::SSM
     PatchComplianceData = Shapes::StructureShape.new(name: 'PatchComplianceData')
     PatchComplianceDataList = Shapes::ListShape.new(name: 'PatchComplianceDataList')
     PatchComplianceDataState = Shapes::StringShape.new(name: 'PatchComplianceDataState')
+    PatchComplianceLevel = Shapes::StringShape.new(name: 'PatchComplianceLevel')
     PatchComplianceMaxResults = Shapes::IntegerShape.new(name: 'PatchComplianceMaxResults')
     PatchContentUrl = Shapes::StringShape.new(name: 'PatchContentUrl')
     PatchDeploymentStatus = Shapes::StringShape.new(name: 'PatchDeploymentStatus')
@@ -508,7 +510,6 @@ module Aws::SSM
     PatchIdList = Shapes::ListShape.new(name: 'PatchIdList')
     PatchInstalledCount = Shapes::IntegerShape.new(name: 'PatchInstalledCount')
     PatchInstalledOtherCount = Shapes::IntegerShape.new(name: 'PatchInstalledOtherCount')
-    PatchInstalledTime = Shapes::TimestampShape.new(name: 'PatchInstalledTime')
     PatchKbNumber = Shapes::StringShape.new(name: 'PatchKbNumber')
     PatchLanguage = Shapes::StringShape.new(name: 'PatchLanguage')
     PatchList = Shapes::ListShape.new(name: 'PatchList')
@@ -516,8 +517,6 @@ module Aws::SSM
     PatchMsrcNumber = Shapes::StringShape.new(name: 'PatchMsrcNumber')
     PatchMsrcSeverity = Shapes::StringShape.new(name: 'PatchMsrcSeverity')
     PatchNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchNotApplicableCount')
-    PatchOperationEndTime = Shapes::TimestampShape.new(name: 'PatchOperationEndTime')
-    PatchOperationStartTime = Shapes::TimestampShape.new(name: 'PatchOperationStartTime')
     PatchOperationType = Shapes::StringShape.new(name: 'PatchOperationType')
     PatchOrchestratorFilter = Shapes::StructureShape.new(name: 'PatchOrchestratorFilter')
     PatchOrchestratorFilterKey = Shapes::StringShape.new(name: 'PatchOrchestratorFilterKey')
@@ -536,6 +535,7 @@ module Aws::SSM
     PingStatus = Shapes::StringShape.new(name: 'PingStatus')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
+    Product = Shapes::StringShape.new(name: 'Product')
     PutInventoryRequest = Shapes::StructureShape.new(name: 'PutInventoryRequest')
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
@@ -615,6 +615,7 @@ module Aws::SSM
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
     UnsupportedInventorySchemaVersionException = Shapes::StructureShape.new(name: 'UnsupportedInventorySchemaVersionException')
+    UnsupportedOperatingSystem = Shapes::StructureShape.new(name: 'UnsupportedOperatingSystem')
     UnsupportedParameterType = Shapes::StructureShape.new(name: 'UnsupportedParameterType')
     UnsupportedPlatformType = Shapes::StructureShape.new(name: 'UnsupportedPlatformType')
     UpdateAssociationRequest = Shapes::StructureShape.new(name: 'UpdateAssociationRequest')
@@ -874,10 +875,12 @@ module Aws::SSM
     CreateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     CreateMaintenanceWindowResult.struct_class = Types::CreateMaintenanceWindowResult
 
+    CreatePatchBaselineRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     CreatePatchBaselineRequest.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, required: true, location_name: "Name"))
     CreatePatchBaselineRequest.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
     CreatePatchBaselineRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
     CreatePatchBaselineRequest.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    CreatePatchBaselineRequest.add_member(:approved_patches_compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ApprovedPatchesComplianceLevel"))
     CreatePatchBaselineRequest.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
     CreatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     CreatePatchBaselineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -1179,6 +1182,7 @@ module Aws::SSM
     DescribePatchGroupStateResult.struct_class = Types::DescribePatchGroupStateResult
 
     DescribePatchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribePatchGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
     DescribePatchGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePatchGroupsRequest.struct_class = Types::DescribePatchGroupsRequest
 
@@ -1285,9 +1289,11 @@ module Aws::SSM
     GetCommandInvocationResult.add_member(:standard_error_url, Shapes::ShapeRef.new(shape: Url, location_name: "StandardErrorUrl"))
     GetCommandInvocationResult.struct_class = Types::GetCommandInvocationResult
 
+    GetDefaultPatchBaselineRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     GetDefaultPatchBaselineRequest.struct_class = Types::GetDefaultPatchBaselineRequest
 
     GetDefaultPatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    GetDefaultPatchBaselineResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     GetDefaultPatchBaselineResult.struct_class = Types::GetDefaultPatchBaselineResult
 
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -1297,6 +1303,7 @@ module Aws::SSM
     GetDeployablePatchSnapshotForInstanceResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     GetDeployablePatchSnapshotForInstanceResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     GetDeployablePatchSnapshotForInstanceResult.add_member(:snapshot_download_url, Shapes::ShapeRef.new(shape: SnapshotDownloadUrl, location_name: "SnapshotDownloadUrl"))
+    GetDeployablePatchSnapshotForInstanceResult.add_member(:product, Shapes::ShapeRef.new(shape: Product, location_name: "Product"))
     GetDeployablePatchSnapshotForInstanceResult.struct_class = Types::GetDeployablePatchSnapshotForInstanceResult
 
     GetDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
@@ -1410,10 +1417,12 @@ module Aws::SSM
     GetParametersResult.struct_class = Types::GetParametersResult
 
     GetPatchBaselineForPatchGroupRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    GetPatchBaselineForPatchGroupRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     GetPatchBaselineForPatchGroupRequest.struct_class = Types::GetPatchBaselineForPatchGroupRequest
 
     GetPatchBaselineForPatchGroupResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     GetPatchBaselineForPatchGroupResult.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, location_name: "PatchGroup"))
+    GetPatchBaselineForPatchGroupResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     GetPatchBaselineForPatchGroupResult.struct_class = Types::GetPatchBaselineForPatchGroupResult
 
     GetPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
@@ -1421,9 +1430,11 @@ module Aws::SSM
 
     GetPatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     GetPatchBaselineResult.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "Name"))
+    GetPatchBaselineResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     GetPatchBaselineResult.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
     GetPatchBaselineResult.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
     GetPatchBaselineResult.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    GetPatchBaselineResult.add_member(:approved_patches_compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ApprovedPatchesComplianceLevel"))
     GetPatchBaselineResult.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
     GetPatchBaselineResult.add_member(:patch_groups, Shapes::ShapeRef.new(shape: PatchGroupList, location_name: "PatchGroups"))
     GetPatchBaselineResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
@@ -1514,8 +1525,8 @@ module Aws::SSM
     InstancePatchState.add_member(:missing_count, Shapes::ShapeRef.new(shape: PatchMissingCount, location_name: "MissingCount"))
     InstancePatchState.add_member(:failed_count, Shapes::ShapeRef.new(shape: PatchFailedCount, location_name: "FailedCount"))
     InstancePatchState.add_member(:not_applicable_count, Shapes::ShapeRef.new(shape: PatchNotApplicableCount, location_name: "NotApplicableCount"))
-    InstancePatchState.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: PatchOperationStartTime, required: true, location_name: "OperationStartTime"))
-    InstancePatchState.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: PatchOperationEndTime, required: true, location_name: "OperationEndTime"))
+    InstancePatchState.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationStartTime"))
+    InstancePatchState.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationEndTime"))
     InstancePatchState.add_member(:operation, Shapes::ShapeRef.new(shape: PatchOperationType, required: true, location_name: "Operation"))
     InstancePatchState.struct_class = Types::InstancePatchState
 
@@ -1850,6 +1861,7 @@ module Aws::SSM
 
     PatchBaselineIdentity.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     PatchBaselineIdentity.add_member(:baseline_name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "BaselineName"))
+    PatchBaselineIdentity.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     PatchBaselineIdentity.add_member(:baseline_description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "BaselineDescription"))
     PatchBaselineIdentity.add_member(:default_baseline, Shapes::ShapeRef.new(shape: DefaultBaseline, location_name: "DefaultBaseline"))
     PatchBaselineIdentity.struct_class = Types::PatchBaselineIdentity
@@ -1861,7 +1873,7 @@ module Aws::SSM
     PatchComplianceData.add_member(:classification, Shapes::ShapeRef.new(shape: PatchClassification, required: true, location_name: "Classification"))
     PatchComplianceData.add_member(:severity, Shapes::ShapeRef.new(shape: PatchSeverity, required: true, location_name: "Severity"))
     PatchComplianceData.add_member(:state, Shapes::ShapeRef.new(shape: PatchComplianceDataState, required: true, location_name: "State"))
-    PatchComplianceData.add_member(:installed_time, Shapes::ShapeRef.new(shape: PatchInstalledTime, required: true, location_name: "InstalledTime"))
+    PatchComplianceData.add_member(:installed_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "InstalledTime"))
     PatchComplianceData.struct_class = Types::PatchComplianceData
 
     PatchComplianceDataList.member = Shapes::ShapeRef.new(shape: PatchComplianceData)
@@ -1898,6 +1910,7 @@ module Aws::SSM
     PatchOrchestratorFilterValues.member = Shapes::ShapeRef.new(shape: PatchOrchestratorFilterValue)
 
     PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
+    PatchRule.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
     PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, required: true, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
     PatchRule.struct_class = Types::PatchRule
 
@@ -1907,6 +1920,7 @@ module Aws::SSM
     PatchRuleList.member = Shapes::ShapeRef.new(shape: PatchRule)
 
     PatchStatus.add_member(:deployment_status, Shapes::ShapeRef.new(shape: PatchDeploymentStatus, location_name: "DeploymentStatus"))
+    PatchStatus.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
     PatchStatus.add_member(:approval_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ApprovalDate"))
     PatchStatus.struct_class = Types::PatchStatus
 
@@ -2133,15 +2147,18 @@ module Aws::SSM
     UpdatePatchBaselineRequest.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
     UpdatePatchBaselineRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
     UpdatePatchBaselineRequest.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    UpdatePatchBaselineRequest.add_member(:approved_patches_compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ApprovedPatchesComplianceLevel"))
     UpdatePatchBaselineRequest.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
     UpdatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineRequest.struct_class = Types::UpdatePatchBaselineRequest
 
     UpdatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
     UpdatePatchBaselineResult.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "Name"))
+    UpdatePatchBaselineResult.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     UpdatePatchBaselineResult.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
     UpdatePatchBaselineResult.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
     UpdatePatchBaselineResult.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    UpdatePatchBaselineResult.add_member(:approved_patches_compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ApprovedPatchesComplianceLevel"))
     UpdatePatchBaselineResult.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
     UpdatePatchBaselineResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
     UpdatePatchBaselineResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
@@ -2495,6 +2512,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeEffectivePatchesForPatchBaselineResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperatingSystem)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -2705,6 +2723,7 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: GetDeployablePatchSnapshotForInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeployablePatchSnapshotForInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperatingSystem)
       end)
 
       api.add_operation(:get_document, Seahorse::Model::Operation.new.tap do |o|

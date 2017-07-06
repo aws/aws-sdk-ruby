@@ -435,6 +435,8 @@ module Aws::Kinesis
     #   resp.stream_description.enhanced_monitoring #=> Array
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics #=> Array
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+    #   resp.stream_description.encryption_type #=> String, one of "NONE", "KMS"
+    #   resp.stream_description.key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream AWS API Documentation
     #
@@ -670,6 +672,7 @@ module Aws::Kinesis
     #   resp.records[0].approximate_arrival_timestamp #=> Time
     #   resp.records[0].data #=> String
     #   resp.records[0].partition_key #=> String
+    #   resp.records[0].encryption_type #=> String, one of "NONE", "KMS"
     #   resp.next_shard_iterator #=> String
     #   resp.millis_behind_latest #=> Integer
     #
@@ -1052,8 +1055,10 @@ module Aws::Kinesis
     # provisioned throughput on the shard involved in the request,
     # `PutRecord` throws `ProvisionedThroughputExceededException`.
     #
-    # Data records are accessible for only 24 hours from the time that they
-    # are added to a stream.
+    # By default, data records are accessible for 24 hours from the time
+    # that they are added to a stream. You can use
+    # IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to
+    # modify this retention period.
     #
     #
     #
@@ -1095,6 +1100,7 @@ module Aws::Kinesis
     #
     #   * {Types::PutRecordOutput#shard_id #shard_id} => String
     #   * {Types::PutRecordOutput#sequence_number #sequence_number} => String
+    #   * {Types::PutRecordOutput#encryption_type #encryption_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1110,6 +1116,7 @@ module Aws::Kinesis
     #
     #   resp.shard_id #=> String
     #   resp.sequence_number #=> String
+    #   resp.encryption_type #=> String, one of "NONE", "KMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord AWS API Documentation
     #
@@ -1184,10 +1191,10 @@ module Aws::Kinesis
     # see [Adding Multiple Records with PutRecords][3] in the *Amazon
     # Kinesis Streams Developer Guide*.
     #
-    # By default, data records are accessible for only 24 hours from the
-    # time that they are added to an Amazon Kinesis stream. This retention
-    # period can be modified using the DecreaseStreamRetentionPeriod and
-    # IncreaseStreamRetentionPeriod operations.
+    # By default, data records are accessible for 24 hours from the time
+    # that they are added to a stream. You can use
+    # IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to
+    # modify this retention period.
     #
     #
     #
@@ -1205,6 +1212,7 @@ module Aws::Kinesis
     #
     #   * {Types::PutRecordsOutput#failed_record_count #failed_record_count} => Integer
     #   * {Types::PutRecordsOutput#records #records} => Array&lt;Types::PutRecordsResultEntry&gt;
+    #   * {Types::PutRecordsOutput#encryption_type #encryption_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1227,6 +1235,7 @@ module Aws::Kinesis
     #   resp.records[0].shard_id #=> String
     #   resp.records[0].error_code #=> String
     #   resp.records[0].error_message #=> String
+    #   resp.encryption_type #=> String, one of "NONE", "KMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords AWS API Documentation
     #
@@ -1360,6 +1369,119 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Enables or updates server-side encryption using an AWS KMS key for a
+    # specified stream.
+    #
+    # Starting encryption is an asynchronous operation. Upon receiving the
+    # request, Amazon Kinesis returns immediately and sets the status of the
+    # stream to `UPDATING`. After the update is complete, Amazon Kinesis
+    # sets the status of the stream back to `ACTIVE`. Updating or applying
+    # encryption normally takes a few seconds to complete but it can take
+    # minutes. You can continue to read and write data to your stream while
+    # its status is `UPDATING`. Once the status of the stream is `ACTIVE`,
+    # records written to the stream will begin to be encrypted.
+    #
+    # API Limits: You can successfully apply a new AWS KMS key for
+    # server-side encryption 25 times in a rolling 24 hour period.
+    #
+    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
+    # status before all records written to the stream are encrypted. After
+    # you’ve enabled encryption, you can verify encryption was applied by
+    # inspecting the API response from `PutRecord` or `PutRecords`.
+    #
+    # @option params [required, String] :stream_name
+    #   The name of the stream for which to start encrypting records.
+    #
+    # @option params [required, String] :encryption_type
+    #   The encryption type to use. This parameter can be one of the following
+    #   values:
+    #
+    #   * `NONE`\: Not valid for this operation. An
+    #     `InvalidOperationException` will be thrown.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #
+    # @option params [required, String] :key_id
+    #   The GUID for the customer-managed KMS key to use for encryption. You
+    #   can also use a Kinesis-owned master key by specifying the alias
+    #   `aws/kinesis`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_stream_encryption({
+    #     stream_name: "StreamName", # required
+    #     encryption_type: "NONE", # required, accepts NONE, KMS
+    #     key_id: "KeyId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption AWS API Documentation
+    #
+    # @overload start_stream_encryption(params = {})
+    # @param [Hash] params ({})
+    def start_stream_encryption(params = {}, options = {})
+      req = build_request(:start_stream_encryption, params)
+      req.send_request(options)
+    end
+
+    # Disables server-side encryption for a specified stream.
+    #
+    # Stopping encryption is an asynchronous operation. Upon receiving the
+    # request, Amazon Kinesis returns immediately and sets the status of the
+    # stream to `UPDATING`. After the update is complete, Amazon Kinesis
+    # sets the status of the stream back to `ACTIVE`. Stopping encryption
+    # normally takes a few seconds to complete but it can take minutes. You
+    # can continue to read and write data to your stream while its status is
+    # `UPDATING`. Once the status of the stream is `ACTIVE` records written
+    # to the stream will no longer be encrypted by the Amazon Kinesis
+    # Streams service.
+    #
+    # API Limits: You can successfully disable server-side encryption 25
+    # times in a rolling 24 hour period.
+    #
+    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
+    # status before all records written to the stream are no longer subject
+    # to encryption. After you’ve disabled encryption, you can verify
+    # encryption was not applied by inspecting the API response from
+    # `PutRecord` or `PutRecords`.
+    #
+    # @option params [required, String] :stream_name
+    #   The name of the stream on which to stop encrypting records.
+    #
+    # @option params [required, String] :encryption_type
+    #   The encryption type. This parameter can be one of the following
+    #   values:
+    #
+    #   * `NONE`\: Not valid for this operation. An
+    #     `InvalidOperationException` will be thrown.
+    #
+    #   * `KMS`\: Use server-side encryption on the records in the stream
+    #     using a customer-managed KMS key.
+    #
+    # @option params [required, String] :key_id
+    #   The GUID for the customer-managed key that was used for encryption.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_stream_encryption({
+    #     stream_name: "StreamName", # required
+    #     encryption_type: "NONE", # required, accepts NONE, KMS
+    #     key_id: "KeyId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption AWS API Documentation
+    #
+    # @overload stop_stream_encryption(params = {})
+    # @param [Hash] params ({})
+    def stop_stream_encryption(params = {}, options = {})
+      req = build_request(:stop_stream_encryption, params)
+      req.send_request(options)
+    end
+
     # Updates the shard count of the specified stream to the specified
     # number of shards.
     #
@@ -1371,16 +1493,29 @@ module Aws::Kinesis
     # complete. You can continue to read and write data to your stream while
     # its status is `UPDATING`.
     #
-    # To update the shard count, Amazon Kinesis performs splits and merges
-    # and individual shards. This can cause short-lived shards to be
-    # created, in addition to the final shards. We recommend that you double
-    # or halve the shard count, as this results in the fewest number of
-    # splits or merges.
+    # To update the shard count, Amazon Kinesis performs splits or merges on
+    # individual shards. This can cause short-lived shards to be created, in
+    # addition to the final shards. We recommend that you double or halve
+    # the shard count, as this results in the fewest number of splits or
+    # merges.
     #
-    # This operation has a rate limit of twice per rolling 24 hour period.
-    # You cannot scale above double your current shard count, scale below
-    # half your current shard count, or exceed the shard limits for your
-    # account.
+    # This operation has the following limits, which are per region per
+    # account unless otherwise noted:
+    #
+    # * scale more than twice per rolling 24 hour period
+    #
+    # * scale up above double your current shard count
+    #
+    # * scale down below half your current shard count
+    #
+    # * scale up above 200 shards in a stream
+    #
+    # * scale a stream with more than 200 shards down unless the result is
+    #   less than 200 shards
+    #
+    # * scale up above the shard limits for your account
+    #
+    # *
     #
     # For the default limits for an AWS account, see [Streams Limits][1] in
     # the *Amazon Kinesis Streams Developer Guide*. If you need to increase
@@ -1442,7 +1577,7 @@ module Aws::Kinesis
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

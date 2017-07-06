@@ -631,6 +631,11 @@ module Aws::SSM
 
     # Creates a patch baseline.
     #
+    # @option params [String] :operating_system
+    #   Defines the operating system the patch baseline applies to. Supported
+    #   operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU and
+    #   REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #
     # @option params [required, String] :name
     #   The name of the patch baseline.
     #
@@ -642,6 +647,13 @@ module Aws::SSM
     #
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
+    #
+    # @option params [String] :approved_patches_compliance_level
+    #   Defines the compliance level for approved patches. This means that if
+    #   an approved patch is reported as missing, this is the severity of the
+    #   compliance violation. Valid compliance severity levels include the
+    #   following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
+    #   The default value is UNSPECIFIED.
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -662,11 +674,12 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -677,16 +690,18 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
     #           },
+    #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1, # required
     #         },
     #       ],
     #     },
     #     approved_patches: ["PatchId"],
+    #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     rejected_patches: ["PatchId"],
     #     description: "BaselineDescription",
     #     client_token: "ClientToken",
@@ -717,11 +732,11 @@ module Aws::SSM
     # We also recommend that you secure access to the Amazon S3 bucket by
     # creating a restrictive bucket policy. To view an example of a
     # restrictive Amazon S3 bucket policy for Resource Data Sync, see
-    # [Creating a Resource Data Sync][1].
+    # [Configuring Resource Data Sync for Inventory][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
@@ -1476,7 +1491,8 @@ module Aws::SSM
     end
 
     # Retrieves the current effective patches (the patch and the approval
-    # state) for the specified patch baseline.
+    # state) for the specified patch baseline. Note that this API applies
+    # only to Windows patch baselines.
     #
     # @option params [required, String] :baseline_id
     #   The ID of the patch baseline to retrieve the effective patches for.
@@ -1518,6 +1534,7 @@ module Aws::SSM
     #   resp.effective_patches[0].patch.msrc_number #=> String
     #   resp.effective_patches[0].patch.language #=> String
     #   resp.effective_patches[0].patch_status.deployment_status #=> String, one of "APPROVED", "PENDING_APPROVAL", "EXPLICIT_APPROVED", "EXPLICIT_REJECTED"
+    #   resp.effective_patches[0].patch_status.compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.effective_patches[0].patch_status.approval_date #=> Time
     #   resp.next_token #=> String
     #
@@ -2332,6 +2349,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2389,6 +2407,10 @@ module Aws::SSM
     # @option params [Integer] :max_results
     #   The maximum number of patch groups to return (per page).
     #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2402,6 +2424,12 @@ module Aws::SSM
     #
     #   resp = client.describe_patch_groups({
     #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
     #     next_token: "NextToken",
     #   })
     #
@@ -2411,6 +2439,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2554,15 +2583,28 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the default patch baseline.
+    # Retrieves the default patch baseline. Note that Systems Manager
+    # supports creating multiple default patch baselines. For example, you
+    # can create a default patch baseline for each operating system.
+    #
+    # @option params [String] :operating_system
+    #   Returns the default patch baseline for the specified operating system.
     #
     # @return [Types::GetDefaultPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDefaultPatchBaselineResult#baseline_id #baseline_id} => String
+    #   * {Types::GetDefaultPatchBaselineResult#operating_system #operating_system} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_default_patch_baseline({
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -2574,7 +2616,7 @@ module Aws::SSM
     end
 
     # Retrieves the current snapshot for the patch baseline the instance
-    # uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems
+    # uses. This API is primarily used by the AWS-RunPatchBaseline Systems
     # Manager document.
     #
     # @option params [required, String] :instance_id
@@ -2589,6 +2631,7 @@ module Aws::SSM
     #   * {Types::GetDeployablePatchSnapshotForInstanceResult#instance_id #instance_id} => String
     #   * {Types::GetDeployablePatchSnapshotForInstanceResult#snapshot_id #snapshot_id} => String
     #   * {Types::GetDeployablePatchSnapshotForInstanceResult#snapshot_download_url #snapshot_download_url} => String
+    #   * {Types::GetDeployablePatchSnapshotForInstanceResult#product #product} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2602,6 +2645,7 @@ module Aws::SSM
     #   resp.instance_id #=> String
     #   resp.snapshot_id #=> String
     #   resp.snapshot_download_url #=> String
+    #   resp.product #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance AWS API Documentation
     #
@@ -3116,9 +3160,11 @@ module Aws::SSM
     #
     #   * {Types::GetPatchBaselineResult#baseline_id #baseline_id} => String
     #   * {Types::GetPatchBaselineResult#name #name} => String
+    #   * {Types::GetPatchBaselineResult#operating_system #operating_system} => String
     #   * {Types::GetPatchBaselineResult#global_filters #global_filters} => Types::PatchFilterGroup
     #   * {Types::GetPatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
     #   * {Types::GetPatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::GetPatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#patch_groups #patch_groups} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#created_date #created_date} => Time
@@ -3135,18 +3181,21 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
+    #   resp.approved_patches_compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
     #   resp.patch_groups #=> Array
@@ -3170,21 +3219,28 @@ module Aws::SSM
     # @option params [required, String] :patch_group
     #   The name of the patch group whose patch baseline should be retrieved.
     #
+    # @option params [String] :operating_system
+    #   Returns he operating system rule specified for patch groups using the
+    #   patch baseline.
+    #
     # @return [Types::GetPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPatchBaselineForPatchGroupResult#baseline_id #baseline_id} => String
     #   * {Types::GetPatchBaselineForPatchGroupResult#patch_group #patch_group} => String
+    #   * {Types::GetPatchBaselineForPatchGroupResult#operating_system #operating_system} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -4667,6 +4723,9 @@ module Aws::SSM
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
     #
+    # @option params [String] :approved_patches_compliance_level
+    #   Assigns a new compliance severity level to an existing patch baseline.
+    #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #
@@ -4677,9 +4736,11 @@ module Aws::SSM
     #
     #   * {Types::UpdatePatchBaselineResult#baseline_id #baseline_id} => String
     #   * {Types::UpdatePatchBaselineResult#name #name} => String
+    #   * {Types::UpdatePatchBaselineResult#operating_system #operating_system} => String
     #   * {Types::UpdatePatchBaselineResult#global_filters #global_filters} => Types::PatchFilterGroup
     #   * {Types::UpdatePatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
     #   * {Types::UpdatePatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
+    #   * {Types::UpdatePatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
     #   * {Types::UpdatePatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
     #   * {Types::UpdatePatchBaselineResult#created_date #created_date} => Time
     #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
@@ -4693,7 +4754,7 @@ module Aws::SSM
     #     global_filters: {
     #       patch_filters: [ # required
     #         {
-    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #           values: ["PatchFilterValue"], # required
     #         },
     #       ],
@@ -4704,16 +4765,18 @@ module Aws::SSM
     #           patch_filter_group: { # required
     #             patch_filters: [ # required
     #               {
-    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
     #                 values: ["PatchFilterValue"], # required
     #               },
     #             ],
     #           },
+    #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1, # required
     #         },
     #       ],
     #     },
     #     approved_patches: ["PatchId"],
+    #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #     rejected_patches: ["PatchId"],
     #     description: "BaselineDescription",
     #   })
@@ -4722,18 +4785,21 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
     #   resp.global_filters.patch_filters #=> Array
-    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
     #   resp.global_filters.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
-    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
+    #   resp.approved_patches_compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
     #   resp.created_date #=> Time
@@ -4762,7 +4828,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 
