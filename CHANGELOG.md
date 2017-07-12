@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.10 (2017-07-12)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::SWF - Updated the API, and documentation for Amazon Simple Workflow Service.
