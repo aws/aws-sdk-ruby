@@ -80,9 +80,7 @@ module Aws::AutoScaling
     # @option options [Integer] :desired_capacity
     #   The number of EC2 instances that should be running in the group. This
     #   number must be greater than or equal to the minimum size of the group
-    #   and less than or equal to the maximum size of the group. If you do not
-    #   specify a desired capacity, the default is the minimum size of the
-    #   group.
+    #   and less than or equal to the maximum size of the group.
     # @option options [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default is 300.
@@ -231,12 +229,8 @@ module Aws::AutoScaling
     #   the scope of your AWS account.
     # @option options [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    #   instances.
-    #
-    #   If you do not specify `InstanceId`, you must specify `ImageId`.
-    #
-    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   instances. For more information, see [Finding an AMI][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -292,12 +286,10 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @option options [String] :instance_id
-    #   The ID of the instance to use to create the launch configuration. The
-    #   new launch configuration derives attributes from the instance, with
-    #   the exception of the block device mapping.
+    #   The ID of the instance to use to create the launch configuration.
     #
-    #   If you do not specify `InstanceId`, you must specify both `ImageId`
-    #   and `InstanceType`.
+    #   The new launch configuration derives attributes from the instance,
+    #   with the exception of the block device mapping.
     #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
@@ -310,12 +302,9 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
     # @option options [String] :instance_type
-    #   The instance type of the EC2 instance.
-    #
-    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
-    #
-    #   For information about available instance types, see [Available
-    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
+    #   The instance type of the EC2 instance. For information about available
+    #   instance types, see [ Available Instance Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide.*
     #
     #
     #
@@ -334,7 +323,7 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     # @option options [Types::InstanceMonitoring] :instance_monitoring
     #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
-    #   the Auto Scaling instances. The default is `true`.
+    #   the Auto Scaling instances.
     # @option options [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
     #   fulfill the request. Spot Instances are launched when the price you

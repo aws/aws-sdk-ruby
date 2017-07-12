@@ -160,7 +160,10 @@ module Aws::SWF
     # Returns the number of closed workflow executions within the given
     # domain that meet the specified filtering criteria.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -169,23 +172,28 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `tagFilter.tag`\: String constraint. The key is
     #     `swf:tagFilter.tag`.
+    #
     #   * `typeFilter.name`\: String constraint. The key is
     #     `swf:typeFilter.name`.
+    #
     #   * `typeFilter.version`\: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -198,38 +206,60 @@ module Aws::SWF
     #   If specified, only workflow executions that meet the start time
     #   criteria of the filter are counted.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #
     # @option params [Types::ExecutionTimeFilter] :close_time_filter
     #   If specified, only workflow executions that meet the close time
     #   criteria of the filter are counted.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #
     # @option params [Types::WorkflowExecutionFilter] :execution_filter
     #   If specified, only workflow executions matching the `WorkflowId` in
     #   the filter are counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::WorkflowTypeFilter] :type_filter
     #   If specified, indicates the type of the workflow executions to be
     #   counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::TagFilter] :tag_filter
     #   If specified, only executions that have a tag that matches the filter
     #   are counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::CloseStatusFilter] :close_status_filter
     #   If specified, only workflow executions that match this close status
     #   are counted. This filter has an affect only if `executionStatus` is
     #   specified as `CLOSED`.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @return [Types::WorkflowExecutionCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -278,7 +308,10 @@ module Aws::SWF
     # Returns the number of open workflow executions within the given domain
     # that meet the specified filtering criteria.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -287,23 +320,28 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `tagFilter.tag`\: String constraint. The key is
     #     `swf:tagFilter.tag`.
+    #
     #   * `typeFilter.name`\: String constraint. The key is
     #     `swf:typeFilter.name`.
+    #
     #   * `typeFilter.version`\: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -319,19 +357,28 @@ module Aws::SWF
     # @option params [Types::WorkflowTypeFilter] :type_filter
     #   Specifies the type of the workflow executions to be counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @option params [Types::TagFilter] :tag_filter
     #   If specified, only executions that have a tag that matches the filter
     #   are counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @option params [Types::WorkflowExecutionFilter] :execution_filter
     #   If specified, only workflow executions matching the `WorkflowId` in
     #   the filter are counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @return [Types::WorkflowExecutionCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -371,9 +418,9 @@ module Aws::SWF
     end
 
     # Returns the estimated number of activity tasks in the specified task
-    # list. The count returned is an approximation and is not guaranteed to
+    # list. The count returned is an approximation and isn't guaranteed to
     # be exact. If you specify a task list that no activity task was ever
-    # scheduled in then 0 will be returned.
+    # scheduled in then `0` is returned.
     #
     # **Access Control**
     #
@@ -382,18 +429,20 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
-    # * Constrain the `taskList.name` parameter by using a **Condition**
+    #
+    # * Constrain the `taskList.name` parameter by using a `Condition`
     #   element with the `swf:taskList.name` key to allow the action to
     #   access only certain task lists.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -432,9 +481,9 @@ module Aws::SWF
     end
 
     # Returns the estimated number of decision tasks in the specified task
-    # list. The count returned is an approximation and is not guaranteed to
+    # list. The count returned is an approximation and isn't guaranteed to
     # be exact. If you specify a task list that no decision task was ever
-    # scheduled in then 0 will be returned.
+    # scheduled in then `0` is returned.
     #
     # **Access Control**
     #
@@ -443,18 +492,20 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
-    # * Constrain the `taskList.name` parameter by using a **Condition**
+    #
+    # * Constrain the `taskList.name` parameter by using a `Condition`
     #   element with the `swf:taskList.name` key to allow the action to
     #   access only certain task lists.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -495,9 +546,12 @@ module Aws::SWF
     # Deprecates the specified *activity type*. After an activity type has
     # been deprecated, you cannot create new tasks of that activity type.
     # Tasks of this type that were scheduled before the type was deprecated
-    # will continue to run.
+    # continue to run.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -506,21 +560,25 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `activityType.name`\: String constraint. The key is
     #     `swf:activityType.name`.
+    #
     #   * `activityType.version`\: String constraint. The key is
     #     `swf:activityType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -556,9 +614,12 @@ module Aws::SWF
     # types. However, you can still use visibility actions on this domain.
     # Deprecating a domain also deprecates all activity and workflow types
     # registered in the domain. Executions that were started before the
-    # domain was deprecated will continue to run.
+    # domain was deprecated continues to run.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -567,16 +628,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -602,11 +665,14 @@ module Aws::SWF
 
     # Deprecates the specified *workflow type*. After a workflow type has
     # been deprecated, you cannot create new executions of that type.
-    # Executions that were started before the type was deprecated will
-    # continue to run. A deprecated workflow type may still be used when
-    # calling visibility actions.
+    # Executions that were started before the type was deprecated continues
+    # to run. A deprecated workflow type may still be used when calling
+    # visibility actions.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -615,21 +681,25 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `workflowType.name`\: String constraint. The key is
     #     `swf:workflowType.name`.
+    #
     #   * `workflowType.version`\: String constraint. The key is
     #     `swf:workflowType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -671,21 +741,25 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `activityType.name`\: String constraint. The key is
     #     `swf:activityType.name`.
+    #
     #   * `activityType.version`\: String constraint. The key is
     #     `swf:activityType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -746,16 +820,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -792,7 +868,10 @@ module Aws::SWF
     # Returns information about the specified workflow execution including
     # its type and some statistics.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -801,16 +880,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -836,7 +917,7 @@ module Aws::SWF
     #     domain: "DomainName", # required
     #     execution: { # required
     #       workflow_id: "WorkflowId", # required
-    #       run_id: "RunId", # required
+    #       run_id: "WorkflowRunId", # required
     #     },
     #   })
     #
@@ -878,7 +959,7 @@ module Aws::SWF
 
     # Returns information about the specified *workflow type*. This includes
     # configuration settings specified when the type was registered and
-    # other information such as creation date, current status, and so on.
+    # other information such as creation date, current status, etc.
     #
     # **Access Control**
     #
@@ -887,21 +968,25 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `workflowType.name`\: String constraint. The key is
     #     `swf:workflowType.name`.
+    #
     #   * `workflowType.version`\: String constraint. The key is
     #     `swf:workflowType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -954,7 +1039,10 @@ module Aws::SWF
     # may be split into multiple pages. To retrieve subsequent pages, make
     # the call again using the `nextPageToken` returned by the initial call.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -963,16 +1051,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -994,7 +1084,7 @@ module Aws::SWF
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1018,7 +1108,7 @@ module Aws::SWF
     #     domain: "DomainName", # required
     #     execution: { # required
     #       workflow_id: "WorkflowId", # required
-    #       run_id: "RunId", # required
+    #       run_id: "WorkflowRunId", # required
     #     },
     #     next_page_token: "PageToken",
     #     maximum_page_size: 1,
@@ -1036,11 +1126,11 @@ module Aws::SWF
     #   resp.events[0].workflow_execution_started_event_attributes.task_start_to_close_timeout #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.child_policy #=> String, one of "TERMINATE", "REQUEST_CANCEL", "ABANDON"
     #   resp.events[0].workflow_execution_started_event_attributes.task_list.name #=> String
+    #   resp.events[0].workflow_execution_started_event_attributes.task_priority #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.workflow_type.name #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.workflow_type.version #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.tag_list #=> Array
     #   resp.events[0].workflow_execution_started_event_attributes.tag_list[0] #=> String
-    #   resp.events[0].workflow_execution_started_event_attributes.task_priority #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.continued_execution_run_id #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.parent_workflow_execution.workflow_id #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.parent_workflow_execution.run_id #=> String
@@ -1251,6 +1341,7 @@ module Aws::SWF
     #   resp.events[0].start_child_workflow_execution_failed_event_attributes.control #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.id #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.name #=> String
+    #   resp.events[0].lambda_function_scheduled_event_attributes.control #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.input #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.start_to_close_timeout #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.decision_task_completed_event_id #=> Integer
@@ -1295,16 +1386,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1330,7 +1423,7 @@ module Aws::SWF
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1382,7 +1475,10 @@ module Aws::SWF
     # multiple pages. To retrieve subsequent pages, make the call again
     # using the nextPageToken returned by the initial call.
     #
-    # <note>This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -1391,23 +1487,28 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `tagFilter.tag`\: String constraint. The key is
     #     `swf:tagFilter.tag`.
+    #
     #   * `typeFilter.name`\: String constraint. The key is
     #     `swf:typeFilter.name`.
+    #
     #   * `typeFilter.version`\: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1422,7 +1523,10 @@ module Aws::SWF
     #   specified by this filter. Also, if this parameter is specified, the
     #   returned results are ordered by their start times.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #
     # @option params [Types::ExecutionTimeFilter] :close_time_filter
     #   If specified, the workflow executions are included in the returned
@@ -1430,31 +1534,50 @@ module Aws::SWF
     #   specified by this filter. Also, if this parameter is specified, the
     #   returned results are ordered by their close times.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #
     # @option params [Types::WorkflowExecutionFilter] :execution_filter
     #   If specified, only workflow executions matching the workflow ID
     #   specified in the filter are returned.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::CloseStatusFilter] :close_status_filter
     #   If specified, only workflow executions that match this *close status*
     #   are listed. For example, if TERMINATED is specified, then only
     #   TERMINATED workflow executions are listed.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::WorkflowTypeFilter] :type_filter
     #   If specified, only executions of the type specified in the filter are
     #   returned.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [Types::TagFilter] :tag_filter
     #   If specified, only executions that have the matching tag are listed.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #
     # @option params [String] :next_page_token
     #   If a `NextPageToken` was returned by a previous call, there are more
@@ -1466,7 +1589,7 @@ module Aws::SWF
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1543,7 +1666,10 @@ module Aws::SWF
     # be split into multiple pages. To retrieve subsequent pages, make the
     # call again using the nextPageToken returned by the initial call.
     #
-    # <note> This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -1554,16 +1680,18 @@ module Aws::SWF
     #   only specified domains. The element must be set to
     #   `arn:aws:swf::AccountID:domain/*`, where *AccountID* is the account
     #   ID, with no dashes.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1582,7 +1710,7 @@ module Aws::SWF
     #   Specifies the registration status of the domains to list.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1629,7 +1757,10 @@ module Aws::SWF
     # multiple pages. To retrieve subsequent pages, make the call again
     # using the nextPageToken returned by the initial call.
     #
-    # <note> This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.</note>
+    # <note markdown="1"> This operation is eventually consistent. The results are best effort
+    # and may not exactly reflect recent updates and changes.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -1638,23 +1769,28 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `tagFilter.tag`\: String constraint. The key is
     #     `swf:tagFilter.tag`.
+    #
     #   * `typeFilter.name`\: String constraint. The key is
     #     `swf:typeFilter.name`.
+    #
     #   * `typeFilter.version`\: String constraint. The key is
     #     `swf:typeFilter.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1672,12 +1808,18 @@ module Aws::SWF
     #   If specified, only executions of the type specified in the filter are
     #   returned.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @option params [Types::TagFilter] :tag_filter
     #   If specified, only executions that have the matching tag are listed.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @option params [String] :next_page_token
     #   If a `NextPageToken` was returned by a previous call, there are more
@@ -1689,7 +1831,7 @@ module Aws::SWF
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1706,7 +1848,10 @@ module Aws::SWF
     #   If specified, only workflow executions matching the workflow ID
     #   specified in the filter are returned.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #
     # @return [Types::WorkflowExecutionInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1772,16 +1917,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1807,7 +1954,7 @@ module Aws::SWF
     #   returned in a single call.
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -1859,10 +2006,10 @@ module Aws::SWF
     # HTTP connection open and responds as soon as a task becomes available.
     # The maximum time the service holds on to the request before responding
     # is 60 seconds. If no task is available within 60 seconds, the poll
-    # will return an empty result. An empty result, in this context, means
-    # that an ActivityTask is returned, but that the value of taskToken is
-    # an empty string. If a task is returned, the worker should use its type
-    # to identify and process it correctly.
+    # returns an empty result. An empty result, in this context, means that
+    # an ActivityTask is returned, but that the value of taskToken is an
+    # empty string. If a task is returned, the worker should use its type to
+    # identify and process it correctly.
     #
     # Workers should set their client side socket timeout to at least 70
     # seconds (10 seconds higher than the maximum time service may hold the
@@ -1875,18 +2022,20 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
-    # * Constrain the `taskList.name` parameter by using a **Condition**
+    #
+    # * Constrain the `taskList.name` parameter by using a `Condition`
     #   element with the `swf:taskList.name` key to allow the action to
     #   access only certain task lists.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1900,8 +2049,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the worker making the request, recorded in the
@@ -1958,16 +2107,16 @@ module Aws::SWF
     # decision task is available in the specified task list before the
     # timeout of 60 seconds expires, an empty result is returned. An empty
     # result, in this context, means that a DecisionTask is returned, but
-    # that the value of `taskToken` is an empty string.
+    # that the value of taskToken is an empty string.
     #
-    # Deciders should set their client-side socket timeout to at least 70
+    # Deciders should set their client side socket timeout to at least 70
     # seconds (10 seconds higher than the timeout).
     #
     # Because the number of workflow history events for a single workflow
     # execution might be very large, the result returned might be split up
     # across a number of pages. To retrieve subsequent pages, make
     # additional calls to `PollForDecisionTask` using the `nextPageToken`
-    # returned by the initial call. Note that you do **not** call
+    # returned by the initial call. Note that you do *not* call
     # `GetWorkflowExecutionHistory` with this `nextPageToken`. Instead, call
     # `PollForDecisionTask` again.
     #
@@ -1978,18 +2127,20 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
-    # * Constrain the `taskList.name` parameter by using a **Condition**
+    #
+    # * Constrain the `taskList.name` parameter by using a `Condition`
     #   element with the `swf:taskList.name` key to allow the action to
     #   access only certain task lists.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2003,8 +2154,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the decider making the request, which is recorded in the
@@ -2021,12 +2172,16 @@ module Aws::SWF
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
-    #   <note>The `nextPageToken` returned by this action cannot be used with GetWorkflowExecutionHistory to get the next page. You must call PollForDecisionTask again (with the `nextPageToken`) to retrieve the next page of history records. Calling PollForDecisionTask with a `nextPageToken` will not return a new decision task.</note>
+    #   <note markdown="1"> The `nextPageToken` returned by this action cannot be used with
+    #   GetWorkflowExecutionHistory to get the next page. You must call
+    #   PollForDecisionTask again (with the `nextPageToken`) to retrieve the
+    #   next page of history records. Calling PollForDecisionTask with a
+    #   `nextPageToken` doesn't return a new decision task.
     #
-    #   .
+    #    </note>
     #
     # @option params [Integer] :maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -2079,11 +2234,11 @@ module Aws::SWF
     #   resp.events[0].workflow_execution_started_event_attributes.task_start_to_close_timeout #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.child_policy #=> String, one of "TERMINATE", "REQUEST_CANCEL", "ABANDON"
     #   resp.events[0].workflow_execution_started_event_attributes.task_list.name #=> String
+    #   resp.events[0].workflow_execution_started_event_attributes.task_priority #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.workflow_type.name #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.workflow_type.version #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.tag_list #=> Array
     #   resp.events[0].workflow_execution_started_event_attributes.tag_list[0] #=> String
-    #   resp.events[0].workflow_execution_started_event_attributes.task_priority #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.continued_execution_run_id #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.parent_workflow_execution.workflow_id #=> String
     #   resp.events[0].workflow_execution_started_event_attributes.parent_workflow_execution.run_id #=> String
@@ -2294,6 +2449,7 @@ module Aws::SWF
     #   resp.events[0].start_child_workflow_execution_failed_event_attributes.control #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.id #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.name #=> String
+    #   resp.events[0].lambda_function_scheduled_event_attributes.control #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.input #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.start_to_close_timeout #=> String
     #   resp.events[0].lambda_function_scheduled_event_attributes.decision_task_completed_event_id #=> Integer
@@ -2327,26 +2483,34 @@ module Aws::SWF
 
     # Used by activity workers to report to the service that the
     # ActivityTask represented by the specified `taskToken` is still making
-    # progress. The worker can also (optionally) specify details of the
-    # progress, for example percent complete, using the `details` parameter.
-    # This action can also be used by the worker as a mechanism to check if
-    # cancellation is being requested for the activity task. If a
-    # cancellation is being attempted for the specified task, then the
-    # boolean `cancelRequested` flag returned by the service is set to
-    # `true`.
+    # progress. The worker can also specify details of the progress, for
+    # example percent complete, using the `details` parameter. This action
+    # can also be used by the worker as a mechanism to check if cancellation
+    # is being requested for the activity task. If a cancellation is being
+    # attempted for the specified task, then the boolean `cancelRequested`
+    # flag returned by the service is set to `true`.
     #
     # This action resets the `taskHeartbeatTimeout` clock. The
     # `taskHeartbeatTimeout` is specified in RegisterActivityType.
     #
-    # This action does not in itself create an event in the workflow
+    # This action doesn't in itself create an event in the workflow
     # execution history. However, if the task times out, the workflow
-    # execution history will contain a `ActivityTaskTimedOut` event that
+    # execution history contains a `ActivityTaskTimedOut` event that
     # contains the information from the last heartbeat generated by the
     # activity worker.
     #
-    # <note>The `taskStartToCloseTimeout` of an activity type is the maximum duration of an activity task, regardless of the number of RecordActivityTaskHeartbeat requests received. The `taskStartToCloseTimeout` is also specified in RegisterActivityType.</note>
+    # <note markdown="1"> The `taskStartToCloseTimeout` of an activity type is the maximum
+    # duration of an activity task, regardless of the number of
+    # RecordActivityTaskHeartbeat requests received. The
+    # `taskStartToCloseTimeout` is also specified in RegisterActivityType.
     #
-    # <note>This operation is only useful for long-lived activities to report liveliness of the task and to determine if a cancellation is being attempted. </note>
+    #  </note>
+    #
+    # <note markdown="1"> This operation is only useful for long-lived activities to report
+    # liveliness of the task and to determine if a cancellation is being
+    # attempted.
+    #
+    #  </note>
     #
     # If the `cancelRequested` flag returns `true`, a cancellation is being
     # attempted. If the worker can cancel the activity, it should respond
@@ -2360,16 +2524,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2422,21 +2588,26 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `defaultTaskList.name`\: String constraint. The key is
     #     `swf:defaultTaskList.name`.
+    #
     #   * `name`\: String constraint. The key is `swf:name`.
+    #
     #   * `version`\: String constraint. The key is `swf:version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2450,18 +2621,21 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the activity type.
     #
-    #   <note>The activity type consists of the name and version, the combination of which must be unique within the domain.</note>
+    #   <note markdown="1"> The activity type consists of the name and version, the combination of
+    #   which must be unique within the domain.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :description
     #   A textual description of the activity type.
@@ -2470,40 +2644,39 @@ module Aws::SWF
     #   If set, specifies the default maximum duration that a worker can take
     #   to process tasks of this activity type. This default can be overridden
     #   when scheduling an activity task using the `ScheduleActivityTask`
-    #   decision.
+    #   Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
     # @option params [String] :default_task_heartbeat_timeout
     #   If set, specifies the default maximum time before which a worker
     #   processing a task of this type must report progress by calling
     #   RecordActivityTaskHeartbeat. If the timeout is exceeded, the activity
     #   task is automatically timed out. This default can be overridden when
-    #   scheduling an activity task using the `ScheduleActivityTask` decision.
+    #   scheduling an activity task using the `ScheduleActivityTask` Decision.
     #   If the activity worker subsequently attempts to record a heartbeat or
     #   returns a result, the activity worker receives an `UnknownResource`
     #   fault. In this case, Amazon SWF no longer considers the activity task
     #   to be valid; the activity worker should clean up the activity task.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
     # @option params [Types::TaskList] :default_task_list
     #   If set, specifies the default task list to use for scheduling tasks of
-    #   this activity type. This default task list is used if a task list is
-    #   not provided when a task is scheduled through the
-    #   `ScheduleActivityTask` decision.
+    #   this activity type. This default task list is used if a task list
+    #   isn't provided when a task is scheduled through the
+    #   `ScheduleActivityTask` Decision.
     #
     # @option params [String] :default_task_priority
     #   The default task priority to assign to the activity type. If not
-    #   assigned, then "0" will be used. Valid values are integers that
-    #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
-    #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
-    #   priority.
+    #   assigned, then `0` is used. Valid values are integers that range from
+    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *in the *Amazon SWF Developer Guide*.*.
     #
     #
     #
@@ -2513,18 +2686,18 @@ module Aws::SWF
     #   If set, specifies the default maximum duration that a task of this
     #   activity type can wait before being assigned to a worker. This default
     #   can be overridden when scheduling an activity task using the
-    #   `ScheduleActivityTask` decision.
+    #   `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
     # @option params [String] :default_task_schedule_to_close_timeout
     #   If set, specifies the default maximum duration for a task of this
     #   activity type. This default can be overridden when scheduling an
-    #   activity task using the `ScheduleActivityTask` decision.
+    #   activity task using the `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2562,16 +2735,18 @@ module Aws::SWF
     # * You cannot use an IAM policy to control domain access for this
     #   action. The name of the domain being registered is available as the
     #   resource of this action.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2583,8 +2758,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :description
     #   A text description of the domain.
@@ -2592,12 +2767,12 @@ module Aws::SWF
     # @option params [required, String] :workflow_execution_retention_period_in_days
     #   The duration (in days) that records and histories of workflow
     #   executions on the domain should be kept by the service. After the
-    #   retention period, the workflow execution is not available in the
+    #   retention period, the workflow execution isn't available in the
     #   results of visibility calls.
     #
     #   If you pass the value `NONE` or `0` (zero), then the workflow
-    #   execution history will not be retained. As soon as the workflow
-    #   execution completes, the execution record and its history are deleted.
+    #   execution history isn't retained. As soon as the workflow execution
+    #   completes, the execution record and its history are deleted.
     #
     #   The maximum workflow execution retention period is 90 days. For more
     #   information about Amazon SWF service limits, see: [Amazon SWF Service
@@ -2641,21 +2816,26 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `defaultTaskList.name`\: String constraint. The key is
     #     `swf:defaultTaskList.name`.
+    #
     #   * `name`\: String constraint. The key is `swf:name`.
+    #
     #   * `version`\: String constraint. The key is `swf:version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2669,18 +2849,22 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the workflow type.
     #
-    #   <note>The workflow type consists of the name and version, the combination of which must be unique within the domain. To get a list of all currently registered workflow types, use the ListWorkflowTypes action.</note>
+    #   <note markdown="1"> The workflow type consists of the name and version, the combination of
+    #   which must be unique within the domain. To get a list of all currently
+    #   registered workflow types, use the ListWorkflowTypes action.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :description
     #   Textual description of the workflow type.
@@ -2689,40 +2873,39 @@ module Aws::SWF
     #   If set, specifies the default maximum duration of decision tasks for
     #   this workflow type. This default can be overridden when starting a
     #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   `StartChildWorkflowExecution` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
     # @option params [String] :default_execution_start_to_close_timeout
     #   If set, specifies the default maximum duration for executions of this
     #   workflow type. You can override this default when starting an
-    #   execution through the StartWorkflowExecution action or
-    #   `StartChildWorkflowExecution` decision.
+    #   execution through the StartWorkflowExecution Action or
+    #   `StartChildWorkflowExecution` Decision.
     #
     #   The duration is specified in seconds; an integer greater than or equal
     #   to 0. Unlike some of the other timeout parameters in Amazon SWF, you
     #   cannot specify a value of "NONE" for
     #   `defaultExecutionStartToCloseTimeout`; there is a one-year max limit
     #   on the time that a workflow execution can run. Exceeding this limit
-    #   will always cause the workflow execution to time out.
+    #   always causes the workflow execution to time out.
     #
     # @option params [Types::TaskList] :default_task_list
     #   If set, specifies the default task list to use for scheduling decision
     #   tasks for executions of this workflow type. This default is used only
-    #   if a task list is not provided when starting the execution through the
-    #   StartWorkflowExecution action or `StartChildWorkflowExecution`
-    #   decision.
+    #   if a task list isn't provided when starting the execution through the
+    #   StartWorkflowExecution Action or `StartChildWorkflowExecution`
+    #   Decision.
     #
     # @option params [String] :default_task_priority
     #   The default task priority to assign to the workflow type. If not
-    #   assigned, then "0" will be used. Valid values are integers that
-    #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
-    #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
-    #   priority.
+    #   assigned, then `0` is used. Valid values are integers that range from
+    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2734,26 +2917,35 @@ module Aws::SWF
     #   calling the TerminateWorkflowExecution action explicitly or due to an
     #   expired timeout. This default can be overridden when starting a
     #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   `StartChildWorkflowExecution` Decision.
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for each
-    #     child execution by recording a `WorkflowExecutionCancelRequested`
-    #     event in its history. It is up to the decider to take appropriate
-    #     actions when it receives an execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event in
+    #     its history. It is up to the decider to take appropriate actions
+    #     when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #
     # @option params [String] :default_lambda_role
-    #   The ARN of the default IAM role to use when a workflow execution of
-    #   this type invokes AWS Lambda functions.
+    #   The default IAM role attached to this workflow type.
     #
-    #   This default can be overridden when starting a workflow execution
-    #   using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` and `ContinueAsNewWorkflowExecution`
-    #   decision.
+    #   <note markdown="1"> Executions of this workflow type need IAM roles to invoke Lambda
+    #   functions. If you don't specify an IAM role when you start this
+    #   workflow type, the default Lambda role is attached to the execution.
+    #   For more information, see
+    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2787,9 +2979,17 @@ module Aws::SWF
     # execution as a whole. It is up to the decider to take appropriate
     # actions when it receives an execution history with this event.
     #
-    # <note>If the runId is not specified, the `WorkflowExecutionCancelRequested` event is recorded in the history of the current open workflow execution with the specified workflowId in the domain.</note>
+    # <note markdown="1"> If the runId isn't specified, the `WorkflowExecutionCancelRequested`
+    # event is recorded in the history of the current open workflow
+    # execution with the specified workflowId in the domain.
     #
-    # <note>Because this action allows the workflow to properly clean up and gracefully close, it should be used instead of TerminateWorkflowExecution when possible.</note>
+    #  </note>
+    #
+    # <note markdown="1"> Because this action allows the workflow to properly clean up and
+    # gracefully close, it should be used instead of
+    # TerminateWorkflowExecution when possible.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -2798,16 +2998,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2829,7 +3031,7 @@ module Aws::SWF
     #   resp = client.request_cancel_workflow_execution({
     #     domain: "DomainName", # required
     #     workflow_id: "WorkflowId", # required
-    #     run_id: "RunIdOptional",
+    #     run_id: "WorkflowRunIdOptional",
     #   })
     #
     # @overload request_cancel_workflow_execution(params = {})
@@ -2841,7 +3043,7 @@ module Aws::SWF
 
     # Used by workers to tell the service that the ActivityTask identified
     # by the `taskToken` was successfully canceled. Additional `details` can
-    # be optionally provided using the `details` argument.
+    # be provided using the `details` argument.
     #
     # These `details` (if provided) appear in the `ActivityTaskCanceled`
     # event added to the workflow history.
@@ -2863,16 +3065,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][2].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][2] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2888,7 +3092,7 @@ module Aws::SWF
     #   progress and respond with results.
     #
     # @option params [String] :details
-    #   *Optional.* Information about the cancellation.
+    #   Information about the cancellation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2911,7 +3115,7 @@ module Aws::SWF
     # provided). The `result` appears in the `ActivityTaskCompleted` event
     # in the workflow history.
     #
-    # If the requested task does not complete successfully, use
+    # If the requested task doesn't complete successfully, use
     # RespondActivityTaskFailed instead. If the worker finds that the task
     # is canceled through the `canceled` flag returned by
     # RecordActivityTaskHeartbeat, it should cancel the task, clean up and
@@ -2930,16 +3134,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][2].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][2] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2992,16 +3198,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][2].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][2] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3020,7 +3228,7 @@ module Aws::SWF
     #   Description of the error that may assist in diagnostics.
     #
     # @option params [String] :details
-    #   *Optional.* Detailed information about the failure.
+    #   Detailed information about the failure.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3057,7 +3265,8 @@ module Aws::SWF
     # policies to be as readable as possible, you can express permissions on
     # decisions as if they were actual API calls, including applying
     # conditions to some parameters. For more information, see [Using IAM to
-    # Manage Access to Amazon SWF Workflows][1].
+    # Manage Access to Amazon SWF Workflows][1] in the *Amazon SWF Developer
+    # Guide*.
     #
     #
     #
@@ -3073,7 +3282,7 @@ module Aws::SWF
     #
     # @option params [Array<Types::Decision>] :decisions
     #   The list of decisions (possibly empty) made by the decider while
-    #   processing this decision task. See the docs for the decision structure
+    #   processing this decision task. See the docs for the Decision structure
     #   for details.
     #
     # @option params [String] :execution_context
@@ -3145,14 +3354,14 @@ module Aws::SWF
     #         },
     #         signal_external_workflow_execution_decision_attributes: {
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunIdOptional",
+    #           run_id: "WorkflowRunIdOptional",
     #           signal_name: "SignalName", # required
     #           input: "Data",
     #           control: "Data",
     #         },
     #         request_cancel_external_workflow_execution_decision_attributes: {
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunIdOptional",
+    #           run_id: "WorkflowRunIdOptional",
     #           control: "Data",
     #         },
     #         start_child_workflow_execution_decision_attributes: {
@@ -3176,6 +3385,7 @@ module Aws::SWF
     #         schedule_lambda_function_decision_attributes: {
     #           id: "FunctionId", # required
     #           name: "FunctionName", # required
+    #           control: "Data",
     #           input: "FunctionInput",
     #           start_to_close_timeout: "DurationInSecondsOptional",
     #         },
@@ -3197,9 +3407,16 @@ module Aws::SWF
     # recorded with the specified user defined signalName and input (if
     # provided).
     #
-    # <note> If a runId is not specified, then the `WorkflowExecutionSignaled` event is recorded in the history of the current open workflow with the matching workflowId in the domain.</note>
+    # <note markdown="1"> If a runId isn't specified, then the `WorkflowExecutionSignaled`
+    # event is recorded in the history of the current open workflow with the
+    # matching workflowId in the domain.
     #
-    # <note> If the specified workflow execution is not open, this method fails with `UnknownResource`.</note>
+    #  </note>
+    #
+    # <note markdown="1"> If the specified workflow execution isn't open, this method fails
+    # with `UnknownResource`.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -3208,16 +3425,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3247,7 +3466,7 @@ module Aws::SWF
     #   resp = client.signal_workflow_execution({
     #     domain: "DomainName", # required
     #     workflow_id: "WorkflowId", # required
-    #     run_id: "RunIdOptional",
+    #     run_id: "WorkflowRunIdOptional",
     #     signal_name: "SignalName", # required
     #     input: "Data",
     #   })
@@ -3271,27 +3490,37 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
+    #
     #   * `tagList.member.0`\: The key is `swf:tagList.member.0`.
+    #
     #   * `tagList.member.1`\: The key is `swf:tagList.member.1`.
+    #
     #   * `tagList.member.2`\: The key is `swf:tagList.member.2`.
+    #
     #   * `tagList.member.3`\: The key is `swf:tagList.member.3`.
+    #
     #   * `tagList.member.4`\: The key is `swf:tagList.member.4`.
+    #
     #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
+    #
     #   * `workflowType.name`\: String constraint. The key is
     #     `swf:workflowType.name`.
+    #
     #   * `workflowType.version`\: String constraint. The key is
     #     `swf:workflowType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3309,8 +3538,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [required, Types::WorkflowType] :workflow_type
     #   The type of the workflow to start.
@@ -3320,23 +3549,28 @@ module Aws::SWF
     #   workflow execution. This overrides the `defaultTaskList` specified
     #   when registering the workflow type.
     #
-    #   <note>A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task list for this workflow execution must be specified either as a
+    #   default for the workflow type or through this parameter. If neither
+    #   this parameter is set nor a default task list was specified at
+    #   registration time then a fault is returned.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
+    #   not contain the literal string `arn`.
     #
     # @option params [String] :task_priority
-    #   The task priority to use for this workflow execution. This will
-    #   override any default priority that was assigned when the workflow type
-    #   was registered. If not set, then the default task priority for the
-    #   workflow type will be used. Valid values are integers that range from
+    #   The task priority to use for this workflow execution. This overrides
+    #   any default priority that was assigned when the workflow type was
+    #   registered. If not set, then the default task priority for the
+    #   workflow type is used. Valid values are integers that range from
     #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3354,12 +3588,17 @@ module Aws::SWF
     #   workflow type.
     #
     #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. Exceeding this limit will cause the workflow execution to time
+    #   to `0`. Exceeding this limit causes the workflow execution to time
     #   out. Unlike some of the other timeout parameters in Amazon SWF, you
     #   cannot specify a value of "NONE" for this timeout; there is a
     #   one-year max limit on the time that a workflow execution can run.
     #
-    #   <note> An execution start-to-close timeout must be specified either through this parameter or as a default when the workflow type is registered. If neither this parameter nor a default execution start-to-close timeout is specified, a fault is returned.</note>
+    #   <note markdown="1"> An execution start-to-close timeout must be specified either through
+    #   this parameter or as a default when the workflow type is registered.
+    #   If neither this parameter nor a default execution start-to-close
+    #   timeout is specified, a fault is returned.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :tag_list
     #   The list of tags to associate with the workflow execution. You can
@@ -3373,10 +3612,16 @@ module Aws::SWF
     #   `defaultTaskStartToCloseTimout` specified when registering the
     #   workflow type using RegisterWorkflowType.
     #
-    #   The duration is specified in seconds; an integer greater than or equal
-    #   to 0. The value "NONE" can be used to specify unlimited duration.
+    #   The duration is specified in seconds, an integer greater than or equal
+    #   to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task start-to-close timeout for this workflow execution must be
+    #   specified either as a default for the workflow type or through this
+    #   parameter. If neither this parameter is set nor a default task
+    #   start-to-close timeout was specified at registration time then a fault
+    #   is returned.
+    #
+    #    </note>
     #
     # @option params [String] :child_policy
     #   If set, specifies the policy to use for the child workflow executions
@@ -3387,21 +3632,38 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for each
-    #     child execution by recording a `WorkflowExecutionCancelRequested`
-    #     event in its history. It is up to the decider to take appropriate
-    #     actions when it receives an execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event in
+    #     its history. It is up to the decider to take appropriate actions
+    #     when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either as
+    #   a default for the workflow type or through this parameter. If neither
+    #   this parameter is set nor a default child policy was specified at
+    #   registration time then a fault is returned.
+    #
+    #    </note>
     #
     # @option params [String] :lambda_role
-    #   The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda
-    #   functions.
+    #   The IAM role to attach to this workflow execution.
     #
-    #   <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>
+    #   <note markdown="1"> Executions of this workflow type need IAM roles to invoke Lambda
+    #   functions. If you don't attach an IAM role, any attempt to schedule a
+    #   Lambda task fails. This results in a `ScheduleLambdaFunctionFailed`
+    #   history event. For more information, see
+    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #
     # @return [Types::Run] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3448,9 +3710,17 @@ module Aws::SWF
     # If the identified workflow execution was in progress, it is terminated
     # immediately.
     #
-    # <note> If a runId is not specified, then the `WorkflowExecutionTerminated` event is recorded in the history of the current open workflow with the matching workflowId in the domain.</note>
+    # <note markdown="1"> If a runId isn't specified, then the `WorkflowExecutionTerminated`
+    # event is recorded in the history of the current open workflow with the
+    # matching workflowId in the domain.
     #
-    # <note> You should consider using RequestCancelWorkflowExecution action instead because it allows the workflow to gracefully close while TerminateWorkflowExecution does not.</note>
+    #  </note>
+    #
+    # <note markdown="1"> You should consider using RequestCancelWorkflowExecution action
+    # instead because it allows the workflow to gracefully close while
+    # TerminateWorkflowExecution doesn't.
+    #
+    #  </note>
     #
     # **Access Control**
     #
@@ -3459,16 +3729,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3484,11 +3756,10 @@ module Aws::SWF
     #   The runId of the workflow execution to terminate.
     #
     # @option params [String] :reason
-    #   *Optional.* A descriptive reason for terminating the workflow
-    #   execution.
+    #   A descriptive reason for terminating the workflow execution.
     #
     # @option params [String] :details
-    #   *Optional.* Details for terminating the workflow execution.
+    #   Details for terminating the workflow execution.
     #
     # @option params [String] :child_policy
     #   If set, specifies the policy to use for the child workflow executions
@@ -3498,15 +3769,22 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for each
-    #     child execution by recording a `WorkflowExecutionCancelRequested`
-    #     event in its history. It is up to the decider to take appropriate
-    #     actions when it receives an execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event in
+    #     its history. It is up to the decider to take appropriate actions
+    #     when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either as
+    #   a default for the workflow type or through this parameter. If neither
+    #   this parameter is set nor a default child policy was specified at
+    #   registration time then a fault is returned.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3515,7 +3793,7 @@ module Aws::SWF
     #   resp = client.terminate_workflow_execution({
     #     domain: "DomainName", # required
     #     workflow_id: "WorkflowId", # required
-    #     run_id: "RunIdOptional",
+    #     run_id: "WorkflowRunIdOptional",
     #     reason: "TerminateReason",
     #     details: "Data",
     #     child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
@@ -3541,7 +3819,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

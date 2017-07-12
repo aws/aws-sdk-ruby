@@ -83,7 +83,7 @@ module Aws::AutoScaling
     end
 
     # The amount of time, in seconds, after a scaling activity completes
-    # before any further dynamic scaling activities can start.
+    # before any further trigger-related scaling activities can start.
     # @return [Integer]
     def cooldown
       data.cooldown
@@ -114,6 +114,12 @@ module Aws::AutoScaling
     # @return [Array<Types::Alarm>]
     def alarms
       data.alarms
+    end
+
+    # A target tracking policy.
+    # @return [Types::TargetTrackingConfiguration]
+    def target_tracking_configuration
+      data.target_tracking_configuration
     end
 
     # @!endgroup

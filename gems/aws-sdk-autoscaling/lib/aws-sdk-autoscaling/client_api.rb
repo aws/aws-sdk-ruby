@@ -55,6 +55,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType = Shapes::StructureShape.new(name: 'CreateAutoScalingGroupType')
     CreateLaunchConfigurationType = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationType')
     CreateOrUpdateTagsType = Shapes::StructureShape.new(name: 'CreateOrUpdateTagsType')
+    CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
     DeleteAutoScalingGroupType = Shapes::StructureShape.new(name: 'DeleteAutoScalingGroupType')
     DeleteLifecycleHookAnswer = Shapes::StructureShape.new(name: 'DeleteLifecycleHookAnswer')
     DeleteLifecycleHookType = Shapes::StructureShape.new(name: 'DeleteLifecycleHookType')
@@ -88,6 +89,7 @@ module Aws::AutoScaling
     DetachLoadBalancersResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancersResultType')
     DetachLoadBalancersType = Shapes::StructureShape.new(name: 'DetachLoadBalancersType')
     DisableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'DisableMetricsCollectionQuery')
+    DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     Ebs = Shapes::StructureShape.new(name: 'Ebs')
     EbsOptimized = Shapes::BooleanShape.new(name: 'EbsOptimized')
     EnableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'EnableMetricsCollectionQuery')
@@ -136,9 +138,18 @@ module Aws::AutoScaling
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     MetricCollectionType = Shapes::StructureShape.new(name: 'MetricCollectionType')
     MetricCollectionTypes = Shapes::ListShape.new(name: 'MetricCollectionTypes')
+    MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
+    MetricDimensionName = Shapes::StringShape.new(name: 'MetricDimensionName')
+    MetricDimensionValue = Shapes::StringShape.new(name: 'MetricDimensionValue')
+    MetricDimensions = Shapes::ListShape.new(name: 'MetricDimensions')
     MetricGranularityType = Shapes::StructureShape.new(name: 'MetricGranularityType')
     MetricGranularityTypes = Shapes::ListShape.new(name: 'MetricGranularityTypes')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricNamespace = Shapes::StringShape.new(name: 'MetricNamespace')
     MetricScale = Shapes::FloatShape.new(name: 'MetricScale')
+    MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
+    MetricType = Shapes::StringShape.new(name: 'MetricType')
+    MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MinAdjustmentMagnitude = Shapes::IntegerShape.new(name: 'MinAdjustmentMagnitude')
     MinAdjustmentStep = Shapes::IntegerShape.new(name: 'MinAdjustmentStep')
@@ -154,6 +165,7 @@ module Aws::AutoScaling
     PolicyIncrement = Shapes::IntegerShape.new(name: 'PolicyIncrement')
     PolicyNames = Shapes::ListShape.new(name: 'PolicyNames')
     PolicyTypes = Shapes::ListShape.new(name: 'PolicyTypes')
+    PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     ProcessNames = Shapes::ListShape.new(name: 'ProcessNames')
     ProcessType = Shapes::StructureShape.new(name: 'ProcessType')
     Processes = Shapes::ListShape.new(name: 'Processes')
@@ -200,6 +212,7 @@ module Aws::AutoScaling
     Tags = Shapes::ListShape.new(name: 'Tags')
     TagsType = Shapes::StructureShape.new(name: 'TagsType')
     TargetGroupARNs = Shapes::ListShape.new(name: 'TargetGroupARNs')
+    TargetTrackingConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingConfiguration')
     TerminateInstanceInAutoScalingGroupType = Shapes::StructureShape.new(name: 'TerminateInstanceInAutoScalingGroupType')
     TerminationPolicies = Shapes::ListShape.new(name: 'TerminationPolicies')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
@@ -382,6 +395,13 @@ module Aws::AutoScaling
 
     CreateOrUpdateTagsType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     CreateOrUpdateTagsType.struct_class = Types::CreateOrUpdateTagsType
+
+    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
+    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "Statistic"))
+    CustomizedMetricSpecification.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    CustomizedMetricSpecification.struct_class = Types::CustomizedMetricSpecification
 
     DeleteAutoScalingGroupType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     DeleteAutoScalingGroupType.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location_name: "ForceDelete"))
@@ -652,6 +672,12 @@ module Aws::AutoScaling
 
     MetricCollectionTypes.member = Shapes::ShapeRef.new(shape: MetricCollectionType)
 
+    MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
+    MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
+    MetricDimension.struct_class = Types::MetricDimension
+
+    MetricDimensions.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
     MetricGranularityType.add_member(:granularity, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Granularity"))
     MetricGranularityType.struct_class = Types::MetricGranularityType
 
@@ -671,11 +697,16 @@ module Aws::AutoScaling
     PoliciesType.struct_class = Types::PoliciesType
 
     PolicyARNType.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "PolicyARN"))
+    PolicyARNType.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     PolicyARNType.struct_class = Types::PolicyARNType
 
     PolicyNames.member = Shapes::ShapeRef.new(shape: ResourceName)
 
     PolicyTypes.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen64)
+
+    PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: MetricType, required: true, location_name: "PredefinedMetricType"))
+    PredefinedMetricSpecification.add_member(:resource_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "ResourceLabel"))
+    PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
 
     ProcessNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -707,7 +738,7 @@ module Aws::AutoScaling
     PutScalingPolicyType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
     PutScalingPolicyType.add_member(:policy_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "PolicyName"))
     PutScalingPolicyType.add_member(:policy_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "PolicyType"))
-    PutScalingPolicyType.add_member(:adjustment_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AdjustmentType"))
+    PutScalingPolicyType.add_member(:adjustment_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AdjustmentType"))
     PutScalingPolicyType.add_member(:min_adjustment_step, Shapes::ShapeRef.new(shape: MinAdjustmentStep, deprecated: true, location_name: "MinAdjustmentStep"))
     PutScalingPolicyType.add_member(:min_adjustment_magnitude, Shapes::ShapeRef.new(shape: MinAdjustmentMagnitude, location_name: "MinAdjustmentMagnitude"))
     PutScalingPolicyType.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: PolicyIncrement, location_name: "ScalingAdjustment"))
@@ -715,6 +746,7 @@ module Aws::AutoScaling
     PutScalingPolicyType.add_member(:metric_aggregation_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "MetricAggregationType"))
     PutScalingPolicyType.add_member(:step_adjustments, Shapes::ShapeRef.new(shape: StepAdjustments, location_name: "StepAdjustments"))
     PutScalingPolicyType.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: EstimatedInstanceWarmup, location_name: "EstimatedInstanceWarmup"))
+    PutScalingPolicyType.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
     PutScalingPolicyType.struct_class = Types::PutScalingPolicyType
 
     PutScheduledUpdateGroupActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
@@ -751,6 +783,7 @@ module Aws::AutoScaling
     ScalingPolicy.add_member(:metric_aggregation_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "MetricAggregationType"))
     ScalingPolicy.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: EstimatedInstanceWarmup, location_name: "EstimatedInstanceWarmup"))
     ScalingPolicy.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
+    ScalingPolicy.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
     ScalingProcessQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
@@ -832,6 +865,12 @@ module Aws::AutoScaling
     TagsType.struct_class = Types::TagsType
 
     TargetGroupARNs.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen511)
+
+    TargetTrackingConfiguration.add_member(:predefined_metric_specification, Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "PredefinedMetricSpecification"))
+    TargetTrackingConfiguration.add_member(:customized_metric_specification, Shapes::ShapeRef.new(shape: CustomizedMetricSpecification, location_name: "CustomizedMetricSpecification"))
+    TargetTrackingConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
+    TargetTrackingConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
+    TargetTrackingConfiguration.struct_class = Types::TargetTrackingConfiguration
 
     TerminateInstanceInAutoScalingGroupType.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
     TerminateInstanceInAutoScalingGroupType.add_member(:should_decrement_desired_capacity, Shapes::ShapeRef.new(shape: ShouldDecrementDesiredCapacity, required: true, location_name: "ShouldDecrementDesiredCapacity"))
@@ -937,6 +976,7 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseFault)
       end)
 
       api.add_operation(:delete_auto_scaling_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1003,6 +1043,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: DeleteTagsType)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseFault)
       end)
 
       api.add_operation(:describe_account_limits, Seahorse::Model::Operation.new.tap do |o|

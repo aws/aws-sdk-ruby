@@ -48,7 +48,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskCancelRequested` event.
+    # Provides the details of the `ActivityTaskCancelRequested` event.
     #
     # @!attribute [rw] decision_task_completed_event_id
     #   The ID of the `DecisionTaskCompleted` event corresponding to the
@@ -68,10 +68,10 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskCanceled` event.
+    # Provides the details of the `ActivityTaskCanceled` event.
     #
     # @!attribute [rw] details
-    #   Details of the cancellation (if any).
+    #   Details of the cancellation.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_event_id
@@ -103,10 +103,10 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskCompleted` event.
+    # Provides the details of the `ActivityTaskCompleted` event.
     #
     # @!attribute [rw] result
-    #   The results of the activity task (if any).
+    #   The results of the activity task.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_event_id
@@ -130,14 +130,14 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskFailed` event.
+    # Provides the details of the `ActivityTaskFailed` event.
     #
     # @!attribute [rw] reason
-    #   The reason provided for the failure (if any).
+    #   The reason provided for the failure.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   The details of the failure (if any).
+    #   The details of the failure.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_event_id
@@ -162,7 +162,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskScheduled` event.
+    # Provides the details of the `ActivityTaskScheduled` event.
     #
     # @!attribute [rw] activity_type
     #   The type of the activity task.
@@ -177,9 +177,8 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks. This data is not sent to the
-    #   activity.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks. This data isn't sent to the activity.
     #   @return [String]
     #
     # @!attribute [rw] schedule_to_start_timeout
@@ -201,16 +200,16 @@ module Aws::SWF
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* The priority to assign to the scheduled activity task.
-    #   If set, this will override any default priority value that was
-    #   assigned when the activity type was registered.
+    #   The priority to assign to the scheduled activity task. If set, this
+    #   overrides any default priority value that was assigned when the
+    #   activity type was registered.
     #
     #   Valid values are integers that range from Java's
     #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -229,7 +228,7 @@ module Aws::SWF
     #   report progress by calling RecordActivityTaskHeartbeat. If the
     #   timeout is exceeded, the activity task is automatically timed out.
     #   If the worker subsequently attempts to record a heartbeat or return
-    #   a result, it will be ignored.
+    #   a result, it is ignored.
     #   @return [String]
     #
     class ActivityTaskScheduledEventAttributes < Struct.new(
@@ -247,7 +246,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskStarted` event.
+    # Provides the details of the `ActivityTaskStarted` event.
     #
     # @!attribute [rw] identity
     #   Identity of the worker that was assigned this task. This aids
@@ -279,7 +278,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ActivityTaskTimedOut` event.
+    # Provides the details of the `ActivityTaskTimedOut` event.
     #
     # @!attribute [rw] timeout_type
     #   The type of the timeout that caused this event.
@@ -325,13 +324,19 @@ module Aws::SWF
     # @!attribute [rw] name
     #   The name of this activity.
     #
-    #   <note>The combination of activity type name and version must be unique within a domain.</note>
+    #   <note markdown="1"> The combination of activity type name and version must be unique
+    #   within a domain.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version of this activity.
     #
-    #   <note>The combination of activity type name and version must be unique with in a domain.</note>
+    #   <note markdown="1"> The combination of activity type name and version must be unique
+    #   with in a domain.
+    #
+    #    </note>
     #   @return [String]
     #
     class ActivityType < Struct.new(
@@ -343,54 +348,51 @@ module Aws::SWF
     # Configuration settings registered with the activity type.
     #
     # @!attribute [rw] default_task_start_to_close_timeout
-    #   *Optional.* The default maximum duration for tasks of an activity
-    #   type specified when registering the activity type. You can override
-    #   this default when scheduling a task through the
-    #   `ScheduleActivityTask` decision.
+    #   The default maximum duration for tasks of an activity type specified
+    #   when registering the activity type. You can override this default
+    #   when scheduling a task through the `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_heartbeat_timeout
-    #   *Optional.* The default maximum time, in seconds, before which a
-    #   worker processing a task must report progress by calling
+    #   The default maximum time, in seconds, before which a worker
+    #   processing a task must report progress by calling
     #   RecordActivityTaskHeartbeat.
     #
     #   You can specify this value only when *registering* an activity type.
     #   The registered default value can be overridden when you schedule a
-    #   task through the `ScheduleActivityTask` decision. If the activity
+    #   task through the `ScheduleActivityTask` Decision. If the activity
     #   worker subsequently attempts to record a heartbeat or returns a
     #   result, the activity worker receives an `UnknownResource` fault. In
     #   this case, Amazon SWF no longer considers the activity task to be
     #   valid; the activity worker should clean up the activity task.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_list
-    #   *Optional.* The default task list specified for this activity type
-    #   at registration. This default is used if a task list is not provided
+    #   The default task list specified for this activity type at
+    #   registration. This default is used if a task list isn't provided
     #   when a task is scheduled through the `ScheduleActivityTask`
-    #   decision. You can override the default registered task list when
-    #   scheduling a task through the `ScheduleActivityTask` decision.
+    #   Decision. You can override the default registered task list when
+    #   scheduling a task through the `ScheduleActivityTask` Decision.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] default_task_priority
-    #   *Optional.* The default task priority for tasks of this activity
-    #   type, specified at registration. If not set, then "0" will be used
-    #   as the default priority. This default can be overridden when
-    #   scheduling an activity task.
+    #   The default task priority for tasks of this activity type, specified
+    #   at registration. If not set, then `0` is used as the default
+    #   priority. This default can be overridden when scheduling an activity
+    #   task.
     #
     #   Valid values are integers that range from Java's
     #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -398,25 +400,23 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] default_task_schedule_to_start_timeout
-    #   *Optional.* The default maximum duration, specified when registering
-    #   the activity type, that a task of an activity type can wait before
-    #   being assigned to a worker. You can override this default when
-    #   scheduling a task through the `ScheduleActivityTask` decision.
+    #   The default maximum duration, specified when registering the
+    #   activity type, that a task of an activity type can wait before being
+    #   assigned to a worker. You can override this default when scheduling
+    #   a task through the `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_schedule_to_close_timeout
-    #   *Optional.* The default maximum duration, specified when registering
-    #   the activity type, for tasks of this activity type. You can override
+    #   The default maximum duration, specified when registering the
+    #   activity type, for tasks of this activity type. You can override
     #   this default when scheduling a task through the
-    #   `ScheduleActivityTask` decision.
+    #   `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     class ActivityTypeConfiguration < Struct.new(
@@ -437,9 +437,10 @@ module Aws::SWF
     #   The status of activity type (returned in the ActivityTypeInfo
     #   structure) can be one of the following.
     #
-    #   * **REGISTERED**\: The type is registered and available. Workers
+    #   * `REGISTERED` – The type is registered and available. Workers
     #     supporting this type should be running.
-    #   * **DEPRECATED**\: The type was deprecated using
+    #
+    #   * `DEPRECATED` – The type was deprecated using
     #     DeprecateActivityType, but is still in use. You should keep
     #     workers supporting this type running. You cannot create new tasks
     #     of this type.
@@ -510,7 +511,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CancelTimer` decision.
+    # Provides the details of the `CancelTimer` decision.
     #
     # **Access Control**
     #
@@ -519,16 +520,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -542,7 +545,7 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] timer_id
-    #   **Required.** The unique ID of the timer to cancel.
+    #   The unique ID of the timer to cancel.
     #   @return [String]
     #
     class CancelTimerDecisionAttributes < Struct.new(
@@ -550,7 +553,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CancelTimerFailed` event.
+    # Provides the details of the `CancelTimerFailed` event.
     #
     # @!attribute [rw] timer_id
     #   The timerId provided in the `CancelTimer` decision that failed.
@@ -560,7 +563,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -581,7 +589,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CancelWorkflowExecution` decision.
+    # Provides the details of the `CancelWorkflowExecution` decision.
     #
     # **Access Control**
     #
@@ -590,16 +598,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -613,7 +623,7 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] details
-    #   *Optional.* details of the cancellation.
+    #   Details of the cancellation.
     #   @return [String]
     #
     class CancelWorkflowExecutionDecisionAttributes < Struct.new(
@@ -621,13 +631,18 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CancelWorkflowExecutionFailed` event.
+    # Provides the details of the `CancelWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] cause
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -664,7 +679,7 @@ module Aws::SWF
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -686,7 +701,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ChildWorkflowExecutionCompleted` event.
+    # Provides the details of the `ChildWorkflowExecutionCompleted` event.
     #
     # @!attribute [rw] workflow_execution
     #   The child workflow execution that was completed.
@@ -697,12 +712,12 @@ module Aws::SWF
     #   @return [Types::WorkflowType]
     #
     # @!attribute [rw] result
-    #   The result of the child workflow execution (if any).
+    #   The result of the child workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -724,7 +739,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ChildWorkflowExecutionFailed` event.
+    # Provides the details of the `ChildWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] workflow_execution
     #   The child workflow execution that failed.
@@ -744,7 +759,7 @@ module Aws::SWF
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -767,7 +782,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ChildWorkflowExecutionStarted` event.
+    # Provides the details of the `ChildWorkflowExecutionStarted` event.
     #
     # @!attribute [rw] workflow_execution
     #   The child workflow execution that was started.
@@ -779,7 +794,7 @@ module Aws::SWF
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -792,7 +807,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ChildWorkflowExecutionTerminated` event.
+    # Provides the details of the `ChildWorkflowExecutionTerminated` event.
     #
     # @!attribute [rw] workflow_execution
     #   The child workflow execution that was terminated.
@@ -804,7 +819,7 @@ module Aws::SWF
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -825,7 +840,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ChildWorkflowExecutionTimedOut` event.
+    # Provides the details of the `ChildWorkflowExecutionTimedOut` event.
     #
     # @!attribute [rw] workflow_execution
     #   The child workflow execution that timed out.
@@ -842,7 +857,7 @@ module Aws::SWF
     #
     # @!attribute [rw] initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this child workflow execution. This information can be useful for
     #   diagnosing problems by tracing back the chain of events leading up
     #   to this event.
@@ -875,8 +890,8 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] status
-    #   **Required.** The close status that must match the close status of
-    #   an execution for it to meet the criteria of this filter.
+    #   The close status that must match the close status of an execution
+    #   for it to meet the criteria of this filter.
     #   @return [String]
     #
     class CloseStatusFilter < Struct.new(
@@ -884,7 +899,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CompleteWorkflowExecution` decision.
+    # Provides the details of the `CompleteWorkflowExecution` decision.
     #
     # **Access Control**
     #
@@ -893,16 +908,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -925,13 +942,18 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `CompleteWorkflowExecutionFailed` event.
+    # Provides the details of the `CompleteWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] cause
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -952,7 +974,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ContinueAsNewWorkflowExecution` decision.
+    # Provides the details of the `ContinueAsNewWorkflowExecution` decision.
     #
     # **Access Control**
     #
@@ -961,21 +983,26 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
-    #   * `tag`\: *Optional.*. A tag used to identify the workflow execution
-    #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
-    #   * `workflowType.version`\: String constraint. The key is
+    #
+    #   * `tag` – A tag used to identify the workflow execution
+    #
+    #   * `taskList` – String constraint. The key is `swf:taskList.name`.
+    #
+    #   * `workflowType.version` – String constraint. The key is
     #     `swf:workflowType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1007,27 +1034,33 @@ module Aws::SWF
     #   This overrides the `defaultExecutionStartToCloseTimeout` specified
     #   when registering the workflow type.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>An execution start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this field. If neither this field is set nor a default execution start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> An execution start-to-close timeout for this workflow execution must
+    #   be specified either as a default for the workflow type or through
+    #   this field. If neither this field is set nor a default execution
+    #   start-to-close timeout was specified at registration time then a
+    #   fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] task_list
-    #   Represents a task list.
+    #   The task list to use for the decisions of the new (continued)
+    #   workflow execution.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* The task priority that, if set, specifies the priority
-    #   for the decision tasks for this workflow execution. This overrides
-    #   the defaultTaskPriority specified when registering the workflow
-    #   type. Valid values are integers that range from Java's
+    #   The task priority that, if set, specifies the priority for the
+    #   decision tasks for this workflow execution. This overrides the
+    #   defaultTaskPriority specified when registering the workflow type.
+    #   Valid values are integers that range from Java's
     #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1040,11 +1073,16 @@ module Aws::SWF
     #   `defaultTaskStartToCloseTimout` specified when registering the
     #   workflow type using RegisterWorkflowType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A task start-to-close timeout for the new workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task start-to-close timeout for the new workflow execution must be
+    #   specified either as a default for the workflow type or through this
+    #   parameter. If neither this parameter is set nor a default task
+    #   start-to-close timeout was specified at registration time then a
+    #   fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -1056,16 +1094,22 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either
+    #   as a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default child policy was
+    #   specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -1076,13 +1120,11 @@ module Aws::SWF
     #   @return [Array<String>]
     #
     # @!attribute [rw] workflow_type_version
+    #   The version of the workflow to start.
     #   @return [String]
     #
     # @!attribute [rw] lambda_role
-    #   The ARN of an IAM role that authorizes Amazon SWF to invoke AWS
-    #   Lambda functions.
-    #
-    #   <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>
+    #   The IAM role to attach to the new (continued) execution.
     #   @return [String]
     #
     class ContinueAsNewWorkflowExecutionDecisionAttributes < Struct.new(
@@ -1098,13 +1140,19 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ContinueAsNewWorkflowExecutionFailed` event.
+    # Provides the details of the `ContinueAsNewWorkflowExecutionFailed`
+    # event.
     #
     # @!attribute [rw] cause
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -1161,35 +1209,53 @@ module Aws::SWF
     #   If specified, only workflow executions that meet the start time
     #   criteria of the filter are counted.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #   @return [Types::ExecutionTimeFilter]
     #
     # @!attribute [rw] close_time_filter
     #   If specified, only workflow executions that meet the close time
     #   criteria of the filter are counted.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #   @return [Types::ExecutionTimeFilter]
     #
     # @!attribute [rw] execution_filter
     #   If specified, only workflow executions matching the `WorkflowId` in
     #   the filter are counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::WorkflowExecutionFilter]
     #
     # @!attribute [rw] type_filter
     #   If specified, indicates the type of the workflow executions to be
     #   counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::WorkflowTypeFilter]
     #
     # @!attribute [rw] tag_filter
     #   If specified, only executions that have a tag that matches the
     #   filter are counted.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] close_status_filter
@@ -1197,7 +1263,11 @@ module Aws::SWF
     #   are counted. This filter has an affect only if `executionStatus` is
     #   specified as `CLOSED`.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::CloseStatusFilter]
     #
     class CountClosedWorkflowExecutionsInput < Struct.new(
@@ -1244,21 +1314,30 @@ module Aws::SWF
     # @!attribute [rw] type_filter
     #   Specifies the type of the workflow executions to be counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::WorkflowTypeFilter]
     #
     # @!attribute [rw] tag_filter
     #   If specified, only executions that have a tag that matches the
     #   filter are counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] execution_filter
     #   If specified, only workflow executions matching the `WorkflowId` in
     #   the filter are counted.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::WorkflowExecutionFilter]
     #
     class CountOpenWorkflowExecutionsInput < Struct.new(
@@ -1321,44 +1400,54 @@ module Aws::SWF
     # Specifies a decision made by the decider. A decision can be one of
     # these types:
     #
-    # * **CancelTimer**\: cancels a previously started timer and records a
+    # * `CancelTimer` – Cancels a previously started timer and records a
     #   `TimerCanceled` event in the history.
-    # * **CancelWorkflowExecution**\: closes the workflow execution and
+    #
+    # * `CancelWorkflowExecution` – Closes the workflow execution and
     #   records a `WorkflowExecutionCanceled` event in the history.
-    # * **CompleteWorkflowExecution**\: closes the workflow execution and
+    #
+    # * `CompleteWorkflowExecution` – Closes the workflow execution and
     #   records a `WorkflowExecutionCompleted` event in the history .
-    # * **ContinueAsNewWorkflowExecution**\: closes the workflow execution
-    #   and starts a new workflow execution of the same type using the same
-    #   workflow ID and a unique run ID. A `WorkflowExecutionContinuedAsNew`
+    #
+    # * `ContinueAsNewWorkflowExecution` – Closes the workflow execution and
+    #   starts a new workflow execution of the same type using the same
+    #   workflow ID and a unique run Id. A `WorkflowExecutionContinuedAsNew`
     #   event is recorded in the history.
-    # * **FailWorkflowExecution**\: closes the workflow execution and
-    #   records a `WorkflowExecutionFailed` event in the history.
-    # * **RecordMarker**\: records a `MarkerRecorded` event in the history.
+    #
+    # * `FailWorkflowExecution` – Closes the workflow execution and records
+    #   a `WorkflowExecutionFailed` event in the history.
+    #
+    # * `RecordMarker` – Records a `MarkerRecorded` event in the history.
     #   Markers can be used for adding custom information in the history for
-    #   instance to let deciders know that they do not need to look at the
+    #   instance to let deciders know that they don't need to look at the
     #   history beyond the marker event.
-    # * **RequestCancelActivityTask**\: attempts to cancel a previously
+    #
+    # * `RequestCancelActivityTask` – Attempts to cancel a previously
     #   scheduled activity task. If the activity task was scheduled but has
-    #   not been assigned to a worker, then it will be canceled. If the
-    #   activity task was already assigned to a worker, then the worker will
-    #   be informed that cancellation has been requested in the response to
+    #   not been assigned to a worker, then it is canceled. If the activity
+    #   task was already assigned to a worker, then the worker is informed
+    #   that cancellation has been requested in the response to
     #   RecordActivityTaskHeartbeat.
-    # * **RequestCancelExternalWorkflowExecution**\: requests that a request
+    #
+    # * `RequestCancelExternalWorkflowExecution` – Requests that a request
     #   be made to cancel the specified external workflow execution and
     #   records a `RequestCancelExternalWorkflowExecutionInitiated` event in
     #   the history.
-    # * **ScheduleActivityTask**\: schedules an activity task.
-    # * **ScheduleLambdaFunction**\: schedules a AWS Lambda function.
-    # * **SignalExternalWorkflowExecution**\: requests a signal to be
+    #
+    # * `ScheduleActivityTask` – Schedules an activity task.
+    #
+    # * `SignalExternalWorkflowExecution` – Requests a signal to be
     #   delivered to the specified external workflow execution and records a
     #   `SignalExternalWorkflowExecutionInitiated` event in the history.
-    # * **StartChildWorkflowExecution**\: requests that a child workflow
+    #
+    # * `StartChildWorkflowExecution` – Requests that a child workflow
     #   execution be started and records a
     #   `StartChildWorkflowExecutionInitiated` event in the history. The
     #   child workflow execution is a separate workflow execution with its
     #   own history.
-    # * **StartTimer**\: starts a timer for this workflow execution and
-    #   records a `TimerStarted` event in the history. This timer will fire
+    #
+    # * `StartTimer` – Starts a timer for this workflow execution and
+    #   records a `TimerStarted` event in the history. This timer fires
     #   after the specified delay and record a `TimerFired` event.
     #
     # **Access Control**
@@ -1368,7 +1457,8 @@ module Aws::SWF
     # returned by this action as if they were members of the API. Treating
     # decisions as a pseudo API maintains a uniform conceptual model and
     # helps keep policies readable. For details and example IAM policies,
-    # see [Using IAM to Manage Access to Amazon SWF Workflows][1].
+    # see [Using IAM to Manage Access to Amazon SWF Workflows][1] in the
+    # *Amazon SWF Developer Guide*.
     #
     # **Decision Failure**
     #
@@ -1376,54 +1466,62 @@ module Aws::SWF
     #
     # * The ordering of decisions should follow a logical flow. Some
     #   decisions might not make sense in the current context of the
-    #   workflow execution and will therefore fail.
+    #   workflow execution and therefore fails.
+    #
     # * A limit on your account was reached.
+    #
     # * The decision lacks sufficient permissions.
     #
     # One of the following events might be added to the history to indicate
-    # an error. The event attribute's **cause** parameter indicates the
-    # cause. If **cause** is set to OPERATION\_NOT\_PERMITTED, the decision
+    # an error. The event attribute's `cause` parameter indicates the
+    # cause. If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision
     # failed because it lacked sufficient permissions. For details and
     # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
-    # Workflows][1].
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
-    # * **ScheduleActivityTaskFailed**\: a ScheduleActivityTask decision
+    # * `ScheduleActivityTaskFailed` – A `ScheduleActivityTask` decision
     #   failed. This could happen if the activity type specified in the
-    #   decision is not registered, is in a deprecated state, or the
-    #   decision is not properly configured.
-    # * **ScheduleLambdaFunctionFailed**\: a ScheduleLambdaFunctionFailed
-    #   decision failed. This could happen if the AWS Lambda function
-    #   specified in the decision does not exist, or the AWS Lambda
-    #   service's limits are exceeded.
-    # * **RequestCancelActivityTaskFailed**\: a RequestCancelActivityTask
+    #   decision isn't registered, is in a deprecated state, or the
+    #   decision isn't properly configured.
+    #
+    # * `RequestCancelActivityTaskFailed` – A `RequestCancelActivityTask`
     #   decision failed. This could happen if there is no open activity task
     #   with the specified activityId.
-    # * **StartTimerFailed**\: a StartTimer decision failed. This could
+    #
+    # * `StartTimerFailed` – A `StartTimer` decision failed. This could
     #   happen if there is another open timer with the same timerId.
-    # * **CancelTimerFailed**\: a CancelTimer decision failed. This could
+    #
+    # * `CancelTimerFailed` – A `CancelTimer` decision failed. This could
     #   happen if there is no open timer with the specified timerId.
-    # * **StartChildWorkflowExecutionFailed**\: a
-    #   StartChildWorkflowExecution decision failed. This could happen if
-    #   the workflow type specified is not registered, is deprecated, or the
-    #   decision is not properly configured.
-    # * **SignalExternalWorkflowExecutionFailed**\: a
-    #   SignalExternalWorkflowExecution decision failed. This could happen
+    #
+    # * `StartChildWorkflowExecutionFailed` – A
+    #   `StartChildWorkflowExecution` decision failed. This could happen if
+    #   the workflow type specified isn't registered, is deprecated, or the
+    #   decision isn't properly configured.
+    #
+    # * `SignalExternalWorkflowExecutionFailed` – A
+    #   `SignalExternalWorkflowExecution` decision failed. This could happen
     #   if the `workflowID` specified in the decision was incorrect.
-    # * **RequestCancelExternalWorkflowExecutionFailed**\: a
-    #   RequestCancelExternalWorkflowExecution decision failed. This could
+    #
+    # * `RequestCancelExternalWorkflowExecutionFailed` – A
+    #   `RequestCancelExternalWorkflowExecution` decision failed. This could
     #   happen if the `workflowID` specified in the decision was incorrect.
-    # * **CancelWorkflowExecutionFailed**\: a CancelWorkflowExecution
+    #
+    # * `CancelWorkflowExecutionFailed` – A `CancelWorkflowExecution`
     #   decision failed. This could happen if there is an unhandled decision
     #   task pending in the workflow execution.
-    # * **CompleteWorkflowExecutionFailed**\: a CompleteWorkflowExecution
+    #
+    # * `CompleteWorkflowExecutionFailed` – A `CompleteWorkflowExecution`
     #   decision failed. This could happen if there is an unhandled decision
     #   task pending in the workflow execution.
-    # * **ContinueAsNewWorkflowExecutionFailed**\: a
-    #   ContinueAsNewWorkflowExecution decision failed. This could happen if
-    #   there is an unhandled decision task pending in the workflow
+    #
+    # * `ContinueAsNewWorkflowExecutionFailed` – A
+    #   `ContinueAsNewWorkflowExecution` decision failed. This could happen
+    #   if there is an unhandled decision task pending in the workflow
     #   execution or the ContinueAsNewWorkflowExecution decision was not
     #   configured correctly.
-    # * **FailWorkflowExecutionFailed**\: a FailWorkflowExecution decision
+    #
+    # * `FailWorkflowExecutionFailed` – A `FailWorkflowExecution` decision
     #   failed. This could happen if there is an unhandled decision task
     #   pending in the workflow execution.
     #
@@ -1432,27 +1530,51 @@ module Aws::SWF
     # cause field in the event structure for the error event indicates the
     # cause of the error.
     #
-    # <note>A workflow execution may be closed by the decider by returning one of the following decisions when completing a decision task: `CompleteWorkflowExecution`, `FailWorkflowExecution`, `CancelWorkflowExecution` and `ContinueAsNewWorkflowExecution`. An UnhandledDecision fault will be returned if a workflow closing decision is specified and a signal or activity event had been added to the history while the decision task was being performed by the decider. Unlike the above situations which are logic issues, this fault is always possible because of race conditions in a distributed system. The right action here is to call RespondDecisionTaskCompleted without any decisions. This would result in another decision task with these new events included in the history. The decider should handle the new events and may decide to close the workflow execution.</note>
+    # <note markdown="1"> A workflow execution may be closed by the decider by returning one of
+    # the following decisions when completing a decision task:
+    # `CompleteWorkflowExecution`, `FailWorkflowExecution`,
+    # `CancelWorkflowExecution` and `ContinueAsNewWorkflowExecution`. An
+    # `UnhandledDecision` fault is returned if a workflow closing decision
+    # is specified and a signal or activity event had been added to the
+    # history while the decision task was being performed by the decider.
+    # Unlike the above situations which are logic issues, this fault is
+    # always possible because of race conditions in a distributed system.
+    # The right action here is to call RespondDecisionTaskCompleted without
+    # any decisions. This would result in another decision task with these
+    # new events included in the history. The decider should handle the new
+    # events and may decide to close the workflow execution.
     #
-    # **How to code a decision**
+    #  </note>
+    #
+    # **How to Code a Decision**
     #
     # You code a decision by first setting the decision type field to one of
     # the above decision values, and then set the corresponding attributes
     # field shown below:
     #
-    # * ScheduleActivityTaskDecisionAttributes
-    # * ScheduleLambdaFunctionDecisionAttributes
-    # * RequestCancelActivityTaskDecisionAttributes
-    # * CompleteWorkflowExecutionDecisionAttributes
-    # * FailWorkflowExecutionDecisionAttributes
-    # * CancelWorkflowExecutionDecisionAttributes
-    # * ContinueAsNewWorkflowExecutionDecisionAttributes
-    # * RecordMarkerDecisionAttributes
-    # * StartTimerDecisionAttributes
-    # * CancelTimerDecisionAttributes
-    # * SignalExternalWorkflowExecutionDecisionAttributes
-    # * RequestCancelExternalWorkflowExecutionDecisionAttributes
-    # * StartChildWorkflowExecutionDecisionAttributes
+    # * ` ScheduleActivityTaskDecisionAttributes `
+    #
+    # * ` RequestCancelActivityTaskDecisionAttributes `
+    #
+    # * ` CompleteWorkflowExecutionDecisionAttributes `
+    #
+    # * ` FailWorkflowExecutionDecisionAttributes `
+    #
+    # * ` CancelWorkflowExecutionDecisionAttributes `
+    #
+    # * ` ContinueAsNewWorkflowExecutionDecisionAttributes `
+    #
+    # * ` RecordMarkerDecisionAttributes `
+    #
+    # * ` StartTimerDecisionAttributes `
+    #
+    # * ` CancelTimerDecisionAttributes `
+    #
+    # * ` SignalExternalWorkflowExecutionDecisionAttributes `
+    #
+    # * ` RequestCancelExternalWorkflowExecutionDecisionAttributes `
+    #
+    # * ` StartChildWorkflowExecutionDecisionAttributes `
     #
     #
     #
@@ -1520,14 +1642,14 @@ module Aws::SWF
     #         },
     #         signal_external_workflow_execution_decision_attributes: {
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunIdOptional",
+    #           run_id: "WorkflowRunIdOptional",
     #           signal_name: "SignalName", # required
     #           input: "Data",
     #           control: "Data",
     #         },
     #         request_cancel_external_workflow_execution_decision_attributes: {
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunIdOptional",
+    #           run_id: "WorkflowRunIdOptional",
     #           control: "Data",
     #         },
     #         start_child_workflow_execution_decision_attributes: {
@@ -1551,6 +1673,7 @@ module Aws::SWF
     #         schedule_lambda_function_decision_attributes: {
     #           id: "FunctionId", # required
     #           name: "FunctionName", # required
+    #           control: "Data",
     #           input: "FunctionInput",
     #           start_to_close_timeout: "DurationInSecondsOptional",
     #         },
@@ -1561,95 +1684,68 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] schedule_activity_task_decision_attributes
-    #   Provides details of the `ScheduleActivityTask` decision. It is not
-    #   set for other decision types.
+    #   Provides the details of the `ScheduleActivityTask` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::ScheduleActivityTaskDecisionAttributes]
     #
     # @!attribute [rw] request_cancel_activity_task_decision_attributes
-    #   Provides details of the `RequestCancelActivityTask` decision. It is
-    #   not set for other decision types.
+    #   Provides the details of the `RequestCancelActivityTask` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::RequestCancelActivityTaskDecisionAttributes]
     #
     # @!attribute [rw] complete_workflow_execution_decision_attributes
-    #   Provides details of the `CompleteWorkflowExecution` decision. It is
-    #   not set for other decision types.
+    #   Provides the details of the `CompleteWorkflowExecution` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::CompleteWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] fail_workflow_execution_decision_attributes
-    #   Provides details of the `FailWorkflowExecution` decision. It is not
-    #   set for other decision types.
+    #   Provides the details of the `FailWorkflowExecution` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::FailWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] cancel_workflow_execution_decision_attributes
-    #   Provides details of the `CancelWorkflowExecution` decision. It is
-    #   not set for other decision types.
+    #   Provides the details of the `CancelWorkflowExecution` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::CancelWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] continue_as_new_workflow_execution_decision_attributes
-    #   Provides details of the `ContinueAsNewWorkflowExecution` decision.
-    #   It is not set for other decision types.
+    #   Provides the details of the `ContinueAsNewWorkflowExecution`
+    #   decision. It isn't set for other decision types.
     #   @return [Types::ContinueAsNewWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] record_marker_decision_attributes
-    #   Provides details of the `RecordMarker` decision. It is not set for
-    #   other decision types.
+    #   Provides the details of the `RecordMarker` decision. It isn't set
+    #   for other decision types.
     #   @return [Types::RecordMarkerDecisionAttributes]
     #
     # @!attribute [rw] start_timer_decision_attributes
-    #   Provides details of the `StartTimer` decision. It is not set for
+    #   Provides the details of the `StartTimer` decision. It isn't set for
     #   other decision types.
     #   @return [Types::StartTimerDecisionAttributes]
     #
     # @!attribute [rw] cancel_timer_decision_attributes
-    #   Provides details of the `CancelTimer` decision. It is not set for
-    #   other decision types.
+    #   Provides the details of the `CancelTimer` decision. It isn't set
+    #   for other decision types.
     #   @return [Types::CancelTimerDecisionAttributes]
     #
     # @!attribute [rw] signal_external_workflow_execution_decision_attributes
-    #   Provides details of the `SignalExternalWorkflowExecution` decision.
-    #   It is not set for other decision types.
+    #   Provides the details of the `SignalExternalWorkflowExecution`
+    #   decision. It isn't set for other decision types.
     #   @return [Types::SignalExternalWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] request_cancel_external_workflow_execution_decision_attributes
-    #   Provides details of the `RequestCancelExternalWorkflowExecution`
-    #   decision. It is not set for other decision types.
+    #   Provides the details of the `RequestCancelExternalWorkflowExecution`
+    #   decision. It isn't set for other decision types.
     #   @return [Types::RequestCancelExternalWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] start_child_workflow_execution_decision_attributes
-    #   Provides details of the `StartChildWorkflowExecution` decision. It
-    #   is not set for other decision types.
+    #   Provides the details of the `StartChildWorkflowExecution` decision.
+    #   It isn't set for other decision types.
     #   @return [Types::StartChildWorkflowExecutionDecisionAttributes]
     #
     # @!attribute [rw] schedule_lambda_function_decision_attributes
-    #   Provides details of the `ScheduleLambdaFunction` decision.
-    #
-    #   **Access Control**
-    #
-    #   You can use IAM policies to control this decision's access to
-    #   Amazon SWF resources as follows:
-    #
-    #   * Use a `Resource` element with the domain name to limit the action
-    #     to only specified domains.
-    #   * Use an `Action` element to allow or deny permission to call this
-    #     action.
-    #   * Constrain the following parameters by using a `Condition` element
-    #     with the appropriate keys.
-    #     * `activityType.name`\: String constraint. The key is
-    #       `swf:activityType.name`.
-    #     * `activityType.version`\: String constraint. The key is
-    #       `swf:activityType.version`.
-    #     * `taskList`\: String constraint. The key is `swf:taskList.name`.
-    #
-    #   If the caller does not have sufficient permissions to invoke the
-    #   action, or the parameter values fall outside the specified
-    #   constraints, the action fails. The associated event attribute's
-    #   **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    #   details and example IAM policies, see [Using IAM to Manage Access to
-    #   Amazon SWF Workflows][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   Provides the details of the `ScheduleLambdaFunction` decision. It
+    #   isn't set for other decision types.
     #   @return [Types::ScheduleLambdaFunctionDecisionAttributes]
     #
     class Decision < Struct.new(
@@ -1725,7 +1821,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `DecisionTaskCompleted` event.
+    # Provides the details of the `DecisionTaskCompleted` event.
     #
     # @!attribute [rw] execution_context
     #   User defined context for the workflow execution.
@@ -1759,13 +1855,13 @@ module Aws::SWF
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* A task priority that, if set, specifies the priority for
-    #   this decision task. Valid values are integers that range from
-    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   A task priority that, if set, specifies the priority for this
+    #   decision task. Valid values are integers that range from Java's
+    #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -1774,11 +1870,10 @@ module Aws::SWF
     #
     # @!attribute [rw] start_to_close_timeout
     #   The maximum duration for this decision task. The task is considered
-    #   timed out if it does not completed within this duration.
+    #   timed out if it doesn't completed within this duration.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     class DecisionTaskScheduledEventAttributes < Struct.new(
@@ -1788,7 +1883,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `DecisionTaskStarted` event.
+    # Provides the details of the `DecisionTaskStarted` event.
     #
     # @!attribute [rw] identity
     #   Identity of the decider making the request. This enables diagnostic
@@ -1809,7 +1904,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `DecisionTaskTimedOut` event.
+    # Provides the details of the `DecisionTaskTimedOut` event.
     #
     # @!attribute [rw] timeout_type
     #   The type of timeout that expired before the decision task could be
@@ -1953,7 +2048,7 @@ module Aws::SWF
     #         domain: "DomainName", # required
     #         execution: { # required
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunId", # required
+    #           run_id: "WorkflowRunId", # required
     #         },
     #       }
     #
@@ -2010,11 +2105,13 @@ module Aws::SWF
     # Contains details of a domain.
     #
     # @!attribute [rw] domain_info
-    #   Contains general information about a domain.
+    #   The basic information about a domain, such as its name, status, and
+    #   description.
     #   @return [Types::DomainInfo]
     #
     # @!attribute [rw] configuration
-    #   Contains the configuration settings of a domain.
+    #   The domain configuration. Currently, this includes only the
+    #   domain's retention period.
     #   @return [Types::DomainConfiguration]
     #
     class DomainDetail < Struct.new(
@@ -2032,10 +2129,11 @@ module Aws::SWF
     # @!attribute [rw] status
     #   The status of the domain:
     #
-    #   * **REGISTERED**\: The domain is properly registered and available.
+    #   * `REGISTERED` – The domain is properly registered and available.
     #     You can use this domain for registering types and creating new
     #     workflow executions.
-    #   * **DEPRECATED**\: The domain was deprecated using DeprecateDomain,
+    #
+    #   * `DEPRECATED` – The domain was deprecated using DeprecateDomain,
     #     but is still in use. You should not create new workflow executions
     #     in this domain.
     #   @return [String]
@@ -2105,7 +2203,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ExternalWorkflowExecutionCancelRequested`
+    # Provides the details of the `ExternalWorkflowExecutionCancelRequested`
     # event.
     #
     # @!attribute [rw] workflow_execution
@@ -2127,7 +2225,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ExternalWorkflowExecutionSignaled` event.
+    # Provides the details of the `ExternalWorkflowExecutionSignaled` event.
     #
     # @!attribute [rw] workflow_execution
     #   The external workflow execution that the signal was delivered to.
@@ -2147,7 +2245,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `FailWorkflowExecution` decision.
+    # Provides the details of the `FailWorkflowExecution` decision.
     #
     # **Access Control**
     #
@@ -2156,16 +2254,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -2184,7 +2284,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   *Optional.* Details of the failure.
+    #   Details of the failure.
     #   @return [String]
     #
     class FailWorkflowExecutionDecisionAttributes < Struct.new(
@@ -2193,13 +2293,18 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `FailWorkflowExecutionFailed` event.
+    # Provides the details of the `FailWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] cause
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -2227,7 +2332,7 @@ module Aws::SWF
     #         domain: "DomainName", # required
     #         execution: { # required
     #           workflow_id: "WorkflowId", # required
-    #           run_id: "RunId", # required
+    #           run_id: "WorkflowRunId", # required
     #         },
     #         next_page_token: "PageToken",
     #         maximum_page_size: 1,
@@ -2253,7 +2358,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -2305,116 +2410,159 @@ module Aws::SWF
     # Event within a workflow execution. A history event can be one of these
     # types:
     #
-    # * **WorkflowExecutionStarted**\: The workflow execution was started.
-    # * **WorkflowExecutionCompleted**\: The workflow execution was closed
-    #   due to successful completion.
-    # * **WorkflowExecutionFailed**\: The workflow execution closed due to a
-    #   failure.
-    # * **WorkflowExecutionTimedOut**\: The workflow execution was closed
-    #   because a time out was exceeded.
-    # * **WorkflowExecutionCanceled**\: The workflow execution was
-    #   successfully canceled and closed.
-    # * **WorkflowExecutionTerminated**\: The workflow execution was
-    #   terminated.
-    # * **WorkflowExecutionContinuedAsNew**\: The workflow execution was
-    #   closed and a new execution of the same type was created with the
-    #   same workflowId.
-    # * **WorkflowExecutionCancelRequested**\: A request to cancel this
-    #   workflow execution was made.
-    # * **DecisionTaskScheduled**\: A decision task was scheduled for the
-    #   workflow execution.
-    # * **DecisionTaskStarted**\: The decision task was dispatched to a
-    #   decider.
-    # * **DecisionTaskCompleted**\: The decider successfully completed a
-    #   decision task by calling RespondDecisionTaskCompleted.
-    # * **DecisionTaskTimedOut**\: The decision task timed out.
-    # * **ActivityTaskScheduled**\: An activity task was scheduled for
-    #   execution.
-    # * **ScheduleActivityTaskFailed**\: Failed to process
-    #   ScheduleActivityTask decision. This happens when the decision is not
-    #   configured properly, for example the activity type specified is not
-    #   registered.
-    # * **ActivityTaskStarted**\: The scheduled activity task was dispatched
-    #   to a worker.
-    # * **ActivityTaskCompleted**\: An activity worker successfully
-    #   completed an activity task by calling RespondActivityTaskCompleted.
-    # * **ActivityTaskFailed**\: An activity worker failed an activity task
-    #   by calling RespondActivityTaskFailed.
-    # * **ActivityTaskTimedOut**\: The activity task timed out.
-    # * **ActivityTaskCanceled**\: The activity task was successfully
-    #   canceled.
-    # * **ActivityTaskCancelRequested**\: A `RequestCancelActivityTask`
+    # * `ActivityTaskCancelRequested` – A `RequestCancelActivityTask`
     #   decision was received by the system.
-    # * **RequestCancelActivityTaskFailed**\: Failed to process
-    #   RequestCancelActivityTask decision. This happens when the decision
-    #   is not configured properly.
-    # * **WorkflowExecutionSignaled**\: An external signal was received for
-    #   the workflow execution.
-    # * **MarkerRecorded**\: A marker was recorded in the workflow history
-    #   as the result of a `RecordMarker` decision.
-    # * **TimerStarted**\: A timer was started for the workflow execution
-    #   due to a `StartTimer` decision.
-    # * **StartTimerFailed**\: Failed to process StartTimer decision. This
-    #   happens when the decision is not configured properly, for example a
-    #   timer already exists with the specified timer ID.
-    # * **TimerFired**\: A timer, previously started for this workflow
-    #   execution, fired.
-    # * **TimerCanceled**\: A timer, previously started for this workflow
-    #   execution, was successfully canceled.
-    # * **CancelTimerFailed**\: Failed to process CancelTimer decision. This
-    #   happens when the decision is not configured properly, for example no
-    #   timer exists with the specified timer ID.
-    # * **StartChildWorkflowExecutionInitiated**\: A request was made to
-    #   start a child workflow execution.
-    # * **StartChildWorkflowExecutionFailed**\: Failed to process
-    #   StartChildWorkflowExecution decision. This happens when the decision
-    #   is not configured properly, for example the workflow type specified
-    #   is not registered.
-    # * **ChildWorkflowExecutionStarted**\: A child workflow execution was
-    #   successfully started.
-    # * **ChildWorkflowExecutionCompleted**\: A child workflow execution,
+    #
+    # * `ActivityTaskCanceled` – The activity task was successfully
+    #   canceled.
+    #
+    # * `ActivityTaskCompleted` – An activity worker successfully completed
+    #   an activity task by calling RespondActivityTaskCompleted.
+    #
+    # * `ActivityTaskFailed` – An activity worker failed an activity task by
+    #   calling RespondActivityTaskFailed.
+    #
+    # * `ActivityTaskScheduled` – An activity task was scheduled for
+    #   execution.
+    #
+    # * `ActivityTaskStarted` – The scheduled activity task was dispatched
+    #   to a worker.
+    #
+    # * `ActivityTaskTimedOut` – The activity task timed out.
+    #
+    # * `CancelTimerFailed` – Failed to process CancelTimer decision. This
+    #   happens when the decision isn't configured properly, for example no
+    #   timer exists with the specified timer Id.
+    #
+    # * `CancelWorkflowExecutionFailed` – A request to cancel a workflow
+    #   execution failed.
+    #
+    # * `ChildWorkflowExecutionCanceled` – A child workflow execution,
+    #   started by this workflow execution, was canceled and closed.
+    #
+    # * `ChildWorkflowExecutionCompleted` – A child workflow execution,
     #   started by this workflow execution, completed successfully and was
     #   closed.
-    # * **ChildWorkflowExecutionFailed**\: A child workflow execution,
-    #   started by this workflow execution, failed to complete successfully
-    #   and was closed.
-    # * **ChildWorkflowExecutionTimedOut**\: A child workflow execution,
-    #   started by this workflow execution, timed out and was closed.
-    # * **ChildWorkflowExecutionCanceled**\: A child workflow execution,
-    #   started by this workflow execution, was canceled and closed.
-    # * **ChildWorkflowExecutionTerminated**\: A child workflow execution,
+    #
+    # * `ChildWorkflowExecutionFailed` – A child workflow execution, started
+    #   by this workflow execution, failed to complete successfully and was
+    #   closed.
+    #
+    # * `ChildWorkflowExecutionStarted` – A child workflow execution was
+    #   successfully started.
+    #
+    # * `ChildWorkflowExecutionTerminated` – A child workflow execution,
     #   started by this workflow execution, was terminated.
-    # * **SignalExternalWorkflowExecutionInitiated**\: A request to signal
-    #   an external workflow was made.
-    # * **ExternalWorkflowExecutionSignaled**\: A signal, requested by this
-    #   workflow execution, was successfully delivered to the target
-    #   external workflow execution.
-    # * **SignalExternalWorkflowExecutionFailed**\: The request to signal an
-    #   external workflow execution failed.
-    # * **RequestCancelExternalWorkflowExecutionInitiated**\: A request was
-    #   made to request the cancellation of an external workflow execution.
-    # * **ExternalWorkflowExecutionCancelRequested**\: Request to cancel an
+    #
+    # * `ChildWorkflowExecutionTimedOut` – A child workflow execution,
+    #   started by this workflow execution, timed out and was closed.
+    #
+    # * `CompleteWorkflowExecutionFailed` – The workflow execution failed to
+    #   complete.
+    #
+    # * `ContinueAsNewWorkflowExecutionFailed` – The workflow execution
+    #   failed to complete after being continued as a new workflow
+    #   execution.
+    #
+    # * `DecisionTaskCompleted` – The decider successfully completed a
+    #   decision task by calling RespondDecisionTaskCompleted.
+    #
+    # * `DecisionTaskScheduled` – A decision task was scheduled for the
+    #   workflow execution.
+    #
+    # * `DecisionTaskStarted` – The decision task was dispatched to a
+    #   decider.
+    #
+    # * `DecisionTaskTimedOut` – The decision task timed out.
+    #
+    # * `ExternalWorkflowExecutionCancelRequested` – Request to cancel an
     #   external workflow execution was successfully delivered to the target
     #   execution.
-    # * **RequestCancelExternalWorkflowExecutionFailed**\: Request to cancel
+    #
+    # * `ExternalWorkflowExecutionSignaled` – A signal, requested by this
+    #   workflow execution, was successfully delivered to the target
+    #   external workflow execution.
+    #
+    # * `FailWorkflowExecutionFailed` – A request to mark a workflow
+    #   execution as failed, itself failed.
+    #
+    # * `MarkerRecorded` – A marker was recorded in the workflow history as
+    #   the result of a `RecordMarker` decision.
+    #
+    # * `RecordMarkerFailed` – A `RecordMarker` decision was returned as
+    #   failed.
+    #
+    # * `RequestCancelActivityTaskFailed` – Failed to process
+    #   RequestCancelActivityTask decision. This happens when the decision
+    #   isn't configured properly.
+    #
+    # * `RequestCancelExternalWorkflowExecutionFailed` – Request to cancel
     #   an external workflow execution failed.
-    # * **LambdaFunctionScheduled**\: An AWS Lambda function was scheduled
-    #   for execution.
-    # * **LambdaFunctionStarted**\: The scheduled function was invoked in
-    #   the AWS Lambda service.
-    # * **LambdaFunctionCompleted**\: The AWS Lambda function successfully
-    #   completed.
-    # * **LambdaFunctionFailed**\: The AWS Lambda function execution failed.
-    # * **LambdaFunctionTimedOut**\: The AWS Lambda function execution timed
-    #   out.
-    # * **ScheduleLambdaFunctionFailed**\: Failed to process
-    #   ScheduleLambdaFunction decision. This happens when the workflow
-    #   execution does not have the proper IAM role attached to invoke AWS
-    #   Lambda functions.
-    # * **StartLambdaFunctionFailed**\: Failed to invoke the scheduled
-    #   function in the AWS Lambda service. This happens when the AWS Lambda
-    #   service is not available in the current region, or received too many
-    #   requests.
+    #
+    # * `RequestCancelExternalWorkflowExecutionInitiated` – A request was
+    #   made to request the cancellation of an external workflow execution.
+    #
+    # * `ScheduleActivityTaskFailed` – Failed to process
+    #   ScheduleActivityTask decision. This happens when the decision isn't
+    #   configured properly, for example the activity type specified isn't
+    #   registered.
+    #
+    # * `SignalExternalWorkflowExecutionFailed` – The request to signal an
+    #   external workflow execution failed.
+    #
+    # * `SignalExternalWorkflowExecutionInitiated` – A request to signal an
+    #   external workflow was made.
+    #
+    # * `StartActivityTaskFailed` – A scheduled activity task failed to
+    #   start.
+    #
+    # * `StartChildWorkflowExecutionFailed` – Failed to process
+    #   StartChildWorkflowExecution decision. This happens when the decision
+    #   isn't configured properly, for example the workflow type specified
+    #   isn't registered.
+    #
+    # * `StartChildWorkflowExecutionInitiated` – A request was made to start
+    #   a child workflow execution.
+    #
+    # * `StartTimerFailed` – Failed to process StartTimer decision. This
+    #   happens when the decision isn't configured properly, for example a
+    #   timer already exists with the specified timer Id.
+    #
+    # * `TimerCanceled` – A timer, previously started for this workflow
+    #   execution, was successfully canceled.
+    #
+    # * `TimerFired` – A timer, previously started for this workflow
+    #   execution, fired.
+    #
+    # * `TimerStarted` – A timer was started for the workflow execution due
+    #   to a `StartTimer` decision.
+    #
+    # * `WorkflowExecutionCancelRequested` – A request to cancel this
+    #   workflow execution was made.
+    #
+    # * `WorkflowExecutionCanceled` – The workflow execution was
+    #   successfully canceled and closed.
+    #
+    # * `WorkflowExecutionCompleted` – The workflow execution was closed due
+    #   to successful completion.
+    #
+    # * `WorkflowExecutionContinuedAsNew` – The workflow execution was
+    #   closed and a new execution of the same type was created with the
+    #   same workflowId.
+    #
+    # * `WorkflowExecutionFailed` – The workflow execution closed due to a
+    #   failure.
+    #
+    # * `WorkflowExecutionSignaled` – An external signal was received for
+    #   the workflow execution.
+    #
+    # * `WorkflowExecutionStarted` – The workflow execution was started.
+    #
+    # * `WorkflowExecutionTerminated` – The workflow execution was
+    #   terminated.
+    #
+    # * `WorkflowExecutionTimedOut` – The workflow execution was closed
+    #   because a time out was exceeded.
     #
     # @!attribute [rw] event_timestamp
     #   The date and time when the event occurred.
@@ -2431,314 +2579,321 @@ module Aws::SWF
     #
     # @!attribute [rw] workflow_execution_started_event_attributes
     #   If the event is of type `WorkflowExecutionStarted` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::WorkflowExecutionStartedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_completed_event_attributes
     #   If the event is of type `WorkflowExecutionCompleted` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::WorkflowExecutionCompletedEventAttributes]
     #
     # @!attribute [rw] complete_workflow_execution_failed_event_attributes
     #   If the event is of type `CompleteWorkflowExecutionFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::CompleteWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_failed_event_attributes
     #   If the event is of type `WorkflowExecutionFailed` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::WorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] fail_workflow_execution_failed_event_attributes
     #   If the event is of type `FailWorkflowExecutionFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::FailWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_timed_out_event_attributes
     #   If the event is of type `WorkflowExecutionTimedOut` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::WorkflowExecutionTimedOutEventAttributes]
     #
     # @!attribute [rw] workflow_execution_canceled_event_attributes
     #   If the event is of type `WorkflowExecutionCanceled` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::WorkflowExecutionCanceledEventAttributes]
     #
     # @!attribute [rw] cancel_workflow_execution_failed_event_attributes
     #   If the event is of type `CancelWorkflowExecutionFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::CancelWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_continued_as_new_event_attributes
     #   If the event is of type `WorkflowExecutionContinuedAsNew` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::WorkflowExecutionContinuedAsNewEventAttributes]
     #
     # @!attribute [rw] continue_as_new_workflow_execution_failed_event_attributes
     #   If the event is of type `ContinueAsNewWorkflowExecutionFailed` then
     #   this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::ContinueAsNewWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_terminated_event_attributes
     #   If the event is of type `WorkflowExecutionTerminated` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::WorkflowExecutionTerminatedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_cancel_requested_event_attributes
     #   If the event is of type `WorkflowExecutionCancelRequested` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::WorkflowExecutionCancelRequestedEventAttributes]
     #
     # @!attribute [rw] decision_task_scheduled_event_attributes
     #   If the event is of type `DecisionTaskScheduled` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::DecisionTaskScheduledEventAttributes]
     #
     # @!attribute [rw] decision_task_started_event_attributes
     #   If the event is of type `DecisionTaskStarted` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::DecisionTaskStartedEventAttributes]
     #
     # @!attribute [rw] decision_task_completed_event_attributes
     #   If the event is of type `DecisionTaskCompleted` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::DecisionTaskCompletedEventAttributes]
     #
     # @!attribute [rw] decision_task_timed_out_event_attributes
     #   If the event is of type `DecisionTaskTimedOut` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::DecisionTaskTimedOutEventAttributes]
     #
     # @!attribute [rw] activity_task_scheduled_event_attributes
     #   If the event is of type `ActivityTaskScheduled` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::ActivityTaskScheduledEventAttributes]
     #
     # @!attribute [rw] activity_task_started_event_attributes
     #   If the event is of type `ActivityTaskStarted` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::ActivityTaskStartedEventAttributes]
     #
     # @!attribute [rw] activity_task_completed_event_attributes
     #   If the event is of type `ActivityTaskCompleted` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::ActivityTaskCompletedEventAttributes]
     #
     # @!attribute [rw] activity_task_failed_event_attributes
     #   If the event is of type `ActivityTaskFailed` then this member is set
-    #   and provides detailed information about the event. It is not set for
+    #   and provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::ActivityTaskFailedEventAttributes]
     #
     # @!attribute [rw] activity_task_timed_out_event_attributes
     #   If the event is of type `ActivityTaskTimedOut` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::ActivityTaskTimedOutEventAttributes]
     #
     # @!attribute [rw] activity_task_canceled_event_attributes
     #   If the event is of type `ActivityTaskCanceled` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::ActivityTaskCanceledEventAttributes]
     #
     # @!attribute [rw] activity_task_cancel_requested_event_attributes
     #   If the event is of type `ActivityTaskcancelRequested` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ActivityTaskCancelRequestedEventAttributes]
     #
     # @!attribute [rw] workflow_execution_signaled_event_attributes
     #   If the event is of type `WorkflowExecutionSignaled` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::WorkflowExecutionSignaledEventAttributes]
     #
     # @!attribute [rw] marker_recorded_event_attributes
     #   If the event is of type `MarkerRecorded` then this member is set and
-    #   provides detailed information about the event. It is not set for
+    #   provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::MarkerRecordedEventAttributes]
     #
     # @!attribute [rw] record_marker_failed_event_attributes
     #   If the event is of type `DecisionTaskFailed` then this member is set
-    #   and provides detailed information about the event. It is not set for
+    #   and provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::RecordMarkerFailedEventAttributes]
     #
     # @!attribute [rw] timer_started_event_attributes
     #   If the event is of type `TimerStarted` then this member is set and
-    #   provides detailed information about the event. It is not set for
+    #   provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::TimerStartedEventAttributes]
     #
     # @!attribute [rw] timer_fired_event_attributes
     #   If the event is of type `TimerFired` then this member is set and
-    #   provides detailed information about the event. It is not set for
+    #   provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::TimerFiredEventAttributes]
     #
     # @!attribute [rw] timer_canceled_event_attributes
     #   If the event is of type `TimerCanceled` then this member is set and
-    #   provides detailed information about the event. It is not set for
+    #   provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::TimerCanceledEventAttributes]
     #
     # @!attribute [rw] start_child_workflow_execution_initiated_event_attributes
     #   If the event is of type `StartChildWorkflowExecutionInitiated` then
     #   this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::StartChildWorkflowExecutionInitiatedEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_started_event_attributes
     #   If the event is of type `ChildWorkflowExecutionStarted` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionStartedEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_completed_event_attributes
     #   If the event is of type `ChildWorkflowExecutionCompleted` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionCompletedEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_failed_event_attributes
     #   If the event is of type `ChildWorkflowExecutionFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_timed_out_event_attributes
     #   If the event is of type `ChildWorkflowExecutionTimedOut` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionTimedOutEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_canceled_event_attributes
     #   If the event is of type `ChildWorkflowExecutionCanceled` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionCanceledEventAttributes]
     #
     # @!attribute [rw] child_workflow_execution_terminated_event_attributes
     #   If the event is of type `ChildWorkflowExecutionTerminated` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ChildWorkflowExecutionTerminatedEventAttributes]
     #
     # @!attribute [rw] signal_external_workflow_execution_initiated_event_attributes
     #   If the event is of type `SignalExternalWorkflowExecutionInitiated`
     #   then this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::SignalExternalWorkflowExecutionInitiatedEventAttributes]
     #
     # @!attribute [rw] external_workflow_execution_signaled_event_attributes
     #   If the event is of type `ExternalWorkflowExecutionSignaled` then
     #   this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::ExternalWorkflowExecutionSignaledEventAttributes]
     #
     # @!attribute [rw] signal_external_workflow_execution_failed_event_attributes
     #   If the event is of type `SignalExternalWorkflowExecutionFailed` then
     #   this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::SignalExternalWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] external_workflow_execution_cancel_requested_event_attributes
     #   If the event is of type `ExternalWorkflowExecutionCancelRequested`
     #   then this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::ExternalWorkflowExecutionCancelRequestedEventAttributes]
     #
     # @!attribute [rw] request_cancel_external_workflow_execution_initiated_event_attributes
     #   If the event is of type
     #   `RequestCancelExternalWorkflowExecutionInitiated` then this member
-    #   is set and provides detailed information about the event. It is not
+    #   is set and provides detailed information about the event. It isn't
     #   set for other event types.
     #   @return [Types::RequestCancelExternalWorkflowExecutionInitiatedEventAttributes]
     #
     # @!attribute [rw] request_cancel_external_workflow_execution_failed_event_attributes
     #   If the event is of type
     #   `RequestCancelExternalWorkflowExecutionFailed` then this member is
-    #   set and provides detailed information about the event. It is not set
+    #   set and provides detailed information about the event. It isn't set
     #   for other event types.
     #   @return [Types::RequestCancelExternalWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] schedule_activity_task_failed_event_attributes
     #   If the event is of type `ScheduleActivityTaskFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::ScheduleActivityTaskFailedEventAttributes]
     #
     # @!attribute [rw] request_cancel_activity_task_failed_event_attributes
     #   If the event is of type `RequestCancelActivityTaskFailed` then this
     #   member is set and provides detailed information about the event. It
-    #   is not set for other event types.
+    #   isn't set for other event types.
     #   @return [Types::RequestCancelActivityTaskFailedEventAttributes]
     #
     # @!attribute [rw] start_timer_failed_event_attributes
     #   If the event is of type `StartTimerFailed` then this member is set
-    #   and provides detailed information about the event. It is not set for
+    #   and provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::StartTimerFailedEventAttributes]
     #
     # @!attribute [rw] cancel_timer_failed_event_attributes
     #   If the event is of type `CancelTimerFailed` then this member is set
-    #   and provides detailed information about the event. It is not set for
+    #   and provides detailed information about the event. It isn't set for
     #   other event types.
     #   @return [Types::CancelTimerFailedEventAttributes]
     #
     # @!attribute [rw] start_child_workflow_execution_failed_event_attributes
     #   If the event is of type `StartChildWorkflowExecutionFailed` then
     #   this member is set and provides detailed information about the
-    #   event. It is not set for other event types.
+    #   event. It isn't set for other event types.
     #   @return [Types::StartChildWorkflowExecutionFailedEventAttributes]
     #
     # @!attribute [rw] lambda_function_scheduled_event_attributes
-    #   Provides details for the `LambdaFunctionScheduled` event.
+    #   Provides the details of the `LambdaFunctionScheduled` event. It
+    #   isn't set for other event types.
     #   @return [Types::LambdaFunctionScheduledEventAttributes]
     #
     # @!attribute [rw] lambda_function_started_event_attributes
-    #   Provides details for the `LambdaFunctionStarted` event.
+    #   Provides the details of the `LambdaFunctionStarted` event. It isn't
+    #   set for other event types.
     #   @return [Types::LambdaFunctionStartedEventAttributes]
     #
     # @!attribute [rw] lambda_function_completed_event_attributes
-    #   Provides details for the `LambdaFunctionCompleted` event.
+    #   Provides the details of the `LambdaFunctionCompleted` event. It
+    #   isn't set for other event types.
     #   @return [Types::LambdaFunctionCompletedEventAttributes]
     #
     # @!attribute [rw] lambda_function_failed_event_attributes
-    #   Provides details for the `LambdaFunctionFailed` event.
+    #   Provides the details of the `LambdaFunctionFailed` event. It isn't
+    #   set for other event types.
     #   @return [Types::LambdaFunctionFailedEventAttributes]
     #
     # @!attribute [rw] lambda_function_timed_out_event_attributes
-    #   Provides details for the `LambdaFunctionTimedOut` event.
+    #   Provides the details of the `LambdaFunctionTimedOut` event. It
+    #   isn't set for other event types.
     #   @return [Types::LambdaFunctionTimedOutEventAttributes]
     #
     # @!attribute [rw] schedule_lambda_function_failed_event_attributes
-    #   Provides details for the `ScheduleLambdaFunctionFailed` event.
+    #   Provides the details of the `ScheduleLambdaFunctionFailed` event. It
+    #   isn't set for other event types.
     #   @return [Types::ScheduleLambdaFunctionFailedEventAttributes]
     #
     # @!attribute [rw] start_lambda_function_failed_event_attributes
-    #   Provides details for the `StartLambdaFunctionFailed` event.
+    #   Provides the details of the `StartLambdaFunctionFailed` event. It
+    #   isn't set for other event types.
     #   @return [Types::StartLambdaFunctionFailedEventAttributes]
     #
     class HistoryEvent < Struct.new(
@@ -2802,21 +2957,24 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details for the `LambdaFunctionCompleted` event.
+    # Provides the details of the `LambdaFunctionCompleted` event. It isn't
+    # set for other event types.
     #
     # @!attribute [rw] scheduled_event_id
     #   The ID of the `LambdaFunctionScheduled` event that was recorded when
-    #   this AWS Lambda function was scheduled. This information can be
-    #   useful for diagnosing problems by tracing back the chain of events
-    #   leading up to this event.
+    #   this Lambda task was scheduled. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     # @!attribute [rw] started_event_id
-    #   The ID of the `LambdaFunctionStarted` event recorded in the history.
+    #   The ID of the `LambdaFunctionStarted` event recorded when this
+    #   activity task started. To help diagnose issues, use this information
+    #   to trace back the chain of events leading up to this event.
     #   @return [Integer]
     #
     # @!attribute [rw] result
-    #   The result of the function execution (if any).
+    #   The results of the Lambda task.
     #   @return [String]
     #
     class LambdaFunctionCompletedEventAttributes < Struct.new(
@@ -2826,25 +2984,28 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details for the `LambdaFunctionFailed` event.
+    # Provides the details of the `LambdaFunctionFailed` event. It isn't
+    # set for other event types.
     #
     # @!attribute [rw] scheduled_event_id
     #   The ID of the `LambdaFunctionScheduled` event that was recorded when
-    #   this AWS Lambda function was scheduled. This information can be
-    #   useful for diagnosing problems by tracing back the chain of events
-    #   leading up to this event.
+    #   this activity task was scheduled. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     # @!attribute [rw] started_event_id
-    #   The ID of the `LambdaFunctionStarted` event recorded in the history.
+    #   The ID of the `LambdaFunctionStarted` event recorded when this
+    #   activity task started. To help diagnose issues, use this information
+    #   to trace back the chain of events leading up to this event.
     #   @return [Integer]
     #
     # @!attribute [rw] reason
-    #   The reason provided for the failure (if any).
+    #   The reason provided for the failure.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   The details of the failure (if any).
+    #   The details of the failure.
     #   @return [String]
     #
     class LambdaFunctionFailedEventAttributes < Struct.new(
@@ -2855,48 +3016,56 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details for the `LambdaFunctionScheduled` event.
+    # Provides the details of the `LambdaFunctionScheduled` event. It isn't
+    # set for other event types.
     #
     # @!attribute [rw] id
-    #   The unique Amazon SWF ID for the AWS Lambda task.
+    #   The unique ID of the Lambda task.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the scheduled AWS Lambda function.
+    #   The name of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] control
+    #   Data attached to the event that the decider can use in subsequent
+    #   workflow tasks. This data isn't sent to the Lambda task.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   Input provided to the AWS Lambda function.
+    #   The input provided to the Lambda task.
     #   @return [String]
     #
     # @!attribute [rw] start_to_close_timeout
-    #   The maximum time, in seconds, that the AWS Lambda function can take
-    #   to execute from start to close before it is marked as failed.
+    #   The maximum amount of time a worker can take to process the Lambda
+    #   task.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
-    #   The ID of the `DecisionTaskCompleted` event for the decision that
-    #   resulted in the scheduling of this AWS Lambda function. This
-    #   information can be useful for diagnosing problems by tracing back
-    #   the chain of events leading up to this event.
+    #   The ID of the `LambdaFunctionCompleted` event corresponding to the
+    #   decision that resulted in scheduling this activity task. To help
+    #   diagnose issues, use this information to trace back the chain of
+    #   events leading up to this event.
     #   @return [Integer]
     #
     class LambdaFunctionScheduledEventAttributes < Struct.new(
       :id,
       :name,
+      :control,
       :input,
       :start_to_close_timeout,
       :decision_task_completed_event_id)
       include Aws::Structure
     end
 
-    # Provides details for the `LambdaFunctionStarted` event.
+    # Provides the details of the `LambdaFunctionStarted` event. It isn't
+    # set for other event types.
     #
     # @!attribute [rw] scheduled_event_id
     #   The ID of the `LambdaFunctionScheduled` event that was recorded when
-    #   this AWS Lambda function was scheduled. This information can be
-    #   useful for diagnosing problems by tracing back the chain of events
-    #   leading up to this event.
+    #   this activity task was scheduled. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     class LambdaFunctionStartedEventAttributes < Struct.new(
@@ -2904,17 +3073,20 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details for the `LambdaFunctionTimedOut` event.
+    # Provides details of the `LambdaFunctionTimedOut` event.
     #
     # @!attribute [rw] scheduled_event_id
     #   The ID of the `LambdaFunctionScheduled` event that was recorded when
-    #   this AWS Lambda function was scheduled. This information can be
-    #   useful for diagnosing problems by tracing back the chain of events
-    #   leading up to this event.
+    #   this activity task was scheduled. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     # @!attribute [rw] started_event_id
-    #   The ID of the `LambdaFunctionStarted` event recorded in the history.
+    #   The ID of the `ActivityTaskStarted` event that was recorded when
+    #   this activity task started. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_type
@@ -2964,7 +3136,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3031,7 +3203,10 @@ module Aws::SWF
     #   specified by this filter. Also, if this parameter is specified, the
     #   returned results are ordered by their start times.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #   @return [Types::ExecutionTimeFilter]
     #
     # @!attribute [rw] close_time_filter
@@ -3040,14 +3215,21 @@ module Aws::SWF
     #   specified by this filter. Also, if this parameter is specified, the
     #   returned results are ordered by their close times.
     #
-    #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+    #   <note markdown="1"> `startTimeFilter` and `closeTimeFilter` are mutually exclusive. You
+    #   must specify one of these in a request but not both.
+    #
+    #    </note>
     #   @return [Types::ExecutionTimeFilter]
     #
     # @!attribute [rw] execution_filter
     #   If specified, only workflow executions matching the workflow ID
     #   specified in the filter are returned.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::WorkflowExecutionFilter]
     #
     # @!attribute [rw] close_status_filter
@@ -3055,20 +3237,32 @@ module Aws::SWF
     #   status* are listed. For example, if TERMINATED is specified, then
     #   only TERMINATED workflow executions are listed.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::CloseStatusFilter]
     #
     # @!attribute [rw] type_filter
     #   If specified, only executions of the type specified in the filter
     #   are returned.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::WorkflowTypeFilter]
     #
     # @!attribute [rw] tag_filter
     #   If specified, only executions that have the matching tag are listed.
     #
-    #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter`
+    #   are mutually exclusive. You can specify at most one of these in a
+    #   request.
+    #
+    #    </note>
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] next_page_token
@@ -3082,7 +3276,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3136,7 +3330,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3198,13 +3392,19 @@ module Aws::SWF
     #   If specified, only executions of the type specified in the filter
     #   are returned.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::WorkflowTypeFilter]
     #
     # @!attribute [rw] tag_filter
     #   If specified, only executions that have the matching tag are listed.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::TagFilter]
     #
     # @!attribute [rw] next_page_token
@@ -3218,7 +3418,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3237,7 +3437,10 @@ module Aws::SWF
     #   If specified, only workflow executions matching the workflow ID
     #   specified in the filter are returned.
     #
-    #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+    #   <note markdown="1"> `executionFilter`, `typeFilter` and `tagFilter` are mutually
+    #   exclusive. You can specify at most one of these in a request.
+    #
+    #    </note>
     #   @return [Types::WorkflowExecutionFilter]
     #
     class ListOpenWorkflowExecutionsInput < Struct.new(
@@ -3288,7 +3491,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3313,14 +3516,14 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `MarkerRecorded` event.
+    # Provides the details of the `MarkerRecorded` event.
     #
     # @!attribute [rw] marker_name
     #   The name of the marker.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   Details of the marker (if any).
+    #   The details of the marker.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -3376,8 +3579,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3417,8 +3620,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3437,13 +3640,17 @@ module Aws::SWF
     #   The configured `maximumPageSize` determines how many results can be
     #   returned in a single call.
     #
-    #   <note>The `nextPageToken` returned by this action cannot be used with GetWorkflowExecutionHistory to get the next page. You must call PollForDecisionTask again (with the `nextPageToken`) to retrieve the next page of history records. Calling PollForDecisionTask with a `nextPageToken` will not return a new decision task.</note>
+    #   <note markdown="1"> The `nextPageToken` returned by this action cannot be used with
+    #   GetWorkflowExecutionHistory to get the next page. You must call
+    #   PollForDecisionTask again (with the `nextPageToken`) to retrieve the
+    #   next page of history records. Calling PollForDecisionTask with a
+    #   `nextPageToken` doesn't return a new decision task.
     #
-    #   .
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] maximum_page_size
-    #   The maximum number of results that will be returned per call.
+    #   The maximum number of results that are returned per call.
     #   `nextPageToken` can be used to obtain futher pages of results. The
     #   default is 1000, which is the maximum allowed page size. You can,
     #   however, specify a page size *smaller* than the maximum.
@@ -3495,7 +3702,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RecordMarker` decision.
+    # Provides the details of the `RecordMarker` decision.
     #
     # **Access Control**
     #
@@ -3504,16 +3711,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3528,11 +3737,11 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] marker_name
-    #   **Required.** The name of the marker.
+    #   The name of the marker.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   *Optional.* details of the marker.
+    #   The details of the marker.
     #   @return [String]
     #
     class RecordMarkerDecisionAttributes < Struct.new(
@@ -3541,7 +3750,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RecordMarkerFailed` event.
+    # Provides the details of the `RecordMarkerFailed` event.
     #
     # @!attribute [rw] marker_name
     #   The marker's name.
@@ -3551,7 +3760,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -3600,19 +3814,22 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version of the activity type.
     #
-    #   <note>The activity type consists of the name and version, the combination of which must be unique within the domain.</note>
+    #   <note markdown="1"> The activity type consists of the name and version, the combination
+    #   of which must be unique within the domain.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3623,11 +3840,10 @@ module Aws::SWF
     #   If set, specifies the default maximum duration that a worker can
     #   take to process tasks of this activity type. This default can be
     #   overridden when scheduling an activity task using the
-    #   `ScheduleActivityTask` decision.
+    #   `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_heartbeat_timeout
@@ -3636,33 +3852,32 @@ module Aws::SWF
     #   RecordActivityTaskHeartbeat. If the timeout is exceeded, the
     #   activity task is automatically timed out. This default can be
     #   overridden when scheduling an activity task using the
-    #   `ScheduleActivityTask` decision. If the activity worker subsequently
+    #   `ScheduleActivityTask` Decision. If the activity worker subsequently
     #   attempts to record a heartbeat or returns a result, the activity
     #   worker receives an `UnknownResource` fault. In this case, Amazon SWF
     #   no longer considers the activity task to be valid; the activity
     #   worker should clean up the activity task.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_list
     #   If set, specifies the default task list to use for scheduling tasks
     #   of this activity type. This default task list is used if a task list
-    #   is not provided when a task is scheduled through the
-    #   `ScheduleActivityTask` decision.
+    #   isn't provided when a task is scheduled through the
+    #   `ScheduleActivityTask` Decision.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] default_task_priority
     #   The default task priority to assign to the activity type. If not
-    #   assigned, then "0" will be used. Valid values are integers that
-    #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
+    #   assigned, then `0` is used. Valid values are integers that range
+    #   from Java's `Integer.MIN_VALUE` (-2147483648) to
     #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
     #   priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *in the *Amazon SWF Developer Guide*.*.
     #
     #
     #
@@ -3673,21 +3888,19 @@ module Aws::SWF
     #   If set, specifies the default maximum duration that a task of this
     #   activity type can wait before being assigned to a worker. This
     #   default can be overridden when scheduling an activity task using the
-    #   `ScheduleActivityTask` decision.
+    #   `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_schedule_to_close_timeout
     #   If set, specifies the default maximum duration for a task of this
     #   activity type. This default can be overridden when scheduling an
-    #   activity task using the `ScheduleActivityTask` decision.
+    #   activity task using the `ScheduleActivityTask` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     class RegisterActivityTypeInput < Struct.new(
@@ -3719,8 +3932,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3730,13 +3943,12 @@ module Aws::SWF
     # @!attribute [rw] workflow_execution_retention_period_in_days
     #   The duration (in days) that records and histories of workflow
     #   executions on the domain should be kept by the service. After the
-    #   retention period, the workflow execution is not available in the
+    #   retention period, the workflow execution isn't available in the
     #   results of visibility calls.
     #
     #   If you pass the value `NONE` or `0` (zero), then the workflow
-    #   execution history will not be retained. As soon as the workflow
-    #   execution completes, the execution record and its history are
-    #   deleted.
+    #   execution history isn't retained. As soon as the workflow execution
+    #   completes, the execution record and its history are deleted.
     #
     #   The maximum workflow execution retention period is 90 days. For more
     #   information about Amazon SWF service limits, see: [Amazon SWF
@@ -3781,19 +3993,24 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version of the workflow type.
     #
-    #   <note>The workflow type consists of the name and version, the combination of which must be unique within the domain. To get a list of all currently registered workflow types, use the ListWorkflowTypes action.</note>
+    #   <note markdown="1"> The workflow type consists of the name and version, the combination
+    #   of which must be unique within the domain. To get a list of all
+    #   currently registered workflow types, use the ListWorkflowTypes
+    #   action.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3804,44 +4021,43 @@ module Aws::SWF
     #   If set, specifies the default maximum duration of decision tasks for
     #   this workflow type. This default can be overridden when starting a
     #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   `StartChildWorkflowExecution` Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_execution_start_to_close_timeout
     #   If set, specifies the default maximum duration for executions of
     #   this workflow type. You can override this default when starting an
-    #   execution through the StartWorkflowExecution action or
-    #   `StartChildWorkflowExecution` decision.
+    #   execution through the StartWorkflowExecution Action or
+    #   `StartChildWorkflowExecution` Decision.
     #
     #   The duration is specified in seconds; an integer greater than or
     #   equal to 0. Unlike some of the other timeout parameters in Amazon
     #   SWF, you cannot specify a value of "NONE" for
     #   `defaultExecutionStartToCloseTimeout`; there is a one-year max limit
     #   on the time that a workflow execution can run. Exceeding this limit
-    #   will always cause the workflow execution to time out.
+    #   always causes the workflow execution to time out.
     #   @return [String]
     #
     # @!attribute [rw] default_task_list
     #   If set, specifies the default task list to use for scheduling
     #   decision tasks for executions of this workflow type. This default is
-    #   used only if a task list is not provided when starting the execution
-    #   through the StartWorkflowExecution action or
-    #   `StartChildWorkflowExecution` decision.
+    #   used only if a task list isn't provided when starting the execution
+    #   through the StartWorkflowExecution Action or
+    #   `StartChildWorkflowExecution` Decision.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] default_task_priority
     #   The default task priority to assign to the workflow type. If not
-    #   assigned, then "0" will be used. Valid values are integers that
-    #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
+    #   assigned, then `0` is used. Valid values are integers that range
+    #   from Java's `Integer.MIN_VALUE` (-2147483648) to
     #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
     #   priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3854,28 +4070,36 @@ module Aws::SWF
     #   calling the TerminateWorkflowExecution action explicitly or due to
     #   an expired timeout. This default can be overridden when starting a
     #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   `StartChildWorkflowExecution` Decision.
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] default_lambda_role
-    #   The ARN of the default IAM role to use when a workflow execution of
-    #   this type invokes AWS Lambda functions.
+    #   The default IAM role attached to this workflow type.
     #
-    #   This default can be overridden when starting a workflow execution
-    #   using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` and `ContinueAsNewWorkflowExecution`
-    #   decision.
+    #   <note markdown="1"> Executions of this workflow type need IAM roles to invoke Lambda
+    #   functions. If you don't specify an IAM role when you start this
+    #   workflow type, the default Lambda role is attached to the execution.
+    #   For more information, see
+    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class RegisterWorkflowTypeInput < Struct.new(
@@ -3892,7 +4116,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RequestCancelActivityTask` decision.
+    # Provides the details of the `RequestCancelActivityTask` decision.
     #
     # **Access Control**
     #
@@ -3901,16 +4125,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3932,7 +4158,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RequestCancelActivityTaskFailed` event.
+    # Provides the details of the `RequestCancelActivityTaskFailed` event.
     #
     # @!attribute [rw] activity_id
     #   The activityId provided in the `RequestCancelActivityTask` decision
@@ -3943,7 +4169,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -3965,7 +4196,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RequestCancelExternalWorkflowExecution`
+    # Provides the details of the `RequestCancelExternalWorkflowExecution`
     # decision.
     #
     # **Access Control**
@@ -3975,16 +4206,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -3995,13 +4228,12 @@ module Aws::SWF
     #
     #       {
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunIdOptional",
+    #         run_id: "WorkflowRunIdOptional",
     #         control: "Data",
     #       }
     #
     # @!attribute [rw] workflow_id
-    #   **Required.** The `workflowId` of the external workflow execution to
-    #   cancel.
+    #   The `workflowId` of the external workflow execution to cancel.
     #   @return [String]
     #
     # @!attribute [rw] run_id
@@ -4009,8 +4241,8 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks.
+    #   The data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks.
     #   @return [String]
     #
     class RequestCancelExternalWorkflowExecutionDecisionAttributes < Struct.new(
@@ -4020,8 +4252,8 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `RequestCancelExternalWorkflowExecutionFailed`
-    # event.
+    # Provides the details of the
+    # `RequestCancelExternalWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] workflow_id
     #   The `workflowId` of the external workflow to which the cancel
@@ -4036,7 +4268,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -4061,6 +4298,9 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] control
+    #   The data attached to the event that the decider can use in
+    #   subsequent workflow tasks. This data isn't sent to the workflow
+    #   execution.
     #   @return [String]
     #
     class RequestCancelExternalWorkflowExecutionFailedEventAttributes < Struct.new(
@@ -4073,7 +4313,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the
+    # Provides the details of the
     # `RequestCancelExternalWorkflowExecutionInitiated` event.
     #
     # @!attribute [rw] workflow_id
@@ -4094,8 +4334,8 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks.
     #   @return [String]
     #
     class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
@@ -4112,7 +4352,7 @@ module Aws::SWF
     #       {
     #         domain: "DomainName", # required
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunIdOptional",
+    #         run_id: "WorkflowRunIdOptional",
     #       }
     #
     # @!attribute [rw] domain
@@ -4152,7 +4392,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   *Optional.* Information about the cancellation.
+    #   Information about the cancellation.
     #   @return [String]
     #
     class RespondActivityTaskCanceledInput < Struct.new(
@@ -4212,7 +4452,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   *Optional.* Detailed information about the failure.
+    #   Detailed information about the failure.
     #   @return [String]
     #
     class RespondActivityTaskFailedInput < Struct.new(
@@ -4222,6 +4462,8 @@ module Aws::SWF
       include Aws::Structure
     end
 
+    # Input data for a TaskCompleted response to a decision task.
+    #
     # @note When making an API call, you may pass RespondDecisionTaskCompletedInput
     #   data as a hash:
     #
@@ -4287,14 +4529,14 @@ module Aws::SWF
     #             },
     #             signal_external_workflow_execution_decision_attributes: {
     #               workflow_id: "WorkflowId", # required
-    #               run_id: "RunIdOptional",
+    #               run_id: "WorkflowRunIdOptional",
     #               signal_name: "SignalName", # required
     #               input: "Data",
     #               control: "Data",
     #             },
     #             request_cancel_external_workflow_execution_decision_attributes: {
     #               workflow_id: "WorkflowId", # required
-    #               run_id: "RunIdOptional",
+    #               run_id: "WorkflowRunIdOptional",
     #               control: "Data",
     #             },
     #             start_child_workflow_execution_decision_attributes: {
@@ -4318,6 +4560,7 @@ module Aws::SWF
     #             schedule_lambda_function_decision_attributes: {
     #               id: "FunctionId", # required
     #               name: "FunctionName", # required
+    #               control: "Data",
     #               input: "FunctionInput",
     #               start_to_close_timeout: "DurationInSecondsOptional",
     #             },
@@ -4337,7 +4580,7 @@ module Aws::SWF
     #
     # @!attribute [rw] decisions
     #   The list of decisions (possibly empty) made by the decider while
-    #   processing this decision task. See the docs for the decision
+    #   processing this decision task. See the docs for the Decision
     #   structure for details.
     #   @return [Array<Types::Decision>]
     #
@@ -4365,7 +4608,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ScheduleActivityTask` decision.
+    # Provides the details of the `ScheduleActivityTask` decision.
     #
     # **Access Control**
     #
@@ -4374,22 +4617,27 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
-    #   * `activityType.name`\: String constraint. The key is
-    #     `swf:activityType.name`.
-    #   * `activityType.version`\: String constraint. The key is
-    #     `swf:activityType.version`.
-    #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    #   * `activityType.name` – String constraint. The key is
+    #     `swf:activityType.name`.
+    #
+    #   * `activityType.version` – String constraint. The key is
+    #     `swf:activityType.version`.
+    #
+    #   * `taskList` – String constraint. The key is `swf:taskList.name`.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -4417,22 +4665,21 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] activity_type
-    #   **Required.** The type of the activity task to schedule.
+    #   The type of the activity task to schedule.
     #   @return [Types::ActivityType]
     #
     # @!attribute [rw] activity_id
-    #   **Required.** The `activityId` of the activity task.
+    #   The `activityId` of the activity task.
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks. This data is not sent to the
-    #   activity.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks. This data isn't sent to the activity.
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -4442,37 +4689,45 @@ module Aws::SWF
     # @!attribute [rw] schedule_to_close_timeout
     #   The maximum duration for this activity task.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A schedule-to-close timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default schedule-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A schedule-to-close timeout for this activity task must be specified
+    #   either as a default for the activity type or through this field. If
+    #   neither this field is set nor a default schedule-to-close timeout
+    #   was specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] task_list
     #   If set, specifies the name of the task list in which to schedule the
     #   activity task. If not specified, the `defaultTaskList` registered
-    #   with the activity type will be used.
+    #   with the activity type is used.
     #
-    #   <note>A task list for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default task list was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task list for this activity task must be specified either as a
+    #   default for the activity type or through this field. If neither this
+    #   field is set nor a default task list was specified at registration
+    #   time then a fault is returned.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* If set, specifies the priority with which the activity
-    #   task is to be assigned to a worker. This overrides the
-    #   defaultTaskPriority specified when registering the activity type
-    #   using RegisterActivityType. Valid values are integers that range
-    #   from Java's `Integer.MIN_VALUE` (-2147483648) to
-    #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
-    #   priority.
+    #   If set, specifies the priority with which the activity task is to be
+    #   assigned to a worker. This overrides the defaultTaskPriority
+    #   specified when registering the activity type using
+    #   RegisterActivityType. Valid values are integers that range from
+    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -4480,16 +4735,20 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] schedule_to_start_timeout
-    #   *Optional.* If set, specifies the maximum duration the activity task
-    #   can wait to be assigned to a worker. This overrides the default
+    #   If set, specifies the maximum duration the activity task can wait to
+    #   be assigned to a worker. This overrides the default
     #   schedule-to-start timeout specified when registering the activity
     #   type using RegisterActivityType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A schedule-to-start timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default schedule-to-start timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A schedule-to-start timeout for this activity task must be specified
+    #   either as a default for the activity type or through this field. If
+    #   neither this field is set nor a default schedule-to-start timeout
+    #   was specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] start_to_close_timeout
@@ -4498,11 +4757,15 @@ module Aws::SWF
     #   timeout specified when registering the activity type using
     #   RegisterActivityType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A start-to-close timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A start-to-close timeout for this activity task must be specified
+    #   either as a default for the activity type or through this field. If
+    #   neither this field is set nor a default start-to-close timeout was
+    #   specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] heartbeat_timeout
@@ -4510,13 +4773,12 @@ module Aws::SWF
     #   a task of this type must report progress by calling
     #   RecordActivityTaskHeartbeat. If the timeout is exceeded, the
     #   activity task is automatically timed out. If the worker subsequently
-    #   attempts to record a heartbeat or returns a result, it will be
-    #   ignored. This overrides the default heartbeat timeout specified when
+    #   attempts to record a heartbeat or returns a result, it is ignored.
+    #   This overrides the default heartbeat timeout specified when
     #   registering the activity type using RegisterActivityType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     class ScheduleActivityTaskDecisionAttributes < Struct.new(
@@ -4533,7 +4795,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ScheduleActivityTaskFailed` event.
+    # Provides the details of the `ScheduleActivityTaskFailed` event.
     #
     # @!attribute [rw] activity_type
     #   The activity type provided in the `ScheduleActivityTask` decision
@@ -4549,7 +4811,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -4571,35 +4838,9 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `ScheduleLambdaFunction` decision.
-    #
-    # **Access Control**
-    #
-    # You can use IAM policies to control this decision's access to Amazon
-    # SWF resources as follows:
-    #
-    # * Use a `Resource` element with the domain name to limit the action to
-    #   only specified domains.
-    # * Use an `Action` element to allow or deny permission to call this
-    #   action.
-    # * Constrain the following parameters by using a `Condition` element
-    #   with the appropriate keys.
-    #   * `activityType.name`\: String constraint. The key is
-    #     `swf:activityType.name`.
-    #   * `activityType.version`\: String constraint. The key is
-    #     `swf:activityType.version`.
-    #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
-    #
-    # If the caller does not have sufficient permissions to invoke the
-    # action, or the parameter values fall outside the specified
-    # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    # Decision attributes specified in
+    # `scheduleLambdaFunctionDecisionAttributes` within the list of
+    # decisions `decisions` passed to RespondDecisionTaskCompleted.
     #
     # @note When making an API call, you may pass ScheduleLambdaFunctionDecisionAttributes
     #   data as a hash:
@@ -4607,55 +4848,68 @@ module Aws::SWF
     #       {
     #         id: "FunctionId", # required
     #         name: "FunctionName", # required
+    #         control: "Data",
     #         input: "FunctionInput",
     #         start_to_close_timeout: "DurationInSecondsOptional",
     #       }
     #
     # @!attribute [rw] id
-    #   **Required.** The SWF `id` of the AWS Lambda task.
-    #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   A string that identifies the Lambda function execution in the event
+    #   history.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   **Required.** The name of the AWS Lambda function to invoke.
+    #   The name, or ARN, of the Lambda function to schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] control
+    #   The data attached to the event that the decider can use in
+    #   subsequent workflow tasks. This data isn't sent to the Lambda task.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The input provided to the AWS Lambda function.
+    #   The optional input data to be supplied to the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] start_to_close_timeout
-    #   If set, specifies the maximum duration the function may take to
-    #   execute.
+    #   The timeout value, in seconds, after which the Lambda function is
+    #   considered to be failed once it has started. This can be any integer
+    #   from 1-300 (1s-5m). If no value is supplied, than a default value of
+    #   300s is assumed.
     #   @return [String]
     #
     class ScheduleLambdaFunctionDecisionAttributes < Struct.new(
       :id,
       :name,
+      :control,
       :input,
       :start_to_close_timeout)
       include Aws::Structure
     end
 
-    # Provides details for the `ScheduleLambdaFunctionFailed` event.
+    # Provides the details of the `ScheduleLambdaFunctionFailed` event. It
+    # isn't set for other event types.
     #
     # @!attribute [rw] id
-    #   The unique Amazon SWF ID of the AWS Lambda task.
+    #   The ID provided in the `ScheduleLambdaFunction` decision that
+    #   failed.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the scheduled AWS Lambda function.
+    #   The name of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] cause
-    #   The cause of the failure. This information is generated by the
-    #   system and can be useful for diagnostic purposes.
+    #   The cause of the failure. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -4663,10 +4917,10 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
-    #   The ID of the `DecisionTaskCompleted` event corresponding to the
-    #   decision that resulted in the scheduling of this AWS Lambda
-    #   function. This information can be useful for diagnosing problems by
-    #   tracing back the chain of events leading up to this event.
+    #   The ID of the `LambdaFunctionCompleted` event corresponding to the
+    #   decision that resulted in scheduling this Lambda task. To help
+    #   diagnose issues, use this information to trace back the chain of
+    #   events leading up to this event.
     #   @return [Integer]
     #
     class ScheduleLambdaFunctionFailedEventAttributes < Struct.new(
@@ -4677,7 +4931,8 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `SignalExternalWorkflowExecution` decision.
+    # Provides the details of the `SignalExternalWorkflowExecution`
+    # decision.
     #
     # **Access Control**
     #
@@ -4686,16 +4941,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -4706,15 +4963,14 @@ module Aws::SWF
     #
     #       {
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunIdOptional",
+    #         run_id: "WorkflowRunIdOptional",
     #         signal_name: "SignalName", # required
     #         input: "Data",
     #         control: "Data",
     #       }
     #
     # @!attribute [rw] workflow_id
-    #   **Required.** The `workflowId` of the workflow execution to be
-    #   signaled.
+    #   The `workflowId` of the workflow execution to be signaled.
     #   @return [String]
     #
     # @!attribute [rw] run_id
@@ -4722,19 +4978,18 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] signal_name
-    #   **Required.** The name of the signal.The target workflow execution
-    #   will use the signal name and input to process the signal.
+    #   The name of the signal.The target workflow execution uses the signal
+    #   name and input to process the signal.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   *Optional.* Input data to be provided with the signal. The target
-    #   workflow execution will use the signal name and input data to
-    #   process the signal.
+    #   The input data to be provided with the signal. The target workflow
+    #   execution uses the signal name and input data to process the signal.
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent decision tasks.
+    #   The data attached to the event that can be used by the decider in
+    #   subsequent decision tasks.
     #   @return [String]
     #
     class SignalExternalWorkflowExecutionDecisionAttributes < Struct.new(
@@ -4746,7 +5001,8 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `SignalExternalWorkflowExecutionFailed` event.
+    # Provides the details of the `SignalExternalWorkflowExecutionFailed`
+    # event.
     #
     # @!attribute [rw] workflow_id
     #   The `workflowId` of the external workflow execution that the signal
@@ -4762,7 +5018,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -4786,6 +5047,9 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] control
+    #   The data attached to the event that the decider can use in
+    #   subsequent workflow tasks. This data isn't sent to the workflow
+    #   execution.
     #   @return [String]
     #
     class SignalExternalWorkflowExecutionFailedEventAttributes < Struct.new(
@@ -4798,7 +5062,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `SignalExternalWorkflowExecutionInitiated`
+    # Provides the details of the `SignalExternalWorkflowExecutionInitiated`
     # event.
     #
     # @!attribute [rw] workflow_id
@@ -4815,7 +5079,7 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   Input provided to the signal (if any).
+    #   The input provided to the signal.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -4827,8 +5091,8 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] control
-    #   *Optional.* data attached to the event that can be used by the
-    #   decider in subsequent decision tasks.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent decision tasks.
     #   @return [String]
     #
     class SignalExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
@@ -4847,7 +5111,7 @@ module Aws::SWF
     #       {
     #         domain: "DomainName", # required
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunIdOptional",
+    #         run_id: "WorkflowRunIdOptional",
     #         signal_name: "SignalName", # required
     #         input: "Data",
     #       }
@@ -4883,7 +5147,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `StartChildWorkflowExecution` decision.
+    # Provides the details of the `StartChildWorkflowExecution` decision.
     #
     # **Access Control**
     #
@@ -4892,24 +5156,30 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * Constrain the following parameters by using a `Condition` element
     #   with the appropriate keys.
-    #   * `tagList.member.N`\: The key is "swf:tagList.N" where N is the
+    #
+    #   * `tagList.member.N` – The key is "swf:tagList.N" where N is the
     #     tag number from 0 to 4, inclusive.
-    #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
-    #   * `workflowType.name`\: String constraint. The key is
+    #
+    #   * `taskList` – String constraint. The key is `swf:taskList.name`.
+    #
+    #   * `workflowType.name` – String constraint. The key is
     #     `swf:workflowType.name`.
-    #   * `workflowType.version`\: String constraint. The key is
+    #
+    #   * `workflowType.version` – String constraint. The key is
     #     `swf:workflowType.version`.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -4938,22 +5208,22 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] workflow_type
-    #   **Required.** The type of the workflow execution to be started.
+    #   The type of the workflow execution to be started.
     #   @return [Types::WorkflowType]
     #
     # @!attribute [rw] workflow_id
-    #   **Required.** The `workflowId` of the workflow execution.
+    #   The `workflowId` of the workflow execution.
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks. This data is not sent to the
-    #   child workflow execution.
+    #   The data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks. This data isn't sent to the child
+    #   workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -4965,35 +5235,45 @@ module Aws::SWF
     #   defaultExecutionStartToCloseTimeout specified when registering the
     #   workflow type.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>An execution start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default execution start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> An execution start-to-close timeout for this workflow execution must
+    #   be specified either as a default for the workflow type or through
+    #   this parameter. If neither this parameter is set nor a default
+    #   execution start-to-close timeout was specified at registration time
+    #   then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] task_list
     #   The name of the task list to be used for decision tasks of the child
     #   workflow execution.
     #
-    #   <note>A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task list for this workflow execution must be specified either as
+    #   a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default task list was specified
+    #   at registration time then a fault is returned.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* A task priority that, if set, specifies the priority for
-    #   a decision task of this workflow execution. This overrides the
+    #   A task priority that, if set, specifies the priority for a decision
+    #   task of this workflow execution. This overrides the
     #   defaultTaskPriority specified when registering the workflow type.
     #   Valid values are integers that range from Java's
     #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -5006,33 +5286,44 @@ module Aws::SWF
     #   `defaultTaskStartToCloseTimout` specified when registering the
     #   workflow type using RegisterWorkflowType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task start-to-close timeout for this workflow execution must be
+    #   specified either as a default for the workflow type or through this
+    #   parameter. If neither this parameter is set nor a default task
+    #   start-to-close timeout was specified at registration time then a
+    #   fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] child_policy
-    #   *Optional.* If set, specifies the policy to use for the child
-    #   workflow executions if the workflow execution being started is
-    #   terminated by calling the TerminateWorkflowExecution action
-    #   explicitly or due to an expired timeout. This policy overrides the
-    #   default child policy specified when registering the workflow type
-    #   using RegisterWorkflowType.
+    #   If set, specifies the policy to use for the child workflow
+    #   executions if the workflow execution being started is terminated by
+    #   calling the TerminateWorkflowExecution action explicitly or due to
+    #   an expired timeout. This policy overrides the default child policy
+    #   specified when registering the workflow type using
+    #   RegisterWorkflowType.
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either
+    #   as a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default child policy was
+    #   specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -5043,10 +5334,7 @@ module Aws::SWF
     #   @return [Array<String>]
     #
     # @!attribute [rw] lambda_role
-    #   The ARN of an IAM role that authorizes Amazon SWF to invoke AWS
-    #   Lambda functions.
-    #
-    #   <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>
+    #   The IAM role attached to the child workflow execution.
     #   @return [String]
     #
     class StartChildWorkflowExecutionDecisionAttributes < Struct.new(
@@ -5064,18 +5352,23 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `StartChildWorkflowExecutionFailed` event.
+    # Provides the details of the `StartChildWorkflowExecutionFailed` event.
     #
     # @!attribute [rw] workflow_type
     #   The workflow type provided in the `StartChildWorkflowExecution`
-    #   decision that failed.
+    #   Decision that failed.
     #   @return [Types::WorkflowType]
     #
     # @!attribute [rw] cause
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> When `cause` is set to `OPERATION_NOT_PERMITTED`, the decision fails
+    #   because it lacks sufficient permissions. For details and example IAM
+    #   policies, see [ Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -5087,22 +5380,30 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] initiated_event_id
-    #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
-    #   this child workflow execution. This information can be useful for
-    #   diagnosing problems by tracing back the chain of events leading up
-    #   to this event.
+    #   When the `cause` is `WORKFLOW_ALREADY_RUNNING`, `initiatedEventId`
+    #   is the ID of the `StartChildWorkflowExecutionInitiated` event that
+    #   corresponds to the `StartChildWorkflowExecution` Decision to start
+    #   the workflow execution. You can use this information to diagnose
+    #   problems by tracing back the chain of events leading up to this
+    #   event.
+    #
+    #   When the `cause` isn't `WORKFLOW_ALREADY_RUNNING`,
+    #   `initiatedEventId` is set to `0` because the
+    #   `StartChildWorkflowExecutionInitiated` event doesn't exist.
     #   @return [Integer]
     #
     # @!attribute [rw] decision_task_completed_event_id
     #   The ID of the `DecisionTaskCompleted` event corresponding to the
     #   decision task that resulted in the `StartChildWorkflowExecution`
-    #   decision to request this child workflow execution. This information
-    #   can be useful for diagnosing problems by tracing back the cause of
+    #   Decision to request this child workflow execution. This information
+    #   can be useful for diagnosing problems by tracing back the chain of
     #   events.
     #   @return [Integer]
     #
     # @!attribute [rw] control
+    #   The data attached to the event that the decider can use in
+    #   subsequent workflow tasks. This data isn't sent to the child
+    #   workflow execution.
     #   @return [String]
     #
     class StartChildWorkflowExecutionFailedEventAttributes < Struct.new(
@@ -5115,7 +5416,8 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `StartChildWorkflowExecutionInitiated` event.
+    # Provides the details of the `StartChildWorkflowExecutionInitiated`
+    # event.
     #
     # @!attribute [rw] workflow_id
     #   The `workflowId` of the child workflow execution.
@@ -5126,23 +5428,21 @@ module Aws::SWF
     #   @return [Types::WorkflowType]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent decision tasks. This data is not sent to the
-    #   activity.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent decision tasks. This data isn't sent to the activity.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The inputs provided to the child workflow execution (if any).
+    #   The inputs provided to the child workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] execution_start_to_close_timeout
     #   The maximum duration for the child workflow execution. If the
-    #   workflow execution is not closed within this duration, it will be
-    #   timed out and force terminated.
+    #   workflow execution isn't closed within this duration, it is timed
+    #   out and force-terminated.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] task_list
@@ -5151,13 +5451,13 @@ module Aws::SWF
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   *Optional.* The priority assigned for the decision tasks for this
-    #   workflow execution. Valid values are integers that range from
-    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   The priority assigned for the decision tasks for this workflow
+    #   execution. Valid values are integers that range from Java's
+    #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -5167,7 +5467,7 @@ module Aws::SWF
     # @!attribute [rw] decision_task_completed_event_id
     #   The ID of the `DecisionTaskCompleted` event corresponding to the
     #   decision task that resulted in the `StartChildWorkflowExecution`
-    #   decision to request this child workflow execution. This information
+    #   Decision to request this child workflow execution. This information
     #   can be useful for diagnosing problems by tracing back the cause of
     #   events.
     #   @return [Integer]
@@ -5179,23 +5479,23 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] task_start_to_close_timeout
     #   The maximum duration allowed for the decision tasks for this
     #   workflow execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -5203,8 +5503,7 @@ module Aws::SWF
     #   @return [Array<String>]
     #
     # @!attribute [rw] lambda_role
-    #   The IAM role attached to this workflow execution to use when
-    #   invoking AWS Lambda functions.
+    #   The IAM role to attach to the child workflow execution.
     #   @return [String]
     #
     class StartChildWorkflowExecutionInitiatedEventAttributes < Struct.new(
@@ -5223,28 +5522,35 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details for the `StartLambdaFunctionFailed` event.
+    # Provides the details of the `StartLambdaFunctionFailed` event. It
+    # isn't set for other event types.
     #
     # @!attribute [rw] scheduled_event_id
-    #   The ID of the `LambdaFunctionScheduled` event that was recorded when
-    #   this AWS Lambda function was scheduled. This information can be
-    #   useful for diagnosing problems by tracing back the chain of events
-    #   leading up to this event.
+    #   The ID of the `ActivityTaskScheduled` event that was recorded when
+    #   this activity task was scheduled. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #   @return [Integer]
     #
     # @!attribute [rw] cause
-    #   The cause of the failure. This information is generated by the
-    #   system and can be useful for diagnostic purposes.
+    #   The cause of the failure. To help diagnose issues, use this
+    #   information to trace back the chain of events leading up to this
+    #   event.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because the IAM role attached to the execution lacked sufficient
+    #   permissions. For details and example IAM policies, see [Lambda
+    #   Tasks][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The error message (if any).
+    #   A description that can help diagnose the cause of the fault.
     #   @return [String]
     #
     class StartLambdaFunctionFailedEventAttributes < Struct.new(
@@ -5254,7 +5560,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `StartTimer` decision.
+    # Provides the details of the `StartTimer` decision.
     #
     # **Access Control**
     #
@@ -5263,16 +5569,18 @@ module Aws::SWF
     #
     # * Use a `Resource` element with the domain name to limit the action to
     #   only specified domains.
+    #
     # * Use an `Action` element to allow or deny permission to call this
     #   action.
+    #
     # * You cannot use an IAM policy to constrain this action's parameters.
     #
-    # If the caller does not have sufficient permissions to invoke the
+    # If the caller doesn't have sufficient permissions to invoke the
     # action, or the parameter values fall outside the specified
     # constraints, the action fails. The associated event attribute's
-    # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
-    # details and example IAM policies, see [Using IAM to Manage Access to
-    # Amazon SWF Workflows][1].
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -5288,24 +5596,24 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] timer_id
-    #   **Required.** The unique ID of the timer.
+    #   The unique ID of the timer.
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks.
+    #   The data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks.
     #   @return [String]
     #
     # @!attribute [rw] start_to_fire_timeout
-    #   **Required.** The duration to wait before firing the timer.
+    #   The duration to wait before firing the timer.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`.
     #   @return [String]
     #
     class StartTimerDecisionAttributes < Struct.new(
@@ -5315,7 +5623,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `StartTimerFailed` event.
+    # Provides the details of the `StartTimerFailed` event.
     #
     # @!attribute [rw] timer_id
     #   The timerId provided in the `StartTimer` decision that failed.
@@ -5325,7 +5633,12 @@ module Aws::SWF
     #   The cause of the failure. This information is generated by the
     #   system and can be useful for diagnostic purposes.
     #
-    #   <note>If **cause** is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked sufficient permissions. For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows][1].</note>
+    #   <note markdown="1"> If `cause` is set to `OPERATION_NOT_PERMITTED`, the decision failed
+    #   because it lacked sufficient permissions. For details and example
+    #   IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    #   Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -5383,8 +5696,8 @@ module Aws::SWF
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] workflow_type
@@ -5396,25 +5709,29 @@ module Aws::SWF
     #   workflow execution. This overrides the `defaultTaskList` specified
     #   when registering the workflow type.
     #
-    #   <note>A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task list for this workflow execution must be specified either as
+    #   a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default task list was specified
+    #   at registration time then a fault is returned.
+    #
+    #    </note>
     #
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
-    #   must not contain the literal string quotarnquot.
+    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
+    #   must not contain the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
-    #   The task priority to use for this workflow execution. This will
-    #   override any default priority that was assigned when the workflow
-    #   type was registered. If not set, then the default task priority for
-    #   the workflow type will be used. Valid values are integers that range
-    #   from Java's `Integer.MIN_VALUE` (-2147483648) to
-    #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
-    #   priority.
+    #   The task priority to use for this workflow execution. This overrides
+    #   any default priority that was assigned when the workflow type was
+    #   registered. If not set, then the default task priority for the
+    #   workflow type is used. Valid values are integers that range from
+    #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+    #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -5434,13 +5751,17 @@ module Aws::SWF
     #   workflow type.
     #
     #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. Exceeding this limit will cause the workflow execution
-    #   to time out. Unlike some of the other timeout parameters in Amazon
-    #   SWF, you cannot specify a value of "NONE" for this timeout; there
-    #   is a one-year max limit on the time that a workflow execution can
-    #   run.
+    #   equal to `0`. Exceeding this limit causes the workflow execution to
+    #   time out. Unlike some of the other timeout parameters in Amazon SWF,
+    #   you cannot specify a value of "NONE" for this timeout; there is a
+    #   one-year max limit on the time that a workflow execution can run.
     #
-    #   <note> An execution start-to-close timeout must be specified either through this parameter or as a default when the workflow type is registered. If neither this parameter nor a default execution start-to-close timeout is specified, a fault is returned.</note>
+    #   <note markdown="1"> An execution start-to-close timeout must be specified either through
+    #   this parameter or as a default when the workflow type is registered.
+    #   If neither this parameter nor a default execution start-to-close
+    #   timeout is specified, a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -5456,11 +5777,16 @@ module Aws::SWF
     #   `defaultTaskStartToCloseTimout` specified when registering the
     #   workflow type using RegisterWorkflowType.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #
-    #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
+    #   <note markdown="1"> A task start-to-close timeout for this workflow execution must be
+    #   specified either as a default for the workflow type or through this
+    #   parameter. If neither this parameter is set nor a default task
+    #   start-to-close timeout was specified at registration time then a
+    #   fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -5473,23 +5799,40 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either
+    #   as a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default child policy was
+    #   specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lambda_role
-    #   The ARN of an IAM role that authorizes Amazon SWF to invoke AWS
-    #   Lambda functions.
+    #   The IAM role to attach to this workflow execution.
     #
-    #   <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>
+    #   <note markdown="1"> Executions of this workflow type need IAM roles to invoke Lambda
+    #   functions. If you don't attach an IAM role, any attempt to schedule
+    #   a Lambda task fails. This results in a
+    #   `ScheduleLambdaFunctionFailed` history event. For more information,
+    #   see
+    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class StartWorkflowExecutionInput < Struct.new(
@@ -5518,8 +5861,8 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] tag
-    #   **Required.** Specifies the tag that must be associated with the
-    #   execution for it to meet the filter criteria.
+    #   Specifies the tag that must be associated with the execution for it
+    #   to meet the filter criteria.
     #   @return [String]
     #
     class TagFilter < Struct.new(
@@ -5551,7 +5894,7 @@ module Aws::SWF
     #       {
     #         domain: "DomainName", # required
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunIdOptional",
+    #         run_id: "WorkflowRunIdOptional",
     #         reason: "TerminateReason",
     #         details: "Data",
     #         child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
@@ -5570,12 +5913,11 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   *Optional.* A descriptive reason for terminating the workflow
-    #   execution.
+    #   A descriptive reason for terminating the workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   *Optional.* Details for terminating the workflow execution.
+    #   Details for terminating the workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -5586,16 +5928,22 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
     #
-    #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
+    #
+    #   <note markdown="1"> A child policy for this workflow execution must be specified either
+    #   as a default for the workflow type or through this parameter. If
+    #   neither this parameter is set nor a default child policy was
+    #   specified at registration time then a fault is returned.
+    #
+    #    </note>
     #   @return [String]
     #
     class TerminateWorkflowExecutionInput < Struct.new(
@@ -5608,7 +5956,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `TimerCanceled` event.
+    # Provides the details of the `TimerCanceled` event.
     #
     # @!attribute [rw] timer_id
     #   The unique ID of the timer that was canceled.
@@ -5634,7 +5982,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `TimerFired` event.
+    # Provides the details of the `TimerFired` event.
     #
     # @!attribute [rw] timer_id
     #   The unique ID of the timer that fired.
@@ -5652,22 +6000,22 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `TimerStarted` event.
+    # Provides the details of the `TimerStarted` event.
     #
     # @!attribute [rw] timer_id
     #   The unique ID of the timer that was started.
     #   @return [String]
     #
     # @!attribute [rw] control
-    #   *Optional.* Data attached to the event that can be used by the
-    #   decider in subsequent workflow tasks.
+    #   Data attached to the event that can be used by the decider in
+    #   subsequent workflow tasks.
     #   @return [String]
     #
     # @!attribute [rw] start_to_fire_timeout
-    #   The duration of time after which the timer will fire.
+    #   The duration of time after which the timer fires.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -5693,7 +6041,7 @@ module Aws::SWF
     #
     #       {
     #         workflow_id: "WorkflowId", # required
-    #         run_id: "RunId", # required
+    #         run_id: "WorkflowRunId", # required
     #       }
     #
     # @!attribute [rw] workflow_id
@@ -5710,7 +6058,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionCancelRequested` event.
+    # Provides the details of the `WorkflowExecutionCancelRequested` event.
     #
     # @!attribute [rw] external_workflow_execution
     #   The external workflow execution for which the cancellation was
@@ -5740,10 +6088,10 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionCanceled` event.
+    # Provides the details of the `WorkflowExecutionCanceled` event.
     #
     # @!attribute [rw] details
-    #   Details for the cancellation (if any).
+    #   The details of the cancellation.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -5760,7 +6108,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionCompleted` event.
+    # Provides the details of the `WorkflowExecutionCompleted` event.
     #
     # @!attribute [rw] result
     #   The result produced by the workflow execution upon successful
@@ -5790,17 +6138,15 @@ module Aws::SWF
     #   The maximum duration allowed for decision tasks for this workflow
     #   execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] execution_start_to_close_timeout
     #   The total duration for this workflow execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] task_list
@@ -5815,7 +6161,7 @@ module Aws::SWF
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -5829,19 +6175,19 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] lambda_role
-    #   The IAM role used by this workflow execution when invoking AWS
-    #   Lambda functions.
+    #   The IAM role attached to the child workflow execution.
     #   @return [String]
     #
     class WorkflowExecutionConfiguration < Struct.new(
@@ -5854,7 +6200,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionContinuedAsNew` event.
+    # Provides the details of the `WorkflowExecutionContinuedAsNew` event.
     #
     # @!attribute [rw] input
     #   The input provided to the new workflow execution.
@@ -5875,25 +6221,26 @@ module Aws::SWF
     # @!attribute [rw] execution_start_to_close_timeout
     #   The total duration allowed for the new workflow execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] task_list
-    #   Represents a task list.
+    #   The task list to use for the decisions of the new (continued)
+    #   workflow execution.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
+    #   The priority of the task to use for the decisions of the new
+    #   (continued) workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] task_start_to_close_timeout
     #   The maximum duration of decision tasks for the new workflow
     #   execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -5904,14 +6251,15 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -5919,12 +6267,11 @@ module Aws::SWF
     #   @return [Array<String>]
     #
     # @!attribute [rw] workflow_type
-    #   Represents a workflow type.
+    #   The workflow type of this execution.
     #   @return [Types::WorkflowType]
     #
     # @!attribute [rw] lambda_role
-    #   The IAM role attached to this workflow execution to use when
-    #   invoking AWS Lambda functions.
+    #   The IAM role to attach to the new (continued) workflow execution.
     #   @return [String]
     #
     class WorkflowExecutionContinuedAsNewEventAttributes < Struct.new(
@@ -6000,14 +6347,14 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionFailed` event.
+    # Provides the details of the `WorkflowExecutionFailed` event.
     #
     # @!attribute [rw] reason
-    #   The descriptive reason provided for the failure (if any).
+    #   The descriptive reason provided for the failure.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   The details of the failure (if any).
+    #   The details of the failure.
     #   @return [String]
     #
     # @!attribute [rw] decision_task_completed_event_id
@@ -6071,15 +6418,20 @@ module Aws::SWF
     #   If the execution status is closed then this specifies how the
     #   execution was closed:
     #
-    #   * `COMPLETED`\: the execution was successfully completed.
-    #   * `CANCELED`\: the execution was canceled.Cancellation allows the
+    #   * `COMPLETED` – the execution was successfully completed.
+    #
+    #   * `CANCELED` – the execution was canceled.Cancellation allows the
     #     implementation to gracefully clean up before the execution is
     #     closed.
-    #   * `TERMINATED`\: the execution was force terminated.
-    #   * `FAILED`\: the execution failed to complete.
-    #   * `TIMED_OUT`\: the execution did not complete in the alloted time
+    #
+    #   * `TERMINATED` – the execution was force terminated.
+    #
+    #   * `FAILED` – the execution failed to complete.
+    #
+    #   * `TIMED_OUT` – the execution did not complete in the alloted time
     #     and was automatically timed out.
-    #   * `CONTINUED_AS_NEW`\: the execution is logically continued. This
+    #
+    #   * `CONTINUED_AS_NEW` – the execution is logically continued. This
     #     means the current execution was completed and a new execution was
     #     started to carry on the workflow.
     #   @return [String]
@@ -6140,7 +6492,7 @@ module Aws::SWF
     # timers for a workflow execution.
     #
     # @!attribute [rw] open_activity_tasks
-    #   The count of activity tasks whose status is OPEN.
+    #   The count of activity tasks whose status is `OPEN`.
     #   @return [Integer]
     #
     # @!attribute [rw] open_decision_tasks
@@ -6154,11 +6506,11 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] open_child_workflow_executions
-    #   The count of child workflow executions whose status is OPEN.
+    #   The count of child workflow executions whose status is `OPEN`.
     #   @return [Integer]
     #
     # @!attribute [rw] open_lambda_functions
-    #   The count of AWS Lambda functions that are currently executing.
+    #   The count of Lambda tasks whose status is `OPEN`.
     #   @return [Integer]
     #
     class WorkflowExecutionOpenCounts < Struct.new(
@@ -6170,7 +6522,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionSignaled` event.
+    # Provides the details of the `WorkflowExecutionSignaled` event.
     #
     # @!attribute [rw] signal_name
     #   The name of the signal received. The decider can use the signal name
@@ -6178,8 +6530,8 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   Inputs provided with the signal (if any). The decider can use the
-    #   signal name and inputs to determine how to process the signal.
+    #   The inputs provided with the signal. The decider can use the signal
+    #   name and inputs to determine how to process the signal.
     #   @return [String]
     #
     # @!attribute [rw] external_workflow_execution
@@ -6208,23 +6560,21 @@ module Aws::SWF
     # Provides details of `WorkflowExecutionStarted` event.
     #
     # @!attribute [rw] input
-    #   The input provided to the workflow execution (if any).
+    #   The input provided to the workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] execution_start_to_close_timeout
     #   The maximum duration for this workflow execution.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] task_start_to_close_timeout
     #   The maximum duration of decision tasks for this workflow type.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -6234,20 +6584,25 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] task_list
     #   The name of the task list for scheduling the decision tasks for this
     #   workflow execution.
     #   @return [Types::TaskList]
+    #
+    # @!attribute [rw] task_priority
+    #   The priority of the decision tasks in the workflow execution.
+    #   @return [String]
     #
     # @!attribute [rw] workflow_type
     #   The workflow type of this execution.
@@ -6258,9 +6613,6 @@ module Aws::SWF
     #   execution can have up to 5 tags.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] task_priority
-    #   @return [String]
-    #
     # @!attribute [rw] continued_execution_run_id
     #   If this workflow execution was started due to a
     #   `ContinueAsNewWorkflowExecution` decision, then it contains the
@@ -6270,13 +6622,13 @@ module Aws::SWF
     #
     # @!attribute [rw] parent_workflow_execution
     #   The source workflow execution that started this workflow execution.
-    #   The member is not set if the workflow execution was not started by a
+    #   The member isn't set if the workflow execution was not started by a
     #   workflow.
     #   @return [Types::WorkflowExecution]
     #
     # @!attribute [rw] parent_initiated_event_id
     #   The ID of the `StartChildWorkflowExecutionInitiated` event
-    #   corresponding to the `StartChildWorkflowExecution` decision to start
+    #   corresponding to the `StartChildWorkflowExecution` Decision to start
     #   this workflow execution. The source event with this ID can be found
     #   in the history of the source workflow execution. This information
     #   can be useful for diagnosing problems by tracing back the chain of
@@ -6284,8 +6636,7 @@ module Aws::SWF
     #   @return [Integer]
     #
     # @!attribute [rw] lambda_role
-    #   The IAM role attached to this workflow execution to use when
-    #   invoking AWS Lambda functions.
+    #   The IAM role attached to the workflow execution.
     #   @return [String]
     #
     class WorkflowExecutionStartedEventAttributes < Struct.new(
@@ -6294,9 +6645,9 @@ module Aws::SWF
       :task_start_to_close_timeout,
       :child_policy,
       :task_list,
+      :task_priority,
       :workflow_type,
       :tag_list,
-      :task_priority,
       :continued_execution_run_id,
       :parent_workflow_execution,
       :parent_initiated_event_id,
@@ -6304,14 +6655,14 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionTerminated` event.
+    # Provides the details of the `WorkflowExecutionTerminated` event.
     #
     # @!attribute [rw] reason
-    #   The reason provided for the termination (if any).
+    #   The reason provided for the termination.
     #   @return [String]
     #
     # @!attribute [rw] details
-    #   The details provided for the termination (if any).
+    #   The details provided for the termination.
     #   @return [String]
     #
     # @!attribute [rw] child_policy
@@ -6320,14 +6671,15 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] cause
@@ -6345,7 +6697,7 @@ module Aws::SWF
       include Aws::Structure
     end
 
-    # Provides details of the `WorkflowExecutionTimedOut` event.
+    # Provides the details of the `WorkflowExecutionTimedOut` event.
     #
     # @!attribute [rw] timeout_type
     #   The type of timeout that caused this event.
@@ -6357,14 +6709,15 @@ module Aws::SWF
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     class WorkflowExecutionTimedOutEventAttributes < Struct.new(
@@ -6384,15 +6737,21 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] name
-    #   **Required.** The name of the workflow type.
+    #   The name of the workflow type.
     #
-    #   <note>The combination of workflow type name and version must be unique with in a domain.</note>
+    #   <note markdown="1"> The combination of workflow type name and version must be unique
+    #   with in a domain.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   **Required.** The version of the workflow type.
+    #   The version of the workflow type.
     #
-    #   <note>The combination of workflow type name and version must be unique with in a domain.</note>
+    #   <note markdown="1"> The combination of workflow type name and version must be unique
+    #   with in a domain.
+    #
+    #    </note>
     #   @return [String]
     #
     class WorkflowType < Struct.new(
@@ -6404,54 +6763,52 @@ module Aws::SWF
     # The configuration settings of a workflow type.
     #
     # @!attribute [rw] default_task_start_to_close_timeout
-    #   *Optional.* The default maximum duration, specified when registering
-    #   the workflow type, that a decision task for executions of this
-    #   workflow type might take before returning completion or failure. If
-    #   the task does not close in the specified time then the task is
+    #   The default maximum duration, specified when registering the
+    #   workflow type, that a decision task for executions of this workflow
+    #   type might take before returning completion or failure. If the task
+    #   doesn'tdo close in the specified time then the task is
     #   automatically timed out and rescheduled. If the decider eventually
     #   reports a completion or failure, it is ignored. This default can be
     #   overridden when starting a workflow execution using the
     #   StartWorkflowExecution action or the `StartChildWorkflowExecution`
-    #   decision.
+    #   Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_execution_start_to_close_timeout
-    #   *Optional.* The default maximum duration, specified when registering
-    #   the workflow type, for executions of this workflow type. This
-    #   default can be overridden when starting a workflow execution using
-    #   the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   The default maximum duration, specified when registering the
+    #   workflow type, for executions of this workflow type. This default
+    #   can be overridden when starting a workflow execution using the
+    #   StartWorkflowExecution action or the `StartChildWorkflowExecution`
+    #   Decision.
     #
-    #   The duration is specified in seconds; an integer greater than or
-    #   equal to 0. The value "NONE" can be used to specify unlimited
-    #   duration.
+    #   The duration is specified in seconds, an integer greater than or
+    #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
     # @!attribute [rw] default_task_list
-    #   *Optional.* The default task list, specified when registering the
-    #   workflow type, for decisions tasks scheduled for workflow executions
-    #   of this type. This default can be overridden when starting a
-    #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   The default task list, specified when registering the workflow type,
+    #   for decisions tasks scheduled for workflow executions of this type.
+    #   This default can be overridden when starting a workflow execution
+    #   using the StartWorkflowExecution action or the
+    #   `StartChildWorkflowExecution` Decision.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] default_task_priority
-    #   *Optional.* The default task priority, specified when registering
-    #   the workflow type, for all decision tasks of this workflow type.
-    #   This default can be overridden when starting a workflow execution
-    #   using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   The default task priority, specified when registering the workflow
+    #   type, for all decision tasks of this workflow type. This default can
+    #   be overridden when starting a workflow execution using the
+    #   StartWorkflowExecution action or the `StartChildWorkflowExecution`
+    #   decision.
     #
     #   Valid values are integers that range from Java's
     #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
     #   (2147483647). Higher numbers indicate higher priority.
     #
     #   For more information about setting task priority, see [Setting Task
-    #   Priority][1] in the *Amazon Simple Workflow Developer Guide*.
+    #   Priority][1] in the *Amazon SWF Developer Guide*.
     #
     #
     #
@@ -6459,28 +6816,41 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] default_child_policy
-    #   *Optional.* The default policy to use for the child workflow
-    #   executions when a workflow execution of this type is terminated, by
-    #   calling the TerminateWorkflowExecution action explicitly or due to
-    #   an expired timeout. This default can be overridden when starting a
-    #   workflow execution using the StartWorkflowExecution action or the
-    #   `StartChildWorkflowExecution` decision.
+    #   The default policy to use for the child workflow executions when a
+    #   workflow execution of this type is terminated, by calling the
+    #   TerminateWorkflowExecution action explicitly or due to an expired
+    #   timeout. This default can be overridden when starting a workflow
+    #   execution using the StartWorkflowExecution action or the
+    #   `StartChildWorkflowExecution` Decision.
     #
     #   The supported child policies are:
     #
-    #   * **TERMINATE:** the child executions will be terminated.
-    #   * **REQUEST\_CANCEL:** a request to cancel will be attempted for
-    #     each child execution by recording a
-    #     `WorkflowExecutionCancelRequested` event in its history. It is up
-    #     to the decider to take appropriate actions when it receives an
-    #     execution history with this event.
-    #   * **ABANDON:** no action will be taken. The child executions will
-    #     continue to run.
+    #   * `TERMINATE` – The child executions are terminated.
+    #
+    #   * `REQUEST_CANCEL` – A request to cancel is attempted for each child
+    #     execution by recording a `WorkflowExecutionCancelRequested` event
+    #     in its history. It is up to the decider to take appropriate
+    #     actions when it receives an execution history with this event.
+    #
+    #   * `ABANDON` – No action is taken. The child executions continue to
+    #     run.
     #   @return [String]
     #
     # @!attribute [rw] default_lambda_role
-    #   The default IAM role to use when a workflow execution invokes a AWS
-    #   Lambda function.
+    #   The default IAM role attached to this workflow type.
+    #
+    #   <note markdown="1"> Executions of this workflow type need IAM roles to invoke Lambda
+    #   functions. If you don't specify an IAM role when starting this
+    #   workflow type, the default Lambda role is attached to the execution.
+    #   For more information, see
+    #   [http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html][1]
+    #   in the *Amazon SWF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
     #   @return [String]
     #
     class WorkflowTypeConfiguration < Struct.new(
@@ -6501,9 +6871,10 @@ module Aws::SWF
     #   The status of the workflow type (returned in the WorkflowTypeInfo
     #   structure) can be one of the following.
     #
-    #   * **REGISTERED**\: The type is registered and available. Workers
+    #   * `REGISTERED` – The type is registered and available. Workers
     #     supporting this type should be running.
-    #   * **DEPRECATED**\: The type was deprecated using
+    #
+    #   * `DEPRECATED` – The type was deprecated using
     #     DeprecateWorkflowType, but is still in use. You should keep
     #     workers supporting this type running. You cannot create new
     #     workflow executions of this type.
@@ -6533,7 +6904,7 @@ module Aws::SWF
     #       }
     #
     # @!attribute [rw] name
-    #   **Required.** Name of the workflow type.
+    #   Name of the workflow type.
     #   @return [String]
     #
     # @!attribute [rw] version

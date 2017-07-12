@@ -796,7 +796,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

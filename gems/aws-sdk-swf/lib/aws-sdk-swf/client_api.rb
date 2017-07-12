@@ -151,8 +151,6 @@ module Aws::SWF
     RespondDecisionTaskCompletedInput = Shapes::StructureShape.new(name: 'RespondDecisionTaskCompletedInput')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     Run = Shapes::StructureShape.new(name: 'Run')
-    RunId = Shapes::StringShape.new(name: 'RunId')
-    RunIdOptional = Shapes::StringShape.new(name: 'RunIdOptional')
     ScheduleActivityTaskDecisionAttributes = Shapes::StructureShape.new(name: 'ScheduleActivityTaskDecisionAttributes')
     ScheduleActivityTaskFailedCause = Shapes::StringShape.new(name: 'ScheduleActivityTaskFailedCause')
     ScheduleActivityTaskFailedEventAttributes = Shapes::StructureShape.new(name: 'ScheduleActivityTaskFailedEventAttributes')
@@ -217,6 +215,8 @@ module Aws::SWF
     WorkflowExecutionTimedOutEventAttributes = Shapes::StructureShape.new(name: 'WorkflowExecutionTimedOutEventAttributes')
     WorkflowExecutionTimeoutType = Shapes::StringShape.new(name: 'WorkflowExecutionTimeoutType')
     WorkflowId = Shapes::StringShape.new(name: 'WorkflowId')
+    WorkflowRunId = Shapes::StringShape.new(name: 'WorkflowRunId')
+    WorkflowRunIdOptional = Shapes::StringShape.new(name: 'WorkflowRunIdOptional')
     WorkflowType = Shapes::StructureShape.new(name: 'WorkflowType')
     WorkflowTypeConfiguration = Shapes::StructureShape.new(name: 'WorkflowTypeConfiguration')
     WorkflowTypeDetail = Shapes::StructureShape.new(name: 'WorkflowTypeDetail')
@@ -608,6 +608,7 @@ module Aws::SWF
 
     LambdaFunctionScheduledEventAttributes.add_member(:id, Shapes::ShapeRef.new(shape: FunctionId, required: true, location_name: "id"))
     LambdaFunctionScheduledEventAttributes.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "name"))
+    LambdaFunctionScheduledEventAttributes.add_member(:control, Shapes::ShapeRef.new(shape: Data, location_name: "control"))
     LambdaFunctionScheduledEventAttributes.add_member(:input, Shapes::ShapeRef.new(shape: FunctionInput, location_name: "input"))
     LambdaFunctionScheduledEventAttributes.add_member(:start_to_close_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "startToCloseTimeout"))
     LambdaFunctionScheduledEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
@@ -738,12 +739,12 @@ module Aws::SWF
     RequestCancelActivityTaskFailedEventAttributes.struct_class = Types::RequestCancelActivityTaskFailedEventAttributes
 
     RequestCancelExternalWorkflowExecutionDecisionAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    RequestCancelExternalWorkflowExecutionDecisionAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    RequestCancelExternalWorkflowExecutionDecisionAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     RequestCancelExternalWorkflowExecutionDecisionAttributes.add_member(:control, Shapes::ShapeRef.new(shape: Data, location_name: "control"))
     RequestCancelExternalWorkflowExecutionDecisionAttributes.struct_class = Types::RequestCancelExternalWorkflowExecutionDecisionAttributes
 
     RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:cause, Shapes::ShapeRef.new(shape: RequestCancelExternalWorkflowExecutionFailedCause, required: true, location_name: "cause"))
     RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:initiated_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "initiatedEventId"))
     RequestCancelExternalWorkflowExecutionFailedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
@@ -751,14 +752,14 @@ module Aws::SWF
     RequestCancelExternalWorkflowExecutionFailedEventAttributes.struct_class = Types::RequestCancelExternalWorkflowExecutionFailedEventAttributes
 
     RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
     RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.add_member(:control, Shapes::ShapeRef.new(shape: Data, location_name: "control"))
     RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.struct_class = Types::RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
 
     RequestCancelWorkflowExecutionInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     RequestCancelWorkflowExecutionInput.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    RequestCancelWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    RequestCancelWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     RequestCancelWorkflowExecutionInput.struct_class = Types::RequestCancelWorkflowExecutionInput
 
     RespondActivityTaskCanceledInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
@@ -779,7 +780,7 @@ module Aws::SWF
     RespondDecisionTaskCompletedInput.add_member(:execution_context, Shapes::ShapeRef.new(shape: Data, location_name: "executionContext"))
     RespondDecisionTaskCompletedInput.struct_class = Types::RespondDecisionTaskCompletedInput
 
-    Run.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, location_name: "runId"))
+    Run.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, location_name: "runId"))
     Run.struct_class = Types::Run
 
     ScheduleActivityTaskDecisionAttributes.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
@@ -802,6 +803,7 @@ module Aws::SWF
 
     ScheduleLambdaFunctionDecisionAttributes.add_member(:id, Shapes::ShapeRef.new(shape: FunctionId, required: true, location_name: "id"))
     ScheduleLambdaFunctionDecisionAttributes.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "name"))
+    ScheduleLambdaFunctionDecisionAttributes.add_member(:control, Shapes::ShapeRef.new(shape: Data, location_name: "control"))
     ScheduleLambdaFunctionDecisionAttributes.add_member(:input, Shapes::ShapeRef.new(shape: FunctionInput, location_name: "input"))
     ScheduleLambdaFunctionDecisionAttributes.add_member(:start_to_close_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "startToCloseTimeout"))
     ScheduleLambdaFunctionDecisionAttributes.struct_class = Types::ScheduleLambdaFunctionDecisionAttributes
@@ -813,14 +815,14 @@ module Aws::SWF
     ScheduleLambdaFunctionFailedEventAttributes.struct_class = Types::ScheduleLambdaFunctionFailedEventAttributes
 
     SignalExternalWorkflowExecutionDecisionAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    SignalExternalWorkflowExecutionDecisionAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    SignalExternalWorkflowExecutionDecisionAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     SignalExternalWorkflowExecutionDecisionAttributes.add_member(:signal_name, Shapes::ShapeRef.new(shape: SignalName, required: true, location_name: "signalName"))
     SignalExternalWorkflowExecutionDecisionAttributes.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
     SignalExternalWorkflowExecutionDecisionAttributes.add_member(:control, Shapes::ShapeRef.new(shape: Data, location_name: "control"))
     SignalExternalWorkflowExecutionDecisionAttributes.struct_class = Types::SignalExternalWorkflowExecutionDecisionAttributes
 
     SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:cause, Shapes::ShapeRef.new(shape: SignalExternalWorkflowExecutionFailedCause, required: true, location_name: "cause"))
     SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:initiated_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "initiatedEventId"))
     SignalExternalWorkflowExecutionFailedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
@@ -828,7 +830,7 @@ module Aws::SWF
     SignalExternalWorkflowExecutionFailedEventAttributes.struct_class = Types::SignalExternalWorkflowExecutionFailedEventAttributes
 
     SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:signal_name, Shapes::ShapeRef.new(shape: SignalName, required: true, location_name: "signalName"))
     SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
     SignalExternalWorkflowExecutionInitiatedEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
@@ -837,7 +839,7 @@ module Aws::SWF
 
     SignalWorkflowExecutionInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     SignalWorkflowExecutionInput.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    SignalWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    SignalWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     SignalWorkflowExecutionInput.add_member(:signal_name, Shapes::ShapeRef.new(shape: SignalName, required: true, location_name: "signalName"))
     SignalWorkflowExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
     SignalWorkflowExecutionInput.struct_class = Types::SignalWorkflowExecutionInput
@@ -915,7 +917,7 @@ module Aws::SWF
 
     TerminateWorkflowExecutionInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     TerminateWorkflowExecutionInput.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    TerminateWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "runId"))
+    TerminateWorkflowExecutionInput.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "runId"))
     TerminateWorkflowExecutionInput.add_member(:reason, Shapes::ShapeRef.new(shape: TerminateReason, location_name: "reason"))
     TerminateWorkflowExecutionInput.add_member(:details, Shapes::ShapeRef.new(shape: Data, location_name: "details"))
     TerminateWorkflowExecutionInput.add_member(:child_policy, Shapes::ShapeRef.new(shape: ChildPolicy, location_name: "childPolicy"))
@@ -937,7 +939,7 @@ module Aws::SWF
     TimerStartedEventAttributes.struct_class = Types::TimerStartedEventAttributes
 
     WorkflowExecution.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "workflowId"))
-    WorkflowExecution.add_member(:run_id, Shapes::ShapeRef.new(shape: RunId, required: true, location_name: "runId"))
+    WorkflowExecution.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, required: true, location_name: "runId"))
     WorkflowExecution.struct_class = Types::WorkflowExecution
 
     WorkflowExecutionCancelRequestedEventAttributes.add_member(:external_workflow_execution, Shapes::ShapeRef.new(shape: WorkflowExecution, location_name: "externalWorkflowExecution"))
@@ -963,7 +965,7 @@ module Aws::SWF
 
     WorkflowExecutionContinuedAsNewEventAttributes.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
     WorkflowExecutionContinuedAsNewEventAttributes.add_member(:decision_task_completed_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "decisionTaskCompletedEventId"))
-    WorkflowExecutionContinuedAsNewEventAttributes.add_member(:new_execution_run_id, Shapes::ShapeRef.new(shape: RunId, required: true, location_name: "newExecutionRunId"))
+    WorkflowExecutionContinuedAsNewEventAttributes.add_member(:new_execution_run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, required: true, location_name: "newExecutionRunId"))
     WorkflowExecutionContinuedAsNewEventAttributes.add_member(:execution_start_to_close_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "executionStartToCloseTimeout"))
     WorkflowExecutionContinuedAsNewEventAttributes.add_member(:task_list, Shapes::ShapeRef.new(shape: TaskList, required: true, location_name: "taskList"))
     WorkflowExecutionContinuedAsNewEventAttributes.add_member(:task_priority, Shapes::ShapeRef.new(shape: TaskPriority, location_name: "taskPriority"))
@@ -1028,10 +1030,10 @@ module Aws::SWF
     WorkflowExecutionStartedEventAttributes.add_member(:task_start_to_close_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "taskStartToCloseTimeout"))
     WorkflowExecutionStartedEventAttributes.add_member(:child_policy, Shapes::ShapeRef.new(shape: ChildPolicy, required: true, location_name: "childPolicy"))
     WorkflowExecutionStartedEventAttributes.add_member(:task_list, Shapes::ShapeRef.new(shape: TaskList, required: true, location_name: "taskList"))
+    WorkflowExecutionStartedEventAttributes.add_member(:task_priority, Shapes::ShapeRef.new(shape: TaskPriority, location_name: "taskPriority"))
     WorkflowExecutionStartedEventAttributes.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "workflowType"))
     WorkflowExecutionStartedEventAttributes.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "tagList"))
-    WorkflowExecutionStartedEventAttributes.add_member(:task_priority, Shapes::ShapeRef.new(shape: TaskPriority, location_name: "taskPriority"))
-    WorkflowExecutionStartedEventAttributes.add_member(:continued_execution_run_id, Shapes::ShapeRef.new(shape: RunIdOptional, location_name: "continuedExecutionRunId"))
+    WorkflowExecutionStartedEventAttributes.add_member(:continued_execution_run_id, Shapes::ShapeRef.new(shape: WorkflowRunIdOptional, location_name: "continuedExecutionRunId"))
     WorkflowExecutionStartedEventAttributes.add_member(:parent_workflow_execution, Shapes::ShapeRef.new(shape: WorkflowExecution, location_name: "parentWorkflowExecution"))
     WorkflowExecutionStartedEventAttributes.add_member(:parent_initiated_event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "parentInitiatedEventId"))
     WorkflowExecutionStartedEventAttributes.add_member(:lambda_role, Shapes::ShapeRef.new(shape: Arn, location_name: "lambdaRole"))

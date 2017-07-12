@@ -397,7 +397,7 @@ module Aws::AutoScaling
     #   scalingpolicy = auto_scaling_group.put_scaling_policy({
     #     policy_name: "XmlStringMaxLen255", # required
     #     policy_type: "XmlStringMaxLen64",
-    #     adjustment_type: "XmlStringMaxLen255", # required
+    #     adjustment_type: "XmlStringMaxLen255",
     #     min_adjustment_step: 1,
     #     min_adjustment_magnitude: 1,
     #     scaling_adjustment: 1,
@@ -411,16 +411,40 @@ module Aws::AutoScaling
     #       },
     #     ],
     #     estimated_instance_warmup: 1,
+    #     target_tracking_configuration: {
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #         resource_label: "XmlStringMaxLen1023",
+    #       },
+    #       customized_metric_specification: {
+    #         metric_name: "MetricName", # required
+    #         namespace: "MetricNamespace", # required
+    #         dimensions: [
+    #           {
+    #             name: "MetricDimensionName", # required
+    #             value: "MetricDimensionValue", # required
+    #           },
+    #         ],
+    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         unit: "MetricUnit",
+    #       },
+    #       target_value: 1.0, # required
+    #       disable_scale_in: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
     #   The name of the policy.
     # @option options [String] :policy_type
-    #   The policy type. Valid values are `SimpleScaling` and `StepScaling`.
-    #   If the policy type is null, the value is treated as `SimpleScaling`.
-    # @option options [required, String] :adjustment_type
-    #   The adjustment type. Valid values are `ChangeInCapacity`,
+    #   The policy type. The valid values are `SimpleScaling`, `StepScaling`,
+    #   and `TargetTrackingScaling`. If the policy type is null, the value is
+    #   treated as `SimpleScaling`.
+    # @option options [String] :adjustment_type
+    #   The adjustment type. The valid values are `ChangeInCapacity`,
     #   `ExactCapacity`, and `PercentChangeInCapacity`.
+    #
+    #   This parameter is supported if the policy type is `SimpleScaling` or
+    #   `StepScaling`.
     #
     #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
     #   User Guide*.
@@ -436,6 +460,9 @@ module Aws::AutoScaling
     #   `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
     #   changes the `DesiredCapacity` of the Auto Scaling group by at least
     #   this many instances. Otherwise, the error is `ValidationError`.
+    #
+    #   This parameter is supported if the policy type is `SimpleScaling` or
+    #   `StepScaling`.
     # @option options [Integer] :scaling_adjustment
     #   The amount by which to scale, based on the specified adjustment type.
     #   A positive value adds to the current capacity while a negative number
@@ -448,8 +475,7 @@ module Aws::AutoScaling
     #   before the next scaling activity can start. If this parameter is not
     #   specified, the default cooldown period for the group applies.
     #
-    #   This parameter is not supported unless the policy type is
-    #   `SimpleScaling`.
+    #   This parameter is supported if the policy type is `SimpleScaling`.
     #
     #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
     #   Scaling User Guide*.
@@ -458,11 +484,11 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
     # @option options [String] :metric_aggregation_type
-    #   The aggregation type for the CloudWatch metrics. Valid values are
+    #   The aggregation type for the CloudWatch metrics. The valid values are
     #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
     #   the value is treated as `Average`.
     #
-    #   This parameter is not supported if the policy type is `SimpleScaling`.
+    #   This parameter is supported if the policy type is `StepScaling`.
     # @option options [Array<Types::StepAdjustment>] :step_adjustments
     #   A set of adjustments that enable you to scale based on the size of the
     #   alarm breach.
@@ -474,7 +500,13 @@ module Aws::AutoScaling
     #   contribute to the CloudWatch metrics. The default is to use the value
     #   specified for the default cooldown period for the group.
     #
-    #   This parameter is not supported if the policy type is `SimpleScaling`.
+    #   This parameter is supported if the policy type is `StepScaling` or
+    #   `TargetTrackingScaling`.
+    # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
+    #   The configuration of a target tracking policy.
+    #
+    #   This parameter is required if the policy type is
+    #   `TargetTrackingScaling` and not supported otherwise.
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)

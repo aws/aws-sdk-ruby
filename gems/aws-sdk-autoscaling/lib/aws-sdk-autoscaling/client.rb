@@ -434,9 +434,7 @@ module Aws::AutoScaling
     # @option params [Integer] :desired_capacity
     #   The number of EC2 instances that should be running in the group. This
     #   number must be greater than or equal to the minimum size of the group
-    #   and less than or equal to the maximum size of the group. If you do not
-    #   specify a desired capacity, the default is the minimum size of the
-    #   group.
+    #   and less than or equal to the maximum size of the group.
     #
     # @option params [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
@@ -653,12 +651,8 @@ module Aws::AutoScaling
     #
     # @option params [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    #   instances.
-    #
-    #   If you do not specify `InstanceId`, you must specify `ImageId`.
-    #
-    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   instances. For more information, see [Finding an AMI][1] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -720,12 +714,10 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @option params [String] :instance_id
-    #   The ID of the instance to use to create the launch configuration. The
-    #   new launch configuration derives attributes from the instance, with
-    #   the exception of the block device mapping.
+    #   The ID of the instance to use to create the launch configuration.
     #
-    #   If you do not specify `InstanceId`, you must specify both `ImageId`
-    #   and `InstanceType`.
+    #   The new launch configuration derives attributes from the instance,
+    #   with the exception of the block device mapping.
     #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
@@ -739,12 +731,9 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
     #
     # @option params [String] :instance_type
-    #   The instance type of the EC2 instance.
-    #
-    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
-    #
-    #   For information about available instance types, see [Available
-    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
+    #   The instance type of the EC2 instance. For information about available
+    #   instance types, see [ Available Instance Types][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide.*
     #
     #
     #
@@ -767,7 +756,7 @@ module Aws::AutoScaling
     #
     # @option params [Types::InstanceMonitoring] :instance_monitoring
     #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
-    #   the Auto Scaling instances. The default is `true`.
+    #   the Auto Scaling instances.
     #
     # @option params [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
@@ -2186,6 +2175,17 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].alarms #=> Array
     #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
     #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "ASGAverageCPUUtilization", "ASGAverageNetworkIn", "ASGAverageNetworkOut", "ALBRequestCountPerTarget"
+    #   resp.scaling_policies[0].target_tracking_configuration.predefined_metric_specification.resource_label #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metric_name #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.namespace #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.dimensions #=> Array
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
+    #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.unit #=> String
+    #   resp.scaling_policies[0].target_tracking_configuration.target_value #=> Float
+    #   resp.scaling_policies[0].target_tracking_configuration.disable_scale_in #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies AWS API Documentation
@@ -2575,8 +2575,8 @@ module Aws::AutoScaling
 
     # Removes one or more instances from the specified Auto Scaling group.
     #
-    # After the instances are detached, you can manage them independent of
-    # the Auto Scaling group.
+    # After the instances are detached, you can manage them independently
+    # from the rest of the Auto Scaling group.
     #
     # If you do not specify the option to decrement the desired capacity,
     # Auto Scaling launches instances to replace the ones that are detached.
@@ -2873,14 +2873,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances into the standby state.
+    # Moves the specified instances into `Standby` mode.
     #
-    # For more information, see [Temporarily Removing Instances from Your
-    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
+    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
+    # Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instances to move into `Standby` mode. You must specify at
@@ -3033,14 +3033,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances out of the standby state.
+    # Moves the specified instances out of `Standby` mode.
     #
-    # For more information, see [Temporarily Removing Instances from Your
-    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
+    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
+    # Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instance IDs. You must specify at least one instance ID.
@@ -3319,12 +3319,16 @@ module Aws::AutoScaling
     #   The name of the policy.
     #
     # @option params [String] :policy_type
-    #   The policy type. Valid values are `SimpleScaling` and `StepScaling`.
-    #   If the policy type is null, the value is treated as `SimpleScaling`.
+    #   The policy type. The valid values are `SimpleScaling`, `StepScaling`,
+    #   and `TargetTrackingScaling`. If the policy type is null, the value is
+    #   treated as `SimpleScaling`.
     #
-    # @option params [required, String] :adjustment_type
-    #   The adjustment type. Valid values are `ChangeInCapacity`,
+    # @option params [String] :adjustment_type
+    #   The adjustment type. The valid values are `ChangeInCapacity`,
     #   `ExactCapacity`, and `PercentChangeInCapacity`.
+    #
+    #   This parameter is supported if the policy type is `SimpleScaling` or
+    #   `StepScaling`.
     #
     #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
     #   User Guide*.
@@ -3343,6 +3347,9 @@ module Aws::AutoScaling
     #   changes the `DesiredCapacity` of the Auto Scaling group by at least
     #   this many instances. Otherwise, the error is `ValidationError`.
     #
+    #   This parameter is supported if the policy type is `SimpleScaling` or
+    #   `StepScaling`.
+    #
     # @option params [Integer] :scaling_adjustment
     #   The amount by which to scale, based on the specified adjustment type.
     #   A positive value adds to the current capacity while a negative number
@@ -3356,8 +3363,7 @@ module Aws::AutoScaling
     #   before the next scaling activity can start. If this parameter is not
     #   specified, the default cooldown period for the group applies.
     #
-    #   This parameter is not supported unless the policy type is
-    #   `SimpleScaling`.
+    #   This parameter is supported if the policy type is `SimpleScaling`.
     #
     #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
     #   Scaling User Guide*.
@@ -3367,11 +3373,11 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
     #
     # @option params [String] :metric_aggregation_type
-    #   The aggregation type for the CloudWatch metrics. Valid values are
+    #   The aggregation type for the CloudWatch metrics. The valid values are
     #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
     #   the value is treated as `Average`.
     #
-    #   This parameter is not supported if the policy type is `SimpleScaling`.
+    #   This parameter is supported if the policy type is `StepScaling`.
     #
     # @option params [Array<Types::StepAdjustment>] :step_adjustments
     #   A set of adjustments that enable you to scale based on the size of the
@@ -3385,11 +3391,19 @@ module Aws::AutoScaling
     #   contribute to the CloudWatch metrics. The default is to use the value
     #   specified for the default cooldown period for the group.
     #
-    #   This parameter is not supported if the policy type is `SimpleScaling`.
+    #   This parameter is supported if the policy type is `StepScaling` or
+    #   `TargetTrackingScaling`.
+    #
+    # @option params [Types::TargetTrackingConfiguration] :target_tracking_configuration
+    #   The configuration of a target tracking policy.
+    #
+    #   This parameter is required if the policy type is
+    #   `TargetTrackingScaling` and not supported otherwise.
     #
     # @return [Types::PolicyARNType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PolicyARNType#policy_arn #policy_arn} => String
+    #   * {Types::PolicyARNType#alarms #alarms} => Array&lt;Types::Alarm&gt;
     #
     #
     # @example Example: To add a scaling policy to an Auto Scaling group
@@ -3414,7 +3428,7 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     policy_name: "XmlStringMaxLen255", # required
     #     policy_type: "XmlStringMaxLen64",
-    #     adjustment_type: "XmlStringMaxLen255", # required
+    #     adjustment_type: "XmlStringMaxLen255",
     #     min_adjustment_step: 1,
     #     min_adjustment_magnitude: 1,
     #     scaling_adjustment: 1,
@@ -3428,11 +3442,34 @@ module Aws::AutoScaling
     #       },
     #     ],
     #     estimated_instance_warmup: 1,
+    #     target_tracking_configuration: {
+    #       predefined_metric_specification: {
+    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #         resource_label: "XmlStringMaxLen1023",
+    #       },
+    #       customized_metric_specification: {
+    #         metric_name: "MetricName", # required
+    #         namespace: "MetricNamespace", # required
+    #         dimensions: [
+    #           {
+    #             name: "MetricDimensionName", # required
+    #             value: "MetricDimensionValue", # required
+    #           },
+    #         ],
+    #         statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #         unit: "MetricUnit",
+    #       },
+    #       target_value: 1.0, # required
+    #       disable_scale_in: false,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.policy_arn #=> String
+    #   resp.alarms #=> Array
+    #   resp.alarms[0].alarm_name #=> String
+    #   resp.alarms[0].alarm_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicy AWS API Documentation
     #
@@ -3973,15 +4010,16 @@ module Aws::AutoScaling
 
     # Updates the configuration for the specified Auto Scaling group.
     #
-    # The new settings take effect on any scaling activities after this call
-    # returns. Scaling activities that are currently in progress aren't
-    # affected.
-    #
     # To update an Auto Scaling group with a launch configuration with
-    # `InstanceMonitoring` set to `false`, you must first disable the
+    # `InstanceMonitoring` set to `False`, you must first disable the
     # collection of group metrics. Otherwise, you will get an error. If you
     # have previously enabled the collection of group metrics, you can
     # disable it using DisableMetricsCollection.
+    #
+    # The new settings are registered upon the completion of this call. Any
+    # launch configuration settings take effect on any triggers after this
+    # call returns. Scaling activities that are currently in progress
+    # aren't affected.
     #
     # Note the following:
     #
@@ -4155,7 +4193,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 
