@@ -459,7 +459,7 @@ module Aws::EC2
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
     #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM consolew.
+    #     from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #

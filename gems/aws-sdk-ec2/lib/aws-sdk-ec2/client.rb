@@ -3552,6 +3552,63 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Grants an AWS authorized partner account permission to attach the
+    # specified network interface to an instance in their account.
+    #
+    # You can grant permission to a single AWS account only, and only one
+    # account at a time.
+    #
+    # @option params [required, String] :network_interface_id
+    #   The ID of the network interface.
+    #
+    # @option params [String] :aws_account_id
+    #   The AWS account ID.
+    #
+    # @option params [String] :aws_service
+    #   The AWS service. Currently not supported.
+    #
+    # @option params [required, String] :permission
+    #   The type of permission to grant.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateNetworkInterfacePermissionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkInterfacePermissionResult#interface_permission #interface_permission} => Types::NetworkInterfacePermission
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_interface_permission({
+    #     network_interface_id: "String", # required
+    #     aws_account_id: "String",
+    #     aws_service: "String",
+    #     permission: "INSTANCE-ATTACH", # required, accepts INSTANCE-ATTACH, EIP-ASSOCIATE
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.interface_permission.network_interface_permission_id #=> String
+    #   resp.interface_permission.network_interface_id #=> String
+    #   resp.interface_permission.aws_account_id #=> String
+    #   resp.interface_permission.aws_service #=> String
+    #   resp.interface_permission.permission #=> String, one of "INSTANCE-ATTACH", "EIP-ASSOCIATE"
+    #   resp.interface_permission.permission_state.state #=> String, one of "pending", "granted", "revoking", "revoked"
+    #   resp.interface_permission.permission_state.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermission AWS API Documentation
+    #
+    # @overload create_network_interface_permission(params = {})
+    # @param [Hash] params ({})
+    def create_network_interface_permission(params = {}, options = {})
+      req = build_request(:create_network_interface_permission, params)
+      req.send_request(options)
+    end
+
     # Creates a placement group that you launch cluster instances into. You
     # must give the group a name that's unique within the scope of your
     # account.
@@ -5477,6 +5534,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def delete_network_interface(params = {}, options = {})
       req = build_request(:delete_network_interface, params)
+      req.send_request(options)
+    end
+
+    # Deletes a permission for a network interface. By default, you cannot
+    # delete the permission if the account for which you're removing the
+    # permission has attached the network interface to an instance. However,
+    # you can force delete the permission, regardless of any attachment.
+    #
+    # @option params [required, String] :network_interface_permission_id
+    #   The ID of the network interface permission.
+    #
+    # @option params [Boolean] :force
+    #   Specify `true` to remove the permission even if the network interface
+    #   is attached to an instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteNetworkInterfacePermissionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNetworkInterfacePermissionResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_interface_permission({
+    #     network_interface_permission_id: "String", # required
+    #     force: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermission AWS API Documentation
+    #
+    # @overload delete_network_interface_permission(params = {})
+    # @param [Hash] params ({})
+    def delete_network_interface_permission(params = {}, options = {})
+      req = build_request(:delete_network_interface_permission, params)
       req.send_request(options)
     end
 
@@ -8374,7 +8474,8 @@ module Aws::EC2
     end
 
     # Describes the status of one or more instances. By default, only
-    # running instances are described, unless specified otherwise.
+    # running instances are described, unless you specifically indicate to
+    # return the status of all instances.
     #
     # Instance status includes the following components:
     #
@@ -9673,6 +9774,76 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_network_interface_attribute(params = {}, options = {})
       req = build_request(:describe_network_interface_attribute, params)
+      req.send_request(options)
+    end
+
+    # Describes the permissions for your network interfaces.
+    #
+    # @option params [Array<String>] :network_interface_permission_ids
+    #   One or more network interface permission IDs.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `network-interface-permission.network-interface-permission-id` - The
+    #     ID of the permission.
+    #
+    #   * `network-interface-permission.network-interface-id` - The ID of the
+    #     network interface.
+    #
+    #   * `network-interface-permission.aws-account-id` - The AWS account ID.
+    #
+    #   * `network-interface-permission.aws-service` - The AWS service.
+    #
+    #   * `network-interface-permission.permission` - The type of permission
+    #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. If this parameter is not specified, up to 50 results are
+    #   returned by default.
+    #
+    # @return [Types::DescribeNetworkInterfacePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNetworkInterfacePermissionsResult#network_interface_permissions #network_interface_permissions} => Array&lt;Types::NetworkInterfacePermission&gt;
+    #   * {Types::DescribeNetworkInterfacePermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_network_interface_permissions({
+    #     network_interface_permission_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_interface_permissions #=> Array
+    #   resp.network_interface_permissions[0].network_interface_permission_id #=> String
+    #   resp.network_interface_permissions[0].network_interface_id #=> String
+    #   resp.network_interface_permissions[0].aws_account_id #=> String
+    #   resp.network_interface_permissions[0].aws_service #=> String
+    #   resp.network_interface_permissions[0].permission #=> String, one of "INSTANCE-ATTACH", "EIP-ASSOCIATE"
+    #   resp.network_interface_permissions[0].permission_state.state #=> String, one of "pending", "granted", "revoking", "revoked"
+    #   resp.network_interface_permissions[0].permission_state.status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissions AWS API Documentation
+    #
+    # @overload describe_network_interface_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_network_interface_permissions(params = {}, options = {})
+      req = build_request(:describe_network_interface_permissions, params)
       req.send_request(options)
     end
 
@@ -11563,7 +11734,7 @@ module Aws::EC2
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
     #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM consolew.
+    #     from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -16191,7 +16362,7 @@ module Aws::EC2
     # @option params [Types::AttributeBooleanValue] :disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
-    #   this paramater for Spot Instances.
+    #   this parameter for Spot Instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20477,7 +20648,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 

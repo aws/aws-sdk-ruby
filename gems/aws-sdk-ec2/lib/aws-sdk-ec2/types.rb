@@ -3051,6 +3051,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateNetworkInterfacePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "String", # required
+    #         aws_account_id: "String",
+    #         aws_service: "String",
+    #         permission: "INSTANCE-ATTACH", # required, accepts INSTANCE-ATTACH, EIP-ASSOCIATE
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_service
+    #   The AWS service. Currently not supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The type of permission to grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermissionRequest AWS API Documentation
+    #
+    class CreateNetworkInterfacePermissionRequest < Struct.new(
+      :network_interface_id,
+      :aws_account_id,
+      :aws_service,
+      :permission,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] interface_permission
+    #   Information about the permission for the network interface.
+    #   @return [Types::NetworkInterfacePermission]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermissionResult AWS API Documentation
+    #
+    class CreateNetworkInterfacePermissionResult < Struct.new(
+      :interface_permission)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateNetworkInterface.
     #
     # @note When making an API call, you may pass CreateNetworkInterfaceRequest
@@ -4533,6 +4589,51 @@ module Aws::EC2
     class DeleteNetworkAclRequest < Struct.new(
       :dry_run,
       :network_acl_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteNetworkInterfacePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_permission_id: "String", # required
+    #         force: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] network_interface_permission_id
+    #   The ID of the network interface permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Specify `true` to remove the permission even if the network
+    #   interface is attached to an instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermissionRequest AWS API Documentation
+    #
+    class DeleteNetworkInterfacePermissionRequest < Struct.new(
+      :network_interface_permission_id,
+      :force,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds, otherwise returns an error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermissionResult AWS API Documentation
+    #
+    class DeleteNetworkInterfacePermissionResult < Struct.new(
+      :return)
       include Aws::Structure
     end
 
@@ -7679,6 +7780,80 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNetworkInterfacePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_permission_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] network_interface_permission_ids
+    #   One or more network interface permission IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `network-interface-permission.network-interface-permission-id` -
+    #     The ID of the permission.
+    #
+    #   * `network-interface-permission.network-interface-id` - The ID of
+    #     the network interface.
+    #
+    #   * `network-interface-permission.aws-account-id` - The AWS account
+    #     ID.
+    #
+    #   * `network-interface-permission.aws-service` - The AWS service.
+    #
+    #   * `network-interface-permission.permission` - The type of permission
+    #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. If this parameter is not specified, up to 50
+    #   results are returned by default.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsRequest AWS API Documentation
+    #
+    class DescribeNetworkInterfacePermissionsRequest < Struct.new(
+      :network_interface_permission_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_interface_permissions
+    #   The network interface permissions.
+    #   @return [Array<Types::NetworkInterfacePermission>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsResult AWS API Documentation
+    #
+    class DescribeNetworkInterfacePermissionsResult < Struct.new(
+      :network_interface_permissions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeNetworkInterfaces.
     #
     # @note When making an API call, you may pass DescribeNetworkInterfacesRequest
@@ -9112,7 +9287,7 @@ module Aws::EC2
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
     #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
     #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM consolew.
+    #     from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -15857,7 +16032,7 @@ module Aws::EC2
     # @!attribute [rw] disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
-    #   this paramater for Spot Instances.
+    #   this parameter for Spot Instances.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] dry_run
@@ -17229,6 +17404,62 @@ module Aws::EC2
     #
     class NetworkInterfaceIpv6Address < Struct.new(
       :ipv_6_address)
+      include Aws::Structure
+    end
+
+    # Describes a permission for a network interface.
+    #
+    # @!attribute [rw] network_interface_permission_id
+    #   The ID of the network interface permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_service
+    #   The AWS service.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   The type of permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_state
+    #   Information about the state of the permission.
+    #   @return [Types::NetworkInterfacePermissionState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePermission AWS API Documentation
+    #
+    class NetworkInterfacePermission < Struct.new(
+      :network_interface_permission_id,
+      :network_interface_id,
+      :aws_account_id,
+      :aws_service,
+      :permission,
+      :permission_state)
+      include Aws::Structure
+    end
+
+    # Describes the state of a network interface permission.
+    #
+    # @!attribute [rw] state
+    #   The state of the permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A status message, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePermissionState AWS API Documentation
+    #
+    class NetworkInterfacePermissionState < Struct.new(
+      :state,
+      :status_message)
       include Aws::Structure
     end
 

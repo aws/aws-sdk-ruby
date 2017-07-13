@@ -241,7 +241,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier under which the Authorizer will be created.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :name
     #   \[Required\] The name of the authorizer.
@@ -333,7 +333,7 @@ module Aws::APIGateway
     #   callers to specify a base path name after the domain name.
     #
     # @option params [required, String] :rest_api_id
-    #   The name of the API that you want to apply this mapping to.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :stage
     #   The name of the API's stage that you want to use for this mapping.
@@ -372,7 +372,7 @@ module Aws::APIGateway
     # callable over the internet.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi resource identifier for the Deployment resource to create.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :stage_name
     #   The name of the Stage resource for the Deployment resource to create.
@@ -436,8 +436,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-created
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, Types::DocumentationPartLocation] :location
     #   \[Required\] The location of the targeted API entity of the
@@ -487,8 +486,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] Specifies the API identifier of the to-be-created
-    #   documentation version.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_version
     #   \[Required\] The version identifier of the new snapshot.
@@ -647,8 +645,7 @@ module Aws::APIGateway
     # Creates a ReqeustValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the RestApi for which the
-    #   RequestValidator is created.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :name
     #   The name of the to-be-created RequestValidator.
@@ -695,7 +692,7 @@ module Aws::APIGateway
     # Creates a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi for the resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :parent_id
     #   The parent resource's identifier.
@@ -832,8 +829,7 @@ module Aws::APIGateway
     # for the API.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   create.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name for the Stage resource.
@@ -1067,7 +1063,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
     #   The identifier of the Authorizer resource.
@@ -1136,8 +1132,7 @@ module Aws::APIGateway
     # if there are no Stage resources associated with it.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Deployment resource to
-    #   delete.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
     #   The identifier of the Deployment resource to delete.
@@ -1159,8 +1154,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] Specifies the identifier of an API of the to-be-deleted
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_part_id
     #   \[Required\] The identifier of the to-be-deleted documentation part.
@@ -1182,8 +1176,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of a to-be-deleted documentation
-    #   snapshot.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_version
     #   \[Required\] The version identifier of a to-be-deleted documentation
@@ -1225,10 +1218,55 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Clears any customization of a GatewayResponse of a specified response
+    # type on the given RestApi and resets it with the default settings.
+    #
+    # @option params [required, String] :rest_api_id
+    #   The string identifier of the associated RestApi.
+    #
+    # @option params [required, String] :response_type
+    #   The response type of the associated GatewayResponse. Valid values are
+    #   * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway_response({
+    #     rest_api_id: "String", # required
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #   })
+    #
+    # @overload delete_gateway_response(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway_response(params = {}, options = {})
+      req = build_request(:delete_gateway_response, params)
+      req.send_request(options)
+    end
+
     # Represents a delete integration.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a delete integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a delete integration request's resource identifier.
@@ -1256,7 +1294,7 @@ module Aws::APIGateway
     # Represents a delete integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a delete integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a delete integration response request's resource
@@ -1289,7 +1327,7 @@ module Aws::APIGateway
     # Deletes an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the Method resource.
@@ -1317,7 +1355,7 @@ module Aws::APIGateway
     # Deletes an existing MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the MethodResponse resource.
@@ -1349,7 +1387,7 @@ module Aws::APIGateway
     # Deletes a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi under which the model will be deleted.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
     #   The name of the model to delete.
@@ -1373,8 +1411,7 @@ module Aws::APIGateway
     # Deletes a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the RestApi from which the given
-    #   RequestValidator is deleted.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of the RequestValidator to be deleted.
@@ -1398,7 +1435,7 @@ module Aws::APIGateway
     # Deletes a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Resource resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the Resource resource.
@@ -1422,7 +1459,7 @@ module Aws::APIGateway
     # Deletes the specified API.
     #
     # @option params [required, String] :rest_api_id
-    #   The ID of the RestApi you want to delete.
+    #   The string identifier of the associated RestApi.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1442,8 +1479,7 @@ module Aws::APIGateway
     # Deletes a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   delete.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the Stage resource to delete.
@@ -1514,7 +1550,7 @@ module Aws::APIGateway
     # Flushes all authorizer cache entries on a stage.
     #
     # @option params [required, String] :rest_api_id
-    #   The API identifier of the stage to flush.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the stage to flush.
@@ -1538,7 +1574,7 @@ module Aws::APIGateway
     # Flushes a stage's cache.
     #
     # @option params [required, String] :rest_api_id
-    #   The API identifier of the stage to flush its cache.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the stage to flush its cache.
@@ -1672,7 +1708,7 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of ApiKeys to get information about.
+    #   The maximum number of returned results per page.
     #
     # @option params [String] :name_query
     #   The name of queried API keys.
@@ -1736,7 +1772,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
     #   The identifier of the Authorizer resource.
@@ -1793,7 +1829,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Authorizers resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -1989,8 +2025,7 @@ module Aws::APIGateway
     # Gets information about a Deployment resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Deployment resource to
-    #   get information about.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
     #   The identifier of the Deployment resource to get information about.
@@ -2043,8 +2078,7 @@ module Aws::APIGateway
     # Gets information about a Deployments collection.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the collection of
-    #   Deployment resources to get information about.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -2086,11 +2120,10 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-retrieved
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_part_id
-    #   \[Required\] The identifier of the to-be-retrieved documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2123,8 +2156,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the API of the to-be-retrieved
-    #   documentation parts.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :type
     #   The type of API entities of the to-be-retrieved documentation parts.
@@ -2177,8 +2209,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the API of the to-be-retrieved
-    #   documentation snapshot.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_version
     #   \[Required\] The version identifier of the to-be-retrieved
@@ -2211,8 +2242,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-retrieved
-    #   documentation versions.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -2324,7 +2354,7 @@ module Aws::APIGateway
     # Exports a deployed version of a RestApi in a specified format.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi to be exported.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the Stage that will be exported.
@@ -2379,10 +2409,121 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Gets a GatewayResponse of a specified response type on the given
+    # RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   The string identifier of the associated RestApi.
+    #
+    # @option params [required, String] :response_type
+    #   The response type of the associated GatewayResponse. Valid values are
+    #   * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #
+    # @return [Types::GatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GatewayResponse#response_type #response_type} => String
+    #   * {Types::GatewayResponse#status_code #status_code} => String
+    #   * {Types::GatewayResponse#response_parameters #response_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#response_templates #response_templates} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#default_response #default_response} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway_response({
+    #     rest_api_id: "String", # required
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.status_code #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["String"] #=> String
+    #   resp.response_templates #=> Hash
+    #   resp.response_templates["String"] #=> String
+    #   resp.default_response #=> Boolean
+    #
+    # @overload get_gateway_response(params = {})
+    # @param [Hash] params ({})
+    def get_gateway_response(params = {}, options = {})
+      req = build_request(:get_gateway_response, params)
+      req.send_request(options)
+    end
+
+    # Gets the GatewayResponses collection on the given RestApi. If an API
+    # developer has not added any definitions for gateway responses, the
+    # result will be the Amazon API Gateway-generated default
+    # GatewayResponses collection for the supported response types.
+    #
+    # @option params [required, String] :rest_api_id
+    #   The string identifier of the associated RestApi.
+    #
+    # @option params [String] :position
+    #   The current pagination position in the paged result set. The
+    #   GatewayResponse collection does not support pagination and the
+    #   position does not apply here.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of returned results per page. The GatewayResponses
+    #   collection does not support pagination and the limit does not apply
+    #   here.
+    #
+    # @return [Types::GatewayResponses] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GatewayResponses#position #position} => String
+    #   * {Types::GatewayResponses#items #items} => Array&lt;Types::GatewayResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway_responses({
+    #     rest_api_id: "String", # required
+    #     position: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.items[0].status_code #=> String
+    #   resp.items[0].response_parameters #=> Hash
+    #   resp.items[0].response_parameters["String"] #=> String
+    #   resp.items[0].response_templates #=> Hash
+    #   resp.items[0].response_templates["String"] #=> String
+    #   resp.items[0].default_response #=> Boolean
+    #
+    # @overload get_gateway_responses(params = {})
+    # @param [Hash] params ({})
+    def get_gateway_responses(params = {}, options = {})
+      req = build_request(:get_gateway_responses, params)
+      req.send_request(options)
+    end
+
     # Represents a get integration.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a get integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a get integration request's resource identifier
@@ -2446,7 +2587,7 @@ module Aws::APIGateway
     # Represents a get integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a get integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a get integration response request's resource identifier.
@@ -2494,7 +2635,7 @@ module Aws::APIGateway
     # Describe an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the Method resource.
@@ -2573,7 +2714,7 @@ module Aws::APIGateway
     # Describes a MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the MethodResponse resource.
@@ -2662,7 +2803,7 @@ module Aws::APIGateway
     # payload into the structure of a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The ID of the RestApi under which the model exists.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
     #   The name of the model for which to generate a template.
@@ -2692,7 +2833,7 @@ module Aws::APIGateway
     # Describes existing Models defined for a RestApi resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -2734,8 +2875,7 @@ module Aws::APIGateway
     # Gets a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the RestApi to which the specified
-    #   RequestValidator belongs.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of the RequestValidator to be retrieved.
@@ -2771,8 +2911,7 @@ module Aws::APIGateway
     # Gets the RequestValidators collection of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of a RestApi to which the
-    #   RequestValidators collection belongs.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -2812,7 +2951,7 @@ module Aws::APIGateway
     # Lists information about a resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The identifier for the Resource resource.
@@ -2897,7 +3036,7 @@ module Aws::APIGateway
     # Lists information about a collection of Resource resources.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
@@ -3068,7 +3207,7 @@ module Aws::APIGateway
     # Generates a client SDK for a RestApi and Stage.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi that the SDK will use.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the Stage that the SDK will use.
@@ -3191,8 +3330,7 @@ module Aws::APIGateway
     # Gets information about a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to get
-    #   information about.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the Stage resource to get information about.
@@ -3255,7 +3393,7 @@ module Aws::APIGateway
     # Gets information about one or more Stage resources.
     #
     # @option params [required, String] :rest_api_id
-    #   The stages' API identifiers.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :deployment_id
     #   The stages' deployment identifiers.
@@ -3586,8 +3724,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-imported
-    #   documentation parts.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :mode
     #   A query parameter to indicate whether to overwrite (`OVERWRITE`) any
@@ -3641,11 +3778,16 @@ module Aws::APIGateway
     #   value is `false`.
     #
     # @option params [Hash<String,String>] :parameters
-    #   Custom header parameters as part of the request.
+    #   Custom header parameters as part of the request. For example, to
+    #   exclude DocumentationParts from an imported API, set
+    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
+    #   command of `aws apigateway import-rest-api --parameters
+    #   ignore=documentation --body 'file:///path/to/imported-api-body.json`.
     #
     # @option params [required, String, IO] :body
     #   The POST request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported.
+    #   only Swagger definition JSON files are supported. The maximum size of
+    #   the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3686,10 +3828,89 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Represents a put integration.
+    # Creates a customization of a GatewayResponse of a specified response
+    # type and status code on the given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a put integration request's API identifier.
+    #   The string identifier of the associated RestApi.
+    #
+    # @option params [required, String] :response_type
+    #   The response type of the associated GatewayResponse. Valid values are
+    #   * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #
+    # @option params [String] :status_code
+    #   The HTTP status code of the GatewayResponse.
+    #
+    # @option params [Hash<String,String>] :response_parameters
+    #   Response parameters (paths, query strings and headers) of the
+    #   GatewayResponse as a string-to-string map of key-value pairs.
+    #
+    # @option params [Hash<String,String>] :response_templates
+    #   Response templates of the GatewayResponse as a string-to-string map of
+    #   key-value pairs.
+    #
+    # @return [Types::GatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GatewayResponse#response_type #response_type} => String
+    #   * {Types::GatewayResponse#status_code #status_code} => String
+    #   * {Types::GatewayResponse#response_parameters #response_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#response_templates #response_templates} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#default_response #default_response} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_gateway_response({
+    #     rest_api_id: "String", # required
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     status_code: "StatusCode",
+    #     response_parameters: {
+    #       "String" => "String",
+    #     },
+    #     response_templates: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.status_code #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["String"] #=> String
+    #   resp.response_templates #=> Hash
+    #   resp.response_templates["String"] #=> String
+    #   resp.default_response #=> Boolean
+    #
+    # @overload put_gateway_response(params = {})
+    # @param [Hash] params ({})
+    def put_gateway_response(params = {}, options = {})
+      req = build_request(:put_gateway_response, params)
+      req.send_request(options)
+    end
+
+    # Sets up a method's integration.
+    #
+    # @option params [required, String] :rest_api_id
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a put integration request's resource ID.
@@ -3705,12 +3926,21 @@ module Aws::APIGateway
     #   HTTP or AWS, this field is required.
     #
     # @option params [String] :uri
-    #   Specifies a put integration input's Uniform Resource Identifier
-    #   (URI). When the integration type is HTTP or AWS, this field is
-    #   required. For integration with Lambda as an AWS service proxy, this
-    #   value is of the
-    #   'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations'
-    #   format.
+    #   Specifies the integration's Uniform Resource Identifier (URI). For
+    #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL
+    #   according to the [RFC-3986 specification][1]. For AWS integrations,
+    #   the URI should be of the form
+    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:\{path|action\}/\{service_api\}`.
+    #   `Region`, `subdomain` and `service` are used to determine the right
+    #   endpoint. For AWS services that use the `Action=` query string
+    #   parameter, `service_api` should be a valid action for the desired
+    #   service. For RESTful AWS service APIs, `path` is used to indicate that
+    #   the remaining substring in the URI should be treated as the path to
+    #   the resource, including the initial `/`.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #
     # @option params [String] :credentials
     #   Specifies whether credentials are required for a put integration.
@@ -3842,7 +4072,7 @@ module Aws::APIGateway
     # Represents a put integration.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a put integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a put integration response request's resource identifier.
@@ -3933,7 +4163,7 @@ module Aws::APIGateway
     # Add a method to an existing Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the new Method resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the new Method resource.
@@ -4066,7 +4296,7 @@ module Aws::APIGateway
     # Adds a MethodResponse to an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the Method resource.
@@ -4140,7 +4370,7 @@ module Aws::APIGateway
     # or overwriting the existing API.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi to be updated.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [String] :mode
     #   The `mode` query parameter to specify the update mode. Valid values
@@ -4153,11 +4383,16 @@ module Aws::APIGateway
     #   value is `false`.
     #
     # @option params [Hash<String,String>] :parameters
-    #   Custom headers supplied as part of the request.
+    #   Custom header parameters as part of the request. For example, to
+    #   exclude DocumentationParts from an imported API, set
+    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
+    #   command of `aws apigateway import-rest-api --parameters
+    #   ignore=documentation --body 'file:///path/to/imported-api-body.json`.
     #
     # @option params [required, String, IO] :body
     #   The PUT request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported.
+    #   only Swagger definition JSON files are supported. The maximum size of
+    #   the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4212,7 +4447,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a test invoke authorizer request's RestApi identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
     #   Specifies a test invoke authorizer request's Authorizer ID.
@@ -4290,7 +4525,7 @@ module Aws::APIGateway
     # parameters, and an incoming request body.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies a test invoke method request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies a test invoke method request's resource ID.
@@ -4467,7 +4702,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
     #   The identifier of the Authorizer resource.
@@ -4620,8 +4855,7 @@ module Aws::APIGateway
     # Changes information about a Deployment resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The replacement identifier of the RestApi resource for the Deployment
-    #   resource to change information about.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
     #   The replacement identifier for the Deployment resource to change
@@ -4671,8 +4905,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-updated
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_part_id
     #   \[Required\] The identifier of the to-be-updated documentation part.
@@ -4720,8 +4953,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-updated
-    #   documentation version.
+    #   \[Required\] The string identifier of the associated RestApi..
     #
     # @option params [required, String] :documentation_version
     #   \[Required\] The version identifier of the to-be-updated documentation
@@ -4811,10 +5043,83 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Updates a GatewayResponse of a specified response type on the given
+    # RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   The string identifier of the associated RestApi.
+    #
+    # @option params [required, String] :response_type
+    #   The response type of the associated GatewayResponse. Valid values are
+    #   * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #
+    # @option params [Array<Types::PatchOperation>] :patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #
+    # @return [Types::GatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GatewayResponse#response_type #response_type} => String
+    #   * {Types::GatewayResponse#status_code #status_code} => String
+    #   * {Types::GatewayResponse#response_parameters #response_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#response_templates #response_templates} => Hash&lt;String,String&gt;
+    #   * {Types::GatewayResponse#default_response #default_response} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_response({
+    #     rest_api_id: "String", # required
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     patch_operations: [
+    #       {
+    #         op: "add", # accepts add, remove, replace, move, copy, test
+    #         path: "String",
+    #         value: "String",
+    #         from: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.status_code #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["String"] #=> String
+    #   resp.response_templates #=> Hash
+    #   resp.response_templates["String"] #=> String
+    #   resp.default_response #=> Boolean
+    #
+    # @overload update_gateway_response(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_response(params = {}, options = {})
+      req = build_request(:update_gateway_response, params)
+      req.send_request(options)
+    end
+
     # Represents an update integration.
     #
     # @option params [required, String] :rest_api_id
-    #   Represents an update integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Represents an update integration request's resource identifier.
@@ -4890,7 +5195,7 @@ module Aws::APIGateway
     # Represents an update integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   Specifies an update integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   Specifies an update integration response request's resource
@@ -4951,7 +5256,7 @@ module Aws::APIGateway
     # Updates an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the Method resource.
@@ -5042,7 +5347,7 @@ module Aws::APIGateway
     # Updates an existing MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The Resource identifier for the MethodResponse resource.
@@ -5098,7 +5403,7 @@ module Aws::APIGateway
     # Changes information about a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier under which the model exists.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
     #   The name of the model to update.
@@ -5148,8 +5453,7 @@ module Aws::APIGateway
     # Updates a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   \[Required\] The identifier of the RestApi for which the given
-    #   RequestValidator is updated.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of RequestValidator to be updated.
@@ -5197,7 +5501,7 @@ module Aws::APIGateway
     # Changes information about a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier for the Resource resource.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the Resource resource.
@@ -5284,7 +5588,7 @@ module Aws::APIGateway
     # Changes information about the specified API.
     #
     # @option params [required, String] :rest_api_id
-    #   The ID of the RestApi you want to update.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5336,8 +5640,7 @@ module Aws::APIGateway
     # Changes information about a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   change information about.
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   The name of the Stage resource to change information about.
@@ -5409,7 +5712,7 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Grants a temporary extension to the reamining quota of a usage plan
+    # Grants a temporary extension to the remaining quota of a usage plan
     # associated with a specified API key.
     #
     # @option params [required, String] :usage_plan_id
@@ -5532,7 +5835,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

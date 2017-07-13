@@ -703,7 +703,7 @@ module Aws::EC2
     # @option options [Types::AttributeBooleanValue] :disable_api_termination
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
-    #   this paramater for Spot Instances.
+    #   this parameter for Spot Instances.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

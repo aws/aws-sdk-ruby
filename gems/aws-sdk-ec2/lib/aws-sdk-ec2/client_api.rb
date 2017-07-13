@@ -144,6 +144,8 @@ module Aws::EC2
     CreateNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'CreateNetworkAclEntryRequest')
     CreateNetworkAclRequest = Shapes::StructureShape.new(name: 'CreateNetworkAclRequest')
     CreateNetworkAclResult = Shapes::StructureShape.new(name: 'CreateNetworkAclResult')
+    CreateNetworkInterfacePermissionRequest = Shapes::StructureShape.new(name: 'CreateNetworkInterfacePermissionRequest')
+    CreateNetworkInterfacePermissionResult = Shapes::StructureShape.new(name: 'CreateNetworkInterfacePermissionResult')
     CreateNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'CreateNetworkInterfaceRequest')
     CreateNetworkInterfaceResult = Shapes::StructureShape.new(name: 'CreateNetworkInterfaceResult')
     CreatePlacementGroupRequest = Shapes::StructureShape.new(name: 'CreatePlacementGroupRequest')
@@ -194,6 +196,8 @@ module Aws::EC2
     DeleteNatGatewayResult = Shapes::StructureShape.new(name: 'DeleteNatGatewayResult')
     DeleteNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'DeleteNetworkAclEntryRequest')
     DeleteNetworkAclRequest = Shapes::StructureShape.new(name: 'DeleteNetworkAclRequest')
+    DeleteNetworkInterfacePermissionRequest = Shapes::StructureShape.new(name: 'DeleteNetworkInterfacePermissionRequest')
+    DeleteNetworkInterfacePermissionResult = Shapes::StructureShape.new(name: 'DeleteNetworkInterfacePermissionResult')
     DeleteNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteNetworkInterfaceRequest')
     DeletePlacementGroupRequest = Shapes::StructureShape.new(name: 'DeletePlacementGroupRequest')
     DeleteRouteRequest = Shapes::StructureShape.new(name: 'DeleteRouteRequest')
@@ -274,6 +278,8 @@ module Aws::EC2
     DescribeNetworkAclsResult = Shapes::StructureShape.new(name: 'DescribeNetworkAclsResult')
     DescribeNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'DescribeNetworkInterfaceAttributeRequest')
     DescribeNetworkInterfaceAttributeResult = Shapes::StructureShape.new(name: 'DescribeNetworkInterfaceAttributeResult')
+    DescribeNetworkInterfacePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacePermissionsRequest')
+    DescribeNetworkInterfacePermissionsResult = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacePermissionsResult')
     DescribeNetworkInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacesRequest')
     DescribeNetworkInterfacesResult = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacesResult')
     DescribePlacementGroupsRequest = Shapes::StructureShape.new(name: 'DescribePlacementGroupsRequest')
@@ -528,6 +534,7 @@ module Aws::EC2
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InterfacePermissionType = Shapes::StringShape.new(name: 'InterfacePermissionType')
     InternetGateway = Shapes::StructureShape.new(name: 'InternetGateway')
     InternetGatewayAttachment = Shapes::StructureShape.new(name: 'InternetGatewayAttachment')
     InternetGatewayAttachmentList = Shapes::ListShape.new(name: 'InternetGatewayAttachmentList')
@@ -608,6 +615,11 @@ module Aws::EC2
     NetworkInterfaceIpv6Address = Shapes::StructureShape.new(name: 'NetworkInterfaceIpv6Address')
     NetworkInterfaceIpv6AddressesList = Shapes::ListShape.new(name: 'NetworkInterfaceIpv6AddressesList')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
+    NetworkInterfacePermission = Shapes::StructureShape.new(name: 'NetworkInterfacePermission')
+    NetworkInterfacePermissionIdList = Shapes::ListShape.new(name: 'NetworkInterfacePermissionIdList')
+    NetworkInterfacePermissionList = Shapes::ListShape.new(name: 'NetworkInterfacePermissionList')
+    NetworkInterfacePermissionState = Shapes::StructureShape.new(name: 'NetworkInterfacePermissionState')
+    NetworkInterfacePermissionStateCode = Shapes::StringShape.new(name: 'NetworkInterfacePermissionStateCode')
     NetworkInterfacePrivateIpAddress = Shapes::StructureShape.new(name: 'NetworkInterfacePrivateIpAddress')
     NetworkInterfacePrivateIpAddressList = Shapes::ListShape.new(name: 'NetworkInterfacePrivateIpAddressList')
     NetworkInterfaceStatus = Shapes::StringShape.new(name: 'NetworkInterfaceStatus')
@@ -1438,6 +1450,16 @@ module Aws::EC2
     CreateNetworkAclResult.add_member(:network_acl, Shapes::ShapeRef.new(shape: NetworkAcl, location_name: "networkAcl"))
     CreateNetworkAclResult.struct_class = Types::CreateNetworkAclResult
 
+    CreateNetworkInterfacePermissionRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NetworkInterfaceId"))
+    CreateNetworkInterfacePermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: String, location_name: "AwsAccountId"))
+    CreateNetworkInterfacePermissionRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: String, location_name: "AwsService"))
+    CreateNetworkInterfacePermissionRequest.add_member(:permission, Shapes::ShapeRef.new(shape: InterfacePermissionType, required: true, location_name: "Permission"))
+    CreateNetworkInterfacePermissionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateNetworkInterfacePermissionRequest.struct_class = Types::CreateNetworkInterfacePermissionRequest
+
+    CreateNetworkInterfacePermissionResult.add_member(:interface_permission, Shapes::ShapeRef.new(shape: NetworkInterfacePermission, location_name: "interfacePermission"))
+    CreateNetworkInterfacePermissionResult.struct_class = Types::CreateNetworkInterfacePermissionResult
+
     CreateNetworkInterfaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateNetworkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateNetworkInterfaceRequest.add_member(:groups, Shapes::ShapeRef.new(shape: SecurityGroupIdStringList, location_name: "SecurityGroupId"))
@@ -1654,6 +1676,14 @@ module Aws::EC2
     DeleteNetworkAclRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteNetworkAclRequest.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkAclId"))
     DeleteNetworkAclRequest.struct_class = Types::DeleteNetworkAclRequest
+
+    DeleteNetworkInterfacePermissionRequest.add_member(:network_interface_permission_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NetworkInterfacePermissionId"))
+    DeleteNetworkInterfacePermissionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
+    DeleteNetworkInterfacePermissionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteNetworkInterfacePermissionRequest.struct_class = Types::DeleteNetworkInterfacePermissionRequest
+
+    DeleteNetworkInterfacePermissionResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DeleteNetworkInterfacePermissionResult.struct_class = Types::DeleteNetworkInterfacePermissionResult
 
     DeleteNetworkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
@@ -2014,6 +2044,16 @@ module Aws::EC2
     DescribeNetworkInterfaceAttributeResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     DescribeNetworkInterfaceAttributeResult.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
     DescribeNetworkInterfaceAttributeResult.struct_class = Types::DescribeNetworkInterfaceAttributeResult
+
+    DescribeNetworkInterfacePermissionsRequest.add_member(:network_interface_permission_ids, Shapes::ShapeRef.new(shape: NetworkInterfacePermissionIdList, location_name: "NetworkInterfacePermissionId"))
+    DescribeNetworkInterfacePermissionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeNetworkInterfacePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeNetworkInterfacePermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeNetworkInterfacePermissionsRequest.struct_class = Types::DescribeNetworkInterfacePermissionsRequest
+
+    DescribeNetworkInterfacePermissionsResult.add_member(:network_interface_permissions, Shapes::ShapeRef.new(shape: NetworkInterfacePermissionList, location_name: "networkInterfacePermissions"))
+    DescribeNetworkInterfacePermissionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeNetworkInterfacePermissionsResult.struct_class = Types::DescribeNetworkInterfacePermissionsResult
 
     DescribeNetworkInterfacesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filter"))
     DescribeNetworkInterfacesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -3499,6 +3539,22 @@ module Aws::EC2
     NetworkInterfaceIpv6AddressesList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceIpv6Address, location_name: "item")
 
     NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "item")
+
+    NetworkInterfacePermission.add_member(:network_interface_permission_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfacePermissionId"))
+    NetworkInterfacePermission.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+    NetworkInterfacePermission.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: String, location_name: "awsAccountId"))
+    NetworkInterfacePermission.add_member(:aws_service, Shapes::ShapeRef.new(shape: String, location_name: "awsService"))
+    NetworkInterfacePermission.add_member(:permission, Shapes::ShapeRef.new(shape: InterfacePermissionType, location_name: "permission"))
+    NetworkInterfacePermission.add_member(:permission_state, Shapes::ShapeRef.new(shape: NetworkInterfacePermissionState, location_name: "permissionState"))
+    NetworkInterfacePermission.struct_class = Types::NetworkInterfacePermission
+
+    NetworkInterfacePermissionIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    NetworkInterfacePermissionList.member = Shapes::ShapeRef.new(shape: NetworkInterfacePermission, location_name: "item")
+
+    NetworkInterfacePermissionState.add_member(:state, Shapes::ShapeRef.new(shape: NetworkInterfacePermissionStateCode, location_name: "state"))
+    NetworkInterfacePermissionState.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    NetworkInterfacePermissionState.struct_class = Types::NetworkInterfacePermissionState
 
     NetworkInterfacePrivateIpAddress.add_member(:association, Shapes::ShapeRef.new(shape: NetworkInterfaceAssociation, location_name: "association"))
     NetworkInterfacePrivateIpAddress.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "primary"))
@@ -5148,6 +5204,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateNetworkInterfaceResult)
       end)
 
+      api.add_operation(:create_network_interface_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNetworkInterfacePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNetworkInterfacePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNetworkInterfacePermissionResult)
+      end)
+
       api.add_operation(:create_placement_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePlacementGroup"
         o.http_method = "POST"
@@ -5354,6 +5418,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_network_interface_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetworkInterfacePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkInterfacePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkInterfacePermissionResult)
       end)
 
       api.add_operation(:delete_placement_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5748,6 +5820,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeNetworkInterfaceAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeNetworkInterfaceAttributeResult)
+      end)
+
+      api.add_operation(:describe_network_interface_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNetworkInterfacePermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacePermissionsResult)
       end)
 
       api.add_operation(:describe_network_interfaces, Seahorse::Model::Operation.new.tap do |o|

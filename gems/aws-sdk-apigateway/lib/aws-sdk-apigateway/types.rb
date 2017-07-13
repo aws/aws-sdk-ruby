@@ -178,8 +178,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of any ApiKey resources in the collection of ApiKey
-    #   resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::ApiKey>]
     #
     class ApiKeys < Struct.new(
@@ -325,7 +324,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Gets the current list of Authorizer resources in the collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::Authorizer>]
     #
     class Authorizers < Struct.new(
@@ -356,11 +355,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] rest_api_id
-    #   The name of the API.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage
-    #   The name of the API's stage.
+    #   The name of the associated stage.
     #   @return [String]
     #
     class BasePathMapping < Struct.new(
@@ -384,8 +383,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of any BasePathMapping resources in the collection
-    #   of base path mapping resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::BasePathMapping>]
     #
     class BasePathMappings < Struct.new(
@@ -456,8 +454,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of any ClientCertificate resources in the
-    #   collection of ClientCertificate resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::ClientCertificate>]
     #
     class ClientCertificates < Struct.new(
@@ -547,7 +544,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier under which the Authorizer will be created.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -626,7 +623,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] rest_api_id
-    #   The name of the API that you want to apply this mapping to.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -661,8 +658,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi resource identifier for the Deployment resource to
-    #   create.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -725,8 +721,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-created
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -761,8 +756,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] Specifies the API identifier of the to-be-created
-    #   documentation version.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_version
@@ -901,8 +895,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the RestApi for which the
-    #   RequestValidator is created.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -940,7 +933,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi for the resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] parent_id
@@ -1020,8 +1013,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   create.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -1184,7 +1176,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -1250,8 +1242,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Deployment resource
-    #   to delete.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -1275,8 +1266,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] Specifies the identifier of an API of the to-be-deleted
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_part_id
@@ -1300,8 +1290,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of a to-be-deleted
-    #   documentation snapshot.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_version
@@ -1333,6 +1322,51 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Clears any customization of a GatewayResponse of a specified response
+    # type on the given RestApi and resets it with the default settings.
+    #
+    # @note When making an API call, you may pass DeleteGatewayResponseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   The string identifier of the associated RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_type
+    #   The response type of the associated GatewayResponse. Valid values
+    #   are * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   @return [String]
+    #
+    class DeleteGatewayResponseRequest < Struct.new(
+      :rest_api_id,
+      :response_type)
+      include Aws::Structure
+    end
+
     # Represents a delete integration request.
     #
     # @note When making an API call, you may pass DeleteIntegrationRequest
@@ -1345,7 +1379,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a delete integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1376,7 +1410,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a delete integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1412,7 +1446,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1443,7 +1477,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1477,7 +1511,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi under which the model will be deleted.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -1501,8 +1535,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the RestApi from which the given
-    #   RequestValidator is deleted.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -1526,7 +1559,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Resource resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1549,7 +1582,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The ID of the RestApi you want to delete.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     class DeleteRestApiRequest < Struct.new(
@@ -1568,8 +1601,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   delete.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -1609,7 +1641,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # The DELETE request to delete a uasge plan of a given plan Id.
+    # The DELETE request to delete a usage plan of a given plan Id.
     #
     # @note When making an API call, you may pass DeleteUsagePlanRequest
     #   data as a hash:
@@ -1698,8 +1730,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of any Deployment resources in the collection of
-    #   deployment resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::Deployment>]
     #
     class Deployments < Struct.new(
@@ -1888,8 +1919,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of DocumentationPart resources in the
-    #   DocumentationParts collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::DocumentationPart>]
     #
     class DocumentationParts < Struct.new(
@@ -1954,8 +1984,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of DocumentationVersion items from the
-    #   DocumentationVersions collection of an API.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::DocumentationVersion>]
     #
     class DocumentationVersions < Struct.new(
@@ -2024,8 +2053,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of any DomainName resources in the collection of
-    #   DomainName resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::DomainName>]
     #
     class DomainNames < Struct.new(
@@ -2068,7 +2096,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The API identifier of the stage to flush.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -2092,7 +2120,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The API identifier of the stage to flush its cache.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -2102,6 +2130,152 @@ module Aws::APIGateway
     class FlushStageCacheRequest < Struct.new(
       :rest_api_id,
       :stage_name)
+      include Aws::Structure
+    end
+
+    # A gateway response of a given response type and status code, with
+    # optional response parameters and mapping templates.
+    #
+    # <div class="remarks">
+    # For more information about valid gateway response types, see [Gateway
+    # Response Types Supported by Amazon API Gateway][1]
+    # <div class="example" markdown="1">
+    # #### Example: Get a Gateway Response of a given response type
+    #
+    # ##### Request
+    #
+    # This example shows how to get a gateway response of the
+    # `MISSING_AUTHNETICATION_TOKEN` type.
+    #
+    #     GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1 Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256 Credential=\{access-key-id\}/20170503/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45
+    #
+    # The response type is specified as a URL path.
+    #
+    # ##### Response
+    #
+    # The successful operation returns the `200 OK` status code and a
+    # payload similar to the following:
+    #
+    #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-\{rel\}.html", "name": "gatewayresponse", "templated": true \}, "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \}, "gatewayresponse:delete": \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \} \}, "defaultResponse": false, "responseParameters": \{ "gatewayresponse.header.x-request-path": "method.request.path.petId", "gatewayresponse.header.Access-Control-Allow-Origin": "'a.b.c'", "gatewayresponse.header.x-request-query": "method.request.querystring.q", "gatewayresponse.header.x-request-header": "method.request.header.Accept" \}, "responseTemplates": \{ "application/json": "\{\n "message": $context.error.messageString,\n "type": "$context.error.responseType",\n "stage": "$context.stage",\n "resourcePath": "$context.resourcePath",\n "stageVariables.a": "$stageVariables.a",\n "statusCode": "'404'"\n\}" \}, "responseType": "MISSING_AUTHENTICATION_TOKEN", "statusCode": "404" \}
+    #
+    #
+    #
+    # </div>
+    # </div>
+    #
+    # <div class="seeAlso">
+    # [Customize Gateway Responses][2]
+    # </div>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
+    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
+    #
+    # @!attribute [rw] response_type
+    #   The response type of the associated GatewayResponse. Valid values
+    #   are * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP status code for this GatewayResponse.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_parameters
+    #   Response parameters (paths, query strings and headers) of the
+    #   GatewayResponse as a string-to-string map of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] response_templates
+    #   Response templates of the GatewayResponse as a string-to-string map
+    #   of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] default_response
+    #   A Boolean flag to indicate whether this GatewayResponse is the
+    #   default gateway response (`true`) or not (`false`). A default
+    #   gateway response is one generated by Amazon API Gateway without any
+    #   customization by an API developer.
+    #   @return [Boolean]
+    #
+    class GatewayResponse < Struct.new(
+      :response_type,
+      :status_code,
+      :response_parameters,
+      :response_templates,
+      :default_response)
+      include Aws::Structure
+    end
+
+    # The collection of the GatewayResponse instances of a RestApi as a
+    # `responseType`-to-GatewayResponse object map of key-value pairs. As
+    # such, pagination is not supported for querying this collection.
+    #
+    # <div class="remarks">
+    # For more information about valid gateway response types, see [Gateway
+    # Response Types Supported by Amazon API Gateway][1]
+    # <div class="example" markdown="1">
+    # #### Example: Get the collection of gateway responses of an API
+    #
+    # ##### Request
+    #
+    # This example request shows how to retrieve the GatewayResponses
+    # collection from an API.
+    #
+    #     GET /restapis/o81lxisefl/gatewayresponses HTTP/1.1 Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json X-Amz-Date: 20170503T220604Z Authorization: AWS4-HMAC-SHA256 Credential=\{access-key-id\}/20170503/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=59b42fe54a76a5de8adf2c67baa6d39206f8e9ad49a1d77ccc6a5da3103a398a Cache-Control: no-cache Postman-Token: 5637af27-dc29-fc5c-9dfe-0645d52cb515
+    #
+    #
+    #
+    # ##### Response
+    #
+    # The successful operation returns the `200 OK` status code and a
+    # payload similar to the following:
+    #
+    #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-\{rel\}.html", "name": "gatewayresponse", "templated": true \}, "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses" \}, "first": \{ "href": "/restapis/o81lxisefl/gatewayresponses" \}, "gatewayresponse:by-type": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "item": [ \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/THROTTLED" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE" \}, \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE" \} ] \}, "_embedded": \{ "item": [ \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "INTEGRATION_FAILURE", "statusCode": "504" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "RESOURCE_NOT_FOUND", "statusCode": "404" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "REQUEST_TOO_LARGE", "statusCode": "413" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/THROTTLED" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/THROTTLED" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "THROTTLED", "statusCode": "429" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "UNSUPPORTED_MEDIA_TYPE", "statusCode": "415" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "AUTHORIZER_CONFIGURATION_ERROR", "statusCode": "500" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "DEFAULT_5XX" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "DEFAULT_4XX" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "BAD_REQUEST_PARAMETERS", "statusCode": "400" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "BAD_REQUEST_BODY", "statusCode": "400" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "EXPIRED_TOKEN", "statusCode": "403" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "ACCESS_DENIED", "statusCode": "403" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "INVALID_API_KEY", "statusCode": "403" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "UNAUTHORIZED", "statusCode": "401" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "API_CONFIGURATION_ERROR", "statusCode": "500" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "QUOTA_EXCEEDED", "statusCode": "429" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "INTEGRATION_TIMEOUT", "statusCode": "504" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "MISSING_AUTHENTICATION_TOKEN", "statusCode": "403" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "INVALID_SIGNATURE", "statusCode": "403" \}, \{ "_links": \{ "self": \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE" \}, "gatewayresponse:put": \{ "href": "/restapis/o81lxisefl/gatewayresponses/\{response_type\}", "templated": true \}, "gatewayresponse:update": \{ "href": "/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE" \} \}, "defaultResponse": true, "responseParameters": \{\}, "responseTemplates": \{ "application/json": "\{"message":$context.error.messageString\}" \}, "responseType": "AUTHORIZER_FAILURE", "statusCode": "500" \} ] \} \}
+    #
+    #
+    #
+    # </div>
+    # </div>
+    #
+    # <div class="seeAlso">
+    # [Customize Gateway Responses][2]
+    # </div>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
+    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
+    #
+    # @!attribute [rw] position
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Returns the entire collection, because of no pagination support.
+    #   @return [Array<Types::GatewayResponse>]
+    #
+    class GatewayResponses < Struct.new(
+      :position,
+      :items)
       include Aws::Structure
     end
 
@@ -2173,7 +2347,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of ApiKeys to get information about.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] name_query
@@ -2210,7 +2384,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2235,7 +2409,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Authorizers resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2370,8 +2544,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Deployment resource
-    #   to get information about.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -2412,8 +2585,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the collection of
-    #   Deployment resources to get information about.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2443,13 +2615,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-retrieved
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_part_id
-    #   \[Required\] The identifier of the to-be-retrieved documentation
-    #   part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     class GetDocumentationPartRequest < Struct.new(
@@ -2474,8 +2644,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the API of the to-be-retrieved
-    #   documentation parts.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2519,8 +2688,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the API of the to-be-retrieved
-    #   documentation snapshot.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_version
@@ -2546,8 +2714,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-retrieved
-    #   documentation versions.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2624,7 +2791,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi to be exported.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -2662,6 +2829,88 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Gets a GatewayResponse of a specified response type on the given
+    # RestApi.
+    #
+    # @note When making an API call, you may pass GetGatewayResponseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   The string identifier of the associated RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_type
+    #   The response type of the associated GatewayResponse. Valid values
+    #   are * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   @return [String]
+    #
+    class GetGatewayResponseRequest < Struct.new(
+      :rest_api_id,
+      :response_type)
+      include Aws::Structure
+    end
+
+    # Gets the GatewayResponses collection on the given RestApi. If an API
+    # developer has not added any definitions for gateway responses, the
+    # result will be the Amazon API Gateway-generated default
+    # GatewayResponses collection for the supported response types.
+    #
+    # @note When making an API call, you may pass GetGatewayResponsesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         position: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   The string identifier of the associated RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   The current pagination position in the paged result set. The
+    #   GatewayResponse collection does not support pagination and the
+    #   position does not apply here.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of returned results per page. The
+    #   GatewayResponses collection does not support pagination and the
+    #   limit does not apply here.
+    #   @return [Integer]
+    #
+    class GetGatewayResponsesRequest < Struct.new(
+      :rest_api_id,
+      :position,
+      :limit)
+      include Aws::Structure
+    end
+
     # Represents a get integration request.
     #
     # @note When making an API call, you may pass GetIntegrationRequest
@@ -2674,7 +2923,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a get integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2705,7 +2954,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a get integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2740,7 +2989,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2771,7 +3020,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2839,7 +3088,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The ID of the RestApi under which the model exists.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -2864,7 +3113,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2894,8 +3143,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the RestApi to which the specified
-    #   RequestValidator belongs.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -2920,8 +3168,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of a RestApi to which the
-    #   RequestValidators collection belongs.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2951,7 +3198,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2988,7 +3235,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3077,7 +3324,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi that the SDK will use.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -3158,8 +3405,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to get
-    #   information about.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -3184,7 +3430,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The stages' API identifiers.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -3413,8 +3659,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-imported
-    #   documentation parts.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -3464,12 +3709,18 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
-    #   Custom header parameters as part of the request.
+    #   Custom header parameters as part of the request. For example, to
+    #   exclude DocumentationParts from an imported API, set
+    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
+    #   command of `aws apigateway import-rest-api --parameters
+    #   ignore=documentation --body
+    #   'file:///path/to/imported-api-body.json`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
     #   The POST request body containing external API definitions.
-    #   Currently, only Swagger definition JSON files are supported.
+    #   Currently, only Swagger definition JSON files are supported. The
+    #   maximum size of the API definition file is 2MB.
     #   @return [String]
     #
     class ImportRestApiRequest < Struct.new(
@@ -4178,7 +4429,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Gets the current Model resource in the collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::Model>]
     #
     class Models < Struct.new(
@@ -4250,7 +4501,76 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents a put integration request.
+    # Creates a customization of a GatewayResponse of a specified response
+    # type and status code on the given RestApi.
+    #
+    # @note When making an API call, you may pass PutGatewayResponseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         status_code: "StatusCode",
+    #         response_parameters: {
+    #           "String" => "String",
+    #         },
+    #         response_templates: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   The string identifier of the associated RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_type
+    #   The response type of the associated GatewayResponse. Valid values
+    #   are * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP status code of the GatewayResponse.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_parameters
+    #   Response parameters (paths, query strings and headers) of the
+    #   GatewayResponse as a string-to-string map of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] response_templates
+    #   Response templates of the GatewayResponse as a string-to-string map
+    #   of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    class PutGatewayResponseRequest < Struct.new(
+      :rest_api_id,
+      :response_type,
+      :status_code,
+      :response_parameters,
+      :response_templates)
+      include Aws::Structure
+    end
+
+    # Sets up a method's integration.
     #
     # @note When making an API call, you may pass PutIntegrationRequest
     #   data as a hash:
@@ -4276,7 +4596,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a put integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4297,12 +4617,21 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   Specifies a put integration input's Uniform Resource Identifier
-    #   (URI). When the integration type is HTTP or AWS, this field is
-    #   required. For integration with Lambda as an AWS service proxy, this
-    #   value is of the
-    #   'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations'
-    #   format.
+    #   Specifies the integration's Uniform Resource Identifier (URI). For
+    #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S)
+    #   URL according to the [RFC-3986 specification][1]. For AWS
+    #   integrations, the URI should be of the form
+    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:\{path|action\}/\{service_api\}`.
+    #   `Region`, `subdomain` and `service` are used to determine the right
+    #   endpoint. For AWS services that use the `Action=` query string
+    #   parameter, `service_api` should be a valid action for the desired
+    #   service. For RESTful AWS service APIs, `path` is used to indicate
+    #   that the remaining substring in the URI should be treated as the
+    #   path to the resource, including the initial `/`.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -4410,7 +4739,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a put integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4500,7 +4829,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the new Method resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4594,7 +4923,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4660,7 +4989,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi to be updated.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -4676,12 +5005,18 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
-    #   Custom headers supplied as part of the request.
+    #   Custom header parameters as part of the request. For example, to
+    #   exclude DocumentationParts from an imported API, set
+    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
+    #   command of `aws apigateway import-rest-api --parameters
+    #   ignore=documentation --body
+    #   'file:///path/to/imported-api-body.json`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
     #   The PUT request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported.
+    #   only Swagger definition JSON files are supported. The maximum size
+    #   of the API definition file is 2MB.
     #   @return [String]
     #
     class PutRestApiRequest < Struct.new(
@@ -4793,8 +5128,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The current page of RequestValidator resources in the
-    #   RequestValidators collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::RequestValidator>]
     #
     class RequestValidators < Struct.new(
@@ -4882,7 +5216,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Gets the current Resource resource in the collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::Resource>]
     #
     class Resources < Struct.new(
@@ -4959,7 +5293,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   An array of links to the current page of RestApi resources.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::RestApi>]
     #
     class RestApis < Struct.new(
@@ -5055,8 +5389,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   The set of SdkType items that comprise this view of the SdkTypes
-    #   collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::SdkType>]
     #
     class SdkTypes < Struct.new(
@@ -5159,12 +5492,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   A list of Stage resources that are associated with the ApiKey
-    #   resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The stage name in the RestApi that the stage key references.
+    #   The stage name associated with the stage key.
     #   @return [String]
     #
     class StageKey < Struct.new(
@@ -5185,7 +5517,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
     #
     # @!attribute [rw] item
-    #   An individual Stage resource.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::Stage>]
     #
     class Stages < Struct.new(
@@ -5239,7 +5571,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a test invoke authorizer request's RestApi identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -5352,7 +5684,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies a test invoke method request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -5544,7 +5876,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Authorizer resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -5653,8 +5985,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The replacement identifier of the RestApi resource for the
-    #   Deployment resource to change information about.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -5693,8 +6024,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-updated
-    #   documentation part.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_part_id
@@ -5732,8 +6062,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of an API of the to-be-updated
-    #   documentation version.
+    #   \[Required\] The string identifier of the associated RestApi..
     #   @return [String]
     #
     # @!attribute [rw] documentation_version
@@ -5785,6 +6114,65 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Updates a GatewayResponse of a specified response type on the given
+    # RestApi.
+    #
+    # @note When making an API call, you may pass UpdateGatewayResponseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         patch_operations: [
+    #           {
+    #             op: "add", # accepts add, remove, replace, move, copy, test
+    #             path: "String",
+    #             value: "String",
+    #             from: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   The string identifier of the associated RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_type
+    #   The response type of the associated GatewayResponse. Valid values
+    #   are * ACCESS\_DENIED
+    #   * API\_CONFIGURATION\_ERROR
+    #   * AUTHORIZER\_FAILURE
+    #   * AUTHORIZER\_CONFIGURATION\_ERROR
+    #   * BAD\_REQUEST\_PARAMETERS
+    #   * BAD\_REQUEST\_BODY
+    #   * DEFAULT\_4XX
+    #   * DEFAULT\_5XX
+    #   * EXPIRED\_TOKEN
+    #   * INVALID\_SIGNATURE
+    #   * INTEGRATION\_FAILURE
+    #   * INTEGRATION\_TIMEOUT
+    #   * INVALID\_API\_KEY
+    #   * MISSING\_AUTHENTICATION\_TOKEN
+    #   * QUOTA\_EXCEEDED
+    #   * REQUEST\_TOO\_LARGE
+    #   * RESOURCE\_NOT\_FOUND
+    #   * THROTTLED
+    #   * UNAUTHORIZED
+    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #   @return [Array<Types::PatchOperation>]
+    #
+    class UpdateGatewayResponseRequest < Struct.new(
+      :rest_api_id,
+      :response_type,
+      :patch_operations)
+      include Aws::Structure
+    end
+
     # Represents an update integration request.
     #
     # @note When making an API call, you may pass UpdateIntegrationRequest
@@ -5805,7 +6193,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Represents an update integration request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -5850,7 +6238,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   Specifies an update integration response request's API identifier.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -5900,7 +6288,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Method resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -5945,7 +6333,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the MethodResponse resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -5993,7 +6381,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier under which the model exists.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -6031,8 +6419,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   \[Required\] The identifier of the RestApi for which the given
-    #   RequestValidator is updated.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -6070,7 +6457,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier for the Resource resource.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -6107,7 +6494,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The ID of the RestApi you want to update.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6141,8 +6528,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource for the Stage resource to
-    #   change information about.
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -6193,7 +6579,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # The PATCH request to grant a temporary extension to the reamining
+    # The PATCH request to grant a temporary extension to the remaining
     # quota of a usage plan associated with a specified API key.
     #
     # @note When making an API call, you may pass UpdateUsageRequest
@@ -6394,7 +6780,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Gets the current item of the usage plan keys collection.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::UsagePlanKey>]
     #
     class UsagePlanKeys < Struct.new(
@@ -6417,7 +6803,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Gets the current item when enumerating the collection of UsagePlan.
+    #   The current page of elements from this collection.
     #   @return [Array<Types::UsagePlan>]
     #
     class UsagePlans < Struct.new(

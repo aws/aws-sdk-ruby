@@ -276,17 +276,17 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] intents
-    #   An array of `Intent` objects. For more information, see .
+    #   An array of `Intent` objects. For more information, see PutBot.
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] clarification_prompt
     #   The message that Amazon Lex uses when it doesn't understand the
-    #   user's request. For more information, see .
+    #   user's request. For more information, see PutBot.
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
     #   The message that Amazon Lex uses to abort a conversation. For more
-    #   information, see .
+    #   information, see PutBot.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] status
@@ -312,7 +312,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The maximum time in seconds that Amazon Lex retains the data
-    #   gathered in a conversation. For more information, see .
+    #   gathered in a conversation. For more information, see PutBot.
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
@@ -666,7 +666,7 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] version
     #   The version of the bot to delete. You cannot delete the `$LATEST`
     #   version of the bot. To delete the `$LATEST` version, use the
-    #   operation.
+    #   DeleteBot operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersionRequest AWS API Documentation
@@ -710,7 +710,7 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] version
     #   The version of the intent to delete. You cannot delete the `$LATEST`
     #   version of the intent. To delete the `$LATEST` version, use the
-    #   operation.
+    #   DeleteIntent operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersionRequest AWS API Documentation
@@ -754,7 +754,7 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] version
     #   The version of the slot type to delete. You cannot delete the
     #   `$LATEST` version of the slot type. To delete the `$LATEST` version,
-    #   use the operation.
+    #   use the DeleteSlotType operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersionRequest AWS API Documentation
@@ -779,8 +779,13 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] user_id
     #   The unique identifier for the user that made the utterances. This is
-    #   the user ID that was sent in the or operation request that contained
-    #   the utterance.
+    #   the user ID that was sent in the [PostContent][1] or [PostText][2]
+    #   operation request that contained the utterance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterancesRequest AWS API Documentation
@@ -822,11 +827,9 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
-    # After an intent is fulfilled, you might prompt the user for additional
-    # activity. For example, after the `OrderPizza` intent is fulfilled (the
-    # pizza order is placed with a pizzeria), you might prompt the user to
-    # find out whether the user wants to order drinks (another intent you
-    # defined in your bot).
+    # A prompt for additional activity after an intent is fulfilled. For
+    # example, after the `OrderPizza` intent is fulfilled, you might prompt
+    # the user to find out whether the user wants to order drinks.
     #
     # @note When making an API call, you may pass FollowUpPrompt
     #   data as a hash:
@@ -854,13 +857,13 @@ module Aws::LexModelBuildingService
     #       }
     #
     # @!attribute [rw] prompt
-    #   Obtains information from the user.
+    #   Prompts for information from the user.
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] rejection_statement
-    #   If the user answers "no" to the question defined in
-    #   `confirmationPrompt`, Amazon Lex responds with this statement to
-    #   acknowledge that the intent was canceled.
+    #   If the user answers "no" to the question defined in the `prompt`
+    #   field, Amazon Lex responds with this statement to acknowledge that
+    #   the intent was canceled.
     #   @return [Types::Statement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/FollowUpPrompt AWS API Documentation
@@ -1228,17 +1231,18 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] intents
-    #   An array of `intent` objects. For more information, see .
+    #   An array of `intent` objects. For more information, see PutBot.
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] clarification_prompt
     #   The message Amazon Lex uses when it doesn't understand the user's
-    #   request. For more information, see .
+    #   request. For more information, see PutBot.
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
     #   The message that Amazon Lex returns when the user elects to end the
-    #   conversation without completing it. For more information, see .
+    #   conversation without completing it. For more information, see
+    #   PutBot.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] status
@@ -1264,12 +1268,12 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The maximum time in seconds that Amazon Lex retains the data
-    #   gathered in a conversation. For more information, see .
+    #   gathered in a conversation. For more information, see PutBot.
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
     #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
-    #   with the user. For more information, see .
+    #   with the user. For more information, see PutBot.
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -1664,7 +1668,8 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] confirmation_prompt
     #   If defined in the bot, Amazon Lex uses prompt to confirm the intent
-    #   before fulfilling the user's request. For more information, see .
+    #   before fulfilling the user's request. For more information, see
+    #   PutIntent.
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] rejection_statement
@@ -1676,7 +1681,7 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] follow_up_prompt
     #   If defined in the bot, Amazon Lex uses this prompt to solicit
     #   additional user activity after the intent is fulfilled. For more
-    #   information, see .
+    #   information, see PutIntent.
     #   @return [Types::FollowUpPrompt]
     #
     # @!attribute [rw] conclusion_statement
@@ -1687,11 +1692,12 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] dialog_code_hook
     #   If defined in the bot, Amazon Amazon Lex invokes this Lambda
-    #   function for each user input. For more information, see .
+    #   function for each user input. For more information, see PutIntent.
     #   @return [Types::CodeHook]
     #
     # @!attribute [rw] fulfillment_activity
-    #   Describes how the intent is fulfilled. For more information, see .
+    #   Describes how the intent is fulfilled. For more information, see
+    #   PutIntent.
     #   @return [Types::FulfillmentActivity]
     #
     # @!attribute [rw] parent_intent_signature
@@ -1827,7 +1833,7 @@ module Aws::LexModelBuildingService
     end
 
     # @!attribute [rw] intents
-    #   An array of `Intent` objects. For more information, see .
+    #   An array of `Intent` objects. For more information, see PutBot.
     #   @return [Array<Types::IntentMetadata>]
     #
     # @!attribute [rw] next_token
@@ -2060,9 +2066,10 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] utterances
-    #   An array of objects, each containing a list of objects describing
-    #   the utterances that were processed by your bot. The response
-    #   contains a maximum of 100 `UtteranceData` objects for each version.
+    #   An array of UtteranceList objects, each containing a list of
+    #   UtteranceData objects describing the utterances that were processed
+    #   by your bot. The response contains a maximum of 100 `UtteranceData`
+    #   objects for each version.
     #   @return [Array<Types::UtteranceList>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesViewResponse AWS API Documentation
@@ -2352,12 +2359,17 @@ module Aws::LexModelBuildingService
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] clarification_prompt
-    #   When Amazon Lex doesn't understand the user's intent, it uses one
-    #   of these messages to get clarification. For example, "Sorry, I
-    #   didn't understand. Please repeat." Amazon Lex repeats the
-    #   clarification prompt the number of times specified in `maxAttempts`.
-    #   If Amazon Lex still can't understand, it sends the message
-    #   specified in `abortStatement`.
+    #   When Amazon Lex doesn't understand the user's intent, it uses this
+    #   message to get clarification. To specify how many times Amazon Lex
+    #   should repeate the clarification prompt, use the `maxAttempts`
+    #   field. If Amazon Lex still doesn't understand, it sends the message
+    #   in the `abortStatement` field.
+    #
+    #   When you create a clarification prompt, make sure that it suggests
+    #   the correct response from the user. for example, for a bot that
+    #   orders pizza and drinks, you might create this clarification prompt:
+    #   "What would you like to do? You can say 'Order a pizza' or
+    #   'Order a drink.'"
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
@@ -2403,12 +2415,12 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Voice][1] in
-    #   the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Available
+    #   Voices][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html
+    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -2498,17 +2510,17 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] intents
-    #   An array of `Intent` objects. For more information, see .
+    #   An array of `Intent` objects. For more information, see PutBot.
     #   @return [Array<Types::Intent>]
     #
     # @!attribute [rw] clarification_prompt
     #   The prompts that Amazon Lex uses when it doesn't understand the
-    #   user's intent. For more information, see .
+    #   user's intent. For more information, see PutBot.
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] abort_statement
     #   The message that Amazon Lex uses to abort a conversation. For more
-    #   information, see .
+    #   information, see PutBot.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] status
@@ -2539,12 +2551,12 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The maximum length of time that Amazon Lex retains the data gathered
-    #   in a conversation. For more information, see .
+    #   in a conversation. For more information, see PutBot.
     #   @return [Integer]
     #
     # @!attribute [rw] voice_id
     #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
-    #   with the user. For more information, see .
+    #   with the user. For more information, see PutBot.
     #   @return [String]
     #
     # @!attribute [rw] checksum
@@ -2770,23 +2782,27 @@ module Aws::LexModelBuildingService
     #   @return [Types::Statement]
     #
     # @!attribute [rw] follow_up_prompt
-    #   A user prompt for additional activity after an intent is fulfilled.
-    #   For example, after the `OrderPizza` intent is fulfilled (your Lambda
-    #   function placed an order with a pizzeria), you might prompt the user
-    #   to find if they want to order a drink (assuming that you have
-    #   defined an `OrderDrink` intent in your bot).
+    #   Amazon Lex uses this prompt to solicit additional activity after
+    #   fulfilling an intent. For example, after the `OrderPizza` intent is
+    #   fulfilled, you might prompt the user to order a drink.
     #
-    #   <note markdown="1"> The `followUpPrompt` and `conclusionStatement` are mutually
-    #   exclusive. You can specify only one. For example, your bot may not
-    #   solicit both the following:
+    #   The action that Amazon Lex takes depends on the user's response, as
+    #   follows:
     #
-    #    Follow up prompt - "`$session.FirstName`, your pizza order has been
-    #   placed. Would you like to order a drink or a dessert?"
+    #   * If the user says "Yes" it responds with the clarification prompt
+    #     that is configured for the bot.
     #
-    #    Conclusion statement - "`$session.FirstName`, your pizza order has
-    #   been placed."
+    #   * if the user says "Yes" and continues with an utterance that
+    #     triggers an intent it starts a conversation for the intent.
     #
-    #    </note>
+    #   * If the user says "No" it responds with the rejection statement
+    #     configured for the the follow-up prompt.
+    #
+    #   * If it doesn't recognize the utterance it repeats the follow-up
+    #     prompt again.
+    #
+    #   The `followUpPrompt` field and the `conclusionStatement` field are
+    #   mutually exclusive. You can specify only one.
     #   @return [Types::FollowUpPrompt]
     #
     # @!attribute [rw] conclusion_statement
@@ -3233,9 +3249,14 @@ module Aws::LexModelBuildingService
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] response_card
-    #   At runtime, if the client is using the API, Amazon Lex includes the
-    #   response card in the response. It substitutes all of the session
-    #   attributes and slot values for placeholders in the response card.
+    #   At runtime, if the client is using the [PostText][1] API, Amazon Lex
+    #   includes the response card in the response. It substitutes all of
+    #   the session attributes and slot values for placeholders in the
+    #   response card.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Statement AWS API Documentation
@@ -3289,8 +3310,9 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] utterances
-    #   One or more objects that contain information about the utterances
-    #   that have been made to a bot. The maximum number of object is 100.
+    #   One or more UtteranceData objects that contain information about the
+    #   utterances that have been made to a bot. The maximum number of
+    #   object is 100.
     #   @return [Array<Types::UtteranceData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UtteranceList AWS API Documentation

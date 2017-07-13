@@ -422,7 +422,8 @@ module Aws::LexModelBuildingService
     end
 
     # Deletes all versions of the bot, including the `$LATEST` version. To
-    # delete a specific version of the bot, use the operation.
+    # delete a specific version of the bot, use the DeleteBotVersion
+    # operation.
     #
     # If a bot has an alias, you can't delete it. Instead, the `DeleteBot`
     # operation returns a `ResourceInUseException` exception that includes a
@@ -524,7 +525,7 @@ module Aws::LexModelBuildingService
     end
 
     # Deletes a specific version of a bot. To delete all versions of a bot,
-    # use the operation.
+    # use the DeleteBot operation.
     #
     # This operation requires permissions for the `lex:DeleteBotVersion`
     # action.
@@ -534,7 +535,7 @@ module Aws::LexModelBuildingService
     #
     # @option params [required, String] :version
     #   The version of the bot to delete. You cannot delete the `$LATEST`
-    #   version of the bot. To delete the `$LATEST` version, use the
+    #   version of the bot. To delete the `$LATEST` version, use the DeleteBot
     #   operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -556,7 +557,8 @@ module Aws::LexModelBuildingService
     end
 
     # Deletes all versions of the intent, including the `$LATEST` version.
-    # To delete a specific version of the intent, use the operation.
+    # To delete a specific version of the intent, use the
+    # DeleteIntentVersion operation.
     #
     # You can delete a version of an intent only if it is not referenced. To
     # delete an intent that is referred to in one or more bots (see
@@ -594,7 +596,7 @@ module Aws::LexModelBuildingService
     end
 
     # Deletes a specific version of an intent. To delete all versions of a
-    # intent, use the operation.
+    # intent, use the DeleteIntent operation.
     #
     # This operation requires permissions for the `lex:DeleteIntentVersion`
     # action.
@@ -605,7 +607,7 @@ module Aws::LexModelBuildingService
     # @option params [required, String] :version
     #   The version of the intent to delete. You cannot delete the `$LATEST`
     #   version of the intent. To delete the `$LATEST` version, use the
-    #   operation.
+    #   DeleteIntent operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -627,7 +629,7 @@ module Aws::LexModelBuildingService
 
     # Deletes all versions of the slot type, including the `$LATEST`
     # version. To delete a specific version of the slot type, use the
-    # operation.
+    # DeleteSlotTypeVersion operation.
     #
     # You can delete a version of a slot type only if it is not referenced.
     # To delete a slot type that is referred to in one or more intents, you
@@ -666,7 +668,7 @@ module Aws::LexModelBuildingService
     end
 
     # Deletes a specific version of a slot type. To delete all versions of a
-    # slot type, use the operation.
+    # slot type, use the DeleteSlotType operation.
     #
     # This operation requires permissions for the
     # `lex:DeleteSlotTypeVersion` action.
@@ -677,7 +679,7 @@ module Aws::LexModelBuildingService
     # @option params [required, String] :version
     #   The version of the slot type to delete. You cannot delete the
     #   `$LATEST` version of the slot type. To delete the `$LATEST` version,
-    #   use the operation.
+    #   use the DeleteSlotType operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -701,9 +703,9 @@ module Aws::LexModelBuildingService
     #
     # Amazon Lex stores the utterances that users send to your bot unless
     # the `childDirected` field in the bot is set to `true`. Utterances are
-    # stored for 15 days for use with the operation, and then stored
-    # indefinately for use in improving the ability of your bot to respond
-    # to user input.
+    # stored for 15 days for use with the GetUtterancesView operation, and
+    # then stored indefinately for use in improving the ability of your bot
+    # to respond to user input.
     #
     # Use the `DeleteStoredUtterances` operation to manually delete stored
     # utterances for a specific user.
@@ -716,8 +718,13 @@ module Aws::LexModelBuildingService
     #
     # @option params [required, String] :user_id
     #   The unique identifier for the user that made the utterances. This is
-    #   the user ID that was sent in the or operation request that contained
-    #   the utterance.
+    #   the user ID that was sent in the [PostContent][1] or [PostText][2]
+    #   operation request that contained the utterance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
+    #   [2]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2033,7 +2040,7 @@ module Aws::LexModelBuildingService
     #
     # If the bot's `childDirected` field is set to `true`, utterances for
     # the bot are not stored and cannot be retrieved with the
-    # `GetUtterancesView` operation. For more information, see .
+    # `GetUtterancesView` operation. For more information, see PutBot.
     #
     # This operation requires permissions for the `lex:GetUtterancesView`
     # action.
@@ -2085,9 +2092,9 @@ module Aws::LexModelBuildingService
     end
 
     # Creates an Amazon Lex conversational bot or replaces an existing bot.
-    # When you create or update a bot you only required to specify a name.
-    # You can use this to add intents later, or to remove intents from an
-    # existing bot. When you create a bot with a name only, the bot is
+    # When you create or update a bot you are only required to specify a
+    # name. You can use this to add intents later, or to remove intents from
+    # an existing bot. When you create a bot with a name only, the bot is
     # created or updated but Amazon Lex returns the ` response FAILED. You
     # can build the bot after you add one or more intents. For more
     # information about Amazon Lex bots, see how-it-works. </p> If you
@@ -2113,12 +2120,17 @@ module Aws::LexModelBuildingService
     #   OrderPizza intent. For more information, see how-it-works.
     #
     # @option params [Types::Prompt] :clarification_prompt
-    #   When Amazon Lex doesn't understand the user's intent, it uses one of
-    #   these messages to get clarification. For example, "Sorry, I didn't
-    #   understand. Please repeat." Amazon Lex repeats the clarification
-    #   prompt the number of times specified in `maxAttempts`. If Amazon Lex
-    #   still can't understand, it sends the message specified in
-    #   `abortStatement`.
+    #   When Amazon Lex doesn't understand the user's intent, it uses this
+    #   message to get clarification. To specify how many times Amazon Lex
+    #   should repeate the clarification prompt, use the `maxAttempts` field.
+    #   If Amazon Lex still doesn't understand, it sends the message in the
+    #   `abortStatement` field.
+    #
+    #   When you create a clarification prompt, make sure that it suggests the
+    #   correct response from the user. for example, for a bot that orders
+    #   pizza and drinks, you might create this clarification prompt: "What
+    #   would you like to do? You can say 'Order a pizza' or 'Order a
+    #   drink.'"
     #
     # @option params [Types::Statement] :abort_statement
     #   When Amazon Lex can't understand the user's input in context, it
@@ -2161,12 +2173,12 @@ module Aws::LexModelBuildingService
     # @option params [String] :voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Voice][1] in
-    #   the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Available
+    #   Voices][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html
+    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #
     # @option params [String] :checksum
     #   Identifies a specific revision of the `$LATEST` version.
@@ -2580,23 +2592,27 @@ module Aws::LexModelBuildingService
     #    </note>
     #
     # @option params [Types::FollowUpPrompt] :follow_up_prompt
-    #   A user prompt for additional activity after an intent is fulfilled.
-    #   For example, after the `OrderPizza` intent is fulfilled (your Lambda
-    #   function placed an order with a pizzeria), you might prompt the user
-    #   to find if they want to order a drink (assuming that you have defined
-    #   an `OrderDrink` intent in your bot).
+    #   Amazon Lex uses this prompt to solicit additional activity after
+    #   fulfilling an intent. For example, after the `OrderPizza` intent is
+    #   fulfilled, you might prompt the user to order a drink.
     #
-    #   <note markdown="1"> The `followUpPrompt` and `conclusionStatement` are mutually exclusive.
-    #   You can specify only one. For example, your bot may not solicit both
-    #   the following:
+    #   The action that Amazon Lex takes depends on the user's response, as
+    #   follows:
     #
-    #    Follow up prompt - "`$session.FirstName`, your pizza order has been
-    #   placed. Would you like to order a drink or a dessert?"
+    #   * If the user says "Yes" it responds with the clarification prompt
+    #     that is configured for the bot.
     #
-    #    Conclusion statement - "`$session.FirstName`, your pizza order has
-    #   been placed."
+    #   * if the user says "Yes" and continues with an utterance that
+    #     triggers an intent it starts a conversation for the intent.
     #
-    #    </note>
+    #   * If the user says "No" it responds with the rejection statement
+    #     configured for the the follow-up prompt.
+    #
+    #   * If it doesn't recognize the utterance it repeats the follow-up
+    #     prompt again.
+    #
+    #   The `followUpPrompt` field and the `conclusionStatement` field are
+    #   mutually exclusive. You can specify only one.
     #
     # @option params [Types::Statement] :conclusion_statement
     #   The statement that you want Amazon Lex to convey to the user after the
@@ -3237,7 +3253,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

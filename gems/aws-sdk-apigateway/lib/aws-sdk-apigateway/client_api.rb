@@ -53,6 +53,7 @@ module Aws::APIGateway
     DeleteDocumentationPartRequest = Shapes::StructureShape.new(name: 'DeleteDocumentationPartRequest')
     DeleteDocumentationVersionRequest = Shapes::StructureShape.new(name: 'DeleteDocumentationVersionRequest')
     DeleteDomainNameRequest = Shapes::StructureShape.new(name: 'DeleteDomainNameRequest')
+    DeleteGatewayResponseRequest = Shapes::StructureShape.new(name: 'DeleteGatewayResponseRequest')
     DeleteIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationRequest')
     DeleteIntegrationResponseRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationResponseRequest')
     DeleteMethodRequest = Shapes::StructureShape.new(name: 'DeleteMethodRequest')
@@ -80,6 +81,9 @@ module Aws::APIGateway
     ExportResponse = Shapes::StructureShape.new(name: 'ExportResponse')
     FlushStageAuthorizersCacheRequest = Shapes::StructureShape.new(name: 'FlushStageAuthorizersCacheRequest')
     FlushStageCacheRequest = Shapes::StructureShape.new(name: 'FlushStageCacheRequest')
+    GatewayResponse = Shapes::StructureShape.new(name: 'GatewayResponse')
+    GatewayResponseType = Shapes::StringShape.new(name: 'GatewayResponseType')
+    GatewayResponses = Shapes::StructureShape.new(name: 'GatewayResponses')
     GenerateClientCertificateRequest = Shapes::StructureShape.new(name: 'GenerateClientCertificateRequest')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
     GetApiKeyRequest = Shapes::StructureShape.new(name: 'GetApiKeyRequest')
@@ -99,6 +103,8 @@ module Aws::APIGateway
     GetDomainNameRequest = Shapes::StructureShape.new(name: 'GetDomainNameRequest')
     GetDomainNamesRequest = Shapes::StructureShape.new(name: 'GetDomainNamesRequest')
     GetExportRequest = Shapes::StructureShape.new(name: 'GetExportRequest')
+    GetGatewayResponseRequest = Shapes::StructureShape.new(name: 'GetGatewayResponseRequest')
+    GetGatewayResponsesRequest = Shapes::StructureShape.new(name: 'GetGatewayResponsesRequest')
     GetIntegrationRequest = Shapes::StructureShape.new(name: 'GetIntegrationRequest')
     GetIntegrationResponseRequest = Shapes::StructureShape.new(name: 'GetIntegrationResponseRequest')
     GetMethodRequest = Shapes::StructureShape.new(name: 'GetMethodRequest')
@@ -140,6 +146,7 @@ module Aws::APIGateway
     ListOfDocumentationPart = Shapes::ListShape.new(name: 'ListOfDocumentationPart')
     ListOfDocumentationVersion = Shapes::ListShape.new(name: 'ListOfDocumentationVersion')
     ListOfDomainName = Shapes::ListShape.new(name: 'ListOfDomainName')
+    ListOfGatewayResponse = Shapes::ListShape.new(name: 'ListOfGatewayResponse')
     ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
     ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
     ListOfPatchOperation = Shapes::ListShape.new(name: 'ListOfPatchOperation')
@@ -178,6 +185,7 @@ module Aws::APIGateway
     PatchOperation = Shapes::StructureShape.new(name: 'PatchOperation')
     PathToMapOfMethodSnapshot = Shapes::MapShape.new(name: 'PathToMapOfMethodSnapshot')
     ProviderARN = Shapes::StringShape.new(name: 'ProviderARN')
+    PutGatewayResponseRequest = Shapes::StructureShape.new(name: 'PutGatewayResponseRequest')
     PutIntegrationRequest = Shapes::StructureShape.new(name: 'PutIntegrationRequest')
     PutIntegrationResponseRequest = Shapes::StructureShape.new(name: 'PutIntegrationResponseRequest')
     PutMethodRequest = Shapes::StructureShape.new(name: 'PutMethodRequest')
@@ -221,6 +229,7 @@ module Aws::APIGateway
     UpdateDocumentationPartRequest = Shapes::StructureShape.new(name: 'UpdateDocumentationPartRequest')
     UpdateDocumentationVersionRequest = Shapes::StructureShape.new(name: 'UpdateDocumentationVersionRequest')
     UpdateDomainNameRequest = Shapes::StructureShape.new(name: 'UpdateDomainNameRequest')
+    UpdateGatewayResponseRequest = Shapes::StructureShape.new(name: 'UpdateGatewayResponseRequest')
     UpdateIntegrationRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationRequest')
     UpdateIntegrationResponseRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationResponseRequest')
     UpdateMethodRequest = Shapes::StructureShape.new(name: 'UpdateMethodRequest')
@@ -435,6 +444,10 @@ module Aws::APIGateway
     DeleteDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
     DeleteDomainNameRequest.struct_class = Types::DeleteDomainNameRequest
 
+    DeleteGatewayResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    DeleteGatewayResponseRequest.add_member(:response_type, Shapes::ShapeRef.new(shape: GatewayResponseType, required: true, location: "uri", location_name: "response_type"))
+    DeleteGatewayResponseRequest.struct_class = Types::DeleteGatewayResponseRequest
+
     DeleteIntegrationRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     DeleteIntegrationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
     DeleteIntegrationRequest.add_member(:http_method, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "http_method"))
@@ -548,6 +561,17 @@ module Aws::APIGateway
     FlushStageCacheRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "stage_name"))
     FlushStageCacheRequest.struct_class = Types::FlushStageCacheRequest
 
+    GatewayResponse.add_member(:response_type, Shapes::ShapeRef.new(shape: GatewayResponseType, location_name: "responseType"))
+    GatewayResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "statusCode"))
+    GatewayResponse.add_member(:response_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseParameters"))
+    GatewayResponse.add_member(:response_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseTemplates"))
+    GatewayResponse.add_member(:default_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultResponse"))
+    GatewayResponse.struct_class = Types::GatewayResponse
+
+    GatewayResponses.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+    GatewayResponses.add_member(:items, Shapes::ShapeRef.new(shape: ListOfGatewayResponse, location_name: "item"))
+    GatewayResponses.struct_class = Types::GatewayResponses
+
     GenerateClientCertificateRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     GenerateClientCertificateRequest.struct_class = Types::GenerateClientCertificateRequest
 
@@ -633,6 +657,15 @@ module Aws::APIGateway
     GetExportRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location: "querystring", location_name: "parameters"))
     GetExportRequest.add_member(:accepts, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Accept"))
     GetExportRequest.struct_class = Types::GetExportRequest
+
+    GetGatewayResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    GetGatewayResponseRequest.add_member(:response_type, Shapes::ShapeRef.new(shape: GatewayResponseType, required: true, location: "uri", location_name: "response_type"))
+    GetGatewayResponseRequest.struct_class = Types::GetGatewayResponseRequest
+
+    GetGatewayResponsesRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    GetGatewayResponsesRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+    GetGatewayResponsesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetGatewayResponsesRequest.struct_class = Types::GetGatewayResponsesRequest
 
     GetIntegrationRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     GetIntegrationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
@@ -806,6 +839,8 @@ module Aws::APIGateway
 
     ListOfDomainName.member = Shapes::ShapeRef.new(shape: DomainName)
 
+    ListOfGatewayResponse.member = Shapes::ShapeRef.new(shape: GatewayResponse)
+
     ListOfLong.member = Shapes::ShapeRef.new(shape: Long)
 
     ListOfModel.member = Shapes::ShapeRef.new(shape: Model)
@@ -916,6 +951,13 @@ module Aws::APIGateway
 
     PathToMapOfMethodSnapshot.key = Shapes::ShapeRef.new(shape: String)
     PathToMapOfMethodSnapshot.value = Shapes::ShapeRef.new(shape: MapOfMethodSnapshot)
+
+    PutGatewayResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    PutGatewayResponseRequest.add_member(:response_type, Shapes::ShapeRef.new(shape: GatewayResponseType, required: true, location: "uri", location_name: "response_type"))
+    PutGatewayResponseRequest.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "statusCode"))
+    PutGatewayResponseRequest.add_member(:response_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseParameters"))
+    PutGatewayResponseRequest.add_member(:response_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseTemplates"))
+    PutGatewayResponseRequest.struct_class = Types::PutGatewayResponseRequest
 
     PutIntegrationRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     PutIntegrationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
@@ -1136,6 +1178,11 @@ module Aws::APIGateway
     UpdateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
     UpdateDomainNameRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
     UpdateDomainNameRequest.struct_class = Types::UpdateDomainNameRequest
+
+    UpdateGatewayResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    UpdateGatewayResponseRequest.add_member(:response_type, Shapes::ShapeRef.new(shape: GatewayResponseType, required: true, location: "uri", location_name: "response_type"))
+    UpdateGatewayResponseRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+    UpdateGatewayResponseRequest.struct_class = Types::UpdateGatewayResponseRequest
 
     UpdateIntegrationRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     UpdateIntegrationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
@@ -1522,6 +1569,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_gateway_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGatewayResponse"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGatewayResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -1929,6 +1989,30 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_gateway_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGatewayResponse"
+        o.http_method = "GET"
+        o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+        o.input = Shapes::ShapeRef.new(shape: GetGatewayResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_gateway_responses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGatewayResponses"
+        o.http_method = "GET"
+        o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses"
+        o.input = Shapes::ShapeRef.new(shape: GetGatewayResponsesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GatewayResponses)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2106,6 +2190,7 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2269,6 +2354,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_gateway_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutGatewayResponse"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+        o.input = Shapes::ShapeRef.new(shape: PutGatewayResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:put_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -2476,6 +2574,18 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_gateway_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGatewayResponse"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGatewayResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
