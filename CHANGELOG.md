@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::LexModelBuildingService - Updated the documentation for Amazon Lex Model Building Service.
+
 2.10.10 (2017-07-12)
 ------------------
 
