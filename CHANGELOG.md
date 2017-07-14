@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the documentation for AWS Marketplace Commerce Analytics.
+
 2.10.11 (2017-07-13)
 ------------------
 
