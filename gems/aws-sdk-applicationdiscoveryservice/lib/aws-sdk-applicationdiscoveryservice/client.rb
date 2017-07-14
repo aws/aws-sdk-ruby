@@ -450,6 +450,9 @@ module Aws::ApplicationDiscoveryService
     #   resp.exports_info[0].status_message #=> String
     #   resp.exports_info[0].configurations_download_url #=> String
     #   resp.exports_info[0].export_request_time #=> Time
+    #   resp.exports_info[0].is_truncated #=> Boolean
+    #   resp.exports_info[0].requested_start_time #=> Time
+    #   resp.exports_info[0].requested_end_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload describe_export_configurations(params = {})
@@ -465,6 +468,13 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<String>] :export_ids
     #   One or more unique identifiers used to query the status of an export
     #   request.
+    #
+    # @option params [Array<Types::ExportFilter>] :filters
+    #   One or more filters.
+    #
+    #   * `AgentId` - ID of the agent whose collected data will be exported
+    #
+    #   ^
     #
     # @option params [Integer] :max_results
     #   The maximum number of volume results returned by `DescribeExportTasks`
@@ -488,6 +498,13 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.describe_export_tasks({
     #     export_ids: ["ConfigurationsExportId"],
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #         condition: "Condition", # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -500,6 +517,9 @@ module Aws::ApplicationDiscoveryService
     #   resp.exports_info[0].status_message #=> String
     #   resp.exports_info[0].configurations_download_url #=> String
     #   resp.exports_info[0].export_request_time #=> Time
+    #   resp.exports_info[0].is_truncated #=> Boolean
+    #   resp.exports_info[0].requested_start_time #=> Time
+    #   resp.exports_info[0].requested_end_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload describe_export_tasks(params = {})
@@ -822,11 +842,40 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Export the configuration data about discovered configuration items and
-    # relationships to an S3 bucket in a specified format.
+    # Begins the export of discovered data to an S3 bucket.
+    #
+    # If you specify `agentId` in a filter, the task exports up to 72 hours
+    # of detailed data collected by the identified Application Discovery
+    # Agent, including network, process, and performance details. A time
+    # range for exported agent data may be set by using `startTime` and
+    # `endTime`. Export of detailed agent data is limited to five
+    # concurrently running exports.
+    #
+    # If you do not include an `agentId` filter, summary data is exported
+    # that includes both AWS Agentless Discovery Connector data and summary
+    # data from AWS Discovery Agents. Export of summary data is limited to
+    # two exports per day.
     #
     # @option params [Array<String>] :export_data_format
     #   The file format for the returned export data. Default value is `CSV`.
+    #
+    # @option params [Array<Types::ExportFilter>] :filters
+    #   If a filter is present, it selects the single `agentId` of the
+    #   Application Discovery Agent for which data is exported. The `agentId`
+    #   can be found in the results of the `DescribeAgents` API or CLI. If no
+    #   filter is present, `startTime` and `endTime` are ignored and exported
+    #   data includes both Agentless Discovery Connector data and summary data
+    #   from Application Discovery agents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start timestamp for exported data from the single Application
+    #   Discovery Agent selected in the filters. If no value is specified,
+    #   data is exported starting from the first data collected by the agent.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end timestamp for exported data from the single Application
+    #   Discovery Agent selected in the filters. If no value is specified,
+    #   exported data includes the most recent data collected by the agent.
     #
     # @return [Types::StartExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,6 +885,15 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.start_export_task({
     #     export_data_format: ["CSV"], # accepts CSV, GRAPHML
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #         condition: "Condition", # required
+    #       },
+    #     ],
+    #     start_time: Time.now,
+    #     end_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -920,7 +978,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

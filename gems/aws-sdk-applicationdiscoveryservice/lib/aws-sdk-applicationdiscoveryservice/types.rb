@@ -526,6 +526,13 @@ module Aws::ApplicationDiscoveryService
     #
     #       {
     #         export_ids: ["ConfigurationsExportId"],
+    #         filters: [
+    #           {
+    #             name: "FilterName", # required
+    #             values: ["FilterValue"], # required
+    #             condition: "Condition", # required
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -534,6 +541,14 @@ module Aws::ApplicationDiscoveryService
     #   One or more unique identifiers used to query the status of an export
     #   request.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `AgentId` - ID of the agent whose collected data will be exported
+    #
+    #   ^
+    #   @return [Array<Types::ExportFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of volume results returned by
@@ -552,6 +567,7 @@ module Aws::ApplicationDiscoveryService
     #
     class DescribeExportTasksRequest < Struct.new(
       :export_ids,
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -666,31 +682,87 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # Information regarding the export status of the discovered data. The
-    # value is an array of objects.
+    # Used to select which agent's data is to be exported. A single agent
+    # ID may be selected for export using the [StartExportTask][1] action.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html
+    #
+    # @note When making an API call, you may pass ExportFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #         condition: "Condition", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A single `ExportFilter` name. Supported filters: `agentId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A single `agentId` for a Discovery Agent. An `agentId` can be found
+    #   using the [DescribeAgents][1] action. Typically an ADS `agentId` is
+    #   in the form `o-0123456789abcdef0`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition
+    #   Supported condition: `EQUALS`
+    #   @return [String]
+    #
+    class ExportFilter < Struct.new(
+      :name,
+      :values,
+      :condition)
+      include Aws::Structure
+    end
+
+    # Information regarding the export status of discovered data. The value
+    # is an array of objects.
     #
     # @!attribute [rw] export_id
-    #   A unique identifier that you can use to query the export.
+    #   A unique identifier used to query an export.
     #   @return [String]
     #
     # @!attribute [rw] export_status
-    #   The status of the configuration data export. The status can succeed,
-    #   fail, or be in-progress.
+    #   The status of the data export job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   Helpful status messages for API callers. For example: Too many
-    #   exports in the last 6 hours. Export in progress. Export was
-    #   successful.
+    #   A status message provided for API callers.
     #   @return [String]
     #
     # @!attribute [rw] configurations_download_url
-    #   A URL for an Amazon S3 bucket where you can review the configuration
+    #   A URL for an Amazon S3 bucket where you can review the exported
     #   data. The URL is displayed only if the export succeeded.
     #   @return [String]
     #
     # @!attribute [rw] export_request_time
-    #   The time that the configuration data export was initiated.
+    #   The time that the data export was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_truncated
+    #   If true, the export of agent information exceeded the size limit for
+    #   a single export and the exported data is incomplete for the
+    #   requested time range. To address this, select a smaller time range
+    #   for the export by using `startDate` and `endDate`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requested_start_time
+    #   The value of `startTime` parameter in the `StartExportTask` request.
+    #   If no `startTime` was requested, this result does not appear in
+    #   `ExportInfo`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] requested_end_time
+    #   The `endTime` used in the `StartExportTask` request. If no `endTime`
+    #   was requested, this result does not appear in `ExportInfo`.
     #   @return [Time]
     #
     class ExportInfo < Struct.new(
@@ -698,7 +770,10 @@ module Aws::ApplicationDiscoveryService
       :export_status,
       :status_message,
       :configurations_download_url,
-      :export_request_time)
+      :export_request_time,
+      :is_truncated,
+      :requested_start_time,
+      :requested_end_time)
       include Aws::Structure
     end
 
@@ -1043,6 +1118,15 @@ module Aws::ApplicationDiscoveryService
     #
     #       {
     #         export_data_format: ["CSV"], # accepts CSV, GRAPHML
+    #         filters: [
+    #           {
+    #             name: "FilterName", # required
+    #             values: ["FilterValue"], # required
+    #             condition: "Condition", # required
+    #           },
+    #         ],
+    #         start_time: Time.now,
+    #         end_time: Time.now,
     #       }
     #
     # @!attribute [rw] export_data_format
@@ -1050,8 +1134,33 @@ module Aws::ApplicationDiscoveryService
     #   `CSV`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filters
+    #   If a filter is present, it selects the single `agentId` of the
+    #   Application Discovery Agent for which data is exported. The
+    #   `agentId` can be found in the results of the `DescribeAgents` API or
+    #   CLI. If no filter is present, `startTime` and `endTime` are ignored
+    #   and exported data includes both Agentless Discovery Connector data
+    #   and summary data from Application Discovery agents.
+    #   @return [Array<Types::ExportFilter>]
+    #
+    # @!attribute [rw] start_time
+    #   The start timestamp for exported data from the single Application
+    #   Discovery Agent selected in the filters. If no value is specified,
+    #   data is exported starting from the first data collected by the
+    #   agent.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end timestamp for exported data from the single Application
+    #   Discovery Agent selected in the filters. If no value is specified,
+    #   exported data includes the most recent data collected by the agent.
+    #   @return [Time]
+    #
     class StartExportTaskRequest < Struct.new(
-      :export_data_format)
+      :export_data_format,
+      :filters,
+      :start_time,
+      :end_time)
       include Aws::Structure
     end
 

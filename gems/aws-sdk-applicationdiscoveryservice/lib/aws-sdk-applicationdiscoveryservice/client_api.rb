@@ -64,6 +64,8 @@ module Aws::ApplicationDiscoveryService
     ExportConfigurationsResponse = Shapes::StructureShape.new(name: 'ExportConfigurationsResponse')
     ExportDataFormat = Shapes::StringShape.new(name: 'ExportDataFormat')
     ExportDataFormats = Shapes::ListShape.new(name: 'ExportDataFormats')
+    ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
+    ExportFilters = Shapes::ListShape.new(name: 'ExportFilters')
     ExportIds = Shapes::ListShape.new(name: 'ExportIds')
     ExportInfo = Shapes::StructureShape.new(name: 'ExportInfo')
     ExportRequestTime = Shapes::TimestampShape.new(name: 'ExportRequestTime')
@@ -238,6 +240,7 @@ module Aws::ApplicationDiscoveryService
     DescribeExportConfigurationsResponse.struct_class = Types::DescribeExportConfigurationsResponse
 
     DescribeExportTasksRequest.add_member(:export_ids, Shapes::ShapeRef.new(shape: ExportIds, location_name: "exportIds"))
+    DescribeExportTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ExportFilters, location_name: "filters"))
     DescribeExportTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     DescribeExportTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
@@ -266,6 +269,13 @@ module Aws::ApplicationDiscoveryService
 
     ExportDataFormats.member = Shapes::ShapeRef.new(shape: ExportDataFormat)
 
+    ExportFilter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    ExportFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
+    ExportFilter.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, required: true, location_name: "condition"))
+    ExportFilter.struct_class = Types::ExportFilter
+
+    ExportFilters.member = Shapes::ShapeRef.new(shape: ExportFilter)
+
     ExportIds.member = Shapes::ShapeRef.new(shape: ConfigurationsExportId)
 
     ExportInfo.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, required: true, location_name: "exportId"))
@@ -273,6 +283,9 @@ module Aws::ApplicationDiscoveryService
     ExportInfo.add_member(:status_message, Shapes::ShapeRef.new(shape: ExportStatusMessage, required: true, location_name: "statusMessage"))
     ExportInfo.add_member(:configurations_download_url, Shapes::ShapeRef.new(shape: ConfigurationsDownloadUrl, location_name: "configurationsDownloadUrl"))
     ExportInfo.add_member(:export_request_time, Shapes::ShapeRef.new(shape: ExportRequestTime, required: true, location_name: "exportRequestTime"))
+    ExportInfo.add_member(:is_truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTruncated"))
+    ExportInfo.add_member(:requested_start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "requestedStartTime"))
+    ExportInfo.add_member(:requested_end_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "requestedEndTime"))
     ExportInfo.struct_class = Types::ExportInfo
 
     ExportsInfo.member = Shapes::ShapeRef.new(shape: ExportInfo)
@@ -341,6 +354,9 @@ module Aws::ApplicationDiscoveryService
     StartDataCollectionByAgentIdsResponse.struct_class = Types::StartDataCollectionByAgentIdsResponse
 
     StartExportTaskRequest.add_member(:export_data_format, Shapes::ShapeRef.new(shape: ExportDataFormats, location_name: "exportDataFormat"))
+    StartExportTaskRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ExportFilters, location_name: "filters"))
+    StartExportTaskRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
+    StartExportTaskRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "endTime"))
     StartExportTaskRequest.struct_class = Types::StartExportTaskRequest
 
     StartExportTaskResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
