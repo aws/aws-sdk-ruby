@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.13 (2017-07-17)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
