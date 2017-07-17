@@ -309,6 +309,8 @@ module Aws::CognitoIdentityProvider
     UserPoolType = Shapes::StructureShape.new(name: 'UserPoolType')
     UserStatusType = Shapes::StringShape.new(name: 'UserStatusType')
     UserType = Shapes::StructureShape.new(name: 'UserType')
+    UsernameAttributeType = Shapes::StringShape.new(name: 'UsernameAttributeType')
+    UsernameAttributesListType = Shapes::ListShape.new(name: 'UsernameAttributesListType')
     UsernameExistsException = Shapes::StructureShape.new(name: 'UsernameExistsException')
     UsernameType = Shapes::StringShape.new(name: 'UsernameType')
     UsersListType = Shapes::ListShape.new(name: 'UsersListType')
@@ -623,6 +625,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaConfigType, location_name: "LambdaConfig"))
     CreateUserPoolRequest.add_member(:auto_verified_attributes, Shapes::ShapeRef.new(shape: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
     CreateUserPoolRequest.add_member(:alias_attributes, Shapes::ShapeRef.new(shape: AliasAttributesListType, location_name: "AliasAttributes"))
+    CreateUserPoolRequest.add_member(:username_attributes, Shapes::ShapeRef.new(shape: UsernameAttributesListType, location_name: "UsernameAttributes"))
     CreateUserPoolRequest.add_member(:sms_verification_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
     CreateUserPoolRequest.add_member(:email_verification_message, Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
     CreateUserPoolRequest.add_member(:email_verification_subject, Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
@@ -1178,6 +1181,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:schema_attributes, Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "SchemaAttributes"))
     UserPoolType.add_member(:auto_verified_attributes, Shapes::ShapeRef.new(shape: VerifiedAttributesListType, location_name: "AutoVerifiedAttributes"))
     UserPoolType.add_member(:alias_attributes, Shapes::ShapeRef.new(shape: AliasAttributesListType, location_name: "AliasAttributes"))
+    UserPoolType.add_member(:username_attributes, Shapes::ShapeRef.new(shape: UsernameAttributesListType, location_name: "UsernameAttributes"))
     UserPoolType.add_member(:sms_verification_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsVerificationMessage"))
     UserPoolType.add_member(:email_verification_message, Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailVerificationMessage"))
     UserPoolType.add_member(:email_verification_subject, Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
@@ -1201,6 +1205,8 @@ module Aws::CognitoIdentityProvider
     UserType.add_member(:user_status, Shapes::ShapeRef.new(shape: UserStatusType, location_name: "UserStatus"))
     UserType.add_member(:mfa_options, Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
     UserType.struct_class = Types::UserType
+
+    UsernameAttributesListType.member = Shapes::ShapeRef.new(shape: UsernameAttributeType)
 
     UsersListType.member = Shapes::ShapeRef.new(shape: UserType)
 
@@ -1478,6 +1484,9 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

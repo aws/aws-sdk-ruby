@@ -685,7 +685,7 @@ module Aws::CognitoIdentityProvider
     #   * `REFRESH_TOKEN_AUTH` will take in a valid refresh token and return
     #     new tokens.
     #
-    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRPA` and return the
+    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
     #   Valid values include:
@@ -708,7 +708,7 @@ module Aws::CognitoIdentityProvider
     #   `AuthFlow` that you are invoking. The required values depend on the
     #   value of `AuthFlow`\:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRPA` (required),
+    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
@@ -1557,6 +1557,10 @@ module Aws::CognitoIdentityProvider
     #   Attributes supported as an alias for this user pool. Possible values:
     #   **phone\_number**, **email**, or **preferred\_username**.
     #
+    # @option params [Array<String>] :username_attributes
+    #   Specifies whether email addresses or phone numbers can be specified as
+    #   usernames when a user signs up.
+    #
     # @option params [String] :sms_verification_message
     #   A string representing the SMS verification message.
     #
@@ -1625,6 +1629,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
+    #     username_attributes: ["phone_number"], # accepts phone_number, email
     #     sms_verification_message: "SmsVerificationMessageType",
     #     email_verification_message: "EmailVerificationMessageType",
     #     email_verification_subject: "EmailVerificationSubjectType",
@@ -1707,6 +1712,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.auto_verified_attributes[0] #=> String, one of "phone_number", "email"
     #   resp.user_pool.alias_attributes #=> Array
     #   resp.user_pool.alias_attributes[0] #=> String, one of "phone_number", "email", "preferred_username"
+    #   resp.user_pool.username_attributes #=> Array
+    #   resp.user_pool.username_attributes[0] #=> String, one of "phone_number", "email"
     #   resp.user_pool.sms_verification_message #=> String
     #   resp.user_pool.email_verification_message #=> String
     #   resp.user_pool.email_verification_subject #=> String
@@ -2197,6 +2204,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.auto_verified_attributes[0] #=> String, one of "phone_number", "email"
     #   resp.user_pool.alias_attributes #=> Array
     #   resp.user_pool.alias_attributes[0] #=> String, one of "phone_number", "email", "preferred_username"
+    #   resp.user_pool.username_attributes #=> Array
+    #   resp.user_pool.username_attributes[0] #=> String, one of "phone_number", "email"
     #   resp.user_pool.sms_verification_message #=> String
     #   resp.user_pool.email_verification_message #=> String
     #   resp.user_pool.email_verification_subject #=> String
@@ -2652,8 +2661,8 @@ module Aws::CognitoIdentityProvider
     #   * `REFRESH_TOKEN_AUTH` will take in a valid refresh token and return
     #     new tokens.
     #
-    #   * `USER_SRP_AUTH` will take in USERNAME and SRPA and return the SRP
-    #     variables to be used for next challenge execution.
+    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
+    #     SRP variables to be used for next challenge execution.
     #
     #   Valid values include:
     #
@@ -2673,7 +2682,7 @@ module Aws::CognitoIdentityProvider
     #   `AuthFlow` that you are invoking. The required values depend on the
     #   value of `AuthFlow`\:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRPA` (required),
+    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
@@ -3968,7 +3977,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

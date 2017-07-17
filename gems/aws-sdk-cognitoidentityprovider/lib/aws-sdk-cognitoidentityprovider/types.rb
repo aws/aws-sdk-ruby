@@ -654,7 +654,7 @@ module Aws::CognitoIdentityProvider
     #   * `REFRESH_TOKEN_AUTH` will take in a valid refresh token and return
     #     new tokens.
     #
-    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRPA` and return the
+    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
     #   Valid values include:
@@ -678,7 +678,7 @@ module Aws::CognitoIdentityProvider
     #   `AuthFlow` that you are invoking. The required values depend on the
     #   value of `AuthFlow`\:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRPA` (required),
+    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
@@ -1906,6 +1906,7 @@ module Aws::CognitoIdentityProvider
     #         },
     #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #         alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
+    #         username_attributes: ["phone_number"], # accepts phone_number, email
     #         sms_verification_message: "SmsVerificationMessageType",
     #         email_verification_message: "EmailVerificationMessageType",
     #         email_verification_subject: "EmailVerificationSubjectType",
@@ -1976,6 +1977,11 @@ module Aws::CognitoIdentityProvider
     #   values: **phone\_number**, **email**, or **preferred\_username**.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] username_attributes
+    #   Specifies whether email addresses or phone numbers can be specified
+    #   as usernames when a user signs up.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] sms_verification_message
     #   A string representing the SMS verification message.
     #   @return [String]
@@ -2034,6 +2040,7 @@ module Aws::CognitoIdentityProvider
       :lambda_config,
       :auto_verified_attributes,
       :alias_attributes,
+      :username_attributes,
       :sms_verification_message,
       :email_verification_message,
       :email_verification_subject,
@@ -3053,8 +3060,8 @@ module Aws::CognitoIdentityProvider
     #   * `REFRESH_TOKEN_AUTH` will take in a valid refresh token and return
     #     new tokens.
     #
-    #   * `USER_SRP_AUTH` will take in USERNAME and SRPA and return the SRP
-    #     variables to be used for next challenge execution.
+    #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
+    #     SRP variables to be used for next challenge execution.
     #
     #   Valid values include:
     #
@@ -3075,7 +3082,7 @@ module Aws::CognitoIdentityProvider
     #   `AuthFlow` that you are invoking. The required values depend on the
     #   value of `AuthFlow`\:
     #
-    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRPA` (required),
+    #   * For `USER_SRP_AUTH`\: `USERNAME` (required), `SRP_A` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
@@ -5189,6 +5196,11 @@ module Aws::CognitoIdentityProvider
     #   Specifies the attributes that are aliased in a user pool.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] username_attributes
+    #   Specifies whether email addresses or phone numbers can be specified
+    #   as usernames when a user signs up.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] sms_verification_message
     #   The contents of the SMS verification message.
     #   @return [String]
@@ -5270,6 +5282,7 @@ module Aws::CognitoIdentityProvider
       :schema_attributes,
       :auto_verified_attributes,
       :alias_attributes,
+      :username_attributes,
       :sms_verification_message,
       :email_verification_message,
       :email_verification_subject,

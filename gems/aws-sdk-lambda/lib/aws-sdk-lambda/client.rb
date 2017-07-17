@@ -619,6 +619,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #
     #
     # @example Example: create-function
@@ -722,6 +723,7 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1201,7 +1203,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_function({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     qualifier: "Qualifier",
     #   })
     #
@@ -1231,6 +1233,7 @@ module Aws::Lambda
     #   resp.configuration.environment.error.message #=> String
     #   resp.configuration.kms_key_arn #=> String
     #   resp.configuration.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.configuration.master_arn #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -1307,6 +1310,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1344,7 +1348,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_function_configuration({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     qualifier: "Qualifier",
     #   })
     #
@@ -1374,6 +1378,7 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -1441,7 +1446,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_policy({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     qualifier: "Qualifier",
     #   })
     #
@@ -1565,7 +1570,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     invocation_type: "Event", # accepts Event, RequestResponse, DryRun
     #     log_type: "None", # accepts None, Tail
     #     client_context: "String",
@@ -1630,7 +1635,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_async({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     invoke_args: "data", # required
     #   })
     #
@@ -1817,14 +1822,36 @@ module Aws::Lambda
     # This operation requires permission for the `lambda:ListFunctions`
     # action.
     #
-    # If you are using versioning feature, the response returns list of
-    # $LATEST versions of your functions. For information about the
+    # If you are using the versioning feature, you can list all of your
+    # functions or only `$LATEST` versions. For information about the
     # versioning feature, see [AWS Lambda Function Versioning and
     # Aliases][1].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    #
+    # @option params [String] :master_region
+    #   Optional string. If not specified, will return only regular function
+    #   versions (i.e., non-replicated versions).
+    #
+    #   Valid values are:
+    #
+    #   The region from which the functions are replicated. For example, if
+    #   you specify `us-east-1`, only functions replicated from that region
+    #   will be returned.
+    #
+    #   `ALL` \_ Will return all functions from any region. If specified, you
+    #   also must specify a valid FunctionVersion parameter.
+    #
+    # @option params [String] :function_version
+    #   Optional string. If not specified, only the unqualified functions ARNs
+    #   (Amazon Resource Names) will be returned.
+    #
+    #   Valid value:
+    #
+    #   `ALL` \_ Will return all versions, including `$LATEST` which will have
+    #   fully qualified ARNs (Amazon Resource Names).
     #
     # @option params [String] :marker
     #   Optional string. An opaque pagination token returned from a previous
@@ -1860,6 +1887,8 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_functions({
+    #     master_region: "MasterRegion",
+    #     function_version: "ALL", # accepts ALL
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -1892,6 +1921,7 @@ module Aws::Lambda
     #   resp.functions[0].environment.error.message #=> String
     #   resp.functions[0].kms_key_arn #=> String
     #   resp.functions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.functions[0].master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -1985,7 +2015,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_versions_by_function({
-    #     function_name: "FunctionName", # required
+    #     function_name: "NamespacedFunctionName", # required
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -2018,6 +2048,7 @@ module Aws::Lambda
     #   resp.versions[0].environment.error.message #=> String
     #   resp.versions[0].kms_key_arn #=> String
     #   resp.versions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.versions[0].master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -2078,6 +2109,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -2142,6 +2174,7 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -2209,7 +2242,7 @@ module Aws::Lambda
     #
     #   resp = client.remove_permission({
     #     function_name: "FunctionName", # required
-    #     statement_id: "StatementId", # required
+    #     statement_id: "NamespacedStatementId", # required
     #     qualifier: "Qualifier",
     #   })
     #
@@ -2564,6 +2597,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #
     #
     # @example Example: To update a Lambda function's code
@@ -2635,6 +2669,7 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -2717,17 +2752,16 @@ module Aws::Lambda
     #   the Python runtime v2.7, set the value to "python2.7". To use the
     #   Node.js runtime v6.10, set the value to "nodejs6.10". To use the
     #   Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   Python runtime v3.6, set the value to "python3.6". To use the Python
-    #   runtime v2.7, set the value to "python2.7".
+    #   Python runtime v3.6, set the value to "python3.6".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
     #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
     #   request a one-time extension until June 30, 2017 by going to the
     #   Lambda console and following the instructions provided. Failure to do
-    #   so will result in an invalid parameter value error being returned.
-    #   Note that you will have to follow this procedure for each region that
-    #   contains functions written in the Node v0.10.42 runtime.
+    #   so will result in an invalid parameter error being returned. Note that
+    #   you will have to follow this procedure for each region that contains
+    #   functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #
@@ -2763,6 +2797,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
+    #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -2853,6 +2888,7 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
+    #   resp.master_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -2876,7 +2912,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 
