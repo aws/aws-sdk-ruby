@@ -929,6 +929,10 @@ module Aws::Lambda
     #   The parent object that contains your function's tracing settings.
     #   @return [Types::TracingConfigResponse]
     #
+    # @!attribute [rw] master_arn
+    #   Returns the ARN (Amazon Resource Name) of the master function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -948,7 +952,8 @@ module Aws::Lambda
       :dead_letter_config,
       :environment,
       :kms_key_arn,
-      :tracing_config)
+      :tracing_config,
+      :master_arn)
       include Aws::Structure
     end
 
@@ -1026,7 +1031,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         qualifier: "Qualifier",
     #       }
     #
@@ -1068,7 +1073,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         qualifier: "Qualifier",
     #       }
     #
@@ -1131,7 +1136,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         qualifier: "Qualifier",
     #       }
     #
@@ -1183,7 +1188,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         invocation_type: "Event", # accepts Event, RequestResponse, DryRun
     #         log_type: "None", # accepts None, Tail
     #         client_context: "String",
@@ -1321,7 +1326,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         invoke_args: "data", # required
     #       }
     #
@@ -1490,9 +1495,35 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
+    #         master_region: "MasterRegion",
+    #         function_version: "ALL", # accepts ALL
     #         marker: "String",
     #         max_items: 1,
     #       }
+    #
+    # @!attribute [rw] master_region
+    #   Optional string. If not specified, will return only regular function
+    #   versions (i.e., non-replicated versions).
+    #
+    #   Valid values are:
+    #
+    #   The region from which the functions are replicated. For example, if
+    #   you specify `us-east-1`, only functions replicated from that region
+    #   will be returned.
+    #
+    #   `ALL` \_ Will return all functions from any region. If specified,
+    #   you also must specify a valid FunctionVersion parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   Optional string. If not specified, only the unqualified functions
+    #   ARNs (Amazon Resource Names) will be returned.
+    #
+    #   Valid value:
+    #
+    #   `ALL` \_ Will return all versions, including `$LATEST` which will
+    #   have fully qualified ARNs (Amazon Resource Names).
+    #   @return [String]
     #
     # @!attribute [rw] marker
     #   Optional string. An opaque pagination token returned from a previous
@@ -1509,6 +1540,8 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest AWS API Documentation
     #
     class ListFunctionsRequest < Struct.new(
+      :master_region,
+      :function_version,
       :marker,
       :max_items)
       include Aws::Structure
@@ -1566,7 +1599,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         function_name: "FunctionName", # required
+    #         function_name: "NamespacedFunctionName", # required
     #         marker: "String",
     #         max_items: 1,
     #       }
@@ -1665,7 +1698,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         statement_id: "StatementId", # required
+    #         statement_id: "NamespacedStatementId", # required
     #         qualifier: "Qualifier",
     #       }
     #
@@ -2063,17 +2096,16 @@ module Aws::Lambda
     #   use the Python runtime v2.7, set the value to "python2.7". To use
     #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
     #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   Python runtime v3.6, set the value to "python3.6". To use the
-    #   Python runtime v2.7, set the value to "python2.7".
+    #   Python runtime v3.6, set the value to "python3.6".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
     #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
     #   request a one-time extension until June 30, 2017 by going to the
     #   Lambda console and following the instructions provided. Failure to
-    #   do so will result in an invalid parameter value error being
-    #   returned. Note that you will have to follow this procedure for each
-    #   region that contains functions written in the Node v0.10.42 runtime.
+    #   do so will result in an invalid parameter error being returned. Note
+    #   that you will have to follow this procedure for each region that
+    #   contains functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #   @return [String]

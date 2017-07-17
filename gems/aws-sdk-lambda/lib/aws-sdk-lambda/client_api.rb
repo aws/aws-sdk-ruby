@@ -55,6 +55,7 @@ module Aws::Lambda
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
     FunctionList = Shapes::ListShape.new(name: 'FunctionList')
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
+    FunctionVersion = Shapes::StringShape.new(name: 'FunctionVersion')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
     GetAliasRequest = Shapes::StructureShape.new(name: 'GetAliasRequest')
@@ -95,8 +96,12 @@ module Aws::Lambda
     ListVersionsByFunctionResponse = Shapes::StructureShape.new(name: 'ListVersionsByFunctionResponse')
     LogType = Shapes::StringShape.new(name: 'LogType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MasterRegion = Shapes::StringShape.new(name: 'MasterRegion')
     MaxListItems = Shapes::IntegerShape.new(name: 'MaxListItems')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
+    NameSpacedFunctionArn = Shapes::StringShape.new(name: 'NameSpacedFunctionArn')
+    NamespacedFunctionName = Shapes::StringShape.new(name: 'NamespacedFunctionName')
+    NamespacedStatementId = Shapes::StringShape.new(name: 'NamespacedStatementId')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
@@ -256,8 +261,8 @@ module Aws::Lambda
     FunctionCodeLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
     FunctionCodeLocation.struct_class = Types::FunctionCodeLocation
 
-    FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, location_name: "FunctionName"))
-    FunctionConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "FunctionArn"))
+    FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, location_name: "FunctionName"))
+    FunctionConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: NameSpacedFunctionArn, location_name: "FunctionArn"))
     FunctionConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
     FunctionConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "Role"))
     FunctionConfiguration.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, location_name: "Handler"))
@@ -273,6 +278,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentResponse, location_name: "Environment"))
     FunctionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     FunctionConfiguration.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfigResponse, location_name: "TracingConfig"))
+    FunctionConfiguration.add_member(:master_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "MasterArn"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
@@ -290,11 +296,11 @@ module Aws::Lambda
     GetEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     GetEventSourceMappingRequest.struct_class = Types::GetEventSourceMappingRequest
 
-    GetFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionConfigurationRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetFunctionConfigurationRequest.struct_class = Types::GetFunctionConfigurationRequest
 
-    GetFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetFunctionRequest.struct_class = Types::GetFunctionRequest
 
@@ -303,14 +309,14 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
-    GetPolicyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetPolicyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetPolicyRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetPolicyRequest.struct_class = Types::GetPolicyRequest
 
     GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
-    InvocationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    InvocationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     InvocationRequest.add_member(:invocation_type, Shapes::ShapeRef.new(shape: InvocationType, location: "header", location_name: "X-Amz-Invocation-Type"))
     InvocationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location: "header", location_name: "X-Amz-Log-Type"))
     InvocationRequest.add_member(:client_context, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Client-Context"))
@@ -328,7 +334,7 @@ module Aws::Lambda
     InvocationResponse[:payload] = :payload
     InvocationResponse[:payload_member] = InvocationResponse.member(:payload)
 
-    InvokeAsyncRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    InvokeAsyncRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     InvokeAsyncRequest.add_member(:invoke_args, Shapes::ShapeRef.new(shape: BlobStream, required: true, location_name: "InvokeArgs"))
     InvokeAsyncRequest.struct_class = Types::InvokeAsyncRequest
     InvokeAsyncRequest[:payload] = :invoke_args
@@ -357,6 +363,8 @@ module Aws::Lambda
     ListEventSourceMappingsResponse.add_member(:event_source_mappings, Shapes::ShapeRef.new(shape: EventSourceMappingsList, location_name: "EventSourceMappings"))
     ListEventSourceMappingsResponse.struct_class = Types::ListEventSourceMappingsResponse
 
+    ListFunctionsRequest.add_member(:master_region, Shapes::ShapeRef.new(shape: MasterRegion, location: "querystring", location_name: "MasterRegion"))
+    ListFunctionsRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: FunctionVersion, location: "querystring", location_name: "FunctionVersion"))
     ListFunctionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListFunctionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxListItems, location: "querystring", location_name: "MaxItems"))
     ListFunctionsRequest.struct_class = Types::ListFunctionsRequest
@@ -371,7 +379,7 @@ module Aws::Lambda
     ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
-    ListVersionsByFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    ListVersionsByFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     ListVersionsByFunctionRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListVersionsByFunctionRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxListItems, location: "querystring", location_name: "MaxItems"))
     ListVersionsByFunctionRequest.struct_class = Types::ListVersionsByFunctionRequest
@@ -386,7 +394,7 @@ module Aws::Lambda
     PublishVersionRequest.struct_class = Types::PublishVersionRequest
 
     RemovePermissionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location: "uri", location_name: "StatementId"))
+    RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: NamespacedStatementId, required: true, location: "uri", location_name: "StatementId"))
     RemovePermissionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
@@ -709,6 +717,7 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: ListFunctionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
