@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
 2.10.13 (2017-07-17)
 ------------------
 
