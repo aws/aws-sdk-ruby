@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-athena', '1.0.0.rc4')
   spec.add_dependency('aws-sdk-autoscaling', '1.0.0.rc9')
   spec.add_dependency('aws-sdk-batch', '1.0.0.rc8')
-  spec.add_dependency('aws-sdk-budgets', '1.0.0.rc9')
+  spec.add_dependency('aws-sdk-budgets', '1.0.0.rc10')
   spec.add_dependency('aws-sdk-clouddirectory', '1.0.0.rc8')
   spec.add_dependency('aws-sdk-cloudformation', '1.0.0.rc9')
   spec.add_dependency('aws-sdk-cloudfront', '1.0.0.rc9')

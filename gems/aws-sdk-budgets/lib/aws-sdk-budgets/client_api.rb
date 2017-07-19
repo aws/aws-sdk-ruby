@@ -65,6 +65,7 @@ module Aws::Budgets
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
+    UnitValue = Shapes::StringShape.new(name: 'UnitValue')
     UpdateBudgetRequest = Shapes::StructureShape.new(name: 'UpdateBudgetRequest')
     UpdateBudgetResponse = Shapes::StructureShape.new(name: 'UpdateBudgetResponse')
     UpdateNotificationRequest = Shapes::StructureShape.new(name: 'UpdateNotificationRequest')
@@ -194,7 +195,7 @@ module Aws::Budgets
     Notifications.member = Shapes::ShapeRef.new(shape: Notification)
 
     Spend.add_member(:amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Amount"))
-    Spend.add_member(:unit, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Unit"))
+    Spend.add_member(:unit, Shapes::ShapeRef.new(shape: UnitValue, required: true, location_name: "Unit"))
     Spend.struct_class = Types::Spend
 
     Subscriber.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "SubscriptionType"))

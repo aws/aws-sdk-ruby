@@ -176,7 +176,7 @@ module Aws::Budgets
     #       budget_name: "BudgetName", # required
     #       budget_limit: { # required
     #         amount: "NumericValue", # required
-    #         unit: "GenericString", # required
+    #         unit: "UnitValue", # required
     #       },
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
@@ -186,7 +186,7 @@ module Aws::Budgets
     #         include_subscription: false, # required
     #         use_blended: false, # required
     #       },
-    #       time_unit: "MONTHLY", # required, accepts MONTHLY, QUARTERLY, ANNUALLY
+    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
     #         start: Time.now, # required
     #         end: Time.now, # required
@@ -194,14 +194,14 @@ module Aws::Budgets
     #       calculated_spend: {
     #         actual_spend: { # required
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #         forecasted_spend: {
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
     #     },
     #     notifications_with_subscribers: [
     #       {
@@ -233,7 +233,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -275,7 +276,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -316,7 +318,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -340,7 +343,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -373,7 +377,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -414,7 +419,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @return [Types::DescribeBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -438,14 +444,14 @@ module Aws::Budgets
     #   resp.budget.cost_types.include_tax #=> Boolean
     #   resp.budget.cost_types.include_subscription #=> Boolean
     #   resp.budget.cost_types.use_blended #=> Boolean
-    #   resp.budget.time_unit #=> String, one of "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budget.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budget.time_period.start #=> Time
     #   resp.budget.time_period.end #=> Time
     #   resp.budget.calculated_spend.actual_spend.amount #=> String
     #   resp.budget.calculated_spend.actual_spend.unit #=> String
     #   resp.budget.calculated_spend.forecasted_spend.amount #=> String
     #   resp.budget.calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budget.budget_type #=> String, one of "USAGE", "COST"
+    #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION"
     #
     # @overload describe_budget(params = {})
     # @param [Hash] params ({})
@@ -491,14 +497,14 @@ module Aws::Budgets
     #   resp.budgets[0].cost_types.include_tax #=> Boolean
     #   resp.budgets[0].cost_types.include_subscription #=> Boolean
     #   resp.budgets[0].cost_types.use_blended #=> Boolean
-    #   resp.budgets[0].time_unit #=> String, one of "MONTHLY", "QUARTERLY", "ANNUALLY"
+    #   resp.budgets[0].time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budgets[0].time_period.start #=> Time
     #   resp.budgets[0].time_period.end #=> Time
     #   resp.budgets[0].calculated_spend.actual_spend.amount #=> String
     #   resp.budgets[0].calculated_spend.actual_spend.unit #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.amount #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST"
+    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION"
     #   resp.next_token #=> String
     #
     # @overload describe_budgets(params = {})
@@ -514,7 +520,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [Integer] :max_results
     #   An integer to represent how many entries should a pagianted response
@@ -558,7 +565,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -622,7 +630,7 @@ module Aws::Budgets
     #       budget_name: "BudgetName", # required
     #       budget_limit: { # required
     #         amount: "NumericValue", # required
-    #         unit: "GenericString", # required
+    #         unit: "UnitValue", # required
     #       },
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
@@ -632,7 +640,7 @@ module Aws::Budgets
     #         include_subscription: false, # required
     #         use_blended: false, # required
     #       },
-    #       time_unit: "MONTHLY", # required, accepts MONTHLY, QUARTERLY, ANNUALLY
+    #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
     #         start: Time.now, # required
     #         end: Time.now, # required
@@ -640,14 +648,14 @@ module Aws::Budgets
     #       calculated_spend: {
     #         actual_spend: { # required
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #         forecasted_spend: {
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
     #     },
     #   })
     #
@@ -664,7 +672,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :old_notification
     #   Notification model. Each budget may contain multiple notifications
@@ -706,7 +715,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character is
+    #   allowed.
     #
     # @option params [required, Types::Notification] :notification
     #   Notification model. Each budget may contain multiple notifications
@@ -762,7 +772,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

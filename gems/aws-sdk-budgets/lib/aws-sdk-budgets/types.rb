@@ -17,7 +17,7 @@ module Aws::Budgets
     #         budget_name: "BudgetName", # required
     #         budget_limit: { # required
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #         cost_filters: {
     #           "GenericString" => ["GenericString"],
@@ -27,7 +27,7 @@ module Aws::Budgets
     #           include_subscription: false, # required
     #           use_blended: false, # required
     #         },
-    #         time_unit: "MONTHLY", # required, accepts MONTHLY, QUARTERLY, ANNUALLY
+    #         time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #         time_period: { # required
     #           start: Time.now, # required
     #           end: Time.now, # required
@@ -35,18 +35,19 @@ module Aws::Budgets
     #         calculated_spend: {
     #           actual_spend: { # required
     #             amount: "NumericValue", # required
-    #             unit: "GenericString", # required
+    #             unit: "UnitValue", # required
     #           },
     #           forecasted_spend: {
     #             amount: "NumericValue", # required
-    #             unit: "GenericString", # required
+    #             unit: "UnitValue", # required
     #           },
     #         },
-    #         budget_type: "USAGE", # required, accepts USAGE, COST
+    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
     #       }
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
@@ -63,7 +64,7 @@ module Aws::Budgets
     #   @return [Types::CostTypes]
     #
     # @!attribute [rw] time_unit
-    #   The time unit of the budget. e.g. weekly, monthly, etc.
+    #   The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -75,7 +76,7 @@ module Aws::Budgets
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
-    #   The type of a budget. Can be COST or USAGE.
+    #   The type of a budget. It should be COST, USAGE, or RI\_UTILIZATION.
     #   @return [String]
     #
     class Budget < Struct.new(
@@ -98,11 +99,11 @@ module Aws::Budgets
     #       {
     #         actual_spend: { # required
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #         forecasted_spend: {
     #           amount: "NumericValue", # required
-    #           unit: "GenericString", # required
+    #           unit: "UnitValue", # required
     #         },
     #       }
     #
@@ -163,7 +164,7 @@ module Aws::Budgets
     #           budget_name: "BudgetName", # required
     #           budget_limit: { # required
     #             amount: "NumericValue", # required
-    #             unit: "GenericString", # required
+    #             unit: "UnitValue", # required
     #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
@@ -173,7 +174,7 @@ module Aws::Budgets
     #             include_subscription: false, # required
     #             use_blended: false, # required
     #           },
-    #           time_unit: "MONTHLY", # required, accepts MONTHLY, QUARTERLY, ANNUALLY
+    #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
     #             start: Time.now, # required
     #             end: Time.now, # required
@@ -181,14 +182,14 @@ module Aws::Budgets
     #           calculated_spend: {
     #             actual_spend: { # required
     #               amount: "NumericValue", # required
-    #               unit: "GenericString", # required
+    #               unit: "UnitValue", # required
     #             },
     #             forecasted_spend: {
     #               amount: "NumericValue", # required
-    #               unit: "GenericString", # required
+    #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
     #         },
     #         notifications_with_subscribers: [
     #           {
@@ -256,7 +257,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -304,7 +306,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -344,7 +347,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     class DeleteBudgetRequest < Struct.new(
@@ -377,7 +381,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -420,7 +425,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -460,7 +466,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     class DescribeBudgetRequest < Struct.new(
@@ -544,7 +551,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -602,7 +610,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
@@ -720,7 +729,7 @@ module Aws::Budgets
     #
     #       {
     #         amount: "NumericValue", # required
-    #         unit: "GenericString", # required
+    #         unit: "UnitValue", # required
     #       }
     #
     # @!attribute [rw] amount
@@ -728,7 +737,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   A generic String.
+    #   A string to represent budget spend unit. It should be not null and
+    #   not empty.
     #   @return [String]
     #
     class Spend < Struct.new(
@@ -797,7 +807,7 @@ module Aws::Budgets
     #           budget_name: "BudgetName", # required
     #           budget_limit: { # required
     #             amount: "NumericValue", # required
-    #             unit: "GenericString", # required
+    #             unit: "UnitValue", # required
     #           },
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
@@ -807,7 +817,7 @@ module Aws::Budgets
     #             include_subscription: false, # required
     #             use_blended: false, # required
     #           },
-    #           time_unit: "MONTHLY", # required, accepts MONTHLY, QUARTERLY, ANNUALLY
+    #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
     #             start: Time.now, # required
     #             end: Time.now, # required
@@ -815,14 +825,14 @@ module Aws::Budgets
     #           calculated_spend: {
     #             actual_spend: { # required
     #               amount: "NumericValue", # required
-    #               unit: "GenericString", # required
+    #               unit: "UnitValue", # required
     #             },
     #             forecasted_spend: {
     #               amount: "NumericValue", # required
-    #               unit: "GenericString", # required
+    #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
     #         },
     #       }
     #
@@ -869,7 +879,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] old_notification
@@ -922,7 +933,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" character is allowed.
+    #   A string represents the budget name. No ":" and "\\" character
+    #   is allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification
