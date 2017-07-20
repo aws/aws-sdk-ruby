@@ -584,7 +584,7 @@ module Aws::EMR
     #   resp.cluster.id #=> String
     #   resp.cluster.name #=> String
     #   resp.cluster.status.state #=> String, one of "STARTING", "BOOTSTRAPPING", "RUNNING", "WAITING", "TERMINATING", "TERMINATED", "TERMINATED_WITH_ERRORS"
-    #   resp.cluster.status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "BOOTSTRAP_FAILURE", "USER_REQUEST", "STEP_FAILURE", "ALL_STEPS_COMPLETED"
+    #   resp.cluster.status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "INSTANCE_FLEET_TIMEOUT", "BOOTSTRAP_FAILURE", "USER_REQUEST", "STEP_FAILURE", "ALL_STEPS_COMPLETED"
     #   resp.cluster.status.state_change_reason.message #=> String
     #   resp.cluster.status.timeline.creation_date_time #=> Time
     #   resp.cluster.status.timeline.ready_date_time #=> Time
@@ -633,6 +633,9 @@ module Aws::EMR
     #   resp.cluster.security_configuration #=> String
     #   resp.cluster.auto_scaling_role #=> String
     #   resp.cluster.scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
+    #   resp.cluster.custom_ami_id #=> String
+    #   resp.cluster.ebs_root_volume_size #=> Integer
+    #   resp.cluster.repo_upgrade_on_boot #=> String, one of "SECURITY", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
@@ -932,7 +935,7 @@ module Aws::EMR
     #   resp.clusters[0].id #=> String
     #   resp.clusters[0].name #=> String
     #   resp.clusters[0].status.state #=> String, one of "STARTING", "BOOTSTRAPPING", "RUNNING", "WAITING", "TERMINATING", "TERMINATED", "TERMINATED_WITH_ERRORS"
-    #   resp.clusters[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "BOOTSTRAP_FAILURE", "USER_REQUEST", "STEP_FAILURE", "ALL_STEPS_COMPLETED"
+    #   resp.clusters[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "INSTANCE_FLEET_TIMEOUT", "BOOTSTRAP_FAILURE", "USER_REQUEST", "STEP_FAILURE", "ALL_STEPS_COMPLETED"
     #   resp.clusters[0].status.state_change_reason.message #=> String
     #   resp.clusters[0].status.timeline.creation_date_time #=> Time
     #   resp.clusters[0].status.timeline.ready_date_time #=> Time
@@ -1110,11 +1113,10 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Provides information about the cluster instances that Amazon EMR
-    # provisions on behalf of a user when it creates the cluster. For
-    # example, this operation indicates when the EC2 instances reach the
-    # Ready state, when instances become available to Amazon EMR to use for
-    # jobs, and the IP addresses for cluster instances, etc.
+    # Provides information for all active EC2 instances and EC2 instances
+    # terminated in the last 30 days, up to a maximum of 2,000. EC2
+    # instances in any of the following states are considered active:
+    # AWAITING\_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
     #
     # @option params [required, String] :cluster_id
     #   The identifier of the cluster for which to list the instances.
@@ -1589,26 +1591,19 @@ module Aws::EMR
     #   A JSON string for selecting additional features.
     #
     # @option params [String] :ami_version
-    #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   greater, use ReleaseLabel.
-    #
-    #    </note>
-    #
-    #   The version of the Amazon Machine Image (AMI) to use when launching
-    #   Amazon EC2 instances in the job flow. The following values are valid:
-    #
-    #   * The version number of the AMI to use, for example, "2.0."
-    #
-    #   ^
+    #   For Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0
+    #   and later, the Linux AMI is determined by the `ReleaseLabel` specified
+    #   or by `CustomAmiID`. The version of the Amazon Machine Image (AMI) to
+    #   use when launching Amazon EC2 instances in the job flow. For details
+    #   about the AMI versions currently supported in EMR version 3.x and 2.x,
+    #   see [AMI Versions Supported in
+    #   EMR](ElasticMapReduce/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
+    #   in the *Amazon EMR Developer Guide*.
     #
     #   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0
-    #   supports both Hadoop 0.18 and 0.20) you can use the
+    #   supports both Hadoop 0.18 and 0.20), you can use the
     #   JobFlowInstancesConfig `HadoopVersion` parameter to modify the version
     #   of Hadoop from the defaults shown above.
-    #
-    #   For details about the AMI versions currently supported by Amazon
-    #   Elastic MapReduce, see [AMI Versions Supported in Elastic
-    #   MapReduce][1] in the *Amazon Elastic MapReduce Developer Guide.*
     #
     #   <note markdown="1"> Previously, the EMR AMI version API parameter options allowed you to
     #   use latest for the latest AMI version rather than specify a numerical
@@ -1618,17 +1613,9 @@ module Aws::EMR
     #
     #    </note>
     #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported
-    #
     # @option params [String] :release_label
-    #   <note markdown="1"> Amazon EMR releases 4.x or later.
-    #
-    #    </note>
-    #
     #   The release label for the Amazon EMR release. For Amazon EMR 3.x and
-    #   2.x AMIs, use amiVersion instead instead of ReleaseLabel.
+    #   2.x AMIs, use `AmiVersion` instead.
     #
     # @option params [required, Types::JobFlowInstancesConfig] :instances
     #   A specification of the number and type of Amazon EC2 instances.
@@ -1642,7 +1629,7 @@ module Aws::EMR
     #
     # @option params [Array<String>] :supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   greater, use Applications.
+    #   later, use Applications.
     #
     #    </note>
     #
@@ -1660,7 +1647,7 @@ module Aws::EMR
     #
     # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
-    #   greater, use Applications.
+    #   later, use Applications.
     #
     #    </note>
     #
@@ -1696,21 +1683,13 @@ module Aws::EMR
     #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
-    #   <note markdown="1"> Amazon EMR releases 4.x or later.
-    #
-    #    </note>
-    #
-    #   A list of applications for the cluster. Valid values are: "Hadoop",
-    #   "Hive", "Mahout", "Pig", and "Spark." They are case
-    #   insensitive.
+    #   For Amazon EMR releases 4.0 and later. A list of applications for the
+    #   cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig",
+    #   and "Spark." They are case insensitive.
     #
     # @option params [Array<Types::Configuration>] :configurations
-    #   <note markdown="1"> Amazon EMR releases 4.x or later.
-    #
-    #    </note>
-    #
-    #   The list of configurations supplied for the EMR cluster you are
-    #   creating.
+    #   For Amazon EMR releases 4.0 and later. The list of configurations
+    #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
     #   Whether the cluster is visible to all IAM users of the AWS account
@@ -1757,6 +1736,39 @@ module Aws::EMR
     #   corruption. `TERMINATE_AT_TASK_COMPLETION` available only in Amazon
     #   EMR version 4.1.0 and later, and is the default for versions of Amazon
     #   EMR earlier than 5.1.0.
+    #
+    # @option params [String] :custom_ami_id
+    #   Available only in Amazon EMR version 5.7.0 and later. The ID of a
+    #   custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this
+    #   AMI when it launches cluster EC2 instances. For more information about
+    #   custom AMIs in Amazon EMR, see [Using a Custom AMI][1] in the *Amazon
+    #   EMR Management Guide*. If omitted, the cluster uses the base Linux AMI
+    #   for the `ReleaseLabel` specified. For Amazon EMR versions 2.x and 3.x,
+    #   use `AmiVersion` instead.
+    #
+    #   For information about creating a custom AMI, see [Creating an Amazon
+    #   EBS-Backed Linux AMI][2] in the *Amazon Elastic Compute Cloud User
+    #   Guide for Linux Instances*. For information about finding an AMI ID,
+    #   see [Finding a Linux AMI][3].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
+    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+    #
+    # @option params [Integer] :ebs_root_volume_size
+    #   The size, in GiB, of the EBS root device volume of the Linux AMI that
+    #   is used for each EC2 instance. Available in Amazon EMR version 4.x and
+    #   later.
+    #
+    # @option params [String] :repo_upgrade_on_boot
+    #   Applies only when `CustomAmiID` is used. Specifies which updates from
+    #   the Amazon Linux AMI package repositories to apply automatically when
+    #   the instance boots using the AMI. If omitted, the default is
+    #   `SECURITY`, which indicates that only security updates are applied. If
+    #   `NONE` is specified, no updates are applied, and all updates must be
+    #   applied manually.
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1975,6 +1987,9 @@ module Aws::EMR
     #     security_configuration: "XmlString",
     #     auto_scaling_role: "XmlString",
     #     scale_down_behavior: "TERMINATE_AT_INSTANCE_HOUR", # accepts TERMINATE_AT_INSTANCE_HOUR, TERMINATE_AT_TASK_COMPLETION
+    #     custom_ami_id: "XmlStringMaxLen256",
+    #     ebs_root_volume_size: 1,
+    #     repo_upgrade_on_boot: "SECURITY", # accepts SECURITY, NONE
     #   })
     #
     # @example Response structure
@@ -2125,7 +2140,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

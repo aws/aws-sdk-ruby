@@ -173,6 +173,7 @@ module Aws::EMR
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
     RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
     RemoveTagsOutput = Shapes::StructureShape.new(name: 'RemoveTagsOutput')
+    RepoUpgradeOnBoot = Shapes::StringShape.new(name: 'RepoUpgradeOnBoot')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     RunJobFlowInput = Shapes::StructureShape.new(name: 'RunJobFlowInput')
     RunJobFlowOutput = Shapes::StructureShape.new(name: 'RunJobFlowOutput')
@@ -337,6 +338,9 @@ module Aws::EMR
     Cluster.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
     Cluster.add_member(:auto_scaling_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "AutoScalingRole"))
     Cluster.add_member(:scale_down_behavior, Shapes::ShapeRef.new(shape: ScaleDownBehavior, location_name: "ScaleDownBehavior"))
+    Cluster.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
+    Cluster.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
+    Cluster.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -848,6 +852,9 @@ module Aws::EMR
     RunJobFlowInput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
     RunJobFlowInput.add_member(:auto_scaling_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "AutoScalingRole"))
     RunJobFlowInput.add_member(:scale_down_behavior, Shapes::ShapeRef.new(shape: ScaleDownBehavior, location_name: "ScaleDownBehavior"))
+    RunJobFlowInput.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
+    RunJobFlowInput.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
+    RunJobFlowInput.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
