@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
 2.10.14 (2017-07-19)
 ------------------
 
