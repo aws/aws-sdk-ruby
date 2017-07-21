@@ -11,7 +11,7 @@ This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
 
 * [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/ruby/)
-* [API Docs](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
+* [API Docs](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
@@ -132,10 +132,10 @@ Valid region and credentials options are:
 
 * `:region` - A string like `us-west-2`. See [this document](http://docs.aws.amazon.com/general/latest/gr/rande.html) for a list of supported regions by service.
 * `:credentials` - An instance of one of the following classes:
-  * [`Aws::Credentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/Credentials.html)
-  * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/SharedCredentials.html)
-  * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/InstanceProfileCredentials.html)
-  * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/AssumeRoleCredentials.html)
+  * [`Aws::Credentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Credentials.html)
+  * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
+  * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
+  * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
 
 You may also pass configuration options directly to resource and client constructors. These options take precedence over the environment and `Aws.config` defaults.
 
@@ -160,7 +160,7 @@ Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['Sec
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
-[API documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
+[API documentation](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/frames.html)
 for a complete list of available methods.
 
 ```ruby
