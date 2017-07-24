@@ -3051,6 +3051,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the parameters for CreateNetworkInterfacePermission.
+    #
     # @note When making an API call, you may pass CreateNetworkInterfacePermissionRequest
     #   data as a hash:
     #
@@ -3096,6 +3098,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the output of CreateNetworkInterfacePermission.
+    #
     # @!attribute [rw] interface_permission
     #   Information about the permission for the network interface.
     #   @return [Types::NetworkInterfacePermission]
@@ -4592,6 +4596,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the parameters for DeleteNetworkInterfacePermission.
+    #
     # @note When making an API call, you may pass DeleteNetworkInterfacePermissionRequest
     #   data as a hash:
     #
@@ -4626,6 +4632,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the output for DeleteNetworkInterfacePermission.
+    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds, otherwise returns an error.
     #   @return [Boolean]
@@ -7780,6 +7788,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the parameters for DescribeNetworkInterfacePermissions.
+    #
     # @note When making an API call, you may pass DescribeNetworkInterfacePermissionsRequest
     #   data as a hash:
     #
@@ -7838,6 +7848,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the output for DescribeNetworkInterfacePermissions.
+    #
     # @!attribute [rw] network_interface_permissions
     #   The network interface permissions.
     #   @return [Array<Types::NetworkInterfacePermission>]
@@ -19081,6 +19093,17 @@ module Aws::EC2
     #               subnet_id: "String",
     #               user_data: "String",
     #               weighted_capacity: 1.0,
+    #               tag_specifications: [
+    #                 {
+    #                   resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #                   tags: [
+    #                     {
+    #                       key: "String",
+    #                       value: "String",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
     #             },
     #           ],
     #           spot_price: "String", # required
@@ -22425,6 +22448,17 @@ module Aws::EC2
     #         subnet_id: "String",
     #         user_data: "String",
     #         weighted_capacity: 1.0,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] security_groups
@@ -22523,6 +22557,10 @@ module Aws::EC2
     #   value is not specified, the default is 1.
     #   @return [Float]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply during creation.
+    #   @return [Array<Types::SpotFleetTagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification AWS API Documentation
     #
     class SpotFleetLaunchSpecification < Struct.new(
@@ -22542,7 +22580,8 @@ module Aws::EC2
       :spot_price,
       :subnet_id,
       :user_data,
-      :weighted_capacity)
+      :weighted_capacity,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -22688,6 +22727,17 @@ module Aws::EC2
     #             subnet_id: "String",
     #             user_data: "String",
     #             weighted_capacity: 1.0,
+    #             tag_specifications: [
+    #               {
+    #                 resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #                 tags: [
+    #                   {
+    #                     key: "String",
+    #                     value: "String",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         ],
     #         spot_price: "String", # required
@@ -22797,6 +22847,38 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :replace_unhealthy_instances)
+      include Aws::Structure
+    end
+
+    # The tags for a Spot fleet resource.
+    #
+    # @note When making an API call, you may pass SpotFleetTagSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource. Currently, the only resource type that is
+    #   supported is `instance`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetTagSpecification AWS API Documentation
+    #
+    class SpotFleetTagSpecification < Struct.new(
+      :resource_type,
+      :tags)
       include Aws::Structure
     end
 

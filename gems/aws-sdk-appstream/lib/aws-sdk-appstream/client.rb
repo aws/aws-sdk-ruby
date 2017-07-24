@@ -181,6 +181,53 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a directory configuration with the given parameters.
+    #
+    # @option params [required, String] :directory_name
+    #   The fully qualified name of the directory, such as corp.example.com
+    #
+    # @option params [required, Array<String>] :organizational_unit_distinguished_names
+    #   The list of the distinguished names of organizational units to place
+    #   computer accounts in.
+    #
+    # @option params [required, Types::ServiceAccountCredentials] :service_account_credentials
+    #   The *AccountName* and *AccountPassword* values for the service
+    #   account, which are used by the streaming instance to connect to the
+    #   directory.
+    #
+    # @return [Types::CreateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDirectoryConfigResult#directory_config #directory_config} => Types::DirectoryConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_directory_config({
+    #     directory_name: "DirectoryName", # required
+    #     organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"], # required
+    #     service_account_credentials: { # required
+    #       account_name: "AccountName", # required
+    #       account_password: "AccountPassword", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_config.directory_name #=> String
+    #   resp.directory_config.organizational_unit_distinguished_names #=> Array
+    #   resp.directory_config.organizational_unit_distinguished_names[0] #=> String
+    #   resp.directory_config.service_account_credentials.account_name #=> String
+    #   resp.directory_config.service_account_credentials.account_password #=> String
+    #   resp.directory_config.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig AWS API Documentation
+    #
+    # @overload create_directory_config(params = {})
+    # @param [Hash] params ({})
+    def create_directory_config(params = {}, options = {})
+      req = build_request(:create_directory_config, params)
+      req.send_request(options)
+    end
+
     # Creates a new fleet.
     #
     # @option params [required, String] :name
@@ -191,7 +238,31 @@ module Aws::AppStream
     #
     # @option params [required, String] :instance_type
     #   The instance type of compute resources for the fleet. Fleet instances
-    #   are launched from this instance type.
+    #   are launched from this instance type. Available instance types are:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
     #
     # @option params [required, Types::ComputeCapacity] :compute_capacity
     #   The parameters for the capacity allocated to the fleet.
@@ -216,7 +287,12 @@ module Aws::AppStream
     #   The display name of the fleet.
     #
     # @option params [Boolean] :enable_default_internet_access
-    #   Enables or disables default Internet access for the fleet.
+    #   Enables or disables default internet access for the fleet.
+    #
+    # @option params [Types::DomainJoinInfo] :domain_join_info
+    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
+    #   which are used to join domains for the AppStream 2.0 streaming
+    #   instances.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -240,6 +316,10 @@ module Aws::AppStream
     #     description: "Description",
     #     display_name: "DisplayName",
     #     enable_default_internet_access: false,
+    #     domain_join_info: {
+    #       directory_name: "DirectoryName",
+    #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -263,9 +343,11 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
+    #   resp.fleet.domain_join_info.directory_name #=> String
+    #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -366,7 +448,7 @@ module Aws::AppStream
     #   resp = client.create_streaming_url({
     #     stack_name: "String", # required
     #     fleet_name: "String", # required
-    #     user_id: "UserId", # required
+    #     user_id: "StreamingUrlUserId", # required
     #     application_id: "String",
     #     validity: 1,
     #     session_context: "String",
@@ -383,6 +465,28 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_streaming_url(params = {}, options = {})
       req = build_request(:create_streaming_url, params)
+      req.send_request(options)
+    end
+
+    # Deletes the directory configuration with the given parameters.
+    #
+    # @option params [required, String] :directory_name
+    #   The name of the directory configuration to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_directory_config({
+    #     directory_name: "DirectoryName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfig AWS API Documentation
+    #
+    # @overload delete_directory_config(params = {})
+    # @param [Hash] params ({})
+    def delete_directory_config(params = {}, options = {})
+      req = build_request(:delete_directory_config, params)
       req.send_request(options)
     end
 
@@ -432,6 +536,51 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Returns a list describing the specified directory configurations.
+    #
+    # @option params [Array<String>] :directory_names
+    #   A specific list of directory names.
+    #
+    # @option params [Integer] :max_results
+    #   The size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The DescribeDirectoryConfigsResult.NextToken from a previous call to
+    #   DescribeDirectoryConfigs. If this is the first call, pass null.
+    #
+    # @return [Types::DescribeDirectoryConfigsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectoryConfigsResult#directory_configs #directory_configs} => Array&lt;Types::DirectoryConfig&gt;
+    #   * {Types::DescribeDirectoryConfigsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_directory_configs({
+    #     directory_names: ["DirectoryName"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_configs #=> Array
+    #   resp.directory_configs[0].directory_name #=> String
+    #   resp.directory_configs[0].organizational_unit_distinguished_names #=> Array
+    #   resp.directory_configs[0].organizational_unit_distinguished_names[0] #=> String
+    #   resp.directory_configs[0].service_account_credentials.account_name #=> String
+    #   resp.directory_configs[0].service_account_credentials.account_password #=> String
+    #   resp.directory_configs[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigs AWS API Documentation
+    #
+    # @overload describe_directory_configs(params = {})
+    # @param [Hash] params ({})
+    def describe_directory_configs(params = {}, options = {})
+      req = build_request(:describe_directory_configs, params)
+      req.send_request(options)
+    end
+
     # If fleet names are provided, this operation describes the specified
     # fleets; otherwise, all the fleets in the account are described.
     #
@@ -477,9 +626,11 @@ module Aws::AppStream
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
     #   resp.fleets[0].created_time #=> Time
     #   resp.fleets[0].fleet_errors #=> Array
-    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
+    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleets[0].fleet_errors[0].error_message #=> String
     #   resp.fleets[0].enable_default_internet_access #=> Boolean
+    #   resp.fleets[0].domain_join_info.directory_name #=> String
+    #   resp.fleets[0].domain_join_info.organizational_unit_distinguished_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
@@ -545,8 +696,8 @@ module Aws::AppStream
 
     # Describes the streaming sessions for a stack and a fleet. If a user ID
     # is provided, this operation returns streaming sessions for only that
-    # user. Pass this value for the `nextToken` parameter in a subsequent
-    # call to this operation to retrieve the next set of items. If an
+    # user. To retrieve the next set of items, pass this value for the
+    # `nextToken` parameter in a subsequent call to this operation. If an
     # authentication type is not provided, the operation defaults to users
     # authenticated using a streaming URL.
     #
@@ -612,8 +763,8 @@ module Aws::AppStream
 
     # If stack names are not provided, this operation describes the
     # specified stacks; otherwise, all stacks in the account are described.
-    # Pass the `nextToken` value in a subsequent call to this operation to
-    # retrieve the next set of items.
+    # To retrieve the next set of items, pass the `nextToken` value in a
+    # subsequent call to this operation.
     #
     # @option params [Array<String>] :names
     #   The stack names to describe. Use null to describe all the stacks for
@@ -824,6 +975,53 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Updates the directory configuration with the given parameters.
+    #
+    # @option params [required, String] :directory_name
+    #   The name of the existing directory configuration to be updated.
+    #
+    # @option params [Array<String>] :organizational_unit_distinguished_names
+    #   The list of the distinguished names of organizational units to place
+    #   computer accounts in.
+    #
+    # @option params [Types::ServiceAccountCredentials] :service_account_credentials
+    #   The *AccountName* and *AccountPassword* values for the service
+    #   account, which are used by the streaming instance to connect to the
+    #   directory
+    #
+    # @return [Types::UpdateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDirectoryConfigResult#directory_config #directory_config} => Types::DirectoryConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_directory_config({
+    #     directory_name: "DirectoryName", # required
+    #     organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"],
+    #     service_account_credentials: {
+    #       account_name: "AccountName", # required
+    #       account_password: "AccountPassword", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_config.directory_name #=> String
+    #   resp.directory_config.organizational_unit_distinguished_names #=> Array
+    #   resp.directory_config.organizational_unit_distinguished_names[0] #=> String
+    #   resp.directory_config.service_account_credentials.account_name #=> String
+    #   resp.directory_config.service_account_credentials.account_password #=> String
+    #   resp.directory_config.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig AWS API Documentation
+    #
+    # @overload update_directory_config(params = {})
+    # @param [Hash] params ({})
+    def update_directory_config(params = {}, options = {})
+      req = build_request(:update_directory_config, params)
+      req.send_request(options)
+    end
+
     # Updates an existing fleet. All the attributes except the fleet name
     # can be updated in the **STOPPED** state. When a fleet is in the
     # **RUNNING** state, only `DisplayName` and `ComputeCapacity` can be
@@ -838,7 +1036,31 @@ module Aws::AppStream
     #
     # @option params [String] :instance_type
     #   The instance type of compute resources for the fleet. Fleet instances
-    #   are launched from this instance type.
+    #   are launched from this instance type. Available instance types are:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
     #
     # @option params [Types::ComputeCapacity] :compute_capacity
     #   The parameters for the capacity allocated to the fleet.
@@ -866,7 +1088,12 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #
     # @option params [Boolean] :enable_default_internet_access
-    #   Enables or disables default Internet access for the fleet.
+    #   Enables or disables default internet access for the fleet.
+    #
+    # @option params [Types::DomainJoinInfo] :domain_join_info
+    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
+    #   which are used to join domains for the AppStream 2.0 streaming
+    #   instances.
     #
     # @option params [Array<String>] :attributes_to_delete
     #   Fleet attributes to be deleted.
@@ -894,7 +1121,11 @@ module Aws::AppStream
     #     description: "Description",
     #     display_name: "DisplayName",
     #     enable_default_internet_access: false,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    #     domain_join_info: {
+    #       directory_name: "DirectoryName",
+    #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #     },
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
     #   })
     #
     # @example Response structure
@@ -918,9 +1149,11 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
+    #   resp.fleet.domain_join_info.directory_name #=> String
+    #   resp.fleet.domain_join_info.organizational_unit_distinguished_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -1003,7 +1236,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

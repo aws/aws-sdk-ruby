@@ -813,6 +813,8 @@ module Aws::EC2
     SpotFleetRequestConfig = Shapes::StructureShape.new(name: 'SpotFleetRequestConfig')
     SpotFleetRequestConfigData = Shapes::StructureShape.new(name: 'SpotFleetRequestConfigData')
     SpotFleetRequestConfigSet = Shapes::ListShape.new(name: 'SpotFleetRequestConfigSet')
+    SpotFleetTagSpecification = Shapes::StructureShape.new(name: 'SpotFleetTagSpecification')
+    SpotFleetTagSpecificationList = Shapes::ListShape.new(name: 'SpotFleetTagSpecificationList')
     SpotInstanceRequest = Shapes::StructureShape.new(name: 'SpotInstanceRequest')
     SpotInstanceRequestIdList = Shapes::ListShape.new(name: 'SpotInstanceRequestIdList')
     SpotInstanceRequestList = Shapes::ListShape.new(name: 'SpotInstanceRequestList')
@@ -4380,6 +4382,7 @@ module Aws::EC2
     SpotFleetLaunchSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     SpotFleetLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
     SpotFleetLaunchSpecification.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
+    SpotFleetLaunchSpecification.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: SpotFleetTagSpecificationList, location_name: "tagSpecificationSet"))
     SpotFleetLaunchSpecification.struct_class = Types::SpotFleetLaunchSpecification
 
     SpotFleetMonitoring.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -4408,6 +4411,12 @@ module Aws::EC2
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")
+
+    SpotFleetTagSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    SpotFleetTagSpecification.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tag"))
+    SpotFleetTagSpecification.struct_class = Types::SpotFleetTagSpecification
+
+    SpotFleetTagSpecificationList.member = Shapes::ShapeRef.new(shape: SpotFleetTagSpecification, location_name: "item")
 
     SpotInstanceRequest.add_member(:actual_block_hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "actualBlockHourlyPrice"))
     SpotInstanceRequest.add_member(:availability_zone_group, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneGroup"))

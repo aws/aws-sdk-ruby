@@ -31,8 +31,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   An application can be disabled after image creation if there is a
-    #   problem.
+    #   If there is a problem, an application can be disabled after image
+    #   creation.
     #   @return [Boolean]
     #
     # @!attribute [rw] metadata
@@ -130,6 +130,53 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDirectoryConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_name: "DirectoryName", # required
+    #         organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"], # required
+    #         service_account_credentials: { # required
+    #           account_name: "AccountName", # required
+    #           account_password: "AccountPassword", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_name
+    #   The fully qualified name of the directory, such as corp.example.com
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_names
+    #   The list of the distinguished names of organizational units to place
+    #   computer accounts in.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_account_credentials
+    #   The *AccountName* and *AccountPassword* values for the service
+    #   account, which are used by the streaming instance to connect to the
+    #   directory.
+    #   @return [Types::ServiceAccountCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest AWS API Documentation
+    #
+    class CreateDirectoryConfigRequest < Struct.new(
+      :directory_name,
+      :organizational_unit_distinguished_names,
+      :service_account_credentials)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_config
+    #   Directory configuration details.
+    #   @return [Types::DirectoryConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigResult AWS API Documentation
+    #
+    class CreateDirectoryConfigResult < Struct.new(
+      :directory_config)
+      include Aws::Structure
+    end
+
     # Contains the parameters for the new fleet to create.
     #
     # @note When making an API call, you may pass CreateFleetRequest
@@ -151,6 +198,10 @@ module Aws::AppStream
     #         description: "Description",
     #         display_name: "DisplayName",
     #         enable_default_internet_access: false,
+    #         domain_join_info: {
+    #           directory_name: "DirectoryName",
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -163,7 +214,32 @@ module Aws::AppStream
     #
     # @!attribute [rw] instance_type
     #   The instance type of compute resources for the fleet. Fleet
-    #   instances are launched from this instance type.
+    #   instances are launched from this instance type. Available instance
+    #   types are:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -195,8 +271,14 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Enables or disables default Internet access for the fleet.
+    #   Enables or disables default internet access for the fleet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_join_info
+    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
+    #   values, which are used to join domains for the AppStream 2.0
+    #   streaming instances.
+    #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
@@ -210,7 +292,8 @@ module Aws::AppStream
       :disconnect_timeout_in_seconds,
       :description,
       :display_name,
-      :enable_default_internet_access)
+      :enable_default_internet_access,
+      :domain_join_info)
       include Aws::Structure
     end
 
@@ -283,7 +366,7 @@ module Aws::AppStream
     #       {
     #         stack_name: "String", # required
     #         fleet_name: "String", # required
-    #         user_id: "UserId", # required
+    #         user_id: "StreamingUrlUserId", # required
     #         application_id: "String",
     #         validity: 1,
     #         session_context: "String",
@@ -333,8 +416,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   Elapsed seconds after the Unix epoch, at which time this URL
-    #   expires.
+    #   Elapsed seconds after the Unix epoch, when this URL expires.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLResult AWS API Documentation
@@ -344,6 +426,28 @@ module Aws::AppStream
       :expires)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDirectoryConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_name: "DirectoryName", # required
+    #       }
+    #
+    # @!attribute [rw] directory_name
+    #   The name of the directory configuration to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigRequest AWS API Documentation
+    #
+    class DeleteDirectoryConfigRequest < Struct.new(
+      :directory_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigResult AWS API Documentation
+    #
+    class DeleteDirectoryConfigResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteFleetRequest
     #   data as a hash:
@@ -388,6 +492,55 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult AWS API Documentation
     #
     class DeleteStackResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeDirectoryConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_names: ["DirectoryName"],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] directory_names
+    #   A specific list of directory names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The size of each page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The DescribeDirectoryConfigsResult.NextToken from a previous call to
+    #   DescribeDirectoryConfigs. If this is the first call, pass null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsRequest AWS API Documentation
+    #
+    class DescribeDirectoryConfigsRequest < Struct.new(
+      :directory_names,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_configs
+    #   The list of directory configurations.
+    #   @return [Array<Types::DirectoryConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, more results are available. To retrieve the next set of
+    #   items, pass this value for the NextToken parameter in a subsequent
+    #   call to DescribeDirectoryConfigs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsResult AWS API Documentation
+    #
+    class DescribeDirectoryConfigsResult < Struct.new(
+      :directory_configs,
+      :next_token)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeFleetsRequest
     #   data as a hash:
@@ -575,6 +728,38 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # Full directory configuration details, which are used to join domains
+    # for the AppStream 2.0 streaming instances.
+    #
+    # @!attribute [rw] directory_name
+    #   The fully qualified name of the directory, such as corp.example.com
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_names
+    #   The list of the distinguished names of organizational units in which
+    #   to place computer accounts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_account_credentials
+    #   The *AccountName* and *AccountPassword* of the service account, to
+    #   be used by the streaming instance to connect to the directory.
+    #   @return [Types::ServiceAccountCredentials]
+    #
+    # @!attribute [rw] created_time
+    #   The time stamp when the directory configuration was created within
+    #   AppStream 2.0.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig AWS API Documentation
+    #
+    class DirectoryConfig < Struct.new(
+      :directory_name,
+      :organizational_unit_distinguished_names,
+      :service_account_credentials,
+      :created_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateFleetRequest
     #   data as a hash:
     #
@@ -602,6 +787,35 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetResult AWS API Documentation
     #
     class DisassociateFleetResult < Aws::EmptyStructure; end
+
+    # The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
+    # which are used to join domains for the AppStream 2.0 streaming
+    # instances.
+    #
+    # @note When making an API call, you may pass DomainJoinInfo
+    #   data as a hash:
+    #
+    #       {
+    #         directory_name: "DirectoryName",
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #       }
+    #
+    # @!attribute [rw] directory_name
+    #   The fully qualified name of the directory, such as corp.example.com
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   The distinguished name of the organizational unit to place the
+    #   computer account in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DomainJoinInfo AWS API Documentation
+    #
+    class DomainJoinInfo < Struct.new(
+      :directory_name,
+      :organizational_unit_distinguished_name)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ExpireSessionRequest
     #   data as a hash:
@@ -685,8 +899,14 @@ module Aws::AppStream
     #   @return [Array<Types::FleetError>]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Whether default Internet access is enabled for the fleet.
+    #   Whether default internet access is enabled for the fleet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_join_info
+    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
+    #   values, which are used to join domains for the AppStream 2.0
+    #   streaming instances.
+    #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
@@ -704,7 +924,8 @@ module Aws::AppStream
       :vpc_config,
       :created_time,
       :fleet_errors,
-      :enable_default_internet_access)
+      :enable_default_internet_access,
+      :domain_join_info)
       include Aws::Structure
     end
 
@@ -746,9 +967,9 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The image starts in the **PENDING** state, and then moves to
-    #   **AVAILABLE** if image creation succeeds and **FAILED** if image
-    #   creation has failed.
+    #   The image starts in the **PENDING** state. If image creation
+    #   succeeds, it moves to **AVAILABLE**. If image creation fails, it
+    #   moves to **FAILED**.
     #   @return [String]
     #
     # @!attribute [rw] visibility
@@ -777,7 +998,7 @@ module Aws::AppStream
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] created_time
-    #   The timestamp when the image was created.
+    #   The time stamp when the image was created.
     #   @return [Time]
     #
     # @!attribute [rw] public_base_image_released_date
@@ -911,6 +1132,37 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The *AccountName* and *AccountPassword* of the service account, to be
+    # used by the streaming instance to connect to the directory.
+    #
+    # @note When making an API call, you may pass ServiceAccountCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         account_name: "AccountName", # required
+    #         account_password: "AccountPassword", # required
+    #       }
+    #
+    # @!attribute [rw] account_name
+    #   The user name of an account in the directory that is used by
+    #   AppStream 2.0 streaming instances to connect to the directory. This
+    #   account must have the following privileges: create computer objects,
+    #   join computers to the domain, change/reset the password on
+    #   descendant computer objects for the organizational units specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_password
+    #   The password for the user account for directory actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ServiceAccountCredentials AWS API Documentation
+    #
+    class ServiceAccountCredentials < Struct.new(
+      :account_name,
+      :account_password)
+      include Aws::Structure
+    end
+
     # Contains the parameters for a streaming session.
     #
     # @!attribute [rw] id
@@ -970,7 +1222,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The timestamp when the stack was created.
+    #   The time stamp when the stack was created.
     #   @return [Time]
     #
     # @!attribute [rw] storage_connectors
@@ -1083,6 +1335,53 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDirectoryConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_name: "DirectoryName", # required
+    #         organizational_unit_distinguished_names: ["OrganizationalUnitDistinguishedName"],
+    #         service_account_credentials: {
+    #           account_name: "AccountName", # required
+    #           account_password: "AccountPassword", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_name
+    #   The name of the existing directory configuration to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_names
+    #   The list of the distinguished names of organizational units to place
+    #   computer accounts in.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_account_credentials
+    #   The *AccountName* and *AccountPassword* values for the service
+    #   account, which are used by the streaming instance to connect to the
+    #   directory
+    #   @return [Types::ServiceAccountCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigRequest AWS API Documentation
+    #
+    class UpdateDirectoryConfigRequest < Struct.new(
+      :directory_name,
+      :organizational_unit_distinguished_names,
+      :service_account_credentials)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_config
+    #   The updated directory configuration details.
+    #   @return [Types::DirectoryConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigResult AWS API Documentation
+    #
+    class UpdateDirectoryConfigResult < Struct.new(
+      :directory_config)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateFleetRequest
     #   data as a hash:
     #
@@ -1103,7 +1402,11 @@ module Aws::AppStream
     #         description: "Description",
     #         display_name: "DisplayName",
     #         enable_default_internet_access: false,
-    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    #         domain_join_info: {
+    #           directory_name: "DirectoryName",
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         },
+    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO
     #       }
     #
     # @!attribute [rw] image_name
@@ -1116,7 +1419,32 @@ module Aws::AppStream
     #
     # @!attribute [rw] instance_type
     #   The instance type of compute resources for the fleet. Fleet
-    #   instances are launched from this instance type.
+    #   instances are launched from this instance type. Available instance
+    #   types are:
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.compute.large
+    #
+    #   * stream.compute.xlarge
+    #
+    #   * stream.compute.2xlarge
+    #
+    #   * stream.compute.4xlarge
+    #
+    #   * stream.compute.8xlarge
+    #
+    #   * stream.memory.large
+    #
+    #   * stream.memory.xlarge
+    #
+    #   * stream.memory.2xlarge
+    #
+    #   * stream.memory.4xlarge
+    #
+    #   * stream.memory.8xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -1152,8 +1480,14 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Enables or disables default Internet access for the fleet.
+    #   Enables or disables default internet access for the fleet.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_join_info
+    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
+    #   values, which are used to join domains for the AppStream 2.0
+    #   streaming instances.
+    #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] attributes_to_delete
     #   Fleet attributes to be deleted.
@@ -1173,6 +1507,7 @@ module Aws::AppStream
       :description,
       :display_name,
       :enable_default_internet_access,
+      :domain_join_info,
       :attributes_to_delete)
       include Aws::Structure
     end

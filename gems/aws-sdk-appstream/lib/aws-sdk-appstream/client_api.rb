@@ -11,6 +11,8 @@ module Aws::AppStream
 
     include Seahorse::Model
 
+    AccountName = Shapes::StringShape.new(name: 'AccountName')
+    AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
     Application = Shapes::StructureShape.new(name: 'Application')
     Applications = Shapes::ListShape.new(name: 'Applications')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -22,16 +24,22 @@ module Aws::AppStream
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    CreateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'CreateDirectoryConfigRequest')
+    CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
     CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
     CreateStackRequest = Shapes::StructureShape.new(name: 'CreateStackRequest')
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
     CreateStreamingURLResult = Shapes::StructureShape.new(name: 'CreateStreamingURLResult')
+    DeleteDirectoryConfigRequest = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigRequest')
+    DeleteDirectoryConfigResult = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigResult')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
     DeleteFleetResult = Shapes::StructureShape.new(name: 'DeleteFleetResult')
     DeleteStackRequest = Shapes::StructureShape.new(name: 'DeleteStackRequest')
     DeleteStackResult = Shapes::StructureShape.new(name: 'DeleteStackResult')
+    DescribeDirectoryConfigsRequest = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsRequest')
+    DescribeDirectoryConfigsResult = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsResult')
     DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
@@ -41,9 +49,14 @@ module Aws::AppStream
     DescribeStacksRequest = Shapes::StructureShape.new(name: 'DescribeStacksRequest')
     DescribeStacksResult = Shapes::StructureShape.new(name: 'DescribeStacksResult')
     Description = Shapes::StringShape.new(name: 'Description')
+    DirectoryConfig = Shapes::StructureShape.new(name: 'DirectoryConfig')
+    DirectoryConfigList = Shapes::ListShape.new(name: 'DirectoryConfigList')
+    DirectoryName = Shapes::StringShape.new(name: 'DirectoryName')
+    DirectoryNameList = Shapes::ListShape.new(name: 'DirectoryNameList')
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
@@ -73,6 +86,8 @@ module Aws::AppStream
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
+    OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
+    OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
@@ -80,6 +95,7 @@ module Aws::AppStream
     ResourceNotAvailableException = Shapes::StructureShape.new(name: 'ResourceNotAvailableException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
     Session = Shapes::StructureShape.new(name: 'Session')
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
@@ -95,10 +111,13 @@ module Aws::AppStream
     StorageConnector = Shapes::StructureShape.new(name: 'StorageConnector')
     StorageConnectorList = Shapes::ListShape.new(name: 'StorageConnectorList')
     StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
+    StreamingUrlUserId = Shapes::StringShape.new(name: 'StreamingUrlUserId')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UpdateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigRequest')
+    UpdateDirectoryConfigResult = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigResult')
     UpdateFleetRequest = Shapes::StructureShape.new(name: 'UpdateFleetRequest')
     UpdateFleetResult = Shapes::StructureShape.new(name: 'UpdateFleetResult')
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
@@ -133,6 +152,14 @@ module Aws::AppStream
     ComputeCapacityStatus.add_member(:available, Shapes::ShapeRef.new(shape: Integer, location_name: "Available"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
 
+    CreateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
+    CreateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, required: true, location_name: "OrganizationalUnitDistinguishedNames"))
+    CreateDirectoryConfigRequest.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, required: true, location_name: "ServiceAccountCredentials"))
+    CreateDirectoryConfigRequest.struct_class = Types::CreateDirectoryConfigRequest
+
+    CreateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))
+    CreateDirectoryConfigResult.struct_class = Types::CreateDirectoryConfigResult
+
     CreateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageName"))
     CreateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
@@ -143,6 +170,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    CreateFleetRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -159,7 +187,7 @@ module Aws::AppStream
 
     CreateStreamingURLRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     CreateStreamingURLRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
-    CreateStreamingURLRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
+    CreateStreamingURLRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: StreamingUrlUserId, required: true, location_name: "UserId"))
     CreateStreamingURLRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: String, location_name: "ApplicationId"))
     CreateStreamingURLRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Long, location_name: "Validity"))
     CreateStreamingURLRequest.add_member(:session_context, Shapes::ShapeRef.new(shape: String, location_name: "SessionContext"))
@@ -168,6 +196,11 @@ module Aws::AppStream
     CreateStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
     CreateStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateStreamingURLResult.struct_class = Types::CreateStreamingURLResult
+
+    DeleteDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
+    DeleteDirectoryConfigRequest.struct_class = Types::DeleteDirectoryConfigRequest
+
+    DeleteDirectoryConfigResult.struct_class = Types::DeleteDirectoryConfigResult
 
     DeleteFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     DeleteFleetRequest.struct_class = Types::DeleteFleetRequest
@@ -178,6 +211,15 @@ module Aws::AppStream
     DeleteStackRequest.struct_class = Types::DeleteStackRequest
 
     DeleteStackResult.struct_class = Types::DeleteStackResult
+
+    DescribeDirectoryConfigsRequest.add_member(:directory_names, Shapes::ShapeRef.new(shape: DirectoryNameList, location_name: "DirectoryNames"))
+    DescribeDirectoryConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeDirectoryConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeDirectoryConfigsRequest.struct_class = Types::DescribeDirectoryConfigsRequest
+
+    DescribeDirectoryConfigsResult.add_member(:directory_configs, Shapes::ShapeRef.new(shape: DirectoryConfigList, location_name: "DirectoryConfigs"))
+    DescribeDirectoryConfigsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeDirectoryConfigsResult.struct_class = Types::DescribeDirectoryConfigsResult
 
     DescribeFleetsRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
     DescribeFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -213,11 +255,25 @@ module Aws::AppStream
     DescribeStacksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeStacksResult.struct_class = Types::DescribeStacksResult
 
+    DirectoryConfig.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
+    DirectoryConfig.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
+    DirectoryConfig.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
+    DirectoryConfig.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DirectoryConfig.struct_class = Types::DirectoryConfig
+
+    DirectoryConfigList.member = Shapes::ShapeRef.new(shape: DirectoryConfig)
+
+    DirectoryNameList.member = Shapes::ShapeRef.new(shape: DirectoryName)
+
     DisassociateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     DisassociateFleetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     DisassociateFleetRequest.struct_class = Types::DisassociateFleetRequest
 
     DisassociateFleetResult.struct_class = Types::DisassociateFleetResult
+
+    DomainJoinInfo.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DirectoryName"))
+    DomainJoinInfo.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
+    DomainJoinInfo.struct_class = Types::DomainJoinInfo
 
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
@@ -238,6 +294,7 @@ module Aws::AppStream
     Fleet.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Fleet.add_member(:fleet_errors, Shapes::ShapeRef.new(shape: FleetErrors, location_name: "FleetErrors"))
     Fleet.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    Fleet.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -290,7 +347,13 @@ module Aws::AppStream
     Metadata.key = Shapes::ShapeRef.new(shape: String)
     Metadata.value = Shapes::ShapeRef.new(shape: String)
 
+    OrganizationalUnitDistinguishedNamesList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName)
+
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    ServiceAccountCredentials.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
+    ServiceAccountCredentials.add_member(:account_password, Shapes::ShapeRef.new(shape: AccountPassword, required: true, location_name: "AccountPassword"))
+    ServiceAccountCredentials.struct_class = Types::ServiceAccountCredentials
 
     Session.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     Session.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
@@ -339,6 +402,14 @@ module Aws::AppStream
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: String)
 
+    UpdateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
+    UpdateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
+    UpdateDirectoryConfigRequest.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
+    UpdateDirectoryConfigRequest.struct_class = Types::UpdateDirectoryConfigRequest
+
+    UpdateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))
+    UpdateDirectoryConfigResult.struct_class = Types::UpdateDirectoryConfigResult
+
     UpdateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
     UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     UpdateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
@@ -350,6 +421,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     UpdateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    UpdateFleetRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     UpdateFleetRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "AttributesToDelete"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
@@ -396,6 +468,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:create_directory_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDirectoryConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDirectoryConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDirectoryConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -410,6 +493,8 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:create_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -438,6 +523,16 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:delete_directory_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDirectoryConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDirectoryConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDirectoryConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFleet"
         o.http_method = "POST"
@@ -458,6 +553,15 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:describe_directory_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDirectoryConfigs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDirectoryConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDirectoryConfigsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -553,6 +657,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:update_directory_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDirectoryConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDirectoryConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDirectoryConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:update_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateFleet"
         o.http_method = "POST"
@@ -567,6 +682,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:update_stack, Seahorse::Model::Operation.new.tap do |o|
