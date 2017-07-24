@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.16 (2017-07-24)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, documentation, and waiters for Amazon AppStream.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
