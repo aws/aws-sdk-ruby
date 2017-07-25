@@ -43,6 +43,6 @@ require_relative 'aws-sdk-emr/customizations'
 # @service
 module Aws::EMR
 
-  GEM_VERSION = '1.0.0.rc9'
+  GEM_VERSION = '1.0.0.rc10'
 
 end

@@ -486,7 +486,7 @@ module Aws::CloudDirectory
     #
     class BatchAddFacetToObjectResponse < Aws::EmptyStructure; end
 
-    # Represents the output of an `AttachObject` operation.
+    # Represents the output of an AttachObject operation.
     #
     # @note When making an API call, you may pass BatchAttachObject
     #   data as a hash:
@@ -522,7 +522,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output batch `AttachObject` response operation.
+    # Represents the output batch AttachObject response operation.
     #
     # @!attribute [rw] attached_object_identifier
     #   The `ObjectIdentifier` of the object that has been attached.
@@ -535,7 +535,235 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `CreateObject` operation.
+    # Attaches a policy object to a regular object inside a BatchRead
+    # operation. For more information, see AttachPolicy and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchAttachPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] policy_reference
+    #   The reference that is associated with the policy object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies the object to which the policy will be
+    #   attached.
+    #   @return [Types::ObjectReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachPolicy AWS API Documentation
+    #
+    class BatchAttachPolicy < Struct.new(
+      :policy_reference,
+      :object_reference)
+      include Aws::Structure
+    end
+
+    # Represents the output of an AttachPolicy response operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachPolicyResponse AWS API Documentation
+    #
+    class BatchAttachPolicyResponse < Aws::EmptyStructure; end
+
+    # Attaches the specified object to the specified index inside a
+    # BatchRead operation. For more information, see AttachToIndex and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchAttachToIndex
+    #   data as a hash:
+    #
+    #       {
+    #         index_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         target_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_reference
+    #   A reference to the index that you are attaching the object to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] target_reference
+    #   A reference to the object that you are attaching to the index.
+    #   @return [Types::ObjectReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachToIndex AWS API Documentation
+    #
+    class BatchAttachToIndex < Struct.new(
+      :index_reference,
+      :target_reference)
+      include Aws::Structure
+    end
+
+    # Represents the output of a AttachToIndex response operation.
+    #
+    # @!attribute [rw] attached_object_identifier
+    #   The `ObjectIdentifier` of the object that was attached to the index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachToIndexResponse AWS API Documentation
+    #
+    class BatchAttachToIndexResponse < Struct.new(
+      :attached_object_identifier)
+      include Aws::Structure
+    end
+
+    # Attaches a typed link to a specified source and target object inside a
+    # BatchRead operation. For more information, see AttachTypedLink and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchAttachTypedLink
+    #   data as a hash:
+    #
+    #       {
+    #         source_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         target_object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         typed_link_facet: { # required
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         attributes: [ # required
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             value: { # required
+    #               string_value: "StringAttributeValue",
+    #               binary_value: "data",
+    #               boolean_value: false,
+    #               number_value: "NumberAttributeValue",
+    #               datetime_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] source_object_reference
+    #   Identifies the source object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] target_object_reference
+    #   Identifies the target object that the typed link will attach to.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] typed_link_facet
+    #   Identifies the typed link facet that is associated with the typed
+    #   link.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] attributes
+    #   A set of attributes that are associated with the typed link.
+    #   @return [Array<Types::AttributeNameAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachTypedLink AWS API Documentation
+    #
+    class BatchAttachTypedLink < Struct.new(
+      :source_object_reference,
+      :target_object_reference,
+      :typed_link_facet,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # Represents the output of a AttachTypedLink response operation.
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Returns a typed link specifier as output.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachTypedLinkResponse AWS API Documentation
+    #
+    class BatchAttachTypedLinkResponse < Struct.new(
+      :typed_link_specifier)
+      include Aws::Structure
+    end
+
+    # Creates an index object inside of a BatchRead operation. For more
+    # information, see CreateIndex and BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchCreateIndex
+    #   data as a hash:
+    #
+    #       {
+    #         ordered_indexed_attribute_list: [ # required
+    #           {
+    #             schema_arn: "Arn", # required
+    #             facet_name: "FacetName", # required
+    #             name: "AttributeName", # required
+    #           },
+    #         ],
+    #         is_unique: false, # required
+    #         parent_reference: {
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         link_name: "LinkName",
+    #         batch_reference_name: "BatchReferenceName",
+    #       }
+    #
+    # @!attribute [rw] ordered_indexed_attribute_list
+    #   Specifies the attributes that should be indexed on. Currently only a
+    #   single attribute is supported.
+    #   @return [Array<Types::AttributeKey>]
+    #
+    # @!attribute [rw] is_unique
+    #   Indicates whether the attribute that is being indexed has unique
+    #   values or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_reference
+    #   A reference to the parent object that contains the index object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] link_name
+    #   The name of the link between the parent object and the index object.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_reference_name
+    #   The batch reference name. See [Batches][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateIndex AWS API Documentation
+    #
+    class BatchCreateIndex < Struct.new(
+      :ordered_indexed_attribute_list,
+      :is_unique,
+      :parent_reference,
+      :link_name,
+      :batch_reference_name)
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateIndex response operation.
+    #
+    # @!attribute [rw] object_identifier
+    #   The `ObjectIdentifier` of the index created by this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateIndexResponse AWS API Documentation
+    #
+    class BatchCreateIndexResponse < Struct.new(
+      :object_identifier)
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateObject operation.
     #
     # @note When making an API call, you may pass BatchCreateObject
     #   data as a hash:
@@ -608,7 +836,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `CreateObject` response operation.
+    # Represents the output of a CreateObject response operation.
     #
     # @!attribute [rw] object_identifier
     #   The ID that is associated with the object.
@@ -621,7 +849,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `DeleteObject` operation.
+    # Represents the output of a DeleteObject operation.
     #
     # @note When making an API call, you may pass BatchDeleteObject
     #   data as a hash:
@@ -643,13 +871,59 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `DeleteObject` response operation.
+    # Represents the output of a DeleteObject response operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDeleteObjectResponse AWS API Documentation
     #
     class BatchDeleteObjectResponse < Aws::EmptyStructure; end
 
-    # Represents the output of a `DetachObject` operation.
+    # Detaches the specified object from the specified index inside a
+    # BatchRead operation. For more information, see DetachFromIndex and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchDetachFromIndex
+    #   data as a hash:
+    #
+    #       {
+    #         index_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         target_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_reference
+    #   A reference to the index object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] target_reference
+    #   A reference to the object being detached from the index.
+    #   @return [Types::ObjectReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachFromIndex AWS API Documentation
+    #
+    class BatchDetachFromIndex < Struct.new(
+      :index_reference,
+      :target_reference)
+      include Aws::Structure
+    end
+
+    # Represents the output of a DetachFromIndex response operation.
+    #
+    # @!attribute [rw] detached_object_identifier
+    #   The `ObjectIdentifier` of the object that was detached from the
+    #   index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachFromIndexResponse AWS API Documentation
+    #
+    class BatchDetachFromIndexResponse < Struct.new(
+      :detached_object_identifier)
+      include Aws::Structure
+    end
+
+    # Represents the output of a DetachObject operation.
     #
     # @note When making an API call, you may pass BatchDetachObject
     #   data as a hash:
@@ -688,7 +962,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `DetachObject` response operation.
+    # Represents the output of a DetachObject response operation.
     #
     # @!attribute [rw] detached_object_identifier
     #   The `ObjectIdentifier` of the detached object.
@@ -701,7 +975,338 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `ListObjectAttributes` operation.
+    # Detaches a typed link from a specified source and target object inside
+    # a BatchRead operation. For more information, see DetachTypedLink and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchDetachTypedLink
+    #   data as a hash:
+    #
+    #       {
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Used to accept a typed link specifier as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLink AWS API Documentation
+    #
+    class BatchDetachTypedLink < Struct.new(
+      :typed_link_specifier)
+      include Aws::Structure
+    end
+
+    # Represents the output of a DetachTypedLink response operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLinkResponse AWS API Documentation
+    #
+    class BatchDetachTypedLinkResponse < Aws::EmptyStructure; end
+
+    # Retrieves metadata about an object inside a BatchRead operation. For
+    # more information, see GetObjectInformation and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchGetObjectInformation
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   A reference to the object.
+    #   @return [Types::ObjectReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectInformation AWS API Documentation
+    #
+    class BatchGetObjectInformation < Struct.new(
+      :object_reference)
+      include Aws::Structure
+    end
+
+    # Represents the output of a GetObjectInformation response operation.
+    #
+    # @!attribute [rw] schema_facets
+    #   The facets attached to the specified object.
+    #   @return [Array<Types::SchemaFacet>]
+    #
+    # @!attribute [rw] object_identifier
+    #   The `ObjectIdentifier` of the specified object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectInformationResponse AWS API Documentation
+    #
+    class BatchGetObjectInformationResponse < Struct.new(
+      :schema_facets,
+      :object_identifier)
+      include Aws::Structure
+    end
+
+    # Lists indices attached to an object inside a BatchRead operation. For
+    # more information, see ListAttachedIndices and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListAttachedIndices
+    #   data as a hash:
+    #
+    #       {
+    #         target_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] target_reference
+    #   A reference to the object that has indices attached.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListAttachedIndices AWS API Documentation
+    #
+    class BatchListAttachedIndices < Struct.new(
+      :target_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListAttachedIndices response operation.
+    #
+    # @!attribute [rw] index_attachments
+    #   The indices attached to the specified object.
+    #   @return [Array<Types::IndexAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListAttachedIndicesResponse AWS API Documentation
+    #
+    class BatchListAttachedIndicesResponse < Struct.new(
+      :index_attachments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Returns a paginated list of all the incoming TypedLinkSpecifier
+    # information for an object inside a BatchRead operation. For more
+    # information, see ListIncomingTypedLinks and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListIncomingTypedLinks
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         filter_attribute_ranges: [
+    #           {
+    #             attribute_name: "AttributeName",
+    #             range: { # required
+    #               start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               start_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               end_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         filter_typed_link: {
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing
+    #   ranges to typed link selection, any inexact ranges must be specified
+    #   at the end. Any attributes that do not have a range specified are
+    #   presumed to match the entire range.
+    #   @return [Array<Types::TypedLinkAttributeRange>]
+    #
+    # @!attribute [rw] filter_typed_link
+    #   Filters are interpreted in the order of the attributes on the typed
+    #   link facet, not the order in which they are supplied to any API
+    #   calls.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIncomingTypedLinks AWS API Documentation
+    #
+    class BatchListIncomingTypedLinks < Struct.new(
+      :object_reference,
+      :filter_attribute_ranges,
+      :filter_typed_link,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListIncomingTypedLinks response operation.
+    #
+    # @!attribute [rw] link_specifiers
+    #   Returns one or more typed link specifiers as output.
+    #   @return [Array<Types::TypedLinkSpecifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIncomingTypedLinksResponse AWS API Documentation
+    #
+    class BatchListIncomingTypedLinksResponse < Struct.new(
+      :link_specifiers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Lists objects attached to the specified index inside a BatchRead
+    # operation. For more information, see ListIndex and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListIndex
+    #   data as a hash:
+    #
+    #       {
+    #         ranges_on_indexed_values: [
+    #           {
+    #             attribute_key: {
+    #               schema_arn: "Arn", # required
+    #               facet_name: "FacetName", # required
+    #               name: "AttributeName", # required
+    #             },
+    #             range: {
+    #               start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               start_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               end_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         index_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] ranges_on_indexed_values
+    #   Specifies the ranges of indexed values that you want to query.
+    #   @return [Array<Types::ObjectAttributeRange>]
+    #
+    # @!attribute [rw] index_reference
+    #   The reference to the index to list.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIndex AWS API Documentation
+    #
+    class BatchListIndex < Struct.new(
+      :ranges_on_indexed_values,
+      :index_reference,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListIndex response operation.
+    #
+    # @!attribute [rw] index_attachments
+    #   The objects and indexed values attached to the index.
+    #   @return [Array<Types::IndexAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIndexResponse AWS API Documentation
+    #
+    class BatchListIndexResponse < Struct.new(
+      :index_attachments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListObjectAttributes operation.
     #
     # @note When making an API call, you may pass BatchListObjectAttributes
     #   data as a hash:
@@ -746,7 +1351,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `ListObjectAttributes` response operation.
+    # Represents the output of a ListObjectAttributes response operation.
     #
     # @!attribute [rw] attributes
     #   The attributes map that is associated with the object.
@@ -765,7 +1370,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `ListObjectChildren` operation.
+    # Represents the output of a ListObjectChildren operation.
     #
     # @note When making an API call, you may pass BatchListObjectChildren
     #   data as a hash:
@@ -800,7 +1405,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a `ListObjectChildren` response operation.
+    # Represents the output of a ListObjectChildren response operation.
     #
     # @!attribute [rw] children
     #   The children structure, which is a map with the key as the
@@ -815,6 +1420,332 @@ module Aws::CloudDirectory
     #
     class BatchListObjectChildrenResponse < Struct.new(
       :children,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Retrieves all available parent paths for any object type such as node,
+    # leaf node, policy node, and index node objects inside a BatchRead
+    # operation. For more information, see ListObjectParentPaths and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListObjectParentPaths
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectParentPaths AWS API Documentation
+    #
+    class BatchListObjectParentPaths < Struct.new(
+      :object_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListObjectParentPaths response operation.
+    #
+    # @!attribute [rw] path_to_object_identifiers_list
+    #   Returns the path to the `ObjectIdentifiers` that are associated with
+    #   the directory.
+    #   @return [Array<Types::PathToObjectIdentifiers>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectParentPathsResponse AWS API Documentation
+    #
+    class BatchListObjectParentPathsResponse < Struct.new(
+      :path_to_object_identifiers_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Returns policies attached to an object in pagination fashion inside a
+    # BatchRead operation. For more information, see ListObjectPolicies and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListObjectPolicies
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectPolicies AWS API Documentation
+    #
+    class BatchListObjectPolicies < Struct.new(
+      :object_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListObjectPolicies response operation.
+    #
+    # @!attribute [rw] attached_policy_ids
+    #   A list of policy `ObjectIdentifiers`, that are attached to the
+    #   object.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectPoliciesResponse AWS API Documentation
+    #
+    class BatchListObjectPoliciesResponse < Struct.new(
+      :attached_policy_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Returns a paginated list of all the outgoing TypedLinkSpecifier
+    # information for an object inside a BatchRead operation. For more
+    # information, see ListOutgoingTypedLinks and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListOutgoingTypedLinks
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         filter_attribute_ranges: [
+    #           {
+    #             attribute_name: "AttributeName",
+    #             range: { # required
+    #               start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               start_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #               end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #               end_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         filter_typed_link: {
+    #           schema_arn: "Arn", # required
+    #           typed_link_name: "TypedLinkName", # required
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies the object whose attributes will be
+    #   listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] filter_attribute_ranges
+    #   Provides range filters for multiple attributes. When providing
+    #   ranges to typed link selection, any inexact ranges must be specified
+    #   at the end. Any attributes that do not have a range specified are
+    #   presumed to match the entire range.
+    #   @return [Array<Types::TypedLinkAttributeRange>]
+    #
+    # @!attribute [rw] filter_typed_link
+    #   Filters are interpreted in the order of the attributes defined on
+    #   the typed link facet, not the order they are supplied to any API
+    #   calls.
+    #   @return [Types::TypedLinkSchemaAndFacetName]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListOutgoingTypedLinks AWS API Documentation
+    #
+    class BatchListOutgoingTypedLinks < Struct.new(
+      :object_reference,
+      :filter_attribute_ranges,
+      :filter_typed_link,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListOutgoingTypedLinks response operation.
+    #
+    # @!attribute [rw] typed_link_specifiers
+    #   Returns a typed link specifier as output.
+    #   @return [Array<Types::TypedLinkSpecifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListOutgoingTypedLinksResponse AWS API Documentation
+    #
+    class BatchListOutgoingTypedLinksResponse < Struct.new(
+      :typed_link_specifiers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Returns all of the `ObjectIdentifiers` to which a given policy is
+    # attached inside a BatchRead operation. For more information, see
+    # ListPolicyAttachments and BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchListPolicyAttachments
+    #   data as a hash:
+    #
+    #       {
+    #         policy_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] policy_reference
+    #   The reference that identifies the policy object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListPolicyAttachments AWS API Documentation
+    #
+    class BatchListPolicyAttachments < Struct.new(
+      :policy_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListPolicyAttachments response operation.
+    #
+    # @!attribute [rw] object_identifiers
+    #   A list of `ObjectIdentifiers` to which the policy is attached.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListPolicyAttachmentsResponse AWS API Documentation
+    #
+    class BatchListPolicyAttachmentsResponse < Struct.new(
+      :object_identifiers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Lists all policies from the root of the Directory to the object
+    # specified inside a BatchRead operation. For more information, see
+    # LookupPolicy and BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchLookupPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose policies will be looked
+    #   up.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchLookupPolicy AWS API Documentation
+    #
+    class BatchLookupPolicy < Struct.new(
+      :object_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # Represents the output of a LookupPolicy response operation.
+    #
+    # @!attribute [rw] policy_to_path_list
+    #   Provides list of path to policies. Policies contain `PolicyId`,
+    #   `ObjectIdentifier`, and `PolicyType`. For more information, see
+    #   [Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   @return [Array<Types::PolicyToPath>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchLookupPolicyResponse AWS API Documentation
+    #
+    class BatchLookupPolicyResponse < Struct.new(
+      :policy_to_path_list,
       :next_token)
       include Aws::Structure
     end
@@ -862,6 +1793,148 @@ module Aws::CloudDirectory
     #           next_token: "NextToken",
     #           max_results: 1,
     #         },
+    #         list_attached_indices: {
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_object_parent_paths: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         get_object_information: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         list_object_policies: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_policy_attachments: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         lookup_policy: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_index: {
+    #           ranges_on_indexed_values: [
+    #             {
+    #               attribute_key: {
+    #                 schema_arn: "Arn", # required
+    #                 facet_name: "FacetName", # required
+    #                 name: "AttributeName", # required
+    #               },
+    #               range: {
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           max_results: 1,
+    #           next_token: "NextToken",
+    #         },
+    #         list_outgoing_typed_links: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           filter_attribute_ranges: [
+    #             {
+    #               attribute_name: "AttributeName",
+    #               range: { # required
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           filter_typed_link: {
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_incoming_typed_links: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           filter_attribute_ranges: [
+    #             {
+    #               attribute_name: "AttributeName",
+    #               range: { # required
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           filter_typed_link: {
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] list_object_attributes
@@ -873,11 +1946,88 @@ module Aws::CloudDirectory
     #   given object.
     #   @return [Types::BatchListObjectChildren]
     #
+    # @!attribute [rw] list_attached_indices
+    #   Lists indices attached to an object.
+    #   @return [Types::BatchListAttachedIndices]
+    #
+    # @!attribute [rw] list_object_parent_paths
+    #   Retrieves all available parent paths for any object type such as
+    #   node, leaf node, policy node, and index node objects. For more
+    #   information about objects, see [Directory Structure][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    #   @return [Types::BatchListObjectParentPaths]
+    #
+    # @!attribute [rw] get_object_information
+    #   Retrieves metadata about an object.
+    #   @return [Types::BatchGetObjectInformation]
+    #
+    # @!attribute [rw] list_object_policies
+    #   Returns policies attached to an object in pagination fashion.
+    #   @return [Types::BatchListObjectPolicies]
+    #
+    # @!attribute [rw] list_policy_attachments
+    #   Returns all of the `ObjectIdentifiers` to which a given policy is
+    #   attached.
+    #   @return [Types::BatchListPolicyAttachments]
+    #
+    # @!attribute [rw] lookup_policy
+    #   Lists all policies from the root of the Directory to the object
+    #   specified. If there are no policies present, an empty list is
+    #   returned. If policies are present, and if some objects don't have
+    #   the policies attached, it returns the `ObjectIdentifier` for such
+    #   objects. If policies are present, it returns `ObjectIdentifier`,
+    #   `policyId`, and `policyType`. Paths that don't lead to the root
+    #   from the target object are ignored. For more information, see
+    #   [Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   @return [Types::BatchLookupPolicy]
+    #
+    # @!attribute [rw] list_index
+    #   Lists objects attached to the specified index.
+    #   @return [Types::BatchListIndex]
+    #
+    # @!attribute [rw] list_outgoing_typed_links
+    #   Returns a paginated list of all the outgoing TypedLinkSpecifier
+    #   information for an object. It also supports filtering by typed link
+    #   facet and identity attributes. For more information, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchListOutgoingTypedLinks]
+    #
+    # @!attribute [rw] list_incoming_typed_links
+    #   Returns a paginated list of all the incoming TypedLinkSpecifier
+    #   information for an object. It also supports filtering by typed link
+    #   facet and identity attributes. For more information, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchListIncomingTypedLinks]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadOperation AWS API Documentation
     #
     class BatchReadOperation < Struct.new(
       :list_object_attributes,
-      :list_object_children)
+      :list_object_children,
+      :list_attached_indices,
+      :list_object_parent_paths,
+      :get_object_information,
+      :list_object_policies,
+      :list_policy_attachments,
+      :lookup_policy,
+      :list_index,
+      :list_outgoing_typed_links,
+      :list_incoming_typed_links)
       include Aws::Structure
     end
 
@@ -920,6 +2070,148 @@ module Aws::CloudDirectory
     #             list_object_children: {
     #               object_reference: { # required
     #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             list_attached_indices: {
+    #               target_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             list_object_parent_paths: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             get_object_information: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             list_object_policies: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             list_policy_attachments: {
+    #               policy_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             lookup_policy: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             list_index: {
+    #               ranges_on_indexed_values: [
+    #                 {
+    #                   attribute_key: {
+    #                     schema_arn: "Arn", # required
+    #                     facet_name: "FacetName", # required
+    #                     name: "AttributeName", # required
+    #                   },
+    #                   range: {
+    #                     start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     start_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                     end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     end_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               index_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               max_results: 1,
+    #               next_token: "NextToken",
+    #             },
+    #             list_outgoing_typed_links: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               filter_attribute_ranges: [
+    #                 {
+    #                   attribute_name: "AttributeName",
+    #                   range: { # required
+    #                     start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     start_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                     end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     end_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               filter_typed_link: {
+    #                 schema_arn: "Arn", # required
+    #                 typed_link_name: "TypedLinkName", # required
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
+    #             },
+    #             list_incoming_typed_links: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               filter_attribute_ranges: [
+    #                 {
+    #                   attribute_name: "AttributeName",
+    #                   range: { # required
+    #                     start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     start_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                     end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                     end_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               filter_typed_link: {
+    #                 schema_arn: "Arn", # required
+    #                 typed_link_name: "TypedLinkName", # required
     #               },
     #               next_token: "NextToken",
     #               max_results: 1,
@@ -975,11 +2267,88 @@ module Aws::CloudDirectory
     #   given object.
     #   @return [Types::BatchListObjectChildrenResponse]
     #
+    # @!attribute [rw] get_object_information
+    #   Retrieves metadata about an object.
+    #   @return [Types::BatchGetObjectInformationResponse]
+    #
+    # @!attribute [rw] list_attached_indices
+    #   Lists indices attached to an object.
+    #   @return [Types::BatchListAttachedIndicesResponse]
+    #
+    # @!attribute [rw] list_object_parent_paths
+    #   Retrieves all available parent paths for any object type such as
+    #   node, leaf node, policy node, and index node objects. For more
+    #   information about objects, see [Directory Structure][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    #   @return [Types::BatchListObjectParentPathsResponse]
+    #
+    # @!attribute [rw] list_object_policies
+    #   Returns policies attached to an object in pagination fashion.
+    #   @return [Types::BatchListObjectPoliciesResponse]
+    #
+    # @!attribute [rw] list_policy_attachments
+    #   Returns all of the `ObjectIdentifiers` to which a given policy is
+    #   attached.
+    #   @return [Types::BatchListPolicyAttachmentsResponse]
+    #
+    # @!attribute [rw] lookup_policy
+    #   Lists all policies from the root of the Directory to the object
+    #   specified. If there are no policies present, an empty list is
+    #   returned. If policies are present, and if some objects don't have
+    #   the policies attached, it returns the `ObjectIdentifier` for such
+    #   objects. If policies are present, it returns `ObjectIdentifier`,
+    #   `policyId`, and `policyType`. Paths that don't lead to the root
+    #   from the target object are ignored. For more information, see
+    #   [Policies][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   @return [Types::BatchLookupPolicyResponse]
+    #
+    # @!attribute [rw] list_index
+    #   Lists objects attached to the specified index.
+    #   @return [Types::BatchListIndexResponse]
+    #
+    # @!attribute [rw] list_outgoing_typed_links
+    #   Returns a paginated list of all the outgoing TypedLinkSpecifier
+    #   information for an object. It also supports filtering by typed link
+    #   facet and identity attributes. For more information, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchListOutgoingTypedLinksResponse]
+    #
+    # @!attribute [rw] list_incoming_typed_links
+    #   Returns a paginated list of all the incoming TypedLinkSpecifier
+    #   information for an object. It also supports filtering by typed link
+    #   facet and identity attributes. For more information, see [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchListIncomingTypedLinksResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadSuccessfulResponse AWS API Documentation
     #
     class BatchReadSuccessfulResponse < Struct.new(
       :list_object_attributes,
-      :list_object_children)
+      :list_object_children,
+      :get_object_information,
+      :list_attached_indices,
+      :list_object_parent_paths,
+      :list_object_policies,
+      :list_policy_attachments,
+      :lookup_policy,
+      :list_index,
+      :list_outgoing_typed_links,
+      :list_incoming_typed_links)
       include Aws::Structure
     end
 
@@ -1193,6 +2562,95 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         attach_policy: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         create_index: {
+    #           ordered_indexed_attribute_list: [ # required
+    #             {
+    #               schema_arn: "Arn", # required
+    #               facet_name: "FacetName", # required
+    #               name: "AttributeName", # required
+    #             },
+    #           ],
+    #           is_unique: false, # required
+    #           parent_reference: {
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           link_name: "LinkName",
+    #           batch_reference_name: "BatchReferenceName",
+    #         },
+    #         attach_to_index: {
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         detach_from_index: {
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         attach_typed_link: {
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           attributes: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         detach_typed_link: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] create_object
@@ -1223,6 +2681,45 @@ module Aws::CloudDirectory
     #   A batch operation that removes a facet from an object.
     #   @return [Types::BatchRemoveFacetFromObject]
     #
+    # @!attribute [rw] attach_policy
+    #   Attaches a policy object to a regular object. An object can have a
+    #   limited number of attached policies.
+    #   @return [Types::BatchAttachPolicy]
+    #
+    # @!attribute [rw] create_index
+    #   Creates an index object. See [Indexing][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    #   @return [Types::BatchCreateIndex]
+    #
+    # @!attribute [rw] attach_to_index
+    #   Attaches the specified object to the specified index.
+    #   @return [Types::BatchAttachToIndex]
+    #
+    # @!attribute [rw] detach_from_index
+    #   Detaches the specified object from the specified index.
+    #   @return [Types::BatchDetachFromIndex]
+    #
+    # @!attribute [rw] attach_typed_link
+    #   Attaches a typed link to a specified source and target object. For
+    #   more information, see [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchAttachTypedLink]
+    #
+    # @!attribute [rw] detach_typed_link
+    #   Detaches a typed link from a specified source and target object. For
+    #   more information, see [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchDetachTypedLink]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperation AWS API Documentation
     #
     class BatchWriteOperation < Struct.new(
@@ -1232,7 +2729,13 @@ module Aws::CloudDirectory
       :update_object_attributes,
       :delete_object,
       :add_facet_to_object,
-      :remove_facet_from_object)
+      :remove_facet_from_object,
+      :attach_policy,
+      :create_index,
+      :attach_to_index,
+      :detach_from_index,
+      :attach_typed_link,
+      :detach_typed_link)
       include Aws::Structure
     end
 
@@ -1266,6 +2769,45 @@ module Aws::CloudDirectory
     #   The result of a batch remove facet from object operation.
     #   @return [Types::BatchRemoveFacetFromObjectResponse]
     #
+    # @!attribute [rw] attach_policy
+    #   Attaches a policy object to a regular object. An object can have a
+    #   limited number of attached policies.
+    #   @return [Types::BatchAttachPolicyResponse]
+    #
+    # @!attribute [rw] create_index
+    #   Creates an index object. See [Indexing][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    #   @return [Types::BatchCreateIndexResponse]
+    #
+    # @!attribute [rw] attach_to_index
+    #   Attaches the specified object to the specified index.
+    #   @return [Types::BatchAttachToIndexResponse]
+    #
+    # @!attribute [rw] detach_from_index
+    #   Detaches the specified object from the specified index.
+    #   @return [Types::BatchDetachFromIndexResponse]
+    #
+    # @!attribute [rw] attach_typed_link
+    #   Attaches a typed link to a specified source and target object. For
+    #   more information, see [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchAttachTypedLinkResponse]
+    #
+    # @!attribute [rw] detach_typed_link
+    #   Detaches a typed link from a specified source and target object. For
+    #   more information, see [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [Types::BatchDetachTypedLinkResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperationResponse AWS API Documentation
     #
     class BatchWriteOperationResponse < Struct.new(
@@ -1275,7 +2817,13 @@ module Aws::CloudDirectory
       :update_object_attributes,
       :delete_object,
       :add_facet_to_object,
-      :remove_facet_from_object)
+      :remove_facet_from_object,
+      :attach_policy,
+      :create_index,
+      :attach_to_index,
+      :detach_from_index,
+      :attach_typed_link,
+      :detach_typed_link)
       include Aws::Structure
     end
 
@@ -1392,6 +2940,95 @@ module Aws::CloudDirectory
     #               },
     #               object_reference: { # required
     #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             attach_policy: {
+    #               policy_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             create_index: {
+    #               ordered_indexed_attribute_list: [ # required
+    #                 {
+    #                   schema_arn: "Arn", # required
+    #                   facet_name: "FacetName", # required
+    #                   name: "AttributeName", # required
+    #                 },
+    #               ],
+    #               is_unique: false, # required
+    #               parent_reference: {
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               link_name: "LinkName",
+    #               batch_reference_name: "BatchReferenceName",
+    #             },
+    #             attach_to_index: {
+    #               index_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               target_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             detach_from_index: {
+    #               index_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               target_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             attach_typed_link: {
+    #               source_object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               target_object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               typed_link_facet: { # required
+    #                 schema_arn: "Arn", # required
+    #                 typed_link_name: "TypedLinkName", # required
+    #               },
+    #               attributes: [ # required
+    #                 {
+    #                   attribute_name: "AttributeName", # required
+    #                   value: { # required
+    #                     string_value: "StringAttributeValue",
+    #                     binary_value: "data",
+    #                     boolean_value: false,
+    #                     number_value: "NumberAttributeValue",
+    #                     datetime_value: Time.now,
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             detach_typed_link: {
+    #               typed_link_specifier: { # required
+    #                 typed_link_facet: { # required
+    #                   schema_arn: "Arn", # required
+    #                   typed_link_name: "TypedLinkName", # required
+    #                 },
+    #                 source_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 target_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 identity_attribute_values: [ # required
+    #                   {
+    #                     attribute_name: "AttributeName", # required
+    #                     value: { # required
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #             },
     #           },
@@ -2733,7 +4370,7 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] target_reference
-    #   A reference to the object to that has indices attached.
+    #   A reference to the object that has indices attached.
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
@@ -4624,7 +6261,7 @@ module Aws::CloudDirectory
     #   The set of attributes that distinguish links made from this facet
     #   from each other, in the order of significance. Listing typed links
     #   can filter on the values of these attributes. See
-    #   ListOutgoingTypedLinks and ListIncomingTypeLinks for details.
+    #   ListOutgoingTypedLinks and ListIncomingTypedLinks for details.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacet AWS API Documentation

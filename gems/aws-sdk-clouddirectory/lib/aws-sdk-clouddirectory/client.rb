@@ -486,6 +486,148 @@ module Aws::CloudDirectory
     #           next_token: "NextToken",
     #           max_results: 1,
     #         },
+    #         list_attached_indices: {
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_object_parent_paths: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         get_object_information: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         list_object_policies: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_policy_attachments: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         lookup_policy: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_index: {
+    #           ranges_on_indexed_values: [
+    #             {
+    #               attribute_key: {
+    #                 schema_arn: "Arn", # required
+    #                 facet_name: "FacetName", # required
+    #                 name: "AttributeName", # required
+    #               },
+    #               range: {
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           max_results: 1,
+    #           next_token: "NextToken",
+    #         },
+    #         list_outgoing_typed_links: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           filter_attribute_ranges: [
+    #             {
+    #               attribute_name: "AttributeName",
+    #               range: { # required
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           filter_typed_link: {
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
+    #         list_incoming_typed_links: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           filter_attribute_ranges: [
+    #             {
+    #               attribute_name: "AttributeName",
+    #               range: { # required
+    #                 start_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 start_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #                 end_mode: "FIRST", # required, accepts FIRST, LAST, LAST_BEFORE_MISSING_VALUES, INCLUSIVE, EXCLUSIVE
+    #                 end_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           filter_typed_link: {
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
+    #         },
     #       },
     #     ],
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
@@ -507,7 +649,79 @@ module Aws::CloudDirectory
     #   resp.responses[0].successful_response.list_object_children.children #=> Hash
     #   resp.responses[0].successful_response.list_object_children.children["LinkName"] #=> String
     #   resp.responses[0].successful_response.list_object_children.next_token #=> String
-    #   resp.responses[0].exception_response.type #=> String, one of "ValidationException", "InvalidArnException", "ResourceNotFoundException", "InvalidNextTokenException", "AccessDeniedException", "NotNodeException"
+    #   resp.responses[0].successful_response.get_object_information.schema_facets #=> Array
+    #   resp.responses[0].successful_response.get_object_information.schema_facets[0].schema_arn #=> String
+    #   resp.responses[0].successful_response.get_object_information.schema_facets[0].facet_name #=> String
+    #   resp.responses[0].successful_response.get_object_information.object_identifier #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments #=> Array
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes #=> Array
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].key.schema_arn #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].key.facet_name #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].key.name #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].object_identifier #=> String
+    #   resp.responses[0].successful_response.list_attached_indices.next_token #=> String
+    #   resp.responses[0].successful_response.list_object_parent_paths.path_to_object_identifiers_list #=> Array
+    #   resp.responses[0].successful_response.list_object_parent_paths.path_to_object_identifiers_list[0].path #=> String
+    #   resp.responses[0].successful_response.list_object_parent_paths.path_to_object_identifiers_list[0].object_identifiers #=> Array
+    #   resp.responses[0].successful_response.list_object_parent_paths.path_to_object_identifiers_list[0].object_identifiers[0] #=> String
+    #   resp.responses[0].successful_response.list_object_parent_paths.next_token #=> String
+    #   resp.responses[0].successful_response.list_object_policies.attached_policy_ids #=> Array
+    #   resp.responses[0].successful_response.list_object_policies.attached_policy_ids[0] #=> String
+    #   resp.responses[0].successful_response.list_object_policies.next_token #=> String
+    #   resp.responses[0].successful_response.list_policy_attachments.object_identifiers #=> Array
+    #   resp.responses[0].successful_response.list_policy_attachments.object_identifiers[0] #=> String
+    #   resp.responses[0].successful_response.list_policy_attachments.next_token #=> String
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list #=> Array
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list[0].path #=> String
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list[0].policies #=> Array
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list[0].policies[0].policy_id #=> String
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list[0].policies[0].object_identifier #=> String
+    #   resp.responses[0].successful_response.lookup_policy.policy_to_path_list[0].policies[0].policy_type #=> String
+    #   resp.responses[0].successful_response.lookup_policy.next_token #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments #=> Array
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes #=> Array
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].key.schema_arn #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].key.facet_name #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].key.name #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].indexed_attributes[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_index.index_attachments[0].object_identifier #=> String
+    #   resp.responses[0].successful_response.list_index.next_token #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers #=> Array
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].typed_link_facet.schema_arn #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].typed_link_facet.typed_link_name #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].source_object_reference.selector #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].target_object_reference.selector #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values #=> Array
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].attribute_name #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.typed_link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_outgoing_typed_links.next_token #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers #=> Array
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].typed_link_facet.schema_arn #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].typed_link_facet.typed_link_name #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].source_object_reference.selector #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].target_object_reference.selector #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values #=> Array
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].attribute_name #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_incoming_typed_links.next_token #=> String
+    #   resp.responses[0].exception_response.type #=> String, one of "ValidationException", "InvalidArnException", "ResourceNotFoundException", "InvalidNextTokenException", "AccessDeniedException", "NotNodeException", "FacetValidationException", "CannotListParentOfRootException", "NotIndexException", "NotPolicyException", "DirectoryNotEnabledException", "LimitExceededException", "InternalServiceException"
     #   resp.responses[0].exception_response.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead AWS API Documentation
@@ -648,6 +862,95 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         attach_policy: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         create_index: {
+    #           ordered_indexed_attribute_list: [ # required
+    #             {
+    #               schema_arn: "Arn", # required
+    #               facet_name: "FacetName", # required
+    #               name: "AttributeName", # required
+    #             },
+    #           ],
+    #           is_unique: false, # required
+    #           parent_reference: {
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           link_name: "LinkName",
+    #           batch_reference_name: "BatchReferenceName",
+    #         },
+    #         attach_to_index: {
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         detach_from_index: {
+    #           index_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
+    #         attach_typed_link: {
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           attributes: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         detach_typed_link: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -659,6 +962,20 @@ module Aws::CloudDirectory
     #   resp.responses[0].attach_object.attached_object_identifier #=> String
     #   resp.responses[0].detach_object.detached_object_identifier #=> String
     #   resp.responses[0].update_object_attributes.object_identifier #=> String
+    #   resp.responses[0].create_index.object_identifier #=> String
+    #   resp.responses[0].attach_to_index.attached_object_identifier #=> String
+    #   resp.responses[0].detach_from_index.detached_object_identifier #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.typed_link_facet.schema_arn #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.typed_link_facet.typed_link_name #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.source_object_reference.selector #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.target_object_reference.selector #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values #=> Array
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].attribute_name #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.string_value #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.binary_value #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.number_value #=> String
+    #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.datetime_value #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite AWS API Documentation
     #
@@ -1639,7 +1956,7 @@ module Aws::CloudDirectory
     #   The ARN of the directory.
     #
     # @option params [required, Types::ObjectReference] :target_reference
-    #   A reference to the object to that has indices attached.
+    #   A reference to the object that has indices attached.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -3188,7 +3505,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.0.0.rc8'
+      context[:gem_version] = '1.0.0.rc9'
       Seahorse::Client::Request.new(handlers, context)
     end
 

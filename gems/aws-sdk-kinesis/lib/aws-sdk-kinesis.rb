@@ -43,6 +43,6 @@ require_relative 'aws-sdk-kinesis/customizations'
 # @service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.0.0.rc8'
+  GEM_VERSION = '1.0.0.rc9'
 
 end

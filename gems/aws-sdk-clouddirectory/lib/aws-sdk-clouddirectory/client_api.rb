@@ -38,16 +38,46 @@ module Aws::CloudDirectory
     BatchAddFacetToObjectResponse = Shapes::StructureShape.new(name: 'BatchAddFacetToObjectResponse')
     BatchAttachObject = Shapes::StructureShape.new(name: 'BatchAttachObject')
     BatchAttachObjectResponse = Shapes::StructureShape.new(name: 'BatchAttachObjectResponse')
+    BatchAttachPolicy = Shapes::StructureShape.new(name: 'BatchAttachPolicy')
+    BatchAttachPolicyResponse = Shapes::StructureShape.new(name: 'BatchAttachPolicyResponse')
+    BatchAttachToIndex = Shapes::StructureShape.new(name: 'BatchAttachToIndex')
+    BatchAttachToIndexResponse = Shapes::StructureShape.new(name: 'BatchAttachToIndexResponse')
+    BatchAttachTypedLink = Shapes::StructureShape.new(name: 'BatchAttachTypedLink')
+    BatchAttachTypedLinkResponse = Shapes::StructureShape.new(name: 'BatchAttachTypedLinkResponse')
+    BatchCreateIndex = Shapes::StructureShape.new(name: 'BatchCreateIndex')
+    BatchCreateIndexResponse = Shapes::StructureShape.new(name: 'BatchCreateIndexResponse')
     BatchCreateObject = Shapes::StructureShape.new(name: 'BatchCreateObject')
     BatchCreateObjectResponse = Shapes::StructureShape.new(name: 'BatchCreateObjectResponse')
     BatchDeleteObject = Shapes::StructureShape.new(name: 'BatchDeleteObject')
     BatchDeleteObjectResponse = Shapes::StructureShape.new(name: 'BatchDeleteObjectResponse')
+    BatchDetachFromIndex = Shapes::StructureShape.new(name: 'BatchDetachFromIndex')
+    BatchDetachFromIndexResponse = Shapes::StructureShape.new(name: 'BatchDetachFromIndexResponse')
     BatchDetachObject = Shapes::StructureShape.new(name: 'BatchDetachObject')
     BatchDetachObjectResponse = Shapes::StructureShape.new(name: 'BatchDetachObjectResponse')
+    BatchDetachTypedLink = Shapes::StructureShape.new(name: 'BatchDetachTypedLink')
+    BatchDetachTypedLinkResponse = Shapes::StructureShape.new(name: 'BatchDetachTypedLinkResponse')
+    BatchGetObjectInformation = Shapes::StructureShape.new(name: 'BatchGetObjectInformation')
+    BatchGetObjectInformationResponse = Shapes::StructureShape.new(name: 'BatchGetObjectInformationResponse')
+    BatchListAttachedIndices = Shapes::StructureShape.new(name: 'BatchListAttachedIndices')
+    BatchListAttachedIndicesResponse = Shapes::StructureShape.new(name: 'BatchListAttachedIndicesResponse')
+    BatchListIncomingTypedLinks = Shapes::StructureShape.new(name: 'BatchListIncomingTypedLinks')
+    BatchListIncomingTypedLinksResponse = Shapes::StructureShape.new(name: 'BatchListIncomingTypedLinksResponse')
+    BatchListIndex = Shapes::StructureShape.new(name: 'BatchListIndex')
+    BatchListIndexResponse = Shapes::StructureShape.new(name: 'BatchListIndexResponse')
     BatchListObjectAttributes = Shapes::StructureShape.new(name: 'BatchListObjectAttributes')
     BatchListObjectAttributesResponse = Shapes::StructureShape.new(name: 'BatchListObjectAttributesResponse')
     BatchListObjectChildren = Shapes::StructureShape.new(name: 'BatchListObjectChildren')
     BatchListObjectChildrenResponse = Shapes::StructureShape.new(name: 'BatchListObjectChildrenResponse')
+    BatchListObjectParentPaths = Shapes::StructureShape.new(name: 'BatchListObjectParentPaths')
+    BatchListObjectParentPathsResponse = Shapes::StructureShape.new(name: 'BatchListObjectParentPathsResponse')
+    BatchListObjectPolicies = Shapes::StructureShape.new(name: 'BatchListObjectPolicies')
+    BatchListObjectPoliciesResponse = Shapes::StructureShape.new(name: 'BatchListObjectPoliciesResponse')
+    BatchListOutgoingTypedLinks = Shapes::StructureShape.new(name: 'BatchListOutgoingTypedLinks')
+    BatchListOutgoingTypedLinksResponse = Shapes::StructureShape.new(name: 'BatchListOutgoingTypedLinksResponse')
+    BatchListPolicyAttachments = Shapes::StructureShape.new(name: 'BatchListPolicyAttachments')
+    BatchListPolicyAttachmentsResponse = Shapes::StructureShape.new(name: 'BatchListPolicyAttachmentsResponse')
+    BatchLookupPolicy = Shapes::StructureShape.new(name: 'BatchLookupPolicy')
+    BatchLookupPolicyResponse = Shapes::StructureShape.new(name: 'BatchLookupPolicyResponse')
     BatchOperationIndex = Shapes::IntegerShape.new(name: 'BatchOperationIndex')
     BatchReadException = Shapes::StructureShape.new(name: 'BatchReadException')
     BatchReadExceptionType = Shapes::StringShape.new(name: 'BatchReadExceptionType')
@@ -377,6 +407,38 @@ module Aws::CloudDirectory
     BatchAttachObjectResponse.add_member(:attached_object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "attachedObjectIdentifier"))
     BatchAttachObjectResponse.struct_class = Types::BatchAttachObjectResponse
 
+    BatchAttachPolicy.add_member(:policy_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "PolicyReference"))
+    BatchAttachPolicy.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchAttachPolicy.struct_class = Types::BatchAttachPolicy
+
+    BatchAttachPolicyResponse.struct_class = Types::BatchAttachPolicyResponse
+
+    BatchAttachToIndex.add_member(:index_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "IndexReference"))
+    BatchAttachToIndex.add_member(:target_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "TargetReference"))
+    BatchAttachToIndex.struct_class = Types::BatchAttachToIndex
+
+    BatchAttachToIndexResponse.add_member(:attached_object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "AttachedObjectIdentifier"))
+    BatchAttachToIndexResponse.struct_class = Types::BatchAttachToIndexResponse
+
+    BatchAttachTypedLink.add_member(:source_object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "SourceObjectReference"))
+    BatchAttachTypedLink.add_member(:target_object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "TargetObjectReference"))
+    BatchAttachTypedLink.add_member(:typed_link_facet, Shapes::ShapeRef.new(shape: TypedLinkSchemaAndFacetName, required: true, location_name: "TypedLinkFacet"))
+    BatchAttachTypedLink.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeNameAndValueList, required: true, location_name: "Attributes"))
+    BatchAttachTypedLink.struct_class = Types::BatchAttachTypedLink
+
+    BatchAttachTypedLinkResponse.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, location_name: "TypedLinkSpecifier"))
+    BatchAttachTypedLinkResponse.struct_class = Types::BatchAttachTypedLinkResponse
+
+    BatchCreateIndex.add_member(:ordered_indexed_attribute_list, Shapes::ShapeRef.new(shape: AttributeKeyList, required: true, location_name: "OrderedIndexedAttributeList"))
+    BatchCreateIndex.add_member(:is_unique, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "IsUnique"))
+    BatchCreateIndex.add_member(:parent_reference, Shapes::ShapeRef.new(shape: ObjectReference, location_name: "ParentReference"))
+    BatchCreateIndex.add_member(:link_name, Shapes::ShapeRef.new(shape: LinkName, location_name: "LinkName"))
+    BatchCreateIndex.add_member(:batch_reference_name, Shapes::ShapeRef.new(shape: BatchReferenceName, location_name: "BatchReferenceName"))
+    BatchCreateIndex.struct_class = Types::BatchCreateIndex
+
+    BatchCreateIndexResponse.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
+    BatchCreateIndexResponse.struct_class = Types::BatchCreateIndexResponse
+
     BatchCreateObject.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacetList, required: true, location_name: "SchemaFacet"))
     BatchCreateObject.add_member(:object_attribute_list, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, required: true, location_name: "ObjectAttributeList"))
     BatchCreateObject.add_member(:parent_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ParentReference"))
@@ -392,6 +454,13 @@ module Aws::CloudDirectory
 
     BatchDeleteObjectResponse.struct_class = Types::BatchDeleteObjectResponse
 
+    BatchDetachFromIndex.add_member(:index_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "IndexReference"))
+    BatchDetachFromIndex.add_member(:target_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "TargetReference"))
+    BatchDetachFromIndex.struct_class = Types::BatchDetachFromIndex
+
+    BatchDetachFromIndexResponse.add_member(:detached_object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "DetachedObjectIdentifier"))
+    BatchDetachFromIndexResponse.struct_class = Types::BatchDetachFromIndexResponse
+
     BatchDetachObject.add_member(:parent_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ParentReference"))
     BatchDetachObject.add_member(:link_name, Shapes::ShapeRef.new(shape: LinkName, required: true, location_name: "LinkName"))
     BatchDetachObject.add_member(:batch_reference_name, Shapes::ShapeRef.new(shape: BatchReferenceName, required: true, location_name: "BatchReferenceName"))
@@ -399,6 +468,48 @@ module Aws::CloudDirectory
 
     BatchDetachObjectResponse.add_member(:detached_object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "detachedObjectIdentifier"))
     BatchDetachObjectResponse.struct_class = Types::BatchDetachObjectResponse
+
+    BatchDetachTypedLink.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
+    BatchDetachTypedLink.struct_class = Types::BatchDetachTypedLink
+
+    BatchDetachTypedLinkResponse.struct_class = Types::BatchDetachTypedLinkResponse
+
+    BatchGetObjectInformation.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchGetObjectInformation.struct_class = Types::BatchGetObjectInformation
+
+    BatchGetObjectInformationResponse.add_member(:schema_facets, Shapes::ShapeRef.new(shape: SchemaFacetList, location_name: "SchemaFacets"))
+    BatchGetObjectInformationResponse.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
+    BatchGetObjectInformationResponse.struct_class = Types::BatchGetObjectInformationResponse
+
+    BatchListAttachedIndices.add_member(:target_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "TargetReference"))
+    BatchListAttachedIndices.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListAttachedIndices.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListAttachedIndices.struct_class = Types::BatchListAttachedIndices
+
+    BatchListAttachedIndicesResponse.add_member(:index_attachments, Shapes::ShapeRef.new(shape: IndexAttachmentList, location_name: "IndexAttachments"))
+    BatchListAttachedIndicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListAttachedIndicesResponse.struct_class = Types::BatchListAttachedIndicesResponse
+
+    BatchListIncomingTypedLinks.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListIncomingTypedLinks.add_member(:filter_attribute_ranges, Shapes::ShapeRef.new(shape: TypedLinkAttributeRangeList, location_name: "FilterAttributeRanges"))
+    BatchListIncomingTypedLinks.add_member(:filter_typed_link, Shapes::ShapeRef.new(shape: TypedLinkSchemaAndFacetName, location_name: "FilterTypedLink"))
+    BatchListIncomingTypedLinks.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListIncomingTypedLinks.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListIncomingTypedLinks.struct_class = Types::BatchListIncomingTypedLinks
+
+    BatchListIncomingTypedLinksResponse.add_member(:link_specifiers, Shapes::ShapeRef.new(shape: TypedLinkSpecifierList, location_name: "LinkSpecifiers"))
+    BatchListIncomingTypedLinksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListIncomingTypedLinksResponse.struct_class = Types::BatchListIncomingTypedLinksResponse
+
+    BatchListIndex.add_member(:ranges_on_indexed_values, Shapes::ShapeRef.new(shape: ObjectAttributeRangeList, location_name: "RangesOnIndexedValues"))
+    BatchListIndex.add_member(:index_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "IndexReference"))
+    BatchListIndex.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListIndex.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListIndex.struct_class = Types::BatchListIndex
+
+    BatchListIndexResponse.add_member(:index_attachments, Shapes::ShapeRef.new(shape: IndexAttachmentList, location_name: "IndexAttachments"))
+    BatchListIndexResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListIndexResponse.struct_class = Types::BatchListIndexResponse
 
     BatchListObjectAttributes.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchListObjectAttributes.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -419,12 +530,68 @@ module Aws::CloudDirectory
     BatchListObjectChildrenResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectChildrenResponse.struct_class = Types::BatchListObjectChildrenResponse
 
+    BatchListObjectParentPaths.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListObjectParentPaths.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParentPaths.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListObjectParentPaths.struct_class = Types::BatchListObjectParentPaths
+
+    BatchListObjectParentPathsResponse.add_member(:path_to_object_identifiers_list, Shapes::ShapeRef.new(shape: PathToObjectIdentifiersList, location_name: "PathToObjectIdentifiersList"))
+    BatchListObjectParentPathsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParentPathsResponse.struct_class = Types::BatchListObjectParentPathsResponse
+
+    BatchListObjectPolicies.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListObjectPolicies.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectPolicies.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListObjectPolicies.struct_class = Types::BatchListObjectPolicies
+
+    BatchListObjectPoliciesResponse.add_member(:attached_policy_ids, Shapes::ShapeRef.new(shape: ObjectIdentifierList, location_name: "AttachedPolicyIds"))
+    BatchListObjectPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectPoliciesResponse.struct_class = Types::BatchListObjectPoliciesResponse
+
+    BatchListOutgoingTypedLinks.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListOutgoingTypedLinks.add_member(:filter_attribute_ranges, Shapes::ShapeRef.new(shape: TypedLinkAttributeRangeList, location_name: "FilterAttributeRanges"))
+    BatchListOutgoingTypedLinks.add_member(:filter_typed_link, Shapes::ShapeRef.new(shape: TypedLinkSchemaAndFacetName, location_name: "FilterTypedLink"))
+    BatchListOutgoingTypedLinks.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListOutgoingTypedLinks.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListOutgoingTypedLinks.struct_class = Types::BatchListOutgoingTypedLinks
+
+    BatchListOutgoingTypedLinksResponse.add_member(:typed_link_specifiers, Shapes::ShapeRef.new(shape: TypedLinkSpecifierList, location_name: "TypedLinkSpecifiers"))
+    BatchListOutgoingTypedLinksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListOutgoingTypedLinksResponse.struct_class = Types::BatchListOutgoingTypedLinksResponse
+
+    BatchListPolicyAttachments.add_member(:policy_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "PolicyReference"))
+    BatchListPolicyAttachments.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListPolicyAttachments.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListPolicyAttachments.struct_class = Types::BatchListPolicyAttachments
+
+    BatchListPolicyAttachmentsResponse.add_member(:object_identifiers, Shapes::ShapeRef.new(shape: ObjectIdentifierList, location_name: "ObjectIdentifiers"))
+    BatchListPolicyAttachmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListPolicyAttachmentsResponse.struct_class = Types::BatchListPolicyAttachmentsResponse
+
+    BatchLookupPolicy.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchLookupPolicy.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchLookupPolicy.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchLookupPolicy.struct_class = Types::BatchLookupPolicy
+
+    BatchLookupPolicyResponse.add_member(:policy_to_path_list, Shapes::ShapeRef.new(shape: PolicyToPathList, location_name: "PolicyToPathList"))
+    BatchLookupPolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchLookupPolicyResponse.struct_class = Types::BatchLookupPolicyResponse
+
     BatchReadException.add_member(:type, Shapes::ShapeRef.new(shape: BatchReadExceptionType, location_name: "Type"))
     BatchReadException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     BatchReadException.struct_class = Types::BatchReadException
 
     BatchReadOperation.add_member(:list_object_attributes, Shapes::ShapeRef.new(shape: BatchListObjectAttributes, location_name: "ListObjectAttributes"))
     BatchReadOperation.add_member(:list_object_children, Shapes::ShapeRef.new(shape: BatchListObjectChildren, location_name: "ListObjectChildren"))
+    BatchReadOperation.add_member(:list_attached_indices, Shapes::ShapeRef.new(shape: BatchListAttachedIndices, location_name: "ListAttachedIndices"))
+    BatchReadOperation.add_member(:list_object_parent_paths, Shapes::ShapeRef.new(shape: BatchListObjectParentPaths, location_name: "ListObjectParentPaths"))
+    BatchReadOperation.add_member(:get_object_information, Shapes::ShapeRef.new(shape: BatchGetObjectInformation, location_name: "GetObjectInformation"))
+    BatchReadOperation.add_member(:list_object_policies, Shapes::ShapeRef.new(shape: BatchListObjectPolicies, location_name: "ListObjectPolicies"))
+    BatchReadOperation.add_member(:list_policy_attachments, Shapes::ShapeRef.new(shape: BatchListPolicyAttachments, location_name: "ListPolicyAttachments"))
+    BatchReadOperation.add_member(:lookup_policy, Shapes::ShapeRef.new(shape: BatchLookupPolicy, location_name: "LookupPolicy"))
+    BatchReadOperation.add_member(:list_index, Shapes::ShapeRef.new(shape: BatchListIndex, location_name: "ListIndex"))
+    BatchReadOperation.add_member(:list_outgoing_typed_links, Shapes::ShapeRef.new(shape: BatchListOutgoingTypedLinks, location_name: "ListOutgoingTypedLinks"))
+    BatchReadOperation.add_member(:list_incoming_typed_links, Shapes::ShapeRef.new(shape: BatchListIncomingTypedLinks, location_name: "ListIncomingTypedLinks"))
     BatchReadOperation.struct_class = Types::BatchReadOperation
 
     BatchReadOperationList.member = Shapes::ShapeRef.new(shape: BatchReadOperation)
@@ -445,6 +612,15 @@ module Aws::CloudDirectory
 
     BatchReadSuccessfulResponse.add_member(:list_object_attributes, Shapes::ShapeRef.new(shape: BatchListObjectAttributesResponse, location_name: "ListObjectAttributes"))
     BatchReadSuccessfulResponse.add_member(:list_object_children, Shapes::ShapeRef.new(shape: BatchListObjectChildrenResponse, location_name: "ListObjectChildren"))
+    BatchReadSuccessfulResponse.add_member(:get_object_information, Shapes::ShapeRef.new(shape: BatchGetObjectInformationResponse, location_name: "GetObjectInformation"))
+    BatchReadSuccessfulResponse.add_member(:list_attached_indices, Shapes::ShapeRef.new(shape: BatchListAttachedIndicesResponse, location_name: "ListAttachedIndices"))
+    BatchReadSuccessfulResponse.add_member(:list_object_parent_paths, Shapes::ShapeRef.new(shape: BatchListObjectParentPathsResponse, location_name: "ListObjectParentPaths"))
+    BatchReadSuccessfulResponse.add_member(:list_object_policies, Shapes::ShapeRef.new(shape: BatchListObjectPoliciesResponse, location_name: "ListObjectPolicies"))
+    BatchReadSuccessfulResponse.add_member(:list_policy_attachments, Shapes::ShapeRef.new(shape: BatchListPolicyAttachmentsResponse, location_name: "ListPolicyAttachments"))
+    BatchReadSuccessfulResponse.add_member(:lookup_policy, Shapes::ShapeRef.new(shape: BatchLookupPolicyResponse, location_name: "LookupPolicy"))
+    BatchReadSuccessfulResponse.add_member(:list_index, Shapes::ShapeRef.new(shape: BatchListIndexResponse, location_name: "ListIndex"))
+    BatchReadSuccessfulResponse.add_member(:list_outgoing_typed_links, Shapes::ShapeRef.new(shape: BatchListOutgoingTypedLinksResponse, location_name: "ListOutgoingTypedLinks"))
+    BatchReadSuccessfulResponse.add_member(:list_incoming_typed_links, Shapes::ShapeRef.new(shape: BatchListIncomingTypedLinksResponse, location_name: "ListIncomingTypedLinks"))
     BatchReadSuccessfulResponse.struct_class = Types::BatchReadSuccessfulResponse
 
     BatchRemoveFacetFromObject.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacet, required: true, location_name: "SchemaFacet"))
@@ -467,6 +643,12 @@ module Aws::CloudDirectory
     BatchWriteOperation.add_member(:delete_object, Shapes::ShapeRef.new(shape: BatchDeleteObject, location_name: "DeleteObject"))
     BatchWriteOperation.add_member(:add_facet_to_object, Shapes::ShapeRef.new(shape: BatchAddFacetToObject, location_name: "AddFacetToObject"))
     BatchWriteOperation.add_member(:remove_facet_from_object, Shapes::ShapeRef.new(shape: BatchRemoveFacetFromObject, location_name: "RemoveFacetFromObject"))
+    BatchWriteOperation.add_member(:attach_policy, Shapes::ShapeRef.new(shape: BatchAttachPolicy, location_name: "AttachPolicy"))
+    BatchWriteOperation.add_member(:create_index, Shapes::ShapeRef.new(shape: BatchCreateIndex, location_name: "CreateIndex"))
+    BatchWriteOperation.add_member(:attach_to_index, Shapes::ShapeRef.new(shape: BatchAttachToIndex, location_name: "AttachToIndex"))
+    BatchWriteOperation.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndex, location_name: "DetachFromIndex"))
+    BatchWriteOperation.add_member(:attach_typed_link, Shapes::ShapeRef.new(shape: BatchAttachTypedLink, location_name: "AttachTypedLink"))
+    BatchWriteOperation.add_member(:detach_typed_link, Shapes::ShapeRef.new(shape: BatchDetachTypedLink, location_name: "DetachTypedLink"))
     BatchWriteOperation.struct_class = Types::BatchWriteOperation
 
     BatchWriteOperationList.member = Shapes::ShapeRef.new(shape: BatchWriteOperation)
@@ -478,6 +660,12 @@ module Aws::CloudDirectory
     BatchWriteOperationResponse.add_member(:delete_object, Shapes::ShapeRef.new(shape: BatchDeleteObjectResponse, location_name: "DeleteObject"))
     BatchWriteOperationResponse.add_member(:add_facet_to_object, Shapes::ShapeRef.new(shape: BatchAddFacetToObjectResponse, location_name: "AddFacetToObject"))
     BatchWriteOperationResponse.add_member(:remove_facet_from_object, Shapes::ShapeRef.new(shape: BatchRemoveFacetFromObjectResponse, location_name: "RemoveFacetFromObject"))
+    BatchWriteOperationResponse.add_member(:attach_policy, Shapes::ShapeRef.new(shape: BatchAttachPolicyResponse, location_name: "AttachPolicy"))
+    BatchWriteOperationResponse.add_member(:create_index, Shapes::ShapeRef.new(shape: BatchCreateIndexResponse, location_name: "CreateIndex"))
+    BatchWriteOperationResponse.add_member(:attach_to_index, Shapes::ShapeRef.new(shape: BatchAttachToIndexResponse, location_name: "AttachToIndex"))
+    BatchWriteOperationResponse.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndexResponse, location_name: "DetachFromIndex"))
+    BatchWriteOperationResponse.add_member(:attach_typed_link, Shapes::ShapeRef.new(shape: BatchAttachTypedLinkResponse, location_name: "AttachTypedLink"))
+    BatchWriteOperationResponse.add_member(:detach_typed_link, Shapes::ShapeRef.new(shape: BatchDetachTypedLinkResponse, location_name: "DetachTypedLink"))
     BatchWriteOperationResponse.struct_class = Types::BatchWriteOperationResponse
 
     BatchWriteOperationResponseList.member = Shapes::ShapeRef.new(shape: BatchWriteOperationResponse)
@@ -1199,6 +1387,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1491,6 +1680,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
       end)
@@ -1750,6 +1940,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
@@ -1911,6 +2102,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)

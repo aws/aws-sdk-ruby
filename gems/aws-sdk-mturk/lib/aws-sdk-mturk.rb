@@ -42,6 +42,6 @@ require_relative 'aws-sdk-mturk/customizations'
 # @service
 module Aws::MTurk
 
-  GEM_VERSION = '1.0.0.rc9'
+  GEM_VERSION = '1.0.0.rc10'
 
 end

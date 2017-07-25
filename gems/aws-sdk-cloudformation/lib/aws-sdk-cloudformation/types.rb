@@ -8,6 +8,48 @@
 module Aws::CloudFormation
   module Types
 
+    # Structure that contains the results of the account gate function AWS
+    # CloudFormation StackSets invokes, if present, before proceeding with
+    # stack set operations in an account.
+    #
+    # Account gating enables you to specify a Lamdba function for an account
+    # that encapsulates any requirements that must be met before AWS
+    # CloudFormation StackSets proceeds with stack set operations in that
+    # account. CloudFormation invokes the function each time stack set
+    # operations are initiated for that account, and only proceeds if the
+    # function returns a success code.
+    #
+    # @!attribute [rw] status
+    #   The status of the account gate function.
+    #
+    #   * `SUCCEEDED`\: The account gate function has determined that the
+    #     account passes any requirements for stack set operations to occur.
+    #     AWS CloudFormation proceeds with stack operations in the account.
+    #
+    #   * `FAILED`\: The account gate function has determined that the
+    #     account does not meet the requirements for stack set operations to
+    #     occur. AWS CloudFormation cancels the stack set operations in that
+    #     account, and the stack set operation status is set to FAILED.
+    #
+    #   * `SKIPPED`\: An account gate function has not been specified for
+    #     the account, or the AWSCloudFormationStackSetExecutionRole of the
+    #     stack set adminstration account lacks permissions to invoke the
+    #     function. AWS CloudFormation proceeds with stack set operations in
+    #     the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the account gate status assigned to this account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountGateResult AWS API Documentation
+    #
+    class AccountGateResult < Struct.new(
+      :status,
+      :status_reason)
+      include Aws::Structure
+    end
+
     # The AccountLimit data type.
     #
     # @!attribute [rw] name
@@ -185,7 +227,7 @@ module Aws::CloudFormation
     #   only resources that are in the `UPDATE_FAILED` state because a
     #   rollback failed. You can't specify resources that are in the
     #   `UPDATE_FAILED` state for other reasons, for example, because an
-    #   update was canceled. To check why a resource update failed, use the
+    #   update was cancelled. To check why a resource update failed, use the
     #   DescribeStackResources action, and view the resource status reason.
     #
     #   Specify this property to skip rolling back resources that AWS
@@ -205,15 +247,24 @@ module Aws::CloudFormation
     #   cause dependent resources to fail. In this case, it might not be
     #   necessary to skip the dependent resources.
     #
-    #   To specify resources in a nested stack, use the following format:
-    #   `NestedStackName.ResourceLogicalID`. If the `ResourceLogicalID` is a
-    #   stack resource (`Type: AWS::CloudFormation::Stack`), it must be in
-    #   one of the following states: `DELETE_IN_PROGRESS`,
-    #   `DELETE_COMPLETE`, or `DELETE_FAILED`.
+    #   To skip resources that are part of nested stacks, use the following
+    #   format: `NestedStackName.ResourceLogicalID`. If you want to specify
+    #   the logical ID of a stack resource (`Type:
+    #   AWS::CloudFormation::Stack`) in the `ResourcesToSkip` list, then its
+    #   corresponding embedded stack must be in one of the following states:
+    #   `DELETE_IN_PROGRESS`, `DELETE_COMPLETE`, or `DELETE_FAILED`.
+    #
+    #   <note markdown="1"> Don't confuse a child stack's name with its corresponding logical
+    #   ID defined in the parent stack. For an example of a continue update
+    #   rollback operation with nested stacks, see [Using ResourcesToSkip to
+    #   recover a nested stacks hierarchy][2].
+    #
+    #    </note>
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_request_token
@@ -264,8 +315,8 @@ module Aws::CloudFormation
     #         notification_arns: ["NotificationARN"],
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         change_set_name: "ChangeSetName", # required
@@ -396,7 +447,7 @@ module Aws::CloudFormation
     # @!attribute [rw] tags
     #   Key-value pairs to associate with this stack. AWS CloudFormation
     #   also propagates these tags to resources in the stack. You can
-    #   specify a maximum of 10 tags.
+    #   specify a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] change_set_name
@@ -504,8 +555,8 @@ module Aws::CloudFormation
     #         stack_policy_url: "StackPolicyURL",
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         client_request_token: "ClientRequestToken",
@@ -685,7 +736,7 @@ module Aws::CloudFormation
     # @!attribute [rw] tags
     #   Key-value pairs to associate with this stack. AWS CloudFormation
     #   also propagates these tags to the resources created in the stack. A
-    #   maximum number of 10 tags can be specified.
+    #   maximum number of 50 tags can be specified.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -694,6 +745,20 @@ module Aws::CloudFormation
     #   that you're not attempting to create a stack with the same name.
     #   You might retry `CreateStack` requests to ensure that AWS
     #   CloudFormation successfully received them.
+    #
+    #   All events triggered by a given stack operation are assigned the
+    #   same client request token, which you can use to track operations.
+    #   For example, if you execute a `CreateStack` operation with the token
+    #   `token1`, then all the `StackEvents` generated by that operation
+    #   will have `ClientRequestToken` set as `token1`.
+    #
+    #   In the console, stack operations display the client request token on
+    #   the Events tab. Stack operations that are initiated from the console
+    #   use the token format *Console-StackOperation-ID*, which helps you
+    #   easily identify the stack operation . For example, if you create a
+    #   stack using the console, each stack event would be assigned the same
+    #   token in the following format:
+    #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
@@ -717,6 +782,84 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStackInstancesInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         accounts: ["Account"], # required
+    #         regions: ["Region"], # required
+    #         operation_preferences: {
+    #           region_order: ["Region"],
+    #           failure_tolerance_count: 1,
+    #           failure_tolerance_percentage: 1,
+    #           max_concurrent_count: 1,
+    #           max_concurrent_percentage: 1,
+    #         },
+    #         operation_id: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to create stack
+    #   instances from.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The names of one or more AWS accounts that you want to create stack
+    #   instances in the specified region(s) for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The names of one or more regions where you want to create stack
+    #   instances using the specified AWS account(s).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operation_preferences
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier for this stack set operation.
+    #
+    #   The operation ID also functions as an idempotency token, to ensure
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
+    #   If you don't specify an operation ID, the SDK generates one
+    #   automatically.
+    #
+    #   Repeating this stack set operation with a new operation ID retries
+    #   all stack instances whose status is `OUTDATED`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesInput AWS API Documentation
+    #
+    class CreateStackInstancesInput < Struct.new(
+      :stack_set_name,
+      :accounts,
+      :regions,
+      :operation_preferences,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The unique identifier for this stack set operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesOutput AWS API Documentation
+    #
+    class CreateStackInstancesOutput < Struct.new(
+      :operation_id)
+      include Aws::Structure
+    end
+
     # The output for a CreateStack action.
     #
     # @!attribute [rw] stack_id
@@ -727,6 +870,174 @@ module Aws::CloudFormation
     #
     class CreateStackOutput < Struct.new(
       :stack_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStackSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         description: "Description",
+    #         template_body: "TemplateBody",
+    #         template_url: "TemplateURL",
+    #         parameters: [
+    #           {
+    #             parameter_key: "ParameterKey",
+    #             parameter_value: "ParameterValue",
+    #             use_previous_value: false,
+    #           },
+    #         ],
+    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name to associate with the stack set. The name must be unique in
+    #   the region where you create your stack set.
+    #
+    #   <note markdown="1"> A stack name can contain only alphanumeric characters
+    #   (case-sensitive) and hyphens. It must start with an alphabetic
+    #   character and can't be longer than 128 characters.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stack set. You can use the description to
+    #   identify the stack set's purpose or other important information.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The structure that contains the template body, with a minimum length
+    #   of 1 byte and a maximum length of 51,200 bytes. For more
+    #   information, see [Template Anatomy][1] in the AWS CloudFormation
+    #   User Guide.
+    #
+    #   Conditional: You must specify either the TemplateBody or the
+    #   TemplateURL parameter, but not both.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The location of the file that contains the template body. The URL
+    #   must point to a template (maximum size: 460,800 bytes) that's
+    #   located in an Amazon S3 bucket. For more information, see [Template
+    #   Anatomy][1] in the AWS CloudFormation User Guide.
+    #
+    #   Conditional: You must specify either the TemplateBody or the
+    #   TemplateURL parameter, but not both.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The input parameters for the stack set template.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] capabilities
+    #   A list of values that you must specify before AWS CloudFormation can
+    #   create certain stack sets. Some stack set templates might include
+    #   resources that can affect permissions in your AWS account—for
+    #   example, by creating new AWS Identity and Access Management (IAM)
+    #   users. For those stack sets, you must explicitly acknowledge their
+    #   capabilities by specifying this parameter.
+    #
+    #   The only valid values are CAPABILITY\_IAM and
+    #   CAPABILITY\_NAMED\_IAM. The following resources require you to
+    #   specify this parameter:
+    #
+    #   * AWS::IAM::AccessKey
+    #
+    #   * AWS::IAM::Group
+    #
+    #   * AWS::IAM::InstanceProfile
+    #
+    #   * AWS::IAM::Policy
+    #
+    #   * AWS::IAM::Role
+    #
+    #   * AWS::IAM::User
+    #
+    #   * AWS::IAM::UserToGroupAddition
+    #
+    #   If your stack template contains these resources, we recommend that
+    #   you review all permissions that are associated with them and edit
+    #   their permissions if necessary.
+    #
+    #   If you have IAM resources, you can specify either capability. If you
+    #   have IAM resources with custom names, you must specify
+    #   CAPABILITY\_NAMED\_IAM. If you don't specify this parameter, this
+    #   action returns an `InsufficientCapabilities` error.
+    #
+    #   For more information, see [Acknowledging IAM Resources in AWS
+    #   CloudFormation Templates.][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to associate with this stack set and the stacks
+    #   created from it. AWS CloudFormation also propagates these tags to
+    #   supported resources that are created in the stacks. A maximum number
+    #   of 50 tags can be specified.
+    #
+    #   If you specify tags as part of a `CreateStackSet` action, AWS
+    #   CloudFormation checks to see if you have the required IAM permission
+    #   to tag resources. If you don't, the entire `CreateStackSet` action
+    #   fails with an `access denied` error, and the stack set is not
+    #   created.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `CreateStackSet` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to create another stack set with the
+    #   same name. You might retry `CreateStackSet` requests to ensure that
+    #   AWS CloudFormation successfully received them.
+    #
+    #   If you don't specify an operation ID, the SDK generates one
+    #   automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetInput AWS API Documentation
+    #
+    class CreateStackSetInput < Struct.new(
+      :stack_set_name,
+      :description,
+      :template_body,
+      :template_url,
+      :parameters,
+      :capabilities,
+      :tags,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set_id
+    #   The ID of the stack set that you're creating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetOutput AWS API Documentation
+    #
+    class CreateStackSetOutput < Struct.new(
+      :stack_set_id)
       include Aws::Structure
     end
 
@@ -808,6 +1119,20 @@ module Aws::CloudFormation
     #   that you're not attempting to delete a stack with the same name.
     #   You might retry `DeleteStack` requests to ensure that AWS
     #   CloudFormation successfully received them.
+    #
+    #   All events triggered by a given stack operation are assigned the
+    #   same client request token, which you can use to track operations.
+    #   For example, if you execute a `CreateStack` operation with the token
+    #   `token1`, then all the `StackEvents` generated by that operation
+    #   will have `ClientRequestToken` set as `token1`.
+    #
+    #   In the console, stack operations display the client request token on
+    #   the Events tab. Stack operations that are initiated from the console
+    #   use the token format *Console-StackOperation-ID*, which helps you
+    #   easily identify the stack operation . For example, if you create a
+    #   stack using the console, each stack event would be assigned the same
+    #   token in the following format:
+    #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
@@ -819,6 +1144,114 @@ module Aws::CloudFormation
       :client_request_token)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteStackInstancesInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         accounts: ["Account"], # required
+    #         regions: ["Region"], # required
+    #         operation_preferences: {
+    #           region_order: ["Region"],
+    #           failure_tolerance_count: 1,
+    #           failure_tolerance_percentage: 1,
+    #           max_concurrent_count: 1,
+    #           max_concurrent_percentage: 1,
+    #         },
+    #         retain_stacks: false, # required
+    #         operation_id: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to delete stack
+    #   instances for.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The names of the AWS accounts that you want to delete stack
+    #   instances for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The regions where you want to delete stack set instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operation_preferences
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] retain_stacks
+    #   Removes the stack instances from the specified stack set, but
+    #   doesn't delete the stacks. You can't reassociate a retained stack
+    #   or add an existing, saved stack to a new stack set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier for this stack set operation.
+    #
+    #   If you don't specify an operation ID, the SDK generates one
+    #   automatically.
+    #
+    #   The operation ID also functions as an idempotency token, to ensure
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You can retry stack
+    #   set operation requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
+    #   Repeating this stack set operation with a new operation ID retries
+    #   all stack instances whose status is `OUTDATED`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesInput AWS API Documentation
+    #
+    class DeleteStackInstancesInput < Struct.new(
+      :stack_set_name,
+      :accounts,
+      :regions,
+      :operation_preferences,
+      :retain_stacks,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The unique identifier for this stack set operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesOutput AWS API Documentation
+    #
+    class DeleteStackInstancesOutput < Struct.new(
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStackSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you're deleting. You
+    #   can obtain this value by running ListStackSets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetInput AWS API Documentation
+    #
+    class DeleteStackSetInput < Struct.new(
+      :stack_set_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput AWS API Documentation
+    #
+    class DeleteStackSetOutput < Aws::EmptyStructure; end
 
     # The input for the DescribeAccountLimits action.
     #
@@ -1054,6 +1487,49 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStackInstanceInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         stack_instance_account: "Account", # required
+    #         stack_instance_region: "Region", # required
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or the unique stack ID of the stack set that you want to
+    #   get stack instance information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_account
+    #   The ID of an AWS account that's associated with this stack
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_region
+    #   The name of a region that's associated with this stack instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceInput AWS API Documentation
+    #
+    class DescribeStackInstanceInput < Struct.new(
+      :stack_set_name,
+      :stack_instance_account,
+      :stack_instance_region)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_instance
+    #   The stack instance that matches the specified request parameters.
+    #   @return [Types::StackInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceOutput AWS API Documentation
+    #
+    class DescribeStackInstanceOutput < Struct.new(
+      :stack_instance)
+      include Aws::Structure
+    end
+
     # The input for DescribeStackResource action.
     #
     # @note When making an API call, you may pass DescribeStackResourceInput
@@ -1171,6 +1647,71 @@ module Aws::CloudFormation
     #
     class DescribeStackResourcesOutput < Struct.new(
       :stack_resources)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStackSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set whose description you want.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetInput AWS API Documentation
+    #
+    class DescribeStackSetInput < Struct.new(
+      :stack_set_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStackSetOperationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         operation_id: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or the unique stack ID of the stack set for the stack
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique ID of the stack set operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationInput AWS API Documentation
+    #
+    class DescribeStackSetOperationInput < Struct.new(
+      :stack_set_name,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set_operation
+    #   The specified stack set operation.
+    #   @return [Types::StackSetOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationOutput AWS API Documentation
+    #
+    class DescribeStackSetOperationOutput < Struct.new(
+      :stack_set_operation)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set
+    #   The specified stack set.
+    #   @return [Types::StackSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOutput AWS API Documentation
+    #
+    class DescribeStackSetOutput < Struct.new(
+      :stack_set)
       include Aws::Structure
     end
 
@@ -1502,6 +2043,7 @@ module Aws::CloudFormation
     #         template_body: "TemplateBody",
     #         template_url: "TemplateURL",
     #         stack_name: "StackNameOrId",
+    #         stack_set_name: "StackSetNameOrId",
     #       }
     #
     # @!attribute [rw] template_body
@@ -1542,12 +2084,18 @@ module Aws::CloudFormation
     #   `StackName`, `TemplateBody`, or `TemplateURL`.
     #   @return [String]
     #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set from which the stack was
+    #   created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput AWS API Documentation
     #
     class GetTemplateSummaryInput < Struct.new(
       :template_body,
       :template_url,
-      :stack_name)
+      :stack_name,
+      :stack_set_name)
       include Aws::Structure
     end
 
@@ -1748,6 +2296,79 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStackInstancesInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         stack_instance_account: "Account",
+    #         stack_instance_region: "Region",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to list stack
+    #   instances for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous request didn't return all of the remaining results,
+    #   the response's `NextToken` parameter value is set to a token. To
+    #   retrieve the next set of results, call `ListStackInstances` again
+    #   and assign that token to the request object's `NextToken`
+    #   parameter. If there are no remaining results, the previous response
+    #   object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_instance_account
+    #   The name of the AWS account that you want to list stack instances
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_region
+    #   The name of the region where you want to list stack instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesInput AWS API Documentation
+    #
+    class ListStackInstancesInput < Struct.new(
+      :stack_set_name,
+      :next_token,
+      :max_results,
+      :stack_instance_account,
+      :stack_instance_region)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of `StackInstanceSummary` structures that contain information
+    #   about the specified stack instances.
+    #   @return [Array<Types::StackInstanceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListStackInstances` again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesOutput AWS API Documentation
+    #
+    class ListStackInstancesOutput < Struct.new(
+      :summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the ListStackResource action.
     #
     # @note When making an API call, you may pass ListStackResourcesInput
@@ -1799,6 +2420,195 @@ module Aws::CloudFormation
     #
     class ListStackResourcesOutput < Struct.new(
       :stack_resource_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStackSetOperationResultsInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         operation_id: "ClientRequestToken", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to get
+    #   operation results for.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The ID of the stack set operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous request didn't return all of the remaining results,
+    #   the response object's `NextToken` parameter value is set to a
+    #   token. To retrieve the next set of results, call
+    #   `ListStackSetOperationResults` again and assign that token to the
+    #   request object's `NextToken` parameter. If there are no remaining
+    #   results, the previous response object's `NextToken` parameter is
+    #   set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsInput AWS API Documentation
+    #
+    class ListStackSetOperationResultsInput < Struct.new(
+      :stack_set_name,
+      :operation_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of `StackSetOperationResultSummary` structures that contain
+    #   information about the specified operation results, for accounts and
+    #   regions that are included in the operation.
+    #   @return [Array<Types::StackSetOperationResultSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all results, `NextToken` is set to a
+    #   token. To retrieve the next set of results, call
+    #   `ListOperationResults` again and assign that token to the request
+    #   object's `NextToken` parameter. If there are no remaining results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsOutput AWS API Documentation
+    #
+    class ListStackSetOperationResultsOutput < Struct.new(
+      :summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStackSetOperationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to get
+    #   operation summaries for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListStackSetOperations` again and assign that token to the request
+    #   object's `NextToken` parameter. If there are no remaining results,
+    #   the previous response object's `NextToken` parameter is set to
+    #   `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsInput AWS API Documentation
+    #
+    class ListStackSetOperationsInput < Struct.new(
+      :stack_set_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of `StackSetOperationSummary` structures that contain summary
+    #   information about operations for the specified stack set.
+    #   @return [Array<Types::StackSetOperationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all results, `NextToken` is set to a
+    #   token. To retrieve the next set of results, call
+    #   `ListOperationResults` again and assign that token to the request
+    #   object's `NextToken` parameter. If there are no remaining results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsOutput AWS API Documentation
+    #
+    class ListStackSetOperationsOutput < Struct.new(
+      :summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStackSetsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         status: "ACTIVE", # accepts ACTIVE, DELETED
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   `ListStackSets` again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the stack sets that you want to get summary
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsInput AWS API Documentation
+    #
+    class ListStackSetsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of `StackSetSummary` structures that contain information
+    #   about the user's stack sets.
+    #   @return [Array<Types::StackSetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all of the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListStackInstances` again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsOutput AWS API Documentation
+    #
+    class ListStackSetsOutput < Struct.new(
+      :summaries,
       :next_token)
       include Aws::Structure
     end
@@ -1868,12 +2678,17 @@ module Aws::CloudFormation
     #   User defined description associated with the output.
     #   @return [String]
     #
+    # @!attribute [rw] export_name
+    #   The name of the export associated with the output.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Output AWS API Documentation
     #
     class Output < Struct.new(
       :output_key,
       :output_value,
-      :description)
+      :description,
+      :export_name)
       include Aws::Structure
     end
 
@@ -2385,9 +3200,19 @@ module Aws::CloudFormation
     # @!attribute [rw] client_request_token
     #   The token passed to the operation that generated this event.
     #
+    #   All events triggered by a given stack operation are assigned the
+    #   same client request token, which you can use to track operations.
     #   For example, if you execute a `CreateStack` operation with the token
     #   `token1`, then all the `StackEvents` generated by that operation
     #   will have `ClientRequestToken` set as `token1`.
+    #
+    #   In the console, stack operations display the client request token on
+    #   the Events tab. Stack operations that are initiated from the console
+    #   use the token format *Console-StackOperation-ID*, which helps you
+    #   easily identify the stack operation . For example, if you create a
+    #   stack using the console, each stack event would be assigned the same
+    #   token in the following format:
+    #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent AWS API Documentation
@@ -2404,6 +3229,134 @@ module Aws::CloudFormation
       :resource_status_reason,
       :resource_properties,
       :client_request_token)
+      include Aws::Structure
+    end
+
+    # An AWS CloudFormation stack, in a specific account and region, that's
+    # part of a stack set operation. A stack instance is a reference to an
+    # attempted or actual stack in a given account within a given region. A
+    # stack instance can exist without a stack—for example, if the stack
+    # couldn't be created for some reason. A stack instance is associated
+    # with only one stack set. Each stack instance contains the ID of its
+    # associated stack set, as well as the ID of the actual stack and the
+    # stack status.
+    #
+    # @!attribute [rw] stack_set_id
+    #   The name or unique ID of the stack set that the stack instance is
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS region that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The name of the AWS account that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_id
+    #   The ID of the stack instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the stack instance, in terms of its synchronization
+    #   with its associated stack set.
+    #
+    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #     left the stack in an unstable state. Stacks in this state are
+    #     excluded from further `UpdateStackSet` and `DeleteStackInstances`
+    #     operations. You might need to clean up the stack manually.
+    #
+    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #     set because:
+    #
+    #     * The associated stack failed during a `CreateStackSet` or
+    #       `UpdateStackSet` operation.
+    #
+    #     * The stack was part of a `CreateStackSet` or `UpdateStackSet`
+    #       operation that failed or was stopped before the stack was
+    #       created or updated.
+    #
+    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The explanation for the specific status code that is assigned to
+    #   this stack instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance AWS API Documentation
+    #
+    class StackInstance < Struct.new(
+      :stack_set_id,
+      :region,
+      :account,
+      :stack_id,
+      :status,
+      :status_reason)
+      include Aws::Structure
+    end
+
+    # The structure that contains summary information about a stack
+    # instance.
+    #
+    # @!attribute [rw] stack_set_id
+    #   The name or unique ID of the stack set that the stack instance is
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS region that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The name of the AWS account that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_id
+    #   The ID of the stack instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the stack instance, in terms of its synchronization
+    #   with its associated stack set.
+    #
+    #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
+    #     left the stack in an unstable state. Stacks in this state are
+    #     excluded from further `UpdateStackSet` and `DeleteStackInstances`
+    #     operations. You might need to clean up the stack manually.
+    #
+    #   * `OUTDATED`\: The stack isn't currently up to date with the stack
+    #     set because:
+    #
+    #     * The associated stack failed during a `CreateStackSet` or
+    #       `UpdateStackSet` operation.
+    #
+    #     * The stack was part of a `CreateStackSet` or `UpdateStackSet`
+    #       operation that failed or was stopped before the stack was
+    #       created or updated.
+    #
+    #   * `CURRENT`\: The stack is currently up to date with the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The explanation for the specific status code assigned to this stack
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary AWS API Documentation
+    #
+    class StackInstanceSummary < Struct.new(
+      :stack_set_id,
+      :region,
+      :account,
+      :stack_id,
+      :status,
+      :status_reason)
       include Aws::Structure
     end
 
@@ -2580,6 +3533,385 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A structure that contains information about a stack set. A stack set
+    # enables you to provision stacks into AWS accounts and across regions
+    # by using a single CloudFormation template. In the stack set, you
+    # specify the template to use, as well as any parameters and
+    # capabilities that the template requires.
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name that's associated with the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_set_id
+    #   The ID of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stack set that you specify when the stack set
+    #   is created or updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The structure that contains the body of the template that was used
+    #   to create or update the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A list of input parameters for a stack set.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] capabilities
+    #   The capabilities that are allowed in the stack set. Some stack set
+    #   templates might include resources that can affect permissions in
+    #   your AWS account—for example, by creating new AWS Identity and
+    #   Access Management (IAM) users. For more information, see
+    #   [Acknowledging IAM Resources in AWS CloudFormation Templates.][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that specify information about the stack set. A
+    #   maximum number of 50 tags can be specified.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
+    #
+    class StackSet < Struct.new(
+      :stack_set_name,
+      :stack_set_id,
+      :description,
+      :status,
+      :template_body,
+      :parameters,
+      :capabilities,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The structure that contains information about a stack set operation.
+    #
+    # @!attribute [rw] operation_id
+    #   The unique ID of a stack set operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_set_id
+    #   The ID of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The type of stack set operation: `CREATE`, `UPDATE`, or `DELETE`.
+    #   Create and delete operations affect only the specified stack set
+    #   instances that are associated with the specified stack set. Update
+    #   operations affect both the stack set itself, as well as *all*
+    #   associated stack set instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the operation.
+    #
+    #   * `FAILED`\: The operation exceeded the specified failure tolerance.
+    #     The failure tolerance value that you've set for an operation is
+    #     applied for each region during stack create and update operations.
+    #     If the number of failed stacks within a region exceeds the failure
+    #     tolerance, the status of the operation in the region is set to
+    #     `FAILED`. This in turn sets the status of the operation as a whole
+    #     to `FAILED`, and AWS CloudFormation cancels the operation in any
+    #     remaining regions.
+    #
+    #   * `RUNNING`\: The operation is currently being performed.
+    #
+    #   * `STOPPED`\: The user has cancelled the operation.
+    #
+    #   * `STOPPING`\: The operation is in the process of stopping, at user
+    #     request.
+    #
+    #   * `SUCCEEDED`\: The operation completed creating or updating all the
+    #     specified stacks without exceeding the failure tolerance for the
+    #     operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_preferences
+    #   The preferences for how AWS CloudFormation performs this stack set
+    #   operation.
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] retain_stacks
+    #   For stack set operations of action type `DELETE`, specifies whether
+    #   to remove the stack instances from the specified stack set, but
+    #   doesn't delete the stacks. You can't reassociate a retained stack,
+    #   or add an existing, saved stack to a new stack set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the operation was initiated. Note that the
+    #   creation times for the stack set operation might differ from the
+    #   creation time of the individual stacks themselves. This is because
+    #   AWS CloudFormation needs to perform preparatory work for the
+    #   operation, such as dispatching the work to the requested regions,
+    #   before actually creating the first stacks.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   The time at which the stack set operation ended, across all accounts
+    #   and regions specified. Note that this doesn't necessarily mean that
+    #   the stack set operation was successful, or even attempted, in each
+    #   account or region.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperation AWS API Documentation
+    #
+    class StackSetOperation < Struct.new(
+      :operation_id,
+      :stack_set_id,
+      :action,
+      :status,
+      :operation_preferences,
+      :retain_stacks,
+      :creation_timestamp,
+      :end_timestamp)
+      include Aws::Structure
+    end
+
+    # The user-specified preferences for how AWS CloudFormation performs a
+    # stack set operation.
+    #
+    # @note When making an API call, you may pass StackSetOperationPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         region_order: ["Region"],
+    #         failure_tolerance_count: 1,
+    #         failure_tolerance_percentage: 1,
+    #         max_concurrent_count: 1,
+    #         max_concurrent_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] region_order
+    #   The order of the regions in where you want to perform the stack
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_tolerance_count
+    #   The number of accounts, per region, for which this operation can
+    #   fail before AWS CloudFormation stops the operation in that region.
+    #   If the operation is stopped in a region, AWS CloudFormation doesn't
+    #   attempt the operation in any subsequent regions.
+    #
+    #   Conditional: You must specify either `FailureToleranceCount` or
+    #   `FailureTolerancePercentage` (but not both).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_tolerance_percentage
+    #   The percentage of accounts, per region, for which this stack
+    #   operation can fail before AWS CloudFormation stops the operation in
+    #   that region. If the operation is stopped in a region, AWS
+    #   CloudFormation doesn't attempt the operation in any subsequent
+    #   regions.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS CloudFormation rounds *down* to the next whole
+    #   number.
+    #
+    #   Conditional: You must specify either `FailureToleranceCount` or
+    #   `FailureTolerancePercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_count
+    #   The maximum number of accounts in which to perform this operation at
+    #   one time. This is dependent on the value of
+    #   `FailureToleranceCount`—`MaxConcurrentCount` is at most one more
+    #   than the `FailureToleranceCount` .
+    #
+    #   Conditional: You must specify either `MaxConcurrentCount` or
+    #   `MaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_percentage
+    #   The maximum percentage of accounts in which to perform this
+    #   operation at one time.
+    #
+    #   When calculating the number of accounts based on the specified
+    #   percentage, AWS CloudFormation rounds down to the next whole number.
+    #   This is true except in cases where rounding down would result is
+    #   zero. In this case, CloudFormation sets the number as one instead.
+    #
+    #   Conditional: You must specify either `MaxConcurrentCount` or
+    #   `MaxConcurrentPercentage`, but not both.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences AWS API Documentation
+    #
+    class StackSetOperationPreferences < Struct.new(
+      :region_order,
+      :failure_tolerance_count,
+      :failure_tolerance_percentage,
+      :max_concurrent_count,
+      :max_concurrent_percentage)
+      include Aws::Structure
+    end
+
+    # The structure that contains information about a specified operation's
+    # results for a given account in a given region.
+    #
+    # @!attribute [rw] account
+    #   The name of the AWS account for this operation result.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the AWS region for this operation result.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The result status of the stack set operation for the given account
+    #   in the given region.
+    #
+    #   * `CANCELLED`\: The operation in the specified account and region
+    #     has been cancelled. This is either because a user has stopped the
+    #     stack set operation, or because the failure tolerance of the stack
+    #     set operation has been exceeded.
+    #
+    #   * `FAILED`\: The operation in the specified account and region
+    #     failed.
+    #
+    #     If the stack set operation fails in enough accounts within a
+    #     region, the failure tolerance for the stack set operation as a
+    #     whole might be exceeded.
+    #
+    #   * `RUNNING`\: The operation in the specified account and region is
+    #     currently in progress.
+    #
+    #   * `PENDING`\: The operation in the specified account and region has
+    #     yet to start.
+    #
+    #   * `SUCCEEDED`\: The operation in the specified account and region
+    #     completed successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the assigned result status.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_gate_result
+    #   The results of the account gate function AWS CloudFormation invokes,
+    #   if present, before proceeding with stack set operations in an
+    #   account
+    #   @return [Types::AccountGateResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary AWS API Documentation
+    #
+    class StackSetOperationResultSummary < Struct.new(
+      :account,
+      :region,
+      :status,
+      :status_reason,
+      :account_gate_result)
+      include Aws::Structure
+    end
+
+    # The structures that contain summary information about the specified
+    # operation.
+    #
+    # @!attribute [rw] operation_id
+    #   The unique ID of the stack set operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The type of operation: `CREATE`, `UPDATE`, or `DELETE`. Create and
+    #   delete operations affect only the specified stack instances that are
+    #   associated with the specified stack set. Update operations affect
+    #   both the stack set itself as well as *all* associated stack set
+    #   instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The overall status of the operation.
+    #
+    #   * `FAILED`\: The operation exceeded the specified failure tolerance.
+    #     The failure tolerance value that you've set for an operation is
+    #     applied for each region during stack create and update operations.
+    #     If the number of failed stacks within a region exceeds the failure
+    #     tolerance, the status of the operation in the region is set to
+    #     `FAILED`. This in turn sets the status of the operation as a whole
+    #     to `FAILED`, and AWS CloudFormation cancels the operation in any
+    #     remaining regions.
+    #
+    #   * `RUNNING`\: The operation is currently being performed.
+    #
+    #   * `STOPPED`\: The user has cancelled the operation.
+    #
+    #   * `STOPPING`\: The operation is in the process of stopping, at user
+    #     request.
+    #
+    #   * `SUCCEEDED`\: The operation completed creating or updating all the
+    #     specified stacks without exceeding the failure tolerance for the
+    #     operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The time at which the operation was initiated. Note that the
+    #   creation times for the stack set operation might differ from the
+    #   creation time of the individual stacks themselves. This is because
+    #   AWS CloudFormation needs to perform preparatory work for the
+    #   operation, such as dispatching the work to the requested regions,
+    #   before actually creating the first stacks.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   The time at which the stack set operation ended, across all accounts
+    #   and regions specified. Note that this doesn't necessarily mean that
+    #   the stack set operation was successful, or even attempted, in each
+    #   account or region.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationSummary AWS API Documentation
+    #
+    class StackSetOperationSummary < Struct.new(
+      :operation_id,
+      :action,
+      :status,
+      :creation_timestamp,
+      :end_timestamp)
+      include Aws::Structure
+    end
+
+    # The structures that contain summary information about the specified
+    # stack set.
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_set_id
+    #   The ID of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stack set that you specify when the stack set
+    #   is created or updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the stack set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary AWS API Documentation
+    #
+    class StackSetSummary < Struct.new(
+      :stack_set_name,
+      :stack_set_id,
+      :description,
+      :status)
+      include Aws::Structure
+    end
+
     # The StackSummary Data Type
     #
     # @!attribute [rw] stack_id
@@ -2629,6 +3961,35 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopStackSetOperationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         operation_id: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to stop the
+    #   operation for.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The ID of the stack operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationInput AWS API Documentation
+    #
+    class StopStackSetOperationInput < Struct.new(
+      :stack_set_name,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationOutput AWS API Documentation
+    #
+    class StopStackSetOperationOutput < Aws::EmptyStructure; end
+
     # The Tag type enables you to specify a key-value pair that can be used
     # to store information about an AWS CloudFormation stack.
     #
@@ -2636,8 +3997,8 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       }
     #
     # @!attribute [rw] key
@@ -2715,8 +4076,8 @@ module Aws::CloudFormation
     #         notification_arns: ["NotificationARN"],
     #         tags: [
     #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
     #           },
     #         ],
     #         client_request_token: "ClientRequestToken",
@@ -2901,7 +4262,7 @@ module Aws::CloudFormation
     # @!attribute [rw] tags
     #   Key-value pairs to associate with this stack. AWS CloudFormation
     #   also propagates these tags to supported resources in the stack. You
-    #   can specify a maximum number of 10 tags.
+    #   can specify a maximum number of 50 tags.
     #
     #   If you don't specify this parameter, AWS CloudFormation doesn't
     #   modify the stack's tags. If you specify an empty value, AWS
@@ -2914,6 +4275,20 @@ module Aws::CloudFormation
     #   that you're not attempting to update a stack with the same name.
     #   You might retry `UpdateStack` requests to ensure that AWS
     #   CloudFormation successfully received them.
+    #
+    #   All events triggered by a given stack operation are assigned the
+    #   same client request token, which you can use to track operations.
+    #   For example, if you execute a `CreateStack` operation with the token
+    #   `token1`, then all the `StackEvents` generated by that operation
+    #   will have `ClientRequestToken` set as `token1`.
+    #
+    #   In the console, stack operations display the client request token on
+    #   the Events tab. Stack operations that are initiated from the console
+    #   use the token format *Console-StackOperation-ID*, which helps you
+    #   easily identify the stack operation . For example, if you create a
+    #   stack using the console, each stack event would be assigned the same
+    #   token in the following format:
+    #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
@@ -2947,6 +4322,219 @@ module Aws::CloudFormation
     #
     class UpdateStackOutput < Struct.new(
       :stack_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStackSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_set_name: "StackSetName", # required
+    #         description: "Description",
+    #         template_body: "TemplateBody",
+    #         template_url: "TemplateURL",
+    #         use_previous_template: false,
+    #         parameters: [
+    #           {
+    #             parameter_key: "ParameterKey",
+    #             parameter_value: "ParameterValue",
+    #             use_previous_value: false,
+    #           },
+    #         ],
+    #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         operation_preferences: {
+    #           region_order: ["Region"],
+    #           failure_tolerance_count: 1,
+    #           failure_tolerance_percentage: 1,
+    #           max_concurrent_count: 1,
+    #           max_concurrent_percentage: 1,
+    #         },
+    #         operation_id: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of updates that you are making.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The structure that contains the template body, with a minimum length
+    #   of 1 byte and a maximum length of 51,200 bytes. For more
+    #   information, see [Template Anatomy][1] in the AWS CloudFormation
+    #   User Guide.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
+    #   true.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The location of the file that contains the template body. The URL
+    #   must point to a template (maximum size: 460,800 bytes) that is
+    #   located in an Amazon S3 bucket. For more information, see [Template
+    #   Anatomy][1] in the AWS CloudFormation User Guide.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
+    #   true.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] use_previous_template
+    #   Use the existing template that's associated with the stack set that
+    #   you're updating.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
+    #   true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters
+    #   A list of input parameters for the stack set template.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] capabilities
+    #   A list of values that you must specify before AWS CloudFormation can
+    #   create certain stack sets. Some stack set templates might include
+    #   resources that can affect permissions in your AWS account—for
+    #   example, by creating new AWS Identity and Access Management (IAM)
+    #   users. For those stack sets, you must explicitly acknowledge their
+    #   capabilities by specifying this parameter.
+    #
+    #   The only valid values are CAPABILITY\_IAM and
+    #   CAPABILITY\_NAMED\_IAM. The following resources require you to
+    #   specify this parameter:
+    #
+    #   * AWS::IAM::AccessKey
+    #
+    #   * AWS::IAM::Group
+    #
+    #   * AWS::IAM::InstanceProfile
+    #
+    #   * AWS::IAM::Policy
+    #
+    #   * AWS::IAM::Role
+    #
+    #   * AWS::IAM::User
+    #
+    #   * AWS::IAM::UserToGroupAddition
+    #
+    #   If your stack template contains these resources, we recommend that
+    #   you review all permissions that are associated with them and edit
+    #   their permissions if necessary.
+    #
+    #   If you have IAM resources, you can specify either capability. If you
+    #   have IAM resources with custom names, you must specify
+    #   CAPABILITY\_NAMED\_IAM. If you don't specify this parameter, this
+    #   action returns an `InsufficientCapabilities` error.
+    #
+    #   For more information, see [Acknowledging IAM Resources in AWS
+    #   CloudFormation Templates.][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to associate with this stack set and the stacks
+    #   created from it. AWS CloudFormation also propagates these tags to
+    #   supported resources that are created in the stacks. You can specify
+    #   a maximum number of 50 tags.
+    #
+    #   If you specify tags for this parameter, those tags replace any list
+    #   of tags that are currently associated with this stack set. This
+    #   means:
+    #
+    #   * If you don't specify this parameter, AWS CloudFormation doesn't
+    #     modify the stack's tags.
+    #
+    #   * If you specify *any* tags using this parameter, you must specify
+    #     *all* the tags that you want associated with this stack set, even
+    #     tags you've specifed before (for example, when creating the stack
+    #     set or during a previous update of the stack set.). Any tags that
+    #     you don't include in the updated list of tags are removed from
+    #     the stack set, and therefore from the stacks and resources as
+    #     well.
+    #
+    #   * If you specify an empty value, AWS CloudFormation removes all
+    #     currently associated tags.
+    #
+    #   If you specify new tags as part of an `UpdateStackSet` action, AWS
+    #   CloudFormation checks to see if you have the required IAM permission
+    #   to tag resources. If you omit tags that are currently associated
+    #   with the stack set from the list of tags you specify, AWS
+    #   CloudFormation assumes that you want to remove those tags from the
+    #   stack set, and checks to see if you have permission to untag
+    #   resources. If you don't have the necessary permission(s), the
+    #   entire `UpdateStackSet` action fails with an `access denied` error,
+    #   and the stack set is not updated.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] operation_preferences
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
+    #   @return [Types::StackSetOperationPreferences]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique ID for this stack set operation.
+    #
+    #   The operation ID also functions as an idempotency token, to ensure
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
+    #   If you don't specify an operation ID, AWS CloudFormation generates
+    #   one automatically.
+    #
+    #   Repeating this stack set operation with a new operation ID retries
+    #   all stack instances whose status is `OUTDATED`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetInput AWS API Documentation
+    #
+    class UpdateStackSetInput < Struct.new(
+      :stack_set_name,
+      :description,
+      :template_body,
+      :template_url,
+      :use_previous_template,
+      :parameters,
+      :capabilities,
+      :tags,
+      :operation_preferences,
+      :operation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The unique ID for this stack set operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetOutput AWS API Documentation
+    #
+    class UpdateStackSetOutput < Struct.new(
+      :operation_id)
       include Aws::Structure
     end
 
