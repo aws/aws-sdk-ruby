@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
 2.10.16 (2017-07-24)
 ------------------
 
