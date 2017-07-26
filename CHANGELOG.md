@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Updated the documentation for Amazon DynamoDB.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
+
 2.10.17 (2017-07-25)
 ------------------
 
