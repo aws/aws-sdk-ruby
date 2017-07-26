@@ -138,6 +138,15 @@ module Aws::CloudWatch
     #   * Start time greater than 63 days ago - Round down to the nearest
     #     1-hour clock interval. For example, 12:32:34 is rounded down to
     #     12:00:00.
+    #
+    #   If you set `Period` to 5, 10, or 30, the start time of your request is
+    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
+    #   30-second divisions of a minute. For example, if you make a query at
+    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
+    #   of your request is rounded down and you receive data from 01:05:10 to
+    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
+    #   of data, using a period of 5 seconds, you receive data timestamped
+    #   between 15:02:15 and 15:07:15.
     # @option options [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
     #
@@ -145,12 +154,20 @@ module Aws::CloudWatch
     #   the specified time stamp. The time stamp must be in ISO 8601 UTC
     #   format (for example, 2016-10-10T23:00:00Z).
     # @option options [required, Integer] :period
-    #   The granularity, in seconds, of the returned data points. A period can
-    #   be as short as one minute (60 seconds) and must be a multiple of 60.
+    #   The granularity, in seconds, of the returned data points. For metrics
+    #   with regular resolution, a period can be as short as one minute (60
+    #   seconds) and must be a multiple of 60. For high-resolution metrics
+    #   that are collected at intervals of less than one minute, the period
+    #   can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution
+    #   metrics are those metrics stored by a `PutMetricData` call that
+    #   includes a `StorageResolution` of 1 second.
     #
     #   If the `StartTime` parameter specifies a time stamp that is greater
-    #   than 15 days ago, you must specify the period as follows or no data
+    #   than 3 hours ago, you must specify the period as follows or no data
     #   points in that time range is returned:
+    #
+    #   * Start time between 3 hours and 15 days ago - Use a multiple of 60
+    #     seconds (1 minute).
     #
     #   * Start time between 15 and 63 days ago - Use a multiple of 300
     #     seconds (5 minutes).
@@ -270,9 +287,26 @@ module Aws::CloudWatch
     #   The dimensions for the metric associated with the alarm.
     # @option options [required, Integer] :period
     #   The period, in seconds, over which the specified statistic is applied.
+    #   Valid values are 10, 30, and any multiple of 60.
+    #
+    #   Be sure to specify 10 or 30 only for metrics that are stored by a
+    #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
+    #   Period of 10 or 30 for a metric that does not have sub-minute
+    #   resolution, the alarm still attempts to gather data at the period rate
+    #   that you specify. In this case, it does not receive data for the
+    #   attempts that do not correspond to a one-minute data resolution, and
+    #   the alarm may often lapse into INSUFFICENT\_DATA status. Specifying 10
+    #   or 30 also sets this alarm as a high-resolution alarm, which has a
+    #   higher charge than other alarms. For more information about pricing,
+    #   see [Amazon CloudWatch Pricing][1].
+    #
     #   An alarm's total current evaluation period can be no longer than one
-    #   day, so this number multiplied by `EvaluationPeriods` must be 86,400
-    #   or less.
+    #   day, so `Period` multiplied by `EvaluationPeriods` cannot be more than
+    #   86,400 seconds.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
     # @option options [String] :unit
     #   The unit of measure for the statistic. For example, the units for the
     #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
@@ -287,8 +321,8 @@ module Aws::CloudWatch
     # @option options [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. An alarm's total current evaluation period can be no
-    #   longer than one day, so this number multiplied by `Period` must be
-    #   86,400 or less.
+    #   longer than one day, so this number multiplied by `Period` cannot be
+    #   more than 86,400 seconds.
     # @option options [required, Float] :threshold
     #   The value against which the specified statistic is compared.
     # @option options [required, String] :comparison_operator

@@ -236,6 +236,8 @@ module Aws::EC2
     DescribeDhcpOptionsResult = Shapes::StructureShape.new(name: 'DescribeDhcpOptionsResult')
     DescribeEgressOnlyInternetGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysRequest')
     DescribeEgressOnlyInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysResult')
+    DescribeElasticGpusRequest = Shapes::StructureShape.new(name: 'DescribeElasticGpusRequest')
+    DescribeElasticGpusResult = Shapes::StructureShape.new(name: 'DescribeElasticGpusResult')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
     DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
@@ -395,6 +397,16 @@ module Aws::EC2
     EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
     EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
     EgressOnlyInternetGatewayList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayList')
+    ElasticGpuAssociation = Shapes::StructureShape.new(name: 'ElasticGpuAssociation')
+    ElasticGpuAssociationList = Shapes::ListShape.new(name: 'ElasticGpuAssociationList')
+    ElasticGpuHealth = Shapes::StructureShape.new(name: 'ElasticGpuHealth')
+    ElasticGpuIdSet = Shapes::ListShape.new(name: 'ElasticGpuIdSet')
+    ElasticGpuSet = Shapes::ListShape.new(name: 'ElasticGpuSet')
+    ElasticGpuSpecification = Shapes::StructureShape.new(name: 'ElasticGpuSpecification')
+    ElasticGpuSpecifications = Shapes::ListShape.new(name: 'ElasticGpuSpecifications')
+    ElasticGpuState = Shapes::StringShape.new(name: 'ElasticGpuState')
+    ElasticGpuStatus = Shapes::StringShape.new(name: 'ElasticGpuStatus')
+    ElasticGpus = Shapes::StructureShape.new(name: 'ElasticGpus')
     EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
     EnableVolumeIORequest = Shapes::StructureShape.new(name: 'EnableVolumeIORequest')
     EnableVpcClassicLinkDnsSupportRequest = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkDnsSupportRequest')
@@ -1842,6 +1854,18 @@ module Aws::EC2
     DescribeEgressOnlyInternetGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeEgressOnlyInternetGatewaysResult.struct_class = Types::DescribeEgressOnlyInternetGatewaysResult
 
+    DescribeElasticGpusRequest.add_member(:elastic_gpu_ids, Shapes::ShapeRef.new(shape: ElasticGpuIdSet, location_name: "ElasticGpuId"))
+    DescribeElasticGpusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeElasticGpusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeElasticGpusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeElasticGpusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeElasticGpusRequest.struct_class = Types::DescribeElasticGpusRequest
+
+    DescribeElasticGpusResult.add_member(:elastic_gpu_set, Shapes::ShapeRef.new(shape: ElasticGpuSet, location_name: "elasticGpuSet"))
+    DescribeElasticGpusResult.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeElasticGpusResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeElasticGpusResult.struct_class = Types::DescribeElasticGpusResult
+
     DescribeExportTasksRequest.add_member(:export_task_ids, Shapes::ShapeRef.new(shape: ExportTaskIdStringList, location_name: "exportTaskId"))
     DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
 
@@ -2569,6 +2593,34 @@ module Aws::EC2
 
     EgressOnlyInternetGatewayList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGateway, location_name: "item")
 
+    ElasticGpuAssociation.add_member(:elastic_gpu_id, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuId"))
+    ElasticGpuAssociation.add_member(:elastic_gpu_association_id, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuAssociationId"))
+    ElasticGpuAssociation.add_member(:elastic_gpu_association_state, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuAssociationState"))
+    ElasticGpuAssociation.add_member(:elastic_gpu_association_time, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuAssociationTime"))
+    ElasticGpuAssociation.struct_class = Types::ElasticGpuAssociation
+
+    ElasticGpuAssociationList.member = Shapes::ShapeRef.new(shape: ElasticGpuAssociation, location_name: "item")
+
+    ElasticGpuHealth.add_member(:status, Shapes::ShapeRef.new(shape: ElasticGpuStatus, location_name: "status"))
+    ElasticGpuHealth.struct_class = Types::ElasticGpuHealth
+
+    ElasticGpuIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    ElasticGpuSet.member = Shapes::ShapeRef.new(shape: ElasticGpus)
+
+    ElasticGpuSpecification.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    ElasticGpuSpecification.struct_class = Types::ElasticGpuSpecification
+
+    ElasticGpuSpecifications.member = Shapes::ShapeRef.new(shape: ElasticGpuSpecification, location_name: "item")
+
+    ElasticGpus.add_member(:elastic_gpu_id, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuId"))
+    ElasticGpus.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ElasticGpus.add_member(:elastic_gpu_type, Shapes::ShapeRef.new(shape: String, location_name: "elasticGpuType"))
+    ElasticGpus.add_member(:elastic_gpu_health, Shapes::ShapeRef.new(shape: ElasticGpuHealth, location_name: "elasticGpuHealth"))
+    ElasticGpus.add_member(:elastic_gpu_state, Shapes::ShapeRef.new(shape: ElasticGpuState, location_name: "elasticGpuState"))
+    ElasticGpus.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    ElasticGpus.struct_class = Types::ElasticGpus
+
     EnableVgwRoutePropagationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GatewayId"))
     EnableVgwRoutePropagationRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RouteTableId"))
     EnableVgwRoutePropagationRequest.struct_class = Types::EnableVgwRoutePropagationRequest
@@ -3024,6 +3076,7 @@ module Aws::EC2
     Instance.add_member(:hypervisor, Shapes::ShapeRef.new(shape: HypervisorType, location_name: "hypervisor"))
     Instance.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfile, location_name: "iamInstanceProfile"))
     Instance.add_member(:instance_lifecycle, Shapes::ShapeRef.new(shape: InstanceLifecycleType, location_name: "instanceLifecycle"))
+    Instance.add_member(:elastic_gpu_associations, Shapes::ShapeRef.new(shape: ElasticGpuAssociationList, location_name: "elasticGpuAssociationSet"))
     Instance.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceList, location_name: "networkInterfaceSet"))
     Instance.add_member(:root_device_name, Shapes::ShapeRef.new(shape: String, location_name: "rootDeviceName"))
     Instance.add_member(:root_device_type, Shapes::ShapeRef.new(shape: DeviceType, location_name: "rootDeviceType"))
@@ -4134,6 +4187,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "instanceInitiatedShutdownBehavior"))
     RunInstancesRequest.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "networkInterface"))
     RunInstancesRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    RunInstancesRequest.add_member(:elastic_gpu_specification, Shapes::ShapeRef.new(shape: ElasticGpuSpecifications, location_name: "ElasticGpuSpecification"))
     RunInstancesRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
@@ -5635,6 +5689,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysResult)
+      end)
+
+      api.add_operation(:describe_elastic_gpus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeElasticGpus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeElasticGpusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeElasticGpusResult)
       end)
 
       api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|

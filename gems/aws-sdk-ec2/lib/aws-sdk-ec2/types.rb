@@ -5831,6 +5831,97 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeElasticGpusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         elastic_gpu_ids: ["String"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] elastic_gpu_ids
+    #   One or more Elastic GPU IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `availability-zone` - The Availability Zone in which the Elastic
+    #     GPU resides.
+    #
+    #   * `elastic-gpu-health` - The status of the Elastic GPU (`OK` \|
+    #     `IMPAIRED`).
+    #
+    #   * `elastic-gpu-state` - The state of the Elastic GPU (`ATTACHED`).
+    #
+    #   * `elastic-gpu-type` - The type of Elastic GPU; for example,
+    #     `eg1.medium`.
+    #
+    #   * `instance-id` - The ID of the instance to which the Elastic GPU is
+    #     associated.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 5 and 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpusRequest AWS API Documentation
+    #
+    class DescribeElasticGpusRequest < Struct.new(
+      :elastic_gpu_ids,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] elastic_gpu_set
+    #   Information about the Elastic GPUs.
+    #   @return [Array<Types::ElasticGpus>]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of items to return. If the total number of items
+    #   available is more than the value specified in max-items then a
+    #   Next-Token will be provided in the output that you can use to resume
+    #   pagination.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpusResult AWS API Documentation
+    #
+    class DescribeElasticGpusResult < Struct.new(
+      :elastic_gpu_set,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeExportTasks.
     #
     # @note When making an API call, you may pass DescribeExportTasksRequest
@@ -12149,6 +12240,106 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the association between an instance and an Elastic GPU.
+    #
+    # @!attribute [rw] elastic_gpu_id
+    #   The ID of the Elastic GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_gpu_association_id
+    #   The ID of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_gpu_association_state
+    #   The state of the association between the instance and the Elastic
+    #   GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_gpu_association_time
+    #   The time the Elastic GPU was associated with the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuAssociation AWS API Documentation
+    #
+    class ElasticGpuAssociation < Struct.new(
+      :elastic_gpu_id,
+      :elastic_gpu_association_id,
+      :elastic_gpu_association_state,
+      :elastic_gpu_association_time)
+      include Aws::Structure
+    end
+
+    # Describes the status of an Elastic GPU.
+    #
+    # @!attribute [rw] status
+    #   The health status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuHealth AWS API Documentation
+    #
+    class ElasticGpuHealth < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # A specification for an Elastic GPU.
+    #
+    # @note When making an API call, you may pass ElasticGpuSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of Elastic GPU.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecification AWS API Documentation
+    #
+    class ElasticGpuSpecification < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes an Elastic GPU.
+    #
+    # @!attribute [rw] elastic_gpu_id
+    #   The ID of the Elastic GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in the which the Elastic GPU resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_gpu_type
+    #   The type of Elastic GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] elastic_gpu_health
+    #   The status of the Elastic GPU.
+    #   @return [Types::ElasticGpuHealth]
+    #
+    # @!attribute [rw] elastic_gpu_state
+    #   The state of the Elastic GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance to which the Elastic GPU is attached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpus AWS API Documentation
+    #
+    class ElasticGpus < Struct.new(
+      :elastic_gpu_id,
+      :availability_zone,
+      :elastic_gpu_type,
+      :elastic_gpu_health,
+      :elastic_gpu_state,
+      :instance_id)
+      include Aws::Structure
+    end
+
     # Contains the parameters for EnableVgwRoutePropagation.
     #
     # @note When making an API call, you may pass EnableVgwRoutePropagationRequest
@@ -14542,6 +14733,10 @@ module Aws::EC2
     #   Indicates whether this is a Spot instance or a Scheduled Instance.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_gpu_associations
+    #   The Elastic GPU associated with the instance.
+    #   @return [Array<Types::ElasticGpuAssociation>]
+    #
     # @!attribute [rw] network_interfaces
     #   \[EC2-VPC\] One or more network interfaces for the instance.
     #   @return [Array<Types::InstanceNetworkInterface>]
@@ -14624,6 +14819,7 @@ module Aws::EC2
       :hypervisor,
       :iam_instance_profile,
       :instance_lifecycle,
+      :elastic_gpu_associations,
       :network_interfaces,
       :root_device_name,
       :root_device_type,
@@ -20738,6 +20934,11 @@ module Aws::EC2
     #           },
     #         ],
     #         private_ip_address: "String",
+    #         elastic_gpu_specification: [
+    #           {
+    #             type: "String", # required
+    #           },
+    #         ],
     #         tag_specifications: [
     #           {
     #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -20971,6 +21172,10 @@ module Aws::EC2
     #   more than one instance in the request.
     #   @return [String]
     #
+    # @!attribute [rw] elastic_gpu_specification
+    #   An Elastic GPU to associate with the instance.
+    #   @return [Array<Types::ElasticGpuSpecification>]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all
@@ -21005,6 +21210,7 @@ module Aws::EC2
       :instance_initiated_shutdown_behavior,
       :network_interfaces,
       :private_ip_address,
+      :elastic_gpu_specification,
       :tag_specifications)
       include Aws::Structure
     end

@@ -179,7 +179,7 @@ module Aws::CloudWatch
     # Used only for alarms based on percentiles. If `ignore`, the alarm
     # state does not change during periods with too few data points to be
     # statistically significant. If `evaluate` or this parameter is not
-    # used, the alarm will always be evaluated and possibly change state no
+    # used, the alarm is always evaluated and possibly changes state no
     # matter how many data points are available.
     # @return [String]
     def evaluate_low_sample_count_percentile

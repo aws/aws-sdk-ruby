@@ -7251,6 +7251,89 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the Elastic GPUs associated with your instances. For more
+    # information about Elastic GPUs, see [Amazon EC2 Elastic GPUs][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-gpus.html
+    #
+    # @option params [Array<String>] :elastic_gpu_ids
+    #   One or more Elastic GPU IDs.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `availability-zone` - The Availability Zone in which the Elastic GPU
+    #     resides.
+    #
+    #   * `elastic-gpu-health` - The status of the Elastic GPU (`OK` \|
+    #     `IMPAIRED`).
+    #
+    #   * `elastic-gpu-state` - The state of the Elastic GPU (`ATTACHED`).
+    #
+    #   * `elastic-gpu-type` - The type of Elastic GPU; for example,
+    #     `eg1.medium`.
+    #
+    #   * `instance-id` - The ID of the instance to which the Elastic GPU is
+    #     associated.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. This value can be between 5 and 1000.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::DescribeElasticGpusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeElasticGpusResult#elastic_gpu_set #elastic_gpu_set} => Array&lt;Types::ElasticGpus&gt;
+    #   * {Types::DescribeElasticGpusResult#max_results #max_results} => Integer
+    #   * {Types::DescribeElasticGpusResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_elastic_gpus({
+    #     elastic_gpu_ids: ["String"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.elastic_gpu_set #=> Array
+    #   resp.elastic_gpu_set[0].elastic_gpu_id #=> String
+    #   resp.elastic_gpu_set[0].availability_zone #=> String
+    #   resp.elastic_gpu_set[0].elastic_gpu_type #=> String
+    #   resp.elastic_gpu_set[0].elastic_gpu_health.status #=> String, one of "OK", "IMPAIRED"
+    #   resp.elastic_gpu_set[0].elastic_gpu_state #=> String, one of "ATTACHED"
+    #   resp.elastic_gpu_set[0].instance_id #=> String
+    #   resp.max_results #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpus AWS API Documentation
+    #
+    # @overload describe_elastic_gpus(params = {})
+    # @param [Hash] params ({})
+    def describe_elastic_gpus(params = {}, options = {})
+      req = build_request(:describe_elastic_gpus, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your export tasks.
     #
     # @option params [Array<String>] :export_task_ids
@@ -9009,6 +9092,11 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].iam_instance_profile.arn #=> String
     #   resp.reservations[0].instances[0].iam_instance_profile.id #=> String
     #   resp.reservations[0].instances[0].instance_lifecycle #=> String, one of "spot", "scheduled"
+    #   resp.reservations[0].instances[0].elastic_gpu_associations #=> Array
+    #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_id #=> String
+    #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
+    #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
+    #   resp.reservations[0].instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
     #   resp.reservations[0].instances[0].network_interfaces #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -19891,6 +19979,9 @@ module Aws::EC2
     #   specification. You cannot specify this option if you're launching
     #   more than one instance in the request.
     #
+    # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
+    #   An Elastic GPU to associate with the instance.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all instances
@@ -19986,6 +20077,11 @@ module Aws::EC2
     #       },
     #     ],
     #     private_ip_address: "String",
+    #     elastic_gpu_specification: [
+    #       {
+    #         type: "String", # required
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -20047,6 +20143,11 @@ module Aws::EC2
     #   resp.instances[0].iam_instance_profile.arn #=> String
     #   resp.instances[0].iam_instance_profile.id #=> String
     #   resp.instances[0].instance_lifecycle #=> String, one of "spot", "scheduled"
+    #   resp.instances[0].elastic_gpu_associations #=> Array
+    #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_id #=> String
+    #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_id #=> String
+    #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_state #=> String
+    #   resp.instances[0].elastic_gpu_associations[0].elastic_gpu_association_time #=> String
     #   resp.instances[0].network_interfaces #=> Array
     #   resp.instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].association.public_dns_name #=> String
@@ -20664,7 +20765,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc13'
+      context[:gem_version] = '1.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 

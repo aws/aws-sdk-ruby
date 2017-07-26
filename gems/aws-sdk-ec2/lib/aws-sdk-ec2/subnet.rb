@@ -215,6 +215,11 @@ module Aws::EC2
     #       },
     #     ],
     #     private_ip_address: "String",
+    #     elastic_gpu_specification: [
+    #       {
+    #         type: "String", # required
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
@@ -394,6 +399,8 @@ module Aws::EC2
     #   private IP address as the primary IP address in a network interface
     #   specification. You cannot specify this option if you're launching
     #   more than one instance in the request.
+    # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
+    #   An Elastic GPU to associate with the instance.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all instances

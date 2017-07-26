@@ -511,27 +511,12 @@ module Aws::CloudWatch
 
     # Gets statistics for the specified metric.
     #
-    # Amazon CloudWatch retains metric data as follows:
-    #
-    # * Data points with a period of 60 seconds (1-minute) are available for
-    #   15 days
-    #
-    # * Data points with a period of 300 seconds (5-minute) are available
-    #   for 63 days
-    #
-    # * Data points with a period of 3600 seconds (1 hour) are available for
-    #   455 days (15 months)
-    #
-    # CloudWatch started retaining 5-minute and 1-hour metric data as of
-    # July 9, 2016.
-    #
     # The maximum number of data points returned from a single call is
     # 1,440. If you request more than 1,440 data points, CloudWatch returns
     # an error. To reduce the number of data points, you can narrow the
     # specified time range and make multiple requests across adjacent time
-    # ranges, or you can increase the specified period. A period can be as
-    # short as one minute (60 seconds). Data points are not returned in
-    # chronological order.
+    # ranges, or you can increase the specified period. Data points are not
+    # returned in chronological order.
     #
     # CloudWatch aggregates data points based on the length of the period
     # that you specify. For example, if you request statistics with a
@@ -549,9 +534,36 @@ module Aws::CloudWatch
     #
     # * The Min and the Max values of the statistic set are equal.
     #
-    # For a list of metrics and dimensions supported by AWS services, see
-    # the [Amazon CloudWatch Metrics and Dimensions Reference][1] in the
-    # *Amazon CloudWatch User Guide*.
+    # Amazon CloudWatch retains metric data as follows:
+    #
+    # * Data points with a period of less than 60 seconds are available for
+    #   3 hours. These data points are high-resolution metrics and are
+    #   available only for custom metrics that have been defined with a
+    #   `StorageResolution` of 1.
+    #
+    # * Data points with a period of 60 seconds (1-minute) are available for
+    #   15 days.
+    #
+    # * Data points with a period of 300 seconds (5-minute) are available
+    #   for 63 days.
+    #
+    # * Data points with a period of 3600 seconds (1 hour) are available for
+    #   455 days (15 months).
+    #
+    # Data points that are initially published with a shorter period are
+    # aggregated together for long-term storage. For example, if you collect
+    # data using a period of 1 minute, the data remains available for 15
+    # days with 1-minute resolution. After 15 days, this data is still
+    # available, but is aggregated and retrievable only with a resolution of
+    # 5 minutes. After 63 days, the data is further aggregated and is
+    # available with a resolution of 1 hour.
+    #
+    # CloudWatch started retaining 5-minute and 1-hour metric data as of
+    # July 9, 2016.
+    #
+    # For information about metrics and dimensions supported by AWS
+    # services, see the [Amazon CloudWatch Metrics and Dimensions
+    # Reference][1] in the *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -601,6 +613,15 @@ module Aws::CloudWatch
     #     1-hour clock interval. For example, 12:32:34 is rounded down to
     #     12:00:00.
     #
+    #   If you set `Period` to 5, 10, or 30, the start time of your request is
+    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
+    #   30-second divisions of a minute. For example, if you make a query at
+    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
+    #   of your request is rounded down and you receive data from 01:05:10 to
+    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
+    #   of data, using a period of 5 seconds, you receive data timestamped
+    #   between 15:02:15 and 15:07:15.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
     #
@@ -609,12 +630,20 @@ module Aws::CloudWatch
     #   format (for example, 2016-10-10T23:00:00Z).
     #
     # @option params [required, Integer] :period
-    #   The granularity, in seconds, of the returned data points. A period can
-    #   be as short as one minute (60 seconds) and must be a multiple of 60.
+    #   The granularity, in seconds, of the returned data points. For metrics
+    #   with regular resolution, a period can be as short as one minute (60
+    #   seconds) and must be a multiple of 60. For high-resolution metrics
+    #   that are collected at intervals of less than one minute, the period
+    #   can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution
+    #   metrics are those metrics stored by a `PutMetricData` call that
+    #   includes a `StorageResolution` of 1 second.
     #
     #   If the `StartTime` parameter specifies a time stamp that is greater
-    #   than 15 days ago, you must specify the period as follows or no data
+    #   than 3 hours ago, you must specify the period as follows or no data
     #   points in that time range is returned:
+    #
+    #   * Start time between 3 hours and 15 days ago - Use a multiple of 60
+    #     seconds (1 minute).
     #
     #   * Start time between 15 and 63 days ago - Use a multiple of 300
     #     seconds (5 minutes).
@@ -798,15 +827,26 @@ module Aws::CloudWatch
     # You can have up to 500 dashboards per account. All dashboards in your
     # account are global, not region-specific.
     #
-    # To copy an existing dashboard, use `GetDashboard`, and then use the
-    # data returned within `DashboardBody` as the template for the new
-    # dashboard when you call `PutDashboard` to create the copy.
+    # A simple way to create a dashboard using `PutDashboard` is to copy an
+    # existing dashboard. To copy an existing dashboard using the console,
+    # you can load the dashboard and then use the View/edit source command
+    # in the Actions menu to display the JSON block for that dashboard.
+    # Another way to copy a dashboard is to use `GetDashboard`, and then use
+    # the data returned within `DashboardBody` as the template for the new
+    # dashboard when you call `PutDashboard`.
+    #
+    # When you create a dashboard with `PutDashboard`, a good practice is to
+    # add a text widget at the top of the dashboard with a message that the
+    # dashboard was created by script and should not be changed in the
+    # console. This message could also point console users to the location
+    # of the `DashboardBody` script or the CloudFormation template used to
+    # create the dashboard.
     #
     # @option params [String] :dashboard_name
     #   The name of the dashboard. If a dashboard with this name already
     #   exists, this call modifies that dashboard, replacing its current
     #   contents. Otherwise, a new dashboard is created. The maximum length is
-    #   255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "\_".
+    #   255, and valid characters are A-Z, a-z, 0-9, "-", and "\_".
     #
     # @option params [String] :dashboard_body
     #   The detailed information about the dashboard in JSON format, including
@@ -965,9 +1005,26 @@ module Aws::CloudWatch
     #
     # @option params [required, Integer] :period
     #   The period, in seconds, over which the specified statistic is applied.
+    #   Valid values are 10, 30, and any multiple of 60.
+    #
+    #   Be sure to specify 10 or 30 only for metrics that are stored by a
+    #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
+    #   Period of 10 or 30 for a metric that does not have sub-minute
+    #   resolution, the alarm still attempts to gather data at the period rate
+    #   that you specify. In this case, it does not receive data for the
+    #   attempts that do not correspond to a one-minute data resolution, and
+    #   the alarm may often lapse into INSUFFICENT\_DATA status. Specifying 10
+    #   or 30 also sets this alarm as a high-resolution alarm, which has a
+    #   higher charge than other alarms. For more information about pricing,
+    #   see [Amazon CloudWatch Pricing][1].
+    #
     #   An alarm's total current evaluation period can be no longer than one
-    #   day, so this number multiplied by `EvaluationPeriods` must be 86,400
-    #   or less.
+    #   day, so `Period` multiplied by `EvaluationPeriods` cannot be more than
+    #   86,400 seconds.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :unit
     #   The unit of measure for the statistic. For example, the units for the
@@ -984,8 +1041,8 @@ module Aws::CloudWatch
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. An alarm's total current evaluation period can be no
-    #   longer than one day, so this number multiplied by `Period` must be
-    #   86,400 or less.
+    #   longer than one day, so this number multiplied by `Period` cannot be
+    #   more than 86,400 seconds.
     #
     # @option params [required, Float] :threshold
     #   The value against which the specified statistic is compared.
@@ -1204,7 +1261,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

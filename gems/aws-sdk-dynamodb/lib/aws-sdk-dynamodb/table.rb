@@ -369,7 +369,7 @@ module Aws::DynamoDB
     #   for the partition key. For a composite primary key, you must provide
     #   values for both the partition key and the sort key.
     # @option options [Hash<String,Types::ExpectedAttributeValue>] :expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB Developer
     #   Guide*.
     #
@@ -698,7 +698,7 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
     # @option options [Hash<String,Types::ExpectedAttributeValue>] :expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB Developer
     #   Guide*.
     #
@@ -1697,7 +1697,7 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html
     # @option options [Hash<String,Types::ExpectedAttributeValue>] :expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB Developer
     #   Guide*.
     #
@@ -1714,8 +1714,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html
     # @option options [String] :return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
-    #   appeared either before or after they were updated. For `UpdateItem`,
-    #   the valid values are:
+    #   appear before or after they are updated. For `UpdateItem`, the valid
+    #   values are:
     #
     #   * `NONE` - If `ReturnValues` is not specified, or if its value is
     #     `NONE`, then nothing is returned. (This setting is the default for
@@ -1735,9 +1735,9 @@ module Aws::DynamoDB
     #
     #   There is no additional cost associated with requesting a return value
     #   aside from the small network and processing overhead of receiving a
-    #   larger response. No Read Capacity Units are consumed.
+    #   larger response. No read capacity units are consumed.
     #
-    #   Values returned are strongly consistent
+    #   The values returned are strongly consistent.
     # @option options [String] :return_consumed_capacity
     #   Determines the level of detail about provisioned throughput
     #   consumption that is returned in the response:

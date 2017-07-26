@@ -509,7 +509,7 @@ module Aws::DynamoDB
     #     subelement:
     #
     #     * `Key` - A map of primary key attribute values that uniquely
-    #       identify the ! item. Each entry in this map consists of an
+    #       identify the item. Each entry in this map consists of an
     #       attribute name and an attribute value. For each primary key, you
     #       must provide *all* of the key attributes. For example, with a
     #       simple primary key, you only need to provide a value for the
@@ -1332,7 +1332,7 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB
     #   Developer Guide*.
     #
@@ -3094,7 +3094,7 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB
     #   Developer Guide*.
     #
@@ -4879,7 +4879,7 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValueUpdate>]
     #
     # @!attribute [rw] expected
-    #   This is a legacy parameter. Use `ConditionExpresssion` instead. For
+    #   This is a legacy parameter. Use `ConditionExpression` instead. For
     #   more information, see [Expected][1] in the *Amazon DynamoDB
     #   Developer Guide*.
     #
@@ -4900,8 +4900,8 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] return_values
     #   Use `ReturnValues` if you want to get the item attributes as they
-    #   appeared either before or after they were updated. For `UpdateItem`,
-    #   the valid values are:
+    #   appear before or after they are updated. For `UpdateItem`, the valid
+    #   values are:
     #
     #   * `NONE` - If `ReturnValues` is not specified, or if its value is
     #     `NONE`, then nothing is returned. (This setting is the default for
@@ -4921,9 +4921,9 @@ module Aws::DynamoDB
     #
     #   There is no additional cost associated with requesting a return
     #   value aside from the small network and processing overhead of
-    #   receiving a larger response. No Read Capacity Units are consumed.
+    #   receiving a larger response. No read capacity units are consumed.
     #
-    #   Values returned are strongly consistent
+    #   The values returned are strongly consistent.
     #   @return [String]
     #
     # @!attribute [rw] return_consumed_capacity
@@ -5173,10 +5173,13 @@ module Aws::DynamoDB
     # Represents the output of an `UpdateItem` operation.
     #
     # @!attribute [rw] attributes
-    #   A map of attribute values as they appeared before the `UpdateItem`
-    #   operation. This map only appears if `ReturnValues` was specified as
-    #   something other than `NONE` in the request. Each element represents
-    #   one attribute.
+    #   A map of attribute values as they appear before or after the
+    #   `UpdateItem` operation, as determined by the `ReturnValues`
+    #   parameter.
+    #
+    #   The `Attributes` map is only present if `ReturnValues` was specified
+    #   as something other than `NONE` in the request. Each element
+    #   represents one attribute.
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] consumed_capacity

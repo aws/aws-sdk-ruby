@@ -212,6 +212,12 @@ module Aws::EC2
       data.instance_lifecycle
     end
 
+    # The Elastic GPU associated with the instance.
+    # @return [Array<Types::ElasticGpuAssociation>]
+    def elastic_gpu_associations
+      data.elastic_gpu_associations
+    end
+
     # The root device name (for example, `/dev/sda1` or `/dev/xvda`).
     # @return [String]
     def root_device_name
