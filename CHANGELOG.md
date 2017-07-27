@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.19 (2017-07-27)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
