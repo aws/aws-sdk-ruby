@@ -2367,6 +2367,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the parameters for CreateDefaultVpc.
+    #
+    # @note When making an API call, you may pass CreateDefaultVpcRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpcRequest AWS API Documentation
+    #
+    class CreateDefaultVpcRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # Contains the output of CreateDefaultVpc.
+    #
+    # @!attribute [rw] vpc
+    #   Information about the VPC.
+    #   @return [Types::Vpc]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpcResult AWS API Documentation
+    #
+    class CreateDefaultVpcResult < Struct.new(
+      :vpc)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateDhcpOptions.
     #
     # @note When making an API call, you may pass CreateDhcpOptionsRequest

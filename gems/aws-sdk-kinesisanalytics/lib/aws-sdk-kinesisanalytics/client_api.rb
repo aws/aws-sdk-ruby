@@ -130,6 +130,7 @@ module Aws::KinesisAnalytics
     S3ReferenceDataSource = Shapes::StructureShape.new(name: 'S3ReferenceDataSource')
     S3ReferenceDataSourceDescription = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceDescription')
     S3ReferenceDataSourceUpdate = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceUpdate')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SourceSchema = Shapes::StructureShape.new(name: 'SourceSchema')
     StartApplicationRequest = Shapes::StructureShape.new(name: 'StartApplicationRequest')
     StartApplicationResponse = Shapes::StructureShape.new(name: 'StartApplicationResponse')
@@ -533,6 +534,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeValidationException)
       end)
 
       api.add_operation(:add_application_output, Seahorse::Model::Operation.new.tap do |o|
@@ -636,6 +638,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: UnableToDetectSchemaException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|

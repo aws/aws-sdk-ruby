@@ -157,23 +157,24 @@ module Aws::KinesisAnalytics
 
     # Adds a CloudWatch log stream to monitor application configuration
     # errors. For more information about using CloudWatch log streams with
-    # Amazon Kinesis Analytics applications, see [Monitoring Configuration
-    # Errors][1].
+    # Amazon Kinesis Analytics applications, see [Working with Amazon
+    # CloudWatch Logs][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #
     # @option params [required, String] :application_name
-    #   The Amazon Kinesis Analytics application name.
+    #   The Kinesis Analytics application name.
     #
     # @option params [required, Integer] :current_application_version_id
-    #   The version ID of the Amazon Kinesis Analytics application.
+    #   The version ID of the Kinesis Analytics application.
     #
     # @option params [required, Types::CloudWatchLoggingOption] :cloud_watch_logging_option
-    #   Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To
-    #   write application messages to CloudWatch, the IAM role used must have
-    #   the `PutLogEvents` policy action enabled.
+    #   Provides the CloudWatch log stream Amazon Resource Name (ARN) and the
+    #   IAM role ARN. Note: To write application messages to CloudWatch, the
+    #   IAM role that is used must have the `PutLogEvents` policy action
+    #   enabled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -529,12 +530,12 @@ module Aws::KinesisAnalytics
     #
     # @option params [Array<Types::CloudWatchLoggingOption>] :cloud_watch_logging_options
     #   Use this parameter to configure a CloudWatch log stream to monitor
-    #   application configuration errors. For more information, see
-    #   [Monitoring Configuration Errors][1].
+    #   application configuration errors. For more information, see [Working
+    #   with Amazon CloudWatch Logs][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #
     # @option params [String] :application_code
     #   One or more SQL statements that read input data, transform it, and
@@ -679,17 +680,17 @@ module Aws::KinesisAnalytics
 
     # Deletes a CloudWatch log stream from an application. For more
     # information about using CloudWatch log streams with Amazon Kinesis
-    # Analytics applications, see [Monitoring Configuration Errors][1].
+    # Analytics applications, see [Working with Amazon CloudWatch Logs][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #
     # @option params [required, String] :application_name
-    #   The Amazon Kinesis Analytics application name.
+    #   The Kinesis Analytics application name.
     #
     # @option params [required, Integer] :current_application_version_id
-    #   The version ID of the Amazon Kinesis Analytics application.
+    #   The version ID of the Kinesis Analytics application.
     #
     # @option params [required, String] :cloud_watch_logging_option_id
     #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
@@ -1250,7 +1251,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

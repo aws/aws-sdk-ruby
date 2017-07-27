@@ -21,17 +21,18 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] application_name
-    #   The Amazon Kinesis Analytics application name.
+    #   The Kinesis Analytics application name.
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The version ID of the Amazon Kinesis Analytics application.
+    #   The version ID of the Kinesis Analytics application.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_watch_logging_option
-    #   Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To
-    #   write application messages to CloudWatch, the IAM role used must
-    #   have the `PutLogEvents` policy action enabled.
+    #   Provides the CloudWatch log stream Amazon Resource Name (ARN) and
+    #   the IAM role ARN. Note: To write application messages to CloudWatch,
+    #   the IAM role that is used must have the `PutLogEvents` policy action
+    #   enabled.
     #   @return [Types::CloudWatchLoggingOption]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionRequest AWS API Documentation
@@ -301,14 +302,14 @@ module Aws::KinesisAnalytics
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     #
     # @!attribute [rw] cloud_watch_logging_option_descriptions
-    #   Describes the CloudWatch log streams configured to receive
+    #   Describes the CloudWatch log streams that are configured to receive
     #   application messages. For more information about using CloudWatch
-    #   log streams with Amazon Kinesis Analytics applications, see
-    #   [Monitoring Configuration Errors][1].
+    #   log streams with Amazon Kinesis Analytics applications, see [Working
+    #   with Amazon CloudWatch Logs][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
     # @!attribute [rw] application_code
@@ -535,7 +536,7 @@ module Aws::KinesisAnalytics
     end
 
     # Provides a description of CloudWatch logging options, including the
-    # log stream ARN and the role ARN.
+    # log stream Amazon Resource Name (ARN) and the role ARN.
     #
     # @note When making an API call, you may pass CloudWatchLoggingOption
     #   data as a hash:
@@ -551,8 +552,8 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] role_arn
     #   IAM ARN of the role to use to send application messages. Note: To
-    #   write application messages to CloudWatch, the IAM role used must
-    #   have the `PutLogEvents` policy action enabled.
+    #   write application messages to CloudWatch, the IAM role that is used
+    #   must have the `PutLogEvents` policy action enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CloudWatchLoggingOption AWS API Documentation
@@ -743,12 +744,12 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] cloud_watch_logging_options
     #   Use this parameter to configure a CloudWatch log stream to monitor
-    #   application configuration errors. For more information, see
-    #   [Monitoring Configuration Errors][1].
+    #   application configuration errors. For more information, see [Working
+    #   with Amazon CloudWatch Logs][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html
+    #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html
     #   @return [Array<Types::CloudWatchLoggingOption>]
     #
     # @!attribute [rw] application_code
@@ -813,11 +814,11 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] application_name
-    #   The Amazon Kinesis Analytics application name.
+    #   The Kinesis Analytics application name.
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The version ID of the Amazon Kinesis Analytics application.
+    #   The version ID of the Kinesis Analytics application.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_watch_logging_option_id
@@ -1128,6 +1129,9 @@ module Aws::KinesisAnalytics
     #   If the streaming source is an Amazon Kinesis stream, identifies the
     #   stream's Amazon Resource Name (ARN) and an IAM role that enables
     #   Amazon Kinesis Analytics to access the stream on your behalf.
+    #
+    #   Note: Either `KinesisStreamsInput` or `KinesisFirehoseInput` is
+    #   required.
     #   @return [Types::KinesisStreamsInput]
     #
     # @!attribute [rw] kinesis_firehose_input
@@ -1135,6 +1139,9 @@ module Aws::KinesisAnalytics
     #   stream, identifies the Firehose delivery stream's ARN and an IAM
     #   role that enables Amazon Kinesis Analytics to access the stream on
     #   your behalf.
+    #
+    #   Note: Either `KinesisStreamsInput` or `KinesisFirehoseInput` is
+    #   required.
     #   @return [Types::KinesisFirehoseInput]
     #
     # @!attribute [rw] input_parallelism
@@ -1501,12 +1508,6 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] record_row_path
     #   Path to the top-level parent that contains the records.
-    #
-    #   For example, consider the following JSON record:
-    #
-    #   In the `RecordRowPath`, `"$"` refers to the root and path
-    #   `"$.vehicle.Model"` refers to the specific `"Model"` key in the
-    #   JSON.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/JSONMappingParameters AWS API Documentation

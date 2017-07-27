@@ -124,6 +124,8 @@ module Aws::EC2
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CreateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'CreateCustomerGatewayRequest')
     CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
+    CreateDefaultVpcRequest = Shapes::StructureShape.new(name: 'CreateDefaultVpcRequest')
+    CreateDefaultVpcResult = Shapes::StructureShape.new(name: 'CreateDefaultVpcResult')
     CreateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'CreateDhcpOptionsRequest')
     CreateDhcpOptionsResult = Shapes::StructureShape.new(name: 'CreateDhcpOptionsResult')
     CreateEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayRequest')
@@ -1364,6 +1366,12 @@ module Aws::EC2
 
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
     CreateCustomerGatewayResult.struct_class = Types::CreateCustomerGatewayResult
+
+    CreateDefaultVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateDefaultVpcRequest.struct_class = Types::CreateDefaultVpcRequest
+
+    CreateDefaultVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
+    CreateDefaultVpcResult.struct_class = Types::CreateDefaultVpcResult
 
     CreateDhcpOptionsRequest.add_member(:dhcp_configurations, Shapes::ShapeRef.new(shape: NewDhcpConfigurationList, required: true, location_name: "dhcpConfiguration"))
     CreateDhcpOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5169,6 +5177,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCustomerGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCustomerGatewayResult)
+      end)
+
+      api.add_operation(:create_default_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDefaultVpc"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDefaultVpcRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDefaultVpcResult)
       end)
 
       api.add_operation(:create_dhcp_options, Seahorse::Model::Operation.new.tap do |o|

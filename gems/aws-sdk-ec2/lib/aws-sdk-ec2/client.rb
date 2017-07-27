@@ -2416,6 +2416,68 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a default VPC with a size `/16` IPv4 CIDR block and a default
+    # subnet in each Availability Zone. For more information about the
+    # components of a default VPC, see [Default VPC and Default Subnets][1]
+    # in the *Amazon Virtual Private Cloud User Guide*. You cannot specify
+    # the components of the default VPC yourself.
+    #
+    # You can create a default VPC if you deleted your previous default VPC.
+    # You cannot have more than one default VPC per region.
+    #
+    # If your account supports EC2-Classic, you cannot use this action to
+    # create a default VPC in a region that supports EC2-Classic. If you
+    # want a default VPC in a region that supports EC2-Classic, see "I
+    # really want a default VPC for my existing EC2 account. Is that
+    # possible?" in the [Default VPCs FAQ][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html
+    # [2]: http://aws.amazon.com/vpc/faqs/#Default_VPCs
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateDefaultVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDefaultVpcResult#vpc #vpc} => Types::Vpc
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_default_vpc({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc.cidr_block #=> String
+    #   resp.vpc.dhcp_options_id #=> String
+    #   resp.vpc.state #=> String, one of "pending", "available"
+    #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpc.is_default #=> Boolean
+    #   resp.vpc.tags #=> Array
+    #   resp.vpc.tags[0].key #=> String
+    #   resp.vpc.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpc AWS API Documentation
+    #
+    # @overload create_default_vpc(params = {})
+    # @param [Hash] params ({})
+    def create_default_vpc(params = {}, options = {})
+      req = build_request(:create_default_vpc, params)
+      req.send_request(options)
+    end
+
     # Creates a set of DHCP options for your VPC. After creating the set,
     # you must associate it with the VPC, causing all existing and new
     # instances that you launch in the VPC to use this set of DHCP options.
@@ -20765,7 +20827,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc14'
+      context[:gem_version] = '1.0.0.rc15'
       Seahorse::Client::Request.new(handlers, context)
     end
 
