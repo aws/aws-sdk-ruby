@@ -1,10 +1,10 @@
 # Upgrade Notes
 
-## `aws-sdk-resources` - v3.0.0
+## `aws-sdk` - v3.0.0
 
 * An equivalent gem of `aws-sdk` that provides resource oriented interfaces and
-  other higher-level abstractions for many AWS services. Please use `aws-sdk`
-  gem or individual service gem instead.
+  other higher-level abstractions for many AWS services. Please see the
+  `V3_UPGRADING_GUIDE.md` guide for upgrading details.
 
 ## `aws-sdk-core` - v3.0.0
 
