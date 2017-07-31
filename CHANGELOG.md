@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.20 (2017-07-31)
+------------------
+
 * Feature - Aws::CodeStar - Updated the API, and documentation for AWS CodeStar.
 
 * Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
