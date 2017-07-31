@@ -167,7 +167,7 @@ module Aws::CodeStar
     #
     # @option params [required, String] :user_arn
     #   The Amazon Resource Name (ARN) for the IAM user you want to add to the
-    #   DevHub project.
+    #   AWS CodeStar project.
     #
     # @option params [required, String] :project_role
     #   The AWS CodeStar project role that will apply to this user. This role
@@ -821,7 +821,7 @@ module Aws::CodeStar
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestar'
-      context[:gem_version] = '1.0.0.rc7'
+      context[:gem_version] = '1.0.0.rc8'
       Seahorse::Client::Request.new(handlers, context)
     end
 

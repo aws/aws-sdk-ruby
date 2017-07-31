@@ -907,7 +907,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Delete a list of parameters.
+    # Delete a list of parameters. This API is used to delete parameters by
+    # using the Amazon EC2 console.
     #
     # @option params [required, Array<String>] :names
     #   The names of the parameters to delete.
@@ -1281,7 +1282,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].automation_execution_id #=> String
     #   resp.automation_execution_metadata_list[0].document_name #=> String
     #   resp.automation_execution_metadata_list[0].document_version #=> String
-    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.automation_execution_metadata_list[0].execution_start_time #=> Time
     #   resp.automation_execution_metadata_list[0].execution_end_time #=> Time
     #   resp.automation_execution_metadata_list[0].executed_by #=> String
@@ -2247,6 +2248,15 @@ module Aws::SSM
 
     # Get information about a parameter.
     #
+    # Request results are returned on a best-effort basis. If you specify
+    # `MaxResults` in the request, the response includes information up to
+    # the limit specified. The number of items returned, however, can be
+    # between zero and the value of `MaxResults`. If the service reaches an
+    # internal limit while processing the results, it stops the operation
+    # and returns the matching values up to that point and a `NextToken`.
+    # You can specify the `NextToken` in a subsequent call to get the next
+    # set of results.
+    #
     # @option params [Array<Types::ParametersFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
@@ -2477,13 +2487,13 @@ module Aws::SSM
     #   resp.automation_execution.document_version #=> String
     #   resp.automation_execution.execution_start_time #=> Time
     #   resp.automation_execution.execution_end_time #=> Time
-    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.automation_execution.step_executions #=> Array
     #   resp.automation_execution.step_executions[0].step_name #=> String
     #   resp.automation_execution.step_executions[0].action #=> String
     #   resp.automation_execution.step_executions[0].execution_start_time #=> Time
     #   resp.automation_execution.step_executions[0].execution_end_time #=> Time
-    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.automation_execution.step_executions[0].response_code #=> String
     #   resp.automation_execution.step_executions[0].inputs #=> Hash
     #   resp.automation_execution.step_executions[0].inputs["String"] #=> String
@@ -3082,6 +3092,15 @@ module Aws::SSM
 
     # Retrieve parameters in a specific hierarchy. For more information, see
     # [Working with Systems Manager Parameters][1].
+    #
+    # Request results are returned on a best-effort basis. If you specify
+    # `MaxResults` in the request, the response includes information up to
+    # the limit specified. The number of items returned, however, can be
+    # between zero and the value of `MaxResults`. If the service reaches an
+    # internal limit while processing the results, it stops the operation
+    # and returns the matching values up to that point and a `NextToken`.
+    # You can specify the `NextToken` in a subsequent call to get the next
+    # set of results.
     #
     #
     #
@@ -4123,6 +4142,42 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Sends a signal to an Automation execution to change the current
+    # behavior or status of the execution.
+    #
+    # @option params [required, String] :automation_execution_id
+    #   The unique identifier for an existing Automation execution that you
+    #   want to send the signal to.
+    #
+    # @option params [required, String] :signal_type
+    #   The type of signal. Valid signal types include the following: Approve
+    #   and Reject
+    #
+    # @option params [Hash<String,Array>] :payload
+    #   The data sent with the signal. The data schema depends on the type of
+    #   signal used in the request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_automation_signal({
+    #     automation_execution_id: "AutomationExecutionId", # required
+    #     signal_type: "Approve", # required, accepts Approve, Reject
+    #     payload: {
+    #       "AutomationParameterKey" => ["AutomationParameterValue"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignal AWS API Documentation
+    #
+    # @overload send_automation_signal(params = {})
+    # @param [Hash] params ({})
+    def send_automation_signal(params = {}, options = {})
+      req = build_request(:send_automation_signal, params)
+      req.send_request(options)
+    end
+
     # Executes commands on one or more managed instances.
     #
     # @option params [Array<String>] :instance_ids
@@ -4828,7 +4883,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

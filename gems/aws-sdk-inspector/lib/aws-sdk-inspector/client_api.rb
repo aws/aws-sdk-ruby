@@ -174,6 +174,7 @@ module Aws::Inspector
     SeverityList = Shapes::ListShape.new(name: 'SeverityList')
     StartAssessmentRunRequest = Shapes::StructureShape.new(name: 'StartAssessmentRunRequest')
     StartAssessmentRunResponse = Shapes::StructureShape.new(name: 'StartAssessmentRunResponse')
+    StopAction = Shapes::StringShape.new(name: 'StopAction')
     StopAssessmentRunRequest = Shapes::StructureShape.new(name: 'StopAssessmentRunRequest')
     SubscribeToEventRequest = Shapes::StructureShape.new(name: 'SubscribeToEventRequest')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
@@ -625,6 +626,7 @@ module Aws::Inspector
     StartAssessmentRunResponse.struct_class = Types::StartAssessmentRunResponse
 
     StopAssessmentRunRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
+    StopAssessmentRunRequest.add_member(:stop_action, Shapes::ShapeRef.new(shape: StopAction, location_name: "stopAction"))
     StopAssessmentRunRequest.struct_class = Types::StopAssessmentRunRequest
 
     SubscribeToEventRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
@@ -879,6 +881,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_assessment_runs, Seahorse::Model::Operation.new.tap do |o|
@@ -891,6 +899,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_assessment_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -902,6 +916,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_assessment_templates, Seahorse::Model::Operation.new.tap do |o|
@@ -914,6 +934,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_event_subscriptions, Seahorse::Model::Operation.new.tap do |o|
@@ -926,6 +952,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -938,6 +970,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_rules_packages, Seahorse::Model::Operation.new.tap do |o|
@@ -949,6 +987,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -974,6 +1018,12 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:register_cross_account_access_role, Seahorse::Model::Operation.new.tap do |o|

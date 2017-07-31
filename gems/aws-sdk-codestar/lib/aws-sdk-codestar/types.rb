@@ -31,7 +31,7 @@ module Aws::CodeStar
     #
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) for the IAM user you want to add to
-    #   the DevHub project.
+    #   the AWS CodeStar project.
     #   @return [String]
     #
     # @!attribute [rw] project_role

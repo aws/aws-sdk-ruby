@@ -307,6 +307,7 @@ module Aws::SSM
     InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
     InvalidAllowedPatternException = Shapes::StructureShape.new(name: 'InvalidAllowedPatternException')
     InvalidAutomationExecutionParametersException = Shapes::StructureShape.new(name: 'InvalidAutomationExecutionParametersException')
+    InvalidAutomationSignalException = Shapes::StructureShape.new(name: 'InvalidAutomationSignalException')
     InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
     InvalidDocument = Shapes::StructureShape.new(name: 'InvalidDocument')
     InvalidDocumentContent = Shapes::StructureShape.new(name: 'InvalidDocumentContent')
@@ -579,9 +580,12 @@ module Aws::SSM
     S3OutputUrl = Shapes::StructureShape.new(name: 'S3OutputUrl')
     S3Region = Shapes::StringShape.new(name: 'S3Region')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    SendAutomationSignalRequest = Shapes::StructureShape.new(name: 'SendAutomationSignalRequest')
+    SendAutomationSignalResult = Shapes::StructureShape.new(name: 'SendAutomationSignalResult')
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
     SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
+    SignalType = Shapes::StringShape.new(name: 'SignalType')
     SnapshotDownloadUrl = Shapes::StringShape.new(name: 'SnapshotDownloadUrl')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     StandardErrorContent = Shapes::StringShape.new(name: 'StandardErrorContent')
@@ -2019,6 +2023,13 @@ module Aws::SSM
     S3OutputUrl.add_member(:output_url, Shapes::ShapeRef.new(shape: Url, location_name: "OutputUrl"))
     S3OutputUrl.struct_class = Types::S3OutputUrl
 
+    SendAutomationSignalRequest.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, required: true, location_name: "AutomationExecutionId"))
+    SendAutomationSignalRequest.add_member(:signal_type, Shapes::ShapeRef.new(shape: SignalType, required: true, location_name: "SignalType"))
+    SendAutomationSignalRequest.add_member(:payload, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Payload"))
+    SendAutomationSignalRequest.struct_class = Types::SendAutomationSignalRequest
+
+    SendAutomationSignalResult.struct_class = Types::SendAutomationSignalResult
+
     SendCommandRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "InstanceIds"))
     SendCommandRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     SendCommandRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
@@ -3090,6 +3101,17 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:send_automation_signal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAutomationSignal"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendAutomationSignalRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendAutomationSignalResult)
+        o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAutomationSignalException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

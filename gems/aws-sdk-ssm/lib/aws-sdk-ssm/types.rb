@@ -7290,6 +7290,45 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendAutomationSignalRequest
+    #   data as a hash:
+    #
+    #       {
+    #         automation_execution_id: "AutomationExecutionId", # required
+    #         signal_type: "Approve", # required, accepts Approve, Reject
+    #         payload: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] automation_execution_id
+    #   The unique identifier for an existing Automation execution that you
+    #   want to send the signal to.
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_type
+    #   The type of signal. Valid signal types include the following:
+    #   Approve and Reject
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The data sent with the signal. The data schema depends on the type
+    #   of signal used in the request.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalRequest AWS API Documentation
+    #
+    class SendAutomationSignalRequest < Struct.new(
+      :automation_execution_id,
+      :signal_type,
+      :payload)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalResult AWS API Documentation
+    #
+    class SendAutomationSignalResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass SendCommandRequest
     #   data as a hash:
     #
