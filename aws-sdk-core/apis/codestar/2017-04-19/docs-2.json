@@ -416,7 +416,7 @@
     "UserArn": {
       "base": null,
       "refs": {
-        "AssociateTeamMemberRequest$userArn": "<p>The Amazon Resource Name (ARN) for the IAM user you want to add to the DevHub project.</p>",
+        "AssociateTeamMemberRequest$userArn": "<p>The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.</p>",
         "CreateUserProfileRequest$userArn": "<p>The Amazon Resource Name (ARN) of the user in IAM.</p>",
         "CreateUserProfileResult$userArn": "<p>The Amazon Resource Name (ARN) of the user in IAM.</p>",
         "DeleteUserProfileRequest$userArn": "<p>The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.</p>",

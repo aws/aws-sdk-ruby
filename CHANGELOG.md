@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeStar - Updated the API, and documentation for AWS CodeStar.
+
+* Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.10.19 (2017-07-27)
 ------------------
 
