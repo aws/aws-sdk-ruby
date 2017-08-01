@@ -20,7 +20,9 @@ module Aws::Pinpoint
     ActivitiesResponse = Shapes::StructureShape.new(name: 'ActivitiesResponse')
     ActivityResponse = Shapes::StructureShape.new(name: 'ActivityResponse')
     AddressConfiguration = Shapes::StructureShape.new(name: 'AddressConfiguration')
+    ApplicationResponse = Shapes::StructureShape.new(name: 'ApplicationResponse')
     ApplicationSettingsResource = Shapes::StructureShape.new(name: 'ApplicationSettingsResource')
+    ApplicationsResponse = Shapes::StructureShape.new(name: 'ApplicationsResponse')
     AttributeDimension = Shapes::StructureShape.new(name: 'AttributeDimension')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -32,6 +34,9 @@ module Aws::Pinpoint
     CampaignStatus = Shapes::StringShape.new(name: 'CampaignStatus')
     CampaignsResponse = Shapes::StructureShape.new(name: 'CampaignsResponse')
     ChannelType = Shapes::StringShape.new(name: 'ChannelType')
+    CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
+    CreateAppResponse = Shapes::StructureShape.new(name: 'CreateAppResponse')
+    CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
     CreateImportJobRequest = Shapes::StructureShape.new(name: 'CreateImportJobRequest')
@@ -44,6 +49,8 @@ module Aws::Pinpoint
     DeleteApnsChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsChannelResponse')
     DeleteApnsSandboxChannelRequest = Shapes::StructureShape.new(name: 'DeleteApnsSandboxChannelRequest')
     DeleteApnsSandboxChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsSandboxChannelResponse')
+    DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
+    DeleteAppResponse = Shapes::StructureShape.new(name: 'DeleteAppResponse')
     DeleteCampaignRequest = Shapes::StructureShape.new(name: 'DeleteCampaignRequest')
     DeleteCampaignResponse = Shapes::StructureShape.new(name: 'DeleteCampaignResponse')
     DeleteEmailChannelRequest = Shapes::StructureShape.new(name: 'DeleteEmailChannelRequest')
@@ -80,8 +87,12 @@ module Aws::Pinpoint
     GetApnsChannelResponse = Shapes::StructureShape.new(name: 'GetApnsChannelResponse')
     GetApnsSandboxChannelRequest = Shapes::StructureShape.new(name: 'GetApnsSandboxChannelRequest')
     GetApnsSandboxChannelResponse = Shapes::StructureShape.new(name: 'GetApnsSandboxChannelResponse')
+    GetAppRequest = Shapes::StructureShape.new(name: 'GetAppRequest')
+    GetAppResponse = Shapes::StructureShape.new(name: 'GetAppResponse')
     GetApplicationSettingsRequest = Shapes::StructureShape.new(name: 'GetApplicationSettingsRequest')
     GetApplicationSettingsResponse = Shapes::StructureShape.new(name: 'GetApplicationSettingsResponse')
+    GetAppsRequest = Shapes::StructureShape.new(name: 'GetAppsRequest')
+    GetAppsResponse = Shapes::StructureShape.new(name: 'GetAppsResponse')
     GetCampaignActivitiesRequest = Shapes::StructureShape.new(name: 'GetCampaignActivitiesRequest')
     GetCampaignActivitiesResponse = Shapes::StructureShape.new(name: 'GetCampaignActivitiesResponse')
     GetCampaignRequest = Shapes::StructureShape.new(name: 'GetCampaignRequest')
@@ -123,6 +134,7 @@ module Aws::Pinpoint
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     ListOfActivityResponse = Shapes::ListShape.new(name: 'ListOfActivityResponse')
+    ListOfApplicationResponse = Shapes::ListShape.new(name: 'ListOfApplicationResponse')
     ListOfCampaignResponse = Shapes::ListShape.new(name: 'ListOfCampaignResponse')
     ListOfEndpointBatchItem = Shapes::ListShape.new(name: 'ListOfEndpointBatchItem')
     ListOfImportJobResponse = Shapes::ListShape.new(name: 'ListOfImportJobResponse')
@@ -272,17 +284,26 @@ module Aws::Pinpoint
     AddressConfiguration.add_member(:title_override, Shapes::ShapeRef.new(shape: __string, location_name: "TitleOverride"))
     AddressConfiguration.struct_class = Types::AddressConfiguration
 
+    ApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    ApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    ApplicationResponse.struct_class = Types::ApplicationResponse
+
     ApplicationSettingsResource.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     ApplicationSettingsResource.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
     ApplicationSettingsResource.add_member(:limits, Shapes::ShapeRef.new(shape: CampaignLimits, location_name: "Limits"))
     ApplicationSettingsResource.add_member(:quiet_time, Shapes::ShapeRef.new(shape: QuietTime, location_name: "QuietTime"))
     ApplicationSettingsResource.struct_class = Types::ApplicationSettingsResource
 
+    ApplicationsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfApplicationResponse, location_name: "Item"))
+    ApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ApplicationsResponse.struct_class = Types::ApplicationsResponse
+
     AttributeDimension.add_member(:attribute_type, Shapes::ShapeRef.new(shape: AttributeType, location_name: "AttributeType"))
     AttributeDimension.add_member(:values, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Values"))
     AttributeDimension.struct_class = Types::AttributeDimension
 
     CampaignEmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    CampaignEmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
     CampaignEmailMessage.add_member(:html_body, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlBody"))
     CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     CampaignEmailMessage.struct_class = Types::CampaignEmailMessage
@@ -323,6 +344,19 @@ module Aws::Pinpoint
     CampaignsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfCampaignResponse, location_name: "Item"))
     CampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     CampaignsResponse.struct_class = Types::CampaignsResponse
+
+    CreateAppRequest.add_member(:create_application_request, Shapes::ShapeRef.new(shape: CreateApplicationRequest, required: true, location_name: "CreateApplicationRequest"))
+    CreateAppRequest.struct_class = Types::CreateAppRequest
+    CreateAppRequest[:payload] = :create_application_request
+    CreateAppRequest[:payload_member] = CreateAppRequest.member(:create_application_request)
+
+    CreateAppResponse.add_member(:application_response, Shapes::ShapeRef.new(shape: ApplicationResponse, required: true, location_name: "ApplicationResponse"))
+    CreateAppResponse.struct_class = Types::CreateAppResponse
+    CreateAppResponse[:payload] = :application_response
+    CreateAppResponse[:payload_member] = CreateAppResponse.member(:application_response)
+
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateCampaignRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     CreateCampaignRequest.add_member(:write_campaign_request, Shapes::ShapeRef.new(shape: WriteCampaignRequest, required: true, location_name: "WriteCampaignRequest"))
@@ -385,6 +419,14 @@ module Aws::Pinpoint
     DeleteApnsSandboxChannelResponse.struct_class = Types::DeleteApnsSandboxChannelResponse
     DeleteApnsSandboxChannelResponse[:payload] = :apns_sandbox_channel_response
     DeleteApnsSandboxChannelResponse[:payload_member] = DeleteApnsSandboxChannelResponse.member(:apns_sandbox_channel_response)
+
+    DeleteAppRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteAppRequest.struct_class = Types::DeleteAppRequest
+
+    DeleteAppResponse.add_member(:application_response, Shapes::ShapeRef.new(shape: ApplicationResponse, required: true, location_name: "ApplicationResponse"))
+    DeleteAppResponse.struct_class = Types::DeleteAppResponse
+    DeleteAppResponse[:payload] = :application_response
+    DeleteAppResponse[:payload_member] = DeleteAppResponse.member(:application_response)
 
     DeleteCampaignRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteCampaignRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "campaign-id"))
@@ -590,6 +632,14 @@ module Aws::Pinpoint
     GetApnsSandboxChannelResponse[:payload] = :apns_sandbox_channel_response
     GetApnsSandboxChannelResponse[:payload_member] = GetApnsSandboxChannelResponse.member(:apns_sandbox_channel_response)
 
+    GetAppRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetAppRequest.struct_class = Types::GetAppRequest
+
+    GetAppResponse.add_member(:application_response, Shapes::ShapeRef.new(shape: ApplicationResponse, required: true, location_name: "ApplicationResponse"))
+    GetAppResponse.struct_class = Types::GetAppResponse
+    GetAppResponse[:payload] = :application_response
+    GetAppResponse[:payload_member] = GetAppResponse.member(:application_response)
+
     GetApplicationSettingsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetApplicationSettingsRequest.struct_class = Types::GetApplicationSettingsRequest
 
@@ -597,6 +647,15 @@ module Aws::Pinpoint
     GetApplicationSettingsResponse.struct_class = Types::GetApplicationSettingsResponse
     GetApplicationSettingsResponse[:payload] = :application_settings_resource
     GetApplicationSettingsResponse[:payload_member] = GetApplicationSettingsResponse.member(:application_settings_resource)
+
+    GetAppsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetAppsRequest.add_member(:token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "token"))
+    GetAppsRequest.struct_class = Types::GetAppsRequest
+
+    GetAppsResponse.add_member(:applications_response, Shapes::ShapeRef.new(shape: ApplicationsResponse, required: true, location_name: "ApplicationsResponse"))
+    GetAppsResponse.struct_class = Types::GetAppsResponse
+    GetAppsResponse[:payload] = :applications_response
+    GetAppsResponse[:payload_member] = GetAppsResponse.member(:applications_response)
 
     GetCampaignActivitiesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetCampaignActivitiesRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "campaign-id"))
@@ -801,6 +860,8 @@ module Aws::Pinpoint
 
     ListOfActivityResponse.member = Shapes::ShapeRef.new(shape: ActivityResponse)
 
+    ListOfApplicationResponse.member = Shapes::ShapeRef.new(shape: ApplicationResponse)
+
     ListOfCampaignResponse.member = Shapes::ShapeRef.new(shape: CampaignResponse)
 
     ListOfEndpointBatchItem.member = Shapes::ShapeRef.new(shape: EndpointBatchItem)
@@ -843,6 +904,7 @@ module Aws::Pinpoint
     Message.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
     Message.add_member(:json_body, Shapes::ShapeRef.new(shape: __string, location_name: "JsonBody"))
     Message.add_member(:media_url, Shapes::ShapeRef.new(shape: __string, location_name: "MediaUrl"))
+    Message.add_member(:raw_content, Shapes::ShapeRef.new(shape: __string, location_name: "RawContent"))
     Message.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
     Message.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     Message.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
@@ -1154,6 +1216,20 @@ module Aws::Pinpoint
         "signingName" => "mobiletargeting",
       }
 
+      api.add_operation(:create_app, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApp"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:create_campaign, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCampaign"
         o.http_method = "POST"
@@ -1216,6 +1292,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/apns_sandbox"
         o.input = Shapes::ShapeRef.new(shape: DeleteApnsSandboxChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApnsSandboxChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_app, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApp"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1336,12 +1426,40 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_app, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApp"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}"
+        o.input = Shapes::ShapeRef.new(shape: GetAppRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAppResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_application_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetApplicationSettings"
         o.http_method = "GET"
         o.http_request_uri = "/v1/apps/{application-id}/settings"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_apps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApps"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps"
+        o.input = Shapes::ShapeRef.new(shape: GetAppsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAppsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

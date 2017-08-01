@@ -289,7 +289,7 @@ module Aws::SES
     #         dimension_configurations: [ # required
     #           {
     #             dimension_name: "DimensionName", # required
-    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #             default_dimension_value: "DefaultDimensionValue", # required
     #           },
     #         ],
@@ -322,7 +322,7 @@ module Aws::SES
     #
     #       {
     #         dimension_name: "DimensionName", # required
-    #         dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #         dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #         default_dimension_value: "DefaultDimensionValue", # required
     #       }
     #
@@ -447,7 +447,7 @@ module Aws::SES
     #         event_destination: { # required
     #           name: "EventDestinationName", # required
     #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -456,10 +456,13 @@ module Aws::SES
     #             dimension_configurations: [ # required
     #               {
     #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #                 default_dimension_value: "DefaultDimensionValue", # required
     #               },
     #             ],
+    #           },
+    #           sns_destination: {
+    #             topic_arn: "AmazonResourceName", # required
     #           },
     #         },
     #       }
@@ -1198,15 +1201,17 @@ module Aws::SES
     # specified email sending events are published.
     #
     # <note markdown="1"> When you create or update an event destination, you must provide one,
-    # and only one, destination. The destination can be either Amazon
-    # CloudWatch or Amazon Kinesis Firehose.
+    # and only one, destination. The destination can be Amazon CloudWatch,
+    # Amazon Kinesis Firehose or Amazon Simple Notification Service (Amazon
+    # SNS).
     #
     #  </note>
     #
     # Event destinations are associated with configuration sets, which
-    # enable you to publish email sending events to Amazon CloudWatch or
-    # Amazon Kinesis Firehose. For information about using configuration
-    # sets, see the [Amazon SES Developer Guide][1].
+    # enable you to publish email sending events to Amazon CloudWatch,
+    # Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon
+    # SNS). For information about using configuration sets, see the [Amazon
+    # SES Developer Guide][1].
     #
     #
     #
@@ -1218,7 +1223,7 @@ module Aws::SES
     #       {
     #         name: "EventDestinationName", # required
     #         enabled: false,
-    #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+    #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
     #         kinesis_firehose_destination: {
     #           iam_role_arn: "AmazonResourceName", # required
     #           delivery_stream_arn: "AmazonResourceName", # required
@@ -1227,10 +1232,13 @@ module Aws::SES
     #           dimension_configurations: [ # required
     #             {
     #               dimension_name: "DimensionName", # required
-    #               dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #               dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #               default_dimension_value: "DefaultDimensionValue", # required
     #             },
     #           ],
+    #         },
+    #         sns_destination: {
+    #           topic_arn: "AmazonResourceName", # required
     #         },
     #       }
     #
@@ -1267,6 +1275,11 @@ module Aws::SES
     #   destination.
     #   @return [Types::CloudWatchDestination]
     #
+    # @!attribute [rw] sns_destination
+    #   An object that contains the topic ARN associated with an Amazon
+    #   Simple Notification Service (Amazon SNS) event destination.
+    #   @return [Types::SNSDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestination AWS API Documentation
     #
     class EventDestination < Struct.new(
@@ -1274,7 +1287,8 @@ module Aws::SES
       :enabled,
       :matching_event_types,
       :kinesis_firehose_destination,
-      :cloud_watch_destination)
+      :cloud_watch_destination,
+      :sns_destination)
       include Aws::Structure
     end
 
@@ -2336,9 +2350,13 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] data
-    #   The raw data of the message. The client must ensure that the message
-    #   format complies with Internet email standards regarding email header
-    #   fields, MIME types, MIME encoding, and base64 encoding.
+    #   The raw data of the message. This data needs to base64-encoded if
+    #   you are accessing Amazon SES directly through the HTTPS interface.
+    #   If you are accessing Amazon SES using an AWS SDK, the SDK takes care
+    #   of the base 64-encoding for you. In all cases, the client must
+    #   ensure that the message format complies with Internet email
+    #   standards regarding email header fields, MIME types, and MIME
+    #   encoding.
     #
     #   The To:, CC:, and BCC: headers in the raw message can contain a
     #   group list.
@@ -3029,6 +3047,44 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Contains the topic ARN associated with an Amazon Simple Notification
+    # Service (Amazon SNS) event destination.
+    #
+    # Event destinations, such as Amazon SNS, are associated with
+    # configuration sets, which enable you to publish email sending events.
+    # For information about using configuration sets, see the [Amazon SES
+    # Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    #
+    # @note When making an API call, you may pass SNSDestination
+    #   data as a hash:
+    #
+    #       {
+    #         topic_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] topic_arn
+    #   The ARN of the Amazon SNS topic to which you want to publish email
+    #   sending events. An example of an Amazon SNS topic ARN is
+    #   arn:aws:sns:us-west-2:123456789012:MyTopic. For more information
+    #   about Amazon SNS topics, see the [ *Amazon SNS Developer Guide*
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/alpha-docs-aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSDestination AWS API Documentation
+    #
+    class SNSDestination < Struct.new(
+      :topic_arn)
+      include Aws::Structure
+    end
+
     # Represents a request to send a bounce message to the sender of an
     # email you received through Amazon SES.
     #
@@ -3422,9 +3478,13 @@ module Aws::SES
     #
     #   * Must be base64-encoded.
     #
+    #   * Per [RFC 5321][2], the maximum length of each line of text,
+    #     including the &lt;CRLF&gt;, must not exceed 1,000 characters.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
+    #   [2]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #   @return [Types::RawMessage]
     #
     # @!attribute [rw] from_arn
@@ -3943,7 +4003,7 @@ module Aws::SES
     #         event_destination: { # required
     #           name: "EventDestinationName", # required
     #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -3952,10 +4012,13 @@ module Aws::SES
     #             dimension_configurations: [ # required
     #               {
     #                 dimension_name: "DimensionName", # required
-    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #                 default_dimension_value: "DefaultDimensionValue", # required
     #               },
     #             ],
+    #           },
+    #           sns_destination: {
+    #             topic_arn: "AmazonResourceName", # required
     #           },
     #         },
     #       }
@@ -4152,8 +4215,16 @@ module Aws::SES
     # domain to complete domain verification with Amazon SES.
     #
     # @!attribute [rw] verification_token
-    #   A TXT record that must be placed in the DNS settings for the domain,
-    #   in order to complete domain verification.
+    #   A TXT record that you must place in the DNS settings of the domain
+    #   to complete domain verification with Amazon SES.
+    #
+    #   As Amazon SES searches for the TXT record, the domain's
+    #   verification status is "Pending". When Amazon SES detects the
+    #   record, the domain's verification status changes to "Success". If
+    #   Amazon SES is unable to detect the record within 72 hours, the
+    #   domain's verification status changes to "Failed." In that case,
+    #   if you still want to verify the domain, you must restart the
+    #   verification process from the beginning.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentityResponse AWS API Documentation

@@ -366,6 +366,16 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].last_attempted_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_groups_info[0].last_attempted_deployment.end_time #=> Time
     #   resp.deployment_groups_info[0].last_attempted_deployment.create_time #=> Time
+    #   resp.deployment_groups_info[0].ec2_tag_set.ec2_tag_set_list #=> Array
+    #   resp.deployment_groups_info[0].ec2_tag_set.ec2_tag_set_list[0] #=> Array
+    #   resp.deployment_groups_info[0].ec2_tag_set.ec2_tag_set_list[0][0].key #=> String
+    #   resp.deployment_groups_info[0].ec2_tag_set.ec2_tag_set_list[0][0].value #=> String
+    #   resp.deployment_groups_info[0].ec2_tag_set.ec2_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list #=> Array
+    #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0] #=> Array
+    #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
+    #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
+    #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -494,6 +504,11 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].target_instances.tag_filters[0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #   resp.deployments_info[0].target_instances.auto_scaling_groups #=> Array
     #   resp.deployments_info[0].target_instances.auto_scaling_groups[0] #=> String
+    #   resp.deployments_info[0].target_instances.ec2_tag_set.ec2_tag_set_list #=> Array
+    #   resp.deployments_info[0].target_instances.ec2_tag_set.ec2_tag_set_list[0] #=> Array
+    #   resp.deployments_info[0].target_instances.ec2_tag_set.ec2_tag_set_list[0][0].key #=> String
+    #   resp.deployments_info[0].target_instances.ec2_tag_set.ec2_tag_set_list[0][0].value #=> String
+    #   resp.deployments_info[0].target_instances.ec2_tag_set.ec2_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #   resp.deployments_info[0].instance_termination_wait_time_started #=> Boolean
     #   resp.deployments_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
     #   resp.deployments_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
@@ -708,6 +723,17 @@ module Aws::CodeDeploy
     #         },
     #       ],
     #       auto_scaling_groups: ["AutoScalingGroupName"],
+    #       ec2_tag_set: {
+    #         ec2_tag_set_list: [
+    #           [
+    #             {
+    #               key: "Key",
+    #               value: "Value",
+    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #             },
+    #           ],
+    #         ],
+    #       },
     #     },
     #     auto_rollback_configuration: {
     #       enabled: false,
@@ -813,11 +839,13 @@ module Aws::CodeDeploy
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
     #   The Amazon EC2 tags on which to filter. The deployment group will
-    #   include EC2 instances with any of the specified tags.
+    #   include EC2 instances with any of the specified tags. Cannot be used
+    #   in the same call as ec2TagSet.
     #
     # @option params [Array<Types::TagFilter>] :on_premises_instance_tag_filters
     #   The on-premises instance tags on which to filter. The deployment group
     #   will include on-premises instances with any of the specified tags.
+    #   Cannot be used in the same call as OnPremisesTagSet.
     #
     # @option params [Array<String>] :auto_scaling_groups
     #   A list of associated Auto Scaling groups.
@@ -854,6 +882,17 @@ module Aws::CodeDeploy
     #
     # @option params [Types::LoadBalancerInfo] :load_balancer_info
     #   Information about the load balancer used in a deployment.
+    #
+    # @option params [Types::EC2TagSet] :ec2_tag_set
+    #   Information about groups of tags applied to EC2 instances. The
+    #   deployment group will include only EC2 instances identified by all the
+    #   tag groups. Cannot be used in the same call as ec2TagFilters.
+    #
+    # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
+    #   Information about groups of tags applied to on-premises instances. The
+    #   deployment group will include only on-premises instances identified by
+    #   all the tag groups. Cannot be used in the same call as
+    #   onPremisesInstanceTagFilters.
     #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -923,6 +962,28 @@ module Aws::CodeDeploy
     #         {
     #           name: "ELBName",
     #         },
+    #       ],
+    #     },
+    #     ec2_tag_set: {
+    #       ec2_tag_set_list: [
+    #         [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #           },
+    #         ],
+    #       ],
+    #     },
+    #     on_premises_tag_set: {
+    #       on_premises_tag_set_list: [
+    #         [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #           },
+    #         ],
     #       ],
     #     },
     #   })
@@ -1212,6 +1273,11 @@ module Aws::CodeDeploy
     #   resp.deployment_info.target_instances.tag_filters[0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #   resp.deployment_info.target_instances.auto_scaling_groups #=> Array
     #   resp.deployment_info.target_instances.auto_scaling_groups[0] #=> String
+    #   resp.deployment_info.target_instances.ec2_tag_set.ec2_tag_set_list #=> Array
+    #   resp.deployment_info.target_instances.ec2_tag_set.ec2_tag_set_list[0] #=> Array
+    #   resp.deployment_info.target_instances.ec2_tag_set.ec2_tag_set_list[0][0].key #=> String
+    #   resp.deployment_info.target_instances.ec2_tag_set.ec2_tag_set_list[0][0].value #=> String
+    #   resp.deployment_info.target_instances.ec2_tag_set.ec2_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #   resp.deployment_info.instance_termination_wait_time_started #=> Boolean
     #   resp.deployment_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
     #   resp.deployment_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
@@ -1341,6 +1407,16 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.last_attempted_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_group_info.last_attempted_deployment.end_time #=> Time
     #   resp.deployment_group_info.last_attempted_deployment.create_time #=> Time
+    #   resp.deployment_group_info.ec2_tag_set.ec2_tag_set_list #=> Array
+    #   resp.deployment_group_info.ec2_tag_set.ec2_tag_set_list[0] #=> Array
+    #   resp.deployment_group_info.ec2_tag_set.ec2_tag_set_list[0][0].key #=> String
+    #   resp.deployment_group_info.ec2_tag_set.ec2_tag_set_list[0][0].value #=> String
+    #   resp.deployment_group_info.ec2_tag_set.ec2_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list #=> Array
+    #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0] #=> Array
+    #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
+    #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
+    #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -2120,6 +2196,16 @@ module Aws::CodeDeploy
     # @option params [Types::LoadBalancerInfo] :load_balancer_info
     #   Information about the load balancer used in a deployment.
     #
+    # @option params [Types::EC2TagSet] :ec2_tag_set
+    #   Information about groups of tags applied to on-premises instances. The
+    #   deployment group will include only EC2 instances identified by all the
+    #   tag groups.
+    #
+    # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
+    #   Information about an on-premises instance tag set. The deployment
+    #   group will include only on-premises instances identified by all the
+    #   tag groups.
+    #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDeploymentGroupOutput#hooks_not_cleaned_up #hooks_not_cleaned_up} => Array&lt;Types::AutoScalingGroup&gt;
@@ -2191,6 +2277,28 @@ module Aws::CodeDeploy
     #         },
     #       ],
     #     },
+    #     ec2_tag_set: {
+    #       ec2_tag_set_list: [
+    #         [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #           },
+    #         ],
+    #       ],
+    #     },
+    #     on_premises_tag_set: {
+    #       on_premises_tag_set_list: [
+    #         [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #           },
+    #         ],
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2221,7 +2329,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc11'
+      context[:gem_version] = '1.0.0.rc12'
       Seahorse::Client::Request.new(handlers, context)
     end
 

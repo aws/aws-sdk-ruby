@@ -709,6 +709,28 @@ module Aws::CodeDeploy
     #             },
     #           ],
     #         },
+    #         ec2_tag_set: {
+    #           ec2_tag_set_list: [
+    #             [
+    #               {
+    #                 key: "Key",
+    #                 value: "Value",
+    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #               },
+    #             ],
+    #           ],
+    #         },
+    #         on_premises_tag_set: {
+    #           on_premises_tag_set_list: [
+    #             [
+    #               {
+    #                 key: "Key",
+    #                 value: "Value",
+    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #               },
+    #             ],
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] application_name
@@ -741,13 +763,14 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] ec2_tag_filters
     #   The Amazon EC2 tags on which to filter. The deployment group will
-    #   include EC2 instances with any of the specified tags.
+    #   include EC2 instances with any of the specified tags. Cannot be used
+    #   in the same call as ec2TagSet.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] on_premises_instance_tag_filters
     #   The on-premises instance tags on which to filter. The deployment
     #   group will include on-premises instances with any of the specified
-    #   tags.
+    #   tags. Cannot be used in the same call as OnPremisesTagSet.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] auto_scaling_groups
@@ -794,6 +817,19 @@ module Aws::CodeDeploy
     #   Information about the load balancer used in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
+    # @!attribute [rw] ec2_tag_set
+    #   Information about groups of tags applied to EC2 instances. The
+    #   deployment group will include only EC2 instances identified by all
+    #   the tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   @return [Types::EC2TagSet]
+    #
+    # @!attribute [rw] on_premises_tag_set
+    #   Information about groups of tags applied to on-premises instances.
+    #   The deployment group will include only on-premises instances
+    #   identified by all the tag groups. Cannot be used in the same call as
+    #   onPremisesInstanceTagFilters.
+    #   @return [Types::OnPremisesTagSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
     #
     class CreateDeploymentGroupInput < Struct.new(
@@ -809,7 +845,9 @@ module Aws::CodeDeploy
       :auto_rollback_configuration,
       :deployment_style,
       :blue_green_deployment_configuration,
-      :load_balancer_info)
+      :load_balancer_info,
+      :ec2_tag_set,
+      :on_premises_tag_set)
       include Aws::Structure
     end
 
@@ -860,6 +898,17 @@ module Aws::CodeDeploy
     #             },
     #           ],
     #           auto_scaling_groups: ["AutoScalingGroupName"],
+    #           ec2_tag_set: {
+    #             ec2_tag_set_list: [
+    #               [
+    #                 {
+    #                   key: "Key",
+    #                   value: "Value",
+    #                   type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #                 },
+    #               ],
+    #             ],
+    #           },
     #         },
     #         auto_rollback_configuration: {
     #           enabled: false,
@@ -1108,11 +1157,13 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter.
+    #   The Amazon EC2 tags on which to filter. The deployment group
+    #   includes EC2 instances with any of the specified tags.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] on_premises_instance_tag_filters
-    #   The on-premises instance tags on which to filter.
+    #   The on-premises instance tags on which to filter. The deployment
+    #   group includes on-premises instances with any of the specified tags.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] auto_scaling_groups
@@ -1166,6 +1217,19 @@ module Aws::CodeDeploy
     #   deployment group.
     #   @return [Types::LastDeploymentInfo]
     #
+    # @!attribute [rw] ec2_tag_set
+    #   Information about groups of tags applied to an EC2 instance. The
+    #   deployment group includes only EC2 instances identified by all the
+    #   tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   @return [Types::EC2TagSet]
+    #
+    # @!attribute [rw] on_premises_tag_set
+    #   Information about groups of tags applied to an on-premises instance.
+    #   The deployment group includes only on-premises instances identified
+    #   by all the tag groups. Cannot be used in the same call as
+    #   onPremisesInstanceTagFilters.
+    #   @return [Types::OnPremisesTagSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
@@ -1185,7 +1249,9 @@ module Aws::CodeDeploy
       :blue_green_deployment_configuration,
       :load_balancer_info,
       :last_successful_deployment,
-      :last_attempted_deployment)
+      :last_attempted_deployment,
+      :ec2_tag_set,
+      :on_premises_tag_set)
       include Aws::Structure
     end
 
@@ -1581,6 +1647,36 @@ module Aws::CodeDeploy
       :key,
       :value,
       :type)
+      include Aws::Structure
+    end
+
+    # Information about groups of EC2 instance tags.
+    #
+    # @note When making an API call, you may pass EC2TagSet
+    #   data as a hash:
+    #
+    #       {
+    #         ec2_tag_set_list: [
+    #           [
+    #             {
+    #               key: "Key",
+    #               value: "Value",
+    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #             },
+    #           ],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] ec2_tag_set_list
+    #   A list containing other lists of EC2 instance tag groups. In order
+    #   for an instance to be included in the deployment group, it must be
+    #   identified by all the tag groups in the list.
+    #   @return [Array<Array<Types::EC2TagFilter>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagSet AWS API Documentation
+    #
+    class EC2TagSet < Struct.new(
+      :ec2_tag_set_list)
       include Aws::Structure
     end
 
@@ -2831,6 +2927,36 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about groups of on-premises instance tags.
+    #
+    # @note When making an API call, you may pass OnPremisesTagSet
+    #   data as a hash:
+    #
+    #       {
+    #         on_premises_tag_set_list: [
+    #           [
+    #             {
+    #               key: "Key",
+    #               value: "Value",
+    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #             },
+    #           ],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] on_premises_tag_set_list
+    #   A list containing other lists of on-premises instance tag groups. In
+    #   order for an instance to be included in the deployment group, it
+    #   must be identified by all the tag groups in the list.
+    #   @return [Array<Array<Types::TagFilter>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/OnPremisesTagSet AWS API Documentation
+    #
+    class OnPremisesTagSet < Struct.new(
+      :on_premises_tag_set_list)
+      include Aws::Structure
+    end
+
     # Represents the input of a RegisterApplicationRevision operation.
     #
     # @note When making an API call, you may pass RegisterApplicationRevisionInput
@@ -3244,11 +3370,23 @@ module Aws::CodeDeploy
     #           },
     #         ],
     #         auto_scaling_groups: ["AutoScalingGroupName"],
+    #         ec2_tag_set: {
+    #           ec2_tag_set_list: [
+    #             [
+    #               {
+    #                 key: "Key",
+    #                 value: "Value",
+    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #               },
+    #             ],
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] tag_filters
     #   The tag filter key, type, and value used to identify Amazon EC2
     #   instances in a replacement environment for a blue/green deployment.
+    #   Cannot be used in the same call as ec2TagSet.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] auto_scaling_groups
@@ -3256,11 +3394,19 @@ module Aws::CodeDeploy
     #   replacement environment for a blue/green deployment.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ec2_tag_set
+    #   Information about the groups of EC2 instance tags that an instance
+    #   must be identified by in order for it to be included in the
+    #   replacement environment for a blue/green deployment. Cannot be used
+    #   in the same call as tagFilters.
+    #   @return [Types::EC2TagSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetInstances AWS API Documentation
     #
     class TargetInstances < Struct.new(
       :tag_filters,
-      :auto_scaling_groups)
+      :auto_scaling_groups,
+      :ec2_tag_set)
       include Aws::Structure
     end
 
@@ -3427,6 +3573,28 @@ module Aws::CodeDeploy
     #             },
     #           ],
     #         },
+    #         ec2_tag_set: {
+    #           ec2_tag_set_list: [
+    #             [
+    #               {
+    #                 key: "Key",
+    #                 value: "Value",
+    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #               },
+    #             ],
+    #           ],
+    #         },
+    #         on_premises_tag_set: {
+    #           on_premises_tag_set_list: [
+    #             [
+    #               {
+    #                 key: "Key",
+    #                 value: "Value",
+    #                 type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #               },
+    #             ],
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] application_name
@@ -3505,6 +3673,18 @@ module Aws::CodeDeploy
     #   Information about the load balancer used in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
+    # @!attribute [rw] ec2_tag_set
+    #   Information about groups of tags applied to on-premises instances.
+    #   The deployment group will include only EC2 instances identified by
+    #   all the tag groups.
+    #   @return [Types::EC2TagSet]
+    #
+    # @!attribute [rw] on_premises_tag_set
+    #   Information about an on-premises instance tag set. The deployment
+    #   group will include only on-premises instances identified by all the
+    #   tag groups.
+    #   @return [Types::OnPremisesTagSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation
     #
     class UpdateDeploymentGroupInput < Struct.new(
@@ -3521,7 +3701,9 @@ module Aws::CodeDeploy
       :auto_rollback_configuration,
       :deployment_style,
       :blue_green_deployment_configuration,
-      :load_balancer_info)
+      :load_balancer_info,
+      :ec2_tag_set,
+      :on_premises_tag_set)
       include Aws::Structure
     end
 

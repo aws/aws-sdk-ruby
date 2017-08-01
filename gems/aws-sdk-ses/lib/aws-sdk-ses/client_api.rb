@@ -126,6 +126,7 @@ module Aws::SES
     InvalidLambdaFunctionException = Shapes::StructureShape.new(name: 'InvalidLambdaFunctionException')
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
     InvalidS3ConfigurationException = Shapes::StructureShape.new(name: 'InvalidS3ConfigurationException')
+    InvalidSNSDestinationException = Shapes::StructureShape.new(name: 'InvalidSNSDestinationException')
     InvalidSnsTopicException = Shapes::StructureShape.new(name: 'InvalidSnsTopicException')
     InvocationType = Shapes::StringShape.new(name: 'InvocationType')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
@@ -199,6 +200,7 @@ module Aws::SES
     S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
     SNSAction = Shapes::StructureShape.new(name: 'SNSAction')
     SNSActionEncoding = Shapes::StringShape.new(name: 'SNSActionEncoding')
+    SNSDestination = Shapes::StructureShape.new(name: 'SNSDestination')
     SendBounceRequest = Shapes::StructureShape.new(name: 'SendBounceRequest')
     SendBounceResponse = Shapes::StructureShape.new(name: 'SendBounceResponse')
     SendDataPoint = Shapes::StructureShape.new(name: 'SendDataPoint')
@@ -405,6 +407,7 @@ module Aws::SES
     EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, required: true, location_name: "MatchingEventTypes"))
     EventDestination.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestination.add_member(:cloud_watch_destination, Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
+    EventDestination.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SNSDestination, location_name: "SNSDestination"))
     EventDestination.struct_class = Types::EventDestination
 
     EventDestinations.member = Shapes::ShapeRef.new(shape: EventDestination)
@@ -630,6 +633,9 @@ module Aws::SES
     SNSAction.add_member(:encoding, Shapes::ShapeRef.new(shape: SNSActionEncoding, location_name: "Encoding"))
     SNSAction.struct_class = Types::SNSAction
 
+    SNSDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicARN"))
+    SNSDestination.struct_class = Types::SNSDestination
+
     SendBounceRequest.add_member(:original_message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "OriginalMessageId"))
     SendBounceRequest.add_member(:bounce_sender, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "BounceSender"))
     SendBounceRequest.add_member(:explanation, Shapes::ShapeRef.new(shape: Explanation, location_name: "Explanation"))
@@ -814,6 +820,7 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: EventDestinationAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSNSDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -1186,6 +1193,7 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: EventDestinationDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSNSDestinationException)
       end)
 
       api.add_operation(:update_receipt_rule, Seahorse::Model::Operation.new.tap do |o|

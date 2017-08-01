@@ -53,7 +53,7 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   Channel ID. Not used, only for backwards compatibility.
+    #   Channel ID. Not used. Present only for backwards compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -267,7 +267,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform type. Will be APNS.
+    #   The platform type. Will be APNS\_SANDBOX.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -397,7 +397,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] channel_type
-    #   Type of channel of this address
+    #   The channel type. Valid values: GCM \| APNS \| SMS \| EMAIL
     #   @return [String]
     #
     # @!attribute [rw] context
@@ -423,6 +423,22 @@ module Aws::Pinpoint
       :raw_content,
       :substitutions,
       :title_override)
+      include Aws::Structure
+    end
+
+    # Application Response.
+    #
+    # @!attribute [rw] id
+    #   The unique application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the application.
+    #   @return [String]
+    #
+    class ApplicationResponse < Struct.new(
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -453,6 +469,23 @@ module Aws::Pinpoint
       :last_modified_date,
       :limits,
       :quiet_time)
+      include Aws::Structure
+    end
+
+    # Get Applications Result.
+    #
+    # @!attribute [rw] item
+    #   List of applications returned in this page.
+    #   @return [Array<Types::ApplicationResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The string that you use in a subsequent request to get the next page
+    #   of results in a paginated response.
+    #   @return [String]
+    #
+    class ApplicationsResponse < Struct.new(
+      :item,
+      :next_token)
       include Aws::Structure
     end
 
@@ -488,12 +521,18 @@ module Aws::Pinpoint
     #
     #       {
     #         body: "__string",
+    #         from_address: "__string",
     #         html_body: "__string",
     #         title: "__string",
     #       }
     #
     # @!attribute [rw] body
     #   The email text body.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The email address used to send the email from. Defaults to use
+    #   FromAddress specified in the Email Channel.
     #   @return [String]
     #
     # @!attribute [rw] html_body
@@ -506,6 +545,7 @@ module Aws::Pinpoint
     #
     class CampaignEmailMessage < Struct.new(
       :body,
+      :from_address,
       :html_body,
       :title)
       include Aws::Structure
@@ -702,6 +742,52 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateAppRequest
+    #   data as a hash:
+    #
+    #       {
+    #         create_application_request: { # required
+    #           name: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] create_application_request
+    #   Application Request.
+    #   @return [Types::CreateApplicationRequest]
+    #
+    class CreateAppRequest < Struct.new(
+      :create_application_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_response
+    #   Application Response.
+    #   @return [Types::ApplicationResponse]
+    #
+    class CreateAppResponse < Struct.new(
+      :application_response)
+      include Aws::Structure
+    end
+
+    # Application Request.
+    #
+    # @note When making an API call, you may pass CreateApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The display name of the application. Used in the Amazon Pinpoint
+    #   console.
+    #   @return [String]
+    #
+    class CreateApplicationRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCampaignRequest
     #   data as a hash:
     #
@@ -719,6 +805,7 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
@@ -731,12 +818,14 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
     #                 },
     #                 email_message: {
     #                   body: "__string",
+    #                   from_address: "__string",
     #                   html_body: "__string",
     #                   title: "__string",
     #                 },
@@ -748,6 +837,7 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
@@ -790,6 +880,7 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
@@ -802,12 +893,14 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
     #             },
     #             email_message: {
     #               body: "__string",
+    #               from_address: "__string",
     #               html_body: "__string",
     #               title: "__string",
     #             },
@@ -819,6 +912,7 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
@@ -1133,6 +1227,30 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAppRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class DeleteAppRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_response
+    #   Application Response.
+    #   @return [Types::ApplicationResponse]
+    #
+    class DeleteAppResponse < Struct.new(
+      :application_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCampaignRequest
     #   data as a hash:
     #
@@ -1434,7 +1552,7 @@ module Aws::Pinpoint
     # Email Channel Response.
     #
     # @!attribute [rw] application_id
-    #   Application id
+    #   The unique ID of the application to which the email channel belongs.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1552,7 +1670,7 @@ module Aws::Pinpoint
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
-    #   The channel type. Valid values: APNS, GCM
+    #   The channel type. Valid values: GCM \| APNS \| SMS \| EMAIL
     #   @return [String]
     #
     # @!attribute [rw] demographic
@@ -1582,8 +1700,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] opt_out
     #   Indicates whether a user has opted out of receiving messages with
-    #   one of the following values: ALL – User receives all messages. NONE
-    #   – User receives no messages.
+    #   one of the following values: ALL - User has opted out of all
+    #   messages. NONE - Users has not opted out and receives all messages.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -1836,7 +1954,7 @@ module Aws::Pinpoint
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
-    #   The channel type. Valid values: APNS, GCM
+    #   The channel type. Valid values: GCM \| APNS \| SMS \| EMAIL
     #   @return [String]
     #
     # @!attribute [rw] demographic
@@ -1862,8 +1980,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] opt_out
     #   Indicates whether a user has opted out of receiving messages with
-    #   one of the following values: ALL – User receives all messages. NONE
-    #   – User receives no messages.
+    #   one of the following values: ALL - User has opted out of all
+    #   messages. NONE - Users has not opted out and receives all messages.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -1905,7 +2023,7 @@ module Aws::Pinpoint
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
-    #   The channel type. Valid values: APNS, GCM
+    #   The channel type. Valid values: GCM \| APNS \| SMS \| EMAIL
     #   @return [String]
     #
     # @!attribute [rw] cohort_id
@@ -1949,8 +2067,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] opt_out
     #   Indicates whether a user has opted out of receiving messages with
-    #   one of the following values: ALL – User receives all messages. NONE
-    #   – User receives no messages.
+    #   one of the following values: ALL - User has opted out of all
+    #   messages. NONE - Users has not opted out and receives all messages.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -2095,7 +2213,7 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   Channel ID. Not used, only for backwards compatibility.
+    #   Channel ID. Not used. Present only for backwards compatibility.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -2307,6 +2425,30 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAppRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    class GetAppRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_response
+    #   Application Response.
+    #   @return [Types::ApplicationResponse]
+    #
+    class GetAppResponse < Struct.new(
+      :application_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApplicationSettingsRequest
     #   data as a hash:
     #
@@ -2328,6 +2470,35 @@ module Aws::Pinpoint
     #
     class GetApplicationSettingsResponse < Struct.new(
       :application_settings_resource)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAppsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_size: "__string",
+    #         token: "__string",
+    #       }
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   @return [String]
+    #
+    class GetAppsRequest < Struct.new(
+      :page_size,
+      :token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] applications_response
+    #   Get Applications Result.
+    #   @return [Types::ApplicationsResponse]
+    #
+    class GetAppsResponse < Struct.new(
+      :applications_response)
       include Aws::Structure
     end
 
@@ -3096,6 +3267,7 @@ module Aws::Pinpoint
     #         image_url: "__string",
     #         json_body: "__string",
     #         media_url: "__string",
+    #         raw_content: "__string",
     #         silent_push: false,
     #         title: "__string",
     #         url: "__string",
@@ -3138,6 +3310,11 @@ module Aws::Pinpoint
     #   .gif file.
     #   @return [String]
     #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
     # @!attribute [rw] silent_push
     #   Indicates if the message should display on the users device. Silent
     #   pushes can be used for Remote Configuration and Phone Home use
@@ -3162,6 +3339,7 @@ module Aws::Pinpoint
       :image_url,
       :json_body,
       :media_url,
+      :raw_content,
       :silent_push,
       :title,
       :url)
@@ -3198,6 +3376,7 @@ module Aws::Pinpoint
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
+    #           raw_content: "__string",
     #           silent_push: false,
     #           title: "__string",
     #           url: "__string",
@@ -3210,12 +3389,14 @@ module Aws::Pinpoint
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
+    #           raw_content: "__string",
     #           silent_push: false,
     #           title: "__string",
     #           url: "__string",
     #         },
     #         email_message: {
     #           body: "__string",
+    #           from_address: "__string",
     #           html_body: "__string",
     #           title: "__string",
     #         },
@@ -3227,6 +3408,7 @@ module Aws::Pinpoint
     #           image_url: "__string",
     #           json_body: "__string",
     #           media_url: "__string",
+    #           raw_content: "__string",
     #           silent_push: false,
     #           title: "__string",
     #           url: "__string",
@@ -3545,7 +3727,7 @@ module Aws::Pinpoint
     # SMS Channel Response.
     #
     # @!attribute [rw] application_id
-    #   Application id
+    #   The unique ID of the application to which the SMS channel belongs.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -4316,6 +4498,7 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
@@ -4328,12 +4511,14 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
     #                 },
     #                 email_message: {
     #                   body: "__string",
+    #                   from_address: "__string",
     #                   html_body: "__string",
     #                   title: "__string",
     #                 },
@@ -4345,6 +4530,7 @@ module Aws::Pinpoint
     #                   image_url: "__string",
     #                   json_body: "__string",
     #                   media_url: "__string",
+    #                   raw_content: "__string",
     #                   silent_push: false,
     #                   title: "__string",
     #                   url: "__string",
@@ -4387,6 +4573,7 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
@@ -4399,12 +4586,14 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
     #             },
     #             email_message: {
     #               body: "__string",
+    #               from_address: "__string",
     #               html_body: "__string",
     #               title: "__string",
     #             },
@@ -4416,6 +4605,7 @@ module Aws::Pinpoint
     #               image_url: "__string",
     #               json_body: "__string",
     #               media_url: "__string",
+    #               raw_content: "__string",
     #               silent_push: false,
     #               title: "__string",
     #               url: "__string",
@@ -4856,6 +5046,7 @@ module Aws::Pinpoint
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
+    #                 raw_content: "__string",
     #                 silent_push: false,
     #                 title: "__string",
     #                 url: "__string",
@@ -4868,12 +5059,14 @@ module Aws::Pinpoint
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
+    #                 raw_content: "__string",
     #                 silent_push: false,
     #                 title: "__string",
     #                 url: "__string",
     #               },
     #               email_message: {
     #                 body: "__string",
+    #                 from_address: "__string",
     #                 html_body: "__string",
     #                 title: "__string",
     #               },
@@ -4885,6 +5078,7 @@ module Aws::Pinpoint
     #                 image_url: "__string",
     #                 json_body: "__string",
     #                 media_url: "__string",
+    #                 raw_content: "__string",
     #                 silent_push: false,
     #                 title: "__string",
     #                 url: "__string",
@@ -4927,6 +5121,7 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
@@ -4939,12 +5134,14 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
     #           },
     #           email_message: {
     #             body: "__string",
+    #             from_address: "__string",
     #             html_body: "__string",
     #             title: "__string",
     #           },
@@ -4956,6 +5153,7 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
@@ -5169,6 +5367,7 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
@@ -5181,12 +5380,14 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",
     #           },
     #           email_message: {
     #             body: "__string",
+    #             from_address: "__string",
     #             html_body: "__string",
     #             title: "__string",
     #           },
@@ -5198,6 +5399,7 @@ module Aws::Pinpoint
     #             image_url: "__string",
     #             json_body: "__string",
     #             media_url: "__string",
+    #             raw_content: "__string",
     #             silent_push: false,
     #             title: "__string",
     #             url: "__string",

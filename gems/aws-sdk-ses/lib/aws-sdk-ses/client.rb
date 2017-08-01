@@ -236,8 +236,9 @@ module Aws::SES
     # Creates a configuration set event destination.
     #
     # <note markdown="1"> When you create or update an event destination, you must provide one,
-    # and only one, destination. The destination can be either Amazon
-    # CloudWatch or Amazon Kinesis Firehose.
+    # and only one, destination. The destination can be Amazon CloudWatch,
+    # Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon
+    # SNS).
     #
     #  </note>
     #
@@ -270,7 +271,7 @@ module Aws::SES
     #     event_destination: { # required
     #       name: "EventDestinationName", # required
     #       enabled: false,
-    #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+    #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -279,10 +280,13 @@ module Aws::SES
     #         dimension_configurations: [ # required
     #           {
     #             dimension_name: "DimensionName", # required
-    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #             default_dimension_value: "DefaultDimensionValue", # required
     #           },
     #         ],
+    #       },
+    #       sns_destination: {
+    #         topic_arn: "AmazonResourceName", # required
     #       },
     #     },
     #   })
@@ -968,13 +972,14 @@ module Aws::SES
     #   resp.event_destinations[0].name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "send", "reject", "bounce", "complaint", "delivery"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "send", "reject", "bounce", "complaint", "delivery", "open", "click"
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.delivery_stream_arn #=> String
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations #=> Array
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_name #=> String
-    #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "messageTag", "emailHeader"
+    #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "messageTag", "emailHeader", "linkTag"
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
+    #   resp.event_destinations[0].sns_destination.topic_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSet AWS API Documentation
     #
@@ -1365,6 +1370,8 @@ module Aws::SES
     #     notification_attributes: {
     #       "example.com" => {
     #         bounce_topic: "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic", 
+    #         complaint_topic: "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic", 
+    #         delivery_topic: "arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic", 
     #         forwarding_enabled: true, 
     #         headers_in_bounce_notifications_enabled: false, 
     #         headers_in_complaint_notifications_enabled: false, 
@@ -1480,6 +1487,24 @@ module Aws::SES
     # Given a list of identities (email addresses and/or domains), returns
     # the verification status and (for domain identities) the verification
     # token for each identity.
+    #
+    # The verification status of an email address is "Pending" until the
+    # email address owner clicks the link within the verification email that
+    # Amazon SES sent to that address. If the email address owner clicks the
+    # link within 24 hours, the verification status of the email address
+    # changes to "Success". If the link is not clicked within 24 hours,
+    # the verification status changes to "Failed." In that case, if you
+    # still want to verify the email address, you must restart the
+    # verification process from the beginning.
+    #
+    # For domain identities, the domain's verification status is
+    # "Pending" as Amazon SES searches for the required TXT record in the
+    # DNS settings of the domain. When Amazon SES detects the record, the
+    # domain's verification status changes to "Success". If Amazon SES is
+    # unable to detect the record within 72 hours, the domain's
+    # verification status changes to "Failed." In that case, if you still
+    # want to verify the domain, you must restart the verification process
+    # from the beginning.
     #
     # This action is throttled at one request per second and can only get
     # verification attributes for up to 100 identities at a time.
@@ -2229,6 +2254,11 @@ module Aws::SES
     # * The total size of the message cannot exceed 10 MB. This includes any
     #   attachments that are part of the message.
     #
+    # * You must provide at least one recipient email address. The recipient
+    #   address can be a To: address, a CC: address, or a BCC: address. If
+    #   any email address you provide is invalid, Amazon SES rejects the
+    #   entire email.
+    #
     # * Amazon SES has a limit on the total number of recipients per
     #   message. The combined number of To:, CC: and BCC: email addresses
     #   cannot exceed 50. If you need to send an email message to a larger
@@ -2458,6 +2488,11 @@ module Aws::SES
     # * The total size of the message cannot exceed 10 MB. This includes any
     #   attachments that are part of the message.
     #
+    # * You must provide at least one recipient email address. The recipient
+    #   address can be a To: address, a CC: address, or a BCC: address. If
+    #   any email address you provide is invalid, Amazon SES rejects the
+    #   entire email.
+    #
     # * Amazon SES has a limit on the total number of recipients per
     #   message. The combined number of To:, CC: and BCC: email addresses
     #   cannot exceed 50. If you need to send an email message to a larger
@@ -2549,9 +2584,13 @@ module Aws::SES
     #
     #   * Must be base64-encoded.
     #
+    #   * Per [RFC 5321][2], the maximum length of each line of text,
+    #     including the &lt;CRLF&gt;, must not exceed 1,000 characters.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
+    #   [2]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #
     # @option params [String] :from_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3121,15 +3160,17 @@ module Aws::SES
     # Updates the event destination of a configuration set.
     #
     # <note markdown="1"> When you create or update an event destination, you must provide one,
-    # and only one, destination. The destination can be either Amazon
-    # CloudWatch or Amazon Kinesis Firehose.
+    # and only one, destination. The destination can be Amazon CloudWatch,
+    # Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon
+    # SNS).
     #
     #  </note>
     #
     # Event destinations are associated with configuration sets, which
-    # enable you to publish email sending events to Amazon CloudWatch or
-    # Amazon Kinesis Firehose. For information about using configuration
-    # sets, see the [Amazon SES Developer Guide][1].
+    # enable you to publish email sending events to Amazon CloudWatch,
+    # Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon
+    # SNS). For information about using configuration sets, see the [Amazon
+    # SES Developer Guide][1].
     #
     # This action is throttled at one request per second.
     #
@@ -3153,7 +3194,7 @@ module Aws::SES
     #     event_destination: { # required
     #       name: "EventDestinationName", # required
     #       enabled: false,
-    #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+    #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
     #       kinesis_firehose_destination: {
     #         iam_role_arn: "AmazonResourceName", # required
     #         delivery_stream_arn: "AmazonResourceName", # required
@@ -3162,10 +3203,13 @@ module Aws::SES
     #         dimension_configurations: [ # required
     #           {
     #             dimension_name: "DimensionName", # required
-    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+    #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader, linkTag
     #             default_dimension_value: "DefaultDimensionValue", # required
     #           },
     #         ],
+    #       },
+    #       sns_destination: {
+    #         topic_arn: "AmazonResourceName", # required
     #       },
     #     },
     #   })
@@ -3475,7 +3519,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.0.0.rc9'
+      context[:gem_version] = '1.0.0.rc10'
       Seahorse::Client::Request.new(handlers, context)
     end
 

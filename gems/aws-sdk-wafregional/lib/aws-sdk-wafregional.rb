@@ -42,6 +42,6 @@ require_relative 'aws-sdk-wafregional/customizations'
 # @service
 module Aws::WAFRegional
 
-  GEM_VERSION = '1.0.0.rc12'
+  GEM_VERSION = '1.0.0.rc13'
 
 end

@@ -2954,7 +2954,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc11'
+      context[:gem_version] = '1.0.0.rc12'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3025,6 +3025,8 @@ module Aws::ElasticLoadBalancingV2
     # | load_balancer_available | {#describe_load_balancers} | 15       | 40            |
     # | load_balancer_exists    | {#describe_load_balancers} | 15       | 40            |
     # | load_balancers_deleted  | {#describe_load_balancers} | 15       | 40            |
+    # | target_deregistered     | {#describe_target_health}  | 15       | 40            |
+    # | target_in_service       | {#describe_target_health}  | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3077,7 +3079,9 @@ module Aws::ElasticLoadBalancingV2
       {
         load_balancer_available: Waiters::LoadBalancerAvailable,
         load_balancer_exists: Waiters::LoadBalancerExists,
-        load_balancers_deleted: Waiters::LoadBalancersDeleted
+        load_balancers_deleted: Waiters::LoadBalancersDeleted,
+        target_deregistered: Waiters::TargetDeregistered,
+        target_in_service: Waiters::TargetInService
       }
     end
 

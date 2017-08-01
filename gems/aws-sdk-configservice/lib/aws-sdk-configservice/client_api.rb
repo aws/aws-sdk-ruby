@@ -98,6 +98,8 @@ module Aws::ConfigService
     GetComplianceSummaryByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetComplianceSummaryByConfigRuleResponse')
     GetComplianceSummaryByResourceTypeRequest = Shapes::StructureShape.new(name: 'GetComplianceSummaryByResourceTypeRequest')
     GetComplianceSummaryByResourceTypeResponse = Shapes::StructureShape.new(name: 'GetComplianceSummaryByResourceTypeResponse')
+    GetDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsRequest')
+    GetDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
     IncludeGlobalResourceTypes = Shapes::BooleanShape.new(name: 'IncludeGlobalResourceTypes')
@@ -121,6 +123,7 @@ module Aws::ConfigService
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
     MaxNumberOfConfigurationRecordersExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigurationRecordersExceededException')
     MaxNumberOfDeliveryChannelsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfDeliveryChannelsExceededException')
@@ -151,6 +154,8 @@ module Aws::ConfigService
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipName = Shapes::StringShape.new(name: 'RelationshipName')
+    ResourceCount = Shapes::StructureShape.new(name: 'ResourceCount')
+    ResourceCounts = Shapes::ListShape.new(name: 'ResourceCounts')
     ResourceCreationTime = Shapes::TimestampShape.new(name: 'ResourceCreationTime')
     ResourceDeletionTime = Shapes::TimestampShape.new(name: 'ResourceDeletionTime')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -468,6 +473,16 @@ module Aws::ConfigService
     GetComplianceSummaryByResourceTypeResponse.add_member(:compliance_summaries_by_resource_type, Shapes::ShapeRef.new(shape: ComplianceSummariesByResourceType, location_name: "ComplianceSummariesByResourceType"))
     GetComplianceSummaryByResourceTypeResponse.struct_class = Types::GetComplianceSummaryByResourceTypeResponse
 
+    GetDiscoveredResourceCountsRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "resourceTypes"))
+    GetDiscoveredResourceCountsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "limit"))
+    GetDiscoveredResourceCountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDiscoveredResourceCountsRequest.struct_class = Types::GetDiscoveredResourceCountsRequest
+
+    GetDiscoveredResourceCountsResponse.add_member(:total_discovered_resources, Shapes::ShapeRef.new(shape: Long, location_name: "totalDiscoveredResources"))
+    GetDiscoveredResourceCountsResponse.add_member(:resource_counts, Shapes::ShapeRef.new(shape: ResourceCounts, location_name: "resourceCounts"))
+    GetDiscoveredResourceCountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDiscoveredResourceCountsResponse.struct_class = Types::GetDiscoveredResourceCountsResponse
+
     GetResourceConfigHistoryRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     GetResourceConfigHistoryRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     GetResourceConfigHistoryRequest.add_member(:later_time, Shapes::ShapeRef.new(shape: LaterTime, location_name: "laterTime"))
@@ -526,6 +541,12 @@ module Aws::ConfigService
     Relationship.struct_class = Types::Relationship
 
     RelationshipList.member = Shapes::ShapeRef.new(shape: Relationship)
+
+    ResourceCount.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
+    ResourceCount.struct_class = Types::ResourceCount
+
+    ResourceCounts.member = Shapes::ShapeRef.new(shape: ResourceCount)
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
@@ -754,6 +775,17 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: GetComplianceSummaryByResourceTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetComplianceSummaryByResourceTypeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:get_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDiscoveredResourceCounts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDiscoveredResourceCountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDiscoveredResourceCountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|

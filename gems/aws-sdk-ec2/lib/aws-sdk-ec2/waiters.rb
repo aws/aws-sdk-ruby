@@ -896,6 +896,11 @@ module Aws::EC2
                 "matcher" => "pathAny",
                 "argument" => "spot_instance_requests[].status.code",
                 "expected" => "system-error"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "error",
+                "expected" => "InvalidSpotInstanceRequestID.NotFound"
               }
             ]
           )

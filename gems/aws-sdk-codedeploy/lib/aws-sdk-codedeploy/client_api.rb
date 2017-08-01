@@ -113,6 +113,8 @@ module Aws::CodeDeploy
     EC2TagFilter = Shapes::StructureShape.new(name: 'EC2TagFilter')
     EC2TagFilterList = Shapes::ListShape.new(name: 'EC2TagFilterList')
     EC2TagFilterType = Shapes::StringShape.new(name: 'EC2TagFilterType')
+    EC2TagSet = Shapes::StructureShape.new(name: 'EC2TagSet')
+    EC2TagSetList = Shapes::ListShape.new(name: 'EC2TagSetList')
     ELBInfo = Shapes::StructureShape.new(name: 'ELBInfo')
     ELBInfoList = Shapes::ListShape.new(name: 'ELBInfoList')
     ELBName = Shapes::StringShape.new(name: 'ELBName')
@@ -182,6 +184,7 @@ module Aws::CodeDeploy
     InvalidDeploymentInstanceTypeException = Shapes::StructureShape.new(name: 'InvalidDeploymentInstanceTypeException')
     InvalidDeploymentStatusException = Shapes::StructureShape.new(name: 'InvalidDeploymentStatusException')
     InvalidDeploymentStyleException = Shapes::StructureShape.new(name: 'InvalidDeploymentStyleException')
+    InvalidEC2TagCombinationException = Shapes::StructureShape.new(name: 'InvalidEC2TagCombinationException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
     InvalidFileExistsBehaviorException = Shapes::StructureShape.new(name: 'InvalidFileExistsBehaviorException')
     InvalidIamSessionArnException = Shapes::StructureShape.new(name: 'InvalidIamSessionArnException')
@@ -193,6 +196,7 @@ module Aws::CodeDeploy
     InvalidLoadBalancerInfoException = Shapes::StructureShape.new(name: 'InvalidLoadBalancerInfoException')
     InvalidMinimumHealthyHostValueException = Shapes::StructureShape.new(name: 'InvalidMinimumHealthyHostValueException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
+    InvalidOnPremisesTagCombinationException = Shapes::StructureShape.new(name: 'InvalidOnPremisesTagCombinationException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidRegistrationStatusException = Shapes::StructureShape.new(name: 'InvalidRegistrationStatusException')
     InvalidRevisionException = Shapes::StructureShape.new(name: 'InvalidRevisionException')
@@ -239,6 +243,8 @@ module Aws::CodeDeploy
     MultipleIamArnsProvidedException = Shapes::StructureShape.new(name: 'MultipleIamArnsProvidedException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    OnPremisesTagSet = Shapes::StructureShape.new(name: 'OnPremisesTagSet')
+    OnPremisesTagSetList = Shapes::ListShape.new(name: 'OnPremisesTagSetList')
     RegisterApplicationRevisionInput = Shapes::StructureShape.new(name: 'RegisterApplicationRevisionInput')
     RegisterOnPremisesInstanceInput = Shapes::StructureShape.new(name: 'RegisterOnPremisesInstanceInput')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
@@ -271,6 +277,7 @@ module Aws::CodeDeploy
     TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagRequiredException = Shapes::StructureShape.new(name: 'TagRequiredException')
+    TagSetListLimitExceededException = Shapes::StructureShape.new(name: 'TagSetListLimitExceededException')
     TargetInstances = Shapes::StructureShape.new(name: 'TargetInstances')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -408,6 +415,8 @@ module Aws::CodeDeploy
     CreateDeploymentGroupInput.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
     CreateDeploymentGroupInput.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     CreateDeploymentGroupInput.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
+    CreateDeploymentGroupInput.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
+    CreateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     CreateDeploymentGroupInput.struct_class = Types::CreateDeploymentGroupInput
 
     CreateDeploymentGroupOutput.add_member(:deployment_group_id, Shapes::ShapeRef.new(shape: DeploymentGroupId, location_name: "deploymentGroupId"))
@@ -466,6 +475,8 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
     DeploymentGroupInfo.add_member(:last_successful_deployment, Shapes::ShapeRef.new(shape: LastDeploymentInfo, location_name: "lastSuccessfulDeployment"))
     DeploymentGroupInfo.add_member(:last_attempted_deployment, Shapes::ShapeRef.new(shape: LastDeploymentInfo, location_name: "lastAttemptedDeployment"))
+    DeploymentGroupInfo.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
+    DeploymentGroupInfo.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     DeploymentGroupInfo.struct_class = Types::DeploymentGroupInfo
 
     DeploymentGroupInfoList.member = Shapes::ShapeRef.new(shape: DeploymentGroupInfo)
@@ -536,6 +547,11 @@ module Aws::CodeDeploy
     EC2TagFilter.struct_class = Types::EC2TagFilter
 
     EC2TagFilterList.member = Shapes::ShapeRef.new(shape: EC2TagFilter)
+
+    EC2TagSet.add_member(:ec2_tag_set_list, Shapes::ShapeRef.new(shape: EC2TagSetList, location_name: "ec2TagSetList"))
+    EC2TagSet.struct_class = Types::EC2TagSet
+
+    EC2TagSetList.member = Shapes::ShapeRef.new(shape: EC2TagFilterList)
 
     ELBInfo.add_member(:name, Shapes::ShapeRef.new(shape: ELBName, location_name: "name"))
     ELBInfo.struct_class = Types::ELBInfo
@@ -733,6 +749,11 @@ module Aws::CodeDeploy
     MinimumHealthyHosts.add_member(:type, Shapes::ShapeRef.new(shape: MinimumHealthyHostsType, location_name: "type"))
     MinimumHealthyHosts.struct_class = Types::MinimumHealthyHosts
 
+    OnPremisesTagSet.add_member(:on_premises_tag_set_list, Shapes::ShapeRef.new(shape: OnPremisesTagSetList, location_name: "onPremisesTagSetList"))
+    OnPremisesTagSet.struct_class = Types::OnPremisesTagSet
+
+    OnPremisesTagSetList.member = Shapes::ShapeRef.new(shape: TagFilterList)
+
     RegisterApplicationRevisionInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "applicationName"))
     RegisterApplicationRevisionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisterApplicationRevisionInput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionLocation, required: true, location_name: "revision"))
@@ -798,6 +819,7 @@ module Aws::CodeDeploy
 
     TargetInstances.add_member(:tag_filters, Shapes::ShapeRef.new(shape: EC2TagFilterList, location_name: "tagFilters"))
     TargetInstances.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, location_name: "autoScalingGroups"))
+    TargetInstances.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
     TargetInstances.struct_class = Types::TargetInstances
 
     TimeRange.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "start"))
@@ -831,6 +853,8 @@ module Aws::CodeDeploy
     UpdateDeploymentGroupInput.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
     UpdateDeploymentGroupInput.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     UpdateDeploymentGroupInput.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
+    UpdateDeploymentGroupInput.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
+    UpdateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     UpdateDeploymentGroupInput.struct_class = Types::UpdateDeploymentGroupInput
 
     UpdateDeploymentGroupOutput.add_member(:hooks_not_cleaned_up, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "hooksNotCleanedUp"))
@@ -1035,6 +1059,9 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerInfoException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStyleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEC2TagCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOnPremisesTagCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: TagSetListLimitExceededException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1412,6 +1439,9 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerInfoException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStyleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEC2TagCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOnPremisesTagCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: TagSetListLimitExceededException)
       end)
     end
 
