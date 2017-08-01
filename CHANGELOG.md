@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.21 (2017-08-01)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
