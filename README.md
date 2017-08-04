@@ -25,8 +25,14 @@ This allows version 1 and version 2 to be used in the same application.
 
 ## Installation
 
-The AWS SDK for Ruby is available as the `aws-sdk` gem from RubyGems. Please
-use a major version when expressing a dependency on `aws-sdk`.
+The AWS SDK for Ruby is available as the `aws-sdk` gem from RubyGems.
+
+To install,
+```ruby
+gem install aws-sdk
+```
+
+Please use a major version when expressing a dependency on `aws-sdk`.
 
 ```ruby
 gem 'aws-sdk', '~> 2'
