@@ -274,8 +274,8 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::ApplicationVersionDescription>]
     #
     # @!attribute [rw] next_token
-    #   For a paginated request, the token that you can pass in a subsequent
-    #   request to get the next page.
+    #   In a paginated request, the token that you can pass in a subsequent
+    #   request to get the next response page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionsMessage AWS API Documentation
@@ -775,7 +775,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -798,7 +798,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #   @return [String]
     #
     # @!attribute [rw] application_name
@@ -1206,9 +1206,9 @@ module Aws::ElasticBeanstalk
     #
     #   Constraint: Must be from 4 to 40 characters in length. The name can
     #   contain only letters, numbers, and hyphens. It cannot start or end
-    #   with a hyphen. This name must be unique in your account. If the
-    #   specified name already exists, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   with a hyphen. This name must be unique within a region in your
+    #   account. If the specified name already exists in the region, AWS
+    #   Elastic Beanstalk returns an `InvalidParameterValue` error.
     #
     #   Default: If the CNAME parameter is not specified, the environment
     #   name becomes part of the CNAME, and therefore part of the visible
@@ -1269,7 +1269,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #   @return [String]
     #
     # @!attribute [rw] option_settings
@@ -1571,7 +1571,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] deployment_time
-    #   For in-progress deployments, the time that the deloyment started.
+    #   For in-progress deployments, the time that the deployment started.
     #
     #   For completed deployments, the time that the deployment ended.
     #   @return [Time]
@@ -1608,13 +1608,19 @@ module Aws::ElasticBeanstalk
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_records
-    #   Specify a maximum number of application versions to paginate in the
-    #   request.
+    #   For a paginated request. Specify a maximum number of application
+    #   versions to include in each response.
+    #
+    #   If no `MaxRecords` is specified, all available application versions
+    #   are retrieved in a single response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Specify a next token to retrieve the next page in a paginated
-    #   request.
+    #   For a paginated request. Specify a token from a previous response
+    #   page to retrieve the next response page. All other parameter values
+    #   must be identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersionsMessage AWS API Documentation
@@ -2002,6 +2008,8 @@ module Aws::ElasticBeanstalk
     #         environment_names: ["EnvironmentName"],
     #         include_deleted: false,
     #         included_deleted_back_to: Time.now,
+    #         max_records: 1,
+    #         next_token: "Token",
     #       }
     #
     # @!attribute [rw] application_name
@@ -2040,6 +2048,22 @@ module Aws::ElasticBeanstalk
     #   environments deleted after this date are displayed.
     #   @return [Time]
     #
+    # @!attribute [rw] max_records
+    #   For a paginated request. Specify a maximum number of environments to
+    #   include in each response.
+    #
+    #   If no `MaxRecords` is specified, all available environments are
+    #   retrieved in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For a paginated request. Specify a token from a previous response
+    #   page to retrieve the next response page. All other parameter values
+    #   must be identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentsMessage AWS API Documentation
     #
     class DescribeEnvironmentsMessage < Struct.new(
@@ -2048,7 +2072,9 @@ module Aws::ElasticBeanstalk
       :environment_ids,
       :environment_names,
       :include_deleted,
-      :included_deleted_back_to)
+      :included_deleted_back_to,
+      :max_records,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2267,7 +2293,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -2365,6 +2391,11 @@ module Aws::ElasticBeanstalk
     #   A list of links to other environments in the same group.
     #   @return [Array<Types::EnvironmentLink>]
     #
+    # @!attribute [rw] environment_arn
+    #   The environment's Amazon Resource Name (ARN), which can be used in
+    #   other API reuqests that require an ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation
     #
     class EnvironmentDescription < Struct.new(
@@ -2386,7 +2417,8 @@ module Aws::ElasticBeanstalk
       :health_status,
       :resources,
       :tier,
-      :environment_links)
+      :environment_links,
+      :environment_arn)
       include Aws::Structure
     end
 
@@ -2396,10 +2428,16 @@ module Aws::ElasticBeanstalk
     #   Returns an EnvironmentDescription list.
     #   @return [Array<Types::EnvironmentDescription>]
     #
+    # @!attribute [rw] next_token
+    #   In a paginated request, the token that you can pass in a subsequent
+    #   request to get the next response page.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescriptionsMessage AWS API Documentation
     #
     class EnvironmentDescriptionsMessage < Struct.new(
-      :environments)
+      :environments,
+      :next_token)
       include Aws::Structure
     end
 
@@ -2587,7 +2625,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #   @return [String]
     #
     # @!attribute [rw] request_id

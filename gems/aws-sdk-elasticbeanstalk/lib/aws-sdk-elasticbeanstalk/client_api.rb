@@ -114,6 +114,7 @@ module Aws::ElasticBeanstalk
     Ec2InstanceId = Shapes::StringShape.new(name: 'Ec2InstanceId')
     ElasticBeanstalkServiceException = Shapes::StructureShape.new(name: 'ElasticBeanstalkServiceException')
     EndpointURL = Shapes::StringShape.new(name: 'EndpointURL')
+    EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentDescription = Shapes::StructureShape.new(name: 'EnvironmentDescription')
     EnvironmentDescriptionsList = Shapes::ListShape.new(name: 'EnvironmentDescriptionsList')
     EnvironmentDescriptionsMessage = Shapes::StructureShape.new(name: 'EnvironmentDescriptionsMessage')
@@ -613,6 +614,8 @@ module Aws::ElasticBeanstalk
     DescribeEnvironmentsMessage.add_member(:environment_names, Shapes::ShapeRef.new(shape: EnvironmentNamesList, location_name: "EnvironmentNames"))
     DescribeEnvironmentsMessage.add_member(:include_deleted, Shapes::ShapeRef.new(shape: IncludeDeleted, location_name: "IncludeDeleted"))
     DescribeEnvironmentsMessage.add_member(:included_deleted_back_to, Shapes::ShapeRef.new(shape: IncludeDeletedBackTo, location_name: "IncludedDeletedBackTo"))
+    DescribeEnvironmentsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeEnvironmentsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeEnvironmentsMessage.struct_class = Types::DescribeEnvironmentsMessage
 
     DescribeEventsMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
@@ -665,11 +668,13 @@ module Aws::ElasticBeanstalk
     EnvironmentDescription.add_member(:resources, Shapes::ShapeRef.new(shape: EnvironmentResourcesDescription, location_name: "Resources"))
     EnvironmentDescription.add_member(:tier, Shapes::ShapeRef.new(shape: EnvironmentTier, location_name: "Tier"))
     EnvironmentDescription.add_member(:environment_links, Shapes::ShapeRef.new(shape: EnvironmentLinks, location_name: "EnvironmentLinks"))
+    EnvironmentDescription.add_member(:environment_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "EnvironmentArn"))
     EnvironmentDescription.struct_class = Types::EnvironmentDescription
 
     EnvironmentDescriptionsList.member = Shapes::ShapeRef.new(shape: EnvironmentDescription)
 
     EnvironmentDescriptionsMessage.add_member(:environments, Shapes::ShapeRef.new(shape: EnvironmentDescriptionsList, location_name: "Environments"))
+    EnvironmentDescriptionsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     EnvironmentDescriptionsMessage.struct_class = Types::EnvironmentDescriptionsMessage
 
     EnvironmentHealthAttributes.member = Shapes::ShapeRef.new(shape: EnvironmentHealthAttribute)

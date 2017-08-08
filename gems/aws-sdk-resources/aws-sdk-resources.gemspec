@@ -56,7 +56,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-efs', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-emr', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-elasticache', '1.0.0.rc11')
-  spec.add_dependency('aws-sdk-elasticbeanstalk', '1.0.0.rc13')
+  spec.add_dependency('aws-sdk-elasticbeanstalk', '1.0.0.rc14')
   spec.add_dependency('aws-sdk-elasticloadbalancing', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-elasticloadbalancingv2', '1.0.0.rc12')
   spec.add_dependency('aws-sdk-elastictranscoder', '1.0.0.rc10')

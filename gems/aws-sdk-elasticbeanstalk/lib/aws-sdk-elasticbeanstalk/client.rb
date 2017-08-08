@@ -307,6 +307,7 @@ module Aws::ElasticBeanstalk
     # @return [Types::EnvironmentDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnvironmentDescriptionsMessage#environments #environments} => Array&lt;Types::EnvironmentDescription&gt;
+    #   * {Types::EnvironmentDescriptionsMessage#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -346,6 +347,8 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links #=> Array
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
+    #   resp.environments[0].environment_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments AWS API Documentation
     #
@@ -771,9 +774,9 @@ module Aws::ElasticBeanstalk
     #
     #   Constraint: Must be from 4 to 40 characters in length. The name can
     #   contain only letters, numbers, and hyphens. It cannot start or end
-    #   with a hyphen. This name must be unique in your account. If the
-    #   specified name already exists, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   with a hyphen. This name must be unique within a region in your
+    #   account. If the specified name already exists in the region, AWS
+    #   Elastic Beanstalk returns an `InvalidParameterValue` error.
     #
     #   Default: If the CNAME parameter is not specified, the environment name
     #   becomes part of the CNAME, and therefore part of the visible URL for
@@ -824,7 +827,7 @@ module Aws::ElasticBeanstalk
     #   values associated with the specified solution stack.
     #
     # @option params [String] :platform_arn
-    #   The ARN of the custom platform.
+    #   The ARN of the platform.
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   If specified, AWS Elastic Beanstalk sets the specified configuration
@@ -857,6 +860,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
+    #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
     #
     #
     # @example Example: To create a new environment for an application
@@ -959,6 +963,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links #=> Array
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
+    #   resp.environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment AWS API Documentation
     #
@@ -1293,11 +1298,18 @@ module Aws::ElasticBeanstalk
     #   Specify a version label to show a specific application version.
     #
     # @option params [Integer] :max_records
-    #   Specify a maximum number of application versions to paginate in the
-    #   request.
+    #   For a paginated request. Specify a maximum number of application
+    #   versions to include in each response.
+    #
+    #   If no `MaxRecords` is specified, all available application versions
+    #   are retrieved in a single response.
     #
     # @option params [String] :next_token
-    #   Specify a next token to retrieve the next page in a paginated request.
+    #   For a paginated request. Specify a token from a previous response page
+    #   to retrieve the next response page. All other parameter values must be
+    #   identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
     #
     # @return [Types::ApplicationVersionDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2059,9 +2071,24 @@ module Aws::ElasticBeanstalk
     #   If specified when `IncludeDeleted` is set to `true`, then environments
     #   deleted after this date are displayed.
     #
+    # @option params [Integer] :max_records
+    #   For a paginated request. Specify a maximum number of environments to
+    #   include in each response.
+    #
+    #   If no `MaxRecords` is specified, all available environments are
+    #   retrieved in a single response.
+    #
+    # @option params [String] :next_token
+    #   For a paginated request. Specify a token from a previous response page
+    #   to retrieve the next response page. All other parameter values must be
+    #   identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
+    #
     # @return [Types::EnvironmentDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnvironmentDescriptionsMessage#environments #environments} => Array&lt;Types::EnvironmentDescription&gt;
+    #   * {Types::EnvironmentDescriptionsMessage#next_token #next_token} => String
     #
     #
     # @example Example: To view information about an environment
@@ -2108,6 +2135,8 @@ module Aws::ElasticBeanstalk
     #     environment_names: ["EnvironmentName"],
     #     include_deleted: false,
     #     included_deleted_back_to: Time.now,
+    #     max_records: 1,
+    #     next_token: "Token",
     #   })
     #
     # @example Response structure
@@ -2140,6 +2169,8 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links #=> Array
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
+    #   resp.environments[0].environment_arn #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments AWS API Documentation
     #
@@ -3001,6 +3032,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
+    #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
     #
     #
     # @example Example: To terminate an environment
@@ -3069,6 +3101,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links #=> Array
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
+    #   resp.environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment AWS API Documentation
     #
@@ -3535,6 +3568,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
+    #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
     #
     #
     # @example Example: To update an environment to a new version
@@ -3680,6 +3714,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links #=> Array
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
+    #   resp.environment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment AWS API Documentation
     #
@@ -3789,7 +3824,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.0.0.rc13'
+      context[:gem_version] = '1.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 
