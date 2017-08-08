@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.22 (2017-08-08)
+------------------
+
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
 
 2.10.21 (2017-08-01)
