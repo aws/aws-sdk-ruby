@@ -435,8 +435,8 @@ module Aws::RDS
     #   parameter.
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   time per AWS Region. To see the time blocks available, see [ Adjusting
+    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -458,7 +458,7 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region, occurring on a random day of the week. To see the
+    #   time per AWS Region, occurring on a random day of the week. To see the
     #   time blocks available, see [ Adjusting the Preferred Maintenance
     #   Window][1] in the *Amazon RDS User Guide.*
     #
@@ -489,38 +489,38 @@ module Aws::RDS
     #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
     #   default encryption key. AWS KMS creates the default encryption key for
     #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS region.
+    #   key for each AWS Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another
-    #   region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination region. This key is used to encrypt the Read Replica in
-    #   that region.
+    #   If you create a Read Replica of an encrypted DB cluster in another AWS
+    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
+    #   destination AWS Region. This key is used to encrypt the Read Replica
+    #   in that AWS Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source region where the
-    #   DB cluster will be replicated from. You only need to specify
+    #   `CreateDBCluster` action to be called in the source AWS Region where
+    #   the DB cluster will be replicated from. You only need to specify
     #   `PreSignedUrl` when you are performing cross-region replication from
     #   an encrypted DB cluster.
     #
     #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source region that contains the
-    #   encrypted DB cluster to be copied.
+    #   API action that can be executed in the source AWS Region that contains
+    #   the encrypted DB cluster to be copied.
     #
     #   The pre-signed URL request must contain the following parameter
     #   values:
     #
     #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster in the destination region. This should
-    #     refer to the same KMS key for both the `CreateDBCluster` action that
-    #     is called in the destination region, and the action contained in the
-    #     pre-signed URL.
+    #     the copy of the DB cluster in the destination AWS Region. This
+    #     should refer to the same KMS key for both the `CreateDBCluster`
+    #     action that is called in the destination AWS Region, and the action
+    #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the region that Aurora Read
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
     #     Replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source region. For
+    #     Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are copying an encrypted DB cluster from the
     #     us-west-2 region, then your `ReplicationSourceIdentifier` would look
     #     like Example:
@@ -752,8 +752,8 @@ module Aws::RDS
     #   parameter.
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   time per AWS Region. To see the time blocks available, see [ Adjusting
+    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -775,7 +775,7 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region, occurring on a random day of the week. To see the
+    #   time per AWS Region, occurring on a random day of the week. To see the
     #   time blocks available, see [ Adjusting the Preferred Maintenance
     #   Window][1] in the *Amazon RDS User Guide.*
     #

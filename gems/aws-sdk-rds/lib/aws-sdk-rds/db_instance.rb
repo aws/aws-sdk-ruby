@@ -613,7 +613,7 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
-    #   Not every database engine is available for every AWS region.
+    #   Not every database engine is available for every AWS Region.
     #
     #   Valid Values:
     #
@@ -641,12 +641,12 @@ module Aws::RDS
     #
     #   * `sqlserver-web`
     # @option options [String] :master_username
-    #   The name for the master database user.
+    #   The name for the master user.
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. You specify the name for the master database user when
-    #   you create your DB cluster.
+    #   Not applicable. The name for the master user is managed by the DB
+    #   cluster. For more information, see CreateDBCluster.
     #
     #   **MariaDB**
     #
@@ -696,13 +696,13 @@ module Aws::RDS
     #
     #   * Cannot be a reserved word for the chosen database engine.
     # @option options [String] :master_user_password
-    #   The password for the master database user. Can be any printable ASCII
-    #   character except "/", """, or "@".
+    #   The password for the master user. Can be any printable ASCII character
+    #   except "/", """, or "@".
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. You specify the password for the master database user
-    #   when you create your DB cluster.
+    #   Not applicable. The password for the master user is managed by the DB
+    #   cluster. For more information, see CreateDBCluster.
     #
     #   **MariaDB**
     #
@@ -730,6 +730,11 @@ module Aws::RDS
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB instance.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The associated list of EC2 VPC security groups is
+    #   managed by the DB cluster. For more information, see CreateDBCluster.
+    #
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :availability_zone
@@ -738,13 +743,13 @@ module Aws::RDS
     #   and Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   region.
+    #   AWS Region.
     #
     #   Example: `us-east-1d`
     #
     #   Constraint: The AvailabilityZone parameter cannot be specified if the
     #   MultiAZ parameter is set to `true`. The specified Availability Zone
-    #   must be in the same region as the current endpoint.
+    #   must be in the same AWS Region as the current endpoint.
     #
     #
     #
@@ -761,7 +766,7 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region, occurring on a random day of the week. To see the
+    #   time per AWS Region, occurring on a random day of the week. To see the
     #   time blocks available, see [ Adjusting the Preferred Maintenance
     #   Window][2] in the *Amazon RDS User Guide.*
     #
@@ -790,6 +795,11 @@ module Aws::RDS
     #   this parameter to a positive number enables backups. Setting this
     #   parameter to 0 disables automated backups.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The retention period for automated backups is managed
+    #   by the DB cluster. For more information, see CreateDBCluster.
+    #
     #   Default: 1
     #
     #   Constraints:
@@ -802,9 +812,14 @@ module Aws::RDS
     #   automated backups are enabled, using the `BackupRetentionPeriod`
     #   parameter. For more information, see [DB Instance Backups][1].
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The daily time range for creating automated backups is
+    #   managed by the DB cluster. For more information, see CreateDBCluster.
+    #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region. To see the time blocks available, see [ Adjusting the
-    #   Preferred DB Instance Maintenance Window][2].
+    #   time per AWS Region. To see the time blocks available, see [ Adjusting
+    #   the Preferred DB Instance Maintenance Window][2].
     #
     #   Constraints:
     #
@@ -876,15 +891,13 @@ module Aws::RDS
     #
     #   The following are the database engines and major and minor versions
     #   that are available with Amazon RDS. Not every database engine is
-    #   available for every AWS region.
+    #   available for every AWS Region.
     #
     #   **Amazon Aurora**
     #
-    #   * Version 5.6 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
-    #     us-east-2, us-west-2): ` 5.6.10a`
-    #
-    #   ^
+    #   Not applicable. The version number of the database engine to be used
+    #   by the DB instance is managed by the DB cluster. For more information,
+    #   see CreateDBCluster.
     #
     #   **MariaDB**
     #
@@ -947,9 +960,6 @@ module Aws::RDS
     #
     #   * `5.7.11` (supported in all AWS regions)
     #
-    #   * `5.7.10` (supported in all regions except us-east-2, ca-central-1,
-    #     eu-west-2)
-    #
     #
     #
     #   * `5.6.35` (supported in all AWS regions)
@@ -960,24 +970,6 @@ module Aws::RDS
     #
     #   * `5.6.27` (supported in all regions except us-east-2, ca-central-1,
     #     eu-west-2)
-    #
-    #   * `5.6.23` (supported in all regions except us-east-2, ap-south-1,
-    #     ca-central-1, eu-west-2)
-    #
-    #   * `5.6.22` (supported in all regions except us-east-2, ap-south-1,
-    #     ap-northeast-2, ca-central-1, eu-west-2)
-    #
-    #   * `5.6.21b` (supported in all regions except us-east-2, ap-south-1,
-    #     ap-northeast-2, ca-central-1, eu-west-2)
-    #
-    #   * `5.6.21` (supported in all regions except us-east-2, ap-south-1,
-    #     ap-northeast-2, ca-central-1, eu-west-2)
-    #
-    #   * `5.6.19b` (supported in all regions except us-east-2, ap-south-1,
-    #     ap-northeast-2, ca-central-1, eu-west-2)
-    #
-    #   * `5.6.19a` (supported in all regions except us-east-2, ap-south-1,
-    #     ap-northeast-2, ca-central-1, eu-west-2)
     #
     #
     #
@@ -1075,6 +1067,11 @@ module Aws::RDS
     # @option options [String] :character_set_name
     #   For supported engines, indicates that the DB instance should be
     #   associated with the specified CharacterSet.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The character set is managed by the DB cluster. For
+    #   more information, see CreateDBCluster.
     # @option options [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
     #   true specifies an Internet-facing instance with a publicly resolvable
@@ -1122,6 +1119,11 @@ module Aws::RDS
     # @option options [Boolean] :storage_encrypted
     #   Specifies whether the DB instance is encrypted.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The encryption for DB instances is managed by the DB
+    #   cluster. For more information, see CreateDBCluster.
+    #
     #   Default: false
     # @option options [String] :kms_key_id
     #   The KMS key identifier for an encrypted DB instance.
@@ -1132,11 +1134,16 @@ module Aws::RDS
     #   instance, then you can use the KMS key alias instead of the ARN for
     #   the KM encryption key.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The KMS key identifier is managed by the DB cluster.
+    #   For more information, see CreateDBCluster.
+    #
     #   If the `StorageEncrypted` parameter is true, and you do not specify a
     #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
     #   default encryption key. AWS KMS creates the default encryption key for
     #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS region.
+    #   key for each AWS Region.
     # @option options [String] :domain
     #   Specify the Active Directory Domain to create the instance in.
     # @option options [Boolean] :copy_tags_to_snapshot
@@ -1193,6 +1200,13 @@ module Aws::RDS
     #
     #   You can enable IAM database authentication for the following database
     #   engines:
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Mapping AWS IAM accounts to database accounts is
+    #   managed by the DB cluster. For more information, see CreateDBCluster.
+    #
+    #   **MySQL**
     #
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
@@ -1260,7 +1274,7 @@ module Aws::RDS
     #   in.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   region.
+    #   AWS Region.
     #
     #   Example: `us-east-1d`
     # @option options [Integer] :port
@@ -1311,12 +1325,12 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Can only be specified if the source DB instance identifier specifies
-    #     a DB instance in another region.
+    #     a DB instance in another AWS Region.
     #
-    #   * The specified DB subnet group must be in the same region in which
-    #     the operation is running.
+    #   * The specified DB subnet group must be in the same AWS Region in
+    #     which the operation is running.
     #
-    #   * All Read Replicas in one region that are created from the same
+    #   * All Read Replicas in one AWS Region that are created from the same
     #     source DB instance must either:&gt;
     #
     #     * Specify DB subnet groups from the same VPC. All these Read
@@ -1369,61 +1383,65 @@ module Aws::RDS
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you create an unencrypted Read Replica and specify a value for the
-    #   `KmsKeyId` parameter, Amazon RDS encrypts the target Read Replica
-    #   using the specified KMS encryption key.
+    #   If you specify this parameter when you create a Read Replica from an
+    #   unencrypted DB instance, the Read Replica is encrypted.
     #
-    #   If you create an encrypted Read Replica from your AWS account, you can
-    #   specify a value for `KmsKeyId` to encrypt the Read Replica with a new
-    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
-    #   the Read Replica is encrypted with the same KMS key as the source DB
-    #   instance.
+    #   If you create an encrypted Read Replica in the same AWS Region as the
+    #   source DB instance, then you do not have to specify a value for this
+    #   parameter. The Read Replica is encrypted with the same KMS key as the
+    #   source DB instance.
     #
-    #   If you create an encrypted Read Replica in a different AWS region,
-    #   then you must specify a KMS key for the destination AWS region. KMS
-    #   encryption keys are specific to the region that they are created in,
-    #   and you cannot use encryption keys from one region in another region.
+    #   If you create an encrypted Read Replica in a different AWS Region,
+    #   then you must specify a KMS key for the destination AWS Region. KMS
+    #   encryption keys are specific to the AWS Region that they are created
+    #   in, and you cannot use encryption keys from one AWS Region in another
+    #   AWS Region.
     # @option options [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the `
-    #   CreateDBInstanceReadReplica` API action in the AWS region that
-    #   contains the source DB instance. The `PreSignedUrl` parameter must be
-    #   used when encrypting a Read Replica from another AWS region.
+    #   The URL that contains a Signature Version 4 signed request for the
+    #   `CreateDBInstanceReadReplica` API action in the source AWS Region that
+    #   contains the source DB instance.
+    #
+    #   You must specify this parameter when you create an encrypted Read
+    #   Replica from another AWS Region by using the Amazon RDS API. You can
+    #   specify the source region option instead of this parameter when you
+    #   create an encrypted Read Replica from another AWS Region by using the
+    #   AWS CLI.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
-    #   source region that contains the encrypted DB instance. The presigned
-    #   URL request must contain the following parameter values:
+    #   source AWS Region that contains the encrypted source DB instance. The
+    #   presigned URL request must contain the following parameter values:
     #
-    #   * `DestinationRegion` - The AWS Region that the Read Replica is
-    #     created in. This region is the same one where the
+    #   * `DestinationRegion` - The AWS Region that the encrypted Read Replica
+    #     will be created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
     #
-    #     For example, if you create an encrypted Read Replica in the
-    #     us-east-1 region, and the source DB instance is in the west-2
-    #     region, then you call the `CreateDBInstanceReadReplica` action in
-    #     the us-east-1 region and provide a presigned URL that contains a
-    #     call to the `CreateDBInstanceReadReplica` action in the us-west-2
-    #     region. For this example, the `DestinationRegion` in the presigned
-    #     URL must be set to the us-east-1 region.
+    #     For example, if you create an encrypted DB instance in the us-west-1
+    #     region, from a source DB instance in the us-east-2 region, then you
+    #     call the `CreateDBInstanceReadReplica` action in the us-east-1
+    #     region and provide a presigned URL that contains a call to the
+    #     `CreateDBInstanceReadReplica` action in the us-west-2 region. For
+    #     this example, the `DestinationRegion` in the presigned URL must be
+    #     set to the us-east-1 region.
     #
     #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the Read Replica in the destination region. This is the same
+    #     the Read Replica in the destination AWS Region. This is the same
     #     identifier for both the `CreateDBInstanceReadReplica` action that is
-    #     called in the destination region, and the action contained in the
-    #     presigned URL.
+    #     called in the destination AWS Region, and the action contained in
+    #     the presigned URL.
     #
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
-    #     encrypted Read Replica to be created. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source region. For
-    #     example, if you create an encrypted Read Replica from a DB instance
-    #     in the us-west-2 region, then your `SourceDBInstanceIdentifier`
-    #     would look like this example: `
-    #     arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-instance-20161115`.
+    #     encrypted DB instance to be replicated. This identifier must be in
+    #     the Amazon Resource Name (ARN) format for the source AWS Region. For
+    #     example, if you are creating an encrypted Read Replica from a DB
+    #     instance in the us-west-2 region, then your
+    #     `SourceDBInstanceIdentifier` looks like the following example:
+    #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
     #
-    #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #   To learn how to generate a Signature Version 4 signed request, see
+    #   [Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [Signature Version 4 Signing Process][2].
     #
     #
     #
@@ -1719,6 +1737,11 @@ module Aws::RDS
     #   A list of EC2 VPC security groups to authorize on this DB instance.
     #   This change is asynchronously applied as soon as possible.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The associated list of EC2 VPC security groups is
+    #   managed by the DB cluster. For more information, see ModifyDBCluster.
+    #
     #   Constraints:
     #
     #   * Must be 1 to 255 alphanumeric characters
@@ -1747,14 +1770,19 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
     # @option options [String] :master_user_password
-    #   The new password for the DB instance master user. Can be any printable
-    #   ASCII character except "/", """, or "@".
+    #   The new password for the master user. Can be any printable ASCII
+    #   character except "/", """, or "@".
     #
     #   Changing this parameter does not result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
     #   response.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The password for the master user is managed by the DB
+    #   cluster. For more information, see ModifyDBCluster.
     #
     #   Default: Uses existing setting
     #
@@ -1793,6 +1821,11 @@ module Aws::RDS
     #   change the parameter from one non-zero value to another non-zero
     #   value, the change is asynchronously applied as soon as possible.
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The retention period for automated backups is managed
+    #   by the DB cluster. For more information, see ModifyDBCluster.
+    #
     #   Default: Uses existing setting
     #
     #   Constraints:
@@ -1812,6 +1845,11 @@ module Aws::RDS
     #   `BackupRetentionPeriod` parameter. Changing this parameter does not
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. The daily time range for creating automated backups is
+    #   managed by the DB cluster. For more information, see ModifyDBCluster.
     #
     #   Constraints:
     #
@@ -1853,7 +1891,7 @@ module Aws::RDS
     #   next maintenance window unless the `ApplyImmediately` parameter is set
     #   to `true` for this request.
     #
-    #   For major version upgrades, if a non-default DB parameter group is
+    #   For major version upgrades, if a nondefault DB parameter group is
     #   currently in use, a new DB parameter group in the DB parameter group
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
@@ -2080,6 +2118,13 @@ module Aws::RDS
     #   You can enable IAM database authentication for the following database
     #   engines
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Mapping AWS IAM accounts to database accounts is
+    #   managed by the DB cluster. For more information, see ModifyDBCluster.
+    #
+    #   **MySQL**
+    #
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
@@ -2121,8 +2166,8 @@ module Aws::RDS
     #   parameter.
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per region. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   time per AWS Region. To see the time blocks available, see [ Adjusting
+    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #

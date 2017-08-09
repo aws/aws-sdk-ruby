@@ -89,7 +89,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-organizations', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-pinpoint', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-polly', '1.0.0.rc12')
-  spec.add_dependency('aws-sdk-rds', '1.0.0.rc15')
+  spec.add_dependency('aws-sdk-rds', '1.0.0.rc16')
   spec.add_dependency('aws-sdk-redshift', '1.0.0.rc10')
   spec.add_dependency('aws-sdk-rekognition', '1.0.0.rc15')
   spec.add_dependency('aws-sdk-resourcegroupstaggingapi', '1.0.0.rc9')
