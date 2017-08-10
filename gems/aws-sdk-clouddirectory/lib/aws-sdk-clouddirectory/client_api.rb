@@ -54,6 +54,8 @@ module Aws::CloudDirectory
     BatchDetachFromIndexResponse = Shapes::StructureShape.new(name: 'BatchDetachFromIndexResponse')
     BatchDetachObject = Shapes::StructureShape.new(name: 'BatchDetachObject')
     BatchDetachObjectResponse = Shapes::StructureShape.new(name: 'BatchDetachObjectResponse')
+    BatchDetachPolicy = Shapes::StructureShape.new(name: 'BatchDetachPolicy')
+    BatchDetachPolicyResponse = Shapes::StructureShape.new(name: 'BatchDetachPolicyResponse')
     BatchDetachTypedLink = Shapes::StructureShape.new(name: 'BatchDetachTypedLink')
     BatchDetachTypedLinkResponse = Shapes::StructureShape.new(name: 'BatchDetachTypedLinkResponse')
     BatchGetObjectInformation = Shapes::StructureShape.new(name: 'BatchGetObjectInformation')
@@ -469,6 +471,12 @@ module Aws::CloudDirectory
     BatchDetachObjectResponse.add_member(:detached_object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "detachedObjectIdentifier"))
     BatchDetachObjectResponse.struct_class = Types::BatchDetachObjectResponse
 
+    BatchDetachPolicy.add_member(:policy_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "PolicyReference"))
+    BatchDetachPolicy.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchDetachPolicy.struct_class = Types::BatchDetachPolicy
+
+    BatchDetachPolicyResponse.struct_class = Types::BatchDetachPolicyResponse
+
     BatchDetachTypedLink.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
     BatchDetachTypedLink.struct_class = Types::BatchDetachTypedLink
 
@@ -644,6 +652,7 @@ module Aws::CloudDirectory
     BatchWriteOperation.add_member(:add_facet_to_object, Shapes::ShapeRef.new(shape: BatchAddFacetToObject, location_name: "AddFacetToObject"))
     BatchWriteOperation.add_member(:remove_facet_from_object, Shapes::ShapeRef.new(shape: BatchRemoveFacetFromObject, location_name: "RemoveFacetFromObject"))
     BatchWriteOperation.add_member(:attach_policy, Shapes::ShapeRef.new(shape: BatchAttachPolicy, location_name: "AttachPolicy"))
+    BatchWriteOperation.add_member(:detach_policy, Shapes::ShapeRef.new(shape: BatchDetachPolicy, location_name: "DetachPolicy"))
     BatchWriteOperation.add_member(:create_index, Shapes::ShapeRef.new(shape: BatchCreateIndex, location_name: "CreateIndex"))
     BatchWriteOperation.add_member(:attach_to_index, Shapes::ShapeRef.new(shape: BatchAttachToIndex, location_name: "AttachToIndex"))
     BatchWriteOperation.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndex, location_name: "DetachFromIndex"))
@@ -661,6 +670,7 @@ module Aws::CloudDirectory
     BatchWriteOperationResponse.add_member(:add_facet_to_object, Shapes::ShapeRef.new(shape: BatchAddFacetToObjectResponse, location_name: "AddFacetToObject"))
     BatchWriteOperationResponse.add_member(:remove_facet_from_object, Shapes::ShapeRef.new(shape: BatchRemoveFacetFromObjectResponse, location_name: "RemoveFacetFromObject"))
     BatchWriteOperationResponse.add_member(:attach_policy, Shapes::ShapeRef.new(shape: BatchAttachPolicyResponse, location_name: "AttachPolicy"))
+    BatchWriteOperationResponse.add_member(:detach_policy, Shapes::ShapeRef.new(shape: BatchDetachPolicyResponse, location_name: "DetachPolicy"))
     BatchWriteOperationResponse.add_member(:create_index, Shapes::ShapeRef.new(shape: BatchCreateIndexResponse, location_name: "CreateIndex"))
     BatchWriteOperationResponse.add_member(:attach_to_index, Shapes::ShapeRef.new(shape: BatchAttachToIndexResponse, location_name: "AttachToIndex"))
     BatchWriteOperationResponse.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndexResponse, location_name: "DetachFromIndex"))

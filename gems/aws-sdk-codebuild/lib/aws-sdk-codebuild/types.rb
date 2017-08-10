@@ -314,7 +314,7 @@ module Aws::CodeBuild
     #         name: "ProjectName", # required
     #         description: "ProjectDescription",
     #         source: { # required
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
     #           location: "String",
     #           buildspec: "String",
     #           auth: {
@@ -1092,7 +1092,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
     #         location: "String",
     #         buildspec: "String",
     #         auth: {
@@ -1358,7 +1358,7 @@ module Aws::CodeBuild
     #         name: "NonEmptyString", # required
     #         description: "ProjectDescription",
     #         source: {
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
     #           location: "String",
     #           buildspec: "String",
     #           auth: {

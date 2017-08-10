@@ -975,6 +975,45 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Detaches the specified policy from the specified directory inside a
+    # BatchRead operation. For more information, see DetachPolicy and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchDetachPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] policy_reference
+    #   Reference that identifies the policy object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose policy object will be
+    #   detached.
+    #   @return [Types::ObjectReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachPolicy AWS API Documentation
+    #
+    class BatchDetachPolicy < Struct.new(
+      :policy_reference,
+      :object_reference)
+      include Aws::Structure
+    end
+
+    # Represents the output of a DetachPolicy response operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachPolicyResponse AWS API Documentation
+    #
+    class BatchDetachPolicyResponse < Aws::EmptyStructure; end
+
     # Detaches a typed link from a specified source and target object inside
     # a BatchRead operation. For more information, see DetachTypedLink and
     # BatchReadRequest$Operations.
@@ -2570,6 +2609,14 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         detach_policy: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
     #         create_index: {
     #           ordered_indexed_attribute_list: [ # required
     #             {
@@ -2686,6 +2733,10 @@ module Aws::CloudDirectory
     #   limited number of attached policies.
     #   @return [Types::BatchAttachPolicy]
     #
+    # @!attribute [rw] detach_policy
+    #   Detaches a policy from a Directory.
+    #   @return [Types::BatchDetachPolicy]
+    #
     # @!attribute [rw] create_index
     #   Creates an index object. See [Indexing][1] for more information.
     #
@@ -2731,6 +2782,7 @@ module Aws::CloudDirectory
       :add_facet_to_object,
       :remove_facet_from_object,
       :attach_policy,
+      :detach_policy,
       :create_index,
       :attach_to_index,
       :detach_from_index,
@@ -2773,6 +2825,10 @@ module Aws::CloudDirectory
     #   Attaches a policy object to a regular object. An object can have a
     #   limited number of attached policies.
     #   @return [Types::BatchAttachPolicyResponse]
+    #
+    # @!attribute [rw] detach_policy
+    #   Detaches a policy from a Directory.
+    #   @return [Types::BatchDetachPolicyResponse]
     #
     # @!attribute [rw] create_index
     #   Creates an index object. See [Indexing][1] for more information.
@@ -2819,6 +2875,7 @@ module Aws::CloudDirectory
       :add_facet_to_object,
       :remove_facet_from_object,
       :attach_policy,
+      :detach_policy,
       :create_index,
       :attach_to_index,
       :detach_from_index,
@@ -2943,6 +3000,14 @@ module Aws::CloudDirectory
     #               },
     #             },
     #             attach_policy: {
+    #               policy_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #             },
+    #             detach_policy: {
     #               policy_reference: { # required
     #                 selector: "SelectorObjectReference",
     #               },

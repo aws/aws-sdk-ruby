@@ -870,6 +870,14 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         detach_policy: {
+    #           policy_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #         },
     #         create_index: {
     #           ordered_indexed_attribute_list: [ # required
     #             {
@@ -3505,7 +3513,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 
