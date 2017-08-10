@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.24 (2017-08-10)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
 
 * Feature - Aws::CodeBuild - Updated the API for AWS CodeBuild.
