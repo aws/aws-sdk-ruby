@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.25 (2017-08-11)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
