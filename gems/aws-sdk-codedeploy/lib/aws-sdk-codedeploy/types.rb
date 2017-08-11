@@ -586,7 +586,7 @@ module Aws::CodeDeploy
     #
     #       {
     #         deployment_config_name: "DeploymentConfigName", # required
-    #         minimum_healthy_hosts: {
+    #         minimum_healthy_hosts: { # required
     #           value: 1,
     #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #         },
@@ -706,6 +706,11 @@ module Aws::CodeDeploy
     #           elb_info_list: [
     #             {
     #               name: "ELBName",
+    #             },
+    #           ],
+    #           target_group_info_list: [
+    #             {
+    #               name: "TargetGroupName",
     #             },
     #           ],
     #         },
@@ -1681,7 +1686,8 @@ module Aws::CodeDeploy
     end
 
     # Information about a load balancer in Elastic Load Balancing to use in
-    # a deployment.
+    # a deployment. Instances are registered directly with a load balancer,
+    # and traffic is routed to the load balancer.
     #
     # @note When making an API call, you may pass ELBInfo
     #   data as a hash:
@@ -1694,7 +1700,7 @@ module Aws::CodeDeploy
     #   For blue/green deployments, the name of the load balancer that will
     #   be used to route traffic from original instances to replacement
     #   instances in a blue/green deployment. For in-place deployments, the
-    #   name of the load balancer that instances are deregistered from so
+    #   name of the load balancer that instances are deregistered from, so
     #   they are not serving traffic during a deployment, and then
     #   re-registered with after the deployment completes.
     #   @return [String]
@@ -2841,7 +2847,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about the load balancer used in a deployment.
+    # Information about the Elastic Load Balancing load balancer or target
+    # group used in a deployment.
     #
     # @note When making an API call, you may pass LoadBalancerInfo
     #   data as a hash:
@@ -2852,17 +2859,30 @@ module Aws::CodeDeploy
     #             name: "ELBName",
     #           },
     #         ],
+    #         target_group_info_list: [
+    #           {
+    #             name: "TargetGroupName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] elb_info_list
-    #   An array containing information about the load balancer in Elastic
-    #   Load Balancing to use in a deployment.
+    #   An array containing information about the load balancer to use for
+    #   load balancing in a deployment. In Elastic Load Balancing, load
+    #   balancers are used with Classic Load Balancers.
     #   @return [Array<Types::ELBInfo>]
+    #
+    # @!attribute [rw] target_group_info_list
+    #   An array containing information about the target group to use for
+    #   load balancing in a deployment. In Elastic Load Balancing, target
+    #   groups are used with Application Load Balancers.
+    #   @return [Array<Types::TargetGroupInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo AWS API Documentation
     #
     class LoadBalancerInfo < Struct.new(
-      :elb_info_list)
+      :elb_info_list,
+      :target_group_info_list)
       include Aws::Structure
     end
 
@@ -3355,6 +3375,34 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about a target group in Elastic Load Balancing to use in a
+    # deployment. Instances are registered as targets in a target group, and
+    # traffic is routed to the target group.
+    #
+    # @note When making an API call, you may pass TargetGroupInfo
+    #   data as a hash:
+    #
+    #       {
+    #         name: "TargetGroupName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   For blue/green deployments, the name of the target group that
+    #   instances in the original environment are deregistered from, and
+    #   instances in the replacement environment registered with. For
+    #   in-place deployments, the name of the target group that instances
+    #   are deregistered from, so they are not serving traffic during a
+    #   deployment, and then re-registered with after the deployment
+    #   completes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupInfo AWS API Documentation
+    #
+    class TargetGroupInfo < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Information about the instances to be used in the replacement
     # environment in a blue/green deployment.
     #
@@ -3570,6 +3618,11 @@ module Aws::CodeDeploy
     #           elb_info_list: [
     #             {
     #               name: "ELBName",
+    #             },
+    #           ],
+    #           target_group_info_list: [
+    #             {
+    #               name: "TargetGroupName",
     #             },
     #           ],
     #         },

@@ -358,6 +358,8 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_info_list #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployment_groups_info[0].last_successful_deployment.deployment_id #=> String
     #   resp.deployment_groups_info[0].last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_groups_info[0].last_successful_deployment.end_time #=> Time
@@ -517,6 +519,8 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployments_info[0].load_balancer_info.elb_info_list #=> Array
     #   resp.deployments_info[0].load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployments_info[0].load_balancer_info.target_group_info_list #=> Array
+    #   resp.deployments_info[0].load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployments_info[0].additional_deployment_status_info #=> String
     #   resp.deployments_info[0].file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #
@@ -761,7 +765,7 @@ module Aws::CodeDeploy
     # @option params [required, String] :deployment_config_name
     #   The name of the deployment configuration to create.
     #
-    # @option params [Types::MinimumHealthyHosts] :minimum_healthy_hosts
+    # @option params [required, Types::MinimumHealthyHosts] :minimum_healthy_hosts
     #   The minimum number of healthy instances that should be available at
     #   any time during the deployment. There are two parameters expected in
     #   the input: type and value.
@@ -790,7 +794,7 @@ module Aws::CodeDeploy
     #
     #   resp = client.create_deployment_config({
     #     deployment_config_name: "DeploymentConfigName", # required
-    #     minimum_healthy_hosts: {
+    #     minimum_healthy_hosts: { # required
     #       value: 1,
     #       type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #     },
@@ -961,6 +965,11 @@ module Aws::CodeDeploy
     #       elb_info_list: [
     #         {
     #           name: "ELBName",
+    #         },
+    #       ],
+    #       target_group_info_list: [
+    #         {
+    #           name: "TargetGroupName",
     #         },
     #       ],
     #     },
@@ -1286,6 +1295,8 @@ module Aws::CodeDeploy
     #   resp.deployment_info.blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployment_info.load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_info.load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_info.load_balancer_info.target_group_info_list #=> Array
+    #   resp.deployment_info.load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployment_info.additional_deployment_status_info #=> String
     #   resp.deployment_info.file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #
@@ -1399,6 +1410,8 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
     #   resp.deployment_group_info.load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_group_info.load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_group_info.load_balancer_info.target_group_info_list #=> Array
+    #   resp.deployment_group_info.load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployment_group_info.last_successful_deployment.deployment_id #=> String
     #   resp.deployment_group_info.last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_group_info.last_successful_deployment.end_time #=> Time
@@ -2276,6 +2289,11 @@ module Aws::CodeDeploy
     #           name: "ELBName",
     #         },
     #       ],
+    #       target_group_info_list: [
+    #         {
+    #           name: "TargetGroupName",
+    #         },
+    #       ],
     #     },
     #     ec2_tag_set: {
     #       ec2_tag_set_list: [
@@ -2329,7 +2347,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

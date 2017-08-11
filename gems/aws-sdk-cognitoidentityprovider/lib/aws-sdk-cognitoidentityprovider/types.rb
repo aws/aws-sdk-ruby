@@ -314,7 +314,7 @@ module Aws::CognitoIdentityProvider
     # user.
     #
     # @!attribute [rw] user
-    #   The user returned in the request to create a new user.
+    #   The newly created user.
     #   @return [Types::UserType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserResponse AWS API Documentation
@@ -395,6 +395,38 @@ module Aws::CognitoIdentityProvider
       :username)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass AdminDisableProviderForUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "StringType", # required
+    #         user: { # required
+    #           provider_name: "ProviderNameType",
+    #           provider_attribute_name: "StringType",
+    #           provider_attribute_value: "StringType",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   The user to be disabled.
+    #   @return [Types::ProviderUserIdentifierType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUserRequest AWS API Documentation
+    #
+    class AdminDisableProviderForUserRequest < Struct.new(
+      :user_pool_id,
+      :user)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUserResponse AWS API Documentation
+    #
+    class AdminDisableProviderForUserResponse < Aws::EmptyStructure; end
 
     # Represents the request to disable any user as an administrator.
     #
@@ -788,6 +820,81 @@ module Aws::CognitoIdentityProvider
       :authentication_result)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass AdminLinkProviderForUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "StringType", # required
+    #         destination_user: { # required
+    #           provider_name: "ProviderNameType",
+    #           provider_attribute_name: "StringType",
+    #           provider_attribute_value: "StringType",
+    #         },
+    #         source_user: { # required
+    #           provider_name: "ProviderNameType",
+    #           provider_attribute_name: "StringType",
+    #           provider_attribute_value: "StringType",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_user
+    #   The existing user in the user pool to be linked to the external
+    #   identity provider user account. Can be a native (Username +
+    #   Password) Cognito User Pools user or a federated user (for example,
+    #   a SAML or Facebook user). If the user doesn't exist, an exception
+    #   is thrown. This is the user that is returned when the new user (with
+    #   the linked identity provider attribute) signs in.
+    #
+    #   The `ProviderAttributeValue` for the `DestinationUser` must match
+    #   the username for the user in the user pool. The
+    #   `ProviderAttributeName` will always be ignored.
+    #   @return [Types::ProviderUserIdentifierType]
+    #
+    # @!attribute [rw] source_user
+    #   An external identity provider account for a user who does not
+    #   currently exist yet in the user pool. This user must be a federated
+    #   user (for example, a SAML or Facebook user), not another native
+    #   user.
+    #
+    #   If the `SourceUser` is a federated social identity provider user
+    #   (Facebook, Google, or Login with Amazon), you must set the
+    #   `ProviderAttributeName` to `Cognito_Subject`. For social identity
+    #   providers, the `ProviderName` will be `Facebook`, `Google`, or
+    #   `LoginWithAmazon`, and Cognito will automatically parse the
+    #   Facebook, Google, and Login with Amazon tokens for `id`, `sub`, and
+    #   `user_id`, respectively. The `ProviderAttributeValue` for the user
+    #   must be the same value as the `id`, `sub`, or `user_id` value found
+    #   in the social identity provider token.
+    #
+    #
+    #
+    #   For SAML, the `ProviderAttributeName` can be any value that matches
+    #   a claim in the SAML assertion. If you wish to link SAML users based
+    #   on the subject of the SAML assertion, you should map the subject to
+    #   a claim through the SAML identity provider and submit that claim
+    #   name as the `ProviderAttributeName`. If you set
+    #   `ProviderAttributeName` to `Cognito_Subject`, Cognito will
+    #   automatically parse the default unique identifier found in the
+    #   subject from the SAML token.
+    #   @return [Types::ProviderUserIdentifierType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserRequest AWS API Documentation
+    #
+    class AdminLinkProviderForUserRequest < Struct.new(
+      :user_pool_id,
+      :destination_user,
+      :source_user)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserResponse AWS API Documentation
+    #
+    class AdminLinkProviderForUserResponse < Aws::EmptyStructure; end
 
     # Represents the request to list devices, as an administrator.
     #
@@ -1443,7 +1550,7 @@ module Aws::CognitoIdentityProvider
     #       }
     #
     # @!attribute [rw] client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #   @return [String]
     #
     # @!attribute [rw] secret_hash
@@ -1500,7 +1607,7 @@ module Aws::CognitoIdentityProvider
     #       }
     #
     # @!attribute [rw] client_id
-    #   The ID of the client associated with the user pool.
+    #   The ID of the app client associated with the user pool.
     #   @return [String]
     #
     # @!attribute [rw] secret_hash
@@ -1620,13 +1727,13 @@ module Aws::CognitoIdentityProvider
     #
     #       {
     #         user_pool_id: "UserPoolIdType", # required
-    #         provider_name: "ProviderNameType", # required
-    #         provider_type: "SAML", # required, accepts SAML
+    #         provider_name: "ProviderNameTypeV1", # required
+    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
     #         provider_details: { # required
     #           "StringType" => "StringType",
     #         },
     #         attribute_mapping: {
-    #           "CustomAttributeNameType" => "StringType",
+    #           "AttributeMappingKeyType" => "StringType",
     #         },
     #         idp_identifiers: ["IdpIdentifierType"],
     #       }
@@ -1677,6 +1784,61 @@ module Aws::CognitoIdentityProvider
     #
     class CreateIdentityProviderResponse < Struct.new(
       :identity_provider)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateResourceServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         identifier: "ResourceServerIdentifierType", # required
+    #         name: "ResourceServerNameType", # required
+    #         scopes: [
+    #           {
+    #             scope_name: "ResourceServerScopeNameType", # required
+    #             scope_description: "ResourceServerScopeDescriptionType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   A unique resource server identifier for the resource server. This
+    #   could be an HTTPS endpoint where the resource server is located. For
+    #   example, `https://my-weather-api.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name for the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   A list of scopes. Each scope is map, where the keys are `name` and
+    #   `description`.
+    #   @return [Array<Types::ResourceServerScopeType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServerRequest AWS API Documentation
+    #
+    class CreateResourceServerRequest < Struct.new(
+      :user_pool_id,
+      :identifier,
+      :name,
+      :scopes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_server
+    #   The newly created resource server.
+    #   @return [Types::ResourceServerType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServerResponse AWS API Documentation
+    #
+    class CreateResourceServerResponse < Struct.new(
+      :resource_server)
       include Aws::Structure
     end
 
@@ -1910,6 +2072,14 @@ module Aws::CognitoIdentityProvider
     #         sms_verification_message: "SmsVerificationMessageType",
     #         email_verification_message: "EmailVerificationMessageType",
     #         email_verification_subject: "EmailVerificationSubjectType",
+    #         verification_message_template: {
+    #           sms_message: "SmsVerificationMessageType",
+    #           email_message: "EmailVerificationMessageType",
+    #           email_subject: "EmailVerificationSubjectType",
+    #           email_message_by_link: "EmailVerificationMessageByLinkType",
+    #           email_subject_by_link: "EmailVerificationSubjectByLinkType",
+    #           default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
+    #         },
     #         sms_authentication_message: "SmsVerificationMessageType",
     #         mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
     #         device_configuration: {
@@ -1994,6 +2164,11 @@ module Aws::CognitoIdentityProvider
     #   A string representing the email verification subject.
     #   @return [String]
     #
+    # @!attribute [rw] verification_message_template
+    #   The template for the verification message that the user sees when
+    #   the app requests permission to access the user's information.
+    #   @return [Types::VerificationMessageTemplateType]
+    #
     # @!attribute [rw] sms_authentication_message
     #   A string representing the SMS authentication message.
     #   @return [String]
@@ -2044,6 +2219,7 @@ module Aws::CognitoIdentityProvider
       :sms_verification_message,
       :email_verification_message,
       :email_verification_subject,
+      :verification_message_template,
       :sms_authentication_message,
       :mfa_configuration,
       :device_configuration,
@@ -2117,6 +2293,30 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourceServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         identifier: "ResourceServerIdentifierType", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool that hosts the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier for the resource server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServerRequest AWS API Documentation
+    #
+    class DeleteResourceServerRequest < Struct.new(
+      :user_pool_id,
+      :identifier)
+      include Aws::Structure
+    end
+
     # Represents the request to delete user attributes.
     #
     # @note When making an API call, you may pass DeleteUserAttributesRequest
@@ -2169,7 +2369,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientRequest AWS API Documentation
@@ -2283,6 +2483,41 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeResourceServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         identifier: "ResourceServerIdentifierType", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool that hosts the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier for the resource server
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerRequest AWS API Documentation
+    #
+    class DescribeResourceServerRequest < Struct.new(
+      :user_pool_id,
+      :identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_server
+    #   The resource server.
+    #   @return [Types::ResourceServerType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerResponse AWS API Documentation
+    #
+    class DescribeResourceServerResponse < Struct.new(
+      :resource_server)
+      include Aws::Structure
+    end
+
     # Represents the request to describe the user import job.
     #
     # @note When making an API call, you may pass DescribeUserImportJobRequest
@@ -2339,7 +2574,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientRequest AWS API Documentation
@@ -2807,6 +3042,41 @@ module Aws::CognitoIdentityProvider
     #
     class GetIdentityProviderByIdentifierResponse < Struct.new(
       :identity_provider)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUICustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         client_id: "ClientIdType",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the client app.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationRequest AWS API Documentation
+    #
+    class GetUICustomizationRequest < Struct.new(
+      :user_pool_id,
+      :client_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ui_customization
+    #   The UI customization information.
+    #   @return [Types::UICustomizationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationResponse AWS API Documentation
+    #
+    class GetUICustomizationResponse < Struct.new(
+      :ui_customization)
       include Aws::Structure
     end
 
@@ -3394,6 +3664,52 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResourceServersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         max_results: 1,
+    #         next_token: "PaginationKeyType",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resource servers to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServersRequest AWS API Documentation
+    #
+    class ListResourceServersRequest < Struct.new(
+      :user_pool_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_servers
+    #   The resource servers.
+    #   @return [Array<Types::ResourceServerType>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServersResponse AWS API Documentation
+    #
+    class ListResourceServersResponse < Struct.new(
+      :resource_servers,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Represents the request to list the user import jobs.
     #
     # @note When making an API call, you may pass ListUserImportJobsRequest
@@ -3911,6 +4227,42 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A container for information about an identity provider for a user
+    # pool.
+    #
+    # @note When making an API call, you may pass ProviderUserIdentifierType
+    #   data as a hash:
+    #
+    #       {
+    #         provider_name: "ProviderNameType",
+    #         provider_attribute_name: "StringType",
+    #         provider_attribute_value: "StringType",
+    #       }
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the provider, for example, Facebook, Google, or Login
+    #   with Amazon.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_attribute_name
+    #   The name of the provider attribute to link to, for example,
+    #   `NameID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_attribute_value
+    #   The value of the provider attribute to link to, for example,
+    #   `xxxxx_account`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderUserIdentifierType AWS API Documentation
+    #
+    class ProviderUserIdentifierType < Struct.new(
+      :provider_name,
+      :provider_attribute_name,
+      :provider_attribute_value)
+      include Aws::Structure
+    end
+
     # Represents the request to resend the confirmation code.
     #
     # @note When making an API call, you may pass ResendConfirmationCodeRequest
@@ -3958,6 +4310,60 @@ module Aws::CognitoIdentityProvider
     #
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details)
+      include Aws::Structure
+    end
+
+    # A resource server scope.
+    #
+    # @note When making an API call, you may pass ResourceServerScopeType
+    #   data as a hash:
+    #
+    #       {
+    #         scope_name: "ResourceServerScopeNameType", # required
+    #         scope_description: "ResourceServerScopeDescriptionType", # required
+    #       }
+    #
+    # @!attribute [rw] scope_name
+    #   The name of the scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_description
+    #   A description of the scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerScopeType AWS API Documentation
+    #
+    class ResourceServerScopeType < Struct.new(
+      :scope_name,
+      :scope_description)
+      include Aws::Structure
+    end
+
+    # A container for information about a resource server for a user pool.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool that hosts the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier for the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   A list of scopes that are defined for the resource server.
+    #   @return [Array<Types::ResourceServerScopeType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerType AWS API Documentation
+    #
+    class ResourceServerType < Struct.new(
+      :user_pool_id,
+      :identifier,
+      :name,
+      :scopes)
       include Aws::Structure
     end
 
@@ -4120,6 +4526,53 @@ module Aws::CognitoIdentityProvider
       :required,
       :number_attribute_constraints,
       :string_attribute_constraints)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SetUICustomizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         client_id: "ClientIdType",
+    #         css: "CSSType",
+    #         image_file: "data",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the client app.
+    #   @return [String]
+    #
+    # @!attribute [rw] css
+    #   The CSS values in the UI customization.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_file
+    #   The uploaded logo image for the UI customization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomizationRequest AWS API Documentation
+    #
+    class SetUICustomizationRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :css,
+      :image_file)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ui_customization
+    #   The UI customization information.
+    #   @return [Types::UICustomizationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomizationResponse AWS API Documentation
+    #
+    class SetUICustomizationResponse < Struct.new(
+      :ui_customization)
       include Aws::Structure
     end
 
@@ -4387,6 +4840,50 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A container for the UI customization information for a user pool's
+    # built-in app UI.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the client app.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The logo image for the UI customization.
+    #   @return [String]
+    #
+    # @!attribute [rw] css
+    #   The CSS values in the UI customization.
+    #   @return [String]
+    #
+    # @!attribute [rw] css_version
+    #   The CSS version number.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last-modified date for the UI customization.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date for the UI customization.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UICustomizationType AWS API Documentation
+    #
+    class UICustomizationType < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :image_url,
+      :css,
+      :css_version,
+      :last_modified_date,
+      :creation_date)
+      include Aws::Structure
+    end
+
     # Represents the request to update the device status.
     #
     # @note When making an API call, you may pass UpdateDeviceStatusRequest
@@ -4490,7 +4987,7 @@ module Aws::CognitoIdentityProvider
     #           "StringType" => "StringType",
     #         },
     #         attribute_mapping: {
-    #           "CustomAttributeNameType" => "StringType",
+    #           "AttributeMappingKeyType" => "StringType",
     #         },
     #         idp_identifiers: ["IdpIdentifierType"],
     #       }
@@ -4535,6 +5032,58 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateResourceServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         identifier: "ResourceServerIdentifierType", # required
+    #         name: "ResourceServerNameType", # required
+    #         scopes: [
+    #           {
+    #             scope_name: "ResourceServerScopeNameType", # required
+    #             scope_description: "ResourceServerScopeDescriptionType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier for the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource server.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   The scope values to be set for the resource server.
+    #   @return [Array<Types::ResourceServerScopeType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServerRequest AWS API Documentation
+    #
+    class UpdateResourceServerRequest < Struct.new(
+      :user_pool_id,
+      :identifier,
+      :name,
+      :scopes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_server
+    #   The resource server.
+    #   @return [Types::ResourceServerType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServerResponse AWS API Documentation
+    #
+    class UpdateResourceServerResponse < Struct.new(
+      :resource_server)
       include Aws::Structure
     end
 
@@ -4649,7 +5198,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
-    #   A list ofallowed logout URLs for the identity providers.
+    #   A list of allowed logout URLs for the identity providers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_redirect_uri
@@ -4740,6 +5289,14 @@ module Aws::CognitoIdentityProvider
     #         sms_verification_message: "SmsVerificationMessageType",
     #         email_verification_message: "EmailVerificationMessageType",
     #         email_verification_subject: "EmailVerificationSubjectType",
+    #         verification_message_template: {
+    #           sms_message: "SmsVerificationMessageType",
+    #           email_message: "EmailVerificationMessageType",
+    #           email_subject: "EmailVerificationSubjectType",
+    #           email_message_by_link: "EmailVerificationMessageByLinkType",
+    #           email_subject_by_link: "EmailVerificationSubjectByLinkType",
+    #           default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
+    #         },
     #         sms_authentication_message: "SmsVerificationMessageType",
     #         mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
     #         device_configuration: {
@@ -4798,6 +5355,10 @@ module Aws::CognitoIdentityProvider
     #   The subject of the email verification message.
     #   @return [String]
     #
+    # @!attribute [rw] verification_message_template
+    #   The template for verification messages.
+    #   @return [Types::VerificationMessageTemplateType]
+    #
     # @!attribute [rw] sms_authentication_message
     #   The contents of the SMS authentication message.
     #   @return [String]
@@ -4850,6 +5411,7 @@ module Aws::CognitoIdentityProvider
       :sms_verification_message,
       :email_verification_message,
       :email_verification_subject,
+      :verification_message_template,
       :sms_authentication_message,
       :mfa_configuration,
       :device_configuration,
@@ -4988,7 +5550,7 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # A user pool of the client type.
+    # Contains information about a user pool client.
     #
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool client.
@@ -5041,7 +5603,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
-    #   A list ofallowed logout URLs for the identity providers.
+    #   A list of allowed logout URLs for the identity providers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_redirect_uri
@@ -5213,6 +5775,10 @@ module Aws::CognitoIdentityProvider
     #   The subject of the email verification message.
     #   @return [String]
     #
+    # @!attribute [rw] verification_message_template
+    #   The template for verification messages.
+    #   @return [Types::VerificationMessageTemplateType]
+    #
     # @!attribute [rw] sms_authentication_message
     #   The contents of the SMS authentication message.
     #   @return [String]
@@ -5286,6 +5852,7 @@ module Aws::CognitoIdentityProvider
       :sms_verification_message,
       :email_verification_message,
       :email_verification_subject,
+      :verification_message_template,
       :sms_authentication_message,
       :mfa_configuration,
       :device_configuration,
@@ -5349,6 +5916,58 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :user_status,
       :mfa_options)
+      include Aws::Structure
+    end
+
+    # The template for verification messages.
+    #
+    # @note When making an API call, you may pass VerificationMessageTemplateType
+    #   data as a hash:
+    #
+    #       {
+    #         sms_message: "SmsVerificationMessageType",
+    #         email_message: "EmailVerificationMessageType",
+    #         email_subject: "EmailVerificationSubjectType",
+    #         email_message_by_link: "EmailVerificationMessageByLinkType",
+    #         email_subject_by_link: "EmailVerificationSubjectByLinkType",
+    #         default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
+    #       }
+    #
+    # @!attribute [rw] sms_message
+    #   The SMS message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_message
+    #   The email message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_subject
+    #   The subject line for the email message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_message_by_link
+    #   The email message template for sending a confirmation link to the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_subject_by_link
+    #   The subject line for the email message template for sending a
+    #   confirmation link to the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_email_option
+    #   The default email option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerificationMessageTemplateType AWS API Documentation
+    #
+    class VerificationMessageTemplateType < Struct.new(
+      :sms_message,
+      :email_message,
+      :email_subject,
+      :email_message_by_link,
+      :email_subject_by_link,
+      :default_email_option)
       include Aws::Structure
     end
 

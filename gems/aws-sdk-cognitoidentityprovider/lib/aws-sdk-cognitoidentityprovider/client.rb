@@ -484,6 +484,71 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Disables the user from signing in with the specified external (SAML or
+    # social) identity provider. If the user to disable is a Cognito User
+    # Pools native username + password user, they are not permitted to use
+    # their password to sign-in. If the user to disable is a linked external
+    # IdP user, any link between that user and an existing user is removed.
+    # The next time the external user (no longer attached to the previously
+    # linked `DestinationUser`) signs in, they must create a new user
+    # account. See
+    # [AdminLinkProviderForUser](API_AdminLinkProviderForUser.html).
+    #
+    # This action is enabled only for admin access and requires developer
+    # credentials.
+    #
+    # The `ProviderName` must match the value specified when creating an IdP
+    # for the pool.
+    #
+    # To disable a native username + password user, the `ProviderName` value
+    # must be `Cognito` and the `ProviderAttributeName` must be
+    # `Cognito_Subject`, with the `ProviderAttributeValue` being the name
+    # that is used in the user pool for the user.
+    #
+    # The `ProviderAttributeName` must always be `Cognito_Subject` for
+    # social identity providers. The `ProviderAttributeValue` must always be
+    # the exact subject that was used when the user was originally linked as
+    # a source user.
+    #
+    # For de-linking a SAML identity, there are two scenarios. If the linked
+    # identity has not yet been used to sign-in, the `ProviderAttributeName`
+    # and `ProviderAttributeValue` must be the same values that were used
+    # for the `SourceUser` when the identities were originally linked in the
+    # [AdminLinkProviderForUser](API_AdminLinkProviderForUser.html) call.
+    # (If the linking was done with `ProviderAttributeName` set to
+    # `Cognito_Subject`, the same applies here). However, if the user has
+    # already signed in, the `ProviderAttributeName` must be
+    # `Cognito_Subject` and `ProviderAttributeValue` must be the subject of
+    # the SAML assertion.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, Types::ProviderUserIdentifierType] :user
+    #   The user to be disabled.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_disable_provider_for_user({
+    #     user_pool_id: "StringType", # required
+    #     user: { # required
+    #       provider_name: "ProviderNameType",
+    #       provider_attribute_name: "StringType",
+    #       provider_attribute_value: "StringType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUser AWS API Documentation
+    #
+    # @overload admin_disable_provider_for_user(params = {})
+    # @param [Hash] params ({})
+    def admin_disable_provider_for_user(params = {}, options = {})
+      req = build_request(:admin_disable_provider_for_user, params)
+      req.send_request(options)
+    end
+
     # Disables the specified user as an administrator. Works on any user.
     #
     # Requires developer credentials.
@@ -769,6 +834,97 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def admin_initiate_auth(params = {}, options = {})
       req = build_request(:admin_initiate_auth, params)
+      req.send_request(options)
+    end
+
+    # Links an existing user account in a user pool (`DestinationUser`) to
+    # an identity from an external identity provider (`SourceUser`) based on
+    # a specified attribute name and value from the external identity
+    # provider. This allows you to create a link from the existing user
+    # account to an external federated user identity that has not yet been
+    # used to sign in, so that the federated user identity can be used to
+    # sign in as the existing user account.
+    #
+    # For example, if there is an existing user with a username and
+    # password, this API links that user to a federated user identity, so
+    # that when the federated user identity is used, the user signs in as
+    # the existing user account.
+    #
+    # Because this API allows a user with an external federated identity to
+    # sign in as an existing user in the user pool, it is critical that it
+    # only be used with external identity providers and provider attributes
+    # that have been trusted by the application owner.
+    #
+    # See also
+    # [AdminDisableProviderForUser](API_AdminDisableProviderForUser.html).
+    #
+    # This action is enabled only for admin access and requires developer
+    # credentials.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, Types::ProviderUserIdentifierType] :destination_user
+    #   The existing user in the user pool to be linked to the external
+    #   identity provider user account. Can be a native (Username + Password)
+    #   Cognito User Pools user or a federated user (for example, a SAML or
+    #   Facebook user). If the user doesn't exist, an exception is thrown.
+    #   This is the user that is returned when the new user (with the linked
+    #   identity provider attribute) signs in.
+    #
+    #   The `ProviderAttributeValue` for the `DestinationUser` must match the
+    #   username for the user in the user pool. The `ProviderAttributeName`
+    #   will always be ignored.
+    #
+    # @option params [required, Types::ProviderUserIdentifierType] :source_user
+    #   An external identity provider account for a user who does not
+    #   currently exist yet in the user pool. This user must be a federated
+    #   user (for example, a SAML or Facebook user), not another native user.
+    #
+    #   If the `SourceUser` is a federated social identity provider user
+    #   (Facebook, Google, or Login with Amazon), you must set the
+    #   `ProviderAttributeName` to `Cognito_Subject`. For social identity
+    #   providers, the `ProviderName` will be `Facebook`, `Google`, or
+    #   `LoginWithAmazon`, and Cognito will automatically parse the Facebook,
+    #   Google, and Login with Amazon tokens for `id`, `sub`, and `user_id`,
+    #   respectively. The `ProviderAttributeValue` for the user must be the
+    #   same value as the `id`, `sub`, or `user_id` value found in the social
+    #   identity provider token.
+    #
+    #
+    #
+    #   For SAML, the `ProviderAttributeName` can be any value that matches a
+    #   claim in the SAML assertion. If you wish to link SAML users based on
+    #   the subject of the SAML assertion, you should map the subject to a
+    #   claim through the SAML identity provider and submit that claim name as
+    #   the `ProviderAttributeName`. If you set `ProviderAttributeName` to
+    #   `Cognito_Subject`, Cognito will automatically parse the default unique
+    #   identifier found in the subject from the SAML token.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_link_provider_for_user({
+    #     user_pool_id: "StringType", # required
+    #     destination_user: { # required
+    #       provider_name: "ProviderNameType",
+    #       provider_attribute_name: "StringType",
+    #       provider_attribute_value: "StringType",
+    #     },
+    #     source_user: { # required
+    #       provider_name: "ProviderNameType",
+    #       provider_attribute_name: "StringType",
+    #       provider_attribute_value: "StringType",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUser AWS API Documentation
+    #
+    # @overload admin_link_provider_for_user(params = {})
+    # @param [Hash] params ({})
+    def admin_link_provider_for_user(params = {}, options = {})
+      req = build_request(:admin_link_provider_for_user, params)
       req.send_request(options)
     end
 
@@ -1266,7 +1422,7 @@ module Aws::CognitoIdentityProvider
     # password.
     #
     # @option params [required, String] :client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #
     # @option params [String] :secret_hash
     #   A keyed-hash message authentication code (HMAC) calculated using the
@@ -1311,7 +1467,7 @@ module Aws::CognitoIdentityProvider
     # previous user.
     #
     # @option params [required, String] :client_id
-    #   The ID of the client associated with the user pool.
+    #   The ID of the app client associated with the user pool.
     #
     # @option params [String] :secret_hash
     #   A keyed-hash message authentication code (HMAC) calculated using the
@@ -1453,13 +1609,13 @@ module Aws::CognitoIdentityProvider
     #
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
-    #     provider_name: "ProviderNameType", # required
-    #     provider_type: "SAML", # required, accepts SAML
+    #     provider_name: "ProviderNameTypeV1", # required
+    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
     #     provider_details: { # required
     #       "StringType" => "StringType",
     #     },
     #     attribute_mapping: {
-    #       "CustomAttributeNameType" => "StringType",
+    #       "AttributeMappingKeyType" => "StringType",
     #     },
     #     idp_identifiers: ["IdpIdentifierType"],
     #   })
@@ -1468,11 +1624,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
-    #   resp.identity_provider.attribute_mapping["CustomAttributeNameType"] #=> String
+    #   resp.identity_provider.attribute_mapping["AttributeMappingKeyType"] #=> String
     #   resp.identity_provider.idp_identifiers #=> Array
     #   resp.identity_provider.idp_identifiers[0] #=> String
     #   resp.identity_provider.last_modified_date #=> Time
@@ -1484,6 +1640,60 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def create_identity_provider(params = {}, options = {})
       req = build_request(:create_identity_provider, params)
+      req.send_request(options)
+    end
+
+    # Creates a new OAuth2.0 resource server and defines custom scopes in
+    # it.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, String] :identifier
+    #   A unique resource server identifier for the resource server. This
+    #   could be an HTTPS endpoint where the resource server is located. For
+    #   example, `https://my-weather-api.example.com`.
+    #
+    # @option params [required, String] :name
+    #   A friendly name for the resource server.
+    #
+    # @option params [Array<Types::ResourceServerScopeType>] :scopes
+    #   A list of scopes. Each scope is map, where the keys are `name` and
+    #   `description`.
+    #
+    # @return [Types::CreateResourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourceServerResponse#resource_server #resource_server} => Types::ResourceServerType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_server({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     identifier: "ResourceServerIdentifierType", # required
+    #     name: "ResourceServerNameType", # required
+    #     scopes: [
+    #       {
+    #         scope_name: "ResourceServerScopeNameType", # required
+    #         scope_description: "ResourceServerScopeDescriptionType", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_server.user_pool_id #=> String
+    #   resp.resource_server.identifier #=> String
+    #   resp.resource_server.name #=> String
+    #   resp.resource_server.scopes #=> Array
+    #   resp.resource_server.scopes[0].scope_name #=> String
+    #   resp.resource_server.scopes[0].scope_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServer AWS API Documentation
+    #
+    # @overload create_resource_server(params = {})
+    # @param [Hash] params ({})
+    def create_resource_server(params = {}, options = {})
+      req = build_request(:create_resource_server, params)
       req.send_request(options)
     end
 
@@ -1570,6 +1780,10 @@ module Aws::CognitoIdentityProvider
     # @option params [String] :email_verification_subject
     #   A string representing the email verification subject.
     #
+    # @option params [Types::VerificationMessageTemplateType] :verification_message_template
+    #   The template for the verification message that the user sees when the
+    #   app requests permission to access the user's information.
+    #
     # @option params [String] :sms_authentication_message
     #   A string representing the SMS authentication message.
     #
@@ -1633,6 +1847,14 @@ module Aws::CognitoIdentityProvider
     #     sms_verification_message: "SmsVerificationMessageType",
     #     email_verification_message: "EmailVerificationMessageType",
     #     email_verification_subject: "EmailVerificationSubjectType",
+    #     verification_message_template: {
+    #       sms_message: "SmsVerificationMessageType",
+    #       email_message: "EmailVerificationMessageType",
+    #       email_subject: "EmailVerificationSubjectType",
+    #       email_message_by_link: "EmailVerificationMessageByLinkType",
+    #       email_subject_by_link: "EmailVerificationSubjectByLinkType",
+    #       default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
+    #     },
     #     sms_authentication_message: "SmsVerificationMessageType",
     #     mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
     #     device_configuration: {
@@ -1717,6 +1939,12 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_verification_message #=> String
     #   resp.user_pool.email_verification_message #=> String
     #   resp.user_pool.email_verification_subject #=> String
+    #   resp.user_pool.verification_message_template.sms_message #=> String
+    #   resp.user_pool.verification_message_template.email_message #=> String
+    #   resp.user_pool.verification_message_template.email_subject #=> String
+    #   resp.user_pool.verification_message_template.email_message_by_link #=> String
+    #   resp.user_pool.verification_message_template.email_subject_by_link #=> String
+    #   resp.user_pool.verification_message_template.default_email_option #=> String, one of "CONFIRM_WITH_LINK", "CONFIRM_WITH_CODE"
     #   resp.user_pool.sms_authentication_message #=> String
     #   resp.user_pool.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #   resp.user_pool.device_configuration.challenge_required_on_new_device #=> Boolean
@@ -1940,7 +2168,33 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Allows a user to delete one's self.
+    # Deletes a resource server.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool that hosts the resource server.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier for the resource server.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_server({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     identifier: "ResourceServerIdentifierType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServer AWS API Documentation
+    #
+    # @overload delete_resource_server(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_server(params = {}, options = {})
+      req = build_request(:delete_resource_server, params)
+      req.send_request(options)
+    end
+
+    # Allows a user to delete himself or herself.
     #
     # @option params [required, String] :access_token
     #   The access token from a request to delete a user.
@@ -2021,7 +2275,7 @@ module Aws::CognitoIdentityProvider
     #   client.
     #
     # @option params [required, String] :client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2090,11 +2344,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
-    #   resp.identity_provider.attribute_mapping["CustomAttributeNameType"] #=> String
+    #   resp.identity_provider.attribute_mapping["AttributeMappingKeyType"] #=> String
     #   resp.identity_provider.idp_identifiers #=> Array
     #   resp.identity_provider.idp_identifiers[0] #=> String
     #   resp.identity_provider.last_modified_date #=> Time
@@ -2106,6 +2360,43 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def describe_identity_provider(params = {}, options = {})
       req = build_request(:describe_identity_provider, params)
+      req.send_request(options)
+    end
+
+    # Describes a resource server.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool that hosts the resource server.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier for the resource server
+    #
+    # @return [Types::DescribeResourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourceServerResponse#resource_server #resource_server} => Types::ResourceServerType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_server({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     identifier: "ResourceServerIdentifierType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_server.user_pool_id #=> String
+    #   resp.resource_server.identifier #=> String
+    #   resp.resource_server.name #=> String
+    #   resp.resource_server.scopes #=> Array
+    #   resp.resource_server.scopes[0].scope_name #=> String
+    #   resp.resource_server.scopes[0].scope_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServer AWS API Documentation
+    #
+    # @overload describe_resource_server(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_server(params = {}, options = {})
+      req = build_request(:describe_resource_server, params)
       req.send_request(options)
     end
 
@@ -2209,6 +2500,12 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.sms_verification_message #=> String
     #   resp.user_pool.email_verification_message #=> String
     #   resp.user_pool.email_verification_subject #=> String
+    #   resp.user_pool.verification_message_template.sms_message #=> String
+    #   resp.user_pool.verification_message_template.email_message #=> String
+    #   resp.user_pool.verification_message_template.email_subject #=> String
+    #   resp.user_pool.verification_message_template.email_message_by_link #=> String
+    #   resp.user_pool.verification_message_template.email_subject_by_link #=> String
+    #   resp.user_pool.verification_message_template.default_email_option #=> String, one of "CONFIRM_WITH_LINK", "CONFIRM_WITH_CODE"
     #   resp.user_pool.sms_authentication_message #=> String
     #   resp.user_pool.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #   resp.user_pool.device_configuration.challenge_required_on_new_device #=> Boolean
@@ -2244,7 +2541,7 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool you want to describe.
     #
     # @option params [required, String] :client_id
-    #   The ID of the client associated with the user pool.
+    #   The app client ID of the app associated with the user pool.
     #
     # @return [Types::DescribeUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2317,7 +2614,7 @@ module Aws::CognitoIdentityProvider
     #   resp.domain_description.s3_bucket #=> String
     #   resp.domain_description.cloud_front_distribution #=> String
     #   resp.domain_description.version #=> String
-    #   resp.domain_description.status #=> String, one of "CREATING", "DELETING", "UPDATING", "ACTIVE"
+    #   resp.domain_description.status #=> String, one of "CREATING", "DELETING", "UPDATING", "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain AWS API Documentation
     #
@@ -2537,11 +2834,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
-    #   resp.identity_provider.attribute_mapping["CustomAttributeNameType"] #=> String
+    #   resp.identity_provider.attribute_mapping["AttributeMappingKeyType"] #=> String
     #   resp.identity_provider.idp_identifiers #=> Array
     #   resp.identity_provider.idp_identifiers[0] #=> String
     #   resp.identity_provider.last_modified_date #=> Time
@@ -2553,6 +2850,48 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_identity_provider_by_identifier(params = {}, options = {})
       req = build_request(:get_identity_provider_by_identifier, params)
+      req.send_request(options)
+    end
+
+    # Gets the UI Customization information for a particular app client's
+    # app UI, if there is something set. If nothing is set for the
+    # particular client, but there is an existing pool level customization
+    # (app `clientId` will be `ALL`), then that is returned. If nothing is
+    # present, then an empty shape is returned.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [String] :client_id
+    #   The client ID for the client app.
+    #
+    # @return [Types::GetUICustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUICustomizationResponse#ui_customization #ui_customization} => Types::UICustomizationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ui_customization({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ui_customization.user_pool_id #=> String
+    #   resp.ui_customization.client_id #=> String
+    #   resp.ui_customization.image_url #=> String
+    #   resp.ui_customization.css #=> String
+    #   resp.ui_customization.css_version #=> String
+    #   resp.ui_customization.last_modified_date #=> Time
+    #   resp.ui_customization.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomization AWS API Documentation
+    #
+    # @overload get_ui_customization(params = {})
+    # @param [Hash] params ({})
+    def get_ui_customization(params = {}, options = {})
+      req = build_request(:get_ui_customization, params)
       req.send_request(options)
     end
 
@@ -2866,7 +3205,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.providers #=> Array
     #   resp.providers[0].provider_name #=> String
-    #   resp.providers[0].provider_type #=> String, one of "SAML"
+    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
     #   resp.providers[0].last_modified_date #=> Time
     #   resp.providers[0].creation_date #=> Time
     #   resp.next_token #=> String
@@ -2877,6 +3216,50 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_identity_providers(params = {}, options = {})
       req = build_request(:list_identity_providers, params)
+      req.send_request(options)
+    end
+
+    # Lists the resource servers for a user pool.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resource servers to return.
+    #
+    # @option params [String] :next_token
+    #   A pagination token.
+    #
+    # @return [Types::ListResourceServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceServersResponse#resource_servers #resource_servers} => Array&lt;Types::ResourceServerType&gt;
+    #   * {Types::ListResourceServersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_servers({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     max_results: 1,
+    #     next_token: "PaginationKeyType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_servers #=> Array
+    #   resp.resource_servers[0].user_pool_id #=> String
+    #   resp.resource_servers[0].identifier #=> String
+    #   resp.resource_servers[0].name #=> String
+    #   resp.resource_servers[0].scopes #=> Array
+    #   resp.resource_servers[0].scopes[0].scope_name #=> String
+    #   resp.resource_servers[0].scopes[0].scope_description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServers AWS API Documentation
+    #
+    # @overload list_resource_servers(params = {})
+    # @param [Hash] params ({})
+    def list_resource_servers(params = {}, options = {})
+      req = build_request(:list_resource_servers, params)
       req.send_request(options)
     end
 
@@ -3313,6 +3696,66 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Sets the UI customization information for a user pool's built-in app
+    # UI.
+    #
+    # You can specify app UI customization settings for a single client
+    # (with a specific `clientId`) or for all clients (by setting the
+    # `clientId` to `ALL`). If you specify `ALL`, the default configuration
+    # will be used for every client that has no UI customization set
+    # previously. If you specify UI customization settings for a particular
+    # client, it will no longer fall back to the `ALL` configuration.
+    #
+    # <note markdown="1"> To use this API, your user pool must have a domain associated with it.
+    # Otherwise, there is no place to host the app's pages, and the service
+    # will throw an error.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [String] :client_id
+    #   The client ID for the client app.
+    #
+    # @option params [String] :css
+    #   The CSS values in the UI customization.
+    #
+    # @option params [String, IO] :image_file
+    #   The uploaded logo image for the UI customization.
+    #
+    # @return [Types::SetUICustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetUICustomizationResponse#ui_customization #ui_customization} => Types::UICustomizationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_ui_customization({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType",
+    #     css: "CSSType",
+    #     image_file: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ui_customization.user_pool_id #=> String
+    #   resp.ui_customization.client_id #=> String
+    #   resp.ui_customization.image_url #=> String
+    #   resp.ui_customization.css #=> String
+    #   resp.ui_customization.css_version #=> String
+    #   resp.ui_customization.last_modified_date #=> Time
+    #   resp.ui_customization.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomization AWS API Documentation
+    #
+    # @overload set_ui_customization(params = {})
+    # @param [Hash] params ({})
+    def set_ui_customization(params = {}, options = {})
+      req = build_request(:set_ui_customization, params)
+      req.send_request(options)
+    end
+
     # Sets the user settings like multi-factor authentication (MFA). If MFA
     # is to be removed for a particular attribute pass the attribute with
     # code delivery as null. If null list is passed, all MFA options are
@@ -3622,7 +4065,7 @@ module Aws::CognitoIdentityProvider
     #       "StringType" => "StringType",
     #     },
     #     attribute_mapping: {
-    #       "CustomAttributeNameType" => "StringType",
+    #       "AttributeMappingKeyType" => "StringType",
     #     },
     #     idp_identifiers: ["IdpIdentifierType"],
     #   })
@@ -3631,11 +4074,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
-    #   resp.identity_provider.attribute_mapping["CustomAttributeNameType"] #=> String
+    #   resp.identity_provider.attribute_mapping["AttributeMappingKeyType"] #=> String
     #   resp.identity_provider.idp_identifiers #=> Array
     #   resp.identity_provider.idp_identifiers[0] #=> String
     #   resp.identity_provider.last_modified_date #=> Time
@@ -3647,6 +4090,57 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def update_identity_provider(params = {}, options = {})
       req = build_request(:update_identity_provider, params)
+      req.send_request(options)
+    end
+
+    # Updates the name and scopes of resource server. All other fields are
+    # read-only.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier for the resource server.
+    #
+    # @option params [required, String] :name
+    #   The name of the resource server.
+    #
+    # @option params [Array<Types::ResourceServerScopeType>] :scopes
+    #   The scope values to be set for the resource server.
+    #
+    # @return [Types::UpdateResourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourceServerResponse#resource_server #resource_server} => Types::ResourceServerType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_server({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     identifier: "ResourceServerIdentifierType", # required
+    #     name: "ResourceServerNameType", # required
+    #     scopes: [
+    #       {
+    #         scope_name: "ResourceServerScopeNameType", # required
+    #         scope_description: "ResourceServerScopeDescriptionType", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_server.user_pool_id #=> String
+    #   resp.resource_server.identifier #=> String
+    #   resp.resource_server.name #=> String
+    #   resp.resource_server.scopes #=> Array
+    #   resp.resource_server.scopes[0].scope_name #=> String
+    #   resp.resource_server.scopes[0].scope_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServer AWS API Documentation
+    #
+    # @overload update_resource_server(params = {})
+    # @param [Hash] params ({})
+    def update_resource_server(params = {}, options = {})
+      req = build_request(:update_resource_server, params)
       req.send_request(options)
     end
 
@@ -3718,6 +4212,9 @@ module Aws::CognitoIdentityProvider
     # @option params [String] :email_verification_subject
     #   The subject of the email verification message.
     #
+    # @option params [Types::VerificationMessageTemplateType] :verification_message_template
+    #   The template for verification messages.
+    #
     # @option params [String] :sms_authentication_message
     #   The contents of the SMS authentication message.
     #
@@ -3782,6 +4279,14 @@ module Aws::CognitoIdentityProvider
     #     sms_verification_message: "SmsVerificationMessageType",
     #     email_verification_message: "EmailVerificationMessageType",
     #     email_verification_subject: "EmailVerificationSubjectType",
+    #     verification_message_template: {
+    #       sms_message: "SmsVerificationMessageType",
+    #       email_message: "EmailVerificationMessageType",
+    #       email_subject: "EmailVerificationSubjectType",
+    #       email_message_by_link: "EmailVerificationMessageByLinkType",
+    #       email_subject_by_link: "EmailVerificationSubjectByLinkType",
+    #       default_email_option: "CONFIRM_WITH_LINK", # accepts CONFIRM_WITH_LINK, CONFIRM_WITH_CODE
+    #     },
     #     sms_authentication_message: "SmsVerificationMessageType",
     #     mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
     #     device_configuration: {
@@ -3853,7 +4358,7 @@ module Aws::CognitoIdentityProvider
     #   A list of allowed callback URLs for the identity providers.
     #
     # @option params [Array<String>] :logout_urls
-    #   A list ofallowed logout URLs for the identity providers.
+    #   A list of allowed logout URLs for the identity providers.
     #
     # @option params [String] :default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
@@ -3977,7 +4482,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

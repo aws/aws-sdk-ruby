@@ -278,6 +278,9 @@ module Aws::CodeDeploy
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagRequiredException = Shapes::StructureShape.new(name: 'TagRequiredException')
     TagSetListLimitExceededException = Shapes::StructureShape.new(name: 'TagSetListLimitExceededException')
+    TargetGroupInfo = Shapes::StructureShape.new(name: 'TargetGroupInfo')
+    TargetGroupInfoList = Shapes::ListShape.new(name: 'TargetGroupInfoList')
+    TargetGroupName = Shapes::StringShape.new(name: 'TargetGroupName')
     TargetInstances = Shapes::StructureShape.new(name: 'TargetInstances')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -396,7 +399,7 @@ module Aws::CodeDeploy
     CreateApplicationOutput.struct_class = Types::CreateApplicationOutput
 
     CreateDeploymentConfigInput.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, required: true, location_name: "deploymentConfigName"))
-    CreateDeploymentConfigInput.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, location_name: "minimumHealthyHosts"))
+    CreateDeploymentConfigInput.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, required: true, location_name: "minimumHealthyHosts"))
     CreateDeploymentConfigInput.struct_class = Types::CreateDeploymentConfigInput
 
     CreateDeploymentConfigOutput.add_member(:deployment_config_id, Shapes::ShapeRef.new(shape: DeploymentConfigId, location_name: "deploymentConfigId"))
@@ -743,6 +746,7 @@ module Aws::CodeDeploy
     ListOnPremisesInstancesOutput.struct_class = Types::ListOnPremisesInstancesOutput
 
     LoadBalancerInfo.add_member(:elb_info_list, Shapes::ShapeRef.new(shape: ELBInfoList, location_name: "elbInfoList"))
+    LoadBalancerInfo.add_member(:target_group_info_list, Shapes::ShapeRef.new(shape: TargetGroupInfoList, location_name: "targetGroupInfoList"))
     LoadBalancerInfo.struct_class = Types::LoadBalancerInfo
 
     MinimumHealthyHosts.add_member(:value, Shapes::ShapeRef.new(shape: MinimumHealthyHostsValue, location_name: "value"))
@@ -816,6 +820,11 @@ module Aws::CodeDeploy
     TagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TargetGroupInfo.add_member(:name, Shapes::ShapeRef.new(shape: TargetGroupName, location_name: "name"))
+    TargetGroupInfo.struct_class = Types::TargetGroupInfo
+
+    TargetGroupInfoList.member = Shapes::ShapeRef.new(shape: TargetGroupInfo)
 
     TargetInstances.add_member(:tag_filters, Shapes::ShapeRef.new(shape: EC2TagFilterList, location_name: "tagFilters"))
     TargetInstances.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, location_name: "autoScalingGroups"))

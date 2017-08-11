@@ -1011,6 +1011,7 @@ module Aws::EC2
     AddressList.member = Shapes::ShapeRef.new(shape: Address, location_name: "item")
 
     AllocateAddressRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
+    AllocateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     AllocateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AllocateAddressRequest.struct_class = Types::AllocateAddressRequest
 

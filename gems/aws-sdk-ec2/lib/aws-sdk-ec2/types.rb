@@ -225,6 +225,7 @@ module Aws::EC2
     #
     #       {
     #         domain: "vpc", # accepts vpc, standard
+    #         address: "String",
     #         dry_run: false,
     #       }
     #
@@ -233,6 +234,10 @@ module Aws::EC2
     #   VPC.
     #
     #   Default: The address is for use with instances in EC2-Classic.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   \[EC2-VPC\] The Elastic IP address to recover.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -246,6 +251,7 @@ module Aws::EC2
     #
     class AllocateAddressRequest < Struct.new(
       :domain,
+      :address,
       :dry_run)
       include Aws::Structure
     end
