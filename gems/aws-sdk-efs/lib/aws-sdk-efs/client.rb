@@ -217,6 +217,36 @@ module Aws::EFS
     #   slightly higher latencies for most file operations. This can't be
     #   changed after the file system has been created.
     #
+    # @option params [Boolean] :encrypted
+    #   A boolean value that, if true, creates an encrypted file system. When
+    #   creating an encrypted file system, you have the option of specifying a
+    #   CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management
+    #   Service (AWS KMS) customer master key (CMK). If you don't specify a
+    #   CMK, then the default CMK for Amazon EFS, `/aws/elasticfilesystem`, is
+    #   used to protect the encrypted file system.
+    #
+    # @option params [String] :kms_key_id
+    #   The id of the AWS KMS CMK that will be used to protect the encrypted
+    #   file system. This parameter is only required if you want to use a
+    #   non-default CMK. If this parameter is not specified, the default CMK
+    #   for Amazon EFS is used. This id can be in one of the following
+    #   formats:
+    #
+    #   * Key ID - A unique identifier of the key. For example,
+    #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * ARN - An Amazon Resource Name for the key. For example,
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * Key alias - A previously created display name for a key. For
+    #     example, `alias/projectKey1`.
+    #
+    #   * Key alias ARN - An Amazon Resource Name for a key alias. For
+    #     example, `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
+    #
+    #   Note that if the KmsKeyId is specified, the
+    #   CreateFileSystemRequest$Encrypted parameter must be set to true.
+    #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FileSystemDescription#owner_id #owner_id} => String
@@ -228,6 +258,8 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#number_of_mount_targets #number_of_mount_targets} => Integer
     #   * {Types::FileSystemDescription#size_in_bytes #size_in_bytes} => Types::FileSystemSize
     #   * {Types::FileSystemDescription#performance_mode #performance_mode} => String
+    #   * {Types::FileSystemDescription#encrypted #encrypted} => Boolean
+    #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
     #
     #
     # @example Example: To create a new file system
@@ -258,6 +290,8 @@ module Aws::EFS
     #   resp = client.create_file_system({
     #     creation_token: "CreationToken", # required
     #     performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
+    #     encrypted: false,
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -272,6 +306,8 @@ module Aws::EFS
     #   resp.size_in_bytes.value #=> Integer
     #   resp.size_in_bytes.timestamp #=> Time
     #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
+    #   resp.encrypted #=> Boolean
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem AWS API Documentation
     #
@@ -791,6 +827,8 @@ module Aws::EFS
     #   resp.file_systems[0].size_in_bytes.value #=> Integer
     #   resp.file_systems[0].size_in_bytes.timestamp #=> Time
     #   resp.file_systems[0].performance_mode #=> String, one of "generalPurpose", "maxIO"
+    #   resp.file_systems[0].encrypted #=> Boolean
+    #   resp.file_systems[0].kms_key_id #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems AWS API Documentation
@@ -1085,7 +1123,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.0.0.rc11'
+      context[:gem_version] = '1.0.0.rc12'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -29,6 +29,7 @@ module Aws::EFS
     DescribeMountTargetsResponse = Shapes::StructureShape.new(name: 'DescribeMountTargetsResponse')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
+    Encrypted = Shapes::BooleanShape.new(name: 'Encrypted')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FileSystemAlreadyExists = Shapes::StructureShape.new(name: 'FileSystemAlreadyExists')
@@ -45,6 +46,7 @@ module Aws::EFS
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressInUse = Shapes::StructureShape.new(name: 'IpAddressInUse')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LifeCycleState = Shapes::StringShape.new(name: 'LifeCycleState')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
@@ -75,6 +77,8 @@ module Aws::EFS
 
     CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
     CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
+    CreateFileSystemRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
+    CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateMountTargetRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -144,6 +148,8 @@ module Aws::EFS
     FileSystemDescription.add_member(:number_of_mount_targets, Shapes::ShapeRef.new(shape: MountTargetCount, required: true, location_name: "NumberOfMountTargets"))
     FileSystemDescription.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: FileSystemSize, required: true, location_name: "SizeInBytes"))
     FileSystemDescription.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, required: true, location_name: "PerformanceMode"))
+    FileSystemDescription.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
+    FileSystemDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     FileSystemDescription.struct_class = Types::FileSystemDescription
 
     FileSystemDescriptions.member = Shapes::ShapeRef.new(shape: FileSystemDescription)

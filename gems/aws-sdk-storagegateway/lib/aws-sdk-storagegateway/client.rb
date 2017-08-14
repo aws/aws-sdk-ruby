@@ -1053,7 +1053,7 @@ module Aws::StorageGateway
     #   The name of the iSCSI target used by initiators to connect to the
     #   target and as a suffix for the target ARN. For example, specifying
     #   `TargetName` as *myvolume* results in the target ARN of
-    #   arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
     #   The target name must be unique across all volumes of a gateway.
     #
     # @option params [required, String] :network_interface_id
@@ -1118,8 +1118,10 @@ module Aws::StorageGateway
     end
 
     # Creates a virtual tape by using your own barcode. You write data to
-    # the virtual tape and then archive the tape. This operation is only
-    # supported in the tape gateway architecture.
+    # the virtual tape and then archive the tape. A barcode is unique and
+    # can not be reused if it has already been used on a tape . This applies
+    # to barcodes used on deleted tapes. This operation is only supported in
+    # the tape gateway. architecture.
     #
     # <note markdown="1"> Cache storage must be allocated to the gateway before you can create a
     # virtual tape. Use the AddCache operation to add cache storage to a
@@ -1141,6 +1143,11 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :tape_barcode
     #   The barcode that you want to assign to the tape.
+    #
+    #   <note markdown="1"> Barcodes cannot be reused. This includes barcodes used for tapes that
+    #   have been deleted.
+    #
+    #    </note>
     #
     # @return [Types::CreateTapeWithBarcodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1391,6 +1398,12 @@ module Aws::StorageGateway
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
     #
+    # @option params [Boolean] :force_delete
+    #   If set to true, deletes a file share immediately and aborts all data
+    #   uploads to AWS. Otherwise the file share is not deleted until all data
+    #   is uploaded to AWS. This process aborts the data upload process and
+    #   the file share enters the FORCE\_DELETING status.
+    #
     # @return [Types::DeleteFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFileShareOutput#file_share_arn #file_share_arn} => String
@@ -1399,6 +1412,7 @@ module Aws::StorageGateway
     #
     #   resp = client.delete_file_share({
     #     file_share_arn: "FileShareARN", # required
+    #     force_delete: false,
     #   })
     #
     # @example Response structure
@@ -3397,8 +3411,9 @@ module Aws::StorageGateway
     end
 
     # Refreshes the cache for the specified file share. This operation finds
-    # objects in the Amazon S3 bucket that were added or removed since the
-    # gateway last listed the bucket's contents and cached the results.
+    # objects in the Amazon S3 bucket that were added, removed or replaced
+    # since the gateway last listed the bucket's contents and cached the
+    # results.
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
@@ -4233,7 +4248,7 @@ module Aws::StorageGateway
     #
     # @option params [Boolean] :read_only
     #   Sets the write status of a file share: "true" if the write status is
-    #   read-only, and otherwise "false".
+    #   read-only, otherwise "false".
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4409,7 +4424,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0.rc13'
+      context[:gem_version] = '1.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 

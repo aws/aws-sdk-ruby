@@ -332,7 +332,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
-    #   The size of the volume in bytes.
+    #   The size, in bytes, of the volume capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_progress
@@ -834,7 +834,7 @@ module Aws::StorageGateway
     #   The name of the iSCSI target used by initiators to connect to the
     #   target and as a suffix for the target ARN. For example, specifying
     #   `TargetName` as *myvolume* results in the target ARN of
-    #   arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
     #   The target name must be unique across all volumes of a gateway.
     #   @return [String]
     #
@@ -910,6 +910,11 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] tape_barcode
     #   The barcode that you want to assign to the tape.
+    #
+    #   <note markdown="1"> Barcodes cannot be reused. This includes barcodes used for tapes
+    #   that have been deleted.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput AWS API Documentation
@@ -1118,16 +1123,25 @@ module Aws::StorageGateway
     #
     #       {
     #         file_share_arn: "FileShareARN", # required
+    #         force_delete: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] force_delete
+    #   If set to true, deletes a file share immediately and aborts all data
+    #   uploads to AWS. Otherwise the file share is not deleted until all
+    #   data is uploaded to AWS. This process aborts the data upload process
+    #   and the file share enters the FORCE\_DELETING status.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareInput AWS API Documentation
     #
     class DeleteFileShareInput < Struct.new(
-      :file_share_arn)
+      :file_share_arn,
+      :force_delete)
       include Aws::Structure
     end
 
@@ -3349,7 +3363,7 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_used_in_bytes
     #   The size, in bytes, of data written to the virtual tape.
     #
-    #   <note markdown="1"> This value is not available for tapes created prior to May,13 2015.
+    #   <note markdown="1"> This value is not available for tapes created prior to May 13, 2015.
     #
     #    </note>
     #   @return [Integer]
@@ -3407,7 +3421,7 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_used_in_bytes
     #   The size, in bytes, of data written to the virtual tape.
     #
-    #   <note markdown="1"> This value is not available for tapes created prior to May,13 2015.
+    #   <note markdown="1"> This value is not available for tapes created prior to May 13, 2015.
     #
     #    </note>
     #   @return [Integer]
@@ -3836,7 +3850,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] read_only
     #   Sets the write status of a file share: "true" if the write status
-    #   is read-only, and otherwise "false".
+    #   is read-only, otherwise "false".
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
@@ -4007,7 +4021,7 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) for the storage volume. For example,
     #   the following is a valid ARN:
     #
-    #   `arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB`
+    #   `arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB`
     #
     #   Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and
     #   hyphens (-).

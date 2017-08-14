@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2017-08-14)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MigrationHub`.
+
+* Feature - Added support for enumerating regions for `Aws::Glue`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudHSMV2`.
+
 1.12.0 (2017-07-31)
 ------------------
 

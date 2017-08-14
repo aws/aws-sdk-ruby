@@ -1048,6 +1048,7 @@ module Aws::Batch
     #   resp.jobs[0].attempts[0].container.task_arn #=> String
     #   resp.jobs[0].attempts[0].container.exit_code #=> Integer
     #   resp.jobs[0].attempts[0].container.reason #=> String
+    #   resp.jobs[0].attempts[0].container.log_stream_name #=> String
     #   resp.jobs[0].attempts[0].started_at #=> Integer
     #   resp.jobs[0].attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].attempts[0].status_reason #=> String
@@ -1088,6 +1089,7 @@ module Aws::Batch
     #   resp.jobs[0].container.reason #=> String
     #   resp.jobs[0].container.container_instance_arn #=> String
     #   resp.jobs[0].container.task_arn #=> String
+    #   resp.jobs[0].container.log_stream_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1626,7 +1628,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.0.0.rc10'
+      context[:gem_version] = '1.0.0.rc11'
       Seahorse::Client::Request.new(handlers, context)
     end
 

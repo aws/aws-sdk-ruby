@@ -31,13 +31,17 @@ module Aws::Batch
     #   additional details about a running or stopped container.
     #   @return [String]
     #
+    # @!attribute [rw] log_stream_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptContainerDetail AWS API Documentation
     #
     class AttemptContainerDetail < Struct.new(
       :container_instance_arn,
       :task_arn,
       :exit_code,
-      :reason)
+      :reason,
+      :log_stream_name)
       include Aws::Structure
     end
 
@@ -404,6 +408,9 @@ module Aws::Batch
     #   associated with the container job.
     #   @return [String]
     #
+    # @!attribute [rw] log_stream_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -422,7 +429,8 @@ module Aws::Batch
       :exit_code,
       :reason,
       :container_instance_arn,
-      :task_arn)
+      :task_arn,
+      :log_stream_name)
       include Aws::Structure
     end
 

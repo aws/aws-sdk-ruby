@@ -430,6 +430,7 @@ module Aws::StorageGateway
     DeleteChapCredentialsOutput.struct_class = Types::DeleteChapCredentialsOutput
 
     DeleteFileShareInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    DeleteFileShareInput.add_member(:force_delete, Shapes::ShapeRef.new(shape: boolean, location_name: "ForceDelete"))
     DeleteFileShareInput.struct_class = Types::DeleteFileShareInput
 
     DeleteFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

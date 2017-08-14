@@ -14,6 +14,8 @@ module Aws::EFS
     #       {
     #         creation_token: "CreationToken", # required
     #         performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
+    #         encrypted: false,
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] creation_token
@@ -30,11 +32,46 @@ module Aws::EFS
     #   can't be changed after the file system has been created.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   A boolean value that, if true, creates an encrypted file system.
+    #   When creating an encrypted file system, you have the option of
+    #   specifying a CreateFileSystemRequest$KmsKeyId for an existing AWS
+    #   Key Management Service (AWS KMS) customer master key (CMK). If you
+    #   don't specify a CMK, then the default CMK for Amazon EFS,
+    #   `/aws/elasticfilesystem`, is used to protect the encrypted file
+    #   system.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The id of the AWS KMS CMK that will be used to protect the encrypted
+    #   file system. This parameter is only required if you want to use a
+    #   non-default CMK. If this parameter is not specified, the default CMK
+    #   for Amazon EFS is used. This id can be in one of the following
+    #   formats:
+    #
+    #   * Key ID - A unique identifier of the key. For example,
+    #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * ARN - An Amazon Resource Name for the key. For example,
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * Key alias - A previously created display name for a key. For
+    #     example, `alias/projectKey1`.
+    #
+    #   * Key alias ARN - An Amazon Resource Name for a key alias. For
+    #     example, `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
+    #
+    #   Note that if the KmsKeyId is specified, the
+    #   CreateFileSystemRequest$Encrypted parameter must be set to true.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest AWS API Documentation
     #
     class CreateFileSystemRequest < Struct.new(
       :creation_token,
-      :performance_mode)
+      :performance_mode,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -444,6 +481,16 @@ module Aws::EFS
     #   The `PerformanceMode` of the file system.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   A boolean value that, if true, indicates that the file system is
+    #   encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The id of an AWS Key Management Service (AWS KMS) customer master
+    #   key (CMK) that was used to protect the encrypted file system.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription AWS API Documentation
     #
     class FileSystemDescription < Struct.new(
@@ -455,7 +502,9 @@ module Aws::EFS
       :name,
       :number_of_mount_targets,
       :size_in_bytes,
-      :performance_mode)
+      :performance_mode,
+      :encrypted,
+      :kms_key_id)
       include Aws::Structure
     end
 

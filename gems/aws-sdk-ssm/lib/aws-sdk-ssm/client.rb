@@ -580,6 +580,11 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the Maintenance Window.
     #
+    # @option params [String] :description
+    #   An optional description for the Maintenance Window. We recommend
+    #   specifying a description to help your organize your Maintenance
+    #   Windows.
+    #
     # @option params [required, String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
@@ -609,6 +614,7 @@ module Aws::SSM
     #
     #   resp = client.create_maintenance_window({
     #     name: "MaintenanceWindowName", # required
+    #     description: "MaintenanceWindowDescription",
     #     schedule: "MaintenanceWindowSchedule", # required
     #     duration: 1, # required
     #     cutoff: 1, # required
@@ -1062,6 +1068,11 @@ module Aws::SSM
     # @option params [required, String] :window_target_id
     #   The ID of the target definition to remove.
     #
+    # @option params [Boolean] :safe
+    #   The system checks if the target is being referenced by a task. If the
+    #   target is being referenced, the system returns and error and does not
+    #   deregister the target from the Maintenance Window.
+    #
     # @return [Types::DeregisterTargetFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterTargetFromMaintenanceWindowResult#window_id #window_id} => String
@@ -1072,6 +1083,7 @@ module Aws::SSM
     #   resp = client.deregister_target_from_maintenance_window({
     #     window_id: "MaintenanceWindowId", # required
     #     window_target_id: "MaintenanceWindowTargetId", # required
+    #     safe: false,
     #   })
     #
     # @example Response structure
@@ -1918,6 +1930,7 @@ module Aws::SSM
     #   resp.window_execution_task_invocation_identities[0].task_execution_id #=> String
     #   resp.window_execution_task_invocation_identities[0].invocation_id #=> String
     #   resp.window_execution_task_invocation_identities[0].execution_id #=> String
+    #   resp.window_execution_task_invocation_identities[0].task_type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
     #   resp.window_execution_task_invocation_identities[0].parameters #=> String
     #   resp.window_execution_task_invocation_identities[0].status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
     #   resp.window_execution_task_invocation_identities[0].status_details #=> String
@@ -1986,7 +1999,7 @@ module Aws::SSM
     #   resp.window_execution_task_identities[0].start_time #=> Time
     #   resp.window_execution_task_identities[0].end_time #=> Time
     #   resp.window_execution_task_identities[0].task_arn #=> String
-    #   resp.window_execution_task_identities[0].task_type #=> String, one of "RUN_COMMAND"
+    #   resp.window_execution_task_identities[0].task_type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks AWS API Documentation
@@ -1998,10 +2011,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the executions of a Maintenance Window (meaning, information
-    # about when the Maintenance Window was scheduled to be active and
-    # information about tasks registered and run with the Maintenance
-    # Window).
+    # Lists the executions of a Maintenance Window. This includes
+    # information about when the Maintenance Window was scheduled to be
+    # active, and information about tasks registered and run with the
+    # Maintenance Window.
     #
     # @option params [required, String] :window_id
     #   The ID of the Maintenance Window whose executions should be retrieved.
@@ -2113,6 +2126,8 @@ module Aws::SSM
     #   resp.targets[0].targets[0].values #=> Array
     #   resp.targets[0].targets[0].values[0] #=> String
     #   resp.targets[0].owner_information #=> String
+    #   resp.targets[0].name #=> String
+    #   resp.targets[0].description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets AWS API Documentation
@@ -2168,7 +2183,7 @@ module Aws::SSM
     #   resp.tasks[0].window_id #=> String
     #   resp.tasks[0].window_task_id #=> String
     #   resp.tasks[0].task_arn #=> String
-    #   resp.tasks[0].type #=> String, one of "RUN_COMMAND"
+    #   resp.tasks[0].type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
     #   resp.tasks[0].targets #=> Array
     #   resp.tasks[0].targets[0].key #=> String
     #   resp.tasks[0].targets[0].values #=> Array
@@ -2183,6 +2198,8 @@ module Aws::SSM
     #   resp.tasks[0].service_role_arn #=> String
     #   resp.tasks[0].max_concurrency #=> String
     #   resp.tasks[0].max_errors #=> String
+    #   resp.tasks[0].name #=> String
+    #   resp.tasks[0].description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks AWS API Documentation
@@ -2232,6 +2249,7 @@ module Aws::SSM
     #   resp.window_identities #=> Array
     #   resp.window_identities[0].window_id #=> String
     #   resp.window_identities[0].name #=> String
+    #   resp.window_identities[0].description #=> String
     #   resp.window_identities[0].enabled #=> Boolean
     #   resp.window_identities[0].duration #=> Integer
     #   resp.window_identities[0].cutoff #=> Integer
@@ -2784,6 +2802,9 @@ module Aws::SSM
     #   returns a token that you can specify in a subsequent call to get the
     #   next set of results.
     #
+    # @option params [Boolean] :sub_type
+    #   Returns the sub-type schema for a specified inventory type.
+    #
     # @return [Types::GetInventorySchemaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInventorySchemaResult#schemas #schemas} => Array&lt;Types::InventoryItemSchema&gt;
@@ -2795,6 +2816,7 @@ module Aws::SSM
     #     type_name: "InventoryItemTypeNameFilter",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     sub_type: false,
     #   })
     #
     # @example Response structure
@@ -2825,6 +2847,7 @@ module Aws::SSM
     #
     #   * {Types::GetMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::GetMaintenanceWindowResult#name #name} => String
+    #   * {Types::GetMaintenanceWindowResult#description #description} => String
     #   * {Types::GetMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::GetMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::GetMaintenanceWindowResult#cutoff #cutoff} => Integer
@@ -2843,6 +2866,7 @@ module Aws::SSM
     #
     #   resp.window_id #=> String
     #   resp.name #=> String
+    #   resp.description #=> String
     #   resp.schedule #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
@@ -2939,7 +2963,7 @@ module Aws::SSM
     #   resp.task_execution_id #=> String
     #   resp.task_arn #=> String
     #   resp.service_role #=> String
-    #   resp.type #=> String, one of "RUN_COMMAND"
+    #   resp.type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
     #   resp.task_parameters #=> Array
     #   resp.task_parameters[0] #=> Hash
     #   resp.task_parameters[0]["MaintenanceWindowTaskParameterName"].values #=> Array
@@ -2958,6 +2982,154 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_maintenance_window_execution_task(params = {}, options = {})
       req = build_request(:get_maintenance_window_execution_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a task invocation. A task invocation is a specific task
+    # executing on a specific target. Maintenance Windows report status for
+    # all invocations.
+    #
+    # @option params [required, String] :window_execution_id
+    #   The ID of the Maintenance Window execution the task is part of.
+    #
+    # @option params [required, String] :task_id
+    #   The ID of the specific task in the Maintenance Window task that should
+    #   be retrieved.
+    #
+    # @option params [required, String] :invocation_id
+    #   The invocation ID to retrieve.
+    #
+    # @return [Types::GetMaintenanceWindowExecutionTaskInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#window_execution_id #window_execution_id} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#task_execution_id #task_execution_id} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#invocation_id #invocation_id} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#execution_id #execution_id} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#task_type #task_type} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#parameters #parameters} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#status #status} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#status_details #status_details} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#start_time #start_time} => Time
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#end_time #end_time} => Time
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#owner_information #owner_information} => String
+    #   * {Types::GetMaintenanceWindowExecutionTaskInvocationResult#window_target_id #window_target_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_maintenance_window_execution_task_invocation({
+    #     window_execution_id: "MaintenanceWindowExecutionId", # required
+    #     task_id: "MaintenanceWindowExecutionTaskId", # required
+    #     invocation_id: "MaintenanceWindowExecutionTaskInvocationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_execution_id #=> String
+    #   resp.task_execution_id #=> String
+    #   resp.invocation_id #=> String
+    #   resp.execution_id #=> String
+    #   resp.task_type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
+    #   resp.parameters #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+    #   resp.status_details #=> String
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.owner_information #=> String
+    #   resp.window_target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocation AWS API Documentation
+    #
+    # @overload get_maintenance_window_execution_task_invocation(params = {})
+    # @param [Hash] params ({})
+    def get_maintenance_window_execution_task_invocation(params = {}, options = {})
+      req = build_request(:get_maintenance_window_execution_task_invocation, params)
+      req.send_request(options)
+    end
+
+    # Lists the tasks in a Maintenance Window.
+    #
+    # @option params [required, String] :window_id
+    #   The Maintenance Window ID that includes the task to retrieve.
+    #
+    # @option params [required, String] :window_task_id
+    #   The Maintenance Window task ID to retrieve.
+    #
+    # @return [Types::GetMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMaintenanceWindowTaskResult#window_id #window_id} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#window_task_id #window_task_id} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#targets #targets} => Array&lt;Types::Target&gt;
+    #   * {Types::GetMaintenanceWindowTaskResult#task_arn #task_arn} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#service_role_arn #service_role_arn} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#task_type #task_type} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#task_parameters #task_parameters} => Hash&lt;String,Types::MaintenanceWindowTaskParameterValueExpression&gt;
+    #   * {Types::GetMaintenanceWindowTaskResult#task_invocation_parameters #task_invocation_parameters} => Types::MaintenanceWindowTaskInvocationParameters
+    #   * {Types::GetMaintenanceWindowTaskResult#priority #priority} => Integer
+    #   * {Types::GetMaintenanceWindowTaskResult#max_concurrency #max_concurrency} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#max_errors #max_errors} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#logging_info #logging_info} => Types::LoggingInfo
+    #   * {Types::GetMaintenanceWindowTaskResult#name #name} => String
+    #   * {Types::GetMaintenanceWindowTaskResult#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_maintenance_window_task({
+    #     window_id: "MaintenanceWindowId", # required
+    #     window_task_id: "MaintenanceWindowTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_id #=> String
+    #   resp.window_task_id #=> String
+    #   resp.targets #=> Array
+    #   resp.targets[0].key #=> String
+    #   resp.targets[0].values #=> Array
+    #   resp.targets[0].values[0] #=> String
+    #   resp.task_arn #=> String
+    #   resp.service_role_arn #=> String
+    #   resp.task_type #=> String, one of "RUN_COMMAND", "AUTOMATION", "STEP_FUNCTIONS", "LAMBDA"
+    #   resp.task_parameters #=> Hash
+    #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values #=> Array
+    #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values[0] #=> String
+    #   resp.task_invocation_parameters.run_command.comment #=> String
+    #   resp.task_invocation_parameters.run_command.document_hash #=> String
+    #   resp.task_invocation_parameters.run_command.document_hash_type #=> String, one of "Sha256", "Sha1"
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_arn #=> String
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_events #=> Array
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.task_invocation_parameters.run_command.output_s3_bucket_name #=> String
+    #   resp.task_invocation_parameters.run_command.output_s3_key_prefix #=> String
+    #   resp.task_invocation_parameters.run_command.parameters #=> Hash
+    #   resp.task_invocation_parameters.run_command.parameters["ParameterName"] #=> Array
+    #   resp.task_invocation_parameters.run_command.parameters["ParameterName"][0] #=> String
+    #   resp.task_invocation_parameters.run_command.service_role_arn #=> String
+    #   resp.task_invocation_parameters.run_command.timeout_seconds #=> Integer
+    #   resp.task_invocation_parameters.automation.document_version #=> String
+    #   resp.task_invocation_parameters.automation.parameters #=> Hash
+    #   resp.task_invocation_parameters.automation.parameters["AutomationParameterKey"] #=> Array
+    #   resp.task_invocation_parameters.automation.parameters["AutomationParameterKey"][0] #=> String
+    #   resp.task_invocation_parameters.step_functions.input #=> String
+    #   resp.task_invocation_parameters.step_functions.name #=> String
+    #   resp.task_invocation_parameters.lambda.client_context #=> String
+    #   resp.task_invocation_parameters.lambda.qualifier #=> String
+    #   resp.task_invocation_parameters.lambda.payload #=> String
+    #   resp.priority #=> Integer
+    #   resp.max_concurrency #=> String
+    #   resp.max_errors #=> String
+    #   resp.logging_info.s3_bucket_name #=> String
+    #   resp.logging_info.s3_key_prefix #=> String
+    #   resp.logging_info.s3_region #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask AWS API Documentation
+    #
+    # @overload get_maintenance_window_task(params = {})
+    # @param [Hash] params ({})
+    def get_maintenance_window_task(params = {}, options = {})
+      req = build_request(:get_maintenance_window_task, params)
       req.send_request(options)
     end
 
@@ -3510,6 +3682,146 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # For a specified resource ID, this API returns a list of compliance
+    # statuses for different resource types. Currently, you can only specify
+    # one resource ID per call. List results depend on the criteria
+    # specified in the filter.
+    #
+    # @option params [Array<Types::ComplianceStringFilter>] :filters
+    #   One or more compliance filters. Use a filter to return a more specific
+    #   list of results.
+    #
+    # @option params [Array<String>] :resource_ids
+    #   The ID for the resources from which you want to get compliance
+    #   information. Currently, you can only specify one resource ID.
+    #
+    # @option params [Array<String>] :resource_types
+    #   The type of resource from which you want to get compliance
+    #   information. Currently, the only supported resource type is
+    #   `ManagedInstance`.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::ListComplianceItemsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListComplianceItemsResult#compliance_items #compliance_items} => Array&lt;Types::ComplianceItem&gt;
+    #   * {Types::ListComplianceItemsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_compliance_items({
+    #     filters: [
+    #       {
+    #         key: "ComplianceStringFilterKey",
+    #         values: ["ComplianceFilterValue"],
+    #         type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #       },
+    #     ],
+    #     resource_ids: ["ComplianceResourceId"],
+    #     resource_types: ["ComplianceResourceType"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compliance_items #=> Array
+    #   resp.compliance_items[0].compliance_type #=> String
+    #   resp.compliance_items[0].resource_type #=> String
+    #   resp.compliance_items[0].resource_id #=> String
+    #   resp.compliance_items[0].id #=> String
+    #   resp.compliance_items[0].title #=> String
+    #   resp.compliance_items[0].status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.compliance_items[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
+    #   resp.compliance_items[0].execution_summary.execution_time #=> Time
+    #   resp.compliance_items[0].execution_summary.execution_id #=> String
+    #   resp.compliance_items[0].execution_summary.execution_type #=> String
+    #   resp.compliance_items[0].details #=> Hash
+    #   resp.compliance_items[0].details["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItems AWS API Documentation
+    #
+    # @overload list_compliance_items(params = {})
+    # @param [Hash] params ({})
+    def list_compliance_items(params = {}, options = {})
+      req = build_request(:list_compliance_items, params)
+      req.send_request(options)
+    end
+
+    # Returns a summary count of compliant and non-compliant resources for a
+    # compliance type. For example, this call can return State Manager
+    # associations, patches, or custom compliance types according to the
+    # filter criteria you specify.
+    #
+    # @option params [Array<Types::ComplianceStringFilter>] :filters
+    #   One or more compliance or inventory filters. Use a filter to return a
+    #   more specific list of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. Currently, you
+    #   can specify null or 50. The call also returns a token that you can
+    #   specify in a subsequent call to get the next set of results.
+    #
+    # @return [Types::ListComplianceSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListComplianceSummariesResult#compliance_summary_items #compliance_summary_items} => Array&lt;Types::ComplianceSummaryItem&gt;
+    #   * {Types::ListComplianceSummariesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_compliance_summaries({
+    #     filters: [
+    #       {
+    #         key: "ComplianceStringFilterKey",
+    #         values: ["ComplianceFilterValue"],
+    #         type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compliance_summary_items #=> Array
+    #   resp.compliance_summary_items[0].compliance_type #=> String
+    #   resp.compliance_summary_items[0].compliant_summary.compliant_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.critical_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.high_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.medium_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.low_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.informational_count #=> Integer
+    #   resp.compliance_summary_items[0].compliant_summary.severity_summary.unspecified_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.non_compliant_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.critical_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.high_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.medium_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.low_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.informational_count #=> Integer
+    #   resp.compliance_summary_items[0].non_compliant_summary.severity_summary.unspecified_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummaries AWS API Documentation
+    #
+    # @overload list_compliance_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_compliance_summaries(params = {}, options = {})
+      req = build_request(:list_compliance_summaries, params)
+      req.send_request(options)
+    end
+
     # List all versions for a document.
     #
     # @option params [required, String] :name
@@ -3675,6 +3987,79 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Returns a resource-level summary count. The summary includes
+    # information about compliant and non-compliant statuses and detailed
+    # compliance-item severity counts, according to the filter criteria you
+    # specify.
+    #
+    # @option params [Array<Types::ComplianceStringFilter>] :filters
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::ListResourceComplianceSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceComplianceSummariesResult#resource_compliance_summary_items #resource_compliance_summary_items} => Array&lt;Types::ResourceComplianceSummaryItem&gt;
+    #   * {Types::ListResourceComplianceSummariesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_compliance_summaries({
+    #     filters: [
+    #       {
+    #         key: "ComplianceStringFilterKey",
+    #         values: ["ComplianceFilterValue"],
+    #         type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_compliance_summary_items #=> Array
+    #   resp.resource_compliance_summary_items[0].compliance_type #=> String
+    #   resp.resource_compliance_summary_items[0].resource_type #=> String
+    #   resp.resource_compliance_summary_items[0].resource_id #=> String
+    #   resp.resource_compliance_summary_items[0].status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.resource_compliance_summary_items[0].overall_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
+    #   resp.resource_compliance_summary_items[0].execution_summary.execution_time #=> Time
+    #   resp.resource_compliance_summary_items[0].execution_summary.execution_id #=> String
+    #   resp.resource_compliance_summary_items[0].execution_summary.execution_type #=> String
+    #   resp.resource_compliance_summary_items[0].compliant_summary.compliant_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.critical_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.high_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.medium_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.low_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.informational_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].compliant_summary.severity_summary.unspecified_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.non_compliant_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.critical_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.high_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.medium_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.low_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.informational_count #=> Integer
+    #   resp.resource_compliance_summary_items[0].non_compliant_summary.severity_summary.unspecified_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummaries AWS API Documentation
+    #
+    # @overload list_resource_compliance_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_resource_compliance_summaries(params = {}, options = {})
+      req = build_request(:list_resource_compliance_summaries, params)
+      req.send_request(options)
+    end
+
     # Lists your resource data sync configurations. Includes information
     # about the last time a sync attempted to start, the last sync status,
     # and the last time a sync successfully completed.
@@ -3809,6 +4194,76 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Registers a compliance type and other compliance details on a
+    # designated resource. This API lets you register custom compliance
+    # details with a resource. This call overwrites existing compliance
+    # information on the resource, so you must provide a full list of
+    # compliance items each time you send the request.
+    #
+    # @option params [required, String] :resource_id
+    #   Specify an ID for this resource. For a managed instance, this is the
+    #   instance ID.
+    #
+    # @option params [required, String] :resource_type
+    #   Specify the type of resource. `ManagedInstance` is currently the only
+    #   supported resource type.
+    #
+    # @option params [required, String] :compliance_type
+    #   Specify the compliance type. For example, specify Association (for a
+    #   State Manager association), Patch, or Custom:`string`.
+    #
+    # @option params [required, Types::ComplianceExecutionSummary] :execution_summary
+    #   A summary of the call execution that includes an execution ID, the
+    #   type of execution (for example, `Command`), and the date/time of the
+    #   execution using a datetime object that is saved in the following
+    #   format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+    #
+    # @option params [required, Array<Types::ComplianceItemEntry>] :items
+    #   Information about the compliance as defined by the resource type. For
+    #   example, for a patch compliance type, `Items` includes information
+    #   about the PatchSeverity, Classification, etc.
+    #
+    # @option params [String] :item_content_hash
+    #   MD5 or Sha256 content hash. The content hash is used to determine if
+    #   existing information should be overwritten or ignored. If the content
+    #   hashes match, ,the request to put compliance information is ignored.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_compliance_items({
+    #     resource_id: "ComplianceResourceId", # required
+    #     resource_type: "ComplianceResourceType", # required
+    #     compliance_type: "ComplianceTypeName", # required
+    #     execution_summary: { # required
+    #       execution_time: Time.now, # required
+    #       execution_id: "ComplianceExecutionId",
+    #       execution_type: "ComplianceExecutionType",
+    #     },
+    #     items: [ # required
+    #       {
+    #         id: "ComplianceItemId",
+    #         title: "ComplianceItemTitle",
+    #         severity: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #         status: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT
+    #         details: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #       },
+    #     ],
+    #     item_content_hash: "ComplianceItemContentHash",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItems AWS API Documentation
+    #
+    # @overload put_compliance_items(params = {})
+    # @param [Hash] params ({})
+    def put_compliance_items(params = {}, options = {})
+      req = build_request(:put_compliance_items, params)
+      req.send_request(options)
+    end
+
     # Bulk update custom inventory items on one more instance. The request
     # adds an inventory item, if it doesn't already exist, or updates an
     # inventory item, if it does exist.
@@ -3837,6 +4292,9 @@ module Aws::SSM
     #             "AttributeName" => "AttributeValue",
     #           },
     #         ],
+    #         context: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
     #       },
     #     ],
     #   })
@@ -3983,6 +4441,12 @@ module Aws::SSM
     #   raised while running tasks for these targets in this Maintenance
     #   Window.
     #
+    # @option params [String] :name
+    #   An optional name for the target.
+    #
+    # @option params [String] :description
+    #   An optional description for the target.
+    #
     # @option params [String] :client_token
     #   User-provided idempotency token.
     #
@@ -4005,6 +4469,8 @@ module Aws::SSM
     #       },
     #     ],
     #     owner_information: "OwnerInformation",
+    #     name: "MaintenanceWindowName",
+    #     description: "MaintenanceWindowDescription",
     #     client_token: "ClientToken",
     #   })
     #
@@ -4043,6 +4509,10 @@ module Aws::SSM
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters that should be passed to the task when it is executed.
     #
+    # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
+    #   Parameters the task should use during execution. Populate only the
+    #   fields that match the task type. All other fields should be empty.
+    #
     # @option params [Integer] :priority
     #   The priority of the task in the Maintenance Window, the lower the
     #   number the higher the priority. Tasks in a Maintenance Window are
@@ -4059,6 +4529,12 @@ module Aws::SSM
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon S3 bucket to write
     #   instance-level logs to.
+    #
+    # @option params [String] :name
+    #   An optional name for the task.
+    #
+    # @option params [String] :description
+    #   An optional description for the task.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -4082,10 +4558,44 @@ module Aws::SSM
     #     ],
     #     task_arn: "MaintenanceWindowTaskArn", # required
     #     service_role_arn: "ServiceRole", # required
-    #     task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND
+    #     task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #     task_parameters: {
     #       "MaintenanceWindowTaskParameterName" => {
     #         values: ["MaintenanceWindowTaskParameterValue"],
+    #       },
+    #     },
+    #     task_invocation_parameters: {
+    #       run_command: {
+    #         comment: "Comment",
+    #         document_hash: "DocumentHash",
+    #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         notification_config: {
+    #           notification_arn: "NotificationArn",
+    #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #           notification_type: "Command", # accepts Command, Invocation
+    #         },
+    #         output_s3_bucket_name: "S3BucketName",
+    #         output_s3_key_prefix: "S3KeyPrefix",
+    #         parameters: {
+    #           "ParameterName" => ["ParameterValue"],
+    #         },
+    #         service_role_arn: "ServiceRole",
+    #         timeout_seconds: 1,
+    #       },
+    #       automation: {
+    #         document_version: "DocumentVersion",
+    #         parameters: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #       },
+    #       step_functions: {
+    #         input: "MaintenanceWindowStepFunctionsInput",
+    #         name: "MaintenanceWindowStepFunctionsName",
+    #       },
+    #       lambda: {
+    #         client_context: "MaintenanceWindowLambdaClientContext",
+    #         qualifier: "MaintenanceWindowLambdaQualifier",
+    #         payload: "data",
     #       },
     #     },
     #     priority: 1,
@@ -4096,6 +4606,8 @@ module Aws::SSM
     #       s3_key_prefix: "S3KeyPrefix",
     #       s3_region: "S3Region", # required
     #     },
+    #     name: "MaintenanceWindowName",
+    #     description: "MaintenanceWindowDescription",
     #     client_token: "ClientToken",
     #   })
     #
@@ -4674,6 +5186,9 @@ module Aws::SSM
     # @option params [String] :name
     #   The name of the Maintenance Window.
     #
+    # @option params [String] :description
+    #   An optional description for the update request.
+    #
     # @option params [String] :schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
@@ -4692,10 +5207,16 @@ module Aws::SSM
     # @option params [Boolean] :enabled
     #   Whether the Maintenance Window is enabled.
     #
+    # @option params [Boolean] :replace
+    #   If you specify True, then all fields that are required by the
+    #   CreateMaintenanceWindow API are also required for this API request.
+    #   Optional fields that are not specified will be set to null.
+    #
     # @return [Types::UpdateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMaintenanceWindowResult#window_id #window_id} => String
     #   * {Types::UpdateMaintenanceWindowResult#name #name} => String
+    #   * {Types::UpdateMaintenanceWindowResult#description #description} => String
     #   * {Types::UpdateMaintenanceWindowResult#schedule #schedule} => String
     #   * {Types::UpdateMaintenanceWindowResult#duration #duration} => Integer
     #   * {Types::UpdateMaintenanceWindowResult#cutoff #cutoff} => Integer
@@ -4707,17 +5228,20 @@ module Aws::SSM
     #   resp = client.update_maintenance_window({
     #     window_id: "MaintenanceWindowId", # required
     #     name: "MaintenanceWindowName",
+    #     description: "MaintenanceWindowDescription",
     #     schedule: "MaintenanceWindowSchedule",
     #     duration: 1,
     #     cutoff: 1,
     #     allow_unassociated_targets: false,
     #     enabled: false,
+    #     replace: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.window_id #=> String
     #   resp.name #=> String
+    #   resp.description #=> String
     #   resp.schedule #=> String
     #   resp.duration #=> Integer
     #   resp.cutoff #=> Integer
@@ -4730,6 +5254,315 @@ module Aws::SSM
     # @param [Hash] params ({})
     def update_maintenance_window(params = {}, options = {})
       req = build_request(:update_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Modifies the target of an existing Maintenance Window. You can't
+    # change the target type, but you can change the following:
+    #
+    # The target from being an ID target to a Tag target, or a Tag target to
+    # an ID target.
+    #
+    # The IDs of an ID target.
+    #
+    # The tags of a Tag target.
+    #
+    # The Owner.
+    #
+    # The Name.
+    #
+    # The Description.
+    #
+    # Also note that if a parameter is null, then the corresponding field is
+    # not modified.
+    #
+    # @option params [required, String] :window_id
+    #   The Maintenance Window ID for which you want to modify the target.
+    #
+    # @option params [required, String] :window_target_id
+    #   The target ID that you want to modify.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   The targets that you want to add or replace.
+    #
+    # @option params [String] :owner_information
+    #   User-provided value that will be included in any CloudWatch events
+    #   raised while running tasks for these targets in this Maintenance
+    #   Window.
+    #
+    # @option params [String] :name
+    #   A name for the update.
+    #
+    # @option params [String] :description
+    #   An optional description for the update.
+    #
+    # @option params [Boolean] :replace
+    #   If you specify True, then all fields that are required by the
+    #   RegisterTargetWithMaintenanceWindow API are also required for this API
+    #   request. Optional fields that are not specified will be set to null.
+    #
+    # @return [Types::UpdateMaintenanceWindowTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMaintenanceWindowTargetResult#window_id #window_id} => String
+    #   * {Types::UpdateMaintenanceWindowTargetResult#window_target_id #window_target_id} => String
+    #   * {Types::UpdateMaintenanceWindowTargetResult#targets #targets} => Array&lt;Types::Target&gt;
+    #   * {Types::UpdateMaintenanceWindowTargetResult#owner_information #owner_information} => String
+    #   * {Types::UpdateMaintenanceWindowTargetResult#name #name} => String
+    #   * {Types::UpdateMaintenanceWindowTargetResult#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_maintenance_window_target({
+    #     window_id: "MaintenanceWindowId", # required
+    #     window_target_id: "MaintenanceWindowTargetId", # required
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     owner_information: "OwnerInformation",
+    #     name: "MaintenanceWindowName",
+    #     description: "MaintenanceWindowDescription",
+    #     replace: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_id #=> String
+    #   resp.window_target_id #=> String
+    #   resp.targets #=> Array
+    #   resp.targets[0].key #=> String
+    #   resp.targets[0].values #=> Array
+    #   resp.targets[0].values[0] #=> String
+    #   resp.owner_information #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTarget AWS API Documentation
+    #
+    # @overload update_maintenance_window_target(params = {})
+    # @param [Hash] params ({})
+    def update_maintenance_window_target(params = {}, options = {})
+      req = build_request(:update_maintenance_window_target, params)
+      req.send_request(options)
+    end
+
+    # Modifies a task assigned to a Maintenance Window. You can't change
+    # the task type, but you can change the following:
+    #
+    # The Task Arn. For example, you can change a RUN\_COMMAND task from
+    # AWS-RunPowerShellScript to AWS-RunShellScript.
+    #
+    # The service role ARN.
+    #
+    # The task parameters.
+    #
+    # The task priority.
+    #
+    # The task MaxConcurrency and MaxErrors.
+    #
+    # The log location.
+    #
+    # If a parameter is null, then the corresponding field is not modified.
+    # Also, if you set Replace to true, then all fields required by the
+    # RegisterTaskWithMaintenanceWindow operation are required for this
+    # request. Optional fields that aren't specified are be set to null.
+    #
+    # @option params [required, String] :window_id
+    #   The Maintenance Window ID that contains the task that you want to
+    #   modify.
+    #
+    # @option params [required, String] :window_task_id
+    #   The task ID that you want to modify.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   The targets (either instances or tags) that you want to modify.
+    #   Instances are specified using
+    #   Key=instanceids,Values=instanceID\_1,instanceID\_2. Tags are specified
+    #   using Key=tag\_name,Values=tag\_value.
+    #
+    # @option params [String] :task_arn
+    #   The task ARN that you want to modify.
+    #
+    # @option params [String] :service_role_arn
+    #   The IAM service role ARN that you want to modify. The system assumes
+    #   this role during task exectuion.
+    #
+    # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
+    #   The parameters that you want to modify. The map has the following
+    #   format:
+    #
+    #   Key: string, between 1 and 255 characters
+    #
+    #   Value: an array of strings, each string is between 1 and 255
+    #   characters
+    #
+    # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
+    #   Parameters the task should use during execution. Populate only the
+    #   fields that match the task type. All other fields should be empty.
+    #
+    # @option params [Integer] :priority
+    #   The new task priority that you want to specify. The lower the number,
+    #   the higher the priority. Tasks that have the same priority are
+    #   scheduled in parallel.
+    #
+    # @option params [String] :max_concurrency
+    #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
+    #   is the number of targets that are allowed to run this task in
+    #   parallel.
+    #
+    # @option params [String] :max_errors
+    #   The new `MaxErrors` value you want to specify. `MaxErrors` is the
+    #   maximum number of errors that are allowed before the task stops being
+    #   scheduled.
+    #
+    # @option params [Types::LoggingInfo] :logging_info
+    #   The new logging location in Amazon S3 that you want to specify.
+    #
+    # @option params [String] :name
+    #   The new task name that you want to specify.
+    #
+    # @option params [String] :description
+    #   The new task description that you want to specify.
+    #
+    # @option params [Boolean] :replace
+    #   If you specify True, then all fields that are required by the
+    #   RegisterTaskWithMaintenanceWndow API are also required for this API
+    #   request. Optional fields that are not specified will be set to null.
+    #
+    # @return [Types::UpdateMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMaintenanceWindowTaskResult#window_id #window_id} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#window_task_id #window_task_id} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#targets #targets} => Array&lt;Types::Target&gt;
+    #   * {Types::UpdateMaintenanceWindowTaskResult#task_arn #task_arn} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#service_role_arn #service_role_arn} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#task_parameters #task_parameters} => Hash&lt;String,Types::MaintenanceWindowTaskParameterValueExpression&gt;
+    #   * {Types::UpdateMaintenanceWindowTaskResult#task_invocation_parameters #task_invocation_parameters} => Types::MaintenanceWindowTaskInvocationParameters
+    #   * {Types::UpdateMaintenanceWindowTaskResult#priority #priority} => Integer
+    #   * {Types::UpdateMaintenanceWindowTaskResult#max_concurrency #max_concurrency} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#max_errors #max_errors} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#logging_info #logging_info} => Types::LoggingInfo
+    #   * {Types::UpdateMaintenanceWindowTaskResult#name #name} => String
+    #   * {Types::UpdateMaintenanceWindowTaskResult#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_maintenance_window_task({
+    #     window_id: "MaintenanceWindowId", # required
+    #     window_task_id: "MaintenanceWindowTaskId", # required
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     task_arn: "MaintenanceWindowTaskArn",
+    #     service_role_arn: "ServiceRole",
+    #     task_parameters: {
+    #       "MaintenanceWindowTaskParameterName" => {
+    #         values: ["MaintenanceWindowTaskParameterValue"],
+    #       },
+    #     },
+    #     task_invocation_parameters: {
+    #       run_command: {
+    #         comment: "Comment",
+    #         document_hash: "DocumentHash",
+    #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         notification_config: {
+    #           notification_arn: "NotificationArn",
+    #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #           notification_type: "Command", # accepts Command, Invocation
+    #         },
+    #         output_s3_bucket_name: "S3BucketName",
+    #         output_s3_key_prefix: "S3KeyPrefix",
+    #         parameters: {
+    #           "ParameterName" => ["ParameterValue"],
+    #         },
+    #         service_role_arn: "ServiceRole",
+    #         timeout_seconds: 1,
+    #       },
+    #       automation: {
+    #         document_version: "DocumentVersion",
+    #         parameters: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #       },
+    #       step_functions: {
+    #         input: "MaintenanceWindowStepFunctionsInput",
+    #         name: "MaintenanceWindowStepFunctionsName",
+    #       },
+    #       lambda: {
+    #         client_context: "MaintenanceWindowLambdaClientContext",
+    #         qualifier: "MaintenanceWindowLambdaQualifier",
+    #         payload: "data",
+    #       },
+    #     },
+    #     priority: 1,
+    #     max_concurrency: "MaxConcurrency",
+    #     max_errors: "MaxErrors",
+    #     logging_info: {
+    #       s3_bucket_name: "S3BucketName", # required
+    #       s3_key_prefix: "S3KeyPrefix",
+    #       s3_region: "S3Region", # required
+    #     },
+    #     name: "MaintenanceWindowName",
+    #     description: "MaintenanceWindowDescription",
+    #     replace: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.window_id #=> String
+    #   resp.window_task_id #=> String
+    #   resp.targets #=> Array
+    #   resp.targets[0].key #=> String
+    #   resp.targets[0].values #=> Array
+    #   resp.targets[0].values[0] #=> String
+    #   resp.task_arn #=> String
+    #   resp.service_role_arn #=> String
+    #   resp.task_parameters #=> Hash
+    #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values #=> Array
+    #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values[0] #=> String
+    #   resp.task_invocation_parameters.run_command.comment #=> String
+    #   resp.task_invocation_parameters.run_command.document_hash #=> String
+    #   resp.task_invocation_parameters.run_command.document_hash_type #=> String, one of "Sha256", "Sha1"
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_arn #=> String
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_events #=> Array
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.task_invocation_parameters.run_command.notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.task_invocation_parameters.run_command.output_s3_bucket_name #=> String
+    #   resp.task_invocation_parameters.run_command.output_s3_key_prefix #=> String
+    #   resp.task_invocation_parameters.run_command.parameters #=> Hash
+    #   resp.task_invocation_parameters.run_command.parameters["ParameterName"] #=> Array
+    #   resp.task_invocation_parameters.run_command.parameters["ParameterName"][0] #=> String
+    #   resp.task_invocation_parameters.run_command.service_role_arn #=> String
+    #   resp.task_invocation_parameters.run_command.timeout_seconds #=> Integer
+    #   resp.task_invocation_parameters.automation.document_version #=> String
+    #   resp.task_invocation_parameters.automation.parameters #=> Hash
+    #   resp.task_invocation_parameters.automation.parameters["AutomationParameterKey"] #=> Array
+    #   resp.task_invocation_parameters.automation.parameters["AutomationParameterKey"][0] #=> String
+    #   resp.task_invocation_parameters.step_functions.input #=> String
+    #   resp.task_invocation_parameters.step_functions.name #=> String
+    #   resp.task_invocation_parameters.lambda.client_context #=> String
+    #   resp.task_invocation_parameters.lambda.qualifier #=> String
+    #   resp.task_invocation_parameters.lambda.payload #=> String
+    #   resp.priority #=> Integer
+    #   resp.max_concurrency #=> String
+    #   resp.max_errors #=> String
+    #   resp.logging_info.s3_bucket_name #=> String
+    #   resp.logging_info.s3_key_prefix #=> String
+    #   resp.logging_info.s3_region #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTask AWS API Documentation
+    #
+    # @overload update_maintenance_window_task(params = {})
+    # @param [Hash] params ({})
+    def update_maintenance_window_task(params = {}, options = {})
+      req = build_request(:update_maintenance_window_task, params)
       req.send_request(options)
     end
 
@@ -4883,7 +5716,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc13'
+      context[:gem_version] = '1.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 

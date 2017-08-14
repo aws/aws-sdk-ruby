@@ -89,6 +89,35 @@ module Aws::SSM
     CommandStatus = Shapes::StringShape.new(name: 'CommandStatus')
     Comment = Shapes::StringShape.new(name: 'Comment')
     CompletedCount = Shapes::IntegerShape.new(name: 'CompletedCount')
+    ComplianceExecutionId = Shapes::StringShape.new(name: 'ComplianceExecutionId')
+    ComplianceExecutionSummary = Shapes::StructureShape.new(name: 'ComplianceExecutionSummary')
+    ComplianceExecutionType = Shapes::StringShape.new(name: 'ComplianceExecutionType')
+    ComplianceFilterValue = Shapes::StringShape.new(name: 'ComplianceFilterValue')
+    ComplianceItem = Shapes::StructureShape.new(name: 'ComplianceItem')
+    ComplianceItemContentHash = Shapes::StringShape.new(name: 'ComplianceItemContentHash')
+    ComplianceItemDetails = Shapes::MapShape.new(name: 'ComplianceItemDetails')
+    ComplianceItemEntry = Shapes::StructureShape.new(name: 'ComplianceItemEntry')
+    ComplianceItemEntryList = Shapes::ListShape.new(name: 'ComplianceItemEntryList')
+    ComplianceItemId = Shapes::StringShape.new(name: 'ComplianceItemId')
+    ComplianceItemList = Shapes::ListShape.new(name: 'ComplianceItemList')
+    ComplianceItemTitle = Shapes::StringShape.new(name: 'ComplianceItemTitle')
+    ComplianceQueryOperatorType = Shapes::StringShape.new(name: 'ComplianceQueryOperatorType')
+    ComplianceResourceId = Shapes::StringShape.new(name: 'ComplianceResourceId')
+    ComplianceResourceIdList = Shapes::ListShape.new(name: 'ComplianceResourceIdList')
+    ComplianceResourceType = Shapes::StringShape.new(name: 'ComplianceResourceType')
+    ComplianceResourceTypeList = Shapes::ListShape.new(name: 'ComplianceResourceTypeList')
+    ComplianceSeverity = Shapes::StringShape.new(name: 'ComplianceSeverity')
+    ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
+    ComplianceStringFilter = Shapes::StructureShape.new(name: 'ComplianceStringFilter')
+    ComplianceStringFilterKey = Shapes::StringShape.new(name: 'ComplianceStringFilterKey')
+    ComplianceStringFilterList = Shapes::ListShape.new(name: 'ComplianceStringFilterList')
+    ComplianceStringFilterValueList = Shapes::ListShape.new(name: 'ComplianceStringFilterValueList')
+    ComplianceSummaryCount = Shapes::IntegerShape.new(name: 'ComplianceSummaryCount')
+    ComplianceSummaryItem = Shapes::StructureShape.new(name: 'ComplianceSummaryItem')
+    ComplianceSummaryItemList = Shapes::ListShape.new(name: 'ComplianceSummaryItemList')
+    ComplianceTypeCountLimitExceededException = Shapes::StructureShape.new(name: 'ComplianceTypeCountLimitExceededException')
+    ComplianceTypeName = Shapes::StringShape.new(name: 'ComplianceTypeName')
+    CompliantSummary = Shapes::StructureShape.new(name: 'CompliantSummary')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
     CreateActivationRequest = Shapes::StructureShape.new(name: 'CreateActivationRequest')
     CreateActivationResult = Shapes::StructureShape.new(name: 'CreateActivationResult')
@@ -230,6 +259,7 @@ module Aws::SSM
     FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     Fault = Shapes::StringShape.new(name: 'Fault')
+    FeatureNotAvailableException = Shapes::StructureShape.new(name: 'FeatureNotAvailableException')
     GetAutomationExecutionRequest = Shapes::StructureShape.new(name: 'GetAutomationExecutionRequest')
     GetAutomationExecutionResult = Shapes::StructureShape.new(name: 'GetAutomationExecutionResult')
     GetCommandInvocationRequest = Shapes::StructureShape.new(name: 'GetCommandInvocationRequest')
@@ -247,10 +277,14 @@ module Aws::SSM
     GetInventorySchemaResult = Shapes::StructureShape.new(name: 'GetInventorySchemaResult')
     GetMaintenanceWindowExecutionRequest = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionRequest')
     GetMaintenanceWindowExecutionResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionResult')
+    GetMaintenanceWindowExecutionTaskInvocationRequest = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionTaskInvocationRequest')
+    GetMaintenanceWindowExecutionTaskInvocationResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionTaskInvocationResult')
     GetMaintenanceWindowExecutionTaskRequest = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionTaskRequest')
     GetMaintenanceWindowExecutionTaskResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowExecutionTaskResult')
     GetMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'GetMaintenanceWindowRequest')
     GetMaintenanceWindowResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowResult')
+    GetMaintenanceWindowTaskRequest = Shapes::StructureShape.new(name: 'GetMaintenanceWindowTaskRequest')
+    GetMaintenanceWindowTaskResult = Shapes::StructureShape.new(name: 'GetMaintenanceWindowTaskResult')
     GetParameterHistoryRequest = Shapes::StructureShape.new(name: 'GetParameterHistoryRequest')
     GetParameterHistoryResult = Shapes::StructureShape.new(name: 'GetParameterHistoryResult')
     GetParameterRequest = Shapes::StructureShape.new(name: 'GetParameterRequest')
@@ -320,6 +354,7 @@ module Aws::SSM
     InvalidFilterValue = Shapes::StructureShape.new(name: 'InvalidFilterValue')
     InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
     InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
+    InvalidInventoryItemContextException = Shapes::StructureShape.new(name: 'InvalidInventoryItemContextException')
     InvalidItemContentException = Shapes::StructureShape.new(name: 'InvalidItemContentException')
     InvalidKeyId = Shapes::StructureShape.new(name: 'InvalidKeyId')
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
@@ -348,6 +383,7 @@ module Aws::SSM
     InventoryItemAttributeList = Shapes::ListShape.new(name: 'InventoryItemAttributeList')
     InventoryItemAttributeName = Shapes::StringShape.new(name: 'InventoryItemAttributeName')
     InventoryItemCaptureTime = Shapes::StringShape.new(name: 'InventoryItemCaptureTime')
+    InventoryItemContentContext = Shapes::MapShape.new(name: 'InventoryItemContentContext')
     InventoryItemContentHash = Shapes::StringShape.new(name: 'InventoryItemContentHash')
     InventoryItemEntry = Shapes::MapShape.new(name: 'InventoryItemEntry')
     InventoryItemEntryList = Shapes::ListShape.new(name: 'InventoryItemEntryList')
@@ -366,6 +402,7 @@ module Aws::SSM
     InventoryResultItemMap = Shapes::MapShape.new(name: 'InventoryResultItemMap')
     InvocationDoesNotExist = Shapes::StructureShape.new(name: 'InvocationDoesNotExist')
     InvocationTraceOutput = Shapes::StringShape.new(name: 'InvocationTraceOutput')
+    IsSubTypeSchema = Shapes::BooleanShape.new(name: 'IsSubTypeSchema')
     ItemContentMismatchException = Shapes::StructureShape.new(name: 'ItemContentMismatchException')
     ItemSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemSizeLimitExceededException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
@@ -378,19 +415,27 @@ module Aws::SSM
     ListCommandInvocationsResult = Shapes::StructureShape.new(name: 'ListCommandInvocationsResult')
     ListCommandsRequest = Shapes::StructureShape.new(name: 'ListCommandsRequest')
     ListCommandsResult = Shapes::StructureShape.new(name: 'ListCommandsResult')
+    ListComplianceItemsRequest = Shapes::StructureShape.new(name: 'ListComplianceItemsRequest')
+    ListComplianceItemsResult = Shapes::StructureShape.new(name: 'ListComplianceItemsResult')
+    ListComplianceSummariesRequest = Shapes::StructureShape.new(name: 'ListComplianceSummariesRequest')
+    ListComplianceSummariesResult = Shapes::StructureShape.new(name: 'ListComplianceSummariesResult')
     ListDocumentVersionsRequest = Shapes::StructureShape.new(name: 'ListDocumentVersionsRequest')
     ListDocumentVersionsResult = Shapes::StructureShape.new(name: 'ListDocumentVersionsResult')
     ListDocumentsRequest = Shapes::StructureShape.new(name: 'ListDocumentsRequest')
     ListDocumentsResult = Shapes::StructureShape.new(name: 'ListDocumentsResult')
     ListInventoryEntriesRequest = Shapes::StructureShape.new(name: 'ListInventoryEntriesRequest')
     ListInventoryEntriesResult = Shapes::StructureShape.new(name: 'ListInventoryEntriesResult')
+    ListResourceComplianceSummariesRequest = Shapes::StructureShape.new(name: 'ListResourceComplianceSummariesRequest')
+    ListResourceComplianceSummariesResult = Shapes::StructureShape.new(name: 'ListResourceComplianceSummariesResult')
     ListResourceDataSyncRequest = Shapes::StructureShape.new(name: 'ListResourceDataSyncRequest')
     ListResourceDataSyncResult = Shapes::StructureShape.new(name: 'ListResourceDataSyncResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
     MaintenanceWindowAllowUnassociatedTargets = Shapes::BooleanShape.new(name: 'MaintenanceWindowAllowUnassociatedTargets')
+    MaintenanceWindowAutomationParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowAutomationParameters')
     MaintenanceWindowCutoff = Shapes::IntegerShape.new(name: 'MaintenanceWindowCutoff')
+    MaintenanceWindowDescription = Shapes::StringShape.new(name: 'MaintenanceWindowDescription')
     MaintenanceWindowDurationHours = Shapes::IntegerShape.new(name: 'MaintenanceWindowDurationHours')
     MaintenanceWindowEnabled = Shapes::BooleanShape.new(name: 'MaintenanceWindowEnabled')
     MaintenanceWindowExecution = Shapes::StructureShape.new(name: 'MaintenanceWindowExecution')
@@ -415,16 +460,25 @@ module Aws::SSM
     MaintenanceWindowId = Shapes::StringShape.new(name: 'MaintenanceWindowId')
     MaintenanceWindowIdentity = Shapes::StructureShape.new(name: 'MaintenanceWindowIdentity')
     MaintenanceWindowIdentityList = Shapes::ListShape.new(name: 'MaintenanceWindowIdentityList')
+    MaintenanceWindowLambdaClientContext = Shapes::StringShape.new(name: 'MaintenanceWindowLambdaClientContext')
+    MaintenanceWindowLambdaParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowLambdaParameters')
+    MaintenanceWindowLambdaPayload = Shapes::BlobShape.new(name: 'MaintenanceWindowLambdaPayload')
+    MaintenanceWindowLambdaQualifier = Shapes::StringShape.new(name: 'MaintenanceWindowLambdaQualifier')
     MaintenanceWindowMaxResults = Shapes::IntegerShape.new(name: 'MaintenanceWindowMaxResults')
     MaintenanceWindowName = Shapes::StringShape.new(name: 'MaintenanceWindowName')
     MaintenanceWindowResourceType = Shapes::StringShape.new(name: 'MaintenanceWindowResourceType')
+    MaintenanceWindowRunCommandParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowRunCommandParameters')
     MaintenanceWindowSchedule = Shapes::StringShape.new(name: 'MaintenanceWindowSchedule')
+    MaintenanceWindowStepFunctionsInput = Shapes::StringShape.new(name: 'MaintenanceWindowStepFunctionsInput')
+    MaintenanceWindowStepFunctionsName = Shapes::StringShape.new(name: 'MaintenanceWindowStepFunctionsName')
+    MaintenanceWindowStepFunctionsParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowStepFunctionsParameters')
     MaintenanceWindowTarget = Shapes::StructureShape.new(name: 'MaintenanceWindowTarget')
     MaintenanceWindowTargetId = Shapes::StringShape.new(name: 'MaintenanceWindowTargetId')
     MaintenanceWindowTargetList = Shapes::ListShape.new(name: 'MaintenanceWindowTargetList')
     MaintenanceWindowTask = Shapes::StructureShape.new(name: 'MaintenanceWindowTask')
     MaintenanceWindowTaskArn = Shapes::StringShape.new(name: 'MaintenanceWindowTaskArn')
     MaintenanceWindowTaskId = Shapes::StringShape.new(name: 'MaintenanceWindowTaskId')
+    MaintenanceWindowTaskInvocationParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowTaskInvocationParameters')
     MaintenanceWindowTaskList = Shapes::ListShape.new(name: 'MaintenanceWindowTaskList')
     MaintenanceWindowTaskParameterName = Shapes::StringShape.new(name: 'MaintenanceWindowTaskParameterName')
     MaintenanceWindowTaskParameterValue = Shapes::StringShape.new(name: 'MaintenanceWindowTaskParameterValue')
@@ -444,6 +498,7 @@ module Aws::SSM
     ModifyDocumentPermissionRequest = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionRequest')
     ModifyDocumentPermissionResponse = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionResponse')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonCompliantSummary = Shapes::StructureShape.new(name: 'NonCompliantSummary')
     NormalStringMap = Shapes::MapShape.new(name: 'NormalStringMap')
     NotificationArn = Shapes::StringShape.new(name: 'NotificationArn')
     NotificationConfig = Shapes::StructureShape.new(name: 'NotificationConfig')
@@ -537,6 +592,8 @@ module Aws::SSM
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
     Product = Shapes::StringShape.new(name: 'Product')
+    PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
+    PutComplianceItemsResult = Shapes::StructureShape.new(name: 'PutComplianceItemsResult')
     PutInventoryRequest = Shapes::StructureShape.new(name: 'PutInventoryRequest')
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
@@ -553,6 +610,8 @@ module Aws::SSM
     RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
+    ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
     ResourceDataSyncAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceDataSyncAlreadyExistsException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
@@ -585,6 +644,7 @@ module Aws::SSM
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
     SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
+    SeveritySummary = Shapes::StructureShape.new(name: 'SeveritySummary')
     SignalType = Shapes::StringShape.new(name: 'SignalType')
     SnapshotDownloadUrl = Shapes::StringShape.new(name: 'SnapshotDownloadUrl')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
@@ -604,12 +664,14 @@ module Aws::SSM
     String = Shapes::StringShape.new(name: 'String')
     StringDateTime = Shapes::StringShape.new(name: 'StringDateTime')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SubTypeCountLimitExceededException = Shapes::StructureShape.new(name: 'SubTypeCountLimitExceededException')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Target = Shapes::StructureShape.new(name: 'Target')
     TargetCount = Shapes::IntegerShape.new(name: 'TargetCount')
+    TargetInUseException = Shapes::StructureShape.new(name: 'TargetInUseException')
     TargetKey = Shapes::StringShape.new(name: 'TargetKey')
     TargetValue = Shapes::StringShape.new(name: 'TargetValue')
     TargetValues = Shapes::ListShape.new(name: 'TargetValues')
@@ -618,6 +680,7 @@ module Aws::SSM
     TooManyTagsError = Shapes::StructureShape.new(name: 'TooManyTagsError')
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
+    UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
     UnsupportedInventorySchemaVersionException = Shapes::StructureShape.new(name: 'UnsupportedInventorySchemaVersionException')
     UnsupportedOperatingSystem = Shapes::StructureShape.new(name: 'UnsupportedOperatingSystem')
     UnsupportedParameterType = Shapes::StructureShape.new(name: 'UnsupportedParameterType')
@@ -632,6 +695,10 @@ module Aws::SSM
     UpdateDocumentResult = Shapes::StructureShape.new(name: 'UpdateDocumentResult')
     UpdateMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowRequest')
     UpdateMaintenanceWindowResult = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowResult')
+    UpdateMaintenanceWindowTargetRequest = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowTargetRequest')
+    UpdateMaintenanceWindowTargetResult = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowTargetResult')
+    UpdateMaintenanceWindowTaskRequest = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowTaskRequest')
+    UpdateMaintenanceWindowTaskResult = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowTaskResult')
     UpdateManagedInstanceRoleRequest = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleRequest')
     UpdateManagedInstanceRoleResult = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleResult')
     UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
@@ -819,6 +886,60 @@ module Aws::SSM
 
     CommandPluginList.member = Shapes::ShapeRef.new(shape: CommandPlugin)
 
+    ComplianceExecutionSummary.add_member(:execution_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "ExecutionTime"))
+    ComplianceExecutionSummary.add_member(:execution_id, Shapes::ShapeRef.new(shape: ComplianceExecutionId, location_name: "ExecutionId"))
+    ComplianceExecutionSummary.add_member(:execution_type, Shapes::ShapeRef.new(shape: ComplianceExecutionType, location_name: "ExecutionType"))
+    ComplianceExecutionSummary.struct_class = Types::ComplianceExecutionSummary
+
+    ComplianceItem.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, location_name: "ComplianceType"))
+    ComplianceItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, location_name: "ResourceType"))
+    ComplianceItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, location_name: "ResourceId"))
+    ComplianceItem.add_member(:id, Shapes::ShapeRef.new(shape: ComplianceItemId, location_name: "Id"))
+    ComplianceItem.add_member(:title, Shapes::ShapeRef.new(shape: ComplianceItemTitle, location_name: "Title"))
+    ComplianceItem.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
+    ComplianceItem.add_member(:severity, Shapes::ShapeRef.new(shape: ComplianceSeverity, location_name: "Severity"))
+    ComplianceItem.add_member(:execution_summary, Shapes::ShapeRef.new(shape: ComplianceExecutionSummary, location_name: "ExecutionSummary"))
+    ComplianceItem.add_member(:details, Shapes::ShapeRef.new(shape: ComplianceItemDetails, location_name: "Details"))
+    ComplianceItem.struct_class = Types::ComplianceItem
+
+    ComplianceItemDetails.key = Shapes::ShapeRef.new(shape: AttributeName)
+    ComplianceItemDetails.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    ComplianceItemEntry.add_member(:id, Shapes::ShapeRef.new(shape: ComplianceItemId, location_name: "Id"))
+    ComplianceItemEntry.add_member(:title, Shapes::ShapeRef.new(shape: ComplianceItemTitle, location_name: "Title"))
+    ComplianceItemEntry.add_member(:severity, Shapes::ShapeRef.new(shape: ComplianceSeverity, required: true, location_name: "Severity"))
+    ComplianceItemEntry.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, required: true, location_name: "Status"))
+    ComplianceItemEntry.add_member(:details, Shapes::ShapeRef.new(shape: ComplianceItemDetails, location_name: "Details"))
+    ComplianceItemEntry.struct_class = Types::ComplianceItemEntry
+
+    ComplianceItemEntryList.member = Shapes::ShapeRef.new(shape: ComplianceItemEntry)
+
+    ComplianceItemList.member = Shapes::ShapeRef.new(shape: ComplianceItem, location_name: "Item")
+
+    ComplianceResourceIdList.member = Shapes::ShapeRef.new(shape: ComplianceResourceId)
+
+    ComplianceResourceTypeList.member = Shapes::ShapeRef.new(shape: ComplianceResourceType)
+
+    ComplianceStringFilter.add_member(:key, Shapes::ShapeRef.new(shape: ComplianceStringFilterKey, location_name: "Key"))
+    ComplianceStringFilter.add_member(:values, Shapes::ShapeRef.new(shape: ComplianceStringFilterValueList, location_name: "Values"))
+    ComplianceStringFilter.add_member(:type, Shapes::ShapeRef.new(shape: ComplianceQueryOperatorType, location_name: "Type"))
+    ComplianceStringFilter.struct_class = Types::ComplianceStringFilter
+
+    ComplianceStringFilterList.member = Shapes::ShapeRef.new(shape: ComplianceStringFilter, location_name: "ComplianceFilter")
+
+    ComplianceStringFilterValueList.member = Shapes::ShapeRef.new(shape: ComplianceFilterValue, location_name: "FilterValue")
+
+    ComplianceSummaryItem.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, location_name: "ComplianceType"))
+    ComplianceSummaryItem.add_member(:compliant_summary, Shapes::ShapeRef.new(shape: CompliantSummary, location_name: "CompliantSummary"))
+    ComplianceSummaryItem.add_member(:non_compliant_summary, Shapes::ShapeRef.new(shape: NonCompliantSummary, location_name: "NonCompliantSummary"))
+    ComplianceSummaryItem.struct_class = Types::ComplianceSummaryItem
+
+    ComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ComplianceSummaryItem, location_name: "Item")
+
+    CompliantSummary.add_member(:compliant_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "CompliantCount"))
+    CompliantSummary.add_member(:severity_summary, Shapes::ShapeRef.new(shape: SeveritySummary, location_name: "SeveritySummary"))
+    CompliantSummary.struct_class = Types::CompliantSummary
+
     CreateActivationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ActivationDescription, location_name: "Description"))
     CreateActivationRequest.add_member(:default_instance_name, Shapes::ShapeRef.new(shape: DefaultInstanceName, location_name: "DefaultInstanceName"))
     CreateActivationRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
@@ -869,6 +990,7 @@ module Aws::SSM
     CreateDocumentResult.struct_class = Types::CreateDocumentResult
 
     CreateMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, required: true, location_name: "Name"))
+    CreateMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     CreateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, required: true, location_name: "Schedule"))
     CreateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, required: true, location_name: "Duration"))
     CreateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, required: true, location_name: "Cutoff"))
@@ -960,6 +1082,7 @@ module Aws::SSM
 
     DeregisterTargetFromMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     DeregisterTargetFromMaintenanceWindowRequest.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTargetId, required: true, location_name: "WindowTargetId"))
+    DeregisterTargetFromMaintenanceWindowRequest.add_member(:safe, Shapes::ShapeRef.new(shape: Boolean, location_name: "Safe", metadata: {"box"=>true}))
     DeregisterTargetFromMaintenanceWindowRequest.struct_class = Types::DeregisterTargetFromMaintenanceWindowRequest
 
     DeregisterTargetFromMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
@@ -1333,6 +1456,7 @@ module Aws::SSM
     GetInventorySchemaRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeNameFilter, location_name: "TypeName"))
     GetInventorySchemaRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetInventorySchemaRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetInventorySchemaMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetInventorySchemaRequest.add_member(:sub_type, Shapes::ShapeRef.new(shape: IsSubTypeSchema, location_name: "SubType", metadata: {"box"=>true}))
     GetInventorySchemaRequest.struct_class = Types::GetInventorySchemaRequest
 
     GetInventorySchemaResult.add_member(:schemas, Shapes::ShapeRef.new(shape: InventoryItemSchemaResultList, location_name: "Schemas"))
@@ -1349,6 +1473,25 @@ module Aws::SSM
     GetMaintenanceWindowExecutionResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     GetMaintenanceWindowExecutionResult.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
     GetMaintenanceWindowExecutionResult.struct_class = Types::GetMaintenanceWindowExecutionResult
+
+    GetMaintenanceWindowExecutionTaskInvocationRequest.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, required: true, location_name: "WindowExecutionId"))
+    GetMaintenanceWindowExecutionTaskInvocationRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, required: true, location_name: "TaskId"))
+    GetMaintenanceWindowExecutionTaskInvocationRequest.add_member(:invocation_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskInvocationId, required: true, location_name: "InvocationId"))
+    GetMaintenanceWindowExecutionTaskInvocationRequest.struct_class = Types::GetMaintenanceWindowExecutionTaskInvocationRequest
+
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, location_name: "WindowExecutionId"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:task_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, location_name: "TaskExecutionId"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:invocation_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskInvocationId, location_name: "InvocationId"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskExecutionId, location_name: "ExecutionId"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, location_name: "TaskType"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskInvocationParameters, location_name: "Parameters"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:status, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionStatus, location_name: "Status"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:status_details, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionStatusDetails, location_name: "StatusDetails"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskTargetId, location_name: "WindowTargetId"))
+    GetMaintenanceWindowExecutionTaskInvocationResult.struct_class = Types::GetMaintenanceWindowExecutionTaskInvocationResult
 
     GetMaintenanceWindowExecutionTaskRequest.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, required: true, location_name: "WindowExecutionId"))
     GetMaintenanceWindowExecutionTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, required: true, location_name: "TaskId"))
@@ -1374,6 +1517,7 @@ module Aws::SSM
 
     GetMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     GetMaintenanceWindowResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    GetMaintenanceWindowResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     GetMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     GetMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     GetMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
@@ -1382,6 +1526,26 @@ module Aws::SSM
     GetMaintenanceWindowResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
     GetMaintenanceWindowResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
     GetMaintenanceWindowResult.struct_class = Types::GetMaintenanceWindowResult
+
+    GetMaintenanceWindowTaskRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
+    GetMaintenanceWindowTaskRequest.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, required: true, location_name: "WindowTaskId"))
+    GetMaintenanceWindowTaskRequest.struct_class = Types::GetMaintenanceWindowTaskRequest
+
+    GetMaintenanceWindowTaskResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    GetMaintenanceWindowTaskResult.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, location_name: "WindowTaskId"))
+    GetMaintenanceWindowTaskResult.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    GetMaintenanceWindowTaskResult.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, location_name: "TaskArn"))
+    GetMaintenanceWindowTaskResult.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
+    GetMaintenanceWindowTaskResult.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, location_name: "TaskType"))
+    GetMaintenanceWindowTaskResult.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
+    GetMaintenanceWindowTaskResult.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
+    GetMaintenanceWindowTaskResult.add_member(:priority, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskPriority, location_name: "Priority"))
+    GetMaintenanceWindowTaskResult.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    GetMaintenanceWindowTaskResult.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    GetMaintenanceWindowTaskResult.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
+    GetMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    GetMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    GetMaintenanceWindowTaskResult.struct_class = Types::GetMaintenanceWindowTaskResult
 
     GetParameterHistoryRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
     GetParameterHistoryRequest.add_member(:with_decryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithDecryption", metadata: {"box"=>true}))
@@ -1561,6 +1725,7 @@ module Aws::SSM
     InventoryItem.add_member(:capture_time, Shapes::ShapeRef.new(shape: InventoryItemCaptureTime, required: true, location_name: "CaptureTime"))
     InventoryItem.add_member(:content_hash, Shapes::ShapeRef.new(shape: InventoryItemContentHash, location_name: "ContentHash"))
     InventoryItem.add_member(:content, Shapes::ShapeRef.new(shape: InventoryItemEntryList, location_name: "Content"))
+    InventoryItem.add_member(:context, Shapes::ShapeRef.new(shape: InventoryItemContentContext, location_name: "Context"))
     InventoryItem.struct_class = Types::InventoryItem
 
     InventoryItemAttribute.add_member(:name, Shapes::ShapeRef.new(shape: InventoryItemAttributeName, required: true, location_name: "Name"))
@@ -1568,6 +1733,9 @@ module Aws::SSM
     InventoryItemAttribute.struct_class = Types::InventoryItemAttribute
 
     InventoryItemAttributeList.member = Shapes::ShapeRef.new(shape: InventoryItemAttribute, location_name: "Attribute")
+
+    InventoryItemContentContext.key = Shapes::ShapeRef.new(shape: AttributeName)
+    InventoryItemContentContext.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     InventoryItemEntry.key = Shapes::ShapeRef.new(shape: AttributeName)
     InventoryItemEntry.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -1633,6 +1801,26 @@ module Aws::SSM
     ListCommandsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCommandsResult.struct_class = Types::ListCommandsResult
 
+    ListComplianceItemsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ComplianceStringFilterList, location_name: "Filters"))
+    ListComplianceItemsRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ComplianceResourceIdList, location_name: "ResourceIds"))
+    ListComplianceItemsRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ComplianceResourceTypeList, location_name: "ResourceTypes"))
+    ListComplianceItemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListComplianceItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListComplianceItemsRequest.struct_class = Types::ListComplianceItemsRequest
+
+    ListComplianceItemsResult.add_member(:compliance_items, Shapes::ShapeRef.new(shape: ComplianceItemList, location_name: "ComplianceItems"))
+    ListComplianceItemsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListComplianceItemsResult.struct_class = Types::ListComplianceItemsResult
+
+    ListComplianceSummariesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ComplianceStringFilterList, location_name: "Filters"))
+    ListComplianceSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListComplianceSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListComplianceSummariesRequest.struct_class = Types::ListComplianceSummariesRequest
+
+    ListComplianceSummariesResult.add_member(:compliance_summary_items, Shapes::ShapeRef.new(shape: ComplianceSummaryItemList, location_name: "ComplianceSummaryItems"))
+    ListComplianceSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListComplianceSummariesResult.struct_class = Types::ListComplianceSummariesResult
+
     ListDocumentVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     ListDocumentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListDocumentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1666,6 +1854,15 @@ module Aws::SSM
     ListInventoryEntriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInventoryEntriesResult.struct_class = Types::ListInventoryEntriesResult
 
+    ListResourceComplianceSummariesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ComplianceStringFilterList, location_name: "Filters"))
+    ListResourceComplianceSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceComplianceSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListResourceComplianceSummariesRequest.struct_class = Types::ListResourceComplianceSummariesRequest
+
+    ListResourceComplianceSummariesResult.add_member(:resource_compliance_summary_items, Shapes::ShapeRef.new(shape: ResourceComplianceSummaryItemList, location_name: "ResourceComplianceSummaryItems"))
+    ListResourceComplianceSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceComplianceSummariesResult.struct_class = Types::ListResourceComplianceSummariesResult
+
     ListResourceDataSyncRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListResourceDataSyncRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListResourceDataSyncRequest.struct_class = Types::ListResourceDataSyncRequest
@@ -1685,6 +1882,10 @@ module Aws::SSM
     LoggingInfo.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "S3KeyPrefix"))
     LoggingInfo.add_member(:s3_region, Shapes::ShapeRef.new(shape: S3Region, required: true, location_name: "S3Region"))
     LoggingInfo.struct_class = Types::LoggingInfo
+
+    MaintenanceWindowAutomationParameters.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    MaintenanceWindowAutomationParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
+    MaintenanceWindowAutomationParameters.struct_class = Types::MaintenanceWindowAutomationParameters
 
     MaintenanceWindowExecution.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     MaintenanceWindowExecution.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, location_name: "WindowExecutionId"))
@@ -1714,6 +1915,7 @@ module Aws::SSM
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:task_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, location_name: "TaskExecutionId"))
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:invocation_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskInvocationId, location_name: "InvocationId"))
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskExecutionId, location_name: "ExecutionId"))
+    MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, location_name: "TaskType"))
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskInvocationParameters, location_name: "Parameters"))
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:status, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionStatus, location_name: "Status"))
     MaintenanceWindowExecutionTaskInvocationIdentity.add_member(:status_details, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionStatusDetails, location_name: "StatusDetails"))
@@ -1735,6 +1937,7 @@ module Aws::SSM
 
     MaintenanceWindowIdentity.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     MaintenanceWindowIdentity.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    MaintenanceWindowIdentity.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     MaintenanceWindowIdentity.add_member(:enabled, Shapes::ShapeRef.new(shape: MaintenanceWindowEnabled, location_name: "Enabled"))
     MaintenanceWindowIdentity.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     MaintenanceWindowIdentity.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
@@ -1742,11 +1945,33 @@ module Aws::SSM
 
     MaintenanceWindowIdentityList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowIdentity)
 
+    MaintenanceWindowLambdaParameters.add_member(:client_context, Shapes::ShapeRef.new(shape: MaintenanceWindowLambdaClientContext, location_name: "ClientContext"))
+    MaintenanceWindowLambdaParameters.add_member(:qualifier, Shapes::ShapeRef.new(shape: MaintenanceWindowLambdaQualifier, location_name: "Qualifier"))
+    MaintenanceWindowLambdaParameters.add_member(:payload, Shapes::ShapeRef.new(shape: MaintenanceWindowLambdaPayload, location_name: "Payload"))
+    MaintenanceWindowLambdaParameters.struct_class = Types::MaintenanceWindowLambdaParameters
+
+    MaintenanceWindowRunCommandParameters.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "Comment"))
+    MaintenanceWindowRunCommandParameters.add_member(:document_hash, Shapes::ShapeRef.new(shape: DocumentHash, location_name: "DocumentHash"))
+    MaintenanceWindowRunCommandParameters.add_member(:document_hash_type, Shapes::ShapeRef.new(shape: DocumentHashType, location_name: "DocumentHashType"))
+    MaintenanceWindowRunCommandParameters.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
+    MaintenanceWindowRunCommandParameters.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "OutputS3BucketName"))
+    MaintenanceWindowRunCommandParameters.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "OutputS3KeyPrefix"))
+    MaintenanceWindowRunCommandParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    MaintenanceWindowRunCommandParameters.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
+    MaintenanceWindowRunCommandParameters.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: TimeoutSeconds, location_name: "TimeoutSeconds", metadata: {"box"=>true}))
+    MaintenanceWindowRunCommandParameters.struct_class = Types::MaintenanceWindowRunCommandParameters
+
+    MaintenanceWindowStepFunctionsParameters.add_member(:input, Shapes::ShapeRef.new(shape: MaintenanceWindowStepFunctionsInput, location_name: "Input"))
+    MaintenanceWindowStepFunctionsParameters.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowStepFunctionsName, location_name: "Name"))
+    MaintenanceWindowStepFunctionsParameters.struct_class = Types::MaintenanceWindowStepFunctionsParameters
+
     MaintenanceWindowTarget.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     MaintenanceWindowTarget.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTargetId, location_name: "WindowTargetId"))
     MaintenanceWindowTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: MaintenanceWindowResourceType, location_name: "ResourceType"))
     MaintenanceWindowTarget.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     MaintenanceWindowTarget.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    MaintenanceWindowTarget.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    MaintenanceWindowTarget.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     MaintenanceWindowTarget.struct_class = Types::MaintenanceWindowTarget
 
     MaintenanceWindowTargetList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowTarget)
@@ -1762,7 +1987,15 @@ module Aws::SSM
     MaintenanceWindowTask.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
     MaintenanceWindowTask.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     MaintenanceWindowTask.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    MaintenanceWindowTask.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    MaintenanceWindowTask.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     MaintenanceWindowTask.struct_class = Types::MaintenanceWindowTask
+
+    MaintenanceWindowTaskInvocationParameters.add_member(:run_command, Shapes::ShapeRef.new(shape: MaintenanceWindowRunCommandParameters, location_name: "RunCommand"))
+    MaintenanceWindowTaskInvocationParameters.add_member(:automation, Shapes::ShapeRef.new(shape: MaintenanceWindowAutomationParameters, location_name: "Automation"))
+    MaintenanceWindowTaskInvocationParameters.add_member(:step_functions, Shapes::ShapeRef.new(shape: MaintenanceWindowStepFunctionsParameters, location_name: "StepFunctions"))
+    MaintenanceWindowTaskInvocationParameters.add_member(:lambda, Shapes::ShapeRef.new(shape: MaintenanceWindowLambdaParameters, location_name: "Lambda"))
+    MaintenanceWindowTaskInvocationParameters.struct_class = Types::MaintenanceWindowTaskInvocationParameters
 
     MaintenanceWindowTaskList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowTask)
 
@@ -1783,6 +2016,10 @@ module Aws::SSM
     ModifyDocumentPermissionRequest.struct_class = Types::ModifyDocumentPermissionRequest
 
     ModifyDocumentPermissionResponse.struct_class = Types::ModifyDocumentPermissionResponse
+
+    NonCompliantSummary.add_member(:non_compliant_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "NonCompliantCount"))
+    NonCompliantSummary.add_member(:severity_summary, Shapes::ShapeRef.new(shape: SeveritySummary, location_name: "SeveritySummary"))
+    NonCompliantSummary.struct_class = Types::NonCompliantSummary
 
     NormalStringMap.key = Shapes::ShapeRef.new(shape: String)
     NormalStringMap.value = Shapes::ShapeRef.new(shape: String)
@@ -1930,6 +2167,16 @@ module Aws::SSM
 
     PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType")
 
+    PutComplianceItemsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, required: true, location_name: "ResourceId"))
+    PutComplianceItemsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, required: true, location_name: "ResourceType"))
+    PutComplianceItemsRequest.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, required: true, location_name: "ComplianceType"))
+    PutComplianceItemsRequest.add_member(:execution_summary, Shapes::ShapeRef.new(shape: ComplianceExecutionSummary, required: true, location_name: "ExecutionSummary"))
+    PutComplianceItemsRequest.add_member(:items, Shapes::ShapeRef.new(shape: ComplianceItemEntryList, required: true, location_name: "Items"))
+    PutComplianceItemsRequest.add_member(:item_content_hash, Shapes::ShapeRef.new(shape: ComplianceItemContentHash, location_name: "ItemContentHash"))
+    PutComplianceItemsRequest.struct_class = Types::PutComplianceItemsRequest
+
+    PutComplianceItemsResult.struct_class = Types::PutComplianceItemsResult
+
     PutInventoryRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     PutInventoryRequest.add_member(:items, Shapes::ShapeRef.new(shape: InventoryItemList, required: true, location_name: "Items"))
     PutInventoryRequest.struct_class = Types::PutInventoryRequest
@@ -1965,6 +2212,8 @@ module Aws::SSM
     RegisterTargetWithMaintenanceWindowRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: MaintenanceWindowResourceType, required: true, location_name: "ResourceType"))
     RegisterTargetWithMaintenanceWindowRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "Targets"))
     RegisterTargetWithMaintenanceWindowRequest.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    RegisterTargetWithMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    RegisterTargetWithMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     RegisterTargetWithMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     RegisterTargetWithMaintenanceWindowRequest.struct_class = Types::RegisterTargetWithMaintenanceWindowRequest
 
@@ -1977,10 +2226,13 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, required: true, location_name: "ServiceRoleArn"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, required: true, location_name: "TaskType"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:priority, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskPriority, location_name: "Priority", metadata: {"box"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, required: true, location_name: "MaxConcurrency"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, required: true, location_name: "MaxErrors"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.struct_class = Types::RegisterTaskWithMaintenanceWindowRequest
 
@@ -1993,6 +2245,18 @@ module Aws::SSM
     RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
+
+    ResourceComplianceSummaryItem.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, location_name: "ComplianceType"))
+    ResourceComplianceSummaryItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, location_name: "ResourceType"))
+    ResourceComplianceSummaryItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, location_name: "ResourceId"))
+    ResourceComplianceSummaryItem.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
+    ResourceComplianceSummaryItem.add_member(:overall_severity, Shapes::ShapeRef.new(shape: ComplianceSeverity, location_name: "OverallSeverity"))
+    ResourceComplianceSummaryItem.add_member(:execution_summary, Shapes::ShapeRef.new(shape: ComplianceExecutionSummary, location_name: "ExecutionSummary"))
+    ResourceComplianceSummaryItem.add_member(:compliant_summary, Shapes::ShapeRef.new(shape: CompliantSummary, location_name: "CompliantSummary"))
+    ResourceComplianceSummaryItem.add_member(:non_compliant_summary, Shapes::ShapeRef.new(shape: NonCompliantSummary, location_name: "NonCompliantSummary"))
+    ResourceComplianceSummaryItem.struct_class = Types::ResourceComplianceSummaryItem
+
+    ResourceComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ResourceComplianceSummaryItem, location_name: "Item")
 
     ResourceDataSyncItem.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, location_name: "SyncName"))
     ResourceDataSyncItem.add_member(:s3_destination, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Destination, location_name: "S3Destination"))
@@ -2049,6 +2313,14 @@ module Aws::SSM
 
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
     SendCommandResult.struct_class = Types::SendCommandResult
+
+    SeveritySummary.add_member(:critical_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "CriticalCount"))
+    SeveritySummary.add_member(:high_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "HighCount"))
+    SeveritySummary.add_member(:medium_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "MediumCount"))
+    SeveritySummary.add_member(:low_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "LowCount"))
+    SeveritySummary.add_member(:informational_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "InformationalCount"))
+    SeveritySummary.add_member(:unspecified_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "UnspecifiedCount"))
+    SeveritySummary.struct_class = Types::SeveritySummary
 
     StartAutomationExecutionRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
     StartAutomationExecutionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion", metadata: {"box"=>true}))
@@ -2131,21 +2403,72 @@ module Aws::SSM
 
     UpdateMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     UpdateMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     UpdateMaintenanceWindowRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     UpdateMaintenanceWindowRequest.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: MaintenanceWindowEnabled, location_name: "Enabled", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
     UpdateMaintenanceWindowRequest.struct_class = Types::UpdateMaintenanceWindowRequest
 
     UpdateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     UpdateMaintenanceWindowResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     UpdateMaintenanceWindowResult.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceWindowSchedule, location_name: "Schedule"))
     UpdateMaintenanceWindowResult.add_member(:duration, Shapes::ShapeRef.new(shape: MaintenanceWindowDurationHours, location_name: "Duration"))
     UpdateMaintenanceWindowResult.add_member(:cutoff, Shapes::ShapeRef.new(shape: MaintenanceWindowCutoff, location_name: "Cutoff"))
     UpdateMaintenanceWindowResult.add_member(:allow_unassociated_targets, Shapes::ShapeRef.new(shape: MaintenanceWindowAllowUnassociatedTargets, location_name: "AllowUnassociatedTargets"))
     UpdateMaintenanceWindowResult.add_member(:enabled, Shapes::ShapeRef.new(shape: MaintenanceWindowEnabled, location_name: "Enabled"))
     UpdateMaintenanceWindowResult.struct_class = Types::UpdateMaintenanceWindowResult
+
+    UpdateMaintenanceWindowTargetRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTargetId, required: true, location_name: "WindowTargetId"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowTargetRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTargetRequest.struct_class = Types::UpdateMaintenanceWindowTargetRequest
+
+    UpdateMaintenanceWindowTargetResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    UpdateMaintenanceWindowTargetResult.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTargetId, location_name: "WindowTargetId"))
+    UpdateMaintenanceWindowTargetResult.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    UpdateMaintenanceWindowTargetResult.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    UpdateMaintenanceWindowTargetResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowTargetResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowTargetResult.struct_class = Types::UpdateMaintenanceWindowTargetResult
+
+    UpdateMaintenanceWindowTaskRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, required: true, location_name: "WindowTaskId"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, location_name: "TaskArn"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:priority, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskPriority, location_name: "Priority", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTaskRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowTaskRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTaskRequest.struct_class = Types::UpdateMaintenanceWindowTaskRequest
+
+    UpdateMaintenanceWindowTaskResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
+    UpdateMaintenanceWindowTaskResult.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, location_name: "WindowTaskId"))
+    UpdateMaintenanceWindowTaskResult.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    UpdateMaintenanceWindowTaskResult.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, location_name: "TaskArn"))
+    UpdateMaintenanceWindowTaskResult.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
+    UpdateMaintenanceWindowTaskResult.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
+    UpdateMaintenanceWindowTaskResult.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
+    UpdateMaintenanceWindowTaskResult.add_member(:priority, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskPriority, location_name: "Priority"))
+    UpdateMaintenanceWindowTaskResult.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    UpdateMaintenanceWindowTaskResult.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    UpdateMaintenanceWindowTaskResult.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
+    UpdateMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
+    UpdateMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowTaskResult.struct_class = Types::UpdateMaintenanceWindowTaskResult
 
     UpdateManagedInstanceRoleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     UpdateManagedInstanceRoleRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
@@ -2422,6 +2745,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DeregisterTargetFromMaintenanceWindowResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TargetInUseException)
       end)
 
       api.add_operation(:deregister_task_from_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
@@ -2802,6 +3126,26 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:get_maintenance_window_execution_task_invocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMaintenanceWindowExecutionTaskInvocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMaintenanceWindowExecutionTaskInvocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMaintenanceWindowExecutionTaskInvocationResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_maintenance_window_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMaintenanceWindowTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMaintenanceWindowTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMaintenanceWindowTaskResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:get_parameter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetParameter"
         o.http_method = "POST"
@@ -2935,6 +3279,30 @@ module Aws::SSM
         )
       end)
 
+      api.add_operation(:list_compliance_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComplianceItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListComplianceItemsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComplianceItemsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:list_compliance_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComplianceSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListComplianceSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComplianceSummariesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_document_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDocumentVersions"
         o.http_method = "POST"
@@ -2976,6 +3344,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
+      api.add_operation(:list_resource_compliance_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceComplianceSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceComplianceSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceComplianceSummariesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_resource_data_sync, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListResourceDataSync"
         o.http_method = "POST"
@@ -3010,6 +3389,21 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: DocumentLimitExceeded)
       end)
 
+      api.add_operation(:put_compliance_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutComplianceItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutComplianceItemsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutComplianceItemsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidItemContentException)
+        o.errors << Shapes::ShapeRef.new(shape: TotalSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ItemSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ComplianceTypeCountLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+      end)
+
       api.add_operation(:put_inventory, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutInventory"
         o.http_method = "POST"
@@ -3025,6 +3419,9 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ItemContentMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: CustomSchemaCountLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedInventorySchemaVersionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedInventoryItemContextException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInventoryItemContextException)
+        o.errors << Shapes::ShapeRef.new(shape: SubTypeCountLimitExceededException)
       end)
 
       api.add_operation(:put_parameter, Seahorse::Model::Operation.new.tap do |o|
@@ -3090,6 +3487,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -3222,6 +3620,26 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_maintenance_window_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMaintenanceWindowTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowTargetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowTargetResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_maintenance_window_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMaintenanceWindowTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMaintenanceWindowTaskResult)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

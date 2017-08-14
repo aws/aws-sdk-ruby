@@ -1018,6 +1018,242 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # A summary of the call execution that includes an execution ID, the
+    # type of execution (for example, `Command`), and the date/time of the
+    # execution using a datetime object that is saved in the following
+    # format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+    #
+    # @note When making an API call, you may pass ComplianceExecutionSummary
+    #   data as a hash:
+    #
+    #       {
+    #         execution_time: Time.now, # required
+    #         execution_id: "ComplianceExecutionId",
+    #         execution_type: "ComplianceExecutionType",
+    #       }
+    #
+    # @!attribute [rw] execution_time
+    #   The time the execution ran as a datetime object that is saved in the
+    #   following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_id
+    #   An ID created by the system when `PutComplianceItems` was called.
+    #   For example, `CommandID` is a valid execution ID. You can use this
+    #   ID in subsequent calls.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_type
+    #   The type of execution. For example, `Command` is a valid execution
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceExecutionSummary AWS API Documentation
+    #
+    class ComplianceExecutionSummary < Struct.new(
+      :execution_time,
+      :execution_id,
+      :execution_type)
+      include Aws::Structure
+    end
+
+    # Information about the compliance as defined by the resource type. For
+    # example, for a patch resource type, `Items` includes information about
+    # the PatchSeverity, Classification, etc.
+    #
+    # @!attribute [rw] compliance_type
+    #   The compliance type. For example, Association (for a State Manager
+    #   association), Patch, or Custom:`string` are all valide compliance
+    #   types.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource. `ManagedInstance` is currently the only
+    #   supported resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An ID for the resource. For a managed instance, this is the instance
+    #   ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An ID for the compliance item. For example, if the compliance item
+    #   is a Windows patch, the ID could be the number of the KB article.
+    #   Here's an example: KB4010320.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A title for the compliance item. For example, if the compliance item
+    #   is a Windows patch, the title could be the title of the KB article
+    #   for the patch. Here's an example: Security Update for Active
+    #   Directory Federation Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the compliance item. An item is either COMPLIANT or
+    #   NON\_COMPLIANT.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the compliance status. Severity can be one of the
+    #   following: Critical, HIGH, Medium, Low, Informational, Unspecified.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_summary
+    #   A summary for the compliance item. The summary includes an execution
+    #   ID, the execution type (for example, command), and the execution
+    #   time.
+    #   @return [Types::ComplianceExecutionSummary]
+    #
+    # @!attribute [rw] details
+    #   A "Key": "Value" tag combination for the compliance item.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceItem AWS API Documentation
+    #
+    class ComplianceItem < Struct.new(
+      :compliance_type,
+      :resource_type,
+      :resource_id,
+      :id,
+      :title,
+      :status,
+      :severity,
+      :execution_summary,
+      :details)
+      include Aws::Structure
+    end
+
+    # Information about a compliance item.
+    #
+    # @note When making an API call, you may pass ComplianceItemEntry
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ComplianceItemId",
+    #         title: "ComplianceItemTitle",
+    #         severity: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #         status: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT
+    #         details: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The compliance item ID. For example, if the compliance item is a
+    #   Windows patch, the ID could be the number of the KB article.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the compliance item. For example, if the compliance
+    #   item is a Windows patch, the title could be the title of the KB
+    #   article for the patch. Here's an example: Security Update for
+    #   Active Directory Federation Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the compliance status. Severity can be one of the
+    #   following: Critical, High, Medium, Low, Informational, Unspecified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the compliance item. An item is either COMPLIANT or
+    #   NON\_COMPLIANT.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A "Key": "Value" tag combination for the compliance item.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceItemEntry AWS API Documentation
+    #
+    class ComplianceItemEntry < Struct.new(
+      :id,
+      :title,
+      :severity,
+      :status,
+      :details)
+      include Aws::Structure
+    end
+
+    # One or more filters. Use a filter to return a more specific list of
+    # results.
+    #
+    # @note When making an API call, you may pass ComplianceStringFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ComplianceStringFilterKey",
+    #         values: ["ComplianceFilterValue"],
+    #         type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value you want to search for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of comparison that should be performed for the value:
+    #   Equal, NotEqual, BeginWith, LessThan, or GreaterThan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceStringFilter AWS API Documentation
+    #
+    class ComplianceStringFilter < Struct.new(
+      :key,
+      :values,
+      :type)
+      include Aws::Structure
+    end
+
+    # A summary of compliance information by compliance type.
+    #
+    # @!attribute [rw] compliance_type
+    #   The type of compliance item. For example, the compliance type can be
+    #   Association, Patch, or Custom:string.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliant_summary
+    #   A list of COMPLIANT items for the specified compliance type.
+    #   @return [Types::CompliantSummary]
+    #
+    # @!attribute [rw] non_compliant_summary
+    #   A list of NON\_COMPLIANT items for the specified compliance type.
+    #   @return [Types::NonCompliantSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ComplianceSummaryItem AWS API Documentation
+    #
+    class ComplianceSummaryItem < Struct.new(
+      :compliance_type,
+      :compliant_summary,
+      :non_compliant_summary)
+      include Aws::Structure
+    end
+
+    # A summary of resources that are compliant. The summary is organized
+    # according to the resource count for each compliance type.
+    #
+    # @!attribute [rw] compliant_count
+    #   The total number of resources that are compliant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_summary
+    #   A summary of the compliance severity by compliance type.
+    #   @return [Types::SeveritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CompliantSummary AWS API Documentation
+    #
+    class CompliantSummary < Struct.new(
+      :compliant_count,
+      :severity_summary)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateActivationRequest
     #   data as a hash:
     #
@@ -1342,6 +1578,7 @@ module Aws::SSM
     #
     #       {
     #         name: "MaintenanceWindowName", # required
+    #         description: "MaintenanceWindowDescription",
     #         schedule: "MaintenanceWindowSchedule", # required
     #         duration: 1, # required
     #         cutoff: 1, # required
@@ -1351,6 +1588,12 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Maintenance Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the Maintenance Window. We recommend
+    #   specifying a description to help your organize your Maintenance
+    #   Windows.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -1383,6 +1626,7 @@ module Aws::SSM
     #
     class CreateMaintenanceWindowRequest < Struct.new(
       :name,
+      :description,
       :schedule,
       :duration,
       :cutoff,
@@ -1828,6 +2072,7 @@ module Aws::SSM
     #       {
     #         window_id: "MaintenanceWindowId", # required
     #         window_target_id: "MaintenanceWindowTargetId", # required
+    #         safe: false,
     #       }
     #
     # @!attribute [rw] window_id
@@ -1838,11 +2083,18 @@ module Aws::SSM
     #   The ID of the target definition to remove.
     #   @return [String]
     #
+    # @!attribute [rw] safe
+    #   The system checks if the target is being referenced by a task. If
+    #   the target is being referenced, the system returns and error and
+    #   does not deregister the target from the Maintenance Window.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowRequest AWS API Documentation
     #
     class DeregisterTargetFromMaintenanceWindowRequest < Struct.new(
       :window_id,
-      :window_target_id)
+      :window_target_id,
+      :safe)
       include Aws::Structure
     end
 
@@ -4003,6 +4255,7 @@ module Aws::SSM
     #         type_name: "InventoryItemTypeNameFilter",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         sub_type: false,
     #       }
     #
     # @!attribute [rw] type_name
@@ -4020,12 +4273,17 @@ module Aws::SSM
     #   next set of results.
     #   @return [Integer]
     #
+    # @!attribute [rw] sub_type
+    #   Returns the sub-type schema for a specified inventory type.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchemaRequest AWS API Documentation
     #
     class GetInventorySchemaRequest < Struct.new(
       :type_name,
       :next_token,
-      :max_results)
+      :max_results,
+      :sub_type)
       include Aws::Structure
     end
 
@@ -4098,6 +4356,107 @@ module Aws::SSM
       :status_details,
       :start_time,
       :end_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMaintenanceWindowExecutionTaskInvocationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_execution_id: "MaintenanceWindowExecutionId", # required
+    #         task_id: "MaintenanceWindowExecutionTaskId", # required
+    #         invocation_id: "MaintenanceWindowExecutionTaskInvocationId", # required
+    #       }
+    #
+    # @!attribute [rw] window_execution_id
+    #   The ID of the Maintenance Window execution the task is part of.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the specific task in the Maintenance Window task that
+    #   should be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_id
+    #   The invocation ID to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationRequest AWS API Documentation
+    #
+    class GetMaintenanceWindowExecutionTaskInvocationRequest < Struct.new(
+      :window_execution_id,
+      :task_id,
+      :invocation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_execution_id
+    #   The Maintenance Window execution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_execution_id
+    #   The task execution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_id
+    #   The invocation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_type
+    #   Retrieves the task type for a Maintenance Window. Task types include
+    #   the following: LAMBDA, STEP\_FUNCTION, AUTOMATION, RUN\_COMMAND.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters used at the time the task executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The task status for an invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   The details explaining the status. Details are only available for
+    #   certain status values.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the task started executing on the target.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time the task finished executing on the target.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner_information
+    #   User-provided value that will be included in any CloudWatch events
+    #   raised while running tasks for these targets in this Maintenance
+    #   Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_target_id
+    #   The Maintenance Window target ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocationResult AWS API Documentation
+    #
+    class GetMaintenanceWindowExecutionTaskInvocationResult < Struct.new(
+      :window_execution_id,
+      :task_execution_id,
+      :invocation_id,
+      :execution_id,
+      :task_type,
+      :parameters,
+      :status,
+      :status_details,
+      :start_time,
+      :end_time,
+      :owner_information,
+      :window_target_id)
       include Aws::Structure
     end
 
@@ -4233,6 +4592,10 @@ module Aws::SSM
     #   The name of the Maintenance Window.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The description of the Maintenance Window.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the Maintenance Window in the form of a cron or rate
     #   expression.
@@ -4269,6 +4632,7 @@ module Aws::SSM
     class GetMaintenanceWindowResult < Struct.new(
       :window_id,
       :name,
+      :description,
       :schedule,
       :duration,
       :cutoff,
@@ -4276,6 +4640,113 @@ module Aws::SSM
       :enabled,
       :created_date,
       :modified_date)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMaintenanceWindowTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_id: "MaintenanceWindowId", # required
+    #         window_task_id: "MaintenanceWindowTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] window_id
+    #   The Maintenance Window ID that includes the task to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_task_id
+    #   The Maintenance Window task ID to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskRequest AWS API Documentation
+    #
+    class GetMaintenanceWindowTaskRequest < Struct.new(
+      :window_id,
+      :window_task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_id
+    #   The retrieved Maintenance Window ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_task_id
+    #   The retrieved Maintenance Window task ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets where the task should execute.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] task_arn
+    #   TaskArn is the resource that the task used during execution. For
+    #   RUN\_COMMAND and AUTOMATION task types, the TaskArn is the SSM
+    #   Document Name/ARN. For LAMBDA tasks, TaskArn is the Function
+    #   Name/ARN. For STEP\_FUNCTION tasks, the TaskArn is the State Machine
+    #   ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The IAM service role to assume during task execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_type
+    #   The type of task to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_parameters
+    #   The parameters to pass to the task when it executes.
+    #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
+    #
+    # @!attribute [rw] task_invocation_parameters
+    #   The parameters to pass to the task when it executes.
+    #   @return [Types::MaintenanceWindowTaskInvocationParameters]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the task when it executes. The lower the number, the
+    #   higher the priority. Tasks that have the same priority are scheduled
+    #   in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run this task in parallel.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The maximum number of errors allowed before the task stops being
+    #   scheduled.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_info
+    #   The location in Amazon S3 where the task results will be logged.
+    #   @return [Types::LoggingInfo]
+    #
+    # @!attribute [rw] name
+    #   The retrieved task name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The retrieved task description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskResult AWS API Documentation
+    #
+    class GetMaintenanceWindowTaskResult < Struct.new(
+      :window_id,
+      :window_task_id,
+      :targets,
+      :task_arn,
+      :service_role_arn,
+      :task_type,
+      :task_parameters,
+      :task_invocation_parameters,
+      :priority,
+      :max_concurrency,
+      :max_errors,
+      :logging_info,
+      :name,
+      :description)
       include Aws::Structure
     end
 
@@ -5111,6 +5582,9 @@ module Aws::SSM
     #             "AttributeName" => "AttributeValue",
     #           },
     #         ],
+    #         context: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] type_name
@@ -5140,6 +5614,13 @@ module Aws::SSM
     #   The inventory data of the inventory type.
     #   @return [Array<Hash<String,String>>]
     #
+    # @!attribute [rw] context
+    #   A map of associated properties for a specified inventory type. For
+    #   example, with this attribute, you can specify the `ExecutionId`,
+    #   `ExecutionType`, `ComplianceType` properties of the
+    #   `AWS:ComplianceItem` type.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItem AWS API Documentation
     #
     class InventoryItem < Struct.new(
@@ -5147,7 +5628,8 @@ module Aws::SSM
       :schema_version,
       :capture_time,
       :content_hash,
-      :content)
+      :content,
+      :context)
       include Aws::Structure
     end
 
@@ -5455,6 +5937,138 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListComplianceItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "ComplianceStringFilterKey",
+    #             values: ["ComplianceFilterValue"],
+    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #         resource_ids: ["ComplianceResourceId"],
+    #         resource_types: ["ComplianceResourceType"],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more compliance filters. Use a filter to return a more
+    #   specific list of results.
+    #   @return [Array<Types::ComplianceStringFilter>]
+    #
+    # @!attribute [rw] resource_ids
+    #   The ID for the resources from which you want to get compliance
+    #   information. Currently, you can only specify one resource ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   The type of resource from which you want to get compliance
+    #   information. Currently, the only supported resource type is
+    #   `ManagedInstance`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItemsRequest AWS API Documentation
+    #
+    class ListComplianceItemsRequest < Struct.new(
+      :filters,
+      :resource_ids,
+      :resource_types,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_items
+    #   A list of compliance information for the specified resource ID.
+    #   @return [Array<Types::ComplianceItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItemsResult AWS API Documentation
+    #
+    class ListComplianceItemsResult < Struct.new(
+      :compliance_items,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListComplianceSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "ComplianceStringFilterKey",
+    #             values: ["ComplianceFilterValue"],
+    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more compliance or inventory filters. Use a filter to return
+    #   a more specific list of results.
+    #   @return [Array<Types::ComplianceStringFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. Currently, you
+    #   can specify null or 50. The call also returns a token that you can
+    #   specify in a subsequent call to get the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummariesRequest AWS API Documentation
+    #
+    class ListComplianceSummariesRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compliance_summary_items
+    #   A list of compliant and non-compliant summary counts based on
+    #   compliance types. For example, this call returns State Manager
+    #   associations, patches, or custom compliance types according to the
+    #   filter criteria you specified.
+    #   @return [Array<Types::ComplianceSummaryItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummariesResult AWS API Documentation
+    #
+    class ListComplianceSummariesResult < Struct.new(
+      :compliance_summary_items,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDocumentVersionsRequest
     #   data as a hash:
     #
@@ -5652,6 +6266,66 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResourceComplianceSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "ComplianceStringFilterKey",
+    #             values: ["ComplianceFilterValue"],
+    #             type: "EQUAL", # accepts EQUAL, NOT_EQUAL, BEGIN_WITH, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #   @return [Array<Types::ComplianceStringFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummariesRequest AWS API Documentation
+    #
+    class ListResourceComplianceSummariesRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_compliance_summary_items
+    #   A summary count for specified or targeted managed instances. Summary
+    #   count includes information about compliant and non-compliant State
+    #   Manager associations, patch statuses, or custom items according to
+    #   the filter criteria you specify.
+    #   @return [Array<Types::ResourceComplianceSummaryItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummariesResult AWS API Documentation
+    #
+    class ListResourceComplianceSummariesResult < Struct.new(
+      :resource_compliance_summary_items,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListResourceDataSyncRequest
     #   data as a hash:
     #
@@ -5761,6 +6435,35 @@ module Aws::SSM
       :s3_bucket_name,
       :s3_key_prefix,
       :s3_region)
+      include Aws::Structure
+    end
+
+    # Parameters for an AUTOMATION task type.
+    #
+    # @note When making an API call, you may pass MaintenanceWindowAutomationParameters
+    #   data as a hash:
+    #
+    #       {
+    #         document_version: "DocumentVersion",
+    #         parameters: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] document_version
+    #   The version of an SSM Automation document to use during task
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Parameters for the AUTOMATION task.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowAutomationParameters AWS API Documentation
+    #
+    class MaintenanceWindowAutomationParameters < Struct.new(
+      :document_version,
+      :parameters)
       include Aws::Structure
     end
 
@@ -5877,6 +6580,10 @@ module Aws::SSM
     #   the command ID.
     #   @return [String]
     #
+    # @!attribute [rw] task_type
+    #   The task type.
+    #   @return [String]
+    #
     # @!attribute [rw] parameters
     #   The parameters that were provided for the invocation when it was
     #   executed.
@@ -5917,6 +6624,7 @@ module Aws::SSM
       :task_execution_id,
       :invocation_id,
       :execution_id,
+      :task_type,
       :parameters,
       :status,
       :status_details,
@@ -5963,6 +6671,10 @@ module Aws::SSM
     #   The name of the Maintenance Window.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description of the Maintenance Window.
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   Whether the Maintenance Window is enabled.
     #   @return [Boolean]
@@ -5981,9 +6693,152 @@ module Aws::SSM
     class MaintenanceWindowIdentity < Struct.new(
       :window_id,
       :name,
+      :description,
       :enabled,
       :duration,
       :cutoff)
+      include Aws::Structure
+    end
+
+    # Parameters for a LAMBDA task type.
+    #
+    # @note When making an API call, you may pass MaintenanceWindowLambdaParameters
+    #   data as a hash:
+    #
+    #       {
+    #         client_context: "MaintenanceWindowLambdaClientContext",
+    #         qualifier: "MaintenanceWindowLambdaQualifier",
+    #         payload: "data",
+    #       }
+    #
+    # @!attribute [rw] client_context
+    #   Using the ClientContext you can pass client-specific information to
+    #   the Lambda function you are invoking. You can then process the
+    #   client information in your Lambda function as you choose through the
+    #   context variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   You can use this optional parameter to specify a Lambda function
+    #   version or alias name. If you specify a function version, the API
+    #   uses the qualified function ARN to invoke a specific Lambda
+    #   function. If you specify an alias name, the API uses the alias ARN
+    #   to invoke the Lambda function version to which the alias points.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   JSON that you want to provide to your Lambda function as input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowLambdaParameters AWS API Documentation
+    #
+    class MaintenanceWindowLambdaParameters < Struct.new(
+      :client_context,
+      :qualifier,
+      :payload)
+      include Aws::Structure
+    end
+
+    # Parameters for a RUN\_COMMAND task type.
+    #
+    # @note When making an API call, you may pass MaintenanceWindowRunCommandParameters
+    #   data as a hash:
+    #
+    #       {
+    #         comment: "Comment",
+    #         document_hash: "DocumentHash",
+    #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         notification_config: {
+    #           notification_arn: "NotificationArn",
+    #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #           notification_type: "Command", # accepts Command, Invocation
+    #         },
+    #         output_s3_bucket_name: "S3BucketName",
+    #         output_s3_key_prefix: "S3KeyPrefix",
+    #         parameters: {
+    #           "ParameterName" => ["ParameterValue"],
+    #         },
+    #         service_role_arn: "ServiceRole",
+    #         timeout_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] comment
+    #   Information about the command(s) to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_hash
+    #   The Sha256 or Sha1 hash created by the system when the document was
+    #   created. Sha1 hashes have been deprecated.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_hash_type
+    #   Sha256 or Sha1. Sha1 hashes have been deprecated.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_config
+    #   Configurations for sending notifications about command status
+    #   changes on a per instance basis.
+    #   @return [Types::NotificationConfig]
+    #
+    # @!attribute [rw] output_s3_bucket_name
+    #   The name of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_s3_key_prefix
+    #   The Amazon S3 bucket subfolder.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Parameters for the RUN\_COMMAND task execution.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The IAM service role that to assume during task execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   If this time is reached and the command has not already started
+    #   executing, it will not execute.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters AWS API Documentation
+    #
+    class MaintenanceWindowRunCommandParameters < Struct.new(
+      :comment,
+      :document_hash,
+      :document_hash_type,
+      :notification_config,
+      :output_s3_bucket_name,
+      :output_s3_key_prefix,
+      :parameters,
+      :service_role_arn,
+      :timeout_seconds)
+      include Aws::Structure
+    end
+
+    # Parameters for the STEP\_FUNCTION execution.
+    #
+    # @note When making an API call, you may pass MaintenanceWindowStepFunctionsParameters
+    #   data as a hash:
+    #
+    #       {
+    #         input: "MaintenanceWindowStepFunctionsInput",
+    #         name: "MaintenanceWindowStepFunctionsName",
+    #       }
+    #
+    # @!attribute [rw] input
+    #   The inputs for the STEP\_FUNCTION task.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the STEP\_FUNCTION task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowStepFunctionsParameters AWS API Documentation
+    #
+    class MaintenanceWindowStepFunctionsParameters < Struct.new(
+      :input,
+      :name)
       include Aws::Structure
     end
 
@@ -6014,6 +6869,14 @@ module Aws::SSM
     #   Window.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The target name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTarget AWS API Documentation
     #
     class MaintenanceWindowTarget < Struct.new(
@@ -6021,7 +6884,9 @@ module Aws::SSM
       :window_target_id,
       :resource_type,
       :targets,
-      :owner_information)
+      :owner_information,
+      :name,
+      :description)
       include Aws::Structure
     end
 
@@ -6036,11 +6901,15 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_arn
-    #   The ARN of the task to execute.
+    #   TaskArn is the resource that the task uses during execution. For
+    #   RUN\_COMMAND and AUTOMATION task types, the TaskArn is the SSM
+    #   Document Name/ARN. For LAMBDA tasks, it's the Function Name/ARN.
+    #   For STEP\_FUNCTION tasks, it's the State Machine ARN.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of task.
+    #   The type of task. The type can be one of the following:
+    #   RUN\_COMMAND, AUTOMATION, LAMBDA, or STEP\_FUNCTION.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -6056,10 +6925,9 @@ module Aws::SSM
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] priority
-    #   The priority of the task in the Maintenance Window, the lower the
-    #   number the higher the priority. Tasks in a Maintenance Window are
-    #   scheduled in priority order with tasks that have the same priority
-    #   scheduled in parallel.
+    #   The priority of the task in the Maintenance Window. The lower the
+    #   number, the higher the priority. Tasks that have the same priority
+    #   are scheduled in parallel.
     #   @return [Integer]
     #
     # @!attribute [rw] logging_info
@@ -6079,6 +6947,14 @@ module Aws::SSM
     #   scheduled.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The task name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask AWS API Documentation
     #
     class MaintenanceWindowTask < Struct.new(
@@ -6092,7 +6968,75 @@ module Aws::SSM
       :logging_info,
       :service_role_arn,
       :max_concurrency,
-      :max_errors)
+      :max_errors,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # Parameters for task execution.
+    #
+    # @note When making an API call, you may pass MaintenanceWindowTaskInvocationParameters
+    #   data as a hash:
+    #
+    #       {
+    #         run_command: {
+    #           comment: "Comment",
+    #           document_hash: "DocumentHash",
+    #           document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #           notification_config: {
+    #             notification_arn: "NotificationArn",
+    #             notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #             notification_type: "Command", # accepts Command, Invocation
+    #           },
+    #           output_s3_bucket_name: "S3BucketName",
+    #           output_s3_key_prefix: "S3KeyPrefix",
+    #           parameters: {
+    #             "ParameterName" => ["ParameterValue"],
+    #           },
+    #           service_role_arn: "ServiceRole",
+    #           timeout_seconds: 1,
+    #         },
+    #         automation: {
+    #           document_version: "DocumentVersion",
+    #           parameters: {
+    #             "AutomationParameterKey" => ["AutomationParameterValue"],
+    #           },
+    #         },
+    #         step_functions: {
+    #           input: "MaintenanceWindowStepFunctionsInput",
+    #           name: "MaintenanceWindowStepFunctionsName",
+    #         },
+    #         lambda: {
+    #           client_context: "MaintenanceWindowLambdaClientContext",
+    #           qualifier: "MaintenanceWindowLambdaQualifier",
+    #           payload: "data",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] run_command
+    #   Parameters for a RUN\_COMMAND task type.
+    #   @return [Types::MaintenanceWindowRunCommandParameters]
+    #
+    # @!attribute [rw] automation
+    #   Parameters for a AUTOMATION task type.
+    #   @return [Types::MaintenanceWindowAutomationParameters]
+    #
+    # @!attribute [rw] step_functions
+    #   Parameters for a STEP\_FUNCTION task type.
+    #   @return [Types::MaintenanceWindowStepFunctionsParameters]
+    #
+    # @!attribute [rw] lambda
+    #   Parameters for a LAMBDA task type.
+    #   @return [Types::MaintenanceWindowLambdaParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTaskInvocationParameters AWS API Documentation
+    #
+    class MaintenanceWindowTaskInvocationParameters < Struct.new(
+      :run_command,
+      :automation,
+      :step_functions,
+      :lambda)
       include Aws::Structure
     end
 
@@ -6162,6 +7106,25 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermissionResponse AWS API Documentation
     #
     class ModifyDocumentPermissionResponse < Aws::EmptyStructure; end
+
+    # A summary of resources that are not compliant. The summary is
+    # organized according to resource type.
+    #
+    # @!attribute [rw] non_compliant_count
+    #   The total number of compliance items that are not compliant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_summary
+    #   A summary of the non-compliance severity by compliance type
+    #   @return [Types::SeveritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/NonCompliantSummary AWS API Documentation
+    #
+    class NonCompliantSummary < Struct.new(
+      :non_compliant_count,
+      :severity_summary)
+      include Aws::Structure
+    end
 
     # Configurations for sending notifications.
     #
@@ -6747,6 +7710,83 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutComplianceItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ComplianceResourceId", # required
+    #         resource_type: "ComplianceResourceType", # required
+    #         compliance_type: "ComplianceTypeName", # required
+    #         execution_summary: { # required
+    #           execution_time: Time.now, # required
+    #           execution_id: "ComplianceExecutionId",
+    #           execution_type: "ComplianceExecutionType",
+    #         },
+    #         items: [ # required
+    #           {
+    #             id: "ComplianceItemId",
+    #             title: "ComplianceItemTitle",
+    #             severity: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #             status: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT
+    #             details: {
+    #               "AttributeName" => "AttributeValue",
+    #             },
+    #           },
+    #         ],
+    #         item_content_hash: "ComplianceItemContentHash",
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   Specify an ID for this resource. For a managed instance, this is the
+    #   instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specify the type of resource. `ManagedInstance` is currently the
+    #   only supported resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   Specify the compliance type. For example, specify Association (for a
+    #   State Manager association), Patch, or Custom:`string`.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_summary
+    #   A summary of the call execution that includes an execution ID, the
+    #   type of execution (for example, `Command`), and the date/time of the
+    #   execution using a datetime object that is saved in the following
+    #   format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+    #   @return [Types::ComplianceExecutionSummary]
+    #
+    # @!attribute [rw] items
+    #   Information about the compliance as defined by the resource type.
+    #   For example, for a patch compliance type, `Items` includes
+    #   information about the PatchSeverity, Classification, etc.
+    #   @return [Array<Types::ComplianceItemEntry>]
+    #
+    # @!attribute [rw] item_content_hash
+    #   MD5 or Sha256 content hash. The content hash is used to determine if
+    #   existing information should be overwritten or ignored. If the
+    #   content hashes match, ,the request to put compliance information is
+    #   ignored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItemsRequest AWS API Documentation
+    #
+    class PutComplianceItemsRequest < Struct.new(
+      :resource_id,
+      :resource_type,
+      :compliance_type,
+      :execution_summary,
+      :items,
+      :item_content_hash)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItemsResult AWS API Documentation
+    #
+    class PutComplianceItemsResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutInventoryRequest
     #   data as a hash:
     #
@@ -6763,6 +7803,9 @@ module Aws::SSM
     #                 "AttributeName" => "AttributeValue",
     #               },
     #             ],
+    #             context: {
+    #               "AttributeName" => "AttributeValue",
+    #             },
     #           },
     #         ],
     #       }
@@ -6935,6 +7978,8 @@ module Aws::SSM
     #           },
     #         ],
     #         owner_information: "OwnerInformation",
+    #         name: "MaintenanceWindowName",
+    #         description: "MaintenanceWindowDescription",
     #         client_token: "ClientToken",
     #       }
     #
@@ -6960,6 +8005,14 @@ module Aws::SSM
     #   Window.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   An optional name for the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the target.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   User-provided idempotency token.
     #
@@ -6974,6 +8027,8 @@ module Aws::SSM
       :resource_type,
       :targets,
       :owner_information,
+      :name,
+      :description,
       :client_token)
       include Aws::Structure
     end
@@ -7002,10 +8057,44 @@ module Aws::SSM
     #         ],
     #         task_arn: "MaintenanceWindowTaskArn", # required
     #         service_role_arn: "ServiceRole", # required
-    #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND
+    #         task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND, AUTOMATION, STEP_FUNCTIONS, LAMBDA
     #         task_parameters: {
     #           "MaintenanceWindowTaskParameterName" => {
     #             values: ["MaintenanceWindowTaskParameterValue"],
+    #           },
+    #         },
+    #         task_invocation_parameters: {
+    #           run_command: {
+    #             comment: "Comment",
+    #             document_hash: "DocumentHash",
+    #             document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #             notification_config: {
+    #               notification_arn: "NotificationArn",
+    #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #               notification_type: "Command", # accepts Command, Invocation
+    #             },
+    #             output_s3_bucket_name: "S3BucketName",
+    #             output_s3_key_prefix: "S3KeyPrefix",
+    #             parameters: {
+    #               "ParameterName" => ["ParameterValue"],
+    #             },
+    #             service_role_arn: "ServiceRole",
+    #             timeout_seconds: 1,
+    #           },
+    #           automation: {
+    #             document_version: "DocumentVersion",
+    #             parameters: {
+    #               "AutomationParameterKey" => ["AutomationParameterValue"],
+    #             },
+    #           },
+    #           step_functions: {
+    #             input: "MaintenanceWindowStepFunctionsInput",
+    #             name: "MaintenanceWindowStepFunctionsName",
+    #           },
+    #           lambda: {
+    #             client_context: "MaintenanceWindowLambdaClientContext",
+    #             qualifier: "MaintenanceWindowLambdaQualifier",
+    #             payload: "data",
     #           },
     #         },
     #         priority: 1,
@@ -7016,6 +8105,8 @@ module Aws::SSM
     #           s3_key_prefix: "S3KeyPrefix",
     #           s3_region: "S3Region", # required
     #         },
+    #         name: "MaintenanceWindowName",
+    #         description: "MaintenanceWindowDescription",
     #         client_token: "ClientToken",
     #       }
     #
@@ -7047,6 +8138,11 @@ module Aws::SSM
     #   executed.
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
+    # @!attribute [rw] task_invocation_parameters
+    #   Parameters the task should use during execution. Populate only the
+    #   fields that match the task type. All other fields should be empty.
+    #   @return [Types::MaintenanceWindowTaskInvocationParameters]
+    #
     # @!attribute [rw] priority
     #   The priority of the task in the Maintenance Window, the lower the
     #   number the higher the priority. Tasks in a Maintenance Window are
@@ -7068,6 +8164,14 @@ module Aws::SSM
     #   write instance-level logs to.
     #   @return [Types::LoggingInfo]
     #
+    # @!attribute [rw] name
+    #   An optional name for the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the task.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   User-provided idempotency token.
     #
@@ -7084,10 +8188,13 @@ module Aws::SSM
       :service_role_arn,
       :task_type,
       :task_parameters,
+      :task_invocation_parameters,
       :priority,
       :max_concurrency,
       :max_errors,
       :logging_info,
+      :name,
+      :description,
       :client_token)
       include Aws::Structure
     end
@@ -7136,6 +8243,55 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceResult AWS API Documentation
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
+    # Compliance summary information for a specific resource.
+    #
+    # @!attribute [rw] compliance_type
+    #   The compliance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The compliance status for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] overall_severity
+    #   The highest severity item found for the resource. The resource is
+    #   compliant for this item.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_summary
+    #   Information about the execution.
+    #   @return [Types::ComplianceExecutionSummary]
+    #
+    # @!attribute [rw] compliant_summary
+    #   A list of items that are compliant for the resource.
+    #   @return [Types::CompliantSummary]
+    #
+    # @!attribute [rw] non_compliant_summary
+    #   A list of items that aren't compliant for the resource.
+    #   @return [Types::NonCompliantSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceComplianceSummaryItem AWS API Documentation
+    #
+    class ResourceComplianceSummaryItem < Struct.new(
+      :compliance_type,
+      :resource_type,
+      :resource_id,
+      :status,
+      :overall_severity,
+      :execution_summary,
+      :compliant_summary,
+      :non_compliant_summary)
+      include Aws::Structure
+    end
 
     # Information about a Resource Data Sync configuration, including its
     # current status and last successful sync.
@@ -7501,6 +8657,57 @@ module Aws::SSM
     #
     class SendCommandResult < Struct.new(
       :command)
+      include Aws::Structure
+    end
+
+    # The number of managed instances found for each patch severity level
+    # defined in the request filter.
+    #
+    # @!attribute [rw] critical_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of critical. Critical severity is determined by the
+    #   organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of high. High severity is determined by the
+    #   organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of medium. Medium severity is determined by the
+    #   organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of low. Low severity is determined by the
+    #   organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of informational. Informational severity is
+    #   determined by the organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unspecified_count
+    #   The total number of resources or compliance items that have a
+    #   severity level of unspecified. Unspecified severity is determined by
+    #   the organization that published the compliance items.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SeveritySummary AWS API Documentation
+    #
+    class SeveritySummary < Struct.new(
+      :critical_count,
+      :high_count,
+      :medium_count,
+      :low_count,
+      :informational_count,
+      :unspecified_count)
       include Aws::Structure
     end
 
@@ -7926,11 +9133,13 @@ module Aws::SSM
     #       {
     #         window_id: "MaintenanceWindowId", # required
     #         name: "MaintenanceWindowName",
+    #         description: "MaintenanceWindowDescription",
     #         schedule: "MaintenanceWindowSchedule",
     #         duration: 1,
     #         cutoff: 1,
     #         allow_unassociated_targets: false,
     #         enabled: false,
+    #         replace: false,
     #       }
     #
     # @!attribute [rw] window_id
@@ -7939,6 +9148,10 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Maintenance Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the update request.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -7964,16 +9177,24 @@ module Aws::SSM
     #   Whether the Maintenance Window is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] replace
+    #   If you specify True, then all fields that are required by the
+    #   CreateMaintenanceWindow API are also required for this API request.
+    #   Optional fields that are not specified will be set to null.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowRequest AWS API Documentation
     #
     class UpdateMaintenanceWindowRequest < Struct.new(
       :window_id,
       :name,
+      :description,
       :schedule,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
-      :enabled)
+      :enabled,
+      :replace)
       include Aws::Structure
     end
 
@@ -7983,6 +9204,10 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Maintenance Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the update.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -8013,11 +9238,345 @@ module Aws::SSM
     class UpdateMaintenanceWindowResult < Struct.new(
       :window_id,
       :name,
+      :description,
       :schedule,
       :duration,
       :cutoff,
       :allow_unassociated_targets,
       :enabled)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateMaintenanceWindowTargetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_id: "MaintenanceWindowId", # required
+    #         window_target_id: "MaintenanceWindowTargetId", # required
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         owner_information: "OwnerInformation",
+    #         name: "MaintenanceWindowName",
+    #         description: "MaintenanceWindowDescription",
+    #         replace: false,
+    #       }
+    #
+    # @!attribute [rw] window_id
+    #   The Maintenance Window ID for which you want to modify the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_target_id
+    #   The target ID that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets that you want to add or replace.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] owner_information
+    #   User-provided value that will be included in any CloudWatch events
+    #   raised while running tasks for these targets in this Maintenance
+    #   Window.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace
+    #   If you specify True, then all fields that are required by the
+    #   RegisterTargetWithMaintenanceWindow API are also required for this
+    #   API request. Optional fields that are not specified will be set to
+    #   null.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTargetRequest AWS API Documentation
+    #
+    class UpdateMaintenanceWindowTargetRequest < Struct.new(
+      :window_id,
+      :window_target_id,
+      :targets,
+      :owner_information,
+      :name,
+      :description,
+      :replace)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_id
+    #   The Maintenance Window ID specified in the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_target_id
+    #   The target ID specified in the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The updated targets.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] owner_information
+    #   The updated owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTargetResult AWS API Documentation
+    #
+    class UpdateMaintenanceWindowTargetResult < Struct.new(
+      :window_id,
+      :window_target_id,
+      :targets,
+      :owner_information,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateMaintenanceWindowTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         window_id: "MaintenanceWindowId", # required
+    #         window_task_id: "MaintenanceWindowTaskId", # required
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         task_arn: "MaintenanceWindowTaskArn",
+    #         service_role_arn: "ServiceRole",
+    #         task_parameters: {
+    #           "MaintenanceWindowTaskParameterName" => {
+    #             values: ["MaintenanceWindowTaskParameterValue"],
+    #           },
+    #         },
+    #         task_invocation_parameters: {
+    #           run_command: {
+    #             comment: "Comment",
+    #             document_hash: "DocumentHash",
+    #             document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #             notification_config: {
+    #               notification_arn: "NotificationArn",
+    #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+    #               notification_type: "Command", # accepts Command, Invocation
+    #             },
+    #             output_s3_bucket_name: "S3BucketName",
+    #             output_s3_key_prefix: "S3KeyPrefix",
+    #             parameters: {
+    #               "ParameterName" => ["ParameterValue"],
+    #             },
+    #             service_role_arn: "ServiceRole",
+    #             timeout_seconds: 1,
+    #           },
+    #           automation: {
+    #             document_version: "DocumentVersion",
+    #             parameters: {
+    #               "AutomationParameterKey" => ["AutomationParameterValue"],
+    #             },
+    #           },
+    #           step_functions: {
+    #             input: "MaintenanceWindowStepFunctionsInput",
+    #             name: "MaintenanceWindowStepFunctionsName",
+    #           },
+    #           lambda: {
+    #             client_context: "MaintenanceWindowLambdaClientContext",
+    #             qualifier: "MaintenanceWindowLambdaQualifier",
+    #             payload: "data",
+    #           },
+    #         },
+    #         priority: 1,
+    #         max_concurrency: "MaxConcurrency",
+    #         max_errors: "MaxErrors",
+    #         logging_info: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_key_prefix: "S3KeyPrefix",
+    #           s3_region: "S3Region", # required
+    #         },
+    #         name: "MaintenanceWindowName",
+    #         description: "MaintenanceWindowDescription",
+    #         replace: false,
+    #       }
+    #
+    # @!attribute [rw] window_id
+    #   The Maintenance Window ID that contains the task that you want to
+    #   modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_task_id
+    #   The task ID that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets (either instances or tags) that you want to modify.
+    #   Instances are specified using
+    #   Key=instanceids,Values=instanceID\_1,instanceID\_2. Tags are
+    #   specified using Key=tag\_name,Values=tag\_value.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] task_arn
+    #   The task ARN that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The IAM service role ARN that you want to modify. The system assumes
+    #   this role during task exectuion.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_parameters
+    #   The parameters that you want to modify. The map has the following
+    #   format:
+    #
+    #   Key: string, between 1 and 255 characters
+    #
+    #   Value: an array of strings, each string is between 1 and 255
+    #   characters
+    #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
+    #
+    # @!attribute [rw] task_invocation_parameters
+    #   Parameters the task should use during execution. Populate only the
+    #   fields that match the task type. All other fields should be empty.
+    #   @return [Types::MaintenanceWindowTaskInvocationParameters]
+    #
+    # @!attribute [rw] priority
+    #   The new task priority that you want to specify. The lower the
+    #   number, the higher the priority. Tasks that have the same priority
+    #   are scheduled in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
+    #   is the number of targets that are allowed to run this task in
+    #   parallel.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The new `MaxErrors` value you want to specify. `MaxErrors` is the
+    #   maximum number of errors that are allowed before the task stops
+    #   being scheduled.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_info
+    #   The new logging location in Amazon S3 that you want to specify.
+    #   @return [Types::LoggingInfo]
+    #
+    # @!attribute [rw] name
+    #   The new task name that you want to specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new task description that you want to specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace
+    #   If you specify True, then all fields that are required by the
+    #   RegisterTaskWithMaintenanceWndow API are also required for this API
+    #   request. Optional fields that are not specified will be set to null.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskRequest AWS API Documentation
+    #
+    class UpdateMaintenanceWindowTaskRequest < Struct.new(
+      :window_id,
+      :window_task_id,
+      :targets,
+      :task_arn,
+      :service_role_arn,
+      :task_parameters,
+      :task_invocation_parameters,
+      :priority,
+      :max_concurrency,
+      :max_errors,
+      :logging_info,
+      :name,
+      :description,
+      :replace)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] window_id
+    #   The Maintenance Window ID that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_task_id
+    #   The Maintenance Window task ID that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The updated target values.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] task_arn
+    #   The updated task ARN value.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The updated service role ARN value.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_parameters
+    #   The updated parameter values.
+    #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
+    #
+    # @!attribute [rw] task_invocation_parameters
+    #   The updated parameter values.
+    #   @return [Types::MaintenanceWindowTaskInvocationParameters]
+    #
+    # @!attribute [rw] priority
+    #   The updated priority value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The updated MaxConcurrency value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The updated MaxErrors value.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_info
+    #   The updated logging information in Amazon S3.
+    #   @return [Types::LoggingInfo]
+    #
+    # @!attribute [rw] name
+    #   The updated task name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated task description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskResult AWS API Documentation
+    #
+    class UpdateMaintenanceWindowTaskResult < Struct.new(
+      :window_id,
+      :window_task_id,
+      :targets,
+      :task_arn,
+      :service_role_arn,
+      :task_parameters,
+      :task_invocation_parameters,
+      :priority,
+      :max_concurrency,
+      :max_errors,
+      :logging_info,
+      :name,
+      :description)
       include Aws::Structure
     end
 

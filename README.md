@@ -300,6 +300,7 @@ to be backwards compatible.
 | AWS Budgets                         | Aws::Budgets                       | aws-sdk-budgets                       | 2016-10-20  |
 | AWS Certificate Manager             | Aws::ACM                           | aws-sdk-acm                           | 2015-12-08  |
 | AWS CloudFormation                  | Aws::CloudFormation                | aws-sdk-cloudformation                | 2010-05-15  |
+| AWS CloudHSM V2                     | Aws::CloudHSMV2                    | aws-sdk-cloudhsmv2                    | 2017-04-28  |
 | AWS CloudTrail                      | Aws::CloudTrail                    | aws-sdk-cloudtrail                    | 2013-11-01  |
 | AWS CodeBuild                       | Aws::CodeBuild                     | aws-sdk-codebuild                     | 2016-10-06  |
 | AWS CodeCommit                      | Aws::CodeCommit                    | aws-sdk-codecommit                    | 2015-04-13  |
@@ -314,6 +315,7 @@ to be backwards compatible.
 | AWS Direct Connect                  | Aws::DirectConnect                 | aws-sdk-directconnect                 | 2012-10-25  |
 | AWS Directory Service               | Aws::DirectoryService              | aws-sdk-directoryservice              | 2015-04-16  |
 | AWS Elastic Beanstalk               | Aws::ElasticBeanstalk              | aws-sdk-elasticbeanstalk              | 2010-12-01  |
+| AWS Glue                            | Aws::Glue                          | aws-sdk-glue                          | 2017-03-31  |
 | AWS Greengrass                      | Aws::Greengrass                    | aws-sdk-greengrass                    | 2017-06-07  |
 | AWS Health APIs and Notifications   | Aws::Health                        | aws-sdk-health                        | 2016-08-04  |
 | AWS Identity and Access Management  | Aws::IAM                           | aws-sdk-iam                           | 2010-05-08  |
@@ -325,6 +327,7 @@ to be backwards compatible.
 | AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics  | aws-sdk-marketplacecommerceanalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | Aws::MarketplaceEntitlementService | aws-sdk-marketplaceentitlementservice | 2017-01-11  |
+| AWS Migration Hub                   | Aws::MigrationHub                  | aws-sdk-migrationhub                  | 2017-05-31  |
 | AWS OpsWorks                        | Aws::OpsWorks                      | aws-sdk-opsworks                      | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                    | aws-sdk-opsworkscm                    | 2016-11-01  |
 | AWS Organizations                   | Aws::Organizations                 | aws-sdk-organizations                 | 2016-11-28  |

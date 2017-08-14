@@ -42,6 +42,9 @@
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
   },
+  "CloudHSMV2": {
+    "models": "cloudhsmv2/2017-04-28"
+  },
   "CloudSearch": {
     "models": "cloudsearch/2013-01-01"
   },
@@ -181,6 +184,9 @@
       "Aws::Glacier::Plugins::Checksums"
     ]
   },
+  "Glue": {
+    "models": "glue/2017-03-31"
+  },
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },
@@ -244,6 +250,9 @@
   },
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
+  },
+  "MigrationHub": {
+    "models": "AWSMigrationHub/2017-05-31"
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc4 (2017-08-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-migrationhub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-glue` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudhsmv2` gem.
+
 3.0.0.rc3 (2017-06-29)
 ------------------
 
