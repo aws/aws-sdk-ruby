@@ -7,7 +7,7 @@ gem 'rake', require: false
 if !ENV['PURE_RUBY']
   if ENV['OLD_OJ']
     gem 'oj', '1.3.0'
-  else
+  elsif RUBY_VERSION != '1.9.3'
     gem 'oj'
   end
 
