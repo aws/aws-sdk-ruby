@@ -106,15 +106,8 @@ module Aws
         end
       end
 
-      def clean_up_parts(parts)
-        parts.each do |filename|
-          File.unlink(filename) if File.exists?(filename)
-        end
-      end
-
-      def file_batches(chunks, mode)
+      def file_batches(chunks, dir, mode)
         batches = []
-        dir = Dir.tmpdir
         chunks = (1..chunks) if mode.eql? 'part_number'
         chunks.each_slice(@thread_count) do |slice|
           batches << map_files(slice, dir, mode)
@@ -140,7 +133,9 @@ module Aws
       end
 
       def thread_batches(chunks, param)
-        batches = file_batches(chunks, param)
+        # create a tmp dir under destination dir for batches
+        dir = Dir.mktmpdir(nil, File.dirname(@path))
+        batches = file_batches(chunks, dir, param)
         parts = batches.flat_map(&:values)
         begin
           batches.each do |batch|
@@ -159,7 +154,8 @@ module Aws
           end
           concatenate_parts(parts)
         ensure
-          clean_up_parts(parts)
+          # clean up tmp dir
+          FileUtils.remove_entry(dir)
         end
       end
 

@@ -187,3 +187,29 @@ Then(/^this test file has been cleaned up$/) do
   File.unlink(@download_file_dest)
   expect(File.exist?(@download_file_dest)).to be(false)
 end
+
+When(/^I download the file (\d+) times with mode "([^"]*)" with (\d+)M chunk size$/) do |cnt, mode, mb|
+  @download_dest = []
+  (1..cnt.to_i).each do |e|
+    tempfile = Tempfile.new("sample_#{e}")
+    @download_dest << tempfile.path
+    tempfile.unlink
+  end
+
+  (1..cnt.to_i)
+    .map { |c| Thread.new { @object.download_file(@download_dest[c - 1], mode: mode, chunk_size: (mb.to_i * 1024 *1024)) } }
+    .each(&:join)
+end
+
+Then(/^those downloaded files should match the uploaded file$/) do
+  @download_dest.each do |download|
+    expect(FileUtils.compare_file(@file.path, download)).to be(true)
+  end
+end
+
+Then(/^these test file has been cleaned up$/) do
+  @download_dest.each do |file|
+    File.unlink(file)
+    expect(File.exist?(file)).to be(false)
+  end
+end
