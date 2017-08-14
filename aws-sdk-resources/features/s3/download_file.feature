@@ -64,7 +64,7 @@ Feature: Managed file download
   # It is possible for the user to control the chunk size of each
   # part downloaded, by specifing a mode "get-range" and also
   # an option to define how large each chunk is.
-  @mode @get_range @large-file
+  @mode @get-range @large-file
   Scenario: Download a large object using chunk size
     Given I have a 16M file
     And I upload the file
@@ -72,3 +72,14 @@ Feature: Managed file download
     Then 2 get_object requests should have been made
     And the downloaded file should match the uploaded file
     And this test file has been cleaned up
+
+  # Create tmp dir folder for batches each time
+  # Thread safe for downloading several files at same time
+  @auto @large-file @multithread
+  Scenario: Download 2 large objects in auto mode multithread
+    Given I have a 16M file
+    And I upload the file
+    When I download the file 2 times with mode "auto" with 3M chunk size
+    Then 12 get_object requests should have been made
+    And those downloaded files should match the uploaded file
+    And these test file has been cleaned up
