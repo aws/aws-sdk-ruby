@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.26 (2017-08-14)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
