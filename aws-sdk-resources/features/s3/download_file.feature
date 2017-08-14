@@ -75,7 +75,7 @@ Feature: Managed file download
 
   # Create tmp dir folder for batches each time
   # Thread safe for downloading several files at same time
-  @auto @large-file @wip @multithread
+  @auto @large-file @multithread
   Scenario: Download 2 large objects in auto mode multithread
     Given I have a 16M file
     And I upload the file
