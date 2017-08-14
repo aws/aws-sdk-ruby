@@ -51,6 +51,10 @@
     "models": "cloudhsm/2014-05-30",
     "endpoint": "cloudhsm"
   },
+  "CloudHSMV2": {
+    "models": "cloudhsmv2/2017-04-28",
+    "endpoint": "cloudhsmv2"
+  },
   "CloudSearch": {
     "models": "cloudsearch/2013-01-01",
     "endpoint": "cloudsearch"
@@ -202,6 +206,10 @@
     "models": "glacier/2012-06-01",
     "endpoint": "glacier"
   },
+  "Glue": {
+    "models": "glue/2017-03-31",
+    "endpoint": "glue"
+  },
   "Greengrass": {
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"
@@ -281,6 +289,10 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
+  },
+  "MigrationHub": {
+    "models": "AWSMigrationHub/2017-05-31",
+    "endpoint": "mgh"
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",

@@ -36,6 +36,7 @@ module Aws
     CloudFormation
     CloudFront
     CloudHSM
+    CloudHSMV2
     CloudSearch
     CloudSearchDomain
     CloudTrail
@@ -74,6 +75,7 @@ module Aws
     Firehose
     GameLift
     Glacier
+    Glue
     Greengrass
     Health
     IAM
@@ -94,6 +96,7 @@ module Aws
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering
+    MigrationHub
     OpsWorks
     OpsWorksCM
     Organizations

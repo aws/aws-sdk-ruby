@@ -259,6 +259,7 @@ to be backwards compatible.
 | AWS Budgets                         | Budgets                       | 2016-10-20  |
 | AWS Certificate Manager             | ACM                           | 2015-12-08  |
 | AWS CloudFormation                  | CloudFormation                | 2010-05-15  |
+| AWS CloudHSM V2                     | CloudHSMV2                    | 2017-04-28  |
 | AWS CloudTrail                      | CloudTrail                    | 2013-11-01  |
 | AWS CodeBuild                       | CodeBuild                     | 2016-10-06  |
 | AWS CodeCommit                      | CodeCommit                    | 2015-04-13  |
@@ -273,6 +274,7 @@ to be backwards compatible.
 | AWS Direct Connect                  | DirectConnect                 | 2012-10-25  |
 | AWS Directory Service               | DirectoryService              | 2015-04-16  |
 | AWS Elastic Beanstalk               | ElasticBeanstalk              | 2010-12-01  |
+| AWS Glue                            | Glue                          | 2017-03-31  |
 | AWS Greengrass                      | Greengrass                    | 2017-06-07  |
 | AWS Health APIs and Notifications   | Health                        | 2016-08-04  |
 | AWS Identity and Access Management  | IAM                           | 2010-05-08  |
@@ -284,6 +286,7 @@ to be backwards compatible.
 | AWS Lambda                          | LambdaPreview                 | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | MarketplaceEntitlementService | 2017-01-11  |
+| AWS Migration Hub                   | MigrationHub                  | 2017-05-31  |
 | AWS OpsWorks                        | OpsWorks                      | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                    | 2016-11-01  |
 | AWS Organizations                   | Organizations                 | 2016-11-28  |

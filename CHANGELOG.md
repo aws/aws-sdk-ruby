@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::MigrationHub - Added support for a new service, AWS Migration Hub.
+
+* Feature - Aws::CloudHSMV2 - Added support for a new service, AWS CloudHSM V2.
+
+* Feature - Aws::Glue - Added support for a new service, AWS Glue.
+
 2.10.25 (2017-08-11)
 ------------------
 
