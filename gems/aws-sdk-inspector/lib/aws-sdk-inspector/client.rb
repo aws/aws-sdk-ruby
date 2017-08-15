@@ -2549,7 +2549,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.0.0.rc11'
+      context[:gem_version] = '1.0.0.rc12'
       Seahorse::Client::Request.new(handlers, context)
     end
 

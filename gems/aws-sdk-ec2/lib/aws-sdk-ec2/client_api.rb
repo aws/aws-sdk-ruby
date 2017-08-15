@@ -2849,7 +2849,7 @@ module Aws::EC2
 
     HostReservationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
-    HostReservationSet.member = Shapes::ShapeRef.new(shape: HostReservation)
+    HostReservationSet.member = Shapes::ShapeRef.new(shape: HostReservation, location_name: "item")
 
     IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))

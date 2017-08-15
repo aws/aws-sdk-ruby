@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.0.0.rc15 (2017-08-15)
+------------------
+
+* Feature - API update.
+
 * Issue - Aws::S3 - Fix Multipart Downloader bug issue #1566, now file batches exist in a newly created tmp directory under destination directory.
 
 1.0.0.rc14 (2017-08-01)

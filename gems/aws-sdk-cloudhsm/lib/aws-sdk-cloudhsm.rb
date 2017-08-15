@@ -42,6 +42,6 @@ require_relative 'aws-sdk-cloudhsm/customizations'
 # @service
 module Aws::CloudHSM
 
-  GEM_VERSION = '1.0.0.rc10'
+  GEM_VERSION = '1.0.0.rc11'
 
 end
