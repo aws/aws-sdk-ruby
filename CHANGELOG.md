@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.27 (2017-08-15)
+------------------
+
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::S3 - Fix Multipart Downloader bug issue #1566, now file batches exist in a newly created tmp directory under destination directory.
