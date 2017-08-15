@@ -15,6 +15,8 @@ group :test do
     gem 'addressable', '2.4.0'
     # webmock dropped support for Ruby 1.9.3 after version 2.2.0
     gem 'webmock', '2.2.0'
+    # oj drop support for Ruby under 2.0 since 3.3.5
+    gem 'oj', '<= 3.3.4'
   else
     gem 'addressable'
     gem 'webmock'
@@ -33,7 +35,7 @@ group :test do
     if ENV['OLD_OJ']
       gem 'oj', '1.3.0'
     else
-      gem 'oj'
+      gem 'oj' unless RUBY_VERSION == '1.9.3'
     end
 
     # Ox after 2.4.12 has a change in default behavior. Test both.
