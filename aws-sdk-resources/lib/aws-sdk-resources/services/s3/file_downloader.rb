@@ -27,7 +27,7 @@ module Aws
         @bucket = options[:bucket]
         @key = options[:key]
 
-        case @mode
+        case @mode.to_s
         when "auto" then multipart_download
         when "single_request" then single_request
         when "get_range"
@@ -35,12 +35,12 @@ module Aws
             resp = @client.head_object(bucket: @bucket, key: @key)
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
           else
-            msg = "In :get_range mode, :chunk_size must be provided"
+            msg = "In \"get_range\" mode, :chunk_size must be provided"
             raise ArgumentError, msg
           end
         else
           msg = "Invalid mode #{@mode} provided, "\
-            "mode should be :single_request, :get_range or :auto"
+            "mode should be \"single_request\", \"get_range\" or \"auto\""
           raise ArgumentError, msg
         end
       end

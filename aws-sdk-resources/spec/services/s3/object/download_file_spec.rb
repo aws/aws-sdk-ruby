@@ -108,14 +108,14 @@ module Aws
             large_obj.download_file(path, mode: "invalid_mode")
           }.to raise_error(
             ArgumentError,
-            "Invalid mode invalid_mode provided, mode should be :single_request, :get_range or :auto"
+            "Invalid mode invalid_mode provided, mode should be \"single_request\", \"get_range\" or \"auto\""
           )
         end
 
         it 'raises an error if choose :get_range without :chunk_size' do
           expect {
             large_obj.download_file(path, mode: "get_range")
-          }.to raise_error(ArgumentError, "In :get_range mode, :chunk_size must be provided")
+          }.to raise_error(ArgumentError, "In \"get_range\" mode, :chunk_size must be provided")
         end
 
         it 'raises an error if :chunk_size is larger than file size' do
