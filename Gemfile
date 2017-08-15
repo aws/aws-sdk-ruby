@@ -7,7 +7,7 @@ gem 'rake', require: false
 if !ENV['PURE_RUBY']
   if ENV['OLD_OJ']
     gem 'oj', '1.3.0'
-  else
+  elsif RUBY_VERSION != '1.9.3'
     gem 'oj'
   end
 
@@ -35,6 +35,8 @@ group :test do
     # has a dependency on ~> 2.0 of public_suffix which is not compatible
     # with Ruby 1.9.3
     gem 'addressable', '2.4.0'
+    # oj drop support for Ruby under 2.0 since 3.3.5
+    gem 'oj', '<= 3.3.4'
   else
     gem 'webmock'
     gem 'addressable'
