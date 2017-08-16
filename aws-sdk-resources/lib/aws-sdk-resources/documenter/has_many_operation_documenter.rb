@@ -4,7 +4,7 @@ module Aws
       class HasManyOperationDocumenter < BaseOperationDocumenter
 
         def docstring
-          super + ' ' +<<-DOCSTRING.lstrip
+          super + ' ' + <<-DOCSTRING.lstrip
 Returns a {Resources::Collection Collection} of {#{target_resource_class_name}}
 resources. No API requests are made until you call an enumerable method on the
 collection. {#{called_operation}} will be called multiple times until every
