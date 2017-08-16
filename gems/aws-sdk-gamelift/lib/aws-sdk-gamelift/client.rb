@@ -155,6 +155,72 @@ module Aws::GameLift
 
     # @!group API Operations
 
+    # Registers a player's acceptance or rejection of a proposed FlexMatch
+    # match. A matchmaking configuration may require player acceptance; if
+    # so, then matches built with that configuration cannot be completed
+    # unless all players accept the proposed match within a specified time
+    # limit.
+    #
+    # When FlexMatch builds a match, all the matchmaking tickets involved in
+    # the proposed match are placed into status `REQUIRES_ACCEPTANCE`. This
+    # is a trigger for your game to get acceptance from all players in the
+    # ticket. Acceptances are only valid for tickets when they are in this
+    # status; all other acceptances result in an error.
+    #
+    # To register acceptance, specify the ticket ID, a response, and one or
+    # more players. Once all players have registered acceptance, the
+    # matchmaking tickets advance to status `PLACING`, where a new game
+    # session is created for the match.
+    #
+    # If any player rejects the match, or if acceptances are not received
+    # before a specified timeout, the proposed match is dropped. The
+    # matchmaking tickets are then handled in one of two ways: For tickets
+    # where all players accepted the match, the ticket status is returned to
+    # `SEARCHING` to find a new match. For tickets where one or more players
+    # failed to accept the match, the ticket status is set to `FAILED`, and
+    # processing is terminated. A new matchmaking request for these players
+    # can be submitted as needed.
+    #
+    # Matchmaking-related operations include:
+    #
+    # * StartMatchmaking
+    #
+    # * DescribeMatchmaking
+    #
+    # * StopMatchmaking
+    #
+    # * AcceptMatch
+    #
+    # @option params [required, String] :ticket_id
+    #   Unique identifier for a matchmaking ticket. The ticket must be in
+    #   status `REQUIRES_ACCEPTANCE`; otherwise this request will fail.
+    #
+    # @option params [required, Array<String>] :player_ids
+    #   Unique identifier for a player delivering the response. This parameter
+    #   can include one or multiple player IDs.
+    #
+    # @option params [required, String] :acceptance_type
+    #   Player response to the proposed match.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_match({
+    #     ticket_id: "MatchmakingIdStringModel", # required
+    #     player_ids: ["PlayerIdStringModel"], # required
+    #     acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch AWS API Documentation
+    #
+    # @overload accept_match(params = {})
+    # @param [Hash] params ({})
+    def accept_match(params = {}, options = {})
+      req = build_request(:accept_match, params)
+      req.send_request(options)
+    end
+
     # Creates an alias for a fleet. In most situations, you can use an alias
     # ID in place of a fleet ID. By using a fleet alias instead of a
     # specific fleet ID, you can switch gameplay and players to a new fleet
@@ -366,7 +432,7 @@ module Aws::GameLift
     #
     # * Access permissions for inbound traffic
     #
-    # * Fleetwide game session protection
+    # * Fleet-wide game session protection
     #
     # * Resource creation limit
     #
@@ -614,8 +680,7 @@ module Aws::GameLift
     # indicate a maximum number of players to allow in the game session. You
     # can also provide a name and game-specific properties for this game
     # session. If successful, a GameSession object is returned containing
-    # game session properties, including a game session ID with the custom
-    # string you provided.
+    # the game session properties and other settings you specified.
     #
     # **Idempotency tokens.** You can add a token that uniquely identifies
     # game session requests. This is useful for ensuring that game session
@@ -629,9 +694,14 @@ module Aws::GameLift
     # specify a creator ID. Without this ID, Amazon GameLift has no way to
     # evaluate the policy for this new game session request.
     #
-    # By default, newly created game sessions allow new players to join. Use
+    # **Player acceptance policy.** By default, newly created game sessions
+    # are open to new players. You can restrict new player access by using
     # UpdateGameSession to change the game session's player session
     # creation policy.
+    #
+    # **Game session logs.** Logs are retained for all active game sessions
+    # for 14 days. To access the logs, call GetGameSessionLogUrl to download
+    # the log files.
     #
     # *Available in Amazon GameLift Local.*
     #
@@ -675,8 +745,14 @@ module Aws::GameLift
     #   names do not need to be unique.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game session.
+    #   Set of developer-defined properties for a game session, formatted as a
+    #   set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a request
+    #   to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :creator_id
     #   Unique identifier for a player or entity creating the game session.
@@ -699,7 +775,19 @@ module Aws::GameLift
     #   string is included in the new game session's ID. (A game session ID
     #   has the following format:
     #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
-    #   or idempotency token>`.)
+    #   or idempotency token>`.) Idempotency tokens remain in use for 30 days
+    #   after a game session has ended; game session objects are retained for
+    #   this time period and then deleted.
+    #
+    # @option params [String] :game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession object,
+    #   which is passed to the game server with a request to start a new game
+    #   session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @return [Types::CreateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -721,6 +809,7 @@ module Aws::GameLift
     #     creator_id: "NonZeroAndMaxString",
     #     game_session_id: "IdStringModel",
     #     idempotency_token: "IdStringModel",
+    #     game_session_data: "GameSessionData",
     #   })
     #
     # @example Response structure
@@ -740,6 +829,7 @@ module Aws::GameLift
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
+    #   resp.game_session.game_session_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession AWS API Documentation
     #
@@ -796,13 +886,13 @@ module Aws::GameLift
     # * DeleteGameSessionQueue
     #
     # @option params [required, String] :name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #
     # @option params [Integer] :timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
-    #   session placement changes to a TIMED\_OUT status.
+    #   session placement changes to a `TIMED_OUT` status.
     #
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
     #   Collection of latency policies to apply when processing game sessions
@@ -862,6 +952,266 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def create_game_session_queue(params = {}, options = {})
       req = build_request(:create_game_session_queue, params)
+      req.send_request(options)
+    end
+
+    # Defines a new matchmaking configuration for use with FlexMatch. A
+    # matchmaking configuration sets out guidelines for matching players and
+    # getting the matches into games. You can set up multiple matchmaking
+    # configurations to handle the scenarios needed for your game. Each
+    # matchmaking request (StartMatchmaking) specifies a configuration for
+    # the match and provides player attributes to support the configuration
+    # being used.
+    #
+    # To create a matchmaking configuration, at a minimum you must specify
+    # the following: configuration name; a rule set that governs how to
+    # evaluate players and find acceptable matches; a game session queue to
+    # use when placing a new game session for the match; and the maximum
+    # time allowed for a matchmaking attempt.
+    #
+    # **Player acceptance** -- In each configuration, you have the option to
+    # require that all players accept participation in a proposed match. To
+    # enable this feature, set *AcceptanceRequired* to true and specify a
+    # time limit for player acceptance. Players have the option to accept or
+    # reject a proposed match, and a match does not move ahead to game
+    # session placement unless all matched players accept.
+    #
+    # **Matchmaking status notification** -- There are two ways to track the
+    # progress of matchmaking tickets: (1) polling ticket status with
+    # DescribeMatchmaking; or (2) receiving notifications with Amazon Simple
+    # Notification Service (SNS). To use notifications, you first need to
+    # set up an SNS topic to receive the notifications, and provide the
+    # topic ARN in the matchmaking configuration (see [ Setting up
+    # Notifications for Matchmaking][1]). Since notifications promise only
+    # "best effort" delivery, we recommend calling `DescribeMatchmaking`
+    # if no notifications are received within 30 seconds.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #
+    # @option params [required, String] :name
+    #   Unique identifier for a matchmaking configuration. This name is used
+    #   to identify the configuration associated with a matchmaking request or
+    #   ticket.
+    #
+    # @option params [String] :description
+    #   Meaningful description of the matchmaking configuration.
+    #
+    # @option params [required, Array<String>] :game_session_queue_arns
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   These queues are used when placing game sessions for matches that are
+    #   created with this matchmaking configuration. Queues can be located in
+    #   any region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #
+    # @option params [required, Integer] :request_timeout_seconds
+    #   Maximum duration, in seconds, that a matchmaking ticket can remain in
+    #   process before timing out. Requests that time out can be resubmitted
+    #   as needed.
+    #
+    # @option params [Integer] :acceptance_timeout_seconds
+    #   Length of time (in seconds) to wait for players to accept a proposed
+    #   match. If any player rejects the match or fails to accept before the
+    #   timeout, the ticket continues to look for an acceptable match.
+    #
+    # @option params [required, Boolean] :acceptance_required
+    #   Flag that determines whether or not a match that was created with this
+    #   configuration must be accepted by the matched players. To require
+    #   acceptance, set to TRUE.
+    #
+    # @option params [required, String] :rule_set_name
+    #   Unique identifier for a matchmaking rule set to use with this
+    #   configuration. A matchmaking configuration can only use rule sets that
+    #   are defined in the same region.
+    #
+    # @option params [String] :notification_target
+    #   SNS topic ARN that is set up to receive matchmaking notifications.
+    #
+    # @option params [Integer] :additional_player_count
+    #   Number of player slots in a match to keep open for future players. For
+    #   example, if the configuration's rule set specifies a match for a
+    #   single 12-person team, and the additional player count is set to 2,
+    #   only 10 players are selected for the match.
+    #
+    # @option params [String] :custom_event_data
+    #   Information to attached to all events related to the matchmaking
+    #   configuration.
+    #
+    # @option params [Array<Types::GameProperty>] :game_properties
+    #   Set of developer-defined properties for a game session, formatted as a
+    #   set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a request
+    #   to start a new game session (see [Start a Game Session][1]). This
+    #   information is added to the new GameSession object that is created for
+    #   a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession object,
+    #   which is passed to the game server with a request to start a new game
+    #   session (see [Start a Game Session][1]). This information is added to
+    #   the new GameSession object that is created for a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @return [Types::CreateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMatchmakingConfigurationOutput#configuration #configuration} => Types::MatchmakingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_matchmaking_configuration({
+    #     name: "MatchmakingIdStringModel", # required
+    #     description: "NonZeroAndMaxString",
+    #     game_session_queue_arns: ["ArnStringModel"], # required
+    #     request_timeout_seconds: 1, # required
+    #     acceptance_timeout_seconds: 1,
+    #     acceptance_required: false, # required
+    #     rule_set_name: "MatchmakingIdStringModel", # required
+    #     notification_target: "SnsArnStringModel",
+    #     additional_player_count: 1,
+    #     custom_event_data: "CustomEventData",
+    #     game_properties: [
+    #       {
+    #         key: "GamePropertyKey", # required
+    #         value: "GamePropertyValue", # required
+    #       },
+    #     ],
+    #     game_session_data: "GameSessionData",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.name #=> String
+    #   resp.configuration.description #=> String
+    #   resp.configuration.game_session_queue_arns #=> Array
+    #   resp.configuration.game_session_queue_arns[0] #=> String
+    #   resp.configuration.request_timeout_seconds #=> Integer
+    #   resp.configuration.acceptance_timeout_seconds #=> Integer
+    #   resp.configuration.acceptance_required #=> Boolean
+    #   resp.configuration.rule_set_name #=> String
+    #   resp.configuration.notification_target #=> String
+    #   resp.configuration.additional_player_count #=> Integer
+    #   resp.configuration.custom_event_data #=> String
+    #   resp.configuration.creation_time #=> Time
+    #   resp.configuration.game_properties #=> Array
+    #   resp.configuration.game_properties[0].key #=> String
+    #   resp.configuration.game_properties[0].value #=> String
+    #   resp.configuration.game_session_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration AWS API Documentation
+    #
+    # @overload create_matchmaking_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_matchmaking_configuration(params = {}, options = {})
+      req = build_request(:create_matchmaking_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new rule set for FlexMatch matchmaking. A rule set describes
+    # the type of match to create, such as the number and size of teams, and
+    # sets the parameters for acceptable player matches, such as minimum
+    # skill level or character type. Rule sets are used in matchmaking
+    # configurations, which define how matchmaking requests are handled.
+    # Each MatchmakingConfiguration uses one rule set; you can set up
+    # multiple rule sets to handle the scenarios that suit your game (such
+    # as for different game modes), and create a separate matchmaking
+    # configuration for each rule set. See additional information on rule
+    # set content in the MatchmakingRuleSet structure. For help creating
+    # rule sets, including useful examples, see the topic [ Adding FlexMatch
+    # to Your Game][1].
+    #
+    # Once created, matchmaking rule sets cannot be changed or deleted, so
+    # we recommend checking the rule set syntax using
+    # ValidateMatchmakingRuleSetbefore creating the rule set.
+    #
+    # To create a matchmaking rule set, provide the set of rules and a
+    # unique name. Rule sets must be defined in the same region as the
+    # matchmaking configuration they will be used with. Rule sets cannot be
+    # edited or deleted. If you need to change a rule set, create a new one
+    # with the necessary edits and then update matchmaking configurations to
+    # use the new rule set.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    #
+    # @option params [required, String] :name
+    #   Unique identifier for a matchmaking rule set. This name is used to
+    #   identify the rule set associated with a matchmaking configuration.
+    #
+    # @option params [required, String] :rule_set_body
+    #   Collection of matchmaking rules, formatted as a JSON string. (Note
+    #   that comments are not allowed in JSON, but most elements support a
+    #   description field.)
+    #
+    # @return [Types::CreateMatchmakingRuleSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMatchmakingRuleSetOutput#rule_set #rule_set} => Types::MatchmakingRuleSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_matchmaking_rule_set({
+    #     name: "MatchmakingIdStringModel", # required
+    #     rule_set_body: "RuleSetBody", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_set.rule_set_name #=> String
+    #   resp.rule_set.rule_set_body #=> String
+    #   resp.rule_set.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet AWS API Documentation
+    #
+    # @overload create_matchmaking_rule_set(params = {})
+    # @param [Hash] params ({})
+    def create_matchmaking_rule_set(params = {}, options = {})
+      req = build_request(:create_matchmaking_rule_set, params)
       req.send_request(options)
     end
 
@@ -1183,8 +1533,8 @@ module Aws::GameLift
     # * DeleteGameSessionQueue
     #
     # @option params [required, String] :name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1200,6 +1550,46 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def delete_game_session_queue(params = {}, options = {})
       req = build_request(:delete_game_session_queue, params)
+      req.send_request(options)
+    end
+
+    # Permanently removes a FlexMatch matchmaking configuration. To delete,
+    # specify the configuration name. A matchmaking configuration cannot be
+    # deleted if it is being used in any active matchmaking tickets.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # @option params [required, String] :name
+    #   Unique identifier for a matchmaking configuration
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_matchmaking_configuration({
+    #     name: "MatchmakingIdStringModel", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration AWS API Documentation
+    #
+    # @overload delete_matchmaking_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_matchmaking_configuration(params = {}, options = {})
+      req = build_request(:delete_matchmaking_configuration, params)
       req.send_request(options)
     end
 
@@ -1546,7 +1936,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value. This
+    #   start at the beginning of the result set, do not specify a value. This
     #   parameter is ignored when the request specifies one or a list of fleet
     #   IDs.
     #
@@ -1669,7 +2059,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value. This
+    #   start at the beginning of the result set, do not specify a value. This
     #   parameter is ignored when the request specifies one or a list of fleet
     #   IDs.
     #
@@ -1781,7 +2171,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeFleetEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1971,7 +2361,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value. This
+    #   start at the beginning of the result set, do not specify a value. This
     #   parameter is ignored when the request specifies one or a list of fleet
     #   IDs.
     #
@@ -2065,7 +2455,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeGameSessionDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2101,6 +2491,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.port #=> Integer
     #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session_details[0].game_session.creator_id #=> String
+    #   resp.game_session_details[0].game_session.game_session_data #=> String
     #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.next_token #=> String
     #
@@ -2176,6 +2567,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
+    #   resp.game_session_placement.game_session_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement AWS API Documentation
     #
@@ -2214,7 +2606,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeGameSessionQueuesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2310,7 +2702,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2346,6 +2738,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
+    #   resp.game_sessions[0].game_session_data #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions AWS API Documentation
@@ -2380,7 +2773,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2414,6 +2807,230 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def describe_instances(params = {}, options = {})
       req = build_request(:describe_instances, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a set of one or more matchmaking tickets. Use this operation
+    # to retrieve ticket information, including status and--once a
+    # successful match is made--acquire connection information for the
+    # resulting new game session.
+    #
+    # You can use this operation to track the progress of matchmaking
+    # requests (through polling) as an alternative to using event
+    # notifications. See more details on tracking matchmaking requests
+    # through polling or notifications in StartMatchmaking.
+    #
+    # You can request data for a one or a list of ticket IDs. If the request
+    # is successful, a ticket object is returned for each requested ID. When
+    # specifying a list of ticket IDs, objects are returned only for tickets
+    # that currently exist.
+    #
+    # Matchmaking-related operations include:
+    #
+    # * StartMatchmaking
+    #
+    # * DescribeMatchmaking
+    #
+    # * StopMatchmaking
+    #
+    # * AcceptMatch
+    #
+    # @option params [required, Array<String>] :ticket_ids
+    #   Unique identifier for a matchmaking ticket. To request all existing
+    #   tickets, leave this parameter empty.
+    #
+    # @return [Types::DescribeMatchmakingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMatchmakingOutput#ticket_list #ticket_list} => Array&lt;Types::MatchmakingTicket&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_matchmaking({
+    #     ticket_ids: ["MatchmakingIdStringModel"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ticket_list #=> Array
+    #   resp.ticket_list[0].ticket_id #=> String
+    #   resp.ticket_list[0].configuration_name #=> String
+    #   resp.ticket_list[0].status #=> String, one of "CANCELED", "COMPLETE", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
+    #   resp.ticket_list[0].status_reason #=> String
+    #   resp.ticket_list[0].status_message #=> String
+    #   resp.ticket_list[0].start_time #=> Time
+    #   resp.ticket_list[0].players #=> Array
+    #   resp.ticket_list[0].players[0].player_id #=> String
+    #   resp.ticket_list[0].players[0].player_attributes #=> Hash
+    #   resp.ticket_list[0].players[0].player_attributes["NonZeroAndMaxString"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.ticket_list[0].players[0].team #=> String
+    #   resp.ticket_list[0].players[0].latency_in_ms #=> Hash
+    #   resp.ticket_list[0].players[0].latency_in_ms["NonEmptyString"] #=> Integer
+    #   resp.ticket_list[0].game_session_connection_info.game_session_arn #=> String
+    #   resp.ticket_list[0].game_session_connection_info.ip_address #=> String
+    #   resp.ticket_list[0].game_session_connection_info.port #=> Integer
+    #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions #=> Array
+    #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_id #=> String
+    #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking AWS API Documentation
+    #
+    # @overload describe_matchmaking(params = {})
+    # @param [Hash] params ({})
+    def describe_matchmaking(params = {}, options = {})
+      req = build_request(:describe_matchmaking, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of FlexMatch matchmaking configurations. with
+    # this operation, you have the following options: (1) retrieve all
+    # existing configurations, (2) provide the names of one or more
+    # configurations to retrieve, or (3) retrieve all configurations that
+    # use a specified rule set name. When requesting multiple items, use the
+    # pagination parameters to retrieve results as a set of sequential
+    # pages. If successful, a configuration is returned for each requested
+    # name. When specifying a list of names, only configurations that
+    # currently exist are returned.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # @option params [Array<String>] :names
+    #   Unique identifier for a matchmaking configuration(s) to retrieve. To
+    #   request all existing configurations, leave this parameter empty.
+    #
+    # @option params [String] :rule_set_name
+    #   Unique identifier for a matchmaking rule set. Use this parameter to
+    #   retrieve all matchmaking configurations that use this rule set.
+    #
+    # @option params [Integer] :limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages. This
+    #   parameter is limited to 10.
+    #
+    # @option params [String] :next_token
+    #   Token that indicates the start of the next sequential page of results.
+    #   Use the token that is returned with a previous call to this action. To
+    #   start at the beginning of the result set, do not specify a value.
+    #
+    # @return [Types::DescribeMatchmakingConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMatchmakingConfigurationsOutput#configurations #configurations} => Array&lt;Types::MatchmakingConfiguration&gt;
+    #   * {Types::DescribeMatchmakingConfigurationsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_matchmaking_configurations({
+    #     names: ["MatchmakingIdStringModel"],
+    #     rule_set_name: "MatchmakingIdStringModel",
+    #     limit: 1,
+    #     next_token: "NonZeroAndMaxString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configurations #=> Array
+    #   resp.configurations[0].name #=> String
+    #   resp.configurations[0].description #=> String
+    #   resp.configurations[0].game_session_queue_arns #=> Array
+    #   resp.configurations[0].game_session_queue_arns[0] #=> String
+    #   resp.configurations[0].request_timeout_seconds #=> Integer
+    #   resp.configurations[0].acceptance_timeout_seconds #=> Integer
+    #   resp.configurations[0].acceptance_required #=> Boolean
+    #   resp.configurations[0].rule_set_name #=> String
+    #   resp.configurations[0].notification_target #=> String
+    #   resp.configurations[0].additional_player_count #=> Integer
+    #   resp.configurations[0].custom_event_data #=> String
+    #   resp.configurations[0].creation_time #=> Time
+    #   resp.configurations[0].game_properties #=> Array
+    #   resp.configurations[0].game_properties[0].key #=> String
+    #   resp.configurations[0].game_properties[0].value #=> String
+    #   resp.configurations[0].game_session_data #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations AWS API Documentation
+    #
+    # @overload describe_matchmaking_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_matchmaking_configurations(params = {}, options = {})
+      req = build_request(:describe_matchmaking_configurations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details for FlexMatch matchmaking rule sets. You can
+    # request all existing rule sets for the region, or provide a list of
+    # one or more rule set names. When requesting multiple items, use the
+    # pagination parameters to retrieve results as a set of sequential
+    # pages. If successful, a rule set is returned for each requested name.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # @option params [Array<String>] :names
+    #   Unique identifier for a matchmaking rule set. This name is used to
+    #   identify the rule set associated with a matchmaking configuration.
+    #
+    # @option params [Integer] :limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [String] :next_token
+    #   Token that indicates the start of the next sequential page of results.
+    #   Use the token that is returned with a previous call to this action. To
+    #   start at the beginning of the result set, do not specify a value.
+    #
+    # @return [Types::DescribeMatchmakingRuleSetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMatchmakingRuleSetsOutput#rule_sets #rule_sets} => Array&lt;Types::MatchmakingRuleSet&gt;
+    #   * {Types::DescribeMatchmakingRuleSetsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_matchmaking_rule_sets({
+    #     names: ["MatchmakingIdStringModel"],
+    #     limit: 1,
+    #     next_token: "NonZeroAndMaxString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_sets #=> Array
+    #   resp.rule_sets[0].rule_set_name #=> String
+    #   resp.rule_sets[0].rule_set_body #=> String
+    #   resp.rule_sets[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSets AWS API Documentation
+    #
+    # @overload describe_matchmaking_rule_sets(params = {})
+    # @param [Hash] params ({})
+    def describe_matchmaking_rule_sets(params = {}, options = {})
+      req = build_request(:describe_matchmaking_rule_sets, params)
       req.send_request(options)
     end
 
@@ -2485,7 +3102,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value. If a
+    #   start at the beginning of the result set, do not specify a value. If a
     #   player session ID is specified, this parameter is ignored.
     #
     # @return [Types::DescribePlayerSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2690,7 +3307,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::DescribeScalingPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2731,8 +3348,8 @@ module Aws::GameLift
 
     # Retrieves the location of stored game session logs for a specified
     # game session. When a game session is terminated, Amazon GameLift
-    # automatically stores the logs in Amazon S3. Use this URL to download
-    # the logs.
+    # automatically stores the logs in Amazon S3 and retains them for 14
+    # days. Use this URL to download the logs.
     #
     # <note markdown="1"> See the [AWS Service Limits][1] page for maximum log file sizes. Log
     # files that exceed this limit are not saved.
@@ -2902,7 +3519,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::ListAliasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2986,7 +3603,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::ListBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3086,7 +3703,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::ListFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3511,7 +4128,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   Token that indicates the start of the next sequential page of results.
     #   Use the token that is returned with a previous call to this action. To
-    #   specify the start of the result set, do not specify a value.
+    #   start at the beginning of the result set, do not specify a value.
     #
     # @return [Types::SearchGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3547,6 +4164,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].port #=> Integer
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
+    #   resp.game_sessions[0].game_session_data #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions AWS API Documentation
@@ -3598,7 +4216,7 @@ module Aws::GameLift
     #
     # To track the status of a placement request, call
     # DescribeGameSessionPlacement and check the request's status. If the
-    # status is `Fulfilled`, a new game session has been created and a game
+    # status is `FULFILLED`, a new game session has been created and a game
     # session ARN and region are referenced. If the placement request times
     # out, you can resubmit the request or retry it with a different queue.
     #
@@ -3634,8 +4252,14 @@ module Aws::GameLift
     #   Name of the queue to use to place the new game session.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game session.
+    #   Set of developer-defined properties for a game session, formatted as a
+    #   set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a request
+    #   to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [required, Integer] :maximum_player_session_count
     #   Maximum number of players that can be connected simultaneously to the
@@ -3647,12 +4271,22 @@ module Aws::GameLift
     #
     # @option params [Array<Types::PlayerLatency>] :player_latencies
     #   Set of values, expressed in milliseconds, indicating the amount of
-    #   latency that players are experiencing when connected to AWS regions.
-    #   This information is used to try to place the new game session where it
-    #   can offer the best possible gameplay experience for the players.
+    #   latency that a player experiences when connected to AWS regions. This
+    #   information is used to try to place the new game session where it can
+    #   offer the best possible gameplay experience for the players.
     #
     # @option params [Array<Types::DesiredPlayerSession>] :desired_player_sessions
     #   Set of information on each player to create a player session for.
+    #
+    # @option params [String] :game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession object,
+    #   which is passed to the game server with a request to start a new game
+    #   session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @return [Types::StartGameSessionPlacementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3684,6 +4318,7 @@ module Aws::GameLift
     #         player_data: "PlayerData",
     #       },
     #     ],
+    #     game_session_data: "GameSessionData",
     #   })
     #
     # @example Response structure
@@ -3710,6 +4345,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
+    #   resp.game_session_placement.game_session_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement AWS API Documentation
     #
@@ -3720,9 +4356,162 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Cancels a game session placement that is in Pending status. To stop a
-    # placement, provide the placement ID values. If successful, the
-    # placement is moved to Cancelled status.
+    # Uses FlexMatch to create a game match for a group of players based on
+    # custom matchmaking rules, and starts a new game for the matched
+    # players. Each matchmaking request specifies the type of match to build
+    # (team configuration, rules for an acceptable match, etc.). The request
+    # also specifies the players to find a match for and where to host the
+    # new game session for optimal performance. A matchmaking request might
+    # start with a single player or a group of players who want to play
+    # together. FlexMatch finds additional players as needed to fill the
+    # match. Match type, rules, and the queue used to place a new game
+    # session are defined in a `MatchmakingConfiguration`. For complete
+    # information on setting up and using FlexMatch, see the topic [ Adding
+    # FlexMatch to Your Game][1].
+    #
+    # To start matchmaking, provide a unique ticket ID, specify a
+    # matchmaking configuration, and include the players to be matched. You
+    # must also include a set of player attributes relevant for the
+    # matchmaking configuration. If successful, a matchmaking ticket is
+    # returned with status set to `QUEUED`. Track the status of the ticket
+    # to respond as needed and acquire game session connection information
+    # for sucessfully completed matches.
+    #
+    # **Tracking ticket status** -- A couple of options are available for
+    # tracking the status of matchmaking requests:
+    #
+    # * Polling -- Call `DescribeMatchmaking`. This operation returns the
+    #   full ticket object, including current status and (for completed
+    #   tickets) game session connection info. We recommend polling no more
+    #   than once every 10 seconds.
+    #
+    # * Notifications -- Get event notifications for changes in ticket
+    #   status using Amazon Simple Notification Service (SNS). Notifications
+    #   are easy to set up (see CreateMatchmakingConfiguration) and
+    #   typically deliver match status changes faster and more efficiently
+    #   than polling. We recommend that you use polling to back up to
+    #   notifications (since delivery is not guaranteed) and call
+    #   `DescribeMatchmaking` only when notifications are not received
+    #   within 30 seconds.
+    #
+    # **Processing a matchmaking request** -- FlexMatch handles a
+    # matchmaking request as follows:
+    #
+    # 1.  Your client code submits a `StartMatchmaking` request for one or
+    #     more players and tracks the status of the request ticket.
+    #
+    # 2.  FlexMatch uses this ticket and others in process to build an
+    #     acceptable match. When a potential match is identified, all
+    #     tickets in the proposed match are advanced to the next status.
+    #
+    # 3.  If the match requires player acceptance (set in the matchmaking
+    #     configuration), the tickets move into status
+    #     `REQUIRES_ACCEPTANCE`. This status triggers your client code to
+    #     solicit acceptance from all players in every ticket involved in
+    #     the match, and then call AcceptMatch for each player. If any
+    #     player rejects or fails to accept the match before a specified
+    #     timeout, the proposed match is dropped (see `AcceptMatch` for more
+    #     details).
+    #
+    # 4.  Once a match is proposed and accepted, the matchmaking tickets
+    #     move into status `PLACING`. FlexMatch locates resources for a new
+    #     game session using the game session queue (set in the matchmaking
+    #     configuration) and creates the game session based on the match
+    #     data.
+    #
+    # 5.  When the match is successfully placed, the matchmaking tickets
+    #     move into `COMPLETED` status. Connection information (including
+    #     game session endpoint and player session) is added to the
+    #     matchmaking tickets. Matched players can use the connection
+    #     information to join the game.
+    #
+    # Matchmaking-related operations include:
+    #
+    # * StartMatchmaking
+    #
+    # * DescribeMatchmaking
+    #
+    # * StopMatchmaking
+    #
+    # * AcceptMatch
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    #
+    # @option params [String] :ticket_id
+    #   Unique identifier for a matchmaking ticket. Use this identifier to
+    #   track the matchmaking ticket status and retrieve match results.
+    #
+    # @option params [required, String] :configuration_name
+    #   Name of the matchmaking configuration to use for this request.
+    #   Matchmaking configurations must exist in the same region as this
+    #   request.
+    #
+    # @option params [required, Array<Types::Player>] :players
+    #   Information on each player to be matched. This information must
+    #   include a player ID, and may contain player attributes and latency
+    #   data to be used in the matchmaking process. After a successful match,
+    #   `Player` objects contain the name of the team the player is assigned
+    #   to.
+    #
+    # @return [Types::StartMatchmakingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMatchmakingOutput#matchmaking_ticket #matchmaking_ticket} => Types::MatchmakingTicket
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_matchmaking({
+    #     ticket_id: "MatchmakingIdStringModel",
+    #     configuration_name: "MatchmakingIdStringModel", # required
+    #     players: [ # required
+    #       {
+    #         player_id: "PlayerIdStringModel",
+    #         player_attributes: {
+    #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         },
+    #         team: "NonZeroAndMaxString",
+    #         latency_in_ms: {
+    #           "NonEmptyString" => 1,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.matchmaking_ticket.ticket_id #=> String
+    #   resp.matchmaking_ticket.configuration_name #=> String
+    #   resp.matchmaking_ticket.status #=> String, one of "CANCELED", "COMPLETE", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
+    #   resp.matchmaking_ticket.status_reason #=> String
+    #   resp.matchmaking_ticket.status_message #=> String
+    #   resp.matchmaking_ticket.start_time #=> Time
+    #   resp.matchmaking_ticket.players #=> Array
+    #   resp.matchmaking_ticket.players[0].player_id #=> String
+    #   resp.matchmaking_ticket.players[0].player_attributes #=> Hash
+    #   resp.matchmaking_ticket.players[0].player_attributes["NonZeroAndMaxString"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.matchmaking_ticket.players[0].team #=> String
+    #   resp.matchmaking_ticket.players[0].latency_in_ms #=> Hash
+    #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
+    #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking AWS API Documentation
+    #
+    # @overload start_matchmaking(params = {})
+    # @param [Hash] params ({})
+    def start_matchmaking(params = {}, options = {})
+      req = build_request(:start_matchmaking, params)
+      req.send_request(options)
+    end
+
+    # Cancels a game session placement that is in `PENDING` status. To stop
+    # a placement, provide the placement ID values. If successful, the
+    # placement is moved to `CANCELLED` status.
     #
     # Game-session-related operations include:
     #
@@ -3783,6 +4572,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions #=> Array
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
+    #   resp.game_session_placement.game_session_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement AWS API Documentation
     #
@@ -3790,6 +4580,41 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def stop_game_session_placement(params = {}, options = {})
       req = build_request(:stop_game_session_placement, params)
+      req.send_request(options)
+    end
+
+    # Cancels a matchmaking ticket that is currently being processed. To
+    # stop the matchmaking operation, specify the ticket ID. If successful,
+    # work on the ticket is stopped, and the ticket status is changed to
+    # `CANCELLED`.
+    #
+    # Matchmaking-related operations include:
+    #
+    # * StartMatchmaking
+    #
+    # * DescribeMatchmaking
+    #
+    # * StopMatchmaking
+    #
+    # * AcceptMatch
+    #
+    # @option params [required, String] :ticket_id
+    #   Unique identifier for a matchmaking ticket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_matchmaking({
+    #     ticket_id: "MatchmakingIdStringModel", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking AWS API Documentation
+    #
+    # @overload stop_matchmaking(params = {})
+    # @param [Hash] params ({})
+    def stop_matchmaking(params = {}, options = {})
+      req = build_request(:stop_matchmaking, params)
       req.send_request(options)
     end
 
@@ -4327,6 +5152,7 @@ module Aws::GameLift
     #   resp.game_session.port #=> Integer
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
+    #   resp.game_session.game_session_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession AWS API Documentation
     #
@@ -4353,13 +5179,13 @@ module Aws::GameLift
     # * DeleteGameSessionQueue
     #
     # @option params [required, String] :name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #
     # @option params [Integer] :timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
-    #   session placement changes to a TIMED\_OUT status.
+    #   session placement changes to a `TIMED_OUT` status.
     #
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
     #   Collection of latency policies to apply when processing game sessions
@@ -4419,6 +5245,159 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def update_game_session_queue(params = {}, options = {})
       req = build_request(:update_game_session_queue, params)
+      req.send_request(options)
+    end
+
+    # Updates settings for a FlexMatch matchmaking configuration. To update
+    # settings, specify the configuration name to be updated and provide the
+    # new settings.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # @option params [required, String] :name
+    #   Unique identifier for a matchmaking configuration to update.
+    #
+    # @option params [String] :description
+    #   Descriptive label that is associated with matchmaking configuration.
+    #
+    # @option params [Array<String>] :game_session_queue_arns
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   These queues are used when placing game sessions for matches that are
+    #   created with this matchmaking configuration. Queues can be located in
+    #   any region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #
+    # @option params [Integer] :request_timeout_seconds
+    #   Maximum duration, in seconds, that a matchmaking ticket can remain in
+    #   process before timing out. Requests that time out can be resubmitted
+    #   as needed.
+    #
+    # @option params [Integer] :acceptance_timeout_seconds
+    #   Length of time (in seconds) to wait for players to accept a proposed
+    #   match. If any player rejects the match or fails to accept before the
+    #   timeout, the ticket continues to look for an acceptable match.
+    #
+    # @option params [Boolean] :acceptance_required
+    #   Flag that determines whether or not a match that was created with this
+    #   configuration must be accepted by the matched players. To require
+    #   acceptance, set to TRUE.
+    #
+    # @option params [String] :rule_set_name
+    #   Unique identifier for a matchmaking rule set to use with this
+    #   configuration. A matchmaking configuration can only use rule sets that
+    #   are defined in the same region.
+    #
+    # @option params [String] :notification_target
+    #   SNS topic ARN that is set up to receive matchmaking notifications. See
+    #   [ Setting up Notifications for Matchmaking][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #
+    # @option params [Integer] :additional_player_count
+    #   Number of player slots in a match to keep open for future players. For
+    #   example, if the configuration's rule set specifies a match for a
+    #   single 12-person team, and the additional player count is set to 2,
+    #   only 10 players are selected for the match.
+    #
+    # @option params [String] :custom_event_data
+    #   Information to attached to all events related to the matchmaking
+    #   configuration.
+    #
+    # @option params [Array<Types::GameProperty>] :game_properties
+    #   Set of developer-defined properties for a game session, formatted as a
+    #   set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a request
+    #   to start a new game session (see [Start a Game Session][1]). This
+    #   information is added to the new GameSession object that is created for
+    #   a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @option params [String] :game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession object,
+    #   which is passed to the game server with a request to start a new game
+    #   session (see [Start a Game Session][1]). This information is added to
+    #   the new GameSession object that is created for a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #
+    # @return [Types::UpdateMatchmakingConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMatchmakingConfigurationOutput#configuration #configuration} => Types::MatchmakingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_matchmaking_configuration({
+    #     name: "MatchmakingIdStringModel", # required
+    #     description: "NonZeroAndMaxString",
+    #     game_session_queue_arns: ["ArnStringModel"],
+    #     request_timeout_seconds: 1,
+    #     acceptance_timeout_seconds: 1,
+    #     acceptance_required: false,
+    #     rule_set_name: "MatchmakingIdStringModel",
+    #     notification_target: "SnsArnStringModel",
+    #     additional_player_count: 1,
+    #     custom_event_data: "CustomEventData",
+    #     game_properties: [
+    #       {
+    #         key: "GamePropertyKey", # required
+    #         value: "GamePropertyValue", # required
+    #       },
+    #     ],
+    #     game_session_data: "GameSessionData",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.name #=> String
+    #   resp.configuration.description #=> String
+    #   resp.configuration.game_session_queue_arns #=> Array
+    #   resp.configuration.game_session_queue_arns[0] #=> String
+    #   resp.configuration.request_timeout_seconds #=> Integer
+    #   resp.configuration.acceptance_timeout_seconds #=> Integer
+    #   resp.configuration.acceptance_required #=> Boolean
+    #   resp.configuration.rule_set_name #=> String
+    #   resp.configuration.notification_target #=> String
+    #   resp.configuration.additional_player_count #=> Integer
+    #   resp.configuration.custom_event_data #=> String
+    #   resp.configuration.creation_time #=> Time
+    #   resp.configuration.game_properties #=> Array
+    #   resp.configuration.game_properties[0].key #=> String
+    #   resp.configuration.game_properties[0].value #=> String
+    #   resp.configuration.game_session_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration AWS API Documentation
+    #
+    # @overload update_matchmaking_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_matchmaking_configuration(params = {}, options = {})
+      req = build_request(:update_matchmaking_configuration, params)
       req.send_request(options)
     end
 
@@ -4537,6 +5516,54 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # Validates the syntax of a matchmaking rule or rule set. This operation
+    # checks that the rule set uses syntactically correct JSON and that it
+    # conforms to allowed property expressions. To validate syntax, provide
+    # a rule set string.
+    #
+    # Operations related to match configurations and rule sets include:
+    #
+    # * CreateMatchmakingConfiguration
+    #
+    # * DescribeMatchmakingConfigurations
+    #
+    # * UpdateMatchmakingConfiguration
+    #
+    # * DeleteMatchmakingConfiguration
+    #
+    # * CreateMatchmakingRuleSet
+    #
+    # * DescribeMatchmakingRuleSets
+    #
+    # * ValidateMatchmakingRuleSet
+    #
+    # @option params [required, String] :rule_set_body
+    #   Collection of matchmaking rules to validate, formatted as a JSON
+    #   string.
+    #
+    # @return [Types::ValidateMatchmakingRuleSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateMatchmakingRuleSetOutput#valid #valid} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_matchmaking_rule_set({
+    #     rule_set_body: "RuleSetBody", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.valid #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSet AWS API Documentation
+    #
+    # @overload validate_matchmaking_rule_set(params = {})
+    # @param [Hash] params ({})
+    def validate_matchmaking_rule_set(params = {}, options = {})
+      req = build_request(:validate_matchmaking_rule_set, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4550,7 +5577,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

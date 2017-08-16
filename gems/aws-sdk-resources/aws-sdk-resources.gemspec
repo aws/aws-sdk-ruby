@@ -63,7 +63,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elastictranscoder', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-elasticsearchservice', '1.0.0.rc12')
   spec.add_dependency('aws-sdk-firehose', '1.0.0.rc13')
-  spec.add_dependency('aws-sdk-gamelift', '1.0.0.rc12')
+  spec.add_dependency('aws-sdk-gamelift', '1.0.0.rc13')
   spec.add_dependency('aws-sdk-glacier', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-glue', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-greengrass', '1.0.0.rc6')

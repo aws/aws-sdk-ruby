@@ -8,6 +8,44 @@
 module Aws::GameLift
   module Types
 
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass AcceptMatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         ticket_id: "MatchmakingIdStringModel", # required
+    #         player_ids: ["PlayerIdStringModel"], # required
+    #         acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
+    #       }
+    #
+    # @!attribute [rw] ticket_id
+    #   Unique identifier for a matchmaking ticket. The ticket must be in
+    #   status `REQUIRES_ACCEPTANCE`; otherwise this request will fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_ids
+    #   Unique identifier for a player delivering the response. This
+    #   parameter can include one or multiple player IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] acceptance_type
+    #   Player response to the proposed match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatchInput AWS API Documentation
+    #
+    class AcceptMatchInput < Struct.new(
+      :ticket_id,
+      :player_ids,
+      :acceptance_type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatchOutput AWS API Documentation
+    #
+    class AcceptMatchOutput < Aws::EmptyStructure; end
+
     # Properties describing a fleet alias.
     #
     # Alias-related operations include:
@@ -73,21 +111,70 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # AWS access credentials sometimes used for uploading game build files
-    # to Amazon GameLift. They are valid for a limited time. If they expire
+    # Values for use in Player attribute type:value pairs. This object lets
+    # you specify an attribute value using any of the valid data types:
+    # string, number, string array or data map. Each `AttributeValue` object
+    # can use only one of the available properties.
+    #
+    # @note When making an API call, you may pass AttributeValue
+    #   data as a hash:
+    #
+    #       {
+    #         s: "NonZeroAndMaxString",
+    #         n: 1.0,
+    #         sl: ["NonZeroAndMaxString"],
+    #         sdm: {
+    #           "NonZeroAndMaxString" => 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s
+    #   For single string values. Maximum string length is 100 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] n
+    #   For number values, expressed as double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sl
+    #   For a list of up to 10 strings. Maximum length for each string is
+    #   100 characters. Duplicate values are not recognized; all occurances
+    #   of the the repeated value after the first of a repeated value are
+    #   ignored.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sdm
+    #   For a map of up to 10 type:value pairs. Maximum length for each
+    #   string value is 100 characters.
+    #   @return [Hash<String,Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AttributeValue AWS API Documentation
+    #
+    class AttributeValue < Struct.new(
+      :s,
+      :n,
+      :sl,
+      :sdm)
+      include Aws::Structure
+    end
+
+    # Temporary access credentials used for uploading game build files to
+    # Amazon GameLift. They are valid for a limited time. If they expire
     # before you upload your game build, get a new set by calling
     # RequestUploadCredentials.
     #
     # @!attribute [rw] access_key_id
-    #   Access key for an AWS account.
+    #   Temporary key allowing access to the Amazon GameLift S3 account.
     #   @return [String]
     #
     # @!attribute [rw] secret_access_key
-    #   Secret key for an AWS account.
+    #   Temporary secret key allowing access to the Amazon GameLift S3
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] session_token
-    #   Token specific to a build ID.
+    #   Token used to associate a specific build ID with the files uploaded
+    #   using these credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AwsCredentials AWS API Documentation
@@ -505,6 +592,7 @@ module Aws::GameLift
     #         creator_id: "NonZeroAndMaxString",
     #         game_session_id: "IdStringModel",
     #         idempotency_token: "IdStringModel",
+    #         game_session_data: "GameSessionData",
     #       }
     #
     # @!attribute [rw] fleet_id
@@ -529,9 +617,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game
-    #   session.
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] creator_id
@@ -557,7 +650,20 @@ module Aws::GameLift
     #   string is included in the new game session's ID. (A game session ID
     #   has the following format:
     #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
-    #   or idempotency token>`.)
+    #   or idempotency token>`.) Idempotency tokens remain in use for 30
+    #   days after a game session has ended; game session objects are
+    #   retained for this time period and then deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionInput AWS API Documentation
@@ -570,7 +676,8 @@ module Aws::GameLift
       :game_properties,
       :creator_id,
       :game_session_id,
-      :idempotency_token)
+      :idempotency_token,
+      :game_session_data)
       include Aws::Structure
     end
 
@@ -609,14 +716,14 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
-    #   session placement changes to a TIMED\_OUT status.
+    #   session placement changes to a `TIMED_OUT` status.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies
@@ -661,6 +768,193 @@ module Aws::GameLift
     #
     class CreateGameSessionQueueOutput < Struct.new(
       :game_session_queue)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass CreateMatchmakingConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MatchmakingIdStringModel", # required
+    #         description: "NonZeroAndMaxString",
+    #         game_session_queue_arns: ["ArnStringModel"], # required
+    #         request_timeout_seconds: 1, # required
+    #         acceptance_timeout_seconds: 1,
+    #         acceptance_required: false, # required
+    #         rule_set_name: "MatchmakingIdStringModel", # required
+    #         notification_target: "SnsArnStringModel",
+    #         additional_player_count: 1,
+    #         custom_event_data: "CustomEventData",
+    #         game_properties: [
+    #           {
+    #             key: "GamePropertyKey", # required
+    #             value: "GamePropertyValue", # required
+    #           },
+    #         ],
+    #         game_session_data: "GameSessionData",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking configuration. This name is used
+    #   to identify the configuration associated with a matchmaking request
+    #   or ticket.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Meaningful description of the matchmaking configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_session_queue_arns
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   These queues are used when placing game sessions for matches that
+    #   are created with this matchmaking configuration. Queues can be
+    #   located in any region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] request_timeout_seconds
+    #   Maximum duration, in seconds, that a matchmaking ticket can remain
+    #   in process before timing out. Requests that time out can be
+    #   resubmitted as needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_timeout_seconds
+    #   Length of time (in seconds) to wait for players to accept a proposed
+    #   match. If any player rejects the match or fails to accept before the
+    #   timeout, the ticket continues to look for an acceptable match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Flag that determines whether or not a match that was created with
+    #   this configuration must be accepted by the matched players. To
+    #   require acceptance, set to TRUE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rule_set_name
+    #   Unique identifier for a matchmaking rule set to use with this
+    #   configuration. A matchmaking configuration can only use rule sets
+    #   that are defined in the same region.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   SNS topic ARN that is set up to receive matchmaking notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_player_count
+    #   Number of player slots in a match to keep open for future players.
+    #   For example, if the configuration's rule set specifies a match for
+    #   a single 12-person team, and the additional player count is set to
+    #   2, only 10 players are selected for the match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_event_data
+    #   Information to attached to all events related to the matchmaking
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_properties
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #   This information is added to the new GameSession object that is
+    #   created for a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [Array<Types::GameProperty>]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]). This information
+    #   is added to the new GameSession object that is created for a
+    #   successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfigurationInput AWS API Documentation
+    #
+    class CreateMatchmakingConfigurationInput < Struct.new(
+      :name,
+      :description,
+      :game_session_queue_arns,
+      :request_timeout_seconds,
+      :acceptance_timeout_seconds,
+      :acceptance_required,
+      :rule_set_name,
+      :notification_target,
+      :additional_player_count,
+      :custom_event_data,
+      :game_properties,
+      :game_session_data)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] configuration
+    #   Object that describes the newly created matchmaking configuration.
+    #   @return [Types::MatchmakingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfigurationOutput AWS API Documentation
+    #
+    class CreateMatchmakingConfigurationOutput < Struct.new(
+      :configuration)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass CreateMatchmakingRuleSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MatchmakingIdStringModel", # required
+    #         rule_set_body: "RuleSetBody", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking rule set. This name is used to
+    #   identify the rule set associated with a matchmaking configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_body
+    #   Collection of matchmaking rules, formatted as a JSON string. (Note
+    #   that comments are not allowed in JSON, but most elements support a
+    #   description field.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSetInput AWS API Documentation
+    #
+    class CreateMatchmakingRuleSetInput < Struct.new(
+      :name,
+      :rule_set_body)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] rule_set
+    #   Object that describes the newly created matchmaking rule set.
+    #   @return [Types::MatchmakingRuleSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSetOutput AWS API Documentation
+    #
+    class CreateMatchmakingRuleSetOutput < Struct.new(
+      :rule_set)
       include Aws::Structure
     end
 
@@ -833,8 +1127,8 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueInput AWS API Documentation
@@ -847,6 +1141,30 @@ module Aws::GameLift
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueOutput AWS API Documentation
     #
     class DeleteGameSessionQueueOutput < Aws::EmptyStructure; end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DeleteMatchmakingConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MatchmakingIdStringModel", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking configuration
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfigurationInput AWS API Documentation
+    #
+    class DeleteMatchmakingConfigurationInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfigurationOutput AWS API Documentation
+    #
+    class DeleteMatchmakingConfigurationOutput < Aws::EmptyStructure; end
 
     # Represents the input for a request action.
     #
@@ -1012,9 +1330,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value. This parameter is ignored when the request specifies one or a
-    #   list of fleet IDs.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value. This parameter is ignored when the request specifies one or
+    #   a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributesInput AWS API Documentation
@@ -1074,9 +1392,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value. This parameter is ignored when the request specifies one or a
-    #   list of fleet IDs.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value. This parameter is ignored when the request specifies one or
+    #   a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacityInput AWS API Documentation
@@ -1149,8 +1467,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEventsInput AWS API Documentation
@@ -1245,9 +1563,9 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value. This parameter is ignored when the request specifies one or a
-    #   list of fleet IDs.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value. This parameter is ignored when the request specifies one or
+    #   a list of fleet IDs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilizationInput AWS API Documentation
@@ -1322,8 +1640,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetailsInput AWS API Documentation
@@ -1417,8 +1735,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueuesInput AWS API Documentation
@@ -1493,8 +1811,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionsInput AWS API Documentation
@@ -1559,8 +1877,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstancesInput AWS API Documentation
@@ -1590,6 +1908,163 @@ module Aws::GameLift
     #
     class DescribeInstancesOutput < Struct.new(
       :instances,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DescribeMatchmakingConfigurationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["MatchmakingIdStringModel"],
+    #         rule_set_name: "MatchmakingIdStringModel",
+    #         limit: 1,
+    #         next_token: "NonZeroAndMaxString",
+    #       }
+    #
+    # @!attribute [rw] names
+    #   Unique identifier for a matchmaking configuration(s) to retrieve. To
+    #   request all existing configurations, leave this parameter empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rule_set_name
+    #   Unique identifier for a matchmaking rule set. Use this parameter to
+    #   retrieve all matchmaking configurations that use this rule set.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages. This
+    #   parameter is limited to 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token that indicates the start of the next sequential page of
+    #   results. Use the token that is returned with a previous call to this
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurationsInput AWS API Documentation
+    #
+    class DescribeMatchmakingConfigurationsInput < Struct.new(
+      :names,
+      :rule_set_name,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] configurations
+    #   Collection of requested matchmaking configuration objects.
+    #   @return [Array<Types::MatchmakingConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   Token that indicates where to resume retrieving results on the next
+    #   call to this action. If no token is returned, these results
+    #   represent the end of the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurationsOutput AWS API Documentation
+    #
+    class DescribeMatchmakingConfigurationsOutput < Struct.new(
+      :configurations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DescribeMatchmakingInput
+    #   data as a hash:
+    #
+    #       {
+    #         ticket_ids: ["MatchmakingIdStringModel"], # required
+    #       }
+    #
+    # @!attribute [rw] ticket_ids
+    #   Unique identifier for a matchmaking ticket. To request all existing
+    #   tickets, leave this parameter empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingInput AWS API Documentation
+    #
+    class DescribeMatchmakingInput < Struct.new(
+      :ticket_ids)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] ticket_list
+    #   Collection of existing matchmaking ticket objects matching the
+    #   request.
+    #   @return [Array<Types::MatchmakingTicket>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingOutput AWS API Documentation
+    #
+    class DescribeMatchmakingOutput < Struct.new(
+      :ticket_list)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DescribeMatchmakingRuleSetsInput
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["MatchmakingIdStringModel"],
+    #         limit: 1,
+    #         next_token: "NonZeroAndMaxString",
+    #       }
+    #
+    # @!attribute [rw] names
+    #   Unique identifier for a matchmaking rule set. This name is used to
+    #   identify the rule set associated with a matchmaking configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   Maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token that indicates the start of the next sequential page of
+    #   results. Use the token that is returned with a previous call to this
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSetsInput AWS API Documentation
+    #
+    class DescribeMatchmakingRuleSetsInput < Struct.new(
+      :names,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] rule_sets
+    #   Collection of requested matchmaking rule set objects.
+    #   @return [Array<Types::MatchmakingRuleSet>]
+    #
+    # @!attribute [rw] next_token
+    #   Token that indicates where to resume retrieving results on the next
+    #   call to this action. If no token is returned, these results
+    #   represent the end of the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSetsOutput AWS API Documentation
+    #
+    class DescribeMatchmakingRuleSetsOutput < Struct.new(
+      :rule_sets,
       :next_token)
       include Aws::Structure
     end
@@ -1649,8 +2124,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value. If a player session ID is specified, this parameter is
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value. If a player session ID is specified, this parameter is
     #   ignored.
     #   @return [String]
     #
@@ -1767,8 +2242,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPoliciesInput AWS API Documentation
@@ -1986,11 +2461,11 @@ module Aws::GameLift
     #   * Fleet creation events:
     #
     #     * **FLEET\_CREATED** – A fleet record was successfully created
-    #       with a status of NEW. Event messaging includes the fleet ID.
+    #       with a status of `NEW`. Event messaging includes the fleet ID.
     #
-    #     * **FLEET\_STATE\_DOWNLOADING** – Fleet status changed from NEW to
-    #       DOWNLOADING. The compressed build has started downloading to a
-    #       fleet instance for installation.
+    #     * **FLEET\_STATE\_DOWNLOADING** – Fleet status changed from `NEW`
+    #       to `DOWNLOADING`. The compressed build has started downloading
+    #       to a fleet instance for installation.
     #
     #     * **FLEET\_BINARY\_DOWNLOAD\_FAILED** – The build failed to
     #       download to the fleet instance.
@@ -1999,47 +2474,45 @@ module Aws::GameLift
     #       was successfully downloaded to an instance, and the build files
     #       are now being extracted from the uploaded build and saved to an
     #       instance. Failure at this stage prevents a fleet from moving to
-    #       ACTIVE status. Logs for this stage display a list of the files
+    #       `ACTIVE` status. Logs for this stage display a list of the files
     #       that are extracted and saved on the instance. Access the logs by
-    #       using the URL in *PreSignedLogUrl*).
+    #       using the URL in *PreSignedLogUrl*.
     #
     #     * **FLEET\_CREATION\_RUNNING\_INSTALLER** – The game server build
     #       files were successfully extracted, and the Amazon GameLift is
     #       now running the build's install script (if one is included).
-    #       Failure in this stage prevents a fleet from moving to ACTIVE
+    #       Failure in this stage prevents a fleet from moving to `ACTIVE`
     #       status. Logs for this stage list the installation steps and
-    #       whether or not the install completed sucessfully. Access the
-    #       logs by using the URL in *PreSignedLogUrl*).
+    #       whether or not the install completed successfully. Access the
+    #       logs by using the URL in *PreSignedLogUrl*.
     #
     #     * **FLEET\_CREATION\_VALIDATING\_RUNTIME\_CONFIG** – The build
     #       process was successful, and the Amazon GameLift is now verifying
-    #       that the game server launch path(s), which are specified in the
+    #       that the game server launch paths, which are specified in the
     #       fleet's run-time configuration, exist. If any listed launch
     #       path exists, Amazon GameLift tries to launch a game server
     #       process and waits for the process to report ready. Failures in
-    #       this stage prevent a fleet from moving to ACTIVE status. Logs
+    #       this stage prevent a fleet from moving to `ACTIVE` status. Logs
     #       for this stage list the launch paths in the run-time
     #       configuration and indicate whether each is found. Access the
-    #       logs by using the URL in *PreSignedLogUrl*). Once the game
-    #       server is launched, failures and crashes are logged; these logs
-    #       can be downloaded from the Amazon GameLift console.
+    #       logs by using the URL in *PreSignedLogUrl*.
     #
     #     * **FLEET\_STATE\_VALIDATING** – Fleet status changed from
-    #       DOWNLOADING to VALIDATING.
+    #       `DOWNLOADING` to `VALIDATING`.
     #
     #     * **FLEET\_VALIDATION\_LAUNCH\_PATH\_NOT\_FOUND** – Validation of
-    #       the run-time validation failed because the executable specified
-    #       in a launch path does not exist on the instance.
+    #       the run-time configuration failed because the executable
+    #       specified in a launch path does not exist on the instance.
     #
     #     * **FLEET\_STATE\_BUILDING** – Fleet status changed from
-    #       VALIDATING to BUILDING.
+    #       `VALIDATING` to `BUILDING`.
     #
     #     * **FLEET\_VALIDATION\_EXECUTABLE\_RUNTIME\_FAILURE** – Validation
-    #       of the runtime validation failed because the executable
+    #       of the run-time configuration failed because the executable
     #       specified in a launch path failed to run on the fleet instance.
     #
     #     * **FLEET\_STATE\_ACTIVATING** – Fleet status changed from
-    #       BUILDING to ACTIVATING.
+    #       `BUILDING` to `ACTIVATING`.
     #
     #     * **FLEET\_ACTIVATION\_FAILED** - The fleet failed to successfully
     #       complete one of the steps in the fleet activation process. This
@@ -2050,7 +2523,7 @@ module Aws::GameLift
     #       ready" to the Amazon GameLift service.
     #
     #     * **FLEET\_STATE\_ACTIVE** – The fleet's status changed from
-    #       ACTIVATING to ACTIVE. The fleet is now ready to host game
+    #       `ACTIVATING` to `ACTIVE`. The fleet is now ready to host game
     #       sessions.
     #
     #   * Other fleet events:
@@ -2078,10 +2551,10 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] pre_signed_log_url
-    #   Location of stored logs with additional detail related to the event,
-    #   useful for debugging issues. The URL is valid for 15 minutes. Fleet
-    #   creation logs can also be accessed through the Amazon GameLift
-    #   console.
+    #   Location of stored logs with additional detail that is related to
+    #   the event. This is useful for debugging issues. The URL is valid for
+    #   15 minutes. You can also access fleet creation logs through the
+    #   Amazon GameLift console.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Event AWS API Documentation
@@ -2437,14 +2910,17 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Set of key-value pairs containing information a server process
-    # requires to set up a game session. This object allows you to pass in
-    # any set of data needed for your game. For more information, see the
-    # [Amazon GameLift Developer Guide][1].
+    # Set of key-value pairs that contain information about a game session.
+    # When included in a game session request, these properties communicate
+    # details to be used when setting up the new game session, such as to
+    # specify a game mode, level, or map. Game properties are passed to the
+    # game server process when initiating a new game session; the server
+    # process uses the properties as appropriate. For more information, see
+    # the [ Amazon GameLift Developer Guide][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
     #
     # @note When making an API call, you may pass GameProperty
     #   data as a hash:
@@ -2455,11 +2931,11 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] key
-    #   TBD
+    #   Game property identifier.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   TBD
+    #   Game property value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameProperty AWS API Documentation
@@ -2471,6 +2947,13 @@ module Aws::GameLift
     end
 
     # Properties describing a game session.
+    #
+    # A game session in ACTIVE status can host players. When a game session
+    # ends, its status is set to `TERMINATED`.
+    #
+    # Once the session ends, the game session object is retained for 30
+    # days. This means you can reuse idempotency token values after this
+    # time. Game session logs are retained for 14 days.
     #
     # Game-session-related operations include:
     #
@@ -2536,9 +3019,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game
-    #   session.
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
@@ -2561,6 +3049,17 @@ module Aws::GameLift
     #   of game sessions a player can create.
     #   @return [String]
     #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession AWS API Documentation
     #
     class GameSession < Struct.new(
@@ -2576,7 +3075,50 @@ module Aws::GameLift
       :ip_address,
       :port,
       :player_session_creation_policy,
-      :creator_id)
+      :creator_id,
+      :game_session_data)
+      include Aws::Structure
+    end
+
+    # Connection information for the new game session that is created with
+    # matchmaking. (with StartMatchmaking). Once a match is set, the
+    # FlexMatch engine places the match and creates a new game session for
+    # it. This information, including the game session endpoint and player
+    # sessions for each player in the original matchmaking request, is added
+    # to the MatchmakingTicket, which can be retrieved by calling
+    # DescribeMatchmaking.
+    #
+    # @!attribute [rw] game_session_arn
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   and uniquely identifies it.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   IP address of the game session. To connect to a Amazon GameLift game
+    #   server, an app needs both the IP address and port number.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port number for the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] matched_player_sessions
+    #   Collection of player session IDs, one for each player ID that was
+    #   included in the original matchmaking request.
+    #   @return [Array<Types::MatchedPlayerSession>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionConnectionInfo AWS API Documentation
+    #
+    class GameSessionConnectionInfo < Struct.new(
+      :game_session_arn,
+      :ip_address,
+      :port,
+      :matched_player_sessions)
       include Aws::Structure
     end
 
@@ -2622,8 +3164,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2645,9 +3187,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game
-    #   session.
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -2662,25 +3209,26 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_session_id
     #   Unique identifier for the game session. This value is set once the
-    #   new game session is placed (placement status is Fulfilled).
+    #   new game session is placed (placement status is `FULFILLED`).
     #   @return [String]
     #
     # @!attribute [rw] game_session_arn
     #   Identifier for the game session created by this placement request.
     #   This value is set once the new game session is placed (placement
-    #   status is Fulfilled). This identifier is unique across all regions.
-    #   You can use this value as a `GameSessionId` value as needed.
+    #   status is `FULFILLED`). This identifier is unique across all
+    #   regions. You can use this value as a `GameSessionId` value as
+    #   needed.
     #   @return [String]
     #
     # @!attribute [rw] game_session_region
     #   Name of the region where the game session created by this placement
     #   request is running. This value is set once the new game session is
-    #   placed (placement status is Fulfilled).
+    #   placed (placement status is `FULFILLED`).
     #   @return [String]
     #
     # @!attribute [rw] player_latencies
     #   Set of values, expressed in milliseconds, indicating the amount of
-    #   latency that players are experiencing when connected to AWS regions.
+    #   latency that a player experiences when connected to AWS regions.
     #   @return [Array<Types::PlayerLatency>]
     #
     # @!attribute [rw] start_time
@@ -2698,25 +3246,36 @@ module Aws::GameLift
     #   IP address of the game session. To connect to a Amazon GameLift game
     #   server, an app needs both the IP address and port number. This value
     #   is set once the new game session is placed (placement status is
-    #   Fulfilled).
+    #   `FULFILLED`).
     #   @return [String]
     #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
     #   game server, an app needs both the IP address and port number. This
     #   value is set once the new game session is placed (placement status
-    #   is Fulfilled).
+    #   is `FULFILLED`).
     #   @return [Integer]
     #
     # @!attribute [rw] placed_player_sessions
     #   Collection of information on player sessions created in response to
     #   the game session placement request. These player sessions are
     #   created only once a new game session is successfully placed
-    #   (placement status is Fulfilled). This information includes the
+    #   (placement status is `FULFILLED`). This information includes the
     #   player ID (as provided in the placement request) and the
     #   corresponding player session ID. Retrieve full player sessions by
     #   calling DescribePlayerSessions with the player session ID.
     #   @return [Array<Types::PlacedPlayerSession>]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
     #
@@ -2735,24 +3294,14 @@ module Aws::GameLift
       :end_time,
       :ip_address,
       :port,
-      :placed_player_sessions)
+      :placed_player_sessions,
+      :game_session_data)
       include Aws::Structure
     end
 
     # Configuration of a queue that is used to process game session
     # placement requests. The queue configuration identifies several game
     # features:
-    #
-    # Queue-related operations include:
-    #
-    # * CreateGameSessionQueue
-    #
-    # * DescribeGameSessionQueues
-    #
-    # * UpdateGameSessionQueue
-    #
-    # * DeleteGameSessionQueue
-    # ^
     #
     # * The destinations where a new game session can potentially be hosted.
     #   Amazon GameLift tries these destinations in an order based on either
@@ -2769,7 +3318,7 @@ module Aws::GameLift
     #   where any individual player is reporting latency higher than a
     #   policy's maximum.
     #
-    # Queue-related operations include the following:
+    # Queue-related operations include:
     #
     # * CreateGameSessionQueue
     #
@@ -2780,8 +3329,8 @@ module Aws::GameLift
     # * DeleteGameSessionQueue
     #
     # @!attribute [rw] name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_arn
@@ -2797,7 +3346,7 @@ module Aws::GameLift
     # @!attribute [rw] timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
-    #   session placement changes to a TIMED\_OUT status.
+    #   session placement changes to a `TIMED_OUT` status.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies
@@ -2942,7 +3491,7 @@ module Aws::GameLift
     end
 
     # Properties that describe an instance of a virtual computing resource
-    # that hosts one or more game servers. A fleet contains zero or more
+    # that hosts one or more game servers. A fleet may contain zero or more
     # instances.
     #
     # @!attribute [rw] fleet_id
@@ -3146,8 +3695,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliasesInput AWS API Documentation
@@ -3217,8 +3766,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuildsInput AWS API Documentation
@@ -3275,8 +3824,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleetsInput AWS API Documentation
@@ -3308,6 +3857,305 @@ module Aws::GameLift
     class ListFleetsOutput < Struct.new(
       :fleet_ids,
       :next_token)
+      include Aws::Structure
+    end
+
+    # New player session created as a result of a successful FlexMatch
+    # match. A successful match automatically creates new player sessions
+    # for every player ID in the original matchmaking request.
+    #
+    # When players connect to the match's game session, they must include
+    # both player ID and player session ID in order to claim their assigned
+    # player slot.
+    #
+    # @!attribute [rw] player_id
+    #   Unique identifier for a player
+    #   @return [String]
+    #
+    # @!attribute [rw] player_session_id
+    #   Unique identifier for a player session
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchedPlayerSession AWS API Documentation
+    #
+    class MatchedPlayerSession < Struct.new(
+      :player_id,
+      :player_session_id)
+      include Aws::Structure
+    end
+
+    # Guidelines for use with FlexMatch to match players into games. All
+    # matchmaking requests must specify a matchmaking configuration.
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking configuration. This name is used
+    #   to identify the configuration associated with a matchmaking request
+    #   or ticket.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Descriptive label that is associated with matchmaking configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_session_queue_arns
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   These queues are used when placing game sessions for matches that
+    #   are created with this matchmaking configuration. Queues can be
+    #   located in any region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] request_timeout_seconds
+    #   Maximum duration, in seconds, that a matchmaking ticket can remain
+    #   in process before timing out. Requests that time out can be
+    #   resubmitted as needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_timeout_seconds
+    #   Length of time (in seconds) to wait for players to accept a proposed
+    #   match. If any player rejects the match or fails to accept before the
+    #   timeout, the ticket continues to look for an acceptable match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Flag that determines whether or not a match that was created with
+    #   this configuration must be accepted by the matched players. To
+    #   require acceptance, set to TRUE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rule_set_name
+    #   Unique identifier for a matchmaking rule set to use with this
+    #   configuration. A matchmaking configuration can only use rule sets
+    #   that are defined in the same region.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   SNS topic ARN that is set up to receive matchmaking notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_player_count
+    #   Number of player slots in a match to keep open for future players.
+    #   For example, if the configuration's rule set specifies a match for
+    #   a single 12-person team, and the additional player count is set to
+    #   2, only 10 players are selected for the match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_event_data
+    #   Information to attached to all events related to the matchmaking
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time stamp indicating when this data object was created. Format is a
+    #   number expressed in Unix time as milliseconds (for example
+    #   "1469498468.057").
+    #   @return [Time]
+    #
+    # @!attribute [rw] game_properties
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #   This information is added to the new GameSession object that is
+    #   created for a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [Array<Types::GameProperty>]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]). This information
+    #   is added to the new GameSession object that is created for a
+    #   successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingConfiguration AWS API Documentation
+    #
+    class MatchmakingConfiguration < Struct.new(
+      :name,
+      :description,
+      :game_session_queue_arns,
+      :request_timeout_seconds,
+      :acceptance_timeout_seconds,
+      :acceptance_required,
+      :rule_set_name,
+      :notification_target,
+      :additional_player_count,
+      :custom_event_data,
+      :creation_time,
+      :game_properties,
+      :game_session_data)
+      include Aws::Structure
+    end
+
+    # Set of rule statements, used with FlexMatch, that determine how to
+    # build a certain kind of player match. Each rule set describes a type
+    # of group to be created and defines the parameters for acceptable
+    # player matches. Rule sets are used in MatchmakingConfiguration
+    # objects.
+    #
+    # A rule set may define the following elements for a match. For detailed
+    # information and examples showing how to construct a rule set, see
+    # [Create Matchmaking Rules for Your Game][1].
+    #
+    # * Teams -- Required. A rule set must define one or multiple teams for
+    #   the match and set minimum and maximum team sizes. For example, a
+    #   rule set might describe a 4x4 match that requires all eight slots to
+    #   be filled.
+    #
+    # * Player attributes -- Optional. These attributes specify a set of
+    #   player characteristics to evaluate when looking for a match.
+    #   Matchmaking requests that use a rule set with player attributes must
+    #   provide the corresponding attribute values. For example, an
+    #   attribute might specify a player's skill or level.
+    #
+    # * Rules -- Optional. Rules define how to evaluate potential players
+    #   for a match based on player attributes. A rule might specify minimum
+    #   requirements for individual players--such as each player must meet a
+    #   certain skill level, or may describe an entire group--such as all
+    #   teams must be evenly matched or have at least one player in a
+    #   certain role.
+    #
+    # * Expansions -- Optional. Expansions allow you to relax the rules
+    #   after a period of time if no acceptable matches are found. This
+    #   feature lets you balance getting players into games in a reasonable
+    #   amount of time instead of making them wait indefinitely for the best
+    #   possible match. For example, you might use an expansion to increase
+    #   the maximum skill variance between players after 30 seconds.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-rules.html
+    #
+    # @!attribute [rw] rule_set_name
+    #   Unique identifier for a matchmaking rule set
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_body
+    #   Collection of matchmaking rules, formatted as a JSON string. (Note
+    #   that comments14 are not allowed in JSON, but most elements support a
+    #   description field.)
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time stamp indicating when this data object was created. Format is a
+    #   number expressed in Unix time as milliseconds (for example
+    #   "1469498468.057").
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingRuleSet AWS API Documentation
+    #
+    class MatchmakingRuleSet < Struct.new(
+      :rule_set_name,
+      :rule_set_body,
+      :creation_time)
+      include Aws::Structure
+    end
+
+    # Ticket generated to track the progress of a matchmaking request. Each
+    # ticket is uniquely identified by a ticket ID, supplied by the
+    # requester, when creating a matchmaking request with StartMatchmaking.
+    # Tickets can be retrieved by calling DescribeMatchmaking with the
+    # ticket ID.
+    #
+    # @!attribute [rw] ticket_id
+    #   Unique identifier for a matchmaking ticket.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_name
+    #   Name of the MatchmakingConfiguration that is used with this ticket.
+    #   Matchmaking configurations determine how players are grouped into a
+    #   match and how a new game session is created for the match.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current status of the matchmaking request.
+    #
+    #   * **QUEUED** – The matchmaking request has been received and is
+    #     currently waiting to be processed.
+    #
+    #   * **SEARCHING** – The matchmaking request is currently being
+    #     processed.
+    #
+    #   * **REQUIRES\_ACCEPTANCE** – A match has been proposed and the
+    #     players must accept the match (see AcceptMatch). This status is
+    #     used only with requests that use a matchmaking configuration with
+    #     a player acceptance requirement.
+    #
+    #   * **PLACING** – The FlexMatch engine has matched players and is in
+    #     the process of placing a new game session for the match.
+    #
+    #   * **COMPLETED** – Players have been matched and a game session is
+    #     ready to host the players. A ticket in this state contains the
+    #     necessary connection information for players.
+    #
+    #   * **FAILED** – The matchmaking request was not completed. Tickets
+    #     with players who fail to accept a proposed match are placed in
+    #     `FAILED` status; new matchmaking requests can be submitted for
+    #     these players.
+    #
+    #   * **CANCELLED** – The matchmaking request was canceled with a call
+    #     to StopMatchmaking.
+    #
+    #   * **TIMED\_OUT** – The matchmaking request was not completed within
+    #     the duration specified in the matchmaking configuration.
+    #     Matchmaking requests that time out can be resubmitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Code to explain the current status. For example, a status reason may
+    #   indicate when a ticket has returned to `SEARCHING` status after a
+    #   proposed match fails to receive player acceptances.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Time stamp indicating when this matchmaking request was received.
+    #   Format is a number expressed in Unix time as milliseconds (for
+    #   example "1469498468.057").
+    #   @return [Time]
+    #
+    # @!attribute [rw] players
+    #   A set of `Player` objects, each representing a player to find
+    #   matches for. Players are identified by a unique player ID and may
+    #   include latency data for use during matchmaking. If the ticket is in
+    #   status `COMPLETED`, the `Player` objects include the team the
+    #   players were assigned to in the resulting match.
+    #   @return [Array<Types::Player>]
+    #
+    # @!attribute [rw] game_session_connection_info
+    #   Identifier and connection information of the game session created
+    #   for the match. This information is added to the ticket only after
+    #   the matchmaking request has been successfully completed.
+    #   @return [Types::GameSessionConnectionInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingTicket AWS API Documentation
+    #
+    class MatchmakingTicket < Struct.new(
+      :ticket_id,
+      :configuration_name,
+      :status,
+      :status_reason,
+      :status_message,
+      :start_time,
+      :players,
+      :game_session_connection_info)
       include Aws::Structure
     end
 
@@ -3346,6 +4194,67 @@ module Aws::GameLift
     class PlacedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
+      include Aws::Structure
+    end
+
+    # Object used in matchmaking to represent a player. When starting a
+    # matchmaking request, a player has a player ID and may have latency
+    # data. Team information is added after a match has been successfully
+    # completed.
+    #
+    # @note When making an API call, you may pass Player
+    #   data as a hash:
+    #
+    #       {
+    #         player_id: "PlayerIdStringModel",
+    #         player_attributes: {
+    #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         },
+    #         team: "NonZeroAndMaxString",
+    #         latency_in_ms: {
+    #           "NonEmptyString" => 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] player_id
+    #   Unique identifier for a player
+    #   @return [String]
+    #
+    # @!attribute [rw] player_attributes
+    #   Collection of name:value pairs containing player information for use
+    #   in matchmaking. Player attribute names need to match
+    #   *playerAttributes* names in the rule set being used. Example:
+    #   `"PlayerAttributes": \{"skill": \{"N": "23"\}, "gameMode": \{"S":
+    #   "deathmatch"\}\}`.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @!attribute [rw] team
+    #   Name of the team that the player is assigned to in a match. Team
+    #   names are defined in a matchmaking rule set.
+    #   @return [String]
+    #
+    # @!attribute [rw] latency_in_ms
+    #   Set of values, expressed in milliseconds, indicating the amount of
+    #   latency that a player experiences when connected to AWS regions. If
+    #   this property is present, FlexMatch considers placing the match only
+    #   in regions that are included in the object map. If not present (that
+    #   is, null), FlexMatch ignores latency issues and may place the match
+    #   in any region in the queue.
+    #
+    #   <note markdown="1"> If this property contains an empty map, FlexMatch assumes that no
+    #   regions are available to the player. In this scenario, the ticket is
+    #   not matchable and always times out unless canceled.
+    #
+    #    </note>
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Player AWS API Documentation
+    #
+    class Player < Struct.new(
+      :player_id,
+      :player_attributes,
+      :team,
+      :latency_in_ms)
       include Aws::Structure
     end
 
@@ -3431,11 +4340,18 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Properties describing a player session. A player session represents
-    # either a player reservation for a game session or actual player
-    # activity in a game session. A player session object (including player
-    # data) is automatically passed to a game session when the player
-    # connects to the game session and is validated.
+    # Properties describing a player session. Player session objects are
+    # created either by creating a player session for a specific game
+    # session, or as part of a game session placement. A player session
+    # represents either a player reservation for a game session (status
+    # `RESERVED`) or actual player activity in a game session (status
+    # `ACTIVE`). A player session object (including player data) is
+    # automatically passed to a game session when the player connects to the
+    # game session and is validated.
+    #
+    # When a player disconnects, the player session status changes to
+    # `COMPLETED`. Once the session ends, the player session object is
+    # retained for 30 days and then removed.
     #
     # Player-session-related operations include:
     #
@@ -3851,7 +4767,7 @@ module Aws::GameLift
 
     # A collection of server process configurations that describe what
     # processes to run on each instance in a fleet. All fleets must have a
-    # runtime configuration. Each instance in the fleet launches the server
+    # run-time configuration. Each instance in the fleet launches the server
     # processes specified in the run-time configuration and launches new
     # ones as existing processes end. Each instance regularly checks for an
     # updated run-time configuration and follows the new instructions.
@@ -4259,8 +5175,8 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   Token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   action. To specify the start of the result set, do not specify a
-    #   value.
+    #   action. To start at the beginning of the result set, do not specify
+    #   a value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessionsInput AWS API Documentation
@@ -4371,6 +5287,7 @@ module Aws::GameLift
     #             player_data: "PlayerData",
     #           },
     #         ],
+    #         game_session_data: "GameSessionData",
     #       }
     #
     # @!attribute [rw] placement_id
@@ -4385,9 +5302,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session. These
-    #   properties are passed to the server process hosting the game
-    #   session.
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -4402,7 +5324,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] player_latencies
     #   Set of values, expressed in milliseconds, indicating the amount of
-    #   latency that players are experiencing when connected to AWS regions.
+    #   latency that a player experiences when connected to AWS regions.
     #   This information is used to try to place the new game session where
     #   it can offer the best possible gameplay experience for the players.
     #   @return [Array<Types::PlayerLatency>]
@@ -4410,6 +5332,17 @@ module Aws::GameLift
     # @!attribute [rw] desired_player_sessions
     #   Set of information on each player to create a player session for.
     #   @return [Array<Types::DesiredPlayerSession>]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacementInput AWS API Documentation
     #
@@ -4420,7 +5353,8 @@ module Aws::GameLift
       :maximum_player_session_count,
       :game_session_name,
       :player_latencies,
-      :desired_player_sessions)
+      :desired_player_sessions,
+      :game_session_data)
       include Aws::Structure
     end
 
@@ -4436,6 +5370,71 @@ module Aws::GameLift
     #
     class StartGameSessionPlacementOutput < Struct.new(
       :game_session_placement)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass StartMatchmakingInput
+    #   data as a hash:
+    #
+    #       {
+    #         ticket_id: "MatchmakingIdStringModel",
+    #         configuration_name: "MatchmakingIdStringModel", # required
+    #         players: [ # required
+    #           {
+    #             player_id: "PlayerIdStringModel",
+    #             player_attributes: {
+    #               "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #             },
+    #             team: "NonZeroAndMaxString",
+    #             latency_in_ms: {
+    #               "NonEmptyString" => 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] ticket_id
+    #   Unique identifier for a matchmaking ticket. Use this identifier to
+    #   track the matchmaking ticket status and retrieve match results.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_name
+    #   Name of the matchmaking configuration to use for this request.
+    #   Matchmaking configurations must exist in the same region as this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] players
+    #   Information on each player to be matched. This information must
+    #   include a player ID, and may contain player attributes and latency
+    #   data to be used in the matchmaking process. After a successful
+    #   match, `Player` objects contain the name of the team the player is
+    #   assigned to.
+    #   @return [Array<Types::Player>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmakingInput AWS API Documentation
+    #
+    class StartMatchmakingInput < Struct.new(
+      :ticket_id,
+      :configuration_name,
+      :players)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] matchmaking_ticket
+    #   Ticket representing the matchmaking request. This object include the
+    #   information included in the request, ticket status, and match
+    #   results as generated during the matchmaking process.
+    #   @return [Types::MatchmakingTicket]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmakingOutput AWS API Documentation
+    #
+    class StartMatchmakingOutput < Struct.new(
+      :matchmaking_ticket)
       include Aws::Structure
     end
 
@@ -4463,7 +5462,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_session_placement
     #   Object that describes the canceled game session placement, with
-    #   Cancelled status and an end time stamp.
+    #   `CANCELLED` status and an end time stamp.
     #   @return [Types::GameSessionPlacement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacementOutput AWS API Documentation
@@ -4472,6 +5471,30 @@ module Aws::GameLift
       :game_session_placement)
       include Aws::Structure
     end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass StopMatchmakingInput
+    #   data as a hash:
+    #
+    #       {
+    #         ticket_id: "MatchmakingIdStringModel", # required
+    #       }
+    #
+    # @!attribute [rw] ticket_id
+    #   Unique identifier for a matchmaking ticket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmakingInput AWS API Documentation
+    #
+    class StopMatchmakingInput < Struct.new(
+      :ticket_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmakingOutput AWS API Documentation
+    #
+    class StopMatchmakingOutput < Aws::EmptyStructure; end
 
     # Represents the input for a request action.
     #
@@ -4858,14 +5881,14 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] name
-    #   Descriptive label that is associated with queue. Queue names must be
-    #   unique within each region.
+    #   Descriptive label that is associated with game session queue. Queue
+    #   names must be unique within each region.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
-    #   session placement changes to a TIMED\_OUT status.
+    #   session placement changes to a `TIMED_OUT` status.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies
@@ -4909,6 +5932,155 @@ module Aws::GameLift
     #
     class UpdateGameSessionQueueOutput < Struct.new(
       :game_session_queue)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass UpdateMatchmakingConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MatchmakingIdStringModel", # required
+    #         description: "NonZeroAndMaxString",
+    #         game_session_queue_arns: ["ArnStringModel"],
+    #         request_timeout_seconds: 1,
+    #         acceptance_timeout_seconds: 1,
+    #         acceptance_required: false,
+    #         rule_set_name: "MatchmakingIdStringModel",
+    #         notification_target: "SnsArnStringModel",
+    #         additional_player_count: 1,
+    #         custom_event_data: "CustomEventData",
+    #         game_properties: [
+    #           {
+    #             key: "GamePropertyKey", # required
+    #             value: "GamePropertyValue", # required
+    #           },
+    #         ],
+    #         game_session_data: "GameSessionData",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Unique identifier for a matchmaking configuration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Descriptive label that is associated with matchmaking configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_session_queue_arns
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #   These queues are used when placing game sessions for matches that
+    #   are created with this matchmaking configuration. Queues can be
+    #   located in any region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] request_timeout_seconds
+    #   Maximum duration, in seconds, that a matchmaking ticket can remain
+    #   in process before timing out. Requests that time out can be
+    #   resubmitted as needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_timeout_seconds
+    #   Length of time (in seconds) to wait for players to accept a proposed
+    #   match. If any player rejects the match or fails to accept before the
+    #   timeout, the ticket continues to look for an acceptable match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Flag that determines whether or not a match that was created with
+    #   this configuration must be accepted by the matched players. To
+    #   require acceptance, set to TRUE.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rule_set_name
+    #   Unique identifier for a matchmaking rule set to use with this
+    #   configuration. A matchmaking configuration can only use rule sets
+    #   that are defined in the same region.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   SNS topic ARN that is set up to receive matchmaking notifications.
+    #   See [ Setting up Notifications for Matchmaking][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_player_count
+    #   Number of player slots in a match to keep open for future players.
+    #   For example, if the configuration's rule set specifies a match for
+    #   a single 12-person team, and the additional player count is set to
+    #   2, only 10 players are selected for the match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_event_data
+    #   Information to attached to all events related to the matchmaking
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_properties
+    #   Set of developer-defined properties for a game session, formatted as
+    #   a set of type:value pairs. These properties are included in the
+    #   GameSession object, which is passed to the game server with a
+    #   request to start a new game session (see [Start a Game Session][1]).
+    #   This information is added to the new GameSession object that is
+    #   created for a successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [Array<Types::GameProperty>]
+    #
+    # @!attribute [rw] game_session_data
+    #   Set of developer-defined game session properties, formatted as a
+    #   single string value. This data is included in the GameSession
+    #   object, which is passed to the game server with a request to start a
+    #   new game session (see [Start a Game Session][1]). This information
+    #   is added to the new GameSession object that is created for a
+    #   successful match.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationInput AWS API Documentation
+    #
+    class UpdateMatchmakingConfigurationInput < Struct.new(
+      :name,
+      :description,
+      :game_session_queue_arns,
+      :request_timeout_seconds,
+      :acceptance_timeout_seconds,
+      :acceptance_required,
+      :rule_set_name,
+      :notification_target,
+      :additional_player_count,
+      :custom_event_data,
+      :game_properties,
+      :game_session_data)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] configuration
+    #   Object that describes the updated matchmaking configuration.
+    #   @return [Types::MatchmakingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationOutput AWS API Documentation
+    #
+    class UpdateMatchmakingConfigurationOutput < Struct.new(
+      :configuration)
       include Aws::Structure
     end
 
@@ -4965,6 +6137,40 @@ module Aws::GameLift
     #
     class UpdateRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass ValidateMatchmakingRuleSetInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_set_body: "RuleSetBody", # required
+    #       }
+    #
+    # @!attribute [rw] rule_set_body
+    #   Collection of matchmaking rules to validate, formatted as a JSON
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSetInput AWS API Documentation
+    #
+    class ValidateMatchmakingRuleSetInput < Struct.new(
+      :rule_set_body)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] valid
+    #   Response indicating whether or not the rule set is valid.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSetOutput AWS API Documentation
+    #
+    class ValidateMatchmakingRuleSetOutput < Struct.new(
+      :valid)
       include Aws::Structure
     end
 
