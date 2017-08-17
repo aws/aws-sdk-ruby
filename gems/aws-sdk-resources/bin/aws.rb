@@ -89,9 +89,9 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-# load the aws-sdk gem
+# load the aws-sdk-resources gem
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
-require 'aws-sdk'
+require 'aws-sdk-resources'
 
 # when running the REPL locally, we want to load all of the gems from source
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
