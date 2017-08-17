@@ -89,6 +89,9 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
+# need to load `aws-sdk-core` first
+$LOAD_PATH.unshift(File.expand_path("../../../aws-sdk-core/lib", __FILE__))
+
 # load the aws-sdk-resources gem
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'aws-sdk-resources'
