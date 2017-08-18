@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc5 (2017-08-18)
+------------------
+
 * Issue - Update 'aws-sdk-resources' gem at `aws.rb`
 
 3.0.0.rc4 (2017-08-14)
