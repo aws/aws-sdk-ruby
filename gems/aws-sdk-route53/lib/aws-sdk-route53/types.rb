@@ -377,7 +377,7 @@ module Aws::Route53
     #         action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #         resource_record_set: { # required
     #           name: "DNSName", # required
-    #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
     #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
@@ -487,7 +487,7 @@ module Aws::Route53
     #             action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #             resource_record_set: { # required
     #               name: "DNSName", # required
-    #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
     #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
@@ -589,7 +589,7 @@ module Aws::Route53
     #               action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #               resource_record_set: { # required
     #                 name: "DNSName", # required
-    #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
     #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
@@ -3075,7 +3075,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         start_record_name: "DNSName",
-    #         start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         start_record_identifier: "ResourceRecordSetIdentifier",
     #         max_items: 1,
     #       }
@@ -3093,13 +3093,13 @@ module Aws::Route53
     # @!attribute [rw] start_record_type
     #   The type of resource record set to begin the record listing from.
     #
-    #   Valid values for basic resource record sets: `A` \| `AAAA` \|
-    #   `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
+    #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA`
+    #   \| `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
     #   `SRV` \| `TXT`
     #
     #   Values for weighted, latency, geo, and failover resource record
-    #   sets: `A` \| `AAAA` \| `CNAME` \| `MX` \| `NAPTR` \| `PTR` \| `SPF`
-    #   \| `SRV` \| `TXT`
+    #   sets: `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \| `PTR`
+    #   \| `SPF` \| `SRV` \| `TXT`
     #
     #   Values for alias resource record sets:
     #
@@ -3111,6 +3111,9 @@ module Aws::Route53
     #   * **ELB load balancer**\: A \| AAAA
     #
     #   * **Amazon S3 bucket**\: A
+    #
+    #   * **Another resource record set in this hosted zone:** The type of
+    #     the resource record set that the alias references.
     #
     #   Constraint: Specifying `type` without specifying `name` returns an
     #   `InvalidInput` error.
@@ -3454,7 +3457,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         max_items: 1,
     #       }
     #
@@ -3568,7 +3571,7 @@ module Aws::Route53
     #         traffic_policy_version: 1, # required
     #         hosted_zone_id_marker: "ResourceId",
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         max_items: 1,
     #       }
     #
@@ -3714,7 +3717,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id_marker: "ResourceId",
     #         traffic_policy_instance_name_marker: "DNSName",
-    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         max_items: 1,
     #       }
     #
@@ -4041,7 +4044,7 @@ module Aws::Route53
     #
     #       {
     #         name: "DNSName", # required
-    #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
     #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
@@ -4114,15 +4117,15 @@ module Aws::Route53
     #   and how data is encoded for them, see [Supported DNS Resource Record
     #   Types][1] in the *Amazon Route 53 Developer Guide*.
     #
-    #   Valid values for basic resource record sets: `A` \| `AAAA` \|
-    #   `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
+    #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA`
+    #   \| `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
     #   `SRV` \| `TXT`
     #
     #   Values for weighted, latency, geolocation, and failover resource
-    #   record sets: `A` \| `AAAA` \| `CNAME` \| `MX` \| `NAPTR` \| `PTR` \|
-    #   `SPF` \| `SRV` \| `TXT`. When creating a group of weighted, latency,
-    #   geolocation, or failover resource record sets, specify the same
-    #   value for all of the resource record sets in the group.
+    #   record sets: `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \|
+    #   `PTR` \| `SPF` \| `SRV` \| `TXT`. When creating a group of weighted,
+    #   latency, geolocation, or failover resource record sets, specify the
+    #   same value for all of the resource record sets in the group.
     #
     #   Valid values for multivalue answer resource record sets: `A` \|
     #   `AAAA` \| `MX` \| `NAPTR` \| `PTR` \| `SPF` \| `SRV` \| `TXT`
@@ -4675,7 +4678,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         record_name: "DNSName", # required
-    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #         resolver_ip: "IPAddress",
     #         edns0_client_subnet_ip: "IPAddress",
     #         edns0_client_subnet_mask: "SubnetMask",

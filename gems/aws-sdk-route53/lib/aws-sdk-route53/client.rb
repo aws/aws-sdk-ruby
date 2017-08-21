@@ -914,7 +914,7 @@ module Aws::Route53
     #           action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #           resource_record_set: { # required
     #             name: "DNSName", # required
-    #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #             set_identifier: "ResourceRecordSetIdentifier",
     #             weight: 1,
     #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
@@ -1427,7 +1427,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
@@ -1496,7 +1496,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance AWS API Documentation
@@ -1548,7 +1548,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
@@ -2357,7 +2357,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #
@@ -2409,7 +2409,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance AWS API Documentation
     #
@@ -2881,13 +2881,13 @@ module Aws::Route53
     # @option params [String] :start_record_type
     #   The type of resource record set to begin the record listing from.
     #
-    #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CNAME`
-    #   \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \| `SRV` \|
-    #   `TXT`
+    #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA` \|
+    #   `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \| `SRV`
+    #   \| `TXT`
     #
     #   Values for weighted, latency, geo, and failover resource record sets:
-    #   `A` \| `AAAA` \| `CNAME` \| `MX` \| `NAPTR` \| `PTR` \| `SPF` \| `SRV`
-    #   \| `TXT`
+    #   `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \| `PTR` \| `SPF`
+    #   \| `SRV` \| `TXT`
     #
     #   Values for alias resource record sets:
     #
@@ -2899,6 +2899,9 @@ module Aws::Route53
     #   * **ELB load balancer**\: A \| AAAA
     #
     #   * **Amazon S3 bucket**\: A
+    #
+    #   * **Another resource record set in this hosted zone:** The type of the
+    #     resource record set that the alias references.
     #
     #   Constraint: Specifying `type` without specifying `name` returns an
     #   `InvalidInput` error.
@@ -2932,7 +2935,7 @@ module Aws::Route53
     #   resp = client.list_resource_record_sets({
     #     hosted_zone_id: "ResourceId", # required
     #     start_record_name: "DNSName",
-    #     start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #     start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #     start_record_identifier: "ResourceRecordSetIdentifier",
     #     max_items: 1,
     #   })
@@ -2941,7 +2944,7 @@ module Aws::Route53
     #
     #   resp.resource_record_sets #=> Array
     #   resp.resource_record_sets[0].name #=> String
-    #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.resource_record_sets[0].set_identifier #=> String
     #   resp.resource_record_sets[0].weight #=> Integer
     #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
@@ -2960,7 +2963,7 @@ module Aws::Route53
     #   resp.resource_record_sets[0].traffic_policy_instance_id #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_record_name #=> String
-    #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.next_record_identifier #=> String
     #   resp.max_items #=> Integer
     #
@@ -3170,7 +3173,7 @@ module Aws::Route53
     #   resp.traffic_policy_summaries #=> Array
     #   resp.traffic_policy_summaries[0].id #=> String
     #   resp.traffic_policy_summaries[0].name #=> String
-    #   resp.traffic_policy_summaries[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_summaries[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy_summaries[0].latest_version #=> Integer
     #   resp.traffic_policy_summaries[0].traffic_policy_count #=> Integer
     #   resp.is_truncated #=> Boolean
@@ -3259,7 +3262,7 @@ module Aws::Route53
     #   resp = client.list_traffic_policy_instances({
     #     hosted_zone_id_marker: "ResourceId",
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #     max_items: 1,
     #   })
     #
@@ -3274,10 +3277,10 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.hosted_zone_id_marker #=> String
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -3356,7 +3359,7 @@ module Aws::Route53
     #   resp = client.list_traffic_policy_instances_by_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #     max_items: 1,
     #   })
     #
@@ -3371,9 +3374,9 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -3478,7 +3481,7 @@ module Aws::Route53
     #     traffic_policy_version: 1, # required
     #     hosted_zone_id_marker: "ResourceId",
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #     max_items: 1,
     #   })
     #
@@ -3493,10 +3496,10 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.hosted_zone_id_marker #=> String
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -3559,7 +3562,7 @@ module Aws::Route53
     #   resp.traffic_policies[0].id #=> String
     #   resp.traffic_policies[0].version #=> Integer
     #   resp.traffic_policies[0].name #=> String
-    #   resp.traffic_policies[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policies[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policies[0].document #=> String
     #   resp.traffic_policies[0].comment #=> String
     #   resp.is_truncated #=> Boolean
@@ -3679,7 +3682,7 @@ module Aws::Route53
     #   resp = client.test_dns_answer({
     #     hosted_zone_id: "ResourceId", # required
     #     record_name: "DNSName", # required
-    #     record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
+    #     record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
     #     resolver_ip: "IPAddress",
     #     edns0_client_subnet_ip: "IPAddress",
     #     edns0_client_subnet_mask: "SubnetMask",
@@ -3689,7 +3692,7 @@ module Aws::Route53
     #
     #   resp.nameserver #=> String
     #   resp.record_name #=> String
-    #   resp.record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.record_data #=> Array
     #   resp.record_data[0] #=> String
     #   resp.response_code #=> String
@@ -4125,7 +4128,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #
@@ -4198,7 +4201,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance AWS API Documentation
     #
@@ -4222,7 +4225,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0.rc14'
+      context[:gem_version] = '1.0.0.rc15'
       Seahorse::Client::Request.new(handlers, context)
     end
 

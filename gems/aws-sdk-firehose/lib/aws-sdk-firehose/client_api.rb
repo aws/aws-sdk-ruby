@@ -12,6 +12,7 @@ module Aws::Firehose
     include Seahorse::Model
 
     AWSKMSKeyARN = Shapes::StringShape.new(name: 'AWSKMSKeyARN')
+    AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     BufferingHints = Shapes::StructureShape.new(name: 'BufferingHints')
@@ -28,11 +29,13 @@ module Aws::Firehose
     DataTableName = Shapes::StringShape.new(name: 'DataTableName')
     DeleteDeliveryStreamInput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamInput')
     DeleteDeliveryStreamOutput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamOutput')
+    DeliveryStartTimestamp = Shapes::TimestampShape.new(name: 'DeliveryStartTimestamp')
     DeliveryStreamARN = Shapes::StringShape.new(name: 'DeliveryStreamARN')
     DeliveryStreamDescription = Shapes::StructureShape.new(name: 'DeliveryStreamDescription')
     DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
     DeliveryStreamNameList = Shapes::ListShape.new(name: 'DeliveryStreamNameList')
     DeliveryStreamStatus = Shapes::StringShape.new(name: 'DeliveryStreamStatus')
+    DeliveryStreamType = Shapes::StringShape.new(name: 'DeliveryStreamType')
     DeliveryStreamVersionId = Shapes::StringShape.new(name: 'DeliveryStreamVersionId')
     DescribeDeliveryStreamInput = Shapes::StructureShape.new(name: 'DescribeDeliveryStreamInput')
     DescribeDeliveryStreamInputLimit = Shapes::IntegerShape.new(name: 'DescribeDeliveryStreamInputLimit')
@@ -59,9 +62,16 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration = Shapes::StructureShape.new(name: 'ExtendedS3DestinationConfiguration')
     ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
+    FirehoseSource = Shapes::StringShape.new(name: 'FirehoseSource')
+    GetKinesisStreamInput = Shapes::StructureShape.new(name: 'GetKinesisStreamInput')
+    GetKinesisStreamOutput = Shapes::StructureShape.new(name: 'GetKinesisStreamOutput')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
+    InvalidStreamTypeException = Shapes::StructureShape.new(name: 'InvalidStreamTypeException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
+    KinesisStreamARN = Shapes::StringShape.new(name: 'KinesisStreamARN')
+    KinesisStreamSourceConfiguration = Shapes::StructureShape.new(name: 'KinesisStreamSourceConfiguration')
+    KinesisStreamSourceDescription = Shapes::StructureShape.new(name: 'KinesisStreamSourceDescription')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListDeliveryStreamsInput = Shapes::StructureShape.new(name: 'ListDeliveryStreamsInput')
     ListDeliveryStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListDeliveryStreamsInputLimit')
@@ -102,8 +112,12 @@ module Aws::Firehose
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
+    SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SessionCredentials = Shapes::StructureShape.new(name: 'SessionCredentials')
+    SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
+    SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateDestinationInput = Shapes::StructureShape.new(name: 'UpdateDestinationInput')
     UpdateDestinationOutput = Shapes::StructureShape.new(name: 'UpdateDestinationOutput')
@@ -124,6 +138,8 @@ module Aws::Firehose
     CopyCommand.struct_class = Types::CopyCommand
 
     CreateDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    CreateDeliveryStreamInput.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, location_name: "DeliveryStreamType"))
+    CreateDeliveryStreamInput.add_member(:kinesis_stream_source_configuration, Shapes::ShapeRef.new(shape: KinesisStreamSourceConfiguration, location_name: "KinesisStreamSourceConfiguration"))
     CreateDeliveryStreamInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, deprecated: true, location_name: "S3DestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:extended_s3_destination_configuration, Shapes::ShapeRef.new(shape: ExtendedS3DestinationConfiguration, location_name: "ExtendedS3DestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
@@ -141,9 +157,11 @@ module Aws::Firehose
     DeliveryStreamDescription.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     DeliveryStreamDescription.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
     DeliveryStreamDescription.add_member(:delivery_stream_status, Shapes::ShapeRef.new(shape: DeliveryStreamStatus, required: true, location_name: "DeliveryStreamStatus"))
+    DeliveryStreamDescription.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, required: true, location_name: "DeliveryStreamType"))
     DeliveryStreamDescription.add_member(:version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "VersionId"))
     DeliveryStreamDescription.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
     DeliveryStreamDescription.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTimestamp"))
+    DeliveryStreamDescription.add_member(:source, Shapes::ShapeRef.new(shape: SourceDescription, location_name: "Source"))
     DeliveryStreamDescription.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationDescriptionList, required: true, location_name: "Destinations"))
     DeliveryStreamDescription.add_member(:has_more_destinations, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDestinations"))
     DeliveryStreamDescription.struct_class = Types::DeliveryStreamDescription
@@ -252,10 +270,27 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
 
+    GetKinesisStreamInput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
+    GetKinesisStreamInput.struct_class = Types::GetKinesisStreamInput
+
+    GetKinesisStreamOutput.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamARN, location_name: "KinesisStreamARN"))
+    GetKinesisStreamOutput.add_member(:credentials_for_reading_kinesis_stream, Shapes::ShapeRef.new(shape: SessionCredentials, location_name: "CredentialsForReadingKinesisStream"))
+    GetKinesisStreamOutput.struct_class = Types::GetKinesisStreamOutput
+
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
 
+    KinesisStreamSourceConfiguration.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamARN, required: true, location_name: "KinesisStreamARN"))
+    KinesisStreamSourceConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    KinesisStreamSourceConfiguration.struct_class = Types::KinesisStreamSourceConfiguration
+
+    KinesisStreamSourceDescription.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamARN, location_name: "KinesisStreamARN"))
+    KinesisStreamSourceDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    KinesisStreamSourceDescription.add_member(:delivery_start_timestamp, Shapes::ShapeRef.new(shape: DeliveryStartTimestamp, location_name: "DeliveryStartTimestamp"))
+    KinesisStreamSourceDescription.struct_class = Types::KinesisStreamSourceDescription
+
     ListDeliveryStreamsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListDeliveryStreamsInputLimit, location_name: "Limit"))
+    ListDeliveryStreamsInput.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, location_name: "DeliveryStreamType"))
     ListDeliveryStreamsInput.add_member(:exclusive_start_delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, location_name: "ExclusiveStartDeliveryStreamName"))
     ListDeliveryStreamsInput.struct_class = Types::ListDeliveryStreamsInput
 
@@ -374,6 +409,15 @@ module Aws::Firehose
     S3DestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     S3DestinationUpdate.struct_class = Types::S3DestinationUpdate
 
+    SessionCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, required: true, location_name: "AccessKeyId"))
+    SessionCredentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, required: true, location_name: "SecretAccessKey"))
+    SessionCredentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, required: true, location_name: "SessionToken"))
+    SessionCredentials.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Expiration"))
+    SessionCredentials.struct_class = Types::SessionCredentials
+
+    SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
+    SourceDescription.struct_class = Types::SourceDescription
+
     UpdateDestinationInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     UpdateDestinationInput.add_member(:current_delivery_stream_version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "CurrentDeliveryStreamVersionId"))
     UpdateDestinationInput.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
@@ -428,6 +472,17 @@ module Aws::Firehose
         o.input = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_kinesis_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKinesisStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetKinesisStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: GetKinesisStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStreamTypeException)
       end)
 
       api.add_operation(:list_delivery_streams, Seahorse::Model::Operation.new.tap do |o|
