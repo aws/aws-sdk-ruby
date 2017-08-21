@@ -15,7 +15,7 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: travis_wait bundle exec rake test:spec
+script: travis_wait 30 bundle exec rake test:spec
 
 bundler_args: --without docs release repl
 
