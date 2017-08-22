@@ -126,6 +126,10 @@ module Aws::SSM
     #   with a schedule.
     #   @return [String]
     #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
     # @!attribute [rw] document_version
     #   The version of the document used in the association.
     #   @return [String]
@@ -147,17 +151,23 @@ module Aws::SSM
     #   runs.
     #   @return [String]
     #
+    # @!attribute [rw] association_name
+    #   The association name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Association AWS API Documentation
     #
     class Association < Struct.new(
       :name,
       :instance_id,
       :association_id,
+      :association_version,
       :document_version,
       :targets,
       :last_execution_date,
       :overview,
-      :schedule_expression)
+      :schedule_expression,
+      :association_name)
       include Aws::Structure
     end
 
@@ -169,6 +179,10 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
     #   @return [String]
     #
     # @!attribute [rw] date
@@ -221,11 +235,16 @@ module Aws::SSM
     #   The last date on which the association was successfully run.
     #   @return [Time]
     #
+    # @!attribute [rw] association_name
+    #   The association name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
       :name,
       :instance_id,
+      :association_version,
       :date,
       :last_update_association_date,
       :status,
@@ -237,7 +256,8 @@ module Aws::SSM
       :schedule_expression,
       :output_location,
       :last_execution_date,
-      :last_successful_execution_date)
+      :last_successful_execution_date,
+      :association_name)
       include Aws::Structure
     end
 
@@ -247,7 +267,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter
+    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName
     #         value: "AssociationFilterValue", # required
     #       }
     #
@@ -329,6 +349,69 @@ module Aws::SSM
       :name,
       :message,
       :additional_info)
+      include Aws::Structure
+    end
+
+    # Information about the association version.
+    #
+    # @!attribute [rw] association_id
+    #   The ID created by the system when the association was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date the association version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name specified when the association was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of an SSM document used when the association version was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Parameters specified when the association version was created.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] targets
+    #   The targets specified for the association when the association
+    #   version was created.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron or rate schedule specified for the association when the
+    #   association version was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location
+    #   The location in Amazon S3 specified for the association when the
+    #   association version was created.
+    #   @return [Types::InstanceAssociationOutputLocation]
+    #
+    # @!attribute [rw] association_name
+    #   The name specified for the association version when the association
+    #   version was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
+    #
+    class AssociationVersionInfo < Struct.new(
+      :association_id,
+      :association_version,
+      :created_date,
+      :name,
+      :document_version,
+      :parameters,
+      :targets,
+      :schedule_expression,
+      :output_location,
+      :association_name)
       include Aws::Structure
     end
 
@@ -1063,7 +1146,7 @@ module Aws::SSM
     #
     # @!attribute [rw] compliance_type
     #   The compliance type. For example, Association (for a State Manager
-    #   association), Patch, or Custom:`string` are all valide compliance
+    #   association), Patch, or Custom:`string` are all valid compliance
     #   types.
     #   @return [String]
     #
@@ -1097,7 +1180,7 @@ module Aws::SSM
     #
     # @!attribute [rw] severity
     #   The severity of the compliance status. Severity can be one of the
-    #   following: Critical, HIGH, Medium, Low, Informational, Unspecified.
+    #   following: Critical, High, Medium, Low, Informational, Unspecified.
     #   @return [String]
     #
     # @!attribute [rw] execution_summary
@@ -1194,7 +1277,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The value you want to search for.
+    #   The value for which to search.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
@@ -1347,6 +1430,7 @@ module Aws::SSM
     #                 output_s3_key_prefix: "S3KeyPrefix",
     #               },
     #             },
+    #             association_name: "AssociationName",
     #           },
     #         ],
     #       }
@@ -1389,6 +1473,7 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
+    #         association_name: "AssociationName",
     #       }
     #
     # @!attribute [rw] name
@@ -1421,6 +1506,10 @@ module Aws::SSM
     #   request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
+    # @!attribute [rw] association_name
+    #   Specify a descriptive name for the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -1430,7 +1519,8 @@ module Aws::SSM
       :document_version,
       :targets,
       :schedule_expression,
-      :output_location)
+      :output_location,
+      :association_name)
       include Aws::Structure
     end
 
@@ -1474,6 +1564,7 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
+    #         association_name: "AssociationName",
     #       }
     #
     # @!attribute [rw] name
@@ -1507,6 +1598,10 @@ module Aws::SSM
     #   the request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
+    # @!attribute [rw] association_name
+    #   Specify a descriptive name for the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -1516,7 +1611,8 @@ module Aws::SSM
       :parameters,
       :targets,
       :schedule_expression,
-      :output_location)
+      :output_location,
+      :association_name)
       include Aws::Structure
     end
 
@@ -1592,7 +1688,7 @@ module Aws::SSM
     #
     # @!attribute [rw] description
     #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help your organize your Maintenance
+    #   specifying a description to help you organize your Maintenance
     #   Windows.
     #   @return [String]
     #
@@ -1611,8 +1707,14 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window
-    #   before tasks can be defined for those targets.
+    #   Enables a Maintenance Window task to execute on managed instances,
+    #   even if you have not registered those instances as targets. If
+    #   enabled, then you must specify the unregistered instances (by
+    #   instance ID) when you register a task with the Maintenance Window
+    #
+    #   If you don't enable this option, then you must specify
+    #   previously-registered targets when you register a task with the
+    #   Maintenance Window.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -2085,8 +2187,8 @@ module Aws::SSM
     #
     # @!attribute [rw] safe
     #   The system checks if the target is being referenced by a task. If
-    #   the target is being referenced, the system returns and error and
-    #   does not deregister the target from the Maintenance Window.
+    #   the target is being referenced, the system returns an error and does
+    #   not deregister the target from the Maintenance Window.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowRequest AWS API Documentation
@@ -2242,6 +2344,7 @@ module Aws::SSM
     #         name: "DocumentName",
     #         instance_id: "InstanceId",
     #         association_id: "AssociationId",
+    #         association_version: "AssociationVersion",
     #       }
     #
     # @!attribute [rw] name
@@ -2256,12 +2359,21 @@ module Aws::SSM
     #   The association ID for which you want information.
     #   @return [String]
     #
+    # @!attribute [rw] association_version
+    #   Specify the association version to retrieve. To view the latest
+    #   version, either specify `$LATEST` for this parameter, or omit this
+    #   parameter. To view a list of all associations for an instance, use
+    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   association, use ListAssociationVersions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationRequest AWS API Documentation
     #
     class DescribeAssociationRequest < Struct.new(
       :name,
       :instance_id,
-      :association_id)
+      :association_id,
+      :association_version)
       include Aws::Structure
     end
 
@@ -4369,7 +4481,8 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the Maintenance Window execution for which the task is a
+    #   part.
     #   @return [String]
     #
     # @!attribute [rw] task_id
@@ -4412,7 +4525,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters used at the time the task executed.
+    #   The parameters used at the time that the task executed.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4425,17 +4538,16 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the task started executing on the target.
+    #   The time that the task started executing on the target.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time the task finished executing on the target.
+    #   The time that the task finished executing on the target.
     #   @return [Time]
     #
     # @!attribute [rw] owner_information
-    #   User-provided value that will be included in any CloudWatch events
-    #   raised while running tasks for these targets in this Maintenance
-    #   Window.
+    #   User-provided value to be included in any CloudWatch events raised
+    #   while running tasks for these targets in this Maintenance Window.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
@@ -4680,11 +4792,10 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
-    #   TaskArn is the resource that the task used during execution. For
-    #   RUN\_COMMAND and AUTOMATION task types, the TaskArn is the SSM
-    #   Document Name/ARN. For LAMBDA tasks, TaskArn is the Function
-    #   Name/ARN. For STEP\_FUNCTION tasks, the TaskArn is the State Machine
-    #   ARN.
+    #   The resource that the task used during execution. For RUN\_COMMAND
+    #   and AUTOMATION task types, the TaskArn is the SSM Document name/ARN.
+    #   For LAMBDA tasks, the value is the function name/ARN. For
+    #   STEP\_FUNCTION tasks, the value is the state machine ARN.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -4719,7 +4830,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] logging_info
-    #   The location in Amazon S3 where the task results will be logged.
+    #   The location in Amazon S3 where the task results are logged.
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -5130,12 +5241,17 @@ module Aws::SSM
     #   The content of the association document for the instance(s).
     #   @return [String]
     #
+    # @!attribute [rw] association_version
+    #   Version information for the association on the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociation AWS API Documentation
     #
     class InstanceAssociation < Struct.new(
       :association_id,
       :instance_id,
-      :content)
+      :content,
+      :association_version)
       include Aws::Structure
     end
 
@@ -5194,6 +5310,10 @@ module Aws::SSM
     #   The association document verions.
     #   @return [String]
     #
+    # @!attribute [rw] association_version
+    #   The version of the association applied to the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_id
     #   The instance ID where the association was created.
     #   @return [String]
@@ -5223,19 +5343,25 @@ module Aws::SSM
     #   this request.
     #   @return [Types::InstanceAssociationOutputUrl]
     #
+    # @!attribute [rw] association_name
+    #   The name of the association applied to the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationStatusInfo AWS API Documentation
     #
     class InstanceAssociationStatusInfo < Struct.new(
       :association_id,
       :name,
       :document_version,
+      :association_version,
       :instance_id,
       :execution_date,
       :status,
       :detailed_status,
       :execution_summary,
       :error_code,
-      :output_url)
+      :output_url,
+      :association_name)
       include Aws::Structure
     end
 
@@ -5738,13 +5864,64 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAssociationVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for which you want to view all versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersionsRequest AWS API Documentation
+    #
+    class ListAssociationVersionsRequest < Struct.new(
+      :association_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_versions
+    #   Information about all versions of the association for the specified
+    #   association ID.
+    #   @return [Array<Types::AssociationVersionInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersionsResult AWS API Documentation
+    #
+    class ListAssociationVersionsResult < Struct.new(
+      :association_versions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssociationsRequest
     #   data as a hash:
     #
     #       {
     #         association_filter_list: [
     #           {
-    #             key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter
+    #             key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName
     #             value: "AssociationFilterValue", # required
     #           },
     #         ],
@@ -5960,14 +6137,13 @@ module Aws::SSM
     #   @return [Array<Types::ComplianceStringFilter>]
     #
     # @!attribute [rw] resource_ids
-    #   The ID for the resources from which you want to get compliance
-    #   information. Currently, you can only specify one resource ID.
+    #   The ID for the resources from which to get compliance information.
+    #   Currently, you can only specify one resource ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
-    #   The type of resource from which you want to get compliance
-    #   information. Currently, the only supported resource type is
-    #   `ManagedInstance`.
+    #   The type of resource from which to get compliance information.
+    #   Currently, the only supported resource type is `ManagedInstance`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -6053,7 +6229,7 @@ module Aws::SSM
     #   A list of compliant and non-compliant summary counts based on
     #   compliance types. For example, this call returns State Manager
     #   associations, patches, or custom compliance types according to the
-    #   filter criteria you specified.
+    #   filter criteria that you specified.
     #   @return [Array<Types::ComplianceSummaryItem>]
     #
     # @!attribute [rw] next_token
@@ -6309,8 +6485,8 @@ module Aws::SSM
     # @!attribute [rw] resource_compliance_summary_items
     #   A summary count for specified or targeted managed instances. Summary
     #   count includes information about compliant and non-compliant State
-    #   Manager associations, patch statuses, or custom items according to
-    #   the filter criteria you specify.
+    #   Manager associations, patch status, or custom items according to the
+    #   filter criteria that you specify.
     #   @return [Array<Types::ResourceComplianceSummaryItem>]
     #
     # @!attribute [rw] next_token
@@ -6438,7 +6614,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters for an AUTOMATION task type.
+    # The parameters for an AUTOMATION task type.
     #
     # @note When making an API call, you may pass MaintenanceWindowAutomationParameters
     #   data as a hash:
@@ -6451,12 +6627,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] document_version
-    #   The version of an SSM Automation document to use during task
-    #   execution.
+    #   The version of an Automation document to use during task execution.
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Parameters for the AUTOMATION task.
+    #   The parameters for the AUTOMATION task.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowAutomationParameters AWS API Documentation
@@ -6700,7 +6875,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters for a LAMBDA task type.
+    # The parameters for a LAMBDA task type.
     #
     # @note When making an API call, you may pass MaintenanceWindowLambdaParameters
     #   data as a hash:
@@ -6712,22 +6887,21 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] client_context
-    #   Using the ClientContext you can pass client-specific information to
-    #   the Lambda function you are invoking. You can then process the
-    #   client information in your Lambda function as you choose through the
-    #   context variable.
+    #   Pass client-specific information to the Lambda function that you are
+    #   invoking. You can then process the client information in your Lambda
+    #   function as you choose through the context variable.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   You can use this optional parameter to specify a Lambda function
-    #   version or alias name. If you specify a function version, the API
-    #   uses the qualified function ARN to invoke a specific Lambda
-    #   function. If you specify an alias name, the API uses the alias ARN
-    #   to invoke the Lambda function version to which the alias points.
+    #   (Optional) Specify a Lambda function version or alias name. If you
+    #   specify a function version, the action uses the qualified function
+    #   ARN to invoke a specific Lambda function. If you specify an alias
+    #   name, the action uses the alias ARN to invoke the Lambda function
+    #   version to which the alias points.
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   JSON that you want to provide to your Lambda function as input.
+    #   JSON to provide to your Lambda function as input.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowLambdaParameters AWS API Documentation
@@ -6739,7 +6913,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters for a RUN\_COMMAND task type.
+    # The parameters for a RUN\_COMMAND task type.
     #
     # @note When making an API call, you may pass MaintenanceWindowRunCommandParameters
     #   data as a hash:
@@ -6767,17 +6941,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_hash
-    #   The Sha256 or Sha1 hash created by the system when the document was
-    #   created. Sha1 hashes have been deprecated.
+    #   The SHA-256 or SHA-1 hash created by the system when the document
+    #   was created. SHA-1 hashes have been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] document_hash_type
-    #   Sha256 or Sha1. Sha1 hashes have been deprecated.
+    #   SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
     #   @return [String]
     #
     # @!attribute [rw] notification_config
     #   Configurations for sending notifications about command status
-    #   changes on a per instance basis.
+    #   changes on a per-instance basis.
     #   @return [Types::NotificationConfig]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -6789,16 +6963,16 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Parameters for the RUN\_COMMAND task execution.
+    #   The parameters for the RUN\_COMMAND task execution.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role that to assume during task execution.
+    #   The IAM service role to assume during task execution.
     #   @return [String]
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute.
+    #   executing, it doesn not execute.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowRunCommandParameters AWS API Documentation
@@ -6816,7 +6990,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters for the STEP\_FUNCTION execution.
+    # The parameters for the STEP\_FUNCTION execution.
     #
     # @note When making an API call, you may pass MaintenanceWindowStepFunctionsParameters
     #   data as a hash:
@@ -6901,10 +7075,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_arn
-    #   TaskArn is the resource that the task uses during execution. For
-    #   RUN\_COMMAND and AUTOMATION task types, the TaskArn is the SSM
-    #   Document Name/ARN. For LAMBDA tasks, it's the Function Name/ARN.
-    #   For STEP\_FUNCTION tasks, it's the State Machine ARN.
+    #   The resource that the task uses during execution. For RUN\_COMMAND
+    #   and AUTOMATION task types, `TaskArn` is the SSM document name or
+    #   ARN. For LAMBDA tasks, it's the function name or ARN. For
+    #   STEP\_FUNCTION tasks, it's the state machine ARN.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -6974,7 +7148,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters for task execution.
+    # The parameters for task execution.
     #
     # @note When making an API call, you may pass MaintenanceWindowTaskInvocationParameters
     #   data as a hash:
@@ -7015,19 +7189,19 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] run_command
-    #   Parameters for a RUN\_COMMAND task type.
+    #   The parameters for a RUN\_COMMAND task type.
     #   @return [Types::MaintenanceWindowRunCommandParameters]
     #
     # @!attribute [rw] automation
-    #   Parameters for a AUTOMATION task type.
+    #   The parameters for a AUTOMATION task type.
     #   @return [Types::MaintenanceWindowAutomationParameters]
     #
     # @!attribute [rw] step_functions
-    #   Parameters for a STEP\_FUNCTION task type.
+    #   The parameters for a STEP\_FUNCTION task type.
     #   @return [Types::MaintenanceWindowStepFunctionsParameters]
     #
     # @!attribute [rw] lambda
-    #   Parameters for a LAMBDA task type.
+    #   The parameters for a LAMBDA task type.
     #   @return [Types::MaintenanceWindowLambdaParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTaskInvocationParameters AWS API Documentation
@@ -7765,9 +7939,9 @@ module Aws::SSM
     #   @return [Array<Types::ComplianceItemEntry>]
     #
     # @!attribute [rw] item_content_hash
-    #   MD5 or Sha256 content hash. The content hash is used to determine if
-    #   existing information should be overwritten or ignored. If the
-    #   content hashes match, ,the request to put compliance information is
+    #   MD5 or SHA-256 content hash. The content hash is used to determine
+    #   if existing information should be overwritten or ignored. If the
+    #   content hashes match, the request to put compliance information is
     #   ignored.
     #   @return [String]
     #
@@ -8139,8 +8313,9 @@ module Aws::SSM
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
-    #   Parameters the task should use during execution. Populate only the
-    #   fields that match the task type. All other fields should be empty.
+    #   The parameters that the task should use during execution. Populate
+    #   only the fields that match the task type. All other fields should be
+    #   empty.
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
@@ -8944,6 +9119,8 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         association_name: "AssociationName",
+    #         association_version: "AssociationVersion",
     #       }
     #
     # @!attribute [rw] association_id
@@ -8978,6 +9155,17 @@ module Aws::SSM
     #   The targets of the association.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] association_name
+    #   The name of the association that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   This parameter is provided for concurrency control purposes. You
+    #   must specify the latest association version in the service. If you
+    #   want to ensure that this request succeeds, either specify `$LATEST`,
+    #   or omit this parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -8987,7 +9175,9 @@ module Aws::SSM
       :schedule_expression,
       :output_location,
       :name,
-      :targets)
+      :targets,
+      :association_name,
+      :association_version)
       include Aws::Structure
     end
 
@@ -9178,9 +9368,9 @@ module Aws::SSM
     #   @return [Boolean]
     #
     # @!attribute [rw] replace
-    #   If you specify True, then all fields that are required by the
-    #   CreateMaintenanceWindow API are also required for this API request.
-    #   Optional fields that are not specified will be set to null.
+    #   If True, then all fields that are required by the
+    #   CreateMaintenanceWindow action are also required for this API
+    #   request. Optional fields that are not specified are set to null.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowRequest AWS API Documentation
@@ -9266,15 +9456,15 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID for which you want to modify the target.
+    #   The Maintenance Window ID with which to modify the target.
     #   @return [String]
     #
     # @!attribute [rw] window_target_id
-    #   The target ID that you want to modify.
+    #   The target ID to modify.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets that you want to add or replace.
+    #   The targets to add or replace.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
@@ -9292,9 +9482,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] replace
-    #   If you specify True, then all fields that are required by the
-    #   RegisterTargetWithMaintenanceWindow API are also required for this
-    #   API request. Optional fields that are not specified will be set to
+    #   If True, then all fields that are required by the
+    #   RegisterTargetWithMaintenanceWindow action are also required for
+    #   this API request. Optional fields that are not specified are set to
     #   null.
     #   @return [Boolean]
     #
@@ -9414,33 +9604,30 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that contains the task that you want to
-    #   modify.
+    #   The Maintenance Window ID that contains the task to modify.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The task ID that you want to modify.
+    #   The task ID to modify.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags) that you want to modify.
-    #   Instances are specified using
-    #   Key=instanceids,Values=instanceID\_1,instanceID\_2. Tags are
-    #   specified using Key=tag\_name,Values=tag\_value.
+    #   The targets (either instances or tags) to modify. Instances are
+    #   specified using Key=instanceids,Values=instanceID\_1,instanceID\_2.
+    #   Tags are specified using Key=tag\_name,Values=tag\_value.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
-    #   The task ARN that you want to modify.
+    #   The task ARN to modify.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The IAM service role ARN that you want to modify. The system assumes
-    #   this role during task exectuion.
+    #   The IAM service role ARN to modify. The system assumes this role
+    #   during task execution.
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters that you want to modify. The map has the following
-    #   format:
+    #   The parameters to modify. The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -9449,14 +9636,15 @@ module Aws::SSM
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
-    #   Parameters the task should use during execution. Populate only the
-    #   fields that match the task type. All other fields should be empty.
+    #   The parameters that the task should use during execution. Populate
+    #   only the fields that match the task type. All other fields should be
+    #   empty.
     #   @return [Types::MaintenanceWindowTaskInvocationParameters]
     #
     # @!attribute [rw] priority
-    #   The new task priority that you want to specify. The lower the
-    #   number, the higher the priority. Tasks that have the same priority
-    #   are scheduled in parallel.
+    #   The new task priority to specify. The lower the number, the higher
+    #   the priority. Tasks that have the same priority are scheduled in
+    #   parallel.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrency
@@ -9466,27 +9654,27 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] max_errors
-    #   The new `MaxErrors` value you want to specify. `MaxErrors` is the
-    #   maximum number of errors that are allowed before the task stops
-    #   being scheduled.
+    #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
+    #   number of errors that are allowed before the task stops being
+    #   scheduled.
     #   @return [String]
     #
     # @!attribute [rw] logging_info
-    #   The new logging location in Amazon S3 that you want to specify.
+    #   The new logging location in Amazon S3 to specify.
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
-    #   The new task name that you want to specify.
+    #   The new task name to specify.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The new task description that you want to specify.
+    #   The new task description to specify.
     #   @return [String]
     #
     # @!attribute [rw] replace
-    #   If you specify True, then all fields that are required by the
-    #   RegisterTaskWithMaintenanceWndow API are also required for this API
-    #   request. Optional fields that are not specified will be set to null.
+    #   If True, then all fields that are required by the
+    #   RegisterTaskWithMaintenanceWndow action are also required for this
+    #   API request. Optional fields that are not specified are set to null.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskRequest AWS API Documentation
@@ -9510,11 +9698,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] window_id
-    #   The Maintenance Window ID that was updated.
+    #   The ID of the Maintenance Window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] window_task_id
-    #   The Maintenance Window task ID that was updated.
+    #   The task ID of the Maintenance Window that was updated.
     #   @return [String]
     #
     # @!attribute [rw] targets

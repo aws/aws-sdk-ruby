@@ -103,7 +103,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sms', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-sns', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-sqs', '1.0.0.rc14')
-  spec.add_dependency('aws-sdk-ssm', '1.0.0.rc14')
+  spec.add_dependency('aws-sdk-ssm', '1.0.0.rc15')
   spec.add_dependency('aws-sdk-swf', '1.0.0.rc11')
   spec.add_dependency('aws-sdk-servicecatalog', '1.0.0.rc12')
   spec.add_dependency('aws-sdk-shield', '1.0.0.rc12')

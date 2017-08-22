@@ -343,6 +343,9 @@ module Aws::SSM
     #   An Amazon S3 bucket where you want to store the output details of the
     #   request.
     #
+    # @option params [String] :association_name
+    #   Specify a descriptive name for the association.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -370,12 +373,14 @@ module Aws::SSM
     #         output_s3_key_prefix: "S3KeyPrefix",
     #       },
     #     },
+    #     association_name: "AssociationName",
     #   })
     #
     # @example Response structure
     #
     #   resp.association_description.name #=> String
     #   resp.association_description.instance_id #=> String
+    #   resp.association_description.association_version #=> String
     #   resp.association_description.date #=> Time
     #   resp.association_description.last_update_association_date #=> Time
     #   resp.association_description.status.date #=> Time
@@ -401,6 +406,7 @@ module Aws::SSM
     #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
+    #   resp.association_description.association_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -455,6 +461,7 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
+    #         association_name: "AssociationName",
     #       },
     #     ],
     #   })
@@ -464,6 +471,7 @@ module Aws::SSM
     #   resp.successful #=> Array
     #   resp.successful[0].name #=> String
     #   resp.successful[0].instance_id #=> String
+    #   resp.successful[0].association_version #=> String
     #   resp.successful[0].date #=> Time
     #   resp.successful[0].last_update_association_date #=> Time
     #   resp.successful[0].status.date #=> Time
@@ -489,6 +497,7 @@ module Aws::SSM
     #   resp.successful[0].output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.successful[0].last_execution_date #=> Time
     #   resp.successful[0].last_successful_execution_date #=> Time
+    #   resp.successful[0].association_name #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -504,6 +513,7 @@ module Aws::SSM
     #   resp.failed[0].entry.output_location.s3_location.output_s3_region #=> String
     #   resp.failed[0].entry.output_location.s3_location.output_s3_bucket_name #=> String
     #   resp.failed[0].entry.output_location.s3_location.output_s3_key_prefix #=> String
+    #   resp.failed[0].entry.association_name #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -582,7 +592,7 @@ module Aws::SSM
     #
     # @option params [String] :description
     #   An optional description for the Maintenance Window. We recommend
-    #   specifying a description to help your organize your Maintenance
+    #   specifying a description to help you organize your Maintenance
     #   Windows.
     #
     # @option params [required, String] :schedule
@@ -597,8 +607,14 @@ module Aws::SSM
     #   Systems Manager stops scheduling new tasks for execution.
     #
     # @option params [required, Boolean] :allow_unassociated_targets
-    #   Whether targets must be registered with the Maintenance Window before
-    #   tasks can be defined for those targets.
+    #   Enables a Maintenance Window task to execute on managed instances,
+    #   even if you have not registered those instances as targets. If
+    #   enabled, then you must specify the unregistered instances (by instance
+    #   ID) when you register a task with the Maintenance Window
+    #
+    #   If you don't enable this option, then you must specify
+    #   previously-registered targets when you register a task with the
+    #   Maintenance Window.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -1070,7 +1086,7 @@ module Aws::SSM
     #
     # @option params [Boolean] :safe
     #   The system checks if the target is being referenced by a task. If the
-    #   target is being referenced, the system returns and error and does not
+    #   target is being referenced, the system returns an error and does not
     #   deregister the target from the Maintenance Window.
     #
     # @return [Types::DeregisterTargetFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1204,6 +1220,13 @@ module Aws::SSM
     # @option params [String] :association_id
     #   The association ID for which you want information.
     #
+    # @option params [String] :association_version
+    #   Specify the association version to retrieve. To view the latest
+    #   version, either specify `$LATEST` for this parameter, or omit this
+    #   parameter. To view a list of all associations for an instance, use
+    #   ListInstanceAssociations. To get a list of versions for a specific
+    #   association, use ListAssociationVersions.
+    #
     # @return [Types::DescribeAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -1214,12 +1237,14 @@ module Aws::SSM
     #     name: "DocumentName",
     #     instance_id: "InstanceId",
     #     association_id: "AssociationId",
+    #     association_version: "AssociationVersion",
     #   })
     #
     # @example Response structure
     #
     #   resp.association_description.name #=> String
     #   resp.association_description.instance_id #=> String
+    #   resp.association_description.association_version #=> String
     #   resp.association_description.date #=> Time
     #   resp.association_description.last_update_association_date #=> Time
     #   resp.association_description.status.date #=> Time
@@ -1245,6 +1270,7 @@ module Aws::SSM
     #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
+    #   resp.association_description.association_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -1492,6 +1518,7 @@ module Aws::SSM
     #   resp.associations[0].association_id #=> String
     #   resp.associations[0].instance_id #=> String
     #   resp.associations[0].content #=> String
+    #   resp.associations[0].association_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociations AWS API Documentation
@@ -1593,6 +1620,7 @@ module Aws::SSM
     #   resp.instance_association_status_infos[0].association_id #=> String
     #   resp.instance_association_status_infos[0].name #=> String
     #   resp.instance_association_status_infos[0].document_version #=> String
+    #   resp.instance_association_status_infos[0].association_version #=> String
     #   resp.instance_association_status_infos[0].instance_id #=> String
     #   resp.instance_association_status_infos[0].execution_date #=> Time
     #   resp.instance_association_status_infos[0].status #=> String
@@ -1600,6 +1628,7 @@ module Aws::SSM
     #   resp.instance_association_status_infos[0].execution_summary #=> String
     #   resp.instance_association_status_infos[0].error_code #=> String
     #   resp.instance_association_status_infos[0].output_url.s3_output_url.output_url #=> String
+    #   resp.instance_association_status_infos[0].association_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus AWS API Documentation
@@ -2990,7 +3019,8 @@ module Aws::SSM
     # all invocations.
     #
     # @option params [required, String] :window_execution_id
-    #   The ID of the Maintenance Window execution the task is part of.
+    #   The ID of the Maintenance Window execution for which the task is a
+    #   part.
     #
     # @option params [required, String] :task_id
     #   The ID of the specific task in the Maintenance Window task that should
@@ -3442,6 +3472,65 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Retrieves all versions of an association for a specific association
+    # ID.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID for which you want to view all versions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::ListAssociationVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssociationVersionsResult#association_versions #association_versions} => Array&lt;Types::AssociationVersionInfo&gt;
+    #   * {Types::ListAssociationVersionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_association_versions({
+    #     association_id: "AssociationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_versions #=> Array
+    #   resp.association_versions[0].association_id #=> String
+    #   resp.association_versions[0].association_version #=> String
+    #   resp.association_versions[0].created_date #=> Time
+    #   resp.association_versions[0].name #=> String
+    #   resp.association_versions[0].document_version #=> String
+    #   resp.association_versions[0].parameters #=> Hash
+    #   resp.association_versions[0].parameters["ParameterName"] #=> Array
+    #   resp.association_versions[0].parameters["ParameterName"][0] #=> String
+    #   resp.association_versions[0].targets #=> Array
+    #   resp.association_versions[0].targets[0].key #=> String
+    #   resp.association_versions[0].targets[0].values #=> Array
+    #   resp.association_versions[0].targets[0].values[0] #=> String
+    #   resp.association_versions[0].schedule_expression #=> String
+    #   resp.association_versions[0].output_location.s3_location.output_s3_region #=> String
+    #   resp.association_versions[0].output_location.s3_location.output_s3_bucket_name #=> String
+    #   resp.association_versions[0].output_location.s3_location.output_s3_key_prefix #=> String
+    #   resp.association_versions[0].association_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
+    #
+    # @overload list_association_versions(params = {})
+    # @param [Hash] params ({})
+    def list_association_versions(params = {}, options = {})
+      req = build_request(:list_association_versions, params)
+      req.send_request(options)
+    end
+
     # Lists the associations for the specified Systems Manager document or
     # instance.
     #
@@ -3468,7 +3557,7 @@ module Aws::SSM
     #   resp = client.list_associations({
     #     association_filter_list: [
     #       {
-    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter
+    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName
     #         value: "AssociationFilterValue", # required
     #       },
     #     ],
@@ -3482,6 +3571,7 @@ module Aws::SSM
     #   resp.associations[0].name #=> String
     #   resp.associations[0].instance_id #=> String
     #   resp.associations[0].association_id #=> String
+    #   resp.associations[0].association_version #=> String
     #   resp.associations[0].document_version #=> String
     #   resp.associations[0].targets #=> Array
     #   resp.associations[0].targets[0].key #=> String
@@ -3493,6 +3583,7 @@ module Aws::SSM
     #   resp.associations[0].overview.association_status_aggregated_count #=> Hash
     #   resp.associations[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.associations[0].schedule_expression #=> String
+    #   resp.associations[0].association_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
@@ -3682,23 +3773,22 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # For a specified resource ID, this API returns a list of compliance
-    # statuses for different resource types. Currently, you can only specify
-    # one resource ID per call. List results depend on the criteria
-    # specified in the filter.
+    # For a specified resource ID, this API action returns a list of
+    # compliance statuses for different resource types. Currently, you can
+    # only specify one resource ID per call. List results depend on the
+    # criteria specified in the filter.
     #
     # @option params [Array<Types::ComplianceStringFilter>] :filters
     #   One or more compliance filters. Use a filter to return a more specific
     #   list of results.
     #
     # @option params [Array<String>] :resource_ids
-    #   The ID for the resources from which you want to get compliance
-    #   information. Currently, you can only specify one resource ID.
+    #   The ID for the resources from which to get compliance information.
+    #   Currently, you can only specify one resource ID.
     #
     # @option params [Array<String>] :resource_types
-    #   The type of resource from which you want to get compliance
-    #   information. Currently, the only supported resource type is
-    #   `ManagedInstance`.
+    #   The type of resource from which to get compliance information.
+    #   Currently, the only supported resource type is `ManagedInstance`.
     #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
@@ -3759,7 +3849,7 @@ module Aws::SSM
     # Returns a summary count of compliant and non-compliant resources for a
     # compliance type. For example, this call can return State Manager
     # associations, patches, or custom compliance types according to the
-    # filter criteria you specify.
+    # filter criteria that you specify.
     #
     # @option params [Array<Types::ComplianceStringFilter>] :filters
     #   One or more compliance or inventory filters. Use a filter to return a
@@ -4195,10 +4285,10 @@ module Aws::SSM
     end
 
     # Registers a compliance type and other compliance details on a
-    # designated resource. This API lets you register custom compliance
+    # designated resource. This action lets you register custom compliance
     # details with a resource. This call overwrites existing compliance
     # information on the resource, so you must provide a full list of
-    # compliance items each time you send the request.
+    # compliance items each time that you send the request.
     #
     # @option params [required, String] :resource_id
     #   Specify an ID for this resource. For a managed instance, this is the
@@ -4224,9 +4314,9 @@ module Aws::SSM
     #   about the PatchSeverity, Classification, etc.
     #
     # @option params [String] :item_content_hash
-    #   MD5 or Sha256 content hash. The content hash is used to determine if
+    #   MD5 or SHA-256 content hash. The content hash is used to determine if
     #   existing information should be overwritten or ignored. If the content
-    #   hashes match, ,the request to put compliance information is ignored.
+    #   hashes match, the request to put compliance information is ignored.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4510,8 +4600,9 @@ module Aws::SSM
     #   The parameters that should be passed to the task when it is executed.
     #
     # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
-    #   Parameters the task should use during execution. Populate only the
-    #   fields that match the task type. All other fields should be empty.
+    #   The parameters that the task should use during execution. Populate
+    #   only the fields that match the task type. All other fields should be
+    #   empty.
     #
     # @option params [Integer] :priority
     #   The priority of the task in the Maintenance Window, the lower the
@@ -4923,8 +5014,9 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Updates an association. You can only update the document version,
-    # schedule, parameters, and Amazon S3 output of an association.
+    # Updates an association. You can update the association name and
+    # version, the document version, schedule, parameters, and Amazon S3
+    # output.
     #
     # @option params [required, String] :association_id
     #   The ID of the association you want to update.
@@ -4950,6 +5042,15 @@ module Aws::SSM
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets of the association.
+    #
+    # @option params [String] :association_name
+    #   The name of the association that you want to update.
+    #
+    # @option params [String] :association_version
+    #   This parameter is provided for concurrency control purposes. You must
+    #   specify the latest association version in the service. If you want to
+    #   ensure that this request succeeds, either specify `$LATEST`, or omit
+    #   this parameter.
     #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4978,12 +5079,15 @@ module Aws::SSM
     #         values: ["TargetValue"],
     #       },
     #     ],
+    #     association_name: "AssociationName",
+    #     association_version: "AssociationVersion",
     #   })
     #
     # @example Response structure
     #
     #   resp.association_description.name #=> String
     #   resp.association_description.instance_id #=> String
+    #   resp.association_description.association_version #=> String
     #   resp.association_description.date #=> Time
     #   resp.association_description.last_update_association_date #=> Time
     #   resp.association_description.status.date #=> Time
@@ -5009,6 +5113,7 @@ module Aws::SSM
     #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
+    #   resp.association_description.association_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -5052,6 +5157,7 @@ module Aws::SSM
     #
     #   resp.association_description.name #=> String
     #   resp.association_description.instance_id #=> String
+    #   resp.association_description.association_version #=> String
     #   resp.association_description.date #=> Time
     #   resp.association_description.last_update_association_date #=> Time
     #   resp.association_description.status.date #=> Time
@@ -5077,6 +5183,7 @@ module Aws::SSM
     #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
+    #   resp.association_description.association_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -5208,9 +5315,9 @@ module Aws::SSM
     #   Whether the Maintenance Window is enabled.
     #
     # @option params [Boolean] :replace
-    #   If you specify True, then all fields that are required by the
-    #   CreateMaintenanceWindow API are also required for this API request.
-    #   Optional fields that are not specified will be set to null.
+    #   If True, then all fields that are required by the
+    #   CreateMaintenanceWindow action are also required for this API request.
+    #   Optional fields that are not specified are set to null.
     #
     # @return [Types::UpdateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5263,27 +5370,26 @@ module Aws::SSM
     # The target from being an ID target to a Tag target, or a Tag target to
     # an ID target.
     #
-    # The IDs of an ID target.
+    # IDs for an ID target.
     #
-    # The tags of a Tag target.
+    # Tags for a Tag target.
     #
-    # The Owner.
+    # Owner.
     #
-    # The Name.
+    # Name.
     #
-    # The Description.
+    # Description.
     #
-    # Also note that if a parameter is null, then the corresponding field is
-    # not modified.
+    # If a parameter is null, then the corresponding field is not modified.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID for which you want to modify the target.
+    #   The Maintenance Window ID with which to modify the target.
     #
     # @option params [required, String] :window_target_id
-    #   The target ID that you want to modify.
+    #   The target ID to modify.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets that you want to add or replace.
+    #   The targets to add or replace.
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
@@ -5297,9 +5403,9 @@ module Aws::SSM
     #   An optional description for the update.
     #
     # @option params [Boolean] :replace
-    #   If you specify True, then all fields that are required by the
-    #   RegisterTargetWithMaintenanceWindow API are also required for this API
-    #   request. Optional fields that are not specified will be set to null.
+    #   If True, then all fields that are required by the
+    #   RegisterTargetWithMaintenanceWindow action are also required for this
+    #   API request. Optional fields that are not specified are set to null.
     #
     # @return [Types::UpdateMaintenanceWindowTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5349,49 +5455,46 @@ module Aws::SSM
     end
 
     # Modifies a task assigned to a Maintenance Window. You can't change
-    # the task type, but you can change the following:
+    # the task type, but you can change the following values:
     #
-    # The Task Arn. For example, you can change a RUN\_COMMAND task from
+    # Task ARN. For example, you can change a RUN\_COMMAND task from
     # AWS-RunPowerShellScript to AWS-RunShellScript.
     #
-    # The service role ARN.
+    # Service role ARN.
     #
-    # The task parameters.
+    # Task parameters.
     #
-    # The task priority.
+    # Task priority.
     #
-    # The task MaxConcurrency and MaxErrors.
+    # Task MaxConcurrency and MaxErrors.
     #
-    # The log location.
+    # Log location.
     #
     # If a parameter is null, then the corresponding field is not modified.
     # Also, if you set Replace to true, then all fields required by the
-    # RegisterTaskWithMaintenanceWindow operation are required for this
-    # request. Optional fields that aren't specified are be set to null.
+    # RegisterTaskWithMaintenanceWindow action are required for this
+    # request. Optional fields that aren't specified are set to null.
     #
     # @option params [required, String] :window_id
-    #   The Maintenance Window ID that contains the task that you want to
-    #   modify.
+    #   The Maintenance Window ID that contains the task to modify.
     #
     # @option params [required, String] :window_task_id
-    #   The task ID that you want to modify.
+    #   The task ID to modify.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or tags) that you want to modify.
-    #   Instances are specified using
-    #   Key=instanceids,Values=instanceID\_1,instanceID\_2. Tags are specified
-    #   using Key=tag\_name,Values=tag\_value.
+    #   The targets (either instances or tags) to modify. Instances are
+    #   specified using Key=instanceids,Values=instanceID\_1,instanceID\_2.
+    #   Tags are specified using Key=tag\_name,Values=tag\_value.
     #
     # @option params [String] :task_arn
-    #   The task ARN that you want to modify.
+    #   The task ARN to modify.
     #
     # @option params [String] :service_role_arn
-    #   The IAM service role ARN that you want to modify. The system assumes
-    #   this role during task exectuion.
+    #   The IAM service role ARN to modify. The system assumes this role
+    #   during task execution.
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
-    #   The parameters that you want to modify. The map has the following
-    #   format:
+    #   The parameters to modify. The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -5399,13 +5502,13 @@ module Aws::SSM
     #   characters
     #
     # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
-    #   Parameters the task should use during execution. Populate only the
-    #   fields that match the task type. All other fields should be empty.
+    #   The parameters that the task should use during execution. Populate
+    #   only the fields that match the task type. All other fields should be
+    #   empty.
     #
     # @option params [Integer] :priority
-    #   The new task priority that you want to specify. The lower the number,
-    #   the higher the priority. Tasks that have the same priority are
-    #   scheduled in parallel.
+    #   The new task priority to specify. The lower the number, the higher the
+    #   priority. Tasks that have the same priority are scheduled in parallel.
     #
     # @option params [String] :max_concurrency
     #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
@@ -5413,23 +5516,23 @@ module Aws::SSM
     #   parallel.
     #
     # @option params [String] :max_errors
-    #   The new `MaxErrors` value you want to specify. `MaxErrors` is the
-    #   maximum number of errors that are allowed before the task stops being
+    #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
+    #   number of errors that are allowed before the task stops being
     #   scheduled.
     #
     # @option params [Types::LoggingInfo] :logging_info
-    #   The new logging location in Amazon S3 that you want to specify.
+    #   The new logging location in Amazon S3 to specify.
     #
     # @option params [String] :name
-    #   The new task name that you want to specify.
+    #   The new task name to specify.
     #
     # @option params [String] :description
-    #   The new task description that you want to specify.
+    #   The new task description to specify.
     #
     # @option params [Boolean] :replace
-    #   If you specify True, then all fields that are required by the
-    #   RegisterTaskWithMaintenanceWndow API are also required for this API
-    #   request. Optional fields that are not specified will be set to null.
+    #   If True, then all fields that are required by the
+    #   RegisterTaskWithMaintenanceWndow action are also required for this API
+    #   request. Optional fields that are not specified are set to null.
     #
     # @return [Types::UpdateMaintenanceWindowTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5716,7 +5819,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc14'
+      context[:gem_version] = '1.0.0.rc15'
       Seahorse::Client::Request.new(handlers, context)
     end
 

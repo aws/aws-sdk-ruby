@@ -37,10 +37,15 @@ module Aws::SSM
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     AssociationLimitExceeded = Shapes::StructureShape.new(name: 'AssociationLimitExceeded')
     AssociationList = Shapes::ListShape.new(name: 'AssociationList')
+    AssociationName = Shapes::StringShape.new(name: 'AssociationName')
     AssociationOverview = Shapes::StructureShape.new(name: 'AssociationOverview')
     AssociationStatus = Shapes::StructureShape.new(name: 'AssociationStatus')
     AssociationStatusAggregatedCount = Shapes::MapShape.new(name: 'AssociationStatusAggregatedCount')
     AssociationStatusName = Shapes::StringShape.new(name: 'AssociationStatusName')
+    AssociationVersion = Shapes::StringShape.new(name: 'AssociationVersion')
+    AssociationVersionInfo = Shapes::StructureShape.new(name: 'AssociationVersionInfo')
+    AssociationVersionLimitExceeded = Shapes::StructureShape.new(name: 'AssociationVersionLimitExceeded')
+    AssociationVersionList = Shapes::ListShape.new(name: 'AssociationVersionList')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AutomationActionName = Shapes::StringShape.new(name: 'AutomationActionName')
@@ -340,6 +345,7 @@ module Aws::SSM
     InvalidActivation = Shapes::StructureShape.new(name: 'InvalidActivation')
     InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
     InvalidAllowedPatternException = Shapes::StructureShape.new(name: 'InvalidAllowedPatternException')
+    InvalidAssociationVersion = Shapes::StructureShape.new(name: 'InvalidAssociationVersion')
     InvalidAutomationExecutionParametersException = Shapes::StructureShape.new(name: 'InvalidAutomationExecutionParametersException')
     InvalidAutomationSignalException = Shapes::StructureShape.new(name: 'InvalidAutomationSignalException')
     InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
@@ -409,6 +415,8 @@ module Aws::SSM
     LastResourceDataSyncStatus = Shapes::StringShape.new(name: 'LastResourceDataSyncStatus')
     LastResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastResourceDataSyncTime')
     LastSuccessfulResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastSuccessfulResourceDataSyncTime')
+    ListAssociationVersionsRequest = Shapes::StructureShape.new(name: 'ListAssociationVersionsRequest')
+    ListAssociationVersionsResult = Shapes::StructureShape.new(name: 'ListAssociationVersionsResult')
     ListAssociationsRequest = Shapes::StructureShape.new(name: 'ListAssociationsRequest')
     ListAssociationsResult = Shapes::StructureShape.new(name: 'ListAssociationsResult')
     ListCommandInvocationsRequest = Shapes::StructureShape.new(name: 'ListCommandInvocationsRequest')
@@ -731,15 +739,18 @@ module Aws::SSM
     Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     Association.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     Association.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
+    Association.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     Association.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     Association.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     Association.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastExecutionDate"))
     Association.add_member(:overview, Shapes::ShapeRef.new(shape: AssociationOverview, location_name: "Overview"))
     Association.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
+    Association.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     Association.struct_class = Types::Association
 
     AssociationDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     AssociationDescription.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    AssociationDescription.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     AssociationDescription.add_member(:date, Shapes::ShapeRef.new(shape: DateTime, location_name: "Date"))
     AssociationDescription.add_member(:last_update_association_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdateAssociationDate"))
     AssociationDescription.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "Status"))
@@ -752,6 +763,7 @@ module Aws::SSM
     AssociationDescription.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
     AssociationDescription.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastExecutionDate"))
     AssociationDescription.add_member(:last_successful_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastSuccessfulExecutionDate"))
+    AssociationDescription.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription")
@@ -777,6 +789,20 @@ module Aws::SSM
 
     AssociationStatusAggregatedCount.key = Shapes::ShapeRef.new(shape: StatusName)
     AssociationStatusAggregatedCount.value = Shapes::ShapeRef.new(shape: InstanceCount)
+
+    AssociationVersionInfo.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
+    AssociationVersionInfo.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
+    AssociationVersionInfo.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
+    AssociationVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    AssociationVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    AssociationVersionInfo.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    AssociationVersionInfo.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    AssociationVersionInfo.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
+    AssociationVersionInfo.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
+    AssociationVersionInfo.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
+    AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
+
+    AssociationVersionList.member = Shapes::ShapeRef.new(shape: AssociationVersionInfo)
 
     AutomationExecution.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
     AutomationExecution.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
@@ -963,6 +989,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     CreateAssociationBatchRequestEntry.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     CreateAssociationBatchRequestEntry.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
+    CreateAssociationBatchRequestEntry.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -976,6 +1003,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     CreateAssociationRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     CreateAssociationRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
+    CreateAssociationRequest.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -1115,6 +1143,7 @@ module Aws::SSM
     DescribeAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DescribeAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     DescribeAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
+    DescribeAssociationRequest.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     DescribeAssociationRequest.struct_class = Types::DescribeAssociationRequest
 
     DescribeAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -1617,6 +1646,7 @@ module Aws::SSM
     InstanceAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     InstanceAssociation.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     InstanceAssociation.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, location_name: "Content"))
+    InstanceAssociation.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     InstanceAssociation.struct_class = Types::InstanceAssociation
 
     InstanceAssociationList.member = Shapes::ShapeRef.new(shape: InstanceAssociation)
@@ -1633,6 +1663,7 @@ module Aws::SSM
     InstanceAssociationStatusInfo.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     InstanceAssociationStatusInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     InstanceAssociationStatusInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    InstanceAssociationStatusInfo.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     InstanceAssociationStatusInfo.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     InstanceAssociationStatusInfo.add_member(:execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExecutionDate"))
     InstanceAssociationStatusInfo.add_member(:status, Shapes::ShapeRef.new(shape: StatusName, location_name: "Status"))
@@ -1640,6 +1671,7 @@ module Aws::SSM
     InstanceAssociationStatusInfo.add_member(:execution_summary, Shapes::ShapeRef.new(shape: InstanceAssociationExecutionSummary, location_name: "ExecutionSummary"))
     InstanceAssociationStatusInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: AgentErrorCode, location_name: "ErrorCode"))
     InstanceAssociationStatusInfo.add_member(:output_url, Shapes::ShapeRef.new(shape: InstanceAssociationOutputUrl, location_name: "OutputUrl"))
+    InstanceAssociationStatusInfo.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     InstanceAssociationStatusInfo.struct_class = Types::InstanceAssociationStatusInfo
 
     InstanceAssociationStatusInfos.member = Shapes::ShapeRef.new(shape: InstanceAssociationStatusInfo)
@@ -1768,6 +1800,15 @@ module Aws::SSM
     InventoryResultItemMap.value = Shapes::ShapeRef.new(shape: InventoryResultItem)
 
     KeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    ListAssociationVersionsRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "AssociationId"))
+    ListAssociationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAssociationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAssociationVersionsRequest.struct_class = Types::ListAssociationVersionsRequest
+
+    ListAssociationVersionsResult.add_member(:association_versions, Shapes::ShapeRef.new(shape: AssociationVersionList, location_name: "AssociationVersions"))
+    ListAssociationVersionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAssociationVersionsResult.struct_class = Types::ListAssociationVersionsResult
 
     ListAssociationsRequest.add_member(:association_filter_list, Shapes::ShapeRef.new(shape: AssociationFilterList, location_name: "AssociationFilterList"))
     ListAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2373,6 +2414,8 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
     UpdateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     UpdateAssociationRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    UpdateAssociationRequest.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
+    UpdateAssociationRequest.add_member(:association_version, Shapes::ShapeRef.new(shape: AssociationVersion, location_name: "AssociationVersion"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2782,6 +2825,7 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DescribeAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAssociationResult)
         o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAssociationVersion)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
@@ -3225,6 +3269,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:list_association_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssociationVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAssociationVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssociationVersionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
+      end)
+
       api.add_operation(:list_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAssociations"
         o.http_method = "POST"
@@ -3570,6 +3625,8 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAssociationVersion)
+        o.errors << Shapes::ShapeRef.new(shape: AssociationVersionLimitExceeded)
       end)
 
       api.add_operation(:update_association_status, Seahorse::Model::Operation.new.tap do |o|
