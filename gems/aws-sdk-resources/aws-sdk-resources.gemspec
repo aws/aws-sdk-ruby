@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   # service gems
   spec.add_dependency('aws-sdk-acm', '1.0.0.rc12')
   spec.add_dependency('aws-sdk-apigateway', '1.0.0.rc13')
-  spec.add_dependency('aws-sdk-appstream', '1.0.0.rc12')
+  spec.add_dependency('aws-sdk-appstream', '1.0.0.rc13')
   spec.add_dependency('aws-sdk-applicationautoscaling', '1.0.0.rc12')
   spec.add_dependency('aws-sdk-applicationdiscoveryservice', '1.0.0.rc13')
   spec.add_dependency('aws-sdk-athena', '1.0.0.rc7')

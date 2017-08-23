@@ -264,6 +264,14 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
     # @option params [required, Types::ComputeCapacity] :compute_capacity
     #   The parameters for the capacity allocated to the fleet.
     #
@@ -1062,6 +1070,14 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
     # @option params [Types::ComputeCapacity] :compute_capacity
     #   The parameters for the capacity allocated to the fleet.
     #
@@ -1236,7 +1252,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -240,6 +240,14 @@ module Aws::AppStream
     #   * stream.memory.4xlarge
     #
     #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -1445,6 +1453,14 @@ module Aws::AppStream
     #   * stream.memory.4xlarge
     #
     #   * stream.memory.8xlarge
+    #
+    #   * stream.graphics-pro.4xlarge
+    #
+    #   * stream.graphics-pro.8xlarge
+    #
+    #   * stream.graphics-pro.16xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
