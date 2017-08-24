@@ -23,6 +23,21 @@ module Aws
 }
       JSON
 
+      let(:lambda_message) { <<-JSON.strip }
+{
+  "Type" : "Notification",
+  "MessageId" : "5b324425-3d5e-4fdf-a3f6-f46b8f93df79",
+  "TopicArn" : "arn:aws:sns:eu-west-1:382739154790:for_justeat_aws_specs",
+  "Subject" : "sdfghdsfg",
+  "Message" : "dfgdsfg",
+  "Timestamp" : "2012-04-30T11:07:54.008Z",
+  "SignatureVersion" : "1",
+  "Signature" : "CTbst0fA37gbKnC0fiWK6HB0nQOr767MSLCJaWb0GyXc7283m1gozU3lRvOBaKP5Cwcj+clhR+rAN1m0Cp6W63oxBEu9n1Z50oyWx/tWtQd2j+MPaes+tNJSGohjHSe5qAqMwvYFYTZkbgFDFoWuVQLQuRj9I53hR1Eo3waHkJQ=",
+  "SigningCertUrl" : #{signing_cert_url.inspect},
+  "UnsubscribeUrl" : "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:382739154790:for_justeat_aws_specs:674f4ab3-2d1d-4df9-b411-b8a336f0ef7d"
+}
+      JSON
+
       let(:cert) { <<-CERT.strip }
 -----BEGIN CERTIFICATE-----
 MIIE+TCCA+GgAwIBAgIQax6zU8p9DAWTsa4uy9uF1jANBgkqhkiG9w0BAQUFADCB
@@ -65,6 +80,10 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
 
         it 'returns true for a valid message' do
           expect(verifier.authenticate!(message)).to be(true)
+        end
+
+        it 'returns true for a valid lambda message' do
+          expect(verifier.authenticate!(lambda_message)).to be(true)
         end
 
         it 'raises when the SigningCertURL is not https' do
