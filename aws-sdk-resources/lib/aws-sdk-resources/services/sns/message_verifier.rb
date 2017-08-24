@@ -59,6 +59,7 @@ module Aws
       #   verification.
       def authenticate!(message_body)
         msg = Json.load(message_body)
+        msg = convert_lambda_msg(msg) if is_from_lambda(msg)
         if public_key(msg).verify(sha1, signature(msg), canonical_string(msg))
           true
         else
@@ -68,6 +69,19 @@ module Aws
       end
 
       private
+
+      def is_from_lambda(message)
+        message.key? 'SigningCertUrl'
+      end
+
+      def convert_lambda_msg(message)
+        cert_url = message.delete('SigningCertUrl')
+        unsubscribe_url = message.delete('UnsubscribeUrl')
+
+        message['SigningCertURL'] = cert_url
+        message['UnsubscribeURL'] = unsubscribe_url
+        message
+      end
 
       def sha1
         OpenSSL::Digest::SHA1.new
@@ -89,21 +103,9 @@ module Aws
       end
 
       def public_key(message)
-        x509_url = URI.parse(cert_url(message))
+        x509_url = URI.parse(message['SigningCertURL'])
         x509 = OpenSSL::X509::Certificate.new(pem(x509_url))
         OpenSSL::PKey::RSA.new(x509.public_key)
-      end
-
-      def cert_url(message)
-        if message.key? 'SigningCertURL'
-          message['SigningCertURL']
-        elsif message.key? 'SigningCertUrl'
-          # For Lambda message
-          message['SigningCertUrl']
-        else
-          msg = "Signing Cert URL cannot be retrieved from message"
-          raise VerificationError, msg
-        end
       end
 
       def pem(uri)
