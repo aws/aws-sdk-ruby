@@ -89,9 +89,21 @@ module Aws
       end
 
       def public_key(message)
-        x509_url = URI.parse(message['SigningCertURL'])
+        x509_url = URI.parse(cert_url(message))
         x509 = OpenSSL::X509::Certificate.new(pem(x509_url))
         OpenSSL::PKey::RSA.new(x509.public_key)
+      end
+
+      def cert_url(message)
+        if message.key? 'SigningCertURL'
+          message['SigningCertURL']
+        elsif message.key? 'SigningCertUrl'
+          # For Lambda message
+          message['SigningCertUrl']
+        else
+          msg = "Signing Cert URL cannot be retrieved from message"
+          raise VerificationError, msg
+        end
       end
 
       def pem(uri)
