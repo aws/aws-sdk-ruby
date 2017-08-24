@@ -301,7 +301,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.bounding_box.top #=> Float
     #   resp.face_matches[0].face.confidence #=> Float
     #   resp.face_matches[0].face.landmarks #=> Array
-    #   resp.face_matches[0].face.landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.face_matches[0].face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.face_matches[0].face.landmarks[0].x #=> Float
     #   resp.face_matches[0].face.landmarks[0].y #=> Float
     #   resp.face_matches[0].face.pose.roll #=> Float
@@ -316,7 +316,7 @@ module Aws::Rekognition
     #   resp.unmatched_faces[0].bounding_box.top #=> Float
     #   resp.unmatched_faces[0].confidence #=> Float
     #   resp.unmatched_faces[0].landmarks #=> Array
-    #   resp.unmatched_faces[0].landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.unmatched_faces[0].landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.unmatched_faces[0].landmarks[0].x #=> Float
     #   resp.unmatched_faces[0].landmarks[0].y #=> Float
     #   resp.unmatched_faces[0].pose.roll #=> Float
@@ -561,27 +561,27 @@ module Aws::Rekognition
     #         confidence: 100, 
     #         landmarks: [
     #           {
-    #             type: "EYE_LEFT", 
+    #             type: "eyeLeft", 
     #             x: 0.6394737362861633, 
     #             y: 0.40819624066352844, 
     #           }, 
     #           {
-    #             type: "EYE_RIGHT", 
+    #             type: "eyeRight", 
     #             x: 0.7266660928726196, 
     #             y: 0.41039225459098816, 
     #           }, 
     #           {
-    #             type: "NOSE_LEFT", 
+    #             type: "eyeRight", 
     #             x: 0.6912462115287781, 
     #             y: 0.44240960478782654, 
     #           }, 
     #           {
-    #             type: "MOUTH_DOWN", 
+    #             type: "mouthDown", 
     #             x: 0.6306198239326477, 
     #             y: 0.46700039505958557, 
     #           }, 
     #           {
-    #             type: "MOUTH_UP", 
+    #             type: "mouthUp", 
     #             x: 0.7215608954429626, 
     #             y: 0.47114261984825134, 
     #           }, 
@@ -629,7 +629,7 @@ module Aws::Rekognition
     #   resp.face_details[0].eyeglasses.confidence #=> Float
     #   resp.face_details[0].sunglasses.value #=> Boolean
     #   resp.face_details[0].sunglasses.confidence #=> Float
-    #   resp.face_details[0].gender.value #=> String, one of "MALE", "FEMALE"
+    #   resp.face_details[0].gender.value #=> String, one of "Male", "Female"
     #   resp.face_details[0].gender.confidence #=> Float
     #   resp.face_details[0].beard.value #=> Boolean
     #   resp.face_details[0].beard.confidence #=> Float
@@ -643,7 +643,7 @@ module Aws::Rekognition
     #   resp.face_details[0].emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
     #   resp.face_details[0].emotions[0].confidence #=> Float
     #   resp.face_details[0].landmarks #=> Array
-    #   resp.face_details[0].landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.face_details[0].landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.face_details[0].landmarks[0].x #=> Float
     #   resp.face_details[0].landmarks[0].y #=> Float
     #   resp.face_details[0].pose.roll #=> Float
@@ -988,27 +988,27 @@ module Aws::Rekognition
     #           confidence: 99.9991226196289, 
     #           landmarks: [
     #             {
-    #               type: "EYE_LEFT", 
+    #               type: "eyeLeft", 
     #               x: 0.3976764678955078, 
     #               y: 0.6248345971107483, 
     #             }, 
     #             {
-    #               type: "EYE_RIGHT", 
+    #               type: "eyeRight", 
     #               x: 0.4810936450958252, 
     #               y: 0.6317117214202881, 
     #             }, 
     #             {
-    #               type: "NOSE_LEFT", 
+    #               type: "noseLeft", 
     #               x: 0.41986238956451416, 
     #               y: 0.7111940383911133, 
     #             }, 
     #             {
-    #               type: "MOUTH_DOWN", 
+    #               type: "mouthDown", 
     #               x: 0.40525302290916443, 
     #               y: 0.7497701048851013, 
     #             }, 
     #             {
-    #               type: "MOUTH_UP", 
+    #               type: "mouthUp", 
     #               x: 0.4753248989582062, 
     #               y: 0.7558549642562866, 
     #             }, 
@@ -1046,27 +1046,27 @@ module Aws::Rekognition
     #           confidence: 99.99950408935547, 
     #           landmarks: [
     #             {
-    #               type: "EYE_LEFT", 
+    #               type: "eyeLeft", 
     #               x: 0.6006892323493958, 
     #               y: 0.290842205286026, 
     #             }, 
     #             {
-    #               type: "EYE_RIGHT", 
+    #               type: "eyeRight", 
     #               x: 0.6808141469955444, 
     #               y: 0.29609042406082153, 
     #             }, 
     #             {
-    #               type: "NOSE_LEFT", 
+    #               type: "noseLeft", 
     #               x: 0.6395332217216492, 
     #               y: 0.3522595763206482, 
     #             }, 
     #             {
-    #               type: "MOUTH_DOWN", 
+    #               type: "mouthDown", 
     #               x: 0.5892083048820496, 
     #               y: 0.38689887523651123, 
     #             }, 
     #             {
-    #               type: "MOUTH_UP", 
+    #               type: "mouthUp", 
     #               x: 0.674560010433197, 
     #               y: 0.394125759601593, 
     #             }, 
@@ -1125,7 +1125,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.eyeglasses.confidence #=> Float
     #   resp.face_records[0].face_detail.sunglasses.value #=> Boolean
     #   resp.face_records[0].face_detail.sunglasses.confidence #=> Float
-    #   resp.face_records[0].face_detail.gender.value #=> String, one of "MALE", "FEMALE"
+    #   resp.face_records[0].face_detail.gender.value #=> String, one of "Male", "Female"
     #   resp.face_records[0].face_detail.gender.confidence #=> Float
     #   resp.face_records[0].face_detail.beard.value #=> Boolean
     #   resp.face_records[0].face_detail.beard.confidence #=> Float
@@ -1139,7 +1139,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
     #   resp.face_records[0].face_detail.emotions[0].confidence #=> Float
     #   resp.face_records[0].face_detail.landmarks #=> Array
-    #   resp.face_records[0].face_detail.landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.face_records[0].face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.face_records[0].face_detail.landmarks[0].x #=> Float
     #   resp.face_records[0].face_detail.landmarks[0].y #=> Float
     #   resp.face_records[0].face_detail.pose.roll #=> Float
@@ -1465,7 +1465,7 @@ module Aws::Rekognition
     #   resp.celebrity_faces[0].face.bounding_box.top #=> Float
     #   resp.celebrity_faces[0].face.confidence #=> Float
     #   resp.celebrity_faces[0].face.landmarks #=> Array
-    #   resp.celebrity_faces[0].face.landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.celebrity_faces[0].face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.celebrity_faces[0].face.landmarks[0].x #=> Float
     #   resp.celebrity_faces[0].face.landmarks[0].y #=> Float
     #   resp.celebrity_faces[0].face.pose.roll #=> Float
@@ -1481,7 +1481,7 @@ module Aws::Rekognition
     #   resp.unrecognized_faces[0].bounding_box.top #=> Float
     #   resp.unrecognized_faces[0].confidence #=> Float
     #   resp.unrecognized_faces[0].landmarks #=> Array
-    #   resp.unrecognized_faces[0].landmarks[0].type #=> String, one of "EYE_LEFT", "EYE_RIGHT", "NOSE", "MOUTH_LEFT", "MOUTH_RIGHT", "LEFT_EYEBROW_LEFT", "LEFT_EYEBROW_RIGHT", "LEFT_EYEBROW_UP", "RIGHT_EYEBROW_LEFT", "RIGHT_EYEBROW_RIGHT", "RIGHT_EYEBROW_UP", "LEFT_EYE_LEFT", "LEFT_EYE_RIGHT", "LEFT_EYE_UP", "LEFT_EYE_DOWN", "RIGHT_EYE_LEFT", "RIGHT_EYE_RIGHT", "RIGHT_EYE_UP", "RIGHT_EYE_DOWN", "NOSE_LEFT", "NOSE_RIGHT", "MOUTH_UP", "MOUTH_DOWN", "LEFT_PUPIL", "RIGHT_PUPIL"
+    #   resp.unrecognized_faces[0].landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
     #   resp.unrecognized_faces[0].landmarks[0].x #=> Float
     #   resp.unrecognized_faces[0].landmarks[0].y #=> Float
     #   resp.unrecognized_faces[0].pose.roll #=> Float
@@ -1780,7 +1780,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0.rc16'
+      context[:gem_version] = '1.0.0.rc17'
       Seahorse::Client::Request.new(handlers, context)
     end
 
