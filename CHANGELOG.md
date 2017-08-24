@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.33 (2017-08-24)
+------------------
+
 * Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
 
 * Feature - Aws::SNS - MessageVerifier now support Lamdba message verification
