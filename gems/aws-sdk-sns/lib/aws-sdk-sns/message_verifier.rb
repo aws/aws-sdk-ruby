@@ -59,6 +59,7 @@ module Aws
       #   verification.
       def authenticate!(message_body)
         msg = Json.load(message_body)
+        msg = convert_lambda_msg(msg) if is_from_lambda(msg)
         if public_key(msg).verify(sha1, signature(msg), canonical_string(msg))
           true
         else
@@ -68,6 +69,19 @@ module Aws
       end
 
       private
+
+      def is_from_lambda(message)
+        message.key? 'SigningCertUrl'
+      end
+
+      def convert_lambda_msg(message)
+        cert_url = message.delete('SigningCertUrl')
+        unsubscribe_url = message.delete('UnsubscribeUrl')
+
+        message['SigningCertURL'] = cert_url
+        message['UnsubscribeURL'] = unsubscribe_url
+        message
+      end
 
       def sha1
         OpenSSL::Digest::SHA1.new

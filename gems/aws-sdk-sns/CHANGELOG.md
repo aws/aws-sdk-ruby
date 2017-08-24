@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SNS - MessageVerifier now support Lamdba message verification
+
 1.0.0.rc11 (2017-08-15)
 ------------------
 
