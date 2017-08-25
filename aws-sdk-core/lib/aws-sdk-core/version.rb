@@ -1,3 +1,3 @@
 module Aws
-  VERSION = '2.10.33'
+  VERSION = '2.10.34'
 end

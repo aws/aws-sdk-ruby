@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.34 (2017-08-25)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
 
 * Feature - Aws::GameLift - Updated the API for Amazon GameLift.
