@@ -1692,25 +1692,81 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **MariaDB**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **PostgreSQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **Oracle**
     #
-    #   Constraints: Must be an integer from 10 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
     #   **SQL Server**
     #
-    #   Constraints: Must be an integer from 200 to 4096 (Standard Edition
-    #   and Enterprise Edition) or from 20 to 4096 (Express Edition and Web
-    #   Edition)
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 16384.
+    #
+    #   * Provisioned IOPS storage (io1):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 100 to 16384.
+    #
+    #   * Magnetic storage (standard):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       1024.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 1024.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
@@ -2048,11 +2104,15 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.1.23` (supported in all AWS regions)
+    #
     #   * `10.1.19` (supported in all AWS regions)
     #
     #   * `10.1.14` (supported in all regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.31` (supported in all AWS regions)
     #
     #   * `10.0.28` (supported in all AWS regions)
     #
@@ -2506,7 +2566,8 @@ module Aws::RDS
     #     source is running MySQL 5.6.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
-    #     the source is running PostgreSQL 9.3.5 or later.
+    #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
+    #     for cross region replication).
     #
     #   * The specified DB instance must have automatic backups enabled, its
     #     backup retention period must be greater than 0.
@@ -9620,6 +9681,24 @@ module Aws::RDS
     #   DB instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] requires_auto_minor_engine_version_upgrade
+    #   If true, you must enable the Auto Minor Version Upgrade setting for
+    #   your DB instance before you can use this option. You can enable Auto
+    #   Minor Version Upgrade when you first create your DB instance, or by
+    #   modifying your DB instance later.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_only
+    #   If true, you can only use this option with a DB instance that is in
+    #   a VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supports_option_version_downgrade
+    #   If true, you can change the option to an earlier version of the
+    #   option. This only applies to options that have different versions
+    #   available.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] option_group_option_settings
     #   The option settings that are available (and the default value) for
     #   each option in an option group.
@@ -9643,6 +9722,9 @@ module Aws::RDS
       :options_conflicts_with,
       :persistent,
       :permanent,
+      :requires_auto_minor_engine_version_upgrade,
+      :vpc_only,
+      :supports_option_version_downgrade,
       :option_group_option_settings,
       :option_group_option_versions)
       include Aws::Structure

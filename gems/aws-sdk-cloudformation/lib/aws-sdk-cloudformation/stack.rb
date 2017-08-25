@@ -68,6 +68,14 @@ module Aws::CloudFormation
       data.last_updated_time
     end
 
+    # The rollback triggers for AWS CloudFormation to monitor during stack
+    # creation and updating operations, and for the specified monitoring
+    # period afterwards.
+    # @return [Types::RollbackConfiguration]
+    def rollback_configuration
+      data.rollback_configuration
+    end
+
     # Current status of the stack.
     # @return [String]
     def stack_status
@@ -229,6 +237,15 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     disable_rollback: false,
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     timeout_in_minutes: 1,
     #     notification_arns: ["NotificationARN"],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -282,6 +299,10 @@ module Aws::CloudFormation
     #   not both.
     #
     #   Default: `false`
+    # @option options [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
     # @option options [Integer] :timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
     #   CREATE\_FAILED; if `DisableRollback` is not set or is set to `false`,
@@ -481,6 +502,15 @@ module Aws::CloudFormation
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
     #     resource_types: ["ResourceType"],
     #     role_arn: "RoleARN",
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     stack_policy_body: "StackPolicyBody",
     #     stack_policy_url: "StackPolicyURL",
     #     notification_arns: ["NotificationARN"],
@@ -615,6 +645,10 @@ module Aws::CloudFormation
     #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
+    # @option options [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
     # @option options [String] :stack_policy_body
     #   Structure containing a new stack policy body. You can specify either
     #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.

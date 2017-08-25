@@ -474,25 +474,77 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **MariaDB**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **PostgreSQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **Oracle**
     #
-    #   Constraints: Must be an integer from 10 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
     #   **SQL Server**
     #
-    #   Constraints: Must be an integer from 200 to 4096 (Standard Edition and
-    #   Enterprise Edition) or from 20 to 4096 (Express Edition and Web
-    #   Edition)
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 16384.
+    #
+    #   * Provisioned IOPS storage (io1):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 100 to 16384.
+    #
+    #   * Magnetic storage (standard):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       1024.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance. Note that not all
     #   instance classes are available in all regions for all DB engines.
@@ -795,11 +847,15 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.1.23` (supported in all AWS regions)
+    #
     #   * `10.1.19` (supported in all AWS regions)
     #
     #   * `10.1.14` (supported in all regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.31` (supported in all AWS regions)
     #
     #   * `10.0.28` (supported in all AWS regions)
     #

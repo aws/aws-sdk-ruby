@@ -8,38 +8,60 @@
 module Aws::CloudFormation
   module Types
 
-    # Structure that contains the results of the account gate function AWS
-    # CloudFormation StackSets invokes, if present, before proceeding with
-    # stack set operations in an account.
+    # Structure that contains the results of the account gate function which
+    # AWS CloudFormation invokes, if present, before proceeding with a stack
+    # set operation in an account and region.
     #
-    # Account gating enables you to specify a Lamdba function for an account
-    # that encapsulates any requirements that must be met before AWS
-    # CloudFormation StackSets proceeds with stack set operations in that
-    # account. CloudFormation invokes the function each time stack set
-    # operations are initiated for that account, and only proceeds if the
-    # function returns a success code.
+    # For each account and region, AWS CloudFormation lets you specify a
+    # Lamdba function that encapsulates any requirements that must be met
+    # before CloudFormation can proceed with a stack set operation in that
+    # account and region. CloudFormation invokes the function each time a
+    # stack set operation is requested for that account and region; if the
+    # function returns `FAILED`, CloudFormation cancels the operation in
+    # that account and region, and sets the stack set operation result
+    # status for that account and region to `FAILED`.
+    #
+    # For more information, see [Configuring a target account gate][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html
     #
     # @!attribute [rw] status
     #   The status of the account gate function.
     #
     #   * `SUCCEEDED`\: The account gate function has determined that the
-    #     account passes any requirements for stack set operations to occur.
-    #     AWS CloudFormation proceeds with stack operations in the account.
+    #     account and region passes any requirements for a stack set
+    #     operation to occur. AWS CloudFormation proceeds with the stack
+    #     operation in that account and region.
     #
     #   * `FAILED`\: The account gate function has determined that the
-    #     account does not meet the requirements for stack set operations to
-    #     occur. AWS CloudFormation cancels the stack set operations in that
-    #     account, and the stack set operation status is set to FAILED.
+    #     account and region does not meet the requirements for a stack set
+    #     operation to occur. AWS CloudFormation cancels the stack set
+    #     operation in that account and region, and sets the stack set
+    #     operation result status for that account and region to `FAILED`.
     #
-    #   * `SKIPPED`\: An account gate function has not been specified for
-    #     the account, or the AWSCloudFormationStackSetExecutionRole of the
-    #     stack set adminstration account lacks permissions to invoke the
-    #     function. AWS CloudFormation proceeds with stack set operations in
-    #     the account.
+    #   * `SKIPPED`\: AWS CloudFormation has skipped calling the account
+    #     gate function for this account and region, for one of the
+    #     following reasons:
+    #
+    #     * An account gate function has not been specified for the account
+    #       and region. AWS CloudFormation proceeds with the stack set
+    #       operation in this account and region.
+    #
+    #     * The `AWSCloudFormationStackSetExecutionRole` of the stack set
+    #       adminstration account lacks permissions to invoke the function.
+    #       AWS CloudFormation proceeds with the stack set operation in this
+    #       account and region.
+    #
+    #     * Either no action is necessary, or no action is possible, on the
+    #       stack. AWS CloudFormation skips the stack set operation in this
+    #       account and region.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   The reason for the account gate status assigned to this account.
+    #   The reason for the account gate status assigned to this account and
+    #   region for the stack set operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountGateResult AWS API Documentation
@@ -312,6 +334,15 @@ module Aws::CloudFormation
     #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
     #         resource_types: ["ResourceType"],
     #         role_arn: "RoleARN",
+    #         rollback_configuration: {
+    #           rollback_triggers: [
+    #             {
+    #               arn: "Arn", # required
+    #               type: "Type", # required
+    #             },
+    #           ],
+    #           monitoring_time_in_minutes: 1,
+    #         },
     #         notification_arns: ["NotificationARN"],
     #         tags: [
     #           {
@@ -437,6 +468,12 @@ module Aws::CloudFormation
     #   your user credentials.
     #   @return [String]
     #
+    # @!attribute [rw] rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #   @return [Types::RollbackConfiguration]
+    #
     # @!attribute [rw] notification_arns
     #   The Amazon Resource Names (ARNs) of Amazon Simple Notification
     #   Service (Amazon SNS) topics that AWS CloudFormation associates with
@@ -501,6 +538,7 @@ module Aws::CloudFormation
       :capabilities,
       :resource_types,
       :role_arn,
+      :rollback_configuration,
       :notification_arns,
       :tags,
       :change_set_name,
@@ -545,6 +583,15 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         disable_rollback: false,
+    #         rollback_configuration: {
+    #           rollback_triggers: [
+    #             {
+    #               arn: "Arn", # required
+    #               type: "Type", # required
+    #             },
+    #           ],
+    #           monitoring_time_in_minutes: 1,
+    #         },
     #         timeout_in_minutes: 1,
     #         notification_arns: ["NotificationARN"],
     #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -616,6 +663,12 @@ module Aws::CloudFormation
     #
     #   Default: `false`
     #   @return [Boolean]
+    #
+    # @!attribute [rw] rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
@@ -769,6 +822,7 @@ module Aws::CloudFormation
       :template_url,
       :parameters,
       :disable_rollback,
+      :rollback_configuration,
       :timeout_in_minutes,
       :notification_arns,
       :capabilities,
@@ -1186,6 +1240,12 @@ module Aws::CloudFormation
     #   Removes the stack instances from the specified stack set, but
     #   doesn't delete the stacks. You can't reassociate a retained stack
     #   or add an existing, saved stack to a new stack set.
+    #
+    #   For more information, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #   @return [Boolean]
     #
     # @!attribute [rw] operation_id
@@ -1391,6 +1451,12 @@ module Aws::CloudFormation
     #   change set.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #   @return [Types::RollbackConfiguration]
+    #
     # @!attribute [rw] capabilities
     #   If you execute the change set, the list of capabilities that were
     #   explicitly acknowledged when the change set was created.
@@ -1425,6 +1491,7 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       :notification_arns,
+      :rollback_configuration,
       :capabilities,
       :tags,
       :changes,
@@ -2053,7 +2120,7 @@ module Aws::CloudFormation
     #   User Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     #
     #
@@ -2067,7 +2134,7 @@ module Aws::CloudFormation
     #   Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     #
     #
@@ -2081,12 +2148,15 @@ module Aws::CloudFormation
     #   you must specify the unique stack ID.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #   @return [String]
     #
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set from which the stack was
     #   created.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput AWS API Documentation
@@ -2964,6 +3034,146 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Structure containing the rollback triggers for AWS CloudFormation to
+    # monitor during stack creation and updating operations, and for the
+    # specified monitoring period afterwards.
+    #
+    # Rollback triggers enable you to have AWS CloudFormation monitor the
+    # state of your application during stack creation and updating, and to
+    # roll back that operation if the application breaches the threshold of
+    # any of the alarms you've specified. For each rollback trigger you
+    # create, you specify the Cloudwatch alarm that CloudFormation should
+    # monitor. CloudFormation monitors the specified alarms during the stack
+    # create or update operation, and for the specified amount of time after
+    # all resources have been deployed. If any of the alarms goes to ALERT
+    # state during the stack operation or the monitoring period,
+    # CloudFormation rolls back the entire stack operation. If the
+    # monitoring period expires without any alarms going to ALERT state,
+    # CloudFormation proceeds to dispose of old resources as usual.
+    #
+    # By default, CloudFormation only rolls back stack operations if an
+    # alarm goes to ALERT state, not INSUFFICIENT\_DATA state. To have
+    # CloudFormation roll back the stack operation if an alarm goes to
+    # INSUFFICIENT\_DATA state as well, edit the CloudWatch alarm to treat
+    # missing data as `breaching`. For more information, see [Configuring
+    # How CloudWatch Alarms Treats Missing Data][1].
+    #
+    # AWS CloudFormation does not monitor rollback triggers when it rolls
+    # back a stack during an update operation.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html
+    #
+    # @note When making an API call, you may pass RollbackConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rollback_triggers: [
+    #           {
+    #             arn: "Arn", # required
+    #             type: "Type", # required
+    #           },
+    #         ],
+    #         monitoring_time_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] rollback_triggers
+    #   The triggers to monitor during stack creation or update actions.
+    #
+    #   By default, AWS CloudFormation saves the rollback triggers specified
+    #   for a stack and applies them to any subsequent update operations for
+    #   the stack, unless you specify otherwise. If you do specify rollback
+    #   triggers for this parameter, those triggers replace any list of
+    #   triggers previously specified for the stack. This means:
+    #
+    #   * If you don't specify this parameter, AWS CloudFormation uses the
+    #     rollback triggers previously specified for this stack, if any.
+    #
+    #   * If you specify any rollback triggers using this parameter, you
+    #     must specify all the triggers that you want used for this stack,
+    #     even triggers you've specifed before (for example, when creating
+    #     the stack or during a previous stack update). Any triggers that
+    #     you don't include in the updated list of triggers are no longer
+    #     applied to the stack.
+    #
+    #   * If you specify an empty list, AWS CloudFormation removes all
+    #     currently specified triggers.
+    #
+    #   If a specified Cloudwatch alarm is missing, the entire stack
+    #   operation fails and is rolled back.
+    #   @return [Array<Types::RollbackTrigger>]
+    #
+    # @!attribute [rw] monitoring_time_in_minutes
+    #   The amount of time, in minutes, during which CloudFormation should
+    #   monitor all the rollback triggers after the stack creation or update
+    #   operation deploys all necessary resources. If any of the alarms goes
+    #   to ALERT state during the stack operation or this monitoring period,
+    #   CloudFormation rolls back the entire stack operation. Then, for
+    #   update operations, if the monitoring period expires without any
+    #   alarms going to ALERT state CloudFormation proceeds to dispose of
+    #   old resources as usual.
+    #
+    #   If you specify a monitoring period but do not specify any rollback
+    #   triggers, CloudFormation still waits the specified period of time
+    #   before cleaning up old resources for update operations. You can use
+    #   this monitoring period to perform any manual stack validation
+    #   desired, and manually cancel the stack creation or update (using
+    #   [CancelUpdateStack][1], for example) as necessary.
+    #
+    #   If you specify 0 for this parameter, CloudFormation still monitors
+    #   the specified rollback triggers during stack creation and update
+    #   operations. Then, for update operations, it begins disposing of old
+    #   resources immediately once the operation completes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration AWS API Documentation
+    #
+    class RollbackConfiguration < Struct.new(
+      :rollback_triggers,
+      :monitoring_time_in_minutes)
+      include Aws::Structure
+    end
+
+    # A rollback trigger AWS CloudFormation monitors during creation and
+    # updating of stacks. If any of the alarms you specify goes to ALERT
+    # state during the stack operation or within the specified monitoring
+    # period afterwards, CloudFormation rolls back the entire stack
+    # operation.
+    #
+    # @note When making an API call, you may pass RollbackTrigger
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "Arn", # required
+    #         type: "Type", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the rollback trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The resource type of the rollback trigger. Currently,
+    #   [AWS::CloudWatch::Alarm][1] is the only supported resource type.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger AWS API Documentation
+    #
+    class RollbackTrigger < Struct.new(
+      :arn,
+      :type)
+      include Aws::Structure
+    end
+
     # The input for the SetStackPolicy action.
     #
     # @note When making an API call, you may pass SetStackPolicyInput
@@ -3084,6 +3294,12 @@ module Aws::CloudFormation
     #   returned if the stack has been updated at least once.
     #   @return [Time]
     #
+    # @!attribute [rw] rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #   @return [Types::RollbackConfiguration]
+    #
     # @!attribute [rw] stack_status
     #   Current status of the stack.
     #   @return [String]
@@ -3137,6 +3353,7 @@ module Aws::CloudFormation
       :parameters,
       :creation_time,
       :last_updated_time,
+      :rollback_configuration,
       :stack_status,
       :stack_status_reason,
       :disable_rollback,
@@ -3266,8 +3483,10 @@ module Aws::CloudFormation
     #
     #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
-    #     excluded from further `UpdateStackSet` and `DeleteStackInstances`
-    #     operations. You might need to clean up the stack manually.
+    #     excluded from further `UpdateStackSet` operations. You might need
+    #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
+    #     set to `true`, to delete the stack instance, and then delete the
+    #     stack manually.
     #
     #   * `OUTDATED`\: The stack isn't currently up to date with the stack
     #     set because:
@@ -3327,8 +3546,10 @@ module Aws::CloudFormation
     #
     #   * `INOPERABLE`\: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
-    #     excluded from further `UpdateStackSet` and `DeleteStackInstances`
-    #     operations. You might need to clean up the stack manually.
+    #     excluded from further `UpdateStackSet` operations. You might need
+    #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
+    #     set to `true`, to delete the stack instance, and then delete the
+    #     stack manually.
     #
     #   * `OUTDATED`\: The stack isn't currently up to date with the stack
     #     set because:
@@ -3682,6 +3903,13 @@ module Aws::CloudFormation
 
     # The user-specified preferences for how AWS CloudFormation performs a
     # stack set operation.
+    #
+    # For more information on maximum concurrent accounts and failure
+    # tolerance, see [Stack set operation options][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
     #
     # @note When making an API call, you may pass StackSetOperationPreferences
     #   data as a hash:
@@ -4071,6 +4299,15 @@ module Aws::CloudFormation
     #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
     #         resource_types: ["ResourceType"],
     #         role_arn: "RoleARN",
+    #         rollback_configuration: {
+    #           rollback_triggers: [
+    #             {
+    #               arn: "Arn", # required
+    #               type: "Type", # required
+    #             },
+    #           ],
+    #           monitoring_time_in_minutes: 1,
+    #         },
     #         stack_policy_body: "StackPolicyBody",
     #         stack_policy_url: "StackPolicyURL",
     #         notification_arns: ["NotificationARN"],
@@ -4230,6 +4467,12 @@ module Aws::CloudFormation
     #   your user credentials.
     #   @return [String]
     #
+    # @!attribute [rw] rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #   @return [Types::RollbackConfiguration]
+    #
     # @!attribute [rw] stack_policy_body
     #   Structure containing a new stack policy body. You can specify either
     #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not
@@ -4304,6 +4547,7 @@ module Aws::CloudFormation
       :capabilities,
       :resource_types,
       :role_arn,
+      :rollback_configuration,
       :stack_policy_body,
       :stack_policy_url,
       :notification_arns,

@@ -1528,6 +1528,9 @@ module Aws::RDS
     OptionGroupOption.add_member(:options_conflicts_with, Shapes::ShapeRef.new(shape: OptionsConflictsWith, location_name: "OptionsConflictsWith"))
     OptionGroupOption.add_member(:persistent, Shapes::ShapeRef.new(shape: Boolean, location_name: "Persistent"))
     OptionGroupOption.add_member(:permanent, Shapes::ShapeRef.new(shape: Boolean, location_name: "Permanent"))
+    OptionGroupOption.add_member(:requires_auto_minor_engine_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequiresAutoMinorEngineVersionUpgrade"))
+    OptionGroupOption.add_member(:vpc_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "VpcOnly"))
+    OptionGroupOption.add_member(:supports_option_version_downgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsOptionVersionDowngrade"))
     OptionGroupOption.add_member(:option_group_option_settings, Shapes::ShapeRef.new(shape: OptionGroupOptionSettingsList, location_name: "OptionGroupOptionSettings"))
     OptionGroupOption.add_member(:option_group_option_versions, Shapes::ShapeRef.new(shape: OptionGroupOptionVersionsList, location_name: "OptionGroupOptionVersions"))
     OptionGroupOption.struct_class = Types::OptionGroupOption

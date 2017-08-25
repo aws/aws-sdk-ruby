@@ -96,6 +96,30 @@ module Aws::RDS
       data.permanent
     end
 
+    # If true, you must enable the Auto Minor Version Upgrade setting for
+    # your DB instance before you can use this option. You can enable Auto
+    # Minor Version Upgrade when you first create your DB instance, or by
+    # modifying your DB instance later.
+    # @return [Boolean]
+    def requires_auto_minor_engine_version_upgrade
+      data.requires_auto_minor_engine_version_upgrade
+    end
+
+    # If true, you can only use this option with a DB instance that is in a
+    # VPC.
+    # @return [Boolean]
+    def vpc_only
+      data.vpc_only
+    end
+
+    # If true, you can change the option to an earlier version of the
+    # option. This only applies to options that have different versions
+    # available.
+    # @return [Boolean]
+    def supports_option_version_downgrade
+      data.supports_option_version_downgrade
+    end
+
     # The option settings that are available (and the default value) for
     # each option in an option group.
     # @return [Array<Types::OptionGroupOptionSetting>]

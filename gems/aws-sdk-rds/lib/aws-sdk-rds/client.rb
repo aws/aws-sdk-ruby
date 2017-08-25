@@ -2007,25 +2007,77 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **MariaDB**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **PostgreSQL**
     #
-    #   Constraints: Must be an integer from 5 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
     #   **Oracle**
     #
-    #   Constraints: Must be an integer from 10 to 6144.
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #     6144.
+    #
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #
+    #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
     #   **SQL Server**
     #
-    #   Constraints: Must be an integer from 200 to 4096 (Standard Edition and
-    #   Enterprise Edition) or from 20 to 4096 (Express Edition and Web
-    #   Edition)
+    #   Constraints to the amount of storage for each storage type are the
+    #   following:
+    #
+    #   * General Purpose (SSD) storage (gp2):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 16384.
+    #
+    #   * Provisioned IOPS storage (io1):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       16384.
+    #
+    #     * Web and Express editions: Must be an integer from 100 to 16384.
+    #
+    #   * Magnetic storage (standard):
+    #
+    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #       1024.
+    #
+    #     * Web and Express editions: Must be an integer from 20 to 1024.
     #
     # @option params [required, String] :db_instance_class
     #   The compute and memory capacity of the DB instance. Note that not all
@@ -2343,11 +2395,15 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.1.23` (supported in all AWS regions)
+    #
     #   * `10.1.19` (supported in all AWS regions)
     #
     #   * `10.1.14` (supported in all regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.31` (supported in all AWS regions)
     #
     #   * `10.0.28` (supported in all AWS regions)
     #
@@ -2893,7 +2949,8 @@ module Aws::RDS
     #     source is running MySQL 5.6.
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
-    #     the source is running PostgreSQL 9.3.5 or later.
+    #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
+    #     for cross region replication).
     #
     #   * The specified DB instance must have automatic backups enabled, its
     #     backup retention period must be greater than 0.
@@ -6952,6 +7009,9 @@ module Aws::RDS
     #   resp.option_group_options[0].options_conflicts_with[0] #=> String
     #   resp.option_group_options[0].persistent #=> Boolean
     #   resp.option_group_options[0].permanent #=> Boolean
+    #   resp.option_group_options[0].requires_auto_minor_engine_version_upgrade #=> Boolean
+    #   resp.option_group_options[0].vpc_only #=> Boolean
+    #   resp.option_group_options[0].supports_option_version_downgrade #=> Boolean
     #   resp.option_group_options[0].option_group_option_settings #=> Array
     #   resp.option_group_options[0].option_group_option_settings[0].setting_name #=> String
     #   resp.option_group_options[0].option_group_option_settings[0].setting_description #=> String
@@ -12590,7 +12650,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.0.0.rc17'
+      context[:gem_version] = '1.0.0.rc18'
       Seahorse::Client::Request.new(handlers, context)
     end
 

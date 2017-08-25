@@ -35,6 +35,15 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     disable_rollback: false,
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     timeout_in_minutes: 1,
     #     notification_arns: ["NotificationARN"],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -97,6 +106,10 @@ module Aws::CloudFormation
     #   not both.
     #
     #   Default: `false`
+    # @option options [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
     # @option options [Integer] :timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
     #   CREATE\_FAILED; if `DisableRollback` is not set or is set to `false`,

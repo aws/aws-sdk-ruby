@@ -21,6 +21,7 @@ module Aws::CloudFormation
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     CancelUpdateStackInput = Shapes::StructureShape.new(name: 'CancelUpdateStackInput')
     Capabilities = Shapes::ListShape.new(name: 'Capabilities')
     CapabilitiesReason = Shapes::StringShape.new(name: 'CapabilitiesReason')
@@ -132,6 +133,7 @@ module Aws::CloudFormation
     MaxConcurrentPercentage = Shapes::IntegerShape.new(name: 'MaxConcurrentPercentage')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metadata = Shapes::StringShape.new(name: 'Metadata')
+    MonitoringTimeInMinutes = Shapes::IntegerShape.new(name: 'MonitoringTimeInMinutes')
     NameAlreadyExistsException = Shapes::StructureShape.new(name: 'NameAlreadyExistsException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoEcho = Shapes::BooleanShape.new(name: 'NoEcho')
@@ -178,6 +180,9 @@ module Aws::CloudFormation
     RetainStacks = Shapes::BooleanShape.new(name: 'RetainStacks')
     RetainStacksNullable = Shapes::BooleanShape.new(name: 'RetainStacksNullable')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    RollbackConfiguration = Shapes::StructureShape.new(name: 'RollbackConfiguration')
+    RollbackTrigger = Shapes::StructureShape.new(name: 'RollbackTrigger')
+    RollbackTriggers = Shapes::ListShape.new(name: 'RollbackTriggers')
     Scope = Shapes::ListShape.new(name: 'Scope')
     SetStackPolicyInput = Shapes::StructureShape.new(name: 'SetStackPolicyInput')
     SignalResourceInput = Shapes::StructureShape.new(name: 'SignalResourceInput')
@@ -244,6 +249,7 @@ module Aws::CloudFormation
     TokenAlreadyExistsException = Shapes::StructureShape.new(name: 'TokenAlreadyExistsException')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
+    Type = Shapes::StringShape.new(name: 'Type')
     UpdateStackInput = Shapes::StructureShape.new(name: 'UpdateStackInput')
     UpdateStackOutput = Shapes::StructureShape.new(name: 'UpdateStackOutput')
     UpdateStackSetInput = Shapes::StructureShape.new(name: 'UpdateStackSetInput')
@@ -310,6 +316,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     CreateChangeSetInput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     CreateChangeSetInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    CreateChangeSetInput.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     CreateChangeSetInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     CreateChangeSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, required: true, location_name: "ChangeSetName"))
@@ -327,6 +334,7 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
     CreateStackInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     CreateStackInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
+    CreateStackInput.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     CreateStackInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeoutMinutes, location_name: "TimeoutInMinutes"))
     CreateStackInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     CreateStackInput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
@@ -416,6 +424,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:status, Shapes::ShapeRef.new(shape: ChangeSetStatus, location_name: "Status"))
     DescribeChangeSetOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: ChangeSetStatusReason, location_name: "StatusReason"))
     DescribeChangeSetOutput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
+    DescribeChangeSetOutput.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     DescribeChangeSetOutput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     DescribeChangeSetOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribeChangeSetOutput.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, location_name: "Changes"))
@@ -667,6 +676,16 @@ module Aws::CloudFormation
 
     RetainResources.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
 
+    RollbackConfiguration.add_member(:rollback_triggers, Shapes::ShapeRef.new(shape: RollbackTriggers, location_name: "RollbackTriggers"))
+    RollbackConfiguration.add_member(:monitoring_time_in_minutes, Shapes::ShapeRef.new(shape: MonitoringTimeInMinutes, location_name: "MonitoringTimeInMinutes"))
+    RollbackConfiguration.struct_class = Types::RollbackConfiguration
+
+    RollbackTrigger.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    RollbackTrigger.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
+    RollbackTrigger.struct_class = Types::RollbackTrigger
+
+    RollbackTriggers.member = Shapes::ShapeRef.new(shape: RollbackTrigger)
+
     Scope.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
 
     SetStackPolicyInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
@@ -687,6 +706,7 @@ module Aws::CloudFormation
     Stack.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     Stack.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     Stack.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
+    Stack.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     Stack.add_member(:stack_status, Shapes::ShapeRef.new(shape: StackStatus, required: true, location_name: "StackStatus"))
     Stack.add_member(:stack_status_reason, Shapes::ShapeRef.new(shape: StackStatusReason, location_name: "StackStatusReason"))
     Stack.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
@@ -869,6 +889,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     UpdateStackInput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     UpdateStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    UpdateStackInput.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     UpdateStackInput.add_member(:stack_policy_body, Shapes::ShapeRef.new(shape: StackPolicyBody, location_name: "StackPolicyBody"))
     UpdateStackInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
     UpdateStackInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))

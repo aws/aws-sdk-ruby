@@ -423,6 +423,11 @@ module Aws::CloudFormation
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
+    # @option params [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #
     # @option params [Array<String>] :notification_arns
     #   The Amazon Resource Names (ARNs) of Amazon Simple Notification Service
     #   (Amazon SNS) topics that AWS CloudFormation associates with the stack.
@@ -491,6 +496,15 @@ module Aws::CloudFormation
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
     #     resource_types: ["ResourceType"],
     #     role_arn: "RoleARN",
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     notification_arns: ["NotificationARN"],
     #     tags: [
     #       {
@@ -571,6 +585,11 @@ module Aws::CloudFormation
     #   not both.
     #
     #   Default: `false`
+    #
+    # @option params [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
     #
     # @option params [Integer] :timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
@@ -721,6 +740,15 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     disable_rollback: false,
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     timeout_in_minutes: 1,
     #     notification_arns: ["NotificationARN"],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -1096,6 +1124,12 @@ module Aws::CloudFormation
     #   delete the stacks. You can't reassociate a retained stack or add an
     #   existing, saved stack to a new stack set.
     #
+    #   For more information, see [Stack set operation options][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #
     # @option params [String] :operation_id
     #   The unique identifier for this stack set operation.
     #
@@ -1241,6 +1275,7 @@ module Aws::CloudFormation
     #   * {Types::DescribeChangeSetOutput#status #status} => String
     #   * {Types::DescribeChangeSetOutput#status_reason #status_reason} => String
     #   * {Types::DescribeChangeSetOutput#notification_arns #notification_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeChangeSetOutput#rollback_configuration #rollback_configuration} => Types::RollbackConfiguration
     #   * {Types::DescribeChangeSetOutput#capabilities #capabilities} => Array&lt;String&gt;
     #   * {Types::DescribeChangeSetOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeChangeSetOutput#changes #changes} => Array&lt;Types::Change&gt;
@@ -1271,6 +1306,10 @@ module Aws::CloudFormation
     #   resp.status_reason #=> String
     #   resp.notification_arns #=> Array
     #   resp.notification_arns[0] #=> String
+    #   resp.rollback_configuration.rollback_triggers #=> Array
+    #   resp.rollback_configuration.rollback_triggers[0].arn #=> String
+    #   resp.rollback_configuration.rollback_triggers[0].type #=> String
+    #   resp.rollback_configuration.monitoring_time_in_minutes #=> Integer
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"
     #   resp.tags #=> Array
@@ -1699,6 +1738,10 @@ module Aws::CloudFormation
     #   resp.stacks[0].parameters[0].use_previous_value #=> Boolean
     #   resp.stacks[0].creation_time #=> Time
     #   resp.stacks[0].last_updated_time #=> Time
+    #   resp.stacks[0].rollback_configuration.rollback_triggers #=> Array
+    #   resp.stacks[0].rollback_configuration.rollback_triggers[0].arn #=> String
+    #   resp.stacks[0].rollback_configuration.rollback_triggers[0].type #=> String
+    #   resp.stacks[0].rollback_configuration.monitoring_time_in_minutes #=> Integer
     #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
     #   resp.stacks[0].stack_status_reason #=> String
     #   resp.stacks[0].disable_rollback #=> Boolean
@@ -1933,11 +1976,11 @@ module Aws::CloudFormation
     # Returns information about a new or existing template. The
     # `GetTemplateSummary` action is useful for viewing parameter
     # information, such as default parameter values and parameter types,
-    # before you create or update a stack.
+    # before you create or update a stack or stack set.
     #
     # You can use the `GetTemplateSummary` action when you submit a
-    # template, or you can get template information for a running or deleted
-    # stack.
+    # template, or you can get template information for a stack set, or a
+    # running or deleted stack.
     #
     # For deleted stacks, `GetTemplateSummary` returns the template
     # information for up to 90 days after the stack has been deleted. If the
@@ -1950,7 +1993,7 @@ module Aws::CloudFormation
     #   Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     #
     #
@@ -1963,7 +2006,7 @@ module Aws::CloudFormation
     #   Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     #
     #
@@ -1976,11 +2019,14 @@ module Aws::CloudFormation
     #   specify the unique stack ID.
     #
     #   Conditional: You must specify only one of the following parameters:
-    #   `StackName`, `TemplateBody`, or `TemplateURL`.
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     # @option params [String] :stack_set_name
     #   The name or unique ID of the stack set from which the stack was
     #   created.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #
     # @return [Types::GetTemplateSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2767,6 +2813,11 @@ module Aws::CloudFormation
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
+    # @option params [Types::RollbackConfiguration] :rollback_configuration
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
+    #   creation and updating operations, and for the specified monitoring
+    #   period afterwards.
+    #
     # @option params [String] :stack_policy_body
     #   Structure containing a new stack policy body. You can specify either
     #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
@@ -2845,6 +2896,15 @@ module Aws::CloudFormation
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
     #     resource_types: ["ResourceType"],
     #     role_arn: "RoleARN",
+    #     rollback_configuration: {
+    #       rollback_triggers: [
+    #         {
+    #           arn: "Arn", # required
+    #           type: "Type", # required
+    #         },
+    #       ],
+    #       monitoring_time_in_minutes: 1,
+    #     },
     #     stack_policy_body: "StackPolicyBody",
     #     stack_policy_url: "StackPolicyURL",
     #     notification_arns: ["NotificationARN"],
@@ -3143,7 +3203,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.0.0.rc12'
+      context[:gem_version] = '1.0.0.rc13'
       Seahorse::Client::Request.new(handlers, context)
     end
 

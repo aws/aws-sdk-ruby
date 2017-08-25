@@ -2854,7 +2854,7 @@ module Aws::GameLift
     #   resp.ticket_list #=> Array
     #   resp.ticket_list[0].ticket_id #=> String
     #   resp.ticket_list[0].configuration_name #=> String
-    #   resp.ticket_list[0].status #=> String, one of "CANCELED", "COMPLETE", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
+    #   resp.ticket_list[0].status #=> String, one of "CANCELLED", "COMPLETED", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
     #   resp.ticket_list[0].status_reason #=> String
     #   resp.ticket_list[0].status_message #=> String
     #   resp.ticket_list[0].start_time #=> Time
@@ -4482,7 +4482,7 @@ module Aws::GameLift
     #
     #   resp.matchmaking_ticket.ticket_id #=> String
     #   resp.matchmaking_ticket.configuration_name #=> String
-    #   resp.matchmaking_ticket.status #=> String, one of "CANCELED", "COMPLETE", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
+    #   resp.matchmaking_ticket.status #=> String, one of "CANCELLED", "COMPLETED", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
     #   resp.matchmaking_ticket.status_reason #=> String
     #   resp.matchmaking_ticket.status_message #=> String
     #   resp.matchmaking_ticket.start_time #=> Time
@@ -5577,7 +5577,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.0.0.rc13'
+      context[:gem_version] = '1.0.0.rc14'
       Seahorse::Client::Request.new(handlers, context)
     end
 
