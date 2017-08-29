@@ -100,7 +100,7 @@ module BuildTools
       if File.exists?(path)
         File.read(path).rstrip
       else
-        "1.0.0.rc1"
+        "1.0.0"
       end
     end
 
