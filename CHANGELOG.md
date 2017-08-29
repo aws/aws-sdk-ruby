@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.35 (2017-08-29)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
