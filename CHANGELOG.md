@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CloudHSM - This has been deprecated, remove smoke test
+
 2.10.35 (2017-08-29)
 ------------------
 
