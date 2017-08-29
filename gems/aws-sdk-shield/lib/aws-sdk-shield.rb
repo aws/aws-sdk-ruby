@@ -42,6 +42,6 @@ require_relative 'aws-sdk-shield/customizations'
 # @service
 module Aws::Shield
 
-  GEM_VERSION = '1.0.0.rc12'
+  GEM_VERSION = '1.0.0'
 
 end

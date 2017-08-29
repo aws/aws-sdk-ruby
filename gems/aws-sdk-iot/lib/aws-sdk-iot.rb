@@ -42,6 +42,6 @@ require_relative 'aws-sdk-iot/customizations'
 # @service
 module Aws::IoT
 
-  GEM_VERSION = '1.0.0.rc11'
+  GEM_VERSION = '1.0.0'
 
 end

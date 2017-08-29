@@ -659,7 +659,7 @@ module Aws::SimpleDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-simpledb'
-      context[:gem_version] = '1.0.0.rc11'
+      context[:gem_version] = '1.0.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
