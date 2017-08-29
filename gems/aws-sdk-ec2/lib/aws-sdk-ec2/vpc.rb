@@ -31,7 +31,7 @@ module Aws::EC2
     end
     alias :vpc_id :id
 
-    # The IPv4 CIDR block for the VPC.
+    # The primary IPv4 CIDR block for the VPC.
     # @return [String]
     def cidr_block
       data.cidr_block
@@ -60,6 +60,12 @@ module Aws::EC2
     # @return [Array<Types::VpcIpv6CidrBlockAssociation>]
     def ipv_6_cidr_block_association_set
       data.ipv_6_cidr_block_association_set
+    end
+
+    # Information about the IPv4 CIDR blocks associated with the VPC.
+    # @return [Array<Types::VpcCidrBlockAssociation>]
+    def cidr_block_association_set
+      data.cidr_block_association_set
     end
 
     # Indicates whether the VPC is the default VPC.

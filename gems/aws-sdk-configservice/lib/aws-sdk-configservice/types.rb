@@ -231,7 +231,7 @@ module Aws::ConfigService
     #           compliance_resource_types: ["StringWithCharLimit256"],
     #           tag_key: "StringWithCharLimit128",
     #           tag_value: "StringWithCharLimit256",
-    #           compliance_resource_id: "StringWithCharLimit256",
+    #           compliance_resource_id: "BaseResourceId",
     #         },
     #         source: { # required
     #           owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS
@@ -1010,7 +1010,7 @@ module Aws::ConfigService
     #
     #       {
     #         resource_type: "StringWithCharLimit256",
-    #         resource_id: "StringWithCharLimit256",
+    #         resource_id: "BaseResourceId",
     #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         limit: 1,
     #         next_token: "NextToken",
@@ -1325,7 +1325,7 @@ module Aws::ConfigService
     #
     #       {
     #         compliance_resource_type: "StringWithCharLimit256", # required
-    #         compliance_resource_id: "StringWithCharLimit256", # required
+    #         compliance_resource_id: "BaseResourceId", # required
     #         compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         annotation: "StringWithCharLimit256",
     #         ordering_timestamp: Time.now, # required
@@ -1541,7 +1541,7 @@ module Aws::ConfigService
     #
     #       {
     #         resource_type: "StringWithCharLimit256", # required
-    #         resource_id: "StringWithCharLimit256", # required
+    #         resource_id: "BaseResourceId", # required
     #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         next_token: "String",
     #       }
@@ -1904,7 +1904,7 @@ module Aws::ConfigService
     #             compliance_resource_types: ["StringWithCharLimit256"],
     #             tag_key: "StringWithCharLimit128",
     #             tag_value: "StringWithCharLimit256",
-    #             compliance_resource_id: "StringWithCharLimit256",
+    #             compliance_resource_id: "BaseResourceId",
     #           },
     #           source: { # required
     #             owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS
@@ -2000,7 +2000,7 @@ module Aws::ConfigService
     #         evaluations: [
     #           {
     #             compliance_resource_type: "StringWithCharLimit256", # required
-    #             compliance_resource_id: "StringWithCharLimit256", # required
+    #             compliance_resource_id: "BaseResourceId", # required
     #             compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #             annotation: "StringWithCharLimit256",
     #             ordering_timestamp: Time.now, # required
@@ -2255,7 +2255,7 @@ module Aws::ConfigService
     #         compliance_resource_types: ["StringWithCharLimit256"],
     #         tag_key: "StringWithCharLimit128",
     #         tag_value: "StringWithCharLimit256",
-    #         compliance_resource_id: "StringWithCharLimit256",
+    #         compliance_resource_id: "BaseResourceId",
     #       }
     #
     # @!attribute [rw] compliance_resource_types

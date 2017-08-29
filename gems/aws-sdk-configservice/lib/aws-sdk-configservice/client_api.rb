@@ -16,6 +16,7 @@ module Aws::ConfigService
     AllSupported = Shapes::BooleanShape.new(name: 'AllSupported')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    BaseResourceId = Shapes::StringShape.new(name: 'BaseResourceId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChronologicalOrder = Shapes::StringShape.new(name: 'ChronologicalOrder')
@@ -201,7 +202,7 @@ module Aws::ConfigService
     ComplianceByConfigRules.member = Shapes::ShapeRef.new(shape: ComplianceByConfigRule)
 
     ComplianceByResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    ComplianceByResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceId"))
+    ComplianceByResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
     ComplianceByResource.add_member(:compliance, Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
     ComplianceByResource.struct_class = Types::ComplianceByResource
 
@@ -365,7 +366,7 @@ module Aws::ConfigService
     DescribeComplianceByConfigRuleResponse.struct_class = Types::DescribeComplianceByConfigRuleResponse
 
     DescribeComplianceByResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    DescribeComplianceByResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceId"))
+    DescribeComplianceByResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
     DescribeComplianceByResourceRequest.add_member(:compliance_types, Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
     DescribeComplianceByResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeComplianceByResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -417,7 +418,7 @@ module Aws::ConfigService
     DescribeDeliveryChannelsResponse.struct_class = Types::DescribeDeliveryChannelsResponse
 
     Evaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
-    Evaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceId"))
+    Evaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
     Evaluation.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, required: true, location_name: "ComplianceType"))
     Evaluation.add_member(:annotation, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
     Evaluation.add_member(:ordering_timestamp, Shapes::ShapeRef.new(shape: OrderingTimestamp, required: true, location_name: "OrderingTimestamp"))
@@ -437,7 +438,7 @@ module Aws::ConfigService
 
     EvaluationResultQualifier.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
     EvaluationResultQualifier.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
-    EvaluationResultQualifier.add_member(:resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceId"))
+    EvaluationResultQualifier.add_member(:resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
     EvaluationResultQualifier.struct_class = Types::EvaluationResultQualifier
 
     EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
@@ -455,7 +456,7 @@ module Aws::ConfigService
     GetComplianceDetailsByConfigRuleResponse.struct_class = Types::GetComplianceDetailsByConfigRuleResponse
 
     GetComplianceDetailsByResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ResourceType"))
-    GetComplianceDetailsByResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ResourceId"))
+    GetComplianceDetailsByResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ResourceId"))
     GetComplianceDetailsByResourceRequest.add_member(:compliance_types, Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
     GetComplianceDetailsByResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetComplianceDetailsByResourceRequest.struct_class = Types::GetComplianceDetailsByResourceRequest
@@ -565,7 +566,7 @@ module Aws::ConfigService
     Scope.add_member(:compliance_resource_types, Shapes::ShapeRef.new(shape: ComplianceResourceTypes, location_name: "ComplianceResourceTypes"))
     Scope.add_member(:tag_key, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKey"))
     Scope.add_member(:tag_value, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValue"))
-    Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ComplianceResourceId"))
+    Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId"))
     Scope.struct_class = Types::Scope
 
     Source.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))

@@ -226,6 +226,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -235,6 +237,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connection.requester_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connection.requester_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -896,14 +900,25 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Associates a CIDR block with your VPC. You can only associate a single
-    # Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block
-    # size is fixed at /56.
+    # Associates a CIDR block with your VPC. You can associate a secondary
+    # IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR
+    # block. The IPv6 CIDR block size is fixed at /56.
+    #
+    # For more information about associating CIDR blocks with your VPC and
+    # applicable restrictions, see [VPC and Subnet Sizing][1] in the *Amazon
+    # Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#VPC_Sizing
     #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IPv6 addresses, or the
     #   size of the CIDR block.
+    #
+    # @option params [String] :cidr_block
+    #   An IPv4 CIDR block to associate with the VPC.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -911,12 +926,14 @@ module Aws::EC2
     # @return [Types::AssociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateVpcCidrBlockResult#ipv_6_cidr_block_association #ipv_6_cidr_block_association} => Types::VpcIpv6CidrBlockAssociation
+    #   * {Types::AssociateVpcCidrBlockResult#cidr_block_association #cidr_block_association} => Types::VpcCidrBlockAssociation
     #   * {Types::AssociateVpcCidrBlockResult#vpc_id #vpc_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_vpc_cidr_block({
     #     amazon_provided_ipv_6_cidr_block: false,
+    #     cidr_block: "String",
     #     vpc_id: "String", # required
     #   })
     #
@@ -926,6 +943,10 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.cidr_block_association.association_id #=> String
+    #   resp.cidr_block_association.cidr_block #=> String
+    #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.cidr_block_association.cidr_block_state.status_message #=> String
     #   resp.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlock AWS API Documentation
@@ -2478,6 +2499,11 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpc.cidr_block_association_set #=> Array
+    #   resp.vpc.cidr_block_association_set[0].association_id #=> String
+    #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
+    #   resp.vpc.cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.vpc.cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpc.is_default #=> Boolean
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
@@ -4340,15 +4366,14 @@ module Aws::EC2
 
     # Creates a subnet in an existing VPC.
     #
-    # When you create each subnet, you provide the VPC ID and the CIDR block
-    # you want for the subnet. After you create a subnet, you can't change
-    # its CIDR block. The subnet's IPv4 CIDR block can be the same as the
-    # VPC's IPv4 CIDR block (assuming you want only a single subnet in the
-    # VPC), or a subset of the VPC's IPv4 CIDR block. If you create more
-    # than one subnet in a VPC, the subnets' CIDR blocks must not overlap.
-    # The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask
-    # (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4
-    # addresses).
+    # When you create each subnet, you provide the VPC ID and the IPv4 CIDR
+    # block you want for the subnet. After you create a subnet, you can't
+    # change its CIDR block. The size of the subnet's IPv4 CIDR block can
+    # be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4
+    # CIDR block. If you create more than one subnet in a VPC, the subnets'
+    # CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you
+    # can create uses a /28 netmask (16 IPv4 addresses), and the largest
+    # uses a /16 netmask (65,536 IPv4 addresses).
     #
     # If you've associated an IPv6 CIDR block with your VPC, you can create
     # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
@@ -4852,6 +4877,11 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpc.cidr_block_association_set #=> Array
+    #   resp.vpc.cidr_block_association_set[0].association_id #=> String
+    #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
+    #   resp.vpc.cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.vpc.cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpc.is_default #=> Boolean
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
@@ -4994,6 +5024,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -5003,6 +5035,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connection.requester_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connection.requester_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -5969,10 +6003,10 @@ module Aws::EC2
     end
 
     # Deletes the specified set of tags from the specified set of resources.
-    # This call is designed to follow a `DescribeTags` request.
     #
-    # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # To list the current tags, use DescribeTags. For more information about
+    # tags, see [Tagging Your Resources][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
     #
     #
     #
@@ -5985,14 +6019,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :resources
-    #   The ID of the resource. For example, ami-1a2b3c4d. You can specify
-    #   more than one resource ID.
+    #   The IDs of one or more resources.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags to delete. If you omit the `value` parameter, we
-    #   delete the tag regardless of its value. If you specify this parameter
-    #   with an empty string as the value, we delete the key only if its value
-    #   is an empty string.
+    #   One or more tags to delete. If you omit this parameter, we delete all
+    #   tags for the specified resources. Specify a tag key and an optional
+    #   tag value to delete specific tags. If you specify a tag key without a
+    #   tag value, we delete any tag with this key regardless of its value. If
+    #   you specify a tag key with an empty string as the tag value, we delete
+    #   the tag only if its value is an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -14355,6 +14390,8 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].accepter_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connections[0].accepter_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connections[0].accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connections[0].accepter_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connections[0].accepter_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connections[0].accepter_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -14364,6 +14401,8 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].requester_vpc_info.cidr_block #=> String
     #   resp.vpc_peering_connections[0].requester_vpc_info.ipv_6_cidr_block_set #=> Array
     #   resp.vpc_peering_connections[0].requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
+    #   resp.vpc_peering_connections[0].requester_vpc_info.cidr_block_set #=> Array
+    #   resp.vpc_peering_connections[0].requester_vpc_info.cidr_block_set[0].cidr_block #=> String
     #   resp.vpc_peering_connections[0].requester_vpc_info.owner_id #=> String
     #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
@@ -14390,10 +14429,19 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you specify
-    #     must exactly match the VPC's CIDR block for information to be
-    #     returned for the VPC. Must contain the slash followed by one or two
-    #     digits (for example, `/28`).
+    #   * `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
+    #     specify must exactly match the VPC's CIDR block for information to
+    #     be returned for the VPC. Must contain the slash followed by one or
+    #     two digits (for example, `/28`).
+    #
+    #   * `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
+    #     with the VPC.
+    #
+    #   * `cidr-block-association.association-id` - The association ID for an
+    #     IPv4 CIDR block associated with the VPC.
+    #
+    #   * `cidr-block-association.state` - The state of an IPv4 CIDR block
+    #     associated with the VPC.
     #
     #   * `dhcp-options-id` - The ID of a set of DHCP options.
     #
@@ -14501,6 +14549,11 @@ module Aws::EC2
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpcs[0].cidr_block_association_set #=> Array
+    #   resp.vpcs[0].cidr_block_association_set[0].association_id #=> String
+    #   resp.vpcs[0].cidr_block_association_set[0].cidr_block #=> String
+    #   resp.vpcs[0].cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.vpcs[0].cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpcs[0].is_default #=> Boolean
     #   resp.vpcs[0].tags #=> Array
     #   resp.vpcs[0].tags[0].key #=> String
@@ -15291,10 +15344,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Disassociates a CIDR block from a VPC. Currently, you can disassociate
-    # an IPv6 CIDR block only. You must detach or delete all gateways and
+    # Disassociates a CIDR block from a VPC. To disassociate the CIDR block,
+    # you must specify its association ID. You can get the association ID by
+    # using DescribeVpcs. You must detach or delete all gateways and
     # resources that are associated with the CIDR block before you can
     # disassociate it.
+    #
+    # You cannot disassociate the CIDR block with which you originally
+    # created the VPC (the primary CIDR block).
     #
     # @option params [required, String] :association_id
     #   The association ID for the CIDR block.
@@ -15302,6 +15359,7 @@ module Aws::EC2
     # @return [Types::DisassociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisassociateVpcCidrBlockResult#ipv_6_cidr_block_association #ipv_6_cidr_block_association} => Types::VpcIpv6CidrBlockAssociation
+    #   * {Types::DisassociateVpcCidrBlockResult#cidr_block_association #cidr_block_association} => Types::VpcCidrBlockAssociation
     #   * {Types::DisassociateVpcCidrBlockResult#vpc_id #vpc_id} => String
     #
     # @example Request syntax with placeholder values
@@ -15316,6 +15374,10 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.cidr_block_association.association_id #=> String
+    #   resp.cidr_block_association.cidr_block #=> String
+    #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.cidr_block_association.cidr_block_state.status_message #=> String
     #   resp.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlock AWS API Documentation
@@ -20857,7 +20919,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc18'
+      context[:gem_version] = '1.0.0.rc19'
       Seahorse::Client::Request.new(handlers, context)
     end
 

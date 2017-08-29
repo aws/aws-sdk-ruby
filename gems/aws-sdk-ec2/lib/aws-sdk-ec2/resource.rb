@@ -2780,10 +2780,19 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you specify
-    #     must exactly match the VPC's CIDR block for information to be
-    #     returned for the VPC. Must contain the slash followed by one or two
-    #     digits (for example, `/28`).
+    #   * `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
+    #     specify must exactly match the VPC's CIDR block for information to
+    #     be returned for the VPC. Must contain the slash followed by one or
+    #     two digits (for example, `/28`).
+    #
+    #   * `cidr-block-association.cidr-block` - An IPv4 CIDR block associated
+    #     with the VPC.
+    #
+    #   * `cidr-block-association.association-id` - The association ID for an
+    #     IPv4 CIDR block associated with the VPC.
+    #
+    #   * `cidr-block-association.state` - The state of an IPv4 CIDR block
+    #     associated with the VPC.
     #
     #   * `dhcp-options-id` - The ID of a set of DHCP options.
     #

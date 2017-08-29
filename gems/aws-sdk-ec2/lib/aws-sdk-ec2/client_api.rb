@@ -107,6 +107,8 @@ module Aws::EC2
     CancelSpotInstanceRequestsResult = Shapes::StructureShape.new(name: 'CancelSpotInstanceRequestsResult')
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
+    CidrBlock = Shapes::StructureShape.new(name: 'CidrBlock')
+    CidrBlockSet = Shapes::ListShape.new(name: 'CidrBlockSet')
     ClassicLinkDnsSupport = Shapes::StructureShape.new(name: 'ClassicLinkDnsSupport')
     ClassicLinkDnsSupportList = Shapes::ListShape.new(name: 'ClassicLinkDnsSupportList')
     ClassicLinkInstance = Shapes::StructureShape.new(name: 'ClassicLinkInstance')
@@ -929,6 +931,8 @@ module Aws::EC2
     VpcAttachment = Shapes::StructureShape.new(name: 'VpcAttachment')
     VpcAttachmentList = Shapes::ListShape.new(name: 'VpcAttachmentList')
     VpcAttributeName = Shapes::StringShape.new(name: 'VpcAttributeName')
+    VpcCidrBlockAssociation = Shapes::StructureShape.new(name: 'VpcCidrBlockAssociation')
+    VpcCidrBlockAssociationSet = Shapes::ListShape.new(name: 'VpcCidrBlockAssociationSet')
     VpcCidrBlockState = Shapes::StructureShape.new(name: 'VpcCidrBlockState')
     VpcCidrBlockStateCode = Shapes::StringShape.new(name: 'VpcCidrBlockStateCode')
     VpcClassicLink = Shapes::StructureShape.new(name: 'VpcClassicLink')
@@ -1088,10 +1092,12 @@ module Aws::EC2
     AssociateSubnetCidrBlockResult.struct_class = Types::AssociateSubnetCidrBlockResult
 
     AssociateVpcCidrBlockRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
+    AssociateVpcCidrBlockRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "CidrBlock"))
     AssociateVpcCidrBlockRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "vpcId"))
     AssociateVpcCidrBlockRequest.struct_class = Types::AssociateVpcCidrBlockRequest
 
     AssociateVpcCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+    AssociateVpcCidrBlockResult.add_member(:cidr_block_association, Shapes::ShapeRef.new(shape: VpcCidrBlockAssociation, location_name: "cidrBlockAssociation"))
     AssociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     AssociateVpcCidrBlockResult.struct_class = Types::AssociateVpcCidrBlockResult
 
@@ -1292,6 +1298,11 @@ module Aws::EC2
     CancelledSpotInstanceRequest.struct_class = Types::CancelledSpotInstanceRequest
 
     CancelledSpotInstanceRequestList.member = Shapes::ShapeRef.new(shape: CancelledSpotInstanceRequest, location_name: "item")
+
+    CidrBlock.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+    CidrBlock.struct_class = Types::CidrBlock
+
+    CidrBlockSet.member = Shapes::ShapeRef.new(shape: CidrBlock, location_name: "item")
 
     ClassicLinkDnsSupport.add_member(:classic_link_dns_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "classicLinkDnsSupported"))
     ClassicLinkDnsSupport.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -2551,6 +2562,7 @@ module Aws::EC2
     DisassociateVpcCidrBlockRequest.struct_class = Types::DisassociateVpcCidrBlockRequest
 
     DisassociateVpcCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+    DisassociateVpcCidrBlockResult.add_member(:cidr_block_association, Shapes::ShapeRef.new(shape: VpcCidrBlockAssociation, location_name: "cidrBlockAssociation"))
     DisassociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     DisassociateVpcCidrBlockResult.struct_class = Types::DisassociateVpcCidrBlockResult
 
@@ -4804,6 +4816,7 @@ module Aws::EC2
     Vpc.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     Vpc.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
     Vpc.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
+    Vpc.add_member(:cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcCidrBlockAssociationSet, location_name: "cidrBlockAssociationSet"))
     Vpc.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDefault"))
     Vpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Vpc.struct_class = Types::Vpc
@@ -4813,6 +4826,13 @@ module Aws::EC2
     VpcAttachment.struct_class = Types::VpcAttachment
 
     VpcAttachmentList.member = Shapes::ShapeRef.new(shape: VpcAttachment, location_name: "item")
+
+    VpcCidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    VpcCidrBlockAssociation.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+    VpcCidrBlockAssociation.add_member(:cidr_block_state, Shapes::ShapeRef.new(shape: VpcCidrBlockState, location_name: "cidrBlockState"))
+    VpcCidrBlockAssociation.struct_class = Types::VpcCidrBlockAssociation
+
+    VpcCidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: VpcCidrBlockAssociation, location_name: "item")
 
     VpcCidrBlockState.add_member(:state, Shapes::ShapeRef.new(shape: VpcCidrBlockStateCode, location_name: "state"))
     VpcCidrBlockState.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
@@ -4870,6 +4890,7 @@ module Aws::EC2
 
     VpcPeeringConnectionVpcInfo.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
     VpcPeeringConnectionVpcInfo.add_member(:ipv_6_cidr_block_set, Shapes::ShapeRef.new(shape: Ipv6CidrBlockSet, location_name: "ipv6CidrBlockSet"))
+    VpcPeeringConnectionVpcInfo.add_member(:cidr_block_set, Shapes::ShapeRef.new(shape: CidrBlockSet, location_name: "cidrBlockSet"))
     VpcPeeringConnectionVpcInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     VpcPeeringConnectionVpcInfo.add_member(:peering_options, Shapes::ShapeRef.new(shape: VpcPeeringConnectionOptionsDescription, location_name: "peeringOptions"))
     VpcPeeringConnectionVpcInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))

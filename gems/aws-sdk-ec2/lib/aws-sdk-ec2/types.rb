@@ -706,6 +706,7 @@ module Aws::EC2
     #
     #       {
     #         amazon_provided_ipv_6_cidr_block: false,
+    #         cidr_block: "String",
     #         vpc_id: "String", # required
     #       }
     #
@@ -715,6 +716,10 @@ module Aws::EC2
     #   size of the CIDR block.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cidr_block
+    #   An IPv4 CIDR block to associate with the VPC.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
@@ -723,6 +728,7 @@ module Aws::EC2
     #
     class AssociateVpcCidrBlockRequest < Struct.new(
       :amazon_provided_ipv_6_cidr_block,
+      :cidr_block,
       :vpc_id)
       include Aws::Structure
     end
@@ -730,6 +736,10 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
+    #
+    # @!attribute [rw] cidr_block_association
+    #   Information about the IPv4 CIDR block association.
+    #   @return [Types::VpcCidrBlockAssociation]
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
@@ -739,6 +749,7 @@ module Aws::EC2
     #
     class AssociateVpcCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
+      :cidr_block_association,
       :vpc_id)
       include Aws::Structure
     end
@@ -1899,6 +1910,19 @@ module Aws::EC2
     class CancelledSpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :state)
+      include Aws::Structure
+    end
+
+    # Describes an IPv4 CIDR block.
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CidrBlock AWS API Documentation
+    #
+    class CidrBlock < Struct.new(
+      :cidr_block)
       include Aws::Structure
     end
 
@@ -4958,15 +4982,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] resources
-    #   The ID of the resource. For example, ami-1a2b3c4d. You can specify
-    #   more than one resource ID.
+    #   The IDs of one or more resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags to delete. If you omit the `value` parameter, we
-    #   delete the tag regardless of its value. If you specify this
-    #   parameter with an empty string as the value, we delete the key only
-    #   if its value is an empty string.
+    #   One or more tags to delete. If you omit this parameter, we delete
+    #   all tags for the specified resources. Specify a tag key and an
+    #   optional tag value to delete specific tags. If you specify a tag key
+    #   without a tag value, we delete any tag with this key regardless of
+    #   its value. If you specify a tag key with an empty string as the tag
+    #   value, we delete the tag only if its value is an empty string.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsRequest AWS API Documentation
@@ -11205,10 +11230,19 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you
-    #     specify must exactly match the VPC's CIDR block for information
-    #     to be returned for the VPC. Must contain the slash followed by one
-    #     or two digits (for example, `/28`).
+    #   * `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block
+    #     you specify must exactly match the VPC's CIDR block for
+    #     information to be returned for the VPC. Must contain the slash
+    #     followed by one or two digits (for example, `/28`).
+    #
+    #   * `cidr-block-association.cidr-block` - An IPv4 CIDR block
+    #     associated with the VPC.
+    #
+    #   * `cidr-block-association.association-id` - The association ID for
+    #     an IPv4 CIDR block associated with the VPC.
+    #
+    #   * `cidr-block-association.state` - The state of an IPv4 CIDR block
+    #     associated with the VPC.
     #
     #   * `dhcp-options-id` - The ID of a set of DHCP options.
     #
@@ -11973,6 +12007,10 @@ module Aws::EC2
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
     #
+    # @!attribute [rw] cidr_block_association
+    #   Information about the IPv4 CIDR block association.
+    #   @return [Types::VpcCidrBlockAssociation]
+    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
@@ -11981,6 +12019,7 @@ module Aws::EC2
     #
     class DisassociateVpcCidrBlockResult < Struct.new(
       :ipv_6_cidr_block_association,
+      :cidr_block_association,
       :vpc_id)
       include Aws::Structure
     end
@@ -23534,6 +23573,9 @@ module Aws::EC2
     #   * `Client.InstanceInitiatedShutdown`\: The instance was shut down
     #     using the `shutdown -h` command from the instance.
     #
+    #   * `Client.InstanceTerminated`\: The instance was terminated or
+    #     rebooted during AMI creation.
+    #
     #   * `Client.UserInitiatedShutdown`\: The instance was shut down using
     #     the Amazon EC2 API.
     #
@@ -24636,7 +24678,7 @@ module Aws::EC2
     # Describes a VPC.
     #
     # @!attribute [rw] cidr_block
-    #   The IPv4 CIDR block for the VPC.
+    #   The primary IPv4 CIDR block for the VPC.
     #   @return [String]
     #
     # @!attribute [rw] dhcp_options_id
@@ -24660,6 +24702,10 @@ module Aws::EC2
     #   Information about the IPv6 CIDR blocks associated with the VPC.
     #   @return [Array<Types::VpcIpv6CidrBlockAssociation>]
     #
+    # @!attribute [rw] cidr_block_association_set
+    #   Information about the IPv4 CIDR blocks associated with the VPC.
+    #   @return [Array<Types::VpcCidrBlockAssociation>]
+    #
     # @!attribute [rw] is_default
     #   Indicates whether the VPC is the default VPC.
     #   @return [Boolean]
@@ -24677,6 +24723,7 @@ module Aws::EC2
       :vpc_id,
       :instance_tenancy,
       :ipv_6_cidr_block_association_set,
+      :cidr_block_association_set,
       :is_default,
       :tags)
       include Aws::Structure
@@ -24697,6 +24744,29 @@ module Aws::EC2
     class VpcAttachment < Struct.new(
       :state,
       :vpc_id)
+      include Aws::Structure
+    end
+
+    # Describes an IPv4 CIDR block associated with a VPC.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block_state
+    #   Information about the state of the CIDR block.
+    #   @return [Types::VpcCidrBlockState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcCidrBlockAssociation AWS API Documentation
+    #
+    class VpcCidrBlockAssociation < Struct.new(
+      :association_id,
+      :cidr_block,
+      :cidr_block_state)
       include Aws::Structure
     end
 
@@ -24902,6 +24972,10 @@ module Aws::EC2
     #   The IPv6 CIDR block for the VPC.
     #   @return [Array<Types::Ipv6CidrBlock>]
     #
+    # @!attribute [rw] cidr_block_set
+    #   Information about the IPv4 CIDR blocks for the VPC.
+    #   @return [Array<Types::CidrBlock>]
+    #
     # @!attribute [rw] owner_id
     #   The AWS account ID of the VPC owner.
     #   @return [String]
@@ -24920,6 +24994,7 @@ module Aws::EC2
     class VpcPeeringConnectionVpcInfo < Struct.new(
       :cidr_block,
       :ipv_6_cidr_block_set,
+      :cidr_block_set,
       :owner_id,
       :peering_options,
       :vpc_id)
