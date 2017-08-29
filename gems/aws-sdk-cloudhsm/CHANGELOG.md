@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issues - Integration tests do not work for this service anymore.
+* Issue - Integration tests do not work for this service anymore.
 
 1.0.0 (2017-08-29)
 ------------------
