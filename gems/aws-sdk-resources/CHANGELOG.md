@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `aws-sdk-resources` gemspec metadata
+
 3.0.1 (2017-08-30)
 ------------------
 

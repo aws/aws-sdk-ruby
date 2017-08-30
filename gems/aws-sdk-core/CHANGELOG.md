@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `aws-sdk-core` gemspec metadata.
+
+* Issue - Update `aws-sdk-core` gemspec metadata
+
 3.1.0 (2017-08-30)
 ------------------
 

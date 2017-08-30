@@ -119,4 +119,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-xray', '~> 1')
   # end service gems
 
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-resources',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-resources/CHANGELOG.md'
+  }
 end

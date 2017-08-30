@@ -13,6 +13,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['lib/**/*.rb']
 
+  spec.metadata = {
+    'source_code_uri' => '{{code_uri}}',
+    'changelog_uri'   => '{{code_uri}}/CHANGELOG.md'
+  }
+
   {{#dependencies}}
   spec.add_dependency('{{gem}}', '{{&version}}')
   {{/dependencies}}

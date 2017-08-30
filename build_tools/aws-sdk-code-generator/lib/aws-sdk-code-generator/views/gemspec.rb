@@ -27,6 +27,11 @@ module AwsSdkCodeGenerator
         desc
       end
 
+      # @return [String]
+      def code_uri
+        "https://github.com/aws/aws-sdk-ruby/tree/master/gems/#{gem_name}"
+      end
+
       # @return [Array<Dependency>]
       def dependencies
         @service.gem_dependencies.map do |gem, version|
