@@ -18,6 +18,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['lib/**/*.rb']
 
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-cloudtrail',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-cloudtrail/CHANGELOG.md'
+  }
+
   spec.add_dependency('aws-sdk-core', '~> 3')
   spec.add_dependency('aws-sigv4', '~> 1.0')
 

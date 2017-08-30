@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `aws-sdk-datapipeline` gemspec metadata.
+
 1.0.0 (2017-08-29)
 ------------------
 

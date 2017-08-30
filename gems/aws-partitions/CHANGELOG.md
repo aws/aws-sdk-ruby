@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update the `aws-partitions` gemspec metadata
+
 1.16.0 (2017-08-23)
 ------------------
 

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update `aws-sdk-applicationautoscaling` gemspec metadata.
+
 1.1.0 (2017-08-30)
 ------------------
 

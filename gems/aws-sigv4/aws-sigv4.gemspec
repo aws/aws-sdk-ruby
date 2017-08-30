@@ -7,4 +7,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.files         = Dir['lib/**/*.rb']
+
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sigv4',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sigv4/CHANGELOG.md'
+  }
 end
