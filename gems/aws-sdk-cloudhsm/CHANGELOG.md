@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2017-08-30)
+------------------
+
+* Feature - API update.
+
 * Issue - Integration tests do not work for this service anymore.
 
 1.0.0 (2017-08-29)

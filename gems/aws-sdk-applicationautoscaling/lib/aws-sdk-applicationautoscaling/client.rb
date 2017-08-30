@@ -851,6 +851,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.unit #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
     #   resp.scaling_policies[0].alarms #=> Array
     #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
     #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
@@ -1070,6 +1071,7 @@ module Aws::ApplicationAutoScaling
     #       },
     #       scale_out_cooldown: 1,
     #       scale_in_cooldown: 1,
+    #       disable_scale_in: false,
     #     },
     #   })
     #
@@ -1245,7 +1247,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

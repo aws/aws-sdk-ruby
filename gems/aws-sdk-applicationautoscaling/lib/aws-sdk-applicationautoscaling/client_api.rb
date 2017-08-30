@@ -27,6 +27,7 @@ module Aws::ApplicationAutoScaling
     DescribeScalingActivitiesResponse = Shapes::StructureShape.new(name: 'DescribeScalingActivitiesResponse')
     DescribeScalingPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesRequest')
     DescribeScalingPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesResponse')
+    DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailedResourceAccessException = Shapes::StructureShape.new(name: 'FailedResourceAccessException')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
@@ -232,6 +233,7 @@ module Aws::ApplicationAutoScaling
     TargetTrackingScalingPolicyConfiguration.add_member(:customized_metric_specification, Shapes::ShapeRef.new(shape: CustomizedMetricSpecification, location_name: "CustomizedMetricSpecification"))
     TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleOutCooldown"))
     TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "ScaleInCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: DisableScaleIn, location_name: "DisableScaleIn"))
     TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
 
 

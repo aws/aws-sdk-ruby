@@ -728,6 +728,7 @@ module Aws::ApplicationAutoScaling
     #           },
     #           scale_out_cooldown: 1,
     #           scale_in_cooldown: 1,
+    #           disable_scale_in: false,
     #         },
     #       }
     #
@@ -1474,6 +1475,7 @@ module Aws::ApplicationAutoScaling
     #         },
     #         scale_out_cooldown: 1,
     #         scale_in_cooldown: 1,
+    #         disable_scale_in: false,
     #       }
     #
     # @!attribute [rw] target_value
@@ -1511,6 +1513,9 @@ module Aws::ApplicationAutoScaling
     #   immediately.
     #   @return [Integer]
     #
+    # @!attribute [rw] disable_scale_in
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingScalingPolicyConfiguration AWS API Documentation
     #
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
@@ -1518,7 +1523,8 @@ module Aws::ApplicationAutoScaling
       :predefined_metric_specification,
       :customized_metric_specification,
       :scale_out_cooldown,
-      :scale_in_cooldown)
+      :scale_in_cooldown,
+      :disable_scale_in)
       include Aws::Structure
     end
 

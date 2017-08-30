@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.0.1 (2017-08-30)
+------------------
+
 * Issue - Rename `aws.rb` executable to `aws-v3.rb` to avoid breaking automation scripts where V2 and V3 exist on the same machine across projects.
 
 3.0.0 (2017-08-29)
