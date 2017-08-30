@@ -34,7 +34,7 @@ end
 
 desc 'Execute spec tests.'
 task 'test:spec' do
-  sh("bundle exec rspec #{Dir.glob('**/spec').join(' ')}")
+  sh("bundle exec rspec #{Dir.glob('**/spec').join(' ')} --profile")
 end
 
 ##
