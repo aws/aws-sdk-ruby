@@ -10,6 +10,11 @@ Gem::Specification.new do |spec|
   spec.email         = ['trevrowe@amazon.com']
   spec.files         = Dir['lib/**/*.rb']
 
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/blob/code-generation/gems/aws-sdk',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/blob/code-generation/gems/aws-sdk/CHANGELOG.md'
+  }
+
   # gem dependency
   spec.add_dependency('aws-sdk-resources', '~> 3')
   # end gem dependency
