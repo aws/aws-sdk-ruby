@@ -7,4 +7,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.files         = ['partitions.json'] + Dir['lib/**/*.rb']
+
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/blob/code-generation/gems/aws-partitions',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/blob/code-generation/gems/aws-partitions/CHANGELOG.md'
+  }
 end
