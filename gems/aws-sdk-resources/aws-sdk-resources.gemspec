@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['trevrowe@amazon.com']
   spec.files         = Dir['lib/**/*.rb']
   spec.bindir        = 'bin'
-  spec.executables   << 'aws.rb'
+  spec.executables   << 'aws-v3.rb'
 
   # service gems
   spec.add_dependency('aws-sdk-acm', '~> 1')
