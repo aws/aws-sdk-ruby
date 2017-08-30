@@ -10,6 +10,11 @@ Unreleased Changes
 
 * Issue - Aws::CloudHSM - This has been deprecated, remove smoke test
 
+3.0.0 (2017-08-29)
+------------------
+
+* Packaging - Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2. For more information, see https://github.com/aws/aws-sdk-ruby/tree/code-generation.
+
 2.10.35 (2017-08-29)
 ------------------
 
@@ -899,7 +904,7 @@ Unreleased Changes
 
 * Issue - Aws::CloudFront::UrlSigner - Fixed an issue where failures could occur
   when the `UrlSigner` was used in a Rails environment with more than one query
-  parameter. See 
+  parameter. See
   [related GitHub issue #1386](https://github.com/aws/aws-sdk-ruby/issues/1386).
 
 2.6.44 (2017-01-04)
