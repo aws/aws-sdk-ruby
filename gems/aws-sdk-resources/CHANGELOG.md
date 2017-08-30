@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Update `aws.rb` executable to `aws-v3.rb` in aws-sdk-resources.gemspec
-
 3.0.1 (2017-08-30)
 ------------------
 
