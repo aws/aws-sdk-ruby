@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.36 (2017-08-30)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
