@@ -5,7 +5,7 @@
 
 This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
 
-* [aws-sdk-v2 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v2).
+* [Version 2 branch](https://github.com/aws/aws-sdk-ruby/tree/version-2).
 
 ## Links of Interest
 
