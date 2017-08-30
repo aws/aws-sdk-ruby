@@ -21,7 +21,7 @@ bundler_args: --without docs release repl
 
 matrix:
   exclude:
-    - rvm: jruby-9.1.5.0
+    - rvm: jruby
       env: KITCHEN_SINK=1
   include:
     - rvm: 2.3.0
