@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
 * Issue - Aws::CloudHSM - This has been deprecated, remove smoke test
 
 2.10.35 (2017-08-29)
