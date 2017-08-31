@@ -795,6 +795,19 @@ module Aws::ElasticLoadBalancingV2
     #   The HTTP codes to use when checking for a successful response from a
     #   target. The default is 200.
     #
+    # @option params [String] :target_type
+    #   The type of target that you must specify when registering targets with
+    #   this target group. The possible values are `instance` (targets are
+    #   specified by instance ID) or `ip` (targets are specified by IP
+    #   address). The default is `instance`. Note that you can't specify
+    #   targets for a target group using both instance IDs and IP addresses.
+    #
+    #   If the target type is `ip`, specify IP addresses from the subnets of
+    #   the virtual private cloud (VPC) for the target group, the RFC 1918
+    #   range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC
+    #   6598 range (100.64.0.0/10). You can't specify publicly routable IP
+    #   addresses.
+    #
     # @return [Types::CreateTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTargetGroupOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
@@ -851,6 +864,7 @@ module Aws::ElasticLoadBalancingV2
     #     matcher: {
     #       http_code: "HttpCode", # required
     #     },
+    #     target_type: "instance", # accepts instance, ip
     #   })
     #
     # @example Response structure
@@ -871,6 +885,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
     #
@@ -1057,6 +1072,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         id: "TargetId", # required
     #         port: 1,
+    #         availability_zone: "ZoneName",
     #       },
     #     ],
     #   })
@@ -1838,6 +1854,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups AWS API Documentation
@@ -1935,6 +1952,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         id: "TargetId", # required
     #         port: 1,
+    #         availability_zone: "ZoneName",
     #       },
     #     ],
     #   })
@@ -1944,9 +1962,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions #=> Array
     #   resp.target_health_descriptions[0].target.id #=> String
     #   resp.target_health_descriptions[0].target.port #=> Integer
+    #   resp.target_health_descriptions[0].target.availability_zone #=> String
     #   resp.target_health_descriptions[0].health_check_port #=> String
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining"
-    #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Elb.InternalError"
+    #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
@@ -2494,6 +2513,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.http_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
     #
@@ -2646,6 +2666,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         id: "TargetId", # required
     #         port: 1,
+    #         availability_zone: "ZoneName",
     #       },
     #     ],
     #   })
@@ -2954,7 +2975,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

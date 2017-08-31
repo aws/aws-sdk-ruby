@@ -8,6 +8,40 @@
 module Aws::CodeBuild
   module Types
 
+    # @note When making an API call, you may pass BatchDeleteBuildsInput
+    #   data as a hash:
+    #
+    #       {
+    #         ids: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] ids
+    #   The IDs of the builds to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsInput AWS API Documentation
+    #
+    class BatchDeleteBuildsInput < Struct.new(
+      :ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] builds_deleted
+    #   The IDs of the builds that were successfully deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] builds_not_deleted
+    #   Information about any builds that could not be successfully deleted.
+    #   @return [Array<Types::BuildNotDeleted>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsOutput AWS API Documentation
+    #
+    class BatchDeleteBuildsOutput < Struct.new(
+      :builds_deleted,
+      :builds_not_deleted)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetBuildsInput
     #   data as a hash:
     #
@@ -225,6 +259,25 @@ module Aws::CodeBuild
       :location,
       :sha256sum,
       :md5sum)
+      include Aws::Structure
+    end
+
+    # Information about a build that could not be successfully deleted.
+    #
+    # @!attribute [rw] id
+    #   The ID of the build that could not be successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   Additional information about the build that could not be
+    #   successfully deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildNotDeleted AWS API Documentation
+    #
+    class BuildNotDeleted < Struct.new(
+      :id,
+      :status_code)
       include Aws::Structure
     end
 
@@ -1071,8 +1124,8 @@ module Aws::CodeBuild
     #   provided by AWS CodeBuild with Docker support.)
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-    #   --host=tcp://0.0.0.0:2375 --storage-driver=vfs& - timeout -t 15 sh
-    #   -c "until docker info; do echo .; sleep 1; done"`
+    #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout -t 15
+    #   sh -c "until docker info; do echo .; sleep 1; done"`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
@@ -1104,6 +1157,8 @@ module Aws::CodeBuild
     # @!attribute [rw] type
     #   The type of repository that contains the source code to be built.
     #   Valid values include:
+    #
+    #   * `BITBUCKET`\: The source code is in a Bitbucket repository.
     #
     #   * `CODECOMMIT`\: The source code is in an AWS CodeCommit repository.
     #
@@ -1149,6 +1204,19 @@ module Aws::CodeBuild
     #     project, and you may then leave the AWS CodeBuild console.) To
     #     instruct AWS CodeBuild to then use this connection, in the
     #     `source` object, set the `auth` object's `type` value to `OAUTH`.
+    #
+    #   * For source code in a Bitbucket repository, the HTTPS clone URL to
+    #     the repository that contains the source and the build spec. Also,
+    #     you must connect your AWS account to your Bitbucket account. To do
+    #     this, use the AWS CodeBuild console to begin creating a build
+    #     project. When you use the console to connect (or reconnect) with
+    #     Bitbucket, on the Bitbucket **Confirm access to your account**
+    #     page that displays, choose **Grant access**. (After you have
+    #     connected to your Bitbucket account, you do not need to finish
+    #     creating the build project, and you may then leave the AWS
+    #     CodeBuild console.) To instruct AWS CodeBuild to then use this
+    #     connection, in the `source` object, set the `auth` object's
+    #     `type` value to `OAUTH`.
     #   @return [String]
     #
     # @!attribute [rw] buildspec
@@ -1165,7 +1233,7 @@ module Aws::CodeBuild
     #
     #   This information is for the AWS CodeBuild console's use only. Your
     #   code should not get or set this information directly (unless the
-    #   build project's source `type` value is `GITHUB`).
+    #   build project's source `type` value is `BITBUCKET` or `GITHUB`).
     #   @return [Types::SourceAuth]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
@@ -1183,7 +1251,7 @@ module Aws::CodeBuild
     #
     # This information is for the AWS CodeBuild console's use only. Your
     # code should not get or set this information directly (unless the build
-    # project's source `type` value is `GITHUB`).
+    # project's source `type` value is `BITBUCKET` or `GITHUB`).
     #
     # @note When making an API call, you may pass SourceAuth
     #   data as a hash:
@@ -1243,7 +1311,20 @@ module Aws::CodeBuild
     #   not specified, the latest version will be used. If specified, must
     #   be one of:
     #
-    #   * For AWS CodeCommit or GitHub: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
+    #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
+    #     name is specified, the branch's HEAD commit ID will be used. If
+    #     not specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build.
+    #     If a branch name is specified, the branch's HEAD commit ID will
+    #     be used. If not specified, the default branch's HEAD commit ID
+    #     will be used.
     #
     #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
     #     the object representing the build input ZIP file to use.

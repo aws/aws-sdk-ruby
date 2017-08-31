@@ -393,6 +393,7 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateSlotTypeVersionResponse#created_date #created_date} => Time
     #   * {Types::CreateSlotTypeVersionResponse#version #version} => String
     #   * {Types::CreateSlotTypeVersionResponse#checksum #checksum} => String
+    #   * {Types::CreateSlotTypeVersionResponse#value_selection_strategy #value_selection_strategy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -407,10 +408,13 @@ module Aws::LexModelBuildingService
     #   resp.description #=> String
     #   resp.enumeration_values #=> Array
     #   resp.enumeration_values[0].value #=> String
+    #   resp.enumeration_values[0].synonyms #=> Array
+    #   resp.enumeration_values[0].synonyms[0] #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion AWS API Documentation
     #
@@ -747,7 +751,7 @@ module Aws::LexModelBuildingService
     # Returns metadata information for a specific bot. You must provide the
     # bot name and the bot version or alias.
     #
-    # The GetBot operation requires permissions for the `lex:GetBot` action.
+    # This operation requires permissions for the `lex:GetBot` action.
     #
     # @option params [required, String] :name
     #   The name of the bot. The name is case sensitive.
@@ -1810,6 +1814,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetSlotTypeResponse#created_date #created_date} => Time
     #   * {Types::GetSlotTypeResponse#version #version} => String
     #   * {Types::GetSlotTypeResponse#checksum #checksum} => String
+    #   * {Types::GetSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
     #
     #
     # @example Example: To get information about a slot type
@@ -1852,10 +1857,13 @@ module Aws::LexModelBuildingService
     #   resp.description #=> String
     #   resp.enumeration_values #=> Array
     #   resp.enumeration_values[0].value #=> String
+    #   resp.enumeration_values[0].synonyms #=> Array
+    #   resp.enumeration_values[0].synonyms[0] #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType AWS API Documentation
     #
@@ -2556,7 +2564,7 @@ module Aws::LexModelBuildingService
     # @option params [Array<Types::Slot>] :slots
     #   An array of intent slots. At runtime, Amazon Lex elicits required slot
     #   values from the user using prompts defined in the slots. For more
-    #   information, see &lt;xref linkend="how-it-works"/&gt;.
+    #   information, see how-it-works.
     #
     # @option params [Array<String>] :sample_utterances
     #   An array of utterances (strings) that a user might say to signal the
@@ -2639,8 +2647,8 @@ module Aws::LexModelBuildingService
     #   and set the corresponding session attribute.
     #
     # @option params [Types::FulfillmentActivity] :fulfillment_activity
-    #   Describes how the intent is fulfilled. For example, after a user
-    #   provides all of the information for a pizza order,
+    #   Required. Describes how the intent is fulfilled. For example, after a
+    #   user provides all of the information for a pizza order,
     #   `fulfillmentActivity` defines how the bot places an order with a local
     #   pizza store.
     #
@@ -3147,7 +3155,17 @@ module Aws::LexModelBuildingService
     #
     # @option params [Array<Types::EnumerationValue>] :enumeration_values
     #   A list of `EnumerationValue` objects that defines the values that the
-    #   slot type can take.
+    #   slot type can take. Each value can have a list of `synonyms`, which
+    #   are additional values that help train the machine learning model about
+    #   the values that it resolves for a slot.
+    #
+    #   When Amazon Lex resolves a slot value, it generates a resolution list
+    #   that contains up to five possible values for the slot. If you are
+    #   using a Lambda function, this resolution list is passed to the
+    #   function. If you are not using a Lambda function you can choose to
+    #   return the value that the user entered or the first value in the
+    #   resolution list as the slot value. The `valueSelectionStrategy` field
+    #   indicates the option to use.
     #
     # @option params [String] :checksum
     #   Identifies a specific revision of the `$LATEST` version.
@@ -3161,6 +3179,19 @@ module Aws::LexModelBuildingService
     #   match the `$LATEST` version, you get a `PreconditionFailedException`
     #   exception.
     #
+    # @option params [String] :value_selection_strategy
+    #   Determines the strategy that Amazon Lex uses to return slot type
+    #   values. The field can be set to one of the following values:
+    #
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user.
+    #
+    #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
+    #     return the first value in the resolution list as the slot type
+    #     value. If there is no resolution list, null is returned.
+    #
+    #   If you don't specify the `valueSelectionStrategy` is not provided,
+    #   the default is `ORIGINAL_VALUE`.
+    #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSlotTypeResponse#name #name} => String
@@ -3170,6 +3201,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutSlotTypeResponse#created_date #created_date} => Time
     #   * {Types::PutSlotTypeResponse#version #version} => String
     #   * {Types::PutSlotTypeResponse#checksum #checksum} => String
+    #   * {Types::PutSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
     #
     #
     # @example Example: To Create a Slot Type
@@ -3215,9 +3247,11 @@ module Aws::LexModelBuildingService
     #     enumeration_values: [
     #       {
     #         value: "Value", # required
+    #         synonyms: ["Value"],
     #       },
     #     ],
     #     checksum: "String",
+    #     value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
     #   })
     #
     # @example Response structure
@@ -3226,10 +3260,13 @@ module Aws::LexModelBuildingService
     #   resp.description #=> String
     #   resp.enumeration_values #=> Array
     #   resp.enumeration_values[0].value #=> String
+    #   resp.enumeration_values[0].synonyms #=> Array
+    #   resp.enumeration_values[0].synonyms[0] #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType AWS API Documentation
     #
@@ -3253,7 +3290,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

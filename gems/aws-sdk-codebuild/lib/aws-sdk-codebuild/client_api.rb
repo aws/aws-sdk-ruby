@@ -15,6 +15,8 @@ module Aws::CodeBuild
     ArtifactNamespace = Shapes::StringShape.new(name: 'ArtifactNamespace')
     ArtifactPackaging = Shapes::StringShape.new(name: 'ArtifactPackaging')
     ArtifactsType = Shapes::StringShape.new(name: 'ArtifactsType')
+    BatchDeleteBuildsInput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsInput')
+    BatchDeleteBuildsOutput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsOutput')
     BatchGetBuildsInput = Shapes::StructureShape.new(name: 'BatchGetBuildsInput')
     BatchGetBuildsOutput = Shapes::StructureShape.new(name: 'BatchGetBuildsOutput')
     BatchGetProjectsInput = Shapes::StructureShape.new(name: 'BatchGetProjectsInput')
@@ -23,10 +25,12 @@ module Aws::CodeBuild
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildArtifacts = Shapes::StructureShape.new(name: 'BuildArtifacts')
     BuildIds = Shapes::ListShape.new(name: 'BuildIds')
+    BuildNotDeleted = Shapes::StructureShape.new(name: 'BuildNotDeleted')
     BuildPhase = Shapes::StructureShape.new(name: 'BuildPhase')
     BuildPhaseType = Shapes::StringShape.new(name: 'BuildPhaseType')
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
     Builds = Shapes::ListShape.new(name: 'Builds')
+    BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
@@ -89,6 +93,13 @@ module Aws::CodeBuild
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
 
+    BatchDeleteBuildsInput.add_member(:ids, Shapes::ShapeRef.new(shape: BuildIds, required: true, location_name: "ids"))
+    BatchDeleteBuildsInput.struct_class = Types::BatchDeleteBuildsInput
+
+    BatchDeleteBuildsOutput.add_member(:builds_deleted, Shapes::ShapeRef.new(shape: BuildIds, location_name: "buildsDeleted"))
+    BatchDeleteBuildsOutput.add_member(:builds_not_deleted, Shapes::ShapeRef.new(shape: BuildsNotDeleted, location_name: "buildsNotDeleted"))
+    BatchDeleteBuildsOutput.struct_class = Types::BatchDeleteBuildsOutput
+
     BatchGetBuildsInput.add_member(:ids, Shapes::ShapeRef.new(shape: BuildIds, required: true, location_name: "ids"))
     BatchGetBuildsInput.struct_class = Types::BatchGetBuildsInput
 
@@ -128,6 +139,10 @@ module Aws::CodeBuild
 
     BuildIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    BuildNotDeleted.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
+    BuildNotDeleted.add_member(:status_code, Shapes::ShapeRef.new(shape: String, location_name: "statusCode"))
+    BuildNotDeleted.struct_class = Types::BuildNotDeleted
+
     BuildPhase.add_member(:phase_type, Shapes::ShapeRef.new(shape: BuildPhaseType, location_name: "phaseType"))
     BuildPhase.add_member(:phase_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "phaseStatus"))
     BuildPhase.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
@@ -139,6 +154,8 @@ module Aws::CodeBuild
     BuildPhases.member = Shapes::ShapeRef.new(shape: BuildPhase)
 
     Builds.member = Shapes::ShapeRef.new(shape: Build)
+
+    BuildsNotDeleted.member = Shapes::ShapeRef.new(shape: BuildNotDeleted)
 
     CreateProjectInput.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
     CreateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
@@ -319,6 +336,15 @@ module Aws::CodeBuild
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeBuild_20161006",
       }
+
+      api.add_operation(:batch_delete_builds, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteBuilds"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteBuildsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteBuildsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
 
       api.add_operation(:batch_get_builds, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetBuilds"

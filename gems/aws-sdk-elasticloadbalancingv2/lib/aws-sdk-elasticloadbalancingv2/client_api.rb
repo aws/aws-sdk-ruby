@@ -197,6 +197,7 @@ module Aws::ElasticLoadBalancingV2
     TargetHealthReasonEnum = Shapes::StringShape.new(name: 'TargetHealthReasonEnum')
     TargetHealthStateEnum = Shapes::StringShape.new(name: 'TargetHealthStateEnum')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TargetTypeEnum = Shapes::StringShape.new(name: 'TargetTypeEnum')
     TooManyCertificatesException = Shapes::StructureShape.new(name: 'TooManyCertificatesException')
     TooManyListenersException = Shapes::StructureShape.new(name: 'TooManyListenersException')
     TooManyLoadBalancersException = Shapes::StructureShape.new(name: 'TooManyLoadBalancersException')
@@ -281,6 +282,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:healthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckThresholdCount, location_name: "HealthyThresholdCount"))
     CreateTargetGroupInput.add_member(:unhealthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckThresholdCount, location_name: "UnhealthyThresholdCount"))
     CreateTargetGroupInput.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
+    CreateTargetGroupInput.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     CreateTargetGroupInput.struct_class = Types::CreateTargetGroupInput
 
     CreateTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
@@ -591,6 +593,7 @@ module Aws::ElasticLoadBalancingV2
 
     TargetDescription.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     TargetDescription.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
+    TargetDescription.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ZoneName, location_name: "AvailabilityZone"))
     TargetDescription.struct_class = Types::TargetDescription
 
     TargetDescriptions.member = Shapes::ShapeRef.new(shape: TargetDescription)
@@ -609,6 +612,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:health_check_path, Shapes::ShapeRef.new(shape: Path, location_name: "HealthCheckPath"))
     TargetGroup.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
     TargetGroup.add_member(:load_balancer_arns, Shapes::ShapeRef.new(shape: LoadBalancerArns, location_name: "LoadBalancerArns"))
+    TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)

@@ -1046,21 +1046,25 @@ module Aws::EC2
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             ipv_6_ranges: [
     #               {
     #                 cidr_ipv_6: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             prefix_list_ids: [
     #               {
+    #                 description: "String",
     #                 prefix_list_id: "String",
     #               },
     #             ],
     #             to_port: 1,
     #             user_id_group_pairs: [
     #               {
+    #                 description: "String",
     #                 group_id: "String",
     #                 group_name: "String",
     #                 peering_status: "String",
@@ -1161,21 +1165,25 @@ module Aws::EC2
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             ipv_6_ranges: [
     #               {
     #                 cidr_ipv_6: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             prefix_list_ids: [
     #               {
+    #                 description: "String",
     #                 prefix_list_id: "String",
     #               },
     #             ],
     #             to_port: 1,
     #             user_id_group_pairs: [
     #               {
+    #                 description: "String",
     #                 group_id: "String",
     #                 group_name: "String",
     #                 peering_status: "String",
@@ -1201,15 +1209,20 @@ module Aws::EC2
     # @!attribute [rw] from_port
     #   The start of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
-    #   to specify all types.
+    #   to specify all types. If you specify all ICMP/ICMPv6 types, you must
+    #   specify all codes.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
-    #   The ID of the security group. Required for a nondefault VPC.
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You
+    #   must specify either the security group ID or the security group name
+    #   in the request.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
@@ -1257,7 +1270,8 @@ module Aws::EC2
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use `-1`
-    #   to specify all codes.
+    #   to specify all codes. If you specify all ICMP/ICMPv6 types, you must
+    #   specify all codes.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -15690,21 +15704,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -15718,7 +15736,8 @@ module Aws::EC2
     # @!attribute [rw] from_port
     #   The start of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 type number. A value of `-1` indicates all ICMP/ICMPv6
-    #   types.
+    #   types. If you specify all ICMP/ICMPv6 types, you must specify all
+    #   codes.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
@@ -15757,7 +15776,8 @@ module Aws::EC2
     # @!attribute [rw] to_port
     #   The end of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
-    #   for the specified ICMP type.
+    #   for the specified ICMP type. If you specify all ICMP/ICMPv6 types,
+    #   you must specify all codes.
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -15784,6 +15804,7 @@ module Aws::EC2
     #
     #       {
     #         cidr_ip: "String",
+    #         description: "String",
     #       }
     #
     # @!attribute [rw] cidr_ip
@@ -15792,10 +15813,19 @@ module Aws::EC2
     #   /32 prefix.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description for the security group rule that references this IPv4
+    #   address range.
+    #
+    #   Constraints: Up to 255 characters in length. Allowed characters are
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpRange AWS API Documentation
     #
     class IpRange < Struct.new(
-      :cidr_ip)
+      :cidr_ip,
+      :description)
       include Aws::Structure
     end
 
@@ -15819,6 +15849,7 @@ module Aws::EC2
     #
     #       {
     #         cidr_ipv_6: "String",
+    #         description: "String",
     #       }
     #
     # @!attribute [rw] cidr_ipv_6
@@ -15827,10 +15858,19 @@ module Aws::EC2
     #   /128 prefix.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description for the security group rule that references this IPv6
+    #   address range.
+    #
+    #   Constraints: Up to 255 characters in length. Allowed characters are
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6Range AWS API Documentation
     #
     class Ipv6Range < Struct.new(
-      :cidr_ipv_6)
+      :cidr_ipv_6,
+      :description)
       include Aws::Structure
     end
 
@@ -18032,8 +18072,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         description: "String",
     #         prefix_list_id: "String",
     #       }
+    #
+    # @!attribute [rw] description
+    #   A description for the security group rule that references this
+    #   prefix list ID.
+    #
+    #   Constraints: Up to 255 characters in length. Allowed characters are
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   @return [String]
     #
     # @!attribute [rw] prefix_list_id
     #   The ID of the prefix.
@@ -18042,6 +18091,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListId AWS API Documentation
     #
     class PrefixListId < Struct.new(
+      :description,
       :prefix_list_id)
       include Aws::Structure
     end
@@ -20534,21 +20584,25 @@ module Aws::EC2
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             ipv_6_ranges: [
     #               {
     #                 cidr_ipv_6: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             prefix_list_ids: [
     #               {
+    #                 description: "String",
     #                 prefix_list_id: "String",
     #               },
     #             ],
     #             to_port: 1,
     #             user_id_group_pairs: [
     #               {
+    #                 description: "String",
     #                 group_id: "String",
     #                 group_name: "String",
     #                 peering_status: "String",
@@ -20649,21 +20703,25 @@ module Aws::EC2
     #             ip_ranges: [
     #               {
     #                 cidr_ip: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             ipv_6_ranges: [
     #               {
     #                 cidr_ipv_6: "String",
+    #                 description: "String",
     #               },
     #             ],
     #             prefix_list_ids: [
     #               {
+    #                 description: "String",
     #                 prefix_list_id: "String",
     #               },
     #             ],
     #             to_port: 1,
     #             user_id_group_pairs: [
     #               {
+    #                 description: "String",
     #                 group_id: "String",
     #                 group_name: "String",
     #                 peering_status: "String",
@@ -24169,6 +24227,193 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.
+    #
+    # @note When making an API call, you may pass UpdateSecurityGroupRuleDescriptionsEgressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         group_id: "String",
+    #         group_name: "String",
+    #         ip_permissions: [ # required
+    #           {
+    #             from_port: 1,
+    #             ip_protocol: "String",
+    #             ip_ranges: [
+    #               {
+    #                 cidr_ip: "String",
+    #                 description: "String",
+    #               },
+    #             ],
+    #             ipv_6_ranges: [
+    #               {
+    #                 cidr_ipv_6: "String",
+    #                 description: "String",
+    #               },
+    #             ],
+    #             prefix_list_ids: [
+    #               {
+    #                 description: "String",
+    #                 prefix_list_id: "String",
+    #               },
+    #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 description: "String",
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_permissions
+    #   The IP permissions for the security group rule.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsEgressRequest AWS API Documentation
+    #
+    class UpdateSecurityGroupRuleDescriptionsEgressRequest < Struct.new(
+      :dry_run,
+      :group_id,
+      :group_name,
+      :ip_permissions)
+      include Aws::Structure
+    end
+
+    # Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.
+    #
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsEgressResult AWS API Documentation
+    #
+    class UpdateSecurityGroupRuleDescriptionsEgressResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
+    # Contains the parameters for
+    # UpdateSecurityGroupRuleDescriptionsIngress.
+    #
+    # @note When making an API call, you may pass UpdateSecurityGroupRuleDescriptionsIngressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         group_id: "String",
+    #         group_name: "String",
+    #         ip_permissions: [ # required
+    #           {
+    #             from_port: 1,
+    #             ip_protocol: "String",
+    #             ip_ranges: [
+    #               {
+    #                 cidr_ip: "String",
+    #                 description: "String",
+    #               },
+    #             ],
+    #             ipv_6_ranges: [
+    #               {
+    #                 cidr_ipv_6: "String",
+    #                 description: "String",
+    #               },
+    #             ],
+    #             prefix_list_ids: [
+    #               {
+    #                 description: "String",
+    #                 prefix_list_id: "String",
+    #               },
+    #             ],
+    #             to_port: 1,
+    #             user_id_group_pairs: [
+    #               {
+    #                 description: "String",
+    #                 group_id: "String",
+    #                 group_name: "String",
+    #                 peering_status: "String",
+    #                 user_id: "String",
+    #                 vpc_id: "String",
+    #                 vpc_peering_connection_id: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   \[EC2-Classic, default VPC\] The name of the security group. You
+    #   must specify either the security group ID or the security group name
+    #   in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_permissions
+    #   The IP permissions for the security group rule.
+    #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsIngressRequest AWS API Documentation
+    #
+    class UpdateSecurityGroupRuleDescriptionsIngressRequest < Struct.new(
+      :dry_run,
+      :group_id,
+      :group_name,
+      :ip_permissions)
+      include Aws::Structure
+    end
+
+    # Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.
+    #
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsIngressResult AWS API Documentation
+    #
+    class UpdateSecurityGroupRuleDescriptionsIngressResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
     # Describes the S3 bucket for the disk image.
     #
     # @note When making an API call, you may pass UserBucket
@@ -24241,6 +24486,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         description: "String",
     #         group_id: "String",
     #         group_name: "String",
     #         peering_status: "String",
@@ -24248,6 +24494,14 @@ module Aws::EC2
     #         vpc_id: "String",
     #         vpc_peering_connection_id: "String",
     #       }
+    #
+    # @!attribute [rw] description
+    #   A description for the security group rule that references this user
+    #   ID group pair.
+    #
+    #   Constraints: Up to 255 characters in length. Allowed characters are
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   @return [String]
     #
     # @!attribute [rw] group_id
     #   The ID of the security group.
@@ -24282,6 +24536,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserIdGroupPair AWS API Documentation
     #
     class UserIdGroupPair < Struct.new(
+      :description,
       :group_id,
       :group_name,
       :peering_status,
