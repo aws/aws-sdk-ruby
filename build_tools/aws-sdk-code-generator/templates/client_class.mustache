@@ -34,9 +34,9 @@ module {{module_name}}
     {{/documentation}}
     # @overload {{name}}(params = {})
     # @param [Hash] params ({})
-    def {{name}}(params = {}, options = {})
+    def {{name}}(params = {}, options = {}{{{block_option}}})
       req = build_request(:{{name}}, params)
-      req.send_request(options)
+      req.send_request(options{{{block_option}}})
     end
     {{/operations}}
 

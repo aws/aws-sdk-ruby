@@ -39,6 +39,10 @@ Feature: S3 Objects
     | a b  |
     | a+b  |
 
+  Scenario: Support object streaming
+    Given I put "hello world" to the key "hello"
+    Then I can streaming download key "hello"
+
   @paging
   Scenario: Paging responses
     Given I put nothing to the key "photos/camping/cascades.jpg"
