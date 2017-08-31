@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2017-08-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 * Issue - Update the `aws-partitions` gemspec metadata
 
 1.16.0 (2017-08-23)

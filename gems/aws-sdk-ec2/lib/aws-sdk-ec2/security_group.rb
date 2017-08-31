@@ -122,21 +122,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -205,21 +209,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -243,9 +251,12 @@ module Aws::EC2
     # @option options [Integer] :from_port
     #   The start of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types.
+    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
+    #   specify all codes.
     # @option options [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You must
+    #   specify either the security group ID or the security group name in the
+    #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
     #   A set of IP permissions. Can be used to specify multiple rules in a
     #   single command.
@@ -280,6 +291,7 @@ module Aws::EC2
     # @option options [Integer] :to_port
     #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
     #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
+    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
     #   codes.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -363,21 +375,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -446,21 +462,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",

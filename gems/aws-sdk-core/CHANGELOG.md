@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.2.0 (2017-08-31)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Issue - Update `aws-sdk-core` gemspec metadata.
 
 * Issue - Update `aws-sdk-core` gemspec metadata

@@ -891,6 +891,10 @@ module Aws::EC2
     UnsuccessfulItemError = Shapes::StructureShape.new(name: 'UnsuccessfulItemError')
     UnsuccessfulItemList = Shapes::ListShape.new(name: 'UnsuccessfulItemList')
     UnsuccessfulItemSet = Shapes::ListShape.new(name: 'UnsuccessfulItemSet')
+    UpdateSecurityGroupRuleDescriptionsEgressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressRequest')
+    UpdateSecurityGroupRuleDescriptionsEgressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressResult')
+    UpdateSecurityGroupRuleDescriptionsIngressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressRequest')
+    UpdateSecurityGroupRuleDescriptionsIngressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressResult')
     UserBucket = Shapes::StructureShape.new(name: 'UserBucket')
     UserBucketDetails = Shapes::StructureShape.new(name: 'UserBucketDetails')
     UserData = Shapes::StructureShape.new(name: 'UserData')
@@ -3295,6 +3299,7 @@ module Aws::EC2
     IpPermissionList.member = Shapes::ShapeRef.new(shape: IpPermission, location_name: "item")
 
     IpRange.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "cidrIp"))
+    IpRange.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     IpRange.struct_class = Types::IpRange
 
     IpRangeList.member = Shapes::ShapeRef.new(shape: IpRange, location_name: "item")
@@ -3309,6 +3314,7 @@ module Aws::EC2
     Ipv6CidrBlockSet.member = Shapes::ShapeRef.new(shape: Ipv6CidrBlock, location_name: "item")
 
     Ipv6Range.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
+    Ipv6Range.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     Ipv6Range.struct_class = Types::Ipv6Range
 
     Ipv6RangeList.member = Shapes::ShapeRef.new(shape: Ipv6Range, location_name: "item")
@@ -3694,6 +3700,7 @@ module Aws::EC2
     PrefixList.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "prefixListName"))
     PrefixList.struct_class = Types::PrefixList
 
+    PrefixListId.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     PrefixListId.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListId"))
     PrefixListId.struct_class = Types::PrefixListId
 
@@ -4689,6 +4696,24 @@ module Aws::EC2
 
     UnsuccessfulItemSet.member = Shapes::ShapeRef.new(shape: UnsuccessfulItem, location_name: "item")
 
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "GroupId"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, required: true, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.struct_class = Types::UpdateSecurityGroupRuleDescriptionsEgressRequest
+
+    UpdateSecurityGroupRuleDescriptionsEgressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    UpdateSecurityGroupRuleDescriptionsEgressResult.struct_class = Types::UpdateSecurityGroupRuleDescriptionsEgressResult
+
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "GroupId"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "GroupName"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, required: true, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.struct_class = Types::UpdateSecurityGroupRuleDescriptionsIngressRequest
+
+    UpdateSecurityGroupRuleDescriptionsIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    UpdateSecurityGroupRuleDescriptionsIngressResult.struct_class = Types::UpdateSecurityGroupRuleDescriptionsIngressResult
+
     UserBucket.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, location_name: "S3Bucket"))
     UserBucket.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
     UserBucket.struct_class = Types::UserBucket
@@ -4702,6 +4727,7 @@ module Aws::EC2
 
     UserGroupStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "UserGroup")
 
+    UserIdGroupPair.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UserIdGroupPair.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     UserIdGroupPair.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     UserIdGroupPair.add_member(:peering_status, Shapes::ShapeRef.new(shape: String, location_name: "peeringStatus"))
@@ -6888,6 +6914,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnmonitorInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: UnmonitorInstancesResult)
+      end)
+
+      api.add_operation(:update_security_group_rule_descriptions_egress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSecurityGroupRuleDescriptionsEgress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsEgressRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsEgressResult)
+      end)
+
+      api.add_operation(:update_security_group_rule_descriptions_ingress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSecurityGroupRuleDescriptionsIngress"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressResult)
       end)
     end
 

@@ -387,6 +387,7 @@ module Aws::ElasticLoadBalancingV2
     #         matcher: {
     #           http_code: "HttpCode", # required
     #         },
+    #         target_type: "instance", # accepts instance, ip
     #       }
     #
     # @!attribute [rw] name
@@ -451,6 +452,20 @@ module Aws::ElasticLoadBalancingV2
     #   target. The default is 200.
     #   @return [Types::Matcher]
     #
+    # @!attribute [rw] target_type
+    #   The type of target that you must specify when registering targets
+    #   with this target group. The possible values are `instance` (targets
+    #   are specified by instance ID) or `ip` (targets are specified by IP
+    #   address). The default is `instance`. Note that you can't specify
+    #   targets for a target group using both instance IDs and IP addresses.
+    #
+    #   If the target type is `ip`, specify IP addresses from the subnets of
+    #   the virtual private cloud (VPC) for the target group, the RFC 1918
+    #   range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC
+    #   6598 range (100.64.0.0/10). You can't specify publicly routable IP
+    #   addresses.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
     #
     class CreateTargetGroupInput < Struct.new(
@@ -465,7 +480,8 @@ module Aws::ElasticLoadBalancingV2
       :health_check_timeout_seconds,
       :healthy_threshold_count,
       :unhealthy_threshold_count,
-      :matcher)
+      :matcher,
+      :target_type)
       include Aws::Structure
     end
 
@@ -577,6 +593,7 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             id: "TargetId", # required
     #             port: 1,
+    #             availability_zone: "ZoneName",
     #           },
     #         ],
     #       }
@@ -1012,6 +1029,7 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             id: "TargetId", # required
     #             port: 1,
+    #             availability_zone: "ZoneName",
     #           },
     #         ],
     #       }
@@ -1585,6 +1603,7 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             id: "TargetId", # required
     #             port: 1,
+    #             availability_zone: "ZoneName",
     #           },
     #         ],
     #       }
@@ -1973,21 +1992,38 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         id: "TargetId", # required
     #         port: 1,
+    #         availability_zone: "ZoneName",
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the target.
+    #   The ID of the target. If the target type of the target group is
+    #   `instance`, specify an instance ID. If the target type is `ip`,
+    #   specify an IP address.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   The port on which the target is listening.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the IP address is to be registered.
+    #   Specify `all` to register an IP address outside the target group VPC
+    #   with all Availability Zones that are enabled for the load balancer.
+    #
+    #   If the IP address is in a subnet of the VPC for the target group,
+    #   the Availability Zone is automatically detected and this parameter
+    #   is optional.
+    #
+    #   This parameter is not supported if the target type of the target
+    #   group is `instance`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription AWS API Documentation
     #
     class TargetDescription < Struct.new(
       :id,
-      :port)
+      :port,
+      :availability_zone)
       include Aws::Structure
     end
 
@@ -2055,6 +2091,13 @@ module Aws::ElasticLoadBalancingV2
     #   traffic to this target group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] target_type
+    #   The type of target that you must specify when registering targets
+    #   with this target group. The possible values are `instance` (targets
+    #   are specified by instance ID) or `ip` (targets are specified by IP
+    #   address).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
     #
     class TargetGroup < Struct.new(
@@ -2071,7 +2114,8 @@ module Aws::ElasticLoadBalancingV2
       :unhealthy_threshold_count,
       :health_check_path,
       :matcher,
-      :load_balancer_arns)
+      :load_balancer_arns,
+      :target_type)
       include Aws::Structure
     end
 

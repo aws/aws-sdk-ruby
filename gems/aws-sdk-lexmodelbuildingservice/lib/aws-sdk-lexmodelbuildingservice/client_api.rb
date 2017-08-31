@@ -142,10 +142,12 @@ module Aws::LexModelBuildingService
     SlotTypeMetadataList = Shapes::ListShape.new(name: 'SlotTypeMetadataList')
     SlotTypeName = Shapes::StringShape.new(name: 'SlotTypeName')
     SlotUtteranceList = Shapes::ListShape.new(name: 'SlotUtteranceList')
+    SlotValueSelectionStrategy = Shapes::StringShape.new(name: 'SlotValueSelectionStrategy')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusType = Shapes::StringShape.new(name: 'StatusType')
     String = Shapes::StringShape.new(name: 'String')
+    SynonymList = Shapes::ListShape.new(name: 'SynonymList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UserId = Shapes::StringShape.new(name: 'UserId')
     Utterance = Shapes::StringShape.new(name: 'Utterance')
@@ -266,6 +268,7 @@ module Aws::LexModelBuildingService
     CreateSlotTypeVersionResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     CreateSlotTypeVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateSlotTypeVersionResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    CreateSlotTypeVersionResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     CreateSlotTypeVersionResponse.struct_class = Types::CreateSlotTypeVersionResponse
 
     DeleteBotAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "name"))
@@ -303,6 +306,7 @@ module Aws::LexModelBuildingService
     DeleteUtterancesRequest.struct_class = Types::DeleteUtterancesRequest
 
     EnumerationValue.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "value"))
+    EnumerationValue.add_member(:synonyms, Shapes::ShapeRef.new(shape: SynonymList, location_name: "synonyms"))
     EnumerationValue.struct_class = Types::EnumerationValue
 
     EnumerationValues.member = Shapes::ShapeRef.new(shape: EnumerationValue)
@@ -480,6 +484,7 @@ module Aws::LexModelBuildingService
     GetSlotTypeResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     GetSlotTypeResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    GetSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     GetSlotTypeResponse.struct_class = Types::GetSlotTypeResponse
 
     GetSlotTypeVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -624,6 +629,7 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     PutSlotTypeRequest.add_member(:enumeration_values, Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
     PutSlotTypeRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutSlotTypeRequest.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeRequest.struct_class = Types::PutSlotTypeRequest
 
     PutSlotTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
@@ -633,6 +639,7 @@ module Aws::LexModelBuildingService
     PutSlotTypeResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     PutSlotTypeResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     PutSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeResponse.struct_class = Types::PutSlotTypeResponse
 
     ResourceReference.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -666,6 +673,8 @@ module Aws::LexModelBuildingService
     Statement.add_member(:messages, Shapes::ShapeRef.new(shape: MessageList, required: true, location_name: "messages"))
     Statement.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     Statement.struct_class = Types::Statement
+
+    SynonymList.member = Shapes::ShapeRef.new(shape: Value)
 
     UtteranceData.add_member(:utterance_string, Shapes::ShapeRef.new(shape: UtteranceString, location_name: "utteranceString"))
     UtteranceData.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))

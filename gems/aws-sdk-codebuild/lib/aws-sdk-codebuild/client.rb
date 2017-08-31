@@ -155,6 +155,39 @@ module Aws::CodeBuild
 
     # @!group API Operations
 
+    # Deletes one or more builds.
+    #
+    # @option params [required, Array<String>] :ids
+    #   The IDs of the builds to delete.
+    #
+    # @return [Types::BatchDeleteBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteBuildsOutput#builds_deleted #builds_deleted} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteBuildsOutput#builds_not_deleted #builds_not_deleted} => Array&lt;Types::BuildNotDeleted&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_builds({
+    #     ids: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.builds_deleted #=> Array
+    #   resp.builds_deleted[0] #=> String
+    #   resp.builds_not_deleted #=> Array
+    #   resp.builds_not_deleted[0].id #=> String
+    #   resp.builds_not_deleted[0].status_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds AWS API Documentation
+    #
+    # @overload batch_delete_builds(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_builds(params = {}, options = {})
+      req = build_request(:batch_delete_builds, params)
+      req.send_request(options)
+    end
+
     # Gets information about builds.
     #
     # @option params [required, Array<String>] :ids
@@ -164,6 +197,259 @@ module Aws::CodeBuild
     #
     #   * {Types::BatchGetBuildsOutput#builds #builds} => Array&lt;Types::Build&gt;
     #   * {Types::BatchGetBuildsOutput#builds_not_found #builds_not_found} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To get information about builds
+    #
+    #   # The following example gets information about builds with the specified build IDs.
+    #
+    #   resp = client.batch_get_builds({
+    #     ids: [
+    #       "codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
+    #       "codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     builds: [
+    #       {
+    #         arn: "arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
+    #         artifacts: {
+    #           location: "arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project", 
+    #         }, 
+    #         build_complete: true, 
+    #         build_status: "SUCCEEDED", 
+    #         current_phase: "COMPLETED", 
+    #         end_time: Time.parse(1479832474.764), 
+    #         environment: {
+    #           type: "LINUX_CONTAINER", 
+    #           compute_type: "BUILD_GENERAL1_SMALL", 
+    #           environment_variables: [
+    #           ], 
+    #           image: "aws/codebuild/java:openjdk-8", 
+    #           privileged_mode: false, 
+    #         }, 
+    #         id: "codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
+    #         initiator: "MyDemoUser", 
+    #         logs: {
+    #           deep_link: "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
+    #           group_name: "/aws/codebuild/codebuild-demo-project", 
+    #           stream_name: "9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
+    #         }, 
+    #         phases: [
+    #           {
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479832342.23), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "SUBMITTED", 
+    #             start_time: Time.parse(1479832341.854), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 72, 
+    #             end_time: Time.parse(1479832415.064), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "PROVISIONING", 
+    #             start_time: Time.parse(1479832342.23), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 46, 
+    #             end_time: Time.parse(1479832461.261), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "DOWNLOAD_SOURCE", 
+    #             start_time: Time.parse(1479832415.064), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479832461.354), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "INSTALL", 
+    #             start_time: Time.parse(1479832461.261), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479832461.448), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "PRE_BUILD", 
+    #             start_time: Time.parse(1479832461.354), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 9, 
+    #             end_time: Time.parse(1479832471.115), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "BUILD", 
+    #             start_time: Time.parse(1479832461.448), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479832471.224), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "POST_BUILD", 
+    #             start_time: Time.parse(1479832471.115), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479832471.791), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "UPLOAD_ARTIFACTS", 
+    #             start_time: Time.parse(1479832471.224), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 2, 
+    #             end_time: Time.parse(1479832474.764), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "FINALIZING", 
+    #             start_time: Time.parse(1479832471.791), 
+    #           }, 
+    #           {
+    #             phase_type: "COMPLETED", 
+    #             start_time: Time.parse(1479832474.764), 
+    #           }, 
+    #         ], 
+    #         project_name: "codebuild-demo-project", 
+    #         source: {
+    #           type: "S3", 
+    #           buildspec: "", 
+    #           location: "arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip", 
+    #         }, 
+    #         start_time: Time.parse(1479832341.854), 
+    #         timeout_in_minutes: 60, 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
+    #         artifacts: {
+    #           location: "arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project", 
+    #         }, 
+    #         build_complete: true, 
+    #         build_status: "SUCCEEDED", 
+    #         current_phase: "COMPLETED", 
+    #         end_time: Time.parse(1479401214.239), 
+    #         environment: {
+    #           type: "LINUX_CONTAINER", 
+    #           compute_type: "BUILD_GENERAL1_SMALL", 
+    #           environment_variables: [
+    #           ], 
+    #           image: "aws/codebuild/java:openjdk-8", 
+    #           privileged_mode: false, 
+    #         }, 
+    #         id: "codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
+    #         initiator: "MyDemoUser", 
+    #         logs: {
+    #           deep_link: "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=b79a46f7-1473-4636-a23f-da9c45c208EX", 
+    #           group_name: "/aws/codebuild/codebuild-demo-project", 
+    #           stream_name: "b79a46f7-1473-4636-a23f-da9c45c208EX", 
+    #         }, 
+    #         phases: [
+    #           {
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479401082.342), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "SUBMITTED", 
+    #             start_time: Time.parse(1479401081.869), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 71, 
+    #             end_time: Time.parse(1479401154.129), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "PROVISIONING", 
+    #             start_time: Time.parse(1479401082.342), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 45, 
+    #             end_time: Time.parse(1479401199.136), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "DOWNLOAD_SOURCE", 
+    #             start_time: Time.parse(1479401154.129), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479401199.236), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "INSTALL", 
+    #             start_time: Time.parse(1479401199.136), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479401199.345), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "PRE_BUILD", 
+    #             start_time: Time.parse(1479401199.236), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 9, 
+    #             end_time: Time.parse(1479401208.68), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "BUILD", 
+    #             start_time: Time.parse(1479401199.345), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479401208.783), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "POST_BUILD", 
+    #             start_time: Time.parse(1479401208.68), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 0, 
+    #             end_time: Time.parse(1479401209.463), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "UPLOAD_ARTIFACTS", 
+    #             start_time: Time.parse(1479401208.783), 
+    #           }, 
+    #           {
+    #             contexts: [
+    #             ], 
+    #             duration_in_seconds: 4, 
+    #             end_time: Time.parse(1479401214.239), 
+    #             phase_status: "SUCCEEDED", 
+    #             phase_type: "FINALIZING", 
+    #             start_time: Time.parse(1479401209.463), 
+    #           }, 
+    #           {
+    #             phase_type: "COMPLETED", 
+    #             start_time: Time.parse(1479401214.239), 
+    #           }, 
+    #         ], 
+    #         project_name: "codebuild-demo-project", 
+    #         source: {
+    #           type: "S3", 
+    #           location: "arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip", 
+    #         }, 
+    #         start_time: Time.parse(1479401081.869), 
+    #         timeout_in_minutes: 60, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -634,7 +920,20 @@ module Aws::CodeBuild
     #   specified, the latest version will be used. If specified, must be one
     #   of:
     #
-    #   * For AWS CodeCommit or GitHub: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID to use.
+    #
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
+    #     that corresponds to the version of the source code you want to
+    #     build. If a pull request ID is specified, it must use the format
+    #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
+    #     specified, the branch's HEAD commit ID will be used. If not
+    #     specified, the default branch's HEAD commit ID will be used.
+    #
+    #   * For Bitbucket: the commit ID, branch name, or tag name that
+    #     corresponds to the version of the source code you want to build. If
+    #     a branch name is specified, the branch's HEAD commit ID will be
+    #     used. If not specified, the default branch's HEAD commit ID will be
+    #     used.
     #
     #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
     #     object representing the build input ZIP file to use.
@@ -948,7 +1247,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

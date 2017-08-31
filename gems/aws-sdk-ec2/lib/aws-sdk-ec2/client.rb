@@ -1297,7 +1297,8 @@ module Aws::EC2
     # CIDR range or a source group. For the TCP and UDP protocols, you must
     # also specify the destination port or port range. For the ICMP
     # protocol, you must also specify the ICMP type and code. You can use -1
-    # for the type or code to mean all types or all codes.
+    # for the type or code to mean all types or all codes. You can
+    # optionally specify a description for the rule.
     #
     # Rule changes are propagated to affected instances as quickly as
     # possible. However, a small delay might occur.
@@ -1362,21 +1363,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -1423,6 +1428,8 @@ module Aws::EC2
     # more information about VPC security group limits, see [Amazon VPC
     # Limits][1].
     #
+    # You can optionally specify a description for the security group rule.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
@@ -1434,13 +1441,18 @@ module Aws::EC2
     # @option params [Integer] :from_port
     #   The start of port range for the TCP and UDP protocols, or an
     #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
-    #   specify all types.
+    #   specify all types. If you specify all ICMP/ICMPv6 types, you must
+    #   specify all codes.
     #
     # @option params [String] :group_id
-    #   The ID of the security group. Required for a nondefault VPC.
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You must
+    #   specify either the security group ID or the security group name in the
+    #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   A set of IP permissions. Can be used to specify multiple rules in a
@@ -1480,6 +1492,7 @@ module Aws::EC2
     # @option params [Integer] :to_port
     #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
     #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
+    #   codes. If you specify all ICMP/ICMPv6 types, you must specify all
     #   codes.
     #
     # @option params [Boolean] :dry_run
@@ -1504,21 +1517,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -11760,12 +11777,16 @@ module Aws::EC2
     #   resp.security_groups[0].ip_permissions[0].ip_protocol #=> String
     #   resp.security_groups[0].ip_permissions[0].ip_ranges #=> Array
     #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].description #=> String
     #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges #=> Array
     #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].description #=> String
     #   resp.security_groups[0].ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].description #=> String
     #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
     #   resp.security_groups[0].ip_permissions[0].to_port #=> Integer
     #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].description #=> String
     #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_id #=> String
     #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_name #=> String
     #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
@@ -11779,12 +11800,16 @@ module Aws::EC2
     #   resp.security_groups[0].ip_permissions_egress[0].ip_protocol #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges #=> Array
     #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].description #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges #=> Array
     #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].description #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids #=> Array
+    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].description #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].to_port #=> Integer
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs #=> Array
+    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].description #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
@@ -13071,6 +13096,7 @@ module Aws::EC2
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].prefix_list_ids[0] #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].to_port #=> Integer
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].description #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
@@ -13086,6 +13112,7 @@ module Aws::EC2
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].prefix_list_ids[0] #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].to_port #=> Integer
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs #=> Array
+    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].description #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
@@ -19640,14 +19667,15 @@ module Aws::EC2
 
     # \[EC2-VPC only\] Removes one or more egress rules from a security
     # group for EC2-VPC. This action doesn't apply to security groups for
-    # use in EC2-Classic. The values that you specify in the revoke request
-    # (for example, ports) must match the existing rule's values for the
-    # rule to be revoked.
+    # use in EC2-Classic. To remove a rule, the values that you specify (for
+    # example, ports) must match the existing rule's values exactly.
     #
     # Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or
     # source security group. For the TCP and UDP protocols, you must also
     # specify the destination port or range of ports. For the ICMP protocol,
-    # you must also specify the ICMP type and code.
+    # you must also specify the ICMP type and code. If the security group
+    # rule has a description, you do not have to specify the description to
+    # revoke the rule.
     #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
@@ -19707,21 +19735,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -19749,9 +19781,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Removes one or more ingress rules from a security group. The values
-    # that you specify in the revoke request (for example, ports) must match
-    # the existing rule's values for the rule to be removed.
+    # Removes one or more ingress rules from a security group. To remove a
+    # rule, the values that you specify (for example, ports) must match the
+    # existing rule's values exactly.
     #
     # <note markdown="1"> \[EC2-Classic security groups only\] If the values you specify do not
     # match the existing rule's values, no error is returned. Use
@@ -19762,7 +19794,9 @@ module Aws::EC2
     # Each rule consists of the protocol and the CIDR range or source
     # security group. For the TCP and UDP protocols, you must also specify
     # the destination port or range of ports. For the ICMP protocol, you
-    # must also specify the ICMP type and code.
+    # must also specify the ICMP type and code. If the security group rule
+    # has a description, you do not have to specify the description to
+    # revoke the rule.
     #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
@@ -19838,21 +19872,25 @@ module Aws::EC2
     #         ip_ranges: [
     #           {
     #             cidr_ip: "String",
+    #             description: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
     #             cidr_ipv_6: "String",
+    #             description: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
+    #             description: "String",
     #             prefix_list_id: "String",
     #           },
     #         ],
     #         to_port: 1,
     #         user_id_group_pairs: [
     #           {
+    #             description: "String",
     #             group_id: "String",
     #             group_name: "String",
     #             peering_status: "String",
@@ -20906,6 +20944,182 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # \[EC2-VPC only\] Updates the description of an egress (outbound)
+    # security group rule. You can replace an existing description, or add a
+    # description to a rule that did not have one previously.
+    #
+    # You specify the description as part of the IP permissions structure.
+    # You can remove a description for a security group rule by omitting the
+    # description parameter in the request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :group_id
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
+    #
+    # @option params [String] :group_name
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
+    #   request.
+    #
+    # @option params [required, Array<Types::IpPermission>] :ip_permissions
+    #   The IP permissions for the security group rule.
+    #
+    # @return [Types::UpdateSecurityGroupRuleDescriptionsEgressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSecurityGroupRuleDescriptionsEgressResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_group_rule_descriptions_egress({
+    #     dry_run: false,
+    #     group_id: "String",
+    #     group_name: "String",
+    #     ip_permissions: [ # required
+    #       {
+    #         from_port: 1,
+    #         ip_protocol: "String",
+    #         ip_ranges: [
+    #           {
+    #             cidr_ip: "String",
+    #             description: "String",
+    #           },
+    #         ],
+    #         ipv_6_ranges: [
+    #           {
+    #             cidr_ipv_6: "String",
+    #             description: "String",
+    #           },
+    #         ],
+    #         prefix_list_ids: [
+    #           {
+    #             description: "String",
+    #             prefix_list_id: "String",
+    #           },
+    #         ],
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             group_id: "String",
+    #             group_name: "String",
+    #             peering_status: "String",
+    #             user_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsEgress AWS API Documentation
+    #
+    # @overload update_security_group_rule_descriptions_egress(params = {})
+    # @param [Hash] params ({})
+    def update_security_group_rule_descriptions_egress(params = {}, options = {})
+      req = build_request(:update_security_group_rule_descriptions_egress, params)
+      req.send_request(options)
+    end
+
+    # Updates the description of an ingress (inbound) security group rule.
+    # You can replace an existing description, or add a description to a
+    # rule that did not have one previously.
+    #
+    # You specify the description as part of the IP permissions structure.
+    # You can remove a description for a security group rule by omitting the
+    # description parameter in the request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :group_id
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
+    #
+    # @option params [String] :group_name
+    #   \[EC2-Classic, default VPC\] The name of the security group. You must
+    #   specify either the security group ID or the security group name in the
+    #   request.
+    #
+    # @option params [required, Array<Types::IpPermission>] :ip_permissions
+    #   The IP permissions for the security group rule.
+    #
+    # @return [Types::UpdateSecurityGroupRuleDescriptionsIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSecurityGroupRuleDescriptionsIngressResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_group_rule_descriptions_ingress({
+    #     dry_run: false,
+    #     group_id: "String",
+    #     group_name: "String",
+    #     ip_permissions: [ # required
+    #       {
+    #         from_port: 1,
+    #         ip_protocol: "String",
+    #         ip_ranges: [
+    #           {
+    #             cidr_ip: "String",
+    #             description: "String",
+    #           },
+    #         ],
+    #         ipv_6_ranges: [
+    #           {
+    #             cidr_ipv_6: "String",
+    #             description: "String",
+    #           },
+    #         ],
+    #         prefix_list_ids: [
+    #           {
+    #             description: "String",
+    #             prefix_list_id: "String",
+    #           },
+    #         ],
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             group_id: "String",
+    #             group_name: "String",
+    #             peering_status: "String",
+    #             user_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsIngress AWS API Documentation
+    #
+    # @overload update_security_group_rule_descriptions_ingress(params = {})
+    # @param [Hash] params ({})
+    def update_security_group_rule_descriptions_ingress(params = {}, options = {})
+      req = build_request(:update_security_group_rule_descriptions_ingress, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -20919,7 +21133,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

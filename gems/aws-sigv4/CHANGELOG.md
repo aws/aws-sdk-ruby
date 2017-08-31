@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.0.2 (2017-08-31)
+------------------
+
 * Issue - Update `aws-sigv4` gemspec metadata
 
 1.0.1 (2017-07-12)
