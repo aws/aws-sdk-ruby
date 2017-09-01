@@ -1,0 +1,101 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "endpointPrefix": "svc",
+    "protocol": "rest-xml",
+    "signatureVersion": "v4"
+  },
+  "operations": {
+    "Foo": {
+      "name": "Foo",
+      "http": {
+        "method": "GET",
+        "requestUri": "/"
+      },
+      "input": {"shape": "FooInput"},
+      "output": {"shape": "FooOutput"}
+    },
+    "Bar": {
+      "name": "Bar",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "BarInput"},
+      "output": {"shape": "BarOutput"}
+    },
+    "Baz": {
+      "name": "Baz",
+      "http": {
+        "method": "GET",
+        "requestUri": "/"
+      },
+      "input": {"shape": "BazInput"},
+      "output": {"shape": "BazOutput"}
+    }
+  },
+  "shapes": {
+    "FooInput": {
+      "type": "structure",
+      "members": {
+        "FooOne": {
+          "shape": "String"
+        }
+      }
+    },
+    "FooOutput": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "Body"
+        }
+      },
+      "payload": "Body"
+    },
+    "BarInput": {
+      "type": "structure",
+      "members": {
+        "BarOne": {
+          "shape": "String"
+        }
+      }
+    },
+    "BarOutput": {
+      "type": "structure",
+      "members": {
+        "PayloadMember": {
+          "shape": "Stream"
+        }
+      },
+      "payload": "PayloadMember"
+    },
+    "BazInput": {
+      "type": "structure",
+      "members": {
+        "BazOne": {
+          "shape": "String"
+        }
+      }
+    },
+    "BazOutput": {
+      "type": "structure",
+      "members": {
+        "PayloadMember": {
+          "shape": "String",
+          "streaming": true
+        }
+      },
+      "payload": "PayloadMember"
+    },
+    "String": {
+      "type": "string"
+    },
+    "Body": {
+      "type": "blob"
+    },
+    "Stream": {
+      "type": "blob",
+      "streaming": true
+    }
+  }
+}

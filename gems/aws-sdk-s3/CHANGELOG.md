@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add object streaming behavior smoke test
+
 * Issue - Update `aws-sdk-s3` gemspec metadata.
 
 1.0.0 (2017-08-29)
