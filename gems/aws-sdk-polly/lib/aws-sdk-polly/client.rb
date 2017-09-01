@@ -583,9 +583,9 @@ module Aws::Polly
     #
     # @overload synthesize_speech(params = {})
     # @param [Hash] params ({})
-    def synthesize_speech(params = {}, options = {})
+    def synthesize_speech(params = {}, options = {}, &block)
       req = build_request(:synthesize_speech, params)
-      req.send_request(options)
+      req.send_request(options, &block)
     end
 
     # @!endgroup
@@ -601,7 +601,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

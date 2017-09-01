@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2017-09-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Mobile`.
+
 1.17.0 (2017-08-31)
 ------------------
 

@@ -87,6 +87,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-marketplaceentitlementservice', '~> 1')
   spec.add_dependency('aws-sdk-marketplacemetering', '~> 1')
   spec.add_dependency('aws-sdk-migrationhub', '~> 1')
+  spec.add_dependency('aws-sdk-mobile', '~> 1')
   spec.add_dependency('aws-sdk-opsworks', '~> 1')
   spec.add_dependency('aws-sdk-opsworkscm', '~> 1')
   spec.add_dependency('aws-sdk-organizations', '~> 1')

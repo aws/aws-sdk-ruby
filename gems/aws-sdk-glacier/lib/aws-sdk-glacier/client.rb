@@ -1305,9 +1305,9 @@ module Aws::Glacier
     #
     # @overload get_job_output(params = {})
     # @param [Hash] params ({})
-    def get_job_output(params = {}, options = {})
+    def get_job_output(params = {}, options = {}, &block)
       req = build_request(:get_job_output, params)
-      req.send_request(options)
+      req.send_request(options, &block)
     end
 
     # This operation retrieves the `access-policy` subresource set on the
@@ -3210,7 +3210,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

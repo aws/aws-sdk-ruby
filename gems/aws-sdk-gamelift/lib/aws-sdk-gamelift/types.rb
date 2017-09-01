@@ -138,8 +138,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] sl
     #   For a list of up to 10 strings. Maximum length for each string is
-    #   100 characters. Duplicate values are not recognized; all occurances
-    #   of the the repeated value after the first of a repeated value are
+    #   100 characters. Duplicate values are not recognized; all occurrences
+    #   of the repeated value after the first of a repeated value are
     #   ignored.
     #   @return [Array<String>]
     #
@@ -221,15 +221,15 @@ module Aws::GameLift
     #
     #   Possible build statuses include the following:
     #
-    #   * **INITIALIZED** – A new build has been defined, but no files have
+    #   * **INITIALIZED** -- A new build has been defined, but no files have
     #     been uploaded. You cannot create fleets for builds that are in
     #     this status. When a build is successfully created, the build
     #     status is set to this value.
     #
-    #   * **READY** – The game build has been successfully uploaded. You can
-    #     now create new fleets for this build.
+    #   * **READY** -- The game build has been successfully uploaded. You
+    #     can now create new fleets for this build.
     #
-    #   * **FAILED** – The game build upload failed. You cannot create new
+    #   * **FAILED** -- The game build upload failed. You cannot create new
     #     fleets for this build.
     #   @return [String]
     #
@@ -408,7 +408,7 @@ module Aws::GameLift
     #         server_launch_path: "NonZeroAndMaxString",
     #         server_launch_parameters: "NonZeroAndMaxString",
     #         log_paths: ["NonZeroAndMaxString"],
-    #         ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
+    #         ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
     #         ec2_inbound_permissions: [
     #           {
     #             from_port: 1, # required
@@ -434,6 +434,8 @@ module Aws::GameLift
     #           policy_period_in_minutes: 1,
     #         },
     #         metric_groups: ["MetricGroup"],
+    #         peer_vpc_aws_account_id: "NonZeroAndMaxString",
+    #         peer_vpc_id: "NonZeroAndMaxString",
     #       }
     #
     # @!attribute [rw] name
@@ -507,11 +509,11 @@ module Aws::GameLift
     #   created after the policy change. You can also set protection for
     #   individual instances using UpdateGameSession.
     #
-    #   * **NoProtection** – The game session can be terminated during a
+    #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
     #
-    #   * **FullProtection** – If the game session is in an `ACTIVE` status,
-    #     it cannot be terminated during a scale-down event.
+    #   * **FullProtection** -- If the game session is in an `ACTIVE`
+    #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
     # @!attribute [rw] runtime_configuration
@@ -542,6 +544,20 @@ module Aws::GameLift
     #   metric group at a time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] peer_vpc_aws_account_id
+    #   Unique identifier for the AWS account with the VPC that you want to
+    #   peer your Amazon GameLift fleet with. You can find your Account ID
+    #   in the AWS Management Console under account settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -556,7 +572,9 @@ module Aws::GameLift
       :new_game_session_protection_policy,
       :runtime_configuration,
       :resource_creation_limit_policy,
-      :metric_groups)
+      :metric_groups,
+      :peer_vpc_aws_account_id,
+      :peer_vpc_id)
       include Aws::Structure
     end
 
@@ -639,7 +657,7 @@ module Aws::GameLift
     #   `IdempotencyToken` instead.* Custom string that uniquely identifies
     #   a request for a new game session. Maximum token length is 48
     #   characters. If provided, this string is included in the new game
-    #   session's ID. (A game session ID has the following format:
+    #   session's ID. (A game session ARN has the following format:
     #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
     #   or idempotency token>`.)
     #   @return [String]
@@ -647,8 +665,8 @@ module Aws::GameLift
     # @!attribute [rw] idempotency_token
     #   Custom string that uniquely identifies a request for a new game
     #   session. Maximum token length is 48 characters. If provided, this
-    #   string is included in the new game session's ID. (A game session ID
-    #   has the following format:
+    #   string is included in the new game session's ID. (A game session
+    #   ARN has the following format:
     #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
     #   or idempotency token>`.) Idempotency tokens remain in use for 30
     #   days after a game session has ended; game session objects are
@@ -1058,6 +1076,95 @@ module Aws::GameLift
 
     # Represents the input for a request action.
     #
+    # @note When making an API call, you may pass CreateVpcPeeringAuthorizationInput
+    #   data as a hash:
+    #
+    #       {
+    #         game_lift_aws_account_id: "NonZeroAndMaxString", # required
+    #         peer_vpc_id: "NonZeroAndMaxString", # required
+    #       }
+    #
+    # @!attribute [rw] game_lift_aws_account_id
+    #   Unique identifier for the AWS account that you use to manage your
+    #   Amazon GameLift fleet. You can find your Account ID in the AWS
+    #   Management Console under account settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorizationInput AWS API Documentation
+    #
+    class CreateVpcPeeringAuthorizationInput < Struct.new(
+      :game_lift_aws_account_id,
+      :peer_vpc_id)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] vpc_peering_authorization
+    #   Details on the requested VPC peering authorization, including
+    #   expiration.
+    #   @return [Types::VpcPeeringAuthorization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorizationOutput AWS API Documentation
+    #
+    class CreateVpcPeeringAuthorizationOutput < Struct.new(
+      :vpc_peering_authorization)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass CreateVpcPeeringConnectionInput
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_id: "FleetId", # required
+    #         peer_vpc_aws_account_id: "NonZeroAndMaxString", # required
+    #         peer_vpc_id: "NonZeroAndMaxString", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet. This tells Amazon GameLift which
+    #   GameLift VPC to peer with.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_aws_account_id
+    #   Unique identifier for the AWS account with the VPC that you want to
+    #   peer your Amazon GameLift fleet with. You can find your Account ID
+    #   in the AWS Management Console under account settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionInput AWS API Documentation
+    #
+    class CreateVpcPeeringConnectionInput < Struct.new(
+      :fleet_id,
+      :peer_vpc_aws_account_id,
+      :peer_vpc_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionOutput AWS API Documentation
+    #
+    class CreateVpcPeeringConnectionOutput < Aws::EmptyStructure; end
+
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DeleteAliasInput
     #   data as a hash:
     #
@@ -1195,6 +1302,75 @@ module Aws::GameLift
 
     # Represents the input for a request action.
     #
+    # @note When making an API call, you may pass DeleteVpcPeeringAuthorizationInput
+    #   data as a hash:
+    #
+    #       {
+    #         game_lift_aws_account_id: "NonZeroAndMaxString", # required
+    #         peer_vpc_id: "NonZeroAndMaxString", # required
+    #       }
+    #
+    # @!attribute [rw] game_lift_aws_account_id
+    #   Unique identifier for the AWS account that you use to manage your
+    #   Amazon GameLift fleet. You can find your Account ID in the AWS
+    #   Management Console under account settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorizationInput AWS API Documentation
+    #
+    class DeleteVpcPeeringAuthorizationInput < Struct.new(
+      :game_lift_aws_account_id,
+      :peer_vpc_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorizationOutput AWS API Documentation
+    #
+    class DeleteVpcPeeringAuthorizationOutput < Aws::EmptyStructure; end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DeleteVpcPeeringConnectionInput
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_id: "FleetId", # required
+    #         vpc_peering_connection_id: "NonZeroAndMaxString", # required
+    #       }
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet. This value must match the fleet ID
+    #   referenced in the VPC peering connection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_peering_connection_id
+    #   Unique identifier for a VPC peering connection. This value is
+    #   included in the VpcPeeringConnection object, which can be retrieved
+    #   by calling DescribeVpcPeeringConnections.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnectionInput AWS API Documentation
+    #
+    class DeleteVpcPeeringConnectionInput < Struct.new(
+      :fleet_id,
+      :vpc_peering_connection_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnectionOutput AWS API Documentation
+    #
+    class DeleteVpcPeeringConnectionOutput < Aws::EmptyStructure; end
+
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DescribeAliasInput
     #   data as a hash:
     #
@@ -1266,7 +1442,7 @@ module Aws::GameLift
     #   data as a hash:
     #
     #       {
-    #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
+    #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
     #       }
     #
     # @!attribute [rw] ec2_instance_type
@@ -2101,18 +2277,18 @@ module Aws::GameLift
     #
     #   Possible player session statuses include the following:
     #
-    #   * **RESERVED** – The player session request has been received, but
+    #   * **RESERVED** -- The player session request has been received, but
     #     the player has not yet connected to the server process and/or been
     #     validated.
     #
-    #   * **ACTIVE** – The player has been validated by the server process
+    #   * **ACTIVE** -- The player has been validated by the server process
     #     and is currently connected.
     #
-    #   * **COMPLETED** – The player connection has been dropped.
+    #   * **COMPLETED** -- The player connection has been dropped.
     #
-    #   * **TIMEDOUT** – A player session request was received, but the
-    #     player did not connect and/or was not validated within the
-    #     time-out limit (60 seconds).
+    #   * **TIMEDOUT** -- A player session request was received, but the
+    #     player did not connect and/or was not validated within the timeout
+    #     limit (60 seconds).
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2216,22 +2392,22 @@ module Aws::GameLift
     #   Scaling policy status to filter results on. A scaling policy is only
     #   in force when in an `ACTIVE` status.
     #
-    #   * **ACTIVE** – The scaling policy is currently in force.
+    #   * **ACTIVE** -- The scaling policy is currently in force.
     #
-    #   * **UPDATEREQUESTED** – A request to update the scaling policy has
+    #   * **UPDATEREQUESTED** -- A request to update the scaling policy has
     #     been received.
     #
-    #   * **UPDATING** – A change is being made to the scaling policy.
+    #   * **UPDATING** -- A change is being made to the scaling policy.
     #
-    #   * **DELETEREQUESTED** – A request to delete the scaling policy has
+    #   * **DELETEREQUESTED** -- A request to delete the scaling policy has
     #     been received.
     #
-    #   * **DELETING** – The scaling policy is being deleted.
+    #   * **DELETING** -- The scaling policy is being deleted.
     #
-    #   * **DELETED** – The scaling policy has been deleted.
+    #   * **DELETED** -- The scaling policy has been deleted.
     #
-    #   * **ERROR** – An error occurred in creating the policy. It should be
-    #     removed and recreated.
+    #   * **ERROR** -- An error occurred in creating the policy. It should
+    #     be removed and recreated.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2274,6 +2450,57 @@ module Aws::GameLift
     class DescribeScalingPoliciesOutput < Struct.new(
       :scaling_policies,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizationsInput AWS API Documentation
+    #
+    class DescribeVpcPeeringAuthorizationsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] vpc_peering_authorizations
+    #   Collection of objects that describe all valid VPC peering operations
+    #   for the current AWS account.
+    #   @return [Array<Types::VpcPeeringAuthorization>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizationsOutput AWS API Documentation
+    #
+    class DescribeVpcPeeringAuthorizationsOutput < Struct.new(
+      :vpc_peering_authorizations)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass DescribeVpcPeeringConnectionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_id: "FleetId",
+    #       }
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnectionsInput AWS API Documentation
+    #
+    class DescribeVpcPeeringConnectionsInput < Struct.new(
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] vpc_peering_connections
+    #   Collection of VPC peering connection records that match the request.
+    #   @return [Array<Types::VpcPeeringConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnectionsOutput AWS API Documentation
+    #
+    class DescribeVpcPeeringConnectionsOutput < Struct.new(
+      :vpc_peering_connections)
       include Aws::Structure
     end
 
@@ -2452,92 +2679,113 @@ module Aws::GameLift
     #   Type of event being logged. The following events are currently in
     #   use:
     #
-    #   * General events:
+    #   **General events:**
     #
-    #     * **GENERIC\_EVENT** – An unspecified event has occurred.
+    #   * GENERIC\_EVENT -- An unspecified event has occurred.
     #
-    #     ^
+    #   ^
     #
-    #   * Fleet creation events:
+    #   **Fleet creation events:**
     #
-    #     * **FLEET\_CREATED** – A fleet record was successfully created
-    #       with a status of `NEW`. Event messaging includes the fleet ID.
+    #   * FLEET\_CREATED -- A fleet record was successfully created with a
+    #     status of `NEW`. Event messaging includes the fleet ID.
     #
-    #     * **FLEET\_STATE\_DOWNLOADING** – Fleet status changed from `NEW`
-    #       to `DOWNLOADING`. The compressed build has started downloading
-    #       to a fleet instance for installation.
+    #   * FLEET\_STATE\_DOWNLOADING -- Fleet status changed from `NEW` to
+    #     `DOWNLOADING`. The compressed build has started downloading to a
+    #     fleet instance for installation.
     #
-    #     * **FLEET\_BINARY\_DOWNLOAD\_FAILED** – The build failed to
-    #       download to the fleet instance.
+    #   * FLEET\_BINARY\_DOWNLOAD\_FAILED -- The build failed to download to
+    #     the fleet instance.
     #
-    #     * **FLEET\_CREATION\_EXTRACTING\_BUILD** – The game server build
-    #       was successfully downloaded to an instance, and the build files
-    #       are now being extracted from the uploaded build and saved to an
-    #       instance. Failure at this stage prevents a fleet from moving to
-    #       `ACTIVE` status. Logs for this stage display a list of the files
-    #       that are extracted and saved on the instance. Access the logs by
-    #       using the URL in *PreSignedLogUrl*.
+    #   * FLEET\_CREATION\_EXTRACTING\_BUILD – The game server build was
+    #     successfully downloaded to an instance, and the build files are
+    #     now being extracted from the uploaded build and saved to an
+    #     instance. Failure at this stage prevents a fleet from moving to
+    #     `ACTIVE` status. Logs for this stage display a list of the files
+    #     that are extracted and saved on the instance. Access the logs by
+    #     using the URL in *PreSignedLogUrl*.
     #
-    #     * **FLEET\_CREATION\_RUNNING\_INSTALLER** – The game server build
-    #       files were successfully extracted, and the Amazon GameLift is
-    #       now running the build's install script (if one is included).
-    #       Failure in this stage prevents a fleet from moving to `ACTIVE`
-    #       status. Logs for this stage list the installation steps and
-    #       whether or not the install completed successfully. Access the
-    #       logs by using the URL in *PreSignedLogUrl*.
+    #   * FLEET\_CREATION\_RUNNING\_INSTALLER – The game server build files
+    #     were successfully extracted, and the Amazon GameLift is now
+    #     running the build's install script (if one is included). Failure
+    #     in this stage prevents a fleet from moving to `ACTIVE` status.
+    #     Logs for this stage list the installation steps and whether or not
+    #     the install completed successfully. Access the logs by using the
+    #     URL in *PreSignedLogUrl*.
     #
-    #     * **FLEET\_CREATION\_VALIDATING\_RUNTIME\_CONFIG** – The build
-    #       process was successful, and the Amazon GameLift is now verifying
-    #       that the game server launch paths, which are specified in the
-    #       fleet's run-time configuration, exist. If any listed launch
-    #       path exists, Amazon GameLift tries to launch a game server
-    #       process and waits for the process to report ready. Failures in
-    #       this stage prevent a fleet from moving to `ACTIVE` status. Logs
-    #       for this stage list the launch paths in the run-time
-    #       configuration and indicate whether each is found. Access the
-    #       logs by using the URL in *PreSignedLogUrl*.
+    #   * FLEET\_CREATION\_VALIDATING\_RUNTIME\_CONFIG -- The build process
+    #     was successful, and the Amazon GameLift is now verifying that the
+    #     game server launch paths, which are specified in the fleet's
+    #     run-time configuration, exist. If any listed launch path exists,
+    #     Amazon GameLift tries to launch a game server process and waits
+    #     for the process to report ready. Failures in this stage prevent a
+    #     fleet from moving to `ACTIVE` status. Logs for this stage list the
+    #     launch paths in the run-time configuration and indicate whether
+    #     each is found. Access the logs by using the URL in
+    #     *PreSignedLogUrl*.
     #
-    #     * **FLEET\_STATE\_VALIDATING** – Fleet status changed from
-    #       `DOWNLOADING` to `VALIDATING`.
+    #   * FLEET\_STATE\_VALIDATING -- Fleet status changed from
+    #     `DOWNLOADING` to `VALIDATING`.
     #
-    #     * **FLEET\_VALIDATION\_LAUNCH\_PATH\_NOT\_FOUND** – Validation of
-    #       the run-time configuration failed because the executable
-    #       specified in a launch path does not exist on the instance.
+    #   * FLEET\_VALIDATION\_LAUNCH\_PATH\_NOT\_FOUND -- Validation of the
+    #     run-time configuration failed because the executable specified in
+    #     a launch path does not exist on the instance.
     #
-    #     * **FLEET\_STATE\_BUILDING** – Fleet status changed from
-    #       `VALIDATING` to `BUILDING`.
+    #   * FLEET\_STATE\_BUILDING -- Fleet status changed from `VALIDATING`
+    #     to `BUILDING`.
     #
-    #     * **FLEET\_VALIDATION\_EXECUTABLE\_RUNTIME\_FAILURE** – Validation
-    #       of the run-time configuration failed because the executable
-    #       specified in a launch path failed to run on the fleet instance.
+    #   * FLEET\_VALIDATION\_EXECUTABLE\_RUNTIME\_FAILURE -- Validation of
+    #     the run-time configuration failed because the executable specified
+    #     in a launch path failed to run on the fleet instance.
     #
-    #     * **FLEET\_STATE\_ACTIVATING** – Fleet status changed from
-    #       `BUILDING` to `ACTIVATING`.
+    #   * FLEET\_STATE\_ACTIVATING -- Fleet status changed from `BUILDING`
+    #     to `ACTIVATING`.
     #
-    #     * **FLEET\_ACTIVATION\_FAILED** - The fleet failed to successfully
-    #       complete one of the steps in the fleet activation process. This
-    #       event code indicates that the game build was successfully
-    #       downloaded to a fleet instance, built, and validated, but was
-    #       not able to start a server process. A possible reason for
-    #       failure is that the game server is not reporting "process
-    #       ready" to the Amazon GameLift service.
+    #   * FLEET\_ACTIVATION\_FAILED - The fleet failed to successfully
+    #     complete one of the steps in the fleet activation process. This
+    #     event code indicates that the game build was successfully
+    #     downloaded to a fleet instance, built, and validated, but was not
+    #     able to start a server process. A possible reason for failure is
+    #     that the game server is not reporting "process ready" to the
+    #     Amazon GameLift service.
     #
-    #     * **FLEET\_STATE\_ACTIVE** – The fleet's status changed from
-    #       `ACTIVATING` to `ACTIVE`. The fleet is now ready to host game
-    #       sessions.
+    #   * FLEET\_STATE\_ACTIVE -- The fleet's status changed from
+    #     `ACTIVATING` to `ACTIVE`. The fleet is now ready to host game
+    #     sessions.
     #
-    #   * Other fleet events:
+    #   **VPC peering events:**
     #
-    #     * **FLEET\_SCALING\_EVENT** – A change was made to the fleet's
-    #       capacity settings (desired instances, minimum/maximum scaling
-    #       limits). Event messaging includes the new capacity settings.
+    #   * FLEET\_VPC\_PEERING\_SUCCEEDED -- A VPC peering connection has
+    #     been established between the VPC for an Amazon GameLift fleet and
+    #     a VPC in your AWS account.
     #
-    #     * **FLEET\_NEW\_GAME\_SESSION\_PROTECTION\_POLICY\_UPDATED** – A
-    #       change was made to the fleet's game session protection policy
-    #       setting. Event messaging includes both the old and new policy
-    #       setting.
+    #   * FLEET\_VPC\_PEERING\_FAILED -- A requested VPC peering connection
+    #     has failed. Event details and status information (see
+    #     DescribeVpcPeeringConnections) provide additional detail. A common
+    #     reason for peering failure is that the two VPCs have overlapping
+    #     CIDR blocks of IPv4 addresses. To resolve this, change the CIDR
+    #     block for the VPC in your AWS account. For more information on VPC
+    #     peering failures, see
+    #     [http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html][1]
     #
-    #     * **FLEET\_DELETED** – A request to delete a fleet was initiated.
+    #   * FLEET\_VPC\_PEERING\_DELETED -- A VPC peering connection has been
+    #     successfully deleted.
+    #
+    #   **Other fleet events:**
+    #
+    #   * FLEET\_SCALING\_EVENT -- A change was made to the fleet's
+    #     capacity settings (desired instances, minimum/maximum scaling
+    #     limits). Event messaging includes the new capacity settings.
+    #
+    #   * FLEET\_NEW\_GAME\_SESSION\_PROTECTION\_POLICY\_UPDATED -- A change
+    #     was made to the fleet's game session protection policy setting.
+    #     Event messaging includes both the old and new policy setting.
+    #
+    #   * FLEET\_DELETED -- A request to delete a fleet was initiated.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -2649,21 +2897,21 @@ module Aws::GameLift
     #
     #   Possible fleet statuses include the following:
     #
-    #   * **NEW** – A new fleet has been defined and desired instances is
+    #   * **NEW** -- A new fleet has been defined and desired instances is
     #     set to 1.
     #
-    #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** – Amazon GameLift
+    #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- Amazon GameLift
     #     is setting up the new fleet, creating new instances with the game
     #     build and starting server processes.
     #
-    #   * **ACTIVE** – Hosts can now accept game sessions.
+    #   * **ACTIVE** -- Hosts can now accept game sessions.
     #
-    #   * **ERROR** – An error occurred when downloading, validating,
+    #   * **ERROR** -- An error occurred when downloading, validating,
     #     building, or activating the fleet.
     #
-    #   * **DELETING** – Hosts are responding to a delete fleet request.
+    #   * **DELETING** -- Hosts are responding to a delete fleet request.
     #
-    #   * **TERMINATED** – The fleet no longer exists.
+    #   * **TERMINATED** -- The fleet no longer exists.
     #   @return [String]
     #
     # @!attribute [rw] build_id
@@ -2703,11 +2951,11 @@ module Aws::GameLift
     #   Type of game session protection to set for all new instances started
     #   in the fleet.
     #
-    #   * **NoProtection** – The game session can be terminated during a
+    #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
     #
-    #   * **FullProtection** – If the game session is in an `ACTIVE` status,
-    #     it cannot be terminated during a scale-down event.
+    #   * **FullProtection** -- If the game session is in an `ACTIVE`
+    #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
     # @!attribute [rw] operating_system
@@ -2978,7 +3226,7 @@ module Aws::GameLift
     #   * StopGameSessionPlacement
     #
     # @!attribute [rw] game_session_id
-    #   Unique identifier for the game session. A game session ID has the
+    #   Unique identifier for the game session. A game session ARN has the
     #   following format: `arn:aws:gamelift:<region>::gamesession/<fleet
     #   ID>/<custom ID string or idempotency token>`.
     #   @return [String]
@@ -2989,7 +3237,7 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
-    #   Unique identifier for a fleet the game session is running on.
+    #   Unique identifier for a fleet that the game session is running on.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3132,11 +3380,11 @@ module Aws::GameLift
     # @!attribute [rw] protection_policy
     #   Current status of protection for the game session.
     #
-    #   * **NoProtection** – The game session can be terminated during a
+    #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
     #
-    #   * **FullProtection** – If the game session is in an `ACTIVE` status,
-    #     it cannot be terminated during a scale-down event.
+    #   * **FullProtection** -- If the game session is in an `ACTIVE`
+    #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionDetail AWS API Documentation
@@ -3171,17 +3419,17 @@ module Aws::GameLift
     # @!attribute [rw] status
     #   Current status of the game session placement request.
     #
-    #   * **PENDING** – The placement request is currently in the queue
+    #   * **PENDING** -- The placement request is currently in the queue
     #     waiting to be processed.
     #
-    #   * **FULFILLED** – A new game session and player sessions (if
+    #   * **FULFILLED** -- A new game session and player sessions (if
     #     requested) have been successfully created. Values for
     #     *GameSessionArn* and *GameSessionRegion* are available.
     #
-    #   * **CANCELLED** – The placement request was canceled with a call to
+    #   * **CANCELLED** -- The placement request was canceled with a call to
     #     StopGameSessionPlacement.
     #
-    #   * **TIMED\_OUT** – A new game session was not successfully created
+    #   * **TIMED\_OUT** -- A new game session was not successfully created
     #     before the time limit expired. You can resubmit the placement
     #     request as needed.
     #   @return [String]
@@ -3519,18 +3767,18 @@ module Aws::GameLift
     #   Current status of the instance. Possible statuses include the
     #   following:
     #
-    #   * **PENDING** – The instance is in the process of being created and
+    #   * **PENDING** -- The instance is in the process of being created and
     #     launching server processes as defined in the fleet's run-time
     #     configuration.
     #
-    #   * **ACTIVE** – The instance has been successfully created and at
+    #   * **ACTIVE** -- The instance has been successfully created and at
     #     least one server process has successfully launched and reported
     #     back to Amazon GameLift that it is ready to host a game session.
     #     The instance is now considered ready to host game sessions.
     #
-    #   * **TERMINATING** – The instance is in the process of shutting down.
-    #     This may happen to reduce capacity during a scaling down event or
-    #     to recycle resources in the event of a problem.
+    #   * **TERMINATING** -- The instance is in the process of shutting
+    #     down. This may happen to reduce capacity during a scaling down
+    #     event or to recycle resources in the event of a problem.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3673,10 +3921,10 @@ module Aws::GameLift
     #
     #   Possible routing types include the following:
     #
-    #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
+    #   * **SIMPLE** -- The alias resolves to one specific fleet. Use this
     #     type when routing to active fleets.
     #
-    #   * **TERMINAL** – The alias does not resolve to a fleet but instead
+    #   * **TERMINAL** -- The alias does not resolve to a fleet but instead
     #     can be used to display a message to the user. A terminal alias
     #     throws a TerminalRoutingStrategyException with the RoutingStrategy
     #     message embedded.
@@ -3746,15 +3994,15 @@ module Aws::GameLift
     #
     #   Possible build statuses include the following:
     #
-    #   * **INITIALIZED** – A new build has been defined, but no files have
+    #   * **INITIALIZED** -- A new build has been defined, but no files have
     #     been uploaded. You cannot create fleets for builds that are in
     #     this status. When a build is successfully created, the build
     #     status is set to this value.
     #
-    #   * **READY** – The game build has been successfully uploaded. You can
-    #     now create new fleets for this build.
+    #   * **READY** -- The game build has been successfully uploaded. You
+    #     can now create new fleets for this build.
     #
-    #   * **FAILED** – The game build upload failed. You cannot create new
+    #   * **FAILED** -- The game build upload failed. You cannot create new
     #     fleets for this build.
     #   @return [String]
     #
@@ -3860,9 +4108,10 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # New player session created as a result of a successful FlexMatch
-    # match. A successful match automatically creates new player sessions
-    # for every player ID in the original matchmaking request.
+    # Represents a new player session that is created as a result of a
+    # successful FlexMatch match. A successful match automatically creates
+    # new player sessions for every player ID in the original matchmaking
+    # request.
     #
     # When players connect to the match's game session, they must include
     # both player ID and player session ID in order to claim their assigned
@@ -4084,33 +4333,33 @@ module Aws::GameLift
     # @!attribute [rw] status
     #   Current status of the matchmaking request.
     #
-    #   * **QUEUED** – The matchmaking request has been received and is
+    #   * **QUEUED** -- The matchmaking request has been received and is
     #     currently waiting to be processed.
     #
-    #   * **SEARCHING** – The matchmaking request is currently being
+    #   * **SEARCHING** -- The matchmaking request is currently being
     #     processed.
     #
-    #   * **REQUIRES\_ACCEPTANCE** – A match has been proposed and the
+    #   * **REQUIRES\_ACCEPTANCE** -- A match has been proposed and the
     #     players must accept the match (see AcceptMatch). This status is
     #     used only with requests that use a matchmaking configuration with
     #     a player acceptance requirement.
     #
-    #   * **PLACING** – The FlexMatch engine has matched players and is in
+    #   * **PLACING** -- The FlexMatch engine has matched players and is in
     #     the process of placing a new game session for the match.
     #
-    #   * **COMPLETED** – Players have been matched and a game session is
+    #   * **COMPLETED** -- Players have been matched and a game session is
     #     ready to host the players. A ticket in this state contains the
     #     necessary connection information for players.
     #
-    #   * **FAILED** – The matchmaking request was not completed. Tickets
+    #   * **FAILED** -- The matchmaking request was not completed. Tickets
     #     with players who fail to accept a proposed match are placed in
     #     `FAILED` status; new matchmaking requests can be submitted for
     #     these players.
     #
-    #   * **CANCELLED** – The matchmaking request was canceled with a call
+    #   * **CANCELLED** -- The matchmaking request was canceled with a call
     #     to StopMatchmaking.
     #
-    #   * **TIMED\_OUT** – The matchmaking request was not completed within
+    #   * **TIMED\_OUT** -- The matchmaking request was not completed within
     #     the duration specified in the matchmaking configuration.
     #     Matchmaking requests that time out can be resubmitted.
     #   @return [String]
@@ -4131,6 +4380,13 @@ module Aws::GameLift
     #   example "1469498468.057").
     #   @return [Time]
     #
+    # @!attribute [rw] end_time
+    #   Time stamp indicating when the matchmaking request stopped being
+    #   processed due to successful completion, timeout, or cancellation.
+    #   Format is a number expressed in Unix time as milliseconds (for
+    #   example "1469498468.057").
+    #   @return [Time]
+    #
     # @!attribute [rw] players
     #   A set of `Player` objects, each representing a player to find
     #   matches for. Players are identified by a unique player ID and may
@@ -4145,6 +4401,12 @@ module Aws::GameLift
     #   the matchmaking request has been successfully completed.
     #   @return [Types::GameSessionConnectionInfo]
     #
+    # @!attribute [rw] estimated_wait_time
+    #   Average amount of time (in seconds) that players are currently
+    #   waiting for a match. If there is not enough recent data, this
+    #   property may be empty.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchmakingTicket AWS API Documentation
     #
     class MatchmakingTicket < Struct.new(
@@ -4154,8 +4416,10 @@ module Aws::GameLift
       :status_reason,
       :status_message,
       :start_time,
+      :end_time,
       :players,
-      :game_session_connection_info)
+      :game_session_connection_info,
+      :estimated_wait_time)
       include Aws::Structure
     end
 
@@ -4197,8 +4461,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Object used in matchmaking to represent a player. When starting a
-    # matchmaking request, a player has a player ID and may have latency
+    # Represents a player in matchmaking. When starting a matchmaking
+    # request, a player has a player ID, attributes, and may have latency
     # data. Team information is added after a match has been successfully
     # completed.
     #
@@ -4237,15 +4501,12 @@ module Aws::GameLift
     #   Set of values, expressed in milliseconds, indicating the amount of
     #   latency that a player experiences when connected to AWS regions. If
     #   this property is present, FlexMatch considers placing the match only
-    #   in regions that are included in the object map. If not present (that
-    #   is, null), FlexMatch ignores latency issues and may place the match
-    #   in any region in the queue.
+    #   in regions for which latency is reported.
     #
-    #   <note markdown="1"> If this property contains an empty map, FlexMatch assumes that no
-    #   regions are available to the player. In this scenario, the ticket is
-    #   not matchable and always times out unless canceled.
-    #
-    #    </note>
+    #   If a matchmaker has a rule that evaluates player latency, players
+    #   must report latency in order to be matched. If no latency is
+    #   reported in this scenario, FlexMatch assumes that no regions are
+    #   available to the player and the ticket is not matchable.
     #   @return [Hash<String,Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Player AWS API Documentation
@@ -4405,18 +4666,18 @@ module Aws::GameLift
     #
     #   Possible player session statuses include the following:
     #
-    #   * **RESERVED** – The player session request has been received, but
+    #   * **RESERVED** -- The player session request has been received, but
     #     the player has not yet connected to the server process and/or been
     #     validated.
     #
-    #   * **ACTIVE** – The player has been validated by the server process
+    #   * **ACTIVE** -- The player has been validated by the server process
     #     and is currently connected.
     #
-    #   * **COMPLETED** – The player connection has been dropped.
+    #   * **COMPLETED** -- The player connection has been dropped.
     #
-    #   * **TIMEDOUT** – A player session request was received, but the
-    #     player did not connect and/or was not validated within the
-    #     time-out limit (60 seconds).
+    #   * **TIMEDOUT** -- A player session request was received, but the
+    #     player did not connect and/or was not validated within the timeout
+    #     limit (60 seconds).
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -4485,14 +4746,14 @@ module Aws::GameLift
     #   Type of adjustment to make to a fleet's instance count (see
     #   FleetCapacity):
     #
-    #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
+    #   * **ChangeInCapacity** -- add (or subtract) the scaling adjustment
     #     value from the current instance count. Positive values scale up
     #     while negative values scale down.
     #
-    #   * **ExactCapacity** – set the instance count to the scaling
+    #   * **ExactCapacity** -- set the instance count to the scaling
     #     adjustment value.
     #
-    #   * **PercentChangeInCapacity** – increase or reduce the current
+    #   * **PercentChangeInCapacity** -- increase or reduce the current
     #     instance count by the scaling adjustment, read as a percentage.
     #     Positive values scale up while negative values scale down; for
     #     example, a value of "-10" scales the fleet down by 10%.
@@ -4516,26 +4777,26 @@ module Aws::GameLift
     #   Name of the Amazon GameLift-defined metric that is used to trigger
     #   an adjustment.
     #
-    #   * **ActivatingGameSessions** – number of game sessions in the
+    #   * **ActivatingGameSessions** -- number of game sessions in the
     #     process of being created (game session status = `ACTIVATING`).
     #
-    #   * **ActiveGameSessions** – number of game sessions currently running
-    #     (game session status = `ACTIVE`).
+    #   * **ActiveGameSessions** -- number of game sessions currently
+    #     running (game session status = `ACTIVE`).
     #
-    #   * **CurrentPlayerSessions** – number of active or reserved player
+    #   * **CurrentPlayerSessions** -- number of active or reserved player
     #     sessions (player session status = `ACTIVE` or `RESERVED`).
     #
-    #   * **AvailablePlayerSessions** – number of player session slots
+    #   * **AvailablePlayerSessions** -- number of player session slots
     #     currently available in active game sessions across the fleet,
     #     calculated by subtracting a game session's current player session
     #     count from its maximum player session count. This number includes
     #     game sessions that are not currently accepting players (game
     #     session `PlayerSessionCreationPolicy` = `DENY_ALL`).
     #
-    #   * **ActiveInstances** – number of instances currently running a game
-    #     session.
+    #   * **ActiveInstances** -- number of instances currently running a
+    #     game session.
     #
-    #   * **IdleInstances** – number of instances not currently running a
+    #   * **IdleInstances** -- number of instances not currently running a
     #     game session.
     #   @return [String]
     #
@@ -4739,10 +5000,10 @@ module Aws::GameLift
     #
     #   Possible routing types include the following:
     #
-    #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
+    #   * **SIMPLE** -- The alias resolves to one specific fleet. Use this
     #     type when routing to active fleets.
     #
-    #   * **TERMINAL** – The alias does not resolve to a fleet but instead
+    #   * **TERMINAL** -- The alias does not resolve to a fleet but instead
     #     can be used to display a message to the user. A terminal alias
     #     throws a TerminalRoutingStrategyException with the RoutingStrategy
     #     message embedded.
@@ -4981,22 +5242,22 @@ module Aws::GameLift
     #   Current status of the scaling policy. The scaling policy is only in
     #   force when in an `ACTIVE` status.
     #
-    #   * **ACTIVE** – The scaling policy is currently in force.
+    #   * **ACTIVE** -- The scaling policy is currently in force.
     #
-    #   * **UPDATE\_REQUESTED** – A request to update the scaling policy has
-    #     been received.
+    #   * **UPDATE\_REQUESTED** -- A request to update the scaling policy
+    #     has been received.
     #
-    #   * **UPDATING** – A change is being made to the scaling policy.
+    #   * **UPDATING** -- A change is being made to the scaling policy.
     #
-    #   * **DELETE\_REQUESTED** – A request to delete the scaling policy has
-    #     been received.
+    #   * **DELETE\_REQUESTED** -- A request to delete the scaling policy
+    #     has been received.
     #
-    #   * **DELETING** – The scaling policy is being deleted.
+    #   * **DELETING** -- The scaling policy is being deleted.
     #
-    #   * **DELETED** – The scaling policy has been deleted.
+    #   * **DELETED** -- The scaling policy has been deleted.
     #
-    #   * **ERROR** – An error occurred in creating the policy. It should be
-    #     removed and recreated.
+    #   * **ERROR** -- An error occurred in creating the policy. It should
+    #     be removed and recreated.
     #   @return [String]
     #
     # @!attribute [rw] scaling_adjustment
@@ -5007,14 +5268,14 @@ module Aws::GameLift
     #   Type of adjustment to make to a fleet's instance count (see
     #   FleetCapacity):
     #
-    #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
+    #   * **ChangeInCapacity** -- add (or subtract) the scaling adjustment
     #     value from the current instance count. Positive values scale up
     #     while negative values scale down.
     #
-    #   * **ExactCapacity** – set the instance count to the scaling
+    #   * **ExactCapacity** -- set the instance count to the scaling
     #     adjustment value.
     #
-    #   * **PercentChangeInCapacity** – increase or reduce the current
+    #   * **PercentChangeInCapacity** -- increase or reduce the current
     #     instance count by the scaling adjustment, read as a percentage.
     #     Positive values scale up while negative values scale down.
     #   @return [String]
@@ -5037,26 +5298,26 @@ module Aws::GameLift
     #   Name of the Amazon GameLift-defined metric that is used to trigger
     #   an adjustment.
     #
-    #   * **ActivatingGameSessions** – number of game sessions in the
+    #   * **ActivatingGameSessions** -- number of game sessions in the
     #     process of being created (game session status = `ACTIVATING`).
     #
-    #   * **ActiveGameSessions** – number of game sessions currently running
-    #     (game session status = `ACTIVE`).
+    #   * **ActiveGameSessions** -- number of game sessions currently
+    #     running (game session status = `ACTIVE`).
     #
-    #   * **CurrentPlayerSessions** – number of active or reserved player
+    #   * **CurrentPlayerSessions** -- number of active or reserved player
     #     sessions (player session status = `ACTIVE` or `RESERVED`).
     #
-    #   * **AvailablePlayerSessions** – number of player session slots
+    #   * **AvailablePlayerSessions** -- number of player session slots
     #     currently available in active game sessions across the fleet,
     #     calculated by subtracting a game session's current player session
     #     count from its maximum player session count. This number does
     #     include game sessions that are not currently accepting players
     #     (game session `PlayerSessionCreationPolicy` = `DENY_ALL`).
     #
-    #   * **ActiveInstances** – number of instances currently running a game
-    #     session.
+    #   * **ActiveInstances** -- number of instances currently running a
+    #     game session.
     #
-    #   * **IdleInstances** – number of instances not currently running a
+    #   * **IdleInstances** -- number of instances not currently running a
     #     game session.
     #   @return [String]
     #
@@ -5636,11 +5897,11 @@ module Aws::GameLift
     #   in this fleet. Instances that already exist are not affected. You
     #   can set protection for individual instances using UpdateGameSession.
     #
-    #   * **NoProtection** – The game session can be terminated during a
+    #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
     #
-    #   * **FullProtection** – If the game session is in an `ACTIVE` status,
-    #     it cannot be terminated during a scale-down event.
+    #   * **FullProtection** -- If the game session is in an `ACTIVE`
+    #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
     # @!attribute [rw] resource_creation_limit_policy
@@ -5828,11 +6089,11 @@ module Aws::GameLift
     # @!attribute [rw] protection_policy
     #   Game session protection policy to apply to this game session only.
     #
-    #   * **NoProtection** – The game session can be terminated during a
+    #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
     #
-    #   * **FullProtection** – If the game session is in an `ACTIVE` status,
-    #     it cannot be terminated during a scale-down event.
+    #   * **FullProtection** -- If the game session is in an `ACTIVE`
+    #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionInput AWS API Documentation
@@ -6171,6 +6432,159 @@ module Aws::GameLift
     #
     class ValidateMatchmakingRuleSetOutput < Struct.new(
       :valid)
+      include Aws::Structure
+    end
+
+    # Represents an authorization for a VPC peering connection between the
+    # VPC for an Amazon GameLift fleet and another VPC on an account you
+    # have access to. This authorization must exist and be valid for the
+    # peering connection to be established. Authorizations are valid for 24
+    # hours after they are issued.
+    #
+    # VPC peering connection operations include:
+    #
+    # * CreateVpcPeeringAuthorization
+    #
+    # * DescribeVpcPeeringAuthorizations
+    #
+    # * DeleteVpcPeeringAuthorization
+    #
+    # * CreateVpcPeeringConnection
+    #
+    # * DescribeVpcPeeringConnections
+    #
+    # * DeleteVpcPeeringConnection
+    #
+    # @!attribute [rw] game_lift_aws_account_id
+    #   Unique identifier for the AWS account that you use to manage your
+    #   Amazon GameLift fleet. You can find your Account ID in the AWS
+    #   Management Console under account settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_aws_account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time stamp indicating when this authorization was issued. Format is
+    #   a number expressed in Unix time as milliseconds (for example
+    #   "1469498468.057").
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   Time stamp indicating when this authorization expires (24 hours
+    #   after issuance). Format is a number expressed in Unix time as
+    #   milliseconds (for example "1469498468.057").
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringAuthorization AWS API Documentation
+    #
+    class VpcPeeringAuthorization < Struct.new(
+      :game_lift_aws_account_id,
+      :peer_vpc_aws_account_id,
+      :peer_vpc_id,
+      :creation_time,
+      :expiration_time)
+      include Aws::Structure
+    end
+
+    # Represents a peering connection between a VPC on one of your AWS
+    # accounts and the VPC for your Amazon GameLift fleets. This record may
+    # be for an active peering connection or a pending connection that has
+    # not yet been established.
+    #
+    # VPC peering connection operations include:
+    #
+    # * CreateVpcPeeringAuthorization
+    #
+    # * DescribeVpcPeeringAuthorizations
+    #
+    # * DeleteVpcPeeringAuthorization
+    #
+    # * CreateVpcPeeringConnection
+    #
+    # * DescribeVpcPeeringConnections
+    #
+    # * DeleteVpcPeeringConnection
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet. This ID determines the ID of the
+    #   Amazon GameLift VPC for your fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_v4_cidr_block
+    #   CIDR block of IPv4 addresses assigned to the VPC peering connection
+    #   for the GameLift VPC. The peered VPC also has an IPv4 CIDR block
+    #   associated with it; these blocks cannot overlap or the peering
+    #   connection cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_peering_connection_id
+    #   Unique identifier that is automatically assigned to the connection
+    #   record. This ID is referenced in VPC peering connection events, and
+    #   is used when deleting a connection with DeleteVpcPeeringConnection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Object that contains status information about the connection. Status
+    #   indicates if a connection is pending, successful, or failed.
+    #   @return [Types::VpcPeeringConnectionStatus]
+    #
+    # @!attribute [rw] peer_vpc_id
+    #   Unique identifier for a VPC with resources to be accessed by your
+    #   Amazon GameLift fleet. The VPC must be in the same region where your
+    #   fleet is deployed. To get VPC information, including IDs, use the
+    #   Virtual Private Cloud service tools, including the VPC Dashboard in
+    #   the AWS Management Console.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_lift_vpc_id
+    #   Unique identifier for the VPC that contains the Amazon GameLift
+    #   fleet for this connection. This VPC is managed by Amazon GameLift
+    #   and does not appear in your AWS account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringConnection AWS API Documentation
+    #
+    class VpcPeeringConnection < Struct.new(
+      :fleet_id,
+      :ip_v4_cidr_block,
+      :vpc_peering_connection_id,
+      :status,
+      :peer_vpc_id,
+      :game_lift_vpc_id)
+      include Aws::Structure
+    end
+
+    # Represents status information for a VPC peering connection. Status is
+    # associated with a VpcPeeringConnection object. Status codes and
+    # messages are provided from EC2 ([).][1] Connection status information
+    # is also communicated as a fleet Event.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html
+    #
+    # @!attribute [rw] code
+    #   Code indicating the status of a VPC peering connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Additional messaging associated with the connection status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/VpcPeeringConnectionStatus AWS API Documentation
+    #
+    class VpcPeeringConnectionStatus < Struct.new(
+      :code,
+      :message)
       include Aws::Structure
     end
 

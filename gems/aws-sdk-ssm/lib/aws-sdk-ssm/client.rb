@@ -777,6 +777,7 @@ module Aws::SSM
     #       prefix: "ResourceDataSyncS3Prefix",
     #       sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #       region: "ResourceDataSyncS3Region", # required
+    #       awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
     #     },
     #   })
     #
@@ -4192,6 +4193,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].s3_destination.prefix #=> String
     #   resp.resource_data_sync_items[0].s3_destination.sync_format #=> String, one of "JsonSerDe"
     #   resp.resource_data_sync_items[0].s3_destination.region #=> String
+    #   resp.resource_data_sync_items[0].s3_destination.awskms_key_arn #=> String
     #   resp.resource_data_sync_items[0].last_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_status #=> String, one of "Successful", "Failed", "InProgress"
@@ -4965,6 +4967,10 @@ module Aws::SSM
     #   A key-value map of execution parameters, which match the declared
     #   parameters in the Automation document.
     #
+    # @option params [String] :client_token
+    #   User-provided idempotency token. The token must be unique, is case
+    #   insensitive, enforces the UUID format, and can't be reused.
+    #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAutomationExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -4977,6 +4983,7 @@ module Aws::SSM
     #     parameters: {
     #       "AutomationParameterKey" => ["AutomationParameterValue"],
     #     },
+    #     client_token: "IdempotencyToken",
     #   })
     #
     # @example Response structure
@@ -5819,7 +5826,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

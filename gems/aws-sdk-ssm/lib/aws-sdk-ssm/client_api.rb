@@ -307,6 +307,7 @@ module Aws::SSM
     HierarchyTypeMismatchException = Shapes::StructureShape.new(name: 'HierarchyTypeMismatchException')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
+    IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
     InstanceAggregatedAssociationOverview = Shapes::StructureShape.new(name: 'InstanceAggregatedAssociationOverview')
     InstanceAssociation = Shapes::StructureShape.new(name: 'InstanceAssociation')
@@ -620,6 +621,7 @@ module Aws::SSM
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
+    ResourceDataSyncAWSKMSKeyARN = Shapes::StringShape.new(name: 'ResourceDataSyncAWSKMSKeyARN')
     ResourceDataSyncAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceDataSyncAlreadyExistsException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
@@ -2313,6 +2315,7 @@ module Aws::SSM
     ResourceDataSyncS3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Prefix, location_name: "Prefix"))
     ResourceDataSyncS3Destination.add_member(:sync_format, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Format, required: true, location_name: "SyncFormat"))
     ResourceDataSyncS3Destination.add_member(:region, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Region, required: true, location_name: "Region"))
+    ResourceDataSyncS3Destination.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: ResourceDataSyncAWSKMSKeyARN, location_name: "AWSKMSKeyARN"))
     ResourceDataSyncS3Destination.struct_class = Types::ResourceDataSyncS3Destination
 
     ResultAttribute.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
@@ -2366,6 +2369,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
     StartAutomationExecutionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
+    StartAutomationExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
 
     StartAutomationExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -3596,6 +3600,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutomationExecutionParametersException)
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AutomationDefinitionVersionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

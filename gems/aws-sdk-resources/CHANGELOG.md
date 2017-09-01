@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.1.0 (2017-09-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mobile` gem.
+
 3.0.2 (2017-08-31)
 ------------------
 

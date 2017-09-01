@@ -77,6 +77,7 @@ module Aws
   autoload :MarketplaceEntitlementService, 'aws-sdk-marketplaceentitlementservice'
   autoload :MarketplaceMetering, 'aws-sdk-marketplacemetering'
   autoload :MigrationHub, 'aws-sdk-migrationhub'
+  autoload :Mobile, 'aws-sdk-mobile'
   autoload :OpsWorks, 'aws-sdk-opsworks'
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'
   autoload :Organizations, 'aws-sdk-organizations'

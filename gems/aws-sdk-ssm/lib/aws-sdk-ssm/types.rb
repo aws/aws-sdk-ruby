@@ -1866,6 +1866,7 @@ module Aws::SSM
     #           prefix: "ResourceDataSyncS3Prefix",
     #           sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #           region: "ResourceDataSyncS3Region", # required
+    #           awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
     #         },
     #       }
     #
@@ -8519,6 +8520,7 @@ module Aws::SSM
     #         prefix: "ResourceDataSyncS3Prefix",
     #         sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #         region: "ResourceDataSyncS3Region", # required
+    #         awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -8540,13 +8542,19 @@ module Aws::SSM
     #   Data Sync.
     #   @return [String]
     #
+    # @!attribute [rw] awskms_key_arn
+    #   The ARN of an encryption key for a destination in Amazon S3. Must
+    #   belong to the same region as the destination Amazon S3 bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination AWS API Documentation
     #
     class ResourceDataSyncS3Destination < Struct.new(
       :bucket_name,
       :prefix,
       :sync_format,
-      :region)
+      :region,
+      :awskms_key_arn)
       include Aws::Structure
     end
 
@@ -8895,6 +8903,7 @@ module Aws::SSM
     #         parameters: {
     #           "AutomationParameterKey" => ["AutomationParameterValue"],
     #         },
+    #         client_token: "IdempotencyToken",
     #       }
     #
     # @!attribute [rw] document_name
@@ -8910,12 +8919,18 @@ module Aws::SSM
     #   parameters in the Automation document.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] client_token
+    #   User-provided idempotency token. The token must be unique, is case
+    #   insensitive, enforces the UUID format, and can't be reused.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
       :document_name,
       :document_version,
-      :parameters)
+      :parameters,
+      :client_token)
       include Aws::Structure
     end
 

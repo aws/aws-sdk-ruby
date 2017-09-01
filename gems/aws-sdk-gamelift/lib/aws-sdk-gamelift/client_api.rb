@@ -45,6 +45,10 @@ module Aws::GameLift
     CreatePlayerSessionOutput = Shapes::StructureShape.new(name: 'CreatePlayerSessionOutput')
     CreatePlayerSessionsInput = Shapes::StructureShape.new(name: 'CreatePlayerSessionsInput')
     CreatePlayerSessionsOutput = Shapes::StructureShape.new(name: 'CreatePlayerSessionsOutput')
+    CreateVpcPeeringAuthorizationInput = Shapes::StructureShape.new(name: 'CreateVpcPeeringAuthorizationInput')
+    CreateVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'CreateVpcPeeringAuthorizationOutput')
+    CreateVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'CreateVpcPeeringConnectionInput')
+    CreateVpcPeeringConnectionOutput = Shapes::StructureShape.new(name: 'CreateVpcPeeringConnectionOutput')
     CustomEventData = Shapes::StringShape.new(name: 'CustomEventData')
     DeleteAliasInput = Shapes::StructureShape.new(name: 'DeleteAliasInput')
     DeleteBuildInput = Shapes::StructureShape.new(name: 'DeleteBuildInput')
@@ -54,6 +58,10 @@ module Aws::GameLift
     DeleteMatchmakingConfigurationInput = Shapes::StructureShape.new(name: 'DeleteMatchmakingConfigurationInput')
     DeleteMatchmakingConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteMatchmakingConfigurationOutput')
     DeleteScalingPolicyInput = Shapes::StructureShape.new(name: 'DeleteScalingPolicyInput')
+    DeleteVpcPeeringAuthorizationInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationInput')
+    DeleteVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationOutput')
+    DeleteVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionInput')
+    DeleteVpcPeeringConnectionOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionOutput')
     DescribeAliasInput = Shapes::StructureShape.new(name: 'DescribeAliasInput')
     DescribeAliasOutput = Shapes::StructureShape.new(name: 'DescribeAliasOutput')
     DescribeBuildInput = Shapes::StructureShape.new(name: 'DescribeBuildInput')
@@ -92,6 +100,10 @@ module Aws::GameLift
     DescribeRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeRuntimeConfigurationOutput')
     DescribeScalingPoliciesInput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesInput')
     DescribeScalingPoliciesOutput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesOutput')
+    DescribeVpcPeeringAuthorizationsInput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringAuthorizationsInput')
+    DescribeVpcPeeringAuthorizationsOutput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringAuthorizationsOutput')
+    DescribeVpcPeeringConnectionsInput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringConnectionsInput')
+    DescribeVpcPeeringConnectionsOutput = Shapes::StructureShape.new(name: 'DescribeVpcPeeringConnectionsOutput')
     DesiredPlayerSession = Shapes::StructureShape.new(name: 'DesiredPlayerSession')
     DesiredPlayerSessionList = Shapes::ListShape.new(name: 'DesiredPlayerSessionList')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -270,6 +282,11 @@ module Aws::GameLift
     UpdateRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateRuntimeConfigurationOutput')
     ValidateMatchmakingRuleSetInput = Shapes::StructureShape.new(name: 'ValidateMatchmakingRuleSetInput')
     ValidateMatchmakingRuleSetOutput = Shapes::StructureShape.new(name: 'ValidateMatchmakingRuleSetOutput')
+    VpcPeeringAuthorization = Shapes::StructureShape.new(name: 'VpcPeeringAuthorization')
+    VpcPeeringAuthorizationList = Shapes::ListShape.new(name: 'VpcPeeringAuthorizationList')
+    VpcPeeringConnection = Shapes::StructureShape.new(name: 'VpcPeeringConnection')
+    VpcPeeringConnectionList = Shapes::ListShape.new(name: 'VpcPeeringConnectionList')
+    VpcPeeringConnectionStatus = Shapes::StructureShape.new(name: 'VpcPeeringConnectionStatus')
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
 
     AcceptMatchInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "TicketId"))
@@ -343,6 +360,8 @@ module Aws::GameLift
     CreateFleetInput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
     CreateFleetInput.add_member(:resource_creation_limit_policy, Shapes::ShapeRef.new(shape: ResourceCreationLimitPolicy, location_name: "ResourceCreationLimitPolicy"))
     CreateFleetInput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupList, location_name: "MetricGroups"))
+    CreateFleetInput.add_member(:peer_vpc_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcAwsAccountId"))
+    CreateFleetInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcId"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
 
     CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
@@ -411,6 +430,20 @@ module Aws::GameLift
     CreatePlayerSessionsOutput.add_member(:player_sessions, Shapes::ShapeRef.new(shape: PlayerSessionList, location_name: "PlayerSessions"))
     CreatePlayerSessionsOutput.struct_class = Types::CreatePlayerSessionsOutput
 
+    CreateVpcPeeringAuthorizationInput.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "GameLiftAwsAccountId"))
+    CreateVpcPeeringAuthorizationInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcId"))
+    CreateVpcPeeringAuthorizationInput.struct_class = Types::CreateVpcPeeringAuthorizationInput
+
+    CreateVpcPeeringAuthorizationOutput.add_member(:vpc_peering_authorization, Shapes::ShapeRef.new(shape: VpcPeeringAuthorization, location_name: "VpcPeeringAuthorization"))
+    CreateVpcPeeringAuthorizationOutput.struct_class = Types::CreateVpcPeeringAuthorizationOutput
+
+    CreateVpcPeeringConnectionInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    CreateVpcPeeringConnectionInput.add_member(:peer_vpc_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcAwsAccountId"))
+    CreateVpcPeeringConnectionInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcId"))
+    CreateVpcPeeringConnectionInput.struct_class = Types::CreateVpcPeeringConnectionInput
+
+    CreateVpcPeeringConnectionOutput.struct_class = Types::CreateVpcPeeringConnectionOutput
+
     DeleteAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
     DeleteAliasInput.struct_class = Types::DeleteAliasInput
 
@@ -433,6 +466,18 @@ module Aws::GameLift
     DeleteScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     DeleteScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
     DeleteScalingPolicyInput.struct_class = Types::DeleteScalingPolicyInput
+
+    DeleteVpcPeeringAuthorizationInput.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "GameLiftAwsAccountId"))
+    DeleteVpcPeeringAuthorizationInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PeerVpcId"))
+    DeleteVpcPeeringAuthorizationInput.struct_class = Types::DeleteVpcPeeringAuthorizationInput
+
+    DeleteVpcPeeringAuthorizationOutput.struct_class = Types::DeleteVpcPeeringAuthorizationOutput
+
+    DeleteVpcPeeringConnectionInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DeleteVpcPeeringConnectionInput.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "VpcPeeringConnectionId"))
+    DeleteVpcPeeringConnectionInput.struct_class = Types::DeleteVpcPeeringConnectionInput
+
+    DeleteVpcPeeringConnectionOutput.struct_class = Types::DeleteVpcPeeringConnectionOutput
 
     DescribeAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
     DescribeAliasInput.struct_class = Types::DescribeAliasInput
@@ -597,6 +642,17 @@ module Aws::GameLift
     DescribeScalingPoliciesOutput.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: ScalingPolicyList, location_name: "ScalingPolicies"))
     DescribeScalingPoliciesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeScalingPoliciesOutput.struct_class = Types::DescribeScalingPoliciesOutput
+
+    DescribeVpcPeeringAuthorizationsInput.struct_class = Types::DescribeVpcPeeringAuthorizationsInput
+
+    DescribeVpcPeeringAuthorizationsOutput.add_member(:vpc_peering_authorizations, Shapes::ShapeRef.new(shape: VpcPeeringAuthorizationList, location_name: "VpcPeeringAuthorizations"))
+    DescribeVpcPeeringAuthorizationsOutput.struct_class = Types::DescribeVpcPeeringAuthorizationsOutput
+
+    DescribeVpcPeeringConnectionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    DescribeVpcPeeringConnectionsInput.struct_class = Types::DescribeVpcPeeringConnectionsInput
+
+    DescribeVpcPeeringConnectionsOutput.add_member(:vpc_peering_connections, Shapes::ShapeRef.new(shape: VpcPeeringConnectionList, location_name: "VpcPeeringConnections"))
+    DescribeVpcPeeringConnectionsOutput.struct_class = Types::DescribeVpcPeeringConnectionsOutput
 
     DesiredPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     DesiredPlayerSession.add_member(:player_data, Shapes::ShapeRef.new(shape: PlayerData, location_name: "PlayerData"))
@@ -853,8 +909,10 @@ module Aws::GameLift
     MatchmakingTicket.add_member(:status_reason, Shapes::ShapeRef.new(shape: StringModel, location_name: "StatusReason"))
     MatchmakingTicket.add_member(:status_message, Shapes::ShapeRef.new(shape: StringModel, location_name: "StatusMessage"))
     MatchmakingTicket.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MatchmakingTicket.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     MatchmakingTicket.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, location_name: "Players"))
     MatchmakingTicket.add_member(:game_session_connection_info, Shapes::ShapeRef.new(shape: GameSessionConnectionInfo, location_name: "GameSessionConnectionInfo"))
+    MatchmakingTicket.add_member(:estimated_wait_time, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "EstimatedWaitTime"))
     MatchmakingTicket.struct_class = Types::MatchmakingTicket
 
     MatchmakingTicketList.member = Shapes::ShapeRef.new(shape: MatchmakingTicket)
@@ -1120,6 +1178,29 @@ module Aws::GameLift
     ValidateMatchmakingRuleSetOutput.add_member(:valid, Shapes::ShapeRef.new(shape: Boolean, location_name: "Valid"))
     ValidateMatchmakingRuleSetOutput.struct_class = Types::ValidateMatchmakingRuleSetOutput
 
+    VpcPeeringAuthorization.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameLiftAwsAccountId"))
+    VpcPeeringAuthorization.add_member(:peer_vpc_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcAwsAccountId"))
+    VpcPeeringAuthorization.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcId"))
+    VpcPeeringAuthorization.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    VpcPeeringAuthorization.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationTime"))
+    VpcPeeringAuthorization.struct_class = Types::VpcPeeringAuthorization
+
+    VpcPeeringAuthorizationList.member = Shapes::ShapeRef.new(shape: VpcPeeringAuthorization)
+
+    VpcPeeringConnection.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    VpcPeeringConnection.add_member(:ip_v4_cidr_block, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "IpV4CidrBlock"))
+    VpcPeeringConnection.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "VpcPeeringConnectionId"))
+    VpcPeeringConnection.add_member(:status, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStatus, location_name: "Status"))
+    VpcPeeringConnection.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcId"))
+    VpcPeeringConnection.add_member(:game_lift_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameLiftVpcId"))
+    VpcPeeringConnection.struct_class = Types::VpcPeeringConnection
+
+    VpcPeeringConnectionList.member = Shapes::ShapeRef.new(shape: VpcPeeringConnection)
+
+    VpcPeeringConnectionStatus.add_member(:code, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Code"))
+    VpcPeeringConnectionStatus.add_member(:message, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Message"))
+    VpcPeeringConnectionStatus.struct_class = Types::VpcPeeringConnectionStatus
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1270,6 +1351,30 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:create_vpc_peering_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcPeeringAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcPeeringAuthorizationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcPeeringAuthorizationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:create_vpc_peering_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcPeeringConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcPeeringConnectionInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcPeeringConnectionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAlias"
         o.http_method = "POST"
@@ -1341,6 +1446,30 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:delete_vpc_peering_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcPeeringAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcPeeringAuthorizationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcPeeringAuthorizationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_vpc_peering_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcPeeringConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcPeeringConnectionInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcPeeringConnectionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:describe_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1568,6 +1697,29 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:describe_vpc_peering_authorizations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcPeeringAuthorizations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcPeeringAuthorizationsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcPeeringAuthorizationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_vpc_peering_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcPeeringConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcPeeringConnectionsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcPeeringConnectionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:get_game_session_log_url, Seahorse::Model::Operation.new.tap do |o|

@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-gamelift/types'
-require_relative 'aws-sdk-gamelift/client_api'
-require_relative 'aws-sdk-gamelift/client'
-require_relative 'aws-sdk-gamelift/errors'
-require_relative 'aws-sdk-gamelift/resource'
-require_relative 'aws-sdk-gamelift/customizations'
+require_relative 'aws-sdk-mobile/types'
+require_relative 'aws-sdk-mobile/client_api'
+require_relative 'aws-sdk-mobile/client'
+require_relative 'aws-sdk-mobile/errors'
+require_relative 'aws-sdk-mobile/resource'
+require_relative 'aws-sdk-mobile/customizations'
 
-# This module provides support for Amazon GameLift. This module is available in the
-# `aws-sdk-gamelift` gem.
+# This module provides support for AWS Mobile. This module is available in the
+# `aws-sdk-mobile` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-gamelift/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon GameLift all
+# Errors returned from AWS Mobile all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::GameLift::Errors::ServiceError
+#     rescue Aws::Mobile::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::GameLift
+module Aws::Mobile
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

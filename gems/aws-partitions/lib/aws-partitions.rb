@@ -293,6 +293,7 @@ module Aws
             'MarketplaceEntitlementService' => 'entitlement.marketplace',
             'MarketplaceMetering' => 'metering.marketplace',
             'MigrationHub' => 'mgh',
+            'Mobile' => 'mobile',
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',

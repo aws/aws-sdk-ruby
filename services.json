@@ -254,6 +254,9 @@
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31"
   },
+  "Mobile": {
+    "models": "mobile/2017-07-01"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },

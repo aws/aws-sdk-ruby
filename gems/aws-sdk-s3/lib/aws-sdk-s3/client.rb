@@ -2085,9 +2085,9 @@ module Aws::S3
     #
     # @overload get_bucket_policy(params = {})
     # @param [Hash] params ({})
-    def get_bucket_policy(params = {}, options = {})
+    def get_bucket_policy(params = {}, options = {}, &block)
       req = build_request(:get_bucket_policy, params)
-      req.send_request(options)
+      req.send_request(options, &block)
     end
 
     # Returns the replication configuration of a bucket.
@@ -2592,9 +2592,9 @@ module Aws::S3
     #
     # @overload get_object(params = {})
     # @param [Hash] params ({})
-    def get_object(params = {}, options = {})
+    def get_object(params = {}, options = {}, &block)
       req = build_request(:get_object, params)
-      req.send_request(options)
+      req.send_request(options, &block)
     end
 
     # Returns the access control list (ACL) of an object.
@@ -2837,9 +2837,9 @@ module Aws::S3
     #
     # @overload get_object_torrent(params = {})
     # @param [Hash] params ({})
-    def get_object_torrent(params = {}, options = {})
+    def get_object_torrent(params = {}, options = {}, &block)
       req = build_request(:get_object_torrent, params)
-      req.send_request(options)
+      req.send_request(options, &block)
     end
 
     # This operation is useful to determine if a bucket exists and you have
@@ -5868,7 +5868,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

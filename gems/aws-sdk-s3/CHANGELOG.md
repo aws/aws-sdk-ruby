@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2017-09-01)
+------------------
+
+* Feature - API update.
+
 * Issue - Add object streaming behavior smoke test
 
 * Issue - Update `aws-sdk-s3` gemspec metadata.
