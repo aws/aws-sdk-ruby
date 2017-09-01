@@ -282,11 +282,12 @@ to be backwards compatible.
 | AWS IoT                             | IoT                           | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                  | 2015-05-28  |
 | AWS Key Management Service          | KMS                           | 2014-11-01  |
-| AWS Lambda                          | Lambda                        | 2015-03-31  |
 | AWS Lambda                          | LambdaPreview                 | 2014-11-11  |
+| AWS Lambda                          | Lambda                        | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | MarketplaceEntitlementService | 2017-01-11  |
 | AWS Migration Hub                   | MigrationHub                  | 2017-05-31  |
+| AWS Mobile                          | Mobile                        | 2017-07-01  |
 | AWS OpsWorks                        | OpsWorks                      | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                    | 2016-11-01  |
 | AWS Organizations                   | Organizations                 | 2016-11-28  |

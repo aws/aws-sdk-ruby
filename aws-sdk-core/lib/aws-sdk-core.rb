@@ -97,6 +97,7 @@ module Aws
     MarketplaceEntitlementService
     MarketplaceMetering
     MigrationHub
+    Mobile
     OpsWorks
     OpsWorksCM
     Organizations
