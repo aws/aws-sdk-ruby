@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.38 (2017-09-01)
+------------------
+
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
