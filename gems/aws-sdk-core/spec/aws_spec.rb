@@ -6,7 +6,7 @@ module Aws
   describe 'VERSION' do
 
     it 'is a semver compatible string' do
-      expect(VERSION).to match(/\d+\.\d+\.\d+/)
+      expect(CORE_GEM_VERSION).to match(/\d+\.\d+\.\d+/)
     end
 
   end

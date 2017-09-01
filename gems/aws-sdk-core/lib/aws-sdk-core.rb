@@ -28,7 +28,6 @@ require_relative 'aws-sdk-core/shared_config'
 require_relative 'aws-sdk-core/structure'
 require_relative 'aws-sdk-core/type_builder'
 require_relative 'aws-sdk-core/util'
-require_relative 'aws-sdk-core/version'
 
 # resource classes
 
