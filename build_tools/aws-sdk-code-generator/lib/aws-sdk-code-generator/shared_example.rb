@@ -30,8 +30,18 @@ module AwsSdkCodeGenerator
       when 'map' then map(json, ref, indent, path)
       when 'list' then list(json, ref, indent, path)
       when 'timestamp' then "Time.parse(#{json.inspect})"
-      when 'string', 'blob' then json.inspect
+      when 'string', 'blob' then string(json)
       else json
+      end
+    end
+
+    def string(json)
+      # Travis jruby hangs when parsing long string (e.g. policy string)
+      # Clean all white spaces in those strings
+      if json.length > 2048
+        json.gsub(/\s+/, "").inspect
+      else
+        json.inspect
       end
     end
 
