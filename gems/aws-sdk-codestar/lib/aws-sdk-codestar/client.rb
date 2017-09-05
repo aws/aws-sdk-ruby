@@ -550,7 +550,7 @@ module Aws::CodeStar
     #   cannot be returned in one response.
     #
     # @option params [Integer] :max_results
-    #   he maximum amount of data that can be contained in a single set of
+    #   The maximum amount of data that can be contained in a single set of
     #   results.
     #
     # @return [Types::ListResourcesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -578,6 +578,45 @@ module Aws::CodeStar
     # @param [Hash] params ({})
     def list_resources(params = {}, options = {})
       req = build_request(:list_resources, params)
+      req.send_request(options)
+    end
+
+    # Gets the tags for a project.
+    #
+    # @option params [required, String] :id
+    #   The ID of the project to get tags for.
+    #
+    # @option params [String] :next_token
+    #   Reserved for future use.
+    #
+    # @option params [Integer] :max_results
+    #   Reserved for future use.
+    #
+    # @return [Types::ListTagsForProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForProjectResult#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ListTagsForProjectResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_project({
+    #     id: "ProjectId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject AWS API Documentation
+    #
+    # @overload list_tags_for_project(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_project(params = {}, options = {})
+      req = build_request(:list_tags_for_project, params)
       req.send_request(options)
     end
 
@@ -663,6 +702,67 @@ module Aws::CodeStar
       req.send_request(options)
     end
 
+    # Adds tags to a project.
+    #
+    # @option params [required, String] :id
+    #   The ID of the project you want to add a tag to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags you want to add to the project.
+    #
+    # @return [Types::TagProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TagProjectResult#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_project({
+    #     id: "ProjectId", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject AWS API Documentation
+    #
+    # @overload tag_project(params = {})
+    # @param [Hash] params ({})
+    def tag_project(params = {}, options = {})
+      req = build_request(:tag_project, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a project.
+    #
+    # @option params [required, String] :id
+    #   The ID of the project to remove tags from.
+    #
+    # @option params [required, Array<String>] :tags
+    #   The tags to remove from the project.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_project({
+    #     id: "ProjectId", # required
+    #     tags: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject AWS API Documentation
+    #
+    # @overload untag_project(params = {})
+    # @param [Hash] params ({})
+    def untag_project(params = {}, options = {})
+      req = build_request(:untag_project, params)
+      req.send_request(options)
+    end
+
     # Updates a project in AWS CodeStar.
     #
     # @option params [required, String] :id
@@ -707,7 +807,7 @@ module Aws::CodeStar
     # @option params [String] :project_role
     #   The role assigned to the user in the project. Project roles have
     #   different levels of access. For more information, see [Working with
-    #   Teams][1] in the AWS CodeStar User Guide.
+    #   Teams][1] in the *AWS CodeStar User Guide*.
     #
     #
     #
@@ -821,7 +921,7 @@ module Aws::CodeStar
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestar'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

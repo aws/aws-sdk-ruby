@@ -526,7 +526,7 @@ module Aws::CodeStar
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   he maximum amount of data that can be contained in a single set of
+    #   The maximum amount of data that can be contained in a single set of
     #   results.
     #   @return [Integer]
     #
@@ -552,6 +552,52 @@ module Aws::CodeStar
     #
     class ListResourcesResult < Struct.new(
       :resources,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ProjectId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the project to get tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Reserved for future use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProjectRequest AWS API Documentation
+    #
+    class ListTagsForProjectRequest < Struct.new(
+      :id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the project.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProjectResult AWS API Documentation
+    #
+    class ListTagsForProjectResult < Struct.new(
+      :tags,
       :next_token)
       include Aws::Structure
     end
@@ -677,6 +723,43 @@ module Aws::CodeStar
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ProjectId", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the project you want to add a tag to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to add to the project.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProjectRequest AWS API Documentation
+    #
+    class TagProjectRequest < Struct.new(
+      :id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the project.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProjectResult AWS API Documentation
+    #
+    class TagProjectResult < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Information about a team member in a project.
     #
     # @!attribute [rw] user_arn
@@ -686,7 +769,7 @@ module Aws::CodeStar
     # @!attribute [rw] project_role
     #   The role assigned to the user in the project. Project roles have
     #   different levels of access. For more information, see [Working with
-    #   Teams][1] in the AWS CodeStar User Guide.
+    #   Teams][1] in the *AWS CodeStar User Guide*.
     #
     #
     #
@@ -706,6 +789,34 @@ module Aws::CodeStar
       :remote_access_allowed)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ProjectId", # required
+    #         tags: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the project to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to remove from the project.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectRequest AWS API Documentation
+    #
+    class UntagProjectRequest < Struct.new(
+      :id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectResult AWS API Documentation
+    #
+    class UntagProjectResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateProjectRequest
     #   data as a hash:
@@ -763,7 +874,7 @@ module Aws::CodeStar
     # @!attribute [rw] project_role
     #   The role assigned to the user in the project. Project roles have
     #   different levels of access. For more information, see [Working with
-    #   Teams][1] in the AWS CodeStar User Guide.
+    #   Teams][1] in the *AWS CodeStar User Guide*.
     #
     #
     #

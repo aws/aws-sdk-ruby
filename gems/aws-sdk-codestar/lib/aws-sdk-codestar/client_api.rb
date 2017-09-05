@@ -40,6 +40,8 @@ module Aws::CodeStar
     ListProjectsResult = Shapes::StructureShape.new(name: 'ListProjectsResult')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
     ListResourcesResult = Shapes::StructureShape.new(name: 'ListResourcesResult')
+    ListTagsForProjectRequest = Shapes::StructureShape.new(name: 'ListTagsForProjectRequest')
+    ListTagsForProjectResult = Shapes::StructureShape.new(name: 'ListTagsForProjectResult')
     ListTeamMembersRequest = Shapes::StructureShape.new(name: 'ListTeamMembersRequest')
     ListTeamMembersResult = Shapes::StructureShape.new(name: 'ListTeamMembersResult')
     ListUserProfilesRequest = Shapes::StructureShape.new(name: 'ListUserProfilesRequest')
@@ -64,10 +66,18 @@ module Aws::CodeStar
     Role = Shapes::StringShape.new(name: 'Role')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StackId = Shapes::StringShape.new(name: 'StackId')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagProjectRequest = Shapes::StructureShape.new(name: 'TagProjectRequest')
+    TagProjectResult = Shapes::StructureShape.new(name: 'TagProjectResult')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     TeamMember = Shapes::StructureShape.new(name: 'TeamMember')
     TeamMemberAlreadyAssociatedException = Shapes::StructureShape.new(name: 'TeamMemberAlreadyAssociatedException')
     TeamMemberNotFoundException = Shapes::StructureShape.new(name: 'TeamMemberNotFoundException')
     TeamMemberResult = Shapes::ListShape.new(name: 'TeamMemberResult')
+    UntagProjectRequest = Shapes::StructureShape.new(name: 'UntagProjectRequest')
+    UntagProjectResult = Shapes::StructureShape.new(name: 'UntagProjectResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
     UpdateProjectResult = Shapes::StructureShape.new(name: 'UpdateProjectResult')
     UpdateTeamMemberRequest = Shapes::StructureShape.new(name: 'UpdateTeamMemberRequest')
@@ -180,6 +190,15 @@ module Aws::CodeStar
     ListResourcesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListResourcesResult.struct_class = Types::ListResourcesResult
 
+    ListTagsForProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
+    ListTagsForProjectRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTagsForProjectRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListTagsForProjectRequest.struct_class = Types::ListTagsForProjectRequest
+
+    ListTagsForProjectResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForProjectResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTagsForProjectResult.struct_class = Types::ListTagsForProjectResult
+
     ListTeamMembersRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "projectId"))
     ListTeamMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListTeamMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box"=>true}))
@@ -208,12 +227,30 @@ module Aws::CodeStar
 
     ResourcesResult.member = Shapes::ShapeRef.new(shape: Resource)
 
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
+    TagProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagProjectRequest.struct_class = Types::TagProjectRequest
+
+    TagProjectResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    TagProjectResult.struct_class = Types::TagProjectResult
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TeamMember.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, required: true, location_name: "userArn"))
     TeamMember.add_member(:project_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "projectRole"))
     TeamMember.add_member(:remote_access_allowed, Shapes::ShapeRef.new(shape: RemoteAccessAllowed, location_name: "remoteAccessAllowed", metadata: {"box"=>true}))
     TeamMember.struct_class = Types::TeamMember
 
     TeamMemberResult.member = Shapes::ShapeRef.new(shape: TeamMember)
+
+    UntagProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
+    UntagProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "tags"))
+    UntagProjectRequest.struct_class = Types::UntagProjectRequest
+
+    UntagProjectResult.struct_class = Types::UntagProjectResult
 
     UpdateProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "name"))
@@ -386,6 +423,17 @@ module Aws::CodeStar
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:list_tags_for_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForProjectResult)
+        o.errors << Shapes::ShapeRef.new(shape: ProjectNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
       api.add_operation(:list_team_members, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTeamMembers"
         o.http_method = "POST"
@@ -405,6 +453,30 @@ module Aws::CodeStar
         o.output = Shapes::ShapeRef.new(shape: ListUserProfilesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:tag_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagProjectResult)
+        o.errors << Shapes::ShapeRef.new(shape: ProjectNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:untag_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagProjectResult)
+        o.errors << Shapes::ShapeRef.new(shape: ProjectNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_project, Seahorse::Model::Operation.new.tap do |o|
