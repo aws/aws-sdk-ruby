@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.39 (2017-09-05)
+------------------
+
 * Feature - Aws::CodeStar - Updated the API, and documentation for AWS CodeStar.
 
 2.10.38 (2017-09-01)
