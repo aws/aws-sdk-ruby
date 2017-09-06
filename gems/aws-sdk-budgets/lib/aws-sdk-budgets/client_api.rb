@@ -63,6 +63,7 @@ module Aws::Budgets
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     Subscribers = Shapes::ListShape.new(name: 'Subscribers')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
+    ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     UnitValue = Shapes::StringShape.new(name: 'UnitValue')
@@ -184,6 +185,7 @@ module Aws::Budgets
     Notification.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "NotificationType"))
     Notification.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     Notification.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationThreshold, required: true, location_name: "Threshold"))
+    Notification.add_member(:threshold_type, Shapes::ShapeRef.new(shape: ThresholdType, location_name: "ThresholdType"))
     Notification.struct_class = Types::Notification
 
     NotificationWithSubscribers.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, required: true, location_name: "Notification"))

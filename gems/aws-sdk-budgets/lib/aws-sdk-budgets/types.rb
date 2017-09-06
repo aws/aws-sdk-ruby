@@ -51,12 +51,12 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
-    #   A structure represent either a cost spend or usage spend. Contains
-    #   an amount and a unit.
+    #   A structure that represents either a cost spend or usage spend.
+    #   Contains an amount and a unit.
     #   @return [Types::Spend]
     #
     # @!attribute [rw] cost_filters
-    #   A map represents the cost filters applied to the budget.
+    #   A map that represents the cost filters applied to the budget.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] cost_types
@@ -68,11 +68,11 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] time_period
-    #   A time period indicated the start date and end date of a budget.
+    #   A time period indicating the start date and end date of a budget.
     #   @return [Types::TimePeriod]
     #
     # @!attribute [rw] calculated_spend
-    #   A structure holds the actual and forecasted spend for a budget.
+    #   A structure that holds the actual and forecasted spend for a budget.
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
@@ -91,7 +91,7 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A structure holds the actual and forecasted spend for a budget.
+    # A structure that holds the actual and forecasted spend for a budget.
     #
     # @note When making an API call, you may pass CalculatedSpend
     #   data as a hash:
@@ -108,13 +108,13 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] actual_spend
-    #   A structure represent either a cost spend or usage spend. Contains
-    #   an amount and a unit.
+    #   A structure that represents either a cost spend or usage spend.
+    #   Contains an amount and a unit.
     #   @return [Types::Spend]
     #
     # @!attribute [rw] forecasted_spend
-    #   A structure represent either a cost spend or usage spend. Contains
-    #   an amount and a unit.
+    #   A structure that represents either a cost spend or usage spend.
+    #   Contains an amount and a unit.
     #   @return [Types::Spend]
     #
     class CalculatedSpend < Struct.new(
@@ -197,6 +197,7 @@ module Aws::Budgets
     #               notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #               comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #               threshold: 1.0, # required
+    #               threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #             },
     #             subscribers: [ # required
     #               {
@@ -243,6 +244,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         subscribers: [ # required
     #           {
@@ -294,6 +296,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -373,6 +376,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #       }
     #
@@ -413,6 +417,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -503,8 +508,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -556,8 +561,8 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -600,6 +605,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         max_results: 1,
     #         next_token: "GenericString",
@@ -620,8 +626,8 @@ module Aws::Budgets
     #   @return [Types::Notification]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -663,6 +669,7 @@ module Aws::Budgets
     #         notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #         comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #         threshold: 1.0, # required
+    #         threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #       }
     #
     # @!attribute [rw] notification_type
@@ -675,14 +682,20 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] threshold
-    #   The threshold of the a notification. It should be a number between 0
-    #   and 100.
+    #   The threshold of a notification. It should be a number between 0 and
+    #   1,000,000,000.
     #   @return [Float]
+    #
+    # @!attribute [rw] threshold_type
+    #   The type of threshold for a notification. It can be PERCENTAGE or
+    #   ABSOLUTE\_VALUE.
+    #   @return [String]
     #
     class Notification < Struct.new(
       :notification_type,
       :comparison_operator,
-      :threshold)
+      :threshold,
+      :threshold_type)
       include Aws::Structure
     end
 
@@ -697,6 +710,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         subscribers: [ # required
     #           {
@@ -721,8 +735,8 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A structure represent either a cost spend or usage spend. Contains an
-    # amount and a unit.
+    # A structure that represents either a cost spend or usage spend.
+    # Contains an amount and a unit.
     #
     # @note When making an API call, you may pass Spend
     #   data as a hash:
@@ -772,7 +786,7 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A time period indicated the start date and end date of a budget.
+    # A time period indicating the start date and end date of a budget.
     #
     # @note When making an API call, you may pass TimePeriod
     #   data as a hash:
@@ -866,11 +880,13 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         new_notification: { # required
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #       }
     #
@@ -917,6 +933,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         old_subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL

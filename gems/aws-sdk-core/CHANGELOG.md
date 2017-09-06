@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.2.1 (2017-09-06)
+------------------
+
 * Issue - Remove redundant version file.
 
 3.2.0 (2017-08-31)

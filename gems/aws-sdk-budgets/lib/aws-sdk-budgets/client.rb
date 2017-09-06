@@ -209,6 +209,7 @@ module Aws::Budgets
     #           notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #           comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #           threshold: 1.0, # required
+    #           threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #         },
     #         subscribers: [ # required
     #           {
@@ -254,6 +255,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     subscribers: [ # required
     #       {
@@ -298,6 +300,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -361,6 +364,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #   })
     #
@@ -399,6 +403,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -466,8 +471,8 @@ module Aws::Budgets
     #   Account Id of the customer. It should be a 12 digit number.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #
     # @option params [String] :next_token
     #   A generic String.
@@ -524,8 +529,8 @@ module Aws::Budgets
     #   allowed.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #
     # @option params [String] :next_token
     #   A generic String.
@@ -550,6 +555,7 @@ module Aws::Budgets
     #   resp.notifications[0].notification_type #=> String, one of "ACTUAL", "FORECASTED"
     #   resp.notifications[0].comparison_operator #=> String, one of "GREATER_THAN", "LESS_THAN", "EQUAL_TO"
     #   resp.notifications[0].threshold #=> Float
+    #   resp.notifications[0].threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
     #   resp.next_token #=> String
     #
     # @overload describe_notifications_for_budget(params = {})
@@ -573,8 +579,8 @@ module Aws::Budgets
     #   with different settings.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries should a pagianted response
-    #   contains. Maxium is set to 100.
+    #   An integer to represent how many entries a paginated response
+    #   contains. Maximum is set to 100.
     #
     # @option params [String] :next_token
     #   A generic String.
@@ -593,6 +599,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     max_results: 1,
     #     next_token: "GenericString",
@@ -694,11 +701,13 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     new_notification: { # required
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #   })
     #
@@ -741,6 +750,7 @@ module Aws::Budgets
     #       notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
     #       comparison_operator: "GREATER_THAN", # required, accepts GREATER_THAN, LESS_THAN, EQUAL_TO
     #       threshold: 1.0, # required
+    #       threshold_type: "PERCENTAGE", # accepts PERCENTAGE, ABSOLUTE_VALUE
     #     },
     #     old_subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
@@ -772,7 +782,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
