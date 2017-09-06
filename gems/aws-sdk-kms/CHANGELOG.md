@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Issue - Compact long string in KMS shared examples causing hanging for jruby
 * Issue - Update `aws-sdk-kms` gemspec metadata.
 
 1.0.0 (2017-08-29)
