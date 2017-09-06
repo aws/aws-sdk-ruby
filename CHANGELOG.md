@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.40 (2017-09-06)
+------------------
+
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
 
 2.10.39 (2017-09-05)
