@@ -5,6 +5,7 @@ module AwsSdkCodeGenerator
       action = options.fetch(:action)
       @request = action.fetch('request')
       @resource = action.fetch('resource', nil)
+      @streaming = options.fetch(:streaming, false)
     end
 
     def build
@@ -27,7 +28,7 @@ module AwsSdkCodeGenerator
     private
 
     def client_request
-      ResourceClientRequest.build(request: @request, resp: true)
+      ResourceClientRequest.build(request: @request, resp: true, streaming: @streaming)
     end
 
     def resource_type
