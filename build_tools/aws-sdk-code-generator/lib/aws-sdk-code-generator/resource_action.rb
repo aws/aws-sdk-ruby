@@ -2,6 +2,8 @@ module AwsSdkCodeGenerator
   class ResourceAction
     class << self
 
+      include Helper
+
       # @return [Array<ResourceMethod>]
       def build_list(resource_name, resource, api)
         resource.fetch('actions', {}).map do |action_name, action|
@@ -22,6 +24,12 @@ module AwsSdkCodeGenerator
         ResourceMethod.new.tap do |m|
           m.method_name = Underscore.underscore(options.fetch(:action_name))
           m.arguments = 'options = {}'
+          operation_name = options.fetch(:action)['request']['operation']
+          api = options.fetch(:api)
+          if operation_streaming?(api['operations'][operation_name], api)
+            m.arguments += ', &block'
+            options[:streaming] = true
+          end
           m.code = ResourceActionCode.new(options).build
           m.documentation = documentation(options)
         end

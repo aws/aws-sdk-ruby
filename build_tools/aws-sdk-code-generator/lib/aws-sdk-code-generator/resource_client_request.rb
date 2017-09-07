@@ -8,13 +8,14 @@ module AwsSdkCodeGenerator
       def build(options)
         request = options.fetch(:request)
         merge = options.fetch(:merge, true)
+        streaming = options.fetch(:streaming, false)
         params = ResourceClientRequestParams.new(params: request['params'])
         parts = []
         parts << request_options(params) if merge
         parts << assignment(options)
         parts << "@client."
         parts << operation_name(request)
-        parts << arguments(merge, params)
+        parts << arguments(merge, params, streaming)
         parts.join
       end
 
@@ -44,13 +45,13 @@ module AwsSdkCodeGenerator
         Underscore.underscore(request['operation'])
       end
 
-      def arguments(merge, params)
+      def arguments(merge, params, streaming)
         if merge
-          '(options)'
+          streaming ? '(options, &block)' : '(options)'
         elsif params.empty?
           ''
         else
-          "(#{params})"
+          streaming ? "(#{params}, &block)" : "(#{params})"
         end
       end
 

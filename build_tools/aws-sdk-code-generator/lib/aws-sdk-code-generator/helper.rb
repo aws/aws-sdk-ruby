@@ -134,6 +134,21 @@ module AwsSdkCodeGenerator
       Docstring.html_to_markdown(html, options)
     end
 
+    def operation_streaming?(operation, api)
+      return unless operation.key? 'output'
+      output = operation['output']['shape']
+      if api['shapes'][output].key? 'payload'
+        output_shape = api['shapes'][output]
+        payload = output_shape['payload']
+        if output_shape.key? 'members'
+          payload_ref = output_shape['members'][payload]
+        elsif output_shape.key? 'member'
+          payload_ref = output_shape['member'][payload]
+        end
+        Api.streaming?(payload_ref, api)
+      end
+    end
+
     def deep_copy(obj)
       case obj
       when nil then nil
@@ -151,7 +166,7 @@ module AwsSdkCodeGenerator
         end
       end
     end
-    module_function :deep_copy
+    module_function :deep_copy, :operation_streaming?
 
   end
 end

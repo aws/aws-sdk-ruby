@@ -210,3 +210,15 @@ Then(/^these test file has been cleaned up$/) do
     expect(File.exist?(file)).to be(false)
   end
 end
+
+Given(/^I put "([^"]*)" to the object with key "([^"]*)"$/) do |body, key|
+  @obj = @bucket.object(key)
+  @obj.put(body: body)
+end
+
+Then(/^I can streaming download object with key "([^"]*)"$/) do |key|
+  resp = @obj.get do |chunk|
+    expect(chunk).to eq("hello world")
+  end
+  expect(resp.body).to be_a(Seahorse::Client::BlockIO)
+end

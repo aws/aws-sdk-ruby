@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
             examples: examples,
             client_examples: client_examples[method_name] || []
           ).to_s,
-          streaming: streaming(operation, api)
+          streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api)
         )
       end
     end
@@ -27,21 +27,6 @@ module AwsSdkCodeGenerator
     # @return [Enumerable<Operation>]
     def each(&block)
       @operations.each(&block)
-    end
-
-    def streaming(operation, api)
-      return unless operation.key? 'output'
-      output = operation['output']['shape']
-      if api['shapes'][output].key? 'payload'
-        output_shape = api['shapes'][output]
-        payload = output_shape['payload']
-        if output_shape.key? 'members'
-          payload_ref = output_shape['members'][payload]
-        elsif output_shape.key? 'member'
-          payload_ref = output_shape['member'][payload]
-        end
-        Api.streaming?(payload_ref, api)
-      end
     end
 
     class Operation
