@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
 2.10.40 (2017-09-06)
 ------------------
 
