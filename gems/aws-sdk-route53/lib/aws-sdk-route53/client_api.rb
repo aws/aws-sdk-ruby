@@ -31,6 +31,7 @@ module Aws::Route53
     CheckerIpRanges = Shapes::ListShape.new(name: 'CheckerIpRanges')
     ChildHealthCheckList = Shapes::ListShape.new(name: 'ChildHealthCheckList')
     CloudWatchAlarmConfiguration = Shapes::StructureShape.new(name: 'CloudWatchAlarmConfiguration')
+    CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CloudWatchRegion = Shapes::StringShape.new(name: 'CloudWatchRegion')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConcurrentModification = Shapes::StructureShape.new(name: 'ConcurrentModification')
@@ -40,6 +41,8 @@ module Aws::Route53
     CreateHealthCheckResponse = Shapes::StructureShape.new(name: 'CreateHealthCheckResponse')
     CreateHostedZoneRequest = Shapes::StructureShape.new(name: 'CreateHostedZoneRequest')
     CreateHostedZoneResponse = Shapes::StructureShape.new(name: 'CreateHostedZoneResponse')
+    CreateQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigRequest')
+    CreateQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigResponse')
     CreateReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'CreateReusableDelegationSetRequest')
     CreateReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'CreateReusableDelegationSetResponse')
     CreateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'CreateTrafficPolicyInstanceRequest')
@@ -64,6 +67,8 @@ module Aws::Route53
     DeleteHealthCheckResponse = Shapes::StructureShape.new(name: 'DeleteHealthCheckResponse')
     DeleteHostedZoneRequest = Shapes::StructureShape.new(name: 'DeleteHostedZoneRequest')
     DeleteHostedZoneResponse = Shapes::StructureShape.new(name: 'DeleteHostedZoneResponse')
+    DeleteQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigRequest')
+    DeleteQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigResponse')
     DeleteReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'DeleteReusableDelegationSetRequest')
     DeleteReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'DeleteReusableDelegationSetResponse')
     DeleteTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyInstanceRequest')
@@ -111,6 +116,8 @@ module Aws::Route53
     GetHostedZoneCountResponse = Shapes::StructureShape.new(name: 'GetHostedZoneCountResponse')
     GetHostedZoneRequest = Shapes::StructureShape.new(name: 'GetHostedZoneRequest')
     GetHostedZoneResponse = Shapes::StructureShape.new(name: 'GetHostedZoneResponse')
+    GetQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'GetQueryLoggingConfigRequest')
+    GetQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'GetQueryLoggingConfigResponse')
     GetReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'GetReusableDelegationSetRequest')
     GetReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'GetReusableDelegationSetResponse')
     GetTrafficPolicyInstanceCountRequest = Shapes::StructureShape.new(name: 'GetTrafficPolicyInstanceCountRequest')
@@ -146,6 +153,7 @@ module Aws::Route53
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressCidr = Shapes::StringShape.new(name: 'IPAddressCidr')
     IncompatibleVersion = Shapes::StructureShape.new(name: 'IncompatibleVersion')
+    InsufficientCloudWatchLogsResourcePolicy = Shapes::StructureShape.new(name: 'InsufficientCloudWatchLogsResourcePolicy')
     InsufficientDataHealthStatus = Shapes::StringShape.new(name: 'InsufficientDataHealthStatus')
     InvalidArgument = Shapes::StructureShape.new(name: 'InvalidArgument')
     InvalidChangeBatch = Shapes::StructureShape.new(name: 'InvalidChangeBatch')
@@ -166,6 +174,8 @@ module Aws::Route53
     ListHostedZonesByNameResponse = Shapes::StructureShape.new(name: 'ListHostedZonesByNameResponse')
     ListHostedZonesRequest = Shapes::StructureShape.new(name: 'ListHostedZonesRequest')
     ListHostedZonesResponse = Shapes::StructureShape.new(name: 'ListHostedZonesResponse')
+    ListQueryLoggingConfigsRequest = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsRequest')
+    ListQueryLoggingConfigsResponse = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsResponse')
     ListResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetsRequest')
     ListResourceRecordSetsResponse = Shapes::StructureShape.new(name: 'ListResourceRecordSetsResponse')
     ListReusableDelegationSetsRequest = Shapes::StructureShape.new(name: 'ListReusableDelegationSetsRequest')
@@ -193,10 +203,12 @@ module Aws::Route53
     Nameserver = Shapes::StringShape.new(name: 'Nameserver')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NoSuchChange = Shapes::StructureShape.new(name: 'NoSuchChange')
+    NoSuchCloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'NoSuchCloudWatchLogsLogGroup')
     NoSuchDelegationSet = Shapes::StructureShape.new(name: 'NoSuchDelegationSet')
     NoSuchGeoLocation = Shapes::StructureShape.new(name: 'NoSuchGeoLocation')
     NoSuchHealthCheck = Shapes::StructureShape.new(name: 'NoSuchHealthCheck')
     NoSuchHostedZone = Shapes::StructureShape.new(name: 'NoSuchHostedZone')
+    NoSuchQueryLoggingConfig = Shapes::StructureShape.new(name: 'NoSuchQueryLoggingConfig')
     NoSuchTrafficPolicy = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicy')
     NoSuchTrafficPolicyInstance = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicyInstance')
     Nonce = Shapes::StringShape.new(name: 'Nonce')
@@ -209,6 +221,10 @@ module Aws::Route53
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorRequestNotComplete = Shapes::StructureShape.new(name: 'PriorRequestNotComplete')
     PublicZoneVPCAssociation = Shapes::StructureShape.new(name: 'PublicZoneVPCAssociation')
+    QueryLoggingConfig = Shapes::StructureShape.new(name: 'QueryLoggingConfig')
+    QueryLoggingConfigAlreadyExists = Shapes::StructureShape.new(name: 'QueryLoggingConfigAlreadyExists')
+    QueryLoggingConfigId = Shapes::StringShape.new(name: 'QueryLoggingConfigId')
+    QueryLoggingConfigs = Shapes::ListShape.new(name: 'QueryLoggingConfigs')
     RData = Shapes::StringShape.new(name: 'RData')
     RRType = Shapes::StringShape.new(name: 'RRType')
     RecordData = Shapes::ListShape.new(name: 'RecordData')
@@ -371,6 +387,14 @@ module Aws::Route53
     CreateHostedZoneResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
     CreateHostedZoneResponse.struct_class = Types::CreateHostedZoneResponse
 
+    CreateQueryLoggingConfigRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+    CreateQueryLoggingConfigRequest.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArn, required: true, location_name: "CloudWatchLogsLogGroupArn"))
+    CreateQueryLoggingConfigRequest.struct_class = Types::CreateQueryLoggingConfigRequest
+
+    CreateQueryLoggingConfigResponse.add_member(:query_logging_config, Shapes::ShapeRef.new(shape: QueryLoggingConfig, required: true, location_name: "QueryLoggingConfig"))
+    CreateQueryLoggingConfigResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
+    CreateQueryLoggingConfigResponse.struct_class = Types::CreateQueryLoggingConfigResponse
+
     CreateReusableDelegationSetRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
     CreateReusableDelegationSetRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "HostedZoneId"))
     CreateReusableDelegationSetRequest.struct_class = Types::CreateReusableDelegationSetRequest
@@ -435,6 +459,11 @@ module Aws::Route53
 
     DeleteHostedZoneResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
     DeleteHostedZoneResponse.struct_class = Types::DeleteHostedZoneResponse
+
+    DeleteQueryLoggingConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: QueryLoggingConfigId, required: true, location: "uri", location_name: "Id"))
+    DeleteQueryLoggingConfigRequest.struct_class = Types::DeleteQueryLoggingConfigRequest
+
+    DeleteQueryLoggingConfigResponse.struct_class = Types::DeleteQueryLoggingConfigResponse
 
     DeleteReusableDelegationSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     DeleteReusableDelegationSetRequest.struct_class = Types::DeleteReusableDelegationSetRequest
@@ -543,6 +572,12 @@ module Aws::Route53
     GetHostedZoneResponse.add_member(:delegation_set, Shapes::ShapeRef.new(shape: DelegationSet, location_name: "DelegationSet"))
     GetHostedZoneResponse.add_member(:vp_cs, Shapes::ShapeRef.new(shape: VPCs, location_name: "VPCs"))
     GetHostedZoneResponse.struct_class = Types::GetHostedZoneResponse
+
+    GetQueryLoggingConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: QueryLoggingConfigId, required: true, location: "uri", location_name: "Id"))
+    GetQueryLoggingConfigRequest.struct_class = Types::GetQueryLoggingConfigRequest
+
+    GetQueryLoggingConfigResponse.add_member(:query_logging_config, Shapes::ShapeRef.new(shape: QueryLoggingConfig, required: true, location_name: "QueryLoggingConfig"))
+    GetQueryLoggingConfigResponse.struct_class = Types::GetQueryLoggingConfigResponse
 
     GetReusableDelegationSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     GetReusableDelegationSetRequest.struct_class = Types::GetReusableDelegationSetRequest
@@ -668,6 +703,15 @@ module Aws::Route53
     ListHostedZonesResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
     ListHostedZonesResponse.struct_class = Types::ListHostedZonesResponse
 
+    ListQueryLoggingConfigsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "hostedzoneid"))
+    ListQueryLoggingConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListQueryLoggingConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListQueryLoggingConfigsRequest.struct_class = Types::ListQueryLoggingConfigsRequest
+
+    ListQueryLoggingConfigsResponse.add_member(:query_logging_configs, Shapes::ShapeRef.new(shape: QueryLoggingConfigs, required: true, location_name: "QueryLoggingConfigs"))
+    ListQueryLoggingConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListQueryLoggingConfigsResponse.struct_class = Types::ListQueryLoggingConfigsResponse
+
     ListResourceRecordSetsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     ListResourceRecordSetsRequest.add_member(:start_record_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "name"))
     ListResourceRecordSetsRequest.add_member(:start_record_type, Shapes::ShapeRef.new(shape: RRType, location: "querystring", location_name: "type"))
@@ -781,6 +825,13 @@ module Aws::Route53
     ListVPCAssociationAuthorizationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListVPCAssociationAuthorizationsResponse.add_member(:vp_cs, Shapes::ShapeRef.new(shape: VPCs, required: true, location_name: "VPCs"))
     ListVPCAssociationAuthorizationsResponse.struct_class = Types::ListVPCAssociationAuthorizationsResponse
+
+    QueryLoggingConfig.add_member(:id, Shapes::ShapeRef.new(shape: QueryLoggingConfigId, required: true, location_name: "Id"))
+    QueryLoggingConfig.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+    QueryLoggingConfig.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArn, required: true, location_name: "CloudWatchLogsLogGroupArn"))
+    QueryLoggingConfig.struct_class = Types::QueryLoggingConfig
+
+    QueryLoggingConfigs.member = Shapes::ShapeRef.new(shape: QueryLoggingConfig, location_name: "QueryLoggingConfig")
 
     RecordData.member = Shapes::ShapeRef.new(shape: RecordDataEntry, location_name: "RecordDataEntry")
 
@@ -1032,6 +1083,25 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: DelegationSetNotReusable)
       end)
 
+      api.add_operation(:create_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQueryLoggingConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/queryloggingconfig"
+        o.input = Shapes::ShapeRef.new(shape: CreateQueryLoggingConfigRequest,
+          location_name: "CreateQueryLoggingConfigRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateQueryLoggingConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudWatchLogsLogGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: QueryLoggingConfigAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCloudWatchLogsResourcePolicy)
+      end)
+
       api.add_operation(:create_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReusableDelegationSet"
         o.http_method = "POST"
@@ -1144,6 +1214,17 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
+      end)
+
+      api.add_operation(:delete_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueryLoggingConfig"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2013-04-01/queryloggingconfig/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueryLoggingConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueryLoggingConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchQueryLoggingConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:delete_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1303,6 +1384,16 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:get_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryLoggingConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/queryloggingconfig/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryLoggingConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryLoggingConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchQueryLoggingConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
       api.add_operation(:get_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetReusableDelegationSet"
         o.http_method = "GET"
@@ -1394,6 +1485,17 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ListHostedZonesByNameResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
+      end)
+
+      api.add_operation(:list_query_logging_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueryLoggingConfigs"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/queryloggingconfig"
+        o.input = Shapes::ShapeRef.new(shape: ListQueryLoggingConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueryLoggingConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
       end)
 
       api.add_operation(:list_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|

@@ -16,7 +16,10 @@ module Aws::ElasticLoadBalancingV2
     Actions = Shapes::ListShape.new(name: 'Actions')
     AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
+    AllocationId = Shapes::StringShape.new(name: 'AllocationId')
+    AllocationIdNotFoundException = Shapes::StructureShape.new(name: 'AllocationIdNotFoundException')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneNotSupportedException = Shapes::StructureShape.new(name: 'AvailabilityZoneNotSupportedException')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     CanonicalHostedZoneId = Shapes::StringShape.new(name: 'CanonicalHostedZoneId')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
@@ -85,6 +88,7 @@ module Aws::ElasticLoadBalancingV2
     InvalidSecurityGroupException = Shapes::StructureShape.new(name: 'InvalidSecurityGroupException')
     InvalidSubnetException = Shapes::StructureShape.new(name: 'InvalidSubnetException')
     InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
+    IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
     Limit = Shapes::StructureShape.new(name: 'Limit')
@@ -96,6 +100,8 @@ module Aws::ElasticLoadBalancingV2
     ListenerNotFoundException = Shapes::StructureShape.new(name: 'ListenerNotFoundException')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     LoadBalancer = Shapes::StructureShape.new(name: 'LoadBalancer')
+    LoadBalancerAddress = Shapes::StructureShape.new(name: 'LoadBalancerAddress')
+    LoadBalancerAddresses = Shapes::ListShape.new(name: 'LoadBalancerAddresses')
     LoadBalancerArn = Shapes::StringShape.new(name: 'LoadBalancerArn')
     LoadBalancerArns = Shapes::ListShape.new(name: 'LoadBalancerArns')
     LoadBalancerAttribute = Shapes::StructureShape.new(name: 'LoadBalancerAttribute')
@@ -168,6 +174,8 @@ module Aws::ElasticLoadBalancingV2
     String = Shapes::StringShape.new(name: 'String')
     StringValue = Shapes::StringShape.new(name: 'StringValue')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
+    SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
     SubnetNotFoundException = Shapes::StructureShape.new(name: 'SubnetNotFoundException')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -224,6 +232,7 @@ module Aws::ElasticLoadBalancingV2
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: ZoneName, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    AvailabilityZone.add_member(:load_balancer_addresses, Shapes::ShapeRef.new(shape: LoadBalancerAddresses, location_name: "LoadBalancerAddresses"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
@@ -251,10 +260,12 @@ module Aws::ElasticLoadBalancingV2
     CreateListenerOutput.struct_class = Types::CreateListenerOutput
 
     CreateLoadBalancerInput.add_member(:name, Shapes::ShapeRef.new(shape: LoadBalancerName, required: true, location_name: "Name"))
-    CreateLoadBalancerInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    CreateLoadBalancerInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
+    CreateLoadBalancerInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
     CreateLoadBalancerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     CreateLoadBalancerInput.add_member(:scheme, Shapes::ShapeRef.new(shape: LoadBalancerSchemeEnum, location_name: "Scheme"))
     CreateLoadBalancerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLoadBalancerInput.add_member(:type, Shapes::ShapeRef.new(shape: LoadBalancerTypeEnum, location_name: "Type"))
     CreateLoadBalancerInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateLoadBalancerInput.struct_class = Types::CreateLoadBalancerInput
 
@@ -432,6 +443,12 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
+    LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    LoadBalancerAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
+    LoadBalancerAddress.struct_class = Types::LoadBalancerAddress
+
+    LoadBalancerAddresses.member = Shapes::ShapeRef.new(shape: LoadBalancerAddress)
+
     LoadBalancerArns.member = Shapes::ShapeRef.new(shape: LoadBalancerArn)
 
     LoadBalancerAttribute.add_member(:key, Shapes::ShapeRef.new(shape: LoadBalancerAttributeKey, location_name: "Key"))
@@ -559,6 +576,7 @@ module Aws::ElasticLoadBalancingV2
 
     SetSubnetsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
     SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    SetSubnetsInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
     SetSubnetsInput.struct_class = Types::SetSubnetsInput
 
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
@@ -574,6 +592,12 @@ module Aws::ElasticLoadBalancingV2
     SslPolicyNames.member = Shapes::ShapeRef.new(shape: SslPolicyName)
 
     SslProtocols.member = Shapes::ShapeRef.new(shape: SslProtocol)
+
+    SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
+    SubnetMapping.struct_class = Types::SubnetMapping
+
+    SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -683,6 +707,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -700,6 +725,9 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidSchemeException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: AllocationIdNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AvailabilityZoneNotSupportedException)
       end)
 
       api.add_operation(:create_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -712,10 +740,12 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetGroupsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRulesException)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupAssociationLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleProtocolsException)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
       end)
 
       api.add_operation(:create_target_group, Seahorse::Model::Operation.new.tap do |o|
@@ -726,6 +756,7 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: CreateTargetGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateTargetGroupNameException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetGroupsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
       end)
 
       api.add_operation(:delete_listener, Seahorse::Model::Operation.new.tap do |o|
@@ -906,6 +937,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -925,6 +957,7 @@ module Aws::ElasticLoadBalancingV2
         o.input = Shapes::ShapeRef.new(shape: ModifyRuleInput)
         o.output = Shapes::ShapeRef.new(shape: ModifyRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupAssociationLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleProtocolsException)
         o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
@@ -939,6 +972,7 @@ module Aws::ElasticLoadBalancingV2
         o.input = Shapes::ShapeRef.new(shape: ModifyTargetGroupInput)
         o.output = Shapes::ShapeRef.new(shape: ModifyTargetGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
       end)
 
       api.add_operation(:modify_target_group_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -948,6 +982,7 @@ module Aws::ElasticLoadBalancingV2
         o.input = Shapes::ShapeRef.new(shape: ModifyTargetGroupAttributesInput)
         o.output = Shapes::ShapeRef.new(shape: ModifyTargetGroupAttributesOutput)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
       end)
 
       api.add_operation(:register_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -1018,6 +1053,8 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         o.errors << Shapes::ShapeRef.new(shape: SubnetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException)
+        o.errors << Shapes::ShapeRef.new(shape: AllocationIdNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AvailabilityZoneNotSupportedException)
       end)
     end
 

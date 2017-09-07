@@ -3530,6 +3530,7 @@ module Aws::EC2
     NatGateway.add_member(:state, Shapes::ShapeRef.new(shape: NatGatewayState, location_name: "state"))
     NatGateway.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     NatGateway.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    NatGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     NatGateway.struct_class = Types::NatGateway
 
     NatGatewayAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))

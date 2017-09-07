@@ -226,13 +226,13 @@ module Aws::S3
     #   for the part specified. Useful for downloading just a part of an
     #   object.
     # @return [Types::GetObjectOutput]
-    def get(options = {})
+    def get(options = {}, &block)
       options = options.merge(
         bucket: @bucket_name,
         key: @object_key,
         version_id: @id
       )
-      resp = @client.get_object(options)
+      resp = @client.get_object(options, &block)
       resp.data
     end
 

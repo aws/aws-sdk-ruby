@@ -3248,6 +3248,9 @@ module Aws::EC2
     #   resp.nat_gateway.state #=> String, one of "pending", "failed", "available", "deleting", "deleted"
     #   resp.nat_gateway.subnet_id #=> String
     #   resp.nat_gateway.vpc_id #=> String
+    #   resp.nat_gateway.tags #=> Array
+    #   resp.nat_gateway.tags[0].key #=> String
+    #   resp.nat_gateway.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGateway AWS API Documentation
     #
@@ -9581,6 +9584,23 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
     #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
+    #     you get any resources assigned both the tag key Purpose (regardless
+    #     of what the tag's value is), and the tag value X (regardless of
+    #     what the tag's key is). If you want to list only resources where
+    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #
+    #   * `tag-value` - The value of a tag assigned to the resource. This
+    #     filter is independent of the `tag-key` filter.
+    #
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #
     # @option params [Integer] :max_results
@@ -9674,6 +9694,9 @@ module Aws::EC2
     #   resp.nat_gateways[0].state #=> String, one of "pending", "failed", "available", "deleting", "deleted"
     #   resp.nat_gateways[0].subnet_id #=> String
     #   resp.nat_gateways[0].vpc_id #=> String
+    #   resp.nat_gateways[0].tags #=> Array
+    #   resp.nat_gateways[0].tags[0].key #=> String
+    #   resp.nat_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways AWS API Documentation
@@ -21133,7 +21156,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

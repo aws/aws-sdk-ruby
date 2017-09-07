@@ -992,6 +992,63 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateQueryLoggingConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId", # required
+    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn", # required
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that you want to log queries for. You can
+    #   log queries only for public hosted zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The Amazon Resource Name (ARN) for the log group that you want to
+    #   Amazon Route 53 to send query logs to. This is the format of the
+    #   ARN:
+    #
+    #   arn:aws:logs:*region*\:*account-id*\:log-group:*log\_group\_name*
+    #
+    #   To get the ARN for a log group, you can use the CloudWatch console,
+    #   the [DescribeLogGroups][1] API action, the [describe-log-groups][2]
+    #   command, or the applicable command in one of the AWS SDKs.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html
+    #   [2]: http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfigRequest AWS API Documentation
+    #
+    class CreateQueryLoggingConfigRequest < Struct.new(
+      :hosted_zone_id,
+      :cloud_watch_logs_log_group_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_logging_config
+    #   A complex type that contains the ID for a query logging
+    #   configuration, the ID of the hosted zone that you want to log
+    #   queries for, and the ARN for the log group that you want Amazon
+    #   Route 53 to send query logs to.
+    #   @return [Types::QueryLoggingConfig]
+    #
+    # @!attribute [rw] location
+    #   The unique URL representing the new query logging configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfigResponse AWS API Documentation
+    #
+    class CreateQueryLoggingConfigResponse < Struct.new(
+      :query_logging_config,
+      :location)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateReusableDelegationSetRequest
     #   data as a hash:
     #
@@ -1368,6 +1425,28 @@ module Aws::Route53
       :change_info)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteQueryLoggingConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "QueryLoggingConfigId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the configuration that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigRequest AWS API Documentation
+    #
+    class DeleteQueryLoggingConfigRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigResponse AWS API Documentation
+    #
+    class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure; end
 
     # A request to delete a reusable delegation set.
     #
@@ -1989,6 +2068,37 @@ module Aws::Route53
       :hosted_zone,
       :delegation_set,
       :vp_cs)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryLoggingConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "QueryLoggingConfigId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the configuration for DNS query logging that you want to
+    #   get information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfigRequest AWS API Documentation
+    #
+    class GetQueryLoggingConfigRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_logging_config
+    #   A complex type that contains information about the query logging
+    #   configuration that you specified in a GetQueryLoggingConfig request.
+    #   @return [Types::QueryLoggingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfigResponse AWS API Documentation
+    #
+    class GetQueryLoggingConfigResponse < Struct.new(
+      :query_logging_config)
       include Aws::Structure
     end
 
@@ -3066,6 +3176,83 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListQueryLoggingConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hosted_zone_id: "ResourceId",
+    #         next_token: "PaginationToken",
+    #         max_results: "MaxResults",
+    #       }
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   (Optional) If you want to list the query logging configuration that
+    #   is associated with a hosted zone, specify the ID in `HostedZoneId`.
+    #
+    #   If you don't specify a hosted zone ID, `ListQueryLoggingConfigs`
+    #   returns all of the configurations that are associated with the
+    #   current AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   query logging configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListQueryLoggingConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   (Optional) The maximum number of query logging configurations that
+    #   you want Amazon Route 53 to return in response to the current
+    #   request. If the current AWS account has more than `MaxResults`
+    #   configurations, use the value of
+    #   ListQueryLoggingConfigsResponse$NextToken in the response to get the
+    #   next page of results.
+    #
+    #   If you don't specify a value for `MaxResults`, Amazon Route 53
+    #   returns up to 100 configurations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsRequest AWS API Documentation
+    #
+    class ListQueryLoggingConfigsRequest < Struct.new(
+      :hosted_zone_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_logging_configs
+    #   An array that contains one QueryLoggingConfig element for each
+    #   configuration for DNS query logging that is associated with the
+    #   current AWS account.
+    #   @return [Array<Types::QueryLoggingConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   If a response includes the last of the query logging configurations
+    #   that are associated with the current AWS account, `NextToken`
+    #   doesn't appear in the response.
+    #
+    #   If a response doesn't include the last of the configurations, you
+    #   can get more configurations by submitting another
+    #   ListQueryLoggingConfigs request. Get the value of `NextToken` that
+    #   Amazon Route 53 returned in the previous response and include it in
+    #   `NextToken` in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsResponse AWS API Documentation
+    #
+    class ListQueryLoggingConfigsResponse < Struct.new(
+      :query_logging_configs,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A request for the resource record sets that are associated with a
     # specified hosted zone.
     #
@@ -3994,6 +4181,32 @@ module Aws::Route53
       :hosted_zone_id,
       :next_token,
       :vp_cs)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about a configuration for DNS
+    # query logging.
+    #
+    # @!attribute [rw] id
+    #   The ID for a configuration for DNS query logging.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that CloudWatch Logs is logging queries
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group that
+    #   Amazon Route 53 is publishing logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/QueryLoggingConfig AWS API Documentation
+    #
+    class QueryLoggingConfig < Struct.new(
+      :id,
+      :hosted_zone_id,
+      :cloud_watch_logs_log_group_arn)
       include Aws::Structure
     end
 

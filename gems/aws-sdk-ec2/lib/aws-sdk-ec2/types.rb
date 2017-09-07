@@ -7728,6 +7728,24 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet in which the NAT gateway
     #     resides.
     #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter
+    #     "tag-value=X", you get any resources assigned both the tag key
+    #     Purpose (regardless of what the tag's value is), and the tag
+    #     value X (regardless of what the tag's key is). If you want to
+    #     list only resources where Purpose is X, see the
+    #     `tag`\:*key*=*value* filter.
+    #
+    #   * `tag-value` - The value of a tag assigned to the resource. This
+    #     filter is independent of the `tag-key` filter.
+    #
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #   @return [Array<Types::Filter>]
     #
@@ -17348,6 +17366,10 @@ module Aws::EC2
     #   The ID of the VPC in which the NAT gateway is located.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the NAT gateway.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGateway AWS API Documentation
     #
     class NatGateway < Struct.new(
@@ -17360,7 +17382,8 @@ module Aws::EC2
       :provisioned_bandwidth,
       :state,
       :subnet_id,
-      :vpc_id)
+      :vpc_id,
+      :tags)
       include Aws::Structure
     end
 
