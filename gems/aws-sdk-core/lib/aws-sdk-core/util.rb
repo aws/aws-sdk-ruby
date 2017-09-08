@@ -23,6 +23,9 @@ module Aws
 
       def deep_copy(obj)
         case obj
+        when nil then nil
+        when true then true
+        when false then false
         when Hash
           obj.inject({}) do |h, (k,v)|
             h[k] = deep_copy(v)

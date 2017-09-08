@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix core util deep copy issue #1603
+
 3.3.0 (2017-09-07)
 ------------------
 
