@@ -23,6 +23,9 @@ module Aws
 
       def deep_copy(obj)
         case obj
+        when nil then nil
+        when true then true
+        when false then false
         when Hash
           obj.inject({}) do |h, (k,v)|
             h[k] = deep_copy(v)
@@ -31,7 +34,13 @@ module Aws
         when Array
           obj.map { |v| deep_copy(v) }
         else
-          v
+          if obj.respond_to?(:dup)
+            obj.dup
+          elsif obj.respond_to?(:clone)
+            obj.clone
+          else
+            obj
+          end
         end
       end
     end

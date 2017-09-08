@@ -96,6 +96,23 @@
         "requestUri":"/"
       },
       "input": { "shape": "DeleteBandsRequest" }
+    },
+    "DeleteTags": {
+      "name": "DeleteTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "DeleteTagRequest"}
+    },
+    "DescribeTags": {
+      "name": "DescribeTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input":{"shape":"DescribeTagsRequest"},
+      "output":{"shape":"DescribeTagsResult"}
     }
   },
   "shapes": {
@@ -108,7 +125,8 @@
         "CoverBandFor": { "shape": "BandName" },
         "BiggestFans": { "shape": "FanList" },
         "Famous": { "shape": "Boolean" },
-        "FanClubPresident": { "shape": "String" }
+        "FanClubPresident": { "shape": "String" },
+        "Tags": { "shape": "TagList" }
       }
     },
     "BandNameList": {
@@ -379,6 +397,50 @@
           "shape": "BandList",
           "locationName": "Band"
         }
+      }
+    },
+    "DeleteTagRequest": {
+      "type": "structure",
+      "members": {
+        "Resources": {
+          "shape": "StringList"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "DescribeTagsRequest": {
+      "type":"structure",
+      "members": {
+        "NextToken":{
+          "shape":"String"
+        }
+      }
+    },
+    "DescribeTagsResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String"
+        },
+        "Tags": {
+          "shape": "TagDescriptionList"
+        }
+      }
+    },
+    "TagDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "TagDescription"
+      }
+    },
+    "TagDescription": {
+      "type": "structure",
+      "members": {
+        "Key": { "shape": "String"},
+        "Value": { "shape": "String"},
+        "ResourceId": { "shape": "String"}
       }
     }
   }

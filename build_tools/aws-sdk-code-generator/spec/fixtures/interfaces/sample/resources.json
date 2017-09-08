@@ -57,6 +57,18 @@
             { "target": "Name", "source": "response", "path": "TopFive.BandNames[]" }
           ]
         }
+      },
+      "Tags": {
+        "request": { "operation": "DescribeTags" },
+        "resource": {
+          "type": "Tag",
+          "identifiers": [
+            { "target": "ResourceId", "source": "response", "path": "Tags[].ResourceId" },
+            { "target": "Key", "source": "response", "path": "Tags[].Key" },
+            { "target": "Value", "source": "response", "path": "Tags[].Value" }
+          ],
+          "path": "Tags[]"
+        }
       }
     }
   },
@@ -140,6 +152,14 @@
             "operation": "DeleteBands",
             "params": [
               { "target": "Bands[].BandName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "CreateTags": {
+          "request": {
+            "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[]", "source": "identifier", "name": "Name"}
             ]
           }
         }
@@ -287,7 +307,32 @@
         { "name": "ResourceId" },
         { "name": "Key" },
         { "name": "Value" }
-      ]
+      ],
+      "shape": "TagDescription",
+      "load": {
+        "request": {
+          "operation": "GetTags",
+          "params": [
+            { "target": "Filters[0].Name", "source": "string", "value": "key" },
+            { "target": "Filters[0].Values[0]", "source": "identifier", "name": "Key" },
+            { "target": "Filters[1].Name", "source": "string", "value": "value" },
+            { "target": "Filters[1].Values[0]", "source": "identifier", "name": "Value" }
+          ]
+        },
+        "path": "Tags[0]"
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[]", "source": "identifier", "name": "ResourceId" },
+              { "target": "Tags[*].Key", "source": "identifier", "name": "Key" },
+              { "target": "Tags[*].Value", "source": "identifier", "name": "Value" }
+            ]
+          }
+        }
+      }
     },
     "Ticket": {
       "identifiers": [

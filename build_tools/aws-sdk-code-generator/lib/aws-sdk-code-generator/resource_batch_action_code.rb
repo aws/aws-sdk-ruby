@@ -3,6 +3,7 @@ module AwsSdkCodeGenerator
 
     def initialize(options)
       @action = options.fetch(:action)
+      @api = options.fetch(:api)
       compute_params
     end
 
@@ -80,16 +81,18 @@ module AwsSdkCodeGenerator
           param, identifier = v.first
           hash[param.to_sym] = "item.#{identifier}"
         end
-        # Construct hash block
-        if @action_prefix
-          each_batch << "    params[:#{underscore(@action_prefix)}][:#{underscore(key)}] << {"
+        first_line = @action_prefix ? "    params[:#{underscore(@action_prefix)}][:#{underscore(key)}] << "
+          : "    params[:#{underscore(key)}] << "
+        if list_of_string?(key, @action['request']['operation'])
+          _, v = hash.first
+          each_batch << first_line + v
         else
-          each_batch << "    params[:#{underscore(key)}] << {"
+          each_batch << first_line + "{"
+          # hashformatter treats this as inline, need extra indent
+          indent_count = hash.size == 1 ? 3 : 2
+          each_batch << indent_helper(HashFormatter.new(wrap: false).format(hash), indent_count)
+          each_batch << "    }"
         end
-        # hashformatter treats this as inline, need extra indent
-        indent_count = hash.size == 1 ? 3 : 2
-        each_batch << indent_helper(HashFormatter.new(wrap: false).format(hash), indent_count)
-        each_batch << "    }"
       end
       each_batch << "  end"
       each_batch.join("\n")
@@ -106,6 +109,25 @@ module AwsSdkCodeGenerator
 
     def underscore(str)
       Underscore.underscore(str)
+    end
+
+    def list_of_string?(member, operation_name)
+      operation_shape = @api['operations'][operation_name]
+      input_shape = @api['shapes'][operation_shape['input']['shape']]
+
+      members = input_shape['type'] == 'structure' ? 'members' : 'member'
+      if @action_prefix
+        prefix_shape_ref = input_shape[members][@action_prefix]
+        _, prefix_shape = Api.resolve(prefix_shape_ref, @api)
+        prefix_members = prefix_shape['type'] == 'structure' ? 'members' : 'member'
+        member_shape_ref = prefix_shape[prefix_members][member]
+      else
+        member_shape_ref = input_shape[members][member]
+      end
+      _, shape = Api.resolve(member_shape_ref, @api)
+      return false unless shape['type'] == 'list'
+      _, item_shape = Api.resolve(shape['member'], @api)
+      item_shape['type'] == 'string'
     end
 
   end

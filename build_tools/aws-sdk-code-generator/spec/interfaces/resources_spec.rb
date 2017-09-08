@@ -730,6 +730,24 @@ describe 'Interfaces' do
         bands.batch_delete!
       end
 
+      it 'auto-populate identifiers with list of strings' do
+        client.stub_responses(:list_bands, [
+          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
+          { bands: [{ band_name: 'band-2' }] },
+        ])
+        expect(client).to receive(:create_tags).with(
+          resources: ['band-1'], tags:[{ key: 'tag-1-key', value: 'tag-1-value' }]
+        ).ordered
+        expect(client).to receive(:create_tags).with(
+          resources: ['band-2'], tags:[{ key: 'tag-1-key', value: 'tag-1-value' }]
+        ).ordered
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        bands.batch_create_tags(tags:[
+          { key: 'tag-1-key', value: 'tag-1-value' },
+        ])
+      end
+
       it 'has a #batches method that returns a collection enumerator that responds to batch actions' do
         client.stub_responses(:list_bands, [
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
