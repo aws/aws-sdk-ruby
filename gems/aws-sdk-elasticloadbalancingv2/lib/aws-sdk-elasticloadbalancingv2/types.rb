@@ -77,11 +77,16 @@ module Aws::ElasticLoadBalancingV2
     #   The ID of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] load_balancer_addresses
+    #   \[Network Load Balancers\] The static IP address.
+    #   @return [Array<Types::LoadBalancerAddress>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
-      :subnet_id)
+      :subnet_id,
+      :load_balancer_addresses)
       include Aws::Structure
     end
 
@@ -129,7 +134,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
     #         port: 1, # required
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
@@ -150,7 +155,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   The protocol for connections from clients to the load balancer.
+    #   The protocol for connections from clients to the load balancer. For
+    #   Application Load Balancers, the supported protocols are HTTP and
+    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -158,17 +165,21 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     #
     # @!attribute [rw] ssl_policy
-    #   The security policy that defines which ciphers and protocols are
-    #   supported. The default is the current predefined security policy.
+    #   \[HTTPS listeners\] The security policy that defines which ciphers
+    #   and protocols are supported. The default is the current predefined
+    #   security policy.
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   The SSL server certificate. You must provide exactly one certificate
-    #   if the protocol is HTTPS.
+    #   \[HTTPS listeners\] The SSL server certificate. You must provide
+    #   exactly one certificate.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
-    #   The default action for the listener.
+    #   The default action for the listener. For Application Load Balancers,
+    #   the protocol of the specified target group must be HTTP or HTTPS.
+    #   For Network Load Balancers, the protocol of the specified target
+    #   group must be TCP.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -199,7 +210,13 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "LoadBalancerName", # required
-    #         subnets: ["SubnetId"], # required
+    #         subnets: ["SubnetId"],
+    #         subnet_mappings: [
+    #           {
+    #             subnet_id: "SubnetId",
+    #             allocation_id: "AllocationId",
+    #           },
+    #         ],
     #         security_groups: ["SecurityGroupId"],
     #         scheme: "internet-facing", # accepts internet-facing, internal
     #         tags: [
@@ -208,6 +225,7 @@ module Aws::ElasticLoadBalancingV2
     #             value: "TagValue",
     #           },
     #         ],
+    #         type: "application", # accepts application, network
     #         ip_address_type: "ipv4", # accepts ipv4, dualstack
     #       }
     #
@@ -222,11 +240,27 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] subnets
     #   The IDs of the subnets to attach to the load balancer. You can
     #   specify only one subnet per Availability Zone. You must specify
-    #   subnets from at least two Availability Zones.
+    #   either subnets or subnet mappings.
+    #
+    #   \[Application Load Balancers\] You must specify subnets from at
+    #   least two Availability Zones.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] subnet_mappings
+    #   The IDs of the subnets to attach to the load balancer. You can
+    #   specify only one subnet per Availability Zone. You must specify
+    #   either subnets or subnet mappings.
+    #
+    #   \[Network Load Balancers\] You can specify one Elastic IP address
+    #   per subnet.
+    #
+    #   \[Application Load Balancers\] You cannot specify Elastic IP
+    #   addresses for your subnets.
+    #   @return [Array<Types::SubnetMapping>]
+    #
     # @!attribute [rw] security_groups
-    #   The IDs of the security groups to assign to the load balancer.
+    #   \[Application Load Balancers\] The IDs of the security groups to
+    #   assign to the load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scheme
@@ -249,11 +283,15 @@ module Aws::ElasticLoadBalancingV2
     #   One or more tags to assign to the load balancer.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] type
+    #   The type of load balancer to create. The default is `application`.
+    #   @return [String]
+    #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses used by the subnets for your load balancer.
-    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
-    #   `ipv4`.
+    #   \[Application Load Balancers\] The type of IP addresses used by the
+    #   subnets for your load balancer. The possible values are `ipv4` (for
+    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
+    #   Internal load balancers must use `ipv4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput AWS API Documentation
@@ -261,9 +299,11 @@ module Aws::ElasticLoadBalancingV2
     class CreateLoadBalancerInput < Struct.new(
       :name,
       :subnets,
+      :subnet_mappings,
       :security_groups,
       :scheme,
       :tags,
+      :type,
       :ip_address_type)
       include Aws::Structure
     end
@@ -304,7 +344,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   A condition. Each condition specifies a field name and a single
+    #   The conditions. Each condition specifies a field name and a single
     #   value.
     #
     #   If the field name is `host-header`, you can specify a single host
@@ -374,10 +414,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         name: "TargetGroupName", # required
-    #         protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #         protocol: "HTTP", # required, accepts HTTP, HTTPS, TCP
     #         port: 1, # required
     #         vpc_id: "VpcId", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
     #         health_check_interval_seconds: 1,
@@ -399,7 +439,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] protocol
-    #   The protocol to use for routing traffic to the targets.
+    #   The protocol to use for routing traffic to the targets. For
+    #   Application Load Balancers, the supported protocols are HTTP and
+    #   HTTPS. For Network Load Balancers, the supported protocol is TCP.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -413,43 +455,54 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The default is the HTTP protocol.
+    #   targets. The TCP protocol is supported only if the protocol of the
+    #   target group is TCP. For Application Load Balancers, the default is
+    #   HTTP. For Network Load Balancers, the default is TCP.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
     #   The port the load balancer uses when performing health checks on
-    #   targets. The default is `traffic-port`, which indicates the port on
-    #   which each target receives traffic from the load balancer.
+    #   targets. The default is `traffic-port`, which is the port on which
+    #   each target receives traffic from the load balancer.
     #   @return [String]
     #
     # @!attribute [rw] health_check_path
-    #   The ping path that is the destination on the targets for health
-    #   checks. The default is /.
+    #   \[HTTP/HTTPS health checks\] The ping path that is the destination
+    #   on the targets for health checks. The default is /.
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. The default is 30 seconds.
+    #   an individual target. For Application Load Balancers, the range is 5
+    #   to 300 seconds. For Network Load Balancers, the supported values are
+    #   10 or 30 seconds. The default is 30 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a
-    #   target means a failed health check. The default is 5 seconds.
+    #   target means a failed health check. For Application Load Balancers,
+    #   the range is 2 to 60 seconds and the default is 5 seconds. For
+    #   Network Load Balancers, this is 10 seconds for TCP and HTTPS health
+    #   checks and 6 seconds for HTTP health checks.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
     #   The number of consecutive health checks successes required before
-    #   considering an unhealthy target healthy. The default is 5.
+    #   considering an unhealthy target healthy. For Application Load
+    #   Balancers, the default is 5. For Network Load Balancers, the default
+    #   is 3.
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering a target unhealthy. The default is 2.
+    #   considering a target unhealthy. For Application Load Balancers, the
+    #   default is 2. For Network Load Balancers, this value must be the
+    #   same as the healthy threshold count.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
-    #   The HTTP codes to use when checking for a successful response from a
-    #   target. The default is 200.
+    #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for
+    #   a successful response from a target.
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] target_type
@@ -1071,6 +1124,10 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * listeners-per-application-load-balancer
     #
+    #   * listeners-per-network-load-balancer
+    #
+    #   * network-load-balancers
+    #
     #   * rules-per-application-load-balancer
     #
     #   * target-groups
@@ -1216,6 +1273,25 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a static IP address for a load balancer.
+    #
+    # @!attribute [rw] ip_address
+    #   The static IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   \[Network Load Balancers\] The allocation ID of the Elastic IP
+    #   address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAddress AWS API Documentation
+    #
+    class LoadBalancerAddress < Struct.new(
+      :ip_address,
+      :allocation_id)
+      include Aws::Structure
+    end
+
     # Information about a load balancer attribute.
     #
     # @note When making an API call, you may pass LoadBalancerAttribute
@@ -1229,24 +1305,26 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   * `access_logs.s3.enabled` - Indicates whether access logs stored in
-    #     Amazon S3 are enabled. The value is `true` or `false`.
+    #   * `access_logs.s3.enabled` - \[Application Load Balancers\]
+    #     Indicates whether access logs stored in Amazon S3 are enabled. The
+    #     value is `true` or `false`.
     #
-    #   * `access_logs.s3.bucket` - The name of the S3 bucket for the access
-    #     logs. This attribute is required if access logs in Amazon S3 are
-    #     enabled. The bucket must exist in the same region as the load
-    #     balancer and have a bucket policy that grants Elastic Load
-    #     Balancing permission to write to the bucket.
+    #   * `access_logs.s3.bucket` - \[Application Load Balancers\] The name
+    #     of the S3 bucket for the access logs. This attribute is required
+    #     if access logs in Amazon S3 are enabled. The bucket must exist in
+    #     the same region as the load balancer and have a bucket policy that
+    #     grants Elastic Load Balancing permission to write to the bucket.
     #
-    #   * `access_logs.s3.prefix` - The prefix for the location in the S3
-    #     bucket. If you don't specify a prefix, the access logs are stored
-    #     in the root of the bucket.
+    #   * `access_logs.s3.prefix` - \[Application Load Balancers\] The
+    #     prefix for the location in the S3 bucket. If you don't specify a
+    #     prefix, the access logs are stored in the root of the bucket.
     #
     #   * `deletion_protection.enabled` - Indicates whether deletion
     #     protection is enabled. The value is `true` or `false`.
     #
-    #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
-    #     seconds. The valid range is 1-3600. The default is 60 seconds.
+    #   * `idle_timeout.timeout_seconds` - \[Application Load Balancers\]
+    #     The idle timeout value, in seconds. The valid range is 1-4000. The
+    #     default is 60 seconds.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1293,9 +1371,14 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] http_code
-    #   The HTTP codes. You can specify values between 200 and 499. The
-    #   default value is 200. You can specify multiple values (for example,
-    #   "200,202") or a range of values (for example, "200-299").
+    #   The HTTP codes.
+    #
+    #   For Application Load Balancers, you can specify values between 200
+    #   and 499, and the default value is 200. You can specify multiple
+    #   values (for example, "200,202") or a range of values (for example,
+    #   "200-299").
+    #
+    #   For Network Load Balancers, this is 200 to 399.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Matcher AWS API Documentation
@@ -1311,7 +1394,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         listener_arn: "ListenerArn", # required
     #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         ssl_policy: "SslPolicyName",
     #         certificates: [
     #           {
@@ -1336,6 +1419,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer.
+    #   Application Load Balancers support HTTP and HTTPS and Network Load
+    #   Balancers support TCP.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
@@ -1353,7 +1438,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
-    #   The default actions.
+    #   The default action. For Application Load Balancers, the protocol of
+    #   the specified target group must be HTTP or HTTPS. For Network Load
+    #   Balancers, the protocol of the specified target group must be TCP.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -1447,7 +1534,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] actions
-    #   The actions.
+    #   The actions. The target group must use the HTTP or HTTPS protocol.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
@@ -1515,7 +1602,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         target_group_arn: "TargetGroupArn", # required
-    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS
+    #         health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         health_check_port: "HealthCheckPort",
     #         health_check_path: "Path",
     #         health_check_interval_seconds: 1,
@@ -1532,25 +1619,31 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] health_check_protocol
-    #   The protocol to use to connect with the target.
+    #   The protocol the load balancer uses when performing health checks on
+    #   targets. The TCP protocol is supported only if the protocol of the
+    #   target group is TCP.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
-    #   The port to use to connect with the target.
+    #   The port the load balancer uses when performing health checks on
+    #   targets.
     #   @return [String]
     #
     # @!attribute [rw] health_check_path
-    #   The ping path that is the destination for the health check request.
+    #   \[HTTP/HTTPS health checks\] The ping path that is the destination
+    #   for the health check request.
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target.
+    #   an individual target. For Application Load Balancers, the range is 5
+    #   to 300 seconds. For Network Load Balancers, the supported values are
+    #   10 or 30 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
-    #   The amount of time, in seconds, during which no response means a
-    #   failed health check.
+    #   \[HTTP/HTTPS health checks\] The amount of time, in seconds, during
+    #   which no response means a failed health check.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
@@ -1560,12 +1653,13 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering the target unhealthy.
+    #   considering the target unhealthy. For Network Load Balancers, this
+    #   value must be the same as the healthy threshold count.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
-    #   The HTTP codes to use when checking for a successful response from a
-    #   target.
+    #   \[HTTP/HTTPS health checks\] The HTTP codes to use when checking for
+    #   a successful response from a target.
     #   @return [Types::Matcher]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
@@ -1887,6 +1981,12 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
     #         subnets: ["SubnetId"], # required
+    #         subnet_mappings: [
+    #           {
+    #             subnet_id: "SubnetId",
+    #             allocation_id: "AllocationId",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] load_balancer_arn
@@ -1894,15 +1994,26 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of the subnets. You must specify at least two subnets. You
-    #   can add only one subnet per Availability Zone.
+    #   The IDs of the subnets. You must specify subnets from at least two
+    #   Availability Zones. You can specify only one subnet per Availability
+    #   Zone. You must specify either subnets or subnet mappings.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_mappings
+    #   The IDs of the subnets. You must specify subnets from at least two
+    #   Availability Zones. You can specify only one subnet per Availability
+    #   Zone. You must specify either subnets or subnet mappings.
+    #
+    #   The load balancer is allocated one static IP address per subnet. You
+    #   cannot specify your own Elastic IP addresses.
+    #   @return [Array<Types::SubnetMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
     #
     class SetSubnetsInput < Struct.new(
       :load_balancer_arn,
-      :subnets)
+      :subnets,
+      :subnet_mappings)
       include Aws::Structure
     end
 
@@ -1937,6 +2048,33 @@ module Aws::ElasticLoadBalancingV2
       :ssl_protocols,
       :ciphers,
       :name)
+      include Aws::Structure
+    end
+
+    # Information about a subnet mapping.
+    #
+    # @note When making an API call, you may pass SubnetMapping
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_id: "SubnetId",
+    #         allocation_id: "AllocationId",
+    #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   \[Network Load Balancers\] The allocation ID of the Elastic IP
+    #   address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
+    #
+    class SubnetMapping < Struct.new(
+      :subnet_id,
+      :allocation_id)
       include Aws::Structure
     end
 
@@ -2137,18 +2275,19 @@ module Aws::ElasticLoadBalancingV2
     #     deregistering target from `draining` to `unused`. The range is
     #     0-3600 seconds. The default value is 300 seconds.
     #
-    #   * `stickiness.enabled` - Indicates whether sticky sessions are
-    #     enabled. The value is `true` or `false`.
+    #   * `stickiness.enabled` - \[Application Load Balancers\] Indicates
+    #     whether sticky sessions are enabled. The value is `true` or
+    #     `false`.
     #
-    #   * `stickiness.type` - The type of sticky sessions. The possible
-    #     value is `lb_cookie`.
+    #   * `stickiness.type` - \[Application Load Balancers\] The type of
+    #     sticky sessions. The possible value is `lb_cookie`.
     #
-    #   * `stickiness.lb_cookie.duration_seconds` - The time period, in
-    #     seconds, during which requests from a client should be routed to
-    #     the same target. After this time period expires, the load
-    #     balancer-generated cookie is considered stale. The range is 1
-    #     second to 1 week (604800 seconds). The default value is 1 day
-    #     (86400 seconds).
+    #   * `stickiness.lb_cookie.duration_seconds` - \[Application Load
+    #     Balancers\] The time period, in seconds, during which requests
+    #     from a client should be routed to the same target. After this time
+    #     period expires, the load balancer-generated cookie is considered
+    #     stale. The range is 1 second to 1 week (604800 seconds). The
+    #     default value is 1 day (86400 seconds).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2208,6 +2347,9 @@ module Aws::ElasticLoadBalancingV2
     #   * `Target.NotInUse` - The target group is not used by any load
     #     balancer or the target is in an Availability Zone that is not
     #     enabled for its load balancer.
+    #
+    #   * `Target.IpUnusable` - The target IP address is reserved for use by
+    #     a load balancer.
     #
     #   * `Target.InvalidState` - The target is in the stopped or terminated
     #     state.

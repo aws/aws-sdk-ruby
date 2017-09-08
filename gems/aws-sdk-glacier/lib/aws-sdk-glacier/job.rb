@@ -271,13 +271,13 @@ module Aws::Glacier
     #       computed to ensure you have downloaded the entire archive content
     #       with no errors.
     # @return [Types::GetJobOutputOutput]
-    def get_output(options = {})
+    def get_output(options = {}, &block)
       options = options.merge(
         account_id: @account_id,
         vault_name: @vault_name,
         job_id: @id
       )
-      resp = @client.get_job_output(options)
+      resp = @client.get_job_output(options, &block)
       resp.data
     end
 

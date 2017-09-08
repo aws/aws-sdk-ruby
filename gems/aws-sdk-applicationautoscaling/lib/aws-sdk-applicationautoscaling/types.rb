@@ -1514,6 +1514,12 @@ module Aws::ApplicationAutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] disable_scale_in
+    #   Indicates whether scale in by the target tracking policy is
+    #   disabled. If the value is `true`, scale in is disabled and the
+    #   target tracking policy won't remove capacity from the scalable
+    #   resource. Otherwise, scale in is enabled and the target tracking
+    #   policy can remove capacity from the scalable resource. The default
+    #   value is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingScalingPolicyConfiguration AWS API Documentation

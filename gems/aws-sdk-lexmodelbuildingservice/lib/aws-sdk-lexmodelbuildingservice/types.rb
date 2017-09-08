@@ -1638,6 +1638,93 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         version: "NumericalVersion", # required
+    #         resource_type: "BOT", # required, accepts BOT
+    #         export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the bot to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the bot to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_type
+    #   The format of the exported data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExportRequest AWS API Documentation
+    #
+    class GetExportRequest < Struct.new(
+      :name,
+      :version,
+      :resource_type,
+      :export_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the bot being exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the bot being exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the exported resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_type
+    #   The format of the exported data.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The status of the export.
+    #
+    #   * `IN_PROGRESS` - The export is in progress.
+    #
+    #   * `READY` - The export is complete.
+    #
+    #   * `FAILED` - The export could not be completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If `status` is `FAILED`, Amazon Lex provides the reason that it
+    #   failed to export the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   An S3 pre-signed URL that provides the location of the exported
+    #   resource. The exported resource is a ZIP archive that contains the
+    #   exported resource in JSON format. The structure of the archive may
+    #   change. Your code should not rely on the archive structure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExportResponse AWS API Documentation
+    #
+    class GetExportResponse < Struct.new(
+      :name,
+      :version,
+      :resource_type,
+      :export_type,
+      :export_status,
+      :failure_reason,
+      :url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetIntentRequest
     #   data as a hash:
     #
@@ -3060,17 +3147,19 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] value_selection_strategy
-    #   Determines the strategy that Amazon Lex uses to return slot type
-    #   values. The field can be set to one of the following values:
+    #   Determines the slot resolution strategy that Amazon Lex uses to
+    #   return slot type values. The field can be set to one of the
+    #   following values:
     #
-    #   * `ORIGINAL_VALUE` - Returns the value entered by the user.
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user, if the
+    #     user value is similar to the slot value.
     #
     #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
     #     return the first value in the resolution list as the slot type
     #     value. If there is no resolution list, null is returned.
     #
-    #   If you don't specify the `valueSelectionStrategy` is not provided,
-    #   the default is `ORIGINAL_VALUE`.
+    #   If you don't specify the `valueSelectionStrategy`, the default is
+    #   `ORIGINAL_VALUE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest AWS API Documentation
@@ -3116,8 +3205,8 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] value_selection_strategy
-    #   The strategy that Amazon Lex uses to determine the value of the
-    #   slot. For more information, see PutSlotType.
+    #   The slot resolution strategy that Amazon Lex uses to determine the
+    #   value of the slot. For more information, see PutSlotType.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse AWS API Documentation

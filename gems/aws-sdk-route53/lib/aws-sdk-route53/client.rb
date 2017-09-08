@@ -1331,6 +1331,180 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Creates a configuration for DNS query logging. After you create a
+    # query logging configuration, Amazon Route 53 begins to publish log
+    # data to an Amazon CloudWatch Logs log group.
+    #
+    # DNS query logs contain information about the queries that Amazon Route
+    # 53 receives for a specified public hosted zone, such as the following:
+    #
+    # * Amazon Route 53 edge location that responded to the DNS query
+    #
+    # * Domain or subdomain that was requested
+    #
+    # * DNS record type, such as A or AAAA
+    #
+    # * DNS response code, such as `NoError` or `ServFail`
+    #
+    # Log Group and Resource Policy
+    #
+    # : Before you create a query logging configuration, perform the
+    #   following operations.
+    #
+    #   <note markdown="1"> If you create a query logging configuration using the Amazon Route
+    #   53 console, Amazon Route 53 performs these operations automatically.
+    #
+    #    </note>
+    #
+    #   1.  Create a CloudWatch Logs log group, and make note of the ARN,
+    #       which you specify when you create a query logging configuration.
+    #       Note the following:
+    #
+    #       * You must create the log group in the us-east-1 region.
+    #
+    #       * You must use the same AWS account to create the log group and
+    #         the hosted zone that you want to configure query logging for.
+    #
+    #       * When you create log groups for query logging, we recommend
+    #         that you use a consistent prefix, for example:
+    #
+    #         `/aws/route53/hosted zone name `
+    #
+    #         In the next step, you'll create a resource policy, which
+    #         controls access to one or more log groups and the associated
+    #         AWS resources, such as Amazon Route 53 hosted zones. There's
+    #         a limit on the number of resource policies that you can
+    #         create, so we recommend that you use a consistent prefix so
+    #         you can use the same resource policy for all the log groups
+    #         that you create for query logging.
+    #
+    #   2.  Create a CloudWatch Logs resource policy, and give it the
+    #       permissions that Amazon Route 53 needs to create log streams and
+    #       to to send query logs to log streams. For the value of
+    #       `Resource`, specify the ARN for the log group that you created
+    #       in the previous step. To use the same resource policy for all
+    #       the CloudWatch Logs log groups that you created for query
+    #       logging configurations, replace the hosted zone name with `*`,
+    #       for example:
+    #
+    #       `arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*`
+    #
+    #       <note markdown="1"> You can't use the CloudWatch console to create or edit a
+    #       resource policy. You must use the CloudWatch API, one of the AWS
+    #       SDKs, or the AWS CLI.
+    #
+    #        </note>
+    #
+    # Log Streams and Edge Locations
+    #
+    # : When Amazon Route 53 finishes creating the configuration for DNS
+    #   query logging, it does the following:
+    #
+    #   * Creates a log stream for an edge location the first time that the
+    #     edge location responds to DNS queries for the specified hosted
+    #     zone. That log stream is used to log all queries that Amazon Route
+    #     53 responds to for that edge location.
+    #
+    #   * Begins to send query logs to the applicable log stream.
+    #
+    #   The name of each log stream is in the following format:
+    #
+    #   ` hosted zone ID/edge location code `
+    #
+    #   The edge location code is a three-letter code and an arbitrarily
+    #   assigned number, for example, DFW3. The three-letter code typically
+    #   corresponds with the International Air Transport Association airport
+    #   code for an airport near the edge location. (These abbreviations
+    #   might change in the future.) For a list of edge locations, see "The
+    #   Amazon Route 53 Global Network" on the [Amazon Route 53 Product
+    #   Details][1] page.
+    #
+    # Queries That Are Logged
+    #
+    # : Query logs contain only the queries that DNS resolvers forward to
+    #   Amazon Route 53. If a DNS resolver has already cached the response
+    #   to a query (such as the IP address for a load balancer for
+    #   example.com), the resolver will continue to return the cached
+    #   response. It doesn't forward another query to Amazon Route 53 until
+    #   the TTL for the corresponding resource record set expires. Depending
+    #   on how many DNS queries are submitted for a resource record set, and
+    #   depending on the TTL for that resource record set, query logs might
+    #   contain information about only one query out of every several
+    #   thousand queries that are submitted to DNS. For more information
+    #   about how DNS works, see [Routing Internet Traffic to Your Website
+    #   or Web Application][2] in the *Amazon Route 53 Developer Guide*.
+    #
+    # Log File Format
+    #
+    # : For a list of the values in each query log and the format of each
+    #   value, see [Logging DNS Queries][3] in the *Amazon Route 53
+    #   Developer Guide*.
+    #
+    # Pricing
+    #
+    # : For information about charges for query logs, see [Amazon CloudWatch
+    #   Pricing][4].
+    #
+    # How to Stop Logging
+    #
+    # : If you want Amazon Route 53 to stop sending query logs to CloudWatch
+    #   Logs, delete the query logging configuration. For more information,
+    #   see DeleteQueryLoggingConfig.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/route53/details/
+    # [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html
+    # [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html
+    # [4]: http://aws.amazon.com/cloudwatch/pricing/
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that you want to log queries for. You can
+    #   log queries only for public hosted zones.
+    #
+    # @option params [required, String] :cloud_watch_logs_log_group_arn
+    #   The Amazon Resource Name (ARN) for the log group that you want to
+    #   Amazon Route 53 to send query logs to. This is the format of the ARN:
+    #
+    #   arn:aws:logs:*region*\:*account-id*\:log-group:*log\_group\_name*
+    #
+    #   To get the ARN for a log group, you can use the CloudWatch console,
+    #   the [DescribeLogGroups][1] API action, the [describe-log-groups][2]
+    #   command, or the applicable command in one of the AWS SDKs.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html
+    #   [2]: http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+    #
+    # @return [Types::CreateQueryLoggingConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQueryLoggingConfigResponse#query_logging_config #query_logging_config} => Types::QueryLoggingConfig
+    #   * {Types::CreateQueryLoggingConfigResponse#location #location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_query_logging_config({
+    #     hosted_zone_id: "ResourceId", # required
+    #     cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_logging_config.id #=> String
+    #   resp.query_logging_config.hosted_zone_id #=> String
+    #   resp.query_logging_config.cloud_watch_logs_log_group_arn #=> String
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfig AWS API Documentation
+    #
+    # @overload create_query_logging_config(params = {})
+    # @param [Hash] params ({})
+    def create_query_logging_config(params = {}, options = {})
+      req = build_request(:create_query_logging_config, params)
+      req.send_request(options)
+    end
+
     # Creates a delegation set (a group of four name servers) that can be
     # reused by multiple hosted zones. If a hosted zoned ID is specified,
     # `CreateReusableDelegationSet` marks the delegation set associated with
@@ -1709,6 +1883,34 @@ module Aws::Route53
     # @param [Hash] params ({})
     def delete_hosted_zone(params = {}, options = {})
       req = build_request(:delete_hosted_zone, params)
+      req.send_request(options)
+    end
+
+    # Deletes a configuration for DNS query logging. If you delete a
+    # configuration, Amazon Route 53 stops sending query logs to CloudWatch
+    # Logs. Amazon Route 53 doesn't delete any logs that are already in
+    # CloudWatch Logs.
+    #
+    # For more information about DNS query logs, see
+    # CreateQueryLoggingConfig.
+    #
+    # @option params [required, String] :id
+    #   The ID of the configuration that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_query_logging_config({
+    #     id: "QueryLoggingConfigId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfig AWS API Documentation
+    #
+    # @overload delete_query_logging_config(params = {})
+    # @param [Hash] params ({})
+    def delete_query_logging_config(params = {}, options = {})
+      req = build_request(:delete_query_logging_config, params)
       req.send_request(options)
     end
 
@@ -2298,6 +2500,45 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Gets information about a specified configuration for DNS query
+    # logging.
+    #
+    # For more information about DNS query logs, see
+    # CreateQueryLoggingConfig and [Logging DNS Queries][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html
+    #
+    # @option params [required, String] :id
+    #   The ID of the configuration for DNS query logging that you want to get
+    #   information about.
+    #
+    # @return [Types::GetQueryLoggingConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryLoggingConfigResponse#query_logging_config #query_logging_config} => Types::QueryLoggingConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_logging_config({
+    #     id: "QueryLoggingConfigId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_logging_config.id #=> String
+    #   resp.query_logging_config.hosted_zone_id #=> String
+    #   resp.query_logging_config.cloud_watch_logs_log_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfig AWS API Documentation
+    #
+    # @overload get_query_logging_config(params = {})
+    # @param [Hash] params ({})
+    def get_query_logging_config(params = {}, options = {})
+      req = build_request(:get_query_logging_config, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a specified reusable delegation set,
     # including the four name servers that are assigned to the delegation
     # set.
@@ -2818,6 +3059,78 @@ module Aws::Route53
     # @param [Hash] params ({})
     def list_hosted_zones_by_name(params = {}, options = {})
       req = build_request(:list_hosted_zones_by_name, params)
+      req.send_request(options)
+    end
+
+    # Lists the configurations for DNS query logging that are associated
+    # with the current AWS account or the configuration that is associated
+    # with a specified hosted zone.
+    #
+    # For more information about DNS query logs, see
+    # CreateQueryLoggingConfig. Additional information, including the format
+    # of DNS query logs, appears in [Logging DNS Queries][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html
+    #
+    # @option params [String] :hosted_zone_id
+    #   (Optional) If you want to list the query logging configuration that is
+    #   associated with a hosted zone, specify the ID in `HostedZoneId`.
+    #
+    #   If you don't specify a hosted zone ID, `ListQueryLoggingConfigs`
+    #   returns all of the configurations that are associated with the current
+    #   AWS account.
+    #
+    # @option params [String] :next_token
+    #   (Optional) If the current AWS account has more than `MaxResults` query
+    #   logging configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListQueryLoggingConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #
+    # @option params [String] :max_results
+    #   (Optional) The maximum number of query logging configurations that you
+    #   want Amazon Route 53 to return in response to the current request. If
+    #   the current AWS account has more than `MaxResults` configurations, use
+    #   the value of ListQueryLoggingConfigsResponse$NextToken in the response
+    #   to get the next page of results.
+    #
+    #   If you don't specify a value for `MaxResults`, Amazon Route 53
+    #   returns up to 100 configurations.
+    #
+    # @return [Types::ListQueryLoggingConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueryLoggingConfigsResponse#query_logging_configs #query_logging_configs} => Array&lt;Types::QueryLoggingConfig&gt;
+    #   * {Types::ListQueryLoggingConfigsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_query_logging_configs({
+    #     hosted_zone_id: "ResourceId",
+    #     next_token: "PaginationToken",
+    #     max_results: "MaxResults",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_logging_configs #=> Array
+    #   resp.query_logging_configs[0].id #=> String
+    #   resp.query_logging_configs[0].hosted_zone_id #=> String
+    #   resp.query_logging_configs[0].cloud_watch_logs_log_group_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigs AWS API Documentation
+    #
+    # @overload list_query_logging_configs(params = {})
+    # @param [Hash] params ({})
+    def list_query_logging_configs(params = {}, options = {})
+      req = build_request(:list_query_logging_configs, params)
       req.send_request(options)
     end
 
@@ -4225,7 +4538,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

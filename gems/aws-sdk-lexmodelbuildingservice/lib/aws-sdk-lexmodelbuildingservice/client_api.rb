@@ -58,6 +58,8 @@ module Aws::LexModelBuildingService
     Description = Shapes::StringShape.new(name: 'Description')
     EnumerationValue = Shapes::StructureShape.new(name: 'EnumerationValue')
     EnumerationValues = Shapes::ListShape.new(name: 'EnumerationValues')
+    ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
+    ExportType = Shapes::StringShape.new(name: 'ExportType')
     FollowUpPrompt = Shapes::StructureShape.new(name: 'FollowUpPrompt')
     FulfillmentActivity = Shapes::StructureShape.new(name: 'FulfillmentActivity')
     FulfillmentActivityType = Shapes::StringShape.new(name: 'FulfillmentActivityType')
@@ -81,6 +83,8 @@ module Aws::LexModelBuildingService
     GetBuiltinIntentsResponse = Shapes::StructureShape.new(name: 'GetBuiltinIntentsResponse')
     GetBuiltinSlotTypesRequest = Shapes::StructureShape.new(name: 'GetBuiltinSlotTypesRequest')
     GetBuiltinSlotTypesResponse = Shapes::StructureShape.new(name: 'GetBuiltinSlotTypesResponse')
+    GetExportRequest = Shapes::StructureShape.new(name: 'GetExportRequest')
+    GetExportResponse = Shapes::StructureShape.new(name: 'GetExportResponse')
     GetIntentRequest = Shapes::StructureShape.new(name: 'GetIntentRequest')
     GetIntentResponse = Shapes::StructureShape.new(name: 'GetIntentResponse')
     GetIntentVersionsRequest = Shapes::StructureShape.new(name: 'GetIntentVersionsRequest')
@@ -132,6 +136,7 @@ module Aws::LexModelBuildingService
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceReference = Shapes::StructureShape.new(name: 'ResourceReference')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseCard = Shapes::StringShape.new(name: 'ResponseCard')
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     Slot = Shapes::StructureShape.new(name: 'Slot')
@@ -433,6 +438,21 @@ module Aws::LexModelBuildingService
     GetBuiltinSlotTypesResponse.add_member(:slot_types, Shapes::ShapeRef.new(shape: BuiltinSlotTypeMetadataList, location_name: "slotTypes"))
     GetBuiltinSlotTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetBuiltinSlotTypesResponse.struct_class = Types::GetBuiltinSlotTypesResponse
+
+    GetExportRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "querystring", location_name: "name"))
+    GetExportRequest.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location: "querystring", location_name: "version"))
+    GetExportRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    GetExportRequest.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, required: true, location: "querystring", location_name: "exportType"))
+    GetExportRequest.struct_class = Types::GetExportRequest
+
+    GetExportResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    GetExportResponse.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, location_name: "version"))
+    GetExportResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    GetExportResponse.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "exportType"))
+    GetExportResponse.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    GetExportResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    GetExportResponse.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    GetExportResponse.struct_class = Types::GetExportResponse
 
     GetIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
     GetIntentRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "version"))
@@ -1017,6 +1037,18 @@ module Aws::LexModelBuildingService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExport"
+        o.http_method = "GET"
+        o.http_request_uri = "/exports/"
+        o.input = Shapes::ShapeRef.new(shape: GetExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:get_intent, Seahorse::Model::Operation.new.tap do |o|

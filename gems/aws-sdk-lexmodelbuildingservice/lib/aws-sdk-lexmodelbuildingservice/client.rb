@@ -1409,6 +1409,58 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
+    # Exports the contents of a Amazon Lex resource in a specified format.
+    #
+    # @option params [required, String] :name
+    #   The name of the bot to export.
+    #
+    # @option params [required, String] :version
+    #   The version of the bot to export.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource to export.
+    #
+    # @option params [required, String] :export_type
+    #   The format of the exported data.
+    #
+    # @return [Types::GetExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportResponse#name #name} => String
+    #   * {Types::GetExportResponse#version #version} => String
+    #   * {Types::GetExportResponse#resource_type #resource_type} => String
+    #   * {Types::GetExportResponse#export_type #export_type} => String
+    #   * {Types::GetExportResponse#export_status #export_status} => String
+    #   * {Types::GetExportResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetExportResponse#url #url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export({
+    #     name: "Name", # required
+    #     version: "NumericalVersion", # required
+    #     resource_type: "BOT", # required, accepts BOT
+    #     export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.version #=> String
+    #   resp.resource_type #=> String, one of "BOT"
+    #   resp.export_type #=> String, one of "ALEXA_SKILLS_KIT"
+    #   resp.export_status #=> String, one of "IN_PROGRESS", "READY", "FAILED"
+    #   resp.failure_reason #=> String
+    #   resp.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExport AWS API Documentation
+    #
+    # @overload get_export(params = {})
+    # @param [Hash] params ({})
+    def get_export(params = {}, options = {})
+      req = build_request(:get_export, params)
+      req.send_request(options)
+    end
+
     # Returns information about an intent. In addition to the intent name,
     # you must specify the intent version.
     #
@@ -3180,17 +3232,18 @@ module Aws::LexModelBuildingService
     #   exception.
     #
     # @option params [String] :value_selection_strategy
-    #   Determines the strategy that Amazon Lex uses to return slot type
-    #   values. The field can be set to one of the following values:
+    #   Determines the slot resolution strategy that Amazon Lex uses to return
+    #   slot type values. The field can be set to one of the following values:
     #
-    #   * `ORIGINAL_VALUE` - Returns the value entered by the user.
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user, if the
+    #     user value is similar to the slot value.
     #
     #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
     #     return the first value in the resolution list as the slot type
     #     value. If there is no resolution list, null is returned.
     #
-    #   If you don't specify the `valueSelectionStrategy` is not provided,
-    #   the default is `ORIGINAL_VALUE`.
+    #   If you don't specify the `valueSelectionStrategy`, the default is
+    #   `ORIGINAL_VALUE`.
     #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3290,7 +3343,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

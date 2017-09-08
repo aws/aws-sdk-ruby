@@ -25,6 +25,7 @@ module Aws::CloudWatchLogs
     DeleteLogGroupRequest = Shapes::StructureShape.new(name: 'DeleteLogGroupRequest')
     DeleteLogStreamRequest = Shapes::StructureShape.new(name: 'DeleteLogStreamRequest')
     DeleteMetricFilterRequest = Shapes::StructureShape.new(name: 'DeleteMetricFilterRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
     Descending = Shapes::BooleanShape.new(name: 'Descending')
@@ -39,6 +40,8 @@ module Aws::CloudWatchLogs
     DescribeLogStreamsResponse = Shapes::StructureShape.new(name: 'DescribeLogStreamsResponse')
     DescribeMetricFiltersRequest = Shapes::StructureShape.new(name: 'DescribeMetricFiltersRequest')
     DescribeMetricFiltersResponse = Shapes::StructureShape.new(name: 'DescribeMetricFiltersResponse')
+    DescribeResourcePoliciesRequest = Shapes::StructureShape.new(name: 'DescribeResourcePoliciesRequest')
+    DescribeResourcePoliciesResponse = Shapes::StructureShape.new(name: 'DescribeResourcePoliciesResponse')
     DescribeSubscriptionFiltersRequest = Shapes::StructureShape.new(name: 'DescribeSubscriptionFiltersRequest')
     DescribeSubscriptionFiltersResponse = Shapes::StructureShape.new(name: 'DescribeSubscriptionFiltersResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
@@ -102,17 +105,23 @@ module Aws::CloudWatchLogs
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     OutputLogEvent = Shapes::StructureShape.new(name: 'OutputLogEvent')
     OutputLogEvents = Shapes::ListShape.new(name: 'OutputLogEvents')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PutDestinationPolicyRequest = Shapes::StructureShape.new(name: 'PutDestinationPolicyRequest')
     PutDestinationRequest = Shapes::StructureShape.new(name: 'PutDestinationRequest')
     PutDestinationResponse = Shapes::StructureShape.new(name: 'PutDestinationResponse')
     PutLogEventsRequest = Shapes::StructureShape.new(name: 'PutLogEventsRequest')
     PutLogEventsResponse = Shapes::StructureShape.new(name: 'PutLogEventsResponse')
     PutMetricFilterRequest = Shapes::StructureShape.new(name: 'PutMetricFilterRequest')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
     PutSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'PutSubscriptionFilterRequest')
     RejectedLogEventsInfo = Shapes::StructureShape.new(name: 'RejectedLogEventsInfo')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicies = Shapes::ListShape.new(name: 'ResourcePolicies')
+    ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     SearchedLogStream = Shapes::StructureShape.new(name: 'SearchedLogStream')
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
@@ -173,6 +182,9 @@ module Aws::CloudWatchLogs
     DeleteMetricFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
     DeleteMetricFilterRequest.struct_class = Types::DeleteMetricFilterRequest
 
+    DeleteResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
     DeleteRetentionPolicyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DeleteRetentionPolicyRequest.struct_class = Types::DeleteRetentionPolicyRequest
 
@@ -231,6 +243,14 @@ module Aws::CloudWatchLogs
     DescribeMetricFiltersResponse.add_member(:metric_filters, Shapes::ShapeRef.new(shape: MetricFilters, location_name: "metricFilters"))
     DescribeMetricFiltersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeMetricFiltersResponse.struct_class = Types::DescribeMetricFiltersResponse
+
+    DescribeResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeResourcePoliciesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeResourcePoliciesRequest.struct_class = Types::DescribeResourcePoliciesRequest
+
+    DescribeResourcePoliciesResponse.add_member(:resource_policies, Shapes::ShapeRef.new(shape: ResourcePolicies, location_name: "resourcePolicies"))
+    DescribeResourcePoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeResourcePoliciesResponse.struct_class = Types::DescribeResourcePoliciesResponse
 
     DescribeSubscriptionFiltersRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DescribeSubscriptionFiltersRequest.add_member(:filter_name_prefix, Shapes::ShapeRef.new(shape: FilterName, location_name: "filterNamePrefix"))
@@ -409,6 +429,13 @@ module Aws::CloudWatchLogs
     PutMetricFilterRequest.add_member(:metric_transformations, Shapes::ShapeRef.new(shape: MetricTransformations, required: true, location_name: "metricTransformations"))
     PutMetricFilterRequest.struct_class = Types::PutMetricFilterRequest
 
+    PutResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
+    PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policyDocument"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "resourcePolicy"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     PutRetentionPolicyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     PutRetentionPolicyRequest.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Days, required: true, location_name: "retentionInDays"))
     PutRetentionPolicyRequest.struct_class = Types::PutRetentionPolicyRequest
@@ -425,6 +452,13 @@ module Aws::CloudWatchLogs
     RejectedLogEventsInfo.add_member(:too_old_log_event_end_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "tooOldLogEventEndIndex"))
     RejectedLogEventsInfo.add_member(:expired_log_event_end_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "expiredLogEventEndIndex"))
     RejectedLogEventsInfo.struct_class = Types::RejectedLogEventsInfo
+
+    ResourcePolicies.member = Shapes::ShapeRef.new(shape: ResourcePolicy)
+
+    ResourcePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
+    ResourcePolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policyDocument"))
+    ResourcePolicy.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    ResourcePolicy.struct_class = Types::ResourcePolicy
 
     SearchedLogStream.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
     SearchedLogStream.add_member(:searched_completely, Shapes::ShapeRef.new(shape: LogStreamSearchedCompletely, location_name: "searchedCompletely"))
@@ -579,6 +613,17 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_retention_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRetentionPolicy"
         o.http_method = "POST"
@@ -677,6 +722,16 @@ module Aws::CloudWatchLogs
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_resource_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_subscription_filters, Seahorse::Model::Operation.new.tap do |o|
@@ -784,6 +839,17 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
