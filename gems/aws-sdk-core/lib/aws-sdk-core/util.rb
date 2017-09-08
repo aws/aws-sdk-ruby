@@ -31,7 +31,13 @@ module Aws
         when Array
           obj.map { |v| deep_copy(v) }
         else
-          v
+          if obj.respond_to?(:dup)
+            obj.dup
+          elsif obj.respond_to?(:clone)
+            obj.clone
+          else
+            obj
+          end
         end
       end
     end

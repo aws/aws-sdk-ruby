@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
           ResourceMethod.new.tap do |m|
             m.method_name = method_name
             m.arguments = 'options = {}'
-            m.code = code(action)
+            m.code = code(action, api)
             m.documentation = docs(method_name, resource_name, action, api)
           end
         end
@@ -17,8 +17,8 @@ module AwsSdkCodeGenerator
 
       private
 
-      def code(action)
-        ResourceBatchActionCode.new(action: action).build
+      def code(action, api)
+        ResourceBatchActionCode.new(action: action, api: api).build
       end
 
       def docs(method_name, resource_name, action, api)
