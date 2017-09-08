@@ -17,6 +17,8 @@ group :test do
     gem 'webmock', '2.2.0'
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
+    # kramdown drop support for Ruby under 2.0 since 1.15.0
+    gem 'kramdown', '<= 1.14.0'
   else
     gem 'addressable'
     gem 'webmock'
