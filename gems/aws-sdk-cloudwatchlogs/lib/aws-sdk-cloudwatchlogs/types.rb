@@ -54,14 +54,14 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
-    #   timestamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
+    #   stamp earlier than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
     #   The end time of the range for the request, expressed as the number
-    #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
-    #   timestamp later than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
+    #   stamp later than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] destination
@@ -229,6 +229,24 @@ module Aws::CloudWatchLogs
     class DeleteMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "PolicyName",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy to be revoked. This parameter is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :policy_name)
       include Aws::Structure
     end
 
@@ -449,7 +467,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_name_prefix
     #   The prefix to match.
     #
-    #   You cannot specify this parameter if `orderBy` is `LastEventTime`.
+    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -462,7 +480,7 @@ module Aws::CloudWatchLogs
     #
     #   lastEventTimestamp represents the time of the most recent log event
     #   in the log stream in CloudWatch Logs. This number is expressed as
-    #   the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   lastEventTimeStamp updates on an eventual consistency basis. It
     #   typically updates in less than an hour from ingestion, but may take
     #   longer in some rare situations.
@@ -580,6 +598,49 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeResourcePoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of resource policies to be displayed with one
+    #   call of this API.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesRequest AWS API Documentation
+    #
+    class DescribeResourcePoliciesRequest < Struct.new(
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policies
+    #   The resource policies that exist in this account.
+    #   @return [Array<Types::ResourcePolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesResponse AWS API Documentation
+    #
+    class DescribeResourcePoliciesResponse < Struct.new(
+      :resource_policies,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSubscriptionFiltersRequest
     #   data as a hash:
     #
@@ -644,8 +705,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) of the physical target where the log
-    #   events will be delivered (for example, a Kinesis stream).
+    #   The Amazon Resource Name (ARN) of the physical target to where the
+    #   log events are delivered (for example, a Kinesis stream).
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -664,7 +725,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the destination, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Destination AWS API Documentation
@@ -694,14 +755,14 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] from
-    #   The start time, expressed as the number of milliseconds since Jan 1,
-    #   1970 00:00:00 UTC. Events with a timestamp prior to this time are
-    #   not exported.
+    #   The start time, expressed as the number of milliseconds after Jan 1,
+    #   1970 00:00:00 UTC. Events with a time stamp before this time are not
+    #   exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
-    #   The end time, expressed as the number of milliseconds since Jan 1,
-    #   1970 00:00:00 UTC. Events with a timestamp later than this time are
+    #   The end time, expressed as the number of milliseconds after Jan 1,
+    #   1970 00:00:00 UTC. Events with a time stamp later than this time are
     #   not exported.
     #   @return [Integer]
     #
@@ -741,12 +802,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the export task, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_time
     #   The completion time of the export task, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskExecutionInfo AWS API Documentation
@@ -799,13 +860,13 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to
-    #   this time are not returned.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
+    #   time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
     #   this time are not returned.
     #   @return [Integer]
     #
@@ -827,7 +888,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] interleaved
     #   If the value is true, the operation makes a best effort to provide
     #   responses that contain events from multiple log streams within the
-    #   log group interleaved in a single response. If the value is false
+    #   log group, interleaved in a single response. If the value is false,
     #   all the matched log events in the first log stream are searched
     #   first, then those in the next log stream, and so on. The default is
     #   false.
@@ -878,7 +939,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC.
+    #   after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -887,7 +948,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] ingestion_time
     #   The time the event was ingested, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] event_id
@@ -928,13 +989,13 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier
+    #   than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
     #   this time are not included.
     #   @return [Integer]
     #
@@ -946,7 +1007,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] limit
     #   The maximum number of log events returned. If you don't specify a
     #   value, the maximum is as many log events as can fit in a response
-    #   size of 1MB, up to 10,000 log events.
+    #   size of 1 MB, up to 10,000 log events.
     #   @return [Integer]
     #
     # @!attribute [rw] start_from_head
@@ -1004,7 +1065,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC.
+    #   fter Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1056,7 +1117,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the log group, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] retention_in_days
@@ -1098,24 +1159,24 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the stream, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] first_event_timestamp
     #   The time of the first event, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC.
+    #   after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] last_event_timestamp
     #   the time of the most recent log event in the log stream in
     #   CloudWatch Logs. This number is expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTime updates
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTime updates
     #   on an eventual consistency basis. It typically updates in less than
     #   an hour from ingestion, but may take longer in some rare situations.
     #   @return [Integer]
     #
     # @!attribute [rw] last_ingestion_time
-    #   The ingestion time, expressed as the number of milliseconds since
+    #   The ingestion time, expressed as the number of milliseconds after
     #   Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
@@ -1155,9 +1216,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
-    #   timestamps, IP addresses, strings, and so on. You use the filter
-    #   pattern to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain time
+    #   stamps, IP addresses, strings, and so on. You use the filter pattern
+    #   to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] metric_transformations
@@ -1166,7 +1227,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the metric filter, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] log_group_name
@@ -1207,7 +1268,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Indicates how to transform ingested log events into metric data in a
+    # Indicates how to transform ingested log events in to metric data in a
     # CloudWatch metric.
     #
     # @note When making an API call, you may pass MetricTransformation
@@ -1252,7 +1313,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC.
+    #   after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1261,7 +1322,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] ingestion_time
     #   The time the event was ingested, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OutputLogEvent AWS API Documentation
@@ -1312,13 +1373,14 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The ARN of an Amazon Kinesis stream to deliver matching log events
-    #   to.
+    #   The ARN of an Amazon Kinesis stream to which to deliver matching log
+    #   events.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that grants CloudWatch Logs permissions to
-    #   call Amazon Kinesis PutRecord on the destination stream.
+    #   call the Amazon Kinesis PutRecord operation on the destination
+    #   stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationRequest AWS API Documentation
@@ -1369,7 +1431,12 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::InputLogEvent>]
     #
     # @!attribute [rw] sequence_token
-    #   The sequence token.
+    #   The sequence token obtained from the response of the previous
+    #   `PutLogEvents` call. An upload in a newly created log stream does
+    #   not require a sequence token. You can also get the sequence token
+    #   using DescribeLogStreams. If you call `PutLogEvents` twice within a
+    #   narrow time period using the same value for `sequenceToken`, both
+    #   calls may be successful, or one may be rejected.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
@@ -1429,7 +1496,7 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] metric_transformations
-    #   A collection of information needed to define how metric data gets
+    #   A collection of information that defines how metric data gets
     #   emitted.
     #   @return [Array<Types::MetricTransformation>]
     #
@@ -1440,6 +1507,54 @@ module Aws::CloudWatchLogs
       :filter_name,
       :filter_pattern,
       :metric_transformations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "PolicyName",
+    #         policy_document: "PolicyDocument",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   Name of the new policy. This parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   Details of the new policy, including the identity of the principal
+    #   that is enabled to put logs to this account. This is formatted as a
+    #   JSON string.
+    #
+    #   The following example creates a resource policy enabling the Route
+    #   53 service to put DNS query logs in to the specified log group.
+    #   Replace "logArn" with the ARN of your CloudWatch Logs resource,
+    #   such as a log group or log stream.
+    #
+    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow",
+    #   "Principal": \\\{ "Service": \[ "route53.amazonaws.com" \]
+    #   \\}, "Action":"logs:PutLogEvents", "Resource": logArn \\} \]
+    #   \\}
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :policy_name,
+      :policy_document)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   The new policy.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_policy)
       include Aws::Structure
     end
 
@@ -1488,7 +1603,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] filter_name
     #   A name for the subscription filter. If you are updating an existing
     #   filter, you must specify the correct name in `filterName`.
-    #   Otherwise, the call will fail because you cannot associate a second
+    #   Otherwise, the call fails because you cannot associate a second
     #   filter with a log group. To find the name of the filter currently
     #   associated with a log group, use DescribeSubscriptionFilters.
     #   @return [String]
@@ -1507,8 +1622,8 @@ module Aws::CloudWatchLogs
     #   * A logical destination (specified using an ARN) belonging to a
     #     different account, for cross-account delivery.
     #
-    #   * An Amazon Kinesis Firehose stream belonging to the same account as
-    #     the subscription filter, for same-account delivery.
+    #   * An Amazon Kinesis Firehose delivery stream belonging to the same
+    #     account as the subscription filter, for same-account delivery.
     #
     #   * An AWS Lambda function belonging to the same account as the
     #     subscription filter, for same-account delivery.
@@ -1563,6 +1678,31 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A policy enabling one or more entities to put logs to a log group in
+    # this account.
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The details of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   Time stamp showing when this policy was last updated, expressed as
+    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourcePolicy AWS API Documentation
+    #
+    class ResourcePolicy < Struct.new(
+      :policy_name,
+      :policy_document,
+      :last_updated_time)
+      include Aws::Structure
+    end
+
     # Represents the search status of a log stream.
     #
     # @!attribute [rw] log_stream_name
@@ -1593,9 +1733,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
-    #   timestamps, IP addresses, strings, and so on. You use the filter
-    #   pattern to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain time
+    #   stamps, IP addresses, strings, and so on. You use the filter pattern
+    #   to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -1612,7 +1752,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the subscription filter, expressed as the
-    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter AWS API Documentation
@@ -1664,9 +1804,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
-    #   timestamps, IP addresses, strings, and so on. You use the filter
-    #   pattern to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain time
+    #   stamps, IP addresses, strings, and so on. You use the filter pattern
+    #   to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] log_event_messages

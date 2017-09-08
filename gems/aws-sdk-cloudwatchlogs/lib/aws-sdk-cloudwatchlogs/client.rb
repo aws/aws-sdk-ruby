@@ -191,8 +191,8 @@ module Aws::CloudWatchLogs
     #
     # You can export logs from multiple log groups or multiple time ranges
     # to the same S3 bucket. To separate out log data for each export task,
-    # you can specify a prefix that will be used as the Amazon S3 key prefix
-    # for all exported objects.
+    # you can specify a prefix to be used as the Amazon S3 key prefix for
+    # all exported objects.
     #
     # @option params [String] :task_name
     #   The name of the export task.
@@ -206,12 +206,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, Integer] :from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
-    #   timestamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
+    #   stamp earlier than this time are not exported.
     #
     # @option params [required, Integer] :to
     #   The end time of the range for the request, expressed as the number of
-    #   milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp
     #   later than this time are not exported.
     #
     # @option params [required, String] :destination
@@ -425,6 +425,29 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def delete_metric_filter(params = {}, options = {})
       req = build_request(:delete_metric_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource policy from this account. This revokes the access
+    # of the identities in that policy to put log events to this account.
+    #
+    # @option params [String] :policy_name
+    #   The name of the policy to be revoked. This parameter is required.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     policy_name: "PolicyName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -646,7 +669,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   You cannot specify this parameter if `orderBy` is `LastEventTime`.
+    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -658,7 +681,7 @@ module Aws::CloudWatchLogs
     #
     #   lastEventTimestamp represents the time of the most recent log event in
     #   the log stream in CloudWatch Logs. This number is expressed as the
-    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   lastEventTimeStamp updates on an eventual consistency basis. It
     #   typically updates in less than an hour from ingestion, but may take
     #   longer in some rare situations.
@@ -777,6 +800,45 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Lists the resource policies in this account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of resource policies to be displayed with one call
+    #   of this API.
+    #
+    # @return [Types::DescribeResourcePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePoliciesResponse#resource_policies #resource_policies} => Array&lt;Types::ResourcePolicy&gt;
+    #   * {Types::DescribeResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_policies({
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policies #=> Array
+    #   resp.resource_policies[0].policy_name #=> String
+    #   resp.resource_policies[0].policy_document #=> String
+    #   resp.resource_policies[0].last_updated_time #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePolicies AWS API Documentation
+    #
+    # @overload describe_resource_policies(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policies(params = {}, options = {})
+      req = build_request(:describe_resource_policies, params)
+      req.send_request(options)
+    end
+
     # Lists the subscription filters for the specified log group. You can
     # list all the subscription filters or filter the results by prefix. The
     # results are ASCII-sorted by filter name.
@@ -835,8 +897,8 @@ module Aws::CloudWatchLogs
     # log events or filter the results using a filter pattern, a time range,
     # and the name of the log stream.
     #
-    # By default, this operation returns as many log events as can fit in
-    # 1MB (up to 10,000 log events), or all the events found within the time
+    # By default, this operation returns as many log events as can fit in 1
+    # MB (up to 10,000 log events), or all the events found within the time
     # range that you specify. If the results include a token, then there are
     # more log events available, and you can get additional results by
     # specifying the token in a subsequent call.
@@ -849,12 +911,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
     #   time are not returned.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
@@ -871,9 +933,9 @@ module Aws::CloudWatchLogs
     # @option params [Boolean] :interleaved
     #   If the value is true, the operation makes a best effort to provide
     #   responses that contain events from multiple log streams within the log
-    #   group interleaved in a single response. If the value is false all the
-    #   matched log events in the first log stream are searched first, then
-    #   those in the next log stream, and so on. The default is false.
+    #   group, interleaved in a single response. If the value is false, all
+    #   the matched log events in the first log stream are searched first,
+    #   then those in the next log stream, and so on. The default is false.
     #
     # @return [Types::FilterLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -920,9 +982,9 @@ module Aws::CloudWatchLogs
     # log events or filter using a time range.
     #
     # By default, this operation returns as many log events as can fit in a
-    # response size of 1MB (up to 10,000 log events). If the results include
-    # tokens, there are more log events available. You can get additional
-    # log events by specifying one of the tokens in a subsequent call.
+    # response size of 1 MB (up to 10,000 log events). You can get
+    # additional log events by specifying one of the tokens in a subsequent
+    # call.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -932,12 +994,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than
     #   this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
     #   this time are not included.
     #
     # @option params [String] :next_token
@@ -947,7 +1009,7 @@ module Aws::CloudWatchLogs
     # @option params [Integer] :limit
     #   The maximum number of log events returned. If you don't specify a
     #   value, the maximum is as many log events as can fit in a response size
-    #   of 1MB, up to 10,000 log events.
+    #   of 1 MB, up to 10,000 log events.
     #
     # @option params [Boolean] :start_from_head
     #   If the value is true, the earliest log events are returned first. If
@@ -1022,28 +1084,29 @@ module Aws::CloudWatchLogs
     end
 
     # Creates or updates a destination. A destination encapsulates a
-    # physical resource (such as a Kinesis stream) and enables you to
-    # subscribe to a real-time stream of log events of a different account,
-    # ingested using PutLogEvents. Currently, the only supported physical
-    # resource is a Amazon Kinesis stream belonging to the same account as
+    # physical resource (such as an Amazon Kinesis stream) and enables you
+    # to subscribe to a real-time stream of log events for a different
+    # account, ingested using PutLogEvents. Currently, the only supported
+    # physical resource is a Kinesis stream belonging to the same account as
     # the destination.
     #
-    # A destination controls what is written to its Amazon Kinesis stream
-    # through an access policy. By default, `PutDestination` does not set
-    # any access policy with the destination, which means a cross-account
-    # user cannot call PutSubscriptionFilter against this destination. To
-    # enable this, the destination owner must call PutDestinationPolicy
-    # after `PutDestination`.
+    # Through an access policy, a destination controls what is written to
+    # its Kinesis stream. By default, `PutDestination` does not set any
+    # access policy with the destination, which means a cross-account user
+    # cannot call PutSubscriptionFilter against this destination. To enable
+    # this, the destination owner must call PutDestinationPolicy after
+    # `PutDestination`.
     #
     # @option params [required, String] :destination_name
     #   A name for the destination.
     #
     # @option params [required, String] :target_arn
-    #   The ARN of an Amazon Kinesis stream to deliver matching log events to.
+    #   The ARN of an Amazon Kinesis stream to which to deliver matching log
+    #   events.
     #
     # @option params [required, String] :role_arn
     #   The ARN of an IAM role that grants CloudWatch Logs permissions to call
-    #   Amazon Kinesis PutRecord on the destination stream.
+    #   the Amazon Kinesis PutRecord operation on the destination stream.
     #
     # @return [Types::PutDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1114,7 +1177,9 @@ module Aws::CloudWatchLogs
     # You must include the sequence token obtained from the response of the
     # previous call. An upload in a newly created log stream does not
     # require a sequence token. You can also get the sequence token using
-    # DescribeLogStreams.
+    # DescribeLogStreams. If you call `PutLogEvents` twice within a narrow
+    # time period using the same value for `sequenceToken`, both calls may
+    # be successful, or one may be rejected.
     #
     # The batch of events must satisfy the following constraints:
     #
@@ -1129,8 +1194,8 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their timestamp (the time the event occurred, expressed as the
-    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC).
+    #   their time stamp (the time the event occurred, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC).
     #
     # * The maximum number of log events in a batch is 10,000.
     #
@@ -1147,7 +1212,12 @@ module Aws::CloudWatchLogs
     #   The log events.
     #
     # @option params [String] :sequence_token
-    #   The sequence token.
+    #   The sequence token obtained from the response of the previous
+    #   `PutLogEvents` call. An upload in a newly created log stream does not
+    #   require a sequence token. You can also get the sequence token using
+    #   DescribeLogStreams. If you call `PutLogEvents` twice within a narrow
+    #   time period using the same value for `sequenceToken`, both calls may
+    #   be successful, or one may be rejected.
     #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1202,8 +1272,7 @@ module Aws::CloudWatchLogs
     #   events.
     #
     # @option params [required, Array<Types::MetricTransformation>] :metric_transformations
-    #   A collection of information needed to define how metric data gets
-    #   emitted.
+    #   A collection of information that defines how metric data gets emitted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1232,8 +1301,56 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates or updates a resource policy allowing other AWS services to
+    # put log events to this account, such as Amazon Route 53. An account
+    # can have up to 50 resource policies per region.
+    #
+    # @option params [String] :policy_name
+    #   Name of the new policy. This parameter is required.
+    #
+    # @option params [String] :policy_document
+    #   Details of the new policy, including the identity of the principal
+    #   that is enabled to put logs to this account. This is formatted as a
+    #   JSON string.
+    #
+    #   The following example creates a resource policy enabling the Route 53
+    #   service to put DNS query logs in to the specified log group. Replace
+    #   "logArn" with the ARN of your CloudWatch Logs resource, such as a
+    #   log group or log stream.
+    #
+    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal":
+    #   \\\{ "Service": \[ "route53.amazonaws.com" \] \\},
+    #   "Action":"logs:PutLogEvents", "Resource": logArn \\} \] \\}
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy_name: "PolicyName",
+    #     policy_document: "PolicyDocument",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.policy_name #=> String
+    #   resp.resource_policy.policy_document #=> String
+    #   resp.resource_policy.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Sets the retention of the specified log group. A retention policy
-    # allows you to configure the number of days you want to retain log
+    # allows you to configure the number of days for which to retain log
     # events in the specified log group.
     #
     # @option params [required, String] :log_group_name
@@ -1274,15 +1391,15 @@ module Aws::CloudWatchLogs
     # * A logical destination that belongs to a different account, for
     #   cross-account delivery.
     #
-    # * An Amazon Kinesis Firehose stream that belongs to the same account
-    #   as the subscription filter, for same-account delivery.
+    # * An Amazon Kinesis Firehose delivery stream that belongs to the same
+    #   account as the subscription filter, for same-account delivery.
     #
     # * An AWS Lambda function that belongs to the same account as the
     #   subscription filter, for same-account delivery.
     #
     # There can only be one subscription filter associated with a log group.
     # If you are updating an existing filter, you must specify the correct
-    # name in `filterName`. Otherwise, the call will fail because you cannot
+    # name in `filterName`. Otherwise, the call fails because you cannot
     # associate a second filter with a log group.
     #
     # @option params [required, String] :log_group_name
@@ -1291,9 +1408,9 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :filter_name
     #   A name for the subscription filter. If you are updating an existing
     #   filter, you must specify the correct name in `filterName`. Otherwise,
-    #   the call will fail because you cannot associate a second filter with a
-    #   log group. To find the name of the filter currently associated with a
-    #   log group, use DescribeSubscriptionFilters.
+    #   the call fails because you cannot associate a second filter with a log
+    #   group. To find the name of the filter currently associated with a log
+    #   group, use DescribeSubscriptionFilters.
     #
     # @option params [required, String] :filter_pattern
     #   A filter pattern for subscribing to a filtered stream of log events.
@@ -1308,8 +1425,8 @@ module Aws::CloudWatchLogs
     #   * A logical destination (specified using an ARN) belonging to a
     #     different account, for cross-account delivery.
     #
-    #   * An Amazon Kinesis Firehose stream belonging to the same account as
-    #     the subscription filter, for same-account delivery.
+    #   * An Amazon Kinesis Firehose delivery stream belonging to the same
+    #     account as the subscription filter, for same-account delivery.
     #
     #   * An AWS Lambda function belonging to the same account as the
     #     subscription filter, for same-account delivery.
@@ -1392,9 +1509,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain
-    #   timestamps, IP addresses, strings, and so on. You use the filter
-    #   pattern to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain time
+    #   stamps, IP addresses, strings, and so on. You use the filter pattern
+    #   to specify what to look for in the log event message.
     #
     # @option params [required, Array<String>] :log_event_messages
     #   The log event messages to test.
@@ -1469,7 +1586,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
