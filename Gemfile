@@ -17,8 +17,6 @@ group :test do
     gem 'webmock', '2.2.0'
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
-    # kramdown drop support for Ruby under 2.0 since 1.15.0
-    gem 'kramdown', '<= 1.14.0'
   else
     gem 'addressable'
     gem 'webmock'
@@ -51,7 +49,8 @@ group :test do
 end
 
 group :build do
-  gem 'kramdown' # using this to fix poorly formatted HTML in API docs
+  # using this to fix poorly formatted HTML in API docs
+  gem 'kramdown', '1.14.0' # pinned to support Ruby 1.9.3
   gem 'mustache', '0.99.8' # pinned to support Ruby 1.9.3
 end
 
