@@ -49,7 +49,8 @@ group :test do
 end
 
 group :build do
-  gem 'kramdown' # using this to fix poorly formatted HTML in API docs
+  # using this to fix poorly formatted HTML in API docs
+  gem 'kramdown', '1.14.0' # pinned to support Ruby 1.9.3
   gem 'mustache', '0.99.8' # pinned to support Ruby 1.9.3
 end
 
