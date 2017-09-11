@@ -309,6 +309,16 @@ describe 'Interfaces' do
           expect(ticket.purchase_price).to be(10)
         end
 
+        it 'allows data to be provided as hash' do
+          data = client.stub_data(:get_ticket, ticket:{purchase_price:10}).ticket
+          expect(client).not_to receive(:get_ticket)
+          data_hash = data.to_h
+          ticket = Sample::Ticket.new(123, data: data_hash, client: client)
+          expect(ticket.data).to be(data_hash)
+          expect(ticket.data_loaded?).to be(true)
+          expect(ticket.purchase_price).to be(10)
+        end
+
       end
 
       describe 'shape without load' do
