@@ -178,9 +178,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:load_balancer_names] ||= []
           batch.each do |item|
-            params[:load_balancer_names] << {
-              name: item.name
-            }
+            params[:load_balancer_names] << item.name
           end
           batch[0].client.attach_load_balancers(params)
         end
@@ -195,9 +193,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:load_balancer_names] ||= []
           batch.each do |item|
-            params[:load_balancer_names] << {
-              name: item.name
-            }
+            params[:load_balancer_names] << item.name
           end
           batch[0].client.detach_load_balancers(params)
         end

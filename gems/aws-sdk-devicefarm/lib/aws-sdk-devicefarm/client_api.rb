@@ -16,6 +16,7 @@ module Aws::DeviceFarm
     AccountsCleanup = Shapes::BooleanShape.new(name: 'AccountsCleanup')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AmazonResourceNames = Shapes::ListShape.new(name: 'AmazonResourceNames')
+    AndroidPaths = Shapes::ListShape.new(name: 'AndroidPaths')
     AppPackagesCleanup = Shapes::BooleanShape.new(name: 'AppPackagesCleanup')
     ArgumentException = Shapes::StructureShape.new(name: 'ArgumentException')
     Artifact = Shapes::StructureShape.new(name: 'Artifact')
@@ -25,6 +26,7 @@ module Aws::DeviceFarm
     BillingMethod = Shapes::StringShape.new(name: 'BillingMethod')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CPU = Shapes::StructureShape.new(name: 'CPU')
+    ClientId = Shapes::StringShape.new(name: 'ClientId')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     Counters = Shapes::StructureShape.new(name: 'Counters')
     CreateDevicePoolRequest = Shapes::StructureShape.new(name: 'CreateDevicePoolRequest')
@@ -39,6 +41,7 @@ module Aws::DeviceFarm
     CreateUploadRequest = Shapes::StructureShape.new(name: 'CreateUploadRequest')
     CreateUploadResult = Shapes::StructureShape.new(name: 'CreateUploadResult')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
+    CustomerArtifactPaths = Shapes::StructureShape.new(name: 'CustomerArtifactPaths')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteDevicePoolRequest = Shapes::StructureShape.new(name: 'DeleteDevicePoolRequest')
     DeleteDevicePoolResult = Shapes::StructureShape.new(name: 'DeleteDevicePoolResult')
@@ -55,6 +58,7 @@ module Aws::DeviceFarm
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceAttribute = Shapes::StringShape.new(name: 'DeviceAttribute')
     DeviceFormFactor = Shapes::StringShape.new(name: 'DeviceFormFactor')
+    DeviceHostPaths = Shapes::ListShape.new(name: 'DeviceHostPaths')
     DeviceMinutes = Shapes::StructureShape.new(name: 'DeviceMinutes')
     DevicePlatform = Shapes::StringShape.new(name: 'DevicePlatform')
     DevicePool = Shapes::StructureShape.new(name: 'DevicePool')
@@ -66,6 +70,7 @@ module Aws::DeviceFarm
     Double = Shapes::FloatShape.new(name: 'Double')
     ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
     ExecutionResult = Shapes::StringShape.new(name: 'ExecutionResult')
+    ExecutionResultCode = Shapes::StringShape.new(name: 'ExecutionResultCode')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     Filter = Shapes::StringShape.new(name: 'Filter')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
@@ -94,12 +99,14 @@ module Aws::DeviceFarm
     GetTestResult = Shapes::StructureShape.new(name: 'GetTestResult')
     GetUploadRequest = Shapes::StructureShape.new(name: 'GetUploadRequest')
     GetUploadResult = Shapes::StructureShape.new(name: 'GetUploadResult')
+    HostAddress = Shapes::StringShape.new(name: 'HostAddress')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     IncompatibilityMessage = Shapes::StructureShape.new(name: 'IncompatibilityMessage')
     IncompatibilityMessages = Shapes::ListShape.new(name: 'IncompatibilityMessages')
     InstallToRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionRequest')
     InstallToRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionResult')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IosPaths = Shapes::ListShape.new(name: 'IosPaths')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobTimeoutMinutes')
     Jobs = Shapes::ListShape.new(name: 'Jobs')
@@ -192,6 +199,7 @@ module Aws::DeviceFarm
     ScheduleRunResult = Shapes::StructureShape.new(name: 'ScheduleRunResult')
     ScheduleRunTest = Shapes::StructureShape.new(name: 'ScheduleRunTest')
     ServiceAccountException = Shapes::StructureShape.new(name: 'ServiceAccountException')
+    SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
     StopRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionResult')
     StopRunRequest = Shapes::StructureShape.new(name: 'StopRunRequest')
@@ -230,6 +238,8 @@ module Aws::DeviceFarm
     AccountSettings.struct_class = Types::AccountSettings
 
     AmazonResourceNames.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
+
+    AndroidPaths.member = Shapes::ShapeRef.new(shape: String)
 
     Artifact.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Artifact.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -292,7 +302,10 @@ module Aws::DeviceFarm
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     CreateRemoteAccessSessionRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "deviceArn"))
+    CreateRemoteAccessSessionRequest.add_member(:ssh_public_key, Shapes::ShapeRef.new(shape: SshPublicKey, location_name: "sshPublicKey"))
+    CreateRemoteAccessSessionRequest.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
     CreateRemoteAccessSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    CreateRemoteAccessSessionRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     CreateRemoteAccessSessionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionConfiguration, location_name: "configuration"))
     CreateRemoteAccessSessionRequest.struct_class = Types::CreateRemoteAccessSessionRequest
 
@@ -307,6 +320,11 @@ module Aws::DeviceFarm
 
     CreateUploadResult.add_member(:upload, Shapes::ShapeRef.new(shape: Upload, location_name: "upload"))
     CreateUploadResult.struct_class = Types::CreateUploadResult
+
+    CustomerArtifactPaths.add_member(:ios_paths, Shapes::ShapeRef.new(shape: IosPaths, location_name: "iosPaths"))
+    CustomerArtifactPaths.add_member(:android_paths, Shapes::ShapeRef.new(shape: AndroidPaths, location_name: "androidPaths"))
+    CustomerArtifactPaths.add_member(:device_host_paths, Shapes::ShapeRef.new(shape: DeviceHostPaths, location_name: "deviceHostPaths"))
+    CustomerArtifactPaths.struct_class = Types::CustomerArtifactPaths
 
     DeleteDevicePoolRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     DeleteDevicePoolRequest.struct_class = Types::DeleteDevicePoolRequest
@@ -353,9 +371,12 @@ module Aws::DeviceFarm
     Device.add_member(:carrier, Shapes::ShapeRef.new(shape: String, location_name: "carrier"))
     Device.add_member(:radio, Shapes::ShapeRef.new(shape: String, location_name: "radio"))
     Device.add_member(:remote_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteAccessEnabled"))
+    Device.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
     Device.add_member(:fleet_type, Shapes::ShapeRef.new(shape: String, location_name: "fleetType"))
     Device.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, location_name: "fleetName"))
     Device.struct_class = Types::Device
+
+    DeviceHostPaths.member = Shapes::ShapeRef.new(shape: String)
 
     DeviceMinutes.add_member(:total, Shapes::ShapeRef.new(shape: Double, location_name: "total"))
     DeviceMinutes.add_member(:metered, Shapes::ShapeRef.new(shape: Double, location_name: "metered"))
@@ -480,6 +501,8 @@ module Aws::DeviceFarm
 
     InstallToRemoteAccessSessionResult.add_member(:app_upload, Shapes::ShapeRef.new(shape: Upload, location_name: "appUpload"))
     InstallToRemoteAccessSessionResult.struct_class = Types::InstallToRemoteAccessSessionResult
+
+    IosPaths.member = Shapes::ShapeRef.new(shape: String)
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Job.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -740,9 +763,13 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:started, Shapes::ShapeRef.new(shape: DateTime, location_name: "started"))
     RemoteAccessSession.add_member(:stopped, Shapes::ShapeRef.new(shape: DateTime, location_name: "stopped"))
     RemoteAccessSession.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
+    RemoteAccessSession.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
+    RemoteAccessSession.add_member(:host_address, Shapes::ShapeRef.new(shape: HostAddress, location_name: "hostAddress"))
+    RemoteAccessSession.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     RemoteAccessSession.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     RemoteAccessSession.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
     RemoteAccessSession.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    RemoteAccessSession.add_member(:device_udid, Shapes::ShapeRef.new(shape: String, location_name: "deviceUdid"))
     RemoteAccessSession.struct_class = Types::RemoteAccessSession
 
     RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)
@@ -781,6 +808,9 @@ module Aws::DeviceFarm
     Run.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     Run.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
     Run.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "networkProfile"))
+    Run.add_member(:parsing_result_url, Shapes::ShapeRef.new(shape: String, location_name: "parsingResultUrl"))
+    Run.add_member(:result_code, Shapes::ShapeRef.new(shape: ExecutionResultCode, location_name: "resultCode"))
+    Run.add_member(:customer_artifact_paths, Shapes::ShapeRef.new(shape: CustomerArtifactPaths, location_name: "customerArtifactPaths"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -796,6 +826,7 @@ module Aws::DeviceFarm
     ScheduleRunConfiguration.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "networkProfileArn"))
     ScheduleRunConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "locale"))
     ScheduleRunConfiguration.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    ScheduleRunConfiguration.add_member(:customer_artifact_paths, Shapes::ShapeRef.new(shape: CustomerArtifactPaths, location_name: "customerArtifactPaths"))
     ScheduleRunConfiguration.add_member(:radios, Shapes::ShapeRef.new(shape: Radios, location_name: "radios"))
     ScheduleRunConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "auxiliaryApps"))
     ScheduleRunConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))

@@ -409,9 +409,7 @@ module Aws::CloudWatch
           params = Aws::Util.copy_hash(options)
           params[:alarm_names] ||= []
           batch.each do |item|
-            params[:alarm_names] << {
-              name: item.name
-            }
+            params[:alarm_names] << item.name
           end
           batch[0].client.delete_alarms(params)
         end
@@ -425,9 +423,7 @@ module Aws::CloudWatch
           params = Aws::Util.copy_hash(options)
           params[:alarm_names] ||= []
           batch.each do |item|
-            params[:alarm_names] << {
-              name: item.name
-            }
+            params[:alarm_names] << item.name
           end
           batch[0].client.disable_alarm_actions(params)
         end
@@ -441,9 +437,7 @@ module Aws::CloudWatch
           params = Aws::Util.copy_hash(options)
           params[:alarm_names] ||= []
           batch.each do |item|
-            params[:alarm_names] << {
-              name: item.name
-            }
+            params[:alarm_names] << item.name
           end
           batch[0].client.enable_alarm_actions(params)
         end

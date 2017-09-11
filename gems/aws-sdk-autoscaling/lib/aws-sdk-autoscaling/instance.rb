@@ -324,9 +324,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.attach_instances(params)
         end
@@ -349,9 +347,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.detach_instances(params)
         end
@@ -376,9 +372,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.enter_standby(params)
         end
@@ -393,9 +387,7 @@ module Aws::AutoScaling
           params[:auto_scaling_group_name] = batch[0].group_name
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.exit_standby(params)
         end

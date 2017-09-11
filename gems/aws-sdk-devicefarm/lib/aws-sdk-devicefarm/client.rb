@@ -200,7 +200,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [ # required
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -214,7 +214,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -385,8 +385,23 @@ module Aws::DeviceFarm
     #   The Amazon Resource Name (ARN) of the device for which you want to
     #   create a remote access session.
     #
+    # @option params [String] :ssh_public_key
+    #   The public key of the `ssh` key pair you want to use for connecting to
+    #   remote devices in your remote debugging session. This is only required
+    #   if `remoteDebugEnabled` is set to `true`.
+    #
+    # @option params [Boolean] :remote_debug_enabled
+    #   Set to `true` if you want to access devices remotely for debugging in
+    #   your remote access session.
+    #
     # @option params [String] :name
     #   The name of the remote access session that you wish to create.
+    #
+    # @option params [String] :client_id
+    #   Unique identifier for the client. If you want access to multiple
+    #   devices on the same client, you should pass the same `clientId` value
+    #   in each call to `CreateRemoteAccessSession`. This is required only if
+    #   `remoteDebugEnabled` is set to true `true`.
     #
     # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
     #   The configuration information for the remote access session request.
@@ -420,7 +435,10 @@ module Aws::DeviceFarm
     #   resp = client.create_remote_access_session({
     #     project_arn: "AmazonResourceName", # required
     #     device_arn: "AmazonResourceName", # required
+    #     ssh_public_key: "SshPublicKey",
+    #     remote_debug_enabled: false,
     #     name: "Name",
+    #     client_id: "ClientId",
     #     configuration: {
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
@@ -454,13 +472,18 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.carrier #=> String
     #   resp.remote_access_session.device.radio #=> String
     #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+    #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.host_address #=> String
+    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
+    #   resp.remote_access_session.device_udid #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -914,6 +937,7 @@ module Aws::DeviceFarm
     #   resp.device.carrier #=> String
     #   resp.device.radio #=> String
     #   resp.device.remote_access_enabled #=> Boolean
+    #   resp.device.remote_debug_enabled #=> Boolean
     #   resp.device.fleet_type #=> String
     #   resp.device.fleet_name #=> String
     #
@@ -963,7 +987,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -1083,12 +1107,13 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].device.carrier #=> String
     #   resp.compatible_devices[0].device.radio #=> String
     #   resp.compatible_devices[0].device.remote_access_enabled #=> Boolean
+    #   resp.compatible_devices[0].device.remote_debug_enabled #=> Boolean
     #   resp.compatible_devices[0].device.fleet_type #=> String
     #   resp.compatible_devices[0].device.fleet_name #=> String
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #   resp.incompatible_devices #=> Array
     #   resp.incompatible_devices[0].device.arn #=> String
     #   resp.incompatible_devices[0].device.name #=> String
@@ -1108,12 +1133,13 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].device.carrier #=> String
     #   resp.incompatible_devices[0].device.radio #=> String
     #   resp.incompatible_devices[0].device.remote_access_enabled #=> Boolean
+    #   resp.incompatible_devices[0].device.remote_debug_enabled #=> Boolean
     #   resp.incompatible_devices[0].device.fleet_type #=> String
     #   resp.incompatible_devices[0].device.fleet_name #=> String
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
     #
@@ -1190,6 +1216,7 @@ module Aws::DeviceFarm
     #   resp.job.device.carrier #=> String
     #   resp.job.device.radio #=> String
     #   resp.job.device.remote_access_enabled #=> Boolean
+    #   resp.job.device.remote_debug_enabled #=> Boolean
     #   resp.job.device.fleet_type #=> String
     #   resp.job.device.fleet_name #=> String
     #   resp.job.device_minutes.total #=> Float
@@ -1451,13 +1478,18 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.carrier #=> String
     #   resp.remote_access_session.device.radio #=> String
     #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+    #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.host_address #=> String
+    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
+    #   resp.remote_access_session.device_udid #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -1559,6 +1591,14 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_jitter_ms #=> Integer
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
+    #   resp.run.parsing_result_url #=> String
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.customer_artifact_paths.ios_paths #=> Array
+    #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.android_paths #=> Array
+    #   resp.run.customer_artifact_paths.android_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.device_host_paths #=> Array
+    #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -1851,7 +1891,7 @@ module Aws::DeviceFarm
     #   resp.artifacts #=> Array
     #   resp.artifacts[0].arn #=> String
     #   resp.artifacts[0].name #=> String
-    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO"
+    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG"
     #   resp.artifacts[0].extension #=> String
     #   resp.artifacts[0].url #=> String
     #   resp.next_token #=> String
@@ -1947,7 +1987,7 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].description #=> String
     #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pools[0].rules #=> Array
-    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.next_token #=> String
@@ -2017,6 +2057,7 @@ module Aws::DeviceFarm
     #   resp.devices[0].carrier #=> String
     #   resp.devices[0].radio #=> String
     #   resp.devices[0].remote_access_enabled #=> Boolean
+    #   resp.devices[0].remote_debug_enabled #=> Boolean
     #   resp.devices[0].fleet_type #=> String
     #   resp.devices[0].fleet_name #=> String
     #   resp.next_token #=> String
@@ -2098,6 +2139,7 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device.carrier #=> String
     #   resp.jobs[0].device.radio #=> String
     #   resp.jobs[0].device.remote_access_enabled #=> Boolean
+    #   resp.jobs[0].device.remote_debug_enabled #=> Boolean
     #   resp.jobs[0].device.fleet_type #=> String
     #   resp.jobs[0].device.fleet_name #=> String
     #   resp.jobs[0].device_minutes.total #=> Float
@@ -2609,13 +2651,18 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.carrier #=> String
     #   resp.remote_access_sessions[0].device.radio #=> String
     #   resp.remote_access_sessions[0].device.remote_access_enabled #=> Boolean
+    #   resp.remote_access_sessions[0].device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_sessions[0].device.fleet_type #=> String
     #   resp.remote_access_sessions[0].device.fleet_name #=> String
+    #   resp.remote_access_sessions[0].remote_debug_enabled #=> Boolean
+    #   resp.remote_access_sessions[0].host_address #=> String
+    #   resp.remote_access_sessions[0].client_id #=> String
     #   resp.remote_access_sessions[0].billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_sessions[0].device_minutes.total #=> Float
     #   resp.remote_access_sessions[0].device_minutes.metered #=> Float
     #   resp.remote_access_sessions[0].device_minutes.unmetered #=> Float
     #   resp.remote_access_sessions[0].endpoint #=> String
+    #   resp.remote_access_sessions[0].device_udid #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -2730,6 +2777,14 @@ module Aws::DeviceFarm
     #   resp.runs[0].network_profile.downlink_jitter_ms #=> Integer
     #   resp.runs[0].network_profile.uplink_loss_percent #=> Integer
     #   resp.runs[0].network_profile.downlink_loss_percent #=> Integer
+    #   resp.runs[0].parsing_result_url #=> String
+    #   resp.runs[0].result_code #=> String, one of "PARSING_FAILED"
+    #   resp.runs[0].customer_artifact_paths.ios_paths #=> Array
+    #   resp.runs[0].customer_artifact_paths.ios_paths[0] #=> String
+    #   resp.runs[0].customer_artifact_paths.android_paths #=> Array
+    #   resp.runs[0].customer_artifact_paths.android_paths[0] #=> String
+    #   resp.runs[0].customer_artifact_paths.device_host_paths #=> Array
+    #   resp.runs[0].customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -3009,6 +3064,7 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.carrier #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.radio #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.remote_access_enabled #=> Boolean
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.remote_debug_enabled #=> Boolean
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_type #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_name #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -3333,6 +3389,11 @@ module Aws::DeviceFarm
     #         latitude: 1.0, # required
     #         longitude: 1.0, # required
     #       },
+    #       customer_artifact_paths: {
+    #         ios_paths: ["String"],
+    #         android_paths: ["String"],
+    #         device_host_paths: ["String"],
+    #       },
     #       radios: {
     #         wifi: false,
     #         bluetooth: false,
@@ -3386,6 +3447,14 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_jitter_ms #=> Integer
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
+    #   resp.run.parsing_result_url #=> String
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.customer_artifact_paths.ios_paths #=> Array
+    #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.android_paths #=> Array
+    #   resp.run.customer_artifact_paths.android_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.device_host_paths #=> Array
+    #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -3440,13 +3509,18 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.carrier #=> String
     #   resp.remote_access_session.device.radio #=> String
     #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+    #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.host_address #=> String
+    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
+    #   resp.remote_access_session.device_udid #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -3531,6 +3605,14 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_jitter_ms #=> Integer
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
+    #   resp.run.parsing_result_url #=> String
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.customer_artifact_paths.ios_paths #=> Array
+    #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.android_paths #=> Array
+    #   resp.run.customer_artifact_paths.android_paths[0] #=> String
+    #   resp.run.customer_artifact_paths.device_host_paths #=> Array
+    #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -3596,7 +3678,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -3610,7 +3692,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -3793,7 +3875,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

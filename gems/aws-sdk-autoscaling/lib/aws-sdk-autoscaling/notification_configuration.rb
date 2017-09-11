@@ -178,9 +178,7 @@ module Aws::AutoScaling
           params[:topic_arn] = batch[0].topic_arn
           params[:notification_types] ||= []
           batch.each do |item|
-            params[:notification_types] << {
-              notification_type: item.notification_type
-            }
+            params[:notification_types] << item.notification_type
           end
           batch[0].client.put_notification_configuration(params)
         end

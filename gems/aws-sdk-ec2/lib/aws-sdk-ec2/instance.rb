@@ -1399,9 +1399,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:resources] ||= []
           batch.each do |item|
-            params[:resources] << {
-              id: item.id
-            }
+            params[:resources] << item.id
           end
           batch[0].client.create_tags(params)
         end
@@ -1425,9 +1423,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.monitor_instances(params)
         end
@@ -1451,9 +1447,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.reboot_instances(params)
         end
@@ -1480,9 +1474,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.start_instances(params)
         end
@@ -1514,9 +1506,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.stop_instances(params)
         end
@@ -1540,9 +1530,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.terminate_instances(params)
         end
@@ -1566,9 +1554,7 @@ module Aws::EC2
           params = Aws::Util.copy_hash(options)
           params[:instance_ids] ||= []
           batch.each do |item|
-            params[:instance_ids] << {
-              id: item.id
-            }
+            params[:instance_ids] << item.id
           end
           batch[0].client.unmonitor_instances(params)
         end

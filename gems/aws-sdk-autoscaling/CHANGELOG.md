@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2017-09-11)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-autoscaling` gemspec metadata.
 
 1.0.0 (2017-08-29)

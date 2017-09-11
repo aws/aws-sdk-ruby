@@ -203,9 +203,7 @@ module Aws::EC2
           params[:resources] ||= []
           params[:tags] ||= []
           batch.each do |item|
-            params[:resources] << {
-              resource_id: item.resource_id
-            }
+            params[:resources] << item.resource_id
             params[:tags] << {
               key: item.key,
               value: item.value
