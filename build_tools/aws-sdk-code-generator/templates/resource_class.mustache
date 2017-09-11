@@ -46,7 +46,11 @@ module {{module_name}}
 
     {{> documentation}}
     def {{name}}
-      data.{{name}}
+      if data.is_a? Hash
+        data[:{{name}}]
+      else
+        data.{{name}}
+      end
     end
     {{/data_attributes}}
 
