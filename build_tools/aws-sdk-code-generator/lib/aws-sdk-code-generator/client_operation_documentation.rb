@@ -133,7 +133,9 @@ module AwsSdkCodeGenerator
           parts = []
           parts << "#\n"
           parts << "# @example Example: #{example['title']}\n#\n"
-          parts << "#   # #{example['description']}\n#\n"
+          if example['description'] && example['description'].length > 0
+            parts << "#{wrap_string(example['description'])}\n#\n"
+          end
           parts += input.lines.map { |line| "#   " + line }
           if example['output']
             output = SharedExample.new(
@@ -189,6 +191,12 @@ module AwsSdkCodeGenerator
     def see_also_tag(operation, api)
       uid = api['metadata']['uid']
       "# " + Crosslink.tag_string(uid, operation['name']) unless !Crosslink.taggable?(uid)
+    end
+
+    private
+
+    def wrap_string(content)
+      content.gsub(/(.{1,120})(\s+|\Z)/, "#   # \\1\n").chomp
     end
   end
 end
