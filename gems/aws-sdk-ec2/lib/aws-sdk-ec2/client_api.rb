@@ -2840,7 +2840,7 @@ module Aws::EC2
     HostOffering.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
     HostOffering.struct_class = Types::HostOffering
 
-    HostOfferingSet.member = Shapes::ShapeRef.new(shape: HostOffering)
+    HostOfferingSet.member = Shapes::ShapeRef.new(shape: HostOffering, location_name: "item")
 
     HostProperties.add_member(:cores, Shapes::ShapeRef.new(shape: Integer, location_name: "cores"))
     HostProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
