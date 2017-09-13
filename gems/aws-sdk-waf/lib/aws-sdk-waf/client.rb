@@ -1883,7 +1883,9 @@ module Aws::WAF
     #
     # @example Example: To get a sampled requests
     #
-    #   # The following example returns detailed information about 100 requests --a sample-- that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource received between the time period 2016-09-27T15:50Z to 2016-09-27T15:50Z.
+    #   # The following example returns detailed information about 100 requests --a sample-- that AWS WAF randomly selects from
+    #   # among the first 5,000 requests that your AWS resource received between the time period 2016-09-27T15:50Z to
+    #   # 2016-09-27T15:50Z.
     #
     #   resp = client.get_sampled_requests({
     #     max_items: 100, 
@@ -1976,7 +1978,8 @@ module Aws::WAF
     #
     # @example Example: To get a size constraint set
     #
-    #   # The following example returns the details of a size constraint match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example returns the details of a size constraint match set with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.get_size_constraint_set({
     #     size_constraint_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
@@ -2041,7 +2044,8 @@ module Aws::WAF
     #
     # @example Example: To get a SQL injection match set
     #
-    #   # The following example returns the details of a SQL injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example returns the details of a SQL injection match set with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.get_sql_injection_match_set({
     #     sql_injection_match_set_id: "example1ds3t-46da-4fdb-b8d5-abc321j569j5", 
@@ -2758,7 +2762,8 @@ module Aws::WAF
     #
     # @example Example: To update a byte match set
     #
-    #   # The following example deletes a ByteMatchTuple object (filters) in an byte match set with the ID exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example deletes a ByteMatchTuple object (filters) in an byte match set with the ID
+    #   # exampleIDs3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.update_byte_match_set({
     #     byte_match_set_id: "exampleIDs3t-46da-4fdb-b8d5-abc321j569j5", 
@@ -2899,7 +2904,8 @@ module Aws::WAF
     #
     # @example Example: To update an IP set
     #
-    #   # The following example deletes an IPSetDescriptor object in an IP match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example deletes an IPSetDescriptor object in an IP match set with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.update_ip_set({
     #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
@@ -3242,7 +3248,8 @@ module Aws::WAF
     #
     # @example Example: To update a size constraint set
     #
-    #   # The following example deletes a SizeConstraint object (filters) in a size constraint set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example deletes a SizeConstraint object (filters) in a size constraint set with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.update_size_constraint_set({
     #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
@@ -3371,7 +3378,8 @@ module Aws::WAF
     #
     # @example Example: To update a SQL injection match set
     #
-    #   # The following example deletes a SqlInjectionMatchTuple object (filters) in a SQL injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example deletes a SqlInjectionMatchTuple object (filters) in a SQL injection match set with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.update_sql_injection_match_set({
     #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
@@ -3644,7 +3652,8 @@ module Aws::WAF
     #
     # @example Example: To update an XSS match set
     #
-    #   # The following example deletes an XssMatchTuple object (filters) in an XssMatchSet with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+    #   # The following example deletes an XssMatchTuple object (filters) in an XssMatchSet with the ID
+    #   # example1ds3t-46da-4fdb-b8d5-abc321j569j5.
     #
     #   resp = client.update_xss_match_set({
     #     change_token: "abcd12f2-46da-4fdb-b8d5-fbd4c466928f", 
@@ -3712,7 +3721,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

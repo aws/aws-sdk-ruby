@@ -271,7 +271,8 @@ module Aws::ElastiCache
     #
     # @example Example: AuthorizeCacheCacheSecurityGroupIngress
     #
-    #   # Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2. Amazon EC2 security groups are used as the authorization mechanism.
+    #   # Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2. Amazon
+    #   # EC2 security groups are used as the authorization mechanism.
     #
     #   resp = client.authorize_cache_security_group_ingress({
     #     cache_security_group_name: "my-sec-grp", 
@@ -1639,7 +1640,8 @@ module Aws::ElastiCache
     #
     # @example Example: CreateReplicationGroup
     #
-    #   # Creates a Redis (cluster mode enabled) replication group with two shards. One shard has one read replica node and the other shard has two read replicas.
+    #   # Creates a Redis (cluster mode enabled) replication group with two shards. One shard has one read replica node and the
+    #   # other shard has two read replicas.
     #
     #   resp = client.create_replication_group({
     #     auto_minor_version_upgrade: true, 
@@ -2832,7 +2834,8 @@ module Aws::ElastiCache
     #
     # @example Example: DescribeCacheParameterGroups
     #
-    #   # Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.
+    #   # Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains
+    #   # only the descriptions for that group.
     #
     #   resp = client.describe_cache_parameter_groups({
     #     cache_parameter_group_name: "custom-mem1-4", 
@@ -3383,7 +3386,8 @@ module Aws::ElastiCache
     #
     # @example Example: DescribeCacheSecurityGroups
     #
-    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group.
+    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only
+    #   # the description of that group.
     #
     #   resp = client.describe_cache_security_groups({
     #     cache_security_group_name: "my-sec-group", 
@@ -4638,7 +4642,8 @@ module Aws::ElastiCache
     #
     # @example Example: DescribeReservedCacheNodes
     #
-    #   # Returns information about reserved cache nodes for this account, or about a specified reserved cache node. If the account has no reserved cache nodes, the operation returns an empty list, as shown here.
+    #   # Returns information about reserved cache nodes for this account, or about a specified reserved cache node. If the
+    #   # account has no reserved cache nodes, the operation returns an empty list, as shown here.
     #
     #   resp = client.describe_reserved_cache_nodes({
     #     max_records: 25, 
@@ -5418,7 +5423,8 @@ module Aws::ElastiCache
     #
     # @example Example: ListTagsForResource
     #
-    #   # Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.
+    #   # Lists all cost allocation tags currently on the named resource. A cost allocation tag is a key-value pair where the key
+    #   # is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.
     #
     #   resp = client.list_tags_for_resource({
     #     resource_name: "arn:aws:elasticache:us-west-2:<my-account-id>:cluster:mycluster", 
@@ -6200,8 +6206,6 @@ module Aws::ElastiCache
     #
     # @example Example: ModifyReplicationGroup
     #
-    #   # 
-    #
     #   resp = client.modify_replication_group({
     #     apply_immediately: true, 
     #     replication_group_description: "Modified replication group", 
@@ -6709,7 +6713,8 @@ module Aws::ElastiCache
     #
     # @example Example: DescribeCacheSecurityGroups
     #
-    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group.
+    #   # Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only
+    #   # the description of that group.
     #
     #   resp = client.revoke_cache_security_group_ingress({
     #     cache_security_group_name: "my-sec-grp", 
@@ -6872,7 +6877,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

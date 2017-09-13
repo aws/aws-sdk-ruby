@@ -241,7 +241,8 @@ module Aws::ECR
     #
     # @example Example: To delete multiple images
     #
-    #   # This example deletes images with the tags precise and trusty in a repository called ubuntu in the default registry for an account.
+    #   # This example deletes images with the tags precise and trusty in a repository called ubuntu in the default registry for
+    #   # an account.
     #
     #   resp = client.batch_delete_image({
     #     image_ids: [
@@ -329,7 +330,8 @@ module Aws::ECR
     #
     # @example Example: To obtain multiple images in a single request
     #
-    #   # This example obtains information for an image with a specified image digest ID from the repository named ubuntu in the current account.
+    #   # This example obtains information for an image with a specified image digest ID from the repository named ubuntu in the
+    #   # current account.
     #
     #   resp = client.batch_get_image({
     #     image_ids: [
@@ -467,7 +469,8 @@ module Aws::ECR
     #
     # @example Example: To create a new repository
     #
-    #   # This example creates a repository called nginx-web-app inside the project-a namespace in the default registry for an account.
+    #   # This example creates a repository called nginx-web-app inside the project-a namespace in the default registry for an
+    #   # account.
     #
     #   resp = client.create_repository({
     #     repository_name: "project-a/nginx-web-app", 
@@ -526,7 +529,8 @@ module Aws::ECR
     #
     # @example Example: To force delete a repository
     #
-    #   # This example force deletes a repository named ubuntu in the default registry for an account. The force parameter is required if the repository contains images.
+    #   # This example force deletes a repository named ubuntu in the default registry for an account. The force parameter is
+    #   # required if the repository contains images.
     #
     #   resp = client.delete_repository({
     #     force: true, 
@@ -753,7 +757,8 @@ module Aws::ECR
     #
     # @example Example: To describe all repositories in the current account
     #
-    #   # The following example obtains a list and description of all repositories in the default registry to which the current user has access.
+    #   # The following example obtains a list and description of all repositories in the default registry to which the current
+    #   # user has access.
     #
     #   resp = client.describe_repositories({
     #   })
@@ -1283,7 +1288,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

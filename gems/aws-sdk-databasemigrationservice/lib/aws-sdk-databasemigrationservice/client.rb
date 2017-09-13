@@ -173,7 +173,9 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Add tags to resource
     #
-    #   # Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with AWS DMS resources, or used in a Condition statement in an IAM policy for AWS DMS.
+    #   # Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task.
+    #   # These tags can also be used with cost allocation reporting to track cost associated with AWS DMS resources, or used in a
+    #   # Condition statement in an IAM policy for AWS DMS.
     #
     #   resp = client.add_tags_to_resource({
     #     resource_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E", # Required. Use the ARN of the resource you want to tag.
@@ -1083,8 +1085,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Delete Endpoint
     #
-    #   # Deletes the specified endpoint. All tasks associated with the endpoint must be deleted before you can delete the endpoint.
-    
+    #   # Deletes the specified endpoint. All tasks associated with the endpoint must be deleted before you can delete the
+    #   # endpoint.
     #
     #   resp = client.delete_endpoint({
     #     endpoint_arn: "arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM", 
@@ -1212,9 +1214,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Delete Replication Instance
     #
-    #   # Deletes the specified replication instance. You must delete any migration tasks that are associated with the replication instance before you can delete it.
-    
-    
+    #   # Deletes the specified replication instance. You must delete any migration tasks that are associated with the replication
+    #   # instance before you can delete it.
     #
     #   resp = client.delete_replication_instance({
     #     replication_instance_arn: "arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ", 
@@ -1448,7 +1449,9 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Describe acount attributes
     #
-    #   # Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This operation does not take any parameters.
+    #   # Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such
+    #   # as the number of replication instances allowed. The description for a quota includes the quota name, current usage
+    #   # toward that quota, and the quota's maximum value. This operation does not take any parameters.
     #
     #   resp = client.describe_account_attributes({
     #   })
@@ -1609,7 +1612,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Describe connections
     #
-    #   # Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.
+    #   # Describes the status of the connections that have been made between the replication instance and an endpoint.
+    #   # Connections are created when you test an endpoint.
     #
     #   resp = client.describe_connections({
     #     filters: [
@@ -2603,7 +2607,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Describe table statistics
     #
-    #   # Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+    #   # Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows
+    #   # deleted.
     #
     #   resp = client.describe_table_statistics({
     #     marker: "", 
@@ -3113,7 +3118,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Modify replication instance
     #
-    #   # Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window.
+    #   # Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these
+    #   # parameters and the new values in the request. Some settings are applied during the maintenance window.
     #
     #   resp = client.modify_replication_instance({
     #     allocated_storage: 123, 
@@ -3419,7 +3425,8 @@ module Aws::DatabaseMigrationService
     #
     # @example Example: Refresh schema
     #
-    #   # Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the describe-refresh-schemas-status operation.
+    #   # Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can
+    #   # check the status of this operation by calling the describe-refresh-schemas-status operation.
     #
     #   resp = client.refresh_schemas({
     #     endpoint_arn: "", 
@@ -3763,7 +3770,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

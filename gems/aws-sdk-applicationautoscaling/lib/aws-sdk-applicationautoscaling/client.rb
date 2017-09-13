@@ -234,7 +234,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To delete a scaling policy
     #
-    #   # This example deletes a scaling policy for the Amazon ECS service called web-app, which is running in the default cluster.
+    #   # This example deletes a scaling policy for the Amazon ECS service called web-app, which is running in the default
+    #   # cluster.
     #
     #   resp = client.delete_scaling_policy({
     #     policy_name: "web-app-cpu-lt-25", 
@@ -341,7 +342,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To deregister a scalable target
     #
-    #   # This example deregisters a scalable target for an Amazon ECS service called web-app that is running in the default cluster.
+    #   # This example deregisters a scalable target for an Amazon ECS service called web-app that is running in the default
+    #   # cluster.
     #
     #   resp = client.deregister_scalable_target({
     #     resource_id: "service/default/web-app", 
@@ -614,7 +616,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To describe scaling activities for a scalable target
     #
-    #   # This example describes the scaling activities for an Amazon ECS service called web-app that is running in the default cluster.
+    #   # This example describes the scaling activities for an Amazon ECS service called web-app that is running in the default
+    #   # cluster.
     #
     #   resp = client.describe_scaling_activities({
     #     resource_id: "service/default/web-app", 
@@ -977,7 +980,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To apply a scaling policy to an Amazon ECS service
     #
-    #   # This example applies a scaling policy to an Amazon ECS service called web-app in the default cluster. The policy increases the desired count of the service by 200%, with a cool down period of 60 seconds.
+    #   # This example applies a scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
+    #   # increases the desired count of the service by 200%, with a cool down period of 60 seconds.
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "web-app-cpu-gt-75", 
@@ -1004,8 +1008,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To apply a scaling policy to an Amazon EC2 Spot fleet
     #
-    #   # This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the spot fleet by 200%, with a cool down period of 180 seconds.",
-       
+    #   # This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the spot
+    #   # fleet by 200%, with a cool down period of 180 seconds.",
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "fleet-cpu-gt-75", 
@@ -1186,7 +1190,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To register an ECS service as a scalable target
     #
-    #   # This example registers a scalable target from an Amazon ECS service called web-app that is running on the default cluster, with a minimum desired count of 1 task and a maximum desired count of 10 tasks.
+    #   # This example registers a scalable target from an Amazon ECS service called web-app that is running on the default
+    #   # cluster, with a minimum desired count of 1 task and a maximum desired count of 10 tasks.
     #
     #   resp = client.register_scalable_target({
     #     max_capacity: 10, 
@@ -1199,7 +1204,8 @@ module Aws::ApplicationAutoScaling
     #
     # @example Example: To register an EC2 Spot fleet as a scalable target
     #
-    #   # This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum target capacity of 1 and a maximum of 10.
+    #   # This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum target capacity of 1 and a maximum
+    #   # of 10.
     #
     #   resp = client.register_scalable_target({
     #     max_capacity: 10, 
@@ -1247,7 +1253,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

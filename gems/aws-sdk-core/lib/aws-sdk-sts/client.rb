@@ -375,8 +375,6 @@ module Aws::STS
     #
     # @example Example: To assume a role
     #
-    #   # 
-    #
     #   resp = client.assume_role({
     #     duration_seconds: 3600, 
     #     external_id: "123ABC", 
@@ -835,8 +833,6 @@ module Aws::STS
     #
     # @example Example: To assume a role as an OpenID Connect-federated user
     #
-    #   # 
-    #
     #   resp = client.assume_role_with_web_identity({
     #     duration_seconds: 3600, 
     #     provider_id: "www.amazon.com", 
@@ -947,8 +943,6 @@ module Aws::STS
     #
     # @example Example: To decode information about an authorization status of a request
     #
-    #   # 
-    #
     #   resp = client.decode_authorization_message({
     #     encoded_message: "<encoded-message>", 
     #   })
@@ -989,7 +983,8 @@ module Aws::STS
     #
     # @example Example: To get details about a calling IAM user
     #
-    #   # This example shows a request and response made with the credentials for a user named Alice in the AWS account 123456789012.
+    #   # This example shows a request and response made with the credentials for a user named Alice in the AWS account
+    #   # 123456789012.
     #
     #   resp = client.get_caller_identity({
     #   })
@@ -1003,7 +998,8 @@ module Aws::STS
     #
     # @example Example: To get details about a calling user federated with AssumeRole
     #
-    #   # This example shows a request and response made with temporary credentials created by AssumeRole. The name of the assumed role is my-role-name, and the RoleSessionName is set to my-role-session-name.
+    #   # This example shows a request and response made with temporary credentials created by AssumeRole. The name of the assumed
+    #   # role is my-role-name, and the RoleSessionName is set to my-role-session-name.
     #
     #   resp = client.get_caller_identity({
     #   })
@@ -1017,7 +1013,8 @@ module Aws::STS
     #
     # @example Example: To get details about a calling user federated with GetFederationToken
     #
-    #   # This example shows a request and response made with temporary credentials created by using GetFederationToken. The Name parameter is set to my-federated-user-name.
+    #   # This example shows a request and response made with temporary credentials created by using GetFederationToken. The Name
+    #   # parameter is set to my-federated-user-name.
     #
     #   resp = client.get_caller_identity({
     #   })
@@ -1209,8 +1206,6 @@ module Aws::STS
     #
     # @example Example: To get temporary credentials for a role by using GetFederationToken
     #
-    #   # 
-    #
     #   resp = client.get_federation_token({
     #     duration_seconds: 3600, 
     #     name: "Bob", 
@@ -1359,8 +1354,6 @@ module Aws::STS
     #
     # @example Example: To get temporary credentials for an IAM user or an AWS account
     #
-    #   # 
-    #
     #   resp = client.get_session_token({
     #     duration_seconds: 3600, 
     #     serial_number: "YourMFASerialNumber", 
@@ -1414,7 +1407,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.4.0'
+      context[:gem_version] = '3.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

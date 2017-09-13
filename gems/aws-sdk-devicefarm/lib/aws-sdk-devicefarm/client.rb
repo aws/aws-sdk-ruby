@@ -3649,7 +3649,8 @@ module Aws::DeviceFarm
     #
     # @example Example: To update a device pool
     #
-    #   # The following example updates the specified device pool with a new name and description. It also enables remote access of devices in the device pool.
+    #   # The following example updates the specified device pool with a new name and description. It also enables remote access
+    #   # of devices in the device pool.
     #
     #   resp = client.update_device_pool({
     #     name: "NewName", 
@@ -3875,7 +3876,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

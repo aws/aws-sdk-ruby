@@ -83,7 +83,7 @@ module Aws::AutoScaling
     end
 
     # The amount of time, in seconds, after a scaling activity completes
-    # before any further trigger-related scaling activities can start.
+    # before any further dynamic scaling activities can start.
     # @return [Integer]
     def cooldown
       data.cooldown

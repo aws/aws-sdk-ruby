@@ -124,6 +124,8 @@ module Aws::AutoScaling
     LifecycleActionToken = Shapes::StringShape.new(name: 'LifecycleActionToken')
     LifecycleHook = Shapes::StructureShape.new(name: 'LifecycleHook')
     LifecycleHookNames = Shapes::ListShape.new(name: 'LifecycleHookNames')
+    LifecycleHookSpecification = Shapes::StructureShape.new(name: 'LifecycleHookSpecification')
+    LifecycleHookSpecifications = Shapes::ListShape.new(name: 'LifecycleHookSpecifications')
     LifecycleHooks = Shapes::ListShape.new(name: 'LifecycleHooks')
     LifecycleState = Shapes::StringShape.new(name: 'LifecycleState')
     LifecycleTransition = Shapes::StringShape.new(name: 'LifecycleTransition')
@@ -370,6 +372,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "VPCZoneIdentifier"))
     CreateAutoScalingGroupType.add_member(:termination_policies, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicies"))
     CreateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
+    CreateAutoScalingGroupType.add_member(:lifecycle_hook_specification_list, Shapes::ShapeRef.new(shape: LifecycleHookSpecifications, location_name: "LifecycleHookSpecificationList"))
     CreateAutoScalingGroupType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
@@ -650,6 +653,17 @@ module Aws::AutoScaling
     LifecycleHook.struct_class = Types::LifecycleHook
 
     LifecycleHookNames.member = Shapes::ShapeRef.new(shape: AsciiStringMaxLen255)
+
+    LifecycleHookSpecification.add_member(:lifecycle_hook_name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "LifecycleHookName"))
+    LifecycleHookSpecification.add_member(:lifecycle_transition, Shapes::ShapeRef.new(shape: LifecycleTransition, location_name: "LifecycleTransition"))
+    LifecycleHookSpecification.add_member(:notification_metadata, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "NotificationMetadata"))
+    LifecycleHookSpecification.add_member(:heartbeat_timeout, Shapes::ShapeRef.new(shape: HeartbeatTimeout, location_name: "HeartbeatTimeout"))
+    LifecycleHookSpecification.add_member(:default_result, Shapes::ShapeRef.new(shape: LifecycleActionResult, location_name: "DefaultResult"))
+    LifecycleHookSpecification.add_member(:notification_target_arn, Shapes::ShapeRef.new(shape: NotificationTargetResourceName, location_name: "NotificationTargetARN"))
+    LifecycleHookSpecification.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RoleARN"))
+    LifecycleHookSpecification.struct_class = Types::LifecycleHookSpecification
+
+    LifecycleHookSpecifications.member = Shapes::ShapeRef.new(shape: LifecycleHookSpecification)
 
     LifecycleHooks.member = Shapes::ShapeRef.new(shape: LifecycleHook)
 

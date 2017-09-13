@@ -166,7 +166,8 @@ module Aws::IAM
     #
     # @example Example: To add a client ID (audience) to an Open-ID Connect (OIDC) provider
     #
-    #   # The following add-client-id-to-open-id-connect-provider command adds the client ID my-application-ID to the OIDC provider named server.example.com:
+    #   # The following add-client-id-to-open-id-connect-provider command adds the client ID my-application-ID to the OIDC
+    #   # provider named server.example.com:
     #
     #   resp = client.add_client_id_to_open_id_connect_provider({
     #     client_id: "my-application-ID", 
@@ -836,7 +837,8 @@ module Aws::IAM
     #
     # @example Example: To create an instance profile
     #
-    #   # The following command creates an instance profile named Webserver that is ready to have a role attached and then be associated with an EC2 instance.
+    #   # The following command creates an instance profile named Webserver that is ready to have a role attached and then be
+    #   # associated with an EC2 instance.
     #
     #   resp = client.create_instance_profile({
     #     instance_profile_name: "Webserver", 
@@ -936,7 +938,8 @@ module Aws::IAM
     #
     # @example Example: To create an instance profile
     #
-    #   # The following command changes IAM user Bob's password and sets the flag that required Bob to change the password the next time he signs in.
+    #   # The following command changes IAM user Bob's password and sets the flag that required Bob to change the password the
+    #   # next time he signs in.
     #
     #   resp = client.create_login_profile({
     #     password: "h]6EszR}vJ*m", 
@@ -1062,7 +1065,8 @@ module Aws::IAM
     #
     # @example Example: To create an instance profile
     #
-    #   # The following example defines a new OIDC provider in IAM with a client ID of my-application-id and pointing at the server with a URL of https://server.example.com.
+    #   # The following example defines a new OIDC provider in IAM with a client ID of my-application-id and pointing at the
+    #   # server with a URL of https://server.example.com.
     #
     #   resp = client.create_open_id_connect_provider({
     #     client_id_list: [
@@ -1366,7 +1370,8 @@ module Aws::IAM
     #
     # @example Example: To create an IAM role
     #
-    #   # The following command creates a role named Test-Role and attaches a trust policy to it that is provided as a URL-encoded JSON string.
+    #   # The following command creates a role named Test-Role and attaches a trust policy to it that is provided as a URL-encoded
+    #   # JSON string.
     #
     #   resp = client.create_role({
     #     assume_role_policy_document: "<URL-encoded-JSON>", 
@@ -7869,7 +7874,8 @@ module Aws::IAM
     #
     # @example Example: To activate or deactivate an access key for an IAM user
     #
-    #   # The following command deactivates the specified access key (access key ID and secret access key) for the IAM user named Bob.
+    #   # The following command deactivates the specified access key (access key ID and secret access key) for the IAM user named
+    #   # Bob.
     #
     #   resp = client.update_access_key({
     #     access_key_id: "AKIAIOSFODNN7EXAMPLE", 
@@ -7976,7 +7982,8 @@ module Aws::IAM
     #
     # @example Example: To set or change the current account password policy
     #
-    #   # The following command sets the password policy to require a minimum length of eight characters and to require one or more numbers in the password:
+    #   # The following command sets the password policy to require a minimum length of eight characters and to require one or
+    #   # more numbers in the password:
     #
     #   resp = client.update_account_password_policy({
     #     minimum_password_length: 8, 
@@ -9103,7 +9110,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

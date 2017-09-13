@@ -229,7 +229,8 @@ module Aws::Polly
     #
     # @example Example: To describe available voices
     #
-    #   # Returns the list of voices that are available for use when requesting speech synthesis. Displayed languages are those within the specified language code. If no language code is specified, voices for all available languages are displayed.
+    #   # Returns the list of voices that are available for use when requesting speech synthesis. Displayed languages are those
+    #   # within the specified language code. If no language code is specified, voices for all available languages are displayed.
     #
     #   resp = client.describe_voices({
     #     language_code: "en-GB", 
@@ -601,7 +602,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

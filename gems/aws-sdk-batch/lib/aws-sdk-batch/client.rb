@@ -197,10 +197,11 @@ module Aws::Batch
     # In a managed compute environment, AWS Batch manages the compute
     # resources within the environment, based on the compute resources that
     # you specify. Instances launched into a managed compute environment use
-    # the latest Amazon ECS-optimized AMI. You can choose to use Amazon EC2
-    # On-Demand instances in your managed compute environment, or you can
-    # use Amazon EC2 Spot instances that only launch when the Spot bid price
-    # is below a specified percentage of the On-Demand price.
+    # a recent, approved version of the Amazon ECS-optimized AMI. You can
+    # choose to use Amazon EC2 On-Demand instances in your managed compute
+    # environment, or you can use Amazon EC2 Spot instances that only launch
+    # when the Spot bid price is below a specified percentage of the
+    # On-Demand price.
     #
     # In an unmanaged compute environment, you can manage your own compute
     # resources. This provides more compute resource configuration options,
@@ -240,6 +241,19 @@ module Aws::Batch
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
     #   Batch to make calls to other AWS services on your behalf.
     #
+    #   If your specified role has a path other than `/`, then you must either
+    #   specify the full role ARN (this is recommended) or prefix the role
+    #   name with the path.
+    #
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN may
+    #   contain the `service-role` path prefix. When you only specify the name
+    #   of the service role, AWS Batch assumes that your ARN does not use the
+    #   `service-role` path prefix. Because of this, we recommend that you
+    #   specify the full ARN of your service role when you create compute
+    #   environments.
+    #
+    #    </note>
+    #
     # @return [Types::CreateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -248,7 +262,8 @@ module Aws::Batch
     #
     # @example Example: To create a managed EC2 compute environment
     #
-    #   # This example creates a managed compute environment with specific C4 instance types that are launched on demand. The compute environment is called C4OnDemand.
+    #   # This example creates a managed compute environment with specific C4 instance types that are launched on demand. The
+    #   # compute environment is called C4OnDemand.
     #
     #   resp = client.create_compute_environment({
     #     type: "MANAGED", 
@@ -291,7 +306,8 @@ module Aws::Batch
     #
     # @example Example: To create a managed EC2 Spot compute environment
     #
-    #   # This example creates a managed compute environment with the M4 instance type that is launched when the Spot bid price is at or below 20% of the On-Demand price for the instance type. The compute environment is called M4Spot.
+    #   # This example creates a managed compute environment with the M4 instance type that is launched when the Spot bid price is
+    #   # at or below 20% of the On-Demand price for the instance type. The compute environment is called M4Spot.
     #
     #   resp = client.create_compute_environment({
     #     type: "MANAGED", 
@@ -389,11 +405,11 @@ module Aws::Batch
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
-    #   lower integer value for the `priority` parameter) are evaluated first
+    #   higher integer value for the `priority` parameter) are evaluated first
     #   when associated with same compute environment. Priority is determined
-    #   in ascending order, for example, a job queue with a priority value of
-    #   `1` is given scheduling preference over a job queue with a priority
-    #   value of `10`.
+    #   in descending order, for example, a job queue with a priority value of
+    #   `10` is given scheduling preference over a job queue with a priority
+    #   value of `1`.
     #
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
@@ -421,7 +437,7 @@ module Aws::Batch
     #       }, 
     #     ], 
     #     job_queue_name: "LowPriority", 
-    #     priority: 10, 
+    #     priority: 1, 
     #     state: "ENABLED", 
     #   })
     #
@@ -433,7 +449,8 @@ module Aws::Batch
     #
     # @example Example: To create a job queue with multiple compute environments
     #
-    #   # This example creates a job queue called HighPriority that uses the C4OnDemand compute environment with an order of 1 and the M4Spot compute environment with an order of 2.
+    #   # This example creates a job queue called HighPriority that uses the C4OnDemand compute environment with an order of 1 and
+    #   # the M4Spot compute environment with an order of 2.
     #
     #   resp = client.create_job_queue({
     #     compute_environment_order: [
@@ -447,7 +464,7 @@ module Aws::Batch
     #       }, 
     #     ], 
     #     job_queue_name: "HighPriority", 
-    #     priority: 1, 
+    #     priority: 10, 
     #     state: "ENABLED", 
     #   })
     #
@@ -527,8 +544,8 @@ module Aws::Batch
     end
 
     # Deletes the specified job queue. You must first disable submissions
-    # for a queue with the UpdateJobQueue operation and terminate any jobs
-    # that have not completed with the TerminateJob.
+    # for a queue with the UpdateJobQueue operation. All jobs in the queue
+    # are terminated when you delete a job queue.
     #
     # It is not necessary to disassociate compute environments from a queue
     # before submitting a `DeleteJobQueue` request.
@@ -1101,14 +1118,16 @@ module Aws::Batch
     end
 
     # Returns a list of task jobs for a specified job queue. You can filter
-    # the results by job status with the `jobStatus` parameter.
+    # the results by job status with the `jobStatus` parameter. If you do
+    # not specify a status, only `RUNNING` jobs are returned.
     #
     # @option params [required, String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
     #   which to list jobs.
     #
     # @option params [String] :job_status
-    #   The job status with which to filter jobs in the specified queue.
+    #   The job status with which to filter jobs in the specified queue. If
+    #   you do not specify a status, only `RUNNING` jobs are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `ListJobs` in paginated
@@ -1204,7 +1223,9 @@ module Aws::Batch
     # Registers an AWS Batch job definition.
     #
     # @option params [required, String] :job_definition_name
-    #   The name of the job definition to register.
+    #   The name of the job definition to register. Up to 128 letters
+    #   (uppercase and lowercase), numbers, hyphens, and underscores are
+    #   allowed.
     #
     # @option params [required, String] :type
     #   The type of job definition.
@@ -1326,9 +1347,9 @@ module Aws::Batch
     # during SubmitJob override parameters defined in the job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the job. A name must be 1 to 128 characters in length.
-    #
-    #   Pattern: ^\[a-zA-Z0-9\_\]+$
+    #   The name of the job. The first character must be alphanumeric, and up
+    #   to 128 letters (uppercase and lowercase), numbers, hyphens, and
+    #   underscores are allowed.
     #
     # @option params [required, String] :job_queue
     #   The job queue into which the job will be submitted. You can specify
@@ -1336,7 +1357,7 @@ module Aws::Batch
     #
     # @option params [Array<Types::JobDependency>] :depends_on
     #   A list of job IDs on which this job depends. A job can depend upon a
-    #   maximum of 100 jobs.
+    #   maximum of 20 jobs.
     #
     # @option params [required, String] :job_definition
     #   The job definition used by this job. This value can be either a
@@ -1492,9 +1513,21 @@ module Aws::Batch
     #   Required for a managed compute environment.
     #
     # @option params [String] :service_role
-    #   The name or full Amazon Resource Name (ARN) of the IAM role that
-    #   allows AWS Batch to make calls to ECS, Auto Scaling, and EC2 on your
-    #   behalf.
+    #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
+    #   Batch to make calls to other AWS services on your behalf.
+    #
+    #   If your specified role has a path other than `/`, then you must either
+    #   specify the full role ARN (this is recommended) or prefix the role
+    #   name with the path.
+    #
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN may
+    #   contain the `service-role` path prefix. When you only specify the name
+    #   of the service role, AWS Batch assumes that your ARN does not use the
+    #   `service-role` path prefix. Because of this, we recommend that you
+    #   specify the full ARN of your service role when you create compute
+    #   environments.
+    #
+    #    </note>
     #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1554,11 +1587,11 @@ module Aws::Batch
     #
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
-    #   lower integer value for the `priority` parameter) are evaluated first
+    #   higher integer value for the `priority` parameter) are evaluated first
     #   when associated with same compute environment. Priority is determined
-    #   in ascending order, for example, a job queue with a priority value of
-    #   `1` is given scheduling preference over a job queue with a priority
-    #   value of `10`.
+    #   in descending order, for example, a job queue with a priority value of
+    #   `10` is given scheduling preference over a job queue with a priority
+    #   value of `1`.
     #
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
@@ -1628,7 +1661,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

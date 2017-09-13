@@ -503,6 +503,9 @@ module Aws::CloudWatchEvents
     # To enable multiple AWS accounts to put events to your default event
     # bus, run `PutPermission` once for each of these accounts.
     #
+    # The permission policy on the default event bus cannot exceed 10KB in
+    # size.
+    #
     # @option params [required, String] :action
     #   The action that you are enabling the other account to perform.
     #   Currently, this must be `events:PutEvents`.
@@ -636,9 +639,15 @@ module Aws::CloudWatchEvents
     #
     # * AWS Step Functions state machines
     #
+    # * Pipelines in Amazon Code Pipeline
+    #
+    # * Amazon Inspector assessment templates
+    #
     # * Amazon SNS topics
     #
     # * Amazon SQS queues
+    #
+    # * The default event bus of another AWS account
     #
     # Note that creating rules with built-in targets is supported only in
     # the AWS Management Console.
@@ -659,11 +668,18 @@ module Aws::CloudWatchEvents
     # *Amazon CloudWatch Events User Guide*.
     #
     # If another AWS account is in the same region and has granted you
-    # permission (using `PutPermission`), you can set that account's event
-    # bus as a target of the rules in your account. To send the matched
-    # events to the other account, specify that account's event bus as the
-    # `Arn` when you run `PutTargets`. For more information about enabling
-    # cross-account events, see PutPermission.
+    # permission (using `PutPermission`), you can send events to that
+    # account by setting that account's event bus as a target of the rules
+    # in your account. To send the matched events to the other account,
+    # specify that account's event bus as the `Arn` when you run
+    # `PutTargets`. If your account sends events to another account, your
+    # account is charged for each sent event. Each event sent to antoher
+    # account is charged as a custom event. The account receiving the event
+    # is not charged. For more information on pricing, see [Amazon
+    # CloudWatch Pricing][2].
+    #
+    # For more information about enabling cross-account events, see
+    # PutPermission.
     #
     # **Input**, **InputPath** and **InputTransformer** are mutually
     # exclusive and optional parameters of a target. When a rule is
@@ -701,6 +717,7 @@ module Aws::CloudWatchEvents
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html
+    # [2]: https://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -896,7 +913,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

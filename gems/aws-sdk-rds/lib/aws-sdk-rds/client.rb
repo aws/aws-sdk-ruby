@@ -5825,7 +5825,8 @@ module Aws::RDS
     #
     # @example Example: To list DB log file names
     #
-    #   # This example lists matching log file names for the specified DB instance, file name pattern, last write date in POSIX time with milleseconds, and minimum file size.
+    #   # This example lists matching log file names for the specified DB instance, file name pattern, last write date in POSIX
+    #   # time with milleseconds, and minimum file size.
     #
     #   resp = client.describe_db_log_files({
     #     db_instance_identifier: "mymysqlinstance", 
@@ -6876,7 +6877,8 @@ module Aws::RDS
     #
     # @example Example: To list information about events
     #
-    #   # This example lists information for all backup-related events for the specified DB instance for the past 7 days (7 days * 24 hours * 60 minutes = 10,080 minutes).
+    #   # This example lists information for all backup-related events for the specified DB instance for the past 7 days (7 days *
+    #   # 24 hours * 60 minutes = 10,080 minutes).
     #
     #   resp = client.describe_events({
     #     duration: 10080, 
@@ -7195,7 +7197,8 @@ module Aws::RDS
     #
     # @example Example: To list information about orderable DB instance options
     #
-    #   # This example lists information for all orderable DB instance options for the specified DB engine, engine version, DB instance class, license model, and VPC settings.
+    #   # This example lists information for all orderable DB instance options for the specified DB engine, engine version, DB
+    #   # instance class, license model, and VPC settings.
     #
     #   resp = client.describe_orderable_db_instance_options({
     #     db_instance_class: "db.t2.micro", 
@@ -7409,7 +7412,8 @@ module Aws::RDS
     #
     # @example Example: To list information about reserved DB instances
     #
-    #   # This example lists information for all reserved DB instances for the specified DB instance class, duration, product, offering type, and availability zone settings.
+    #   # This example lists information for all reserved DB instances for the specified DB instance class, duration, product,
+    #   # offering type, and availability zone settings.
     #
     #   resp = client.describe_reserved_db_instances({
     #     db_instance_class: "db.t2.micro", 
@@ -7533,7 +7537,8 @@ module Aws::RDS
     #
     # @example Example: To list information about reserved DB instance offerings
     #
-    #   # This example lists information for all reserved DB instance offerings for the specified DB instance class, duration, product, offering type, and availability zone settings.
+    #   # This example lists information for all reserved DB instance offerings for the specified DB instance class, duration,
+    #   # product, offering type, and availability zone settings.
     #
     #   resp = client.describe_reserved_db_instances_offerings({
     #     db_instance_class: "db.t2.micro", 
@@ -8408,7 +8413,8 @@ module Aws::RDS
     #
     # @example Example: To add or remove access to a manual DB cluster snapshot
     #
-    #   # The following example gives two AWS accounts access to a manual DB cluster snapshot and ensures that the DB cluster snapshot is private by removing the value "all".
+    #   # The following example gives two AWS accounts access to a manual DB cluster snapshot and ensures that the DB cluster
+    #   # snapshot is private by removing the value "all".
     #
     #   resp = client.modify_db_cluster_snapshot_attribute({
     #     attribute_name: "restore", 
@@ -12650,7 +12656,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

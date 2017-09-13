@@ -693,7 +693,8 @@ module Aws::ElasticBeanstalk
     #
     # @example Example: To create a configuration template
     #
-    #   # The following operation creates a configuration template named my-app-v1 from the settings applied to an environment with the id e-rpqsewtp2j:
+    #   # The following operation creates a configuration template named my-app-v1 from the settings applied to an environment
+    #   # with the id e-rpqsewtp2j:
     #
     #   resp = client.create_configuration_template({
     #     application_name: "my-app", 
@@ -2543,7 +2544,8 @@ module Aws::ElasticBeanstalk
     #
     # @example Example: To view solution stacks
     #
-    #   # The following operation lists solution stacks for all currently available platform configurations and any that you have used in the past:
+    #   # The following operation lists solution stacks for all currently available platform configurations and any that you have
+    #   # used in the past:
     #
     #   resp = client.list_available_solution_stacks({
     #   })
@@ -3393,7 +3395,8 @@ module Aws::ElasticBeanstalk
     #
     # @example Example: To update a configuration template
     #
-    #   # The following operation removes the configured CloudWatch custom health metrics configuration ConfigDocument from a saved configuration template named my-template:
+    #   # The following operation removes the configured CloudWatch custom health metrics configuration ConfigDocument from a
+    #   # saved configuration template named my-template:
     #
     #   resp = client.update_configuration_template({
     #     application_name: "my-app", 
@@ -3824,7 +3827,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

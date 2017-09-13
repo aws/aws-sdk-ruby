@@ -1236,7 +1236,8 @@ module Aws::S3
     #
     # @example Example: To remove tag set from an object version
     #
-    #   # The following example removes tag set associated with the specified object version. The request specifies both the object key and object version.
+    #   # The following example removes tag set associated with the specified object version. The request specifies both the
+    #   # object key and object version.
     #
     #   resp = client.delete_object_tagging({
     #     bucket: "examplebucket", 
@@ -1251,7 +1252,8 @@ module Aws::S3
     #
     # @example Example: To remove tag set from an object
     #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the operation removes tag set from the latest object version.
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
     #
     #   resp = client.delete_object_tagging({
     #     bucket: "examplebucket", 
@@ -1311,7 +1313,8 @@ module Aws::S3
     #
     # @example Example: To delete multiple object versions from a versioned bucket
     #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object versions and returns the key and versions of deleted objects in the response.
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
     #
     #   resp = client.delete_objects({
     #     bucket: "examplebucket", 
@@ -1346,7 +1349,8 @@ module Aws::S3
     #
     # @example Example: To delete multiple objects from a versioned bucket
     #
-    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
+    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
+    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
     #
     #   resp = client.delete_objects({
     #     bucket: "examplebucket", 
@@ -2483,7 +2487,8 @@ module Aws::S3
     #
     # @example Example: To retrieve a byte range of an object 
     #
-    #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a specific byte range.
+    #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
+    #   # specific byte range.
     #
     #   resp = client.get_object({
     #     bucket: "examplebucket", 
@@ -3210,7 +3215,9 @@ module Aws::S3
     #
     # @example Example: To list object versions
     #
-    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.
+    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items
+    #   # returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify
+    #   # this token value in your next request to fetch next set of object versions.
     #
     #   resp = client.list_buckets({
     #   })
@@ -3347,7 +3354,8 @@ module Aws::S3
     #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
-    #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next setup of multipart uploads.
+    #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next
+    #   # setup of multipart uploads.
     #
     #   resp = client.list_multipart_uploads({
     #     bucket: "examplebucket", 
@@ -3489,7 +3497,9 @@ module Aws::S3
     #
     # @example Example: To list object versions
     #
-    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.
+    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items
+    #   # returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify
+    #   # this token value in your next request to fetch next set of object versions.
     #
     #   resp = client.list_object_versions({
     #     bucket: "examplebucket", 
@@ -3767,7 +3777,8 @@ module Aws::S3
     #
     # @example Example: To get object list
     #
-    #   # The following example retrieves object list. The request specifies max keys to limit response to include only 2 object keys. 
+    #   # The following example retrieves object list. The request specifies max keys to limit response to include only 2 object
+    #   # keys. 
     #
     #   resp = client.list_objects_v2({
     #     bucket: "examplebucket", 
@@ -4030,7 +4041,9 @@ module Aws::S3
     #
     # @example Example: Put bucket acl
     #
-    #   # The following example replaces existing ACL on a bucket. The ACL grants the bucket owner (specified using the owner ID) and write permission to the LogDelivery group. Because this is a replace operation, you must specify all the grants in your request. To incrementally add or remove ACL grants, you might use the console.
+    #   # The following example replaces existing ACL on a bucket. The ACL grants the bucket owner (specified using the owner ID)
+    #   # and write permission to the LogDelivery group. Because this is a replace operation, you must specify all the grants in
+    #   # your request. To incrementally add or remove ACL grants, you might use the console.
     #
     #   resp = client.put_bucket_acl({
     #     bucket: "examplebucket", 
@@ -4153,7 +4166,8 @@ module Aws::S3
     #
     # @example Example: To set cors configuration on a bucket.
     #
-    #   # The following example enables PUT, POST, and DELETE requests from www.example.com, and enables GET requests from any domain.
+    #   # The following example enables PUT, POST, and DELETE requests from www.example.com, and enables GET requests from any
+    #   # domain.
     #
     #   resp = client.put_bucket_cors({
     #     bucket: "", 
@@ -4443,7 +4457,8 @@ module Aws::S3
     #
     # @example Example: Set logging configuration for a bucket
     #
-    #   # The following example sets logging policy on a bucket. For the Log Delivery group to deliver logs to the destination bucket, it needs permission for the READ_ACP action which the policy grants.
+    #   # The following example sets logging policy on a bucket. For the Log Delivery group to deliver logs to the destination
+    #   # bucket, it needs permission for the READ_ACP action which the policy grants.
     #
     #   resp = client.put_bucket_logging({
     #     bucket: "sourcebucket", 
@@ -5133,7 +5148,8 @@ module Aws::S3
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
-    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
@@ -5152,7 +5168,8 @@ module Aws::S3
     #
     # @example Example: To upload an object and specify canned ACL.
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     acl: "authenticated-read", 
@@ -5169,7 +5186,8 @@ module Aws::S3
     #
     # @example Example: To upload an object
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
     #     body: "HappyFace.jpg", 
@@ -5201,7 +5219,8 @@ module Aws::S3
     #
     # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore S3 returns version ID of the newly created object.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
     #     body: "c:\\HappyFace.jpg", 
@@ -5218,7 +5237,8 @@ module Aws::S3
     #
     # @example Example: To upload object and specify user-defined metadata
     #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
@@ -5238,7 +5258,8 @@ module Aws::S3
     #
     # @example Example: To upload an object (specify optional headers)
     #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific storage class and use server-side encryption.
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
     #
     #   resp = client.put_object({
     #     body: "HappyFace.jpg", 
@@ -5362,7 +5383,8 @@ module Aws::S3
     #
     # @example Example: To grant permissions using object ACL
     #
-    #   # The following example adds grants to an object ACL. The first permission grants user1 and user2 FULL_CONTROL and the AllUsers group READ permission.
+    #   # The following example adds grants to an object ACL. The first permission grants user1 and user2 FULL_CONTROL and the
+    #   # AllUsers group READ permission.
     #
     #   resp = client.put_object_acl({
     #     access_control_policy: {
@@ -5635,7 +5657,8 @@ module Aws::S3
     #
     # @example Example: To upload a part
     #
-    #   # The following example uploads part 1 of a multipart upload. The example specifies a file name for the part data. The Upload ID is same that is returned by the initiate multipart upload.
+    #   # The following example uploads part 1 of a multipart upload. The example specifies a file name for the part data. The
+    #   # Upload ID is same that is returned by the initiate multipart upload.
     #
     #   resp = client.upload_part({
     #     body: "fileToUpload", 
@@ -5774,7 +5797,8 @@ module Aws::S3
     #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
-    #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as data source.
+    #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
+    #   # data source.
     #
     #   resp = client.upload_part_copy({
     #     bucket: "examplebucket", 
@@ -5868,7 +5892,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -359,7 +359,8 @@ module Aws::AutoScaling
     #
     # @example Example: To complete the lifecycle action
     #
-    #   # This example notifies Auto Scaling that the specified lifecycle action is complete so that it can finish launching or terminating the instance.
+    #   # This example notifies Auto Scaling that the specified lifecycle action is complete so that it can finish launching or
+    #   # terminating the instance.
     #
     #   resp = client.complete_lifecycle_action({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
@@ -434,7 +435,9 @@ module Aws::AutoScaling
     # @option params [Integer] :desired_capacity
     #   The number of EC2 instances that should be running in the group. This
     #   number must be greater than or equal to the minimum size of the group
-    #   and less than or equal to the maximum size of the group.
+    #   and less than or equal to the maximum size of the group. If you do not
+    #   specify a desired capacity, the default is the minimum size of the
+    #   group.
     #
     # @option params [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
@@ -532,6 +535,9 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
     #
+    # @option params [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
+    #   One or more lifecycle hooks.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags.
     #
@@ -612,6 +618,17 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "XmlStringMaxLen2047",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
+    #     lifecycle_hook_specification_list: [
+    #       {
+    #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
+    #         lifecycle_transition: "LifecycleTransition",
+    #         notification_metadata: "XmlStringMaxLen1023",
+    #         heartbeat_timeout: 1,
+    #         default_result: "LifecycleActionResult",
+    #         notification_target_arn: "NotificationTargetResourceName",
+    #         role_arn: "ResourceName",
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         resource_id: "XmlString",
@@ -651,8 +668,12 @@ module Aws::AutoScaling
     #
     # @option params [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    #   instances. For more information, see [Finding an AMI][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   instances.
+    #
+    #   If you do not specify `InstanceId`, you must specify `ImageId`.
+    #
+    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -714,10 +735,12 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @option params [String] :instance_id
-    #   The ID of the instance to use to create the launch configuration.
+    #   The ID of the instance to use to create the launch configuration. The
+    #   new launch configuration derives attributes from the instance, with
+    #   the exception of the block device mapping.
     #
-    #   The new launch configuration derives attributes from the instance,
-    #   with the exception of the block device mapping.
+    #   If you do not specify `InstanceId`, you must specify both `ImageId`
+    #   and `InstanceType`.
     #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
@@ -731,9 +754,12 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
     #
     # @option params [String] :instance_type
-    #   The instance type of the EC2 instance. For information about available
-    #   instance types, see [ Available Instance Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide.*
+    #   The instance type of the EC2 instance.
+    #
+    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
+    #
+    #   For information about available instance types, see [Available
+    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
     #
     #
     #
@@ -756,7 +782,7 @@ module Aws::AutoScaling
     #
     # @option params [Types::InstanceMonitoring] :instance_monitoring
     #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
-    #   the Auto Scaling instances.
+    #   the Auto Scaling instances. The default is `true`.
     #
     # @option params [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
@@ -2575,8 +2601,8 @@ module Aws::AutoScaling
 
     # Removes one or more instances from the specified Auto Scaling group.
     #
-    # After the instances are detached, you can manage them independently
-    # from the rest of the Auto Scaling group.
+    # After the instances are detached, you can manage them independent of
+    # the Auto Scaling group.
     #
     # If you do not specify the option to decrement the desired capacity,
     # Auto Scaling launches instances to replace the ones that are detached.
@@ -2873,14 +2899,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances into `Standby` mode.
+    # Moves the specified instances into the standby state.
     #
-    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-    # Scaling User Guide*.
+    # For more information, see [Temporarily Removing Instances from Your
+    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instances to move into `Standby` mode. You must specify at
@@ -3033,14 +3059,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances out of `Standby` mode.
+    # Moves the specified instances out of the standby state.
     #
-    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-    # Scaling User Guide*.
+    # For more information, see [Temporarily Removing Instances from Your
+    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instance IDs. You must specify at least one instance ID.
@@ -3191,11 +3217,13 @@ module Aws::AutoScaling
     #   Scaling sends a message to the notification target.
     #
     # @option params [Integer] :heartbeat_timeout
-    #   The amount of time, in seconds, that can elapse before the lifecycle
-    #   hook times out. When the lifecycle hook times out, Auto Scaling
-    #   performs the default action. You can prevent the lifecycle hook from
-    #   timing out by calling RecordLifecycleActionHeartbeat. The default is
+    #   The maximum time, in seconds, that can elapse before the lifecycle
+    #   hook times out. The range is from 30 to 7200 seconds. The default is
     #   3600 seconds (1 hour).
+    #
+    #   If the lifecycle hook times out, Auto Scaling performs the default
+    #   action. You can prevent the lifecycle hook from timing out by calling
+    #   RecordLifecycleActionHeartbeat.
     #
     # @option params [String] :default_result
     #   Defines the action the Auto Scaling group should take when the
@@ -3395,7 +3423,7 @@ module Aws::AutoScaling
     #   `TargetTrackingScaling`.
     #
     # @option params [Types::TargetTrackingConfiguration] :target_tracking_configuration
-    #   The configuration of a target tracking policy.
+    #   A target tracking policy.
     #
     #   This parameter is required if the policy type is
     #   `TargetTrackingScaling` and not supported otherwise.
@@ -3972,7 +4000,8 @@ module Aws::AutoScaling
     #
     # @example Example: To terminate an instance in an Auto Scaling group
     #
-    #   # This example terminates the specified instance from the specified Auto Scaling group without updating the size of the group. Auto Scaling launches a replacement instance after the specified instance terminates.
+    #   # This example terminates the specified instance from the specified Auto Scaling group without updating the size of the
+    #   # group. Auto Scaling launches a replacement instance after the specified instance terminates.
     #
     #   resp = client.terminate_instance_in_auto_scaling_group({
     #     instance_id: "i-93633f9b", 
@@ -4010,16 +4039,15 @@ module Aws::AutoScaling
 
     # Updates the configuration for the specified Auto Scaling group.
     #
+    # The new settings take effect on any scaling activities after this call
+    # returns. Scaling activities that are currently in progress aren't
+    # affected.
+    #
     # To update an Auto Scaling group with a launch configuration with
-    # `InstanceMonitoring` set to `False`, you must first disable the
+    # `InstanceMonitoring` set to `false`, you must first disable the
     # collection of group metrics. Otherwise, you will get an error. If you
     # have previously enabled the collection of group metrics, you can
     # disable it using DisableMetricsCollection.
-    #
-    # The new settings are registered upon the completion of this call. Any
-    # launch configuration settings take effect on any triggers after this
-    # call returns. Scaling activities that are currently in progress
-    # aren't affected.
     #
     # Note the following:
     #
@@ -4193,7 +4221,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

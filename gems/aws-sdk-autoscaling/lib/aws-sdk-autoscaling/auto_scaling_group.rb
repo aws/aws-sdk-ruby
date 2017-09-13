@@ -503,7 +503,7 @@ module Aws::AutoScaling
     #   This parameter is supported if the policy type is `StepScaling` or
     #   `TargetTrackingScaling`.
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
-    #   The configuration of a target tracking policy.
+    #   A target tracking policy.
     #
     #   This parameter is required if the policy type is
     #   `TargetTrackingScaling` and not supported otherwise.

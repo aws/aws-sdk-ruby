@@ -379,7 +379,8 @@ module Aws::KMS
     #
     # @example Example: To create a grant
     #
-    #   # The following example creates a grant that allows the specified IAM role to encrypt data with the specified customer master key (CMK).
+    #   # The following example creates a grant that allows the specified IAM role to encrypt data with the specified customer
+    #   # master key (CMK).
     #
     #   resp = client.create_grant({
     #     grantee_principal: "arn:aws:iam::111122223333:role/ExampleRole", # The identity that is given permission to perform the operations specified in the grant.
@@ -1250,7 +1251,8 @@ module Aws::KMS
     #
     # @example Example: To generate a data key
     #
-    #   # The following example generates a 256-bit symmetric data encryption key (data key) in two formats. One is the unencrypted (plainext) data key, and the other is the data key encrypted with the specified customer master key (CMK).
+    #   # The following example generates a 256-bit symmetric data encryption key (data key) in two formats. One is the
+    #   # unencrypted (plainext) data key, and the other is the data key encrypted with the specified customer master key (CMK).
     #
     #   resp = client.generate_data_key({
     #     key_id: "alias/ExampleAlias", # The identifier of the CMK to use to encrypt the data key. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
@@ -1366,7 +1368,8 @@ module Aws::KMS
     #
     # @example Example: To generate an encrypted data key
     #
-    #   # The following example generates an encrypted copy of a 256-bit symmetric data encryption key (data key). The data key is encrypted with the specified customer master key (CMK).
+    #   # The following example generates an encrypted copy of a 256-bit symmetric data encryption key (data key). The data key is
+    #   # encrypted with the specified customer master key (CMK).
     #
     #   resp = client.generate_data_key_without_plaintext({
     #     key_id: "alias/ExampleAlias", # The identifier of the CMK to use to encrypt the data key. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
@@ -2985,7 +2988,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

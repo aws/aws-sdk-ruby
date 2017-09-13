@@ -357,7 +357,8 @@ module Aws::DynamoDB
     #
     # @example Example: To retrieve multiple items from a table
     #
-    #   # This example reads multiple items from the Music table using a batch of three GetItem requests.  Only the AlbumTitle attribute is returned.
+    #   # This example reads multiple items from the Music table using a batch of three GetItem requests.  Only the AlbumTitle
+    #   # attribute is returned.
     #
     #   resp = client.batch_get_item({
     #     request_items: {
@@ -1582,7 +1583,8 @@ module Aws::DynamoDB
     #
     # @example Example: To determine capacity limits per table and account, in the current AWS region
     #
-    #   # The following example returns the maximum read and write capacity units per table, and for the AWS account, in the current AWS region.
+    #   # The following example returns the maximum read and write capacity units per table, and for the AWS account, in the
+    #   # current AWS region.
     #
     #   resp = client.describe_limits({
     #   })
@@ -1904,7 +1906,8 @@ module Aws::DynamoDB
     #
     # @example Example: To read an item from a table
     #
-    #   # This example retrieves an item from the Music table. The table has a partition key and a sort key (Artist and SongTitle), so you must specify both of these attributes.
+    #   # This example retrieves an item from the Music table. The table has a partition key and a sort key (Artist and
+    #   # SongTitle), so you must specify both of these attributes.
     #
     #   resp = client.get_item({
     #     key: {
@@ -2844,7 +2847,8 @@ module Aws::DynamoDB
     #
     # @example Example: To query an item
     #
-    #   # This example queries items in the Music table. The table has a partition key and sort key (Artist and SongTitle), but this query only specifies the partition key value. It returns song titles by the artist named "No One You Know".
+    #   # This example queries items in the Music table. The table has a partition key and sort key (Artist and SongTitle), but
+    #   # this query only specifies the partition key value. It returns song titles by the artist named "No One You Know".
     #
     #   resp = client.query({
     #     expression_attribute_values: {
@@ -3276,7 +3280,8 @@ module Aws::DynamoDB
     #
     # @example Example: To scan a table
     #
-    #   # This example scans the entire Music table, and then narrows the results to songs by the artist "No One You Know". For each item, only the album title and song title are returned.
+    #   # This example scans the entire Music table, and then narrows the results to songs by the artist "No One You Know". For
+    #   # each item, only the album title and song title are returned.
     #
     #   resp = client.scan({
     #     expression_attribute_names: {
@@ -3751,7 +3756,8 @@ module Aws::DynamoDB
     #
     # @example Example: To update an item in a table
     #
-    #   # This example updates an item in the Music table. It adds a new attribute (Year) and modifies the AlbumTitle attribute.  All of the attributes in the item, as they appear after the update, are returned in the response.
+    #   # This example updates an item in the Music table. It adds a new attribute (Year) and modifies the AlbumTitle attribute. 
+    #   # All of the attributes in the item, as they appear after the update, are returned in the response.
     #
     #   resp = client.update_item({
     #     expression_attribute_names: {
@@ -4170,7 +4176,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

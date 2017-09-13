@@ -595,7 +595,8 @@ module Aws::SES
     #
     # @example Example: DeleteIdentity
     #
-    #   # The following example deletes an identity from the list of identities that have been submitted for verification with Amazon SES:
+    #   # The following example deletes an identity from the list of identities that have been submitted for verification with
+    #   # Amazon SES:
     #
     #   resp = client.delete_identity({
     #     identity: "user@example.com", 
@@ -823,7 +824,8 @@ module Aws::SES
     #
     # @example Example: DeleteVerifiedEmailAddress
     #
-    #   # The following example deletes an email address from the list of identities that have been submitted for verification with Amazon SES:
+    #   # The following example deletes an email address from the list of identities that have been submitted for verification
+    #   # with Amazon SES:
     #
     #   resp = client.delete_verified_email_address({
     #     email_address: "user@example.com", 
@@ -2940,7 +2942,8 @@ module Aws::SES
     #
     # @example Example: SetIdentityHeadersInNotificationsEnabled
     #
-    #   # The following example configures Amazon SES to include the original email headers in the Amazon SNS bounce notifications for an identity:
+    #   # The following example configures Amazon SES to include the original email headers in the Amazon SNS bounce notifications
+    #   # for an identity:
     #
     #   resp = client.set_identity_headers_in_notifications_enabled({
     #     enabled: true, 
@@ -3079,7 +3082,8 @@ module Aws::SES
     #
     # @example Example: SetIdentityNotificationTopic
     #
-    #   # The following example sets the Amazon SNS topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with the specified identity as the Source:
+    #   # The following example sets the Amazon SNS topic to which Amazon SES will publish bounce, complaint, and/or delivery
+    #   # notifications for emails sent with the specified identity as the Source:
     #
     #   resp = client.set_identity_notification_topic({
     #     identity: "user@example.com", 
@@ -3519,7 +3523,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

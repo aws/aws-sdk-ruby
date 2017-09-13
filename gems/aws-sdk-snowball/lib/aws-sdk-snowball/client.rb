@@ -239,7 +239,9 @@ module Aws::Snowball
     #
     # @example Example: To create an address for a job
     #
-    #   # This operation creates an address for a job. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+    #   # This operation creates an address for a job. Addresses are validated at the time of creation. The address you provide
+    #   # must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception
+    #   # is thrown.
     #
     #   resp = client.create_address({
     #     address: {
@@ -369,7 +371,8 @@ module Aws::Snowball
     #
     # @example Example: To create a cluster
     #
-    #   # Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
+    #   # Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs
+    #   # for each of these nodes. The cluster does not ship until these five node jobs have been created.
     #
     #   resp = client.create_cluster({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
@@ -547,7 +550,9 @@ module Aws::Snowball
     #
     # @example Example: To create a job
     #
-    #   # Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.
+    #   # Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have
+    #   # the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a
+    #   # cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.
     #
     #   resp = client.create_job({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
@@ -720,7 +725,8 @@ module Aws::Snowball
     #
     # @example Example: To describe all the addresses you've created for AWS Snowball
     #
-    #   # This operation describes all the addresses that you've created for AWS Snowball. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
+    #   # This operation describes all the addresses that you've created for AWS Snowball. Calling this API in one of the US
+    #   # regions will return addresses from the list of all addresses associated with this account in all US regions.
     #
     #   resp = client.describe_addresses({
     #   })
@@ -790,7 +796,8 @@ module Aws::Snowball
     #
     # @example Example: To describe a cluster
     #
-    #   # Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+    #   # Returns information about a specific cluster including shipping information, cluster status, and other important
+    #   # metadata.
     #
     #   resp = client.describe_cluster({
     #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
@@ -1042,13 +1049,16 @@ module Aws::Snowball
     #
     # @example Example: To get the manifest for a job you've created for AWS Snowball
     #
-    #   # Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action.
-    
-    The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.
-    
-    As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
-    
-    The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+    #   # Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can
+    #   # access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60
+    #   # minutes have passed, you'll have to make another call to the GetJobManifest action.
+    #   # The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is
+    #   # decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when
+    #   # the client is started for the first time.
+    #   # As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest
+    #   # file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball
+    #   # associated with that job.
+    #   # The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
     #
     #   resp = client.get_job_manifest({
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
@@ -1103,11 +1113,14 @@ module Aws::Snowball
     #
     # @example Example: To get the unlock code for a job you've created for AWS Snowball
     #
-    #   # Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.
-    
-    The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.
-    
-    As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
+    #   # Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days
+    #   # after the associated job has been created.
+    #   # The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt
+    #   # the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client
+    #   # is started for the first time.
+    #   # As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file
+    #   # for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated
+    #   # with that job.
     #
     #   resp = client.get_job_unlock_code({
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
@@ -1152,9 +1165,10 @@ module Aws::Snowball
     #
     # @example Example: To see your Snowball service limit and the number of Snowballs you have in use
     #
-    #   # Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.
-    
-    The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+    #   # Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has
+    #   # in use.
+    #   # The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your
+    #   # service limit, contact AWS Support.
     #
     #   resp = client.get_snowball_usage({
     #   })
@@ -1203,7 +1217,8 @@ module Aws::Snowball
     #
     # @example Example: To get a list of jobs in a cluster that you've created for AWS Snowball
     #
-    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
+    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified
+    #   # cluster and contains a job's state, a job's ID, and other information.
     #
     #   resp = client.list_cluster_jobs({
     #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
@@ -1309,7 +1324,8 @@ module Aws::Snowball
     #
     # @example Example: To get a list of clusters that you've created for AWS Snowball
     #
-    #   # Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+    #   # Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's
+    #   # state, a cluster's ID, and other important status information.
     #
     #   resp = client.list_clusters({
     #   })
@@ -1374,7 +1390,9 @@ module Aws::Snowball
     #
     # @example Example: To get a list of jobs that you've created for AWS Snowball
     #
-    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
+    #   # Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a
+    #   # job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action
+    #   # in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
     #
     #   resp = client.list_jobs({
     #   })
@@ -1467,7 +1485,8 @@ module Aws::Snowball
     #
     # @example Example: To update a cluster
     #
-    #   # This action allows you to update certain parameters for a cluster. Once the cluster changes to a different state, usually within 60 minutes of it being created, this action is no longer available.
+    #   # This action allows you to update certain parameters for a cluster. Once the cluster changes to a different state,
+    #   # usually within 60 minutes of it being created, this action is no longer available.
     #
     #   resp = client.update_cluster({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
@@ -1570,7 +1589,8 @@ module Aws::Snowball
     #
     # @example Example: To update a job
     #
-    #   # This action allows you to update certain parameters for a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
+    #   # This action allows you to update certain parameters for a job. Once the job changes to a different job state, usually
+    #   # within 60 minutes of the job being created, this action is no longer available.
     #
     #   resp = client.update_job({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
@@ -1640,7 +1660,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

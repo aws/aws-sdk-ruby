@@ -48,24 +48,9 @@ module Aws::AutoScaling
       data.lifecycle_transition
     end
 
-    # The ARN of the notification target that Auto Scaling uses to notify
-    # you when an instance is in the transition state for the lifecycle
-    # hook. This ARN target can be either an SQS queue or an SNS topic. The
-    # notification message sent to the target includes the following:
-    #
-    # * Lifecycle action token
-    #
-    # * User account ID
-    #
-    # * Name of the Auto Scaling group
-    #
-    # * Lifecycle hook name
-    #
-    # * EC2 instance ID
-    #
-    # * Lifecycle transition
-    #
-    # * Notification metadata
+    # The ARN of the target that Auto Scaling sends notifications to when an
+    # instance is in the transition state for the lifecycle hook. The
+    # notification target can be either an SQS queue or an SNS topic.
     # @return [String]
     def notification_target_arn
       data.notification_target_arn
@@ -86,10 +71,9 @@ module Aws::AutoScaling
     end
 
     # The maximum time, in seconds, that can elapse before the lifecycle
-    # hook times out. The default is 3600 seconds (1 hour). When the
-    # lifecycle hook times out, Auto Scaling performs the default action.
-    # You can prevent the lifecycle hook from timing out by calling
-    # RecordLifecycleActionHeartbeat.
+    # hook times out. If the lifecycle hook times out, Auto Scaling performs
+    # the default action. You can prevent the lifecycle hook from timing out
+    # by calling RecordLifecycleActionHeartbeat.
     # @return [Integer]
     def heartbeat_timeout
       data.heartbeat_timeout
@@ -235,11 +219,13 @@ module Aws::AutoScaling
     #   Contains additional information that you want to include any time Auto
     #   Scaling sends a message to the notification target.
     # @option options [Integer] :heartbeat_timeout
-    #   The amount of time, in seconds, that can elapse before the lifecycle
-    #   hook times out. When the lifecycle hook times out, Auto Scaling
-    #   performs the default action. You can prevent the lifecycle hook from
-    #   timing out by calling RecordLifecycleActionHeartbeat. The default is
+    #   The maximum time, in seconds, that can elapse before the lifecycle
+    #   hook times out. The range is from 30 to 7200 seconds. The default is
     #   3600 seconds (1 hour).
+    #
+    #   If the lifecycle hook times out, Auto Scaling performs the default
+    #   action. You can prevent the lifecycle hook from timing out by calling
+    #   RecordLifecycleActionHeartbeat.
     # @option options [String] :default_result
     #   Defines the action the Auto Scaling group should take when the
     #   lifecycle hook timeout elapses or if an unexpected failure occurs.

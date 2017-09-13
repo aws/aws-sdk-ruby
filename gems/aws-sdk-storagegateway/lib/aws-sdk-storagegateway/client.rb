@@ -512,7 +512,8 @@ module Aws::StorageGateway
     #
     # @example Example: To add storage on local disk
     #
-    #   # Configures one or more gateway local disks as working storage for a gateway. (Working storage is also referred to as upload buffer.)
+    #   # Configures one or more gateway local disks as working storage for a gateway. (Working storage is also referred to as
+    #   # upload buffer.)
     #
     #   resp = client.add_working_storage({
     #     disk_ids: [
@@ -617,7 +618,8 @@ module Aws::StorageGateway
     #
     # @example Example: To cancel virtual tape retrieval
     #
-    #   # Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated.
+    #   # Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is
+    #   # initiated.
     #
     #   resp = client.cancel_retrieval({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -1676,7 +1678,8 @@ module Aws::StorageGateway
     #
     # @example Example: To delete a gateway volume
     #
-    #   # Deletes the specified gateway volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API.
+    #   # Deletes the specified gateway volume that you previously created using the CreateCachediSCSIVolume or
+    #   # CreateStorediSCSIVolume API.
     #
     #   resp = client.delete_volume({
     #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
@@ -1926,7 +1929,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe CHAP credetnitals for an iSCSI
     #
-    #   # Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.
+    #   # Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI
+    #   # target, one for each target-initiator pair.
     #
     #   resp = client.describe_chap_credentials({
     #     target_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume", 
@@ -1991,7 +1995,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe metadata about the gateway
     #
-    #   # Returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the gateway is running or not).
+    #   # Returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the
+    #   # gateway is running or not).
     #
     #   resp = client.describe_gateway_information({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -2169,7 +2174,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe snapshot schedule for gateway volume
     #
-    #   # Describes the snapshot schedule for the specified gateway volume including intervals at which snapshots are automatically initiated.
+    #   # Describes the snapshot schedule for the specified gateway volume including intervals at which snapshots are
+    #   # automatically initiated.
     #
     #   resp = client.describe_snapshot_schedule({
     #     volume_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB", 
@@ -2496,7 +2502,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe virtual tape(s) associated with gateway
     #
-    #   # Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes.
+    #   # Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified,
+    #   # returns a description of all virtual tapes.
     #
     #   resp = client.describe_tapes({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
@@ -2580,7 +2587,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe upload buffer of gateway
     #
-    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated/used.
+    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space
+    #   # allocated/used.
     #
     #   resp = client.describe_upload_buffer({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -2599,7 +2607,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe upload buffer of a gateway
     #
-    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated and used.
+    #   # Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space
+    #   # allocated and used.
     #
     #   resp = client.describe_upload_buffer({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -2790,7 +2799,8 @@ module Aws::StorageGateway
     #
     # @example Example: To describe the working storage of a gateway [Depreciated]
     #
-    #   # This operation is supported only for the gateway-stored volume architecture. This operation is deprecated in cached-volumes API version (20120630). Use DescribeUploadBuffer instead.
+    #   # This operation is supported only for the gateway-stored volume architecture. This operation is deprecated in
+    #   # cached-volumes API version (20120630). Use DescribeUploadBuffer instead.
     #
     #   resp = client.describe_working_storage({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -2851,7 +2861,8 @@ module Aws::StorageGateway
     #
     # @example Example: To disable a gateway when it is no longer functioning
     #
-    #   # Disables a gateway when the gateway is no longer functioning. Use this operation for a gateway-VTL that is not reachable or not functioning.
+    #   # Disables a gateway when the gateway is no longer functioning. Use this operation for a gateway-VTL that is not reachable
+    #   # or not functioning.
     #
     #   resp = client.disable_gateway({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -2961,7 +2972,8 @@ module Aws::StorageGateway
     #
     # @example Example: To lists region specific gateways per AWS account
     #
-    #   # Lists gateways owned by an AWS account in a specified region as requested. Results are sorted by gateway ARN up to a maximum of 100 gateways.
+    #   # Lists gateways owned by an AWS account in a specified region as requested. Results are sorted by gateway ARN up to a
+    #   # maximum of 100 gateways.
     #
     #   resp = client.list_gateways({
     #     limit: 2, 
@@ -3031,7 +3043,8 @@ module Aws::StorageGateway
     #
     # @example Example: To list the gateway's local disks
     #
-    #   # The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored volume or not configured at all.
+    #   # The request returns a list of all disks, specifying which are configured as working storage, cache storage, or stored
+    #   # volume or not configured at all.
     #
     #   resp = client.list_local_disks({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -3271,7 +3284,8 @@ module Aws::StorageGateway
     #
     # @example Example: To list recovery points for a gateway
     #
-    #   # Lists the recovery points for a specified gateway in which all data of the volume is consistent and can be used to create a snapshot.
+    #   # Lists the recovery points for a specified gateway in which all data of the volume is consistent and can be used to
+    #   # create a snapshot.
     #
     #   resp = client.list_volume_recovery_points({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B", 
@@ -3582,7 +3596,8 @@ module Aws::StorageGateway
     #
     # @example Example: To retrieve an archived tape from the VTS
     #
-    #   # Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL. Virtual tapes archived in the VTS are not associated with any gateway.
+    #   # Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a gateway-VTL. Virtual tapes archived in the VTS
+    #   # are not associated with any gateway.
     #
     #   resp = client.retrieve_tape_archive({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
@@ -3766,7 +3781,8 @@ module Aws::StorageGateway
     #
     # @example Example: To shut down a gateway service
     #
-    #   # This operation shuts down the gateway service component running in the storage gateway's virtual machine (VM) and not the VM.
+    #   # This operation shuts down the gateway service component running in the storage gateway's virtual machine (VM) and not
+    #   # the VM.
     #
     #   resp = client.shutdown_gateway({
     #     gateway_arn: "arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B", 
@@ -3883,7 +3899,8 @@ module Aws::StorageGateway
     #
     # @example Example: To update the bandwidth rate limits of a gateway
     #
-    #   # Updates the bandwidth rate limits of a gateway. Both the upload and download bandwidth rate limit can be set, or either one of the two. If a new limit is not set, the existing rate limit remains.
+    #   # Updates the bandwidth rate limits of a gateway. Both the upload and download bandwidth rate limit can be set, or either
+    #   # one of the two. If a new limit is not set, the existing rate limit remains.
     #
     #   resp = client.update_bandwidth_rate_limit({
     #     average_download_rate_limit_in_bits_per_sec: 102400, 
@@ -4152,7 +4169,8 @@ module Aws::StorageGateway
     #
     # @example Example: To update a gateway's maintenance start time
     #
-    #   # Updates a gateway's weekly maintenance start time information, including day and time of the week. The maintenance time is in your gateway's time zone.
+    #   # Updates a gateway's weekly maintenance start time information, including day and time of the week. The maintenance time
+    #   # is in your gateway's time zone.
     #
     #   resp = client.update_maintenance_start_time({
     #     day_of_week: 2, 
@@ -4424,7 +4442,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

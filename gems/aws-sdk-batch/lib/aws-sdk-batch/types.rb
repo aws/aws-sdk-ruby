@@ -32,6 +32,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
+    #   The name of the CloudWatch Logs log stream associated with the
+    #   container. The log group for AWS Batch jobs is `/aws/batch/job`.
+    #   Each container attempt receives a log stream name when they reach
+    #   the `RUNNING` status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptContainerDetail AWS API Documentation
@@ -260,8 +264,17 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] instance_role
-    #   The Amazon ECS instance role applied to Amazon EC2 instances in a
-    #   compute environment.
+    #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
+    #   compute environment. You can specify the short name or full Amazon
+    #   Resource Name (ARN) of an instance profile. For example,
+    #   `ecsInstanceRole` or
+    #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole`.
+    #   For more information, see [Amazon ECS Instance Role][1] in the *AWS
+    #   Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -409,6 +422,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
+    #   The name of the CloudWatch Logs log stream associated with the
+    #   container. The log group for AWS Batch jobs is `/aws/batch/job`.
+    #   Each container attempt receives a log stream name when they reach
+    #   the `RUNNING` status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
@@ -562,7 +579,8 @@ module Aws::Batch
     #   The number of vCPUs reserved for the container. This parameter maps
     #   to `CpuShares` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cpu-shares` option to [docker run][3].
-    #   Each vCPU is equivalent to 1,024 CPU shares.
+    #   Each vCPU is equivalent to 1,024 CPU shares. You must specify at
+    #   least 1 vCPU.
     #
     #
     #
@@ -576,7 +594,8 @@ module Aws::Batch
     #   your container attempts to exceed the memory specified here, the
     #   container is killed. This parameter maps to `Memory` in the [Create
     #   a container][1] section of the [Docker Remote API][2] and the
-    #   `--memory` option to [docker run][3].
+    #   `--memory` option to [docker run][3]. You must specify at least 4
+    #   MiB of memory for a job.
     #
     #
     #
@@ -754,6 +773,19 @@ module Aws::Batch
     # @!attribute [rw] service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
     #   Batch to make calls to other AWS services on your behalf.
+    #
+    #   If your specified role has a path other than `/`, then you must
+    #   either specify the full role ARN (this is recommended) or prefix the
+    #   role name with the path.
+    #
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
+    #   may contain the `service-role` path prefix. When you only specify
+    #   the name of the service role, AWS Batch assumes that your ARN does
+    #   not use the `service-role` path prefix. Because of this, we
+    #   recommend that you specify the full ARN of your service role when
+    #   you create compute environments.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest AWS API Documentation
@@ -809,11 +841,11 @@ module Aws::Batch
     #
     # @!attribute [rw] priority
     #   The priority of the job queue. Job queues with a higher priority (or
-    #   a lower integer value for the `priority` parameter) are evaluated
+    #   a higher integer value for the `priority` parameter) are evaluated
     #   first when associated with same compute environment. Priority is
-    #   determined in ascending order, for example, a job queue with a
-    #   priority value of `1` is given scheduling preference over a job
-    #   queue with a priority value of `10`.
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job
+    #   queue with a priority value of `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] compute_environment_order
@@ -1468,7 +1500,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The job status with which to filter jobs in the specified queue.
+    #   The job status with which to filter jobs in the specified queue. If
+    #   you do not specify a status, only `RUNNING` jobs are returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1613,7 +1646,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_definition_name
-    #   The name of the job definition to register.
+    #   The name of the job definition to register. Up to 128 letters
+    #   (uppercase and lowercase), numbers, hyphens, and underscores are
+    #   allowed.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1725,9 +1760,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job. A name must be 1 to 128 characters in length.
-    #
-    #   Pattern: ^\[a-zA-Z0-9\_\]+$
+    #   The name of the job. The first character must be alphanumeric, and
+    #   up to 128 letters (uppercase and lowercase), numbers, hyphens, and
+    #   underscores are allowed.
     #   @return [String]
     #
     # @!attribute [rw] job_queue
@@ -1737,7 +1772,7 @@ module Aws::Batch
     #
     # @!attribute [rw] depends_on
     #   A list of job IDs on which this job depends. A job can depend upon a
-    #   maximum of 100 jobs.
+    #   maximum of 20 jobs.
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
@@ -1894,9 +1929,21 @@ module Aws::Batch
     #   @return [Types::ComputeResourceUpdate]
     #
     # @!attribute [rw] service_role
-    #   The name or full Amazon Resource Name (ARN) of the IAM role that
-    #   allows AWS Batch to make calls to ECS, Auto Scaling, and EC2 on your
-    #   behalf.
+    #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
+    #   Batch to make calls to other AWS services on your behalf.
+    #
+    #   If your specified role has a path other than `/`, then you must
+    #   either specify the full role ARN (this is recommended) or prefix the
+    #   role name with the path.
+    #
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
+    #   may contain the `service-role` path prefix. When you only specify
+    #   the name of the service role, AWS Batch assumes that your ARN does
+    #   not use the `service-role` path prefix. Because of this, we
+    #   recommend that you specify the full ARN of your service role when
+    #   you create compute environments.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
@@ -1950,11 +1997,11 @@ module Aws::Batch
     #
     # @!attribute [rw] priority
     #   The priority of the job queue. Job queues with a higher priority (or
-    #   a lower integer value for the `priority` parameter) are evaluated
+    #   a higher integer value for the `priority` parameter) are evaluated
     #   first when associated with same compute environment. Priority is
-    #   determined in ascending order, for example, a job queue with a
-    #   priority value of `1` is given scheduling preference over a job
-    #   queue with a priority value of `10`.
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job
+    #   queue with a priority value of `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] compute_environment_order

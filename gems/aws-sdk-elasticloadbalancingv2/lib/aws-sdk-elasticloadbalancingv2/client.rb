@@ -258,7 +258,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To create an HTTP listener
     #
-    #   # This example creates an HTTP listener for the specified load balancer that forwards requests to the specified target group.
+    #   # This example creates an HTTP listener for the specified load balancer that forwards requests to the specified target
+    #   # group.
     #
     #   resp = client.create_listener({
     #     default_actions: [
@@ -292,7 +293,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To create an HTTPS listener
     #
-    #   # This example creates an HTTPS listener for the specified load balancer that forwards requests to the specified target group. Note that you must specify an SSL certificate for an HTTPS listener. You can create and manage certificates using AWS Certificate Manager (ACM). Alternatively, you can create a certificate using SSL/TLS tools, get the certificate signed by a certificate authority (CA), and upload the certificate to AWS Identity and Access Management (IAM).
+    #   # This example creates an HTTPS listener for the specified load balancer that forwards requests to the specified target
+    #   # group. Note that you must specify an SSL certificate for an HTTPS listener. You can create and manage certificates using
+    #   # AWS Certificate Manager (ACM). Alternatively, you can create a certificate using SSL/TLS tools, get the certificate
+    #   # signed by a certificate authority (CA), and upload the certificate to AWS Identity and Access Management (IAM).
     #
     #   resp = client.create_listener({
     #     certificates: [
@@ -682,7 +686,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To create a rule
     #
-    #   # This example creates a rule that forwards requests to the specified target group if the URL contains the specified pattern (for example, /img/*).
+    #   # This example creates a rule that forwards requests to the specified target group if the URL contains the specified
+    #   # pattern (for example, /img/*).
     #
     #   resp = client.create_rule({
     #     actions: [
@@ -875,7 +880,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To create a target group
     #
-    #   # This example creates a target group that you can use to route traffic to targets using HTTP on port 80. This target group uses the default health check configuration.
+    #   # This example creates a target group that you can use to route traffic to targets using HTTP on port 80. This target
+    #   # group uses the default health check configuration.
     #
     #   resp = client.create_target_group({
     #     name: "my-targets", 
@@ -1947,7 +1953,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To describe the health of the targets for a target group
     #
-    #   # This example describes the health of the targets for the specified target group. One target is healthy but the other is not specified in an action, so it can't receive traffic from the load balancer.
+    #   # This example describes the health of the targets for the specified target group. One target is healthy but the other is
+    #   # not specified in an action, so it can't receive traffic from the load balancer.
     #
     #   resp = client.describe_target_health({
     #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
@@ -2296,7 +2303,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To enable access logs
     #
-    #   # This example enables access logs for the specified load balancer. Note that the S3 bucket must exist in the same region as the load balancer and must have a policy attached that grants access to the Elastic Load Balancing service.
+    #   # This example enables access logs for the specified load balancer. Note that the S3 bucket must exist in the same region
+    #   # as the load balancer and must have a policy attached that grants access to the Elastic Load Balancing service.
     #
     #   resp = client.modify_load_balancer_attributes({
     #     attributes: [
@@ -2523,7 +2531,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To modify the health check configuration for a target group
     #
-    #   # This example changes the configuration of the health checks used to evaluate the health of the targets for the specified target group.
+    #   # This example changes the configuration of the health checks used to evaluate the health of the targets for the specified
+    #   # target group.
     #
     #   resp = client.modify_target_group({
     #     health_check_port: "443", 
@@ -2723,7 +2732,8 @@ module Aws::ElasticLoadBalancingV2
     #
     # @example Example: To register targets with a target group using port overrides
     #
-    #   # This example registers the specified instance with the specified target group using multiple ports. This enables you to register ECS containers on the same instance as targets in the target group.
+    #   # This example registers the specified instance with the specified target group using multiple ports. This enables you to
+    #   # register ECS containers on the same instance as targets in the target group.
     #
     #   resp = client.register_targets({
     #     target_group_arn: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9", 
@@ -3082,7 +3092,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -448,7 +448,8 @@ module Aws::ElasticLoadBalancing
     #
     # @example Example: To generate a stickiness policy for your load balancer
     #
-    #   # This example generates a stickiness policy that follows the sticky session lifetimes of the application-generated cookie.
+    #   # This example generates a stickiness policy that follows the sticky session lifetimes of the application-generated
+    #   # cookie.
     #
     #   resp = client.create_app_cookie_stickiness_policy({
     #     cookie_name: "my-app-cookie", 
@@ -945,7 +946,8 @@ module Aws::ElasticLoadBalancing
     #
     # @example Example: To create a backend server authentication policy
     #
-    #   # This example creates a backend server authentication policy that enables authentication on your backend instance using a public key policy.
+    #   # This example creates a backend server authentication policy that enables authentication on your backend instance using a
+    #   # public key policy.
     #
     #   resp = client.create_load_balancer_policy({
     #     load_balancer_name: "my-load-balancer", 
@@ -1074,7 +1076,8 @@ module Aws::ElasticLoadBalancing
     #
     # @example Example: To delete a policy from your load balancer
     #
-    #   # This example deletes the specified policy from the specified load balancer. The policy must not be enabled on any listener.
+    #   # This example deletes the specified policy from the specified load balancer. The policy must not be enabled on any
+    #   # listener.
     #
     #   resp = client.delete_load_balancer_policy({
     #     load_balancer_name: "my-load-balancer", 
@@ -2413,7 +2416,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -371,7 +371,8 @@ module Aws::ECS
     #
     # @example Example: To create a new service
     #
-    #   # This example creates a service in your default region called ``ecs-simple-service``. The service uses the ``hello_world`` task definition and it maintains 10 copies of that task.
+    #   # This example creates a service in your default region called ``ecs-simple-service``. The service uses the
+    #   # ``hello_world`` task definition and it maintains 10 copies of that task.
     #
     #   resp = client.create_service({
     #     desired_count: 10, 
@@ -426,7 +427,9 @@ module Aws::ECS
     #
     # @example Example: To create a new service behind a load balancer
     #
-    #   # This example creates a service in your default region called ``ecs-simple-service-elb``. The service uses the ``ecs-demo`` task definition and it maintains 10 copies of that task. You must reference an existing load balancer in the same region by its name.
+    #   # This example creates a service in your default region called ``ecs-simple-service-elb``. The service uses the
+    #   # ``ecs-demo`` task definition and it maintains 10 copies of that task. You must reference an existing load balancer in
+    #   # the same region by its name.
     #
     #   resp = client.create_service({
     #     desired_count: 10, 
@@ -708,7 +711,8 @@ module Aws::ECS
     #
     # @example Example: To delete a service
     #
-    #   # This example deletes the my-http-service service. The service must have a desired count and running count of 0 before you can delete it.
+    #   # This example deletes the my-http-service service. The service must have a desired count and running count of 0 before
+    #   # you can delete it.
     #
     #   resp = client.delete_service({
     #     service: "my-http-service", 
@@ -829,7 +833,8 @@ module Aws::ECS
     #
     # @example Example: To deregister a container instance from a cluster
     #
-    #   # This example deregisters a container instance from the specified cluster in your default region. If there are still tasks running on the container instance, you must either stop those tasks before deregistering, or use the force option.
+    #   # This example deregisters a container instance from the specified cluster in your default region. If there are still
+    #   # tasks running on the container instance, you must either stop those tasks before deregistering, or use the force option.
     #
     #   resp = client.deregister_container_instance({
     #     cluster: "default", 
@@ -1095,7 +1100,8 @@ module Aws::ECS
     #
     # @example Example: To describe container instance
     #
-    #   # This example provides a description of the specified container instance in your default region, using the container instance UUID as an identifier.
+    #   # This example provides a description of the specified container instance in your default region, using the container
+    #   # instance UUID as an identifier.
     #
     #   resp = client.describe_container_instances({
     #     cluster: "default", 
@@ -2359,7 +2365,8 @@ module Aws::ECS
     #
     # @example Example: To list the tasks on a particular container instance
     #
-    #   # This example lists the tasks of a specified container instance. Specifying a ``containerInstance`` value limits  the  results  to  tasks  that belong to that container instance.
+    #   # This example lists the tasks of a specified container instance. Specifying a ``containerInstance`` value limits  the 
+    #   # results  to  tasks  that belong to that container instance.
     #
     #   resp = client.list_tasks({
     #     cluster: "default", 
@@ -3855,7 +3862,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

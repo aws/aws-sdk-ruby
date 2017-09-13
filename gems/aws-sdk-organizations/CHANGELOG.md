@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2017-09-13)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-organizations` gemspec metadata.
 
 1.1.0 (2017-08-30)

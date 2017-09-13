@@ -338,7 +338,8 @@ module Aws::Route53
     #
     # @example Example: To create a basic resource record set
     #
-    #   # The following example creates a resource record set that routes Internet traffic to a resource with an IP address of 192.0.2.44.
+    #   # The following example creates a resource record set that routes Internet traffic to a resource with an IP address of
+    #   # 192.0.2.44.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -374,7 +375,8 @@ module Aws::Route53
     #
     # @example Example: To create weighted resource record sets
     #
-    #   # The following example creates two weighted resource record sets. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.
+    #   # The following example creates two weighted resource record sets. The resource with a Weight of 100 will get 1/3rd of
+    #   # traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -464,7 +466,9 @@ module Aws::Route53
     #
     # @example Example: To create weighted alias resource record sets
     #
-    #   # The following example creates two weighted alias resource record sets that route traffic to ELB load balancers. The resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the traffic for example.com.
+    #   # The following example creates two weighted alias resource record sets that route traffic to ELB load balancers. The
+    #   # resource with a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will get the rest of the
+    #   # traffic for example.com.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -515,7 +519,9 @@ module Aws::Route53
     #
     # @example Example: To create latency resource record sets
     #
-    #   # The following example creates two latency resource record sets that route traffic to EC2 instances. Traffic for example.com is routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.
+    #   # The following example creates two latency resource record sets that route traffic to EC2 instances. Traffic for
+    #   # example.com is routed either to the Ohio region or the Oregon region, depending on the latency between the user and
+    #   # those regions.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -570,7 +576,9 @@ module Aws::Route53
     #
     # @example Example: To create latency alias resource record sets
     #
-    #   # The following example creates two latency alias resource record sets that route traffic for example.com to ELB load balancers. Requests are routed either to the Ohio region or the Oregon region, depending on the latency between the user and those regions.
+    #   # The following example creates two latency alias resource record sets that route traffic for example.com to ELB load
+    #   # balancers. Requests are routed either to the Ohio region or the Oregon region, depending on the latency between the user
+    #   # and those regions.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -621,7 +629,9 @@ module Aws::Route53
     #
     # @example Example: To create failover resource record sets
     #
-    #   # The following example creates primary and secondary failover resource record sets that route traffic to EC2 instances. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.
+    #   # The following example creates primary and secondary failover resource record sets that route traffic to EC2 instances.
+    #   # Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is
+    #   # routed to the secondary resource, in the Oregon region.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -676,7 +686,9 @@ module Aws::Route53
     #
     # @example Example: To create failover alias resource record sets
     #
-    #   # The following example creates primary and secondary failover alias resource record sets that route traffic to ELB load balancers. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable, traffic is routed to the secondary resource, in the Oregon region.
+    #   # The following example creates primary and secondary failover alias resource record sets that route traffic to ELB load
+    #   # balancers. Traffic is generally routed to the primary resource, in the Ohio region. If that resource is unavailable,
+    #   # traffic is routed to the secondary resource, in the Oregon region.
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -727,7 +739,9 @@ module Aws::Route53
     #
     # @example Example: To create geolocation resource record sets
     #
-    #   # The following example creates four geolocation resource record sets that use IPv4 addresses to route traffic to resources such as web servers running on EC2 instances. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).
+    #   # The following example creates four geolocation resource record sets that use IPv4 addresses to route traffic to
+    #   # resources such as web servers running on EC2 instances. Traffic is routed to one of four IP addresses, for North America
+    #   # (NA), for South America (SA), for Europe (EU), and for all other locations (*).
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -818,7 +832,9 @@ module Aws::Route53
     #
     # @example Example: To create geolocation alias resource record sets
     #
-    #   # The following example creates four geolocation alias resource record sets that route traffic to ELB load balancers. Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for all other locations (*).
+    #   # The following example creates four geolocation alias resource record sets that route traffic to ELB load balancers.
+    #   # Traffic is routed to one of four IP addresses, for North America (NA), for South America (SA), for Europe (EU), and for
+    #   # all other locations (*).
     #
     #   resp = client.change_resource_record_sets({
     #     change_batch: {
@@ -4538,7 +4554,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

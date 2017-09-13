@@ -265,7 +265,8 @@ module Aws::Glacier
     #
     # @example Example: To abort a vault lock
     #
-    #   # The example aborts the vault locking process if the vault lock is not in the Locked state for the vault named examplevault.
+    #   # The example aborts the vault locking process if the vault lock is not in the Locked state for the vault named
+    #   # examplevault.
     #
     #   resp = client.abort_vault_lock({
     #     account_id: "-", 
@@ -516,7 +517,8 @@ module Aws::Glacier
     #
     # @example Example: To complete a vault lock
     #
-    #   # The example completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked state.
+    #   # The example completes the vault locking process by transitioning the vault lock from the InProgress state to the Locked
+    #   # state.
     #
     #   resp = client.complete_vault_lock({
     #     account_id: "-", 
@@ -1849,7 +1851,8 @@ module Aws::Glacier
     #
     # @example Example: To initiate a multipart upload
     #
-    #   # The example initiates a multipart upload to a vault named my-vault with a part size of 1 MiB (1024 x 1024 bytes) per file.
+    #   # The example initiates a multipart upload to a vault named my-vault with a part size of 1 MiB (1024 x 1024 bytes) per
+    #   # file.
     #
     #   resp = client.initiate_multipart_upload({
     #     account_id: "-", 
@@ -3210,7 +3213,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
