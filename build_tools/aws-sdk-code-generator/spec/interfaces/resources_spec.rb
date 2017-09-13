@@ -98,14 +98,14 @@ describe 'Interfaces' do
         end
 
         it 'supports nullable associations that return nil' do
-          data = double('band-data', fan_club_president: nil)
-          band = Sample::Band.new(name: 'band-name', data: data, client: client)
+          data = Struct.new(:fan_club_president)
+          band = Sample::Band.new(name: 'band-name', data: data.new(nil), client: client)
           expect(band.fan_club_president).to be(nil)
         end
 
         it 'supports nullable associations that return a value' do
-          data = double('band-data', fan_club_president: 'fan-name')
-          band = Sample::Band.new(name: 'band-name', data: data, client: client)
+          data = Struct.new(:fan_club_president)
+          band = Sample::Band.new(name: 'band-name', data: data.new('fan-name'), client: client)
           expect(band.fan_club_president).to be_kind_of(Sample::Fan)
           expect(band.fan_club_president.name).to eq('fan-name')
           expect(band.fan_club_president.client).to be(client)
@@ -309,6 +309,16 @@ describe 'Interfaces' do
           expect(ticket.purchase_price).to be(10)
         end
 
+        it 'allows data to be provided as hash' do
+          data = client.stub_data(:get_ticket, ticket:{purchase_price:10}).ticket
+          expect(client).not_to receive(:get_ticket)
+          data_hash = data.to_h
+          ticket = Sample::Ticket.new(123, data: data_hash, client: client)
+          expect(ticket.data).to be(data_hash)
+          expect(ticket.data_loaded?).to be(true)
+          expect(ticket.purchase_price).to be(10)
+        end
+
       end
 
       describe 'shape without load' do
@@ -372,7 +382,7 @@ describe 'Interfaces' do
       end
 
       it 'defines a read-only method for each data shape member' do
-        band = Sample::Band.new(name:'name', data: double('data', year_established:2000), client: client)
+        band = Sample::Band.new(name:'name', data: {:year_established => 2000}, client: client)
         expect(band).to respond_to(:band_name)
         expect(band).not_to respond_to(:band_name=)
         expect(band).to respond_to(:year_established)
@@ -517,10 +527,10 @@ describe 'Interfaces' do
       end
 
       it 'supports has associations without input' do
-        band_data = double('band-data', biggest_fans: [
-          double('fan', name: 'fan-1', age: 20),
-          double('fan', name: 'fan-2', age: 21),
-        ])
+        fan_struct = Struct.new(:name, :age)
+        data = Struct.new(:biggest_fans)
+        band_data = data.new([fan_struct.new('fan-1', 20), fan_struct.new('fan-2', 21)])
+
         band = Sample::Band.new(name: 'band-name', data: band_data, client: client)
         fan = band.biggest_fan
         expect(fan).to be_kind_of(Sample::Fan)
@@ -531,10 +541,10 @@ describe 'Interfaces' do
       end
 
       it 'supports plural has associations' do
-        band_data = double('band-data', biggest_fans: [
-          double('fan', name: 'fan-1', age: 20),
-          double('fan', name: 'fan-2', age: 21),
-        ])
+        fan_struct = Struct.new(:name, :age)
+        data = Struct.new(:biggest_fans)
+        band_data = data.new([fan_struct.new('fan-1', 20), fan_struct.new('fan-2', 21)])
+
         band = Sample::Band.new(name: 'band-name', data: band_data, client: client)
         fans = band.fan_club_leaders
         expect(fans).to be_kind_of(Sample::Fan::Collection)

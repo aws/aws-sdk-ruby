@@ -65,7 +65,7 @@ module AwsSdkCodeGenerator
       if path && path.include?('[]')
         prefix = loops.last.match(/\|(.+)\|/)[1]
         suffix = underscore(path[common_prefix.length..-1])
-        if @context == :options
+        unless @context == :response
           suffix = suffix.gsub(/\.\w+/) { |word| "[:#{word[1..-1]}]" }
         end
         suffix.length == 0 ? prefix : prefix + suffix
@@ -110,7 +110,7 @@ module AwsSdkCodeGenerator
     def loops
       loop_var =
         case @context
-        when :data then 'data.'
+        when :data then 'data'
         when :options then 'options'
         when :response then "#{@resp_var_name}.data."
         end
@@ -121,7 +121,7 @@ module AwsSdkCodeGenerator
       parts = common_prefix.split('[]')
       parts = parts.map.with_index do |part,n|
         part = underscore(part)
-        if @context == :options
+        unless @context == :response
           part = part.gsub(/\w+/) { |word| "[:#{word}]" }
           part = part.gsub(/\./, '')
         end

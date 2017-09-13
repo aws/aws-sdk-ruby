@@ -16,7 +16,9 @@ module AwsSdkCodeGenerator
       if path == '@'
         'data'
       elsif path.match(/^(\w(\[0\])?)+(\.\w+)*$/)
-        'data.' + underscore_path(path)
+        data_path = underscore_path(path).gsub(/\w+/) { |word| "[:#{word}]" }
+        # In case resource model path contains x.[:0].y
+        'data' + data_path.gsub(/\[\[\:/, '[').gsub(/\]\]/, ']').gsub(/\./, '')
       else
         raise "unsupported path: #{path.inspect}"
       end
