@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.45 (2017-09-13)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::Batch - Updated the documentation for AWS Batch.
