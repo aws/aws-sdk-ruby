@@ -5,10 +5,12 @@ Before("@ec2") do
 end
 
 After("@ec2") do
-  @volume_ids.each do |id|
-    @client.delete_volume(volume_id: id)
+  unless @volume_ids.empty?
+    @volume_ids.each do |id|
+      @client.delete_volume(volume_id: id)
+    end
+    @client.wait_until(:volume_deleted, volume_ids: @volume_ids)
   end
-  @client.wait_until(:volume_deleted, volume_ids: @volume_ids)
 end
 
 Given(/^I create a volume$/) do

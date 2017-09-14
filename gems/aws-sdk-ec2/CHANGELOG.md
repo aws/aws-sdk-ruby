@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update smoke test clean up steps
+
 1.6.0 (2017-09-14)
 ------------------
 
