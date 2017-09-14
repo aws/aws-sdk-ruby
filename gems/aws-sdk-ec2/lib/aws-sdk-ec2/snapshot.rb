@@ -40,19 +40,19 @@ module Aws::EC2
     # parameter is only returned by the DescribeSnapshots API operation.
     # @return [String]
     def data_encryption_key_id
-      data.data_encryption_key_id
+      data[:data_encryption_key_id]
     end
 
     # The description for the snapshot.
     # @return [String]
     def description
-      data.description
+      data[:description]
     end
 
     # Indicates whether the snapshot is encrypted.
     # @return [Boolean]
     def encrypted
-      data.encrypted
+      data[:encrypted]
     end
 
     # The full ARN of the AWS Key Management Service (AWS KMS) customer
@@ -60,31 +60,31 @@ module Aws::EC2
     # for the parent volume.
     # @return [String]
     def kms_key_id
-      data.kms_key_id
+      data[:kms_key_id]
     end
 
     # The AWS account ID of the EBS snapshot owner.
     # @return [String]
     def owner_id
-      data.owner_id
+      data[:owner_id]
     end
 
     # The progress of the snapshot, as a percentage.
     # @return [String]
     def progress
-      data.progress
+      data[:progress]
     end
 
     # The time stamp when the snapshot was initiated.
     # @return [Time]
     def start_time
-      data.start_time
+      data[:start_time]
     end
 
     # The snapshot state.
     # @return [String]
     def state
-      data.state
+      data[:state]
     end
 
     # Encrypted Amazon EBS snapshots are copied asynchronously. If a
@@ -95,7 +95,7 @@ module Aws::EC2
     # operation.
     # @return [String]
     def state_message
-      data.state_message
+      data[:state_message]
     end
 
     # The ID of the volume that was used to create the snapshot. Snapshots
@@ -103,13 +103,13 @@ module Aws::EC2
     # should not be used for any purpose.
     # @return [String]
     def volume_id
-      data.volume_id
+      data[:volume_id]
     end
 
     # The size of the volume, in GiB.
     # @return [Integer]
     def volume_size
-      data.volume_size
+      data[:volume_size]
     end
 
     # Value from an Amazon-maintained list (`amazon` \| `aws-marketplace` \|
@@ -117,13 +117,13 @@ module Aws::EC2
     # user-configured AWS account alias, which is set from the IAM console.
     # @return [String]
     def owner_alias
-      data.owner_alias
+      data[:owner_alias]
     end
 
     # Any tags assigned to the snapshot.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -177,6 +177,101 @@ module Aws::EC2
         data: resp.data.snapshots[],
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -416,9 +511,9 @@ module Aws::EC2
 
     # @return [Volume, nil]
     def volume
-      if data.volume_id
+      if data[:volume_id]
         Volume.new(
-          id: data.volume_id,
+          id: data[:volume_id],
           client: @client
         )
       else

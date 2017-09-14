@@ -34,26 +34,26 @@ module Aws::CloudWatch
     # The Amazon Resource Name (ARN) of the alarm.
     # @return [String]
     def alarm_arn
-      data.alarm_arn
+      data[:alarm_arn]
     end
 
     # The description of the alarm.
     # @return [String]
     def alarm_description
-      data.alarm_description
+      data[:alarm_description]
     end
 
     # The time stamp of the last update to the alarm configuration.
     # @return [Time]
     def alarm_configuration_updated_timestamp
-      data.alarm_configuration_updated_timestamp
+      data[:alarm_configuration_updated_timestamp]
     end
 
     # Indicates whether actions should be executed during any changes to the
     # alarm state.
     # @return [Boolean]
     def actions_enabled
-      data.actions_enabled
+      data[:actions_enabled]
     end
 
     # The actions to execute when this alarm transitions to the `OK` state
@@ -61,7 +61,7 @@ module Aws::CloudWatch
     # Name (ARN).
     # @return [Array<String>]
     def ok_actions
-      data.ok_actions
+      data[:ok_actions]
     end
 
     # The actions to execute when this alarm transitions to the `ALARM`
@@ -69,7 +69,7 @@ module Aws::CloudWatch
     # Resource Name (ARN).
     # @return [Array<String>]
     def alarm_actions
-      data.alarm_actions
+      data[:alarm_actions]
     end
 
     # The actions to execute when this alarm transitions to the
@@ -77,88 +77,88 @@ module Aws::CloudWatch
     # specified as an Amazon Resource Name (ARN).
     # @return [Array<String>]
     def insufficient_data_actions
-      data.insufficient_data_actions
+      data[:insufficient_data_actions]
     end
 
     # The state value for the alarm.
     # @return [String]
     def state_value
-      data.state_value
+      data[:state_value]
     end
 
     # An explanation for the alarm state, in text format.
     # @return [String]
     def state_reason
-      data.state_reason
+      data[:state_reason]
     end
 
     # An explanation for the alarm state, in JSON format.
     # @return [String]
     def state_reason_data
-      data.state_reason_data
+      data[:state_reason_data]
     end
 
     # The time stamp of the last update to the alarm state.
     # @return [Time]
     def state_updated_timestamp
-      data.state_updated_timestamp
+      data[:state_updated_timestamp]
     end
 
     # The name of the metric associated with the alarm.
     # @return [String]
     def metric_name
-      data.metric_name
+      data[:metric_name]
     end
 
     # The namespace of the metric associated with the alarm.
     # @return [String]
     def namespace
-      data.namespace
+      data[:namespace]
     end
 
     # The statistic for the metric associated with the alarm, other than
     # percentile. For percentile statistics, use `ExtendedStatistic`.
     # @return [String]
     def statistic
-      data.statistic
+      data[:statistic]
     end
 
     # The percentile statistic for the metric associated with the alarm.
     # Specify a value between p0.0 and p100.
     # @return [String]
     def extended_statistic
-      data.extended_statistic
+      data[:extended_statistic]
     end
 
     # The dimensions for the metric associated with the alarm.
     # @return [Array<Types::Dimension>]
     def dimensions
-      data.dimensions
+      data[:dimensions]
     end
 
     # The period, in seconds, over which the statistic is applied.
     # @return [Integer]
     def period
-      data.period
+      data[:period]
     end
 
     # The unit of the metric associated with the alarm.
     # @return [String]
     def unit
-      data.unit
+      data[:unit]
     end
 
     # The number of periods over which data is compared to the specified
     # threshold.
     # @return [Integer]
     def evaluation_periods
-      data.evaluation_periods
+      data[:evaluation_periods]
     end
 
     # The value to compare with the specified statistic.
     # @return [Float]
     def threshold
-      data.threshold
+      data[:threshold]
     end
 
     # The arithmetic operation to use when comparing the specified statistic
@@ -166,14 +166,14 @@ module Aws::CloudWatch
     # operand.
     # @return [String]
     def comparison_operator
-      data.comparison_operator
+      data[:comparison_operator]
     end
 
     # Sets how this alarm is to handle missing data points. If this
     # parameter is omitted, the default behavior of `missing` is used.
     # @return [String]
     def treat_missing_data
-      data.treat_missing_data
+      data[:treat_missing_data]
     end
 
     # Used only for alarms based on percentiles. If `ignore`, the alarm
@@ -183,7 +183,7 @@ module Aws::CloudWatch
     # matter how many data points are available.
     # @return [String]
     def evaluate_low_sample_count_percentile
-      data.evaluate_low_sample_count_percentile
+      data[:evaluate_low_sample_count_percentile]
     end
 
     # @!endgroup
@@ -250,6 +250,101 @@ module Aws::CloudWatch
         name: @name,
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::CloudWatch::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -342,10 +437,10 @@ module Aws::CloudWatch
 
     # @return [Metric, nil]
     def metric
-      if data.namespace && data.metric_name
+      if data[:namespace] && data[:metric_name]
         Metric.new(
-          namespace: data.namespace,
-          name: data.metric_name,
+          namespace: data[:namespace],
+          name: data[:metric_name],
           client: @client
         )
       else

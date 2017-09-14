@@ -34,7 +34,7 @@ module Aws::EC2
     # The Availability Zone of the subnet.
     # @return [String]
     def availability_zone
-      data.availability_zone
+      data[:availability_zone]
     end
 
     # The number of unused private IPv4 addresses in the subnet. Note that
@@ -42,39 +42,39 @@ module Aws::EC2
     # unavailable.
     # @return [Integer]
     def available_ip_address_count
-      data.available_ip_address_count
+      data[:available_ip_address_count]
     end
 
     # The IPv4 CIDR block assigned to the subnet.
     # @return [String]
     def cidr_block
-      data.cidr_block
+      data[:cidr_block]
     end
 
     # Indicates whether this is the default subnet for the Availability
     # Zone.
     # @return [Boolean]
     def default_for_az
-      data.default_for_az
+      data[:default_for_az]
     end
 
     # Indicates whether instances launched in this subnet receive a public
     # IPv4 address.
     # @return [Boolean]
     def map_public_ip_on_launch
-      data.map_public_ip_on_launch
+      data[:map_public_ip_on_launch]
     end
 
     # The current state of the subnet.
     # @return [String]
     def state
-      data.state
+      data[:state]
     end
 
     # The ID of the VPC the subnet is in.
     # @return [String]
     def vpc_id
-      data.vpc_id
+      data[:vpc_id]
     end
 
     # Indicates whether a network interface created in this subnet
@@ -82,19 +82,19 @@ module Aws::EC2
     # IPv6 address.
     # @return [Boolean]
     def assign_ipv_6_address_on_creation
-      data.assign_ipv_6_address_on_creation
+      data[:assign_ipv_6_address_on_creation]
     end
 
     # Information about the IPv6 CIDR blocks associated with the subnet.
     # @return [Array<Types::SubnetIpv6CidrBlockAssociation>]
     def ipv_6_cidr_block_association_set
-      data.ipv_6_cidr_block_association_set
+      data[:ipv_6_cidr_block_association_set]
     end
 
     # Any tags assigned to the subnet.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -130,6 +130,101 @@ module Aws::EC2
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -1025,9 +1120,9 @@ module Aws::EC2
 
     # @return [Vpc, nil]
     def vpc
-      if data.vpc_id
+      if data[:vpc_id]
         Vpc.new(
-          id: data.vpc_id,
+          id: data[:vpc_id],
           client: @client
         )
       else

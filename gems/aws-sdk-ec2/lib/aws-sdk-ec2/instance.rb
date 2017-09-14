@@ -35,56 +35,56 @@ module Aws::EC2
     # launch group.
     # @return [Integer]
     def ami_launch_index
-      data.ami_launch_index
+      data[:ami_launch_index]
     end
 
     # The ID of the AMI used to launch the instance.
     # @return [String]
     def image_id
-      data.image_id
+      data[:image_id]
     end
 
     # The instance type.
     # @return [String]
     def instance_type
-      data.instance_type
+      data[:instance_type]
     end
 
     # The kernel associated with this instance, if applicable.
     # @return [String]
     def kernel_id
-      data.kernel_id
+      data[:kernel_id]
     end
 
     # The name of the key pair, if this instance was launched with an
     # associated key pair.
     # @return [String]
     def key_name
-      data.key_name
+      data[:key_name]
     end
 
     # The time the instance was launched.
     # @return [Time]
     def launch_time
-      data.launch_time
+      data[:launch_time]
     end
 
     # The monitoring for the instance.
     # @return [Types::Monitoring]
     def monitoring
-      data.monitoring
+      data[:monitoring]
     end
 
     # The location where the instance launched, if applicable.
     # @return [Types::Placement]
     def placement
-      data.placement
+      data[:placement]
     end
 
     # The value is `Windows` for Windows instances; otherwise blank.
     # @return [String]
     def platform
-      data.platform
+      data[:platform]
     end
 
     # (IPv4 only) The private DNS hostname name assigned to the instance.
@@ -98,19 +98,19 @@ module Aws::EC2
     # servers must resolve the hostname as appropriate.
     # @return [String]
     def private_dns_name
-      data.private_dns_name
+      data[:private_dns_name]
     end
 
     # The private IPv4 address assigned to the instance.
     # @return [String]
     def private_ip_address
-      data.private_ip_address
+      data[:private_ip_address]
     end
 
     # The product codes attached to this instance, if applicable.
     # @return [Array<Types::ProductCode>]
     def product_codes
-      data.product_codes
+      data[:product_codes]
     end
 
     # (IPv4 only) The public DNS name assigned to the instance. This name is
@@ -119,63 +119,63 @@ module Aws::EC2
     # for your VPC.
     # @return [String]
     def public_dns_name
-      data.public_dns_name
+      data[:public_dns_name]
     end
 
     # The public IPv4 address assigned to the instance, if applicable.
     # @return [String]
     def public_ip_address
-      data.public_ip_address
+      data[:public_ip_address]
     end
 
     # The RAM disk associated with this instance, if applicable.
     # @return [String]
     def ramdisk_id
-      data.ramdisk_id
+      data[:ramdisk_id]
     end
 
     # The current state of the instance.
     # @return [Types::InstanceState]
     def state
-      data.state
+      data[:state]
     end
 
     # The reason for the most recent state transition. This might be an
     # empty string.
     # @return [String]
     def state_transition_reason
-      data.state_transition_reason
+      data[:state_transition_reason]
     end
 
     # \[EC2-VPC\] The ID of the subnet in which the instance is running.
     # @return [String]
     def subnet_id
-      data.subnet_id
+      data[:subnet_id]
     end
 
     # \[EC2-VPC\] The ID of the VPC in which the instance is running.
     # @return [String]
     def vpc_id
-      data.vpc_id
+      data[:vpc_id]
     end
 
     # The architecture of the image.
     # @return [String]
     def architecture
-      data.architecture
+      data[:architecture]
     end
 
     # Any block device mapping entries for the instance.
     # @return [Array<Types::InstanceBlockDeviceMapping>]
     def block_device_mappings
-      data.block_device_mappings
+      data[:block_device_mappings]
     end
 
     # The idempotency token you provided when you launched the instance, if
     # applicable.
     # @return [String]
     def client_token
-      data.client_token
+      data[:client_token]
     end
 
     # Indicates whether the instance is optimized for EBS I/O. This
@@ -185,56 +185,56 @@ module Aws::EC2
     # usage charges apply when using an EBS Optimized instance.
     # @return [Boolean]
     def ebs_optimized
-      data.ebs_optimized
+      data[:ebs_optimized]
     end
 
     # Specifies whether enhanced networking with ENA is enabled.
     # @return [Boolean]
     def ena_support
-      data.ena_support
+      data[:ena_support]
     end
 
     # The hypervisor type of the instance.
     # @return [String]
     def hypervisor
-      data.hypervisor
+      data[:hypervisor]
     end
 
     # The IAM instance profile associated with the instance, if applicable.
     # @return [Types::IamInstanceProfile]
     def iam_instance_profile
-      data.iam_instance_profile
+      data[:iam_instance_profile]
     end
 
     # Indicates whether this is a Spot instance or a Scheduled Instance.
     # @return [String]
     def instance_lifecycle
-      data.instance_lifecycle
+      data[:instance_lifecycle]
     end
 
     # The Elastic GPU associated with the instance.
     # @return [Array<Types::ElasticGpuAssociation>]
     def elastic_gpu_associations
-      data.elastic_gpu_associations
+      data[:elastic_gpu_associations]
     end
 
     # The root device name (for example, `/dev/sda1` or `/dev/xvda`).
     # @return [String]
     def root_device_name
-      data.root_device_name
+      data[:root_device_name]
     end
 
     # The root device type used by the AMI. The AMI can use an EBS volume or
     # an instance store volume.
     # @return [String]
     def root_device_type
-      data.root_device_type
+      data[:root_device_type]
     end
 
     # One or more security groups for the instance.
     # @return [Array<Types::GroupIdentifier>]
     def security_groups
-      data.security_groups
+      data[:security_groups]
     end
 
     # Specifies whether to enable an instance launched in a VPC to perform
@@ -249,38 +249,38 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     # @return [Boolean]
     def source_dest_check
-      data.source_dest_check
+      data[:source_dest_check]
     end
 
     # If the request is a Spot instance request, the ID of the request.
     # @return [String]
     def spot_instance_request_id
-      data.spot_instance_request_id
+      data[:spot_instance_request_id]
     end
 
     # Specifies whether enhanced networking with the Intel 82599 Virtual
     # Function interface is enabled.
     # @return [String]
     def sriov_net_support
-      data.sriov_net_support
+      data[:sriov_net_support]
     end
 
     # The reason for the most recent state transition.
     # @return [Types::StateReason]
     def state_reason
-      data.state_reason
+      data[:state_reason]
     end
 
     # Any tags assigned to the instance.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # The virtualization type of the instance.
     # @return [String]
     def virtualization_type
-      data.virtualization_type
+      data[:virtualization_type]
     end
 
     # @!endgroup
@@ -402,6 +402,101 @@ module Aws::EC2
         data: resp.data.reservations[0].instances[0],
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -1072,9 +1167,9 @@ module Aws::EC2
 
     # @return [ClassicAddress, nil]
     def classic_address
-      if data.public_ip_address
+      if data[:public_ip_address]
         ClassicAddress.new(
-          public_ip: data.public_ip_address,
+          public_ip: data[:public_ip_address],
           client: @client
         )
       else
@@ -1084,9 +1179,9 @@ module Aws::EC2
 
     # @return [Image, nil]
     def image
-      if data.image_id
+      if data[:image_id]
         Image.new(
-          id: data.image_id,
+          id: data[:image_id],
           client: @client
         )
       else
@@ -1096,9 +1191,9 @@ module Aws::EC2
 
     # @return [KeyPairInfo, nil]
     def key_pair
-      if data.key_name
+      if data[:key_name]
         KeyPairInfo.new(
-          name: data.key_name,
+          name: data[:key_name],
           client: @client
         )
       else
@@ -1109,10 +1204,10 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces
       batch = []
-      data.network_interfaces.each do |n|
+      data[:network_interfaces].each do |d|
         batch << NetworkInterface.new(
-          id: n.network_interface_id,
-          data: n,
+          id: d[:network_interface_id],
+          data: d,
           client: @client
         )
       end
@@ -1121,9 +1216,9 @@ module Aws::EC2
 
     # @return [PlacementGroup, nil]
     def placement_group
-      if data.placement.group_name
+      if data[:placement][:group_name]
         PlacementGroup.new(
-          name: data.placement.group_name,
+          name: data[:placement][:group_name],
           client: @client
         )
       else
@@ -1133,9 +1228,9 @@ module Aws::EC2
 
     # @return [Subnet, nil]
     def subnet
-      if data.subnet_id
+      if data[:subnet_id]
         Subnet.new(
-          id: data.subnet_id,
+          id: data[:subnet_id],
           client: @client
         )
       else
@@ -1243,9 +1338,9 @@ module Aws::EC2
 
     # @return [Vpc, nil]
     def vpc
-      if data.vpc_id
+      if data[:vpc_id]
         Vpc.new(
-          id: data.vpc_id,
+          id: data[:vpc_id],
           client: @client
         )
       else

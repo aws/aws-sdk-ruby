@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2017-09-14)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-sns` gemspec metadata.
 
 1.0.0 (2017-08-29)

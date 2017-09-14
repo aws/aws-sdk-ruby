@@ -577,7 +577,9 @@ module Aws::Organizations
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
     #   This email address must not already be associated with another AWS
-    #   account.
+    #   account. You must use a valid email address to complete account
+    #   creation. You cannot access the root user of the account or remove an
+    #   account that was created with an invalid email address.
     #
     # @option params [required, String] :account_name
     #   The friendly name of the member account.
@@ -1732,8 +1734,8 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Disables an organizational control policy type in a root. A poicy of a
-    # certain type can be attached to entities in a root only if that type
+    # Disables an organizational control policy type in a root. A policy of
+    # a certain type can be attached to entities in a root only if that type
     # is enabled in the root. After you perform this operation, you no
     # longer can attach policies of the specified type to that root or to
     # any OU or account in that root. You can undo this by using the
@@ -2021,14 +2023,14 @@ module Aws::Organizations
     #   If you use the AWS CLI, you can submit this as a single string,
     #   similar to the following example:
     #
-    #   `--target id=123456789012,type=ACCOUNT`
+    #   `--target Id=123456789012,Type=ACCOUNT`
     #
     #   If you specify `"Type": "ACCOUNT"`, then you must provide the AWS
     #   account ID number as the `Id`. If you specify `"Type": "EMAIL"`, then
     #   you must specify the email address that is associated with the
     #   account.
     #
-    #   `--target id=bill@example.com,type=EMAIL`
+    #   `--target Id=bill@example.com,Type=EMAIL`
     #
     # @option params [String] :notes
     #   Additional information that you want to include in the generated email
@@ -3874,7 +3876,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -44,103 +44,103 @@ module Aws::RDS
     # cluster snapshot can be restored in.
     # @return [Array<String>]
     def availability_zones
-      data.availability_zones
+      data[:availability_zones]
     end
 
     # Provides the time when the snapshot was taken, in Universal
     # Coordinated Time (UTC).
     # @return [Time]
     def snapshot_create_time
-      data.snapshot_create_time
+      data[:snapshot_create_time]
     end
 
     # Specifies the name of the database engine.
     # @return [String]
     def engine
-      data.engine
+      data[:engine]
     end
 
     # Specifies the allocated storage size in gigabytes (GB).
     # @return [Integer]
     def allocated_storage
-      data.allocated_storage
+      data[:allocated_storage]
     end
 
     # Specifies the status of this DB cluster snapshot.
     # @return [String]
     def status
-      data.status
+      data[:status]
     end
 
     # Specifies the port that the DB cluster was listening on at the time of
     # the snapshot.
     # @return [Integer]
     def port
-      data.port
+      data[:port]
     end
 
     # Provides the VPC ID associated with the DB cluster snapshot.
     # @return [String]
     def vpc_id
-      data.vpc_id
+      data[:vpc_id]
     end
 
     # Specifies the time when the DB cluster was created, in Universal
     # Coordinated Time (UTC).
     # @return [Time]
     def cluster_create_time
-      data.cluster_create_time
+      data[:cluster_create_time]
     end
 
     # Provides the master username for the DB cluster snapshot.
     # @return [String]
     def master_username
-      data.master_username
+      data[:master_username]
     end
 
     # Provides the version of the database engine for this DB cluster
     # snapshot.
     # @return [String]
     def engine_version
-      data.engine_version
+      data[:engine_version]
     end
 
     # Provides the license model information for this DB cluster snapshot.
     # @return [String]
     def license_model
-      data.license_model
+      data[:license_model]
     end
 
     # Provides the type of the DB cluster snapshot.
     # @return [String]
     def snapshot_type
-      data.snapshot_type
+      data[:snapshot_type]
     end
 
     # Specifies the percentage of the estimated data that has been
     # transferred.
     # @return [Integer]
     def percent_progress
-      data.percent_progress
+      data[:percent_progress]
     end
 
     # Specifies whether the DB cluster snapshot is encrypted.
     # @return [Boolean]
     def storage_encrypted
-      data.storage_encrypted
+      data[:storage_encrypted]
     end
 
     # If `StorageEncrypted` is true, the KMS key identifier for the
     # encrypted DB cluster snapshot.
     # @return [String]
     def kms_key_id
-      data.kms_key_id
+      data[:kms_key_id]
     end
 
     # The Amazon Resource Name (ARN) for the DB cluster snapshot.
     # @return [String]
     def db_cluster_snapshot_arn
-      data.db_cluster_snapshot_arn
+      data[:db_cluster_snapshot_arn]
     end
 
     # If the DB cluster snapshot was copied from a source DB cluster
@@ -148,14 +148,14 @@ module Aws::RDS
     # snapshot; otherwise, a null value.
     # @return [String]
     def source_db_cluster_snapshot_arn
-      data.source_db_cluster_snapshot_arn
+      data[:source_db_cluster_snapshot_arn]
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
     # to database accounts is enabled; otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
-      data.iam_database_authentication_enabled
+      data[:iam_database_authentication_enabled]
     end
 
     # @!endgroup
@@ -191,6 +191,101 @@ module Aws::RDS
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::RDS::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

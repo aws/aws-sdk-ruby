@@ -17,16 +17,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -90,16 +87,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -139,16 +133,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -252,6 +243,90 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         source_product_arn: "ProductArn", # required
+    #         target_product_id: "Id",
+    #         target_product_name: "ProductViewName",
+    #         source_provisioning_artifact_identifiers: [
+    #           {
+    #             "Id" => "ProvisioningArtifactPropertyValue",
+    #           },
+    #         ],
+    #         copy_options: ["CopyTags"], # accepts CopyTags
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] source_product_arn
+    #   The Amazon Resource Name (ARN) of the source product.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_product_id
+    #   The ID of the target product. By default, a new product is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_product_name
+    #   A name for the target product. The default is the name of the source
+    #   product.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_provisioning_artifact_identifiers
+    #   The IDs of the product versions to copy. By default, all
+    #   provisioning artifacts are copied.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @!attribute [rw] copy_options
+    #   The copy options. If the value is `CopyTags`, the tags from the
+    #   source product are copied to the target product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductInput AWS API Documentation
+    #
+    class CopyProductInput < Struct.new(
+      :accept_language,
+      :source_product_arn,
+      :target_product_id,
+      :target_product_name,
+      :source_provisioning_artifact_identifiers,
+      :copy_options,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_product_token
+    #   A unique token to pass to `DescribeCopyProductStatus` to track the
+    #   progress of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductOutput AWS API Documentation
+    #
+    class CopyProductOutput < Struct.new(
+      :copy_product_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateConstraintInput
     #   data as a hash:
     #
@@ -266,16 +341,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -288,7 +360,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] parameters
     #   The constraint parameters. Expected values vary depending on which
-    #   **Type** is specified. For examples, see the bottom of this topic.
+    #   **Type** is specified. For more information, see the Examples
+    #   section.
     #
     #   For Type `LAUNCH`, the `RoleArn` property is required.
     #
@@ -308,9 +381,9 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that
-    #   you also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -368,16 +441,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -397,9 +467,9 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that
-    #   you also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -443,16 +513,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -507,16 +574,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -560,9 +624,9 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that
-    #   you also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -625,16 +689,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -646,9 +707,9 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that
-    #   you also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -730,16 +791,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -767,16 +825,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -805,16 +860,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -847,16 +899,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -885,16 +934,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -928,16 +974,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -973,6 +1016,58 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCopyProductStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         copy_product_token: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_product_token
+    #   The token returned from the call to `CopyProduct` that initiated the
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatusInput AWS API Documentation
+    #
+    class DescribeCopyProductStatusInput < Struct.new(
+      :accept_language,
+      :copy_product_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_product_status
+    #   The status of the copy product operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_product_id
+    #   The ID of the copied product.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_detail
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatusOutput AWS API Documentation
+    #
+    class DescribeCopyProductStatusOutput < Struct.new(
+      :copy_product_status,
+      :target_product_id,
+      :status_detail)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePortfolioInput
     #   data as a hash:
     #
@@ -982,16 +1077,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1036,16 +1128,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1095,16 +1184,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1146,16 +1232,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1197,16 +1280,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1243,16 +1323,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
@@ -1310,16 +1387,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1390,16 +1464,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1493,16 +1564,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -1536,16 +1604,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1637,16 +1702,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] page_token
@@ -1698,16 +1760,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -1768,16 +1827,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1833,16 +1889,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -1885,16 +1938,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1949,16 +1999,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] page_token
@@ -2009,16 +2056,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -2072,16 +2116,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -2131,16 +2172,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] access_level_filter
@@ -2582,16 +2620,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -2714,9 +2749,9 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that
-    #   you also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same
+    #   input in multiple requests, provided that you also specify a
+    #   different idempotency token for each request.
     #   @return [String]
     #
     # @!attribute [rw] last_record_id
@@ -3120,16 +3155,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -3195,16 +3227,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] access_level_filter
@@ -3267,16 +3296,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] portfolio_id
@@ -3360,16 +3386,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -3549,16 +3572,13 @@ module Aws::ServiceCatalog
     #   @return [Boolean]
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput AWS API Documentation
@@ -3596,16 +3616,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -3665,16 +3682,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -3755,16 +3769,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -3863,16 +3874,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
@@ -3955,16 +3963,13 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] accept_language
-    #   The language code to use for this operation. Supported language
-    #   codes are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #   @return [String]
     #
     # @!attribute [rw] product_id

@@ -33,19 +33,19 @@ module Aws::OpsWorks
     # The stack ID.
     # @return [String]
     def stack_id
-      data.stack_id
+      data[:stack_id]
     end
 
     # The stack name.
     # @return [String]
     def name
-      data.name
+      data[:name]
     end
 
     # The stack's ARN.
     # @return [String]
     def arn
-      data.arn
+      data[:arn]
     end
 
     # The stack AWS region, such as "ap-northeast-2". For more information
@@ -56,25 +56,25 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
     # @return [String]
     def region
-      data.region
+      data[:region]
     end
 
     # The VPC ID; applicable only if the stack is running in a VPC.
     # @return [String]
     def vpc_id
-      data.vpc_id
+      data[:vpc_id]
     end
 
     # The stack's attributes.
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # The stack AWS Identity and Access Management (IAM) role.
     # @return [String]
     def service_role_arn
-      data.service_role_arn
+      data[:service_role_arn]
     end
 
     # The ARN of an IAM profile that is the default profile for all of the
@@ -86,19 +86,19 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def default_instance_profile_arn
-      data.default_instance_profile_arn
+      data[:default_instance_profile_arn]
     end
 
     # The stack's default operating system.
     # @return [String]
     def default_os
-      data.default_os
+      data[:default_os]
     end
 
     # The stack host name theme, with spaces replaced by underscores.
     # @return [String]
     def hostname_theme
-      data.hostname_theme
+      data[:hostname_theme]
     end
 
     # The stack's default Availability Zone. For more information, see
@@ -109,14 +109,14 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
     # @return [String]
     def default_availability_zone
-      data.default_availability_zone
+      data[:default_availability_zone]
     end
 
     # The default subnet ID; applicable only if the stack is running in a
     # VPC.
     # @return [String]
     def default_subnet_id
-      data.default_subnet_id
+      data[:default_subnet_id]
     end
 
     # A JSON object that contains user-defined attributes to be added to the
@@ -135,13 +135,13 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     # @return [String]
     def custom_json
-      data.custom_json
+      data[:custom_json]
     end
 
     # The configuration manager.
     # @return [Types::StackConfigurationManager]
     def configuration_manager
-      data.configuration_manager
+      data[:configuration_manager]
     end
 
     # A `ChefConfiguration` object that specifies whether to enable
@@ -153,20 +153,20 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     # @return [Types::ChefConfiguration]
     def chef_configuration
-      data.chef_configuration
+      data[:chef_configuration]
     end
 
     # Whether the stack uses custom cookbooks.
     # @return [Boolean]
     def use_custom_cookbooks
-      data.use_custom_cookbooks
+      data[:use_custom_cookbooks]
     end
 
     # Whether the stack automatically associates the AWS OpsWorks Stacks
     # built-in security groups with the stack's layers.
     # @return [Boolean]
     def use_opsworks_security_groups
-      data.use_opsworks_security_groups
+      data[:use_opsworks_security_groups]
     end
 
     # Contains the information required to retrieve an app or cookbook from
@@ -179,20 +179,20 @@ module Aws::OpsWorks
     # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     # @return [Types::Source]
     def custom_cookbooks_source
-      data.custom_cookbooks_source
+      data[:custom_cookbooks_source]
     end
 
     # A default Amazon EC2 key pair for the stack's instances. You can
     # override this value when you create or update an instance.
     # @return [String]
     def default_ssh_key_name
-      data.default_ssh_key_name
+      data[:default_ssh_key_name]
     end
 
     # The date when the stack was created.
     # @return [String]
     def created_at
-      data.created_at
+      data[:created_at]
     end
 
     # The default root device type. This value is used by default for all
@@ -204,14 +204,14 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     # @return [String]
     def default_root_device_type
-      data.default_root_device_type
+      data[:default_root_device_type]
     end
 
     # The agent version. This parameter is set to `LATEST` for auto-update.
     # or a version number for a fixed agent version.
     # @return [String]
     def agent_version
-      data.agent_version
+      data[:agent_version]
     end
 
     # @!endgroup
@@ -247,6 +247,101 @@ module Aws::OpsWorks
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::OpsWorks::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

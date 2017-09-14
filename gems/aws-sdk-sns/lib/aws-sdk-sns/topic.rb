@@ -59,7 +59,7 @@ module Aws::SNS
     #   delivery policy that takes into account system defaults
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # @!endgroup

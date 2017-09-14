@@ -34,38 +34,38 @@ module Aws::CloudFormation
     # Unique identifier of the stack.
     # @return [String]
     def stack_id
-      data.stack_id
+      data[:stack_id]
     end
 
     # The unique ID of the change set.
     # @return [String]
     def change_set_id
-      data.change_set_id
+      data[:change_set_id]
     end
 
     # A user-defined description associated with the stack.
     # @return [String]
     def description
-      data.description
+      data[:description]
     end
 
     # A list of `Parameter` structures.
     # @return [Array<Types::Parameter>]
     def parameters
-      data.parameters
+      data[:parameters]
     end
 
     # The time at which the stack was created.
     # @return [Time]
     def creation_time
-      data.creation_time
+      data[:creation_time]
     end
 
     # The time the stack was last updated. This field will only be returned
     # if the stack has been updated at least once.
     # @return [Time]
     def last_updated_time
-      data.last_updated_time
+      data[:last_updated_time]
     end
 
     # The rollback triggers for AWS CloudFormation to monitor during stack
@@ -73,19 +73,19 @@ module Aws::CloudFormation
     # period afterwards.
     # @return [Types::RollbackConfiguration]
     def rollback_configuration
-      data.rollback_configuration
+      data[:rollback_configuration]
     end
 
     # Current status of the stack.
     # @return [String]
     def stack_status
-      data.stack_status
+      data[:stack_status]
     end
 
     # Success/failure message associated with the stack status.
     # @return [String]
     def stack_status_reason
-      data.stack_status_reason
+      data[:stack_status_reason]
     end
 
     # Boolean to enable or disable rollback on stack creation failures:
@@ -95,31 +95,31 @@ module Aws::CloudFormation
     # * `false`\: enable rollback
     # @return [Boolean]
     def disable_rollback
-      data.disable_rollback
+      data[:disable_rollback]
     end
 
     # SNS topic ARNs to which stack related events are published.
     # @return [Array<String>]
     def notification_arns
-      data.notification_arns
+      data[:notification_arns]
     end
 
     # The amount of time within which stack creation should complete.
     # @return [Integer]
     def timeout_in_minutes
-      data.timeout_in_minutes
+      data[:timeout_in_minutes]
     end
 
     # The capabilities allowed in the stack.
     # @return [Array<String>]
     def capabilities
-      data.capabilities
+      data[:capabilities]
     end
 
     # A list of output structures.
     # @return [Array<Types::Output>]
     def outputs
-      data.outputs
+      data[:outputs]
     end
 
     # The Amazon Resource Name (ARN) of an AWS Identity and Access
@@ -128,13 +128,13 @@ module Aws::CloudFormation
     # make calls on your behalf.
     # @return [String]
     def role_arn
-      data.role_arn
+      data[:role_arn]
     end
 
     # A list of `Tag`s that specify information about the stack.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -201,6 +201,101 @@ module Aws::CloudFormation
         name: @name,
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::CloudFormation::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

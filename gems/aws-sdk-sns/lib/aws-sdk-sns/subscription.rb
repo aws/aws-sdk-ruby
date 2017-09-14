@@ -50,7 +50,7 @@ module Aws::SNS
     #   and account system defaults
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # @!endgroup

@@ -46,7 +46,7 @@ module Aws::SNS
     #   (permanent) to one of the application's endpoints.
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # @!endgroup

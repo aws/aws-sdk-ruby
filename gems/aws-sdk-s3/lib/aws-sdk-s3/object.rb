@@ -43,12 +43,12 @@ module Aws::S3
     # response.
     # @return [Boolean]
     def delete_marker
-      data.delete_marker
+      data[:delete_marker]
     end
 
     # @return [String]
     def accept_ranges
-      data.accept_ranges
+      data[:accept_ranges]
     end
 
     # If the object expiration is configured (see PUT Bucket lifecycle), the
@@ -57,33 +57,33 @@ module Aws::S3
     # the rule-id is URL encoded.
     # @return [String]
     def expiration
-      data.expiration
+      data[:expiration]
     end
 
     # Provides information about object restoration operation and expiration
     # time of the restored object copy.
     # @return [String]
     def restore
-      data.restore
+      data[:restore]
     end
 
     # Last modified date of the object
     # @return [Time]
     def last_modified
-      data.last_modified
+      data[:last_modified]
     end
 
     # Size of the body in bytes.
     # @return [Integer]
     def content_length
-      data.content_length
+      data[:content_length]
     end
 
     # An ETag is an opaque identifier assigned by a web server to a specific
     # version of a resource found at a URL
     # @return [String]
     def etag
-      data.etag
+      data[:etag]
     end
 
     # This is set to the number of metadata entries not returned in
@@ -93,25 +93,25 @@ module Aws::S3
     # legal HTTP headers.
     # @return [Integer]
     def missing_meta
-      data.missing_meta
+      data[:missing_meta]
     end
 
     # Version of the object.
     # @return [String]
     def version_id
-      data.version_id
+      data[:version_id]
     end
 
     # Specifies caching behavior along the request/reply chain.
     # @return [String]
     def cache_control
-      data.cache_control
+      data[:cache_control]
     end
 
     # Specifies presentational information for the object.
     # @return [String]
     def content_disposition
-      data.content_disposition
+      data[:content_disposition]
     end
 
     # Specifies what content encodings have been applied to the object and
@@ -119,30 +119,30 @@ module Aws::S3
     # referenced by the Content-Type header field.
     # @return [String]
     def content_encoding
-      data.content_encoding
+      data[:content_encoding]
     end
 
     # The language the content is in.
     # @return [String]
     def content_language
-      data.content_language
+      data[:content_language]
     end
 
     # A standard MIME type describing the format of the object data.
     # @return [String]
     def content_type
-      data.content_type
+      data[:content_type]
     end
 
     # The date and time at which the object is no longer cacheable.
     # @return [Time]
     def expires
-      data.expires
+      data[:expires]
     end
 
     # @return [String]
     def expires_string
-      data.expires_string
+      data[:expires_string]
     end
 
     # If the bucket is configured as a website, redirects requests for this
@@ -150,20 +150,20 @@ module Aws::S3
     # Amazon S3 stores the value of this header in the object metadata.
     # @return [String]
     def website_redirect_location
-      data.website_redirect_location
+      data[:website_redirect_location]
     end
 
     # The Server-side encryption algorithm used when storing this object in
     # S3 (e.g., AES256, aws:kms).
     # @return [String]
     def server_side_encryption
-      data.server_side_encryption
+      data[:server_side_encryption]
     end
 
     # A map of metadata to store with the object in S3.
     # @return [Hash<String,String>]
     def metadata
-      data.metadata
+      data[:metadata]
     end
 
     # If server-side encryption with a customer-provided encryption key was
@@ -171,7 +171,7 @@ module Aws::S3
     # encryption algorithm used.
     # @return [String]
     def sse_customer_algorithm
-      data.sse_customer_algorithm
+      data[:sse_customer_algorithm]
     end
 
     # If server-side encryption with a customer-provided encryption key was
@@ -180,37 +180,37 @@ module Aws::S3
     # key.
     # @return [String]
     def sse_customer_key_md5
-      data.sse_customer_key_md5
+      data[:sse_customer_key_md5]
     end
 
     # If present, specifies the ID of the AWS Key Management Service (KMS)
     # master encryption key that was used for the object.
     # @return [String]
     def ssekms_key_id
-      data.ssekms_key_id
+      data[:ssekms_key_id]
     end
 
     # @return [String]
     def storage_class
-      data.storage_class
+      data[:storage_class]
     end
 
     # If present, indicates that the requester was successfully charged for
     # the request.
     # @return [String]
     def request_charged
-      data.request_charged
+      data[:request_charged]
     end
 
     # @return [String]
     def replication_status
-      data.replication_status
+      data[:replication_status]
     end
 
     # The count of parts this object has.
     # @return [Integer]
     def parts_count
-      data.parts_count
+      data[:parts_count]
     end
 
     # @!endgroup
@@ -301,6 +301,101 @@ module Aws::S3
         key: @key,
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::S3::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

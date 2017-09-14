@@ -37,6 +37,11 @@ module Aws::ServiceCatalog
     ConstraintSummaries = Shapes::ListShape.new(name: 'ConstraintSummaries')
     ConstraintSummary = Shapes::StructureShape.new(name: 'ConstraintSummary')
     ConstraintType = Shapes::StringShape.new(name: 'ConstraintType')
+    CopyOption = Shapes::StringShape.new(name: 'CopyOption')
+    CopyOptions = Shapes::ListShape.new(name: 'CopyOptions')
+    CopyProductInput = Shapes::StructureShape.new(name: 'CopyProductInput')
+    CopyProductOutput = Shapes::StructureShape.new(name: 'CopyProductOutput')
+    CopyProductStatus = Shapes::StringShape.new(name: 'CopyProductStatus')
     CreateConstraintInput = Shapes::StructureShape.new(name: 'CreateConstraintInput')
     CreateConstraintOutput = Shapes::StructureShape.new(name: 'CreateConstraintOutput')
     CreatePortfolioInput = Shapes::StructureShape.new(name: 'CreatePortfolioInput')
@@ -64,6 +69,8 @@ module Aws::ServiceCatalog
     DeleteProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'DeleteProvisioningArtifactOutput')
     DescribeConstraintInput = Shapes::StructureShape.new(name: 'DescribeConstraintInput')
     DescribeConstraintOutput = Shapes::StructureShape.new(name: 'DescribeConstraintOutput')
+    DescribeCopyProductStatusInput = Shapes::StructureShape.new(name: 'DescribeCopyProductStatusInput')
+    DescribeCopyProductStatusOutput = Shapes::StructureShape.new(name: 'DescribeCopyProductStatusOutput')
     DescribePortfolioInput = Shapes::StructureShape.new(name: 'DescribePortfolioInput')
     DescribePortfolioOutput = Shapes::StructureShape.new(name: 'DescribePortfolioOutput')
     DescribeProductAsAdminInput = Shapes::StructureShape.new(name: 'DescribeProductAsAdminInput')
@@ -148,6 +155,7 @@ module Aws::ServiceCatalog
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     Principals = Shapes::ListShape.new(name: 'Principals')
+    ProductArn = Shapes::StringShape.new(name: 'ProductArn')
     ProductSource = Shapes::StringShape.new(name: 'ProductSource')
     ProductType = Shapes::StringShape.new(name: 'ProductType')
     ProductViewAggregationType = Shapes::StringShape.new(name: 'ProductViewAggregationType')
@@ -190,6 +198,8 @@ module Aws::ServiceCatalog
     ProvisioningArtifactParameter = Shapes::StructureShape.new(name: 'ProvisioningArtifactParameter')
     ProvisioningArtifactParameters = Shapes::ListShape.new(name: 'ProvisioningArtifactParameters')
     ProvisioningArtifactProperties = Shapes::StructureShape.new(name: 'ProvisioningArtifactProperties')
+    ProvisioningArtifactPropertyName = Shapes::StringShape.new(name: 'ProvisioningArtifactPropertyName')
+    ProvisioningArtifactPropertyValue = Shapes::StringShape.new(name: 'ProvisioningArtifactPropertyValue')
     ProvisioningArtifactSummaries = Shapes::ListShape.new(name: 'ProvisioningArtifactSummaries')
     ProvisioningArtifactSummary = Shapes::StructureShape.new(name: 'ProvisioningArtifactSummary')
     ProvisioningArtifactType = Shapes::StringShape.new(name: 'ProvisioningArtifactType')
@@ -231,7 +241,10 @@ module Aws::ServiceCatalog
     SearchProductsInput = Shapes::StructureShape.new(name: 'SearchProductsInput')
     SearchProductsOutput = Shapes::StructureShape.new(name: 'SearchProductsOutput')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SourceProvisioningArtifactProperties = Shapes::ListShape.new(name: 'SourceProvisioningArtifactProperties')
+    SourceProvisioningArtifactPropertiesMap = Shapes::MapShape.new(name: 'SourceProvisioningArtifactPropertiesMap')
     Status = Shapes::StringShape.new(name: 'Status')
+    StatusDetail = Shapes::StringShape.new(name: 'StatusDetail')
     SupportDescription = Shapes::StringShape.new(name: 'SupportDescription')
     SupportEmail = Shapes::StringShape.new(name: 'SupportEmail')
     SupportUrl = Shapes::StringShape.new(name: 'SupportUrl')
@@ -323,6 +336,20 @@ module Aws::ServiceCatalog
     ConstraintSummary.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, location_name: "Type"))
     ConstraintSummary.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
     ConstraintSummary.struct_class = Types::ConstraintSummary
+
+    CopyOptions.member = Shapes::ShapeRef.new(shape: CopyOption)
+
+    CopyProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    CopyProductInput.add_member(:source_product_arn, Shapes::ShapeRef.new(shape: ProductArn, required: true, location_name: "SourceProductArn"))
+    CopyProductInput.add_member(:target_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "TargetProductId"))
+    CopyProductInput.add_member(:target_product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "TargetProductName"))
+    CopyProductInput.add_member(:source_provisioning_artifact_identifiers, Shapes::ShapeRef.new(shape: SourceProvisioningArtifactProperties, location_name: "SourceProvisioningArtifactIdentifiers"))
+    CopyProductInput.add_member(:copy_options, Shapes::ShapeRef.new(shape: CopyOptions, location_name: "CopyOptions"))
+    CopyProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CopyProductInput.struct_class = Types::CopyProductInput
+
+    CopyProductOutput.add_member(:copy_product_token, Shapes::ShapeRef.new(shape: Id, location_name: "CopyProductToken"))
+    CopyProductOutput.struct_class = Types::CopyProductOutput
 
     CreateConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     CreateConstraintInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
@@ -434,6 +461,15 @@ module Aws::ServiceCatalog
     DescribeConstraintOutput.add_member(:constraint_parameters, Shapes::ShapeRef.new(shape: ConstraintParameters, location_name: "ConstraintParameters"))
     DescribeConstraintOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     DescribeConstraintOutput.struct_class = Types::DescribeConstraintOutput
+
+    DescribeCopyProductStatusInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DescribeCopyProductStatusInput.add_member(:copy_product_token, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "CopyProductToken"))
+    DescribeCopyProductStatusInput.struct_class = Types::DescribeCopyProductStatusInput
+
+    DescribeCopyProductStatusOutput.add_member(:copy_product_status, Shapes::ShapeRef.new(shape: CopyProductStatus, location_name: "CopyProductStatus"))
+    DescribeCopyProductStatusOutput.add_member(:target_product_id, Shapes::ShapeRef.new(shape: Id, location_name: "TargetProductId"))
+    DescribeCopyProductStatusOutput.add_member(:status_detail, Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
+    DescribeCopyProductStatusOutput.struct_class = Types::DescribeCopyProductStatusOutput
 
     DescribePortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribePortfolioInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
@@ -883,6 +919,11 @@ module Aws::ServiceCatalog
     SearchProductsOutput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextPageToken"))
     SearchProductsOutput.struct_class = Types::SearchProductsOutput
 
+    SourceProvisioningArtifactProperties.member = Shapes::ShapeRef.new(shape: SourceProvisioningArtifactPropertiesMap)
+
+    SourceProvisioningArtifactPropertiesMap.key = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyName)
+    SourceProvisioningArtifactPropertiesMap.value = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyValue)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -1065,6 +1106,16 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
+      api.add_operation(:copy_product, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyProduct"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyProductInput)
+        o.output = Shapes::ShapeRef.new(shape: CopyProductOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
       api.add_operation(:create_constraint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConstraint"
         o.http_method = "POST"
@@ -1195,6 +1246,15 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_copy_product_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCopyProductStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCopyProductStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCopyProductStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_portfolio, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribePortfolio"
         o.http_method = "POST"
@@ -1318,6 +1378,12 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ListAcceptedPortfolioSharesInput)
         o.output = Shapes::ShapeRef.new(shape: ListAcceptedPortfolioSharesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_constraints_for_portfolio, Seahorse::Model::Operation.new.tap do |o|
@@ -1328,6 +1394,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListConstraintsForPortfolioOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_launch_paths, Seahorse::Model::Operation.new.tap do |o|
@@ -1338,6 +1410,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListLaunchPathsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_portfolio_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1356,6 +1434,12 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ListPortfoliosInput)
         o.output = Shapes::ShapeRef.new(shape: ListPortfoliosOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_portfolios_for_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1366,6 +1450,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListPortfoliosForProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_principals_for_portfolio, Seahorse::Model::Operation.new.tap do |o|
@@ -1376,6 +1466,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListPrincipalsForPortfolioOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_provisioning_artifacts, Seahorse::Model::Operation.new.tap do |o|
@@ -1466,6 +1562,12 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: SearchProductsInput)
         o.output = Shapes::ShapeRef.new(shape: SearchProductsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:search_products_as_admin, Seahorse::Model::Operation.new.tap do |o|
@@ -1476,6 +1578,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: SearchProductsAsAdminOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:terminate_provisioned_product, Seahorse::Model::Operation.new.tap do |o|

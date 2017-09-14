@@ -42,19 +42,19 @@ module Aws::SQS
     # across all AWS accounts for an extended period of time.
     # @return [String]
     def message_id
-      data.message_id
+      data[:message_id]
     end
 
     # An MD5 digest of the non-URL-encoded message body string.
     # @return [String]
     def md5_of_body
-      data.md5_of_body
+      data[:md5_of_body]
     end
 
     # The message's contents (not URL-encoded).
     # @return [String]
     def body
-      data.body
+      data[:body]
     end
 
     # `SenderId`, `SentTimestamp`, `ApproximateReceiveCount`, and/or
@@ -67,7 +67,7 @@ module Aws::SQS
     # [1]: http://en.wikipedia.org/wiki/Unix_time
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # An MD5 digest of the non-URL-encoded message attribute string. You can
@@ -80,7 +80,7 @@ module Aws::SQS
     # [1]: https://www.ietf.org/rfc/rfc1321.txt
     # @return [String]
     def md5_of_message_attributes
-      data.md5_of_message_attributes
+      data[:md5_of_message_attributes]
     end
 
     # Each message attribute consists of a `Name`, `Type`, and `Value`. For
@@ -92,7 +92,7 @@ module Aws::SQS
     # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
     # @return [Hash<String,Types::MessageAttributeValue>]
     def message_attributes
-      data.message_attributes
+      data[:message_attributes]
     end
 
     # @!endgroup

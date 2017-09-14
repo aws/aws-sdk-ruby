@@ -391,6 +391,7 @@ module Aws::CodeBuild
     #             {
     #               name: "NonEmptyString", # required
     #               value: "String", # required
+    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #             },
     #           ],
     #           privileged_mode: false,
@@ -568,6 +569,7 @@ module Aws::CodeBuild
     #       {
     #         name: "NonEmptyString", # required
     #         value: "String", # required
+    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       }
     #
     # @!attribute [rw] name
@@ -584,11 +586,21 @@ module Aws::CodeBuild
     #   Interface (AWS CLI).
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of environment variable. Valid values include:
+    #
+    #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
+    #     Systems Manager Parameter Store.
+    #
+    #   * `PLAINTEXT`\: An environment variable in plaintext format.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
     #
     class EnvironmentVariable < Struct.new(
       :name,
-      :value)
+      :value,
+      :type)
       include Aws::Structure
     end
 
@@ -1077,6 +1089,7 @@ module Aws::CodeBuild
     #           {
     #             name: "NonEmptyString", # required
     #             value: "String", # required
+    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
     #         privileged_mode: false,
@@ -1296,6 +1309,7 @@ module Aws::CodeBuild
     #           {
     #             name: "NonEmptyString", # required
     #             value: "String", # required
+    #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
     #         buildspec_override: "String",
@@ -1463,6 +1477,7 @@ module Aws::CodeBuild
     #             {
     #               name: "NonEmptyString", # required
     #               value: "String", # required
+    #               type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #             },
     #           ],
     #           privileged_mode: false,

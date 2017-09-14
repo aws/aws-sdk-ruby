@@ -33,7 +33,7 @@ module Aws::SQS
     # A map of attributes to their respective values.
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # @!endgroup

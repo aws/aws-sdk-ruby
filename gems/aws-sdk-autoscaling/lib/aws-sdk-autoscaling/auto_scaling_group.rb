@@ -34,64 +34,64 @@ module Aws::AutoScaling
     # The Amazon Resource Name (ARN) of the group.
     # @return [String]
     def auto_scaling_group_arn
-      data.auto_scaling_group_arn
+      data[:auto_scaling_group_arn]
     end
 
     # The name of the associated launch configuration.
     # @return [String]
     def launch_configuration_name
-      data.launch_configuration_name
+      data[:launch_configuration_name]
     end
 
     # The minimum size of the group.
     # @return [Integer]
     def min_size
-      data.min_size
+      data[:min_size]
     end
 
     # The maximum size of the group.
     # @return [Integer]
     def max_size
-      data.max_size
+      data[:max_size]
     end
 
     # The desired size of the group.
     # @return [Integer]
     def desired_capacity
-      data.desired_capacity
+      data[:desired_capacity]
     end
 
     # The amount of time, in seconds, after a scaling activity completes
     # before another scaling activity can start.
     # @return [Integer]
     def default_cooldown
-      data.default_cooldown
+      data[:default_cooldown]
     end
 
     # One or more Availability Zones for the group.
     # @return [Array<String>]
     def availability_zones
-      data.availability_zones
+      data[:availability_zones]
     end
 
     # One or more load balancers associated with the group.
     # @return [Array<String>]
     def load_balancer_names
-      data.load_balancer_names
+      data[:load_balancer_names]
     end
 
     # The Amazon Resource Names (ARN) of the target groups for your load
     # balancer.
     # @return [Array<String>]
     def target_group_arns
-      data.target_group_arns
+      data[:target_group_arns]
     end
 
     # The service to use for the health checks. The valid values are `EC2`
     # and `ELB`.
     # @return [String]
     def health_check_type
-      data.health_check_type
+      data[:health_check_type]
     end
 
     # The amount of time, in seconds, that Auto Scaling waits before
@@ -99,19 +99,19 @@ module Aws::AutoScaling
     # service.
     # @return [Integer]
     def health_check_grace_period
-      data.health_check_grace_period
+      data[:health_check_grace_period]
     end
 
     # The date and time the group was created.
     # @return [Time]
     def created_time
-      data.created_time
+      data[:created_time]
     end
 
     # The suspended processes associated with the group.
     # @return [Array<Types::SuspendedProcess>]
     def suspended_processes
-      data.suspended_processes
+      data[:suspended_processes]
     end
 
     # The name of the placement group into which you'll launch your
@@ -123,7 +123,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     # @return [String]
     def placement_group
-      data.placement_group
+      data[:placement_group]
     end
 
     # One or more subnet IDs, if applicable, separated by commas.
@@ -133,33 +133,33 @@ module Aws::AutoScaling
     # `AvailabilityZones`.
     # @return [String]
     def vpc_zone_identifier
-      data.vpc_zone_identifier
+      data[:vpc_zone_identifier]
     end
 
     # The metrics enabled for the group.
     # @return [Array<Types::EnabledMetric>]
     def enabled_metrics
-      data.enabled_metrics
+      data[:enabled_metrics]
     end
 
     # The current state of the group when DeleteAutoScalingGroup is in
     # progress.
     # @return [String]
     def status
-      data.status
+      data[:status]
     end
 
     # The termination policies for the group.
     # @return [Array<String>]
     def termination_policies
-      data.termination_policies
+      data[:termination_policies]
     end
 
     # Indicates whether newly launched instances are protected from
     # termination by Auto Scaling when scaling in.
     # @return [Boolean]
     def new_instances_protected_from_scale_in
-      data.new_instances_protected_from_scale_in
+      data[:new_instances_protected_from_scale_in]
     end
 
     # @!endgroup
@@ -260,6 +260,101 @@ module Aws::AutoScaling
         name: @name,
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::AutoScaling::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -793,11 +888,11 @@ module Aws::AutoScaling
     # @return [Instance::Collection]
     def instances
       batch = []
-      data.instances.each do |i|
+      data[:instances].each do |d|
         batch << Instance.new(
           group_name: @name,
-          id: i.instance_id,
-          data: i,
+          id: d[:instance_id],
+          data: d,
           client: @client
         )
       end
@@ -806,9 +901,9 @@ module Aws::AutoScaling
 
     # @return [LaunchConfiguration, nil]
     def launch_configuration
-      if data.launch_configuration_name
+      if data[:launch_configuration_name]
         LaunchConfiguration.new(
-          name: data.launch_configuration_name,
+          name: data[:launch_configuration_name],
           client: @client
         )
       else
@@ -1014,12 +1109,12 @@ module Aws::AutoScaling
     # @return [Tag::Collection]
     def tags
       batch = []
-      data.tags.each do |t|
+      data[:tags].each do |d|
         batch << Tag.new(
-          key: t.key,
-          resource_id: t.resource_id,
-          resource_type: t.resource_type,
-          data: t,
+          key: d[:key],
+          resource_id: d[:resource_id],
+          resource_type: d[:resource_type],
+          data: d,
           client: @client
         )
       end

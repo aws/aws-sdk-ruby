@@ -34,25 +34,25 @@ module Aws::EC2
     # The architecture of the image.
     # @return [String]
     def architecture
-      data.architecture
+      data[:architecture]
     end
 
     # The date and time the image was created.
     # @return [String]
     def creation_date
-      data.creation_date
+      data[:creation_date]
     end
 
     # The location of the AMI.
     # @return [String]
     def image_location
-      data.image_location
+      data[:image_location]
     end
 
     # The type of image.
     # @return [String]
     def image_type
-      data.image_type
+      data[:image_type]
     end
 
     # Indicates whether the image has public launch permissions. The value
@@ -60,122 +60,122 @@ module Aws::EC2
     # has only implicit and explicit launch permissions.
     # @return [Boolean]
     def public
-      data.public
+      data[:public]
     end
 
     # The kernel associated with the image, if any. Only applicable for
     # machine images.
     # @return [String]
     def kernel_id
-      data.kernel_id
+      data[:kernel_id]
     end
 
     # The AWS account ID of the image owner.
     # @return [String]
     def owner_id
-      data.owner_id
+      data[:owner_id]
     end
 
     # The value is `Windows` for Windows AMIs; otherwise blank.
     # @return [String]
     def platform
-      data.platform
+      data[:platform]
     end
 
     # Any product codes associated with the AMI.
     # @return [Array<Types::ProductCode>]
     def product_codes
-      data.product_codes
+      data[:product_codes]
     end
 
     # The RAM disk associated with the image, if any. Only applicable for
     # machine images.
     # @return [String]
     def ramdisk_id
-      data.ramdisk_id
+      data[:ramdisk_id]
     end
 
     # The current state of the AMI. If the state is `available`, the image
     # is successfully registered and can be used to launch an instance.
     # @return [String]
     def state
-      data.state
+      data[:state]
     end
 
     # Any block device mapping entries.
     # @return [Array<Types::BlockDeviceMapping>]
     def block_device_mappings
-      data.block_device_mappings
+      data[:block_device_mappings]
     end
 
     # The description of the AMI that was provided during image creation.
     # @return [String]
     def description
-      data.description
+      data[:description]
     end
 
     # Specifies whether enhanced networking with ENA is enabled.
     # @return [Boolean]
     def ena_support
-      data.ena_support
+      data[:ena_support]
     end
 
     # The hypervisor type of the image.
     # @return [String]
     def hypervisor
-      data.hypervisor
+      data[:hypervisor]
     end
 
     # The AWS account alias (for example, `amazon`, `self`) or the AWS
     # account ID of the AMI owner.
     # @return [String]
     def image_owner_alias
-      data.image_owner_alias
+      data[:image_owner_alias]
     end
 
     # The name of the AMI that was provided during image creation.
     # @return [String]
     def name
-      data.name
+      data[:name]
     end
 
     # The device name of the root device (for example, `/dev/sda1` or
     # `/dev/xvda`).
     # @return [String]
     def root_device_name
-      data.root_device_name
+      data[:root_device_name]
     end
 
     # The type of root device used by the AMI. The AMI can use an EBS volume
     # or an instance store volume.
     # @return [String]
     def root_device_type
-      data.root_device_type
+      data[:root_device_type]
     end
 
     # Specifies whether enhanced networking with the Intel 82599 Virtual
     # Function interface is enabled.
     # @return [String]
     def sriov_net_support
-      data.sriov_net_support
+      data[:sriov_net_support]
     end
 
     # The reason for the state change.
     # @return [Types::StateReason]
     def state_reason
-      data.state_reason
+      data[:state_reason]
     end
 
     # Any tags assigned to the image.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # The type of virtualization of the AMI.
     # @return [String]
     def virtualization_type
-      data.virtualization_type
+      data[:virtualization_type]
     end
 
     # @!endgroup
@@ -243,6 +243,101 @@ module Aws::EC2
         data: resp.data.images[0],
         client: @client
       })
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

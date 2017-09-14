@@ -50,53 +50,53 @@ module Aws::Glacier
     # The job description you provided when you initiated the job.
     # @return [String]
     def job_description
-      data.job_description
+      data[:job_description]
     end
 
     # The job type. It is either ArchiveRetrieval or InventoryRetrieval.
     # @return [String]
     def action
-      data.action
+      data[:action]
     end
 
     # For an ArchiveRetrieval job, this is the archive ID requested for
     # download. Otherwise, this field is null.
     # @return [String]
     def archive_id
-      data.archive_id
+      data[:archive_id]
     end
 
     # The Amazon Resource Name (ARN) of the vault from which the archive
     # retrieval was requested.
     # @return [String]
     def vault_arn
-      data.vault_arn
+      data[:vault_arn]
     end
 
     # The UTC date when the job was created. A string representation of ISO
     # 8601 date format, for example, "2012-03-20T17:03:43.221Z".
     # @return [Time]
     def creation_date
-      data.creation_date
+      data[:creation_date]
     end
 
     # The job status. When a job is completed, you get the job's output.
     # @return [Boolean]
     def completed
-      data.completed
+      data[:completed]
     end
 
     # The status code can be InProgress, Succeeded, or Failed, and indicates
     # the status of the job.
     # @return [String]
     def status_code
-      data.status_code
+      data[:status_code]
     end
 
     # A friendly message that describes the job status.
     # @return [String]
     def status_message
-      data.status_message
+      data[:status_message]
     end
 
     # For an ArchiveRetrieval job, this is the size in bytes of the archive
@@ -104,7 +104,7 @@ module Aws::Glacier
     # value is null.
     # @return [Integer]
     def archive_size_in_bytes
-      data.archive_size_in_bytes
+      data[:archive_size_in_bytes]
     end
 
     # For an InventoryRetrieval job, this is the size in bytes of the
@@ -112,21 +112,21 @@ module Aws::Glacier
     # value is null.
     # @return [Integer]
     def inventory_size_in_bytes
-      data.inventory_size_in_bytes
+      data[:inventory_size_in_bytes]
     end
 
     # An Amazon Simple Notification Service (Amazon SNS) topic that receives
     # notification.
     # @return [String]
     def sns_topic
-      data.sns_topic
+      data[:sns_topic]
     end
 
     # The UTC time that the archive retrieval request completed. While the
     # job is in progress, the value will be null.
     # @return [Time]
     def completion_date
-      data.completion_date
+      data[:completion_date]
     end
 
     # For an ArchiveRetrieval job, it is the checksum of the archive.
@@ -158,14 +158,14 @@ module Aws::Glacier
     # ^
     # @return [String]
     def sha256_tree_hash
-      data.sha256_tree_hash
+      data[:sha256_tree_hash]
     end
 
     # The SHA256 tree hash of the entire archive for an archive retrieval.
     # For inventory retrieval jobs, this field is null.
     # @return [String]
     def archive_sha256_tree_hash
-      data.archive_sha256_tree_hash
+      data[:archive_sha256_tree_hash]
     end
 
     # The retrieved byte range for archive retrieval jobs in the form
@@ -175,20 +175,20 @@ module Aws::Glacier
     # archive minus 1. For inventory retrieval jobs this field is null.
     # @return [String]
     def retrieval_byte_range
-      data.retrieval_byte_range
+      data[:retrieval_byte_range]
     end
 
     # The retrieval option to use for the archive retrieval. Valid values
     # are `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
     # @return [String]
     def tier
-      data.tier
+      data[:tier]
     end
 
     # Parameters used for range inventory retrieval.
     # @return [Types::InventoryRetrievalJobDescription]
     def inventory_retrieval_parameters
-      data.inventory_retrieval_parameters
+      data[:inventory_retrieval_parameters]
     end
 
     # @!endgroup
@@ -228,6 +228,101 @@ module Aws::Glacier
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::Glacier::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

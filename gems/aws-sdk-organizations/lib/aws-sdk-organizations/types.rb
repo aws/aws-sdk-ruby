@@ -253,7 +253,9 @@ module Aws::Organizations
     # @!attribute [rw] email
     #   The email address of the owner to assign to the new member account.
     #   This email address must not already be associated with another AWS
-    #   account.
+    #   account. You must use a valid email address to complete account
+    #   creation. You cannot access the root user of the account or remove
+    #   an account that was created with an invalid email address.
     #   @return [String]
     #
     # @!attribute [rw] account_name
@@ -1280,14 +1282,14 @@ module Aws::Organizations
     #   If you use the AWS CLI, you can submit this as a single string,
     #   similar to the following example:
     #
-    #   `--target id=123456789012,type=ACCOUNT`
+    #   `--target Id=123456789012,Type=ACCOUNT`
     #
     #   If you specify `"Type": "ACCOUNT"`, then you must provide the AWS
     #   account ID number as the `Id`. If you specify `"Type": "EMAIL"`,
     #   then you must specify the email address that is associated with the
     #   account.
     #
-    #   `--target id=bill@example.com,type=EMAIL`
+    #   `--target Id=bill@example.com,Type=EMAIL`
     #   @return [Types::HandshakeParty]
     #
     # @!attribute [rw] notes

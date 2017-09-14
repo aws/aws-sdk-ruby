@@ -34,110 +34,110 @@ module Aws::EC2
     # The network interface attachment.
     # @return [Types::NetworkInterfaceAttachment]
     def attachment
-      data.attachment
+      data[:attachment]
     end
 
     # The Availability Zone.
     # @return [String]
     def availability_zone
-      data.availability_zone
+      data[:availability_zone]
     end
 
     # A description.
     # @return [String]
     def description
-      data.description
+      data[:description]
     end
 
     # Any security groups for the network interface.
     # @return [Array<Types::GroupIdentifier>]
     def groups
-      data.groups
+      data[:groups]
     end
 
     # The type of interface.
     # @return [String]
     def interface_type
-      data.interface_type
+      data[:interface_type]
     end
 
     # The IPv6 addresses associated with the network interface.
     # @return [Array<Types::NetworkInterfaceIpv6Address>]
     def ipv_6_addresses
-      data.ipv_6_addresses
+      data[:ipv_6_addresses]
     end
 
     # The MAC address.
     # @return [String]
     def mac_address
-      data.mac_address
+      data[:mac_address]
     end
 
     # The AWS account ID of the owner of the network interface.
     # @return [String]
     def owner_id
-      data.owner_id
+      data[:owner_id]
     end
 
     # The private DNS name.
     # @return [String]
     def private_dns_name
-      data.private_dns_name
+      data[:private_dns_name]
     end
 
     # The IPv4 address of the network interface within the subnet.
     # @return [String]
     def private_ip_address
-      data.private_ip_address
+      data[:private_ip_address]
     end
 
     # The private IPv4 addresses associated with the network interface.
     # @return [Array<Types::NetworkInterfacePrivateIpAddress>]
     def private_ip_addresses
-      data.private_ip_addresses
+      data[:private_ip_addresses]
     end
 
     # The ID of the entity that launched the instance on your behalf (for
     # example, AWS Management Console or Auto Scaling).
     # @return [String]
     def requester_id
-      data.requester_id
+      data[:requester_id]
     end
 
     # Indicates whether the network interface is being managed by AWS.
     # @return [Boolean]
     def requester_managed
-      data.requester_managed
+      data[:requester_managed]
     end
 
     # Indicates whether traffic to or from the instance is validated.
     # @return [Boolean]
     def source_dest_check
-      data.source_dest_check
+      data[:source_dest_check]
     end
 
     # The status of the network interface.
     # @return [String]
     def status
-      data.status
+      data[:status]
     end
 
     # The ID of the subnet.
     # @return [String]
     def subnet_id
-      data.subnet_id
+      data[:subnet_id]
     end
 
     # Any tags assigned to the network interface.
     # @return [Array<Types::Tag>]
     def tag_set
-      data.tag_set
+      data[:tag_set]
     end
 
     # The ID of the VPC.
     # @return [String]
     def vpc_id
-      data.vpc_id
+      data[:vpc_id]
     end
 
     # @!endgroup
@@ -173,6 +173,101 @@ module Aws::EC2
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -323,7 +418,7 @@ module Aws::EC2
     #   Specifies whether to force a detachment.
     # @return [EmptyStructure]
     def detach(options = {})
-      options = options.merge(attachment_id: data.attachment.attachment_id)
+      options = options.merge(attachment_id: data[:attachment][:attachment_id])
       resp = @client.detach_network_interface(options)
       resp.data
     end
@@ -418,10 +513,10 @@ module Aws::EC2
 
     # @return [NetworkInterfaceAssociation, nil]
     def association
-      if data.association.association_id
+      if data[:association][:association_id]
         NetworkInterfaceAssociation.new(
-          id: data.association.association_id,
-          data: data.association,
+          id: data[:association][:association_id],
+          data: data[:association],
           client: @client
         )
       else
@@ -431,9 +526,9 @@ module Aws::EC2
 
     # @return [Subnet, nil]
     def subnet
-      if data.subnet_id
+      if data[:subnet_id]
         Subnet.new(
-          id: data.subnet_id,
+          id: data[:subnet_id],
           client: @client
         )
       else
@@ -443,9 +538,9 @@ module Aws::EC2
 
     # @return [Vpc, nil]
     def vpc
-      if data.vpc_id
+      if data[:vpc_id]
         Vpc.new(
-          id: data.vpc_id,
+          id: data[:vpc_id],
           client: @client
         )
       else

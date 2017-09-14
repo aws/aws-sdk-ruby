@@ -491,6 +491,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables #=> Array
     #   resp.builds[0].environment.environment_variables[0].name #=> String
     #   resp.builds[0].environment.environment_variables[0].value #=> String
+    #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
@@ -549,6 +550,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables #=> Array
     #   resp.projects[0].environment.environment_variables[0].name #=> String
     #   resp.projects[0].environment.environment_variables[0].value #=> String
+    #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.projects[0].environment.privileged_mode #=> Boolean
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
@@ -644,6 +646,7 @@ module Aws::CodeBuild
     #         {
     #           name: "NonEmptyString", # required
     #           value: "String", # required
+    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #         },
     #       ],
     #       privileged_mode: false,
@@ -681,6 +684,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
+    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
@@ -976,6 +980,7 @@ module Aws::CodeBuild
     #       {
     #         name: "NonEmptyString", # required
     #         value: "String", # required
+    #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
     #     buildspec_override: "String",
@@ -1015,6 +1020,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
+    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1080,6 +1086,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
+    #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -1178,6 +1185,7 @@ module Aws::CodeBuild
     #         {
     #           name: "NonEmptyString", # required
     #           value: "String", # required
+    #           type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #         },
     #       ],
     #       privileged_mode: false,
@@ -1215,6 +1223,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
+    #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
@@ -1247,7 +1256,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

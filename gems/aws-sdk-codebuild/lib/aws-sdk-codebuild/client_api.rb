@@ -44,6 +44,7 @@ module Aws::CodeBuild
     EnvironmentPlatforms = Shapes::ListShape.new(name: 'EnvironmentPlatforms')
     EnvironmentType = Shapes::StringShape.new(name: 'EnvironmentType')
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
+    EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     KeyInput = Shapes::StringShape.new(name: 'KeyInput')
@@ -196,6 +197,7 @@ module Aws::CodeBuild
 
     EnvironmentVariable.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
     EnvironmentVariable.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    EnvironmentVariable.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentVariableType, location_name: "type"))
     EnvironmentVariable.struct_class = Types::EnvironmentVariable
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)

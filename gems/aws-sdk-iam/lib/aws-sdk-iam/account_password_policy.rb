@@ -23,39 +23,39 @@ module Aws::IAM
     # Minimum length to require for IAM user passwords.
     # @return [Integer]
     def minimum_password_length
-      data.minimum_password_length
+      data[:minimum_password_length]
     end
 
     # Specifies whether to require symbols for IAM user passwords.
     # @return [Boolean]
     def require_symbols
-      data.require_symbols
+      data[:require_symbols]
     end
 
     # Specifies whether to require numbers for IAM user passwords.
     # @return [Boolean]
     def require_numbers
-      data.require_numbers
+      data[:require_numbers]
     end
 
     # Specifies whether to require uppercase characters for IAM user
     # passwords.
     # @return [Boolean]
     def require_uppercase_characters
-      data.require_uppercase_characters
+      data[:require_uppercase_characters]
     end
 
     # Specifies whether to require lowercase characters for IAM user
     # passwords.
     # @return [Boolean]
     def require_lowercase_characters
-      data.require_lowercase_characters
+      data[:require_lowercase_characters]
     end
 
     # Specifies whether IAM users are allowed to change their own password.
     # @return [Boolean]
     def allow_users_to_change_password
-      data.allow_users_to_change_password
+      data[:allow_users_to_change_password]
     end
 
     # Indicates whether passwords in the account expire. Returns true if
@@ -63,27 +63,27 @@ module Aws::IAM
     # MaxPasswordAge is 0 or not present.
     # @return [Boolean]
     def expire_passwords
-      data.expire_passwords
+      data[:expire_passwords]
     end
 
     # The number of days that an IAM user password is valid.
     # @return [Integer]
     def max_password_age
-      data.max_password_age
+      data[:max_password_age]
     end
 
     # Specifies the number of previous passwords that IAM users are
     # prevented from reusing.
     # @return [Integer]
     def password_reuse_prevention
-      data.password_reuse_prevention
+      data[:password_reuse_prevention]
     end
 
     # Specifies whether IAM users are prevented from setting a new password
     # after their password has expired.
     # @return [Boolean]
     def hard_expiry
-      data.hard_expiry
+      data[:hard_expiry]
     end
 
     # @!endgroup
@@ -119,6 +119,101 @@ module Aws::IAM
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::IAM::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

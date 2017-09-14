@@ -34,25 +34,25 @@ module Aws::EC2
     # Information about the volume attachments.
     # @return [Array<Types::VolumeAttachment>]
     def attachments
-      data.attachments
+      data[:attachments]
     end
 
     # The Availability Zone for the volume.
     # @return [String]
     def availability_zone
-      data.availability_zone
+      data[:availability_zone]
     end
 
     # The time stamp when volume creation was initiated.
     # @return [Time]
     def create_time
-      data.create_time
+      data[:create_time]
     end
 
     # Indicates whether the volume will be encrypted.
     # @return [Boolean]
     def encrypted
-      data.encrypted
+      data[:encrypted]
     end
 
     # The full ARN of the AWS Key Management Service (AWS KMS) customer
@@ -60,25 +60,25 @@ module Aws::EC2
     # for the volume.
     # @return [String]
     def kms_key_id
-      data.kms_key_id
+      data[:kms_key_id]
     end
 
     # The size of the volume, in GiBs.
     # @return [Integer]
     def size
-      data.size
+      data[:size]
     end
 
     # The snapshot from which the volume was created, if applicable.
     # @return [String]
     def snapshot_id
-      data.snapshot_id
+      data[:snapshot_id]
     end
 
     # The volume state.
     # @return [String]
     def state
-      data.state
+      data[:state]
     end
 
     # The number of I/O operations per second (IOPS) that the volume
@@ -102,13 +102,13 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     # @return [Integer]
     def iops
-      data.iops
+      data[:iops]
     end
 
     # Any tags assigned to the volume.
     # @return [Array<Types::Tag>]
     def tags
-      data.tags
+      data[:tags]
     end
 
     # The volume type. This can be `gp2` for General Purpose SSD, `io1` for
@@ -116,7 +116,7 @@ module Aws::EC2
     # Cold HDD, or `standard` for Magnetic volumes.
     # @return [String]
     def volume_type
-      data.volume_type
+      data[:volume_type]
     end
 
     # @!endgroup
@@ -152,6 +152,101 @@ module Aws::EC2
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::EC2::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions

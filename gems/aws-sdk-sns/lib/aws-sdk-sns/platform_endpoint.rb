@@ -47,7 +47,7 @@ module Aws::SNS
     #   notification service.
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # @!endgroup

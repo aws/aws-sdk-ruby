@@ -158,16 +158,13 @@ module Aws::ServiceCatalog
     # Accepts an offer to share a portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -193,16 +190,13 @@ module Aws::ServiceCatalog
     # Associates the specified principal ARN with the specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -236,16 +230,13 @@ module Aws::ServiceCatalog
     # Associates a product with a portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -302,6 +293,83 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Copies the specified source product to the specified target product or
+    # a new product.
+    #
+    # You can copy the product to the same account or another account. You
+    # can copy the product to the same region or another region.
+    #
+    # This operation is performed asynchronously. To track the progress of
+    # the operation, use DescribeCopyProductStatus.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :source_product_arn
+    #   The Amazon Resource Name (ARN) of the source product.
+    #
+    # @option params [String] :target_product_id
+    #   The ID of the target product. By default, a new product is created.
+    #
+    # @option params [String] :target_product_name
+    #   A name for the target product. The default is the name of the source
+    #   product.
+    #
+    # @option params [Array<Hash>] :source_provisioning_artifact_identifiers
+    #   The IDs of the product versions to copy. By default, all provisioning
+    #   artifacts are copied.
+    #
+    # @option params [Array<String>] :copy_options
+    #   The copy options. If the value is `CopyTags`, the tags from the source
+    #   product are copied to the target product.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A token to disambiguate duplicate requests. You can use the same input
+    #   in multiple requests, provided that you also specify a different
+    #   idempotency token for each request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CopyProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyProductOutput#copy_product_token #copy_product_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_product({
+    #     accept_language: "AcceptLanguage",
+    #     source_product_arn: "ProductArn", # required
+    #     target_product_id: "Id",
+    #     target_product_name: "ProductViewName",
+    #     source_provisioning_artifact_identifiers: [
+    #       {
+    #         "Id" => "ProvisioningArtifactPropertyValue",
+    #       },
+    #     ],
+    #     copy_options: ["CopyTags"], # accepts CopyTags
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_product_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProduct AWS API Documentation
+    #
+    # @overload copy_product(params = {})
+    # @param [Hash] params ({})
+    def copy_product(params = {}, options = {})
+      req = build_request(:copy_product, params)
+      req.send_request(options)
+    end
+
     # Creates a new constraint. For more information, see [Using
     # Constraints][1].
     #
@@ -310,16 +378,13 @@ module Aws::ServiceCatalog
     # [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -329,7 +394,7 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :parameters
     #   The constraint parameters. Expected values vary depending on which
-    #   **Type** is specified. For examples, see the bottom of this topic.
+    #   **Type** is specified. For more information, see the Examples section.
     #
     #   For Type `LAUNCH`, the `RoleArn` property is required.
     #
@@ -345,9 +410,9 @@ module Aws::ServiceCatalog
     #   The text description of the constraint.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that you
-    #   also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same input
+    #   in multiple requests, provided that you also specify a different
+    #   idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -391,16 +456,13 @@ module Aws::ServiceCatalog
     # Creates a new portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :display_name
     #   The name to use for display purposes.
@@ -415,9 +477,9 @@ module Aws::ServiceCatalog
     #   Tags to associate with the new portfolio.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that you
-    #   also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same input
+    #   in multiple requests, provided that you also specify a different
+    #   idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -467,16 +529,13 @@ module Aws::ServiceCatalog
     # Creates a new portfolio share.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -506,16 +565,13 @@ module Aws::ServiceCatalog
     # Creates a new product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :name
     #   The name of the product.
@@ -548,9 +604,9 @@ module Aws::ServiceCatalog
     #   Parameters for the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that you
-    #   also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same input
+    #   in multiple requests, provided that you also specify a different
+    #   idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -627,19 +683,14 @@ module Aws::ServiceCatalog
     # Create a new provisioning artifact for the specified product. This
     # operation does not work with a product that has been shared with you.
     #
-    # See the bottom of this topic for an example JSON request.
-    #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -648,9 +699,9 @@ module Aws::ServiceCatalog
     #   The parameters to use when creating the new provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can create multiple
-    #   resources using the same input in multiple requests, provided that you
-    #   also specify a different idempotency token for each request.
+    #   A token to disambiguate duplicate requests. You can use the same input
+    #   in multiple requests, provided that you also specify a different
+    #   idempotency token for each request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -735,16 +786,13 @@ module Aws::ServiceCatalog
     # Deletes the specified constraint.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the constraint to delete.
@@ -772,16 +820,13 @@ module Aws::ServiceCatalog
     # constraints, or shared accounts associated with it.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the portfolio for the delete request.
@@ -807,16 +852,13 @@ module Aws::ServiceCatalog
     # Deletes the specified portfolio share.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -848,16 +890,13 @@ module Aws::ServiceCatalog
     # portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the product for the delete request.
@@ -887,16 +926,13 @@ module Aws::ServiceCatalog
     # artifact).
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -927,16 +963,13 @@ module Aws::ServiceCatalog
     # Retrieves detailed information for a specified constraint.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the constraint.
@@ -972,20 +1005,60 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Describes the status of the specified copy product operation.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :copy_product_token
+    #   The token returned from the call to `CopyProduct` that initiated the
+    #   operation.
+    #
+    # @return [Types::DescribeCopyProductStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCopyProductStatusOutput#copy_product_status #copy_product_status} => String
+    #   * {Types::DescribeCopyProductStatusOutput#target_product_id #target_product_id} => String
+    #   * {Types::DescribeCopyProductStatusOutput#status_detail #status_detail} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_copy_product_status({
+    #     accept_language: "AcceptLanguage",
+    #     copy_product_token: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_product_status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED"
+    #   resp.target_product_id #=> String
+    #   resp.status_detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatus AWS API Documentation
+    #
+    # @overload describe_copy_product_status(params = {})
+    # @param [Hash] params ({})
+    def describe_copy_product_status(params = {}, options = {})
+      req = build_request(:describe_copy_product_status, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information and any tags associated with the
     # specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the portfolio for which to retrieve information.
@@ -1035,16 +1108,13 @@ module Aws::ServiceCatalog
     # that it takes as input `ProductId` instead of `ProductViewId`.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The `ProductId` of the product to describe.
@@ -1093,16 +1163,13 @@ module Aws::ServiceCatalog
     # administrator access.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the product for which to retrieve information.
@@ -1168,16 +1235,13 @@ module Aws::ServiceCatalog
     # that it takes as input `ProductViewId` instead of `ProductId`.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The `ProductViewId` of the product to describe.
@@ -1225,16 +1289,13 @@ module Aws::ServiceCatalog
     # Retrieve detailed information about the provisioned product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The provisioned product identifier.
@@ -1275,16 +1336,13 @@ module Aws::ServiceCatalog
     # artifact.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact. This is sometimes
@@ -1348,16 +1406,13 @@ module Aws::ServiceCatalog
     # "`sc-tagoption-conflict-portfolioId-productId`".
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -1423,16 +1478,13 @@ module Aws::ServiceCatalog
     # UpdateProvisionedProduct).
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The record identifier of the ProvisionedProduct object for which to
@@ -1532,16 +1584,13 @@ module Aws::ServiceCatalog
     # portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -1571,16 +1620,13 @@ module Aws::ServiceCatalog
     # Disassociates the specified product from the specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -1637,16 +1683,13 @@ module Aws::ServiceCatalog
     # account.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [String] :page_token
     #   The page token of the first page retrieved. If null, this retrieves
@@ -1694,16 +1737,13 @@ module Aws::ServiceCatalog
     # and product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -1759,16 +1799,13 @@ module Aws::ServiceCatalog
     # put on the product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier. Identifies the product for which to retrieve
@@ -1823,16 +1860,13 @@ module Aws::ServiceCatalog
     # specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -1867,16 +1901,13 @@ module Aws::ServiceCatalog
     # Lists all portfolios in the catalog.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [String] :page_token
     #   The page token of the first page retrieved. If null, this retrieves
@@ -1923,16 +1954,13 @@ module Aws::ServiceCatalog
     # Lists all portfolios that the specified product is associated with.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -1983,16 +2011,13 @@ module Aws::ServiceCatalog
     # Lists all principal ARNs associated with the specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -2040,16 +2065,13 @@ module Aws::ServiceCatalog
     # product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -2089,16 +2111,13 @@ module Aws::ServiceCatalog
     # RecordDetails objects that are filtered as specified.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [Types::AccessLevelFilter] :access_level_filter
     #   The access level for obtaining results. If left unspecified, `User`
@@ -2284,16 +2303,13 @@ module Aws::ServiceCatalog
     # in conflict. For more information, see DescribeProvisioningParameters.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -2390,16 +2406,13 @@ module Aws::ServiceCatalog
     # Rejects an offer to share a portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :portfolio_id
     #   The portfolio identifier.
@@ -2426,16 +2439,13 @@ module Aws::ServiceCatalog
     # are currently available (not terminated).
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [Types::AccessLevelFilter] :access_level_filter
     #   The access level for obtaining results. If left unspecified, `User`
@@ -2497,16 +2507,13 @@ module Aws::ServiceCatalog
     # operations, such as DescribeProductView.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [Hash<String,Array>] :filters
     #   The list of filters with which to limit search results. If no search
@@ -2584,16 +2591,13 @@ module Aws::ServiceCatalog
     # associated with the specified portfolio.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [String] :portfolio_id
     #   The portfolio identifier.
@@ -2706,16 +2710,13 @@ module Aws::ServiceCatalog
     #   resources.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @return [Types::TerminateProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2763,16 +2764,13 @@ module Aws::ServiceCatalog
     # Updates an existing constraint.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the constraint to update.
@@ -2816,16 +2814,13 @@ module Aws::ServiceCatalog
     # work with a product that has been shared with you.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the portfolio for the update request.
@@ -2893,16 +2888,13 @@ module Aws::ServiceCatalog
     # Updates an existing product.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :id
     #   The identifier of the product for the update request.
@@ -3001,16 +2993,13 @@ module Aws::ServiceCatalog
     # operation.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [String] :provisioned_product_name
     #   The updated name of the ProvisionedProduct object. Specify either
@@ -3101,16 +3090,13 @@ module Aws::ServiceCatalog
     # product that has been shared with you.
     #
     # @option params [String] :accept_language
-    #   The language code to use for this operation. Supported language codes
-    #   are as follows:
+    #   The language code.
     #
-    #   "en" (English)
+    #   * `en` - English (default)
     #
-    #   "jp" (Japanese)
+    #   * `jp` - Japanese
     #
-    #   "zh" (Chinese)
-    #
-    #   If no code is specified, "en" is used as the default.
+    #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
     #   The product identifier.
@@ -3213,7 +3199,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

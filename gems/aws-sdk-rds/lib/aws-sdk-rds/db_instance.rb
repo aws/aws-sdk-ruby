@@ -35,26 +35,26 @@ module Aws::RDS
     # instance.
     # @return [String]
     def db_instance_class
-      data.db_instance_class
+      data[:db_instance_class]
     end
 
     # Provides the name of the database engine to be used for this DB
     # instance.
     # @return [String]
     def engine
-      data.engine
+      data[:engine]
     end
 
     # Specifies the current state of this database.
     # @return [String]
     def db_instance_status
-      data.db_instance_status
+      data[:db_instance_status]
     end
 
     # Contains the master username for the DB instance.
     # @return [String]
     def master_username
-      data.master_username
+      data[:master_username]
     end
 
     # The meaning of this parameter differs according to the database engine
@@ -77,25 +77,25 @@ module Aws::RDS
     # instance.
     # @return [String]
     def db_name
-      data.db_name
+      data[:db_name]
     end
 
     # Specifies the connection endpoint.
     # @return [Types::Endpoint]
     def endpoint
-      data.endpoint
+      data[:endpoint]
     end
 
     # Specifies the allocated storage size specified in gigabytes.
     # @return [Integer]
     def allocated_storage
-      data.allocated_storage
+      data[:allocated_storage]
     end
 
     # Provides the date and time the DB instance was created.
     # @return [Time]
     def instance_create_time
-      data.instance_create_time
+      data[:instance_create_time]
     end
 
     # Specifies the daily time range during which automated backups are
@@ -103,41 +103,41 @@ module Aws::RDS
     # `BackupRetentionPeriod`.
     # @return [String]
     def preferred_backup_window
-      data.preferred_backup_window
+      data[:preferred_backup_window]
     end
 
     # Specifies the number of days for which automatic DB snapshots are
     # retained.
     # @return [Integer]
     def backup_retention_period
-      data.backup_retention_period
+      data[:backup_retention_period]
     end
 
     # Provides List of DB security group elements containing only
     # `DBSecurityGroup.Name` and `DBSecurityGroup.Status` subelements.
     # @return [Array<Types::DBSecurityGroupMembership>]
     def db_security_groups
-      data.db_security_groups
+      data[:db_security_groups]
     end
 
     # Provides a list of VPC security group elements that the DB instance
     # belongs to.
     # @return [Array<Types::VpcSecurityGroupMembership>]
     def vpc_security_groups
-      data.vpc_security_groups
+      data[:vpc_security_groups]
     end
 
     # Provides the list of DB parameter groups applied to this DB instance.
     # @return [Array<Types::DBParameterGroupStatus>]
     def db_parameter_groups
-      data.db_parameter_groups
+      data[:db_parameter_groups]
     end
 
     # Specifies the name of the Availability Zone the DB instance is located
     # in.
     # @return [String]
     def availability_zone
-      data.availability_zone
+      data[:availability_zone]
     end
 
     # Specifies information on the subnet group associated with the DB
@@ -145,14 +145,14 @@ module Aws::RDS
     # group.
     # @return [Types::DBSubnetGroup]
     def db_subnet_group
-      data.db_subnet_group
+      data[:db_subnet_group]
     end
 
     # Specifies the weekly time range during which system maintenance can
     # occur, in Universal Coordinated Time (UTC).
     # @return [String]
     def preferred_maintenance_window
-      data.preferred_maintenance_window
+      data[:preferred_maintenance_window]
     end
 
     # Specifies that changes to the DB instance are pending. This element is
@@ -160,85 +160,85 @@ module Aws::RDS
     # identified by subelements.
     # @return [Types::PendingModifiedValues]
     def pending_modified_values
-      data.pending_modified_values
+      data[:pending_modified_values]
     end
 
     # Specifies the latest time to which a database can be restored with
     # point-in-time restore.
     # @return [Time]
     def latest_restorable_time
-      data.latest_restorable_time
+      data[:latest_restorable_time]
     end
 
     # Specifies if the DB instance is a Multi-AZ deployment.
     # @return [Boolean]
     def multi_az
-      data.multi_az
+      data[:multi_az]
     end
 
     # Indicates the database engine version.
     # @return [String]
     def engine_version
-      data.engine_version
+      data[:engine_version]
     end
 
     # Indicates that minor version patches are applied automatically.
     # @return [Boolean]
     def auto_minor_version_upgrade
-      data.auto_minor_version_upgrade
+      data[:auto_minor_version_upgrade]
     end
 
     # Contains the identifier of the source DB instance if this DB instance
     # is a Read Replica.
     # @return [String]
     def read_replica_source_db_instance_identifier
-      data.read_replica_source_db_instance_identifier
+      data[:read_replica_source_db_instance_identifier]
     end
 
     # Contains one or more identifiers of the Read Replicas associated with
     # this DB instance.
     # @return [Array<String>]
     def read_replica_db_instance_identifiers
-      data.read_replica_db_instance_identifiers
+      data[:read_replica_db_instance_identifiers]
     end
 
     # Contains one or more identifiers of Aurora DB clusters that are Read
     # Replicas of this DB instance.
     # @return [Array<String>]
     def read_replica_db_cluster_identifiers
-      data.read_replica_db_cluster_identifiers
+      data[:read_replica_db_cluster_identifiers]
     end
 
     # License model information for this DB instance.
     # @return [String]
     def license_model
-      data.license_model
+      data[:license_model]
     end
 
     # Specifies the Provisioned IOPS (I/O operations per second) value.
     # @return [Integer]
     def iops
-      data.iops
+      data[:iops]
     end
 
     # Provides the list of option group memberships for this DB instance.
     # @return [Array<Types::OptionGroupMembership>]
     def option_group_memberships
-      data.option_group_memberships
+      data[:option_group_memberships]
     end
 
     # If present, specifies the name of the character set that this instance
     # is associated with.
     # @return [String]
     def character_set_name
-      data.character_set_name
+      data[:character_set_name]
     end
 
     # If present, specifies the name of the secondary Availability Zone for
     # a DB instance with multi-AZ support.
     # @return [String]
     def secondary_availability_zone
-      data.secondary_availability_zone
+      data[:secondary_availability_zone]
     end
 
     # Specifies the accessibility options for the DB instance. A value of
@@ -262,27 +262,27 @@ module Aws::RDS
     # set, the DB instance will be private.
     # @return [Boolean]
     def publicly_accessible
-      data.publicly_accessible
+      data[:publicly_accessible]
     end
 
     # The status of a Read Replica. If the instance is not a Read Replica,
     # this will be blank.
     # @return [Array<Types::DBInstanceStatusInfo>]
     def status_infos
-      data.status_infos
+      data[:status_infos]
     end
 
     # Specifies the storage type associated with DB instance.
     # @return [String]
     def storage_type
-      data.storage_type
+      data[:storage_type]
     end
 
     # The ARN from the key store with which the instance is associated for
     # TDE encryption.
     # @return [String]
     def tde_credential_arn
-      data.tde_credential_arn
+      data[:tde_credential_arn]
     end
 
     # Specifies the port that the DB instance listens on. If the DB instance
@@ -290,27 +290,27 @@ module Aws::RDS
     # cluster port.
     # @return [Integer]
     def db_instance_port
-      data.db_instance_port
+      data[:db_instance_port]
     end
 
     # If the DB instance is a member of a DB cluster, contains the name of
     # the DB cluster that the DB instance is a member of.
     # @return [String]
     def db_cluster_identifier
-      data.db_cluster_identifier
+      data[:db_cluster_identifier]
     end
 
     # Specifies whether the DB instance is encrypted.
     # @return [Boolean]
     def storage_encrypted
-      data.storage_encrypted
+      data[:storage_encrypted]
     end
 
     # If `StorageEncrypted` is true, the KMS key identifier for the
     # encrypted DB instance.
     # @return [String]
     def kms_key_id
-      data.kms_key_id
+      data[:kms_key_id]
     end
 
     # The region-unique, immutable identifier for the DB instance. This
@@ -318,34 +318,34 @@ module Aws::RDS
     # for the DB instance is accessed.
     # @return [String]
     def dbi_resource_id
-      data.dbi_resource_id
+      data[:dbi_resource_id]
     end
 
     # The identifier of the CA certificate for this DB instance.
     # @return [String]
     def ca_certificate_identifier
-      data.ca_certificate_identifier
+      data[:ca_certificate_identifier]
     end
 
     # The Active Directory Domain membership records associated with the DB
     # instance.
     # @return [Array<Types::DomainMembership>]
     def domain_memberships
-      data.domain_memberships
+      data[:domain_memberships]
     end
 
     # Specifies whether tags are copied from the DB instance to snapshots of
     # the DB instance.
     # @return [Boolean]
     def copy_tags_to_snapshot
-      data.copy_tags_to_snapshot
+      data[:copy_tags_to_snapshot]
     end
 
     # The interval, in seconds, between points when Enhanced Monitoring
     # metrics are collected for the DB instance.
     # @return [Integer]
     def monitoring_interval
-      data.monitoring_interval
+      data[:monitoring_interval]
     end
 
     # The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log
@@ -353,14 +353,14 @@ module Aws::RDS
     # instance.
     # @return [String]
     def enhanced_monitoring_resource_arn
-      data.enhanced_monitoring_resource_arn
+      data[:enhanced_monitoring_resource_arn]
     end
 
     # The ARN for the IAM role that permits RDS to send Enhanced Monitoring
     # metrics to CloudWatch Logs.
     # @return [String]
     def monitoring_role_arn
-      data.monitoring_role_arn
+      data[:monitoring_role_arn]
     end
 
     # A value that specifies the order in which an Aurora Replica is
@@ -373,13 +373,13 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
     # @return [Integer]
     def promotion_tier
-      data.promotion_tier
+      data[:promotion_tier]
     end
 
     # The Amazon Resource Name (ARN) for the DB instance.
     # @return [String]
     def db_instance_arn
-      data.db_instance_arn
+      data[:db_instance_arn]
     end
 
     # The time zone of the DB instance. In most cases, the `Timezone`
@@ -387,7 +387,7 @@ module Aws::RDS
     # Server DB instances that were created with a time zone specified.
     # @return [String]
     def timezone
-      data.timezone
+      data[:timezone]
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
@@ -404,7 +404,7 @@ module Aws::RDS
     #   Aurora, see DBCluster Type.
     # @return [Boolean]
     def iam_database_authentication_enabled
-      data.iam_database_authentication_enabled
+      data[:iam_database_authentication_enabled]
     end
 
     # @!endgroup
@@ -440,6 +440,101 @@ module Aws::RDS
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::RDS::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -2532,9 +2627,9 @@ module Aws::RDS
 
     # @return [Certificate, nil]
     def certificate
-      if data.ca_certificate_identifier
+      if data[:ca_certificate_identifier]
         Certificate.new(
-          id: data.ca_certificate_identifier,
+          id: data[:ca_certificate_identifier],
           client: @client
         )
       else
@@ -2544,9 +2639,9 @@ module Aws::RDS
 
     # @return [DBCluster, nil]
     def cluster
-      if data.db_cluster_identifier
+      if data[:db_cluster_identifier]
         DBCluster.new(
-          id: data.db_cluster_identifier,
+          id: data[:db_cluster_identifier],
           client: @client
         )
       else
@@ -2671,9 +2766,9 @@ module Aws::RDS
     # @return [OptionGroup::Collection]
     def option_groups
       batch = []
-      data.option_group_memberships.each do |o|
+      data[:option_group_memberships].each do |d|
         batch << OptionGroup.new(
-          name: o.option_group_name,
+          name: d[:option_group_name],
           client: @client
         )
       end
@@ -2683,9 +2778,9 @@ module Aws::RDS
     # @return [DBParameterGroup::Collection]
     def parameter_groups
       batch = []
-      data.db_parameter_groups.each do |d|
+      data[:db_parameter_groups].each do |d|
         batch << DBParameterGroup.new(
-          name: d.db_parameter_group_name,
+          name: d[:db_parameter_group_name],
           client: @client
         )
       end
@@ -2761,9 +2856,9 @@ module Aws::RDS
     # @return [DBInstance::Collection]
     def read_replicas
       batch = []
-      data.read_replica_db_instance_identifiers.each do |r|
+      data[:read_replica_db_instance_identifiers].each do |d|
         batch << DBInstance.new(
-          id: r,
+          id: d,
           client: @client
         )
       end
@@ -2773,9 +2868,9 @@ module Aws::RDS
     # @return [DBSecurityGroup::Collection]
     def security_groups
       batch = []
-      data.db_security_groups.each do |d|
+      data[:db_security_groups].each do |d|
         batch << DBSecurityGroup.new(
-          name: d.db_security_group_name,
+          name: d[:db_security_group_name],
           client: @client
         )
       end
@@ -2880,9 +2975,9 @@ module Aws::RDS
 
     # @return [DBInstance, nil]
     def source
-      if data.read_replica_source_db_instance_identifier
+      if data[:read_replica_source_db_instance_identifier]
         DBInstance.new(
-          id: data.read_replica_source_db_instance_identifier,
+          id: data[:read_replica_source_db_instance_identifier],
           client: @client
         )
       else
@@ -2892,9 +2987,9 @@ module Aws::RDS
 
     # @return [DBSubnetGroup, nil]
     def subnet_group
-      if data.db_subnet_group.db_subnet_group_name
+      if data[:db_subnet_group][:db_subnet_group_name]
         DBSubnetGroup.new(
-          name: data.db_subnet_group.db_subnet_group_name,
+          name: data[:db_subnet_group][:db_subnet_group_name],
           client: @client
         )
       else

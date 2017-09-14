@@ -32,37 +32,37 @@ module Aws::OpsWorks
 
     # @return [String]
     def arn
-      data.arn
+      data[:arn]
     end
 
     # The layer stack ID.
     # @return [String]
     def stack_id
-      data.stack_id
+      data[:stack_id]
     end
 
     # The layer ID.
     # @return [String]
     def layer_id
-      data.layer_id
+      data[:layer_id]
     end
 
     # The layer type.
     # @return [String]
     def type
-      data.type
+      data[:type]
     end
 
     # The layer name.
     # @return [String]
     def name
-      data.name
+      data[:name]
     end
 
     # The layer short name.
     # @return [String]
     def shortname
-      data.shortname
+      data[:shortname]
     end
 
     # The layer attributes.
@@ -75,13 +75,13 @@ module Aws::OpsWorks
     # attribute is set to the cluster's ARN.
     # @return [Hash<String,String>]
     def attributes
-      data.attributes
+      data[:attributes]
     end
 
     # The Amazon CloudWatch Logs configuration settings for the layer.
     # @return [Types::CloudWatchLogsConfiguration]
     def cloud_watch_logs_configuration
-      data.cloud_watch_logs_configuration
+      data[:cloud_watch_logs_configuration]
     end
 
     # The ARN of the default IAM profile to be used for the layer's EC2
@@ -93,45 +93,45 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def custom_instance_profile_arn
-      data.custom_instance_profile_arn
+      data[:custom_instance_profile_arn]
     end
 
     # A JSON formatted string containing the layer's custom stack
     # configuration and deployment attributes.
     # @return [String]
     def custom_json
-      data.custom_json
+      data[:custom_json]
     end
 
     # An array containing the layer's custom security group IDs.
     # @return [Array<String>]
     def custom_security_group_ids
-      data.custom_security_group_ids
+      data[:custom_security_group_ids]
     end
 
     # An array containing the layer's security group names.
     # @return [Array<String>]
     def default_security_group_names
-      data.default_security_group_names
+      data[:default_security_group_names]
     end
 
     # An array of `Package` objects that describe the layer's packages.
     # @return [Array<String>]
     def packages
-      data.packages
+      data[:packages]
     end
 
     # A `VolumeConfigurations` object that describes the layer's Amazon EBS
     # volumes.
     # @return [Array<Types::VolumeConfiguration>]
     def volume_configurations
-      data.volume_configurations
+      data[:volume_configurations]
     end
 
     # Whether auto healing is disabled for the layer.
     # @return [Boolean]
     def enable_auto_healing
-      data.enable_auto_healing
+      data[:enable_auto_healing]
     end
 
     # Whether to automatically assign an [Elastic IP address][1] to the
@@ -144,7 +144,7 @@ module Aws::OpsWorks
     # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @return [Boolean]
     def auto_assign_elastic_ips
-      data.auto_assign_elastic_ips
+      data[:auto_assign_elastic_ips]
     end
 
     # For stacks that are running in a VPC, whether to automatically assign
@@ -156,7 +156,7 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     # @return [Boolean]
     def auto_assign_public_ips
-      data.auto_assign_public_ips
+      data[:auto_assign_public_ips]
     end
 
     # AWS OpsWorks Stacks supports five lifecycle events: **setup**,
@@ -175,20 +175,20 @@ module Aws::OpsWorks
     # phpapp2 folder.
     # @return [Types::Recipes]
     def default_recipes
-      data.default_recipes
+      data[:default_recipes]
     end
 
     # A `LayerCustomRecipes` object that specifies the layer's custom
     # recipes.
     # @return [Types::Recipes]
     def custom_recipes
-      data.custom_recipes
+      data[:custom_recipes]
     end
 
     # Date when the layer was created.
     # @return [String]
     def created_at
-      data.created_at
+      data[:created_at]
     end
 
     # Whether to install operating system and package updates when the
@@ -204,20 +204,20 @@ module Aws::OpsWorks
     #  </note>
     # @return [Boolean]
     def install_updates_on_boot
-      data.install_updates_on_boot
+      data[:install_updates_on_boot]
     end
 
     # Whether the layer uses Amazon EBS-optimized instances.
     # @return [Boolean]
     def use_ebs_optimized_instances
-      data.use_ebs_optimized_instances
+      data[:use_ebs_optimized_instances]
     end
 
     # A `LifeCycleEventConfiguration` object that specifies the Shutdown
     # event configuration.
     # @return [Types::LifecycleEventConfiguration]
     def lifecycle_event_configuration
-      data.lifecycle_event_configuration
+      data[:lifecycle_event_configuration]
     end
 
     # @!endgroup
@@ -255,6 +255,101 @@ module Aws::OpsWorks
       !!@data
     end
 
+    # @deprecated Use [Aws::OpsWorks::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
+    end
+
     # @!group Actions
 
     # @example Request syntax with placeholder values
@@ -272,9 +367,9 @@ module Aws::OpsWorks
 
     # @return [Stack, nil]
     def stack
-      if data.stack_id
+      if data[:stack_id]
         Stack.new(
-          id: data.stack_id,
+          id: data[:stack_id],
           client: @client
         )
       else

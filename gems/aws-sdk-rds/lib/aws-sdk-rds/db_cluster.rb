@@ -37,28 +37,28 @@ module Aws::RDS
     # size is not fixed, but instead automatically adjusts as needed.
     # @return [Integer]
     def allocated_storage
-      data.allocated_storage
+      data[:allocated_storage]
     end
 
     # Provides the list of EC2 Availability Zones that instances in the DB
     # cluster can be created in.
     # @return [Array<String>]
     def availability_zones
-      data.availability_zones
+      data[:availability_zones]
     end
 
     # Specifies the number of days for which automatic DB snapshots are
     # retained.
     # @return [Integer]
     def backup_retention_period
-      data.backup_retention_period
+      data[:backup_retention_period]
     end
 
     # If present, specifies the name of the character set that this cluster
     # is associated with.
     # @return [String]
     def character_set_name
-      data.character_set_name
+      data[:character_set_name]
     end
 
     # Contains the name of the initial database of this DB cluster that was
@@ -66,14 +66,14 @@ module Aws::RDS
     # created. This same name is returned for the life of the DB cluster.
     # @return [String]
     def database_name
-      data.database_name
+      data[:database_name]
     end
 
     # Specifies the name of the DB cluster parameter group for the DB
     # cluster.
     # @return [String]
     def db_cluster_parameter_group
-      data.db_cluster_parameter_group
+      data[:db_cluster_parameter_group]
     end
 
     # Specifies information on the subnet group associated with the DB
@@ -81,33 +81,33 @@ module Aws::RDS
     # group.
     # @return [String]
     def db_subnet_group
-      data.db_subnet_group
+      data[:db_subnet_group]
     end
 
     # Specifies the current state of this DB cluster.
     # @return [String]
     def status
-      data.status
+      data[:status]
     end
 
     # Specifies the progress of the operation as a percentage.
     # @return [String]
     def percent_progress
-      data.percent_progress
+      data[:percent_progress]
     end
 
     # Specifies the earliest time to which a database can be restored with
     # point-in-time restore.
     # @return [Time]
     def earliest_restorable_time
-      data.earliest_restorable_time
+      data[:earliest_restorable_time]
     end
 
     # Specifies the connection endpoint for the primary instance of the DB
     # cluster.
     # @return [String]
     def endpoint
-      data.endpoint
+      data[:endpoint]
     end
 
     # The reader endpoint for the DB cluster. The reader endpoint for a DB
@@ -124,52 +124,52 @@ module Aws::RDS
     # endpoint.
     # @return [String]
     def reader_endpoint
-      data.reader_endpoint
+      data[:reader_endpoint]
     end
 
     # Specifies whether the DB cluster has instances in multiple
     # Availability Zones.
     # @return [Boolean]
     def multi_az
-      data.multi_az
+      data[:multi_az]
     end
 
     # Provides the name of the database engine to be used for this DB
     # cluster.
     # @return [String]
     def engine
-      data.engine
+      data[:engine]
     end
 
     # Indicates the database engine version.
     # @return [String]
     def engine_version
-      data.engine_version
+      data[:engine_version]
     end
 
     # Specifies the latest time to which a database can be restored with
     # point-in-time restore.
     # @return [Time]
     def latest_restorable_time
-      data.latest_restorable_time
+      data[:latest_restorable_time]
     end
 
     # Specifies the port that the database engine is listening on.
     # @return [Integer]
     def port
-      data.port
+      data[:port]
     end
 
     # Contains the master username for the DB cluster.
     # @return [String]
     def master_username
-      data.master_username
+      data[:master_username]
     end
 
     # Provides the list of option group memberships for this DB cluster.
     # @return [Array<Types::DBClusterOptionGroupStatus>]
     def db_cluster_option_group_memberships
-      data.db_cluster_option_group_memberships
+      data[:db_cluster_option_group_memberships]
     end
 
     # Specifies the daily time range during which automated backups are
@@ -177,60 +177,60 @@ module Aws::RDS
     # `BackupRetentionPeriod`.
     # @return [String]
     def preferred_backup_window
-      data.preferred_backup_window
+      data[:preferred_backup_window]
     end
 
     # Specifies the weekly time range during which system maintenance can
     # occur, in Universal Coordinated Time (UTC).
     # @return [String]
     def preferred_maintenance_window
-      data.preferred_maintenance_window
+      data[:preferred_maintenance_window]
     end
 
     # Contains the identifier of the source DB cluster if this DB cluster is
     # a Read Replica.
     # @return [String]
     def replication_source_identifier
-      data.replication_source_identifier
+      data[:replication_source_identifier]
     end
 
     # Contains one or more identifiers of the Read Replicas associated with
     # this DB cluster.
     # @return [Array<String>]
     def read_replica_identifiers
-      data.read_replica_identifiers
+      data[:read_replica_identifiers]
     end
 
     # Provides the list of instances that make up the DB cluster.
     # @return [Array<Types::DBClusterMember>]
     def db_cluster_members
-      data.db_cluster_members
+      data[:db_cluster_members]
     end
 
     # Provides a list of VPC security groups that the DB cluster belongs to.
     # @return [Array<Types::VpcSecurityGroupMembership>]
     def vpc_security_groups
-      data.vpc_security_groups
+      data[:vpc_security_groups]
     end
 
     # Specifies the ID that Amazon Route 53 assigns when you create a hosted
     # zone.
     # @return [String]
     def hosted_zone_id
-      data.hosted_zone_id
+      data[:hosted_zone_id]
     end
 
     # Specifies whether the DB cluster is encrypted.
     # @return [Boolean]
     def storage_encrypted
-      data.storage_encrypted
+      data[:storage_encrypted]
     end
 
     # If `StorageEncrypted` is true, the KMS key identifier for the
     # encrypted DB cluster.
     # @return [String]
     def kms_key_id
-      data.kms_key_id
+      data[:kms_key_id]
     end
 
     # The region-unique, immutable identifier for the DB cluster. This
@@ -238,13 +238,13 @@ module Aws::RDS
     # for the DB cluster is accessed.
     # @return [String]
     def db_cluster_resource_id
-      data.db_cluster_resource_id
+      data[:db_cluster_resource_id]
     end
 
     # The Amazon Resource Name (ARN) for the DB cluster.
     # @return [String]
     def db_cluster_arn
-      data.db_cluster_arn
+      data[:db_cluster_arn]
     end
 
     # Provides a list of the AWS Identity and Access Management (IAM) roles
@@ -253,27 +253,27 @@ module Aws::RDS
     # AWS services on your behalf.
     # @return [Array<Types::DBClusterRole>]
     def associated_roles
-      data.associated_roles
+      data[:associated_roles]
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
     # to database accounts is enabled; otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
-      data.iam_database_authentication_enabled
+      data[:iam_database_authentication_enabled]
     end
 
     # Identifies the clone group to which the DB cluster is associated.
     # @return [String]
     def clone_group_id
-      data.clone_group_id
+      data[:clone_group_id]
     end
 
     # Specifies the time when the DB cluster was created, in Universal
     # Coordinated Time (UTC).
     # @return [Time]
     def cluster_create_time
-      data.cluster_create_time
+      data[:cluster_create_time]
     end
 
     # @!endgroup
@@ -309,6 +309,101 @@ module Aws::RDS
     #   {#data} on an unloaded resource will trigger a call to {#load}.
     def data_loaded?
       !!@data
+    end
+
+    # @deprecated Use [Aws::RDS::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
     end
 
     # @!group Actions
@@ -1011,9 +1106,9 @@ module Aws::RDS
     # @return [DBInstance::Collection]
     def members
       batch = []
-      data.db_cluster_members.each do |d|
+      data[:db_cluster_members].each do |d|
         batch << DBInstance.new(
-          id: d.db_instance_identifier,
+          id: d[:db_instance_identifier],
           data: d,
           client: @client
         )
@@ -1024,9 +1119,9 @@ module Aws::RDS
     # @return [OptionGroup::Collection]
     def option_groups
       batch = []
-      data.db_cluster_option_group_memberships.each do |d|
+      data[:db_cluster_option_group_memberships].each do |d|
         batch << OptionGroup.new(
-          name: d.db_cluster_option_group_name,
+          name: d[:db_cluster_option_group_name],
           data: d,
           client: @client
         )
@@ -1036,9 +1131,9 @@ module Aws::RDS
 
     # @return [DBClusterParameterGroup, nil]
     def parameter_group
-      if data.db_cluster_parameter_group
+      if data[:db_cluster_parameter_group]
         DBClusterParameterGroup.new(
-          name: data.db_cluster_parameter_group,
+          name: data[:db_cluster_parameter_group],
           client: @client
         )
       else
@@ -1159,9 +1254,9 @@ module Aws::RDS
 
     # @return [DBSubnetGroup, nil]
     def subnet_group
-      if data.db_subnet_group
+      if data[:db_subnet_group]
         DBSubnetGroup.new(
-          name: data.db_subnet_group,
+          name: data[:db_subnet_group],
           client: @client
         )
       else
