@@ -15,6 +15,7 @@ module AwsSdkCodeGenerator
         @client_load_method = Underscore.underscore(resource['load']['request']['operation']) if resource['load']
         @data_class = "Types::#{resource['shape']}"
         @waiters = ResourceWaiter.build_list(resource, options[:waiters])
+        @wait_until = options[:waiters] # add #wait_until method if service has waiters
         @actions = ResourceAction.build_list(@class_name, resource, api)
         @associations = build_associations(options)
         @batch_actions = ResourceBatchAction.build_list(@class_name, resource, api)
@@ -50,6 +51,9 @@ module AwsSdkCodeGenerator
 
       # @return [Array<Waiter>]
       attr_reader :waiters
+
+      # @return [Boolean]
+      attr_reader :wait_until
 
       # @return [Array<ResourceAction>]
       attr_reader :actions
