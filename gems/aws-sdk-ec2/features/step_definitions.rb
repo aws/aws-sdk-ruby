@@ -14,7 +14,7 @@ After("@ec2") do
 end
 
 Given(/^I create a volume$/) do
-  @volume = @service.create_volume(size: 1, availability_zone: 'us-west-2a', volume_type: 'gp2')
+  @volume = @service.create_volume(size: 1, availability_zone: 'us-east-1a', volume_type: 'gp2')
   @volume_id = @volume.id
   @volume_ids << @volume_id
 end
