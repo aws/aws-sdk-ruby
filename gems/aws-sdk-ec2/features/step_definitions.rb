@@ -1,7 +1,6 @@
 Before("@ec2") do
   @service = Aws::EC2::Resource.new
   @client = @service.client
-  @volume_ids = []
 end
 
 After("@ec2") do
