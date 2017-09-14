@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.46 (2017-09-14)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
