@@ -643,6 +643,15 @@ describe 'Interfaces' do
 
     describe 'waiters' do
 
+      it 'has default #wait_until method' do
+        band = Sample::Band.new(name:'band-name', client: client)
+        expect(band).to respond_to(:wait_until)
+
+        # Tag doesn't have waiter entry at `resource.json`
+        tag = Sample::Tag.new(resource_id: 'foo', key: 'bar', value: 'baz', client: client)
+        expect(tag).to respond_to(:wait_until)
+      end
+
       it 'defines a single #wait_until_* method for each named waiter' do
         band = Sample::Band.new(name:'band-name', client: client)
         expect(band).to respond_to(:wait_until_exists)
