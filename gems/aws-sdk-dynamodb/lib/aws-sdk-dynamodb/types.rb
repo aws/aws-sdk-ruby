@@ -150,6 +150,7 @@ module Aws::DynamoDB
       :ss,
       :ns,
       :bs,
+      :es,
       :m,
       :l,
       :null,

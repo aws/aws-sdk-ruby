@@ -66,6 +66,7 @@ module Aws::DynamoDBStreams
       :ss,
       :ns,
       :bs,
+      :es,
       :m,
       :l,
       :null,
