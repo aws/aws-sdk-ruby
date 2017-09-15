@@ -247,30 +247,79 @@ module Aws::APIGateway
     #   \[Required\] The name of the authorizer.
     #
     # @option params [required, String] :type
-    #   \[Required\] The type of the authorizer.
+    #   \[Required\] The authorizer type. Valid values are `TOKEN` for a
+    #   Lambda function using a single authorization token submitted in a
+    #   custom header, `REQUEST` for a Lambda function using incoming request
+    #   parameters, and `COGNITO_USER_POOLS` for using an Amazon Cognito user
+    #   pool.
     #
     # @option params [Array<String>] :provider_arns
-    #   A list of the Cognito Your User Pool authorizer's provider ARNs.
+    #   A list of the Amazon Cognito user pool ARNs for the
+    #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
+    #   `arn:aws:cognito-idp:\{region\}:\{account_id\}:userpool/\{user_pool_id\}`.
+    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #
     # @option params [String] :auth_type
-    #   Optional customer-defined field, used in Swagger imports/exports. Has
-    #   no functional impact.
+    #   Optional customer-defined field, used in Swagger imports and exports
+    #   without functional impact.
     #
     # @option params [String] :authorizer_uri
-    #   \[Required\] Specifies the authorizer's Uniform Resource Identifier
-    #   (URI).
+    #   Specifies the authorizer's Uniform Resource Identifier (URI). For
+    #   `TOKEN` or `REQUEST` authorizers, this must be a well-formed Lambda
+    #   function URI, for example,
+    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\{account_id\}:function:\{lambda_function_name\}/invocations`.
+    #   In general, the URI has this form
+    #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`, where
+    #   `\{region\}` is the same as the region hosting the Lambda function,
+    #   `path` indicates that the remaining substring in the URI should be
+    #   treated as the path to the resource, including the initial `/`. For
+    #   Lambda functions, this is usually of the form
+    #   `/2015-03-31/functions/[FunctionARN]/invocations`.
     #
     # @option params [String] :authorizer_credentials
-    #   Specifies the credentials required for the authorizer, if any.
+    #   Specifies the required credentials as an IAM role for Amazon API
+    #   Gateway to invoke the authorizer. To specify an IAM role for Amazon
+    #   API Gateway to assume, use the role's Amazon Resource Name (ARN). To
+    #   use resource-based permissions on the Lambda function, specify null.
     #
-    # @option params [required, String] :identity_source
-    #   \[Required\] The source of the identity in an incoming request.
+    # @option params [String] :identity_source
+    #   The identity source for which authorization is requested. * For a
+    #   `TOKEN` authorizer, this is required and specifies the request
+    #     header mapping expression for the custom header holding the
+    #     authorization token submitted by the client. For example, if the
+    #     token header name is `Auth`, the header mapping expression is
+    #     `method.request.header.Auth`.
+    #   * For the `REQUEST` authorizer, this is required when authorization
+    #     caching is enabled. The value is a comma-separated string of one or
+    #     more mapping expressions of the specified request parameters. For
+    #     example, if an `Auth` header, a `Name` query string parameter are
+    #     defined as identity sources, this value is
+    #     `method.request.header.Auth, method.request.querystring.Name`. These
+    #     parameters will be used to derive the authorization caching key and
+    #     to perform runtime validation of the `REQUEST` authorizer by
+    #     verifying all of the identity-related request parameters are
+    #     present, not null and non-empty. Only when this is true does the
+    #     authorizer invoke the authorizer Lambda function, otherwise, it
+    #     returns a 401 Unauthorized response without calling the Lambda
+    #     function. The valid value is a string of comma-separated mapping
+    #     expressions of the specified request parameters. When the
+    #     authorization caching is not enabled, this property is optional.
+    #   * For a `COGNITO_USER_POOLS` authorizer, this property is not used.
     #
     # @option params [String] :identity_validation_expression
-    #   A validation expression for the incoming identity.
+    #   A validation expression for the incoming identity token. For `TOKEN`
+    #   authorizers, this value is a regular expression. Amazon API Gateway
+    #   will match the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
-    #   The TTL of cached authorizer results.
+    #   The TTL in seconds of cached authorizer results. If it equals 0,
+    #   authorization caching is disabled. If it is greater than 0, API
+    #   Gateway will cache authorizer responses. If this field is not set, the
+    #   default value is 300. The maximum value is 3600, or 1 hour.
     #
     # @return [Types::Authorizer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -290,12 +339,12 @@ module Aws::APIGateway
     #   resp = client.create_authorizer({
     #     rest_api_id: "String", # required
     #     name: "String", # required
-    #     type: "TOKEN", # required, accepts TOKEN, COGNITO_USER_POOLS
+    #     type: "TOKEN", # required, accepts TOKEN, REQUEST, COGNITO_USER_POOLS
     #     provider_arns: ["ProviderARN"],
     #     auth_type: "String",
     #     authorizer_uri: "String",
     #     authorizer_credentials: "String",
-    #     identity_source: "String", # required
+    #     identity_source: "String",
     #     identity_validation_expression: "String",
     #     authorizer_result_ttl_in_seconds: 1,
     #   })
@@ -304,7 +353,7 @@ module Aws::APIGateway
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -593,7 +642,7 @@ module Aws::APIGateway
     #   The RestApi identifier under which the Model will be created.
     #
     # @option params [required, String] :name
-    #   The name of the model.
+    #   The name of the model. Must be alphanumeric.
     #
     # @option params [String] :description
     #   The description of the model.
@@ -1801,7 +1850,7 @@ module Aws::APIGateway
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -1856,7 +1905,7 @@ module Aws::APIGateway
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+    #   resp.items[0].type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
     #   resp.items[0].provider_arns #=> Array
     #   resp.items[0].provider_arns[0] #=> String
     #   resp.items[0].auth_type #=> String
@@ -3213,15 +3262,17 @@ module Aws::APIGateway
     #   The name of the Stage that the SDK will use.
     #
     # @option params [required, String] :sdk_type
-    #   The language for the generated SDK. Currently `javascript`, `android`,
-    #   and `objectivec` (for iOS) are supported.
+    #   The language for the generated SDK. Currently `java`, `javascript`,
+    #   `android`, `objectivec` and `swift` (for iOS) are supported.
     #
     # @option params [Hash<String,String>] :parameters
-    #   A key-value map of query string parameters that specify properties of
-    #   the SDK, depending on the requested `sdkType`. For `sdkType` of
-    #   `objectivec`, a parameter named `classPrefix` is required. For
-    #   `sdkType` of `android`, parameters named `groupId`, `artifactId`,
-    #   `artifactVersion`, and `invokerPackage` are required.
+    #   A string-to-string key-value map of query parameters
+    #   `sdkType`-dependent properties of the SDK. For `sdkType` of
+    #   `objectivec` or `swift`, a parameter named `classPrefix` is required.
+    #   For `sdkType` of `android`, parameters named `groupId`, `artifactId`,
+    #   `artifactVersion`, and `invokerPackage` are required. For `sdkType` of
+    #   `java`, parameters named `serviceName` and `javaPackageName` are
+    #   required.
     #
     # @return [Types::SdkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4743,7 +4794,7 @@ module Aws::APIGateway
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -5835,7 +5886,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

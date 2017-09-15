@@ -329,7 +329,7 @@ module Aws::APIGateway
     CreateAuthorizerRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: String, location_name: "authType"))
     CreateAuthorizerRequest.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: String, location_name: "authorizerUri"))
     CreateAuthorizerRequest.add_member(:authorizer_credentials, Shapes::ShapeRef.new(shape: String, location_name: "authorizerCredentials"))
-    CreateAuthorizerRequest.add_member(:identity_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "identitySource"))
+    CreateAuthorizerRequest.add_member(:identity_source, Shapes::ShapeRef.new(shape: String, location_name: "identitySource"))
     CreateAuthorizerRequest.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: String, location_name: "identityValidationExpression"))
     CreateAuthorizerRequest.add_member(:authorizer_result_ttl_in_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "authorizerResultTtlInSeconds"))
     CreateAuthorizerRequest.struct_class = Types::CreateAuthorizerRequest
@@ -1507,6 +1507,8 @@ module Aws::APIGateway
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
