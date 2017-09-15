@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix support for empty set attribute values.
 * Issue - Update `aws-sdk-dynamodbstreams` gemspec metadata.
 
 1.0.0 (2017-08-29)

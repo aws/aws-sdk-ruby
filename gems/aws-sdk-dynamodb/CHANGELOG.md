@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix support for empty set attribute values.
+
 1.2.0 (2017-09-14)
 ------------------
 
