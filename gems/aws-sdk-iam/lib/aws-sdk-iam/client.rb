@@ -1125,7 +1125,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -2053,7 +2053,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -2416,7 +2416,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -2586,6 +2586,58 @@ module Aws::IAM
     # @param [Hash] params ({})
     def delete_server_certificate(params = {}, options = {})
       req = build_request(:delete_server_certificate, params)
+      req.send_request(options)
+    end
+
+    # Submits a service-linked role deletion request and returns a
+    # `DeletionTaskId`, which you can use to check the status of the
+    # deletion. Before you call this operation, confirm that the role has no
+    # active sessions and that any resources used by the role in the linked
+    # service are deleted. If you call this operation more than once for the
+    # same service-linked role and an earlier deletion task is not complete,
+    # then the `DeletionTaskId` of the earlier request is returned.
+    #
+    # If you submit a deletion request for a service-linked role whose
+    # linked service is still accessing a resource, then the deletion task
+    # fails. If it fails, the GetServiceLinkedRoleDeletionStatus API
+    # operation returns the reason for the failure, including the resources
+    # that must be deleted. To delete the service-linked role, you must
+    # first remove those resources from the linked service and then submit
+    # the deletion request again. Resources are specific to the service that
+    # is linked to the role. For more information about removing resources
+    # from a service, see the [AWS documentation][1] for your service.
+    #
+    # For more information about service-linked roles, see [Roles Terms and
+    # Concepts: AWS Service-Linked Role][2] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/
+    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    #
+    # @option params [required, String] :role_name
+    #   The name of the service-linked role to be deleted.
+    #
+    # @return [Types::DeleteServiceLinkedRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteServiceLinkedRoleResponse#deletion_task_id #deletion_task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_linked_role({
+    #     role_name: "roleNameType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRole AWS API Documentation
+    #
+    # @overload delete_service_linked_role(params = {})
+    # @param [Hash] params ({})
+    def delete_service_linked_role(params = {}, options = {})
+      req = build_request(:delete_service_linked_role, params)
       req.send_request(options)
     end
 
@@ -2766,7 +2818,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -3693,7 +3745,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -4185,7 +4237,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -4394,6 +4446,47 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Retrieves the status of your service-linked role deletion. After you
+    # use the DeleteServiceLinkedRole API operation to submit a
+    # service-linked role for deletion, you can use the `DeletionTaskId`
+    # parameter in `GetServiceLinkedRoleDeletionStatus` to check the status
+    # of the deletion. If the deletion fails, this operation returns the
+    # reason that it failed.
+    #
+    # @option params [required, String] :deletion_task_id
+    #   The deletion task identifier. This identifier is returned by the
+    #   DeleteServiceLinkedRole operation in the format
+    #   `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
+    #
+    # @return [Types::GetServiceLinkedRoleDeletionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceLinkedRoleDeletionStatusResponse#status #status} => String
+    #   * {Types::GetServiceLinkedRoleDeletionStatusResponse#reason #reason} => Types::DeletionTaskFailureReasonType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_linked_role_deletion_status({
+    #     deletion_task_id: "DeletionTaskIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "FAILED", "NOT_STARTED"
+    #   resp.reason.reason #=> String
+    #   resp.reason.role_usage_list #=> Array
+    #   resp.reason.role_usage_list[0].region #=> String
+    #   resp.reason.role_usage_list[0].resources #=> Array
+    #   resp.reason.role_usage_list[0].resources[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatus AWS API Documentation
+    #
+    # @overload get_service_linked_role_deletion_status(params = {})
+    # @param [Hash] params ({})
+    def get_service_linked_role_deletion_status(params = {}, options = {})
+      req = build_request(:get_service_linked_role_deletion_status, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified IAM user, including the
     # user's creation date, path, unique ID, and ARN.
     #
@@ -4504,7 +4597,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -6695,7 +6788,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -6797,7 +6890,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -6891,7 +6984,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   =,.@-+
     #
     #
     #
@@ -9110,7 +9203,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

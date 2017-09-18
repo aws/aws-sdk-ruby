@@ -522,6 +522,7 @@ module Aws::EC2
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
+    InstanceInterruptionBehavior = Shapes::StringShape.new(name: 'InstanceInterruptionBehavior')
     InstanceIpv6Address = Shapes::StructureShape.new(name: 'InstanceIpv6Address')
     InstanceIpv6AddressList = Shapes::ListShape.new(name: 'InstanceIpv6AddressList')
     InstanceLifecycleType = Shapes::StringShape.new(name: 'InstanceLifecycleType')
@@ -3952,6 +3953,7 @@ module Aws::EC2
     RequestSpotInstancesRequest.add_member(:type, Shapes::ShapeRef.new(shape: SpotInstanceType, location_name: "type"))
     RequestSpotInstancesRequest.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "validFrom"))
     RequestSpotInstancesRequest.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
+    RequestSpotInstancesRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
     RequestSpotInstancesRequest.struct_class = Types::RequestSpotInstancesRequest
 
     RequestSpotInstancesResult.add_member(:spot_instance_requests, Shapes::ShapeRef.new(shape: SpotInstanceRequestList, location_name: "spotInstanceRequestSet"))
@@ -4491,6 +4493,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "validFrom"))
     SpotFleetRequestConfigData.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
     SpotFleetRequestConfigData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
+    SpotFleetRequestConfigData.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")
@@ -4519,6 +4522,7 @@ module Aws::EC2
     SpotInstanceRequest.add_member(:type, Shapes::ShapeRef.new(shape: SpotInstanceType, location_name: "type"))
     SpotInstanceRequest.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "validFrom"))
     SpotInstanceRequest.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
+    SpotInstanceRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotInstanceRequest.struct_class = Types::SpotInstanceRequest
 
     SpotInstanceRequestIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "SpotInstanceRequestId")

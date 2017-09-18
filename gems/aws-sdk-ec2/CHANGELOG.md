@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2017-09-18)
+------------------
+
+* Feature - API update.
+
 * Issue - Update smoke test clean up steps
 
 1.6.0 (2017-09-14)

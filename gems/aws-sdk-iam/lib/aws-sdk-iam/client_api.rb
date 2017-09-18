@@ -19,6 +19,7 @@ module Aws::IAM
     AddClientIDToOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'AddClientIDToOpenIDConnectProviderRequest')
     AddRoleToInstanceProfileRequest = Shapes::StructureShape.new(name: 'AddRoleToInstanceProfileRequest')
     AddUserToGroupRequest = Shapes::StructureShape.new(name: 'AddUserToGroupRequest')
+    ArnListType = Shapes::ListShape.new(name: 'ArnListType')
     AttachGroupPolicyRequest = Shapes::StructureShape.new(name: 'AttachGroupPolicyRequest')
     AttachRolePolicyRequest = Shapes::StructureShape.new(name: 'AttachRolePolicyRequest')
     AttachUserPolicyRequest = Shapes::StructureShape.new(name: 'AttachUserPolicyRequest')
@@ -79,11 +80,16 @@ module Aws::IAM
     DeleteSAMLProviderRequest = Shapes::StructureShape.new(name: 'DeleteSAMLProviderRequest')
     DeleteSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'DeleteSSHPublicKeyRequest')
     DeleteServerCertificateRequest = Shapes::StructureShape.new(name: 'DeleteServerCertificateRequest')
+    DeleteServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'DeleteServiceLinkedRoleRequest')
+    DeleteServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'DeleteServiceLinkedRoleResponse')
     DeleteServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'DeleteServiceSpecificCredentialRequest')
     DeleteSigningCertificateRequest = Shapes::StructureShape.new(name: 'DeleteSigningCertificateRequest')
     DeleteUserPolicyRequest = Shapes::StructureShape.new(name: 'DeleteUserPolicyRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteVirtualMFADeviceRequest = Shapes::StructureShape.new(name: 'DeleteVirtualMFADeviceRequest')
+    DeletionTaskFailureReasonType = Shapes::StructureShape.new(name: 'DeletionTaskFailureReasonType')
+    DeletionTaskIdType = Shapes::StringShape.new(name: 'DeletionTaskIdType')
+    DeletionTaskStatusType = Shapes::StringShape.new(name: 'DeletionTaskStatusType')
     DetachGroupPolicyRequest = Shapes::StructureShape.new(name: 'DetachGroupPolicyRequest')
     DetachRolePolicyRequest = Shapes::StructureShape.new(name: 'DetachRolePolicyRequest')
     DetachUserPolicyRequest = Shapes::StructureShape.new(name: 'DetachUserPolicyRequest')
@@ -132,6 +138,8 @@ module Aws::IAM
     GetSSHPublicKeyResponse = Shapes::StructureShape.new(name: 'GetSSHPublicKeyResponse')
     GetServerCertificateRequest = Shapes::StructureShape.new(name: 'GetServerCertificateRequest')
     GetServerCertificateResponse = Shapes::StructureShape.new(name: 'GetServerCertificateResponse')
+    GetServiceLinkedRoleDeletionStatusRequest = Shapes::StructureShape.new(name: 'GetServiceLinkedRoleDeletionStatusRequest')
+    GetServiceLinkedRoleDeletionStatusResponse = Shapes::StructureShape.new(name: 'GetServiceLinkedRoleDeletionStatusResponse')
     GetUserPolicyRequest = Shapes::StructureShape.new(name: 'GetUserPolicyRequest')
     GetUserPolicyResponse = Shapes::StructureShape.new(name: 'GetUserPolicyResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
@@ -217,6 +225,7 @@ module Aws::IAM
     PolicyGroup = Shapes::StructureShape.new(name: 'PolicyGroup')
     PolicyGroupListType = Shapes::ListShape.new(name: 'PolicyGroupListType')
     PolicyIdentifierType = Shapes::StringShape.new(name: 'PolicyIdentifierType')
+    PolicyNotAttachableException = Shapes::StructureShape.new(name: 'PolicyNotAttachableException')
     PolicyRole = Shapes::StructureShape.new(name: 'PolicyRole')
     PolicyRoleListType = Shapes::ListShape.new(name: 'PolicyRoleListType')
     PolicySourceType = Shapes::StringShape.new(name: 'PolicySourceType')
@@ -227,6 +236,8 @@ module Aws::IAM
     PutGroupPolicyRequest = Shapes::StructureShape.new(name: 'PutGroupPolicyRequest')
     PutRolePolicyRequest = Shapes::StructureShape.new(name: 'PutRolePolicyRequest')
     PutUserPolicyRequest = Shapes::StructureShape.new(name: 'PutUserPolicyRequest')
+    ReasonType = Shapes::StringShape.new(name: 'ReasonType')
+    RegionNameType = Shapes::StringShape.new(name: 'RegionNameType')
     RemoveClientIDFromOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'RemoveClientIDFromOpenIDConnectProviderRequest')
     RemoveRoleFromInstanceProfileRequest = Shapes::StructureShape.new(name: 'RemoveRoleFromInstanceProfileRequest')
     RemoveUserFromGroupRequest = Shapes::StructureShape.new(name: 'RemoveUserFromGroupRequest')
@@ -244,6 +255,8 @@ module Aws::IAM
     ResyncMFADeviceRequest = Shapes::StructureShape.new(name: 'ResyncMFADeviceRequest')
     Role = Shapes::StructureShape.new(name: 'Role')
     RoleDetail = Shapes::StructureShape.new(name: 'RoleDetail')
+    RoleUsageListType = Shapes::ListShape.new(name: 'RoleUsageListType')
+    RoleUsageType = Shapes::StructureShape.new(name: 'RoleUsageType')
     SAMLMetadataDocumentType = Shapes::StringShape.new(name: 'SAMLMetadataDocumentType')
     SAMLProviderListEntry = Shapes::StructureShape.new(name: 'SAMLProviderListEntry')
     SAMLProviderListType = Shapes::ListShape.new(name: 'SAMLProviderListType')
@@ -358,6 +371,7 @@ module Aws::IAM
     policyListType = Shapes::ListShape.new(name: 'policyListType')
     policyNameListType = Shapes::ListShape.new(name: 'policyNameListType')
     policyNameType = Shapes::StringShape.new(name: 'policyNameType')
+    policyNotAttachableMessage = Shapes::StringShape.new(name: 'policyNotAttachableMessage')
     policyPathType = Shapes::StringShape.new(name: 'policyPathType')
     policyScopeType = Shapes::StringShape.new(name: 'policyScopeType')
     policyVersionIdType = Shapes::StringShape.new(name: 'policyVersionIdType')
@@ -424,6 +438,8 @@ module Aws::IAM
     AddUserToGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
     AddUserToGroupRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     AddUserToGroupRequest.struct_class = Types::AddUserToGroupRequest
+
+    ArnListType.member = Shapes::ShapeRef.new(shape: arnType)
 
     AttachGroupPolicyRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
     AttachGroupPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
@@ -608,6 +624,12 @@ module Aws::IAM
     DeleteServerCertificateRequest.add_member(:server_certificate_name, Shapes::ShapeRef.new(shape: serverCertificateNameType, required: true, location_name: "ServerCertificateName"))
     DeleteServerCertificateRequest.struct_class = Types::DeleteServerCertificateRequest
 
+    DeleteServiceLinkedRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    DeleteServiceLinkedRoleRequest.struct_class = Types::DeleteServiceLinkedRoleRequest
+
+    DeleteServiceLinkedRoleResponse.add_member(:deletion_task_id, Shapes::ShapeRef.new(shape: DeletionTaskIdType, required: true, location_name: "DeletionTaskId"))
+    DeleteServiceLinkedRoleResponse.struct_class = Types::DeleteServiceLinkedRoleResponse
+
     DeleteServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
     DeleteServiceSpecificCredentialRequest.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
     DeleteServiceSpecificCredentialRequest.struct_class = Types::DeleteServiceSpecificCredentialRequest
@@ -625,6 +647,10 @@ module Aws::IAM
 
     DeleteVirtualMFADeviceRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
     DeleteVirtualMFADeviceRequest.struct_class = Types::DeleteVirtualMFADeviceRequest
+
+    DeletionTaskFailureReasonType.add_member(:reason, Shapes::ShapeRef.new(shape: ReasonType, location_name: "Reason"))
+    DeletionTaskFailureReasonType.add_member(:role_usage_list, Shapes::ShapeRef.new(shape: RoleUsageListType, location_name: "RoleUsageList"))
+    DeletionTaskFailureReasonType.struct_class = Types::DeletionTaskFailureReasonType
 
     DetachGroupPolicyRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "GroupName"))
     DetachGroupPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
@@ -794,6 +820,13 @@ module Aws::IAM
 
     GetServerCertificateResponse.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ServerCertificate, required: true, location_name: "ServerCertificate"))
     GetServerCertificateResponse.struct_class = Types::GetServerCertificateResponse
+
+    GetServiceLinkedRoleDeletionStatusRequest.add_member(:deletion_task_id, Shapes::ShapeRef.new(shape: DeletionTaskIdType, required: true, location_name: "DeletionTaskId"))
+    GetServiceLinkedRoleDeletionStatusRequest.struct_class = Types::GetServiceLinkedRoleDeletionStatusRequest
+
+    GetServiceLinkedRoleDeletionStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: DeletionTaskStatusType, required: true, location_name: "Status"))
+    GetServiceLinkedRoleDeletionStatusResponse.add_member(:reason, Shapes::ShapeRef.new(shape: DeletionTaskFailureReasonType, location_name: "Reason"))
+    GetServiceLinkedRoleDeletionStatusResponse.struct_class = Types::GetServiceLinkedRoleDeletionStatusResponse
 
     GetUserPolicyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     GetUserPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, required: true, location_name: "PolicyName"))
@@ -1239,6 +1272,12 @@ module Aws::IAM
     RoleDetail.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: attachedPoliciesListType, location_name: "AttachedManagedPolicies"))
     RoleDetail.struct_class = Types::RoleDetail
 
+    RoleUsageListType.member = Shapes::ShapeRef.new(shape: RoleUsageType)
+
+    RoleUsageType.add_member(:region, Shapes::ShapeRef.new(shape: RegionNameType, location_name: "Region"))
+    RoleUsageType.add_member(:resources, Shapes::ShapeRef.new(shape: ArnListType, location_name: "Resources"))
+    RoleUsageType.struct_class = Types::RoleUsageType
+
     SAMLProviderListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
     SAMLProviderListEntry.add_member(:valid_until, Shapes::ShapeRef.new(shape: dateType, location_name: "ValidUntil"))
     SAMLProviderListEntry.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
@@ -1573,6 +1612,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotAttachableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1586,6 +1626,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotAttachableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1598,6 +1639,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotAttachableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1969,6 +2011,17 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:delete_service_linked_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceLinkedRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceLinkedRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteServiceLinkedRoleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:delete_service_specific_credential, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteServiceSpecificCredential"
         o.http_method = "POST"
@@ -2288,6 +2341,17 @@ module Aws::IAM
         o.input = Shapes::ShapeRef.new(shape: GetServerCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetServerCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_service_linked_role_deletion_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceLinkedRoleDeletionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceLinkedRoleDeletionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceLinkedRoleDeletionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

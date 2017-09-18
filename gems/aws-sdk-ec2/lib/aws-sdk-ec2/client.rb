@@ -12605,6 +12605,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_from #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_until #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.replace_unhealthy_instances #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_interruption_behavior #=> String, one of "stop", "terminate"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
     #
@@ -12917,6 +12918,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].type #=> String, one of "one-time", "persistent"
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
+    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "stop", "terminate"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
     #
@@ -19160,6 +19162,7 @@ module Aws::EC2
     #       valid_from: Time.now,
     #       valid_until: Time.now,
     #       replace_unhealthy_instances: false,
+    #       instance_interruption_behavior: "stop", # accepts stop, terminate
     #     },
     #   })
     #
@@ -19278,6 +19281,10 @@ module Aws::EC2
     #   remains active until it is canceled or this date and time is reached.
     #
     #   Default: The request is effective indefinitely.
+    #
+    # @option params [String] :instance_interruption_behavior
+    #   Indicates whether a Spot instance stops or terminates when it is
+    #   interrupted.
     #
     # @return [Types::RequestSpotInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19412,6 +19419,7 @@ module Aws::EC2
     #     type: "one-time", # accepts one-time, persistent
     #     valid_from: Time.now,
     #     valid_until: Time.now,
+    #     instance_interruption_behavior: "stop", # accepts stop, terminate
     #   })
     #
     # @example Response structure
@@ -19484,6 +19492,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].type #=> String, one of "one-time", "persistent"
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
+    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "stop", "terminate"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstances AWS API Documentation
     #
@@ -21196,7 +21205,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

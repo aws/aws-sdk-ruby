@@ -47,6 +47,8 @@ module Aws::SES
     CreateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetEventDestinationResponse')
     CreateConfigurationSetRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetRequest')
     CreateConfigurationSetResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetResponse')
+    CreateConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetTrackingOptionsRequest')
+    CreateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetTrackingOptionsResponse')
     CreateReceiptFilterRequest = Shapes::StructureShape.new(name: 'CreateReceiptFilterRequest')
     CreateReceiptFilterResponse = Shapes::StructureShape.new(name: 'CreateReceiptFilterResponse')
     CreateReceiptRuleRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleRequest')
@@ -54,11 +56,14 @@ module Aws::SES
     CreateReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetRequest')
     CreateReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetResponse')
     CustomMailFromStatus = Shapes::StringShape.new(name: 'CustomMailFromStatus')
+    CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
     DeleteConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationRequest')
     DeleteConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationResponse')
     DeleteConfigurationSetRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetRequest')
     DeleteConfigurationSetResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetResponse')
+    DeleteConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetTrackingOptionsRequest')
+    DeleteConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetTrackingOptionsResponse')
     DeleteIdentityPolicyRequest = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyRequest')
     DeleteIdentityPolicyResponse = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyResponse')
     DeleteIdentityRequest = Shapes::StructureShape.new(name: 'DeleteIdentityRequest')
@@ -128,6 +133,7 @@ module Aws::SES
     InvalidS3ConfigurationException = Shapes::StructureShape.new(name: 'InvalidS3ConfigurationException')
     InvalidSNSDestinationException = Shapes::StructureShape.new(name: 'InvalidSNSDestinationException')
     InvalidSnsTopicException = Shapes::StructureShape.new(name: 'InvalidSnsTopicException')
+    InvalidTrackingOptionsException = Shapes::StructureShape.new(name: 'InvalidTrackingOptionsException')
     InvocationType = Shapes::StringShape.new(name: 'InvocationType')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
@@ -228,8 +234,13 @@ module Aws::SES
     StopScope = Shapes::StringShape.new(name: 'StopScope')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
+    TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
+    TrackingOptionsAlreadyExistsException = Shapes::StructureShape.new(name: 'TrackingOptionsAlreadyExistsException')
+    TrackingOptionsDoesNotExistException = Shapes::StructureShape.new(name: 'TrackingOptionsDoesNotExistException')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
     UpdateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationResponse')
+    UpdateConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsRequest')
+    UpdateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsResponse')
     UpdateReceiptRuleRequest = Shapes::StructureShape.new(name: 'UpdateReceiptRuleRequest')
     UpdateReceiptRuleResponse = Shapes::StructureShape.new(name: 'UpdateReceiptRuleResponse')
     VerificationAttributes = Shapes::MapShape.new(name: 'VerificationAttributes')
@@ -308,6 +319,12 @@ module Aws::SES
 
     CreateConfigurationSetResponse.struct_class = Types::CreateConfigurationSetResponse
 
+    CreateConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    CreateConfigurationSetTrackingOptionsRequest.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, required: true, location_name: "TrackingOptions"))
+    CreateConfigurationSetTrackingOptionsRequest.struct_class = Types::CreateConfigurationSetTrackingOptionsRequest
+
+    CreateConfigurationSetTrackingOptionsResponse.struct_class = Types::CreateConfigurationSetTrackingOptionsResponse
+
     CreateReceiptFilterRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ReceiptFilter, required: true, location_name: "Filter"))
     CreateReceiptFilterRequest.struct_class = Types::CreateReceiptFilterRequest
 
@@ -335,6 +352,11 @@ module Aws::SES
     DeleteConfigurationSetRequest.struct_class = Types::DeleteConfigurationSetRequest
 
     DeleteConfigurationSetResponse.struct_class = Types::DeleteConfigurationSetResponse
+
+    DeleteConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    DeleteConfigurationSetTrackingOptionsRequest.struct_class = Types::DeleteConfigurationSetTrackingOptionsRequest
+
+    DeleteConfigurationSetTrackingOptionsResponse.struct_class = Types::DeleteConfigurationSetTrackingOptionsResponse
 
     DeleteIdentityPolicyRequest.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "Identity"))
     DeleteIdentityPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
@@ -378,6 +400,7 @@ module Aws::SES
 
     DescribeConfigurationSetResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, location_name: "ConfigurationSet"))
     DescribeConfigurationSetResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
+    DescribeConfigurationSetResponse.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
     DescribeConfigurationSetResponse.struct_class = Types::DescribeConfigurationSetResponse
 
     DescribeReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
@@ -732,11 +755,20 @@ module Aws::SES
     StopAction.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
     StopAction.struct_class = Types::StopAction
 
+    TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
+    TrackingOptions.struct_class = Types::TrackingOptions
+
     UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestination, required: true, location_name: "EventDestination"))
     UpdateConfigurationSetEventDestinationRequest.struct_class = Types::UpdateConfigurationSetEventDestinationRequest
 
     UpdateConfigurationSetEventDestinationResponse.struct_class = Types::UpdateConfigurationSetEventDestinationResponse
+
+    UpdateConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    UpdateConfigurationSetTrackingOptionsRequest.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, required: true, location_name: "TrackingOptions"))
+    UpdateConfigurationSetTrackingOptionsRequest.struct_class = Types::UpdateConfigurationSetTrackingOptionsRequest
+
+    UpdateConfigurationSetTrackingOptionsResponse.struct_class = Types::UpdateConfigurationSetTrackingOptionsResponse
 
     UpdateReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
     UpdateReceiptRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: ReceiptRule, required: true, location_name: "Rule"))
@@ -824,6 +856,17 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_configuration_set_tracking_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConfigurationSetTrackingOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateConfigurationSetTrackingOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConfigurationSetTrackingOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TrackingOptionsAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrackingOptionsException)
+      end)
+
       api.add_operation(:create_receipt_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReceiptFilter"
         o.http_method = "POST"
@@ -876,6 +919,16 @@ module Aws::SES
         o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationSetEventDestinationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: EventDestinationDoesNotExistException)
+      end)
+
+      api.add_operation(:delete_configuration_set_tracking_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConfigurationSetTrackingOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationSetTrackingOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationSetTrackingOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TrackingOptionsDoesNotExistException)
       end)
 
       api.add_operation(:delete_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -1194,6 +1247,17 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSNSDestinationException)
+      end)
+
+      api.add_operation(:update_configuration_set_tracking_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfigurationSetTrackingOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationSetTrackingOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationSetTrackingOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TrackingOptionsDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrackingOptionsException)
       end)
 
       api.add_operation(:update_receipt_rule, Seahorse::Model::Operation.new.tap do |o|

@@ -19463,6 +19463,7 @@ module Aws::EC2
     #           valid_from: Time.now,
     #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
+    #           instance_interruption_behavior: "stop", # accepts stop, terminate
     #         },
     #       }
     #
@@ -19579,6 +19580,7 @@ module Aws::EC2
     #         type: "one-time", # accepts one-time, persistent
     #         valid_from: Time.now,
     #         valid_until: Time.now,
+    #         instance_interruption_behavior: "stop", # accepts stop, terminate
     #       }
     #
     # @!attribute [rw] availability_zone_group
@@ -19687,6 +19689,11 @@ module Aws::EC2
     #   Default: The request is effective indefinitely.
     #   @return [Time]
     #
+    # @!attribute [rw] instance_interruption_behavior
+    #   Indicates whether a Spot instance stops or terminates when it is
+    #   interrupted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesRequest AWS API Documentation
     #
     class RequestSpotInstancesRequest < Struct.new(
@@ -19700,7 +19707,8 @@ module Aws::EC2
       :spot_price,
       :type,
       :valid_from,
-      :valid_until)
+      :valid_until,
+      :instance_interruption_behavior)
       include Aws::Structure
     end
 
@@ -23115,6 +23123,7 @@ module Aws::EC2
     #         valid_from: Time.now,
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
+    #         instance_interruption_behavior: "stop", # accepts stop, terminate
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -23199,6 +23208,11 @@ module Aws::EC2
     #   Indicates whether Spot fleet should replace unhealthy instances.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_interruption_behavior
+    #   Indicates whether a Spot instance stops or terminates when it is
+    #   interrupted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
     #
     class SpotFleetRequestConfigData < Struct.new(
@@ -23214,7 +23228,8 @@ module Aws::EC2
       :type,
       :valid_from,
       :valid_until,
-      :replace_unhealthy_instances)
+      :replace_unhealthy_instances,
+      :instance_interruption_behavior)
       include Aws::Structure
     end
 
@@ -23346,6 +23361,11 @@ module Aws::EC2
     #   remains active until it is canceled or this date is reached.
     #   @return [Time]
     #
+    # @!attribute [rw] instance_interruption_behavior
+    #   Indicates whether a Spot instance stops or terminates when it is
+    #   interrupted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceRequest AWS API Documentation
     #
     class SpotInstanceRequest < Struct.new(
@@ -23366,7 +23386,8 @@ module Aws::EC2
       :tags,
       :type,
       :valid_from,
-      :valid_until)
+      :valid_until,
+      :instance_interruption_behavior)
       include Aws::Structure
     end
 

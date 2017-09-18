@@ -869,7 +869,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -1543,7 +1543,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -1758,7 +1758,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -1886,6 +1886,37 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteServiceLinkedRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the service-linked role to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleRequest AWS API Documentation
+    #
+    class DeleteServiceLinkedRoleRequest < Struct.new(
+      :role_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deletion_task_id
+    #   The deletion task identifier that you can use to check the status of
+    #   the deletion. This identifier is returned in the format
+    #   `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleResponse AWS API Documentation
+    #
+    class DeleteServiceLinkedRoleResponse < Struct.new(
+      :deletion_task_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteServiceSpecificCredentialRequest
     #   data as a hash:
     #
@@ -1999,7 +2030,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -2066,6 +2097,33 @@ module Aws::IAM
     #
     class DeleteVirtualMFADeviceRequest < Struct.new(
       :serial_number)
+      include Aws::Structure
+    end
+
+    # The reason that the service-linked role deletion failed.
+    #
+    # This data type is used as a response element in the
+    # GetServiceLinkedRoleDeletionStatus operation.
+    #
+    # @!attribute [rw] reason
+    #   A short description of the reason that the service-linked role
+    #   deletion failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_usage_list
+    #   A list of objects that contains details about the service-linked
+    #   role deletion failure. If the service-linked role has active
+    #   sessions or if any resources that were used by the role have not
+    #   been deleted from the linked service, the role can't be deleted.
+    #   This parameter includes a list of the resources that are associated
+    #   with the role and the region in which the resources are being used.
+    #   @return [Array<Types::RoleUsageType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletionTaskFailureReasonType AWS API Documentation
+    #
+    class DeletionTaskFailureReasonType < Struct.new(
+      :reason,
+      :role_usage_list)
       include Aws::Structure
     end
 
@@ -2689,7 +2747,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -3077,7 +3135,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -3308,6 +3366,43 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetServiceLinkedRoleDeletionStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         deletion_task_id: "DeletionTaskIdType", # required
+    #       }
+    #
+    # @!attribute [rw] deletion_task_id
+    #   The deletion task identifier. This identifier is returned by the
+    #   DeleteServiceLinkedRole operation in the format
+    #   `task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusRequest AWS API Documentation
+    #
+    class GetServiceLinkedRoleDeletionStatusRequest < Struct.new(
+      :deletion_task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the deletion.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   An object that contains details about the reason the deletion
+    #   failed.
+    #   @return [Types::DeletionTaskFailureReasonType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusResponse AWS API Documentation
+    #
+    class GetServiceLinkedRoleDeletionStatusResponse < Struct.new(
+      :status,
+      :reason)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUserPolicyRequest
     #   data as a hash:
     #
@@ -3335,7 +3430,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -4249,6 +4344,15 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_names
     #   A list of policy names.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-+
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_truncated
@@ -6275,7 +6379,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -6335,7 +6439,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -6395,7 +6499,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: =,.@-+
     #
     #
     #
@@ -6864,6 +6968,28 @@ module Aws::IAM
       :instance_profile_list,
       :role_policy_list,
       :attached_managed_policies)
+      include Aws::Structure
+    end
+
+    # An object that contains details about how a service-linked role is
+    # used.
+    #
+    # This data type is used as a response element in the
+    # GetServiceLinkedRoleDeletionStatus operation.
+    #
+    # @!attribute [rw] region
+    #   The name of the region where the service-linked role is being used.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The name of the resource that is using the service-linked role.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleUsageType AWS API Documentation
+    #
+    class RoleUsageType < Struct.new(
+      :region,
+      :resources)
       include Aws::Structure
     end
 
@@ -8750,15 +8876,19 @@ module Aws::IAM
     #   list of AWS websites that capture a user's last sign-in time, see
     #   the [Credential Reports][2] topic in the *Using IAM* guide. If a
     #   password is used more than once in a five-minute span, only the
-    #   first use is returned in this field. This field is null (not
-    #   present) when:
+    #   first use is returned in this field. If the field is null (no value)
+    #   then it indicates that they never signed in with a password. This
+    #   can be because:
     #
-    #   * The user does not have a password
+    #   * The user never had a password.
     #
-    #   * The password exists but has never been used (at least not since
-    #     IAM started tracking this information on October 20th, 2014
+    #   * A password exists but has not been used since IAM started tracking
+    #     this information on October 20th, 2014.
     #
-    #   * there is no sign-in data associated with the user
+    #   A null does not mean that the user *never* had a password. Also, if
+    #   the user does not currently have a password, but had one in the
+    #   past, then this field contains the date and time the most recent
+    #   password was used.
     #
     #   This value is returned only in the GetUser and ListUsers actions.
     #
