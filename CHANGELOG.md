@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.48 (2017-09-18)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
