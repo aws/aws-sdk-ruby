@@ -351,17 +351,27 @@ module Aws
           handle { |context| resp }
         end
 
-        it 'truncates the response body before each retry attempt' do
+        it 'truncates the response body before retry attempt of invalid bytes' do
           body = double('truncatable-body', pos: 100, truncate: 0)
           resp.context.http_response.body = body
           expect(body).to receive(:truncate).with(0).exactly(3).times
+          resp.error = Seahorse::Client::NetworkingError.new(
+            Seahorse::Client::NetHttp::Handler::TruncatedBodyError.new(11, 10))
+          handle { |context| resp }
+        end
+
+        it 'does not truncate response body before retry attempt of other errors' do
+          body = double('truncatable-body', pos: 100, truncate: 0)
+          resp.context.http_response.body = body
+          expect(body).to receive(:truncate).never
           resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
 
-        it 'skips retry if un-truncatable response body has received data' do
+        it 'skips retry on invalid bytes if response body is un-truncatable' do
           resp.context.http_response.body = double('write-once-body', pos: 100)
-          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          resp.error = Seahorse::Client::NetworkingError.new(
+            Seahorse::Client::NetHttp::Handler::TruncatedBodyError.new(11, 10))
           handle { |context| resp }
           expect(resp.context.retries).to eq(0)
         end

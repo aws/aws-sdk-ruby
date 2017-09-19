@@ -117,6 +117,11 @@ A delay randomiser function used by the default backoff function. Some predefine
           NETWORKING_ERRORS.include?(@name)
         end
 
+        def invalid_bytes?
+          @error.is_a?(Seahorse::Client::NetworkingError) &&
+          @error.original_error.is_a?(Seahorse::Client::NetHttp::Handler::TruncatedBodyError)
+        end
+
         def server?
           (500..599).include?(@http_status_code)
         end
@@ -198,7 +203,7 @@ A delay randomiser function used by the default backoff function. Some predefine
           context.retries += 1
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
-          context.http_response.reset
+          context.http_response.reset(truncate: error.invalid_bytes?)
           call(context)
         end
 
@@ -209,7 +214,7 @@ A delay randomiser function used by the default backoff function. Some predefine
         def should_retry?(context, error)
           error.retryable?(context) and
           context.retries < retry_limit(context) and
-          response_truncatable?(context)
+          (response_truncatable?(context) or !error.invalid_bytes?)
         end
 
         def retry_limit(context)

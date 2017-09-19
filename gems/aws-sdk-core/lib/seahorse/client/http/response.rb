@@ -149,10 +149,10 @@ module Seahorse
           end
         end
 
-        def reset
+        def reset(options = {})
           @status_code = 0
           @headers.clear
-          @body.truncate(0)
+          @body.truncate(0) if options[:truncate]
           @error = nil
         end
 

@@ -23,6 +23,10 @@ module Aws
           @io.write(@cipher.final)
         end
 
+        def size
+          @io.size
+        end
+
       end
     end
   end
