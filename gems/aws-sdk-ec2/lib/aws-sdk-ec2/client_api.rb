@@ -2632,7 +2632,7 @@ module Aws::EC2
 
     ElasticGpuIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
-    ElasticGpuSet.member = Shapes::ShapeRef.new(shape: ElasticGpus)
+    ElasticGpuSet.member = Shapes::ShapeRef.new(shape: ElasticGpus, location_name: "item")
 
     ElasticGpuSpecification.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
     ElasticGpuSpecification.struct_class = Types::ElasticGpuSpecification
