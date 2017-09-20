@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
 2.10.49 (2017-09-19)
 ------------------
 
