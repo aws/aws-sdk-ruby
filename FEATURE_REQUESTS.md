@@ -156,6 +156,10 @@ support for an injectable timestamp into signing via the presigner.
 
 See [related GitHub issue #1013](https://github.com/aws/aws-sdk-ruby/issues/1013).
 
+Consider expose interface from `aws-sigv4` gem with `:time` option.
+
+See [related Github issue #1598](https://github.com/aws/aws-sdk-ruby/issues/1598).
+
 ### Add accelerate endpoint support to presigned POST requests
 
 The presigned POST utility does not support pre-signing Amazon S3 acclerated
