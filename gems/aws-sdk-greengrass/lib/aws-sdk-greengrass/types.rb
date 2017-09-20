@@ -310,7 +310,7 @@ module Aws::Greengrass
     #       {
     #         amzn_client_token: "__string",
     #         deployment_id: "__string",
-    #         deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment
+    #         deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
     #         group_id: "__string", # required
     #         group_version_id: "__string",
     #       }
@@ -323,7 +323,8 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   Type of deployment
+    #   Type of deployment. When used in CreateDeployment, only
+    #   NewDeployment and Redeployment are valid.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -345,11 +346,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] deployment_arn
-    #   Arn of the deployment.
+    #   The arn of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   Id of the deployment.
+    #   The id of the deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentResponse AWS API Documentation
@@ -1243,6 +1244,10 @@ module Aws::Greengrass
     #   Id of the deployment.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_type
+    #   The type of deployment.
+    #   @return [String]
+    #
     # @!attribute [rw] group_arn
     #   Arn of the group for this deployment.
     #   @return [String]
@@ -1253,6 +1258,7 @@ module Aws::Greengrass
       :created_at,
       :deployment_arn,
       :deployment_id,
+      :deployment_type,
       :group_arn)
       include Aws::Structure
     end
@@ -1557,7 +1563,7 @@ module Aws::Greengrass
     #   @return [Array<Types::ErrorDetail>]
     #
     # @!attribute [rw] message
-    #   Message
+    #   Message containing information about the error
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GeneralError AWS API Documentation
@@ -1621,7 +1627,7 @@ module Aws::Greengrass
     # connectivity info response
     #
     # @!attribute [rw] connectivity_info
-    #   Connectivity info array
+    #   Connectivity info list
     #   @return [Array<Types::ConnectivityInfo>]
     #
     # @!attribute [rw] message
@@ -1767,6 +1773,14 @@ module Aws::Greengrass
     #   Status of the deployment.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_type
+    #   The type of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   The error Details
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] error_message
     #   Error Message
     #   @return [String]
@@ -1779,6 +1793,8 @@ module Aws::Greengrass
     #
     class GetDeploymentStatusResponse < Struct.new(
       :deployment_status,
+      :deployment_type,
+      :error_details,
       :error_message,
       :updated_at)
       include Aws::Structure
@@ -2456,7 +2472,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information of a group
+    # Information on the group
     #
     # @!attribute [rw] arn
     #   Arn of a group.
@@ -2620,7 +2636,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # List of definition response
+    # List of definition responses
     #
     # @!attribute [rw] definitions
     #   Definitions
@@ -2667,7 +2683,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] deployments
-    #   Information on deployments
+    #   List of deployments for the requested groups
     #   @return [Array<Types::Deployment>]
     #
     # @!attribute [rw] next_token
@@ -3191,6 +3207,52 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Information needed to perform a reset of a group's deployments.
+    #
+    # @note When making an API call, you may pass ResetDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         amzn_client_token: "__string",
+    #         force: false,
+    #         group_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] amzn_client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   When set to true, perform a best-effort only core reset.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsRequest AWS API Documentation
+    #
+    class ResetDeploymentsRequest < Struct.new(
+      :amzn_client_token,
+      :force,
+      :group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployment_arn
+    #   The arn of the reset deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_id
+    #   The id of the reset deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsResponse AWS API Documentation
+    #
+    class ResetDeploymentsResponse < Struct.new(
+      :deployment_arn,
+      :deployment_id)
+      include Aws::Structure
+    end
+
     # Information on subscription
     #
     # @note When making an API call, you may pass Subscription
@@ -3276,7 +3338,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] connectivity_info
-    #   Connectivity info array
+    #   Connectivity info list
     #   @return [Array<Types::ConnectivityInfo>]
     #
     # @!attribute [rw] thing_name

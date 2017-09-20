@@ -1498,11 +1498,19 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If the `StorageEncrypted` parameter is true, and you do not specify a
-    #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
-    #   default encryption key. AWS KMS creates the default encryption key for
-    #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS Region.
+    #   If an encryption key is not specified in `KmsKeyId`\:
+    #
+    #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
+    #     then Amazon RDS will use the encryption key used to encrypt the
+    #     source. Otherwise, Amazon RDS will use your default encryption key.
+    #
+    #   * If the `StorageEncrypted` parameter is true and
+    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS will
+    #     use your default encryption key.
+    #
+    #   AWS KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     #   If you create a Read Replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
@@ -2529,7 +2537,7 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2`
+    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
     #
     #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -2733,6 +2741,10 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Boolean] :enable_performance_insights
+    #
+    # @option params [String] :performance_insights_kms_key_id
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -2804,6 +2816,8 @@ module Aws::RDS
     #     promotion_tier: 1,
     #     timezone: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -2897,6 +2911,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3187,6 +3203,10 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Boolean] :enable_performance_insights
+    #
+    # @option params [String] :performance_insights_kms_key_id
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3248,6 +3268,8 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #     source_region: "String",
     #   })
     #
@@ -3342,6 +3364,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4270,7 +4294,8 @@ module Aws::RDS
     # `true`.
     #
     # If the specified DB instance is part of an Amazon Aurora DB cluster,
-    # you cannot delete the DB instance if the following are true:
+    # you cannot delete the DB instance if both of the following conditions
+    # are true:
     #
     # * The DB cluster is a Read Replica of another Amazon Aurora DB
     #   cluster.
@@ -4453,6 +4478,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -5767,6 +5794,8 @@ module Aws::RDS
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].timezone #=> String
     #   resp.db_instances[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instances[0].performance_insights_enabled #=> Boolean
+    #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -7247,6 +7276,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_iops #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_iam_database_authentication #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_performance_insights #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -9032,6 +9062,10 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Boolean] :enable_performance_insights
+    #
+    # @option params [String] :performance_insights_kms_key_id
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -9094,6 +9128,8 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     promotion_tier: 1,
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -9187,6 +9223,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -9323,6 +9361,8 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The engine version to update the DB snapshot to.
     #
+    # @option params [String] :option_group_name
+    #
     # @return [Types::ModifyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
@@ -9332,6 +9372,7 @@ module Aws::RDS
     #   resp = client.modify_db_snapshot({
     #     db_snapshot_identifier: "String", # required
     #     engine_version: "String",
+    #     option_group_name: "String",
     #   })
     #
     # @example Response structure
@@ -9947,6 +9988,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -10281,6 +10324,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -10941,10 +10986,16 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a new DB cluster from a DB cluster snapshot. The target DB
-    # cluster is created from the source DB cluster restore point with the
-    # same configuration as the original source DB cluster, except that the
-    # new DB cluster is created with the default security group.
+    # Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
+    #
+    # If a DB snapshot is specified, the target DB cluster is created from
+    # the source DB snapshot with a default configuration and default
+    # security group.
+    #
+    # If a DB cluster snapshot is specified, the target DB cluster is
+    # created from the source DB cluster restore point with the same
+    # configuration as the original source DB cluster, except that the new
+    # DB cluster is created with the default security group.
     #
     # For more information on Amazon Aurora, see [Aurora on Amazon RDS][1]
     # in the *Amazon RDS User Guide.*
@@ -10958,8 +11009,8 @@ module Aws::RDS
     #   restored DB cluster can be created in.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The name of the DB cluster to create from the DB cluster snapshot.
-    #   This parameter isn't case-sensitive.
+    #   The name of the DB cluster to create from the DB snapshot or DB
+    #   cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -10972,7 +11023,12 @@ module Aws::RDS
     #   Example: `my-snapshot-id`
     #
     # @option params [required, String] :snapshot_identifier
-    #   The identifier for the DB cluster snapshot to restore from.
+    #   The identifier for the DB snapshot or DB cluster snapshot to restore
+    #   from.
+    #
+    #   You can use either the name or the Amazon Resource Name (ARN) to
+    #   specify a DB cluster snapshot. However, you can use only the ARN to
+    #   specify a DB snapshot.
     #
     #   Constraints:
     #
@@ -11021,7 +11077,7 @@ module Aws::RDS
     #
     # @option params [String] :kms_key_id
     #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from a DB cluster snapshot.
+    #   from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -11032,12 +11088,12 @@ module Aws::RDS
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
     #
-    #   * If the DB cluster snapshot is encrypted, then the restored DB
-    #     cluster is encrypted using the KMS key that was used to encrypt the
-    #     DB cluster snapshot.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
+    #     encrypted, then the restored DB cluster is encrypted using the KMS
+    #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
-    #   * If the DB cluster snapshot is not encrypted, then the restored DB
-    #     cluster is encrypted using the specified encryption key.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
+    #     not encrypted, then the restored DB cluster is not encrypted.
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   A Boolean value that is true to enable mapping of AWS Identity and
@@ -11841,6 +11897,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -12299,6 +12357,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -12507,6 +12567,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -12633,6 +12695,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -12656,7 +12720,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

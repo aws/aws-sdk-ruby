@@ -164,6 +164,8 @@ module Aws::Greengrass
     LoggerLevel = Shapes::StringShape.new(name: 'LoggerLevel')
     LoggerType = Shapes::StringShape.new(name: 'LoggerType')
     MapOf__string = Shapes::MapShape.new(name: 'MapOf__string')
+    ResetDeploymentsRequest = Shapes::StructureShape.new(name: 'ResetDeploymentsRequest')
+    ResetDeploymentsResponse = Shapes::StructureShape.new(name: 'ResetDeploymentsResponse')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
     SubscriptionDefinitionVersion = Shapes::StructureShape.new(name: 'SubscriptionDefinitionVersion')
     UpdateConnectivityInfoRequest = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoRequest')
@@ -431,6 +433,7 @@ module Aws::Greengrass
     Deployment.add_member(:created_at, Shapes::ShapeRef.new(shape: __string, location_name: "CreatedAt"))
     Deployment.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentArn"))
     Deployment.add_member(:deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentId"))
+    Deployment.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
     Deployment.add_member(:group_arn, Shapes::ShapeRef.new(shape: __string, location_name: "GroupArn"))
     Deployment.struct_class = Types::Deployment
 
@@ -529,6 +532,8 @@ module Aws::Greengrass
     GetDeploymentStatusRequest.struct_class = Types::GetDeploymentStatusRequest
 
     GetDeploymentStatusResponse.add_member(:deployment_status, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentStatus"))
+    GetDeploymentStatusResponse.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
+    GetDeploymentStatusResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     GetDeploymentStatusResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "ErrorMessage"))
     GetDeploymentStatusResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: __string, location_name: "UpdatedAt"))
     GetDeploymentStatusResponse.struct_class = Types::GetDeploymentStatusResponse
@@ -853,6 +858,15 @@ module Aws::Greengrass
 
     MapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     MapOf__string.value = Shapes::ShapeRef.new(shape: __string)
+
+    ResetDeploymentsRequest.add_member(:amzn_client_token, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "X-Amzn-Client-Token"))
+    ResetDeploymentsRequest.add_member(:force, Shapes::ShapeRef.new(shape: __boolean, location_name: "Force"))
+    ResetDeploymentsRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "GroupId"))
+    ResetDeploymentsRequest.struct_class = Types::ResetDeploymentsRequest
+
+    ResetDeploymentsResponse.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentArn"))
+    ResetDeploymentsResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: __string, location_name: "DeploymentId"))
+    ResetDeploymentsResponse.struct_class = Types::ResetDeploymentsResponse
 
     Subscription.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     Subscription.add_member(:source, Shapes::ShapeRef.new(shape: __string, location_name: "Source"))
@@ -1442,6 +1456,15 @@ module Aws::Greengrass
         o.http_request_uri = "/greengrass/definition/subscriptions"
         o.input = Shapes::ShapeRef.new(shape: ListSubscriptionDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSubscriptionDefinitionsResponse)
+      end)
+
+      api.add_operation(:reset_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/greengrass/groups/{GroupId}/deployments/$reset"
+        o.input = Shapes::ShapeRef.new(shape: ResetDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:update_connectivity_info, Seahorse::Model::Operation.new.tap do |o|

@@ -12,6 +12,7 @@ module Aws::Lex
     include Seahorse::Model
 
     Accept = Shapes::StringShape.new(name: 'Accept')
+    AttributesString = Shapes::StringShape.new(name: 'AttributesString')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
@@ -63,7 +64,8 @@ module Aws::Lex
     PostContentRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PostContentRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
     PostContentRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    PostContentRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
+    PostContentRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: AttributesString, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
+    PostContentRequest.add_member(:request_attributes, Shapes::ShapeRef.new(shape: AttributesString, location: "header", location_name: "x-amz-lex-request-attributes", metadata: {"jsonvalue"=>true}))
     PostContentRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, required: true, location: "header", location_name: "Content-Type"))
     PostContentRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location: "header", location_name: "Accept"))
     PostContentRequest.add_member(:input_stream, Shapes::ShapeRef.new(shape: BlobStream, required: true, location_name: "inputStream"))
@@ -88,6 +90,7 @@ module Aws::Lex
     PostTextRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
     PostTextRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
     PostTextRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
+    PostTextRequest.add_member(:request_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "requestAttributes"))
     PostTextRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "inputText"))
     PostTextRequest.struct_class = Types::PostTextRequest
 

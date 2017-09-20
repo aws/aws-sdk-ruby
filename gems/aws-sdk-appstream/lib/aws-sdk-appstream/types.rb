@@ -186,6 +186,7 @@ module Aws::AppStream
     #         name: "Name", # required
     #         image_name: "String", # required
     #         instance_type: "String", # required
+    #         fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND
     #         compute_capacity: { # required
     #           desired_instances: 1, # required
     #         },
@@ -213,9 +214,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type of compute resources for the fleet. Fleet
-    #   instances are launched from this instance type. Available instance
-    #   types are:
+    #   The instance type to use when launching fleet instances. The
+    #   following instance types are available:
     #
     #   * stream.standard.medium
     #
@@ -241,13 +241,24 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
     #   * stream.graphics-pro.4xlarge
     #
     #   * stream.graphics-pro.8xlarge
     #
     #   * stream.graphics-pro.16xlarge
+    #   @return [String]
     #
-    #   * stream.graphics-desktop.2xlarge
+    # @!attribute [rw] fleet_type
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -294,6 +305,7 @@ module Aws::AppStream
       :name,
       :image_name,
       :instance_type,
+      :fleet_type,
       :compute_capacity,
       :vpc_config,
       :max_user_duration_in_seconds,
@@ -870,8 +882,10 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type of compute resources for the fleet. The fleet
-    #   instances are launched from this instance type.
+    #   The instance type to use when launching fleet instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_type
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity_status
@@ -925,6 +939,7 @@ module Aws::AppStream
       :description,
       :image_name,
       :instance_type,
+      :fleet_type,
       :compute_capacity_status,
       :max_user_duration_in_seconds,
       :disconnect_timeout_in_seconds,
@@ -1426,9 +1441,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type of compute resources for the fleet. Fleet
-    #   instances are launched from this instance type. Available instance
-    #   types are:
+    #   The instance type to use when launching fleet instances. The
+    #   following instance types are available:
     #
     #   * stream.standard.medium
     #
@@ -1454,13 +1468,21 @@ module Aws::AppStream
     #
     #   * stream.memory.8xlarge
     #
+    #   * stream.graphics-design.large
+    #
+    #   * stream.graphics-design.xlarge
+    #
+    #   * stream.graphics-design.2xlarge
+    #
+    #   * stream.graphics-design.4xlarge
+    #
+    #   * stream.graphics-desktop.2xlarge
+    #
     #   * stream.graphics-pro.4xlarge
     #
     #   * stream.graphics-pro.8xlarge
     #
     #   * stream.graphics-pro.16xlarge
-    #
-    #   * stream.graphics-desktop.2xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity

@@ -667,6 +667,7 @@ module Aws::CodePipeline
     # @return [Types::GetPipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPipelineOutput#pipeline #pipeline} => Types::PipelineDeclaration
+    #   * {Types::GetPipelineOutput#metadata #metadata} => Types::PipelineMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -703,6 +704,9 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.metadata.pipeline_arn #=> String
+    #   resp.metadata.created #=> Time
+    #   resp.metadata.updated #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline AWS API Documentation
     #
@@ -961,7 +965,7 @@ module Aws::CodePipeline
     #   value is 100.
     #
     # @option params [String] :next_token
-    #   The token that was returned from the previous list pipeline executions
+    #   The token that was returned from the previous ListPipelineExecutions
     #   call, which can be used to return the next set of pipeline executions
     #   in the list.
     #
@@ -1631,7 +1635,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

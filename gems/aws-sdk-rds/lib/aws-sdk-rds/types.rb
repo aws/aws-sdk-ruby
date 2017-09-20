@@ -1262,11 +1262,20 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for
     #   the KMS encryption key.
     #
-    #   If the `StorageEncrypted` parameter is true, and you do not specify
-    #   a value for the `KmsKeyId` parameter, then Amazon RDS will use your
-    #   default encryption key. AWS KMS creates the default encryption key
-    #   for your AWS account. Your AWS account has a different default
-    #   encryption key for each AWS Region.
+    #   If an encryption key is not specified in `KmsKeyId`\:
+    #
+    #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
+    #     then Amazon RDS will use the encryption key used to encrypt the
+    #     source. Otherwise, Amazon RDS will use your default encryption
+    #     key.
+    #
+    #   * If the `StorageEncrypted` parameter is true and
+    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS
+    #     will use your default encryption key.
+    #
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     #   If you create a Read Replica of an encrypted DB cluster in another
     #   AWS Region, you must set `KmsKeyId` to a KMS key ID that is valid in
@@ -1585,6 +1594,8 @@ module Aws::RDS
     #         promotion_tier: 1,
     #         timezone: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_performance_insights: false,
+    #         performance_insights_kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -2244,7 +2255,7 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2`
+    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
     #
     #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -2471,6 +2482,12 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_insights
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2512,7 +2529,9 @@ module Aws::RDS
       :domain_iam_role_name,
       :promotion_tier,
       :timezone,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :enable_performance_insights,
+      :performance_insights_kms_key_id)
       include Aws::Structure
     end
 
@@ -2543,6 +2562,8 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         pre_signed_url: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_performance_insights: false,
+    #         performance_insights_kms_key_id: "String",
     #         source_region: "String",
     #       }
     #
@@ -2825,6 +2846,12 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_insights
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   @return [String]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -2854,6 +2881,8 @@ module Aws::RDS
       :kms_key_id,
       :pre_signed_url,
       :enable_iam_database_authentication,
+      :enable_performance_insights,
+      :performance_insights_kms_key_id,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -4417,6 +4446,12 @@ module Aws::RDS
     #     Aurora, see DBCluster Type.
     #   @return [Boolean]
     #
+    # @!attribute [rw] performance_insights_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4468,7 +4503,9 @@ module Aws::RDS
       :promotion_tier,
       :db_instance_arn,
       :timezone,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :performance_insights_enabled,
+      :performance_insights_kms_key_id)
       include Aws::Structure
     end
 
@@ -8381,6 +8418,8 @@ module Aws::RDS
     #         domain_iam_role_name: "String",
     #         promotion_tier: 1,
     #         enable_iam_database_authentication: false,
+    #         enable_performance_insights: false,
+    #         performance_insights_kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -8991,6 +9030,12 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_insights
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -9026,7 +9071,9 @@ module Aws::RDS
       :monitoring_role_arn,
       :domain_iam_role_name,
       :promotion_tier,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :enable_performance_insights,
+      :performance_insights_kms_key_id)
       include Aws::Structure
     end
 
@@ -9192,6 +9239,7 @@ module Aws::RDS
     #       {
     #         db_snapshot_identifier: "String", # required
     #         engine_version: "String",
+    #         option_group_name: "String",
     #       }
     #
     # @!attribute [rw] db_snapshot_identifier
@@ -9202,11 +9250,15 @@ module Aws::RDS
     #   The engine version to update the DB snapshot to.
     #   @return [String]
     #
+    # @!attribute [rw] option_group_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotMessage AWS API Documentation
     #
     class ModifyDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier,
-      :engine_version)
+      :engine_version,
+      :option_group_name)
       include Aws::Structure
     end
 
@@ -9964,6 +10016,9 @@ module Aws::RDS
     #   authentication.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_performance_insights
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -9979,7 +10034,8 @@ module Aws::RDS
       :storage_type,
       :supports_iops,
       :supports_enhanced_monitoring,
-      :supports_iam_database_authentication)
+      :supports_iam_database_authentication,
+      :supports_performance_insights)
       include Aws::Structure
     end
 
@@ -11320,8 +11376,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The name of the DB cluster to create from the DB cluster snapshot.
-    #   This parameter isn't case-sensitive.
+    #   The name of the DB cluster to create from the DB snapshot or DB
+    #   cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -11335,7 +11391,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] snapshot_identifier
-    #   The identifier for the DB cluster snapshot to restore from.
+    #   The identifier for the DB snapshot or DB cluster snapshot to restore
+    #   from.
+    #
+    #   You can use either the name or the Amazon Resource Name (ARN) to
+    #   specify a DB cluster snapshot. However, you can use only the ARN to
+    #   specify a DB snapshot.
     #
     #   Constraints:
     #
@@ -11394,7 +11455,7 @@ module Aws::RDS
     #
     # @!attribute [rw] kms_key_id
     #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from a DB cluster snapshot.
+    #   from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -11405,12 +11466,13 @@ module Aws::RDS
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
     #
-    #   * If the DB cluster snapshot is encrypted, then the restored DB
-    #     cluster is encrypted using the KMS key that was used to encrypt
-    #     the DB cluster snapshot.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
+    #     is encrypted, then the restored DB cluster is encrypted using the
+    #     KMS key that was used to encrypt the DB snapshot or DB cluster
+    #     snapshot.
     #
-    #   * If the DB cluster snapshot is not encrypted, then the restored DB
-    #     cluster is encrypted using the specified encryption key.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
+    #     is not encrypted, then the restored DB cluster is not encrypted.
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication

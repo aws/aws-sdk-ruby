@@ -580,11 +580,19 @@ module Aws::RDS
     #   cluster, then you can use the KMS key alias instead of the ARN for the
     #   KMS encryption key.
     #
-    #   If the `StorageEncrypted` parameter is true, and you do not specify a
-    #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
-    #   default encryption key. AWS KMS creates the default encryption key for
-    #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS Region.
+    #   If an encryption key is not specified in `KmsKeyId`\:
+    #
+    #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
+    #     then Amazon RDS will use the encryption key used to encrypt the
+    #     source. Otherwise, Amazon RDS will use your default encryption key.
+    #
+    #   * If the `StorageEncrypted` parameter is true and
+    #     `ReplicationSourceIdentifier` is not specified, then Amazon RDS will
+    #     use your default encryption key.
+    #
+    #   AWS KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     #   If you create a Read Replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the

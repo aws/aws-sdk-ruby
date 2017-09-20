@@ -323,7 +323,8 @@ module Aws::Greengrass
     #   Id of the deployment if you wish to redeploy a previous deployment.
     #
     # @option params [String] :deployment_type
-    #   Type of deployment
+    #   Type of deployment. When used in CreateDeployment, only NewDeployment
+    #   and Redeployment are valid.
     #
     # @option params [required, String] :group_id
     #
@@ -340,7 +341,7 @@ module Aws::Greengrass
     #   resp = client.create_deployment({
     #     amzn_client_token: "__string",
     #     deployment_id: "__string",
-    #     deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment
+    #     deployment_type: "NewDeployment", # accepts NewDeployment, Redeployment, ResetDeployment, ForceResetDeployment
     #     group_id: "__string", # required
     #     group_version_id: "__string",
     #   })
@@ -1264,6 +1265,8 @@ module Aws::Greengrass
     # @return [Types::GetDeploymentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDeploymentStatusResponse#deployment_status #deployment_status} => String
+    #   * {Types::GetDeploymentStatusResponse#deployment_type #deployment_type} => String
+    #   * {Types::GetDeploymentStatusResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::GetDeploymentStatusResponse#error_message #error_message} => String
     #   * {Types::GetDeploymentStatusResponse#updated_at #updated_at} => String
     #
@@ -1277,6 +1280,10 @@ module Aws::Greengrass
     # @example Response structure
     #
     #   resp.deployment_status #=> String
+    #   resp.deployment_type #=> String, one of "NewDeployment", "Redeployment", "ResetDeployment", "ForceResetDeployment"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].detailed_error_code #=> String
+    #   resp.error_details[0].detailed_error_message #=> String
     #   resp.error_message #=> String
     #   resp.updated_at #=> String
     #
@@ -1895,6 +1902,7 @@ module Aws::Greengrass
     #   resp.deployments[0].created_at #=> String
     #   resp.deployments[0].deployment_arn #=> String
     #   resp.deployments[0].deployment_id #=> String
+    #   resp.deployments[0].deployment_type #=> String, one of "NewDeployment", "Redeployment", "ResetDeployment", "ForceResetDeployment"
     #   resp.deployments[0].group_arn #=> String
     #   resp.next_token #=> String
     #
@@ -2326,12 +2334,48 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Resets a group's deployments.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [Boolean] :force
+    #   When set to true, perform a best-effort only core reset.
+    #
+    # @option params [required, String] :group_id
+    #
+    # @return [Types::ResetDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetDeploymentsResponse#deployment_arn #deployment_arn} => String
+    #   * {Types::ResetDeploymentsResponse#deployment_id #deployment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_deployments({
+    #     amzn_client_token: "__string",
+    #     force: false,
+    #     group_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment_arn #=> String
+    #   resp.deployment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeployments AWS API Documentation
+    #
+    # @overload reset_deployments(params = {})
+    # @param [Hash] params ({})
+    def reset_deployments(params = {}, options = {})
+      req = build_request(:reset_deployments, params)
+      req.send_request(options)
+    end
+
     # Updates the connectivity information for the core. Any devices that
     # belong to the group which has this core will receive this information
     # in order to find the location of the core and connect to it.
     #
     # @option params [Array<Types::ConnectivityInfo>] :connectivity_info
-    #   Connectivity info array
+    #   Connectivity info list
     #
     # @option params [required, String] :thing_name
     #
@@ -2560,7 +2604,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

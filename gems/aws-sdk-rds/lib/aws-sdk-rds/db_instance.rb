@@ -407,6 +407,16 @@ module Aws::RDS
       data[:iam_database_authentication_enabled]
     end
 
+    # @return [Boolean]
+    def performance_insights_enabled
+      data[:performance_insights_enabled]
+    end
+
+    # @return [String]
+    def performance_insights_kms_key_id
+      data[:performance_insights_kms_key_id]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -585,6 +595,8 @@ module Aws::RDS
     #     promotion_tier: 1,
     #     timezone: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1182,7 +1194,7 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2`
+    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
     #
     #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -1364,6 +1376,8 @@ module Aws::RDS
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
     #   Default: `false`
+    # @option options [Boolean] :enable_performance_insights
+    # @option options [String] :performance_insights_kms_key_id
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1400,6 +1414,8 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1612,6 +1628,8 @@ module Aws::RDS
     #   * Aurora 5.6 or higher.
     #
     #   Default: `false`
+    # @option options [Boolean] :enable_performance_insights
+    # @option options [String] :performance_insights_kms_key_id
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1757,6 +1775,8 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     promotion_tier: 1,
     #     enable_iam_database_authentication: false,
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2281,6 +2301,8 @@ module Aws::RDS
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
     #   Default: `false`
+    # @option options [Boolean] :enable_performance_insights
+    # @option options [String] :performance_insights_kms_key_id
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

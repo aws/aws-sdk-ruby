@@ -140,6 +140,7 @@ module Aws::CodePipeline
     OutputArtifact = Shapes::StructureShape.new(name: 'OutputArtifact')
     OutputArtifactList = Shapes::ListShape.new(name: 'OutputArtifactList')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    PipelineArn = Shapes::StringShape.new(name: 'PipelineArn')
     PipelineContext = Shapes::StructureShape.new(name: 'PipelineContext')
     PipelineDeclaration = Shapes::StructureShape.new(name: 'PipelineDeclaration')
     PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
@@ -149,6 +150,7 @@ module Aws::CodePipeline
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
     PipelineList = Shapes::ListShape.new(name: 'PipelineList')
+    PipelineMetadata = Shapes::StructureShape.new(name: 'PipelineMetadata')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineNameInUseException = Shapes::StructureShape.new(name: 'PipelineNameInUseException')
     PipelineNotFoundException = Shapes::StructureShape.new(name: 'PipelineNotFoundException')
@@ -422,6 +424,7 @@ module Aws::CodePipeline
     GetPipelineInput.struct_class = Types::GetPipelineInput
 
     GetPipelineOutput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, location_name: "pipeline"))
+    GetPipelineOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: PipelineMetadata, location_name: "metadata"))
     GetPipelineOutput.struct_class = Types::GetPipelineOutput
 
     GetPipelineStateInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
@@ -526,6 +529,11 @@ module Aws::CodePipeline
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
 
     PipelineList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
+
+    PipelineMetadata.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "pipelineArn"))
+    PipelineMetadata.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+    PipelineMetadata.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
+    PipelineMetadata.struct_class = Types::PipelineMetadata
 
     PipelineStageDeclarationList.member = Shapes::ShapeRef.new(shape: StageDeclaration)
 

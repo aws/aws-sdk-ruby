@@ -146,8 +146,13 @@ module Aws::Lex
     # @!group API Operations
 
     # Sends user input (text or speech) to Amazon Lex. Clients use this API
-    # to send requests to Amazon Lex at runtime. Amazon Lex interprets the
-    # user input using the machine learning model that it built for the bot.
+    # to send text and audio requests to Amazon Lex at runtime. Amazon Lex
+    # interprets the user input using the machine learning model that it
+    # built for the bot.
+    #
+    # The `PostContent` operation supports audio input at 8kHz and 16kHz.
+    # You can use 8kHz audio to achieve higher speech recognition accuracy
+    # in telephone audio applications.
     #
     # In response, Amazon Lex returns the next message to convey to the
     # user. Consider the following example messages:
@@ -210,73 +215,41 @@ module Aws::Lex
     #   Alias of the Amazon Lex bot.
     #
     # @option params [required, String] :user_id
-    #   ID of the client application user. Typically, each of your application
-    #   users should have a unique ID. The application developer decides the
-    #   user IDs. At runtime, each request must include the user ID. Note the
-    #   following considerations:
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot. At runtime, each
+    #   request must contain the `userID` field.
     #
-    #   * If you want a user to start conversation on one device and continue
-    #     the conversation on another device, you might choose a user-specific
-    #     identifier, such as the user's login, or Amazon Cognito user ID
-    #     (assuming your application is using Amazon Cognito).
+    #   To decide the user ID to use for your application, consider the
+    #   following factors.
+    #
+    #   * The `userID` field must not contain any personally identifiable
+    #     information of the user, for example, name, personal identification
+    #     numbers, or other end user personal information.
+    #
+    #   * If you want a user to start a conversation on one device and
+    #     continue on another device, use a user-specific identifier.
     #
     #   * If you want the same user to be able to have two independent
-    #     conversations on two different devices, you might choose
-    #     device-specific identifier, such as device ID, or some globally
-    #     unique identifier.
+    #     conversations on two different devices, choose a device-specific
+    #     identifier.
+    #
+    #   * A user can't have two independent conversations with two different
+    #     versions of the same bot. For example, a user can't have a
+    #     conversation with the PROD and BETA versions of the same bot. If you
+    #     anticipate that a user will need to have conversation with two
+    #     different versions, for example, while testing, include the bot
+    #     alias in the user ID to separate the two conversations.
     #
     # @option params [String] :session_attributes
-    #   You pass this value in the `x-amz-lex-session-attributes` HTTP header.
-    #   The value must be map (keys and values must be strings) that is JSON
-    #   serialized and then base64 encoded.
+    #   You pass this value as the `x-amz-lex-session-attributes` HTTP header.
     #
-    #   A session represents dialog between a user and Amazon Lex. At runtime,
-    #   a client application can pass contextual information, in the request
-    #   to Amazon Lex. For example,
+    #   Application-specific information passed between Amazon Lex and a
+    #   client application. The value must be a JSON serialized and base64
+    #   encoded map with string keys and values. The total size of the
+    #   `sessionAttributes` and `requestAttributes` headers is limited to 12
+    #   KB.
     #
-    #   * You might use session attributes to track the requestID of user
-    #     requests.
-    #
-    #   * In Getting Started Exercise 1, the example bot uses the price
-    #     session attribute to maintain the price of flowers ordered (for
-    #     example, "price":25). The code hook (Lambda function) sets this
-    #     attribute based on the type of flowers ordered. For more
-    #     information, see [Review the Details of Information Flow][1].
-    #
-    #   * In the BookTrip bot exercise, the bot uses the `currentReservation`
-    #     session attribute to maintains the slot data during the in-progress
-    #     conversation to book a hotel or book a car. For more information,
-    #     see [Details of Information Flow][2].
-    #
-    #   Amazon Lex passes these session attributes to the Lambda functions
-    #   configured for the intent In the your Lambda function, you can use the
-    #   session attributes for initialization and customization (prompts).
-    #   Some examples are:
-    #
-    #   * Initialization - In a pizza ordering bot, if you pass user location
-    #     (for example, `"Location : 111 Maple Street"`), then your Lambda
-    #     function might use this information to determine the closest
-    #     pizzeria to place the order (and perhaps set the storeAddress slot
-    #     value as well).
-    #
-    #     Personalized prompts - For example, you can configure prompts to
-    #     refer to the user by name (for example, "Hey \[firstName\], what
-    #     toppings would you like?"). You can pass the user's name as a
-    #     session attribute ("firstName": "Joe") so that Amazon Lex can
-    #     substitute the placeholder to provide a personalized prompt to the
-    #     user ("Hey Joe, what toppings would you like?").
-    #
-    #   <note markdown="1"> Amazon Lex does not persist session attributes.
-    #
-    #    If you configured a code hook for the intent, Amazon Lex passes the
-    #   incoming session attributes to the Lambda function. The Lambda
-    #   function must return these session attributes if you want Amazon Lex
-    #   to return them to the client.
-    #
-    #    If there is no code hook configured for the intent Amazon Lex simply
-    #   returns the session attributes to the client application.
-    #
-    #    </note>
+    #   For more information, see [Setting Session Attributes][1].
     #
     #   **SDK automatically handles json encoding and base64 encoding for you
     #   when the required value (Hash, Array, etc.) is provided according to
@@ -284,25 +257,49 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/gs-bp-details-after-lambda.html
-    #   [2]: http://docs.aws.amazon.com/lex/latest/dg/book-trip-detail-flow.html
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #
+    # @option params [String] :request_attributes
+    #   You pass this value as the `x-amz-lex-request-attributes` HTTP header.
+    #
+    #   Request-specific information passed between Amazon Lex and a client
+    #   application. The value must be a JSON serialized and base64 encoded
+    #   map with string keys and values. The total size of the
+    #   `requestAttributes` and `sessionAttributes` headers is limited to 12
+    #   KB.
+    #
+    #   The namespace `x-amz-lex:` is reserved for special attributes. Don't
+    #   create any request attributes with the prefix `x-amz-lex:`.
+    #
+    #   For more information, see [Setting Request Attributes][1].
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #
     # @option params [required, String] :content_type
-    #   You pass this values as the `Content-Type` HTTP header.
+    #   You pass this value as the `Content-Type` HTTP header.
     #
     #   Indicates the audio format or text. The header value must start with
     #   one of the following prefixes:
     #
-    #   * PCM format
+    #   * PCM format, audio data must be in little-endian byte order.
     #
     #     * audio/l16; rate=16000; channels=1
     #
     #     * audio/x-l16; sample-rate=16000; channel-count=1
     #
+    #     * audio/lpcm; sample-rate=8000; sample-size-bits=16;
+    #       channel-count=1; is-big-endian=false
+    #
     #   * Opus format
     #
-    #     * audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=1;
-    #       frame-size-milliseconds=1.1
+    #     * audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000;
+    #       frame-size-milliseconds=4
     #
     #     ^
     #
@@ -343,6 +340,11 @@ module Aws::Lex
     #   User input in PCM or Opus audio format or text format as described in
     #   the `Content-Type` HTTP header.
     #
+    #   You can stream audio data to Amazon Lex or you can create a local
+    #   buffer that captures all of the audio data before sending. In general,
+    #   you get better performance if you stream audio data rather than
+    #   buffering the data locally.
+    #
     # @return [Types::PostContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PostContentResponse#content_type #content_type} => String
@@ -361,7 +363,8 @@ module Aws::Lex
     #     bot_name: "BotName", # required
     #     bot_alias: "BotAlias", # required
     #     user_id: "UserId", # required
-    #     session_attributes: "String",
+    #     session_attributes: "AttributesString",
+    #     request_attributes: "AttributesString",
     #     content_type: "HttpContentType", # required
     #     accept: "Accept",
     #     input_stream: "data", # required
@@ -453,75 +456,53 @@ module Aws::Lex
     #   The alias of the Amazon Lex bot.
     #
     # @option params [required, String] :user_id
-    #   The ID of the client application user. The application developer
-    #   decides the user IDs. At runtime, each request must include the user
-    #   ID. Typically, each of your application users should have a unique ID.
-    #   Note the following considerations:
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot. At runtime, each
+    #   request must contain the `userID` field.
+    #
+    #   To decide the user ID to use for your application, consider the
+    #   following factors.
+    #
+    #   * The `userID` field must not contain any personally identifiable
+    #     information of the user, for example, name, personal identification
+    #     numbers, or other end user personal information.
     #
     #   * If you want a user to start a conversation on one device and
-    #     continue the conversation on another device, you might choose a
-    #     user-specific identifier, such as a login or Amazon Cognito user ID
-    #     (assuming your application is using Amazon Cognito).
+    #     continue on another device, use a user-specific identifier.
     #
     #   * If you want the same user to be able to have two independent
-    #     conversations on two different devices, you might choose a
-    #     device-specific identifier, such as device ID, or some globally
-    #     unique identifier.
+    #     conversations on two different devices, choose a device-specific
+    #     identifier.
+    #
+    #   * A user can't have two independent conversations with two different
+    #     versions of the same bot. For example, a user can't have a
+    #     conversation with the PROD and BETA versions of the same bot. If you
+    #     anticipate that a user will need to have conversation with two
+    #     different versions, for example, while testing, include the bot
+    #     alias in the user ID to separate the two conversations.
     #
     # @option params [Hash<String,String>] :session_attributes
-    #   By using session attributes, a client application can pass contextual
-    #   information in the request to Amazon Lex For example,
+    #   Application-specific information passed between Amazon Lex and a
+    #   client application.
     #
-    #   * In Getting Started Exercise 1, the example bot uses the `price`
-    #     session attribute to maintain the price of the flowers ordered (for
-    #     example, "Price":25). The code hook (the Lambda function) sets
-    #     this attribute based on the type of flowers ordered. For more
-    #     information, see [Review the Details of Information Flow][1].
-    #
-    #   * In the BookTrip bot exercise, the bot uses the `currentReservation`
-    #     session attribute to maintain slot data during the in-progress
-    #     conversation to book a hotel or book a car. For more information,
-    #     see [Details of Information Flow][2].
-    #
-    #   * You might use the session attributes (key, value pairs) to track the
-    #     requestID of user requests.
-    #
-    #   Amazon Lex simply passes these session attributes to the Lambda
-    #   functions configured for the intent.
-    #
-    #   In your Lambda function, you can also use the session attributes for
-    #   initialization and customization (prompts and response cards). Some
-    #   examples are:
-    #
-    #   * Initialization - In a pizza ordering bot, if you can pass the user
-    #     location as a session attribute (for example, `"Location" : "111
-    #     Maple street"`), then your Lambda function might use this
-    #     information to determine the closest pizzeria to place the order
-    #     (perhaps to set the storeAddress slot value).
-    #
-    #   * Personalize prompts - For example, you can configure prompts to
-    #     refer to the user name. (For example, "Hey \[FirstName\], what
-    #     toppings would you like?"). You can pass the user name as a session
-    #     attribute (`"FirstName" : "Joe"`) so that Amazon Lex can substitute
-    #     the placeholder to provide a personalize prompt to the user ("Hey
-    #     Joe, what toppings would you like?").
-    #
-    #   <note markdown="1"> Amazon Lex does not persist session attributes.
-    #
-    #    If you configure a code hook for the intent, Amazon Lex passes the
-    #   incoming session attributes to the Lambda function. If you want Amazon
-    #   Lex to return these session attributes back to the client, the Lambda
-    #   function must return them.
-    #
-    #    If there is no code hook configured for the intent, Amazon Lex simply
-    #   returns the session attributes back to the client application.
-    #
-    #    </note>
+    #   For more information, see [Setting Session Attributes][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/gs-bp-details-after-lambda.html
-    #   [2]: http://docs.aws.amazon.com/lex/latest/dg/book-trip-detail-flow.html
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #
+    # @option params [Hash<String,String>] :request_attributes
+    #   Request-specific information passed between Amazon Lex and a client
+    #   application.
+    #
+    #   The namespace `x-amz-lex:` is reserved for special attributes. Don't
+    #   create any request attributes with the prefix `x-amz-lex:`.
+    #
+    #   For more information, see [Setting Request Attributes][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #
     # @option params [required, String] :input_text
     #   The text that the user entered (Amazon Lex interprets this text).
@@ -543,6 +524,9 @@ module Aws::Lex
     #     bot_alias: "BotAlias", # required
     #     user_id: "UserId", # required
     #     session_attributes: {
+    #       "String" => "String",
+    #     },
+    #     request_attributes: {
     #       "String" => "String",
     #     },
     #     input_text: "Text", # required
@@ -591,7 +575,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

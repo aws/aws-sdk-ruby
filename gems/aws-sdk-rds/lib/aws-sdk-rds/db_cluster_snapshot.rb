@@ -473,8 +473,8 @@ module Aws::RDS
     #   Provides the list of EC2 Availability Zones that instances in the
     #   restored DB cluster can be created in.
     # @option options [required, String] :db_cluster_identifier
-    #   The name of the DB cluster to create from the DB cluster snapshot.
-    #   This parameter isn't case-sensitive.
+    #   The name of the DB cluster to create from the DB snapshot or DB
+    #   cluster snapshot. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -516,7 +516,7 @@ module Aws::RDS
     #   The tags to be assigned to the restored DB cluster.
     # @option options [String] :kms_key_id
     #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from a DB cluster snapshot.
+    #   from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -527,12 +527,12 @@ module Aws::RDS
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
     #
-    #   * If the DB cluster snapshot is encrypted, then the restored DB
-    #     cluster is encrypted using the KMS key that was used to encrypt the
-    #     DB cluster snapshot.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
+    #     encrypted, then the restored DB cluster is encrypted using the KMS
+    #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
-    #   * If the DB cluster snapshot is not encrypted, then the restored DB
-    #     cluster is encrypted using the specified encryption key.
+    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
+    #     not encrypted, then the restored DB cluster is not encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
     #   A Boolean value that is true to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts, and otherwise
