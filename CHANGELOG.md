@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.50 (2017-09-20)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
