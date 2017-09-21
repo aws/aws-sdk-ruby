@@ -2126,6 +2126,74 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyFpgaImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         source_fpga_image_id: "String", # required
+    #         description: "String",
+    #         name: "String",
+    #         source_region: "String", # required
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_fpga_image_id
+    #   The ID of the source AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the new AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the new AFI. The default is the name of the source AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The region that contains the source AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImageRequest AWS API Documentation
+    #
+    class CopyFpgaImageRequest < Struct.new(
+      :dry_run,
+      :source_fpga_image_id,
+      :description,
+      :name,
+      :source_region,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the new AFI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImageResult AWS API Documentation
+    #
+    class CopyFpgaImageResult < Struct.new(
+      :fpga_image_id)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CopyImage.
     #
     # @note When making an API call, you may pass CopyImageRequest
@@ -4515,6 +4583,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFpgaImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fpga_image_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the AFI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImageRequest AWS API Documentation
+    #
+    class DeleteFpgaImageRequest < Struct.new(
+      :dry_run,
+      :fpga_image_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImageResult AWS API Documentation
+    #
+    class DeleteFpgaImageResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeleteInternetGateway.
     #
     # @note When making an API call, you may pass DeleteInternetGatewayRequest
@@ -6112,6 +6218,50 @@ module Aws::EC2
     class DescribeFlowLogsResult < Struct.new(
       :flow_logs,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFpgaImageAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fpga_image_id: "String", # required
+    #         attribute: "description", # required, accepts description, name, loadPermission, productCodes
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute
+    #   The AFI attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeRequest AWS API Documentation
+    #
+    class DescribeFpgaImageAttributeRequest < Struct.new(
+      :dry_run,
+      :fpga_image_id,
+      :attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fpga_image_attribute
+    #   Information about the attribute.
+    #   @return [Types::FpgaImageAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeResult AWS API Documentation
+    #
+    class DescribeFpgaImageAttributeResult < Struct.new(
+      :fpga_image_attribute)
       include Aws::Structure
     end
 
@@ -12915,6 +13065,10 @@ module Aws::EC2
     #   Any tags assigned to the AFI.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] public
+    #   Indicates whether the AFI is public.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage AWS API Documentation
     #
     class FpgaImage < Struct.new(
@@ -12930,7 +13084,41 @@ module Aws::EC2
       :owner_id,
       :owner_alias,
       :product_codes,
-      :tags)
+      :tags,
+      :public)
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FPGA image (AFI) attribute.
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_permissions
+    #   One or more load permissions.
+    #   @return [Array<Types::LoadPermission>]
+    #
+    # @!attribute [rw] product_codes
+    #   One or more product codes.
+    #   @return [Array<Types::ProductCode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageAttribute AWS API Documentation
+    #
+    class FpgaImageAttribute < Struct.new(
+      :fpga_image_id,
+      :name,
+      :description,
+      :load_permissions,
+      :product_codes)
       include Aws::Structure
     end
 
@@ -13158,7 +13346,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] password_data
-    #   The password of the instance.
+    #   The password of the instance. Returns an empty string if the
+    #   password is not available.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -16098,6 +16287,190 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :monitoring)
+      include Aws::Structure
+    end
+
+    # Describes a load permission.
+    #
+    # @!attribute [rw] user_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermission AWS API Documentation
+    #
+    class LoadPermission < Struct.new(
+      :user_id,
+      :group)
+      include Aws::Structure
+    end
+
+    # Describes modifications to the load permissions of an Amazon FPGA
+    # image (AFI).
+    #
+    # @note When making an API call, you may pass LoadPermissionModifications
+    #   data as a hash:
+    #
+    #       {
+    #         add: [
+    #           {
+    #             group: "all", # accepts all
+    #             user_id: "String",
+    #           },
+    #         ],
+    #         remove: [
+    #           {
+    #             group: "all", # accepts all
+    #             user_id: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] add
+    #   The load permissions to add.
+    #   @return [Array<Types::LoadPermissionRequest>]
+    #
+    # @!attribute [rw] remove
+    #   The load permissions to remove.
+    #   @return [Array<Types::LoadPermissionRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionModifications AWS API Documentation
+    #
+    class LoadPermissionModifications < Struct.new(
+      :add,
+      :remove)
+      include Aws::Structure
+    end
+
+    # Describes a load permission.
+    #
+    # @note When making an API call, you may pass LoadPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group: "all", # accepts all
+    #         user_id: "String",
+    #       }
+    #
+    # @!attribute [rw] group
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionRequest AWS API Documentation
+    #
+    class LoadPermissionRequest < Struct.new(
+      :group,
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyFpgaImageAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fpga_image_id: "String", # required
+    #         attribute: "description", # accepts description, name, loadPermission, productCodes
+    #         operation_type: "add", # accepts add, remove
+    #         user_ids: ["String"],
+    #         user_groups: ["String"],
+    #         product_codes: ["String"],
+    #         load_permission: {
+    #           add: [
+    #             {
+    #               group: "all", # accepts all
+    #               user_id: "String",
+    #             },
+    #           ],
+    #           remove: [
+    #             {
+    #               group: "all", # accepts all
+    #               user_id: "String",
+    #             },
+    #           ],
+    #         },
+    #         description: "String",
+    #         name: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The operation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_ids
+    #   One or more AWS account IDs. This parameter is valid only when
+    #   modifying the `loadPermission` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_groups
+    #   One or more user groups. This parameter is valid only when modifying
+    #   the `loadPermission` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] product_codes
+    #   One or more product codes. After you add a product code to an AFI,
+    #   it can't be removed. This parameter is valid only when modifying
+    #   the `productCodes` attribute.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] load_permission
+    #   The load permission for the AFI.
+    #   @return [Types::LoadPermissionModifications]
+    #
+    # @!attribute [rw] description
+    #   A description for the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the AFI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttributeRequest AWS API Documentation
+    #
+    class ModifyFpgaImageAttributeRequest < Struct.new(
+      :dry_run,
+      :fpga_image_id,
+      :attribute,
+      :operation_type,
+      :user_ids,
+      :user_groups,
+      :product_codes,
+      :load_permission,
+      :description,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fpga_image_attribute
+    #   Information about the attribute.
+    #   @return [Types::FpgaImageAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttributeResult AWS API Documentation
+    #
+    class ModifyFpgaImageAttributeResult < Struct.new(
+      :fpga_image_attribute)
       include Aws::Structure
     end
 
@@ -20403,6 +20776,50 @@ module Aws::EC2
       :pricing_details,
       :recurring_charges,
       :scope)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResetFpgaImageAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fpga_image_id: "String", # required
+    #         attribute: "loadPermission", # accepts loadPermission
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fpga_image_id
+    #   The ID of the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute
+    #   The attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeRequest AWS API Documentation
+    #
+    class ResetFpgaImageAttributeRequest < Struct.new(
+      :dry_run,
+      :fpga_image_id,
+      :attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeResult AWS API Documentation
+    #
+    class ResetFpgaImageAttributeResult < Struct.new(
+      :return)
       include Aws::Structure
     end
 

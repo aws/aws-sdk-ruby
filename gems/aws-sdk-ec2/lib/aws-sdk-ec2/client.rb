@@ -2093,6 +2093,63 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Copies the specified Amazon FPGA Image (AFI) to the current region.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :source_fpga_image_id
+    #   The ID of the source AFI.
+    #
+    # @option params [String] :description
+    #   The description for the new AFI.
+    #
+    # @option params [String] :name
+    #   The name for the new AFI. The default is the name of the source AFI.
+    #
+    # @option params [required, String] :source_region
+    #   The region that contains the source AFI.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CopyFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyFpgaImageResult#fpga_image_id #fpga_image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_fpga_image({
+    #     dry_run: false,
+    #     source_fpga_image_id: "String", # required
+    #     description: "String",
+    #     name: "String",
+    #     source_region: "String", # required
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fpga_image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImage AWS API Documentation
+    #
+    # @overload copy_fpga_image(params = {})
+    # @param [Hash] params ({})
+    def copy_fpga_image(params = {}, options = {})
+      req = build_request(:copy_fpga_image, params)
+      req.send_request(options)
+    end
+
     # Initiates the copy of an AMI from the specified source region to the
     # current region. You specify the destination region by using its
     # endpoint when making the request.
@@ -5426,6 +5483,41 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the specified Amazon FPGA Image (AFI).
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :fpga_image_id
+    #   The ID of the AFI.
+    #
+    # @return [Types::DeleteFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFpgaImageResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fpga_image({
+    #     dry_run: false,
+    #     fpga_image_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImage AWS API Documentation
+    #
+    # @overload delete_fpga_image(params = {})
+    # @param [Hash] params ({})
+    def delete_fpga_image(params = {}, options = {})
+      req = build_request(:delete_fpga_image, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Internet gateway. You must detach the Internet
     # gateway from the VPC before you can delete it.
     #
@@ -7595,6 +7687,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the specified attribute of the specified Amazon FPGA Image
+    # (AFI).
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :fpga_image_id
+    #   The ID of the AFI.
+    #
+    # @option params [required, String] :attribute
+    #   The AFI attribute.
+    #
+    # @return [Types::DescribeFpgaImageAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFpgaImageAttributeResult#fpga_image_attribute #fpga_image_attribute} => Types::FpgaImageAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fpga_image_attribute({
+    #     dry_run: false,
+    #     fpga_image_id: "String", # required
+    #     attribute: "description", # required, accepts description, name, loadPermission, productCodes
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fpga_image_attribute.fpga_image_id #=> String
+    #   resp.fpga_image_attribute.name #=> String
+    #   resp.fpga_image_attribute.description #=> String
+    #   resp.fpga_image_attribute.load_permissions #=> Array
+    #   resp.fpga_image_attribute.load_permissions[0].user_id #=> String
+    #   resp.fpga_image_attribute.load_permissions[0].group #=> String, one of "all"
+    #   resp.fpga_image_attribute.product_codes #=> Array
+    #   resp.fpga_image_attribute.product_codes[0].product_code_id #=> String
+    #   resp.fpga_image_attribute.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttribute AWS API Documentation
+    #
+    # @overload describe_fpga_image_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_fpga_image_attribute(params = {}, options = {})
+      req = build_request(:describe_fpga_image_attribute, params)
+      req.send_request(options)
+    end
+
     # Describes one or more available Amazon FPGA Images (AFIs). These
     # include public AFIs, private AFIs that you own, and AFIs owned by
     # other AWS accounts for which you have load permissions.
@@ -7704,6 +7844,7 @@ module Aws::EC2
     #   resp.fpga_images[0].tags #=> Array
     #   resp.fpga_images[0].tags[0].key #=> String
     #   resp.fpga_images[0].tags[0].value #=> String
+    #   resp.fpga_images[0].public #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImages AWS API Documentation
@@ -15772,22 +15913,32 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Retrieves the encrypted administrator password for an instance running
-    # Windows.
+    # Retrieves the encrypted administrator password for a running Windows
+    # instance.
     #
-    # The Windows password is generated at boot if the `EC2Config` service
-    # plugin, `Ec2SetPassword`, is enabled. This usually only happens the
-    # first time an AMI is launched, and then `Ec2SetPassword` is
-    # automatically disabled. The password is not generated for rebundled
-    # AMIs unless `Ec2SetPassword` is enabled before bundling.
+    # The Windows password is generated at boot by the `EC2Config` service
+    # or `EC2Launch` scripts (Windows Server 2016 and later). This usually
+    # only happens the first time an instance is launched. For more
+    # information, see [EC2Config][1] and [EC2Launch][2] in the Amazon
+    # Elastic Compute Cloud User Guide.
+    #
+    # For the `EC2Config` service, the password is not generated for
+    # rebundled AMIs unless `Ec2SetPassword` is enabled before bundling.
     #
     # The password is encrypted using the key pair that you specified when
     # you launched the instance. You must provide the corresponding key pair
     # file.
     #
-    # Password generation and encryption takes a few moments. We recommend
-    # that you wait up to 15 minutes after launching an instance before
-    # trying to retrieve the generated password.
+    # When you launch an instance, password generation and encryption may
+    # take a few minutes. If you try to retrieve the password before it's
+    # available, the output returns an empty string. We recommend that you
+    # wait up to 15 minutes after launching an instance before trying to
+    # retrieve the generated password.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the Windows instance.
@@ -16386,6 +16537,99 @@ module Aws::EC2
     # @param [Hash] params ({})
     def import_volume(params = {}, options = {})
       req = build_request(:import_volume, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified attribute of the specified Amazon FPGA Image
+    # (AFI).
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :fpga_image_id
+    #   The ID of the AFI.
+    #
+    # @option params [String] :attribute
+    #   The name of the attribute.
+    #
+    # @option params [String] :operation_type
+    #   The operation type.
+    #
+    # @option params [Array<String>] :user_ids
+    #   One or more AWS account IDs. This parameter is valid only when
+    #   modifying the `loadPermission` attribute.
+    #
+    # @option params [Array<String>] :user_groups
+    #   One or more user groups. This parameter is valid only when modifying
+    #   the `loadPermission` attribute.
+    #
+    # @option params [Array<String>] :product_codes
+    #   One or more product codes. After you add a product code to an AFI, it
+    #   can't be removed. This parameter is valid only when modifying the
+    #   `productCodes` attribute.
+    #
+    # @option params [Types::LoadPermissionModifications] :load_permission
+    #   The load permission for the AFI.
+    #
+    # @option params [String] :description
+    #   A description for the AFI.
+    #
+    # @option params [String] :name
+    #   A name for the AFI.
+    #
+    # @return [Types::ModifyFpgaImageAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyFpgaImageAttributeResult#fpga_image_attribute #fpga_image_attribute} => Types::FpgaImageAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_fpga_image_attribute({
+    #     dry_run: false,
+    #     fpga_image_id: "String", # required
+    #     attribute: "description", # accepts description, name, loadPermission, productCodes
+    #     operation_type: "add", # accepts add, remove
+    #     user_ids: ["String"],
+    #     user_groups: ["String"],
+    #     product_codes: ["String"],
+    #     load_permission: {
+    #       add: [
+    #         {
+    #           group: "all", # accepts all
+    #           user_id: "String",
+    #         },
+    #       ],
+    #       remove: [
+    #         {
+    #           group: "all", # accepts all
+    #           user_id: "String",
+    #         },
+    #       ],
+    #     },
+    #     description: "String",
+    #     name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fpga_image_attribute.fpga_image_id #=> String
+    #   resp.fpga_image_attribute.name #=> String
+    #   resp.fpga_image_attribute.description #=> String
+    #   resp.fpga_image_attribute.load_permissions #=> Array
+    #   resp.fpga_image_attribute.load_permissions[0].user_id #=> String
+    #   resp.fpga_image_attribute.load_permissions[0].group #=> String, one of "all"
+    #   resp.fpga_image_attribute.product_codes #=> Array
+    #   resp.fpga_image_attribute.product_codes[0].product_code_id #=> String
+    #   resp.fpga_image_attribute.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttribute AWS API Documentation
+    #
+    # @overload modify_fpga_image_attribute(params = {})
+    # @param [Hash] params ({})
+    def modify_fpga_image_attribute(params = {}, options = {})
+      req = build_request(:modify_fpga_image_attribute, params)
       req.send_request(options)
     end
 
@@ -19503,6 +19747,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Resets the specified attribute of the specified Amazon FPGA Image
+    # (AFI) to its default value. You can only reset the load permission
+    # attribute.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :fpga_image_id
+    #   The ID of the AFI.
+    #
+    # @option params [String] :attribute
+    #   The attribute.
+    #
+    # @return [Types::ResetFpgaImageAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetFpgaImageAttributeResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_fpga_image_attribute({
+    #     dry_run: false,
+    #     fpga_image_id: "String", # required
+    #     attribute: "loadPermission", # accepts loadPermission
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttribute AWS API Documentation
+    #
+    # @overload reset_fpga_image_attribute(params = {})
+    # @param [Hash] params ({})
+    def reset_fpga_image_attribute(params = {}, options = {})
+      req = build_request(:reset_fpga_image_attribute, params)
+      req.send_request(options)
+    end
+
     # Resets an attribute of an AMI to its default value.
     #
     # <note markdown="1"> The productCodes attribute can't be reset.
@@ -21205,7 +21490,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

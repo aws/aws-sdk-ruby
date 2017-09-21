@@ -120,6 +120,8 @@ module Aws::EC2
     ConversionIdStringList = Shapes::ListShape.new(name: 'ConversionIdStringList')
     ConversionTask = Shapes::StructureShape.new(name: 'ConversionTask')
     ConversionTaskState = Shapes::StringShape.new(name: 'ConversionTaskState')
+    CopyFpgaImageRequest = Shapes::StructureShape.new(name: 'CopyFpgaImageRequest')
+    CopyFpgaImageResult = Shapes::StructureShape.new(name: 'CopyFpgaImageResult')
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
     CopyImageResult = Shapes::StructureShape.new(name: 'CopyImageResult')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
@@ -194,6 +196,8 @@ module Aws::EC2
     DeleteEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayResult')
     DeleteFlowLogsRequest = Shapes::StructureShape.new(name: 'DeleteFlowLogsRequest')
     DeleteFlowLogsResult = Shapes::StructureShape.new(name: 'DeleteFlowLogsResult')
+    DeleteFpgaImageRequest = Shapes::StructureShape.new(name: 'DeleteFpgaImageRequest')
+    DeleteFpgaImageResult = Shapes::StructureShape.new(name: 'DeleteFpgaImageResult')
     DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteNatGatewayRequest = Shapes::StructureShape.new(name: 'DeleteNatGatewayRequest')
@@ -246,6 +250,8 @@ module Aws::EC2
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
     DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
     DescribeFlowLogsResult = Shapes::StructureShape.new(name: 'DescribeFlowLogsResult')
+    DescribeFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeRequest')
+    DescribeFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeResult')
     DescribeFpgaImagesRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImagesRequest')
     DescribeFpgaImagesResult = Shapes::StructureShape.new(name: 'DescribeFpgaImagesResult')
     DescribeHostReservationOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsRequest')
@@ -437,6 +443,8 @@ module Aws::EC2
     FlowLogSet = Shapes::ListShape.new(name: 'FlowLogSet')
     FlowLogsResourceType = Shapes::StringShape.new(name: 'FlowLogsResourceType')
     FpgaImage = Shapes::StructureShape.new(name: 'FpgaImage')
+    FpgaImageAttribute = Shapes::StructureShape.new(name: 'FpgaImageAttribute')
+    FpgaImageAttributeName = Shapes::StringShape.new(name: 'FpgaImageAttributeName')
     FpgaImageIdList = Shapes::ListShape.new(name: 'FpgaImageIdList')
     FpgaImageList = Shapes::ListShape.new(name: 'FpgaImageList')
     FpgaImageState = Shapes::StructureShape.new(name: 'FpgaImageState')
@@ -578,8 +586,15 @@ module Aws::EC2
     LaunchSpecsList = Shapes::ListShape.new(name: 'LaunchSpecsList')
     ListingState = Shapes::StringShape.new(name: 'ListingState')
     ListingStatus = Shapes::StringShape.new(name: 'ListingStatus')
+    LoadPermission = Shapes::StructureShape.new(name: 'LoadPermission')
+    LoadPermissionList = Shapes::ListShape.new(name: 'LoadPermissionList')
+    LoadPermissionListRequest = Shapes::ListShape.new(name: 'LoadPermissionListRequest')
+    LoadPermissionModifications = Shapes::StructureShape.new(name: 'LoadPermissionModifications')
+    LoadPermissionRequest = Shapes::StructureShape.new(name: 'LoadPermissionRequest')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    ModifyFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeRequest')
+    ModifyFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeResult')
     ModifyHostsRequest = Shapes::StructureShape.new(name: 'ModifyHostsRequest')
     ModifyHostsResult = Shapes::StructureShape.new(name: 'ModifyHostsResult')
     ModifyIdFormatRequest = Shapes::StructureShape.new(name: 'ModifyIdFormatRequest')
@@ -758,6 +773,9 @@ module Aws::EC2
     ReservedInstancesOfferingIdStringList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingIdStringList')
     ReservedInstancesOfferingList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingList')
     ReservedIntancesIds = Shapes::ListShape.new(name: 'ReservedIntancesIds')
+    ResetFpgaImageAttributeName = Shapes::StringShape.new(name: 'ResetFpgaImageAttributeName')
+    ResetFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ResetFpgaImageAttributeRequest')
+    ResetFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'ResetFpgaImageAttributeResult')
     ResetImageAttributeName = Shapes::StringShape.new(name: 'ResetImageAttributeName')
     ResetImageAttributeRequest = Shapes::StructureShape.new(name: 'ResetImageAttributeRequest')
     ResetInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ResetInstanceAttributeRequest')
@@ -1349,6 +1367,17 @@ module Aws::EC2
     ConversionTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ConversionTask.struct_class = Types::ConversionTask
 
+    CopyFpgaImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CopyFpgaImageRequest.add_member(:source_fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceFpgaImageId"))
+    CopyFpgaImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CopyFpgaImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CopyFpgaImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
+    CopyFpgaImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CopyFpgaImageRequest.struct_class = Types::CopyFpgaImageRequest
+
+    CopyFpgaImageResult.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
+    CopyFpgaImageResult.struct_class = Types::CopyFpgaImageResult
+
     CopyImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CopyImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CopyImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
@@ -1692,6 +1721,13 @@ module Aws::EC2
     DeleteFlowLogsResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: UnsuccessfulItemSet, location_name: "unsuccessful"))
     DeleteFlowLogsResult.struct_class = Types::DeleteFlowLogsResult
 
+    DeleteFpgaImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteFpgaImageRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
+    DeleteFpgaImageRequest.struct_class = Types::DeleteFpgaImageRequest
+
+    DeleteFpgaImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DeleteFpgaImageResult.struct_class = Types::DeleteFpgaImageResult
+
     DeleteInternetGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteInternetGatewayRequest.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "internetGatewayId"))
     DeleteInternetGatewayRequest.struct_class = Types::DeleteInternetGatewayRequest
@@ -1906,6 +1942,14 @@ module Aws::EC2
     DescribeFlowLogsResult.add_member(:flow_logs, Shapes::ShapeRef.new(shape: FlowLogSet, location_name: "flowLogSet"))
     DescribeFlowLogsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeFlowLogsResult.struct_class = Types::DescribeFlowLogsResult
+
+    DescribeFpgaImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFpgaImageAttributeRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
+    DescribeFpgaImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: FpgaImageAttributeName, required: true, location_name: "Attribute"))
+    DescribeFpgaImageAttributeRequest.struct_class = Types::DescribeFpgaImageAttributeRequest
+
+    DescribeFpgaImageAttributeResult.add_member(:fpga_image_attribute, Shapes::ShapeRef.new(shape: FpgaImageAttribute, location_name: "fpgaImageAttribute"))
+    DescribeFpgaImageAttributeResult.struct_class = Types::DescribeFpgaImageAttributeResult
 
     DescribeFpgaImagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeFpgaImagesRequest.add_member(:fpga_image_ids, Shapes::ShapeRef.new(shape: FpgaImageIdList, location_name: "FpgaImageId"))
@@ -2731,7 +2775,15 @@ module Aws::EC2
     FpgaImage.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
     FpgaImage.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
     FpgaImage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    FpgaImage.add_member(:public, Shapes::ShapeRef.new(shape: Boolean, location_name: "public"))
     FpgaImage.struct_class = Types::FpgaImage
+
+    FpgaImageAttribute.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
+    FpgaImageAttribute.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    FpgaImageAttribute.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    FpgaImageAttribute.add_member(:load_permissions, Shapes::ShapeRef.new(shape: LoadPermissionList, location_name: "loadPermissions"))
+    FpgaImageAttribute.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
+    FpgaImageAttribute.struct_class = Types::FpgaImageAttribute
 
     FpgaImageIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -3361,6 +3413,37 @@ module Aws::EC2
     LaunchSpecification.struct_class = Types::LaunchSpecification
 
     LaunchSpecsList.member = Shapes::ShapeRef.new(shape: SpotFleetLaunchSpecification, location_name: "item")
+
+    LoadPermission.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
+    LoadPermission.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "group"))
+    LoadPermission.struct_class = Types::LoadPermission
+
+    LoadPermissionList.member = Shapes::ShapeRef.new(shape: LoadPermission, location_name: "item")
+
+    LoadPermissionListRequest.member = Shapes::ShapeRef.new(shape: LoadPermissionRequest, location_name: "item")
+
+    LoadPermissionModifications.add_member(:add, Shapes::ShapeRef.new(shape: LoadPermissionListRequest, location_name: "Add"))
+    LoadPermissionModifications.add_member(:remove, Shapes::ShapeRef.new(shape: LoadPermissionListRequest, location_name: "Remove"))
+    LoadPermissionModifications.struct_class = Types::LoadPermissionModifications
+
+    LoadPermissionRequest.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "Group"))
+    LoadPermissionRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "UserId"))
+    LoadPermissionRequest.struct_class = Types::LoadPermissionRequest
+
+    ModifyFpgaImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyFpgaImageAttributeRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
+    ModifyFpgaImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: FpgaImageAttributeName, location_name: "Attribute"))
+    ModifyFpgaImageAttributeRequest.add_member(:operation_type, Shapes::ShapeRef.new(shape: OperationType, location_name: "OperationType"))
+    ModifyFpgaImageAttributeRequest.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdStringList, location_name: "UserId"))
+    ModifyFpgaImageAttributeRequest.add_member(:user_groups, Shapes::ShapeRef.new(shape: UserGroupStringList, location_name: "UserGroup"))
+    ModifyFpgaImageAttributeRequest.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeStringList, location_name: "ProductCode"))
+    ModifyFpgaImageAttributeRequest.add_member(:load_permission, Shapes::ShapeRef.new(shape: LoadPermissionModifications, location_name: "LoadPermission"))
+    ModifyFpgaImageAttributeRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyFpgaImageAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ModifyFpgaImageAttributeRequest.struct_class = Types::ModifyFpgaImageAttributeRequest
+
+    ModifyFpgaImageAttributeResult.add_member(:fpga_image_attribute, Shapes::ShapeRef.new(shape: FpgaImageAttribute, location_name: "fpgaImageAttribute"))
+    ModifyFpgaImageAttributeResult.struct_class = Types::ModifyFpgaImageAttributeResult
 
     ModifyHostsRequest.add_member(:auto_placement, Shapes::ShapeRef.new(shape: AutoPlacement, required: true, location_name: "autoPlacement"))
     ModifyHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, required: true, location_name: "hostId"))
@@ -4096,6 +4179,14 @@ module Aws::EC2
     ReservedInstancesOfferingList.member = Shapes::ShapeRef.new(shape: ReservedInstancesOffering, location_name: "item")
 
     ReservedIntancesIds.member = Shapes::ShapeRef.new(shape: ReservedInstancesId, location_name: "item")
+
+    ResetFpgaImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ResetFpgaImageAttributeRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
+    ResetFpgaImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: ResetFpgaImageAttributeName, location_name: "Attribute"))
+    ResetFpgaImageAttributeRequest.struct_class = Types::ResetFpgaImageAttributeRequest
+
+    ResetFpgaImageAttributeResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ResetFpgaImageAttributeResult.struct_class = Types::ResetFpgaImageAttributeResult
 
     ResetImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: ResetImageAttributeName, required: true, location_name: "Attribute"))
     ResetImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
@@ -5208,6 +5299,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ConfirmProductInstanceResult)
       end)
 
+      api.add_operation(:copy_fpga_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyFpgaImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyFpgaImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyFpgaImageResult)
+      end)
+
       api.add_operation(:copy_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CopyImage"
         o.http_method = "POST"
@@ -5504,6 +5603,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DeleteFlowLogsResult)
       end)
 
+      api.add_operation(:delete_fpga_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFpgaImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFpgaImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFpgaImageResult)
+      end)
+
       api.add_operation(:delete_internet_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteInternetGateway"
         o.http_method = "POST"
@@ -5782,6 +5889,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFlowLogsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFlowLogsResult)
+      end)
+
+      api.add_operation(:describe_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFpgaImageAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFpgaImageAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFpgaImageAttributeResult)
       end)
 
       api.add_operation(:describe_fpga_images, Seahorse::Model::Operation.new.tap do |o|
@@ -6529,6 +6644,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
       end)
 
+      api.add_operation(:modify_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyFpgaImageAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyFpgaImageAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyFpgaImageAttributeResult)
+      end)
+
       api.add_operation(:modify_hosts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyHosts"
         o.http_method = "POST"
@@ -6799,6 +6922,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RequestSpotInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestSpotInstancesResult)
+      end)
+
+      api.add_operation(:reset_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetFpgaImageAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetFpgaImageAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetFpgaImageAttributeResult)
       end)
 
       api.add_operation(:reset_image_attribute, Seahorse::Model::Operation.new.tap do |o|

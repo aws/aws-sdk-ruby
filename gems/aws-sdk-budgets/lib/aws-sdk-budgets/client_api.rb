@@ -389,6 +389,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
       end)
 
       api.add_operation(:update_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -400,6 +401,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
       end)
     end
 

@@ -8,6 +8,36 @@
 module Aws::CloudWatchLogs
   module Types
 
+    # @note When making an API call, you may pass AssociateKmsKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #         kms_key_id: "KmsKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
+    #   data. For more information, see [Amazon Resource Names - AWS Key
+    #   Management Service (AWS KMS)][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
+    #
+    class AssociateKmsKeyRequest < Struct.new(
+      :log_group_name,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelExportTaskRequest
     #   data as a hash:
     #
@@ -103,6 +133,7 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_group_name: "LogGroupName", # required
+    #         kms_key_id: "KmsKeyId",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -110,6 +141,16 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
+    #   data. For more information, see [Amazon Resource Names - AWS Key
+    #   Management Service (AWS KMS)][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -120,6 +161,7 @@ module Aws::CloudWatchLogs
     #
     class CreateLogGroupRequest < Struct.new(
       :log_group_name,
+      :kms_key_id,
       :tags)
       include Aws::Structure
     end
@@ -562,7 +604,9 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   The name of the CloudWatch metric.
+    #   The name of the CloudWatch metric to which the monitored log
+    #   information should be published. For example, you may publish to a
+    #   metric called ErrorCount.
     #   @return [String]
     #
     # @!attribute [rw] metric_namespace
@@ -737,6 +781,24 @@ module Aws::CloudWatchLogs
       :access_policy,
       :arn,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateKmsKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKeyRequest AWS API Documentation
+    #
+    class DisassociateKmsKeyRequest < Struct.new(
+      :log_group_name)
       include Aws::Structure
     end
 
@@ -1099,7 +1161,7 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] tags
-    #   The tags.
+    #   The tags for the log group.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroupResponse AWS API Documentation
@@ -1138,6 +1200,11 @@ module Aws::CloudWatchLogs
     #   The number of bytes stored.
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
+    #   data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -1146,7 +1213,8 @@ module Aws::CloudWatchLogs
       :retention_in_days,
       :metric_filter_count,
       :arn,
-      :stored_bytes)
+      :stored_bytes,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -1637,10 +1705,10 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] distribution
-    #   The method used to distribute log data to the destination, when the
-    #   destination is an Amazon Kinesis stream. By default, log data is
-    #   grouped by log stream. For a more even distribution, you can group
-    #   log data randomly.
+    #   The method used to distribute log data to the destination. By
+    #   default log data is grouped by log stream, but the grouping can be
+    #   set to random for a more even distribution. This property is only
+    #   applicable when the destination is an Amazon Kinesis stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest AWS API Documentation
@@ -1746,8 +1814,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] distribution
-    #   The method used to distribute log data to the destination, when the
-    #   destination is an Amazon Kinesis stream.
+    #   The method used to distribute log data to the destination, which can
+    #   be either random or grouped by log stream.
     #   @return [String]
     #
     # @!attribute [rw] creation_time

@@ -155,6 +155,54 @@ module Aws::CloudWatchLogs
 
     # @!group API Operations
 
+    # Associates the specified AWS Key Management Service (AWS KMS) customer
+    # master key (CMK) with the specified log group.
+    #
+    # Associating an AWS KMS CMK with a log group overrides any existing
+    # associations between the log group and a CMK. After a CMK is
+    # associated with a log group, all newly ingested data for the log group
+    # is encrypted using the CMK. This association is stored as long as the
+    # data encrypted with the CMK is still within Amazon CloudWatch Logs.
+    # This enables Amazon CloudWatch Logs to decrypt this data whenever it
+    # is requested.
+    #
+    # Note that it can take up to 5 minutes for this operation to take
+    # effect.
+    #
+    # If you attempt to associate a CMK with a log group but the CMK does
+    # not exist or the CMK is disabled, you will receive an
+    # `InvalidParameterException` error.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
+    #   data. For more information, see [Amazon Resource Names - AWS Key
+    #   Management Service (AWS KMS)][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_kms_key({
+    #     log_group_name: "LogGroupName", # required
+    #     kms_key_id: "KmsKeyId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey AWS API Documentation
+    #
+    # @overload associate_kms_key(params = {})
+    # @param [Hash] params ({})
+    def associate_kms_key(params = {}, options = {})
+      req = build_request(:associate_kms_key, params)
+      req.send_request(options)
+    end
+
     # Cancels the specified export task.
     #
     # The task must be in the `PENDING` or `RUNNING` state.
@@ -265,8 +313,27 @@ module Aws::CloudWatchLogs
     #   '\_' (underscore), '-' (hyphen), '/' (forward slash), and
     #   '.' (period).
     #
+    # If you associate a AWS Key Management Service (AWS KMS) customer
+    # master key (CMK) with the log group, ingested data is encrypted using
+    # the CMK. This association is stored as long as the data encrypted with
+    # the CMK is still within Amazon CloudWatch Logs. This enables Amazon
+    # CloudWatch Logs to decrypt this data whenever it is requested.
+    #
+    # If you attempt to associate a CMK with the log group but the CMK does
+    # not exist or the CMK is disabled, you will receive an
+    # `InvalidParameterException` error.
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
+    #   data. For more information, see [Amazon Resource Names - AWS Key
+    #   Management Service (AWS KMS)][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to use for the tags.
@@ -277,6 +344,7 @@ module Aws::CloudWatchLogs
     #
     #   resp = client.create_log_group({
     #     log_group_name: "LogGroupName", # required
+    #     kms_key_id: "KmsKeyId",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -645,6 +713,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].metric_filter_count #=> Integer
     #   resp.log_groups[0].arn #=> String
     #   resp.log_groups[0].stored_bytes #=> Integer
+    #   resp.log_groups[0].kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -738,7 +807,7 @@ module Aws::CloudWatchLogs
     end
 
     # Lists the specified metric filters. You can list all the metric
-    # filters or filter the results by log name, prefix, metric name, and
+    # filters or filter the results by log name, prefix, metric name, or
     # metric namespace. The results are ASCII-sorted by filter name.
     #
     # @option params [String] :log_group_name
@@ -756,7 +825,9 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [String] :metric_name
-    #   The name of the CloudWatch metric.
+    #   The name of the CloudWatch metric to which the monitored log
+    #   information should be published. For example, you may publish to a
+    #   metric called ErrorCount.
     #
     # @option params [String] :metric_namespace
     #   The namespace of the CloudWatch metric.
@@ -893,6 +964,38 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Disassociates the associated AWS Key Management Service (AWS KMS)
+    # customer master key (CMK) from the specified log group.
+    #
+    # After the AWS KMS CMK is disassociated from the log group, AWS
+    # CloudWatch Logs stops encrypting newly ingested data for the log
+    # group. All previously ingested data remains encrypted, and AWS
+    # CloudWatch Logs requires permissions for the CMK whenever the
+    # encrypted data is requested.
+    #
+    # Note that it can take up to 5 minutes for this operation to take
+    # effect.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_kms_key({
+    #     log_group_name: "LogGroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey AWS API Documentation
+    #
+    # @overload disassociate_kms_key(params = {})
+    # @param [Hash] params ({})
+    def disassociate_kms_key(params = {}, options = {})
+      req = build_request(:disassociate_kms_key, params)
+      req.send_request(options)
+    end
+
     # Lists log events from the specified log group. You can list all the
     # log events or filter the results using a filter pattern, a time range,
     # and the name of the log stream.
@@ -982,9 +1085,8 @@ module Aws::CloudWatchLogs
     # log events or filter using a time range.
     #
     # By default, this operation returns as many log events as can fit in a
-    # response size of 1 MB (up to 10,000 log events). You can get
-    # additional log events by specifying one of the tokens in a subsequent
-    # call.
+    # response size of 1MB (up to 10,000 log events). You can get additional
+    # log events by specifying one of the tokens in a subsequent call.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1053,8 +1155,6 @@ module Aws::CloudWatchLogs
     end
 
     # Lists the tags for the specified log group.
-    #
-    # To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1438,10 +1538,10 @@ module Aws::CloudWatchLogs
     #   cross-account delivery.
     #
     # @option params [String] :distribution
-    #   The method used to distribute log data to the destination, when the
-    #   destination is an Amazon Kinesis stream. By default, log data is
-    #   grouped by log stream. For a more even distribution, you can group log
-    #   data randomly.
+    #   The method used to distribute log data to the destination. By default
+    #   log data is grouped by log stream, but the grouping can be set to
+    #   random for a more even distribution. This property is only applicable
+    #   when the destination is an Amazon Kinesis stream.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1586,7 +1686,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

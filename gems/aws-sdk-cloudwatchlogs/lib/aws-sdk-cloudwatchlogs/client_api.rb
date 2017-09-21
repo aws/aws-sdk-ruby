@@ -13,6 +13,7 @@ module Aws::CloudWatchLogs
 
     AccessPolicy = Shapes::StringShape.new(name: 'AccessPolicy')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
     CreateExportTaskRequest = Shapes::StructureShape.new(name: 'CreateExportTaskRequest')
     CreateExportTaskResponse = Shapes::StructureShape.new(name: 'CreateExportTaskResponse')
@@ -48,6 +49,7 @@ module Aws::CloudWatchLogs
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationName = Shapes::StringShape.new(name: 'DestinationName')
     Destinations = Shapes::ListShape.new(name: 'Destinations')
+    DisassociateKmsKeyRequest = Shapes::StructureShape.new(name: 'DisassociateKmsKeyRequest')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventMessage = Shapes::StringShape.new(name: 'EventMessage')
@@ -80,6 +82,7 @@ module Aws::CloudWatchLogs
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidSequenceTokenException = Shapes::StructureShape.new(name: 'InvalidSequenceTokenException')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
     ListTagsLogGroupResponse = Shapes::StructureShape.new(name: 'ListTagsLogGroupResponse')
@@ -145,6 +148,10 @@ module Aws::CloudWatchLogs
     UntagLogGroupRequest = Shapes::StructureShape.new(name: 'UntagLogGroupRequest')
     Value = Shapes::StringShape.new(name: 'Value')
 
+    AssociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    AssociateKmsKeyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
+    AssociateKmsKeyRequest.struct_class = Types::AssociateKmsKeyRequest
+
     CancelExportTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, required: true, location_name: "taskId"))
     CancelExportTaskRequest.struct_class = Types::CancelExportTaskRequest
 
@@ -161,6 +168,7 @@ module Aws::CloudWatchLogs
     CreateExportTaskResponse.struct_class = Types::CreateExportTaskResponse
 
     CreateLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    CreateLogGroupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLogGroupRequest.struct_class = Types::CreateLogGroupRequest
 
@@ -272,6 +280,9 @@ module Aws::CloudWatchLogs
 
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)
 
+    DisassociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
+
     ExportTask.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, location_name: "taskId"))
     ExportTask.add_member(:task_name, Shapes::ShapeRef.new(shape: ExportTaskName, location_name: "taskName"))
     ExportTask.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
@@ -354,6 +365,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:metric_filter_count, Shapes::ShapeRef.new(shape: FilterCount, location_name: "metricFilterCount"))
     LogGroup.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     LogGroup.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "storedBytes"))
+    LogGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroups.member = Shapes::ShapeRef.new(shape: LogGroup)
@@ -513,6 +525,18 @@ module Aws::CloudWatchLogs
         "signatureVersion" => "v4",
         "targetPrefix" => "Logs_20140328",
       }
+
+      api.add_operation(:associate_kms_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateKmsKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateKmsKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
 
       api.add_operation(:cancel_export_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelExportTask"
@@ -749,6 +773,18 @@ module Aws::CloudWatchLogs
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:disassociate_kms_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateKmsKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateKmsKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:filter_log_events, Seahorse::Model::Operation.new.tap do |o|
