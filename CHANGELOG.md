@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.52 (2017-09-22)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
