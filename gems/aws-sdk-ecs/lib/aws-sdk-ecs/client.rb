@@ -310,14 +310,13 @@ module Aws::ECS
     #   or target group ARN, container name, and container port specified in
     #   the service definition are immutable.
     #
-    #   For Elastic Load Balancing Classic load balancers, this object must
-    #   contain the load balancer name, the container name (as it appears in a
-    #   container definition), and the container port to access from the load
-    #   balancer. When a task from this service is placed on a container
-    #   instance, the container instance is registered with the load balancer
-    #   specified here.
+    #   For Classic Load Balancers, this object must contain the load balancer
+    #   name, the container name (as it appears in a container definition),
+    #   and the container port to access from the load balancer. When a task
+    #   from this service is placed on a container instance, the container
+    #   instance is registered with the load balancer specified here.
     #
-    #   For Elastic Load Balancing Application load balancers, this object
+    #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name
     #   (as it appears in a container definition), and the container port to
     #   access from the load balancer. When a task from this service is placed
@@ -822,7 +821,7 @@ module Aws::ECS
     #   on a different container instance if possible.
     #
     #   Any containers in orphaned service tasks that are registered with a
-    #   Classic load balancer or an Application load balancer target group are
+    #   Classic Load Balancer or an Application Load Balancer target group are
     #   deregistered, and they will begin connection draining according to the
     #   settings on the load balancer or target group.
     #
@@ -964,6 +963,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].volumes_from #=> Array
     #   resp.task_definition.container_definitions[0].volumes_from[0].source_container #=> String
     #   resp.task_definition.container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1489,6 +1492,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].volumes_from #=> Array
     #   resp.task_definition.container_definitions[0].volumes_from[0].source_container #=> String
     #   resp.task_definition.container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -2764,6 +2771,12 @@ module Aws::ECS
     #             read_only: false,
     #           },
     #         ],
+    #         linux_parameters: {
+    #           capabilities: {
+    #             add: ["String"],
+    #             drop: ["String"],
+    #           },
+    #         },
     #         hostname: "String",
     #         user: "String",
     #         working_directory: "String",
@@ -2843,6 +2856,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].volumes_from #=> Array
     #   resp.task_definition.container_definitions[0].volumes_from[0].source_container #=> String
     #   resp.task_definition.container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -3862,7 +3879,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

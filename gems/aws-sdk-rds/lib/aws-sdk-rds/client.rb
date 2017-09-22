@@ -9349,19 +9349,44 @@ module Aws::RDS
     end
 
     # Updates a manual DB snapshot, which can be encrypted or not encrypted,
-    # with a new engine version. You can update the engine version to either
-    # a new major or minor engine version.
+    # with a new engine version.
     #
-    # Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5.1 to
-    # MySQL 5.5.
+    # Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier of the DB snapshot to modify.
     #
     # @option params [String] :engine_version
-    #   The engine version to update the DB snapshot to.
+    #   The engine version to upgrade the DB snapshot to.
+    #
+    #   The following are the database engines and engine versions that are
+    #   available when you upgrade a DB snapshot.
+    #
+    #   **MySQL**
+    #
+    #   * `5.5.46` (supported for 5.1 DB snapshots)
+    #
+    #   ^
+    #
+    #   **Oracle**
+    #
+    #   * `12.1.0.2.v8` (supported for 12.1.0.1 DB snapshots)
+    #
+    #   * `11.2.0.4.v12` (supported for 11.2.0.2 DB snapshots)
+    #
+    #   * `11.2.0.4.v11` (supported for 11.2.0.3 DB snapshots)
     #
     # @option params [String] :option_group_name
+    #   The option group to identify with the upgraded DB snapshot.
+    #
+    #   You can specify this parameter when you upgrade an Oracle DB snapshot.
+    #   The same option group considerations apply when upgrading a DB
+    #   snapshot as when upgrading a DB instance. For more information, see
+    #   [Option Group Considerations][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
     #
     # @return [Types::ModifyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12720,7 +12745,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
