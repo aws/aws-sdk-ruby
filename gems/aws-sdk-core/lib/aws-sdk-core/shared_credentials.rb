@@ -6,6 +6,7 @@ module Aws
   class SharedCredentials
 
     include CredentialProvider
+    include RefreshingCredentials
 
     # @api private
     KEY_MAP = {
@@ -38,15 +39,20 @@ module Aws
       @profile_name = options[:profile_name]
       @profile_name ||= ENV['AWS_PROFILE']
       @profile_name ||= shared_config.profile_name
-      if @path && @path == shared_config.credentials_path
-        @credentials = shared_config.credentials(profile: @profile_name)
-      else
-        config = SharedConfig.new(
-          credentials_path: @path,
-          profile_name: @profile_name
-        )
-        @credentials = config.credentials(profile: @profile_name)
-      end
+
+      @refresh_cycle = options[:refresh_cycle]
+      # the default refresh cycle is one hour
+      @refresh_cycle ||= 60 * 60
+
+      # set last_refresh to 0 to trigger the refresh for the first time 
+      # call credentials method
+      @last_refresh = 0
+
+      # according to different dilivery service of credentials, the 
+      # expiration is different, so it should not value this variable here
+      @expiration = 0
+        
+      super
     end
 
     # @return [String]
@@ -55,8 +61,9 @@ module Aws
     # @return [String]
     attr_reader :profile_name
 
-    # @return [Credentials]
-    attr_reader :credentials
+    # just use for unit tests
+    attr_writer :path
+    attr_writer :last_refresh
 
     # @api private
     def inspect
@@ -64,6 +71,7 @@ module Aws
         self.class.name,
         "profile_name=#{profile_name.inspect}",
         "path=#{path.inspect}",
+        "last_refresh=#{last_refresh}",
       ]
       "#<#{parts.join(' ')}>"
     end
@@ -75,6 +83,37 @@ module Aws
     #   will be parsable, only if it can be read.
     def loadable?
       !path.nil? && File.exist?(path) && File.readable?(path)
+    end
+
+    private 
+
+    def load_config()
+      if @path && @path == Aws.shared_config.credentials_path
+        Aws.shared_config
+      else
+        SharedConfig.new(
+          credentials_path: @path,
+          profile_name: @profile_name
+        )
+      end
+    end
+
+    def refresh
+      config = load_config  
+      @credentials = config.credentials(profile: @profile_name)
+
+      @last_refresh = Time.now
+      # here, according to different dilivery service of credentials, the 
+      # expiration is different, so it should not value this variable here
+      @expiration = 0
+    end
+
+    def near_expiration?
+      if Time.now >= @last_refresh + @refresh_cycle  
+        true
+      else
+        false
+      end
     end
 
   end
