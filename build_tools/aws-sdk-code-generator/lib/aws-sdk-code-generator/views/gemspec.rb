@@ -5,6 +5,13 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
+        @custom = @service.protocol == 'api-gateway'
+      end
+
+      # @return [String|nil]
+      def generated_src_warning
+        return if @service.protocol == 'api-gateway'
+        GENERATED_SRC_WARNING
       end
 
       # @return [String]
@@ -12,18 +19,34 @@ module AwsSdkCodeGenerator
         @service.gem_name
       end
 
+      def author
+        @custom ? 'Author Name' : 'Amazon Web Services'
+      end
+
+      def homepage
+        @custom ? 'Gem Homepage' : 'http://github.com/aws/aws-sdk-ruby'
+      end
+
+      def email
+        @custom ? 'yourname@email.com' : 'trevrowe@amazon.com'
+      end
+
       # @return [String]
       def summary
-        "AWS SDK for Ruby - #{@service.short_name}"
+        @custom ? @service.short_name : "AWS SDK for Ruby - #{@service.short_name}"
       end
 
       # @return [String]
       def description
-        if @service.short_name != @service.full_name
-          abbreviation = " (#{@service.short_name})"
+        if @custom
+          desc = "Gem Description"
+        else
+          if @service.short_name != @service.full_name
+            abbreviation = " (#{@service.short_name})"
+          end
+          desc = "Official AWS Ruby gem for #{@service.full_name}#{abbreviation}. "
+          desc += 'This gem is part of the AWS SDK for Ruby.'
         end
-        desc = "Official AWS Ruby gem for #{@service.full_name}#{abbreviation}. "
-        desc += 'This gem is part of the AWS SDK for Ruby.'
         desc
       end
 

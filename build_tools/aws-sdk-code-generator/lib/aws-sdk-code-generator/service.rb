@@ -31,6 +31,8 @@ module AwsSdkCodeGenerator
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
       @endpoints_key = options.fetch(:endpoints_key, nil)
+      # APIG custom service only
+      @default_endpoint = options[:default_endpoint]
 
       # computed attributes
       @protocol = api.fetch('metadata').fetch('protocol')
@@ -73,6 +75,9 @@ module AwsSdkCodeGenerator
 
     # @return [String, nil]
     attr_reader :endpoints_key
+
+    # @return [String] Required for APIG custom service
+    attr_reader :default_endpoint
 
     # @return [Hash<String,String>] A hash of plugins to add.
     attr_reader :add_plugins

@@ -34,6 +34,10 @@ module Seahorse
       # @return [Array<ShapeRef>]
       attr_accessor :errors
 
+      # APIG only
+      # @return [Boolean]
+      attr_accessor :require_apikey
+
       def [](key)
         @metadata[key.to_s]
       end

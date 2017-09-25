@@ -31,7 +31,7 @@ module Aws
         def populate_body(context)
           Body.new(
             serializer_class(context),
-            context.operation.input,
+            context.operation.input
           ).apply(context.http_request, context.params)
         end
 
@@ -40,6 +40,7 @@ module Aws
           case protocol
           when 'rest-xml' then Xml::Builder
           when 'rest-json' then Json::Builder
+          when 'api-gateway' then Json::Builder
           else raise "unsupported protocol #{protocol}"
           end
         end

@@ -11,6 +11,12 @@ module AwsSdkCodeGenerator
         @prefix = options.fetch(:prefix)
       end
 
+      # @return [String|nil]
+      def generated_src_warning
+        return if @service.protocol == 'api-gateway'
+        GENERATED_SRC_WARNING
+      end
+
       def full_name
         @service.full_name
       end

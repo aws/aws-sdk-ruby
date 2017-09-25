@@ -37,6 +37,7 @@ module Aws
           case protocol
           when 'rest-xml' then Xml::Parser
           when 'rest-json' then Json::Parser
+          when 'api-gateway' then Json::Parser
           else raise "unsupported protocol #{protocol}"
           end
         end

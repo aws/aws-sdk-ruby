@@ -14,6 +14,7 @@ module AwsSdkCodeGenerator
           api: api,
           paginators: options.fetch(:paginators)
         )
+        @custom = options.fetch(:custom)
       end
 
       # @return [String]
@@ -24,6 +25,12 @@ module AwsSdkCodeGenerator
 
       # @return [Array<ResourceAssociation>]
       attr_reader :associations
+
+      # @return [String|nil]
+      def generated_src_warning
+        return if @custom
+        GENERATED_SRC_WARNING
+      end
 
       # @return [Boolean]
       def actions?

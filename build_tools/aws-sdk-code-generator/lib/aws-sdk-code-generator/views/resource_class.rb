@@ -20,6 +20,7 @@ module AwsSdkCodeGenerator
         @associations = build_associations(options)
         @batch_actions = ResourceBatchAction.build_list(@class_name, resource, api)
         @shape = resource['shape']
+        @custom = options.fetch(:custom)
       end
 
       # @return [String]
@@ -66,6 +67,12 @@ module AwsSdkCodeGenerator
 
       # @return [String, nil]
       attr_reader :shape
+
+      # @return [String|nil]
+      def generated_src_warning
+        return if @custom
+        GENERATED_SRC_WARNING
+      end
 
       # @return [Boolean]
       def waiters?

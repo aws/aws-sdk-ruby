@@ -41,10 +41,12 @@ module Aws
 
       option(:unsigned_operations) do |cfg|
         cfg.api.operation_names.inject([]) do |unsigned, operation_name|
-          if cfg.api.operation(operation_name)['authtype'] != 'none'
-            unsigned
-          else
+          if cfg.api.operation(operation_name)['authtype'] == 'none' ||
+            cfg.api.operation(operation_name)['authtype'] == 'custom'
+            # Unsign requests that has custom apigateway authorizer as well
             unsigned << operation_name
+          else
+            unsigned
           end
         end
       end

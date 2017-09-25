@@ -71,6 +71,7 @@ module AwsSdkCodeGenerator
     def option_tags(operation, api)
       if operation['input']
         shape = Api.shape(operation['input'], api)
+        return if shape['members'].nil?
         shape['members'].map do |member_name, member_ref|
           next if member_ref['documented'] === false
           docstring = Api.docstring(member_ref, api)
@@ -190,7 +191,9 @@ module AwsSdkCodeGenerator
 
     def see_also_tag(operation, api)
       uid = api['metadata']['uid']
-      "# " + Crosslink.tag_string(uid, operation['name']) unless !Crosslink.taggable?(uid)
+      if api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
+        "# " + Crosslink.tag_string(uid, operation['name'])
+      end
     end
 
     private

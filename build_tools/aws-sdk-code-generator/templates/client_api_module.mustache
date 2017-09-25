@@ -1,5 +1,6 @@
-{{> generated_src_warning}}
-
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
 module {{module_name}}
   # @api private
   module ClientApi
@@ -38,6 +39,9 @@ module {{module_name}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
+        {{#require_apikey}}
+        o.require_apikey = {{require_apikey}}
+        {{/require_apikey}}
         {{#shape_references}}
         {{#lines}}
         {{{.}}}{{/lines}}

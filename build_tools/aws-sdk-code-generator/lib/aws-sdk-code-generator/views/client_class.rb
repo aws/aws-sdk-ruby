@@ -25,6 +25,7 @@ module AwsSdkCodeGenerator
         @client_constructor = ClientConstructor.new(plugins: @plugins)
         @operations = ClientOperationList.new(options).to_a
         @waiters = Waiter.build_list(options[:waiters])
+        @custom = options.fetch(:custom)
       end
 
       # @return [String]
@@ -47,6 +48,12 @@ module AwsSdkCodeGenerator
 
       # @return [Array<Operation>]
       attr_reader :operations
+
+      # @return [String|nil]
+      def generated_src_warning
+        return if @custom
+        GENERATED_SRC_WARNING
+      end
 
       # @return [Array<String>]
       def plugin_requires

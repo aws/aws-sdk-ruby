@@ -150,7 +150,12 @@ def match_req_body(group, suite, test_case, http_req, it)
     when 'rest-xml'
       body = normalize_xml(body)
       expected_body = normalize_xml(expected_body)
-    else raise "unsported protocol: `#{protocol}'"
+    when 'api-gateway'
+      if body[0] == '{'
+        body = Aws::Json.load(body)
+        expected_body = Aws::Json.load(expected_body)
+      end
+    else raise "unsupported protocol: `#{protocol}`"
     end
     it.expect(body).to(eq(expected_body))
   end

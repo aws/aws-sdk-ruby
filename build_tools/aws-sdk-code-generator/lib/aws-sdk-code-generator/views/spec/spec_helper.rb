@@ -13,10 +13,17 @@ module AwsSdkCodeGenerator
           @gem_dependencies = service.gem_dependencies.map do |gem_name, _|
             { dependency: gem_name }
           end
+          @custom = service.protocol == 'api-gateway'
         end
 
         attr_reader :gem_name
         attr_reader :gem_dependencies
+
+        # @return [String|nil]
+        def generated_src_warning
+          return if @custom
+          GENERATED_SRC_WARNING
+        end
 
       end
     end

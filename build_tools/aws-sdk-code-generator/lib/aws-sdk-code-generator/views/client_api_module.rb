@@ -2,6 +2,8 @@ module AwsSdkCodeGenerator
   module Views
     class ClientApiModule < View
 
+      include Helper
+
       SKIP_TRAITS = Set.new(%w(shape deprecated location locationName documentation))
 
       SHAPE_CLASSES = {
@@ -76,6 +78,12 @@ module AwsSdkCodeGenerator
         @service = options.fetch(:service)
       end
 
+      # @return [String|nil]
+      def generated_src_warning
+        return if @service.protocol == 'api-gateway'
+        GENERATED_SRC_WARNING
+      end
+
       # @return [String]
       def module_name
         @service.module_name
@@ -89,9 +97,11 @@ module AwsSdkCodeGenerator
       # @return [Array<Shape>]
       def shapes
         shape_enum.map do |shape_name, shape|
+          # APIG model, shape can start with downcase
+          shape_name = upcase_first(shape_name)
           Shape.new.tap do |s|
             s.name = shape_name
-            s.class_name = shape_class_name(shape['type'])
+            s.class_name, shape = shape_class_name(shape)
             s.constructor_args = shape_constructor_args(shape_name, shape)
           end
         end
@@ -99,11 +109,15 @@ module AwsSdkCodeGenerator
 
       def shape_definitions
         shape_enum.inject([]) do |groups, (shape_name, shape)|
+          # APIG model, shape can start with downcase
+          shape_name = upcase_first(shape_name)
           lines = []
           if non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
-            shape['members'].each do |member_name, member_ref|
-              lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+            unless shape['members'].nil?
+              shape['members'].each do |member_name, member_ref|
+                lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+              end
             end
             lines << "#{shape_name}.struct_class = Types::#{shape_name}"
             if payload = shape['payload']
@@ -157,6 +171,7 @@ module AwsSdkCodeGenerator
             o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
             o.authtype = operation['authtype'] if operation.key?('authtype')
+            o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
           end
         end
@@ -164,9 +179,14 @@ module AwsSdkCodeGenerator
 
       private
 
-      def shape_class_name(type)
+      def shape_class_name(shape)
+        type = shape['type']
+        # APIG time serializing difference
+        if @service.protocol == 'api-gateway' && type == 'timestamp'
+          shape['timestampFormat'] = 'iso8601'
+        end
         if SHAPE_CLASSES.key?(type)
-          "Shapes::#{SHAPE_CLASSES[type]}"
+          ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
           raise ArgumentError, "unsupported shape type `#{type}'"
         end
@@ -287,7 +307,8 @@ module AwsSdkCodeGenerator
 
       def operation_ref(ref)
         metadata = ref.dup
-        shape_name = metadata.delete('shape')
+        # APIG model, shape can start with downcase
+        shape_name = upcase_first(metadata.delete('shape'))
         if metadata.empty?
           options = ''
         else
@@ -359,6 +380,10 @@ module AwsSdkCodeGenerator
 
         # @return [String,nil]
         attr_accessor :authtype
+
+        # APIG only
+        # @return [Boolean]
+        attr_accessor :require_apikey
 
         # @return [Pager, nil]
         attr_accessor :pager

@@ -260,11 +260,12 @@ module Aws
 
     def protocol_helper
       case config.api.metadata['protocol']
-      when 'json'      then Stubbing::Protocols::Json
-      when 'query'     then Stubbing::Protocols::Query
-      when 'ec2'       then Stubbing::Protocols::EC2
-      when 'rest-json' then Stubbing::Protocols::RestJson
-      when 'rest-xml'  then Stubbing::Protocols::RestXml
+      when 'json'        then Stubbing::Protocols::Json
+      when 'query'       then Stubbing::Protocols::Query
+      when 'ec2'         then Stubbing::Protocols::EC2
+      when 'rest-json'   then Stubbing::Protocols::RestJson
+      when 'rest-xml'    then Stubbing::Protocols::RestXml
+      when 'api-gateway' then Stubbing::Protocols::ApiGateway
       else raise "unsupported protocol"
       end.new
     end

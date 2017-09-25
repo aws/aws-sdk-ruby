@@ -118,6 +118,22 @@ module AwsSdkCodeGenerator
       shape(member_ref)
     end
 
+    def upcase_first(shape_name)
+      if shape_name[0] =~ /[a-z]/
+        shape_name = shape_name.size == 1 ? shape_name.upcase
+          : shape_name[0].upcase + shape_name[1..-1]
+      end
+      shape_name
+    end
+
+    def downcase_first(shape_name)
+      if shape_name[0] =~/[A-Z]/
+        shape_name = shape_name.size == 1 ? shape_name.downcase
+          : shape_name[0].downcase + shape_name[1..-1]
+      end
+      shape_name
+    end
+
     def shape(ref)
       if ref.nil?
         nil
@@ -166,7 +182,7 @@ module AwsSdkCodeGenerator
         end
       end
     end
-    module_function :deep_copy, :operation_streaming?
+    module_function :deep_copy, :operation_streaming?, :downcase_first
 
   end
 end

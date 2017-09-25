@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
     end
 
     def format
-      if @shape && @shape['members'].length > 0
+      if @shape && @shape['members'] && @shape['members'].length > 0
         <<-EXAMPLE.strip
 # @example Request syntax with placeholder values
 #
