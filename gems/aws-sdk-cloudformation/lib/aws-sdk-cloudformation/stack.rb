@@ -61,6 +61,12 @@ module Aws::CloudFormation
       data[:creation_time]
     end
 
+    # The time the stack was deleted.
+    # @return [Time]
+    def deletion_time
+      data[:deletion_time]
+    end
+
     # The time the stack was last updated. This field will only be returned
     # if the stack has been updated at least once.
     # @return [Time]
@@ -135,6 +141,52 @@ module Aws::CloudFormation
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
+    end
+
+    # Whether termination protection is enabled for the stack.
+    #
+    # For [nested stacks][1], termination protection is set on the root
+    # stack and cannot be changed directly on the nested stack. For more
+    # information, see [Protecting a Stack From Being Deleted][2] in the
+    # *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    # @return [Boolean]
+    def enable_termination_protection
+      data[:enable_termination_protection]
+    end
+
+    # For nested stacks--stacks created as resources for another stack--the
+    # stack ID of the direct parent of this stack. For the first level of
+    # nested stacks, the root stack is also the parent stack.
+    #
+    # For more information, see [Working with Nested Stacks][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    # @return [String]
+    def parent_id
+      data[:parent_id]
+    end
+
+    # For nested stacks--stacks created as resources for another stack--the
+    # stack ID of the the top-level stack to which the nested stack
+    # ultimately belongs.
+    #
+    # For more information, see [Working with Nested Stacks][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    # @return [String]
+    def root_id
+      data[:root_id]
     end
 
     # @!endgroup
@@ -356,6 +408,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     enable_termination_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :template_body
@@ -519,6 +572,21 @@ module Aws::CloudFormation
     #   stack using the console, each stack event would be assigned the same
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
+    # @option options [Boolean] :enable_termination_protection
+    #   Whether to enable termination protection on the specified stack. If a
+    #   user attempts to delete a stack with termination protection enabled,
+    #   the operation fails and the stack remains unchanged. For more
+    #   information, see [Protecting a Stack From Being Deleted][1] in the
+    #   *AWS CloudFormation User Guide*. Termination protection is disabled on
+    #   stacks by default.
+    #
+    #   For [nested stacks][2], termination protection is set on the root
+    #   stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)

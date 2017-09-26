@@ -83,6 +83,7 @@ module Aws::CloudFormation
     DescribeStacksOutput = Shapes::StructureShape.new(name: 'DescribeStacksOutput')
     Description = Shapes::StringShape.new(name: 'Description')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
+    EnableTerminationProtection = Shapes::BooleanShape.new(name: 'EnableTerminationProtection')
     EstimateTemplateCostInput = Shapes::StructureShape.new(name: 'EstimateTemplateCostInput')
     EstimateTemplateCostOutput = Shapes::StructureShape.new(name: 'EstimateTemplateCostOutput')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
@@ -254,6 +255,8 @@ module Aws::CloudFormation
     UpdateStackOutput = Shapes::StructureShape.new(name: 'UpdateStackOutput')
     UpdateStackSetInput = Shapes::StructureShape.new(name: 'UpdateStackSetInput')
     UpdateStackSetOutput = Shapes::StructureShape.new(name: 'UpdateStackSetOutput')
+    UpdateTerminationProtectionInput = Shapes::StructureShape.new(name: 'UpdateTerminationProtectionInput')
+    UpdateTerminationProtectionOutput = Shapes::StructureShape.new(name: 'UpdateTerminationProtectionOutput')
     Url = Shapes::StringShape.new(name: 'Url')
     UsePreviousTemplate = Shapes::BooleanShape.new(name: 'UsePreviousTemplate')
     UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
@@ -345,6 +348,7 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
     CreateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    CreateStackInput.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -705,6 +709,7 @@ module Aws::CloudFormation
     Stack.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     Stack.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
     Stack.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    Stack.add_member(:deletion_time, Shapes::ShapeRef.new(shape: DeletionTime, location_name: "DeletionTime"))
     Stack.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))
     Stack.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     Stack.add_member(:stack_status, Shapes::ShapeRef.new(shape: StackStatus, required: true, location_name: "StackStatus"))
@@ -716,6 +721,9 @@ module Aws::CloudFormation
     Stack.add_member(:outputs, Shapes::ShapeRef.new(shape: Outputs, location_name: "Outputs"))
     Stack.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     Stack.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    Stack.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
+    Stack.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
+    Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     Stack.struct_class = Types::Stack
 
     StackEvent.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
@@ -851,6 +859,8 @@ module Aws::CloudFormation
     StackSummary.add_member(:deletion_time, Shapes::ShapeRef.new(shape: DeletionTime, location_name: "DeletionTime"))
     StackSummary.add_member(:stack_status, Shapes::ShapeRef.new(shape: StackStatus, required: true, location_name: "StackStatus"))
     StackSummary.add_member(:stack_status_reason, Shapes::ShapeRef.new(shape: StackStatusReason, location_name: "StackStatusReason"))
+    StackSummary.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
+    StackSummary.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     StackSummary.struct_class = Types::StackSummary
 
     Stacks.member = Shapes::ShapeRef.new(shape: Stack)
@@ -914,6 +924,13 @@ module Aws::CloudFormation
 
     UpdateStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
     UpdateStackSetOutput.struct_class = Types::UpdateStackSetOutput
+
+    UpdateTerminationProtectionInput.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, required: true, location_name: "EnableTerminationProtection"))
+    UpdateTerminationProtectionInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
+    UpdateTerminationProtectionInput.struct_class = Types::UpdateTerminationProtectionInput
+
+    UpdateTerminationProtectionOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    UpdateTerminationProtectionOutput.struct_class = Types::UpdateTerminationProtectionOutput
 
     ValidateTemplateInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
     ValidateTemplateInput.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
@@ -1325,6 +1342,14 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: OperationIdAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: StaleRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:update_termination_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTerminationProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTerminationProtectionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTerminationProtectionOutput)
       end)
 
       api.add_operation(:validate_template, Seahorse::Model::Operation.new.tap do |o|

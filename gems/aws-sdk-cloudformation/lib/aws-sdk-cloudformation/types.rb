@@ -607,6 +607,7 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         client_request_token: "ClientRequestToken",
+    #         enable_termination_protection: false,
     #       }
     #
     # @!attribute [rw] stack_name
@@ -814,6 +815,23 @@ module Aws::CloudFormation
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
+    # @!attribute [rw] enable_termination_protection
+    #   Whether to enable termination protection on the specified stack. If
+    #   a user attempts to delete a stack with termination protection
+    #   enabled, the operation fails and the stack remains unchanged. For
+    #   more information, see [Protecting a Stack From Being Deleted][1] in
+    #   the *AWS CloudFormation User Guide*. Termination protection is
+    #   disabled on stacks by default.
+    #
+    #   For [nested stacks][2], termination protection is set on the root
+    #   stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
     #
     class CreateStackInput < Struct.new(
@@ -832,7 +850,8 @@ module Aws::CloudFormation
       :stack_policy_body,
       :stack_policy_url,
       :tags,
-      :client_request_token)
+      :client_request_token,
+      :enable_termination_protection)
       include Aws::Structure
     end
 
@@ -3289,6 +3308,10 @@ module Aws::CloudFormation
     #   The time at which the stack was created.
     #   @return [Time]
     #
+    # @!attribute [rw] deletion_time
+    #   The time the stack was deleted.
+    #   @return [Time]
+    #
     # @!attribute [rw] last_updated_time
     #   The time the stack was last updated. This field will only be
     #   returned if the stack has been updated at least once.
@@ -3343,6 +3366,47 @@ module Aws::CloudFormation
     #   A list of `Tag`s that specify information about the stack.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_termination_protection
+    #   Whether termination protection is enabled for the stack.
+    #
+    #   For [nested stacks][1], termination protection is set on the root
+    #   stack and cannot be changed directly on the nested stack. For more
+    #   information, see [Protecting a Stack From Being Deleted][2] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_id
+    #   For nested stacks--stacks created as resources for another
+    #   stack--the stack ID of the direct parent of this stack. For the
+    #   first level of nested stacks, the root stack is also the parent
+    #   stack.
+    #
+    #   For more information, see [Working with Nested Stacks][1] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] root_id
+    #   For nested stacks--stacks created as resources for another
+    #   stack--the stack ID of the the top-level stack to which the nested
+    #   stack ultimately belongs.
+    #
+    #   For more information, see [Working with Nested Stacks][1] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -3352,6 +3416,7 @@ module Aws::CloudFormation
       :description,
       :parameters,
       :creation_time,
+      :deletion_time,
       :last_updated_time,
       :rollback_configuration,
       :stack_status,
@@ -3362,7 +3427,10 @@ module Aws::CloudFormation
       :capabilities,
       :outputs,
       :role_arn,
-      :tags)
+      :tags,
+      :enable_termination_protection,
+      :parent_id,
+      :root_id)
       include Aws::Structure
     end
 
@@ -3958,6 +4026,11 @@ module Aws::CloudFormation
     #   `FailureToleranceCount`—`MaxConcurrentCount` is at most one more
     #   than the `FailureToleranceCount` .
     #
+    #   Note that this setting lets you specify the *maximum* for
+    #   operations. For large deployments, under certain circumstances the
+    #   actual number of accounts acted upon concurrently may be lower due
+    #   to service throttling.
+    #
     #   Conditional: You must specify either `MaxConcurrentCount` or
     #   `MaxConcurrentPercentage`, but not both.
     #   @return [Integer]
@@ -3970,6 +4043,11 @@ module Aws::CloudFormation
     #   percentage, AWS CloudFormation rounds down to the next whole number.
     #   This is true except in cases where rounding down would result is
     #   zero. In this case, CloudFormation sets the number as one instead.
+    #
+    #   Note that this setting lets you specify the *maximum* for
+    #   operations. For large deployments, under certain circumstances the
+    #   actual number of accounts acted upon concurrently may be lower due
+    #   to service throttling.
     #
     #   Conditional: You must specify either `MaxConcurrentCount` or
     #   `MaxConcurrentPercentage`, but not both.
@@ -4175,6 +4253,33 @@ module Aws::CloudFormation
     #   Success/Failure message associated with the stack status.
     #   @return [String]
     #
+    # @!attribute [rw] parent_id
+    #   For nested stacks--stacks created as resources for another
+    #   stack--the stack ID of the direct parent of this stack. For the
+    #   first level of nested stacks, the root stack is also the parent
+    #   stack.
+    #
+    #   For more information, see [Working with Nested Stacks][1] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] root_id
+    #   For nested stacks--stacks created as resources for another
+    #   stack--the stack ID of the the top-level stack to which the nested
+    #   stack ultimately belongs.
+    #
+    #   For more information, see [Working with Nested Stacks][1] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
     #
     class StackSummary < Struct.new(
@@ -4185,7 +4290,9 @@ module Aws::CloudFormation
       :last_updated_time,
       :deletion_time,
       :stack_status,
-      :stack_status_reason)
+      :stack_status_reason,
+      :parent_id,
+      :root_id)
       include Aws::Structure
     end
 
@@ -4779,6 +4886,42 @@ module Aws::CloudFormation
     #
     class UpdateStackSetOutput < Struct.new(
       :operation_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTerminationProtectionInput
+    #   data as a hash:
+    #
+    #       {
+    #         enable_termination_protection: false, # required
+    #         stack_name: "StackNameOrId", # required
+    #       }
+    #
+    # @!attribute [rw] enable_termination_protection
+    #   Whether to enable termination protection on the specified stack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stack_name
+    #   The name or unique ID of the stack for which you want to set
+    #   termination protection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionInput AWS API Documentation
+    #
+    class UpdateTerminationProtectionInput < Struct.new(
+      :enable_termination_protection,
+      :stack_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_id
+    #   The unique ID of the stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionOutput AWS API Documentation
+    #
+    class UpdateTerminationProtectionOutput < Struct.new(
+      :stack_id)
       include Aws::Structure
     end
 

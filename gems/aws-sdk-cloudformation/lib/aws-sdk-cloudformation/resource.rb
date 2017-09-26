@@ -59,6 +59,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     enable_termination_protection: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :stack_name
@@ -231,6 +232,21 @@ module Aws::CloudFormation
     #   stack using the console, each stack event would be assigned the same
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
+    # @option options [Boolean] :enable_termination_protection
+    #   Whether to enable termination protection on the specified stack. If a
+    #   user attempts to delete a stack with termination protection enabled,
+    #   the operation fails and the stack remains unchanged. For more
+    #   information, see [Protecting a Stack From Being Deleted][1] in the
+    #   *AWS CloudFormation User Guide*. Termination protection is disabled on
+    #   stacks by default.
+    #
+    #   For [nested stacks][2], termination protection is set on the root
+    #   stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Stack]
     def create_stack(options = {})
       resp = @client.create_stack(options)
