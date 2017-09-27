@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
 2.10.53 (2017-09-26)
 ------------------
 
