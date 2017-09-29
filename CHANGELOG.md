@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.55 (2017-09-29)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
