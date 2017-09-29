@@ -480,6 +480,36 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateWebhookInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the build project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
+    #
+    class CreateWebhookInput < Struct.new(
+      :project_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] webhook
+    #   Information about a webhook in GitHub that connects repository
+    #   events to a build project in AWS CodeBuild.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookOutput AWS API Documentation
+    #
+    class CreateWebhookOutput < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteProjectInput
     #   data as a hash:
     #
@@ -501,6 +531,28 @@ module Aws::CodeBuild
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectOutput AWS API Documentation
     #
     class DeleteProjectOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteWebhookInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the build project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookInput AWS API Documentation
+    #
+    class DeleteWebhookInput < Struct.new(
+      :project_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookOutput AWS API Documentation
+    #
+    class DeleteWebhookOutput < Aws::EmptyStructure; end
 
     # Information about a Docker image that is managed by AWS CodeBuild.
     #
@@ -918,6 +970,11 @@ module Aws::CodeBuild
     #   Unix time format.
     #   @return [Time]
     #
+    # @!attribute [rw] webhook
+    #   Information about a webhook in GitHub that connects repository
+    #   events to a build project in AWS CodeBuild.
+    #   @return [Types::Webhook]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -932,7 +989,8 @@ module Aws::CodeBuild
       :encryption_key,
       :tags,
       :created,
-      :last_modified)
+      :last_modified,
+      :webhook)
       include Aws::Structure
     end
 
@@ -1570,6 +1628,20 @@ module Aws::CodeBuild
     #
     class UpdateProjectOutput < Struct.new(
       :project)
+      include Aws::Structure
+    end
+
+    # Information about a webhook in GitHub that connects repository events
+    # to a build project in AWS CodeBuild.
+    #
+    # @!attribute [rw] url
+    #   The URL to the webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
+    #
+    class Webhook < Struct.new(
+      :url)
       include Aws::Structure
     end
 

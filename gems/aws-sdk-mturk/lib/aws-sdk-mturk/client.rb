@@ -322,7 +322,7 @@ module Aws::MTurk
     # @option params [required, String] :hit_id
     #   The ID of the HIT to extend.
     #
-    # @option params [Integer] :number_of_additional_assignments
+    # @option params [required, Integer] :number_of_additional_assignments
     #   The number of additional assignments to request for this HIT.
     #
     # @option params [String] :unique_request_token
@@ -340,7 +340,7 @@ module Aws::MTurk
     #
     #   resp = client.create_additional_assignments_for_hit({
     #     hit_id: "EntityId", # required
-    #     number_of_additional_assignments: 1,
+    #     number_of_additional_assignments: 1, # required
     #     unique_request_token: "IdempotencyToken",
     #   })
     #
@@ -506,7 +506,7 @@ module Aws::MTurk
     #     auto_approval_delay_in_seconds: 1,
     #     lifetime_in_seconds: 1, # required
     #     assignment_duration_in_seconds: 1, # required
-    #     reward: "NumericValue", # required
+    #     reward: "CurrencyAmount", # required
     #     title: "String", # required
     #     keywords: "String",
     #     description: "String", # required
@@ -528,7 +528,7 @@ module Aws::MTurk
     #     ],
     #     unique_request_token: "IdempotencyToken",
     #     assignment_review_policy: {
-    #       policy_name: "String",
+    #       policy_name: "String", # required
     #       parameters: [
     #         {
     #           key: "String",
@@ -543,7 +543,7 @@ module Aws::MTurk
     #       ],
     #     },
     #     hit_review_policy: {
-    #       policy_name: "String",
+    #       policy_name: "String", # required
     #       parameters: [
     #         {
     #           key: "String",
@@ -560,8 +560,8 @@ module Aws::MTurk
     #     hit_layout_id: "EntityId",
     #     hit_layout_parameters: [
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "String", # required
+    #         value: "String", # required
     #       },
     #     ],
     #   })
@@ -660,7 +660,7 @@ module Aws::MTurk
     #   resp = client.create_hit_type({
     #     auto_approval_delay_in_seconds: 1,
     #     assignment_duration_in_seconds: 1, # required
-    #     reward: "NumericValue", # required
+    #     reward: "CurrencyAmount", # required
     #     title: "String", # required
     #     keywords: "String",
     #     description: "String", # required
@@ -805,7 +805,7 @@ module Aws::MTurk
     #     requester_annotation: "String",
     #     unique_request_token: "IdempotencyToken",
     #     assignment_review_policy: {
-    #       policy_name: "String",
+    #       policy_name: "String", # required
     #       parameters: [
     #         {
     #           key: "String",
@@ -820,7 +820,7 @@ module Aws::MTurk
     #       ],
     #     },
     #     hit_review_policy: {
-    #       policy_name: "String",
+    #       policy_name: "String", # required
     #       parameters: [
     #         {
     #           key: "String",
@@ -837,8 +837,8 @@ module Aws::MTurk
     #     hit_layout_id: "EntityId",
     #     hit_layout_parameters: [
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "String", # required
+    #         value: "String", # required
     #       },
     #     ],
     #   })
@@ -2199,7 +2199,7 @@ module Aws::MTurk
     #   The ID of the assignment. The assignment must correspond to a HIT
     #   created by the Requester.
     #
-    # @option params [String] :requester_feedback
+    # @option params [required, String] :requester_feedback
     #   A message for the Worker, which the Worker can see in the Status
     #   section of the web site.
     #
@@ -2209,7 +2209,7 @@ module Aws::MTurk
     #
     #   resp = client.reject_assignment({
     #     assignment_id: "EntityId", # required
-    #     requester_feedback: "String",
+    #     requester_feedback: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment AWS API Documentation
@@ -2275,7 +2275,7 @@ module Aws::MTurk
     # @option params [required, String] :assignment_id
     #   The ID of the assignment for which this bonus is paid.
     #
-    # @option params [String] :reason
+    # @option params [required, String] :reason
     #   A message that explains the reason for the bonus payment. The Worker
     #   receiving the bonus can see this message.
     #
@@ -2294,9 +2294,9 @@ module Aws::MTurk
     #
     #   resp = client.send_bonus({
     #     worker_id: "CustomerId", # required
-    #     bonus_amount: "NumericValue", # required
+    #     bonus_amount: "CurrencyAmount", # required
     #     assignment_id: "EntityId", # required
-    #     reason: "String",
+    #     reason: "String", # required
     #     unique_request_token: "IdempotencyToken",
     #   })
     #
@@ -2335,9 +2335,9 @@ module Aws::MTurk
     #   resp = client.send_test_event_notification({
     #     notification: { # required
     #       destination: "String", # required
-    #       transport: "Email", # required, accepts Email, SQS
-    #       version: "String",
-    #       event_types: ["AssignmentAccepted"], # accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
+    #       transport: "Email", # required, accepts Email, SQS, SNS
+    #       version: "String", # required
+    #       event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #     },
     #     test_event_type: "AssignmentAccepted", # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #   })
@@ -2358,7 +2358,7 @@ module Aws::MTurk
     # @option params [required, String] :hit_id
     #   The HIT to update.
     #
-    # @option params [Time,DateTime,Date,Integer,String] :expire_at
+    # @option params [required, Time,DateTime,Date,Integer,String] :expire_at
     #   The date and time at which you want the HIT to expire
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2367,7 +2367,7 @@ module Aws::MTurk
     #
     #   resp = client.update_expiration_for_hit({
     #     hit_id: "EntityId", # required
-    #     expire_at: Time.now,
+    #     expire_at: Time.now, # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT AWS API Documentation
@@ -2478,9 +2478,9 @@ module Aws::MTurk
     #     hit_type_id: "EntityId", # required
     #     notification: {
     #       destination: "String", # required
-    #       transport: "Email", # required, accepts Email, SQS
-    #       version: "String",
-    #       event_types: ["AssignmentAccepted"], # accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
+    #       transport: "Email", # required, accepts Email, SQS, SNS
+    #       version: "String", # required
+    #       event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #     },
     #     active: false,
     #   })
@@ -2637,7 +2637,7 @@ module Aws::MTurk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

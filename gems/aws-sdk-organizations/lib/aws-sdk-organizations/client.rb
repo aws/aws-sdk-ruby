@@ -1746,7 +1746,7 @@ module Aws::Organizations
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to disable a
-    #   policy type. You can get the ID from the ListPolicies operation.
+    #   policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lower-case letters or digits.
@@ -2104,8 +2104,8 @@ module Aws::Organizations
     #
     #   resp = client.invite_account_to_organization({
     #     target: { # required
-    #       id: "HandshakePartyId",
-    #       type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION, EMAIL
+    #       id: "HandshakePartyId", # required
+    #       type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #     },
     #     notes: "HandshakeNotes",
     #   })
@@ -3876,7 +3876,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

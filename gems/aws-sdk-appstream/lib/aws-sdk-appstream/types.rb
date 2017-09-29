@@ -8,18 +8,18 @@
 module Aws::AppStream
   module Types
 
-    # An entry for a single application in the application catalog.
+    # Describes an application in the application catalog.
     #
     # @!attribute [rw] name
-    #   The unique identifier for the application.
+    #   The name of the application.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the application shown to the end users.
+    #   The application name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] icon_url
-    #   The URL for the application icon. This URL may be time-limited.
+    #   The URL for the application icon. This URL might be time-limited.
     #   @return [String]
     #
     # @!attribute [rw] launch_path
@@ -27,11 +27,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] launch_parameters
-    #   A list of arguments that are passed to the application at launch.
+    #   The arguments that are passed to the application at launch.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   If there is a problem, an application can be disabled after image
+    #   If there is a problem, the application can be disabled after image
     #   creation.
     #   @return [Boolean]
     #
@@ -61,11 +61,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet to associate.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack to which the fleet is associated.
+    #   The name of the stack.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetRequest AWS API Documentation
@@ -80,7 +80,7 @@ module Aws::AppStream
     #
     class AssociateFleetResult < Aws::EmptyStructure; end
 
-    # The capacity configuration for the fleet.
+    # Describes the capacity for a fleet.
     #
     # @note When making an API call, you may pass ComputeCapacity
     #   data as a hash:
@@ -100,7 +100,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The capacity information for the fleet.
+    # Describes the capacity status for a fleet.
     #
     # @!attribute [rw] desired
     #   The desired number of streaming instances.
@@ -112,7 +112,7 @@ module Aws::AppStream
     #   @return [Integer]
     #
     # @!attribute [rw] in_use
-    #   The number of instances that are being used for streaming.
+    #   The number of instances in use for streaming.
     #   @return [Integer]
     #
     # @!attribute [rw] available
@@ -143,18 +143,18 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The fully qualified name of the directory, such as corp.example.com
+    #   The fully qualified name of the directory (for example,
+    #   corp.example.com).
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_names
-    #   The list of the distinguished names of organizational units to place
-    #   computer accounts in.
+    #   The distinguished names of the organizational units for computer
+    #   accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The *AccountName* and *AccountPassword* values for the service
-    #   account, which are used by the streaming instance to connect to the
-    #   directory.
+    #   The credentials for the service account used by the streaming
+    #   instance to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest AWS API Documentation
@@ -167,7 +167,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_config
-    #   Directory configuration details.
+    #   Information about the directory configuration.
     #   @return [Types::DirectoryConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigResult AWS API Documentation
@@ -177,8 +177,6 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Contains the parameters for the new fleet to create.
-    #
     # @note When making an API call, you may pass CreateFleetRequest
     #   data as a hash:
     #
@@ -206,11 +204,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   A unique identifier for the fleet.
+    #   A unique name for the fleet.
     #   @return [String]
     #
     # @!attribute [rw] image_name
-    #   Unique name of the image used by the fleet.
+    #   The name of the image used by the fleet.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -262,7 +260,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
-    #   The parameters for the capacity allocated to the fleet.
+    #   The desired capacity for the fleet.
     #   @return [Types::ComputeCapacity]
     #
     # @!attribute [rw] vpc_config
@@ -270,23 +268,23 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time for which a streaming session can run. The input
-    #   can be any numeric value in seconds between 600 and 57600.
+    #   The maximum time that a streaming session can run, in seconds.
+    #   Specify a value between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to their previous session. The
-    #   input can be any numeric value in seconds between 60 and 57600.
+    #   ended, in seconds. If a user who was disconnected reconnects within
+    #   this time interval, the user is connected to their previous session.
+    #   Specify a value between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   The description of the fleet.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of the fleet.
+    #   The fleet name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -294,9 +292,7 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
-    #   values, which are used to join domains for the AppStream 2.0
-    #   streaming instances.
+    #   The information needed for streaming instances to join a domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
@@ -318,13 +314,120 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] fleet
-    #   The details for the created fleet.
+    #   Information about the fleet.
     #   @return [Types::Fleet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetResult AWS API Documentation
     #
     class CreateFleetResult < Struct.new(
       :fleet)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateImageBuilderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         image_name: "String", # required
+    #         instance_type: "String", # required
+    #         description: "Description",
+    #         display_name: "DisplayName",
+    #         vpc_config: {
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #         },
+    #         enable_default_internet_access: false,
+    #         domain_join_info: {
+    #           directory_name: "DirectoryName",
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] image_name
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Describes VPC configuration information.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] enable_default_internet_access
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_join_info
+    #   Contains the information needed for streaming instances to join a
+    #   domain.
+    #   @return [Types::DomainJoinInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
+    #
+    class CreateImageBuilderRequest < Struct.new(
+      :name,
+      :image_name,
+      :instance_type,
+      :description,
+      :display_name,
+      :vpc_config,
+      :enable_default_internet_access,
+      :domain_join_info)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderResult AWS API Documentation
+    #
+    class CreateImageBuilderResult < Struct.new(
+      :image_builder)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateImageBuilderStreamingURLRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         validity: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] validity
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLRequest AWS API Documentation
+    #
+    class CreateImageBuilderStreamingURLRequest < Struct.new(
+      :name,
+      :validity)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_url
+    #   @return [String]
+    #
+    # @!attribute [rw] expires
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLResult AWS API Documentation
+    #
+    class CreateImageBuilderStreamingURLResult < Struct.new(
+      :streaming_url,
+      :expires)
       include Aws::Structure
     end
 
@@ -344,19 +447,19 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   The unique identifier for this stack.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The stack name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] storage_connectors
-    #   The storage connectors to be enabled for the stack.
+    #   The storage connectors to enable.
     #   @return [Array<Types::StorageConnector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
@@ -370,7 +473,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] stack
-    #   The details for the created stack.
+    #   Information about the stack.
     #   @return [Types::Stack]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackResult AWS API Documentation
@@ -393,15 +496,15 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] stack_name
-    #   The stack for which the URL is generated.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] fleet_name
-    #   The fleet for which the URL is generated.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   A unique user ID for whom the URL is generated.
+    #   The ID of the user.
     #   @return [String]
     #
     # @!attribute [rw] application_id
@@ -410,13 +513,12 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] validity
-    #   The duration up to which the URL returned by this action is valid.
-    #   The input can be any numeric value in seconds between 1 and 604800
-    #   seconds.
+    #   The time that the streaming URL will be valid, in seconds. Specify a
+    #   value between 1 and 604800 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] session_context
-    #   The sessionContext of the streaming URL.
+    #   The session context of the streaming URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLRequest AWS API Documentation
@@ -436,7 +538,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   Elapsed seconds after the Unix epoch, when this URL expires.
+    #   The elapsed time, in seconds after the Unix epoch, when this URL
+    #   expires.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLResult AWS API Documentation
@@ -455,7 +558,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The name of the directory configuration to be deleted.
+    #   The name of the directory configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigRequest AWS API Documentation
@@ -477,7 +580,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the fleet to be deleted.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetRequest AWS API Documentation
@@ -491,6 +594,61 @@ module Aws::AppStream
     #
     class DeleteFleetResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteImageBuilderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderRequest AWS API Documentation
+    #
+    class DeleteImageBuilderRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderResult AWS API Documentation
+    #
+    class DeleteImageBuilderResult < Struct.new(
+      :image_builder)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageRequest AWS API Documentation
+    #
+    class DeleteImageRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image
+    #   Describes an image.
+    #   @return [Types::Image]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageResult AWS API Documentation
+    #
+    class DeleteImageResult < Struct.new(
+      :image)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStackRequest
     #   data as a hash:
     #
@@ -499,7 +657,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the stack to delete.
+    #   The name of the stack.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackRequest AWS API Documentation
@@ -523,16 +681,16 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_names
-    #   A specific list of directory names.
+    #   The directory names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The size of each page of results.
+    #   The maximum size of each page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The DescribeDirectoryConfigsResult.NextToken from a previous call to
-    #   DescribeDirectoryConfigs. If this is the first call, pass null.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsRequest AWS API Documentation
@@ -545,13 +703,12 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_configs
-    #   The list of directory configurations.
+    #   Information about the directory configurations.
     #   @return [Array<Types::DirectoryConfig>]
     #
     # @!attribute [rw] next_token
-    #   If not null, more results are available. To retrieve the next set of
-    #   items, pass this value for the NextToken parameter in a subsequent
-    #   call to DescribeDirectoryConfigs.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsResult AWS API Documentation
@@ -571,8 +728,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
-    #   The fleet names to describe. Use null to describe all the fleets for
-    #   the AWS account.
+    #   The names of the fleets to describe.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -589,7 +745,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] fleets
-    #   The list of fleet details.
+    #   Information about the fleets.
     #   @return [Array<Types::Fleet>]
     #
     # @!attribute [rw] next_token
@@ -605,6 +761,47 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeImageBuildersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersRequest AWS API Documentation
+    #
+    class DescribeImageBuildersRequest < Struct.new(
+      :names,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builders
+    #   @return [Array<Types::ImageBuilder>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersResult AWS API Documentation
+    #
+    class DescribeImageBuildersResult < Struct.new(
+      :image_builders,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeImagesRequest
     #   data as a hash:
     #
@@ -613,7 +810,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
-    #   A specific list of images to describe.
+    #   The names of the images to describe.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest AWS API Documentation
@@ -624,7 +821,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] images
-    #   The list of images.
+    #   Information about the images.
     #   @return [Array<Types::Image>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult AWS API Documentation
@@ -647,16 +844,15 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack for which to list sessions.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet for which to list sessions.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The user for whom to list sessions. Use null to describe all the
-    #   sessions for the stack and fleet.
+    #   The user ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -666,14 +862,13 @@ module Aws::AppStream
     #
     # @!attribute [rw] limit
     #   The size of each page of results. The default value is 20 and the
-    #   maximum supported value is 50.
+    #   maximum value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] authentication_type
-    #   The authentication method of the user. It can be `API` for a user
-    #   authenticated using a streaming URL, or `SAML` for a SAML federated
-    #   user. If an authentication type is not provided, the operation
-    #   defaults to users authenticated using a streaming URL.
+    #   The authentication method. Specify `API` for a user authenticated
+    #   using a streaming URL or `SAML` for a SAML federated user. The
+    #   default is to authenticate users using a streaming URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
@@ -689,7 +884,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] sessions
-    #   The list of streaming sessions.
+    #   Information about the streaming sessions.
     #   @return [Array<Types::Session>]
     #
     # @!attribute [rw] next_token
@@ -714,8 +909,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
-    #   The stack names to describe. Use null to describe all the stacks for
-    #   the AWS account.
+    #   The names of the stacks to describe.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -732,7 +926,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] stacks
-    #   The list of stack details.
+    #   Information about the stacks.
     #   @return [Array<Types::Stack>]
     #
     # @!attribute [rw] next_token
@@ -748,26 +942,25 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Full directory configuration details, which are used to join domains
-    # for the AppStream 2.0 streaming instances.
+    # Configuration information for the directory used to join domains.
     #
     # @!attribute [rw] directory_name
-    #   The fully qualified name of the directory, such as corp.example.com
+    #   The fully qualified name of the directory (for example,
+    #   corp.example.com).
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_names
-    #   The list of the distinguished names of organizational units in which
-    #   to place computer accounts.
+    #   The distinguished names of the organizational units for computer
+    #   accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The *AccountName* and *AccountPassword* of the service account, to
-    #   be used by the streaming instance to connect to the directory.
+    #   The credentials for the service account used by the streaming
+    #   instance to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @!attribute [rw] created_time
-    #   The time stamp when the directory configuration was created within
-    #   AppStream 2.0.
+    #   The time the directory configuration was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig AWS API Documentation
@@ -789,11 +982,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet to disassociate.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack with which the fleet is associated.
+    #   The name of the stack.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetRequest AWS API Documentation
@@ -808,9 +1001,8 @@ module Aws::AppStream
     #
     class DisassociateFleetResult < Aws::EmptyStructure; end
 
-    # The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
-    # which are used to join domains for the AppStream 2.0 streaming
-    # instances.
+    # Contains the information needed for streaming instances to join a
+    # domain.
     #
     # @note When making an API call, you may pass DomainJoinInfo
     #   data as a hash:
@@ -821,12 +1013,13 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The fully qualified name of the directory, such as corp.example.com
+    #   The fully qualified name of the directory (for example,
+    #   corp.example.com).
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_name
-    #   The distinguished name of the organizational unit to place the
-    #   computer account in.
+    #   The distinguished name of the organizational unit for computer
+    #   accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DomainJoinInfo AWS API Documentation
@@ -845,7 +1038,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] session_id
-    #   The unique identifier of the streaming session to be stopped.
+    #   The ID of the streaming session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionRequest AWS API Documentation
@@ -870,11 +1063,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The fleet name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -889,19 +1082,19 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity_status
-    #   The capacity information for the fleet.
+    #   The capacity status for the fleet.
     #   @return [Types::ComputeCapacityStatus]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time for which a streaming session can run. The value
-    #   can be any numeric value in seconds between 600 and 57600.
+    #   The maximum time that a streaming session can run, in seconds.
+    #   Specify a value between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to their previous session. The
-    #   input can be any numeric value in seconds between 60 and 57600.
+    #   ended, in seconds. If a user who was disconnected reconnects within
+    #   this time interval, the user is connected to their previous session.
+    #   Specify a value between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -913,21 +1106,19 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] created_time
-    #   The time at which the fleet was created.
+    #   The time the fleet was created.
     #   @return [Time]
     #
     # @!attribute [rw] fleet_errors
-    #   The list of fleet errors is appended to this list.
+    #   The fleet errors.
     #   @return [Array<Types::FleetError>]
     #
     # @!attribute [rw] enable_default_internet_access
-    #   Whether default internet access is enabled for the fleet.
+    #   Indicates whether default internet access is enabled for the fleet.
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
-    #   values, which are used to join domains for the AppStream 2.0
-    #   streaming instances.
+    #   The information needed for streaming instances to join a domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
@@ -952,14 +1143,14 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The details of the fleet error.
+    # Describes a fleet error.
     #
     # @!attribute [rw] error_code
-    #   The error code for the fleet error.
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message generated when the fleet has errors.
+    #   The error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/FleetError AWS API Documentation
@@ -970,38 +1161,36 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # New streaming instances are booted from images. The image stores the
-    # application catalog and is connected to fleets.
+    # Describes an image.
     #
     # @!attribute [rw] name
-    #   The unique identifier for the image.
+    #   The name of the image.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN for the image.
+    #   The ARN of the image.
     #   @return [String]
     #
     # @!attribute [rw] base_image_arn
-    #   The source image ARN from which this image was created.
+    #   The ARN of the image from which this image was created.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name for the image.
+    #   The image name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The image starts in the **PENDING** state. If image creation
-    #   succeeds, it moves to **AVAILABLE**. If image creation fails, it
-    #   moves to **FAILED**.
+    #   The image starts in the `PENDING` state. If image creation succeeds,
+    #   the state is `AVAILABLE`. If image creation fails, the state is
+    #   `FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] visibility
-    #   The visibility of an image to the user; images can be public or
-    #   private.
+    #   Indicates whether the image is public or private.
     #   @return [String]
     #
     # @!attribute [rw] image_builder_supported
-    #   Whether an image builder can be launched from this image.
+    #   Indicates whether an image builder can be launched from this image.
     #   @return [Boolean]
     #
     # @!attribute [rw] platform
@@ -1009,7 +1198,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A meaningful description for the image.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -1017,17 +1206,17 @@ module Aws::AppStream
     #   @return [Types::ImageStateChangeReason]
     #
     # @!attribute [rw] applications
-    #   The applications associated with an image.
+    #   The applications associated with the image.
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] created_time
-    #   The time stamp when the image was created.
+    #   The time the image was created.
     #   @return [Time]
     #
     # @!attribute [rw] public_base_image_released_date
-    #   The AWS release date of the public base image. For private images,
-    #   this date is the release date of the base image from which the image
-    #   was created.
+    #   The release date of the public base image. For private images, this
+    #   date is the release date of the base image from which the image was
+    #   created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
@@ -1049,14 +1238,93 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The reason why the last state change occurred.
+    # @!attribute [rw] name
+    #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Describes VPC configuration information.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] instance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_reason
+    #   @return [Types::ImageBuilderStateChangeReason]
+    #
+    # @!attribute [rw] created_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] enable_default_internet_access
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_join_info
+    #   Contains the information needed for streaming instances to join a
+    #   domain.
+    #   @return [Types::DomainJoinInfo]
+    #
+    # @!attribute [rw] image_builder_errors
+    #   @return [Array<Types::ResourceError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
+    #
+    class ImageBuilder < Struct.new(
+      :name,
+      :arn,
+      :image_arn,
+      :description,
+      :display_name,
+      :vpc_config,
+      :instance_type,
+      :platform,
+      :state,
+      :state_change_reason,
+      :created_time,
+      :enable_default_internet_access,
+      :domain_join_info,
+      :image_builder_errors)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] code
-    #   The state change reason code of the image.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The state change reason message to the end user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderStateChangeReason AWS API Documentation
+    #
+    class ImageBuilderStateChangeReason < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes the reason why the last state change occurred.
+    #
+    # @!attribute [rw] code
+    #   The state change reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The state change reason message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageStateChangeReason AWS API Documentation
@@ -1076,7 +1344,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack whose associated fleets are listed.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1092,10 +1360,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The response from a successful operation.
-    #
     # @!attribute [rw] names
-    #   The names of associated fleets.
+    #   The names of the fleets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1120,7 +1386,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet whose associated stacks are listed.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1136,10 +1402,8 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The response from a successful operation.
-    #
     # @!attribute [rw] names
-    #   The names of associated stacks.
+    #   The names of the stacks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1155,8 +1419,26 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The *AccountName* and *AccountPassword* of the service account, to be
-    # used by the streaming instance to connect to the directory.
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] error_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceError AWS API Documentation
+    #
+    class ResourceError < Struct.new(
+      :error_code,
+      :error_message,
+      :error_timestamp)
+      include Aws::Structure
+    end
+
+    # Describes the credentials for the service account used by the
+    # streaming instance to connect to the directory.
     #
     # @note When making an API call, you may pass ServiceAccountCredentials
     #   data as a hash:
@@ -1167,15 +1449,14 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] account_name
-    #   The user name of an account in the directory that is used by
-    #   AppStream 2.0 streaming instances to connect to the directory. This
-    #   account must have the following privileges: create computer objects,
-    #   join computers to the domain, change/reset the password on
-    #   descendant computer objects for the organizational units specified.
+    #   The user name of the account. This account must have the following
+    #   privileges: create computer objects, join computers to the domain,
+    #   and change/reset the password on descendant computer objects for the
+    #   organizational units specified.
     #   @return [String]
     #
     # @!attribute [rw] account_password
-    #   The password for the user account for directory actions.
+    #   The password for the account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ServiceAccountCredentials AWS API Documentation
@@ -1186,10 +1467,10 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Contains the parameters for a streaming session.
+    # Describes a streaming session.
     #
     # @!attribute [rw] id
-    #   The unique ID for a streaming session.
+    #   The ID of the streaming session.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1197,11 +1478,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack for which the streaming session was created.
+    #   The name of the stack for the streaming session.
     #   @return [String]
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet for which the streaming session was created.
+    #   The name of the fleet for the streaming session.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1209,9 +1490,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] authentication_type
-    #   The authentication method of the user for whom the session was
-    #   created. It can be `API` for a user authenticated using a streaming
-    #   URL or `SAML` for a SAML federated user.
+    #   The authentication method. The user is authenticated using a
+    #   streaming URL (`API`) or SAML federation (`SAML`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
@@ -1226,34 +1506,34 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Details about a stack.
+    # Describes a stack.
     #
     # @!attribute [rw] arn
     #   The ARN of the stack.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The unique identifier of the stack.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A meaningful description for the stack.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   A display name for the stack.
+    #   The stack name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time stamp when the stack was created.
+    #   The time the stack was created.
     #   @return [Time]
     #
     # @!attribute [rw] storage_connectors
-    #   The storage connectors to be enabled for the stack.
+    #   The storage connectors to enable.
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] stack_errors
-    #   The list of errors associated with the stack.
+    #   The errors for the stack.
     #   @return [Array<Types::StackError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
@@ -1269,14 +1549,14 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Contains the parameters for a stack error.
+    # Describes a stack error.
     #
     # @!attribute [rw] error_code
-    #   The error code of a stack error.
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message of a stack error.
+    #   The error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StackError AWS API Documentation
@@ -1295,7 +1575,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the fleet to start.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetRequest AWS API Documentation
@@ -1309,6 +1589,33 @@ module Aws::AppStream
     #
     class StartFleetResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass StartImageBuilderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderRequest AWS API Documentation
+    #
+    class StartImageBuilderRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderResult AWS API Documentation
+    #
+    class StartImageBuilderResult < Struct.new(
+      :image_builder)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopFleetRequest
     #   data as a hash:
     #
@@ -1317,7 +1624,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the fleet to stop.
+    #   The name of the fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetRequest AWS API Documentation
@@ -1331,7 +1638,34 @@ module Aws::AppStream
     #
     class StopFleetResult < Aws::EmptyStructure; end
 
-    # Contains the parameters for a storage connector.
+    # @note When making an API call, you may pass StopImageBuilderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderRequest AWS API Documentation
+    #
+    class StopImageBuilderRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderResult AWS API Documentation
+    #
+    class StopImageBuilderResult < Struct.new(
+      :image_builder)
+      include Aws::Structure
+    end
+
+    # Describes a storage connector.
     #
     # @note When making an API call, you may pass StorageConnector
     #   data as a hash:
@@ -1342,12 +1676,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] connector_type
-    #   The type of storage connector. The possible values include:
-    #   HOMEFOLDERS.
+    #   The type of storage connector.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   The ARN associated with the storage connector.
+    #   The ARN of the storage connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
@@ -1371,18 +1704,17 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The name of the existing directory configuration to be updated.
+    #   The name of the directory configuration.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_names
-    #   The list of the distinguished names of organizational units to place
-    #   computer accounts in.
+    #   The distinguished names of the organizational units for computer
+    #   accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_account_credentials
-    #   The *AccountName* and *AccountPassword* values for the service
-    #   account, which are used by the streaming instance to connect to the
-    #   directory
+    #   The credentials for the service account used by the streaming
+    #   instance to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigRequest AWS API Documentation
@@ -1395,7 +1727,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_config
-    #   The updated directory configuration details.
+    #   Information about the directory configuration.
     #   @return [Types::DirectoryConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigResult AWS API Documentation
@@ -1433,11 +1765,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] image_name
-    #   The image name from which a fleet is created.
+    #   The name of the image used by the fleet.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the fleet.
+    #   A unique name for the fleet.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -1486,7 +1818,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
-    #   The parameters for the capacity allocated to the fleet.
+    #   The desired capacity for the fleet.
     #   @return [Types::ComputeCapacity]
     #
     # @!attribute [rw] vpc_config
@@ -1494,27 +1826,27 @@ module Aws::AppStream
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] max_user_duration_in_seconds
-    #   The maximum time for which a streaming session can run. The input
-    #   can be any numeric value in seconds between 600 and 57600.
+    #   The maximum time that a streaming session can run, in seconds.
+    #   Specify a value between 600 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to their previous session. The
-    #   input can be any numeric value in seconds between 60 and 57600.
+    #   ended, in seconds. If a user who was disconnected reconnects within
+    #   this time interval, the user is connected to their previous session.
+    #   Specify a value between 60 and 57600.
     #   @return [Integer]
     #
     # @!attribute [rw] delete_vpc_config
-    #   Delete the VPC association for the specified fleet.
+    #   Deletes the VPC association for the specified fleet.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The fleet name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -1522,13 +1854,11 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName*
-    #   values, which are used to join domains for the AppStream 2.0
-    #   streaming instances.
+    #   The information needed for streaming instances to join a domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] attributes_to_delete
-    #   Fleet attributes to be deleted.
+    #   The fleet attributes to delete.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
@@ -1551,7 +1881,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] fleet
-    #   A list of fleet details.
+    #   Information about the fleet.
     #   @return [Types::Fleet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetResult AWS API Documentation
@@ -1578,23 +1908,23 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The stack name displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the stack to update.
+    #   The name of the stack.
     #   @return [String]
     #
     # @!attribute [rw] storage_connectors
-    #   The storage connectors to be enabled for the stack.
+    #   The storage connectors to enable.
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] delete_storage_connectors
-    #   Remove all the storage connectors currently enabled for the stack.
+    #   Deletes the storage connectors currently enabled for the stack.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
@@ -1609,7 +1939,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] stack
-    #   A list of stack details.
+    #   Information about the stack.
     #   @return [Types::Stack]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackResult AWS API Documentation
@@ -1619,7 +1949,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # VPC configuration information.
+    # Describes VPC configuration information.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:
@@ -1630,12 +1960,12 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   The list of subnets to which a network interface is established from
-    #   the fleet instance.
+    #   The subnets to which a network interface is established from the
+    #   fleet instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   Security groups associated with the fleet.
+    #   The security groups for the fleet.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig AWS API Documentation

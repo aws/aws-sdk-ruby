@@ -560,6 +560,7 @@ module Aws::CodeBuild
     #   resp.projects[0].tags[0].value #=> String
     #   resp.projects[0].created #=> Time
     #   resp.projects[0].last_modified #=> Time
+    #   resp.projects[0].webhook.url #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -694,6 +695,7 @@ module Aws::CodeBuild
     #   resp.project.tags[0].value #=> String
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
+    #   resp.project.webhook.url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -701,6 +703,51 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def create_project(params = {}, options = {})
       req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
+    # For an existing AWS CodeBuild build project that has its source code
+    # stored in a GitHub repository, enables AWS CodeBuild to begin
+    # automatically rebuilding the source code every time a code change is
+    # pushed to the repository.
+    #
+    # If you enable webhooks for an AWS CodeBuild project, and the project
+    # is used as a build step in AWS CodePipeline, then two identical builds
+    # will be created for each commit. One build is triggered through
+    # webhooks, and one through AWS CodePipeline. Because billing is on a
+    # per-build basis, you will be billed for both builds. Therefore, if you
+    # are using AWS CodePipeline, we recommend that you disable webhooks in
+    # CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For
+    # more information, see step 9 in [Change a Build Project’s
+    # Settings][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
+    #
+    # @option params [required, String] :project_name
+    #   The name of the build project.
+    #
+    # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWebhookOutput#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_webhook({
+    #     project_name: "ProjectName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
+    #
+    # @overload create_webhook(params = {})
+    # @param [Hash] params ({})
+    def create_webhook(params = {}, options = {})
+      req = build_request(:create_webhook, params)
       req.send_request(options)
     end
 
@@ -723,6 +770,31 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
       req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # For an existing AWS CodeBuild build project that has its source code
+    # stored in a GitHub repository, stops AWS CodeBuild from automatically
+    # rebuilding the source code every time a code change is pushed to the
+    # repository.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the build project.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_webhook({
+    #     project_name: "ProjectName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook AWS API Documentation
+    #
+    # @overload delete_webhook(params = {})
+    # @param [Hash] params ({})
+    def delete_webhook(params = {}, options = {})
+      req = build_request(:delete_webhook, params)
       req.send_request(options)
     end
 
@@ -1233,6 +1305,7 @@ module Aws::CodeBuild
     #   resp.project.tags[0].value #=> String
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
+    #   resp.project.webhook.url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -1256,7 +1329,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

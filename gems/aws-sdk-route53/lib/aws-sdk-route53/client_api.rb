@@ -230,6 +230,8 @@ module Aws::Route53
     RecordData = Shapes::ListShape.new(name: 'RecordData')
     RecordDataEntry = Shapes::StringShape.new(name: 'RecordDataEntry')
     RequestInterval = Shapes::IntegerShape.new(name: 'RequestInterval')
+    ResettableElementName = Shapes::StringShape.new(name: 'ResettableElementName')
+    ResettableElementNameList = Shapes::ListShape.new(name: 'ResettableElementNameList')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourcePath = Shapes::StringShape.new(name: 'ResourcePath')
@@ -835,6 +837,8 @@ module Aws::Route53
 
     RecordData.member = Shapes::ShapeRef.new(shape: RecordDataEntry, location_name: "RecordDataEntry")
 
+    ResettableElementNameList.member = Shapes::ShapeRef.new(shape: ResettableElementName, location_name: "ResettableElementName")
+
     ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: RData, required: true, location_name: "Value"))
     ResourceRecord.struct_class = Types::ResourceRecord
 
@@ -941,6 +945,7 @@ module Aws::Route53
     UpdateHealthCheckRequest.add_member(:regions, Shapes::ShapeRef.new(shape: HealthCheckRegionList, location_name: "Regions"))
     UpdateHealthCheckRequest.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: AlarmIdentifier, location_name: "AlarmIdentifier"))
     UpdateHealthCheckRequest.add_member(:insufficient_data_health_status, Shapes::ShapeRef.new(shape: InsufficientDataHealthStatus, location_name: "InsufficientDataHealthStatus"))
+    UpdateHealthCheckRequest.add_member(:reset_elements, Shapes::ShapeRef.new(shape: ResettableElementNameList, location_name: "ResetElements"))
     UpdateHealthCheckRequest.struct_class = Types::UpdateHealthCheckRequest
 
     UpdateHealthCheckResponse.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, required: true, location_name: "HealthCheck"))

@@ -218,7 +218,7 @@ module Aws::MTurk
     #   @return [String]
     #
     # @!attribute [rw] bonus_amount
-    #   A string representing a numeric value.
+    #   A string representing a currency amount.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
@@ -249,7 +249,7 @@ module Aws::MTurk
     #
     #       {
     #         hit_id: "EntityId", # required
-    #         number_of_additional_assignments: 1,
+    #         number_of_additional_assignments: 1, # required
     #         unique_request_token: "IdempotencyToken",
     #       }
     #
@@ -292,7 +292,7 @@ module Aws::MTurk
     #         auto_approval_delay_in_seconds: 1,
     #         lifetime_in_seconds: 1, # required
     #         assignment_duration_in_seconds: 1, # required
-    #         reward: "NumericValue", # required
+    #         reward: "CurrencyAmount", # required
     #         title: "String", # required
     #         keywords: "String",
     #         description: "String", # required
@@ -314,7 +314,7 @@ module Aws::MTurk
     #         ],
     #         unique_request_token: "IdempotencyToken",
     #         assignment_review_policy: {
-    #           policy_name: "String",
+    #           policy_name: "String", # required
     #           parameters: [
     #             {
     #               key: "String",
@@ -329,7 +329,7 @@ module Aws::MTurk
     #           ],
     #         },
     #         hit_review_policy: {
-    #           policy_name: "String",
+    #           policy_name: "String", # required
     #           parameters: [
     #             {
     #               key: "String",
@@ -346,8 +346,8 @@ module Aws::MTurk
     #         hit_layout_id: "EntityId",
     #         hit_layout_parameters: [
     #           {
-    #             name: "String",
-    #             value: "String",
+    #             name: "String", # required
+    #             value: "String", # required
     #           },
     #         ],
     #       }
@@ -520,7 +520,7 @@ module Aws::MTurk
     #       {
     #         auto_approval_delay_in_seconds: 1,
     #         assignment_duration_in_seconds: 1, # required
-    #         reward: "NumericValue", # required
+    #         reward: "CurrencyAmount", # required
     #         title: "String", # required
     #         keywords: "String",
     #         description: "String", # required
@@ -621,7 +621,7 @@ module Aws::MTurk
     #         requester_annotation: "String",
     #         unique_request_token: "IdempotencyToken",
     #         assignment_review_policy: {
-    #           policy_name: "String",
+    #           policy_name: "String", # required
     #           parameters: [
     #             {
     #               key: "String",
@@ -636,7 +636,7 @@ module Aws::MTurk
     #           ],
     #         },
     #         hit_review_policy: {
-    #           policy_name: "String",
+    #           policy_name: "String", # required
     #           parameters: [
     #             {
     #               key: "String",
@@ -653,8 +653,8 @@ module Aws::MTurk
     #         hit_layout_id: "EntityId",
     #         hit_layout_parameters: [
     #           {
-    #             name: "String",
-    #             value: "String",
+    #             name: "String", # required
+    #             value: "String", # required
     #           },
     #         ],
     #       }
@@ -1043,11 +1043,11 @@ module Aws::MTurk
     class GetAccountBalanceRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] available_balance
-    #   A string representing a numeric value.
+    #   A string representing a currency amount.
     #   @return [String]
     #
     # @!attribute [rw] on_hold_balance
-    #   A string representing a numeric value.
+    #   A string representing a currency amount.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalanceResponse AWS API Documentation
@@ -1279,7 +1279,7 @@ module Aws::MTurk
     #   @return [Integer]
     #
     # @!attribute [rw] reward
-    #   A string representing a numeric value.
+    #   A string representing a currency amount.
     #   @return [String]
     #
     # @!attribute [rw] auto_approval_delay_in_seconds
@@ -1368,8 +1368,8 @@ module Aws::MTurk
     #   data as a hash:
     #
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "String", # required
+    #         value: "String", # required
     #       }
     #
     # @!attribute [rw] name
@@ -2070,21 +2070,25 @@ module Aws::MTurk
     #
     #       {
     #         destination: "String", # required
-    #         transport: "Email", # required, accepts Email, SQS
-    #         version: "String",
-    #         event_types: ["AssignmentAccepted"], # accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
+    #         transport: "Email", # required, accepts Email, SQS, SNS
+    #         version: "String", # required
+    #         event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #       }
     #
     # @!attribute [rw] destination
-    #   The destination for notification messages. or email notifications
-    #   (if Transport is Email), this is an email address. For Amazon Simple
-    #   Queue Service (Amazon SQS) notifications (if Transport is SQS), this
-    #   is the URL for your Amazon SQS queue.
+    #   The target for notification messages. The Destination’s format is
+    #   determined by the specified Transport:
+    #
+    #   * When Transport is Email, the Destination is your email address.
+    #
+    #   * When Transport is SQS, the Destination is your queue URL.
+    #
+    #   * When Transport is SNS, the Destination is the ARN of your topic.
     #   @return [String]
     #
     # @!attribute [rw] transport
     #   The method Amazon Mechanical Turk uses to send the notification.
-    #   Valid Values: Email \| SQS.
+    #   Valid Values: Email \| SQS \| SNS.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2538,7 +2542,7 @@ module Aws::MTurk
     #
     #       {
     #         assignment_id: "EntityId", # required
-    #         requester_feedback: "String",
+    #         requester_feedback: "String", # required
     #       }
     #
     # @!attribute [rw] assignment_id
@@ -2654,7 +2658,7 @@ module Aws::MTurk
     #   data as a hash:
     #
     #       {
-    #         policy_name: "String",
+    #         policy_name: "String", # required
     #         parameters: [
     #           {
     #             key: "String",
@@ -2760,9 +2764,9 @@ module Aws::MTurk
     #
     #       {
     #         worker_id: "CustomerId", # required
-    #         bonus_amount: "NumericValue", # required
+    #         bonus_amount: "CurrencyAmount", # required
     #         assignment_id: "EntityId", # required
-    #         reason: "String",
+    #         reason: "String", # required
     #         unique_request_token: "IdempotencyToken",
     #       }
     #
@@ -2816,9 +2820,9 @@ module Aws::MTurk
     #       {
     #         notification: { # required
     #           destination: "String", # required
-    #           transport: "Email", # required, accepts Email, SQS
-    #           version: "String",
-    #           event_types: ["AssignmentAccepted"], # accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
+    #           transport: "Email", # required, accepts Email, SQS, SNS
+    #           version: "String", # required
+    #           event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #         },
     #         test_event_type: "AssignmentAccepted", # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #       }
@@ -2854,7 +2858,7 @@ module Aws::MTurk
     #
     #       {
     #         hit_id: "EntityId", # required
-    #         expire_at: Time.now,
+    #         expire_at: Time.now, # required
     #       }
     #
     # @!attribute [rw] hit_id
@@ -2946,9 +2950,9 @@ module Aws::MTurk
     #         hit_type_id: "EntityId", # required
     #         notification: {
     #           destination: "String", # required
-    #           transport: "Email", # required, accepts Email, SQS
-    #           version: "String",
-    #           event_types: ["AssignmentAccepted"], # accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
+    #           transport: "Email", # required, accepts Email, SQS, SNS
+    #           version: "String", # required
+    #           event_types: ["AssignmentAccepted"], # required, accepts AssignmentAccepted, AssignmentAbandoned, AssignmentReturned, AssignmentSubmitted, AssignmentRejected, AssignmentApproved, HITCreated, HITExpired, HITReviewable, HITExtended, HITDisposed, Ping
     #         },
     #         active: false,
     #       }

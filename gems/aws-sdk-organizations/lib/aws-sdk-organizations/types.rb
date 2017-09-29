@@ -947,7 +947,7 @@ module Aws::Organizations
     #
     # @!attribute [rw] root_id
     #   The unique identifier (ID) of the root in which you want to disable
-    #   a policy type. You can get the ID from the ListPolicies operation.
+    #   a policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lower-case letters or digits.
@@ -1191,8 +1191,8 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         id: "HandshakePartyId",
-    #         type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION, EMAIL
+    #         id: "HandshakePartyId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #       }
     #
     # @!attribute [rw] id
@@ -1266,8 +1266,8 @@ module Aws::Organizations
     #
     #       {
     #         target: { # required
-    #           id: "HandshakePartyId",
-    #           type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION, EMAIL
+    #           id: "HandshakePartyId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #         },
     #         notes: "HandshakeNotes",
     #       }

@@ -358,8 +358,8 @@ module Aws::Organizations
 
     HandshakeParties.member = Shapes::ShapeRef.new(shape: HandshakeParty)
 
-    HandshakeParty.add_member(:id, Shapes::ShapeRef.new(shape: HandshakePartyId, location_name: "Id"))
-    HandshakeParty.add_member(:type, Shapes::ShapeRef.new(shape: HandshakePartyType, location_name: "Type"))
+    HandshakeParty.add_member(:id, Shapes::ShapeRef.new(shape: HandshakePartyId, required: true, location_name: "Id"))
+    HandshakeParty.add_member(:type, Shapes::ShapeRef.new(shape: HandshakePartyType, required: true, location_name: "Type"))
     HandshakeParty.struct_class = Types::HandshakeParty
 
     HandshakeResource.add_member(:value, Shapes::ShapeRef.new(shape: HandshakeResourceValue, location_name: "Value"))

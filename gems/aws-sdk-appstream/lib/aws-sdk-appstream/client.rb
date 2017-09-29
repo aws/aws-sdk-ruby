@@ -155,13 +155,13 @@ module Aws::AppStream
 
     # @!group API Operations
 
-    # Associate a fleet to a stack.
+    # Associates the specified fleet with the specified stack.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet to associate.
+    #   The name of the fleet.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack to which the fleet is associated.
+    #   The name of the stack.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -181,19 +181,19 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a directory configuration with the given parameters.
+    # Creates a directory configuration.
     #
     # @option params [required, String] :directory_name
-    #   The fully qualified name of the directory, such as corp.example.com
+    #   The fully qualified name of the directory (for example,
+    #   corp.example.com).
     #
     # @option params [required, Array<String>] :organizational_unit_distinguished_names
-    #   The list of the distinguished names of organizational units to place
-    #   computer accounts in.
+    #   The distinguished names of the organizational units for computer
+    #   accounts.
     #
     # @option params [required, Types::ServiceAccountCredentials] :service_account_credentials
-    #   The *AccountName* and *AccountPassword* values for the service
-    #   account, which are used by the streaming instance to connect to the
-    #   directory.
+    #   The credentials for the service account used by the streaming instance
+    #   to connect to the directory.
     #
     # @return [Types::CreateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -228,13 +228,13 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a new fleet.
+    # Creates a fleet.
     #
     # @option params [required, String] :name
-    #   A unique identifier for the fleet.
+    #   A unique name for the fleet.
     #
     # @option params [required, String] :image_name
-    #   Unique name of the image used by the fleet.
+    #   The name of the image used by the fleet.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching fleet instances. The following
@@ -283,34 +283,32 @@ module Aws::AppStream
     # @option params [String] :fleet_type
     #
     # @option params [required, Types::ComputeCapacity] :compute_capacity
-    #   The parameters for the capacity allocated to the fleet.
+    #   The desired capacity for the fleet.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time for which a streaming session can run. The input can
-    #   be any numeric value in seconds between 600 and 57600.
+    #   The maximum time that a streaming session can run, in seconds. Specify
+    #   a value between 600 and 57600.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to their previous session. The
-    #   input can be any numeric value in seconds between 60 and 57600.
+    #   ended, in seconds. If a user who was disconnected reconnects within
+    #   this time interval, the user is connected to their previous session.
+    #   Specify a value between 60 and 57600.
     #
     # @option params [String] :description
-    #   The description of the fleet.
+    #   The description displayed to end users.
     #
     # @option params [String] :display_name
-    #   The display name of the fleet.
+    #   The fleet name displayed to end users.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
-    #   which are used to join domains for the AppStream 2.0 streaming
-    #   instances.
+    #   The information needed for streaming instances to join a domain.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -378,19 +376,125 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Create a new stack.
-    #
     # @option params [required, String] :name
-    #   The unique identifier for this stack.
+    #
+    # @option params [required, String] :image_name
+    #
+    # @option params [required, String] :instance_type
     #
     # @option params [String] :description
-    #   The description displayed to end users on the AppStream 2.0 portal.
     #
     # @option params [String] :display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Describes VPC configuration information.
+    #
+    # @option params [Boolean] :enable_default_internet_access
+    #
+    # @option params [Types::DomainJoinInfo] :domain_join_info
+    #   Contains the information needed for streaming instances to join a
+    #   domain.
+    #
+    # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_image_builder({
+    #     name: "Name", # required
+    #     image_name: "String", # required
+    #     instance_type: "String", # required
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     vpc_config: {
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #     enable_default_internet_access: false,
+    #     domain_join_info: {
+    #       directory_name: "DirectoryName",
+    #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builder.name #=> String
+    #   resp.image_builder.arn #=> String
+    #   resp.image_builder.image_arn #=> String
+    #   resp.image_builder.description #=> String
+    #   resp.image_builder.display_name #=> String
+    #   resp.image_builder.vpc_config.subnet_ids #=> Array
+    #   resp.image_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builder.vpc_config.security_group_ids #=> Array
+    #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builder.instance_type #=> String
+    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builder.state_change_reason.message #=> String
+    #   resp.image_builder.created_time #=> Time
+    #   resp.image_builder.enable_default_internet_access #=> Boolean
+    #   resp.image_builder.domain_join_info.directory_name #=> String
+    #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.image_builder_errors #=> Array
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_message #=> String
+    #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
+    #
+    # @overload create_image_builder(params = {})
+    # @param [Hash] params ({})
+    def create_image_builder(params = {}, options = {})
+      req = build_request(:create_image_builder, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [Integer] :validity
+    #
+    # @return [Types::CreateImageBuilderStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImageBuilderStreamingURLResult#streaming_url #streaming_url} => String
+    #   * {Types::CreateImageBuilderStreamingURLResult#expires #expires} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_image_builder_streaming_url({
+    #     name: "String", # required
+    #     validity: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_url #=> String
+    #   resp.expires #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURL AWS API Documentation
+    #
+    # @overload create_image_builder_streaming_url(params = {})
+    # @param [Hash] params ({})
+    def create_image_builder_streaming_url(params = {}, options = {})
+      req = build_request(:create_image_builder_streaming_url, params)
+      req.send_request(options)
+    end
+
+    # Creates a stack.
+    #
+    # @option params [required, String] :name
+    #   The name of the stack.
+    #
+    # @option params [String] :description
+    #   The description displayed to end users.
+    #
+    # @option params [String] :display_name
+    #   The stack name displayed to end users.
     #
     # @option params [Array<Types::StorageConnector>] :storage_connectors
-    #   The storage connectors to be enabled for the stack.
+    #   The storage connectors to enable.
     #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -433,30 +537,30 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a URL to start an AppStream 2.0 streaming session for a user.
-    # By default, the URL is valid only for 1 minute from the time that it
+    # Creates a URL to start a streaming session for the specified user.
+    #
+    # By default, the URL is valid only for one minute from the time that it
     # is generated.
     #
     # @option params [required, String] :stack_name
-    #   The stack for which the URL is generated.
+    #   The name of the stack.
     #
     # @option params [required, String] :fleet_name
-    #   The fleet for which the URL is generated.
+    #   The name of the fleet.
     #
     # @option params [required, String] :user_id
-    #   A unique user ID for whom the URL is generated.
+    #   The ID of the user.
     #
     # @option params [String] :application_id
     #   The ID of the application that must be launched after the session
     #   starts.
     #
     # @option params [Integer] :validity
-    #   The duration up to which the URL returned by this action is valid. The
-    #   input can be any numeric value in seconds between 1 and 604800
-    #   seconds.
+    #   The time that the streaming URL will be valid, in seconds. Specify a
+    #   value between 1 and 604800 seconds.
     #
     # @option params [String] :session_context
-    #   The sessionContext of the streaming URL.
+    #   The session context of the streaming URL.
     #
     # @return [Types::CreateStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -488,10 +592,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the directory configuration with the given parameters.
+    # Deletes the specified directory configuration.
     #
     # @option params [required, String] :directory_name
-    #   The name of the directory configuration to be deleted.
+    #   The name of the directory configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -510,10 +614,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes a fleet.
+    # Deletes the specified fleet.
     #
     # @option params [required, String] :name
-    #   The name of the fleet to be deleted.
+    #   The name of the fleet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -532,12 +636,104 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the stack. After this operation completes, the environment can
-    # no longer be activated, and any reservations made for the stack are
-    # released.
+    # @option params [required, String] :name
+    #
+    # @return [Types::DeleteImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteImageResult#image #image} => Types::Image
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image({
+    #     name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image.name #=> String
+    #   resp.image.arn #=> String
+    #   resp.image.base_image_arn #=> String
+    #   resp.image.display_name #=> String
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
+    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.image.image_builder_supported #=> Boolean
+    #   resp.image.platform #=> String, one of "WINDOWS"
+    #   resp.image.description #=> String
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
+    #   resp.image.state_change_reason.message #=> String
+    #   resp.image.applications #=> Array
+    #   resp.image.applications[0].name #=> String
+    #   resp.image.applications[0].display_name #=> String
+    #   resp.image.applications[0].icon_url #=> String
+    #   resp.image.applications[0].launch_path #=> String
+    #   resp.image.applications[0].launch_parameters #=> String
+    #   resp.image.applications[0].enabled #=> Boolean
+    #   resp.image.applications[0].metadata #=> Hash
+    #   resp.image.applications[0].metadata["String"] #=> String
+    #   resp.image.created_time #=> Time
+    #   resp.image.public_base_image_released_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
+    #
+    # @overload delete_image(params = {})
+    # @param [Hash] params ({})
+    def delete_image(params = {}, options = {})
+      req = build_request(:delete_image, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @return [Types::DeleteImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image_builder({
+    #     name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builder.name #=> String
+    #   resp.image_builder.arn #=> String
+    #   resp.image_builder.image_arn #=> String
+    #   resp.image_builder.description #=> String
+    #   resp.image_builder.display_name #=> String
+    #   resp.image_builder.vpc_config.subnet_ids #=> Array
+    #   resp.image_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builder.vpc_config.security_group_ids #=> Array
+    #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builder.instance_type #=> String
+    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builder.state_change_reason.message #=> String
+    #   resp.image_builder.created_time #=> Time
+    #   resp.image_builder.enable_default_internet_access #=> Boolean
+    #   resp.image_builder.domain_join_info.directory_name #=> String
+    #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.image_builder_errors #=> Array
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_message #=> String
+    #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
+    #
+    # @overload delete_image_builder(params = {})
+    # @param [Hash] params ({})
+    def delete_image_builder(params = {}, options = {})
+      req = build_request(:delete_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified stack. After this operation completes, the
+    # environment can no longer be activated and any reservations made for
+    # the stack are released.
     #
     # @option params [required, String] :name
-    #   The name of the stack to delete.
+    #   The name of the stack.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -556,17 +752,17 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Returns a list describing the specified directory configurations.
+    # Describes the specified directory configurations.
     #
     # @option params [Array<String>] :directory_names
-    #   A specific list of directory names.
+    #   The directory names.
     #
     # @option params [Integer] :max_results
-    #   The size of each page of results.
+    #   The maximum size of each page of results.
     #
     # @option params [String] :next_token
-    #   The DescribeDirectoryConfigsResult.NextToken from a previous call to
-    #   DescribeDirectoryConfigs. If this is the first call, pass null.
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @return [Types::DescribeDirectoryConfigsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -601,12 +797,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # If fleet names are provided, this operation describes the specified
-    # fleets; otherwise, all the fleets in the account are described.
+    # Describes the specified fleets or all fleets in the account.
     #
     # @option params [Array<String>] :names
-    #   The fleet names to describe. Use null to describe all the fleets for
-    #   the AWS account.
+    #   The names of the fleets to describe.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -663,12 +857,65 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the images. If a list of names is not provided, all images
-    # in your account are returned. This operation does not return a
-    # paginated result.
+    # @option params [Array<String>] :names
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeImageBuildersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageBuildersResult#image_builders #image_builders} => Array&lt;Types::ImageBuilder&gt;
+    #   * {Types::DescribeImageBuildersResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_builders({
+    #     names: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builders #=> Array
+    #   resp.image_builders[0].name #=> String
+    #   resp.image_builders[0].arn #=> String
+    #   resp.image_builders[0].image_arn #=> String
+    #   resp.image_builders[0].description #=> String
+    #   resp.image_builders[0].display_name #=> String
+    #   resp.image_builders[0].vpc_config.subnet_ids #=> Array
+    #   resp.image_builders[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
+    #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builders[0].instance_type #=> String
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS"
+    #   resp.image_builders[0].state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builders[0].state_change_reason.message #=> String
+    #   resp.image_builders[0].created_time #=> Time
+    #   resp.image_builders[0].enable_default_internet_access #=> Boolean
+    #   resp.image_builders[0].domain_join_info.directory_name #=> String
+    #   resp.image_builders[0].domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builders[0].image_builder_errors #=> Array
+    #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builders[0].image_builder_errors[0].error_message #=> String
+    #   resp.image_builders[0].image_builder_errors[0].error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
+    #
+    # @overload describe_image_builders(params = {})
+    # @param [Hash] params ({})
+    def describe_image_builders(params = {}, options = {})
+      req = build_request(:describe_image_builders, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified images or all images in the account.
     #
     # @option params [Array<String>] :names
-    #   A specific list of images to describe.
+    #   The names of the images to describe.
     #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -715,22 +962,19 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the streaming sessions for a stack and a fleet. If a user ID
-    # is provided, this operation returns streaming sessions for only that
-    # user. To retrieve the next set of items, pass this value for the
-    # `nextToken` parameter in a subsequent call to this operation. If an
-    # authentication type is not provided, the operation defaults to users
-    # authenticated using a streaming URL.
+    # Describes the streaming sessions for the specified stack and fleet. If
+    # a user ID is provided, only the streaming sessions for only that user
+    # are returned. If an authentication type is not provided, the default
+    # is to authenticate users using a streaming URL.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack for which to list sessions.
+    #   The name of the stack.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet for which to list sessions.
+    #   The name of the fleet.
     #
     # @option params [String] :user_id
-    #   The user for whom to list sessions. Use null to describe all the
-    #   sessions for the stack and fleet.
+    #   The user ID.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -738,13 +982,12 @@ module Aws::AppStream
     #
     # @option params [Integer] :limit
     #   The size of each page of results. The default value is 20 and the
-    #   maximum supported value is 50.
+    #   maximum value is 50.
     #
     # @option params [String] :authentication_type
-    #   The authentication method of the user. It can be `API` for a user
-    #   authenticated using a streaming URL, or `SAML` for a SAML federated
-    #   user. If an authentication type is not provided, the operation
-    #   defaults to users authenticated using a streaming URL.
+    #   The authentication method. Specify `API` for a user authenticated
+    #   using a streaming URL or `SAML` for a SAML federated user. The default
+    #   is to authenticate users using a streaming URL.
     #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -782,14 +1025,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # If stack names are not provided, this operation describes the
-    # specified stacks; otherwise, all stacks in the account are described.
-    # To retrieve the next set of items, pass the `nextToken` value in a
-    # subsequent call to this operation.
+    # Describes the specified stacks or all stacks in the account.
     #
     # @option params [Array<String>] :names
-    #   The stack names to describe. Use null to describe all the stacks for
-    #   the AWS account.
+    #   The names of the stacks to describe.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -832,13 +1071,13 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Disassociates a fleet from a stack.
+    # Disassociates the specified fleet from the specified stack.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet to disassociate.
+    #   The name of the fleet.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack with which the fleet is associated.
+    #   The name of the stack.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -858,10 +1097,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # This operation immediately stops a streaming session.
+    # Stops the specified streaming session.
     #
     # @option params [required, String] :session_id
-    #   The unique identifier of the streaming session to be stopped.
+    #   The ID of the streaming session.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -880,10 +1119,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists all fleets associated with the stack.
+    # Lists the fleets associated with the specified stack.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack whose associated fleets are listed.
+    #   The name of the stack.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -916,10 +1155,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists all stacks to which the specified fleet is associated.
+    # Lists the stacks associated with the specified fleet.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet whose associated stacks are listed.
+    #   The name of the fleet.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -952,10 +1191,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Starts a fleet.
+    # Starts the specified fleet.
     #
     # @option params [required, String] :name
-    #   The name of the fleet to start.
+    #   The name of the fleet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -974,10 +1213,56 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Stops a fleet.
+    # @option params [required, String] :name
+    #
+    # @return [Types::StartImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_image_builder({
+    #     name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builder.name #=> String
+    #   resp.image_builder.arn #=> String
+    #   resp.image_builder.image_arn #=> String
+    #   resp.image_builder.description #=> String
+    #   resp.image_builder.display_name #=> String
+    #   resp.image_builder.vpc_config.subnet_ids #=> Array
+    #   resp.image_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builder.vpc_config.security_group_ids #=> Array
+    #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builder.instance_type #=> String
+    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builder.state_change_reason.message #=> String
+    #   resp.image_builder.created_time #=> Time
+    #   resp.image_builder.enable_default_internet_access #=> Boolean
+    #   resp.image_builder.domain_join_info.directory_name #=> String
+    #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.image_builder_errors #=> Array
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_message #=> String
+    #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
+    #
+    # @overload start_image_builder(params = {})
+    # @param [Hash] params ({})
+    def start_image_builder(params = {}, options = {})
+      req = build_request(:start_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Stops the specified fleet.
     #
     # @option params [required, String] :name
-    #   The name of the fleet to stop.
+    #   The name of the fleet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -996,19 +1281,64 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the directory configuration with the given parameters.
+    # @option params [required, String] :name
+    #
+    # @return [Types::StopImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_image_builder({
+    #     name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builder.name #=> String
+    #   resp.image_builder.arn #=> String
+    #   resp.image_builder.image_arn #=> String
+    #   resp.image_builder.description #=> String
+    #   resp.image_builder.display_name #=> String
+    #   resp.image_builder.vpc_config.subnet_ids #=> Array
+    #   resp.image_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builder.vpc_config.security_group_ids #=> Array
+    #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builder.instance_type #=> String
+    #   resp.image_builder.platform #=> String, one of "WINDOWS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builder.state_change_reason.message #=> String
+    #   resp.image_builder.created_time #=> Time
+    #   resp.image_builder.enable_default_internet_access #=> Boolean
+    #   resp.image_builder.domain_join_info.directory_name #=> String
+    #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.image_builder_errors #=> Array
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_message #=> String
+    #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
+    #
+    # @overload stop_image_builder(params = {})
+    # @param [Hash] params ({})
+    def stop_image_builder(params = {}, options = {})
+      req = build_request(:stop_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified directory configuration.
     #
     # @option params [required, String] :directory_name
-    #   The name of the existing directory configuration to be updated.
+    #   The name of the directory configuration.
     #
     # @option params [Array<String>] :organizational_unit_distinguished_names
-    #   The list of the distinguished names of organizational units to place
-    #   computer accounts in.
+    #   The distinguished names of the organizational units for computer
+    #   accounts.
     #
     # @option params [Types::ServiceAccountCredentials] :service_account_credentials
-    #   The *AccountName* and *AccountPassword* values for the service
-    #   account, which are used by the streaming instance to connect to the
-    #   directory
+    #   The credentials for the service account used by the streaming instance
+    #   to connect to the directory.
     #
     # @return [Types::UpdateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1043,17 +1373,18 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates an existing fleet. All the attributes except the fleet name
-    # can be updated in the **STOPPED** state. When a fleet is in the
-    # **RUNNING** state, only `DisplayName` and `ComputeCapacity` can be
-    # updated. A fleet cannot be updated in a status of **STARTING** or
-    # **STOPPING**.
+    # Updates the specified fleet.
+    #
+    # If the fleet is in the `STOPPED` state, you can update any attribute
+    # except the fleet name. If the fleet is in the `RUNNING` state, you can
+    # update the `DisplayName` and `ComputeCapacity` attributes. If the
+    # fleet is in the `STARTING` or `STOPPING` state, you can't update it.
     #
     # @option params [String] :image_name
-    #   The image name from which a fleet is created.
+    #   The name of the image used by the fleet.
     #
     # @option params [required, String] :name
-    #   The name of the fleet.
+    #   A unique name for the fleet.
     #
     # @option params [String] :instance_type
     #   The instance type to use when launching fleet instances. The following
@@ -1100,40 +1431,38 @@ module Aws::AppStream
     #   * stream.graphics-pro.16xlarge
     #
     # @option params [Types::ComputeCapacity] :compute_capacity
-    #   The parameters for the capacity allocated to the fleet.
+    #   The desired capacity for the fleet.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC configuration for the fleet.
     #
     # @option params [Integer] :max_user_duration_in_seconds
-    #   The maximum time for which a streaming session can run. The input can
-    #   be any numeric value in seconds between 600 and 57600.
+    #   The maximum time that a streaming session can run, in seconds. Specify
+    #   a value between 600 and 57600.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The time after disconnection when a session is considered to have
-    #   ended. If a user who got disconnected reconnects within this timeout
-    #   interval, the user is connected back to their previous session. The
-    #   input can be any numeric value in seconds between 60 and 57600.
+    #   ended, in seconds. If a user who was disconnected reconnects within
+    #   this time interval, the user is connected to their previous session.
+    #   Specify a value between 60 and 57600.
     #
     # @option params [Boolean] :delete_vpc_config
-    #   Delete the VPC association for the specified fleet.
+    #   Deletes the VPC association for the specified fleet.
     #
     # @option params [String] :description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #
     # @option params [String] :display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The fleet name displayed to end users.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The *DirectoryName* and *OrganizationalUnitDistinguishedName* values,
-    #   which are used to join domains for the AppStream 2.0 streaming
-    #   instances.
+    #   The information needed for streaming instances to join a domain.
     #
     # @option params [Array<String>] :attributes_to_delete
-    #   Fleet attributes to be deleted.
+    #   The fleet attributes to delete.
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1202,22 +1531,22 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified fields in the stack with the specified name.
+    # Updates the specified stack.
     #
     # @option params [String] :display_name
-    #   The name displayed to end users on the AppStream 2.0 portal.
+    #   The stack name displayed to end users.
     #
     # @option params [String] :description
-    #   The description displayed to end users on the AppStream 2.0 portal.
+    #   The description displayed to end users.
     #
     # @option params [required, String] :name
-    #   The name of the stack to update.
+    #   The name of the stack.
     #
     # @option params [Array<Types::StorageConnector>] :storage_connectors
-    #   The storage connectors to be enabled for the stack.
+    #   The storage connectors to enable.
     #
     # @option params [Boolean] :delete_storage_connectors
-    #   Remove all the storage connectors currently enabled for the stack.
+    #   Deletes the storage connectors currently enabled for the stack.
     #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1274,7 +1603,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
