@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.56 (2017-10-02)
+------------------
+
 * Feature - Aws::CloudHSM - Updated the documentation, and API for Amazon CloudHSM.
 
 2.10.55 (2017-09-29)
