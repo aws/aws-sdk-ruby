@@ -81,7 +81,7 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # Contains the inputs for the CreateHsm operation.
+    # Contains the inputs for the `CreateHsm` operation.
     #
     # @note When making an API call, you may pass CreateHsmRequest
     #   data as a hash:
@@ -118,7 +118,7 @@ module Aws::CloudHSM
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external ID from **IamRoleArn**, if present.
+    #   The external ID from `IamRoleArn`, if present.
     #   @return [String]
     #
     # @!attribute [rw] subscription_type
@@ -126,6 +126,7 @@ module Aws::CloudHSM
     #
     #   * **PRODUCTION** - The HSM is being used in a production
     #     environment.
+    #
     #   * **TRIAL** - The HSM is being used in a product trial.
     #   @return [String]
     #
@@ -153,7 +154,7 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # Contains the output of the CreateHsm operation.
+    # Contains the output of the `CreateHsm` operation.
     #
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM.
@@ -332,15 +333,12 @@ module Aws::CloudHSM
     #   @return [String]
     #
     # @!attribute [rw] hsms_last_action_failed
-    #   Contains a list of ARNs that identify the HSMs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] hsms_pending_deletion
-    #   Contains a list of ARNs that identify the HSMs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] hsms_pending_registration
-    #   Contains a list of ARNs that identify the HSMs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] label
@@ -387,13 +385,13 @@ module Aws::CloudHSM
     #       }
     #
     # @!attribute [rw] hsm_arn
-    #   The ARN of the HSM. Either the *HsmArn* or the *SerialNumber*
+    #   The ARN of the HSM. Either the `HsmArn` or the `SerialNumber`
     #   parameter must be specified.
     #   @return [String]
     #
     # @!attribute [rw] hsm_serial_number
-    #   The serial number of the HSM. Either the *HsmArn* or the
-    #   *HsmSerialNumber* parameter must be specified.
+    #   The serial number of the HSM. Either the `HsmArn` or the
+    #   `HsmSerialNumber` parameter must be specified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmRequest AWS API Documentation
@@ -436,6 +434,7 @@ module Aws::CloudHSM
     #
     #   * **PRODUCTION** - The HSM is being used in a production
     #     environment.
+    #
     #   * **TRIAL** - The HSM is being used in a product trial.
     #   @return [String]
     #
@@ -657,7 +656,7 @@ module Aws::CloudHSM
     #       }
     #
     # @!attribute [rw] next_token
-    #   The *NextToken* value from a previous call to ListHapgs. Pass null
+    #   The `NextToken` value from a previous call to `ListHapgs`. Pass null
     #   if this is the first call.
     #   @return [String]
     #
@@ -674,7 +673,7 @@ module Aws::CloudHSM
     #
     # @!attribute [rw] next_token
     #   If not null, more results are available. Pass this value to
-    #   ListHapgs to retrieve the next set of items.
+    #   `ListHapgs` to retrieve the next set of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsResponse AWS API Documentation
@@ -693,8 +692,8 @@ module Aws::CloudHSM
     #       }
     #
     # @!attribute [rw] next_token
-    #   The *NextToken* value from a previous call to ListHsms. Pass null if
-    #   this is the first call.
+    #   The `NextToken` value from a previous call to `ListHsms`. Pass null
+    #   if this is the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsRequest AWS API Documentation
@@ -704,15 +703,15 @@ module Aws::CloudHSM
       include Aws::Structure
     end
 
-    # Contains the output of the ListHsms operation.
+    # Contains the output of the `ListHsms` operation.
     #
     # @!attribute [rw] hsm_list
     #   The list of ARNs that identify the HSMs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   If not null, more results are available. Pass this value to ListHsms
-    #   to retrieve the next set of items.
+    #   If not null, more results are available. Pass this value to
+    #   `ListHsms` to retrieve the next set of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsResponse AWS API Documentation
@@ -731,8 +730,8 @@ module Aws::CloudHSM
     #       }
     #
     # @!attribute [rw] next_token
-    #   The *NextToken* value from a previous call to ListLunaClients. Pass
-    #   null if this is the first call.
+    #   The `NextToken` value from a previous call to `ListLunaClients`.
+    #   Pass null if this is the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsRequest AWS API Documentation
@@ -748,7 +747,7 @@ module Aws::CloudHSM
     #
     # @!attribute [rw] next_token
     #   If not null, more results are available. Pass this to
-    #   ListLunaClients to retrieve the next set of items.
+    #   `ListLunaClients` to retrieve the next set of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsResponse AWS API Documentation

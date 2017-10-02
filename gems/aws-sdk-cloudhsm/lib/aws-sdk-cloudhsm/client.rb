@@ -229,8 +229,8 @@ module Aws::CloudHSM
     # Creates an uninitialized HSM instance.
     #
     # There is an upfront fee charged for each HSM instance that you create
-    # with the CreateHsm operation. If you accidentally provision an HSM and
-    # want to request a refund, delete the instance using the DeleteHsm
+    # with the `CreateHsm` operation. If you accidentally provision an HSM
+    # and want to request a refund, delete the instance using the DeleteHsm
     # operation, go to the [AWS Support Center][1], create a new case, and
     # select **Account and Billing Support**.
     #
@@ -240,7 +240,7 @@ module Aws::CloudHSM
     #
     #
     #
-    # [1]: https://console.aws.amazon.com/support/home#/
+    # [1]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :subnet_id
     #   The identifier of the subnet in your VPC in which to place the HSM.
@@ -259,12 +259,13 @@ module Aws::CloudHSM
     #   an ENI on your behalf.
     #
     # @option params [String] :external_id
-    #   The external ID from **IamRoleArn**, if present.
+    #   The external ID from `IamRoleArn`, if present.
     #
     # @option params [required, String] :subscription_type
     #   Specifies the type of subscription for the HSM.
     #
     #   * **PRODUCTION** - The HSM is being used in a production environment.
+    #
     #   * **TRIAL** - The HSM is being used in a product trial.
     #
     # @option params [String] :client_token
@@ -475,12 +476,12 @@ module Aws::CloudHSM
     # ARN or its serial number.
     #
     # @option params [String] :hsm_arn
-    #   The ARN of the HSM. Either the *HsmArn* or the *SerialNumber*
+    #   The ARN of the HSM. Either the `HsmArn` or the `SerialNumber`
     #   parameter must be specified.
     #
     # @option params [String] :hsm_serial_number
-    #   The serial number of the HSM. Either the *HsmArn* or the
-    #   *HsmSerialNumber* parameter must be specified.
+    #   The serial number of the HSM. Either the `HsmArn` or the
+    #   `HsmSerialNumber` parameter must be specified.
     #
     # @return [Types::DescribeHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -652,14 +653,14 @@ module Aws::CloudHSM
 
     # Lists the high-availability partition groups for the account.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
-    # response contains a token that you pass in the next call to ListHapgs
-    # to retrieve the next set of items.
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
+    # response contains a token that you pass in the next call to
+    # `ListHapgs` to retrieve the next set of items.
     #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListHapgs. Pass null if
-    #   this is the first call.
+    #   The `NextToken` value from a previous call to `ListHapgs`. Pass null
+    #   if this is the first call.
     #
     # @return [Types::ListHapgsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -690,13 +691,13 @@ module Aws::CloudHSM
     # Retrieves the identifiers of all of the HSMs provisioned for the
     # current customer.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
-    # response contains a token that you pass in the next call to ListHsms
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
+    # response contains a token that you pass in the next call to `ListHsms`
     # to retrieve the next set of items.
     #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListHsms. Pass null if
+    #   The `NextToken` value from a previous call to `ListHsms`. Pass null if
     #   this is the first call.
     #
     # @return [Types::ListHsmsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -727,13 +728,13 @@ module Aws::CloudHSM
 
     # Lists all of the clients.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
     # response contains a token that you pass in the next call to
-    # ListLunaClients to retrieve the next set of items.
+    # `ListLunaClients` to retrieve the next set of items.
     #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListLunaClients. Pass
+    #   The `NextToken` value from a previous call to `ListLunaClients`. Pass
     #   null if this is the first call.
     #
     # @return [Types::ListLunaClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -976,7 +977,7 @@ module Aws::CloudHSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsm'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
