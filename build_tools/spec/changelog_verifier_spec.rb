@@ -34,7 +34,7 @@ describe "ensures CHANGELOG.md has valid section ordering" do
       expect(lines[0].strip).to eql("Unreleased Changes")
     end
 
-    first_version = file.lines.find {|l| l.match(/\d\.\d\.\d.*/) }
+    first_version = file.lines.find {|l| l.match(/\d\.\d+\.\d.*/) }
     it "#{path}CHANGLOG.md follows with current version section" do
       expect(first_version).to match(version[0].strip)
     end
@@ -44,7 +44,7 @@ end
 
 describe "ensures CHANGELOG.md has parsable entries" do
 
-  let(:skip_pattern) { /(------------------\n|Unreleased Changes\n|\d\.\d\.\d.*)/ }
+  let(:skip_pattern) { /(------------------\n|Unreleased Changes\n|\d\.\d+\.\d.*)/ }
   let(:entry_pattern) { /(\*\sFeature\s-\s\w+|\*\sIssue\s-\s\w+)/ }
 
   log_paths.each do |path|
