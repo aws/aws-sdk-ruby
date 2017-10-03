@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.57 (2017-10-03)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, documentation, and waiters for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
