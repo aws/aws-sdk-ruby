@@ -72,7 +72,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -113,7 +113,7 @@ module Aws::SSM
     # instance.
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -174,7 +174,7 @@ module Aws::SSM
     # Describes the parameters for a document.
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -371,8 +371,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of an SSM document used when the association version was
-    #   created.
+    #   The version of a Systems Manager document used when the association
+    #   version was created.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -2349,7 +2349,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2544,7 +2544,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -2561,7 +2561,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] document
-    #   Information about the SSM document.
+    #   Information about the Systems Manager document.
     #   @return [Types::DocumentDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentResult AWS API Documentation
@@ -3631,11 +3631,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes an SSM document.
+    # Describes a Systems Manager document.
     #
     # @!attribute [rw] sha_1
-    #   The SHA1 hash of the document, which you can use for verification
-    #   purposes.
+    #   The SHA1 hash of the document, which you can use for verification.
     #   @return [String]
     #
     # @!attribute [rw] hash
@@ -3656,11 +3655,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The AWS user account of the person who created the document.
+    #   The AWS user account that created the document.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -3668,7 +3667,7 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the SSM document.
+    #   The status of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -3684,7 +3683,8 @@ module Aws::SSM
     #   @return [Array<Types::DocumentParameter>]
     #
     # @!attribute [rw] platform_types
-    #   The list of OS platforms compatible with this SSM document.
+    #   The list of OS platforms compatible with this Systems Manager
+    #   document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_type
@@ -3703,6 +3703,10 @@ module Aws::SSM
     #   The default version.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags, or metadata, that have been applied to the document.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -3720,7 +3724,8 @@ module Aws::SSM
       :document_type,
       :schema_version,
       :latest_version,
-      :default_version)
+      :default_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -3750,14 +3755,14 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the name of an SSM document.
+    # Describes the name of a Systems Manager document.
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The AWS user account of the person who created the document.
+    #   The AWS user account that created the document.
     #   @return [String]
     #
     # @!attribute [rw] platform_types
@@ -3776,6 +3781,10 @@ module Aws::SSM
     #   The schema version.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags, or metadata, that have been applied to the document.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
@@ -3784,7 +3793,64 @@ module Aws::SSM
       :platform_types,
       :document_version,
       :document_type,
-      :schema_version)
+      :schema_version,
+      :tags)
+      include Aws::Structure
+    end
+
+    # One or more filters. Use a filter to return a more specific list of
+    # documents.
+    #
+    # For keys, you can specify one or more tags that have been applied to a
+    # document.
+    #
+    # Other valid values include Owner, Name, PlatformTypes, and
+    # DocumentType.
+    #
+    # Note that only one Owner can be specified in a request. For example:
+    # `Key=Owner,Values=Self`.
+    #
+    # If you use Name as a key, you can use a name prefix to return a list
+    # of documents. For example, in the AWS CLI, to return a list of all
+    # documents that begin with `Te`, run the following command:
+    #
+    # `aws ssm list-documents --filters Key=Name,Values=Te`
+    #
+    # If you specify more than two keys, only documents that are identified
+    # by all the tags are returned in the results. If you specify more than
+    # two values for a key, documents that are identified by any of the
+    # values are returned in the results.
+    #
+    # To specify a custom key and value pair, use the format
+    # `Key=tag:[tagName],Values=[valueName]`.
+    #
+    # For example, if you created a Key called region and are using the AWS
+    # CLI to call the `list-documents` command:
+    #
+    # `aws ssm list-documents --filters Key=tag:region,Values=east,west
+    # Key=Owner,Values=Self`
+    #
+    # @note When making an API call, you may pass DocumentKeyValuesFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "DocumentKeyValuesFilterKey",
+    #         values: ["DocumentKeyValuesFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value for the filter key.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentKeyValuesFilter AWS API Documentation
+    #
+    class DocumentKeyValuesFilter < Struct.new(
+      :key,
+      :values)
       include Aws::Structure
     end
 
@@ -4252,7 +4318,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -4268,7 +4334,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -4276,7 +4342,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The contents of the SSM document.
+    #   The contents of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_type
@@ -4794,9 +4860,10 @@ module Aws::SSM
     #
     # @!attribute [rw] task_arn
     #   The resource that the task used during execution. For RUN\_COMMAND
-    #   and AUTOMATION task types, the TaskArn is the SSM Document name/ARN.
-    #   For LAMBDA tasks, the value is the function name/ARN. For
-    #   STEP\_FUNCTION tasks, the value is the state machine ARN.
+    #   and AUTOMATION task types, the TaskArn is the Systems Manager
+    #   Document name/ARN. For LAMBDA tasks, the value is the function
+    #   name/ARN. For STEP\_FUNCTION tasks, the value is the state machine
+    #   ARN.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -6306,6 +6373,12 @@ module Aws::SSM
     #             value: "DocumentFilterValue", # required
     #           },
     #         ],
+    #         filters: [
+    #           {
+    #             key: "DocumentKeyValuesFilterKey",
+    #             values: ["DocumentKeyValuesFilterValue"],
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -6314,6 +6387,11 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #   @return [Array<Types::DocumentFilter>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #   @return [Array<Types::DocumentKeyValuesFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
@@ -6330,13 +6408,14 @@ module Aws::SSM
     #
     class ListDocumentsRequest < Struct.new(
       :document_filter_list,
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
     end
 
     # @!attribute [rw] document_identifiers
-    #   The names of the SSM documents.
+    #   The names of the Systems Manager documents.
     #   @return [Array<Types::DocumentIdentifier>]
     #
     # @!attribute [rw] next_token
@@ -6552,7 +6631,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -7077,8 +7156,8 @@ module Aws::SSM
     #
     # @!attribute [rw] task_arn
     #   The resource that the task uses during execution. For RUN\_COMMAND
-    #   and AUTOMATION task types, `TaskArn` is the SSM document name or
-    #   ARN. For LAMBDA tasks, it's the function name or ARN. For
+    #   and AUTOMATION task types, `TaskArn` is the Systems Manager document
+    #   name or ARN. For LAMBDA tasks, it's the function name or ARN. For
     #   STEP\_FUNCTION tasks, it's the state machine ARN.
     #   @return [String]
     #
@@ -8390,7 +8469,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
@@ -9037,9 +9116,11 @@ module Aws::SSM
     #
     class StopAutomationExecutionResult < Aws::EmptyStructure; end
 
-    # Metadata that you assign to your managed instances. Tags enable you to
-    # categorize your managed instances in different ways, for example, by
-    # purpose, owner, or environment.
+    # Metadata that you assign to your AWS resources. Tags enable you to
+    # categorize your resources in different ways, for example, by purpose,
+    # owner, or environment. In Systems Manager, you can apply tags to
+    # documents, managed instances, Maintenance Windows, Parameter Store
+    # parameters, and patch baselines.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -9222,7 +9303,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] instance_id

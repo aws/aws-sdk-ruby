@@ -901,6 +901,7 @@ module Aws::EC2
     TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
     TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
+    TunnelOptionsList = Shapes::ListShape.new(name: 'TunnelOptionsList')
     UnassignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesRequest')
     UnassignIpv6AddressesResult = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesResult')
     UnassignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'UnassignPrivateIpAddressesRequest')
@@ -986,6 +987,7 @@ module Aws::EC2
     VpnStaticRoute = Shapes::StructureShape.new(name: 'VpnStaticRoute')
     VpnStaticRouteList = Shapes::ListShape.new(name: 'VpnStaticRouteList')
     VpnStaticRouteSource = Shapes::StringShape.new(name: 'VpnStaticRouteSource')
+    VpnTunnelOptionsSpecification = Shapes::StructureShape.new(name: 'VpnTunnelOptionsSpecification')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     scope = Shapes::StringShape.new(name: 'scope')
 
@@ -3897,7 +3899,7 @@ module Aws::EC2
     PurchaseScheduledInstancesResult.add_member(:scheduled_instance_set, Shapes::ShapeRef.new(shape: PurchasedScheduledInstanceSet, location_name: "scheduledInstanceSet"))
     PurchaseScheduledInstancesResult.struct_class = Types::PurchaseScheduledInstancesResult
 
-    PurchaseSet.member = Shapes::ShapeRef.new(shape: Purchase)
+    PurchaseSet.member = Shapes::ShapeRef.new(shape: Purchase, location_name: "item")
 
     PurchasedScheduledInstanceSet.member = Shapes::ShapeRef.new(shape: ScheduledInstance, location_name: "item")
 
@@ -4761,6 +4763,8 @@ module Aws::EC2
     TerminateInstancesResult.add_member(:terminating_instances, Shapes::ShapeRef.new(shape: InstanceStateChangeList, location_name: "instancesSet"))
     TerminateInstancesResult.struct_class = Types::TerminateInstancesResult
 
+    TunnelOptionsList.member = Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecification, location_name: "item")
+
     UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, required: true, location_name: "ipv6Addresses"))
     UnassignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
     UnassignIpv6AddressesRequest.struct_class = Types::UnassignIpv6AddressesRequest
@@ -5020,6 +5024,7 @@ module Aws::EC2
 
     VpnConnection.add_member(:customer_gateway_configuration, Shapes::ShapeRef.new(shape: String, location_name: "customerGatewayConfiguration"))
     VpnConnection.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "customerGatewayId"))
+    VpnConnection.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "category"))
     VpnConnection.add_member(:state, Shapes::ShapeRef.new(shape: VpnState, location_name: "state"))
     VpnConnection.add_member(:type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "type"))
     VpnConnection.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpnConnectionId"))
@@ -5038,6 +5043,7 @@ module Aws::EC2
     VpnConnectionOptions.struct_class = Types::VpnConnectionOptions
 
     VpnConnectionOptionsSpecification.add_member(:static_routes_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "staticRoutesOnly"))
+    VpnConnectionOptionsSpecification.add_member(:tunnel_options, Shapes::ShapeRef.new(shape: TunnelOptionsList, location_name: "TunnelOptions"))
     VpnConnectionOptionsSpecification.struct_class = Types::VpnConnectionOptionsSpecification
 
     VpnGateway.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -5058,6 +5064,10 @@ module Aws::EC2
     VpnStaticRoute.struct_class = Types::VpnStaticRoute
 
     VpnStaticRouteList.member = Shapes::ShapeRef.new(shape: VpnStaticRoute, location_name: "item")
+
+    VpnTunnelOptionsSpecification.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideCidr"))
+    VpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKey"))
+    VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
     ZoneNameStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ZoneName")
 

@@ -232,6 +232,11 @@ module Aws::SSM
     DocumentHashType = Shapes::StringShape.new(name: 'DocumentHashType')
     DocumentIdentifier = Shapes::StructureShape.new(name: 'DocumentIdentifier')
     DocumentIdentifierList = Shapes::ListShape.new(name: 'DocumentIdentifierList')
+    DocumentKeyValuesFilter = Shapes::StructureShape.new(name: 'DocumentKeyValuesFilter')
+    DocumentKeyValuesFilterKey = Shapes::StringShape.new(name: 'DocumentKeyValuesFilterKey')
+    DocumentKeyValuesFilterList = Shapes::ListShape.new(name: 'DocumentKeyValuesFilterList')
+    DocumentKeyValuesFilterValue = Shapes::StringShape.new(name: 'DocumentKeyValuesFilterValue')
+    DocumentKeyValuesFilterValues = Shapes::ListShape.new(name: 'DocumentKeyValuesFilterValues')
     DocumentLimitExceeded = Shapes::StructureShape.new(name: 'DocumentLimitExceeded')
     DocumentName = Shapes::StringShape.new(name: 'DocumentName')
     DocumentOwner = Shapes::StringShape.new(name: 'DocumentOwner')
@@ -1367,6 +1372,7 @@ module Aws::SSM
     DocumentDescription.add_member(:schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, location_name: "SchemaVersion"))
     DocumentDescription.add_member(:latest_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "LatestVersion"))
     DocumentDescription.add_member(:default_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DefaultVersion"))
+    DocumentDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))
@@ -1381,9 +1387,18 @@ module Aws::SSM
     DocumentIdentifier.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentIdentifier.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     DocumentIdentifier.add_member(:schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, location_name: "SchemaVersion"))
+    DocumentIdentifier.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
     DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier, location_name: "DocumentIdentifier")
+
+    DocumentKeyValuesFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterKey, location_name: "Key"))
+    DocumentKeyValuesFilter.add_member(:values, Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterValues, location_name: "Values"))
+    DocumentKeyValuesFilter.struct_class = Types::DocumentKeyValuesFilter
+
+    DocumentKeyValuesFilterList.member = Shapes::ShapeRef.new(shape: DocumentKeyValuesFilter)
+
+    DocumentKeyValuesFilterValues.member = Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterValue)
 
     DocumentParameter.add_member(:name, Shapes::ShapeRef.new(shape: DocumentParameterName, location_name: "Name"))
     DocumentParameter.add_member(:type, Shapes::ShapeRef.new(shape: DocumentParameterType, location_name: "Type"))
@@ -1874,6 +1889,7 @@ module Aws::SSM
     ListDocumentVersionsResult.struct_class = Types::ListDocumentVersionsResult
 
     ListDocumentsRequest.add_member(:document_filter_list, Shapes::ShapeRef.new(shape: DocumentFilterList, location_name: "DocumentFilterList"))
+    ListDocumentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterList, location_name: "Filters"))
     ListDocumentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListDocumentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDocumentsRequest.struct_class = Types::ListDocumentsRequest

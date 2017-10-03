@@ -2036,8 +2036,8 @@ module Aws::EC2
 
     # Determines whether a product code is associated with an instance. This
     # action can only be used by the owner of the product code. It is useful
-    # when a product code owner needs to verify whether another user's
-    # instance is eligible for support.
+    # when a product code owner must verify whether another user's instance
+    # is eligible for support.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -3793,9 +3793,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a placement group that you launch cluster instances into. You
-    # must give the group a name that's unique within the scope of your
-    # account.
+    # Creates a placement group that you launch cluster instances into. Give
+    # the group a name that's unique within the scope of your account.
     #
     # For more information about placement groups and cluster instances, see
     # [Cluster Instances][1] in the *Amazon Elastic Compute Cloud User
@@ -5163,9 +5162,8 @@ module Aws::EC2
     # This is an idempotent operation. If you perform the operation more
     # than once, Amazon EC2 doesn't return an error.
     #
-    # For more information about VPN connections, see [Adding a Hardware
-    # Virtual Private Gateway to Your VPC][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # For more information, see [AWS Managed VPN Connections][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -5187,11 +5185,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::VpnConnectionOptionsSpecification] :options
-    #   Indicates whether the VPN connection requires static routes. If you
-    #   are creating a VPN connection for a device that does not support BGP,
-    #   you must specify `true`.
-    #
-    #   Default: `false`
+    #   The options for the VPN connection.
     #
     # @return [Types::CreateVpnConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5206,6 +5200,12 @@ module Aws::EC2
     #     dry_run: false,
     #     options: {
     #       static_routes_only: false,
+    #       tunnel_options: [
+    #         {
+    #           tunnel_inside_cidr: "String",
+    #           pre_shared_key: "String",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -5213,6 +5213,7 @@ module Aws::EC2
     #
     #   resp.vpn_connection.customer_gateway_configuration #=> String
     #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.category #=> String
     #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.vpn_connection.type #=> String, one of "ipsec.1"
     #   resp.vpn_connection.vpn_connection_id #=> String
@@ -9187,9 +9188,9 @@ module Aws::EC2
     #
     #   * `network-interface.source-dest-check` - Whether the network
     #     interface performs source/destination checking. A value of `true`
-    #     means checking is enabled, and `false` means checking is disabled.
-    #     The value must be `false` for the network interface to perform
-    #     network address translation (NAT) in your VPC.
+    #     means that checking is enabled, and `false` means that checking is
+    #     disabled. The value must be `false` for the network interface to
+    #     perform network address translation (NAT) in your VPC.
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the network
     #     interface.
@@ -9230,9 +9231,9 @@ module Aws::EC2
     #     reservation ID has a one-to-one relationship with an instance launch
     #     request, but can be associated with more than one instance if you
     #     launch multiple instances using the same launch request. For
-    #     example, if you launch one instance, you'll get one reservation ID.
-    #     If you launch ten instances using the same launch request, you'll
-    #     also get one reservation ID.
+    #     example, if you launch one instance, you get one reservation ID. If
+    #     you launch ten instances using the same launch request, you also get
+    #     one reservation ID.
     #
     #   * `root-device-name` - The name of the root device for the instance
     #     (for example, `/dev/sda1` or `/dev/xvda`).
@@ -9242,11 +9243,11 @@ module Aws::EC2
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
-    #     is enabled, and `false` means checking is disabled. The value must
-    #     be `false` for the instance to perform network address translation
-    #     (NAT) in your VPC.
+    #     is enabled, and `false` means that checking is disabled. The value
+    #     must be `false` for the instance to perform network address
+    #     translation (NAT) in your VPC.
     #
-    #   * `spot-instance-request-id` - The ID of the Spot instance request.
+    #   * `spot-instance-request-id` - The ID of the Spot Instance request.
     #
     #   * `state-reason-code` - The reason code for the state change.
     #
@@ -9264,9 +9265,9 @@ module Aws::EC2
     #     is independent of the `tag-value` filter. For example, if you use
     #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
     #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
@@ -12826,37 +12827,37 @@ module Aws::EC2
     #   * `launch.key-name` - The name of the key pair the instance launched
     #     with.
     #
-    #   * `launch.monitoring-enabled` - Whether monitoring is enabled for the
-    #     Spot instance.
+    #   * `launch.monitoring-enabled` - Whether detailed monitoring is enabled
+    #     for the Spot instance.
     #
     #   * `launch.ramdisk-id` - The RAM disk ID.
     #
-    #   * `network-interface.network-interface-id` - The ID of the network
+    #   * `launched-availability-zone` - The Availability Zone in which the
+    #     bid is launched.
+    #
+    #   * `network-interface.addresses.primary` - Indicates whether the IP
+    #     address is the primary private IP address.
+    #
+    #   * `network-interface.delete-on-termination` - Indicates whether the
+    #     network interface is deleted when the instance is terminated.
+    #
+    #   * `network-interface.description` - A description of the network
     #     interface.
     #
     #   * `network-interface.device-index` - The index of the device for the
     #     network interface attachment on the instance.
     #
-    #   * `network-interface.subnet-id` - The ID of the subnet for the
-    #     instance.
+    #   * `network-interface.group-id` - The ID of the security group
+    #     associated with the network interface.
     #
-    #   * `network-interface.description` - A description of the network
+    #   * `network-interface.network-interface-id` - The ID of the network
     #     interface.
     #
     #   * `network-interface.private-ip-address` - The primary private IP
     #     address of the network interface.
     #
-    #   * `network-interface.delete-on-termination` - Indicates whether the
-    #     network interface is deleted when the instance is terminated.
-    #
-    #   * `network-interface.group-id` - The ID of the security group
-    #     associated with the network interface.
-    #
-    #   * `network-interface.group-name` - The name of the security group
-    #     associated with the network interface.
-    #
-    #   * `network-interface.addresses.primary` - Indicates whether the IP
-    #     address is the primary private IP address.
+    #   * `network-interface.subnet-id` - The ID of the subnet for the
+    #     instance.
     #
     #   * `product-description` - The product description associated with the
     #     instance (`Linux/UNIX` \| `Windows`).
@@ -12897,9 +12898,6 @@ module Aws::EC2
     #
     #   * `type` - The type of Spot instance request (`one-time` \|
     #     `persistent`).
-    #
-    #   * `launched-availability-zone` - The Availability Zone in which the
-    #     bid is launched.
     #
     #   * `valid-from` - The start date of the request.
     #
@@ -14866,6 +14864,7 @@ module Aws::EC2
     #   resp.vpn_connections #=> Array
     #   resp.vpn_connections[0].customer_gateway_configuration #=> String
     #   resp.vpn_connections[0].customer_gateway_id #=> String
+    #   resp.vpn_connections[0].category #=> String
     #   resp.vpn_connections[0].state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.vpn_connections[0].type #=> String, one of "ipsec.1"
     #   resp.vpn_connections[0].vpn_connection_id #=> String
@@ -15766,7 +15765,7 @@ module Aws::EC2
     #
     # Instance console output is buffered and posted shortly after instance
     # boot, reboot, and termination. Amazon EC2 preserves the most recent 64
-    # KB output which is available for at least one hour after the most
+    # KB output, which is available for at least one hour after the most
     # recent post.
     #
     # For Linux instances, the instance console output displays the exact
@@ -16885,8 +16884,8 @@ module Aws::EC2
     #
     # @option params [Types::AttributeBooleanValue] :source_dest_check
     #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
+    #   `true` means that checking is enabled, and `false` means that checking
+    #   is disabled. This value must be `false` for a NAT instance to perform
     #   NAT.
     #
     # @option params [String] :attribute
@@ -16919,7 +16918,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Types::AttributeBooleanValue] :ebs_optimized
-    #   Specifies whether the instance is optimized for EBS I/O. This
+    #   Specifies whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
     #   optimized configuration stack to provide optimal EBS I/O performance.
     #   This optimization isn't available with all instance types. Additional
@@ -16984,9 +16983,9 @@ module Aws::EC2
     #
     # @option params [Types::BlobAttributeValue] :user_data
     #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   using an AWS SDK or command line tool, base64-encoding is performed
     #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   provide base64-encoded text.
     #
     # @option params [String] :value
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
@@ -19060,7 +19059,7 @@ module Aws::EC2
     #   One or more instances.
     #
     # @option params [required, Array<String>] :reason_codes
-    #   One or more reason codes that describes the health state of your
+    #   One or more reason codes that describe the health state of your
     #   instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
@@ -19074,14 +19073,14 @@ module Aws::EC2
     #     instance.
     #
     #   * `performance-network`\: My instance is experiencing performance
-    #     problems which I believe are network related.
+    #     problems that I believe are network related.
     #
     #   * `performance-instance-store`\: My instance is experiencing
-    #     performance problems which I believe are related to the instance
+    #     performance problems that I believe are related to the instance
     #     stores.
     #
     #   * `performance-ebs-volume`\: My instance is experiencing performance
-    #     problems which I believe are related to an EBS volume.
+    #     problems that I believe are related to an EBS volume.
     #
     #   * `performance-other`\: My instance is experiencing performance
     #     problems.
@@ -20306,8 +20305,8 @@ module Aws::EC2
     #   has not subscribed, the request fails.
     #
     # To ensure faster instance launches, break up large requests into
-    # smaller batches. For example, create 5 separate launch requests for
-    # 100 instances each instead of 1 launch request for 500 instances.
+    # smaller batches. For example, create five separate launch requests for
+    # 100 instances each instead of one launch request for 500 instances.
     #
     # An instance is ready for you to use when it's in the `running` state.
     # You can check the state of your instance using DescribeInstances. You
@@ -20457,8 +20456,8 @@ module Aws::EC2
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
-    #   command line tool, Base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide Base64-encoded
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide base64-encoded
     #   text.
     #
     #
@@ -20497,11 +20496,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Boolean] :ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O. This
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O performance.
-    #   This optimization isn't available with all instance types. Additional
-    #   usage charges apply when using an EBS-optimized instance.
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS-optimized
+    #   instance.
     #
     #   Default: `false`
     #
@@ -20955,17 +20955,21 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Starts an Amazon EBS-backed AMI that you've previously stopped.
+    # Starts an Amazon EBS-backed instance that you've previously stopped.
     #
     # Instances that use Amazon EBS volumes as their root devices can be
     # quickly stopped and started. When an instance is stopped, the compute
-    # resources are released and you are not billed for hourly instance
-    # usage. However, your root partition Amazon EBS volume remains,
-    # continues to persist your data, and you are charged for Amazon EBS
-    # volume usage. You can restart your instance at any time. Each time you
-    # transition an instance from stopped to started, Amazon EC2 charges a
-    # full instance hour, even if transitions happen multiple times within a
-    # single hour.
+    # resources are released and you are not billed for instance usage.
+    # However, your root partition Amazon EBS volume remains and continues
+    # to persist your data, and you are charged for Amazon EBS volume usage.
+    # You can restart your instance at any time. Every time you start your
+    # Windows instance, Amazon EC2 charges you for a full instance hour. If
+    # you stop and restart your Windows instance, a new instance hour begins
+    # and Amazon EC2 charges you for another full instance hour even if you
+    # are still within the same 60-minute period when it was stopped. Every
+    # time you start your Linux instance, Amazon EC2 charges a one-minute
+    # minimum for instance usage, and thereafter charges per second for
+    # instance usage.
     #
     # Before stopping an instance, make sure it is in a state from which it
     # can be restarted. Stopping an instance does not preserve data stored
@@ -21025,14 +21029,18 @@ module Aws::EC2
 
     # Stops an Amazon EBS-backed instance.
     #
-    # We don't charge hourly usage for a stopped instance, or data transfer
-    # fees; however, your root partition Amazon EBS volume remains,
-    # continues to persist your data, and you are charged for Amazon EBS
-    # volume usage. Each time you transition an instance from stopped to
-    # started, Amazon EC2 charges a full instance hour, even if transitions
-    # happen multiple times within a single hour.
+    # We don't charge usage for a stopped instance, or data transfer fees;
+    # however, your root partition Amazon EBS volume remains and continues
+    # to persist your data, and you are charged for Amazon EBS volume usage.
+    # Every time you start your Windows instance, Amazon EC2 charges you for
+    # a full instance hour. If you stop and restart your Windows instance, a
+    # new instance hour begins and Amazon EC2 charges you for another full
+    # instance hour even if you are still within the same 60-minute period
+    # when it was stopped. Every time you start your Linux instance, Amazon
+    # EC2 charges a one-minute minimum for instance usage, and thereafter
+    # charges per second for instance usage.
     #
-    # You can't start or stop Spot instances, and you can't stop instance
+    # You can't start or stop Spot Instances, and you can't stop instance
     # store-backed instances.
     #
     # When you stop an instance, we shut it down. You can restart your
@@ -21490,7 +21498,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

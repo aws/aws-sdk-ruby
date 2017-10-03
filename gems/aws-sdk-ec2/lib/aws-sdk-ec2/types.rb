@@ -4281,6 +4281,12 @@ module Aws::EC2
     #         dry_run: false,
     #         options: {
     #           static_routes_only: false,
+    #           tunnel_options: [
+    #             {
+    #               tunnel_inside_cidr: "String",
+    #               pre_shared_key: "String",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4304,11 +4310,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] options
-    #   Indicates whether the VPN connection requires static routes. If you
-    #   are creating a VPN connection for a device that does not support
-    #   BGP, you must specify `true`.
-    #
-    #   Default: `false`
+    #   The options for the VPN connection.
     #   @return [Types::VpnConnectionOptionsSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRequest AWS API Documentation
@@ -7478,9 +7480,9 @@ module Aws::EC2
     #
     #   * `network-interface.source-dest-check` - Whether the network
     #     interface performs source/destination checking. A value of `true`
-    #     means checking is enabled, and `false` means checking is disabled.
-    #     The value must be `false` for the network interface to perform
-    #     network address translation (NAT) in your VPC.
+    #     means that checking is enabled, and `false` means that checking is
+    #     disabled. The value must be `false` for the network interface to
+    #     perform network address translation (NAT) in your VPC.
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the
     #     network interface.
@@ -7521,9 +7523,9 @@ module Aws::EC2
     #     reservation ID has a one-to-one relationship with an instance
     #     launch request, but can be associated with more than one instance
     #     if you launch multiple instances using the same launch request.
-    #     For example, if you launch one instance, you'll get one
-    #     reservation ID. If you launch ten instances using the same launch
-    #     request, you'll also get one reservation ID.
+    #     For example, if you launch one instance, you get one reservation
+    #     ID. If you launch ten instances using the same launch request, you
+    #     also get one reservation ID.
     #
     #   * `root-device-name` - The name of the root device for the instance
     #     (for example, `/dev/sda1` or `/dev/xvda`).
@@ -7533,11 +7535,11 @@ module Aws::EC2
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
-    #     is enabled, and `false` means checking is disabled. The value must
-    #     be `false` for the instance to perform network address translation
-    #     (NAT) in your VPC.
+    #     is enabled, and `false` means that checking is disabled. The value
+    #     must be `false` for the instance to perform network address
+    #     translation (NAT) in your VPC.
     #
-    #   * `spot-instance-request-id` - The ID of the Spot instance request.
+    #   * `spot-instance-request-id` - The ID of the Spot Instance request.
     #
     #   * `state-reason-code` - The reason code for the state change.
     #
@@ -7557,9 +7559,8 @@ module Aws::EC2
     #     both the filter "tag-key=Purpose" and the filter
     #     "tag-value=X", you get any resources assigned both the tag key
     #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
+    #     value X (regardless of the tag's key). If you want to list only
+    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
@@ -10085,37 +10086,37 @@ module Aws::EC2
     #   * `launch.key-name` - The name of the key pair the instance launched
     #     with.
     #
-    #   * `launch.monitoring-enabled` - Whether monitoring is enabled for
-    #     the Spot instance.
+    #   * `launch.monitoring-enabled` - Whether detailed monitoring is
+    #     enabled for the Spot instance.
     #
     #   * `launch.ramdisk-id` - The RAM disk ID.
     #
-    #   * `network-interface.network-interface-id` - The ID of the network
+    #   * `launched-availability-zone` - The Availability Zone in which the
+    #     bid is launched.
+    #
+    #   * `network-interface.addresses.primary` - Indicates whether the IP
+    #     address is the primary private IP address.
+    #
+    #   * `network-interface.delete-on-termination` - Indicates whether the
+    #     network interface is deleted when the instance is terminated.
+    #
+    #   * `network-interface.description` - A description of the network
     #     interface.
     #
     #   * `network-interface.device-index` - The index of the device for the
     #     network interface attachment on the instance.
     #
-    #   * `network-interface.subnet-id` - The ID of the subnet for the
-    #     instance.
+    #   * `network-interface.group-id` - The ID of the security group
+    #     associated with the network interface.
     #
-    #   * `network-interface.description` - A description of the network
+    #   * `network-interface.network-interface-id` - The ID of the network
     #     interface.
     #
     #   * `network-interface.private-ip-address` - The primary private IP
     #     address of the network interface.
     #
-    #   * `network-interface.delete-on-termination` - Indicates whether the
-    #     network interface is deleted when the instance is terminated.
-    #
-    #   * `network-interface.group-id` - The ID of the security group
-    #     associated with the network interface.
-    #
-    #   * `network-interface.group-name` - The name of the security group
-    #     associated with the network interface.
-    #
-    #   * `network-interface.addresses.primary` - Indicates whether the IP
-    #     address is the primary private IP address.
+    #   * `network-interface.subnet-id` - The ID of the subnet for the
+    #     instance.
     #
     #   * `product-description` - The product description associated with
     #     the instance (`Linux/UNIX` \| `Windows`).
@@ -10157,9 +10158,6 @@ module Aws::EC2
     #
     #   * `type` - The type of Spot instance request (`one-time` \|
     #     `persistent`).
-    #
-    #   * `launched-availability-zone` - The Availability Zone in which the
-    #     bid is launched.
     #
     #   * `valid-from` - The start date of the request.
     #
@@ -14950,11 +14948,11 @@ module Aws::EC2
     #   This name is not available until the instance enters the `running`
     #   state.
     #
-    #   \[EC2-VPC\] The Amazon-provided DNS server will resolve
-    #   Amazon-provided private DNS hostnames if you've enabled DNS
-    #   resolution and DNS hostnames in your VPC. If you are not using the
-    #   Amazon-provided DNS server in your VPC, your custom domain name
-    #   servers must resolve the hostname as appropriate.
+    #   \[EC2-VPC\] The Amazon-provided DNS server resolves Amazon-provided
+    #   private DNS hostnames if you've enabled DNS resolution and DNS
+    #   hostnames in your VPC. If you are not using the Amazon-provided DNS
+    #   server in your VPC, your custom domain name servers must resolve the
+    #   hostname as appropriate.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -15011,7 +15009,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O. This
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
     #   optimized configuration stack to provide optimal I/O performance.
     #   This optimization isn't available with all instance types.
@@ -15032,7 +15030,7 @@ module Aws::EC2
     #   @return [Types::IamInstanceProfile]
     #
     # @!attribute [rw] instance_lifecycle
-    #   Indicates whether this is a Spot instance or a Scheduled Instance.
+    #   Indicates whether this is a Spot Instance or a Scheduled Instance.
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_associations
@@ -15059,9 +15057,9 @@ module Aws::EC2
     # @!attribute [rw] source_dest_check
     #   Specifies whether to enable an instance launched in a VPC to perform
     #   NAT. This controls whether source/destination checking is enabled on
-    #   the instance. A value of `true` means checking is enabled, and
-    #   `false` means checking is disabled. The value must be `false` for
-    #   the instance to perform NAT. For more information, see [NAT
+    #   the instance. A value of `true` means that checking is enabled, and
+    #   `false` means that checking is disabled. The value must be `false`
+    #   for the instance to perform NAT. For more information, see [NAT
     #   Instances][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
@@ -15070,7 +15068,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_id
-    #   If the request is a Spot instance request, the ID of the request.
+    #   If the request is a Spot Instance request, the ID of the request.
     #   @return [String]
     #
     # @!attribute [rw] sriov_net_support
@@ -15155,7 +15153,7 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O.
+    #   Indicates whether the instance is optimized for Amazon EBS I/O.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] instance_id
@@ -15191,9 +15189,9 @@ module Aws::EC2
     #
     # @!attribute [rw] source_dest_check
     #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
+    #   `true` means that checking is enabled, and `false` means that
+    #   checking is disabled. This value must be `false` for a NAT instance
+    #   to perform NAT.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] sriov_net_support
@@ -16724,9 +16722,9 @@ module Aws::EC2
     #
     # @!attribute [rw] source_dest_check
     #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
+    #   `true` means that checking is enabled, and `false` means that
+    #   checking is disabled. This value must be `false` for a NAT instance
+    #   to perform NAT.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] attribute
@@ -16763,7 +16761,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] ebs_optimized
-    #   Specifies whether the instance is optimized for EBS I/O. This
+    #   Specifies whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
     #   optimized configuration stack to provide optimal EBS I/O
     #   performance. This optimization isn't available with all instance
@@ -16839,9 +16837,9 @@ module Aws::EC2
     #
     # @!attribute [rw] user_data
     #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   using an AWS SDK or command line tool, base64-encoding is performed
     #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   provide base64-encoded text.
     #   @return [Types::BlobAttributeValue]
     #
     # @!attribute [rw] value
@@ -19682,7 +19680,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] reason_codes
-    #   One or more reason codes that describes the health state of your
+    #   One or more reason codes that describe the health state of your
     #   instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
@@ -19696,14 +19694,14 @@ module Aws::EC2
     #     instance.
     #
     #   * `performance-network`\: My instance is experiencing performance
-    #     problems which I believe are network related.
+    #     problems that I believe are network related.
     #
     #   * `performance-instance-store`\: My instance is experiencing
-    #     performance problems which I believe are related to the instance
+    #     performance problems that I believe are related to the instance
     #     stores.
     #
     #   * `performance-ebs-volume`\: My instance is experiencing performance
-    #     problems which I believe are related to an EBS volume.
+    #     problems that I believe are related to an EBS volume.
     #
     #   * `performance-other`\: My instance is experiencing performance
     #     problems.
@@ -21676,9 +21674,9 @@ module Aws::EC2
     #   The user data to make available to the instance. For more
     #   information, see [Running Commands on Your Linux Instance at
     #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   using an AWS SDK or command line tool, base64-encoding is performed
     #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   provide base64-encoded text.
     #
     #
     #
@@ -21722,9 +21720,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O. This
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
     #   performance. This optimization isn't available with all instance
     #   types. Additional usage charges apply when using an EBS-optimized
     #   instance.
@@ -24083,7 +24081,7 @@ module Aws::EC2
     #   * `Server.ScheduledStop`\: The instance was stopped due to a
     #     scheduled retirement.
     #
-    #   * `Server.SpotInstanceTermination`\: A Spot instance was terminated
+    #   * `Server.SpotInstanceTermination`\: A Spot Instance was terminated
     #     due to an increase in the market price.
     #
     #   * `Client.InternalError`\: A client error caused the instance to
@@ -25731,6 +25729,17 @@ module Aws::EC2
     #   The ID of the customer gateway at your end of the VPN connection.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The category of the VPN connection. A value of `VPN` indicates an
+    #   AWS VPN connection. A value of `VPN-Classic` indicates an AWS
+    #   Classic VPN connection. For more information, see [AWS Managed VPN
+    #   Categories][1] in the *Amazon Virtual Private Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-categories
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The current state of the VPN connection.
     #   @return [String]
@@ -25769,6 +25778,7 @@ module Aws::EC2
     class VpnConnection < Struct.new(
       :customer_gateway_configuration,
       :customer_gateway_id,
+      :category,
       :state,
       :type,
       :vpn_connection_id,
@@ -25801,17 +25811,31 @@ module Aws::EC2
     #
     #       {
     #         static_routes_only: false,
+    #         tunnel_options: [
+    #           {
+    #             tunnel_inside_cidr: "String",
+    #             pre_shared_key: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] static_routes_only
-    #   Indicates whether the VPN connection uses static routes only. Static
-    #   routes must be used for devices that don't support BGP.
+    #   Indicate whether the VPN connection uses static routes only. If you
+    #   are creating a VPN connection for a device that does not support
+    #   BGP, you must specify `true`.
+    #
+    #   Default: `false`
     #   @return [Boolean]
+    #
+    # @!attribute [rw] tunnel_options
+    #   The tunnel options for the VPN connection.
+    #   @return [Array<Types::VpnTunnelOptionsSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptionsSpecification AWS API Documentation
     #
     class VpnConnectionOptionsSpecification < Struct.new(
-      :static_routes_only)
+      :static_routes_only,
+      :tunnel_options)
       include Aws::Structure
     end
 
@@ -25875,6 +25899,56 @@ module Aws::EC2
       :destination_cidr_block,
       :source,
       :state)
+      include Aws::Structure
+    end
+
+    # The tunnel options for a VPN connection.
+    #
+    # @note When making an API call, you may pass VpnTunnelOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         tunnel_inside_cidr: "String",
+    #         pre_shared_key: "String",
+    #       }
+    #
+    # @!attribute [rw] tunnel_inside_cidr
+    #   The range of inside IP addresses for the tunnel. Any specified CIDR
+    #   blocks must be unique across all VPN connections that use the same
+    #   virtual private gateway.
+    #
+    #   Constraints: A size /30 CIDR block from the `169.254.0.0/16` range.
+    #   The following CIDR blocks are reserved and cannot be used:
+    #
+    #   * `169.254.0.0/30`
+    #
+    #   * `169.254.1.0/30`
+    #
+    #   * `169.254.2.0/30`
+    #
+    #   * `169.254.3.0/30`
+    #
+    #   * `169.254.4.0/30`
+    #
+    #   * `169.254.5.0/30`
+    #
+    #   * `169.254.169.252/30`
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_shared_key
+    #   The pre-shared key (PSK) to establish initial authentication between
+    #   the virtual private gateway and customer gateway.
+    #
+    #   Constraints: Allowed characters are alphanumeric characters and .\_.
+    #   Must be between 8 and 64 characters in length and cannot start with
+    #   zero (0).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
+    #
+    class VpnTunnelOptionsSpecification < Struct.new(
+      :tunnel_inside_cidr,
+      :pre_shared_key)
       include Aws::Structure
     end
 
