@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Delete encryption tempfiles after use. Issue #1624
 
 1.4.0 (2017-09-14)
 ------------------
