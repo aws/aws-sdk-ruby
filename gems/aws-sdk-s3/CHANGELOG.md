@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update OJ Json parser error code
+
 1.4.0 (2017-09-14)
 ------------------
 
