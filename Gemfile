@@ -6,7 +6,6 @@ gem 'jmespath'
 group :test do
 
   gem 'rspec'
-  gem 'cucumber'
 
   if RUBY_VERSION == '1.9.3'
     # webmock depends on addressable, but the latest version of addressable
@@ -17,9 +16,12 @@ group :test do
     gem 'webmock', '2.2.0'
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
+    # cucumber drop support for Ruby under 2.0 after 3.0.0
+    gem 'cucumber', '3.0.0'
   else
     gem 'addressable'
     gem 'webmock'
+    gem 'cucumber'
   end
   gem 'json-schema'
   gem 'multipart-post'

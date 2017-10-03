@@ -47,7 +47,7 @@ module Aws
         def validate_desc(description)
           Json.load(description)
           description
-        rescue Json::ParseError
+        rescue Json::ParseError, EncodingError
           msg = "expected description to be a valid JSON document string"
           raise ArgumentError, msg
         end
