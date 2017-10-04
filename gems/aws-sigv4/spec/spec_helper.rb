@@ -13,7 +13,7 @@ module SpecHelper
 
     # @param [String] request
     # @return [Hash]
-    def parse_reqeust(request)
+    def parse_request(request)
       lines = request.lines.to_a
 
       http_method, request_uri, _ = lines.shift.split
