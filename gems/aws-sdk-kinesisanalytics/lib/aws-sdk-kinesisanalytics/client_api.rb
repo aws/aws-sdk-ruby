@@ -13,6 +13,8 @@ module Aws::KinesisAnalytics
 
     AddApplicationCloudWatchLoggingOptionRequest = Shapes::StructureShape.new(name: 'AddApplicationCloudWatchLoggingOptionRequest')
     AddApplicationCloudWatchLoggingOptionResponse = Shapes::StructureShape.new(name: 'AddApplicationCloudWatchLoggingOptionResponse')
+    AddApplicationInputProcessingConfigurationRequest = Shapes::StructureShape.new(name: 'AddApplicationInputProcessingConfigurationRequest')
+    AddApplicationInputProcessingConfigurationResponse = Shapes::StructureShape.new(name: 'AddApplicationInputProcessingConfigurationResponse')
     AddApplicationInputRequest = Shapes::StructureShape.new(name: 'AddApplicationInputRequest')
     AddApplicationInputResponse = Shapes::StructureShape.new(name: 'AddApplicationInputResponse')
     AddApplicationOutputRequest = Shapes::StructureShape.new(name: 'AddApplicationOutputRequest')
@@ -43,6 +45,8 @@ module Aws::KinesisAnalytics
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     DeleteApplicationCloudWatchLoggingOptionRequest = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionRequest')
     DeleteApplicationCloudWatchLoggingOptionResponse = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionResponse')
+    DeleteApplicationInputProcessingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationInputProcessingConfigurationRequest')
+    DeleteApplicationInputProcessingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationInputProcessingConfigurationResponse')
     DeleteApplicationOutputRequest = Shapes::StructureShape.new(name: 'DeleteApplicationOutputRequest')
     DeleteApplicationOutputResponse = Shapes::StructureShape.new(name: 'DeleteApplicationOutputResponse')
     DeleteApplicationReferenceDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteApplicationReferenceDataSourceRequest')
@@ -65,9 +69,15 @@ module Aws::KinesisAnalytics
     InputConfigurations = Shapes::ListShape.new(name: 'InputConfigurations')
     InputDescription = Shapes::StructureShape.new(name: 'InputDescription')
     InputDescriptions = Shapes::ListShape.new(name: 'InputDescriptions')
+    InputLambdaProcessor = Shapes::StructureShape.new(name: 'InputLambdaProcessor')
+    InputLambdaProcessorDescription = Shapes::StructureShape.new(name: 'InputLambdaProcessorDescription')
+    InputLambdaProcessorUpdate = Shapes::StructureShape.new(name: 'InputLambdaProcessorUpdate')
     InputParallelism = Shapes::StructureShape.new(name: 'InputParallelism')
     InputParallelismCount = Shapes::IntegerShape.new(name: 'InputParallelismCount')
     InputParallelismUpdate = Shapes::StructureShape.new(name: 'InputParallelismUpdate')
+    InputProcessingConfiguration = Shapes::StructureShape.new(name: 'InputProcessingConfiguration')
+    InputProcessingConfigurationDescription = Shapes::StructureShape.new(name: 'InputProcessingConfigurationDescription')
+    InputProcessingConfigurationUpdate = Shapes::StructureShape.new(name: 'InputProcessingConfigurationUpdate')
     InputSchemaUpdate = Shapes::StructureShape.new(name: 'InputSchemaUpdate')
     InputStartingPosition = Shapes::StringShape.new(name: 'InputStartingPosition')
     InputStartingPositionConfiguration = Shapes::StructureShape.new(name: 'InputStartingPositionConfiguration')
@@ -104,6 +114,8 @@ module Aws::KinesisAnalytics
     ParsedInputRecord = Shapes::ListShape.new(name: 'ParsedInputRecord')
     ParsedInputRecordField = Shapes::StringShape.new(name: 'ParsedInputRecordField')
     ParsedInputRecords = Shapes::ListShape.new(name: 'ParsedInputRecords')
+    ProcessedInputRecord = Shapes::StringShape.new(name: 'ProcessedInputRecord')
+    ProcessedInputRecords = Shapes::ListShape.new(name: 'ProcessedInputRecords')
     RawInputRecord = Shapes::StringShape.new(name: 'RawInputRecord')
     RawInputRecords = Shapes::ListShape.new(name: 'RawInputRecords')
     RecordColumn = Shapes::StructureShape.new(name: 'RecordColumn')
@@ -127,6 +139,7 @@ module Aws::KinesisAnalytics
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ResourceProvisionedThroughputExceededException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3ReferenceDataSource = Shapes::StructureShape.new(name: 'S3ReferenceDataSource')
     S3ReferenceDataSourceDescription = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceDescription')
     S3ReferenceDataSourceUpdate = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceUpdate')
@@ -147,6 +160,14 @@ module Aws::KinesisAnalytics
     AddApplicationCloudWatchLoggingOptionRequest.struct_class = Types::AddApplicationCloudWatchLoggingOptionRequest
 
     AddApplicationCloudWatchLoggingOptionResponse.struct_class = Types::AddApplicationCloudWatchLoggingOptionResponse
+
+    AddApplicationInputProcessingConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    AddApplicationInputProcessingConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    AddApplicationInputProcessingConfigurationRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "InputId"))
+    AddApplicationInputProcessingConfigurationRequest.add_member(:input_processing_configuration, Shapes::ShapeRef.new(shape: InputProcessingConfiguration, required: true, location_name: "InputProcessingConfiguration"))
+    AddApplicationInputProcessingConfigurationRequest.struct_class = Types::AddApplicationInputProcessingConfigurationRequest
+
+    AddApplicationInputProcessingConfigurationResponse.struct_class = Types::AddApplicationInputProcessingConfigurationResponse
 
     AddApplicationInputRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     AddApplicationInputRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
@@ -239,6 +260,13 @@ module Aws::KinesisAnalytics
 
     DeleteApplicationCloudWatchLoggingOptionResponse.struct_class = Types::DeleteApplicationCloudWatchLoggingOptionResponse
 
+    DeleteApplicationInputProcessingConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    DeleteApplicationInputProcessingConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    DeleteApplicationInputProcessingConfigurationRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "InputId"))
+    DeleteApplicationInputProcessingConfigurationRequest.struct_class = Types::DeleteApplicationInputProcessingConfigurationRequest
+
+    DeleteApplicationInputProcessingConfigurationResponse.struct_class = Types::DeleteApplicationInputProcessingConfigurationResponse
+
     DeleteApplicationOutputRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteApplicationOutputRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
     DeleteApplicationOutputRequest.add_member(:output_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "OutputId"))
@@ -268,19 +296,23 @@ module Aws::KinesisAnalytics
     DestinationSchema.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, location_name: "RecordFormatType"))
     DestinationSchema.struct_class = Types::DestinationSchema
 
-    DiscoverInputSchemaRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
-    DiscoverInputSchemaRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
-    DiscoverInputSchemaRequest.add_member(:input_starting_position_configuration, Shapes::ShapeRef.new(shape: InputStartingPositionConfiguration, required: true, location_name: "InputStartingPositionConfiguration"))
+    DiscoverInputSchemaRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    DiscoverInputSchemaRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    DiscoverInputSchemaRequest.add_member(:input_starting_position_configuration, Shapes::ShapeRef.new(shape: InputStartingPositionConfiguration, location_name: "InputStartingPositionConfiguration"))
+    DiscoverInputSchemaRequest.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
+    DiscoverInputSchemaRequest.add_member(:input_processing_configuration, Shapes::ShapeRef.new(shape: InputProcessingConfiguration, location_name: "InputProcessingConfiguration"))
     DiscoverInputSchemaRequest.struct_class = Types::DiscoverInputSchemaRequest
 
     DiscoverInputSchemaResponse.add_member(:input_schema, Shapes::ShapeRef.new(shape: SourceSchema, location_name: "InputSchema"))
     DiscoverInputSchemaResponse.add_member(:parsed_input_records, Shapes::ShapeRef.new(shape: ParsedInputRecords, location_name: "ParsedInputRecords"))
+    DiscoverInputSchemaResponse.add_member(:processed_input_records, Shapes::ShapeRef.new(shape: ProcessedInputRecords, location_name: "ProcessedInputRecords"))
     DiscoverInputSchemaResponse.add_member(:raw_input_records, Shapes::ShapeRef.new(shape: RawInputRecords, location_name: "RawInputRecords"))
     DiscoverInputSchemaResponse.struct_class = Types::DiscoverInputSchemaResponse
 
     InAppStreamNames.member = Shapes::ShapeRef.new(shape: InAppStreamName)
 
     Input.add_member(:name_prefix, Shapes::ShapeRef.new(shape: InAppStreamName, required: true, location_name: "NamePrefix"))
+    Input.add_member(:input_processing_configuration, Shapes::ShapeRef.new(shape: InputProcessingConfiguration, location_name: "InputProcessingConfiguration"))
     Input.add_member(:kinesis_streams_input, Shapes::ShapeRef.new(shape: KinesisStreamsInput, location_name: "KinesisStreamsInput"))
     Input.add_member(:kinesis_firehose_input, Shapes::ShapeRef.new(shape: KinesisFirehoseInput, location_name: "KinesisFirehoseInput"))
     Input.add_member(:input_parallelism, Shapes::ShapeRef.new(shape: InputParallelism, location_name: "InputParallelism"))
@@ -296,6 +328,7 @@ module Aws::KinesisAnalytics
     InputDescription.add_member(:input_id, Shapes::ShapeRef.new(shape: Id, location_name: "InputId"))
     InputDescription.add_member(:name_prefix, Shapes::ShapeRef.new(shape: InAppStreamName, location_name: "NamePrefix"))
     InputDescription.add_member(:in_app_stream_names, Shapes::ShapeRef.new(shape: InAppStreamNames, location_name: "InAppStreamNames"))
+    InputDescription.add_member(:input_processing_configuration_description, Shapes::ShapeRef.new(shape: InputProcessingConfigurationDescription, location_name: "InputProcessingConfigurationDescription"))
     InputDescription.add_member(:kinesis_streams_input_description, Shapes::ShapeRef.new(shape: KinesisStreamsInputDescription, location_name: "KinesisStreamsInputDescription"))
     InputDescription.add_member(:kinesis_firehose_input_description, Shapes::ShapeRef.new(shape: KinesisFirehoseInputDescription, location_name: "KinesisFirehoseInputDescription"))
     InputDescription.add_member(:input_schema, Shapes::ShapeRef.new(shape: SourceSchema, location_name: "InputSchema"))
@@ -305,11 +338,32 @@ module Aws::KinesisAnalytics
 
     InputDescriptions.member = Shapes::ShapeRef.new(shape: InputDescription)
 
+    InputLambdaProcessor.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    InputLambdaProcessor.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    InputLambdaProcessor.struct_class = Types::InputLambdaProcessor
+
+    InputLambdaProcessorDescription.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    InputLambdaProcessorDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    InputLambdaProcessorDescription.struct_class = Types::InputLambdaProcessorDescription
+
+    InputLambdaProcessorUpdate.add_member(:resource_arn_update, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARNUpdate"))
+    InputLambdaProcessorUpdate.add_member(:role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARNUpdate"))
+    InputLambdaProcessorUpdate.struct_class = Types::InputLambdaProcessorUpdate
+
     InputParallelism.add_member(:count, Shapes::ShapeRef.new(shape: InputParallelismCount, location_name: "Count"))
     InputParallelism.struct_class = Types::InputParallelism
 
     InputParallelismUpdate.add_member(:count_update, Shapes::ShapeRef.new(shape: InputParallelismCount, location_name: "CountUpdate"))
     InputParallelismUpdate.struct_class = Types::InputParallelismUpdate
+
+    InputProcessingConfiguration.add_member(:input_lambda_processor, Shapes::ShapeRef.new(shape: InputLambdaProcessor, required: true, location_name: "InputLambdaProcessor"))
+    InputProcessingConfiguration.struct_class = Types::InputProcessingConfiguration
+
+    InputProcessingConfigurationDescription.add_member(:input_lambda_processor_description, Shapes::ShapeRef.new(shape: InputLambdaProcessorDescription, location_name: "InputLambdaProcessorDescription"))
+    InputProcessingConfigurationDescription.struct_class = Types::InputProcessingConfigurationDescription
+
+    InputProcessingConfigurationUpdate.add_member(:input_lambda_processor_update, Shapes::ShapeRef.new(shape: InputLambdaProcessorUpdate, required: true, location_name: "InputLambdaProcessorUpdate"))
+    InputProcessingConfigurationUpdate.struct_class = Types::InputProcessingConfigurationUpdate
 
     InputSchemaUpdate.add_member(:record_format_update, Shapes::ShapeRef.new(shape: RecordFormat, location_name: "RecordFormatUpdate"))
     InputSchemaUpdate.add_member(:record_encoding_update, Shapes::ShapeRef.new(shape: RecordEncoding, location_name: "RecordEncodingUpdate"))
@@ -321,6 +375,7 @@ module Aws::KinesisAnalytics
 
     InputUpdate.add_member(:input_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "InputId"))
     InputUpdate.add_member(:name_prefix_update, Shapes::ShapeRef.new(shape: InAppStreamName, location_name: "NamePrefixUpdate"))
+    InputUpdate.add_member(:input_processing_configuration_update, Shapes::ShapeRef.new(shape: InputProcessingConfigurationUpdate, location_name: "InputProcessingConfigurationUpdate"))
     InputUpdate.add_member(:kinesis_streams_input_update, Shapes::ShapeRef.new(shape: KinesisStreamsInputUpdate, location_name: "KinesisStreamsInputUpdate"))
     InputUpdate.add_member(:kinesis_firehose_input_update, Shapes::ShapeRef.new(shape: KinesisFirehoseInputUpdate, location_name: "KinesisFirehoseInputUpdate"))
     InputUpdate.add_member(:input_schema_update, Shapes::ShapeRef.new(shape: InputSchemaUpdate, location_name: "InputSchemaUpdate"))
@@ -424,6 +479,8 @@ module Aws::KinesisAnalytics
 
     ParsedInputRecords.member = Shapes::ShapeRef.new(shape: ParsedInputRecord)
 
+    ProcessedInputRecords.member = Shapes::ShapeRef.new(shape: ProcessedInputRecord)
+
     RawInputRecords.member = Shapes::ShapeRef.new(shape: RawInputRecord)
 
     RecordColumn.add_member(:name, Shapes::ShapeRef.new(shape: RecordColumnName, required: true, location_name: "Name"))
@@ -457,6 +514,11 @@ module Aws::KinesisAnalytics
     ReferenceDataSourceUpdate.struct_class = Types::ReferenceDataSourceUpdate
 
     ReferenceDataSourceUpdates.member = Shapes::ShapeRef.new(shape: ReferenceDataSourceUpdate)
+
+    S3Configuration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    S3Configuration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    S3Configuration.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, required: true, location_name: "FileKey"))
+    S3Configuration.struct_class = Types::S3Configuration
 
     S3ReferenceDataSource.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     S3ReferenceDataSource.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, required: true, location_name: "FileKey"))
@@ -537,6 +599,18 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: CodeValidationException)
       end)
 
+      api.add_operation(:add_application_input_processing_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddApplicationInputProcessingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddApplicationInputProcessingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddApplicationInputProcessingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:add_application_output, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddApplicationOutput"
         o.http_method = "POST"
@@ -590,6 +664,18 @@ module Aws::KinesisAnalytics
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteApplicationCloudWatchLoggingOptionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApplicationCloudWatchLoggingOptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_application_input_processing_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplicationInputProcessingConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationInputProcessingConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationInputProcessingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)

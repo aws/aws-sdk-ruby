@@ -17,6 +17,8 @@ module Aws::Route53Domains
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CheckDomainAvailabilityRequest = Shapes::StructureShape.new(name: 'CheckDomainAvailabilityRequest')
     CheckDomainAvailabilityResponse = Shapes::StructureShape.new(name: 'CheckDomainAvailabilityResponse')
+    CheckDomainTransferabilityRequest = Shapes::StructureShape.new(name: 'CheckDomainTransferabilityRequest')
+    CheckDomainTransferabilityResponse = Shapes::StructureShape.new(name: 'CheckDomainTransferabilityResponse')
     City = Shapes::StringShape.new(name: 'City')
     ContactDetail = Shapes::StructureShape.new(name: 'ContactDetail')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
@@ -41,6 +43,7 @@ module Aws::Route53Domains
     DomainSuggestionsList = Shapes::ListShape.new(name: 'DomainSuggestionsList')
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
+    DomainTransferability = Shapes::StructureShape.new(name: 'DomainTransferability')
     DuplicateRequest = Shapes::StructureShape.new(name: 'DuplicateRequest')
     DurationInYears = Shapes::IntegerShape.new(name: 'DurationInYears')
     Email = Shapes::StringShape.new(name: 'Email')
@@ -111,6 +114,7 @@ module Aws::Route53Domains
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TransferDomainRequest = Shapes::StructureShape.new(name: 'TransferDomainRequest')
     TransferDomainResponse = Shapes::StructureShape.new(name: 'TransferDomainResponse')
+    Transferable = Shapes::StringShape.new(name: 'Transferable')
     UnsupportedTLD = Shapes::StructureShape.new(name: 'UnsupportedTLD')
     UpdateDomainContactPrivacyRequest = Shapes::StructureShape.new(name: 'UpdateDomainContactPrivacyRequest')
     UpdateDomainContactPrivacyResponse = Shapes::StructureShape.new(name: 'UpdateDomainContactPrivacyResponse')
@@ -139,6 +143,13 @@ module Aws::Route53Domains
 
     CheckDomainAvailabilityResponse.add_member(:availability, Shapes::ShapeRef.new(shape: DomainAvailability, required: true, location_name: "Availability"))
     CheckDomainAvailabilityResponse.struct_class = Types::CheckDomainAvailabilityResponse
+
+    CheckDomainTransferabilityRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    CheckDomainTransferabilityRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: DomainAuthCode, location_name: "AuthCode"))
+    CheckDomainTransferabilityRequest.struct_class = Types::CheckDomainTransferabilityRequest
+
+    CheckDomainTransferabilityResponse.add_member(:transferability, Shapes::ShapeRef.new(shape: DomainTransferability, required: true, location_name: "Transferability"))
+    CheckDomainTransferabilityResponse.struct_class = Types::CheckDomainTransferabilityResponse
 
     ContactDetail.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
     ContactDetail.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
@@ -188,6 +199,9 @@ module Aws::Route53Domains
     DomainSummary.struct_class = Types::DomainSummary
 
     DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
+
+    DomainTransferability.add_member(:transferable, Shapes::ShapeRef.new(shape: Transferable, location_name: "Transferable"))
+    DomainTransferability.struct_class = Types::DomainTransferability
 
     EnableDomainAutoRenewRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     EnableDomainAutoRenewRequest.struct_class = Types::EnableDomainAutoRenewRequest
@@ -377,7 +391,7 @@ module Aws::Route53Domains
     UpdateDomainContactResponse.struct_class = Types::UpdateDomainContactResponse
 
     UpdateDomainNameserversRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
-    UpdateDomainNameserversRequest.add_member(:fi_auth_key, Shapes::ShapeRef.new(shape: FIAuthKey, location_name: "FIAuthKey"))
+    UpdateDomainNameserversRequest.add_member(:fi_auth_key, Shapes::ShapeRef.new(shape: FIAuthKey, deprecated: true, location_name: "FIAuthKey"))
     UpdateDomainNameserversRequest.add_member(:nameservers, Shapes::ShapeRef.new(shape: NameserverList, required: true, location_name: "Nameservers"))
     UpdateDomainNameserversRequest.struct_class = Types::UpdateDomainNameserversRequest
 
@@ -421,6 +435,16 @@ module Aws::Route53Domains
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CheckDomainAvailabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckDomainAvailabilityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+      end)
+
+      api.add_operation(:check_domain_transferability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CheckDomainTransferability"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CheckDomainTransferabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: CheckDomainTransferabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
