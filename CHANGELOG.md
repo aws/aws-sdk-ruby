@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.58 (2017-10-04)
+------------------
+
 * Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
 
 * Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
