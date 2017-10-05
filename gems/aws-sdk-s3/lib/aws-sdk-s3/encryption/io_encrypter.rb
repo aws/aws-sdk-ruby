@@ -39,7 +39,7 @@ module Aws
 
         # @api private
         def close
-          @encrypted.close if Tempfile === @encrypted
+          @encrypted.close! if Tempfile === @encrypted
         end
 
         private

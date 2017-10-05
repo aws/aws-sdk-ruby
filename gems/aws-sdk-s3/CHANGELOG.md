@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Delete encryption tempfiles after use. Issue #1624
 
 * Issue - Update OJ Json parser error code
 
