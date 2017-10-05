@@ -393,15 +393,17 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # Temporary credentials with authorization to log in to an Amazon
+    # Temporary credentials with authorization to log on to an Amazon
     # Redshift database.
     #
     # @!attribute [rw] db_user
     #   A database user name that is authorized to log on to the database
-    #   `DbName` using the password `DbPassword`. If the `DbGroups`
-    #   parameter is specifed, `DbUser` is added to the listed groups for
-    #   the current session. The user name is prefixed with `IAM:` for an
-    #   existing user name or `IAMA:` if the user was auto-created.
+    #   `DbName` using the password `DbPassword`. If the specified DbUser
+    #   exists in the database, the new user name has the same database
+    #   privileges as the the user named in DbUser. By default, the user is
+    #   added to PUBLIC. If the `DbGroups` parameter is specifed, `DbUser`
+    #   is added to the listed groups for any sessions created using these
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] db_password
@@ -410,7 +412,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] expiration
-    #   The date and time `DbPassword` expires.
+    #   The date and time the password in `DbPassword` expires.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterCredentials AWS API Documentation
@@ -2889,6 +2891,8 @@ module Aws::Redshift
     #         subscription_name: "String",
     #         max_records: 1,
     #         marker: "String",
+    #         tag_keys: ["String"],
+    #         tag_values: ["String"],
     #       }
     #
     # @!attribute [rw] subscription_name
@@ -2918,12 +2922,34 @@ module Aws::Redshift
     #   retrying the request.
     #   @return [String]
     #
+    # @!attribute [rw] tag_keys
+    #   A tag key or keys for which you want to return all matching event
+    #   notification subscriptions that are associated with the specified
+    #   key or keys. For example, suppose that you have subscriptions that
+    #   are tagged with keys called `owner` and `environment`. If you
+    #   specify both of these tag keys in the request, Amazon Redshift
+    #   returns a response with the subscriptions that have either or both
+    #   of these tag keys associated with them.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_values
+    #   A tag value or values for which you want to return all matching
+    #   event notification subscriptions that are associated with the
+    #   specified tag value or values. For example, suppose that you have
+    #   subscriptions that are tagged with values called `admin` and `test`.
+    #   If you specify both of these tag values in the request, Amazon
+    #   Redshift returns a response with the subscriptions that have either
+    #   or both of these tag values associated with them.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptionsMessage AWS API Documentation
     #
     class DescribeEventSubscriptionsMessage < Struct.new(
       :subscription_name,
       :max_records,
-      :marker)
+      :marker,
+      :tag_keys,
+      :tag_values)
       include Aws::Structure
     end
 
@@ -3537,13 +3563,13 @@ module Aws::Redshift
     #   * Snapshot copy grant
     #
     #   For more information about Amazon Redshift resource types and
-    #   constructing ARNs, go to [Constructing an Amazon Redshift Amazon
-    #   Resource Name (ARN)][1] in the Amazon Redshift Cluster Management
-    #   Guide.
+    #   constructing ARNs, go to [Specifying Policy Elements: Actions,
+    #   Effects, Resources, and Principals][1] in the Amazon Redshift
+    #   Cluster Management Guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4096,9 +4122,10 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 to 128 alphanumeric characters or hyphens
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters.
+    #   * Must contain only lowercase letters, numbers, underscore, plus
+    #     sign, period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -4110,20 +4137,25 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [String]
     #
     # @!attribute [rw] db_name
     #   The name of a database that `DbUser` is authorized to log on to. If
-    #   `DbName` is not specified, `DbUser` can log in to any existing
+    #   `DbName` is not specified, `DbUser` can log on to any existing
     #   database.
     #
     #   Constraints:
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters.
+    #   * Must contain only lowercase letters, numbers, underscore, plus
+    #     sign, period (dot), at symbol (@), or hyphen.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
     #
     #   * Cannot be a reserved word. A list of reserved words can be found
     #     in [Reserved Words][1] in the Amazon Redshift Database Developer
@@ -4149,14 +4181,34 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] auto_create
-    #   Create a database user with the name specified for `DbUser` if one
-    #   does not exist.
+    #   Create a database user with the name specified for the user named in
+    #   `DbUser` if one does not exist.
     #   @return [Boolean]
     #
     # @!attribute [rw] db_groups
-    #   A list of the names of existing database groups that `DbUser` will
-    #   join for the current session. If not specified, the new user is
-    #   added only to PUBLIC.
+    #   A list of the names of existing database groups that the user named
+    #   in `DbUser` will join for the current session, in addition to any
+    #   group memberships for an existing user. If not specified, a new user
+    #   is added only to PUBLIC.
+    #
+    #   Database group name constraints
+    #
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters, numbers, underscore, plus
+    #     sign, period (dot), at symbol (@), or hyphen.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found
+    #     in [Reserved Words][1] in the Amazon Redshift Database Developer
+    #     Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsMessage AWS API Documentation
@@ -6562,7 +6614,7 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResource AWS API Documentation
