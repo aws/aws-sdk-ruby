@@ -131,7 +131,7 @@ module Aws::S3
     # @option options [String] :endpoint
     #   The client endpoint is normally constructed from the `:region`
     #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   to test endpoints. This should be a valid HTTP(S) URI.
     #
     # @option options [Boolean] :follow_redirects (true)
     #   When `true`, this client will follow 307 redirects returned
