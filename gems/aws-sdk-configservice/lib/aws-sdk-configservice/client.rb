@@ -1118,7 +1118,7 @@ module Aws::ConfigService
     #   resp.configuration_items[0].version #=> String
     #   resp.configuration_items[0].account_id #=> String
     #   resp.configuration_items[0].configuration_item_capture_time #=> Time
-    #   resp.configuration_items[0].configuration_item_status #=> String, one of "Ok", "Failed", "Discovered", "Deleted", "OK", "ResourceDiscovered", "ResourceNotRecorded", "ResourceDeleted", "ResourceDeletedNotRecorded"
+    #   resp.configuration_items[0].configuration_item_status #=> String, one of "Ok", "Failed", "Discovered", "Deleted"
     #   resp.configuration_items[0].configuration_state_id #=> String
     #   resp.configuration_items[0].configuration_item_md5_hash #=> String
     #   resp.configuration_items[0].arn #=> String
@@ -1597,7 +1597,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
