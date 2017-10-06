@@ -56,4 +56,37 @@ module Aws
       expect(conn_pool.size).to eq(0)
     end
   end
+
+  describe 'add_plugins' do
+
+    let(:dir) { File.expand_path('../fixtures/apis', __FILE__) }
+
+    it 'adds custom plugins to service' do
+      SvcTest = ApiHelper.sample_service(
+        api: Json.load_file("#{dir}/s3.json")
+      )
+      Aws.add_plugins({
+        'YellowSeahorseFixtures::Plugin' => File.join(dir, "../example.com/plugin.rb")
+      }, SvcTest)
+      client = SvcTest::Client.new(region: 'foo')
+      expect(client.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+    end
+
+    it 'adds custom plugins to all available AWS service' do
+      Aws::Svc1 = ApiHelper.sample_service(
+        api: Json.load_file("#{dir}/s3.json")
+      )
+      Aws::Svc2 = ApiHelper.sample_service(
+        api: Json.load_file("#{dir}/dynamodb.json")
+      )
+      Aws.add_plugins({
+        'YellowSeahorseFixtures::Plugin' => File.join(dir, "../example.com/plugin.rb")
+      })
+
+      client1 = Aws::Svc1::Client.new(region: 'foo')
+      expect(client1.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+      client2 = Aws::Svc2::Client.new(region: 'foo')
+      expect(client2.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+    end
+  end
 end

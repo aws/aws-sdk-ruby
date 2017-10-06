@@ -70,6 +70,8 @@ module Aws
   CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
   @config = {}
+  @plugins = {}
+  @plugin_added_callbacks = []
 
   class << self
 
@@ -149,5 +151,70 @@ module Aws
       warn(msg)
     end
 
+    # @api private
+    #
+    # Register customer plugins outside of SDK
+    #
+    #   Aws.add_plugins({
+    #     'Awesome::Plugins::PluginA' => "/path/to/plugin/a.rb",
+    #     'Awesome::Plugins::PluginB' => "/path/to/plugin/b.rb",
+    #   })
+    #
+    # @param [Hash] plugins a Hash of plugins mappings with name as
+    #   key and plugin path as value
+    # @param options[String] svc_name service module for plugins to
+    #   add, e.g. Aws::S3. Default to nil, plugins will be added to
+    #   all AWS service modules available
+    def add_plugins(plugins = {}, svc_name = nil)
+      unless svc_name.nil?
+        add_svc_plugins(svc_name, plugins)
+      else
+        # add plugins to all services available
+        service_available.each do |svc|
+          add_svc_plugins(svc, plugins)
+        end
+      end
+    end
+
+    # @api private
+    def service_available
+      aws_modules = Aws.constants.map(&Aws.method(:const_get)).grep(Module)
+      aws_modules.inject([]) do |svc, item|
+        # filter in only service modules
+        svc << item if item.constants.include? :ClientApi
+        svc
+      end
+    end
+
+    # @api private
+    def add_svc_plugins(svc_name, plugins)
+      @plugins[svc_name] = [plugins]
+      @plugin_added_callbacks.each do |callback|
+        callback.call(svc_name.to_s, *@plugins[svc_name])
+      end
+      svc_name
+    end
+
+    # Yields to the given block for each plugin that has already been
+    # defined via {add_plugins}. Also yields to the given block for
+    # each new plugins added after the callback is registered.
+    #
+    # @api private
+    def plugins_added(&block)
+      callback = Proc.new
+      @plugins.each do |svc_name, plugins|
+        yield(svc_name, plugins)
+      end
+      @plugin_added_callbacks << callback
+    end
   end
+
+  # add custom plugins
+  plugins_added do |svc_module, plugins|
+    plugins.each do |name, plugin|
+      Kernel.require(plugin)
+      Object.const_get("#{svc_module}::Client").add_plugin(name)
+    end
+  end
+
 end
