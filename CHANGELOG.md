@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
 2.10.59 (2017-10-05)
 ------------------
 
