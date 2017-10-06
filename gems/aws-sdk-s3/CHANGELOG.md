@@ -2,6 +2,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Update OJ Json parser error code
+* Issue - Fix typo
 
 1.4.0 (2017-09-14)
 ------------------
