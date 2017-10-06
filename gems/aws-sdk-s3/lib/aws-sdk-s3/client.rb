@@ -131,7 +131,7 @@ module Aws::S3
     # @option options [String] :endpoint
     #   The client endpoint is normally constructed from the `:region`
     #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be a valid HTTP(S) URI.
+    #   to test endpoints. This should be avalid HTTP(S) URI.
     #
     # @option options [Boolean] :follow_redirects (true)
     #   When `true`, this client will follow 307 redirects returned
@@ -5892,7 +5892,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
