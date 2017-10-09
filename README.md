@@ -12,9 +12,12 @@ This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
 * [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/ruby/)
 * [API Docs](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/frames.html)
-* [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
+
+## Change Log
+
+Change Log now can be found at each gem root path, e.g. change log for `aws-sdk-s3` gem can be found at `/gems/aws-sdk-s3/CHANGELOG.md` [here](https://github.com/aws/aws-sdk-ruby/blob/master/gems/aws-sdk-s3/CHANGELOG.md). The change log is also accessible via RubyGems.org page under "LINKS" section for changelog.
 
 ## Installation
 
