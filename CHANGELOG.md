@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.62 (2017-10-10)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
