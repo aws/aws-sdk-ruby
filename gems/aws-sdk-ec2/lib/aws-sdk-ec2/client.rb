@@ -1241,8 +1241,8 @@ module Aws::EC2
     # Attaches a virtual private gateway to a VPC. You can attach one
     # virtual private gateway to one VPC at a time.
     #
-    # For more information, see [Adding a Hardware Virtual Private Gateway
-    # to Your VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # For more information, see [AWS Managed VPN Connections][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -1320,36 +1320,30 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #
     # @option params [String] :cidr_ip
-    #   The CIDR IPv4 address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #
     # @option params [String] :ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #
     # @option params [String] :source_security_group_name
-    #   The name of a destination security group. To authorize outbound access
-    #   to a destination security group, we recommend that you use a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #
     # @option params [String] :source_security_group_owner_id
-    #   The AWS account number for a destination security group. To authorize
-    #   outbound access to a destination security group, we recommend that you
-    #   use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1457,8 +1451,8 @@ module Aws::EC2
     #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
+    #   One or more sets of IP permissions. Can be used to specify multiple
+    #   rules in a single command.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -1483,8 +1477,8 @@ module Aws::EC2
     #   EC2-VPC, the source security group must be in the same VPC.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account number for the source security group,
-    #   if the source security group is in a different account. You can't
+    #   \[EC2-Classic\] The AWS account ID for the source security group, if
+    #   the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
@@ -2439,9 +2433,8 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information about VPN customer gateways, see [Adding a
-    # Hardware Virtual Private Gateway to Your VPC][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information about VPN customer gateways, see [AWS Managed VPN
+    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     # You cannot create more than one customer gateway with the same VPN
     # type, IP address, and BGP ASN parameter values. If you run an
@@ -5247,9 +5240,8 @@ module Aws::EC2
     # static route allows traffic to be routed from the virtual private
     # gateway to the VPN customer gateway.
     #
-    # For more information about VPN connections, see [Adding a Hardware
-    # Virtual Private Gateway to Your VPC][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # For more information about VPN connections, see [AWS Managed VPN
+    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -5284,9 +5276,8 @@ module Aws::EC2
     # endpoint on the VPC side of your VPN connection. You can create a
     # virtual private gateway before creating the VPC itself.
     #
-    # For more information about virtual private gateways, see [Adding a
-    # Hardware Virtual Private Gateway to Your VPC][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information about virtual private gateways, see [AWS Managed
+    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -5297,6 +5288,14 @@ module Aws::EC2
     #
     # @option params [required, String] :type
     #   The type of VPN connection this virtual private gateway supports.
+    #
+    # @option params [Integer] :amazon_side_asn
+    #   A private Autonomous System Number (ASN) for the Amazon side of a BGP
+    #   session. If you're using a 16-bit ASN, it must be in the 64512 to
+    #   65534 range. If you're using a 32-bit ASN, it must be in the
+    #   4200000000 to 4294967294 range.
+    #
+    #   Default: 64512
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5313,6 +5312,7 @@ module Aws::EC2
     #   resp = client.create_vpn_gateway({
     #     availability_zone: "String",
     #     type: "ipsec.1", # required, accepts ipsec.1
+    #     amazon_side_asn: 1,
     #     dry_run: false,
     #   })
     #
@@ -5325,6 +5325,7 @@ module Aws::EC2
     #   resp.vpn_gateway.vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.vpn_gateway.vpc_attachments[0].vpc_id #=> String
     #   resp.vpn_gateway.vpn_gateway_id #=> String
+    #   resp.vpn_gateway.amazon_side_asn #=> Integer
     #   resp.vpn_gateway.tags #=> Array
     #   resp.vpn_gateway.tags[0].key #=> String
     #   resp.vpn_gateway.tags[0].value #=> String
@@ -7208,9 +7209,8 @@ module Aws::EC2
 
     # Describes one or more of your VPN customer gateways.
     #
-    # For more information about VPN customer gateways, see [Adding a
-    # Hardware Virtual Private Gateway to Your VPC][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information about VPN customer gateways, see [AWS Managed VPN
+    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -14776,9 +14776,8 @@ module Aws::EC2
 
     # Describes one or more of your VPN connections.
     #
-    # For more information about VPN connections, see [Adding a Hardware
-    # Virtual Private Gateway to Your VPC][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # For more information about VPN connections, see [AWS Managed VPN
+    # Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -14895,9 +14894,8 @@ module Aws::EC2
 
     # Describes one or more of your virtual private gateways.
     #
-    # For more information about virtual private gateways, see [Adding an
-    # IPsec Hardware VPN to Your VPC][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # For more information about virtual private gateways, see [AWS Managed
+    # VPN Connections][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -14905,6 +14903,9 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
+    #
+    #   * `amazon-side-asn` - The Autonomous System Number (ASN) for the
+    #     Amazon side of the gateway.
     #
     #   * `attachment.state` - The current state of the attachment between the
     #     gateway and the VPC (`attaching` \| `attached` \| `detaching` \|
@@ -14978,6 +14979,7 @@ module Aws::EC2
     #   resp.vpn_gateways[0].vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.vpn_gateways[0].vpc_attachments[0].vpc_id #=> String
     #   resp.vpn_gateways[0].vpn_gateway_id #=> String
+    #   resp.vpn_gateways[0].amazon_side_asn #=> Integer
     #   resp.vpn_gateways[0].tags #=> Array
     #   resp.vpn_gateways[0].tags[0].key #=> String
     #   resp.vpn_gateways[0].tags[0].value #=> String
@@ -16780,51 +16782,50 @@ module Aws::EC2
     end
 
     # Modifies the specified attribute of the specified AMI. You can specify
-    # only one attribute at a time.
+    # only one attribute at a time. You can use the `Attribute` parameter to
+    # specify the attribute or one of the following parameters:
+    # `Description`, `LaunchPermission`, or `ProductCode`.
     #
-    # <note markdown="1"> AWS Marketplace product codes cannot be modified. Images with an AWS
+    # AWS Marketplace product codes cannot be modified. Images with an AWS
     # Marketplace product code cannot be made public.
     #
-    #  </note>
-    #
-    # <note markdown="1"> The SriovNetSupport enhanced networking attribute cannot be changed
-    # using this command. Instead, enable SriovNetSupport on an instance and
-    # create an AMI from the instance. This will result in an image with
-    # SriovNetSupport enabled.
-    #
-    #  </note>
+    # To enable the SriovNetSupport enhanced networking attribute of an
+    # image, enable SriovNetSupport on an instance and create an AMI from
+    # the instance.
     #
     # @option params [String] :attribute
-    #   The name of the attribute to modify.
+    #   The name of the attribute to modify. The valid values are
+    #   `description`, `launchPermission`, and `productCodes`.
     #
     # @option params [Types::AttributeValue] :description
-    #   A description for the AMI.
+    #   A new description for the AMI.
     #
     # @option params [required, String] :image_id
     #   The ID of the AMI.
     #
     # @option params [Types::LaunchPermissionModifications] :launch_permission
-    #   A launch permission modification.
+    #   A new launch permission for the AMI.
     #
     # @option params [String] :operation_type
-    #   The operation type.
+    #   The operation type. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [Array<String>] :product_codes
-    #   One or more product codes. After you add a product code to an AMI, it
-    #   can't be removed. This is only valid when modifying the
-    #   `productCodes` attribute.
+    #   One or more DevPay product codes. After you add a product code to an
+    #   AMI, it can't be removed.
     #
     # @option params [Array<String>] :user_groups
-    #   One or more user groups. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more user groups. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [Array<String>] :user_ids
-    #   One or more AWS account IDs. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more AWS account IDs. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #
     # @option params [String] :value
-    #   The value of the attribute being modified. This is only valid when
-    #   modifying the `description` attribute.
+    #   The value of the attribute being modified. This parameter can be used
+    #   only when the `Attribute` parameter is `description` or
+    #   `productCodes`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20046,36 +20047,30 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #
     # @option params [String] :cidr_ip
-    #   The CIDR IP address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     #
     # @option params [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #
     # @option params [String] :ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     #
     # @option params [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #
     # @option params [String] :source_security_group_name
-    #   The name of a destination security group. To revoke outbound access to
-    #   a destination security group, we recommend that you use a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #
     # @option params [String] :source_security_group_owner_id
-    #   The AWS account number for a destination security group. To revoke
-    #   outbound access to a destination security group, we recommend that you
-    #   use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -20166,15 +20161,19 @@ module Aws::EC2
     #   number. For the ICMP type number, use `-1` to specify all ICMP types.
     #
     # @option params [String] :group_id
-    #   The ID of the security group. Required for a security group in a
-    #   nondefault VPC.
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You must
+    #   specify either the security group ID or the security group name in the
+    #   request.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a source security group
-    #   and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a source
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
@@ -21498,7 +21497,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

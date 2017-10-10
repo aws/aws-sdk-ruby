@@ -194,6 +194,7 @@ module Aws::OpsWorksCM
     DescribeNodeAssociationStatusRequest.struct_class = Types::DescribeNodeAssociationStatusRequest
 
     DescribeNodeAssociationStatusResponse.add_member(:node_association_status, Shapes::ShapeRef.new(shape: NodeAssociationStatus, location_name: "NodeAssociationStatus"))
+    DescribeNodeAssociationStatusResponse.add_member(:engine_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, location_name: "EngineAttributes"))
     DescribeNodeAssociationStatusResponse.struct_class = Types::DescribeNodeAssociationStatusResponse
 
     DescribeServersRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "ServerName"))
@@ -263,6 +264,7 @@ module Aws::OpsWorksCM
     Servers.member = Shapes::ShapeRef.new(shape: Server)
 
     StartMaintenanceRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
+    StartMaintenanceRequest.add_member(:engine_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, location_name: "EngineAttributes"))
     StartMaintenanceRequest.struct_class = Types::StartMaintenanceRequest
 
     StartMaintenanceResponse.add_member(:server, Shapes::ShapeRef.new(shape: Server, location_name: "Server"))

@@ -34,6 +34,46 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AddListenerCertificatesInput
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "ListenerArn", # required
+    #         certificates: [ # required
+    #           {
+    #             certificate_arn: "CertificateArn",
+    #             is_default: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificates
+    #   The certificate to add. You can specify one certificate per call.
+    #   @return [Array<Types::Certificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesInput AWS API Documentation
+    #
+    class AddListenerCertificatesInput < Struct.new(
+      :listener_arn,
+      :certificates)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificates
+    #   Information about the certificates.
+    #   @return [Array<Types::Certificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificatesOutput AWS API Documentation
+    #
+    class AddListenerCertificatesOutput < Struct.new(
+      :certificates)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddTagsInput
     #   data as a hash:
     #
@@ -90,24 +130,29 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Information about an SSL server certificate deployed on a load
-    # balancer.
+    # Information about an SSL server certificate.
     #
     # @note When making an API call, you may pass Certificate
     #   data as a hash:
     #
     #       {
     #         certificate_arn: "CertificateArn",
+    #         is_default: false,
     #       }
     #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] is_default
+    #   Indicates whether the certificate is the default certificate.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
-      :certificate_arn)
+      :certificate_arn,
+      :is_default)
       include Aws::Structure
     end
 
@@ -140,6 +185,7 @@ module Aws::ElasticLoadBalancingV2
     #         certificates: [
     #           {
     #             certificate_arn: "CertificateArn",
+    #             is_default: false,
     #           },
     #         ],
     #         default_actions: [ # required
@@ -711,6 +757,54 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeAccountLimitsOutput < Struct.new(
       :limits,
+      :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeListenerCertificatesInput
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "ListenerArn", # required
+    #         marker: "Marker",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Names (ARN) of the listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificatesInput AWS API Documentation
+    #
+    class DescribeListenerCertificatesInput < Struct.new(
+      :listener_arn,
+      :marker,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificates
+    #   Information about the certificates.
+    #   @return [Array<Types::Certificate>]
+    #
+    # @!attribute [rw] next_marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificatesOutput AWS API Documentation
+    #
+    class DescribeListenerCertificatesOutput < Struct.new(
+      :certificates,
       :next_marker)
       include Aws::Structure
     end
@@ -1399,6 +1493,7 @@ module Aws::ElasticLoadBalancingV2
     #         certificates: [
     #           {
     #             certificate_arn: "CertificateArn",
+    #             is_default: false,
     #           },
     #         ],
     #         default_actions: [
@@ -1434,7 +1529,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   The SSL server certificate.
+    #   The default SSL server certificate.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
@@ -1707,10 +1802,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets. The default port for a target is the port for the
-    #   target group. You can specify a port override. If a target is
-    #   already registered, you can register it again using a different
-    #   port.
+    #   The targets.
     #   @return [Array<Types::TargetDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsInput AWS API Documentation
@@ -1724,6 +1816,39 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsOutput AWS API Documentation
     #
     class RegisterTargetsOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveListenerCertificatesInput
+    #   data as a hash:
+    #
+    #       {
+    #         listener_arn: "ListenerArn", # required
+    #         certificates: [ # required
+    #           {
+    #             certificate_arn: "CertificateArn",
+    #             is_default: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificates
+    #   The certificate to remove. You can specify one certificate per call.
+    #   @return [Array<Types::Certificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificatesInput AWS API Documentation
+    #
+    class RemoveListenerCertificatesInput < Struct.new(
+      :listener_arn,
+      :certificates)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificatesOutput AWS API Documentation
+    #
+    class RemoveListenerCertificatesOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveTagsInput
     #   data as a hash:
@@ -2144,16 +2269,19 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone where the IP address is to be registered.
-    #   Specify `all` to register an IP address outside the target group VPC
-    #   with all Availability Zones that are enabled for the load balancer.
-    #
-    #   If the IP address is in a subnet of the VPC for the target group,
-    #   the Availability Zone is automatically detected and this parameter
-    #   is optional.
+    #   An Availability Zone or `all`. This determines whether the target
+    #   receives traffic from the load balancer nodes in the specified
+    #   Availability Zone or from all enabled Availability Zones for the
+    #   load balancer.
     #
     #   This parameter is not supported if the target type of the target
-    #   group is `instance`.
+    #   group is `instance`. If the IP address is in a subnet of the VPC for
+    #   the target group, the Availability Zone is automatically detected
+    #   and this parameter is optional. If the IP address is outside the
+    #   VPC, this parameter is required.
+    #
+    #   With an Application Load Balancer, if the IP address is outside the
+    #   VPC for the target group, the only supported value is `all`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription AWS API Documentation

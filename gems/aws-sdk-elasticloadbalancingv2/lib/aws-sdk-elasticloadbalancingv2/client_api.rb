@@ -14,6 +14,8 @@ module Aws::ElasticLoadBalancingV2
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionTypeEnum = Shapes::StringShape.new(name: 'ActionTypeEnum')
     Actions = Shapes::ListShape.new(name: 'Actions')
+    AddListenerCertificatesInput = Shapes::StructureShape.new(name: 'AddListenerCertificatesInput')
+    AddListenerCertificatesOutput = Shapes::StructureShape.new(name: 'AddListenerCertificatesOutput')
     AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
@@ -41,6 +43,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupOutput = Shapes::StructureShape.new(name: 'CreateTargetGroupOutput')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
+    Default = Shapes::BooleanShape.new(name: 'Default')
     DeleteListenerInput = Shapes::StructureShape.new(name: 'DeleteListenerInput')
     DeleteListenerOutput = Shapes::StructureShape.new(name: 'DeleteListenerOutput')
     DeleteLoadBalancerInput = Shapes::StructureShape.new(name: 'DeleteLoadBalancerInput')
@@ -53,6 +56,8 @@ module Aws::ElasticLoadBalancingV2
     DeregisterTargetsOutput = Shapes::StructureShape.new(name: 'DeregisterTargetsOutput')
     DescribeAccountLimitsInput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsInput')
     DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
+    DescribeListenerCertificatesInput = Shapes::StructureShape.new(name: 'DescribeListenerCertificatesInput')
+    DescribeListenerCertificatesOutput = Shapes::StructureShape.new(name: 'DescribeListenerCertificatesOutput')
     DescribeListenersInput = Shapes::StructureShape.new(name: 'DescribeListenersInput')
     DescribeListenersOutput = Shapes::StructureShape.new(name: 'DescribeListenersOutput')
     DescribeLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'DescribeLoadBalancerAttributesInput')
@@ -138,6 +143,8 @@ module Aws::ElasticLoadBalancingV2
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
     RegisterTargetsInput = Shapes::StructureShape.new(name: 'RegisterTargetsInput')
     RegisterTargetsOutput = Shapes::StructureShape.new(name: 'RegisterTargetsOutput')
+    RemoveListenerCertificatesInput = Shapes::StructureShape.new(name: 'RemoveListenerCertificatesInput')
+    RemoveListenerCertificatesOutput = Shapes::StructureShape.new(name: 'RemoveListenerCertificatesOutput')
     RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
     RemoveTagsOutput = Shapes::StructureShape.new(name: 'RemoveTagsOutput')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -224,6 +231,13 @@ module Aws::ElasticLoadBalancingV2
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
 
+    AddListenerCertificatesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
+    AddListenerCertificatesInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, required: true, location_name: "Certificates"))
+    AddListenerCertificatesInput.struct_class = Types::AddListenerCertificatesInput
+
+    AddListenerCertificatesOutput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
+    AddListenerCertificatesOutput.struct_class = Types::AddListenerCertificatesOutput
+
     AddTagsInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, required: true, location_name: "ResourceArns"))
     AddTagsInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     AddTagsInput.struct_class = Types::AddTagsInput
@@ -238,6 +252,7 @@ module Aws::ElasticLoadBalancingV2
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
     Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "CertificateArn"))
+    Certificate.add_member(:is_default, Shapes::ShapeRef.new(shape: Default, location_name: "IsDefault"))
     Certificate.struct_class = Types::Certificate
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate)
@@ -332,6 +347,15 @@ module Aws::ElasticLoadBalancingV2
     DescribeAccountLimitsOutput.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
     DescribeAccountLimitsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeAccountLimitsOutput.struct_class = Types::DescribeAccountLimitsOutput
+
+    DescribeListenerCertificatesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
+    DescribeListenerCertificatesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeListenerCertificatesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    DescribeListenerCertificatesInput.struct_class = Types::DescribeListenerCertificatesInput
+
+    DescribeListenerCertificatesOutput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
+    DescribeListenerCertificatesOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
+    DescribeListenerCertificatesOutput.struct_class = Types::DescribeListenerCertificatesOutput
 
     DescribeListenersInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, location_name: "LoadBalancerArn"))
     DescribeListenersInput.add_member(:listener_arns, Shapes::ShapeRef.new(shape: ListenerArns, location_name: "ListenerArns"))
@@ -521,6 +545,12 @@ module Aws::ElasticLoadBalancingV2
 
     RegisterTargetsOutput.struct_class = Types::RegisterTargetsOutput
 
+    RemoveListenerCertificatesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
+    RemoveListenerCertificatesInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, required: true, location_name: "Certificates"))
+    RemoveListenerCertificatesInput.struct_class = Types::RemoveListenerCertificatesInput
+
+    RemoveListenerCertificatesOutput.struct_class = Types::RemoveListenerCertificatesOutput
+
     RemoveTagsInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, required: true, location_name: "ResourceArns"))
     RemoveTagsInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
     RemoveTagsInput.struct_class = Types::RemoveTagsInput
@@ -677,6 +707,17 @@ module Aws::ElasticLoadBalancingV2
         "xmlNamespace" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/",
       }
 
+      api.add_operation(:add_listener_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddListenerCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddListenerCertificatesInput)
+        o.output = Shapes::ShapeRef.new(shape: AddListenerCertificatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificatesException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
+      end)
+
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTags"
         o.http_method = "POST"
@@ -813,6 +854,15 @@ module Aws::ElasticLoadBalancingV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountLimitsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
+      end)
+
+      api.add_operation(:describe_listener_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeListenerCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeListenerCertificatesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeListenerCertificatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
       end)
 
       api.add_operation(:describe_listeners, Seahorse::Model::Operation.new.tap do |o|
@@ -995,6 +1045,16 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyTargetsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRegistrationsForTargetIdException)
+      end)
+
+      api.add_operation(:remove_listener_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveListenerCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveListenerCertificatesInput)
+        o.output = Shapes::ShapeRef.new(shape: RemoveListenerCertificatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|

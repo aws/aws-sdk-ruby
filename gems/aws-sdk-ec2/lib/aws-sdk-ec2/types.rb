@@ -1095,42 +1095,36 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] cidr_ip
-    #   The CIDR IPv4 address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. We recommend that you specify the port range in a set
-    #   of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #   @return [Integer]
     #
     # @!attribute [rw] source_security_group_name
-    #   The name of a destination security group. To authorize outbound
-    #   access to a destination security group, we recommend that you use a
-    #   set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   The AWS account number for a destination security group. To
-    #   authorize outbound access to a destination security group, we
-    #   recommend that you use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest AWS API Documentation
@@ -1226,8 +1220,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
+    #   One or more sets of IP permissions. Can be used to specify multiple
+    #   rules in a single command.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
@@ -1257,14 +1251,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account number for the source security
-    #   group, if the source security group is in a different account. You
-    #   can't specify this parameter in combination with the following
-    #   parameters: the CIDR IP address range, the IP protocol, the start of
-    #   the port range, and the end of the port range. Creates rules that
-    #   grant full ICMP, UDP, and TCP access. To create a rule with a
-    #   specific IP protocol and port range, use a set of IP permissions
-    #   instead.
+    #   \[EC2-Classic\] The AWS account ID for the source security group, if
+    #   the source security group is in a different account. You can't
+    #   specify this parameter in combination with the following parameters:
+    #   the CIDR IP address range, the IP protocol, the start of the port
+    #   range, and the end of the port range. Creates rules that grant full
+    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
+    #   protocol and port range, use a set of IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] to_port
@@ -4372,6 +4365,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         type: "ipsec.1", # required, accepts ipsec.1
+    #         amazon_side_asn: 1,
     #         dry_run: false,
     #       }
     #
@@ -4382,6 +4376,15 @@ module Aws::EC2
     # @!attribute [rw] type
     #   The type of VPN connection this virtual private gateway supports.
     #   @return [String]
+    #
+    # @!attribute [rw] amazon_side_asn
+    #   A private Autonomous System Number (ASN) for the Amazon side of a
+    #   BGP session. If you're using a 16-bit ASN, it must be in the 64512
+    #   to 65534 range. If you're using a 32-bit ASN, it must be in the
+    #   4200000000 to 4294967294 range.
+    #
+    #   Default: 64512
+    #   @return [Integer]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4395,6 +4398,7 @@ module Aws::EC2
     class CreateVpnGatewayRequest < Struct.new(
       :availability_zone,
       :type,
+      :amazon_side_asn,
       :dry_run)
       include Aws::Structure
     end
@@ -11614,6 +11618,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
+    #   * `amazon-side-asn` - The Autonomous System Number (ASN) for the
+    #     Amazon side of the gateway.
+    #
     #   * `attachment.state` - The current state of the attachment between
     #     the gateway and the VPC (`attaching` \| `attached` \| `detaching`
     #     \| `detached`).
@@ -15898,7 +15905,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a security group rule.
+    # Describes a set of permissions for a security group rule.
     #
     # @note When making an API call, you may pass IpPermission
     #   data as a hash:
@@ -16015,7 +16022,7 @@ module Aws::EC2
     # @!attribute [rw] cidr_ip
     #   The IPv4 CIDR range. You can either specify a CIDR range or a source
     #   security group, not both. To specify a single IPv4 address, use the
-    #   /32 prefix.
+    #   /32 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -16060,7 +16067,7 @@ module Aws::EC2
     # @!attribute [rw] cidr_ipv_6
     #   The IPv6 CIDR range. You can either specify a CIDR range or a source
     #   security group, not both. To specify a single IPv6 address, use the
-    #   /128 prefix.
+    #   /128 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -16613,11 +16620,12 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] attribute
-    #   The name of the attribute to modify.
+    #   The name of the attribute to modify. The valid values are
+    #   `description`, `launchPermission`, and `productCodes`.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the AMI.
+    #   A new description for the AMI.
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] image_id
@@ -16625,32 +16633,33 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_permission
-    #   A launch permission modification.
+    #   A new launch permission for the AMI.
     #   @return [Types::LaunchPermissionModifications]
     #
     # @!attribute [rw] operation_type
-    #   The operation type.
+    #   The operation type. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #   @return [String]
     #
     # @!attribute [rw] product_codes
-    #   One or more product codes. After you add a product code to an AMI,
-    #   it can't be removed. This is only valid when modifying the
-    #   `productCodes` attribute.
+    #   One or more DevPay product codes. After you add a product code to an
+    #   AMI, it can't be removed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   One or more user groups. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more user groups. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_ids
-    #   One or more AWS account IDs. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more AWS account IDs. This parameter can be used only when
+    #   the `Attribute` parameter is `launchPermission`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] value
-    #   The value of the attribute being modified. This is only valid when
-    #   modifying the `description` attribute.
+    #   The value of the attribute being modified. This parameter can be
+    #   used only when the `Attribute` parameter is `description` or
+    #   `productCodes`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -21079,42 +21088,36 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] cidr_ip
-    #   The CIDR IP address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP
-    #   type number. We recommend that you specify the port range in a set
-    #   of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     #   @return [Integer]
     #
     # @!attribute [rw] source_security_group_name
-    #   The name of a destination security group. To revoke outbound access
-    #   to a destination security group, we recommend that you use a set of
-    #   IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   The AWS account number for a destination security group. To revoke
-    #   outbound access to a destination security group, we recommend that
-    #   you use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressRequest AWS API Documentation
@@ -21197,17 +21200,21 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
-    #   The ID of the security group. Required for a security group in a
-    #   nondefault VPC.
+    #   The ID of the security group. You must specify either the security
+    #   group ID or the security group name in the request. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You
+    #   must specify either the security group ID or the security group name
+    #   in the request.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   A set of IP permissions. You can't specify a source security group
-    #   and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a source
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
@@ -25862,6 +25869,11 @@ module Aws::EC2
     #   The ID of the virtual private gateway.
     #   @return [String]
     #
+    # @!attribute [rw] amazon_side_asn
+    #   The private Autonomous System Number (ASN) for the Amazon side of a
+    #   BGP session.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the virtual private gateway.
     #   @return [Array<Types::Tag>]
@@ -25874,6 +25886,7 @@ module Aws::EC2
       :type,
       :vpc_attachments,
       :vpn_gateway_id,
+      :amazon_side_asn,
       :tags)
       include Aws::Structure
     end
