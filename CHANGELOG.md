@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks for Chef Automate.
+
 2.10.61 (2017-10-06)
 ------------------
 
