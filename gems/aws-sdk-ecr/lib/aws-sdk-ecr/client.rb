@@ -396,10 +396,10 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Inform Amazon ECR that the image layer upload for a specified
-    # registry, repository name, and upload ID, has completed. You can
-    # optionally provide a `sha256` digest of the image layer for data
-    # validation purposes.
+    # Informs Amazon ECR that the image layer upload has completed for a
+    # specified registry, repository name, and upload ID. You can optionally
+    # provide a `sha256` digest of the image layer for data validation
+    # purposes.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -508,6 +508,47 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Deletes the specified lifecycle policy.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that is associated with the repository
+    #   policy to  delete.
+    #
+    # @return [Types::DeleteLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLifecyclePolicyResponse#registry_id #registry_id} => String
+    #   * {Types::DeleteLifecyclePolicyResponse#repository_name #repository_name} => String
+    #   * {Types::DeleteLifecyclePolicyResponse#lifecycle_policy_text #lifecycle_policy_text} => String
+    #   * {Types::DeleteLifecyclePolicyResponse#last_evaluated_at #last_evaluated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.lifecycle_policy_text #=> String
+    #   resp.last_evaluated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicy AWS API Documentation
+    #
+    # @overload delete_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_lifecycle_policy(params = {}, options = {})
+      req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing image repository. If a repository contains images,
     # you must use the `force` option to delete it.
     #
@@ -520,7 +561,7 @@ module Aws::ECR
     #   The name of the repository to delete.
     #
     # @option params [Boolean] :force
-    #   Force the deletion of the repository if it contains images.
+    #   If a repository contains images, forces the deletion.
     #
     # @return [Types::DeleteRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -916,6 +957,137 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Retrieves the specified lifecycle policy.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository with the policy to retrieve.
+    #
+    # @return [Types::GetLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecyclePolicyResponse#registry_id #registry_id} => String
+    #   * {Types::GetLifecyclePolicyResponse#repository_name #repository_name} => String
+    #   * {Types::GetLifecyclePolicyResponse#lifecycle_policy_text #lifecycle_policy_text} => String
+    #   * {Types::GetLifecyclePolicyResponse#last_evaluated_at #last_evaluated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_policy({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.lifecycle_policy_text #=> String
+    #   resp.last_evaluated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicy AWS API Documentation
+    #
+    # @overload get_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_policy(params = {}, options = {})
+      req = build_request(:get_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the results of the specified lifecycle policy preview
+    # request.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository with the policy to retrieve.
+    #
+    # @option params [Array<Types::ImageIdentifier>] :image_ids
+    #   The list of imageIDs to be included.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated 
+    #   `GetLifecyclePolicyPreviewRequest` request where `maxResults` was used
+    #   and the  results exceeded the value of that parameter. Pagination
+    #   continues from the end of the  previous results that returned the
+    #   `nextToken` value. This value is  `null` when there are no more
+    #   results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of repository results returned by
+    #   `GetLifecyclePolicyPreviewRequest` in  paginated output. When this
+    #   parameter is used, `GetLifecyclePolicyPreviewRequest` only returns 
+    #   `maxResults` results in a single page along with a `nextToken` 
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending  another `GetLifecyclePolicyPreviewRequest` request
+    #   with the returned `nextToken`  value. This value can be between 1 and
+    #   100. If this  parameter is not used, then
+    #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
+    #   `nextToken` value, if  applicable.
+    #
+    # @option params [Types::LifecyclePolicyPreviewFilter] :filter
+    #   An optional parameter that filters results based on image tag status
+    #   and all tags, if tagged.
+    #
+    # @return [Types::GetLifecyclePolicyPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLifecyclePolicyPreviewResponse#registry_id #registry_id} => String
+    #   * {Types::GetLifecyclePolicyPreviewResponse#repository_name #repository_name} => String
+    #   * {Types::GetLifecyclePolicyPreviewResponse#lifecycle_policy_text #lifecycle_policy_text} => String
+    #   * {Types::GetLifecyclePolicyPreviewResponse#status #status} => String
+    #   * {Types::GetLifecyclePolicyPreviewResponse#next_token #next_token} => String
+    #   * {Types::GetLifecyclePolicyPreviewResponse#preview_results #preview_results} => Array&lt;Types::LifecyclePolicyPreviewResult&gt;
+    #   * {Types::GetLifecyclePolicyPreviewResponse#summary #summary} => Types::LifecyclePolicyPreviewSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lifecycle_policy_preview({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_ids: [
+    #       {
+    #         image_digest: "ImageDigest",
+    #         image_tag: "ImageTag",
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: {
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.lifecycle_policy_text #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "EXPIRED", "FAILED"
+    #   resp.next_token #=> String
+    #   resp.preview_results #=> Array
+    #   resp.preview_results[0].image_tags #=> Array
+    #   resp.preview_results[0].image_tags[0] #=> String
+    #   resp.preview_results[0].image_digest #=> String
+    #   resp.preview_results[0].image_pushed_at #=> Time
+    #   resp.preview_results[0].action.type #=> String, one of "EXPIRE"
+    #   resp.preview_results[0].applied_rule_priority #=> Integer
+    #   resp.summary.expiring_image_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreview AWS API Documentation
+    #
+    # @overload get_lifecycle_policy_preview(params = {})
+    # @param [Hash] params ({})
+    def get_lifecycle_policy_preview(params = {}, options = {})
+      req = build_request(:get_lifecycle_policy_preview, params)
+      req.send_request(options)
+    end
+
     # Retrieves the repository policy for a specified repository.
     #
     # @option params [String] :registry_id
@@ -924,7 +1096,7 @@ module Aws::ECR
     #   assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository whose policy you want to retrieve.
+    #   The name of the repository with the policy to retrieve.
     #
     # @return [Types::GetRepositoryPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -979,12 +1151,12 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that you intend to
-    #   upload layers to. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The AWS account ID associated with the registry to which you intend to
+    #   upload layers. If you do not specify a registry, the default registry
+    #   is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository that you intend to upload layers to.
+    #   The name of the repository to which you intend to upload layers.
     #
     # @return [Types::InitiateLayerUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1023,11 +1195,11 @@ module Aws::ECR
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
-    #   repository to list images in. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   repository in which to list images. If you do not specify a registry,
+    #   the default registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The repository whose image IDs are to be listed.
+    #   The repository with image IDs to be listed.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListImages`
@@ -1162,6 +1334,48 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Creates or updates a lifecycle policy.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do  not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository to receive the policy.
+    #
+    # @option params [required, String] :lifecycle_policy_text
+    #   The JSON repository policy text to apply to the repository.
+    #
+    # @return [Types::PutLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutLifecyclePolicyResponse#registry_id #registry_id} => String
+    #   * {Types::PutLifecyclePolicyResponse#repository_name #repository_name} => String
+    #   * {Types::PutLifecyclePolicyResponse#lifecycle_policy_text #lifecycle_policy_text} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_lifecycle_policy({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     lifecycle_policy_text: "LifecyclePolicyText", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.lifecycle_policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutLifecyclePolicy AWS API Documentation
+    #
+    # @overload put_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def put_lifecycle_policy(params = {}, options = {})
+      req = build_request(:put_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Applies a repository policy on a specified repository to control
     # access permissions.
     #
@@ -1212,6 +1426,52 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Starts a preview of the specified lifecycle policy. This allows you to
+    # see the results before creating the lifecycle policy.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository to be evaluated.
+    #
+    # @option params [String] :lifecycle_policy_text
+    #   The policy to be evaluated against. If you do not specify a policy,
+    #   the current policy for the repository is used.
+    #
+    # @return [Types::StartLifecyclePolicyPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartLifecyclePolicyPreviewResponse#registry_id #registry_id} => String
+    #   * {Types::StartLifecyclePolicyPreviewResponse#repository_name #repository_name} => String
+    #   * {Types::StartLifecyclePolicyPreviewResponse#lifecycle_policy_text #lifecycle_policy_text} => String
+    #   * {Types::StartLifecyclePolicyPreviewResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_lifecycle_policy_preview({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     lifecycle_policy_text: "LifecyclePolicyText",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.lifecycle_policy_text #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "EXPIRED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreview AWS API Documentation
+    #
+    # @overload start_lifecycle_policy_preview(params = {})
+    # @param [Hash] params ({})
+    def start_lifecycle_policy_preview(params = {}, options = {})
+      req = build_request(:start_lifecycle_policy_preview, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
@@ -1221,12 +1481,12 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that you are uploading
-    #   layer parts to. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The AWS account ID associated with the registry to which you are
+    #   uploading layer parts. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository that you are uploading layer parts to.
+    #   The name of the repository to which you are uploading layer parts.
     #
     # @option params [required, String] :upload_id
     #   The upload ID from a previous InitiateLayerUpload operation to
@@ -1288,7 +1548,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
