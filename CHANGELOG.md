@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
+
 2.10.62 (2017-10-10)
 ------------------
 
