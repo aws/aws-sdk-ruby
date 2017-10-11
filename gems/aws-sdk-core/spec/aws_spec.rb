@@ -65,28 +65,12 @@ module Aws
       SvcTest = ApiHelper.sample_service(
         api: Json.load_file("#{dir}/s3.json")
       )
-      Aws.add_plugins({
+      Aws.add_plugins(SvcTest, {
         'Custom::Plugin' => File.join(dir, "../custom/plugin.rb")
-      }, SvcTest)
+      })
       client = SvcTest::Client.new(region: 'foo')
       expect(client.class.plugins).to include(Custom::Plugin)
     end
 
-    it 'adds custom plugins to all available AWS service' do
-      Aws::Svc1 = ApiHelper.sample_service(
-        api: Json.load_file("#{dir}/s3.json")
-      )
-      Aws::Svc2 = ApiHelper.sample_service(
-        api: Json.load_file("#{dir}/dynamodb.json")
-      )
-      Aws.add_plugins({
-        'Custom::Plugin' => File.join(dir, "../custom/plugin.rb")
-      })
-
-      client1 = Aws::Svc1::Client.new(region: 'foo')
-      expect(client1.class.plugins).to include(Custom::Plugin)
-      client2 = Aws::Svc2::Client.new(region: 'foo')
-      expect(client2.class.plugins).to include(Custom::Plugin)
-    end
   end
 end
