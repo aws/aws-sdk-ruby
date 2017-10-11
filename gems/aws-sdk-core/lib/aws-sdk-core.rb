@@ -153,41 +153,19 @@ module Aws
 
     # @api private
     #
-    # Register customer plugins outside of SDK
+    # Register custom plugins outside of SDK per service
     #
-    #   Aws.add_plugins({
+    #   Aws.add_plugins(Aws::S3, {
     #     'Awesome::Plugins::PluginA' => "/path/to/plugin/a.rb",
     #     'Awesome::Plugins::PluginB' => "/path/to/plugin/b.rb",
     #   })
     #
     # @param [Hash] plugins a Hash of plugins mappings with name as
     #   key and plugin path as value
-    # @param options[String] svc_name service module for plugins to
+    # @param [String] svc_name service module for plugins to
     #   add, e.g. Aws::S3. Default to nil, plugins will be added to
     #   all AWS service modules available
-    def add_plugins(plugins = {}, svc_name = nil)
-      unless svc_name.nil?
-        add_svc_plugins(svc_name, plugins)
-      else
-        # add plugins to all services available
-        service_available.each do |svc|
-          add_svc_plugins(svc, plugins)
-        end
-      end
-    end
-
-    # @api private
-    def service_available
-      aws_modules = Aws.constants.map(&Aws.method(:const_get)).grep(Module)
-      aws_modules.inject([]) do |svc, item|
-        # filter in only service modules
-        svc << item if item.constants.include? :ClientApi
-        svc
-      end
-    end
-
-    # @api private
-    def add_svc_plugins(svc_name, plugins)
+    def add_plugins(svc_name, plugins = {})
       @plugins[svc_name] = [plugins]
       @plugin_added_callbacks.each do |callback|
         callback.call(svc_name.to_s, *@plugins[svc_name])

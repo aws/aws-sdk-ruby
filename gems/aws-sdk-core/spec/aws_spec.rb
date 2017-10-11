@@ -66,10 +66,10 @@ module Aws
         api: Json.load_file("#{dir}/s3.json")
       )
       Aws.add_plugins({
-        'YellowSeahorseFixtures::Plugin' => File.join(dir, "../example.com/plugin.rb")
+        'Custom::Plugin' => File.join(dir, "../custom/plugin.rb")
       }, SvcTest)
       client = SvcTest::Client.new(region: 'foo')
-      expect(client.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+      expect(client.class.plugins).to include(Custom::Plugin)
     end
 
     it 'adds custom plugins to all available AWS service' do
@@ -80,13 +80,13 @@ module Aws
         api: Json.load_file("#{dir}/dynamodb.json")
       )
       Aws.add_plugins({
-        'YellowSeahorseFixtures::Plugin' => File.join(dir, "../example.com/plugin.rb")
+        'Custom::Plugin' => File.join(dir, "../custom/plugin.rb")
       })
 
       client1 = Aws::Svc1::Client.new(region: 'foo')
-      expect(client1.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+      expect(client1.class.plugins).to include(Custom::Plugin)
       client2 = Aws::Svc2::Client.new(region: 'foo')
-      expect(client2.class.plugins).to include(YellowSeahorseFixtures::Plugin)
+      expect(client2.class.plugins).to include(Custom::Plugin)
     end
   end
 end
