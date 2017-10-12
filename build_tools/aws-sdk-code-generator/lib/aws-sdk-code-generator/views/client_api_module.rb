@@ -69,6 +69,7 @@ module AwsSdkCodeGenerator
         'globalEndpoint' => false,
         'serviceAbbreviation' => false,
         'uid' => false,
+        'serviceId' => false,
       }
 
       # @option options [required, Service] :service
