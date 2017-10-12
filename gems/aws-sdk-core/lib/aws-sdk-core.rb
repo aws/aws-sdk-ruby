@@ -191,7 +191,7 @@ module Aws
   plugins_added do |svc_module, plugins|
     plugins.each do |name, plugin|
       Kernel.require(plugin)
-      Object.const_get("#{svc_module}::Client").add_plugin(name)
+      Object.const_get(svc_module).const_get("Client").add_plugin(name)
     end
   end
 
