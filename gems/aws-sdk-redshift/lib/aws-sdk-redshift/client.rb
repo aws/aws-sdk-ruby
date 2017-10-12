@@ -2960,9 +2960,20 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Lists descriptions of all the Amazon Redshift event notifications
-    # subscription for a customer account. If you specify a subscription
+    # Lists descriptions of all the Amazon Redshift event notification
+    # subscriptions for a customer account. If you specify a subscription
     # name, lists the description for that subscription.
+    #
+    # If you specify both tag keys and tag values in the same request,
+    # Amazon Redshift returns all event notification subscriptions that
+    # match any combination of the specified keys and values. For example,
+    # if you have `owner` and `environment` for tag keys, and `admin` and
+    # `test` for tag values, all subscriptions that have any combination of
+    # those values are returned.
+    #
+    # If both tag keys and values are omitted from the request,
+    # subscriptions are returned regardless of whether they have tag keys or
+    # values associated with them.
     #
     # @option params [String] :subscription_name
     #   The name of the Amazon Redshift event notification subscription to be
@@ -2988,6 +2999,24 @@ module Aws::Redshift
     #   providing the returned marker value in the `Marker` parameter and
     #   retrying the request.
     #
+    # @option params [Array<String>] :tag_keys
+    #   A tag key or keys for which you want to return all matching event
+    #   notification subscriptions that are associated with the specified key
+    #   or keys. For example, suppose that you have subscriptions that are
+    #   tagged with keys called `owner` and `environment`. If you specify both
+    #   of these tag keys in the request, Amazon Redshift returns a response
+    #   with the subscriptions that have either or both of these tag keys
+    #   associated with them.
+    #
+    # @option params [Array<String>] :tag_values
+    #   A tag value or values for which you want to return all matching event
+    #   notification subscriptions that are associated with the specified tag
+    #   value or values. For example, suppose that you have subscriptions that
+    #   are tagged with values called `admin` and `test`. If you specify both
+    #   of these tag values in the request, Amazon Redshift returns a response
+    #   with the subscriptions that have either or both of these tag values
+    #   associated with them.
+    #
     # @return [Types::EventSubscriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
@@ -2999,6 +3028,8 @@ module Aws::Redshift
     #     subscription_name: "String",
     #     max_records: 1,
     #     marker: "String",
+    #     tag_keys: ["String"],
+    #     tag_values: ["String"],
     #   })
     #
     # @example Response structure
@@ -3888,13 +3919,13 @@ module Aws::Redshift
     #   * Snapshot copy grant
     #
     #   For more information about Amazon Redshift resource types and
-    #   constructing ARNs, go to [Constructing an Amazon Redshift Amazon
-    #   Resource Name (ARN)][1] in the Amazon Redshift Cluster Management
-    #   Guide.
+    #   constructing ARNs, go to [Specifying Policy Elements: Actions,
+    #   Effects, Resources, and Principals][1] in the Amazon Redshift Cluster
+    #   Management Guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
     #
     # @option params [Integer] :max_records
     #   The maximum number or response records to return in each call. If the
@@ -4309,21 +4340,22 @@ module Aws::Redshift
     end
 
     # Returns a database user name and temporary password with temporary
-    # authorization to log in to an Amazon Redshift database. The action
+    # authorization to log on to an Amazon Redshift database. The action
     # returns the database user name prefixed with `IAM:` if `AutoCreate` is
     # `False` or `IAMA:` if `AutoCreate` is `True`. You can optionally
     # specify one or more database user groups that the user will join at
-    # log in. By default, the temporary credentials expire in 900 seconds.
+    # log on. By default, the temporary credentials expire in 900 seconds.
     # You can optionally specify a duration between 900 seconds (15 minutes)
-    # and 3600 seconds (60 minutes). For more information, see Generating
-    # IAM Database User Credentials in the Amazon Redshift Cluster
-    # Management Guide.
+    # and 3600 seconds (60 minutes). For more information, see [Using IAM
+    # Authentication to Generate Database User Credentials][1] in the Amazon
+    # Redshift Cluster Management Guide.
     #
-    # The IAM user or role that executes GetClusterCredentials must have an
-    # IAM policy attached that allows the `redshift:GetClusterCredentials`
-    # action with access to the `dbuser` resource on the cluster. The user
-    # name specified for `dbuser` in the IAM policy and the user name
-    # specified for the `DbUser` parameter must match.
+    # The AWS Identity and Access Management (IAM)user or role that executes
+    # GetClusterCredentials must have an IAM policy attached that allows
+    # access to all necessary actions and resources. For more information
+    # about permissions, see [Resource Policies for
+    # GetClusterCredentials][2] in the Amazon Redshift Cluster Management
+    # Guide.
     #
     # If the `DbGroups` parameter is specified, the IAM policy must allow
     # the `redshift:JoinGroup` action with access to the listed `dbgroups`.
@@ -4333,6 +4365,11 @@ module Aws::Redshift
     #
     # If the `DbName` parameter is specified, the IAM policy must allow
     # access to the resource `dbname` for the specified database name.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html
+    # [2]: http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources
     #
     # @option params [required, String] :db_user
     #   The name of a database user. If a user name matching `DbUser` exists
@@ -4349,9 +4386,10 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 to 128 alphanumeric characters or hyphens
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters.
+    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
+    #     period (dot), at symbol (@), or hyphen.
     #
     #   * First character must be a letter.
     #
@@ -4362,19 +4400,24 @@ module Aws::Redshift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
     #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [String] :db_name
     #   The name of a database that `DbUser` is authorized to log on to. If
-    #   `DbName` is not specified, `DbUser` can log in to any existing
+    #   `DbName` is not specified, `DbUser` can log on to any existing
     #   database.
     #
     #   Constraints:
     #
     #   * Must be 1 to 64 alphanumeric characters or hyphens
     #
-    #   * Must contain only lowercase letters.
+    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
+    #     period (dot), at symbol (@), or hyphen.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
     #
     #   * Cannot be a reserved word. A list of reserved words can be found in
     #     [Reserved Words][1] in the Amazon Redshift Database Developer Guide.
@@ -4396,13 +4439,32 @@ module Aws::Redshift
     #   Default: 900
     #
     # @option params [Boolean] :auto_create
-    #   Create a database user with the name specified for `DbUser` if one
-    #   does not exist.
+    #   Create a database user with the name specified for the user named in
+    #   `DbUser` if one does not exist.
     #
     # @option params [Array<String>] :db_groups
-    #   A list of the names of existing database groups that `DbUser` will
-    #   join for the current session. If not specified, the new user is added
-    #   only to PUBLIC.
+    #   A list of the names of existing database groups that the user named in
+    #   `DbUser` will join for the current session, in addition to any group
+    #   memberships for an existing user. If not specified, a new user is
+    #   added only to PUBLIC.
+    #
+    #   Database group name constraints
+    #
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters, numbers, underscore, plus sign,
+    #     period (dot), at symbol (@), or hyphen.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found in
+    #     [Reserved Words][1] in the Amazon Redshift Database Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @return [Types::ClusterCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6116,7 +6178,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

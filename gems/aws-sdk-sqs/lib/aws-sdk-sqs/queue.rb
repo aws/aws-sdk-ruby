@@ -312,7 +312,9 @@ module Aws::SQS
     # @option options [Integer] :wait_time_seconds
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
-    #   call returns sooner than `WaitTimeSeconds`.
+    #   call returns sooner than `WaitTimeSeconds`. If no messages are
+    #   available and the wait time expires, the call returns successfully
+    #   with an empty list of messages.
     # @option options [String] :receive_request_attempt_id
     #   This parameter applies only to FIFO (first-in-first-out) queues.
     #
@@ -628,13 +630,21 @@ module Aws::SQS
     #     for which a ` ReceiveMessage ` action waits for a message to arrive.
     #     Valid values: an integer from 0 to 20 (seconds). The default is 0.
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon SQS
+    #     Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be a
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered to
+    #       the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be a
     #     standard queue.
     #
     #      </note>
@@ -650,7 +660,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see [Key
     #     Terms][5]. While the alias of the AWS-managed CMK for Amazon SQS is
     #     always `alias/aws/sqs`, the alias of a custom CMK can, for example,
-    #     be `alias/aws/sqs`. For more examples, see [KeyId][6] in the *AWS
+    #     be `alias/MyAlias `. For more examples, see [KeyId][6] in the *AWS
     #     Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds, for
@@ -659,8 +669,8 @@ module Aws::SQS
     #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
     #     hours). The default is 300 (5 minutes). A shorter time period
     #     provides better security but results in more calls to KMS which
-    #     incur charges after Free Tier. For more information, see [How Does
-    #     the Data Key Reuse Period Work?][8].
+    #     might incur charges after Free Tier. For more information, see [How
+    #     Does the Data Key Reuse Period Work?][8].
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
     #   queues][9]\:

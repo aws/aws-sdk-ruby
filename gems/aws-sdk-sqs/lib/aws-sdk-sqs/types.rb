@@ -321,13 +321,21 @@ module Aws::SQS
     #     arrive. Valid values: An integer from 0 to 20 (seconds). The
     #     default is 0 (zero).
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon SQS
+    #     Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
     #     a standard queue.
     #
     #      </note>
@@ -343,7 +351,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
-    #     example, be `alias/aws/sqs`. For more examples, see [KeyId][6] in
+    #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
@@ -352,8 +360,8 @@ module Aws::SQS
     #     representing seconds, between 60 seconds (1 minute) and 86,400
     #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
-    #     which incur charges after Free Tier. For more information, see
-    #     [How Does the Data Key Reuse Period Work?][8].
+    #     which might incur charges after Free Tier. For more information,
+    #     see [How Does the Data Key Reuse Period Work?][8].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
@@ -655,10 +663,18 @@ module Aws::SQS
     #     seconds, for which the `ReceiveMessage` action waits for a message
     #     to arrive.
     #
-    #   * `RedrivePolicy` - Returns the parameters for dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][3] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - Returns the string that includes the parameters
+    #     for dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][3] in the *Amazon SQS
+    #     Developer Guide*.
+    #
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
     #
     #   * `VisibilityTimeout` - Returns the visibility timeout for the
     #     queue. For more information about the visibility timeout, see
@@ -672,23 +688,24 @@ module Aws::SQS
     #
     #   * `KmsDataKeyReusePeriodSeconds` - Returns the length of time, in
     #     seconds, for which Amazon SQS can reuse a data key to encrypt or
-    #     decrypt messages before calling AWS KMS again.
+    #     decrypt messages before calling AWS KMS again. For more
+    #     information, see [How Does the Data Key Reuse Period Work?][7].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][7]\:
+    #   queues][8]\:
     #
     #   * `FifoQueue` - Returns whether the queue is FIFO. For more
-    #     information, see [FIFO Queue Logic][8] in the *Amazon SQS
+    #     information, see [FIFO Queue Logic][9] in the *Amazon SQS
     #     Developer Guide*.
     #
-    #     <note markdown="1"> To determine whether a queue is [FIFO][7], you can check whether
+    #     <note markdown="1"> To determine whether a queue is [FIFO][8], you can check whether
     #     `QueueName` ends with the `.fifo` suffix.
     #
     #      </note>
     #
     #   * `ContentBasedDeduplication` - Returns whether content-based
     #     deduplication is enabled for the queue. For more information, see
-    #     [Exactly-Once Processing][9] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-Once Processing][10] in the *Amazon SQS Developer Guide*.
     #
     #
     #
@@ -698,9 +715,10 @@ module Aws::SQS
     #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
-    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
-    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
-    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
+    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+    #   [10]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest AWS API Documentation
@@ -778,7 +796,7 @@ module Aws::SQS
     #       }
     #
     # @!attribute [rw] queue_url
-    #   The URL of a dead letter queue.
+    #   The URL of a dead-letter queue.
     #
     #   Queue URLs are case-sensitive.
     #   @return [String]
@@ -794,7 +812,7 @@ module Aws::SQS
     #
     # @!attribute [rw] queue_urls
     #   A list of source queue URLs that have the `RedrivePolicy` queue
-    #   attribute configured with a dead letter queue.
+    #   attribute configured with a dead-letter queue.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult AWS API Documentation
@@ -1122,7 +1140,9 @@ module Aws::SQS
     # @!attribute [rw] wait_time_seconds
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
-    #   call returns sooner than `WaitTimeSeconds`.
+    #   call returns sooner than `WaitTimeSeconds`. If no messages are
+    #   available and the wait time expires, the call returns successfully
+    #   with an empty list of messages.
     #   @return [Integer]
     #
     # @!attribute [rw] receive_request_attempt_id
@@ -1816,13 +1836,21 @@ module Aws::SQS
     #     arrive. Valid values: an integer from 0 to 20 (seconds). The
     #     default is 0.
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon SQS
+    #     Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
     #     a standard queue.
     #
     #      </note>
@@ -1838,7 +1866,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
-    #     example, be `alias/aws/sqs`. For more examples, see [KeyId][6] in
+    #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
@@ -1847,8 +1875,8 @@ module Aws::SQS
     #     representing seconds, between 60 seconds (1 minute) and 86,400
     #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
-    #     which incur charges after Free Tier. For more information, see
-    #     [How Does the Data Key Reuse Period Work?][8].
+    #     which might incur charges after Free Tier. For more information,
+    #     see [How Does the Data Key Reuse Period Work?][8].
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
     #   queues][9]\:
