@@ -2666,6 +2666,45 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Returns the tags applied to an AWS Elastic Beanstalk resource. The
+    # response contains a list of tag key-value pairs.
+    #
+    # Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk
+    # environments.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
+    #   requested.
+    #
+    #   Must be the ARN of an Elastic Beanstalk environment.
+    #
+    # @return [Types::ResourceTagsDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResourceTagsDescriptionMessage#resource_arn #resource_arn} => String
+    #   * {Types::ResourceTagsDescriptionMessage#resource_tags #resource_tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Deletes and recreates all of the AWS resources (for example: the Auto
     # Scaling group, load balancer, etc.) for a specified environment and
     # forces a restart.
@@ -3728,6 +3767,52 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Update the list of tags applied to an AWS Elastic Beanstalk resource.
+    # Two lists can be passed: `TagsToAdd` for tags to add or update, and
+    # `TagsToRemove`.
+    #
+    # Currently, Elastic Beanstalk only supports tagging of Elastic
+    # Beanstalk environments.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resouce to be updated.
+    #
+    #   Must be the ARN of an Elastic Beanstalk environment.
+    #
+    # @option params [Array<Types::Tag>] :tags_to_add
+    #   A list of tags to add or update.
+    #
+    #   If a key of an existing tag is added, the tag's value is updated.
+    #
+    # @option params [Array<String>] :tags_to_remove
+    #   A list of tag keys to remove.
+    #
+    #   If a tag key doesn't exist, it is silently ignored.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags_to_add: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     tags_to_remove: ["TagKey"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateTagsForResource AWS API Documentation
+    #
+    # @overload update_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def update_tags_for_resource(params = {}, options = {})
+      req = build_request(:update_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Takes a set of configuration settings and either a configuration
     # template or environment, and determines whether those values are
     # valid.
@@ -3827,7 +3912,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

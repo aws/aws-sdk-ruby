@@ -270,11 +270,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match an existing DBParameterGroupFamily.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     # @option options [Array<Types::Filter>] :filters
     #   Not currently supported.
     # @option options [Boolean] :default_only

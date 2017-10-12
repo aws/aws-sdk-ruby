@@ -197,10 +197,14 @@ module Aws::RDS
     DescribeReservedDBInstancesMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesMessage')
     DescribeReservedDBInstancesOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesOfferingsMessage')
     DescribeSourceRegionsMessage = Shapes::StructureShape.new(name: 'DescribeSourceRegionsMessage')
+    DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
+    DescribeValidDBInstanceModificationsResult = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsResult')
     DomainMembership = Shapes::StructureShape.new(name: 'DomainMembership')
     DomainMembershipList = Shapes::ListShape.new(name: 'DomainMembershipList')
     DomainNotFoundFault = Shapes::StructureShape.new(name: 'DomainNotFoundFault')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleRange = Shapes::StructureShape.new(name: 'DoubleRange')
+    DoubleRangeList = Shapes::ListShape.new(name: 'DoubleRangeList')
     DownloadDBLogFilePortionDetails = Shapes::StructureShape.new(name: 'DownloadDBLogFilePortionDetails')
     DownloadDBLogFilePortionMessage = Shapes::StructureShape.new(name: 'DownloadDBLogFilePortionMessage')
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
@@ -311,6 +315,8 @@ module Aws::RDS
     ProvisionedIopsNotAvailableInAZFault = Shapes::StructureShape.new(name: 'ProvisionedIopsNotAvailableInAZFault')
     PurchaseReservedDBInstancesOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedDBInstancesOfferingMessage')
     PurchaseReservedDBInstancesOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedDBInstancesOfferingResult')
+    Range = Shapes::StructureShape.new(name: 'Range')
+    RangeList = Shapes::ListShape.new(name: 'RangeList')
     ReadReplicaDBClusterIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBClusterIdentifierList')
     ReadReplicaDBInstanceIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBInstanceIdentifierList')
     ReadReplicaIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaIdentifierList')
@@ -381,6 +387,9 @@ module Aws::RDS
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
     Timezone = Shapes::StructureShape.new(name: 'Timezone')
     UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
+    ValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'ValidDBInstanceModificationsMessage')
+    ValidStorageOptions = Shapes::StructureShape.new(name: 'ValidStorageOptions')
+    ValidStorageOptionsList = Shapes::ListShape.new(name: 'ValidStorageOptionsList')
     ValidUpgradeTargetList = Shapes::ListShape.new(name: 'ValidUpgradeTargetList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
@@ -1264,6 +1273,12 @@ module Aws::RDS
     DescribeSourceRegionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeSourceRegionsMessage.struct_class = Types::DescribeSourceRegionsMessage
 
+    DescribeValidDBInstanceModificationsMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    DescribeValidDBInstanceModificationsMessage.struct_class = Types::DescribeValidDBInstanceModificationsMessage
+
+    DescribeValidDBInstanceModificationsResult.add_member(:valid_db_instance_modifications_message, Shapes::ShapeRef.new(shape: ValidDBInstanceModificationsMessage, location_name: "ValidDBInstanceModificationsMessage"))
+    DescribeValidDBInstanceModificationsResult.struct_class = Types::DescribeValidDBInstanceModificationsResult
+
     DomainMembership.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     DomainMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DomainMembership.add_member(:fqdn, Shapes::ShapeRef.new(shape: String, location_name: "FQDN"))
@@ -1271,6 +1286,12 @@ module Aws::RDS
     DomainMembership.struct_class = Types::DomainMembership
 
     DomainMembershipList.member = Shapes::ShapeRef.new(shape: DomainMembership, location_name: "DomainMembership")
+
+    DoubleRange.add_member(:from, Shapes::ShapeRef.new(shape: Double, location_name: "From"))
+    DoubleRange.add_member(:to, Shapes::ShapeRef.new(shape: Double, location_name: "To"))
+    DoubleRange.struct_class = Types::DoubleRange
+
+    DoubleRangeList.member = Shapes::ShapeRef.new(shape: DoubleRange, location_name: "DoubleRange")
 
     DownloadDBLogFilePortionDetails.add_member(:log_file_data, Shapes::ShapeRef.new(shape: String, location_name: "LogFileData"))
     DownloadDBLogFilePortionDetails.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1685,6 +1706,13 @@ module Aws::RDS
     PurchaseReservedDBInstancesOfferingResult.add_member(:reserved_db_instance, Shapes::ShapeRef.new(shape: ReservedDBInstance, location_name: "ReservedDBInstance"))
     PurchaseReservedDBInstancesOfferingResult.struct_class = Types::PurchaseReservedDBInstancesOfferingResult
 
+    Range.add_member(:from, Shapes::ShapeRef.new(shape: Integer, location_name: "From"))
+    Range.add_member(:to, Shapes::ShapeRef.new(shape: Integer, location_name: "To"))
+    Range.add_member(:step, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Step"))
+    Range.struct_class = Types::Range
+
+    RangeList.member = Shapes::ShapeRef.new(shape: Range, location_name: "Range")
+
     ReadReplicaDBClusterIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBClusterIdentifier")
 
     ReadReplicaDBInstanceIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBInstanceIdentifier")
@@ -1962,6 +1990,17 @@ module Aws::RDS
     UpgradeTarget.add_member(:auto_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoUpgrade"))
     UpgradeTarget.add_member(:is_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMajorVersionUpgrade"))
     UpgradeTarget.struct_class = Types::UpgradeTarget
+
+    ValidDBInstanceModificationsMessage.add_member(:storage, Shapes::ShapeRef.new(shape: ValidStorageOptionsList, location_name: "Storage"))
+    ValidDBInstanceModificationsMessage.struct_class = Types::ValidDBInstanceModificationsMessage
+
+    ValidStorageOptions.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    ValidStorageOptions.add_member(:storage_size, Shapes::ShapeRef.new(shape: RangeList, location_name: "StorageSize"))
+    ValidStorageOptions.add_member(:provisioned_iops, Shapes::ShapeRef.new(shape: RangeList, location_name: "ProvisionedIops"))
+    ValidStorageOptions.add_member(:iops_to_storage_ratio, Shapes::ShapeRef.new(shape: DoubleRangeList, location_name: "IopsToStorageRatio"))
+    ValidStorageOptions.struct_class = Types::ValidStorageOptions
+
+    ValidStorageOptionsList.member = Shapes::ShapeRef.new(shape: ValidStorageOptions, location_name: "ValidStorageOptions")
 
     ValidUpgradeTargetList.member = Shapes::ShapeRef.new(shape: UpgradeTarget, location_name: "UpgradeTarget")
 
@@ -2714,6 +2753,16 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSourceRegionsMessage)
         o.output = Shapes::ShapeRef.new(shape: SourceRegionMessage)
+      end)
+
+      api.add_operation(:describe_valid_db_instance_modifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeValidDBInstanceModifications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeValidDBInstanceModificationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeValidDBInstanceModificationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:download_db_log_file_portion, Seahorse::Model::Operation.new.tap do |o|

@@ -2580,6 +2580,10 @@ module Aws::DatabaseMigrationService
     # Returns table statistics on the database migration task, including
     # table name, rows inserted, rows updated, and rows deleted.
     #
+    # Note that the "last updated" column the DMS console only indicates
+    # the time that AWS DMS last updated the table statistics record for a
+    # table. It does not indicate the time of the last update to the table.
+    #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #
@@ -2591,12 +2595,20 @@ module Aws::DatabaseMigrationService
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 500.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond the
     #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the describe table statistics action.
+    #
+    #   Valid filter names: schema-name \| table-name \| table-state
+    #
+    #   A combination of filters creates an AND condition where each record
+    #   matches all specified filters.
     #
     # @return [Types::DescribeTableStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2630,6 +2642,12 @@ module Aws::DatabaseMigrationService
     #     replication_task_arn: "String", # required
     #     max_records: 1,
     #     marker: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2811,7 +2829,8 @@ module Aws::DatabaseMigrationService
     #   The name of the endpoint database.
     #
     # @option params [String] :extra_connection_attributes
-    #   Additional attributes associated with the connection.
+    #   Additional attributes associated with the connection. To reset this
+    #   parameter, pass the empty string ("") as an argument.
     #
     # @option params [String] :certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate used for SSL
@@ -3770,7 +3789,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

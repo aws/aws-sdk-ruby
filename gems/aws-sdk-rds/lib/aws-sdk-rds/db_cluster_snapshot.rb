@@ -340,7 +340,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -478,7 +478,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -502,8 +502,8 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     # @option options [String] :database_name

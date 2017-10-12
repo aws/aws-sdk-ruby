@@ -473,18 +473,17 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
     #
     #   Example: `mySubnetgroup`
     # @option options [required, String] :engine
@@ -507,7 +506,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -676,7 +675,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -727,7 +726,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -787,9 +786,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #
@@ -932,7 +931,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -987,8 +986,8 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     # @option options [String] :option_group_name
@@ -1173,11 +1172,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * If supplied, must match the identifier of an existing
+    #     DBClusterSnapshot.
     #
     #   * If this identifier is for an automated snapshot, the `SnapshotType`
     #     parameter must also be specified.

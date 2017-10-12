@@ -381,7 +381,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -544,7 +544,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 numbers, letters, or hyphens
     #
     #   * First character must be a letter
     #
@@ -580,8 +580,8 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     # @option options [Boolean] :multi_az
@@ -634,9 +634,31 @@ module Aws::RDS
     #   Constraint: Must be compatible with the engine of the source. You can
     #   restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
     #
-    #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
-    #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
-    #   `sqlserver-web` \| `postgres` \| `aurora`
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [Integer] :iops
     #   Specifies the amount of provisioned IOPS for the DB instance,
     #   expressed in I/O operations per second. If this parameter is not

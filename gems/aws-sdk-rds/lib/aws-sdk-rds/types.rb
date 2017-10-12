@@ -87,10 +87,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] source_identifier
-    #   The identifier of the event source to be added. An identifier must
-    #   begin with a letter and must contain only ASCII letters, digits, and
-    #   hyphens; it cannot end with a hyphen or contain two consecutive
-    #   hyphens.
+    #   The identifier of the event source to be added.
     #
     #   Constraints:
     #
@@ -441,7 +438,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -511,12 +508,6 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
-    #
     #   * Must specify a valid system snapshot in the "available" state.
     #
     #   * If the source snapshot is in the same AWS Region as the copy,
@@ -539,7 +530,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -704,7 +695,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -803,7 +794,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -999,7 +990,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -1110,7 +1101,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1126,11 +1117,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -1140,8 +1130,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with this DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -1172,7 +1162,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -1390,11 +1380,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must match the name of an existing DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #
     #   <note markdown="1"> This value is stored as a lowercase string.
     #
@@ -1490,7 +1478,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1505,11 +1493,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must match the identifier of an existing DBCluster.
     #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   ^
     #
     #   Example: `my-cluster1`
     #   @return [String]
@@ -1612,7 +1598,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     #
@@ -1624,7 +1610,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     #
@@ -1636,7 +1622,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 63 alphanumeric characters
+    #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
     #   * Must begin with a letter or an underscore. Subsequent characters
     #     can be letters, underscores, or digits (0-9).
@@ -1669,7 +1655,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     #   @return [String]
@@ -1680,7 +1666,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -1838,7 +1824,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Required for MariaDB.
+    #
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
@@ -1846,9 +1834,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 128 alphanumeric characters.
+    #   * Required for SQL Server.
     #
-    #   * First character must be a letter.
+    #   * Must be 1 to 128 letters or numbers.
+    #
+    #   * The first character must be a letter.
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
@@ -1856,7 +1846,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Required for MySQL.
+    #
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -1866,7 +1858,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 30 alphanumeric characters.
+    #   * Required for Oracle.
+    #
+    #   * Must be 1 to 30 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -1876,7 +1870,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 63 alphanumeric characters.
+    #   * Required for PostgreSQL.
+    #
+    #   * Must be 1 to 63 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -1987,7 +1983,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -2695,6 +2691,8 @@ module Aws::RDS
     #   * Can only be specified if the source DB instance identifier
     #     specifies a DB instance in another AWS Region.
     #
+    #   * If supplied, must match the name of an existing DBSubnetGroup.
+    #
     #   * The specified DB subnet group must be in the same AWS Region in
     #     which the operation is running.
     #
@@ -2706,9 +2704,6 @@ module Aws::RDS
     #
     #     * Not specify a DB subnet group. All these Read Replicas will be
     #       created outside of any VPC.
-    #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -2958,7 +2953,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -3030,7 +3025,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -3102,7 +3097,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -3112,16 +3107,14 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier. This is the unique key that identifies a
-    #   DB instance.
+    #   The identifier of the DB instance that you want to create the
+    #   snapshot of.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3175,7 +3168,7 @@ module Aws::RDS
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
+    #   Constraints: Must contain no more than 255 letters, numbers,
     #   periods, underscores, spaces, or hyphens. Must not be default.
     #
     #   Example: `mySubnetgroup`
@@ -3356,7 +3349,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters or hyphens
+    #   * Must be 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -3786,7 +3779,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters or numbers.
     #
     #   * First character must be a letter
     #
@@ -5110,11 +5103,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match an existing DBClusterIdentifier.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] skip_final_snapshot
@@ -5142,7 +5133,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -5266,11 +5257,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the name of an existing DB instance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] skip_final_snapshot
@@ -5305,7 +5294,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters or numbers.
     #
     #   * First character must be a letter
     #
@@ -5390,7 +5379,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -5462,8 +5451,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -5556,11 +5545,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match an existing CertificateIdentifier.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -5616,11 +5603,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -5677,11 +5663,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -5785,11 +5770,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * If supplied, must match the identifier of an existing DBCluster.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
@@ -5800,11 +5783,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * If supplied, must match the identifier of an existing
+    #     DBClusterSnapshot.
     #
     #   * If this identifier is for an automated snapshot, the
     #     `SnapshotType` parameter must also be specified.
@@ -5919,11 +5899,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * If supplied, must match an existing DBClusterIdentifier.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -6002,11 +5980,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match an existing DBParameterGroupFamily.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -6084,11 +6060,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * If supplied, must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -6181,11 +6155,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filename_contains
@@ -6272,11 +6244,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -6332,11 +6303,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing DBParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -6491,11 +6460,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * If supplied, must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] db_snapshot_identifier
@@ -6505,11 +6472,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * If supplied, must match the identifier of an existing DBSnapshot.
     #
     #   * If this identifier is for an automated snapshot, the
     #     `SnapshotType` parameter must also be specified.
@@ -7503,6 +7466,38 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeValidDBInstanceModificationsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_instance_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The customer identifier or the ARN of your DB instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModificationsMessage AWS API Documentation
+    #
+    class DescribeValidDBInstanceModificationsMessage < Struct.new(
+      :db_instance_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid_db_instance_modifications_message
+    #   Information about valid modifications that you can make to your DB
+    #   instance. Contains the result of a successful call to the
+    #   DescribeValidDBInstanceModifications action. You can use this
+    #   information when you call ModifyDBInstance.
+    #   @return [Types::ValidDBInstanceModificationsMessage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModificationsResult AWS API Documentation
+    #
+    class DescribeValidDBInstanceModificationsResult < Struct.new(
+      :valid_db_instance_modifications_message)
+      include Aws::Structure
+    end
+
     # An Active Directory Domain membership record associated with the DB
     # instance.
     #
@@ -7531,6 +7526,24 @@ module Aws::RDS
       :status,
       :fqdn,
       :iam_role_name)
+      include Aws::Structure
+    end
+
+    # A range of double values.
+    #
+    # @!attribute [rw] from
+    #   The minimum value in the range.
+    #   @return [Float]
+    #
+    # @!attribute [rw] to
+    #   The maximum value in the range.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DoubleRange AWS API Documentation
+    #
+    class DoubleRange < Struct.new(
+      :from,
+      :to)
       include Aws::Structure
     end
 
@@ -7576,11 +7589,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] log_file_name
@@ -7923,11 +7934,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBCluster.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] target_db_instance_identifier
@@ -8077,13 +8086,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier for an existing DB cluster.
+    #   * Must match the identifier of an existing DBCluster.
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] new_db_cluster_identifier
@@ -8092,9 +8097,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #
@@ -8428,13 +8433,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier for an existing DB instance
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -8546,8 +8547,8 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   specify `true` for the `ApplyImmediately` parameter.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetGroup`
     #
@@ -8563,11 +8564,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match existing DBSecurityGroups.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -8582,11 +8581,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match existing VpcSecurityGroupIds.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [Array<String>]
     #
     # @!attribute [rw] apply_immediately
@@ -8628,9 +8625,25 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     #
-    #   Constraints: Must be 8 to 41 alphanumeric characters (MySQL,
-    #   MariaDB, and Amazon Aurora), 8 to 30 alphanumeric characters
-    #   (Oracle), or 8 to 128 alphanumeric characters (SQL Server).
+    #   **MariaDB**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
+    #
+    #   **MySQL**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Oracle**
+    #
+    #   Constraints: Must contain from 8 to 30 characters.
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
     #
     #   <note markdown="1"> Amazon RDS API actions never return the password, so this action
     #   provides a way to regain access to a primary instance user if the
@@ -8848,11 +8861,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `mydbinstance`
     #   @return [String]
     #
     # @!attribute [rw] storage_type
@@ -9128,13 +9143,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the name of an existing DB parameter group
+    #   * If supplied, must match the name of an existing DBParameterGroup.
     #
-    #   * Must be 1 to 255 alphanumeric characters
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -9319,10 +9330,10 @@ module Aws::RDS
     #
     # @!attribute [rw] db_subnet_group_name
     #   The name for the DB subnet group. This value is stored as a
-    #   lowercase string.
+    #   lowercase string. You can't modify the default subnet group.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -10339,11 +10350,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must match the identifier of an existing DBCluster Read Replica.
     #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   ^
     #
     #   Example: `my-cluster-replica1`
     #   @return [String]
@@ -10397,13 +10406,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier for an existing Read Replica DB instance
+    #   * Must match the identifier of an existing Read Replica DB instance.
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #
     #   Example: `mydbinstance`
     #   @return [String]
@@ -10541,6 +10546,33 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # A range of integer values.
+    #
+    # @!attribute [rw] from
+    #   The minimum value in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The maximum value in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] step
+    #   The step value for the range. For example, if you have a range of
+    #   5,000 to 10,000, with a step value of 1,000, the valid values start
+    #   at 5,000 and step up by 1,000. Even though 7,500 is within the
+    #   range, it isn't a valid value for the range. The valid values are
+    #   5,000, 6,000, 7,000, 8,000...
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :from,
+      :to,
+      :step)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RebootDBInstanceMessage
     #   data as a hash:
     #
@@ -10555,11 +10587,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] force_failover
@@ -10979,11 +11009,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must match the name of an existing DBParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] reset_all_parameters
@@ -11118,7 +11146,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -11134,11 +11162,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match the name of an existing
+    #     DBClusterParameterGroup.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -11149,8 +11176,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with the restored DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -11182,7 +11209,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -11408,7 +11435,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -11427,11 +11454,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing Snapshot.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -11457,8 +11482,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -11584,7 +11609,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -11613,13 +11638,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing database instance
+    #   * Must match the identifier of an existing DBCluster.
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] restore_to_time
@@ -11663,8 +11684,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -11802,7 +11823,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 numbers, letters, or hyphens
     #
     #   * First character must be a letter
     #
@@ -11816,14 +11837,10 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must match the identifier of an existing DBSnapshot.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
-    #
-    #   If you are restoring from a shared manual DB snapshot, the
-    #   `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
+    #   * If you are restoring from a shared manual DB snapshot, the
+    #     `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
@@ -11861,8 +11878,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -11927,9 +11944,31 @@ module Aws::RDS
     #   Constraint: Must be compatible with the engine of the source. You
     #   can restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
     #
-    #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
-    #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
-    #   `sqlserver-web` \| `postgres` \| `aurora`
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -12108,13 +12147,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing database instance
+    #   * Must match the identifier of an existing DBInstance.
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
-    #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] target_db_instance_identifier
@@ -12122,7 +12157,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -12191,8 +12226,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -12255,9 +12290,31 @@ module Aws::RDS
     #
     #   Constraint: Must be compatible with the engine of the source
     #
-    #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
-    #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
-    #   `sqlserver-web` \| `postgres` \| `aurora`
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -12739,6 +12796,54 @@ module Aws::RDS
       :description,
       :auto_upgrade,
       :is_major_version_upgrade)
+      include Aws::Structure
+    end
+
+    # Information about valid modifications that you can make to your DB
+    # instance. Contains the result of a successful call to the
+    # DescribeValidDBInstanceModifications action. You can use this
+    # information when you call ModifyDBInstance.
+    #
+    # @!attribute [rw] storage
+    #   Valid storage options for your DB instance.
+    #   @return [Array<Types::ValidStorageOptions>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
+    #
+    class ValidDBInstanceModificationsMessage < Struct.new(
+      :storage)
+      include Aws::Structure
+    end
+
+    # Information about valid modifications that you can make to your DB
+    # instance. Contains the result of a successful call to the
+    # DescribeValidDBInstanceModifications action.
+    #
+    # @!attribute [rw] storage_type
+    #   The valid storage types for your DB instance. For example, gp2, io1.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_size
+    #   The valid range of storage in gigabytes. For example, 100 to 6144.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] provisioned_iops
+    #   The valid range of provisioned IOPS. For example, 1000-20000.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] iops_to_storage_ratio
+    #   The valid range of Provisioned IOPS to gigabytes of storage
+    #   multiplier. For example, 3-10, which means that provisioned IOPS can
+    #   be between 3 and 10 times storage.
+    #   @return [Array<Types::DoubleRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidStorageOptions AWS API Documentation
+    #
+    class ValidStorageOptions < Struct.new(
+      :storage_type,
+      :storage_size,
+      :provisioned_iops,
+      :iops_to_storage_ratio)
       include Aws::Structure
     end
 

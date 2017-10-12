@@ -40,6 +40,9 @@ module Aws::CodeCommit
     CreateRepositoryOutput = Shapes::StructureShape.new(name: 'CreateRepositoryOutput')
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     Date = Shapes::StringShape.new(name: 'Date')
+    DefaultBranchCannotBeDeletedException = Shapes::StructureShape.new(name: 'DefaultBranchCannotBeDeletedException')
+    DeleteBranchInput = Shapes::StructureShape.new(name: 'DeleteBranchInput')
+    DeleteBranchOutput = Shapes::StructureShape.new(name: 'DeleteBranchOutput')
     DeleteRepositoryInput = Shapes::StructureShape.new(name: 'DeleteRepositoryInput')
     DeleteRepositoryOutput = Shapes::StructureShape.new(name: 'DeleteRepositoryOutput')
     Difference = Shapes::StructureShape.new(name: 'Difference')
@@ -157,6 +160,7 @@ module Aws::CodeCommit
 
     BranchNameList.member = Shapes::ShapeRef.new(shape: BranchName)
 
+    Commit.add_member(:commit_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "commitId"))
     Commit.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
     Commit.add_member(:parents, Shapes::ShapeRef.new(shape: ParentList, location_name: "parents"))
     Commit.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
@@ -176,6 +180,13 @@ module Aws::CodeCommit
 
     CreateRepositoryOutput.add_member(:repository_metadata, Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
     CreateRepositoryOutput.struct_class = Types::CreateRepositoryOutput
+
+    DeleteBranchInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DeleteBranchInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
+    DeleteBranchInput.struct_class = Types::DeleteBranchInput
+
+    DeleteBranchOutput.add_member(:deleted_branch, Shapes::ShapeRef.new(shape: BranchInfo, location_name: "deletedBranch"))
+    DeleteBranchOutput.struct_class = Types::DeleteBranchOutput
 
     DeleteRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteRepositoryInput.struct_class = Types::DeleteRepositoryInput
@@ -395,6 +406,25 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryDescriptionException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:delete_branch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBranch"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBranchInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBranchOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: BranchNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBranchNameException)
+        o.errors << Shapes::ShapeRef.new(shape: DefaultBranchCannotBeDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)

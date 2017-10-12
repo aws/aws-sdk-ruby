@@ -2889,6 +2889,27 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resouce for which a tag list
+    #   is requested.
+    #
+    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListTagsForResourceMessage AWS API Documentation
+    #
+    class ListTagsForResourceMessage < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
     # Describes the properties of a Listener for the LoadBalancer.
     #
     # @!attribute [rw] protocol
@@ -3471,6 +3492,23 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resouce for which a tag list
+    #   was requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_tags
+    #   A list of tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceTagsDescriptionMessage AWS API Documentation
+    #
+    class ResourceTagsDescriptionMessage < Struct.new(
+      :resource_arn,
+      :resource_tags)
       include Aws::Structure
     end
 
@@ -4290,6 +4328,47 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :option_settings,
       :options_to_remove)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTagsForResourceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags_to_add: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         tags_to_remove: ["TagKey"],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resouce to be updated.
+    #
+    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags_to_add
+    #   A list of tags to add or update.
+    #
+    #   If a key of an existing tag is added, the tag's value is updated.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] tags_to_remove
+    #   A list of tag keys to remove.
+    #
+    #   If a tag key doesn't exist, it is silently ignored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateTagsForResourceMessage AWS API Documentation
+    #
+    class UpdateTagsForResourceMessage < Struct.new(
+      :resource_arn,
+      :tags_to_add,
+      :tags_to_remove)
       include Aws::Structure
     end
 

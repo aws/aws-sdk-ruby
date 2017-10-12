@@ -613,7 +613,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     #
@@ -625,7 +625,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     #
@@ -637,7 +637,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 63 alphanumeric characters
+    #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
     #   * Must begin with a letter or an underscore. Subsequent characters can
     #     be letters, underscores, or digits (0-9).
@@ -670,7 +670,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 alphanumeric characters
+    #   * Must contain 1 to 64 letters or numbers.
     #
     #   * Cannot be a word reserved by the specified database engine
     # @option options [Integer] :allocated_storage
@@ -811,7 +811,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Required for MariaDB.
+    #
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
@@ -819,9 +821,11 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 128 alphanumeric characters.
+    #   * Required for SQL Server.
     #
-    #   * First character must be a letter.
+    #   * Must be 1 to 128 letters or numbers.
+    #
+    #   * The first character must be a letter.
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
@@ -829,7 +833,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 16 alphanumeric characters.
+    #   * Required for MySQL.
+    #
+    #   * Must be 1 to 16 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -839,7 +845,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 30 alphanumeric characters.
+    #   * Required for Oracle.
+    #
+    #   * Must be 1 to 30 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -849,7 +857,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 63 alphanumeric characters.
+    #   * Required for PostgreSQL.
+    #
+    #   * Must be 1 to 63 letters or numbers.
     #
     #   * First character must be a letter.
     #
@@ -944,7 +954,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
     #   * First character must be a letter
     #
@@ -1494,6 +1504,8 @@ module Aws::RDS
     #   * Can only be specified if the source DB instance identifier specifies
     #     a DB instance in another AWS Region.
     #
+    #   * If supplied, must match the name of an existing DBSubnetGroup.
+    #
     #   * The specified DB subnet group must be in the same AWS Region in
     #     which the operation is running.
     #
@@ -1505,9 +1517,6 @@ module Aws::RDS
     #
     #     * Not specify a DB subnet group. All these Read Replicas will be
     #       created outside of any VPC.
-    #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
     #
     #   Example: `mySubnetgroup`
     # @option options [String] :storage_type
@@ -1664,7 +1673,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -1722,7 +1731,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * Must be 1 to 255 letters or numbers.
     #
     #   * First character must be a letter
     #
@@ -1884,8 +1893,8 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   specify `true` for the `ApplyImmediately` parameter.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetGroup`
     #
@@ -1899,11 +1908,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match existing DBSecurityGroups.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to authorize on this DB instance.
     #   This change is asynchronously applied as soon as possible.
@@ -1915,11 +1922,9 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters
+    #   * If supplied, must match existing VpcSecurityGroupIds.
     #
-    #   * First character must be a letter
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   ^
     # @option options [Boolean] :apply_immediately
     #   Specifies whether the modifications in this request and any pending
     #   modifications are asynchronously applied as soon as possible,
@@ -1957,9 +1962,25 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     #
-    #   Constraints: Must be 8 to 41 alphanumeric characters (MySQL, MariaDB,
-    #   and Amazon Aurora), 8 to 30 alphanumeric characters (Oracle), or 8 to
-    #   128 alphanumeric characters (SQL Server).
+    #   **MariaDB**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
+    #
+    #   **MySQL**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **Oracle**
+    #
+    #   Constraints: Must contain from 8 to 30 characters.
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
     #
     #   <note markdown="1"> Amazon RDS API actions never return the password, so this action
     #   provides a way to regain access to a primary instance user if the
@@ -2149,11 +2170,13 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `mydbinstance`
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
@@ -2426,7 +2449,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -2482,8 +2505,8 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
     #
     #   Example: `mySubnetgroup`
     # @option options [Boolean] :multi_az
@@ -2534,9 +2557,31 @@ module Aws::RDS
     #
     #   Constraint: Must be compatible with the engine of the source
     #
-    #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
-    #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
-    #   `sqlserver-web` \| `postgres` \| `aurora`
+    #   Valid Values:
+    #
+    #   * `aurora`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance.
@@ -2921,11 +2966,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be 1 to 255 alphanumeric characters.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * If supplied, must match the identifier of an existing DBSnapshot.
     #
     #   * If this identifier is for an automated snapshot, the `SnapshotType`
     #     parameter must also be specified.
