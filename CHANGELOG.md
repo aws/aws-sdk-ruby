@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.64 (2017-10-12)
+------------------
+
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
