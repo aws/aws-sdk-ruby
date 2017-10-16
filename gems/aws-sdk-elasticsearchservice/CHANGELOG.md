@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2017-10-16)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-elasticsearchservice` gemspec metadata.
 
 1.0.0 (2017-08-29)

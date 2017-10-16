@@ -231,6 +231,10 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
     #
+    # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
+    #   Map of `LogType` and `LogPublishingOption`, each containing options to
+    #   publish a given type of Elasticsearch log.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -261,6 +265,12 @@ module Aws::ElasticsearchService
     #     advanced_options: {
     #       "String" => "String",
     #     },
+    #     log_publishing_options: {
+    #       "INDEX_SLOW_LOGS" => {
+    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
+    #         enabled: false,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -287,6 +297,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
+    #   resp.domain_status.log_publishing_options #=> Hash
+    #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -336,6 +349,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
+    #   resp.domain_status.log_publishing_options #=> Hash
+    #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -385,6 +401,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
+    #   resp.domain_status.log_publishing_options #=> Hash
+    #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -457,6 +476,14 @@ module Aws::ElasticsearchService
     #   resp.domain_config.advanced_options.status.update_version #=> Integer
     #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.log_publishing_options.options #=> Hash
+    #   resp.domain_config.log_publishing_options.options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_config.log_publishing_options.options["LogType"].enabled #=> Boolean
+    #   resp.domain_config.log_publishing_options.status.creation_date #=> Time
+    #   resp.domain_config.log_publishing_options.status.update_date #=> Time
+    #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
+    #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -507,6 +534,9 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
     #   resp.domain_status_list[0].advanced_options #=> Hash
     #   resp.domain_status_list[0].advanced_options["String"] #=> String
+    #   resp.domain_status_list[0].log_publishing_options #=> Hash
+    #   resp.domain_status_list[0].log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_status_list[0].log_publishing_options["LogType"].enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -756,6 +786,10 @@ module Aws::ElasticsearchService
     # @option params [String] :access_policies
     #   IAM access policy as a JSON-formatted string.
     #
+    # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
+    #   Map of `LogType` and `LogPublishingOption`, each containing options to
+    #   publish a given type of Elasticsearch log.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -785,6 +819,12 @@ module Aws::ElasticsearchService
     #       "String" => "String",
     #     },
     #     access_policies: "PolicyDocument",
+    #     log_publishing_options: {
+    #       "INDEX_SLOW_LOGS" => {
+    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
+    #         enabled: false,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -834,6 +874,14 @@ module Aws::ElasticsearchService
     #   resp.domain_config.advanced_options.status.update_version #=> Integer
     #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.log_publishing_options.options #=> Hash
+    #   resp.domain_config.log_publishing_options.options["LogType"].cloud_watch_logs_log_group_arn #=> String
+    #   resp.domain_config.log_publishing_options.options["LogType"].enabled #=> Boolean
+    #   resp.domain_config.log_publishing_options.status.creation_date #=> Time
+    #   resp.domain_config.log_publishing_options.status.update_date #=> Time
+    #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
+    #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #
     # @overload update_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -855,7 +903,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -444,6 +444,50 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGeoMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the GeoMatchSet. You can't change
+    #   `Name` after you create the `GeoMatchSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetRequest AWS API Documentation
+    #
+    class CreateGeoMatchSetRequest < Struct.new(
+      :name,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] geo_match_set
+    #   The GeoMatchSet returned in the `CreateGeoMatchSet` response. The
+    #   `GeoMatchSet` contains no `GeoMatchConstraints`.
+    #   @return [Types::GeoMatchSet]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `CreateGeoMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetResponse AWS API Documentation
+    #
+    class CreateGeoMatchSetResponse < Struct.new(
+      :geo_match_set,
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateIPSetRequest
     #   data as a hash:
     #
@@ -558,6 +602,93 @@ module Aws::WAF
     #
     class CreateRateBasedRuleResponse < Struct.new(
       :rule,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRegexMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexMatchSet. You can't
+    #   change `Name` after you create a `RegexMatchSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetRequest AWS API Documentation
+    #
+    class CreateRegexMatchSetRequest < Struct.new(
+      :name,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regex_match_set
+    #   A RegexMatchSet that contains no `RegexMatchTuple` objects.
+    #   @return [Types::RegexMatchSet]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `CreateRegexMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetResponse AWS API Documentation
+    #
+    class CreateRegexMatchSetResponse < Struct.new(
+      :regex_match_set,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRegexPatternSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexPatternSet. You can't
+    #   change `Name` after you create a `RegexPatternSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetRequest AWS API Documentation
+    #
+    class CreateRegexPatternSetRequest < Struct.new(
+      :name,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regex_pattern_set
+    #   A RegexPatternSet that contains no objects.
+    #   @return [Types::RegexPatternSet]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the
+    #   `CreateRegexPatternSet` request. You can also use this value to
+    #   query the status of the request. For more information, see
+    #   GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetResponse AWS API Documentation
+    #
+    class CreateRegexPatternSetResponse < Struct.new(
+      :regex_pattern_set,
       :change_token)
       include Aws::Structure
     end
@@ -856,6 +987,45 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteGeoMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         geo_match_set_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] geo_match_set_id
+    #   The `GeoMatchSetID` of the GeoMatchSet that you want to delete.
+    #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
+    #   ListGeoMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetRequest AWS API Documentation
+    #
+    class DeleteGeoMatchSetRequest < Struct.new(
+      :geo_match_set_id,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `DeleteGeoMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetResponse AWS API Documentation
+    #
+    class DeleteGeoMatchSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteIPSetRequest
     #   data as a hash:
     #
@@ -928,6 +1098,85 @@ module Aws::WAF
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRuleResponse AWS API Documentation
     #
     class DeleteRateBasedRuleResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRegexMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_match_set_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] regex_match_set_id
+    #   The `RegexMatchSetId` of the RegexMatchSet that you want to delete.
+    #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
+    #   ListRegexMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetRequest AWS API Documentation
+    #
+    class DeleteRegexMatchSetRequest < Struct.new(
+      :regex_match_set_id,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `DeleteRegexMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetResponse AWS API Documentation
+    #
+    class DeleteRegexMatchSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRegexPatternSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_pattern_set_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The `RegexPatternSetId` of the RegexPatternSet that you want to
+    #   delete. `RegexPatternSetId` is returned by CreateRegexPatternSet and
+    #   by ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetRequest AWS API Documentation
+    #
+    class DeleteRegexPatternSetRequest < Struct.new(
+      :regex_pattern_set_id,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the
+    #   `DeleteRegexPatternSet` request. You can also use this value to
+    #   query the status of the request. For more information, see
+    #   GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetResponse AWS API Documentation
+    #
+    class DeleteRegexPatternSetResponse < Struct.new(
       :change_token)
       include Aws::Structure
     end
@@ -1192,6 +1441,119 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # The country from which web requests originate that you want AWS WAF to
+    # search for.
+    #
+    # @note When making an API call, you may pass GeoMatchConstraint
+    #   data as a hash:
+    #
+    #       {
+    #         type: "Country", # required, accepts Country
+    #         value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of geographical area you want AWS WAF to search for.
+    #   Currently `Country` is the only valid value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The country that you want AWS WAF to search for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchConstraint AWS API Documentation
+    #
+    class GeoMatchConstraint < Struct.new(
+      :type,
+      :value)
+      include Aws::Structure
+    end
+
+    # Contains one or more countries that AWS WAF will search for.
+    #
+    # @!attribute [rw] geo_match_set_id
+    #   The `GeoMatchSetId` for an `GeoMatchSet`. You use `GeoMatchSetId` to
+    #   get information about a `GeoMatchSet` (see GeoMatchSet), update a
+    #   `GeoMatchSet` (see UpdateGeoMatchSet), insert a `GeoMatchSet` into a
+    #   `Rule` or delete one from a `Rule` (see UpdateRule), and delete a
+    #   `GeoMatchSet` from AWS WAF (see DeleteGeoMatchSet).
+    #
+    #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
+    #   ListGeoMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the GeoMatchSet. You can't change
+    #   the name of an `GeoMatchSet` after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_constraints
+    #   An array of GeoMatchConstraint objects, which contain the country
+    #   that you want AWS WAF to search for.
+    #   @return [Array<Types::GeoMatchConstraint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSet AWS API Documentation
+    #
+    class GeoMatchSet < Struct.new(
+      :geo_match_set_id,
+      :name,
+      :geo_match_constraints)
+      include Aws::Structure
+    end
+
+    # Contains the identifier and the name of the `GeoMatchSet`.
+    #
+    # @!attribute [rw] geo_match_set_id
+    #   The `GeoMatchSetId` for an GeoMatchSet. You can use `GeoMatchSetId`
+    #   in a GetGeoMatchSet request to get detailed information about an
+    #   GeoMatchSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the GeoMatchSet. You can't change
+    #   the name of an `GeoMatchSet` after you create it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSetSummary AWS API Documentation
+    #
+    class GeoMatchSetSummary < Struct.new(
+      :geo_match_set_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # Specifies the type of update to perform to an GeoMatchSet with
+    # UpdateGeoMatchSet.
+    #
+    # @note When making an API call, you may pass GeoMatchSetUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         geo_match_constraint: { # required
+    #           type: "Country", # required, accepts Country
+    #           value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specifies whether to insert or delete a country with
+    #   UpdateGeoMatchSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_constraint
+    #   The country from which web requests originate that you want AWS WAF
+    #   to search for.
+    #   @return [Types::GeoMatchConstraint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSetUpdate AWS API Documentation
+    #
+    class GeoMatchSetUpdate < Struct.new(
+      :action,
+      :geo_match_constraint)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetByteMatchSetRequest
     #   data as a hash:
     #
@@ -1280,6 +1642,40 @@ module Aws::WAF
     #
     class GetChangeTokenStatusResponse < Struct.new(
       :change_token_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetGeoMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         geo_match_set_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] geo_match_set_id
+    #   The `GeoMatchSetId` of the GeoMatchSet that you want to get.
+    #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
+    #   ListGeoMatchSets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetRequest AWS API Documentation
+    #
+    class GetGeoMatchSetRequest < Struct.new(
+      :geo_match_set_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] geo_match_set
+    #   Information about the GeoMatchSet that you specified in the
+    #   `GetGeoMatchSet` request. This includes the `Type`, which for a
+    #   `GeoMatchContraint` is always `Country`, as well as the `Value`,
+    #   which is the identifier for a specific country.
+    #   @return [Types::GeoMatchSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetResponse AWS API Documentation
+    #
+    class GetGeoMatchSetResponse < Struct.new(
+      :geo_match_set)
       include Aws::Structure
     end
 
@@ -1391,6 +1787,73 @@ module Aws::WAF
     #
     class GetRateBasedRuleResponse < Struct.new(
       :rule)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRegexMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_match_set_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] regex_match_set_id
+    #   The `RegexMatchSetId` of the RegexMatchSet that you want to get.
+    #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
+    #   ListRegexMatchSets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetRequest AWS API Documentation
+    #
+    class GetRegexMatchSetRequest < Struct.new(
+      :regex_match_set_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regex_match_set
+    #   Information about the RegexMatchSet that you specified in the
+    #   `GetRegexMatchSet` request. For more information, see
+    #   RegexMatchTuple.
+    #   @return [Types::RegexMatchSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetResponse AWS API Documentation
+    #
+    class GetRegexMatchSetResponse < Struct.new(
+      :regex_match_set)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRegexPatternSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_pattern_set_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The `RegexPatternSetId` of the RegexPatternSet that you want to get.
+    #   `RegexPatternSetId` is returned by CreateRegexPatternSet and by
+    #   ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetRequest AWS API Documentation
+    #
+    class GetRegexPatternSetRequest < Struct.new(
+      :regex_pattern_set_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regex_pattern_set
+    #   Information about the RegexPatternSet that you specified in the
+    #   `GetRegexPatternSet` request, including the identifier of the
+    #   pattern set and the regular expression patterns you want AWS WAF to
+    #   search for.
+    #   @return [Types::RegexPatternSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetResponse AWS API Documentation
+    #
+    class GetRegexPatternSetResponse < Struct.new(
+      :regex_pattern_set)
       include Aws::Structure
     end
 
@@ -1978,6 +2441,60 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListGeoMatchSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more `GeoMatchSet`s
+    #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in
+    #   the response that allows you to list another group of `GeoMatchSet`
+    #   objects. For the second and subsequent `ListGeoMatchSets` requests,
+    #   specify the value of `NextMarker` from the previous response to get
+    #   information about another batch of `GeoMatchSet` objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `GeoMatchSet` objects that you want AWS WAF
+    #   to return for this request. If you have more `GeoMatchSet` objects
+    #   than the number you specify for `Limit`, the response includes a
+    #   `NextMarker` value that you can use to get another batch of
+    #   `GeoMatchSet` objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsRequest AWS API Documentation
+    #
+    class ListGeoMatchSetsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `GeoMatchSet` objects than the number that you
+    #   specified for `Limit` in the request, the response includes a
+    #   `NextMarker` value. To list more `GeoMatchSet` objects, submit
+    #   another `ListGeoMatchSets` request, and specify the `NextMarker`
+    #   value from the response in the `NextMarker` value in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_sets
+    #   An array of GeoMatchSetSummary objects.
+    #   @return [Array<Types::GeoMatchSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsResponse AWS API Documentation
+    #
+    class ListGeoMatchSetsResponse < Struct.new(
+      :next_marker,
+      :geo_match_sets)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIPSetsRequest
     #   data as a hash:
     #
@@ -1992,7 +2509,7 @@ module Aws::WAF
     #   response that allows you to list another group of `IPSets`. For the
     #   second and subsequent `ListIPSets` requests, specify the value of
     #   `NextMarker` from the previous response to get information about
-    #   another batch of `ByteMatchSets`.
+    #   another batch of `IPSets`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2079,6 +2596,116 @@ module Aws::WAF
     class ListRateBasedRulesResponse < Struct.new(
       :next_marker,
       :rules)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRegexMatchSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more `RegexMatchSet`
+    #   objects than the value of `Limit`, AWS WAF returns a `NextMarker`
+    #   value in the response that allows you to list another group of
+    #   `ByteMatchSets`. For the second and subsequent `ListRegexMatchSets`
+    #   requests, specify the value of `NextMarker` from the previous
+    #   response to get information about another batch of `RegexMatchSet`
+    #   objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `RegexMatchSet` objects that you want AWS
+    #   WAF to return for this request. If you have more `RegexMatchSet`
+    #   objects than the number you specify for `Limit`, the response
+    #   includes a `NextMarker` value that you can use to get another batch
+    #   of `RegexMatchSet` objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsRequest AWS API Documentation
+    #
+    class ListRegexMatchSetsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `RegexMatchSet` objects than the number that you
+    #   specified for `Limit` in the request, the response includes a
+    #   `NextMarker` value. To list more `RegexMatchSet` objects, submit
+    #   another `ListRegexMatchSets` request, and specify the `NextMarker`
+    #   value from the response in the `NextMarker` value in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_match_sets
+    #   An array of RegexMatchSetSummary objects.
+    #   @return [Array<Types::RegexMatchSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsResponse AWS API Documentation
+    #
+    class ListRegexMatchSetsResponse < Struct.new(
+      :next_marker,
+      :regex_match_sets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRegexPatternSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `RegexPatternSet` objects than the value of `Limit`, AWS WAF returns
+    #   a `NextMarker` value in the response that allows you to list another
+    #   group of `RegexPatternSet` objects. For the second and subsequent
+    #   `ListRegexPatternSets` requests, specify the value of `NextMarker`
+    #   from the previous response to get information about another batch of
+    #   `RegexPatternSet` objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `RegexPatternSet` objects that you want AWS
+    #   WAF to return for this request. If you have more `RegexPatternSet`
+    #   objects than the number you specify for `Limit`, the response
+    #   includes a `NextMarker` value that you can use to get another batch
+    #   of `RegexPatternSet` objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsRequest AWS API Documentation
+    #
+    class ListRegexPatternSetsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `RegexPatternSet` objects than the number that you
+    #   specified for `Limit` in the request, the response includes a
+    #   `NextMarker` value. To list more `RegexPatternSet` objects, submit
+    #   another `ListRegexPatternSets` request, and specify the `NextMarker`
+    #   value from the response in the `NextMarker` value in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_pattern_sets
+    #   An array of RegexPatternSetSummary objects.
+    #   @return [Array<Types::RegexPatternSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsResponse AWS API Documentation
+    #
+    class ListRegexPatternSetsResponse < Struct.new(
+      :next_marker,
+      :regex_pattern_sets)
       include Aws::Structure
     end
 
@@ -2362,33 +2989,34 @@ module Aws::WAF
     end
 
     # Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
-    # and SizeConstraintSet objects that you want to add to a `Rule` and,
-    # for each object, indicates whether you want to negate the settings,
-    # for example, requests that do NOT originate from the IP address
-    # 192.0.2.44.
+    # RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
+    # want to add to a `Rule` and, for each object, indicates whether you
+    # want to negate the settings, for example, requests that do NOT
+    # originate from the IP address 192.0.2.44.
     #
     # @note When making an API call, you may pass Predicate
     #   data as a hash:
     #
     #       {
     #         negated: false, # required
-    #         type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #         type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
     #         data_id: "ResourceId", # required
     #       }
     #
     # @!attribute [rw] negated
     #   Set `Negated` to `False` if you want AWS WAF to allow, block, or
     #   count requests based on the settings in the specified ByteMatchSet,
-    #   IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet. For
-    #   example, if an `IPSet` includes the IP address `192.0.2.44`, AWS WAF
-    #   will allow or block requests based on that IP address.
+    #   IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet,
+    #   GeoMatchSet, or SizeConstraintSet. For example, if an `IPSet`
+    #   includes the IP address `192.0.2.44`, AWS WAF will allow or block
+    #   requests based on that IP address.
     #
     #   Set `Negated` to `True` if you want AWS WAF to allow or block a
     #   request based on the negation of the settings in the ByteMatchSet,
-    #   IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet. For
-    #   example, if an `IPSet` includes the IP address `192.0.2.44`, AWS WAF
-    #   will allow, block, or count requests based on all IP addresses
-    #   *except* `192.0.2.44`.
+    #   IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet,
+    #   GeoMatchSet, or SizeConstraintSet. For example, if an `IPSet`
+    #   includes the IP address `192.0.2.44`, AWS WAF will allow, block, or
+    #   count requests based on all IP addresses *except* `192.0.2.44`.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -2482,6 +3110,340 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # In a GetRegexMatchSet request, `RegexMatchSet` is a complex type that
+    # contains the `RegexMatchSetId` and `Name` of a `RegexMatchSet`, and
+    # the values that you specified when you updated the `RegexMatchSet`.
+    #
+    # The values are contained in a `RegexMatchTuple` object, which specify
+    # the parts of web requests that you want AWS WAF to inspect and the
+    # values that you want AWS WAF to search for. If a `RegexMatchSet`
+    # contains more than one `RegexMatchTuple` object, a request needs to
+    # match the settings in only one `ByteMatchTuple` to be considered a
+    # match.
+    #
+    # @!attribute [rw] regex_match_set_id
+    #   The `RegexMatchSetId` for a `RegexMatchSet`. You use
+    #   `RegexMatchSetId` to get information about a `RegexMatchSet` (see
+    #   GetRegexMatchSet), update a `RegexMatchSet` (see
+    #   UpdateRegexMatchSet), insert a `RegexMatchSet` into a `Rule` or
+    #   delete one from a `Rule` (see UpdateRule), and delete a
+    #   `RegexMatchSet` from AWS WAF (see DeleteRegexMatchSet).
+    #
+    #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
+    #   ListRegexMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexMatchSet. You can't
+    #   change `Name` after you create a `RegexMatchSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_match_tuples
+    #   Contains an array of RegexMatchTuple objects. Each `RegexMatchTuple`
+    #   object contains:
+    #
+    #   * The part of a web request that you want AWS WAF to inspect, such
+    #     as a query string or the value of the `User-Agent` header.
+    #
+    #   * The identifier of the pattern (a regular expression) that you want
+    #     AWS WAF to look for. For more information, see RegexPatternSet.
+    #
+    #   * Whether to perform any conversions on the request, such as
+    #     converting it to lowercase, before inspecting it for the specified
+    #     string.
+    #   @return [Array<Types::RegexMatchTuple>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSet AWS API Documentation
+    #
+    class RegexMatchSet < Struct.new(
+      :regex_match_set_id,
+      :name,
+      :regex_match_tuples)
+      include Aws::Structure
+    end
+
+    # Returned by ListRegexMatchSets. Each `RegexMatchSetSummary` object
+    # includes the `Name` and `RegexMatchSetId` for one RegexMatchSet.
+    #
+    # @!attribute [rw] regex_match_set_id
+    #   The `RegexMatchSetId` for a `RegexMatchSet`. You use
+    #   `RegexMatchSetId` to get information about a `RegexMatchSet`, update
+    #   a `RegexMatchSet`, remove a `RegexMatchSet` from a `Rule`, and
+    #   delete a `RegexMatchSet` from AWS WAF.
+    #
+    #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
+    #   ListRegexMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexMatchSet. You can't
+    #   change `Name` after you create a `RegexMatchSet`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSetSummary AWS API Documentation
+    #
+    class RegexMatchSetSummary < Struct.new(
+      :regex_match_set_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # In an UpdateRegexMatchSet request, `RegexMatchSetUpdate` specifies
+    # whether to insert or delete a RegexMatchTuple and includes the
+    # settings for the `RegexMatchTuple`.
+    #
+    # @note When making an API call, you may pass RegexMatchSetUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         regex_match_tuple: { # required
+    #           field_to_match: { # required
+    #             type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #             data: "MatchFieldData",
+    #           },
+    #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #           regex_pattern_set_id: "ResourceId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specifies whether to insert or delete a RegexMatchTuple.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_match_tuple
+    #   Information about the part of a web request that you want AWS WAF to
+    #   inspect and the identifier of the regular expression (regex) pattern
+    #   that you want AWS WAF to search for. If you specify `DELETE` for the
+    #   value of `Action`, the `RegexMatchTuple` values must exactly match
+    #   the values in the `RegexMatchTuple` that you want to delete from the
+    #   `RegexMatchSet`.
+    #   @return [Types::RegexMatchTuple]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSetUpdate AWS API Documentation
+    #
+    class RegexMatchSetUpdate < Struct.new(
+      :action,
+      :regex_match_tuple)
+      include Aws::Structure
+    end
+
+    # The regular expression pattern that you want AWS WAF to search for in
+    # web requests, the location in requests that you want AWS WAF to
+    # search, and other settings. Each `RegexMatchTuple` object contains:
+    #
+    # * The part of a web request that you want AWS WAF to inspect, such as
+    #   a query string or the value of the `User-Agent` header.
+    #
+    # * The identifier of the pattern (a regular expression) that you want
+    #   AWS WAF to look for. For more information, see RegexPatternSet.
+    #
+    # * Whether to perform any conversions on the request, such as
+    #   converting it to lowercase, before inspecting it for the specified
+    #   string.
+    #
+    # @note When making an API call, you may pass RegexMatchTuple
+    #   data as a hash:
+    #
+    #       {
+    #         field_to_match: { # required
+    #           type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #           data: "MatchFieldData",
+    #         },
+    #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #         regex_pattern_set_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] field_to_match
+    #   Specifies where in a web request to look for the `RegexPatternSet`.
+    #   @return [Types::FieldToMatch]
+    #
+    # @!attribute [rw] text_transformation
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass AWS WAF. If you
+    #   specify a transformation, AWS WAF performs the transformation on
+    #   `RegexPatternSet` before inspecting a request for a match.
+    #
+    #   **CMD\_LINE**
+    #
+    #   When you're concerned that attackers are injecting an operating
+    #   system commandline command and using unusual formatting to disguise
+    #   some or all of the command, use this option to perform the following
+    #   transformations:
+    #
+    #   * Delete the following characters: \\ " ' ^
+    #
+    #   * Delete spaces before the following characters: / (
+    #
+    #   * Replace the following characters with a space: , ;
+    #
+    #   * Replace multiple spaces with one space
+    #
+    #   * Convert uppercase letters (A-Z) to lowercase (a-z)
+    #
+    #   **COMPRESS\_WHITE\_SPACE**
+    #
+    #   Use this option to replace the following characters with a space
+    #   character (decimal 32):
+    #
+    #   * \\f, formfeed, decimal 12
+    #
+    #   * \\t, tab, decimal 9
+    #
+    #   * \\n, newline, decimal 10
+    #
+    #   * \\r, carriage return, decimal 13
+    #
+    #   * \\v, vertical tab, decimal 11
+    #
+    #   * non-breaking space, decimal 160
+    #
+    #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
+    #
+    #   **HTML\_ENTITY\_DECODE**
+    #
+    #   Use this option to replace HTML-encoded characters with unencoded
+    #   characters. `HTML_ENTITY_DECODE` performs the following operations:
+    #
+    #   * Replaces `(ampersand)quot;` with `"`
+    #
+    #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
+    #
+    #   * Replaces `(ampersand)lt;` with a "less than" symbol
+    #
+    #   * Replaces `(ampersand)gt;` with `>`
+    #
+    #   * Replaces characters that are represented in hexadecimal format,
+    #     `(ampersand)#xhhhh;`, with the corresponding characters
+    #
+    #   * Replaces characters that are represented in decimal format,
+    #     `(ampersand)#nnnn;`, with the corresponding characters
+    #
+    #   **LOWERCASE**
+    #
+    #   Use this option to convert uppercase letters (A-Z) to lowercase
+    #   (a-z).
+    #
+    #   **URL\_DECODE**
+    #
+    #   Use this option to decode a URL-encoded value.
+    #
+    #   **NONE**
+    #
+    #   Specify `NONE` if you don't want to perform any text
+    #   transformations.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The `RegexPatternSetId` for a `RegexPatternSet`. You use
+    #   `RegexPatternSetId` to get information about a `RegexPatternSet`
+    #   (see GetRegexPatternSet), update a `RegexPatternSet` (see
+    #   UpdateRegexPatternSet), insert a `RegexPatternSet` into a
+    #   `RegexMatchSet` or delete one from a `RegexMatchSet` (see
+    #   UpdateRegexMatchSet), and delete an `RegexPatternSet` from AWS WAF
+    #   (see DeleteRegexPatternSet).
+    #
+    #   `RegexPatternSetId` is returned by CreateRegexPatternSet and by
+    #   ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchTuple AWS API Documentation
+    #
+    class RegexMatchTuple < Struct.new(
+      :field_to_match,
+      :text_transformation,
+      :regex_pattern_set_id)
+      include Aws::Structure
+    end
+
+    # The `RegexPatternSet` specifies the regular expression (regex) pattern
+    # that you want AWS WAF to search for, such as `B[a@]dB[o0]t`. You can
+    # then configure AWS WAF to reject those requests.
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The identifier for the `RegexPatternSet`. You use
+    #   `RegexPatternSetId` to get information about a `RegexPatternSet`,
+    #   update a `RegexPatternSet`, remove a `RegexPatternSet` from a
+    #   `RegexMatchSet`, and delete a `RegexPatternSet` from AWS WAF.
+    #
+    #   `RegexMatchSetId` is returned by CreateRegexPatternSet and by
+    #   ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexPatternSet. You can't
+    #   change `Name` after you create a `RegexPatternSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_pattern_strings
+    #   Specifies the regular expression (regex) patterns that you want AWS
+    #   WAF to search for, such as `B[a@]dB[o0]t`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSet AWS API Documentation
+    #
+    class RegexPatternSet < Struct.new(
+      :regex_pattern_set_id,
+      :name,
+      :regex_pattern_strings)
+      include Aws::Structure
+    end
+
+    # Returned by ListRegexPatternSets. Each `RegexPatternSetSummary` object
+    # includes the `Name` and `RegexPatternSetId` for one RegexPatternSet.
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The `RegexPatternSetId` for a `RegexPatternSet`. You use
+    #   `RegexPatternSetId` to get information about a `RegexPatternSet`,
+    #   update a `RegexPatternSet`, remove a `RegexPatternSet` from a
+    #   `RegexMatchSet`, and delete a `RegexPatternSet` from AWS WAF.
+    #
+    #   `RegexPatternSetId` is returned by CreateRegexPatternSet and by
+    #   ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RegexPatternSet. You can't
+    #   change `Name` after you create a `RegexPatternSet`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSetSummary AWS API Documentation
+    #
+    class RegexPatternSetSummary < Struct.new(
+      :regex_pattern_set_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # In an UpdateRegexPatternSet request, `RegexPatternSetUpdate` specifies
+    # whether to insert or delete a `RegexPatternString` and includes the
+    # settings for the `RegexPatternString`.
+    #
+    # @note When making an API call, you may pass RegexPatternSetUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         regex_pattern_string: "RegexPatternString", # required
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specifies whether to insert or delete a `RegexPatternString`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_pattern_string
+    #   Specifies the regular expression (regex) pattern that you want AWS
+    #   WAF to search for, such as `B[a@]dB[o0]t`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSetUpdate AWS API Documentation
+    #
+    class RegexPatternSetUpdate < Struct.new(
+      :action,
+      :regex_pattern_string)
+      include Aws::Structure
+    end
+
     # A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet
     # objects that identify the web requests that you want to allow, block,
     # or count. For example, you might create a `Rule` that includes the
@@ -2571,7 +3533,7 @@ module Aws::WAF
     #         action: "INSERT", # required, accepts INSERT, DELETE
     #         predicate: { # required
     #           negated: false, # required
-    #           type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #           type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
     #           data_id: "ResourceId", # required
     #         },
     #       }
@@ -3210,6 +4172,69 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateGeoMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         geo_match_set_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #         updates: [ # required
+    #           {
+    #             action: "INSERT", # required, accepts INSERT, DELETE
+    #             geo_match_constraint: { # required
+    #               type: "Country", # required, accepts Country
+    #               value: "AF", # required, accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] geo_match_set_id
+    #   The `GeoMatchSetId` of the GeoMatchSet that you want to update.
+    #   `GeoMatchSetId` is returned by CreateGeoMatchSet and by
+    #   ListGeoMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   An array of `GeoMatchSetUpdate` objects that you want to insert into
+    #   or delete from an GeoMatchSet. For more information, see the
+    #   applicable data types:
+    #
+    #   * GeoMatchSetUpdate: Contains `Action` and `GeoMatchConstraint`
+    #
+    #   * GeoMatchConstraint: Contains `Type` and `Value`
+    #
+    #     You can have only one `Type` and `Value` per `GeoMatchConstraint`.
+    #     To add multiple countries, include multiple `GeoMatchSetUpdate`
+    #     objects in your request.
+    #   @return [Array<Types::GeoMatchSetUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetRequest AWS API Documentation
+    #
+    class UpdateGeoMatchSetRequest < Struct.new(
+      :geo_match_set_id,
+      :change_token,
+      :updates)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `UpdateGeoMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetResponse AWS API Documentation
+    #
+    class UpdateGeoMatchSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateIPSetRequest
     #   data as a hash:
     #
@@ -3279,7 +4304,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             predicate: { # required
     #               negated: false, # required
-    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
     #               data_id: "ResourceId", # required
     #             },
     #           },
@@ -3333,6 +4358,117 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateRegexMatchSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_match_set_id: "ResourceId", # required
+    #         updates: [ # required
+    #           {
+    #             action: "INSERT", # required, accepts INSERT, DELETE
+    #             regex_match_tuple: { # required
+    #               field_to_match: { # required
+    #                 type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
+    #                 data: "MatchFieldData",
+    #               },
+    #               text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               regex_pattern_set_id: "ResourceId", # required
+    #             },
+    #           },
+    #         ],
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] regex_match_set_id
+    #   The `RegexMatchSetId` of the RegexMatchSet that you want to update.
+    #   `RegexMatchSetId` is returned by CreateRegexMatchSet and by
+    #   ListRegexMatchSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   An array of `RegexMatchSetUpdate` objects that you want to insert
+    #   into or delete from a RegexMatchSet. For more information, see
+    #   RegexMatchTuple.
+    #   @return [Array<Types::RegexMatchSetUpdate>]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetRequest AWS API Documentation
+    #
+    class UpdateRegexMatchSetRequest < Struct.new(
+      :regex_match_set_id,
+      :updates,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `UpdateRegexMatchSet`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetResponse AWS API Documentation
+    #
+    class UpdateRegexMatchSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRegexPatternSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         regex_pattern_set_id: "ResourceId", # required
+    #         updates: [ # required
+    #           {
+    #             action: "INSERT", # required, accepts INSERT, DELETE
+    #             regex_pattern_string: "RegexPatternString", # required
+    #           },
+    #         ],
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] regex_pattern_set_id
+    #   The `RegexPatternSetId` of the RegexPatternSet that you want to
+    #   update. `RegexPatternSetId` is returned by CreateRegexPatternSet and
+    #   by ListRegexPatternSets.
+    #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   An array of `RegexPatternSetUpdate` objects that you want to insert
+    #   into or delete from a RegexPatternSet.
+    #   @return [Array<Types::RegexPatternSetUpdate>]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetRequest AWS API Documentation
+    #
+    class UpdateRegexPatternSetRequest < Struct.new(
+      :regex_pattern_set_id,
+      :updates,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the
+    #   `UpdateRegexPatternSet` request. You can also use this value to
+    #   query the status of the request. For more information, see
+    #   GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetResponse AWS API Documentation
+    #
+    class UpdateRegexPatternSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateRuleRequest
     #   data as a hash:
     #
@@ -3344,7 +4480,7 @@ module Aws::WAF
     #             action: "INSERT", # required, accepts INSERT, DELETE
     #             predicate: { # required
     #               negated: false, # required
-    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
+    #               type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, GeoMatch, SizeConstraint, XssMatch, RegexMatch
     #               data_id: "ResourceId", # required
     #             },
     #           },

@@ -432,10 +432,9 @@ module Aws::EC2
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide base64-encoded
-    #   text.
+    #   [Adding User Data][2] (Windows). If you are using a command line tool,
+    #   base64-encoding is performed for you, and you can load the text from a
+    #   file. Otherwise, you must provide base64-encoded text.
     #
     #
     #

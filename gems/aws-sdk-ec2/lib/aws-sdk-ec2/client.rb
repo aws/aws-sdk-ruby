@@ -159,12 +159,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :reserved_instance_ids
-    #   The IDs of the Convertible Reserved Instances to exchange for other
-    #   Convertible Reserved Instances of the same or higher value.
+    #   The IDs of the Convertible Reserved Instances to exchange for another
+    #   Convertible Reserved Instance of the same or higher value.
     #
     # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
-    #   The configurations of the Convertible Reserved Instance offerings that
-    #   you are purchasing in this exchange.
+    #   The configuration of the target Convertible Reserved Instance to
+    #   exchange for your current Convertible Reserved Instances.
     #
     # @return [Types::AcceptReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15978,10 +15978,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Returns details about the values and term of your specified
-    # Convertible Reserved Instances. When a target configuration is
-    # specified, it returns information about whether the exchange is valid
-    # and can be performed.
+    # Returns a quote and exchange information for exchanging one or more
+    # specified Convertible Reserved Instances for a new Convertible
+    # Reserved Instance. If the exchange cannot be performed, the reason is
+    # returned in the response. Use AcceptReservedInstancesExchangeQuote to
+    # perform the exchange.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -15993,8 +15994,8 @@ module Aws::EC2
     #   The IDs of the Convertible Reserved Instances to exchange.
     #
     # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
-    #   The configuration requirements of the Convertible Reserved Instances
-    #   to exchange for your current Convertible Reserved Instances.
+    #   The configuration of the target Convertible Reserved Instance to
+    #   exchange for your current Convertible Reserved Instances.
     #
     # @return [Types::GetReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17217,9 +17218,9 @@ module Aws::EC2
     end
 
     # Modifies the Availability Zone, instance count, instance type, or
-    # network platform (EC2-Classic or EC2-VPC) of your Standard Reserved
-    # Instances. The Reserved Instances to be modified must be identical,
-    # except for Availability Zone, network platform, and instance type.
+    # network platform (EC2-Classic or EC2-VPC) of your Reserved Instances.
+    # The Reserved Instances to be modified must be identical, except for
+    # Availability Zone, network platform, and instance type.
     #
     # For more information, see [Modifying Reserved Instances][1] in the
     # Amazon Elastic Compute Cloud User Guide.
@@ -17942,6 +17943,59 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_vpc_peering_connection_options(params = {}, options = {})
       req = build_request(:modify_vpc_peering_connection_options, params)
+      req.send_request(options)
+    end
+
+    # Modifies the instance tenancy attribute of the specified VPC. You can
+    # change the instance tenancy attribute of a VPC to `default` only. You
+    # cannot change the instance tenancy attribute to `dedicated`.
+    #
+    # After you modify the tenancy of the VPC, any new instances that you
+    # launch into the VPC have a tenancy of `default`, unless you specify
+    # otherwise during launch. The tenancy of any existing instances in the
+    # VPC is not affected.
+    #
+    # For more information about Dedicated Instances, see [Dedicated
+    # Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC.
+    #
+    # @option params [required, String] :instance_tenancy
+    #   The instance tenancy attribute for the VPC.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyVpcTenancyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpcTenancyResult#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpc_tenancy({
+    #     vpc_id: "String", # required
+    #     instance_tenancy: "default", # required, accepts default
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcTenancy AWS API Documentation
+    #
+    # @overload modify_vpc_tenancy(params = {})
+    # @param [Hash] params ({})
+    def modify_vpc_tenancy(params = {}, options = {})
+      req = build_request(:modify_vpc_tenancy, params)
       req.send_request(options)
     end
 
@@ -20454,10 +20508,9 @@ module Aws::EC2
     # @option params [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide base64-encoded
-    #   text.
+    #   [Adding User Data][2] (Windows). If you are using a command line tool,
+    #   base64-encoding is performed for you, and you can load the text from a
+    #   file. Otherwise, you must provide base64-encoded text.
     #
     #
     #
@@ -21497,7 +21550,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

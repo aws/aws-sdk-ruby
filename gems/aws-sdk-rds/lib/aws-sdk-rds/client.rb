@@ -12769,7 +12769,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -12839,6 +12839,8 @@ module Aws::RDS
     # | --------------------- | ------------------------ | -------- | ------------- |
     # | db_instance_available | {#describe_db_instances} | 30       | 60            |
     # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
+    # | db_snapshot_available | {#describe_db_snapshots} | 30       | 60            |
+    # | db_snapshot_deleted   | {#describe_db_snapshots} | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -12890,7 +12892,9 @@ module Aws::RDS
     def waiters
       {
         db_instance_available: Waiters::DBInstanceAvailable,
-        db_instance_deleted: Waiters::DBInstanceDeleted
+        db_instance_deleted: Waiters::DBInstanceDeleted,
+        db_snapshot_available: Waiters::DBSnapshotAvailable,
+        db_snapshot_deleted: Waiters::DBSnapshotDeleted
       }
     end
 

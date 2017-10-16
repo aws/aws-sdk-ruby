@@ -144,6 +144,12 @@ module Aws::ElasticsearchService
     #         advanced_options: {
     #           "String" => "String",
     #         },
+    #         log_publishing_options: {
+    #           "INDEX_SLOW_LOGS" => {
+    #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
+    #             enabled: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -195,6 +201,11 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Map of `LogType` and `LogPublishingOption`, each containing options
+    #   to publish a given type of Elasticsearch log.
+    #   @return [Hash<String,Types::LogPublishingOption>]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -202,7 +213,8 @@ module Aws::ElasticsearchService
       :ebs_options,
       :access_policies,
       :snapshot_options,
-      :advanced_options)
+      :advanced_options,
+      :log_publishing_options)
       include Aws::Structure
     end
 
@@ -578,13 +590,18 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
     #   @return [Types::AdvancedOptionsStatus]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Log publishing options for the given domain.
+    #   @return [Types::LogPublishingOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
       :ebs_options,
       :access_policies,
       :snapshot_options,
-      :advanced_options)
+      :advanced_options,
+      :log_publishing_options)
       include Aws::Structure
     end
 
@@ -663,6 +680,10 @@ module Aws::ElasticsearchService
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Log publishing options for the given domain.
+    #   @return [Hash<String,Types::LogPublishingOption>]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -676,7 +697,8 @@ module Aws::ElasticsearchService
       :ebs_options,
       :access_policies,
       :snapshot_options,
-      :advanced_options)
+      :advanced_options,
+      :log_publishing_options)
       include Aws::Structure
     end
 
@@ -918,6 +940,54 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Log Publishing option that is set for given domain.
+    # Attributes and their details: * CloudWatchLogsLogGroupArn: ARN of the
+    # Cloudwatch log group to which
+    #   log needs to be published.
+    # * Enabled: Whether the log publishing for given log type is enabled or
+    #   not
+    #
+    # @note When making an API call, you may pass LogPublishingOption
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   ARN of the Cloudwatch log group to which log needs to be published.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether given log publishing option is enabled or not.
+    #   @return [Boolean]
+    #
+    class LogPublishingOption < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # The configured log publishing options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   The log publishing options configured for the Elasticsearch domain.
+    #   @return [Hash<String,Types::LogPublishingOption>]
+    #
+    # @!attribute [rw] status
+    #   The status of the log publishing options for the Elasticsearch
+    #   domain. See `OptionStatus` for the status information that's
+    #   included.
+    #   @return [Types::OptionStatus]
+    #
+    class LogPublishingOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # Provides the current status of the entity.
     #
     # @!attribute [rw] creation_date
@@ -1126,6 +1196,12 @@ module Aws::ElasticsearchService
     #           "String" => "String",
     #         },
     #         access_policies: "PolicyDocument",
+    #         log_publishing_options: {
+    #           "INDEX_SLOW_LOGS" => {
+    #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
+    #             enabled: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1161,13 +1237,19 @@ module Aws::ElasticsearchService
     #   IAM access policy as a JSON-formatted string.
     #   @return [String]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Map of `LogType` and `LogPublishingOption`, each containing options
+    #   to publish a given type of Elasticsearch log.
+    #   @return [Hash<String,Types::LogPublishingOption>]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
       :ebs_options,
       :snapshot_options,
       :advanced_options,
-      :access_policies)
+      :access_policies,
+      :log_publishing_options)
       include Aws::Structure
     end
 

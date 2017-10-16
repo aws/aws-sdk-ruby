@@ -144,5 +144,140 @@ module Aws::RDS
       attr_reader :waiter
 
     end
+
+    class DBSnapshotAvailable
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_db_snapshots,
+            acceptors: [
+              {
+                "expected" => "available",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "deleted",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "deleting",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "incompatible-restore",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "incompatible-parameters",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_db_snapshots)
+      # @return (see Client#describe_db_snapshots)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DBSnapshotDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_db_snapshots,
+            acceptors: [
+              {
+                "expected" => "deleted",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "DBSnapshotNotFound",
+                "matcher" => "error",
+                "state" => "success"
+              },
+              {
+                "expected" => "creating",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "modifying",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "rebooting",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              },
+              {
+                "expected" => "resetting-master-credentials",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "db_snapshots[].status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_db_snapshots)
+      # @return (see Client#describe_db_snapshots)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
   end
 end

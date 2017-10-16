@@ -618,6 +618,8 @@ module Aws::EC2
     ModifyVpcEndpointResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointResult')
     ModifyVpcPeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'ModifyVpcPeeringConnectionOptionsRequest')
     ModifyVpcPeeringConnectionOptionsResult = Shapes::StructureShape.new(name: 'ModifyVpcPeeringConnectionOptionsResult')
+    ModifyVpcTenancyRequest = Shapes::StructureShape.new(name: 'ModifyVpcTenancyRequest')
+    ModifyVpcTenancyResult = Shapes::StructureShape.new(name: 'ModifyVpcTenancyResult')
     MonitorInstancesRequest = Shapes::StructureShape.new(name: 'MonitorInstancesRequest')
     MonitorInstancesResult = Shapes::StructureShape.new(name: 'MonitorInstancesResult')
     Monitoring = Shapes::StructureShape.new(name: 'Monitoring')
@@ -975,6 +977,7 @@ module Aws::EC2
     VpcPeeringConnectionStateReasonCode = Shapes::StringShape.new(name: 'VpcPeeringConnectionStateReasonCode')
     VpcPeeringConnectionVpcInfo = Shapes::StructureShape.new(name: 'VpcPeeringConnectionVpcInfo')
     VpcState = Shapes::StringShape.new(name: 'VpcState')
+    VpcTenancy = Shapes::StringShape.new(name: 'VpcTenancy')
     VpnConnection = Shapes::StructureShape.new(name: 'VpnConnection')
     VpnConnectionIdStringList = Shapes::ListShape.new(name: 'VpnConnectionIdStringList')
     VpnConnectionList = Shapes::ListShape.new(name: 'VpnConnectionList')
@@ -3582,6 +3585,14 @@ module Aws::EC2
     ModifyVpcPeeringConnectionOptionsResult.add_member(:accepter_peering_connection_options, Shapes::ShapeRef.new(shape: PeeringConnectionOptions, location_name: "accepterPeeringConnectionOptions"))
     ModifyVpcPeeringConnectionOptionsResult.add_member(:requester_peering_connection_options, Shapes::ShapeRef.new(shape: PeeringConnectionOptions, location_name: "requesterPeeringConnectionOptions"))
     ModifyVpcPeeringConnectionOptionsResult.struct_class = Types::ModifyVpcPeeringConnectionOptionsResult
+
+    ModifyVpcTenancyRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    ModifyVpcTenancyRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: VpcTenancy, required: true, location_name: "InstanceTenancy"))
+    ModifyVpcTenancyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpcTenancyRequest.struct_class = Types::ModifyVpcTenancyRequest
+
+    ModifyVpcTenancyResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyVpcTenancyResult.struct_class = Types::ModifyVpcTenancyResult
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
     MonitorInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -6790,6 +6801,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyVpcPeeringConnectionOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyVpcPeeringConnectionOptionsResult)
+      end)
+
+      api.add_operation(:modify_vpc_tenancy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVpcTenancy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVpcTenancyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVpcTenancyResult)
       end)
 
       api.add_operation(:monitor_instances, Seahorse::Model::Operation.new.tap do |o|

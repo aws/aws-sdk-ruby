@@ -32,13 +32,13 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] reserved_instance_ids
-    #   The IDs of the Convertible Reserved Instances to exchange for other
-    #   Convertible Reserved Instances of the same or higher value.
+    #   The IDs of the Convertible Reserved Instances to exchange for
+    #   another Convertible Reserved Instance of the same or higher value.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_configurations
-    #   The configurations of the Convertible Reserved Instance offerings
-    #   that you are purchasing in this exchange.
+    #   The configuration of the target Convertible Reserved Instance to
+    #   exchange for your current Convertible Reserved Instances.
     #   @return [Array<Types::TargetConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuoteRequest AWS API Documentation
@@ -13396,8 +13396,8 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_configurations
-    #   The configuration requirements of the Convertible Reserved Instances
-    #   to exchange for your current Convertible Reserved Instances.
+    #   The configuration of the target Convertible Reserved Instance to
+    #   exchange for your current Convertible Reserved Instances.
     #   @return [Array<Types::TargetConfigurationRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteRequest AWS API Documentation
@@ -17532,6 +17532,54 @@ module Aws::EC2
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
       :accepter_peering_connection_options,
       :requester_peering_connection_options)
+      include Aws::Structure
+    end
+
+    # Contains the parameters for ModifyVpcTenancy.
+    #
+    # @note When making an API call, you may pass ModifyVpcTenancyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "String", # required
+    #         instance_tenancy: "default", # required, accepts default
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_tenancy
+    #   The instance tenancy attribute for the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcTenancyRequest AWS API Documentation
+    #
+    class ModifyVpcTenancyRequest < Struct.new(
+      :vpc_id,
+      :instance_tenancy,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # Contains the output of ModifyVpcTenancy.
+    #
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, returns an error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcTenancyResult AWS API Documentation
+    #
+    class ModifyVpcTenancyResult < Struct.new(
+      :return_value)
       include Aws::Structure
     end
 
@@ -21681,9 +21729,9 @@ module Aws::EC2
     #   The user data to make available to the instance. For more
     #   information, see [Running Commands on Your Linux Instance at
     #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
-    #   using an AWS SDK or command line tool, base64-encoding is performed
-    #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide base64-encoded text.
+    #   using a command line tool, base64-encoding is performed for you, and
+    #   you can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text.
     #
     #
     #
