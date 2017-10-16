@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudHSM - Updated the API, and documentation for Amazon CloudHSM.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Updated the API, and waiters for Amazon Relational Database Service.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
 2.10.64 (2017-10-12)
 ------------------
 
