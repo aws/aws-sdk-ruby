@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.65 (2017-10-16)
+------------------
+
 * Feature - Aws::CloudHSM - Updated the API, and documentation for Amazon CloudHSM.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
