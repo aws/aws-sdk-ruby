@@ -124,11 +124,11 @@ module Aws::ElasticsearchService
     #         domain_name: "DomainName", # required
     #         elasticsearch_version: "ElasticsearchVersionString",
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
     #         ebs_options: {
@@ -140,6 +140,10 @@ module Aws::ElasticsearchService
     #         access_policies: "PolicyDocument",
     #         snapshot_options: {
     #           automated_snapshot_start_hour: 1,
+    #         },
+    #         vpc_options: {
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
     #         },
     #         advanced_options: {
     #           "String" => "String",
@@ -190,6 +194,16 @@ module Aws::ElasticsearchService
     #   Default value is 0 hours.
     #   @return [Types::SnapshotOptions]
     #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for VPC endpoint.
+    #   For more information, see [Creating a VPC][1] in *VPC Endpoints for
+    #   Amazon Elasticsearch Service Domains*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
+    #   @return [Types::VPCOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Option to allow references to indices in an HTTP request body. Must
     #   be `false` when configuring access to individual sub-resources. By
@@ -213,6 +227,7 @@ module Aws::ElasticsearchService
       :ebs_options,
       :access_policies,
       :snapshot_options,
+      :vpc_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -369,7 +384,7 @@ module Aws::ElasticsearchService
     #
     #       {
     #         domain_name: "DomainName",
-    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         elasticsearch_version: "ElasticsearchVersionString", # required
     #       }
     #
@@ -485,11 +500,11 @@ module Aws::ElasticsearchService
     #   data as a hash:
     #
     #       {
-    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         instance_count: 1,
     #         dedicated_master_enabled: false,
     #         zone_awareness_enabled: false,
-    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         dedicated_master_count: 1,
     #       }
     #
@@ -581,6 +596,15 @@ module Aws::ElasticsearchService
     #   Specifies the `SnapshotOptions` for the Elasticsearch domain.
     #   @return [Types::SnapshotOptionsStatus]
     #
+    # @!attribute [rw] vpc_options
+    #   The `VPCOptions` for the specified domain. For more information, see
+    #   [VPC Endpoints for Amazon Elasticsearch Service Domains][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
+    #   @return [Types::VPCDerivedInfoStatus]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the `AdvancedOptions` for the domain. See [Configuring
     #   Advanced Options][1] for more information.
@@ -600,6 +624,7 @@ module Aws::ElasticsearchService
       :ebs_options,
       :access_policies,
       :snapshot_options,
+      :vpc_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -646,6 +671,12 @@ module Aws::ElasticsearchService
     #   search requests.
     #   @return [String]
     #
+    # @!attribute [rw] endpoints
+    #   Map containing the Elasticsearch domain endpoints used to submit
+    #   index and search requests. Example `key, value`\:
+    #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] processing
     #   The status of the Elasticsearch domain configuration. `True` if
     #   Amazon Elasticsearch Service is processing configuration changes.
@@ -676,6 +707,15 @@ module Aws::ElasticsearchService
     #   Specifies the status of the `SnapshotOptions`
     #   @return [Types::SnapshotOptions]
     #
+    # @!attribute [rw] vpc_options
+    #   The `VPCOptions` for the specified domain. For more information, see
+    #   [VPC Endpoints for Amazon Elasticsearch Service Domains][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
+    #   @return [Types::VPCDerivedInfo]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
@@ -691,12 +731,14 @@ module Aws::ElasticsearchService
       :created,
       :deleted,
       :endpoint,
+      :endpoints,
       :processing,
       :elasticsearch_version,
       :elasticsearch_cluster_config,
       :ebs_options,
       :access_policies,
       :snapshot_options,
+      :vpc_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -1176,11 +1218,11 @@ module Aws::ElasticsearchService
     #       {
     #         domain_name: "DomainName", # required
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
     #         ebs_options: {
@@ -1191,6 +1233,10 @@ module Aws::ElasticsearchService
     #         },
     #         snapshot_options: {
     #           automated_snapshot_start_hour: 1,
+    #         },
+    #         vpc_options: {
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
     #         },
     #         advanced_options: {
     #           "String" => "String",
@@ -1222,6 +1268,16 @@ module Aws::ElasticsearchService
     #   snapshot. Default value is `0` hours.
     #   @return [Types::SnapshotOptions]
     #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for VPC endpoint.
+    #   For more information, see [Creating a VPC][1] in *VPC Endpoints for
+    #   Amazon Elasticsearch Service Domains*
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
+    #   @return [Types::VPCOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Modifies the advanced option to allow references to indices in an
     #   HTTP request body. Must be `false` when configuring access to
@@ -1247,6 +1303,7 @@ module Aws::ElasticsearchService
       :elasticsearch_cluster_config,
       :ebs_options,
       :snapshot_options,
+      :vpc_options,
       :advanced_options,
       :access_policies,
       :log_publishing_options)
@@ -1262,6 +1319,87 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      include Aws::Structure
+    end
+
+    # Options to specify the subnets and security groups for VPC endpoint.
+    # For more information, see [ VPC Endpoints for Amazon Elasticsearch
+    # Service Domains][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC Id for the Elasticsearch domain. Exists only if the domain
+    #   was created with VPCOptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   Specifies the subnets for VPC endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zones
+    #   The availability zones for the Elasticsearch domain. Exists only if
+    #   the domain was created with VPCOptions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Specifies the security groups for VPC endpoint.
+    #   @return [Array<String>]
+    #
+    class VPCDerivedInfo < Struct.new(
+      :vpc_id,
+      :subnet_ids,
+      :availability_zones,
+      :security_group_ids)
+      include Aws::Structure
+    end
+
+    # Status of the VPC options for the specified Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the VPC options for the specified Elasticsearch domain.
+    #   @return [Types::VPCDerivedInfo]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the VPC options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class VPCDerivedInfoStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
+    # Options to specify the subnets and security groups for VPC endpoint.
+    # For more information, see [ VPC Endpoints for Amazon Elasticsearch
+    # Service Domains][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
+    #
+    # @note When making an API call, you may pass VPCOptions
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["String"],
+    #         security_group_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   Specifies the subnets for VPC endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Specifies the security groups for VPC endpoint.
+    #   @return [Array<String>]
+    #
+    class VPCOptions < Struct.new(
+      :subnet_ids,
+      :security_group_ids)
       include Aws::Structure
     end
 
