@@ -123,8 +123,10 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] min_power
-    #   The minimum machine size required to run this blueprint. `0`
-    #   indicates that the blueprint runs on all instances.
+    #   The minimum bundle power required to run this blueprint. For
+    #   example, you need a bundle with a power value of 500 or more to
+    #   create an instance that uses a blueprint with a minimum power value
+    #   of 500. `0` indicates that the blueprint runs on all instance sizes.
     #   @return [Integer]
     #
     # @!attribute [rw] version
@@ -144,6 +146,11 @@ module Aws::Lightsail
     #   The end-user license agreement URL for the image or blueprint.
     #   @return [String]
     #
+    # @!attribute [rw] platform
+    #   The operating system platform (either Linux/Unix-based or Windows
+    #   Server-based) of the blueprint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Blueprint AWS API Documentation
     #
     class Blueprint < Struct.new(
@@ -157,7 +164,8 @@ module Aws::Lightsail
       :version,
       :version_code,
       :product_url,
-      :license_url)
+      :license_url,
+      :platform)
       include Aws::Structure
     end
 
@@ -193,7 +201,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] power
-    #   The power of the bundle (e.g., `500`).
+    #   A numeric value that represents the power of the bundle (e.g.,
+    #   `500`). You can use the bundle's power value in conjunction with a
+    #   blueprint's minimum power value to determine whether the blueprint
+    #   will run on the bundle. For example, you need a bundle with a power
+    #   value of 500 or more to create an instance that uses a blueprint
+    #   with a minimum power value of 500.
     #   @return [Integer]
     #
     # @!attribute [rw] ram_size_in_gb
@@ -203,6 +216,13 @@ module Aws::Lightsail
     # @!attribute [rw] transfer_per_month_in_gb
     #   The data transfer rate per month in GB (e.g., `2000`).
     #   @return [Integer]
+    #
+    # @!attribute [rw] supported_platforms
+    #   The operating system platform (Linux/Unix-based or Windows
+    #   Server-based) that the bundle supports. You can only launch a
+    #   `WINDOWS` bundle on a blueprint that supports the `WINDOWS`
+    #   platform. `LINUX_UNIX` blueprints require a `LINUX_UNIX` bundle.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
     #
@@ -216,7 +236,8 @@ module Aws::Lightsail
       :name,
       :power,
       :ram_size_in_gb,
-      :transfer_per_month_in_gb)
+      :transfer_per_month_in_gb,
+      :supported_platforms)
       include Aws::Structure
     end
 
@@ -531,7 +552,7 @@ module Aws::Lightsail
     #
     #
     #
-    #   [1]: http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image
     #   @return [String]
     #
     # @!attribute [rw] key_pair_name
@@ -1942,8 +1963,30 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   For RDP access, the temporary password of the Amazon EC2 instance.
+    #   For RDP access, the password for your Amazon Lightsail instance.
+    #   Password will be an empty string if the password for your new
+    #   instance is not ready yet. When you create an instance, it can take
+    #   up to 15 minutes for the instance to be ready.
+    #
+    #   <note markdown="1"> If you create an instance using any key pair other than the default
+    #   (`LightsailDefaultKeyPair`), `password` will always be an empty
+    #   string.
+    #
+    #    If you change the Administrator password on the instance, Lightsail
+    #   will continue to return the original password value. When accessing
+    #   the instance using RDP, you need to manually enter the Administrator
+    #   password after changing it from the default.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] password_data
+    #   For a Windows Server-based instance, an object with the data you can
+    #   use to retrieve your password. This is only needed if `password` is
+    #   empty and the instance is not new (and therefore the password is not
+    #   ready yet). When you create an instance, it can take up to 15
+    #   minutes for the instance to be ready.
+    #   @return [Types::PasswordData]
     #
     # @!attribute [rw] private_key
     #   For SSH access, the temporary private key. For OpenSSH clients
@@ -1970,6 +2013,7 @@ module Aws::Lightsail
       :expires_at,
       :ip_address,
       :password,
+      :password_data,
       :private_key,
       :protocol,
       :instance_name,
@@ -2469,6 +2513,47 @@ module Aws::Lightsail
       :status_changed_at,
       :error_code,
       :error_details)
+      include Aws::Structure
+    end
+
+    # The password data for the Windows Server-based instance, including the
+    # ciphertext and the key pair name.
+    #
+    # @!attribute [rw] ciphertext
+    #   The encrypted password. Ciphertext will be an empty string if access
+    #   to your new instance is not ready yet. When you create an instance,
+    #   it can take up to 15 minutes for the instance to be ready.
+    #
+    #   <note markdown="1"> If you use the default key pair (`LightsailDefaultKeyPair`), the
+    #   decrypted password will be available in the password field.
+    #
+    #    If you are using a custom key pair, you need to use your own means
+    #   of decryption.
+    #
+    #    If you change the Administrator password on the instance, Lightsail
+    #   will continue to return the original ciphertext value. When
+    #   accessing the instance using RDP, you need to manually enter the
+    #   Administrator password after changing it from the default.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_name
+    #   The name of the key pair that you used when creating your instance.
+    #   If no key pair name was specified when creating the instance,
+    #   Lightsail uses the default key pair (`LightsailDefaultKeyPair`).
+    #
+    #   If you are using a custom key pair, you need to use your own means
+    #   of decrypting your password using the `ciphertext`. Lightsail
+    #   creates the ciphertext by encrypting your password with the public
+    #   key part of this key pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PasswordData AWS API Documentation
+    #
+    class PasswordData < Struct.new(
+      :ciphertext,
+      :key_pair_name)
       include Aws::Structure
     end
 

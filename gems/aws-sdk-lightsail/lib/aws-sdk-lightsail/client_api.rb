@@ -115,6 +115,8 @@ module Aws::Lightsail
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceMetricName = Shapes::StringShape.new(name: 'InstanceMetricName')
     InstanceNetworking = Shapes::StructureShape.new(name: 'InstanceNetworking')
+    InstancePlatform = Shapes::StringShape.new(name: 'InstancePlatform')
+    InstancePlatformList = Shapes::ListShape.new(name: 'InstancePlatformList')
     InstancePortInfo = Shapes::StructureShape.new(name: 'InstancePortInfo')
     InstancePortInfoList = Shapes::ListShape.new(name: 'InstancePortInfoList')
     InstancePortState = Shapes::StructureShape.new(name: 'InstancePortState')
@@ -148,6 +150,7 @@ module Aws::Lightsail
     OperationList = Shapes::ListShape.new(name: 'OperationList')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
+    PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
     PeerVpcRequest = Shapes::StructureShape.new(name: 'PeerVpcRequest')
     PeerVpcResult = Shapes::StructureShape.new(name: 'PeerVpcResult')
     Port = Shapes::IntegerShape.new(name: 'Port')
@@ -217,6 +220,7 @@ module Aws::Lightsail
     Blueprint.add_member(:version_code, Shapes::ShapeRef.new(shape: string, location_name: "versionCode"))
     Blueprint.add_member(:product_url, Shapes::ShapeRef.new(shape: string, location_name: "productUrl"))
     Blueprint.add_member(:license_url, Shapes::ShapeRef.new(shape: string, location_name: "licenseUrl"))
+    Blueprint.add_member(:platform, Shapes::ShapeRef.new(shape: InstancePlatform, location_name: "platform"))
     Blueprint.struct_class = Types::Blueprint
 
     BlueprintList.member = Shapes::ShapeRef.new(shape: Blueprint)
@@ -231,6 +235,7 @@ module Aws::Lightsail
     Bundle.add_member(:power, Shapes::ShapeRef.new(shape: integer, location_name: "power"))
     Bundle.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
     Bundle.add_member(:transfer_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "transferPerMonthInGb"))
+    Bundle.add_member(:supported_platforms, Shapes::ShapeRef.new(shape: InstancePlatformList, location_name: "supportedPlatforms"))
     Bundle.struct_class = Types::Bundle
 
     BundleList.member = Shapes::ShapeRef.new(shape: Bundle)
@@ -557,6 +562,7 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     InstanceAccessDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
     InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    InstanceAccessDetails.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
     InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: string, location_name: "privateKey"))
     InstanceAccessDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: InstanceAccessProtocol, location_name: "protocol"))
     InstanceAccessDetails.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
@@ -573,6 +579,8 @@ module Aws::Lightsail
     InstanceNetworking.add_member(:monthly_transfer, Shapes::ShapeRef.new(shape: MonthlyTransfer, location_name: "monthlyTransfer"))
     InstanceNetworking.add_member(:ports, Shapes::ShapeRef.new(shape: InstancePortInfoList, location_name: "ports"))
     InstanceNetworking.struct_class = Types::InstanceNetworking
+
+    InstancePlatformList.member = Shapes::ShapeRef.new(shape: InstancePlatform)
 
     InstancePortInfo.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
     InstancePortInfo.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
@@ -668,6 +676,10 @@ module Aws::Lightsail
     Operation.struct_class = Types::Operation
 
     OperationList.member = Shapes::ShapeRef.new(shape: Operation)
+
+    PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
+    PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
+    PasswordData.struct_class = Types::PasswordData
 
     PeerVpcRequest.struct_class = Types::PeerVpcRequest
 
