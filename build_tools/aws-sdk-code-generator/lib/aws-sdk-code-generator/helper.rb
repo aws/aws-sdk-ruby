@@ -118,20 +118,20 @@ module AwsSdkCodeGenerator
       shape(member_ref)
     end
 
-    def upcase_first(shape_name)
-      if shape_name[0] =~ /[a-z]/
-        shape_name = shape_name.size == 1 ? shape_name.upcase
-          : shape_name[0].upcase + shape_name[1..-1]
+    def upcase_first(name)
+      if name[0] =~ /[a-z]/
+        name.size == 1 ? name.upcase : name[0].upcase + name[1..-1]
+      else
+        name
       end
-      shape_name
     end
 
-    def downcase_first(shape_name)
-      if shape_name[0] =~/[A-Z]/
-        shape_name = shape_name.size == 1 ? shape_name.downcase
-          : shape_name[0].downcase + shape_name[1..-1]
+    def downcase_first(name)
+      if name[0] =~/[A-Z]/
+        name.size == 1 ? name.downcase : name[0].downcase + name[1..-1]
+      else
+        name
       end
-      shape_name
     end
 
     def shape(ref)
