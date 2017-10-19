@@ -98,7 +98,7 @@ module AwsSdkCodeGenerator
       def shapes
         shape_enum.map do |shape_name, shape|
           # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name)
+          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
           Shape.new.tap do |s|
             s.name = shape_name
             s.class_name, shape = shape_class_name(shape)
@@ -110,7 +110,7 @@ module AwsSdkCodeGenerator
       def shape_definitions
         shape_enum.inject([]) do |groups, (shape_name, shape)|
           # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name)
+          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
           lines = []
           if non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
@@ -308,7 +308,8 @@ module AwsSdkCodeGenerator
       def operation_ref(ref)
         metadata = ref.dup
         # APIG model, shape can start with downcase
-        shape_name = upcase_first(metadata.delete('shape'))
+        shape_name = metadata.delete('shape')
+        shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
         if metadata.empty?
           options = ''
         else

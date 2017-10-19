@@ -76,7 +76,9 @@ module AwsSdkCodeGenerator
 
       def attribute_macros_docs(shape_name)
         # APIG model downcase shape name in origin
-        shape_name = downcase_first(shape_name) if shape(shape_name).nil?
+        if shape(shape_name).nil? && @service.protocol == 'api-gateway'
+          shape_name = downcase_first(shape_name)
+        end
         return if shape(shape_name)['members'].nil?
         shape(shape_name)['members'].map do |member_name, member_ref|
           docs = Api.docstring(member_ref, @api).to_s
