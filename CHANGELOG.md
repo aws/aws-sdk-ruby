@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.10.67 (2017-10-18)
 ------------------
 
