@@ -85,7 +85,7 @@ module Aws::SQS
 
     # Each message attribute consists of a `Name`, `Type`, and `Value`. For
     # more information, see [Message Attribute Items and Validation][1] in
-    # the *Amazon SQS Developer Guide*.
+    # the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #

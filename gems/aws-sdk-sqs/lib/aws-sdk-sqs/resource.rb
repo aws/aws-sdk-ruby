@@ -73,8 +73,8 @@ module Aws::SQS
     #   * `RedrivePolicy` - The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue. For more
     #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon SQS
-    #     Developer Guide*.
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple Queue
+    #     Service Developer Guide*.
     #
     #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -92,7 +92,7 @@ module Aws::SQS
     #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
     #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
     #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon SQS Developer Guide*.
+    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -121,12 +121,13 @@ module Aws::SQS
     #     attribute, you must also provide the `MessageGroupId` for your
     #     messages explicitly.
     #
-    #     For more information, see [FIFO Queue Logic][10] in the *Amazon SQS
-    #     Developer Guide*.
+    #     For more information, see [FIFO Queue Logic][10] in the *Amazon
+    #     Simple Queue Service Developer Guide*.
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
     #     Valid values: `true`, `false`. For more information, see
-    #     [Exactly-Once Processing][11] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-Once Processing][11] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #

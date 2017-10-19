@@ -93,8 +93,8 @@ module Aws::SQS
     #   The AWS account number of the [principal][1] who is given permission.
     #   The principal must have an AWS account, but does not need to be signed
     #   up for Amazon SQS. For information about locating the AWS account
-    #   identification, see [Your AWS Identifiers][2] in the *Amazon SQS
-    #   Developer Guide*.
+    #   identification, see [Your AWS Identifiers][2] in the *Amazon Simple
+    #   Queue Service Developer Guide*.
     #
     #
     #
@@ -119,7 +119,7 @@ module Aws::SQS
     #   * `SendMessage`
     #
     #   For more information about these actions, see [Understanding
-    #   Permissions][1] in the *Amazon SQS Developer Guide*.
+    #   Permissions][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   Specifying `SendMessage`, `DeleteMessage`, or
     #   `ChangeMessageVisibility` for `ActionName.n` also grants permissions
@@ -459,7 +459,7 @@ module Aws::SQS
     # @option options [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`. For
     #   more information, see [Message Attribute Items and Validation][1] in
-    #   the *Amazon SQS Developer Guide*.
+    #   the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -471,8 +471,8 @@ module Aws::SQS
     #   particular `MessageDeduplicationId` is sent successfully, any messages
     #   sent with the same `MessageDeduplicationId` are accepted successfully
     #   but aren't delivered during the 5-minute deduplication interval. For
-    #   more information, see [ Exactly-Once Processing][1] in the *Amazon SQS
-    #   Developer Guide*.
+    #   more information, see [ Exactly-Once Processing][1] in the *Amazon
+    #   Simple Queue Service Developer Guide*.
     #
     #   * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -633,8 +633,8 @@ module Aws::SQS
     #   * `RedrivePolicy` - The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue. For more
     #     information about the redrive policy and dead-letter queues, see
-    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon SQS
-    #     Developer Guide*.
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple Queue
+    #     Service Developer Guide*.
     #
     #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -652,7 +652,7 @@ module Aws::SQS
     #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
     #     values: an integer from 0 to 43,200 (12 hours). The default is 30.
     #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon SQS Developer Guide*.
+    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -677,7 +677,7 @@ module Aws::SQS
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
     #     For more information, see [Exactly-Once Processing][10] in the
-    #     *Amazon SQS Developer Guide*.
+    #     *Amazon Simple Queue Service Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #

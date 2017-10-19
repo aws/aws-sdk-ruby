@@ -188,6 +188,12 @@ module Aws::SSM
     # @option params [required, String] :resource_id
     #   The resource ID you want to tag.
     #
+    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline values,
+    #   use the ID of the resource, such as mw-01234361858c9b57b for a
+    #   Maintenance Window.
+    #
+    #   For the Document and Parameter values, use the name of the resource.
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
@@ -2362,6 +2368,7 @@ module Aws::SSM
     #   resp.parameters[0].last_modified_user #=> String
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].allowed_pattern #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
@@ -3195,6 +3202,7 @@ module Aws::SSM
     #   resp.parameter.name #=> String
     #   resp.parameter.type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameter.value #=> String
+    #   resp.parameter.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
     #
@@ -3248,6 +3256,7 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].allowed_pattern #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -3287,6 +3296,7 @@ module Aws::SSM
     #   resp.parameters[0].name #=> String
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
     #
@@ -3368,6 +3378,7 @@ module Aws::SSM
     #   resp.parameters[0].name #=> String
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
@@ -4447,7 +4458,9 @@ module Aws::SSM
     #   example, for String types with values restricted to numbers, you can
     #   specify the following: AllowedPattern=^\\d+$
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutParameterResult#version #version} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4460,6 +4473,10 @@ module Aws::SSM
     #     overwrite: false,
     #     allowed_pattern: "AllowedPattern",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter AWS API Documentation
     #
@@ -5848,7 +5865,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

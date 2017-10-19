@@ -88,6 +88,12 @@ module Aws::SSM
     #
     # @!attribute [rw] resource_id
     #   The resource ID you want to tag.
+    #
+    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline
+    #   values, use the ID of the resource, such as mw-01234361858c9b57b for
+    #   a Maintenance Window.
+    #
+    #   For the Document and Parameter values, use the name of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7440,12 +7446,17 @@ module Aws::SSM
     #   The parameter value.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The parameter version.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :name,
       :type,
-      :value)
+      :value,
+      :version)
       include Aws::Structure
     end
 
@@ -7486,6 +7497,10 @@ module Aws::SSM
     #   a-zA-Z0-9\_.-
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The parameter version.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -7496,7 +7511,8 @@ module Aws::SSM
       :last_modified_user,
       :description,
       :value,
-      :allowed_pattern)
+      :allowed_pattern,
+      :version)
       include Aws::Structure
     end
 
@@ -7535,6 +7551,10 @@ module Aws::SSM
     #   a-zA-Z0-9\_.-
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The parameter version.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
     #
     class ParameterMetadata < Struct.new(
@@ -7544,7 +7564,8 @@ module Aws::SSM
       :last_modified_date,
       :last_modified_user,
       :description,
-      :allowed_pattern)
+      :allowed_pattern,
+      :version)
       include Aws::Structure
     end
 
@@ -8144,9 +8165,22 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @!attribute [rw] version
+    #   The new version number of a parameter. If you edit a parameter
+    #   value, Parameter Store automatically creates a new version and
+    #   assigns this new version a unique ID. You can reference a parameter
+    #   version ID in API actions or in Systems Manager documents (SSM
+    #   documents). By default, if you don't specify a specific version,
+    #   the system returns the latest parameter value when a parameter is
+    #   called.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterResult AWS API Documentation
     #
-    class PutParameterResult < Aws::EmptyStructure; end
+    class PutParameterResult < Struct.new(
+      :version)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass RegisterDefaultPatchBaselineRequest
     #   data as a hash:

@@ -51,6 +51,8 @@ module Aws::SQS
     InvalidMessageContents = Shapes::StructureShape.new(name: 'InvalidMessageContents')
     ListDeadLetterSourceQueuesRequest = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesRequest')
     ListDeadLetterSourceQueuesResult = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesResult')
+    ListQueueTagsRequest = Shapes::StructureShape.new(name: 'ListQueueTagsRequest')
+    ListQueueTagsResult = Shapes::StructureShape.new(name: 'ListQueueTagsResult')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
     ListQueuesResult = Shapes::StructureShape.new(name: 'ListQueuesResult')
     Message = Shapes::StructureShape.new(name: 'Message')
@@ -86,8 +88,14 @@ module Aws::SQS
     SetQueueAttributesRequest = Shapes::StructureShape.new(name: 'SetQueueAttributesRequest')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList', flattened: true)
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList', flattened: true)
+    TagMap = Shapes::MapShape.new(name: 'TagMap', flattened: true)
+    TagQueueRequest = Shapes::StructureShape.new(name: 'TagQueueRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyEntriesInBatchRequest = Shapes::StructureShape.new(name: 'TooManyEntriesInBatchRequest')
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
+    UntagQueueRequest = Shapes::StructureShape.new(name: 'UntagQueueRequest')
 
     AWSAccountIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "AWSAccountId")
 
@@ -188,6 +196,12 @@ module Aws::SQS
 
     ListDeadLetterSourceQueuesResult.add_member(:queue_urls, Shapes::ShapeRef.new(shape: QueueUrlList, required: true, location_name: "queueUrls"))
     ListDeadLetterSourceQueuesResult.struct_class = Types::ListDeadLetterSourceQueuesResult
+
+    ListQueueTagsRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
+    ListQueueTagsRequest.struct_class = Types::ListQueueTagsRequest
+
+    ListQueueTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tag"))
+    ListQueueTagsResult.struct_class = Types::ListQueueTagsResult
 
     ListQueuesRequest.add_member(:queue_name_prefix, Shapes::ShapeRef.new(shape: String, location_name: "QueueNamePrefix"))
     ListQueuesRequest.struct_class = Types::ListQueuesRequest
@@ -291,6 +305,19 @@ module Aws::SQS
     SetQueueAttributesRequest.struct_class = Types::SetQueueAttributesRequest
 
     StringList.member = Shapes::ShapeRef.new(shape: String, location_name: "StringListValue")
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey")
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey, location_name: "Key")
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue, location_name: "Value")
+
+    TagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
+    TagQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagQueueRequest.struct_class = Types::TagQueueRequest
+
+    UntagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
+    UntagQueueRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagQueueRequest.struct_class = Types::UntagQueueRequest
 
 
     # @api private
@@ -405,6 +432,14 @@ module Aws::SQS
         o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
       end)
 
+      api.add_operation(:list_queue_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueueTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListQueueTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueueTagsResult)
+      end)
+
       api.add_operation(:list_queues, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListQueues"
         o.http_method = "POST"
@@ -471,6 +506,22 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: SetQueueAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeName)
+      end)
+
+      api.add_operation(:tag_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:untag_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

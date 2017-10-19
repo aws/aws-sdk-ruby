@@ -523,6 +523,7 @@ module Aws::SSM
     OwnerInformation = Shapes::StringShape.new(name: 'OwnerInformation')
     PSParameterName = Shapes::StringShape.new(name: 'PSParameterName')
     PSParameterValue = Shapes::StringShape.new(name: 'PSParameterValue')
+    PSParameterVersion = Shapes::IntegerShape.new(name: 'PSParameterVersion')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterAlreadyExists = Shapes::StructureShape.new(name: 'ParameterAlreadyExists')
     ParameterDescription = Shapes::StringShape.new(name: 'ParameterDescription')
@@ -531,6 +532,7 @@ module Aws::SSM
     ParameterKeyId = Shapes::StringShape.new(name: 'ParameterKeyId')
     ParameterLimitExceeded = Shapes::StructureShape.new(name: 'ParameterLimitExceeded')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
+    ParameterMaxVersionLimitExceeded = Shapes::StructureShape.new(name: 'ParameterMaxVersionLimitExceeded')
     ParameterMetadata = Shapes::StructureShape.new(name: 'ParameterMetadata')
     ParameterMetadataList = Shapes::ListShape.new(name: 'ParameterMetadataList')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
@@ -546,6 +548,7 @@ module Aws::SSM
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ParameterValueList = Shapes::ListShape.new(name: 'ParameterValueList')
+    ParameterVersionNotFound = Shapes::StructureShape.new(name: 'ParameterVersionNotFound')
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     ParametersFilter = Shapes::StructureShape.new(name: 'ParametersFilter')
     ParametersFilterKey = Shapes::StringShape.new(name: 'ParametersFilterKey')
@@ -2093,6 +2096,7 @@ module Aws::SSM
     Parameter.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, location_name: "Name"))
     Parameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, location_name: "Type"))
     Parameter.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, location_name: "Value"))
+    Parameter.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     Parameter.struct_class = Types::Parameter
 
     ParameterHistory.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, location_name: "Name"))
@@ -2103,6 +2107,7 @@ module Aws::SSM
     ParameterHistory.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
     ParameterHistory.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, location_name: "Value"))
     ParameterHistory.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
+    ParameterHistory.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     ParameterHistory.struct_class = Types::ParameterHistory
 
     ParameterHistoryList.member = Shapes::ShapeRef.new(shape: ParameterHistory)
@@ -2116,6 +2121,7 @@ module Aws::SSM
     ParameterMetadata.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: String, location_name: "LastModifiedUser"))
     ParameterMetadata.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
     ParameterMetadata.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
+    ParameterMetadata.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     ParameterMetadata.struct_class = Types::ParameterMetadata
 
     ParameterMetadataList.member = Shapes::ShapeRef.new(shape: ParameterMetadata)
@@ -2251,6 +2257,7 @@ module Aws::SSM
     PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
+    PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     PutParameterResult.struct_class = Types::PutParameterResult
 
     RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
@@ -2705,6 +2712,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidActivationId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidActivation)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
       api.add_operation(:delete_association, Seahorse::Model::Operation.new.tap do |o|
@@ -3219,6 +3227,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeyId)
         o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterVersionNotFound)
       end)
 
       api.add_operation(:get_parameter_history, Seahorse::Model::Operation.new.tap do |o|
@@ -3513,6 +3522,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: HierarchyLevelLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: HierarchyTypeMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAllowedPatternException)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterMaxVersionLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: ParameterPatternMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedParameterType)
       end)
