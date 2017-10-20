@@ -9461,6 +9461,8 @@ module Aws::EC2
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         dry_run: false,
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] filters
@@ -9535,13 +9537,25 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another request with the
+    #   returned `NextToken` value. This value can be between 5 and 1000.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsRequest AWS API Documentation
     #
     class DescribeSecurityGroupsRequest < Struct.new(
       :filters,
       :group_ids,
       :group_names,
-      :dry_run)
+      :dry_run,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -9551,10 +9565,16 @@ module Aws::EC2
     #   Information about one or more security groups.
     #   @return [Array<Types::SecurityGroup>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsResult AWS API Documentation
     #
     class DescribeSecurityGroupsResult < Struct.new(
-      :security_groups)
+      :security_groups,
+      :next_token)
       include Aws::Structure
     end
 
@@ -16216,9 +16236,6 @@ module Aws::EC2
     #
     # @!attribute [rw] block_device_mappings
     #   One or more block device mapping entries.
-    #
-    #   Although you can specify encrypted EBS volumes in this block device
-    #   mapping for your Spot Instances, these volumes are not encrypted.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -20241,9 +20258,6 @@ module Aws::EC2
     #
     # @!attribute [rw] block_device_mappings
     #   One or more block device mapping entries.
-    #
-    #   Although you can specify encrypted EBS volumes in this block device
-    #   mapping for your Spot Instances, these volumes are not encrypted.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
