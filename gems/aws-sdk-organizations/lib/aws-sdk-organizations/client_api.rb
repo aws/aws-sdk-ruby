@@ -15,6 +15,8 @@ module Aws::Organizations
     AcceptHandshakeRequest = Shapes::StructureShape.new(name: 'AcceptHandshakeRequest')
     AcceptHandshakeResponse = Shapes::StructureShape.new(name: 'AcceptHandshakeResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessDeniedForDependencyException = Shapes::StructureShape.new(name: 'AccessDeniedForDependencyException')
+    AccessDeniedForDependencyExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedForDependencyExceptionReason')
     Account = Shapes::StructureShape.new(name: 'Account')
     AccountArn = Shapes::StringShape.new(name: 'AccountArn')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -600,6 +602,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedForDependencyException)
       end)
 
       api.add_operation(:attach_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -666,6 +669,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedForDependencyException)
       end)
 
       api.add_operation(:create_organizational_unit, Seahorse::Model::Operation.new.tap do |o|

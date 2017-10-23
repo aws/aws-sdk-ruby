@@ -164,13 +164,22 @@ module Aws::Organizations
     # * **Invitation to join** or **Approve all features request**
     #   handshakes: only a principal from the member account.
     #
+    #   The user who calls the API for an invitation to join must have the
+    #   `organizations:AcceptHandshake` permission. If you enabled all
+    #   features in the organization, then the user must also have the
+    #   `iam:CreateServiceLinkedRole` permission so that Organizations can
+    #   create the required service-linked role named
+    #   *OrgsServiceLinkedRoleName*. For more information, see [AWS
+    #   Organizations and Service-Linked Roles][1] in the *AWS Organizations
+    #   User Guide*.
+    #
     # * **Enable all features final confirmation** handshake: only a
     #   principal from the master account.
     #
     #   For more information about invitations, see [Inviting an AWS Account
-    #   to Join Your Organization][1] in the *AWS Organizations User Guide*.
+    #   to Join Your Organization][2] in the *AWS Organizations User Guide*.
     #   For more information about requests to enable all features in the
-    #   organization, see [Enabling All Features in Your Organization][2] in
+    #   organization, see [Enabling All Features in Your Organization][3] in
     #   the *AWS Organizations User Guide*.
     #
     # After you accept a handshake, it continues to appear in the results of
@@ -178,8 +187,9 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to accept.
@@ -267,7 +277,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -505,7 +515,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -527,15 +537,28 @@ module Aws::Organizations
     # response element from this operation to provide as a parameter to the
     # DescribeCreateAccountStatus operation.
     #
-    # AWS Organizations preconfigures the new member account with a role
-    # (named `OrganizationAccountAccessRole` by default) that grants
-    # administrator permissions to the new account. Principals in the master
-    # account can assume the role. AWS Organizations clones the company name
-    # and address information for the new account from the organization's
-    # master account.
+    # The user who calls the API for an invitation to join must have the
+    # `organizations:CreateAccount` permission. If you enabled all features
+    # in the organization, then the user must also have the
+    # `iam:CreateServiceLinkedRole` permission so that Organizations can
+    # create the required service-linked role named
+    # *OrgsServiceLinkedRoleName*. For more information, see [AWS
+    # Organizations and Service-Linked Roles][1] in the *AWS Organizations
+    # User Guide*.
+    #
+    # The user in the master account who calls this API must also have the
+    # `iam:CreateRole` permission because AWS Organizations preconfigures
+    # the new member account with a role (named
+    # `OrganizationAccountAccessRole` by default) that grants users in the
+    # master account administrator permissions in the new member account.
+    # Principals in the master account can assume the role. AWS
+    # Organizations clones the company name and address information for the
+    # new account from the organization's master account.
+    #
+    #
     #
     # For more information about creating accounts, see [Creating an AWS
-    # Account in Your Organization][1] in the *AWS Organizations User
+    # Account in Your Organization][2] in the *AWS Organizations User
     # Guide*.
     #
     # When you create an account in an organization using the AWS
@@ -545,7 +568,7 @@ module Aws::Organizations
     # automatically collected. If you must remove an account from your
     # organization later, you can do so only after you provide the missing
     # information. Follow the steps at [ To leave an organization when all
-    # required account information has not yet been provided][2] in the *AWS
+    # required account information has not yet been provided][3] in the *AWS
     # Organizations User Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
@@ -555,7 +578,7 @@ module Aws::Organizations
     # for the account. If you disable this, then only the account root user
     # can access billing information. For information about how to disable
     # this for an account, see [Granting Access to Your Billing Information
-    # and Tools][3].
+    # and Tools][4].
     #
     #  </note>
     #
@@ -565,14 +588,15 @@ module Aws::Organizations
     # If you get an exception that indicates that you exceeded your account
     # limits for the organization or that you can"t add an account because
     # your organization is still initializing, please contact [ AWS Customer
-    # Support][4].
+    # Support][5].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
-    # [3]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
-    # [4]: https://console.aws.amazon.com/support/home#/
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [4]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    # [5]: https://console.aws.amazon.com/support/home#/
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
@@ -671,7 +695,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -1093,7 +1117,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -1340,7 +1364,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -1447,7 +1471,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -1894,7 +1918,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -2120,7 +2144,7 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
     #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -2595,7 +2619,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].requested_timestamp #=> Time
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -2709,7 +2733,7 @@ module Aws::Organizations
     #
     #   resp = client.list_handshakes_for_account({
     #     filter: {
-    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES
+    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
     #       parent_handshake_id: "HandshakeId",
     #     },
     #     next_token: "NextToken",
@@ -2727,7 +2751,7 @@ module Aws::Organizations
     #   resp.handshakes[0].state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshakes[0].requested_timestamp #=> Time
     #   resp.handshakes[0].expiration_timestamp #=> Time
-    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshakes[0].resources #=> Array
     #   resp.handshakes[0].resources[0].value #=> String
     #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -2889,7 +2913,7 @@ module Aws::Organizations
     #
     #   resp = client.list_handshakes_for_organization({
     #     filter: {
-    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES
+    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
     #       parent_handshake_id: "HandshakeId",
     #     },
     #     next_token: "NextToken",
@@ -2907,7 +2931,7 @@ module Aws::Organizations
     #   resp.handshakes[0].state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshakes[0].requested_timestamp #=> Time
     #   resp.handshakes[0].expiration_timestamp #=> Time
-    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES"
+    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
     #   resp.handshakes[0].resources #=> Array
     #   resp.handshakes[0].resources[0].value #=> String
     #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
@@ -3876,7 +3900,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
