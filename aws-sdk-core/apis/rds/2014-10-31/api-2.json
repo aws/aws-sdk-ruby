@@ -6,6 +6,7 @@
     "protocol":"query",
     "serviceAbbreviation":"Amazon RDS",
     "serviceFullName":"Amazon Relational Database Service",
+    "serviceId":"RDS",
     "signatureVersion":"v4",
     "uid":"rds-2014-10-31",
     "xmlNamespace":"http://rds.amazonaws.com/doc/2014-10-31/"
@@ -951,6 +952,22 @@
         "shape":"SourceRegionMessage",
         "resultWrapper":"DescribeSourceRegionsResult"
       }
+    },
+    "DescribeValidDBInstanceModifications":{
+      "name":"DescribeValidDBInstanceModifications",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeValidDBInstanceModificationsMessage"},
+      "output":{
+        "shape":"DescribeValidDBInstanceModificationsResult",
+        "resultWrapper":"DescribeValidDBInstanceModificationsResult"
+      },
+      "errors":[
+        {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"InvalidDBInstanceStateFault"}
+      ]
     },
     "DownloadDBLogFilePortion":{
       "name":"DownloadDBLogFilePortion",
@@ -1983,7 +2000,9 @@
         "DomainIAMRoleName":{"shape":"String"},
         "PromotionTier":{"shape":"IntegerOptional"},
         "Timezone":{"shape":"String"},
-        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"}
+        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
+        "EnablePerformanceInsights":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -2010,7 +2029,9 @@
         "MonitoringRoleArn":{"shape":"String"},
         "KmsKeyId":{"shape":"String"},
         "PreSignedUrl":{"shape":"String"},
-        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"}
+        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
+        "EnablePerformanceInsights":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -2522,7 +2543,9 @@
         "PromotionTier":{"shape":"IntegerOptional"},
         "DBInstanceArn":{"shape":"String"},
         "Timezone":{"shape":"String"},
-        "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"}
+        "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"},
+        "PerformanceInsightsEnabled":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -3399,6 +3422,19 @@
         "Filters":{"shape":"FilterList"}
       }
     },
+    "DescribeValidDBInstanceModificationsMessage":{
+      "type":"structure",
+      "required":["DBInstanceIdentifier"],
+      "members":{
+        "DBInstanceIdentifier":{"shape":"String"}
+      }
+    },
+    "DescribeValidDBInstanceModificationsResult":{
+      "type":"structure",
+      "members":{
+        "ValidDBInstanceModificationsMessage":{"shape":"ValidDBInstanceModificationsMessage"}
+      }
+    },
     "DomainMembership":{
       "type":"structure",
       "members":{
@@ -3427,6 +3463,20 @@
       "exception":true
     },
     "Double":{"type":"double"},
+    "DoubleRange":{
+      "type":"structure",
+      "members":{
+        "From":{"shape":"Double"},
+        "To":{"shape":"Double"}
+      }
+    },
+    "DoubleRangeList":{
+      "type":"list",
+      "member":{
+        "shape":"DoubleRange",
+        "locationName":"DoubleRange"
+      }
+    },
     "DownloadDBLogFilePortionDetails":{
       "type":"structure",
       "members":{
@@ -3952,7 +4002,9 @@
         "MonitoringRoleArn":{"shape":"String"},
         "DomainIAMRoleName":{"shape":"String"},
         "PromotionTier":{"shape":"IntegerOptional"},
-        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"}
+        "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
+        "EnablePerformanceInsights":{"shape":"BooleanOptional"},
+        "PerformanceInsightsKMSKeyId":{"shape":"String"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -3996,7 +4048,8 @@
       "required":["DBSnapshotIdentifier"],
       "members":{
         "DBSnapshotIdentifier":{"shape":"String"},
-        "EngineVersion":{"shape":"String"}
+        "EngineVersion":{"shape":"String"},
+        "OptionGroupName":{"shape":"String"}
       }
     },
     "ModifyDBSnapshotResult":{
@@ -4299,7 +4352,8 @@
         "StorageType":{"shape":"String"},
         "SupportsIops":{"shape":"Boolean"},
         "SupportsEnhancedMonitoring":{"shape":"Boolean"},
-        "SupportsIAMDatabaseAuthentication":{"shape":"Boolean"}
+        "SupportsIAMDatabaseAuthentication":{"shape":"Boolean"},
+        "SupportsPerformanceInsights":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -4453,6 +4507,21 @@
       "type":"structure",
       "members":{
         "ReservedDBInstance":{"shape":"ReservedDBInstance"}
+      }
+    },
+    "Range":{
+      "type":"structure",
+      "members":{
+        "From":{"shape":"Integer"},
+        "To":{"shape":"Integer"},
+        "Step":{"shape":"IntegerOptional"}
+      }
+    },
+    "RangeList":{
+      "type":"list",
+      "member":{
+        "shape":"Range",
+        "locationName":"Range"
       }
     },
     "ReadReplicaDBClusterIdentifierList":{
@@ -5156,6 +5225,29 @@
         "Description":{"shape":"String"},
         "AutoUpgrade":{"shape":"Boolean"},
         "IsMajorVersionUpgrade":{"shape":"Boolean"}
+      }
+    },
+    "ValidDBInstanceModificationsMessage":{
+      "type":"structure",
+      "members":{
+        "Storage":{"shape":"ValidStorageOptionsList"}
+      },
+      "wrapper":true
+    },
+    "ValidStorageOptions":{
+      "type":"structure",
+      "members":{
+        "StorageType":{"shape":"String"},
+        "StorageSize":{"shape":"RangeList"},
+        "ProvisionedIops":{"shape":"RangeList"},
+        "IopsToStorageRatio":{"shape":"DoubleRangeList"}
+      }
+    },
+    "ValidStorageOptionsList":{
+      "type":"list",
+      "member":{
+        "shape":"ValidStorageOptions",
+        "locationName":"ValidStorageOptions"
       }
     },
     "ValidUpgradeTargetList":{

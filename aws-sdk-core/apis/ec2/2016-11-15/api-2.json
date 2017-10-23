@@ -256,6 +256,15 @@
       "input":{"shape":"ConfirmProductInstanceRequest"},
       "output":{"shape":"ConfirmProductInstanceResult"}
     },
+    "CopyFpgaImage":{
+      "name":"CopyFpgaImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyFpgaImageRequest"},
+      "output":{"shape":"CopyFpgaImageResult"}
+    },
     "CopyImage":{
       "name":"CopyImage",
       "http":{
@@ -583,6 +592,15 @@
       "input":{"shape":"DeleteFlowLogsRequest"},
       "output":{"shape":"DeleteFlowLogsResult"}
     },
+    "DeleteFpgaImage":{
+      "name":"DeleteFpgaImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteFpgaImageRequest"},
+      "output":{"shape":"DeleteFpgaImageResult"}
+    },
     "DeleteInternetGateway":{
       "name":"DeleteInternetGateway",
       "http":{
@@ -878,6 +896,15 @@
       },
       "input":{"shape":"DescribeFlowLogsRequest"},
       "output":{"shape":"DescribeFlowLogsResult"}
+    },
+    "DescribeFpgaImageAttribute":{
+      "name":"DescribeFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeFpgaImageAttributeRequest"},
+      "output":{"shape":"DescribeFpgaImageAttributeResult"}
     },
     "DescribeFpgaImages":{
       "name":"DescribeFpgaImages",
@@ -1636,6 +1663,15 @@
       "input":{"shape":"ImportVolumeRequest"},
       "output":{"shape":"ImportVolumeResult"}
     },
+    "ModifyFpgaImageAttribute":{
+      "name":"ModifyFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyFpgaImageAttributeRequest"},
+      "output":{"shape":"ModifyFpgaImageAttributeResult"}
+    },
     "ModifyHosts":{
       "name":"ModifyHosts",
       "http":{
@@ -1770,6 +1806,15 @@
       },
       "input":{"shape":"ModifyVpcPeeringConnectionOptionsRequest"},
       "output":{"shape":"ModifyVpcPeeringConnectionOptionsResult"}
+    },
+    "ModifyVpcTenancy":{
+      "name":"ModifyVpcTenancy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyVpcTenancyRequest"},
+      "output":{"shape":"ModifyVpcTenancyResult"}
     },
     "MonitorInstances":{
       "name":"MonitorInstances",
@@ -1928,6 +1973,15 @@
       "input":{"shape":"RequestSpotInstancesRequest"},
       "output":{"shape":"RequestSpotInstancesResult"}
     },
+    "ResetFpgaImageAttribute":{
+      "name":"ResetFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResetFpgaImageAttributeRequest"},
+      "output":{"shape":"ResetFpgaImageAttributeResult"}
+    },
     "ResetImageAttribute":{
       "name":"ResetImageAttribute",
       "http":{
@@ -2055,6 +2109,24 @@
       },
       "input":{"shape":"UnmonitorInstancesRequest"},
       "output":{"shape":"UnmonitorInstancesResult"}
+    },
+    "UpdateSecurityGroupRuleDescriptionsEgress":{
+      "name":"UpdateSecurityGroupRuleDescriptionsEgress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateSecurityGroupRuleDescriptionsEgressRequest"},
+      "output":{"shape":"UpdateSecurityGroupRuleDescriptionsEgressResult"}
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngress":{
+      "name":"UpdateSecurityGroupRuleDescriptionsIngress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressRequest"},
+      "output":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressResult"}
     }
   },
   "shapes":{
@@ -3440,6 +3512,30 @@
         "completed"
       ]
     },
+    "CopyFpgaImageRequest":{
+      "type":"structure",
+      "required":[
+        "SourceFpgaImageId",
+        "SourceRegion"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "SourceFpgaImageId":{"shape":"String"},
+        "Description":{"shape":"String"},
+        "Name":{"shape":"String"},
+        "SourceRegion":{"shape":"String"},
+        "ClientToken":{"shape":"String"}
+      }
+    },
+    "CopyFpgaImageResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageId":{
+          "shape":"String",
+          "locationName":"fpgaImageId"
+        }
+      }
+    },
     "CopyImageRequest":{
       "type":"structure",
       "required":[
@@ -4381,6 +4477,7 @@
       "members":{
         "AvailabilityZone":{"shape":"String"},
         "Type":{"shape":"GatewayType"},
+        "AmazonSideAsn":{"shape":"Long"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -4506,6 +4603,23 @@
         "Unsuccessful":{
           "shape":"UnsuccessfulItemSet",
           "locationName":"unsuccessful"
+        }
+      }
+    },
+    "DeleteFpgaImageRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "FpgaImageId":{"shape":"String"}
+      }
+    },
+    "DeleteFpgaImageResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
         }
       }
     },
@@ -5162,6 +5276,27 @@
         "NextToken":{
           "shape":"String",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":[
+        "FpgaImageId",
+        "Attribute"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "FpgaImageId":{"shape":"String"},
+        "Attribute":{"shape":"FpgaImageAttributeName"}
+      }
+    },
+    "DescribeFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageAttribute":{
+          "shape":"FpgaImageAttribute",
+          "locationName":"fpgaImageAttribute"
         }
       }
     },
@@ -6124,7 +6259,9 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"Integer"}
       }
     },
     "DescribeSecurityGroupsResult":{
@@ -6133,6 +6270,10 @@
         "SecurityGroups":{
           "shape":"SecurityGroupList",
           "locationName":"securityGroupInfo"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -7428,7 +7569,10 @@
     },
     "ElasticGpuSet":{
       "type":"list",
-      "member":{"shape":"ElasticGpus"}
+      "member":{
+        "shape":"ElasticGpus",
+        "locationName":"item"
+      }
     },
     "ElasticGpuSpecification":{
       "type":"structure",
@@ -7833,8 +7977,46 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tags"
+        },
+        "Public":{
+          "shape":"Boolean",
+          "locationName":"public"
         }
       }
+    },
+    "FpgaImageAttribute":{
+      "type":"structure",
+      "members":{
+        "FpgaImageId":{
+          "shape":"String",
+          "locationName":"fpgaImageId"
+        },
+        "Name":{
+          "shape":"String",
+          "locationName":"name"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "LoadPermissions":{
+          "shape":"LoadPermissionList",
+          "locationName":"loadPermissions"
+        },
+        "ProductCodes":{
+          "shape":"ProductCodeList",
+          "locationName":"productCodes"
+        }
+      }
+    },
+    "FpgaImageAttributeName":{
+      "type":"string",
+      "enum":[
+        "description",
+        "name",
+        "loadPermission",
+        "productCodes"
+      ]
     },
     "FpgaImageIdList":{
       "type":"list",
@@ -8215,7 +8397,10 @@
     },
     "HostOfferingSet":{
       "type":"list",
-      "member":{"shape":"HostOffering"}
+      "member":{
+        "shape":"HostOffering",
+        "locationName":"item"
+      }
     },
     "HostProperties":{
       "type":"structure",
@@ -9432,6 +9617,13 @@
         "locationName":"InstanceId"
       }
     },
+    "InstanceInterruptionBehavior":{
+      "type":"string",
+      "enum":[
+        "stop",
+        "terminate"
+      ]
+    },
     "InstanceIpv6Address":{
       "type":"structure",
       "members":{
@@ -9877,6 +10069,7 @@
         "r4.16xlarge",
         "x1.16xlarge",
         "x1.32xlarge",
+        "x1e.32xlarge",
         "i2.xlarge",
         "i2.2xlarge",
         "i2.4xlarge",
@@ -10022,6 +10215,10 @@
         "CidrIp":{
           "shape":"String",
           "locationName":"cidrIp"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
         }
       }
     },
@@ -10069,6 +10266,10 @@
         "CidrIpv6":{
           "shape":"String",
           "locationName":"cidrIpv6"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
         }
       }
     },
@@ -10241,11 +10442,86 @@
         "closed"
       ]
     },
+    "LoadPermission":{
+      "type":"structure",
+      "members":{
+        "UserId":{
+          "shape":"String",
+          "locationName":"userId"
+        },
+        "Group":{
+          "shape":"PermissionGroup",
+          "locationName":"group"
+        }
+      }
+    },
+    "LoadPermissionList":{
+      "type":"list",
+      "member":{
+        "shape":"LoadPermission",
+        "locationName":"item"
+      }
+    },
+    "LoadPermissionListRequest":{
+      "type":"list",
+      "member":{
+        "shape":"LoadPermissionRequest",
+        "locationName":"item"
+      }
+    },
+    "LoadPermissionModifications":{
+      "type":"structure",
+      "members":{
+        "Add":{"shape":"LoadPermissionListRequest"},
+        "Remove":{"shape":"LoadPermissionListRequest"}
+      }
+    },
+    "LoadPermissionRequest":{
+      "type":"structure",
+      "members":{
+        "Group":{"shape":"PermissionGroup"},
+        "UserId":{"shape":"String"}
+      }
+    },
     "Long":{"type":"long"},
     "MaxResults":{
       "type":"integer",
       "max":255,
       "min":5
+    },
+    "ModifyFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "FpgaImageId":{"shape":"String"},
+        "Attribute":{"shape":"FpgaImageAttributeName"},
+        "OperationType":{"shape":"OperationType"},
+        "UserIds":{
+          "shape":"UserIdStringList",
+          "locationName":"UserId"
+        },
+        "UserGroups":{
+          "shape":"UserGroupStringList",
+          "locationName":"UserGroup"
+        },
+        "ProductCodes":{
+          "shape":"ProductCodeStringList",
+          "locationName":"ProductCode"
+        },
+        "LoadPermission":{"shape":"LoadPermissionModifications"},
+        "Description":{"shape":"String"},
+        "Name":{"shape":"String"}
+      }
+    },
+    "ModifyFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageAttribute":{
+          "shape":"FpgaImageAttribute",
+          "locationName":"fpgaImageAttribute"
+        }
+      }
     },
     "ModifyHostsRequest":{
       "type":"structure",
@@ -10651,6 +10927,27 @@
         }
       }
     },
+    "ModifyVpcTenancyRequest":{
+      "type":"structure",
+      "required":[
+        "VpcId",
+        "InstanceTenancy"
+      ],
+      "members":{
+        "VpcId":{"shape":"String"},
+        "InstanceTenancy":{"shape":"VpcTenancy"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyVpcTenancyResult":{
+      "type":"structure",
+      "members":{
+        "ReturnValue":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "MonitorInstancesRequest":{
       "type":"structure",
       "required":["InstanceIds"],
@@ -10788,6 +11085,10 @@
         "VpcId":{
           "shape":"String",
           "locationName":"vpcId"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -11465,6 +11766,10 @@
     "PrefixListId":{
       "type":"structure",
       "members":{
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
         "PrefixListId":{
           "shape":"String",
           "locationName":"prefixListId"
@@ -11834,7 +12139,10 @@
     },
     "PurchaseSet":{
       "type":"list",
-      "member":{"shape":"Purchase"}
+      "member":{
+        "shape":"Purchase",
+        "locationName":"item"
+      }
     },
     "PurchasedScheduledInstanceSet":{
       "type":"list",
@@ -12364,7 +12672,8 @@
         "ValidUntil":{
           "shape":"DateTime",
           "locationName":"validUntil"
-        }
+        },
+        "InstanceInterruptionBehavior":{"shape":"InstanceInterruptionBehavior"}
       }
     },
     "RequestSpotInstancesResult":{
@@ -12892,6 +13201,28 @@
       "member":{
         "shape":"ReservedInstancesId",
         "locationName":"item"
+      }
+    },
+    "ResetFpgaImageAttributeName":{
+      "type":"string",
+      "enum":["loadPermission"]
+    },
+    "ResetFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "FpgaImageId":{"shape":"String"},
+        "Attribute":{"shape":"ResetFpgaImageAttributeName"}
+      }
+    },
+    "ResetFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
       }
     },
     "ResetImageAttributeName":{
@@ -14203,6 +14534,10 @@
         "ReplaceUnhealthyInstances":{
           "shape":"Boolean",
           "locationName":"replaceUnhealthyInstances"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "locationName":"instanceInterruptionBehavior"
         }
       }
     },
@@ -14307,6 +14642,10 @@
         "ValidUntil":{
           "shape":"DateTime",
           "locationName":"validUntil"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "locationName":"instanceInterruptionBehavior"
         }
       }
     },
@@ -14894,6 +15233,13 @@
         "ALL"
       ]
     },
+    "TunnelOptionsList":{
+      "type":"list",
+      "member":{
+        "shape":"VpnTunnelOptionsSpecification",
+        "locationName":"item"
+      }
+    },
     "UnassignIpv6AddressesRequest":{
       "type":"structure",
       "required":[
@@ -15009,6 +15355,44 @@
         "locationName":"item"
       }
     },
+    "UpdateSecurityGroupRuleDescriptionsEgressRequest":{
+      "type":"structure",
+      "required":["IpPermissions"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "GroupId":{"shape":"String"},
+        "GroupName":{"shape":"String"},
+        "IpPermissions":{"shape":"IpPermissionList"}
+      }
+    },
+    "UpdateSecurityGroupRuleDescriptionsEgressResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngressRequest":{
+      "type":"structure",
+      "required":["IpPermissions"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "GroupId":{"shape":"String"},
+        "GroupName":{"shape":"String"},
+        "IpPermissions":{"shape":"IpPermissionList"}
+      }
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngressResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "UserBucket":{
       "type":"structure",
       "members":{
@@ -15048,6 +15432,10 @@
     "UserIdGroupPair":{
       "type":"structure",
       "members":{
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
         "GroupId":{
           "shape":"String",
           "locationName":"groupId"
@@ -15841,6 +16229,10 @@
         "available"
       ]
     },
+    "VpcTenancy":{
+      "type":"string",
+      "enum":["default"]
+    },
     "VpnConnection":{
       "type":"structure",
       "members":{
@@ -15851,6 +16243,10 @@
         "CustomerGatewayId":{
           "shape":"String",
           "locationName":"customerGatewayId"
+        },
+        "Category":{
+          "shape":"String",
+          "locationName":"category"
         },
         "State":{
           "shape":"VpnState",
@@ -15915,7 +16311,8 @@
         "StaticRoutesOnly":{
           "shape":"Boolean",
           "locationName":"staticRoutesOnly"
-        }
+        },
+        "TunnelOptions":{"shape":"TunnelOptionsList"}
       }
     },
     "VpnGateway":{
@@ -15940,6 +16337,10 @@
         "VpnGatewayId":{
           "shape":"String",
           "locationName":"vpnGatewayId"
+        },
+        "AmazonSideAsn":{
+          "shape":"Long",
+          "locationName":"amazonSideAsn"
         },
         "Tags":{
           "shape":"TagList",
@@ -15997,6 +16398,13 @@
     "VpnStaticRouteSource":{
       "type":"string",
       "enum":["Static"]
+    },
+    "VpnTunnelOptionsSpecification":{
+      "type":"structure",
+      "members":{
+        "TunnelInsideCidr":{"shape":"String"},
+        "PreSharedKey":{"shape":"String"}
+      }
     },
     "ZoneNameStringList":{
       "type":"list",
