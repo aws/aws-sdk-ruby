@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Handle service identifier with empty value.
+
 1.26.0 (2017-10-17)
 ------------------
 
