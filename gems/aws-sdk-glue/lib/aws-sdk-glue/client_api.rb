@@ -29,6 +29,13 @@ module Aws::Glue
     BatchGetPartitionRequest = Shapes::StructureShape.new(name: 'BatchGetPartitionRequest')
     BatchGetPartitionResponse = Shapes::StructureShape.new(name: 'BatchGetPartitionResponse')
     BatchGetPartitionValueList = Shapes::ListShape.new(name: 'BatchGetPartitionValueList')
+    BatchStopJobRunError = Shapes::StructureShape.new(name: 'BatchStopJobRunError')
+    BatchStopJobRunErrorList = Shapes::ListShape.new(name: 'BatchStopJobRunErrorList')
+    BatchStopJobRunJobRunIdList = Shapes::ListShape.new(name: 'BatchStopJobRunJobRunIdList')
+    BatchStopJobRunRequest = Shapes::StructureShape.new(name: 'BatchStopJobRunRequest')
+    BatchStopJobRunResponse = Shapes::StructureShape.new(name: 'BatchStopJobRunResponse')
+    BatchStopJobRunSuccessfulSubmission = Shapes::StructureShape.new(name: 'BatchStopJobRunSuccessfulSubmission')
+    BatchStopJobRunSuccessfulSubmissionList = Shapes::ListShape.new(name: 'BatchStopJobRunSuccessfulSubmissionList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
@@ -419,6 +426,29 @@ module Aws::Glue
 
     BatchGetPartitionValueList.member = Shapes::ShapeRef.new(shape: PartitionValueList)
 
+    BatchStopJobRunError.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    BatchStopJobRunError.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
+    BatchStopJobRunError.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "ErrorDetail"))
+    BatchStopJobRunError.struct_class = Types::BatchStopJobRunError
+
+    BatchStopJobRunErrorList.member = Shapes::ShapeRef.new(shape: BatchStopJobRunError)
+
+    BatchStopJobRunJobRunIdList.member = Shapes::ShapeRef.new(shape: IdString)
+
+    BatchStopJobRunRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
+    BatchStopJobRunRequest.add_member(:job_run_ids, Shapes::ShapeRef.new(shape: BatchStopJobRunJobRunIdList, required: true, location_name: "JobRunIds"))
+    BatchStopJobRunRequest.struct_class = Types::BatchStopJobRunRequest
+
+    BatchStopJobRunResponse.add_member(:successful_submissions, Shapes::ShapeRef.new(shape: BatchStopJobRunSuccessfulSubmissionList, location_name: "SuccessfulSubmissions"))
+    BatchStopJobRunResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchStopJobRunErrorList, location_name: "Errors"))
+    BatchStopJobRunResponse.struct_class = Types::BatchStopJobRunResponse
+
+    BatchStopJobRunSuccessfulSubmission.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    BatchStopJobRunSuccessfulSubmission.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
+    BatchStopJobRunSuccessfulSubmission.struct_class = Types::BatchStopJobRunSuccessfulSubmission
+
+    BatchStopJobRunSuccessfulSubmissionList.member = Shapes::ShapeRef.new(shape: BatchStopJobRunSuccessfulSubmission)
+
     BoundedPartitionValueList.member = Shapes::ShapeRef.new(shape: ValueString)
 
     CatalogEntries.member = Shapes::ShapeRef.new(shape: CatalogEntry)
@@ -569,9 +599,9 @@ module Aws::Glue
 
     CreateDevEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointName"))
     CreateDevEndpointRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
-    CreateDevEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "SecurityGroupIds"))
-    CreateDevEndpointRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubnetId"))
-    CreateDevEndpointRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
+    CreateDevEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
+    CreateDevEndpointRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubnetId"))
+    CreateDevEndpointRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "PublicKey"))
     CreateDevEndpointRequest.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointRequest.add_member(:extra_python_libs_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraPythonLibsS3Path"))
     CreateDevEndpointRequest.add_member(:extra_jars_s3_path, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExtraJarsS3Path"))
@@ -583,6 +613,7 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:subnet_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubnetId"))
     CreateDevEndpointResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateDevEndpointResponse.add_member(:yarn_endpoint_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "YarnEndpointAddress"))
+    CreateDevEndpointResponse.add_member(:zeppelin_remote_spark_interpreter_port, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ZeppelinRemoteSparkInterpreterPort"))
     CreateDevEndpointResponse.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
     CreateDevEndpointResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: GenericString, location_name: "AvailabilityZone"))
     CreateDevEndpointResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "VpcId"))
@@ -740,6 +771,7 @@ module Aws::Glue
     DevEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
     DevEndpoint.add_member(:subnet_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubnetId"))
     DevEndpoint.add_member(:yarn_endpoint_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "YarnEndpointAddress"))
+    DevEndpoint.add_member(:zeppelin_remote_spark_interpreter_port, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ZeppelinRemoteSparkInterpreterPort"))
     DevEndpoint.add_member(:public_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicAddress"))
     DevEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: GenericString, location_name: "Status"))
     DevEndpoint.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "NumberOfNodes"))
@@ -1374,6 +1406,7 @@ module Aws::Glue
     UpdateDevEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointName"))
     UpdateDevEndpointRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "PublicKey"))
     UpdateDevEndpointRequest.add_member(:custom_libraries, Shapes::ShapeRef.new(shape: DevEndpointCustomLibraries, location_name: "CustomLibraries"))
+    UpdateDevEndpointRequest.add_member(:update_etl_libraries, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "UpdateEtlLibraries"))
     UpdateDevEndpointRequest.struct_class = Types::UpdateDevEndpointRequest
 
     UpdateDevEndpointResponse.struct_class = Types::UpdateDevEndpointResponse
@@ -1514,6 +1547,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:batch_stop_job_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchStopJobRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchStopJobRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchStopJobRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
       api.add_operation(:create_classifier, Seahorse::Model::Operation.new.tap do |o|

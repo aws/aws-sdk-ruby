@@ -54,6 +54,10 @@ module Aws::Pinpoint
     #   If the channel is enabled for sending messages.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
     #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
@@ -84,6 +88,7 @@ module Aws::Pinpoint
       :application_id,
       :creation_date,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -109,7 +114,6 @@ module Aws::Pinpoint
     #         icon_reference: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
-    #         json_data: "__string",
     #         md5: "__string",
     #         raw_content: "__string",
     #         silent_push: false,
@@ -165,11 +169,6 @@ module Aws::Pinpoint
     #   The URL that points to an image used in the push notification.
     #   @return [String]
     #
-    # @!attribute [rw] json_data
-    #   The data payload used for a silent push. This payload is added to
-    #   the notifications' data.pinpoint.jsonBody' object
-    #   @return [String]
-    #
     # @!attribute [rw] md5
     #   Optional. Base-64-encoded MD5 checksum of the data parameter. Used
     #   to verify data integrity
@@ -222,7 +221,6 @@ module Aws::Pinpoint
       :icon_reference,
       :image_icon_url,
       :image_url,
-      :json_data,
       :md5,
       :raw_content,
       :silent_push,
@@ -306,8 +304,20 @@ module Aws::Pinpoint
     #   When was this segment created
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -339,7 +349,10 @@ module Aws::Pinpoint
     class APNSChannelResponse < Struct.new(
       :application_id,
       :creation_date,
+      :default_authentication_method,
       :enabled,
+      :has_credential,
+      :has_token_key,
       :id,
       :is_archived,
       :last_modified_by,
@@ -359,12 +372,13 @@ module Aws::Pinpoint
     #         badge: 1,
     #         body: "__string",
     #         category: "__string",
+    #         collapse_id: "__string",
     #         data: {
     #           "__string" => "__string",
     #         },
-    #         json_data: "__string",
     #         media_url: "__string",
     #         preferred_authentication_method: "__string",
+    #         priority: "__string",
     #         raw_content: "__string",
     #         silent_push: false,
     #         sound: "__string",
@@ -372,6 +386,7 @@ module Aws::Pinpoint
     #           "__string" => ["__string"],
     #         },
     #         thread_id: "__string",
+    #         time_to_live: 1,
     #         title: "__string",
     #         url: "__string",
     #       }
@@ -405,13 +420,14 @@ module Aws::Pinpoint
     #   identifier property of one of your app's registered categories.
     #   @return [String]
     #
+    # @!attribute [rw] collapse_id
+    #   Multiple notifications with the same collapse identifier are
+    #   displayed to the user as a single notification. The value of this
+    #   key must not exceed 64 bytes.
+    #   @return [String]
+    #
     # @!attribute [rw] data
     #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] json_data
-    #   The data payload used for a silent push. This payload is added to
-    #   the notifications' data.pinpoint.jsonBody' object
-    #   @return [String]
     #
     # @!attribute [rw] media_url
     #   The URL that points to a video used in the push notification.
@@ -420,6 +436,10 @@ module Aws::Pinpoint
     # @!attribute [rw] preferred_authentication_method
     #   The preferred authentication method, either "CERTIFICATE" or
     #   "TOKEN"
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Is this a transaction priority message or lower priority.
     #   @return [String]
     #
     # @!attribute [rw] raw_content
@@ -451,6 +471,15 @@ module Aws::Pinpoint
     #   your notifications together.
     #   @return [String]
     #
+    # @!attribute [rw] time_to_live
+    #   This parameter specifies how long (in seconds) the message should be
+    #   kept if APNS is unable to deliver the notification the first time.
+    #   If the value is 0, APNS treats the notification as if it expires
+    #   immediately and does not store the notification or attempt to
+    #   redeliver it. This value is converted to the expiration field when
+    #   sent to APNS
+    #   @return [Integer]
+    #
     # @!attribute [rw] title
     #   The message title that displays above the message on the user's
     #   device.
@@ -468,15 +497,17 @@ module Aws::Pinpoint
       :badge,
       :body,
       :category,
+      :collapse_id,
       :data,
-      :json_data,
       :media_url,
       :preferred_authentication_method,
+      :priority,
       :raw_content,
       :silent_push,
       :sound,
       :substitutions,
       :thread_id,
+      :time_to_live,
       :title,
       :url)
       include Aws::Structure
@@ -554,8 +585,20 @@ module Aws::Pinpoint
     #   When was this segment created
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -587,7 +630,270 @@ module Aws::Pinpoint
     class APNSSandboxChannelResponse < Struct.new(
       :application_id,
       :creation_date,
+      :default_authentication_method,
       :enabled,
+      :has_credential,
+      :has_token_key,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Push Notification Service channel definition.
+    #
+    # @note When making an API call, you may pass APNSVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "__string",
+    #         certificate: "__string",
+    #         default_authentication_method: "__string",
+    #         enabled: false,
+    #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_key
+    #   The certificate private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelRequest AWS API Documentation
+    #
+    class APNSVoipChannelRequest < Struct.new(
+      :bundle_id,
+      :certificate,
+      :default_authentication_method,
+      :enabled,
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Push Notification Service channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be APNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelResponse AWS API Documentation
+    #
+    class APNSVoipChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :default_authentication_method,
+      :enabled,
+      :has_credential,
+      :has_token_key,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Developer Push Notification Service channel definition.
+    #
+    # @note When making an API call, you may pass APNSVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "__string",
+    #         certificate: "__string",
+    #         default_authentication_method: "__string",
+    #         enabled: false,
+    #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_key
+    #   The certificate private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelRequest AWS API Documentation
+    #
+    class APNSVoipSandboxChannelRequest < Struct.new(
+      :bundle_id,
+      :certificate,
+      :default_authentication_method,
+      :enabled,
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Developer Push Notification Service channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be APNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelResponse AWS API Documentation
+    #
+    class APNSVoipSandboxChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :default_authentication_method,
+      :enabled,
+      :has_credential,
+      :has_token_key,
       :id,
       :is_archived,
       :last_modified_by,
@@ -695,7 +1001,7 @@ module Aws::Pinpoint
     #
     #       {
     #         body_override: "__string",
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         context: {
     #           "__string" => "__string",
     #         },
@@ -888,6 +1194,10 @@ module Aws::Pinpoint
     #   If the channel is enabled for sending messages.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
     #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
@@ -919,6 +1229,7 @@ module Aws::Pinpoint
       :creation_date,
       :credential,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -942,7 +1253,6 @@ module Aws::Pinpoint
     #         icon_reference: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
-    #         json_data: "__string",
     #         raw_content: "__string",
     #         silent_push: false,
     #         small_image_icon_url: "__string",
@@ -984,11 +1294,6 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] image_url
     #   The URL that points to an image used in the push notification.
-    #   @return [String]
-    #
-    # @!attribute [rw] json_data
-    #   The data payload used for a silent push. This payload is added to
-    #   the notifications' data.pinpoint.jsonBody' object
     #   @return [String]
     #
     # @!attribute [rw] raw_content
@@ -1036,7 +1341,6 @@ module Aws::Pinpoint
       :icon_reference,
       :image_icon_url,
       :image_url,
-      :json_data,
       :raw_content,
       :silent_push,
       :small_image_icon_url,
@@ -1363,7 +1667,33 @@ module Aws::Pinpoint
     #           additional_treatments: [
     #             {
     #               message_configuration: {
+    #                 adm_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
     #                 apns_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
+    #                 baidu_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
@@ -1440,7 +1770,33 @@ module Aws::Pinpoint
     #             total: 1,
     #           },
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -1505,7 +1861,6 @@ module Aws::Pinpoint
     #           },
     #           segment_id: "__string",
     #           segment_version: 1,
-    #           trace: false,
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -1705,7 +2060,6 @@ module Aws::Pinpoint
     #         data: {
     #           "__string" => "__string",
     #         },
-    #         json_data: "__string",
     #         silent_push: false,
     #         substitutions: {
     #           "__string" => ["__string"],
@@ -1733,11 +2087,6 @@ module Aws::Pinpoint
     # @!attribute [rw] data
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] json_data
-    #   The data payload used for a silent push. This payload is added to
-    #   the notifications' data.pinpoint.jsonBody' object
-    #   @return [String]
-    #
     # @!attribute [rw] silent_push
     #   Indicates if the message should display on the users device. Silent
     #   pushes can be used for Remote Configuration and Phone Home use
@@ -1763,7 +2112,6 @@ module Aws::Pinpoint
       :action,
       :body,
       :data,
-      :json_data,
       :silent_push,
       :substitutions,
       :title,
@@ -1852,6 +2200,62 @@ module Aws::Pinpoint
     #
     class DeleteApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelRequest AWS API Documentation
+    #
+    class DeleteApnsVoipChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelResponse AWS API Documentation
+    #
+    class DeleteApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class DeleteApnsVoipSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class DeleteApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -1980,6 +2384,7 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] application_id
+    #   Application Id.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStreamRequest AWS API Documentation
@@ -2106,7 +2511,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           md5: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
@@ -2123,12 +2527,13 @@ module Aws::Pinpoint
     #           badge: 1,
     #           body: "__string",
     #           category: "__string",
+    #           collapse_id: "__string",
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           media_url: "__string",
     #           preferred_authentication_method: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           sound: "__string",
@@ -2136,6 +2541,7 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #           thread_id: "__string",
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -2148,7 +2554,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           small_image_icon_url: "__string",
@@ -2171,23 +2576,12 @@ module Aws::Pinpoint
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           silent_push: false,
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
     #           title: "__string",
     #           url: "__string",
-    #         },
-    #         email_message: {
-    #           body: "__string",
-    #           from_address: "__string",
-    #           html_body: "__string",
-    #           substitutions: {
-    #             "__string" => ["__string"],
-    #           },
-    #           template_arn: "__string",
-    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -2199,7 +2593,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
     #           silent_push: false,
@@ -2208,6 +2602,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -2244,10 +2639,6 @@ module Aws::Pinpoint
     #   The default push notification message for all push channels.
     #   @return [Types::DefaultPushNotificationMessage]
     #
-    # @!attribute [rw] email_message
-    #   The message to Email channels. Overrides the default message.
-    #   @return [Types::EmailMessage]
-    #
     # @!attribute [rw] gcm_message
     #   The message to GCM channels. Overrides the default push notification
     #   message.
@@ -2265,7 +2656,6 @@ module Aws::Pinpoint
       :baidu_message,
       :default_message,
       :default_push_notification_message,
-      :email_message,
       :gcm_message,
       :sms_message)
       include Aws::Structure
@@ -2328,6 +2718,10 @@ module Aws::Pinpoint
     #   The email address used to send emails from.
     #   @return [String]
     #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
     #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
@@ -2368,6 +2762,7 @@ module Aws::Pinpoint
       :creation_date,
       :enabled,
       :from_address,
+      :has_credential,
       :id,
       :identity,
       :is_archived,
@@ -2376,59 +2771,6 @@ module Aws::Pinpoint
       :platform,
       :role_arn,
       :version)
-      include Aws::Structure
-    end
-
-    # Email Message.
-    #
-    # @note When making an API call, you may pass EmailMessage
-    #   data as a hash:
-    #
-    #       {
-    #         body: "__string",
-    #         from_address: "__string",
-    #         html_body: "__string",
-    #         substitutions: {
-    #           "__string" => ["__string"],
-    #         },
-    #         template_arn: "__string",
-    #         title: "__string",
-    #       }
-    #
-    # @!attribute [rw] body
-    #   The message body of the notification, the email body or the text
-    #   message.
-    #   @return [String]
-    #
-    # @!attribute [rw] from_address
-    #   The email address used to send the email from. Defaults to use
-    #   FromAddress specified in the Email Channel.
-    #   @return [String]
-    #
-    # @!attribute [rw] html_body
-    #   The HTML part of the email.
-    #   @return [String]
-    #
-    # @!attribute [rw] substitutions
-    #   @return [Hash<String,Array<String>>]
-    #
-    # @!attribute [rw] template_arn
-    #   The ARN of the template to use for the email.
-    #   @return [String]
-    #
-    # @!attribute [rw] title
-    #   The subject of the email.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailMessage AWS API Documentation
-    #
-    class EmailMessage < Struct.new(
-      :body,
-      :from_address,
-      :html_body,
-      :substitutions,
-      :template_arn,
-      :title)
       include Aws::Structure
     end
 
@@ -2442,7 +2784,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -2559,7 +2901,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -2768,7 +3110,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -2934,10 +3276,6 @@ module Aws::Pinpoint
     #   The unique ID for the most recent request to update the endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] shard_id
-    #   The ShardId of endpoint.
-    #   @return [String]
-    #
     # @!attribute [rw] user
     #   Custom user-specific attributes that your app reports to Amazon
     #   Pinpoint.
@@ -2960,7 +3298,6 @@ module Aws::Pinpoint
       :metrics,
       :opt_out,
       :request_id,
-      :shard_id,
       :user)
       include Aws::Structure
     end
@@ -3128,6 +3465,10 @@ module Aws::Pinpoint
     #   If the channel is enabled for sending messages.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
     #   Channel ID. Not used. Present only for backwards compatibility.
     #   @return [String]
@@ -3159,6 +3500,7 @@ module Aws::Pinpoint
       :creation_date,
       :credential,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -3183,7 +3525,7 @@ module Aws::Pinpoint
     #         icon_reference: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
-    #         json_data: "__string",
+    #         priority: "__string",
     #         raw_content: "__string",
     #         restricted_package_name: "__string",
     #         silent_push: false,
@@ -3192,6 +3534,7 @@ module Aws::Pinpoint
     #         substitutions: {
     #           "__string" => ["__string"],
     #         },
+    #         time_to_live: 1,
     #         title: "__string",
     #         url: "__string",
     #       }
@@ -3236,9 +3579,8 @@ module Aws::Pinpoint
     #   The URL that points to an image used in the push notification.
     #   @return [String]
     #
-    # @!attribute [rw] json_data
-    #   The data payload used for a silent push. This payload is added to
-    #   the notifications' data.pinpoint.jsonBody' object
+    # @!attribute [rw] priority
+    #   Is this a transaction priority message or lower priority.
     #   @return [String]
     #
     # @!attribute [rw] raw_content
@@ -3272,6 +3614,12 @@ module Aws::Pinpoint
     # @!attribute [rw] substitutions
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] time_to_live
+    #   This parameter specifies how long (in seconds) the message should be
+    #   kept in GCM storage if the device is offline. The maximum time to
+    #   live supported is 4 weeks, and the default value is 4 weeks.
+    #   @return [Integer]
+    #
     # @!attribute [rw] title
     #   The message title that displays above the message on the user's
     #   device.
@@ -3292,13 +3640,14 @@ module Aws::Pinpoint
       :icon_reference,
       :image_icon_url,
       :image_url,
-      :json_data,
+      :priority,
       :raw_content,
       :restricted_package_name,
       :silent_push,
       :small_image_icon_url,
       :sound,
       :substitutions,
+      :time_to_live,
       :title,
       :url)
       include Aws::Structure
@@ -3385,6 +3734,62 @@ module Aws::Pinpoint
     #
     class GetApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelRequest AWS API Documentation
+    #
+    class GetApnsVoipChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelResponse AWS API Documentation
+    #
+    class GetApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class GetApnsVoipSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class GetApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -3769,6 +4174,7 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] application_id
+    #   Application Id.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStreamRequest AWS API Documentation
@@ -4450,7 +4856,33 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         adm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
     #         apns_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
@@ -4502,8 +4934,18 @@ module Aws::Pinpoint
     #         },
     #       }
     #
+    # @!attribute [rw] adm_message
+    #   The message that the campaign delivers to ADM channels. Overrides
+    #   the default message.
+    #   @return [Types::Message]
+    #
     # @!attribute [rw] apns_message
     #   The message that the campaign delivers to APNS channels. Overrides
+    #   the default message.
+    #   @return [Types::Message]
+    #
+    # @!attribute [rw] baidu_message
+    #   The message that the campaign delivers to Baidu channels. Overrides
     #   the default message.
     #   @return [Types::Message]
     #
@@ -4527,7 +4969,9 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageConfiguration AWS API Documentation
     #
     class MessageConfiguration < Struct.new(
+      :adm_message,
       :apns_message,
+      :baidu_message,
       :default_message,
       :email_message,
       :gcm_message,
@@ -4544,7 +4988,7 @@ module Aws::Pinpoint
     #         addresses: {
     #           "__string" => {
     #             body_override: "__string",
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #             context: {
     #               "__string" => "__string",
     #             },
@@ -4554,9 +4998,6 @@ module Aws::Pinpoint
     #             },
     #             title_override: "__string",
     #           },
-    #         },
-    #         campaign: {
-    #           "__string" => "__string",
     #         },
     #         context: {
     #           "__string" => "__string",
@@ -4586,7 +5027,6 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
     #             md5: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
@@ -4603,12 +5043,13 @@ module Aws::Pinpoint
     #             badge: 1,
     #             body: "__string",
     #             category: "__string",
+    #             collapse_id: "__string",
     #             data: {
     #               "__string" => "__string",
     #             },
-    #             json_data: "__string",
     #             media_url: "__string",
     #             preferred_authentication_method: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
     #             sound: "__string",
@@ -4616,6 +5057,7 @@ module Aws::Pinpoint
     #               "__string" => ["__string"],
     #             },
     #             thread_id: "__string",
+    #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -4628,7 +5070,6 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
     #             small_image_icon_url: "__string",
@@ -4651,23 +5092,12 @@ module Aws::Pinpoint
     #             data: {
     #               "__string" => "__string",
     #             },
-    #             json_data: "__string",
     #             silent_push: false,
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
     #             title: "__string",
     #             url: "__string",
-    #           },
-    #           email_message: {
-    #             body: "__string",
-    #             from_address: "__string",
-    #             html_body: "__string",
-    #             substitutions: {
-    #               "__string" => ["__string"],
-    #             },
-    #             template_arn: "__string",
-    #             title: "__string",
     #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -4679,7 +5109,7 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             restricted_package_name: "__string",
     #             silent_push: false,
@@ -4688,6 +5118,7 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -4700,7 +5131,6 @@ module Aws::Pinpoint
     #             },
     #           },
     #         },
-    #         request_id: "__string",
     #       }
     #
     # @!attribute [rw] addresses
@@ -4708,9 +5138,6 @@ module Aws::Pinpoint
     #   address, phone number or push token) and the Address Configuration
     #   as the value.
     #   @return [Hash<String,Types::AddressConfiguration>]
-    #
-    # @!attribute [rw] campaign
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] context
     #   @return [Hash<String,String>]
@@ -4725,19 +5152,13 @@ module Aws::Pinpoint
     #   Message configuration.
     #   @return [Types::DirectMessageConfiguration]
     #
-    # @!attribute [rw] request_id
-    #   Original request Id for which this message is delivered.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageRequest AWS API Documentation
     #
     class MessageRequest < Struct.new(
       :addresses,
-      :campaign,
       :context,
       :endpoints,
-      :message_configuration,
-      :request_id)
+      :message_configuration)
       include Aws::Structure
     end
 
@@ -4807,16 +5228,16 @@ module Aws::Pinpoint
     #         application_id: "__string", # required
     #         write_event_stream: { # required
     #           destination_stream_arn: "__string",
-    #           external_id: "__string",
     #           role_arn: "__string",
     #         },
     #       }
     #
     # @!attribute [rw] application_id
+    #   Application Id.
     #   @return [String]
     #
     # @!attribute [rw] write_event_stream
-    #   Request to save an EventStream.
+    #   Write event stream wrapper.
     #   @return [Types::WriteEventStream]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStreamRequest AWS API Documentation
@@ -4940,6 +5361,10 @@ module Aws::Pinpoint
     #   If the channel is enabled for sending messages.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] id
     #   Channel ID. Not used, only for backwards compatibility.
     #   @return [String]
@@ -4978,6 +5403,7 @@ module Aws::Pinpoint
       :application_id,
       :creation_date,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -5421,7 +5847,7 @@ module Aws::Pinpoint
     #           addresses: {
     #             "__string" => {
     #               body_override: "__string",
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #               context: {
     #                 "__string" => "__string",
     #               },
@@ -5431,9 +5857,6 @@ module Aws::Pinpoint
     #               },
     #               title_override: "__string",
     #             },
-    #           },
-    #           campaign: {
-    #             "__string" => "__string",
     #           },
     #           context: {
     #             "__string" => "__string",
@@ -5463,7 +5886,6 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
     #               md5: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
@@ -5480,12 +5902,13 @@ module Aws::Pinpoint
     #               badge: 1,
     #               body: "__string",
     #               category: "__string",
+    #               collapse_id: "__string",
     #               data: {
     #                 "__string" => "__string",
     #               },
-    #               json_data: "__string",
     #               media_url: "__string",
     #               preferred_authentication_method: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
     #               sound: "__string",
@@ -5493,6 +5916,7 @@ module Aws::Pinpoint
     #                 "__string" => ["__string"],
     #               },
     #               thread_id: "__string",
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -5505,7 +5929,6 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
     #               small_image_icon_url: "__string",
@@ -5528,23 +5951,12 @@ module Aws::Pinpoint
     #               data: {
     #                 "__string" => "__string",
     #               },
-    #               json_data: "__string",
     #               silent_push: false,
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
     #               title: "__string",
     #               url: "__string",
-    #             },
-    #             email_message: {
-    #               body: "__string",
-    #               from_address: "__string",
-    #               html_body: "__string",
-    #               substitutions: {
-    #                 "__string" => ["__string"],
-    #               },
-    #               template_arn: "__string",
-    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5556,7 +5968,7 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               restricted_package_name: "__string",
     #               silent_push: false,
@@ -5565,6 +5977,7 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -5577,7 +5990,6 @@ module Aws::Pinpoint
     #               },
     #             },
     #           },
-    #           request_id: "__string",
     #         },
     #       }
     #
@@ -5628,7 +6040,6 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
     #             md5: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
@@ -5645,12 +6056,13 @@ module Aws::Pinpoint
     #             badge: 1,
     #             body: "__string",
     #             category: "__string",
+    #             collapse_id: "__string",
     #             data: {
     #               "__string" => "__string",
     #             },
-    #             json_data: "__string",
     #             media_url: "__string",
     #             preferred_authentication_method: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
     #             sound: "__string",
@@ -5658,6 +6070,7 @@ module Aws::Pinpoint
     #               "__string" => ["__string"],
     #             },
     #             thread_id: "__string",
+    #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -5670,7 +6083,6 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
     #             small_image_icon_url: "__string",
@@ -5693,23 +6105,12 @@ module Aws::Pinpoint
     #             data: {
     #               "__string" => "__string",
     #             },
-    #             json_data: "__string",
     #             silent_push: false,
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
     #             title: "__string",
     #             url: "__string",
-    #           },
-    #           email_message: {
-    #             body: "__string",
-    #             from_address: "__string",
-    #             html_body: "__string",
-    #             substitutions: {
-    #               "__string" => ["__string"],
-    #             },
-    #             template_arn: "__string",
-    #             title: "__string",
     #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5721,7 +6122,7 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
-    #             json_data: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             restricted_package_name: "__string",
     #             silent_push: false,
@@ -5730,6 +6131,7 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -5742,7 +6144,6 @@ module Aws::Pinpoint
     #             },
     #           },
     #         },
-    #         request_id: "__string",
     #         users: {
     #           "__string" => {
     #             body_override: "__string",
@@ -5765,10 +6166,6 @@ module Aws::Pinpoint
     #   Message configuration.
     #   @return [Types::DirectMessageConfiguration]
     #
-    # @!attribute [rw] request_id
-    #   Original request Id for which this message is delivered.
-    #   @return [String]
-    #
     # @!attribute [rw] users
     #   A map of destination endpoints, with the EndpointId as the key
     #   Endpoint Message Configuration as the value.
@@ -5779,7 +6176,6 @@ module Aws::Pinpoint
     class SendUsersMessageRequest < Struct.new(
       :context,
       :message_configuration,
-      :request_id,
       :users)
       include Aws::Structure
     end
@@ -5829,7 +6225,6 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
     #               md5: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
@@ -5846,12 +6241,13 @@ module Aws::Pinpoint
     #               badge: 1,
     #               body: "__string",
     #               category: "__string",
+    #               collapse_id: "__string",
     #               data: {
     #                 "__string" => "__string",
     #               },
-    #               json_data: "__string",
     #               media_url: "__string",
     #               preferred_authentication_method: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
     #               sound: "__string",
@@ -5859,6 +6255,7 @@ module Aws::Pinpoint
     #                 "__string" => ["__string"],
     #               },
     #               thread_id: "__string",
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -5871,7 +6268,6 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
     #               small_image_icon_url: "__string",
@@ -5894,23 +6290,12 @@ module Aws::Pinpoint
     #               data: {
     #                 "__string" => "__string",
     #               },
-    #               json_data: "__string",
     #               silent_push: false,
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
     #               title: "__string",
     #               url: "__string",
-    #             },
-    #             email_message: {
-    #               body: "__string",
-    #               from_address: "__string",
-    #               html_body: "__string",
-    #               substitutions: {
-    #                 "__string" => ["__string"],
-    #               },
-    #               template_arn: "__string",
-    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -5922,7 +6307,7 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
-    #               json_data: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               restricted_package_name: "__string",
     #               silent_push: false,
@@ -5931,6 +6316,7 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -5943,7 +6329,6 @@ module Aws::Pinpoint
     #               },
     #             },
     #           },
-    #           request_id: "__string",
     #           users: {
     #             "__string" => {
     #               body_override: "__string",
@@ -6180,6 +6565,92 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         apns_voip_channel_request: { # required
+    #           bundle_id: "__string",
+    #           certificate: "__string",
+    #           default_authentication_method: "__string",
+    #           enabled: false,
+    #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] apns_voip_channel_request
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelRequest AWS API Documentation
+    #
+    class UpdateApnsVoipChannelRequest < Struct.new(
+      :apns_voip_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelResponse AWS API Documentation
+    #
+    class UpdateApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         apns_voip_sandbox_channel_request: { # required
+    #           bundle_id: "__string",
+    #           certificate: "__string",
+    #           default_authentication_method: "__string",
+    #           enabled: false,
+    #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] apns_voip_sandbox_channel_request
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class UpdateApnsVoipSandboxChannelRequest < Struct.new(
+      :apns_voip_sandbox_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class UpdateApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateApplicationSettingsRequest
     #   data as a hash:
     #
@@ -6273,7 +6744,33 @@ module Aws::Pinpoint
     #           additional_treatments: [
     #             {
     #               message_configuration: {
+    #                 adm_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
     #                 apns_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
+    #                 baidu_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
@@ -6350,7 +6847,33 @@ module Aws::Pinpoint
     #             total: 1,
     #           },
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -6415,7 +6938,6 @@ module Aws::Pinpoint
     #           },
     #           segment_id: "__string",
     #           segment_version: 1,
-    #           trace: false,
     #           treatment_description: "__string",
     #           treatment_name: "__string",
     #         },
@@ -6501,7 +7023,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -6578,7 +7100,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -6857,7 +7379,33 @@ module Aws::Pinpoint
     #         additional_treatments: [
     #           {
     #             message_configuration: {
+    #               adm_message: {
+    #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                 body: "__string",
+    #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
+    #                 image_url: "__string",
+    #                 json_body: "__string",
+    #                 media_url: "__string",
+    #                 raw_content: "__string",
+    #                 silent_push: false,
+    #                 title: "__string",
+    #                 url: "__string",
+    #               },
     #               apns_message: {
+    #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                 body: "__string",
+    #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
+    #                 image_url: "__string",
+    #                 json_body: "__string",
+    #                 media_url: "__string",
+    #                 raw_content: "__string",
+    #                 silent_push: false,
+    #                 title: "__string",
+    #                 url: "__string",
+    #               },
+    #               baidu_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                 body: "__string",
     #                 image_icon_url: "__string",
@@ -6934,7 +7482,33 @@ module Aws::Pinpoint
     #           total: 1,
     #         },
     #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
     #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
@@ -6999,7 +7573,6 @@ module Aws::Pinpoint
     #         },
     #         segment_id: "__string",
     #         segment_version: 1,
-    #         trace: false,
     #         treatment_description: "__string",
     #         treatment_name: "__string",
     #       }
@@ -7046,11 +7619,6 @@ module Aws::Pinpoint
     #   The version of the segment to which the campaign sends messages.
     #   @return [Integer]
     #
-    # @!attribute [rw] trace
-    #   Whether or not to enable trace logging for the campaign.
-    #   Undocumented
-    #   @return [Boolean]
-    #
     # @!attribute [rw] treatment_description
     #   A custom description for the treatment.
     #   @return [String]
@@ -7072,7 +7640,6 @@ module Aws::Pinpoint
       :schedule,
       :segment_id,
       :segment_version,
-      :trace,
       :treatment_description,
       :treatment_name)
       include Aws::Structure
@@ -7085,7 +7652,6 @@ module Aws::Pinpoint
     #
     #       {
     #         destination_stream_arn: "__string",
-    #         external_id: "__string",
     #         role_arn: "__string",
     #       }
     #
@@ -7097,11 +7663,6 @@ module Aws::Pinpoint
     #   Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT\_ID:stream/STREAM\_NAME
     #   @return [String]
     #
-    # @!attribute [rw] external_id
-    #   The external ID assigned the IAM role that authorizes Amazon
-    #   Pinpoint to publish to the stream.
-    #   @return [String]
-    #
     # @!attribute [rw] role_arn
     #   The IAM role that authorizes Amazon Pinpoint to publish events to
     #   the stream in your account.
@@ -7111,7 +7672,6 @@ module Aws::Pinpoint
     #
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
-      :external_id,
       :role_arn)
       include Aws::Structure
     end
@@ -7200,7 +7760,33 @@ module Aws::Pinpoint
     #
     #       {
     #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
     #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",

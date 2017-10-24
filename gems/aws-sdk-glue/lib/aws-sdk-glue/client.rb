@@ -465,6 +465,46 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Stops a batch of job runs for a given job.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job whose job runs are to be stopped.
+    #
+    # @option params [required, Array<String>] :job_run_ids
+    #   A list of job run Ids of the given job to be stopped.
+    #
+    # @return [Types::BatchStopJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchStopJobRunResponse#successful_submissions #successful_submissions} => Array&lt;Types::BatchStopJobRunSuccessfulSubmission&gt;
+    #   * {Types::BatchStopJobRunResponse#errors #errors} => Array&lt;Types::BatchStopJobRunError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_stop_job_run({
+    #     job_name: "NameString", # required
+    #     job_run_ids: ["IdString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_submissions #=> Array
+    #   resp.successful_submissions[0].job_name #=> String
+    #   resp.successful_submissions[0].job_run_id #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job_name #=> String
+    #   resp.errors[0].job_run_id #=> String
+    #   resp.errors[0].error_detail.error_code #=> String
+    #   resp.errors[0].error_detail.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRun AWS API Documentation
+    #
+    # @overload batch_stop_job_run(params = {})
+    # @param [Hash] params ({})
+    def batch_stop_job_run(params = {}, options = {})
+      req = build_request(:batch_stop_job_run, params)
+      req.send_request(options)
+    end
+
     # Creates a `Classifier` in the user's account.
     #
     # @option params [Types::CreateGrokClassifierRequest] :grok_classifier
@@ -540,8 +580,8 @@ module Aws::Glue
     #   Name of the new `Crawler`.
     #
     # @option params [required, String] :role
-    #   The AWS ARN of the IAM role used by the new `Crawler` to access
-    #   customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
+    #   access customer resources.
     #
     # @option params [required, String] :database_name
     #   The Glue `Database` where results will be stored, such as:
@@ -554,13 +594,13 @@ module Aws::Glue
     #   A list of collection of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A cron expression that can be used as a Cloudwatch event (see
-    #   [CloudWatch Schedule Expression Syntax][1]. For example, to run every
-    #   day at 12:15 UTC, specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom `Classifier` names that the user has registered. By
@@ -659,22 +699,32 @@ module Aws::Glue
     # @option params [required, String] :role_arn
     #   The IAM role for the DevEndpoint.
     #
-    # @option params [required, Array<String>] :security_group_ids
+    # @option params [Array<String>] :security_group_ids
     #   Security group IDs for the security groups to be used by the new
     #   DevEndpoint.
     #
-    # @option params [required, String] :subnet_id
+    # @option params [String] :subnet_id
     #   The subnet ID for the new DevEndpoint to use.
     #
-    # @option params [String] :public_key
+    # @option params [required, String] :public_key
     #   The public key to use for authentication.
     #
     # @option params [Integer] :number_of_nodes
-    #   The number of nodes to use.
+    #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
+    #   this DevEndpoint.
     #
     # @option params [String] :extra_python_libs_s3_path
-    #   Path to one or more Python libraries in an S3 bucket that should be
-    #   loaded in your DevEndpoint.
+    #   Path(s) to one or more Python libraries in an S3 bucket that should be
+    #   loaded in your DevEndpoint. Multiple values must be complete paths
+    #   separated by a comma.
+    #
+    #   Please note that only pure Python libraries can currently be used on a
+    #   DevEndpoint. Libraries that rely on C extensions, such as the
+    #   [pandas][1] Python data analysis library, are not yet supported.
+    #
+    #
+    #
+    #   [1]: http://pandas.pydata.org/
     #
     # @option params [String] :extra_jars_s3_path
     #   Path to one or more Java Jars in an S3 bucket that should be loaded in
@@ -688,6 +738,7 @@ module Aws::Glue
     #   * {Types::CreateDevEndpointResponse#subnet_id #subnet_id} => String
     #   * {Types::CreateDevEndpointResponse#role_arn #role_arn} => String
     #   * {Types::CreateDevEndpointResponse#yarn_endpoint_address #yarn_endpoint_address} => String
+    #   * {Types::CreateDevEndpointResponse#zeppelin_remote_spark_interpreter_port #zeppelin_remote_spark_interpreter_port} => Integer
     #   * {Types::CreateDevEndpointResponse#number_of_nodes #number_of_nodes} => Integer
     #   * {Types::CreateDevEndpointResponse#availability_zone #availability_zone} => String
     #   * {Types::CreateDevEndpointResponse#vpc_id #vpc_id} => String
@@ -701,9 +752,9 @@ module Aws::Glue
     #   resp = client.create_dev_endpoint({
     #     endpoint_name: "GenericString", # required
     #     role_arn: "RoleArn", # required
-    #     security_group_ids: ["GenericString"], # required
-    #     subnet_id: "GenericString", # required
-    #     public_key: "GenericString",
+    #     security_group_ids: ["GenericString"],
+    #     subnet_id: "GenericString",
+    #     public_key: "GenericString", # required
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -718,6 +769,7 @@ module Aws::Glue
     #   resp.subnet_id #=> String
     #   resp.role_arn #=> String
     #   resp.yarn_endpoint_address #=> String
+    #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
     #   resp.availability_zone #=> String
     #   resp.vpc_id #=> String
@@ -744,7 +796,7 @@ module Aws::Glue
     #   Description of the job.
     #
     # @option params [String] :log_uri
-    #   Location of the logs for this job.
+    #   This field is reserved for future use.
     #
     # @option params [required, String] :role
     #   The role associated with this job.
@@ -1043,7 +1095,13 @@ module Aws::Glue
     #   The type of the new trigger.
     #
     # @option params [String] :schedule
-    #   A cron schedule expression for the new trigger.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Types::Predicate] :predicate
     #   A predicate to specify when the new trigger should fire.
@@ -1943,6 +2001,7 @@ module Aws::Glue
     #   resp.dev_endpoint.security_group_ids[0] #=> String
     #   resp.dev_endpoint.subnet_id #=> String
     #   resp.dev_endpoint.yarn_endpoint_address #=> String
+    #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -1994,6 +2053,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].security_group_ids[0] #=> String
     #   resp.dev_endpoints[0].subnet_id #=> String
     #   resp.dev_endpoints[0].yarn_endpoint_address #=> String
+    #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -3312,8 +3372,8 @@ module Aws::Glue
     #   Name of the new `Crawler`.
     #
     # @option params [String] :role
-    #   The AWS ARN of the IAM role used by the new `Crawler` to access
-    #   customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
+    #   access customer resources.
     #
     # @option params [String] :database_name
     #   The Glue `Database` where results will be stored, such as:
@@ -3326,13 +3386,13 @@ module Aws::Glue
     #   A list of collection of targets to crawl.
     #
     # @option params [String] :schedule
-    #   A cron expression that can be used as a Cloudwatch event (see
-    #   [CloudWatch Schedule Expression Syntax][1]. For example, to run every
-    #   day at 12:15 UTC, specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom `Classifier` names that the user has registered. By
@@ -3394,7 +3454,14 @@ module Aws::Glue
     #   Name of the crawler whose schedule to update.
     #
     # @option params [String] :schedule
-    #   Cron expression of the updated schedule.
+    #   The updated `cron` expression used to specify the schedule (see
+    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
+    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * * ?
+    #   *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3462,8 +3529,11 @@ module Aws::Glue
     #   The public key for the DevEndpoint to use.
     #
     # @option params [Types::DevEndpointCustomLibraries] :custom_libraries
-    #   Custom Python or Java custom libraries to be loaded in the
-    #   DevEndpoint.
+    #   Custom Python or Java libraries to be loaded in the DevEndpoint.
+    #
+    # @option params [Boolean] :update_etl_libraries
+    #   True if the list of custom libraries to be loaded in the development
+    #   endpoint needs to be updated, or False otherwise.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3476,6 +3546,7 @@ module Aws::Glue
     #       extra_python_libs_s3_path: "GenericString",
     #       extra_jars_s3_path: "GenericString",
     #     },
+    #     update_etl_libraries: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint AWS API Documentation
@@ -3844,7 +3915,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

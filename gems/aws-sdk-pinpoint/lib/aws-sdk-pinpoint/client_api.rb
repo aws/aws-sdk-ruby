@@ -19,6 +19,10 @@ module Aws::Pinpoint
     APNSMessage = Shapes::StructureShape.new(name: 'APNSMessage')
     APNSSandboxChannelRequest = Shapes::StructureShape.new(name: 'APNSSandboxChannelRequest')
     APNSSandboxChannelResponse = Shapes::StructureShape.new(name: 'APNSSandboxChannelResponse')
+    APNSVoipChannelRequest = Shapes::StructureShape.new(name: 'APNSVoipChannelRequest')
+    APNSVoipChannelResponse = Shapes::StructureShape.new(name: 'APNSVoipChannelResponse')
+    APNSVoipSandboxChannelRequest = Shapes::StructureShape.new(name: 'APNSVoipSandboxChannelRequest')
+    APNSVoipSandboxChannelResponse = Shapes::StructureShape.new(name: 'APNSVoipSandboxChannelResponse')
     Action = Shapes::StringShape.new(name: 'Action')
     ActivitiesResponse = Shapes::StructureShape.new(name: 'ActivitiesResponse')
     ActivityResponse = Shapes::StructureShape.new(name: 'ActivityResponse')
@@ -57,6 +61,10 @@ module Aws::Pinpoint
     DeleteApnsChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsChannelResponse')
     DeleteApnsSandboxChannelRequest = Shapes::StructureShape.new(name: 'DeleteApnsSandboxChannelRequest')
     DeleteApnsSandboxChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsSandboxChannelResponse')
+    DeleteApnsVoipChannelRequest = Shapes::StructureShape.new(name: 'DeleteApnsVoipChannelRequest')
+    DeleteApnsVoipChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsVoipChannelResponse')
+    DeleteApnsVoipSandboxChannelRequest = Shapes::StructureShape.new(name: 'DeleteApnsVoipSandboxChannelRequest')
+    DeleteApnsVoipSandboxChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsVoipSandboxChannelResponse')
     DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
     DeleteAppResponse = Shapes::StructureShape.new(name: 'DeleteAppResponse')
     DeleteBaiduChannelRequest = Shapes::StructureShape.new(name: 'DeleteBaiduChannelRequest')
@@ -79,7 +87,6 @@ module Aws::Pinpoint
     Duration = Shapes::StringShape.new(name: 'Duration')
     EmailChannelRequest = Shapes::StructureShape.new(name: 'EmailChannelRequest')
     EmailChannelResponse = Shapes::StructureShape.new(name: 'EmailChannelResponse')
-    EmailMessage = Shapes::StructureShape.new(name: 'EmailMessage')
     EndpointBatchItem = Shapes::StructureShape.new(name: 'EndpointBatchItem')
     EndpointBatchRequest = Shapes::StructureShape.new(name: 'EndpointBatchRequest')
     EndpointDemographic = Shapes::StructureShape.new(name: 'EndpointDemographic')
@@ -102,6 +109,10 @@ module Aws::Pinpoint
     GetApnsChannelResponse = Shapes::StructureShape.new(name: 'GetApnsChannelResponse')
     GetApnsSandboxChannelRequest = Shapes::StructureShape.new(name: 'GetApnsSandboxChannelRequest')
     GetApnsSandboxChannelResponse = Shapes::StructureShape.new(name: 'GetApnsSandboxChannelResponse')
+    GetApnsVoipChannelRequest = Shapes::StructureShape.new(name: 'GetApnsVoipChannelRequest')
+    GetApnsVoipChannelResponse = Shapes::StructureShape.new(name: 'GetApnsVoipChannelResponse')
+    GetApnsVoipSandboxChannelRequest = Shapes::StructureShape.new(name: 'GetApnsVoipSandboxChannelRequest')
+    GetApnsVoipSandboxChannelResponse = Shapes::StructureShape.new(name: 'GetApnsVoipSandboxChannelResponse')
     GetAppRequest = Shapes::StructureShape.new(name: 'GetAppRequest')
     GetAppResponse = Shapes::StructureShape.new(name: 'GetAppResponse')
     GetApplicationSettingsRequest = Shapes::StructureShape.new(name: 'GetApplicationSettingsRequest')
@@ -210,6 +221,10 @@ module Aws::Pinpoint
     UpdateApnsChannelResponse = Shapes::StructureShape.new(name: 'UpdateApnsChannelResponse')
     UpdateApnsSandboxChannelRequest = Shapes::StructureShape.new(name: 'UpdateApnsSandboxChannelRequest')
     UpdateApnsSandboxChannelResponse = Shapes::StructureShape.new(name: 'UpdateApnsSandboxChannelResponse')
+    UpdateApnsVoipChannelRequest = Shapes::StructureShape.new(name: 'UpdateApnsVoipChannelRequest')
+    UpdateApnsVoipChannelResponse = Shapes::StructureShape.new(name: 'UpdateApnsVoipChannelResponse')
+    UpdateApnsVoipSandboxChannelRequest = Shapes::StructureShape.new(name: 'UpdateApnsVoipSandboxChannelRequest')
+    UpdateApnsVoipSandboxChannelResponse = Shapes::StructureShape.new(name: 'UpdateApnsVoipSandboxChannelResponse')
     UpdateApplicationSettingsRequest = Shapes::StructureShape.new(name: 'UpdateApplicationSettingsRequest')
     UpdateApplicationSettingsResponse = Shapes::StructureShape.new(name: 'UpdateApplicationSettingsResponse')
     UpdateBaiduChannelRequest = Shapes::StructureShape.new(name: 'UpdateBaiduChannelRequest')
@@ -247,6 +262,7 @@ module Aws::Pinpoint
     ADMChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     ADMChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     ADMChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    ADMChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
     ADMChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     ADMChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     ADMChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -263,7 +279,6 @@ module Aws::Pinpoint
     ADMMessage.add_member(:icon_reference, Shapes::ShapeRef.new(shape: __string, location_name: "IconReference"))
     ADMMessage.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageIconUrl"))
     ADMMessage.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
-    ADMMessage.add_member(:json_data, Shapes::ShapeRef.new(shape: __string, location_name: "JsonData"))
     ADMMessage.add_member(:md5, Shapes::ShapeRef.new(shape: __string, location_name: "MD5"))
     ADMMessage.add_member(:raw_content, Shapes::ShapeRef.new(shape: __string, location_name: "RawContent"))
     ADMMessage.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
@@ -286,7 +301,10 @@ module Aws::Pinpoint
 
     APNSChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     APNSChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    APNSChannelResponse.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
     APNSChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
+    APNSChannelResponse.add_member(:has_token_key, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasTokenKey"))
     APNSChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     APNSChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     APNSChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -299,15 +317,17 @@ module Aws::Pinpoint
     APNSMessage.add_member(:badge, Shapes::ShapeRef.new(shape: __integer, location_name: "Badge"))
     APNSMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     APNSMessage.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "Category"))
+    APNSMessage.add_member(:collapse_id, Shapes::ShapeRef.new(shape: __string, location_name: "CollapseId"))
     APNSMessage.add_member(:data, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Data"))
-    APNSMessage.add_member(:json_data, Shapes::ShapeRef.new(shape: __string, location_name: "JsonData"))
     APNSMessage.add_member(:media_url, Shapes::ShapeRef.new(shape: __string, location_name: "MediaUrl"))
     APNSMessage.add_member(:preferred_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "PreferredAuthenticationMethod"))
+    APNSMessage.add_member(:priority, Shapes::ShapeRef.new(shape: __string, location_name: "Priority"))
     APNSMessage.add_member(:raw_content, Shapes::ShapeRef.new(shape: __string, location_name: "RawContent"))
     APNSMessage.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
     APNSMessage.add_member(:sound, Shapes::ShapeRef.new(shape: __string, location_name: "Sound"))
     APNSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     APNSMessage.add_member(:thread_id, Shapes::ShapeRef.new(shape: __string, location_name: "ThreadId"))
+    APNSMessage.add_member(:time_to_live, Shapes::ShapeRef.new(shape: __integer, location_name: "TimeToLive"))
     APNSMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     APNSMessage.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
     APNSMessage.struct_class = Types::APNSMessage
@@ -324,7 +344,10 @@ module Aws::Pinpoint
 
     APNSSandboxChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     APNSSandboxChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    APNSSandboxChannelResponse.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
     APNSSandboxChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSSandboxChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
+    APNSSandboxChannelResponse.add_member(:has_token_key, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasTokenKey"))
     APNSSandboxChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     APNSSandboxChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     APNSSandboxChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -332,6 +355,54 @@ module Aws::Pinpoint
     APNSSandboxChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, location_name: "Platform"))
     APNSSandboxChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     APNSSandboxChannelResponse.struct_class = Types::APNSSandboxChannelResponse
+
+    APNSVoipChannelRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: __string, location_name: "BundleId"))
+    APNSVoipChannelRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: __string, location_name: "Certificate"))
+    APNSVoipChannelRequest.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
+    APNSVoipChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSVoipChannelRequest.add_member(:private_key, Shapes::ShapeRef.new(shape: __string, location_name: "PrivateKey"))
+    APNSVoipChannelRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: __string, location_name: "TeamId"))
+    APNSVoipChannelRequest.add_member(:token_key, Shapes::ShapeRef.new(shape: __string, location_name: "TokenKey"))
+    APNSVoipChannelRequest.add_member(:token_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "TokenKeyId"))
+    APNSVoipChannelRequest.struct_class = Types::APNSVoipChannelRequest
+
+    APNSVoipChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    APNSVoipChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    APNSVoipChannelResponse.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
+    APNSVoipChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSVoipChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
+    APNSVoipChannelResponse.add_member(:has_token_key, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasTokenKey"))
+    APNSVoipChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    APNSVoipChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
+    APNSVoipChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
+    APNSVoipChannelResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
+    APNSVoipChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, location_name: "Platform"))
+    APNSVoipChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
+    APNSVoipChannelResponse.struct_class = Types::APNSVoipChannelResponse
+
+    APNSVoipSandboxChannelRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: __string, location_name: "BundleId"))
+    APNSVoipSandboxChannelRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: __string, location_name: "Certificate"))
+    APNSVoipSandboxChannelRequest.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
+    APNSVoipSandboxChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSVoipSandboxChannelRequest.add_member(:private_key, Shapes::ShapeRef.new(shape: __string, location_name: "PrivateKey"))
+    APNSVoipSandboxChannelRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: __string, location_name: "TeamId"))
+    APNSVoipSandboxChannelRequest.add_member(:token_key, Shapes::ShapeRef.new(shape: __string, location_name: "TokenKey"))
+    APNSVoipSandboxChannelRequest.add_member(:token_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "TokenKeyId"))
+    APNSVoipSandboxChannelRequest.struct_class = Types::APNSVoipSandboxChannelRequest
+
+    APNSVoipSandboxChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    APNSVoipSandboxChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    APNSVoipSandboxChannelResponse.add_member(:default_authentication_method, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultAuthenticationMethod"))
+    APNSVoipSandboxChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    APNSVoipSandboxChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
+    APNSVoipSandboxChannelResponse.add_member(:has_token_key, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasTokenKey"))
+    APNSVoipSandboxChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    APNSVoipSandboxChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
+    APNSVoipSandboxChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
+    APNSVoipSandboxChannelResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
+    APNSVoipSandboxChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, location_name: "Platform"))
+    APNSVoipSandboxChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
+    APNSVoipSandboxChannelResponse.struct_class = Types::APNSVoipSandboxChannelResponse
 
     ActivitiesResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfActivityResponse, location_name: "Item"))
     ActivitiesResponse.struct_class = Types::ActivitiesResponse
@@ -386,6 +457,7 @@ module Aws::Pinpoint
     BaiduChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     BaiduChannelResponse.add_member(:credential, Shapes::ShapeRef.new(shape: __string, location_name: "Credential"))
     BaiduChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    BaiduChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
     BaiduChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     BaiduChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     BaiduChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -400,7 +472,6 @@ module Aws::Pinpoint
     BaiduMessage.add_member(:icon_reference, Shapes::ShapeRef.new(shape: __string, location_name: "IconReference"))
     BaiduMessage.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageIconUrl"))
     BaiduMessage.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
-    BaiduMessage.add_member(:json_data, Shapes::ShapeRef.new(shape: __string, location_name: "JsonData"))
     BaiduMessage.add_member(:raw_content, Shapes::ShapeRef.new(shape: __string, location_name: "RawContent"))
     BaiduMessage.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
     BaiduMessage.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "SmallImageIconUrl"))
@@ -508,7 +579,6 @@ module Aws::Pinpoint
     DefaultPushNotificationMessage.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
     DefaultPushNotificationMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     DefaultPushNotificationMessage.add_member(:data, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Data"))
-    DefaultPushNotificationMessage.add_member(:json_data, Shapes::ShapeRef.new(shape: __string, location_name: "JsonData"))
     DefaultPushNotificationMessage.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
     DefaultPushNotificationMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     DefaultPushNotificationMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
@@ -538,6 +608,22 @@ module Aws::Pinpoint
     DeleteApnsSandboxChannelResponse.struct_class = Types::DeleteApnsSandboxChannelResponse
     DeleteApnsSandboxChannelResponse[:payload] = :apns_sandbox_channel_response
     DeleteApnsSandboxChannelResponse[:payload_member] = DeleteApnsSandboxChannelResponse.member(:apns_sandbox_channel_response)
+
+    DeleteApnsVoipChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteApnsVoipChannelRequest.struct_class = Types::DeleteApnsVoipChannelRequest
+
+    DeleteApnsVoipChannelResponse.add_member(:apns_voip_channel_response, Shapes::ShapeRef.new(shape: APNSVoipChannelResponse, required: true, location_name: "APNSVoipChannelResponse"))
+    DeleteApnsVoipChannelResponse.struct_class = Types::DeleteApnsVoipChannelResponse
+    DeleteApnsVoipChannelResponse[:payload] = :apns_voip_channel_response
+    DeleteApnsVoipChannelResponse[:payload_member] = DeleteApnsVoipChannelResponse.member(:apns_voip_channel_response)
+
+    DeleteApnsVoipSandboxChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteApnsVoipSandboxChannelRequest.struct_class = Types::DeleteApnsVoipSandboxChannelRequest
+
+    DeleteApnsVoipSandboxChannelResponse.add_member(:apns_voip_sandbox_channel_response, Shapes::ShapeRef.new(shape: APNSVoipSandboxChannelResponse, required: true, location_name: "APNSVoipSandboxChannelResponse"))
+    DeleteApnsVoipSandboxChannelResponse.struct_class = Types::DeleteApnsVoipSandboxChannelResponse
+    DeleteApnsVoipSandboxChannelResponse[:payload] = :apns_voip_sandbox_channel_response
+    DeleteApnsVoipSandboxChannelResponse[:payload_member] = DeleteApnsVoipSandboxChannelResponse.member(:apns_voip_sandbox_channel_response)
 
     DeleteAppRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteAppRequest.struct_class = Types::DeleteAppRequest
@@ -610,7 +696,6 @@ module Aws::Pinpoint
     DirectMessageConfiguration.add_member(:baidu_message, Shapes::ShapeRef.new(shape: BaiduMessage, location_name: "BaiduMessage"))
     DirectMessageConfiguration.add_member(:default_message, Shapes::ShapeRef.new(shape: DefaultMessage, location_name: "DefaultMessage"))
     DirectMessageConfiguration.add_member(:default_push_notification_message, Shapes::ShapeRef.new(shape: DefaultPushNotificationMessage, location_name: "DefaultPushNotificationMessage"))
-    DirectMessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: EmailMessage, location_name: "EmailMessage"))
     DirectMessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: GCMMessage, location_name: "GCMMessage"))
     DirectMessageConfiguration.add_member(:sms_message, Shapes::ShapeRef.new(shape: SMSMessage, location_name: "SMSMessage"))
     DirectMessageConfiguration.struct_class = Types::DirectMessageConfiguration
@@ -625,6 +710,7 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     EmailChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     EmailChannelResponse.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
+    EmailChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
     EmailChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     EmailChannelResponse.add_member(:identity, Shapes::ShapeRef.new(shape: __string, location_name: "Identity"))
     EmailChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
@@ -634,14 +720,6 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     EmailChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     EmailChannelResponse.struct_class = Types::EmailChannelResponse
-
-    EmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
-    EmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
-    EmailMessage.add_member(:html_body, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlBody"))
-    EmailMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
-    EmailMessage.add_member(:template_arn, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateArn"))
-    EmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
-    EmailMessage.struct_class = Types::EmailMessage
 
     EndpointBatchItem.add_member(:address, Shapes::ShapeRef.new(shape: __string, location_name: "Address"))
     EndpointBatchItem.add_member(:attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Attributes"))
@@ -712,7 +790,6 @@ module Aws::Pinpoint
     EndpointResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__double, location_name: "Metrics"))
     EndpointResponse.add_member(:opt_out, Shapes::ShapeRef.new(shape: __string, location_name: "OptOut"))
     EndpointResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
-    EndpointResponse.add_member(:shard_id, Shapes::ShapeRef.new(shape: __string, location_name: "ShardId"))
     EndpointResponse.add_member(:user, Shapes::ShapeRef.new(shape: EndpointUser, location_name: "User"))
     EndpointResponse.struct_class = Types::EndpointResponse
 
@@ -743,6 +820,7 @@ module Aws::Pinpoint
     GCMChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     GCMChannelResponse.add_member(:credential, Shapes::ShapeRef.new(shape: __string, location_name: "Credential"))
     GCMChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    GCMChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
     GCMChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     GCMChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     GCMChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -758,13 +836,14 @@ module Aws::Pinpoint
     GCMMessage.add_member(:icon_reference, Shapes::ShapeRef.new(shape: __string, location_name: "IconReference"))
     GCMMessage.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageIconUrl"))
     GCMMessage.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
-    GCMMessage.add_member(:json_data, Shapes::ShapeRef.new(shape: __string, location_name: "JsonData"))
+    GCMMessage.add_member(:priority, Shapes::ShapeRef.new(shape: __string, location_name: "Priority"))
     GCMMessage.add_member(:raw_content, Shapes::ShapeRef.new(shape: __string, location_name: "RawContent"))
     GCMMessage.add_member(:restricted_package_name, Shapes::ShapeRef.new(shape: __string, location_name: "RestrictedPackageName"))
     GCMMessage.add_member(:silent_push, Shapes::ShapeRef.new(shape: __boolean, location_name: "SilentPush"))
     GCMMessage.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: __string, location_name: "SmallImageIconUrl"))
     GCMMessage.add_member(:sound, Shapes::ShapeRef.new(shape: __string, location_name: "Sound"))
     GCMMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    GCMMessage.add_member(:time_to_live, Shapes::ShapeRef.new(shape: __integer, location_name: "TimeToLive"))
     GCMMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     GCMMessage.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "Url"))
     GCMMessage.struct_class = Types::GCMMessage
@@ -792,6 +871,22 @@ module Aws::Pinpoint
     GetApnsSandboxChannelResponse.struct_class = Types::GetApnsSandboxChannelResponse
     GetApnsSandboxChannelResponse[:payload] = :apns_sandbox_channel_response
     GetApnsSandboxChannelResponse[:payload_member] = GetApnsSandboxChannelResponse.member(:apns_sandbox_channel_response)
+
+    GetApnsVoipChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetApnsVoipChannelRequest.struct_class = Types::GetApnsVoipChannelRequest
+
+    GetApnsVoipChannelResponse.add_member(:apns_voip_channel_response, Shapes::ShapeRef.new(shape: APNSVoipChannelResponse, required: true, location_name: "APNSVoipChannelResponse"))
+    GetApnsVoipChannelResponse.struct_class = Types::GetApnsVoipChannelResponse
+    GetApnsVoipChannelResponse[:payload] = :apns_voip_channel_response
+    GetApnsVoipChannelResponse[:payload_member] = GetApnsVoipChannelResponse.member(:apns_voip_channel_response)
+
+    GetApnsVoipSandboxChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetApnsVoipSandboxChannelRequest.struct_class = Types::GetApnsVoipSandboxChannelRequest
+
+    GetApnsVoipSandboxChannelResponse.add_member(:apns_voip_sandbox_channel_response, Shapes::ShapeRef.new(shape: APNSVoipSandboxChannelResponse, required: true, location_name: "APNSVoipSandboxChannelResponse"))
+    GetApnsVoipSandboxChannelResponse.struct_class = Types::GetApnsVoipSandboxChannelResponse
+    GetApnsVoipSandboxChannelResponse[:payload] = :apns_voip_sandbox_channel_response
+    GetApnsVoipSandboxChannelResponse[:payload_member] = GetApnsVoipSandboxChannelResponse.member(:apns_voip_sandbox_channel_response)
 
     GetAppRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetAppRequest.struct_class = Types::GetAppRequest
@@ -1092,7 +1187,9 @@ module Aws::Pinpoint
     MessageBody.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
     MessageBody.struct_class = Types::MessageBody
 
+    MessageConfiguration.add_member(:adm_message, Shapes::ShapeRef.new(shape: Message, location_name: "ADMMessage"))
     MessageConfiguration.add_member(:apns_message, Shapes::ShapeRef.new(shape: Message, location_name: "APNSMessage"))
+    MessageConfiguration.add_member(:baidu_message, Shapes::ShapeRef.new(shape: Message, location_name: "BaiduMessage"))
     MessageConfiguration.add_member(:default_message, Shapes::ShapeRef.new(shape: Message, location_name: "DefaultMessage"))
     MessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: CampaignEmailMessage, location_name: "EmailMessage"))
     MessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: Message, location_name: "GCMMessage"))
@@ -1100,11 +1197,9 @@ module Aws::Pinpoint
     MessageConfiguration.struct_class = Types::MessageConfiguration
 
     MessageRequest.add_member(:addresses, Shapes::ShapeRef.new(shape: MapOfAddressConfiguration, location_name: "Addresses"))
-    MessageRequest.add_member(:campaign, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Campaign"))
     MessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     MessageRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, location_name: "Endpoints"))
     MessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, location_name: "MessageConfiguration"))
-    MessageRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
     MessageRequest.struct_class = Types::MessageRequest
 
     MessageResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -1146,6 +1241,7 @@ module Aws::Pinpoint
     SMSChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
     SMSChannelResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
     SMSChannelResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
+    SMSChannelResponse.add_member(:has_credential, Shapes::ShapeRef.new(shape: __boolean, location_name: "HasCredential"))
     SMSChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     SMSChannelResponse.add_member(:is_archived, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsArchived"))
     SMSChannelResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedBy"))
@@ -1227,7 +1323,6 @@ module Aws::Pinpoint
 
     SendUsersMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     SendUsersMessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, location_name: "MessageConfiguration"))
-    SendUsersMessageRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
     SendUsersMessageRequest.add_member(:users, Shapes::ShapeRef.new(shape: MapOfEndpointSendConfiguration, location_name: "Users"))
     SendUsersMessageRequest.struct_class = Types::SendUsersMessageRequest
 
@@ -1292,6 +1387,28 @@ module Aws::Pinpoint
     UpdateApnsSandboxChannelResponse.struct_class = Types::UpdateApnsSandboxChannelResponse
     UpdateApnsSandboxChannelResponse[:payload] = :apns_sandbox_channel_response
     UpdateApnsSandboxChannelResponse[:payload_member] = UpdateApnsSandboxChannelResponse.member(:apns_sandbox_channel_response)
+
+    UpdateApnsVoipChannelRequest.add_member(:apns_voip_channel_request, Shapes::ShapeRef.new(shape: APNSVoipChannelRequest, required: true, location_name: "APNSVoipChannelRequest"))
+    UpdateApnsVoipChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    UpdateApnsVoipChannelRequest.struct_class = Types::UpdateApnsVoipChannelRequest
+    UpdateApnsVoipChannelRequest[:payload] = :apns_voip_channel_request
+    UpdateApnsVoipChannelRequest[:payload_member] = UpdateApnsVoipChannelRequest.member(:apns_voip_channel_request)
+
+    UpdateApnsVoipChannelResponse.add_member(:apns_voip_channel_response, Shapes::ShapeRef.new(shape: APNSVoipChannelResponse, required: true, location_name: "APNSVoipChannelResponse"))
+    UpdateApnsVoipChannelResponse.struct_class = Types::UpdateApnsVoipChannelResponse
+    UpdateApnsVoipChannelResponse[:payload] = :apns_voip_channel_response
+    UpdateApnsVoipChannelResponse[:payload_member] = UpdateApnsVoipChannelResponse.member(:apns_voip_channel_response)
+
+    UpdateApnsVoipSandboxChannelRequest.add_member(:apns_voip_sandbox_channel_request, Shapes::ShapeRef.new(shape: APNSVoipSandboxChannelRequest, required: true, location_name: "APNSVoipSandboxChannelRequest"))
+    UpdateApnsVoipSandboxChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    UpdateApnsVoipSandboxChannelRequest.struct_class = Types::UpdateApnsVoipSandboxChannelRequest
+    UpdateApnsVoipSandboxChannelRequest[:payload] = :apns_voip_sandbox_channel_request
+    UpdateApnsVoipSandboxChannelRequest[:payload_member] = UpdateApnsVoipSandboxChannelRequest.member(:apns_voip_sandbox_channel_request)
+
+    UpdateApnsVoipSandboxChannelResponse.add_member(:apns_voip_sandbox_channel_response, Shapes::ShapeRef.new(shape: APNSVoipSandboxChannelResponse, required: true, location_name: "APNSVoipSandboxChannelResponse"))
+    UpdateApnsVoipSandboxChannelResponse.struct_class = Types::UpdateApnsVoipSandboxChannelResponse
+    UpdateApnsVoipSandboxChannelResponse[:payload] = :apns_voip_sandbox_channel_response
+    UpdateApnsVoipSandboxChannelResponse[:payload_member] = UpdateApnsVoipSandboxChannelResponse.member(:apns_voip_sandbox_channel_response)
 
     UpdateApplicationSettingsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     UpdateApplicationSettingsRequest.add_member(:write_application_settings_request, Shapes::ShapeRef.new(shape: WriteApplicationSettingsRequest, required: true, location_name: "WriteApplicationSettingsRequest"))
@@ -1409,13 +1526,11 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
     WriteCampaignRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
     WriteCampaignRequest.add_member(:segment_version, Shapes::ShapeRef.new(shape: __integer, location_name: "SegmentVersion"))
-    WriteCampaignRequest.add_member(:trace, Shapes::ShapeRef.new(shape: __boolean, location_name: "Trace"))
     WriteCampaignRequest.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     WriteCampaignRequest.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     WriteCampaignRequest.struct_class = Types::WriteCampaignRequest
 
     WriteEventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationStreamArn"))
-    WriteEventStream.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
     WriteEventStream.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     WriteEventStream.struct_class = Types::WriteEventStream
 
@@ -1535,6 +1650,34 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/apns_sandbox"
         o.input = Shapes::ShapeRef.new(shape: DeleteApnsSandboxChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApnsSandboxChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_apns_voip_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApnsVoipChannel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApnsVoipChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApnsVoipChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_apns_voip_sandbox_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApnsVoipSandboxChannel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip_sandbox"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApnsVoipSandboxChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApnsVoipSandboxChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1689,6 +1832,34 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/apns_sandbox"
         o.input = Shapes::ShapeRef.new(shape: GetApnsSandboxChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApnsSandboxChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_apns_voip_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApnsVoipChannel"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip"
+        o.input = Shapes::ShapeRef.new(shape: GetApnsVoipChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApnsVoipChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_apns_voip_sandbox_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApnsVoipSandboxChannel"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip_sandbox"
+        o.input = Shapes::ShapeRef.new(shape: GetApnsVoipSandboxChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApnsVoipSandboxChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2067,6 +2238,34 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/apns_sandbox"
         o.input = Shapes::ShapeRef.new(shape: UpdateApnsSandboxChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateApnsSandboxChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_apns_voip_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApnsVoipChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApnsVoipChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApnsVoipChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_apns_voip_sandbox_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApnsVoipSandboxChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/apps/{application-id}/channels/apns_voip_sandbox"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApnsVoipSandboxChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApnsVoipSandboxChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

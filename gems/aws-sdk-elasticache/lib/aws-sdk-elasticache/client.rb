@@ -609,27 +609,47 @@ module Aws::ElastiCache
     #   The compute and memory capacity of the nodes in the node group
     #   (shard).
     #
-    #   Valid node types are as follows:
+    #   The following node types are supported by ElastiCache. Generally
+    #   speaking, the current generation types provide more memory and
+    #   computational power at lower cost when compared to their equivalent
+    #   previous generation counterparts.
     #
     #   * General purpose:
     #
-    #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
-    #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
-    #       `cache.m4.10xlarge`
+    #     * Current generation:
     #
-    #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
-    #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
-    #   * Compute optimized: `cache.c1.xlarge`
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #
+    #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
+    #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **T1 node types:** `cache.t1.micro`
+    #
+    #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
+    #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #   * Compute optimized:
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **C1 node types:** `cache.c1.xlarge`
     #
     #   * Memory optimized:
     #
-    #     * Current generation: `cache.r3.large`, `cache.r3.xlarge`,
+    #     * Current generation:
+    #
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #     * Previous generation: `cache.m2.xlarge`, `cache.m2.2xlarge`,
+    #     * Previous generation: (not recommended)
+    #
+    #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
     #   **Notes:**
@@ -637,12 +657,17 @@ module Aws::ElastiCache
     #   * All T2 instances are created in an Amazon Virtual Private Cloud
     #     (Amazon VPC).
     #
-    #   * Redis backup/restore is not supported for Redis (cluster mode
-    #     disabled) T1 and T2 instances. Backup/restore is supported on Redis
-    #     (cluster mode enabled) T2 instances.
+    #   * Redis (cluster mode disabled): Redis backup/restore is not supported
+    #     on T1 and T2 instances.
+    #
+    #   * Redis (cluster mode enabled): Backup/restore is not supported on T1
+    #     instances.
     #
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
+    #
+    #   Supported node types are available in all regions except as noted in
+    #   the following table.
     #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
@@ -708,8 +733,7 @@ module Aws::ElastiCache
     #   Amazon Virtual Private Cloud (Amazon VPC).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource. A tag is
-    #   a key-value pair. A tag key must be accompanied by a tag value.
+    #   A list of cost allocation tags to be added to this resource.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A single-element string list containing an Amazon Resource Name (ARN)
@@ -798,8 +822,9 @@ module Aws::ElastiCache
     #   If you do not specify this parameter, ElastiCache automatically
     #   chooses an appropriate time range.
     #
-    #   **Note:** This parameter is only valid if the `Engine` parameter is
-    #   `redis`.
+    #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
+    #
+    #    </note>
     #
     # @option params [String] :auth_token
     #   **Reserved parameter.** The password used to access a password
@@ -813,9 +838,10 @@ module Aws::ElastiCache
     #     length.
     #
     #   * Cannot contain any of the following characters: '/', '"', or
-    #     "@".
+    #     '@'.
     #
-    #   For more information, see [AUTH password][1] at Redis.
+    #   For more information, see [AUTH password][1] at
+    #   http://redis.io/commands/AUTH.
     #
     #
     #
@@ -992,6 +1018,9 @@ module Aws::ElastiCache
     #   resp.cache_cluster.replication_group_id #=> String
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
+    #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
     #
@@ -1306,15 +1335,14 @@ module Aws::ElastiCache
     #
     #   Default: false
     #
-    #   <note markdown="1"> ElastiCache Multi-AZ replication groups is not supported on:
+    #   Amazon ElastiCache for Redis does not support Multi-AZ with automatic
+    #   failover on:
     #
-    #    * Redis versions earlier than 2.8.6.
+    #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 node types.
+    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
     #
-    #     Redis (cluster mode enabled): T2 node types.
-    #
-    #    </note>
+    #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Integer] :num_cache_clusters
     #   The number of clusters this replication group initially has.
@@ -1376,27 +1404,47 @@ module Aws::ElastiCache
     #   The compute and memory capacity of the nodes in the node group
     #   (shard).
     #
-    #   Valid node types are as follows:
+    #   The following node types are supported by ElastiCache. Generally
+    #   speaking, the current generation types provide more memory and
+    #   computational power at lower cost when compared to their equivalent
+    #   previous generation counterparts.
     #
     #   * General purpose:
     #
-    #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
-    #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
-    #       `cache.m4.10xlarge`
+    #     * Current generation:
     #
-    #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
-    #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
-    #   * Compute optimized: `cache.c1.xlarge`
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #
+    #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
+    #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **T1 node types:** `cache.t1.micro`
+    #
+    #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
+    #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #   * Compute optimized:
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **C1 node types:** `cache.c1.xlarge`
     #
     #   * Memory optimized:
     #
-    #     * Current generation: `cache.r3.large`, `cache.r3.xlarge`,
+    #     * Current generation:
+    #
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #     * Previous generation: `cache.m2.xlarge`, `cache.m2.2xlarge`,
+    #     * Previous generation: (not recommended)
+    #
+    #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
     #   **Notes:**
@@ -1404,12 +1452,17 @@ module Aws::ElastiCache
     #   * All T2 instances are created in an Amazon Virtual Private Cloud
     #     (Amazon VPC).
     #
-    #   * Redis backup/restore is not supported for Redis (cluster mode
-    #     disabled) T1 and T2 instances. Backup/restore is supported on Redis
-    #     (cluster mode enabled) T2 instances.
+    #   * Redis (cluster mode disabled): Redis backup/restore is not supported
+    #     on T1 and T2 instances.
+    #
+    #   * Redis (cluster mode enabled): Backup/restore is not supported on T1
+    #     instances.
     #
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
+    #
+    #   Supported node types are available in all regions except as noted in
+    #   the following table.
     #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
@@ -1482,7 +1535,7 @@ module Aws::ElastiCache
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of cost allocation tags to be added to this resource. A tag is
-    #   a key-value pair. A tag key must be accompanied by a tag value.
+    #   a key-value pair.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
@@ -1494,20 +1547,12 @@ module Aws::ElastiCache
     #   *NodeGroupConfiguration* regardless of the number of ARNs specified
     #   here.
     #
-    #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
-    #
-    #    </note>
-    #
     #   Example of an Amazon S3 ARN: `arn:aws:s3:::my_bucket/snapshot1.rdb`
     #
     # @option params [String] :snapshot_name
     #   The name of a snapshot from which to restore data into the new
     #   replication group. The snapshot status changes to `restoring` while
     #   the new replication group is being created.
-    #
-    #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
-    #
-    #    </note>
     #
     # @option params [String] :preferred_maintenance_window
     #   Specifies the weekly time range during which maintenance on the cache
@@ -1560,10 +1605,6 @@ module Aws::ElastiCache
     #   to 5, a snapshot that was taken today is retained for 5 days before
     #   being deleted.
     #
-    #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
-    #
-    #    </note>
-    #
     #   Default: 0 (i.e., automatic backups are disabled for this cache
     #   cluster).
     #
@@ -1576,13 +1617,16 @@ module Aws::ElastiCache
     #   If you do not specify this parameter, ElastiCache automatically
     #   chooses an appropriate time range.
     #
-    #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
-    #
-    #    </note>
-    #
     # @option params [String] :auth_token
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
+    #
+    #   This parameter is valid only if:
+    #
+    #   * The parameter `TransitEncryptionEnabled` was set to `true` when the
+    #     cluster was created.
+    #
+    #   * The line `requirepass` was added to the database configuration file.
     #
     #   Password constraints:
     #
@@ -1592,13 +1636,46 @@ module Aws::ElastiCache
     #     length.
     #
     #   * Cannot contain any of the following characters: '/', '"', or
-    #     "@".
+    #     '@'.
     #
-    #   For more information, see [AUTH password][1] at Redis.
+    #   For more information, see [AUTH password][1] at
+    #   http://redis.io/commands/AUTH.
     #
     #
     #
     #   [1]: http://redis.io/commands/AUTH
+    #
+    # @option params [Boolean] :transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to `true`.
+    #
+    #   You cannot modify the value of `TransitEncryptionEnabled` after the
+    #   cluster is created. To enable in-transit encryption on a cluster you
+    #   must set `TransitEncryptionEnabled` to `true` when you create a
+    #   cluster.
+    #
+    #   This parameter is valid only if the `Engine` parameter is `redis`, the
+    #   `EngineVersion` parameter is `3.2.4` or later, and the cluster is
+    #   being created in an Amazon VPC.
+    #
+    #   If you enable in-transit encryption, you must also specify a value for
+    #   `CacheSubnetGroup`.
+    #
+    #   Default: `false`
+    #
+    # @option params [Boolean] :at_rest_encryption_enabled
+    #   A flag that enables encryption at rest when set to `true`.
+    #
+    #   You cannot modify the value of `AtRestEncryptionEnabled` after the
+    #   replication group is created. To enable encryption at rest on a
+    #   replication group you must set `AtRestEncryptionEnabled` to `true`
+    #   when you create the replication group.
+    #
+    #   <note markdown="1"> This parameter is valid only if the `Engine` parameter is `redis` and
+    #   the cluster is being created in an Amazon VPC.
+    #
+    #    </note>
+    #
+    #   Default: `false`
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1736,6 +1813,8 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     snapshot_window: "String",
     #     auth_token: "String",
+    #     transit_encryption_enabled: false,
+    #     at_rest_encryption_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1768,6 +1847,9 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_window #=> String
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -1799,6 +1881,131 @@ module Aws::ElastiCache
     # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotResult#snapshot #snapshot} => Types::Snapshot
+    #
+    #
+    # @example Example: CreateSnapshot - NonClustered Redis, no read-replicas
+    #
+    #   # Creates a snapshot of a non-clustered Redis cluster that has only one node.
+    #
+    #   resp = client.create_snapshot({
+    #     cache_cluster_id: "onenoderedis", 
+    #     snapshot_name: "snapshot-1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2017-02-03T15:43:36.278Z"), 
+    #       cache_cluster_id: "onenoderedis", 
+    #       cache_node_type: "cache.m3.medium", 
+    #       cache_parameter_group_name: "default.redis3.2", 
+    #       cache_subnet_group_name: "default", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       node_snapshots: [
+    #         {
+    #           cache_node_create_time: Time.parse("2017-02-03T15:43:36.278Z"), 
+    #           cache_node_id: "0001", 
+    #           cache_size: "", 
+    #         }, 
+    #       ], 
+    #       num_cache_nodes: 1, 
+    #       port: 6379, 
+    #       preferred_availability_zone: "us-west-2c", 
+    #       preferred_maintenance_window: "sat:08:00-sat:09:00", 
+    #       snapshot_name: "snapshot-1", 
+    #       snapshot_retention_limit: 1, 
+    #       snapshot_source: "manual", 
+    #       snapshot_status: "creating", 
+    #       snapshot_window: "00:00-01:00", 
+    #       vpc_id: "vpc-73c3cd17", 
+    #     }, 
+    #   }
+    #
+    # @example Example: CreateSnapshot - NonClustered Redis, 2 read-replicas
+    #
+    #   # Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary and two read-replicas.
+    #   # CacheClusterId must be a specific node in the cluster.
+    #
+    #   resp = client.create_snapshot({
+    #     cache_cluster_id: "threenoderedis-001", 
+    #     snapshot_name: "snapshot-2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot: {
+    #       auto_minor_version_upgrade: true, 
+    #       cache_cluster_create_time: Time.parse("2017-02-03T15:43:36.278Z"), 
+    #       cache_cluster_id: "threenoderedis-001", 
+    #       cache_node_type: "cache.m3.medium", 
+    #       cache_parameter_group_name: "default.redis3.2", 
+    #       cache_subnet_group_name: "default", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       node_snapshots: [
+    #         {
+    #           cache_node_create_time: Time.parse("2017-02-03T15:43:36.278Z"), 
+    #           cache_node_id: "0001", 
+    #           cache_size: "", 
+    #         }, 
+    #       ], 
+    #       num_cache_nodes: 1, 
+    #       port: 6379, 
+    #       preferred_availability_zone: "us-west-2c", 
+    #       preferred_maintenance_window: "sat:08:00-sat:09:00", 
+    #       snapshot_name: "snapshot-2", 
+    #       snapshot_retention_limit: 1, 
+    #       snapshot_source: "manual", 
+    #       snapshot_status: "creating", 
+    #       snapshot_window: "00:00-01:00", 
+    #       vpc_id: "vpc-73c3cd17", 
+    #     }, 
+    #   }
+    #
+    # @example Example: CreateSnapshot-clustered Redis
+    #
+    #   # Creates a snapshot of a clustered Redis cluster that has 2 shards, each with a primary and 4 read-replicas.
+    #
+    #   resp = client.create_snapshot({
+    #     replication_group_id: "clusteredredis", 
+    #     snapshot_name: "snapshot-2x5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot: {
+    #       auto_minor_version_upgrade: true, 
+    #       automatic_failover: "enabled", 
+    #       cache_node_type: "cache.m3.medium", 
+    #       cache_parameter_group_name: "default.redis3.2.cluster.on", 
+    #       cache_subnet_group_name: "default", 
+    #       engine: "redis", 
+    #       engine_version: "3.2.4", 
+    #       node_snapshots: [
+    #         {
+    #           cache_size: "", 
+    #           node_group_id: "0001", 
+    #         }, 
+    #         {
+    #           cache_size: "", 
+    #           node_group_id: "0002", 
+    #         }, 
+    #       ], 
+    #       num_node_groups: 2, 
+    #       port: 6379, 
+    #       preferred_maintenance_window: "mon:09:30-mon:10:30", 
+    #       replication_group_description: "Redis cluster with 2 shards.", 
+    #       replication_group_id: "clusteredredis", 
+    #       snapshot_name: "snapshot-2x5", 
+    #       snapshot_retention_limit: 1, 
+    #       snapshot_source: "manual", 
+    #       snapshot_status: "creating", 
+    #       snapshot_window: "12:00-13:00", 
+    #       vpc_id: "vpc-73c3cd17", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1976,6 +2183,9 @@ module Aws::ElastiCache
     #   resp.cache_cluster.replication_group_id #=> String
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
+    #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
     #
@@ -2195,6 +2405,9 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_window #=> String
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -2542,6 +2755,9 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].replication_group_id #=> String
     #   resp.cache_clusters[0].snapshot_retention_limit #=> Integer
     #   resp.cache_clusters[0].snapshot_window #=> String
+    #   resp.cache_clusters[0].auth_token_enabled #=> Boolean
+    #   resp.cache_clusters[0].transit_encryption_enabled #=> Boolean
+    #   resp.cache_clusters[0].at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters AWS API Documentation
     #
@@ -4530,6 +4746,9 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].snapshot_window #=> String
     #   resp.replication_groups[0].cluster_enabled #=> Boolean
     #   resp.replication_groups[0].cache_node_type #=> String
+    #   resp.replication_groups[0].auth_token_enabled #=> Boolean
+    #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
+    #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups AWS API Documentation
     #
@@ -4555,27 +4774,47 @@ module Aws::ElastiCache
     #   The cache node type filter value. Use this parameter to show only
     #   those reservations matching the specified cache node type.
     #
-    #   Valid node types are as follows:
+    #   The following node types are supported by ElastiCache. Generally
+    #   speaking, the current generation types provide more memory and
+    #   computational power at lower cost when compared to their equivalent
+    #   previous generation counterparts.
     #
     #   * General purpose:
     #
-    #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
-    #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
-    #       `cache.m4.10xlarge`
+    #     * Current generation:
     #
-    #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
-    #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
-    #   * Compute optimized: `cache.c1.xlarge`
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #
+    #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
+    #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **T1 node types:** `cache.t1.micro`
+    #
+    #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
+    #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #   * Compute optimized:
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **C1 node types:** `cache.c1.xlarge`
     #
     #   * Memory optimized:
     #
-    #     * Current generation: `cache.r3.large`, `cache.r3.xlarge`,
+    #     * Current generation:
+    #
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #     * Previous generation: `cache.m2.xlarge`, `cache.m2.2xlarge`,
+    #     * Previous generation: (not recommended)
+    #
+    #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
     #   **Notes:**
@@ -4583,12 +4822,17 @@ module Aws::ElastiCache
     #   * All T2 instances are created in an Amazon Virtual Private Cloud
     #     (Amazon VPC).
     #
-    #   * Redis backup/restore is not supported for Redis (cluster mode
-    #     disabled) T1 and T2 instances. Backup/restore is supported on Redis
-    #     (cluster mode enabled) T2 instances.
+    #   * Redis (cluster mode disabled): Redis backup/restore is not supported
+    #     on T1 and T2 instances.
+    #
+    #   * Redis (cluster mode enabled): Backup/restore is not supported on T1
+    #     instances.
     #
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
+    #
+    #   Supported node types are available in all regions except as noted in
+    #   the following table.
     #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
@@ -4703,27 +4947,47 @@ module Aws::ElastiCache
     #   The cache node type filter value. Use this parameter to show only the
     #   available offerings matching the specified cache node type.
     #
-    #   Valid node types are as follows:
+    #   The following node types are supported by ElastiCache. Generally
+    #   speaking, the current generation types provide more memory and
+    #   computational power at lower cost when compared to their equivalent
+    #   previous generation counterparts.
     #
     #   * General purpose:
     #
-    #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
-    #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
-    #       `cache.m4.10xlarge`
+    #     * Current generation:
     #
-    #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
-    #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
-    #   * Compute optimized: `cache.c1.xlarge`
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #
+    #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
+    #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **T1 node types:** `cache.t1.micro`
+    #
+    #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
+    #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #   * Compute optimized:
+    #
+    #     * Previous generation: (not recommended)
+    #
+    #       **C1 node types:** `cache.c1.xlarge`
     #
     #   * Memory optimized:
     #
-    #     * Current generation: `cache.r3.large`, `cache.r3.xlarge`,
+    #     * Current generation:
+    #
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
     #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #     * Previous generation: `cache.m2.xlarge`, `cache.m2.2xlarge`,
+    #     * Previous generation: (not recommended)
+    #
+    #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
     #   **Notes:**
@@ -4731,12 +4995,17 @@ module Aws::ElastiCache
     #   * All T2 instances are created in an Amazon Virtual Private Cloud
     #     (Amazon VPC).
     #
-    #   * Redis backup/restore is not supported for Redis (cluster mode
-    #     disabled) T1 and T2 instances. Backup/restore is supported on Redis
-    #     (cluster mode enabled) T2 instances.
+    #   * Redis (cluster mode disabled): Redis backup/restore is not supported
+    #     on T1 and T2 instances.
+    #
+    #   * Redis (cluster mode enabled): Backup/restore is not supported on T1
+    #     instances.
     #
     #   * Redis Append-only files (AOF) functionality is not supported for T1
     #     or T2 instances.
+    #
+    #   Supported node types are available in all regions except as noted in
+    #   the following table.
     #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
@@ -5522,7 +5791,7 @@ module Aws::ElastiCache
     #   `NumCacheNodes` in the request.
     #
     #   For example: If you have 3 active cache nodes, 7 pending cache nodes,
-    #   and the number of cache nodes in this `ModifyCacheCluser` call is 5,
+    #   and the number of cache nodes in this `ModifyCacheCluster` call is 5,
     #   you must list 2 (7 - 5) cache node IDs to remove.
     #
     # @option params [String] :az_mode
@@ -5857,6 +6126,9 @@ module Aws::ElastiCache
     #   resp.cache_cluster.replication_group_id #=> String
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
+    #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
     #
@@ -6067,15 +6339,14 @@ module Aws::ElastiCache
     #
     #   Valid values: `true` \| `false`
     #
-    #   <note markdown="1"> ElastiCache Multi-AZ replication groups are not supported on:
+    #   Amazon ElastiCache for Redis does not support Multi-AZ with automatic
+    #   failover on:
     #
-    #    * Redis versions earlier than 2.8.6.
+    #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled):T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
     #
-    #     Redis (cluster mode enabled): T1 node types.
-    #
-    #    </note>
+    #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Array<String>] :cache_security_group_names
     #   A list of cache security group names to authorize for the clusters in
@@ -6327,6 +6598,9 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_window #=> String
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -6417,6 +6691,18 @@ module Aws::ElastiCache
     # rebooted) to be lost.
     #
     # When the reboot is complete, a cache cluster event is created.
+    #
+    # Rebooting a cluster is currently supported on Memcached and Redis
+    # (cluster mode disabled) clusters. Rebooting is not supported on Redis
+    # (cluster mode enabled) clusters.
+    #
+    # If you make changes to parameters that require a Redis (cluster mode
+    # enabled) cluster reboot for the changes to be applied, see [Rebooting
+    # a Cluster][1] for an alternate process.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.htm
     #
     # @option params [required, String] :cache_cluster_id
     #   The cache cluster identifier. This parameter is stored as a lowercase
@@ -6528,6 +6814,9 @@ module Aws::ElastiCache
     #   resp.cache_cluster.replication_group_id #=> String
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
+    #   resp.cache_cluster.auth_token_enabled #=> Boolean
+    #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
     #
@@ -6854,6 +7143,9 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_window #=> String
     #   resp.replication_group.cluster_enabled #=> Boolean
     #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -6877,7 +7169,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

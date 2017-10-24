@@ -195,7 +195,33 @@ module Aws::Pinpoint
     #       additional_treatments: [
     #         {
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -272,7 +298,33 @@ module Aws::Pinpoint
     #         total: 1,
     #       },
     #       message_configuration: {
+    #         adm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
     #         apns_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
@@ -337,7 +389,6 @@ module Aws::Pinpoint
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
-    #       trace: false,
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -347,6 +398,17 @@ module Aws::Pinpoint
     #
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -358,6 +420,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -410,6 +483,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.apns_message.body #=> String
     #   resp.campaign_response.message_configuration.apns_message.image_icon_url #=> String
@@ -421,6 +505,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -681,6 +776,7 @@ module Aws::Pinpoint
     #   resp.adm_channel_response.application_id #=> String
     #   resp.adm_channel_response.creation_date #=> String
     #   resp.adm_channel_response.enabled #=> Boolean
+    #   resp.adm_channel_response.has_credential #=> Boolean
     #   resp.adm_channel_response.id #=> String
     #   resp.adm_channel_response.is_archived #=> Boolean
     #   resp.adm_channel_response.last_modified_by #=> String
@@ -715,7 +811,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_channel_response.application_id #=> String
     #   resp.apns_channel_response.creation_date #=> String
+    #   resp.apns_channel_response.default_authentication_method #=> String
     #   resp.apns_channel_response.enabled #=> Boolean
+    #   resp.apns_channel_response.has_credential #=> Boolean
+    #   resp.apns_channel_response.has_token_key #=> Boolean
     #   resp.apns_channel_response.id #=> String
     #   resp.apns_channel_response.is_archived #=> Boolean
     #   resp.apns_channel_response.last_modified_by #=> String
@@ -750,7 +849,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_sandbox_channel_response.application_id #=> String
     #   resp.apns_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_sandbox_channel_response.default_authentication_method #=> String
     #   resp.apns_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_token_key #=> Boolean
     #   resp.apns_sandbox_channel_response.id #=> String
     #   resp.apns_sandbox_channel_response.is_archived #=> Boolean
     #   resp.apns_sandbox_channel_response.last_modified_by #=> String
@@ -764,6 +866,82 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_apns_sandbox_channel(params = {}, options = {})
       req = build_request(:delete_apns_sandbox_channel, params)
+      req.send_request(options)
+    end
+
+    # Delete an APNS VOIP channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::DeleteApnsVoipChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteApnsVoipChannelResponse#apns_voip_channel_response #apns_voip_channel_response} => Types::APNSVoipChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_apns_voip_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_channel_response.application_id #=> String
+    #   resp.apns_voip_channel_response.creation_date #=> String
+    #   resp.apns_voip_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_channel_response.id #=> String
+    #   resp.apns_voip_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_channel_response.platform #=> String
+    #   resp.apns_voip_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannel AWS API Documentation
+    #
+    # @overload delete_apns_voip_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_apns_voip_channel(params = {}, options = {})
+      req = build_request(:delete_apns_voip_channel, params)
+      req.send_request(options)
+    end
+
+    # Delete an APNS VOIP sandbox channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::DeleteApnsVoipSandboxChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteApnsVoipSandboxChannelResponse#apns_voip_sandbox_channel_response #apns_voip_sandbox_channel_response} => Types::APNSVoipSandboxChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_apns_voip_sandbox_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_sandbox_channel_response.application_id #=> String
+    #   resp.apns_voip_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.id #=> String
+    #   resp.apns_voip_sandbox_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_sandbox_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.platform #=> String
+    #   resp.apns_voip_sandbox_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannel AWS API Documentation
+    #
+    # @overload delete_apns_voip_sandbox_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_apns_voip_sandbox_channel(params = {}, options = {})
+      req = build_request(:delete_apns_voip_sandbox_channel, params)
       req.send_request(options)
     end
 
@@ -815,6 +993,7 @@ module Aws::Pinpoint
     #   resp.baidu_channel_response.creation_date #=> String
     #   resp.baidu_channel_response.credential #=> String
     #   resp.baidu_channel_response.enabled #=> Boolean
+    #   resp.baidu_channel_response.has_credential #=> Boolean
     #   resp.baidu_channel_response.id #=> String
     #   resp.baidu_channel_response.is_archived #=> Boolean
     #   resp.baidu_channel_response.last_modified_by #=> String
@@ -852,6 +1031,17 @@ module Aws::Pinpoint
     #
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -863,6 +1053,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -915,6 +1116,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.apns_message.body #=> String
     #   resp.campaign_response.message_configuration.apns_message.image_icon_url #=> String
@@ -926,6 +1138,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -999,6 +1222,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
+    #   resp.email_channel_response.has_credential #=> Boolean
     #   resp.email_channel_response.id #=> String
     #   resp.email_channel_response.identity #=> String
     #   resp.email_channel_response.is_archived #=> Boolean
@@ -1020,6 +1244,7 @@ module Aws::Pinpoint
     # Deletes the event stream for an app.
     #
     # @option params [required, String] :application_id
+    #   Application Id.
     #
     # @return [Types::DeleteEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1069,6 +1294,7 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
+    #   resp.gcm_channel_response.has_credential #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -1178,6 +1404,7 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.application_id #=> String
     #   resp.sms_channel_response.creation_date #=> String
     #   resp.sms_channel_response.enabled #=> Boolean
+    #   resp.sms_channel_response.has_credential #=> Boolean
     #   resp.sms_channel_response.id #=> String
     #   resp.sms_channel_response.is_archived #=> Boolean
     #   resp.sms_channel_response.last_modified_by #=> String
@@ -1215,6 +1442,7 @@ module Aws::Pinpoint
     #   resp.adm_channel_response.application_id #=> String
     #   resp.adm_channel_response.creation_date #=> String
     #   resp.adm_channel_response.enabled #=> Boolean
+    #   resp.adm_channel_response.has_credential #=> Boolean
     #   resp.adm_channel_response.id #=> String
     #   resp.adm_channel_response.is_archived #=> Boolean
     #   resp.adm_channel_response.last_modified_by #=> String
@@ -1249,7 +1477,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_channel_response.application_id #=> String
     #   resp.apns_channel_response.creation_date #=> String
+    #   resp.apns_channel_response.default_authentication_method #=> String
     #   resp.apns_channel_response.enabled #=> Boolean
+    #   resp.apns_channel_response.has_credential #=> Boolean
+    #   resp.apns_channel_response.has_token_key #=> Boolean
     #   resp.apns_channel_response.id #=> String
     #   resp.apns_channel_response.is_archived #=> Boolean
     #   resp.apns_channel_response.last_modified_by #=> String
@@ -1284,7 +1515,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_sandbox_channel_response.application_id #=> String
     #   resp.apns_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_sandbox_channel_response.default_authentication_method #=> String
     #   resp.apns_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_token_key #=> Boolean
     #   resp.apns_sandbox_channel_response.id #=> String
     #   resp.apns_sandbox_channel_response.is_archived #=> Boolean
     #   resp.apns_sandbox_channel_response.last_modified_by #=> String
@@ -1298,6 +1532,82 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_apns_sandbox_channel(params = {}, options = {})
       req = build_request(:get_apns_sandbox_channel, params)
+      req.send_request(options)
+    end
+
+    # Get an APNS Voip channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::GetApnsVoipChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApnsVoipChannelResponse#apns_voip_channel_response #apns_voip_channel_response} => Types::APNSVoipChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_apns_voip_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_channel_response.application_id #=> String
+    #   resp.apns_voip_channel_response.creation_date #=> String
+    #   resp.apns_voip_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_channel_response.id #=> String
+    #   resp.apns_voip_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_channel_response.platform #=> String
+    #   resp.apns_voip_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannel AWS API Documentation
+    #
+    # @overload get_apns_voip_channel(params = {})
+    # @param [Hash] params ({})
+    def get_apns_voip_channel(params = {}, options = {})
+      req = build_request(:get_apns_voip_channel, params)
+      req.send_request(options)
+    end
+
+    # Get an APNS VoipSandbox channel
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::GetApnsVoipSandboxChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApnsVoipSandboxChannelResponse#apns_voip_sandbox_channel_response #apns_voip_sandbox_channel_response} => Types::APNSVoipSandboxChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_apns_voip_sandbox_channel({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_sandbox_channel_response.application_id #=> String
+    #   resp.apns_voip_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.id #=> String
+    #   resp.apns_voip_sandbox_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_sandbox_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.platform #=> String
+    #   resp.apns_voip_sandbox_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannel AWS API Documentation
+    #
+    # @overload get_apns_voip_sandbox_channel(params = {})
+    # @param [Hash] params ({})
+    def get_apns_voip_sandbox_channel(params = {}, options = {})
+      req = build_request(:get_apns_voip_sandbox_channel, params)
       req.send_request(options)
     end
 
@@ -1416,6 +1726,7 @@ module Aws::Pinpoint
     #   resp.baidu_channel_response.creation_date #=> String
     #   resp.baidu_channel_response.credential #=> String
     #   resp.baidu_channel_response.enabled #=> Boolean
+    #   resp.baidu_channel_response.has_credential #=> Boolean
     #   resp.baidu_channel_response.id #=> String
     #   resp.baidu_channel_response.is_archived #=> Boolean
     #   resp.baidu_channel_response.last_modified_by #=> String
@@ -1453,6 +1764,17 @@ module Aws::Pinpoint
     #
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -1464,6 +1786,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -1516,6 +1849,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.apns_message.body #=> String
     #   resp.campaign_response.message_configuration.apns_message.image_icon_url #=> String
@@ -1527,6 +1871,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -1653,6 +2008,17 @@ module Aws::Pinpoint
     #
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -1664,6 +2030,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -1716,6 +2093,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.apns_message.body #=> String
     #   resp.campaign_response.message_configuration.apns_message.image_icon_url #=> String
@@ -1727,6 +2115,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -1808,6 +2207,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item #=> Array
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -1819,6 +2229,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -1871,6 +2292,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].limits.maximum_duration #=> Integer
     #   resp.campaigns_response.item[0].limits.messages_per_second #=> Integer
     #   resp.campaigns_response.item[0].limits.total #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.title #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.apns_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.image_icon_url #=> String
@@ -1882,6 +2314,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaigns_response.item[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.image_icon_url #=> String
@@ -1961,6 +2404,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item #=> Array
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -1972,6 +2426,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -2024,6 +2489,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].limits.maximum_duration #=> Integer
     #   resp.campaigns_response.item[0].limits.messages_per_second #=> Integer
     #   resp.campaigns_response.item[0].limits.total #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.title #=> String
+    #   resp.campaigns_response.item[0].message_configuration.adm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.apns_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.image_icon_url #=> String
@@ -2035,6 +2511,17 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaigns_response.item[0].message_configuration.apns_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.apns_message.url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.image_icon_url #=> String
@@ -2109,6 +2596,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
+    #   resp.email_channel_response.has_credential #=> Boolean
     #   resp.email_channel_response.id #=> String
     #   resp.email_channel_response.identity #=> String
     #   resp.email_channel_response.is_archived #=> Boolean
@@ -2151,7 +2639,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU"
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -2175,7 +2663,6 @@ module Aws::Pinpoint
     #   resp.endpoint_response.metrics["__string"] #=> Float
     #   resp.endpoint_response.opt_out #=> String
     #   resp.endpoint_response.request_id #=> String
-    #   resp.endpoint_response.shard_id #=> String
     #   resp.endpoint_response.user.user_attributes #=> Hash
     #   resp.endpoint_response.user.user_attributes["__string"] #=> Array
     #   resp.endpoint_response.user.user_attributes["__string"][0] #=> String
@@ -2193,6 +2680,7 @@ module Aws::Pinpoint
     # Returns the event stream for an app.
     #
     # @option params [required, String] :application_id
+    #   Application Id.
     #
     # @return [Types::GetEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2242,6 +2730,7 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
+    #   resp.gcm_channel_response.has_credential #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -2752,6 +3241,7 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.application_id #=> String
     #   resp.sms_channel_response.creation_date #=> String
     #   resp.sms_channel_response.enabled #=> Boolean
+    #   resp.sms_channel_response.has_credential #=> Boolean
     #   resp.sms_channel_response.id #=> String
     #   resp.sms_channel_response.is_archived #=> Boolean
     #   resp.sms_channel_response.last_modified_by #=> String
@@ -2773,9 +3263,10 @@ module Aws::Pinpoint
     # Use to create or update the event stream for an app.
     #
     # @option params [required, String] :application_id
+    #   Application Id.
     #
     # @option params [required, Types::WriteEventStream] :write_event_stream
-    #   Request to save an EventStream.
+    #   Write event stream wrapper.
     #
     # @return [Types::PutEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2787,7 +3278,6 @@ module Aws::Pinpoint
     #     application_id: "__string", # required
     #     write_event_stream: { # required
     #       destination_stream_arn: "__string",
-    #       external_id: "__string",
     #       role_arn: "__string",
     #     },
     #   })
@@ -2829,7 +3319,7 @@ module Aws::Pinpoint
     #       addresses: {
     #         "__string" => {
     #           body_override: "__string",
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #           context: {
     #             "__string" => "__string",
     #           },
@@ -2839,9 +3329,6 @@ module Aws::Pinpoint
     #           },
     #           title_override: "__string",
     #         },
-    #       },
-    #       campaign: {
-    #         "__string" => "__string",
     #       },
     #       context: {
     #         "__string" => "__string",
@@ -2871,7 +3358,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           md5: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
@@ -2888,12 +3374,13 @@ module Aws::Pinpoint
     #           badge: 1,
     #           body: "__string",
     #           category: "__string",
+    #           collapse_id: "__string",
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           media_url: "__string",
     #           preferred_authentication_method: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           sound: "__string",
@@ -2901,6 +3388,7 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #           thread_id: "__string",
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -2913,7 +3401,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           small_image_icon_url: "__string",
@@ -2936,23 +3423,12 @@ module Aws::Pinpoint
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           silent_push: false,
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
     #           title: "__string",
     #           url: "__string",
-    #         },
-    #         email_message: {
-    #           body: "__string",
-    #           from_address: "__string",
-    #           html_body: "__string",
-    #           substitutions: {
-    #             "__string" => ["__string"],
-    #           },
-    #           template_arn: "__string",
-    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -2964,7 +3440,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
     #           silent_push: false,
@@ -2973,6 +3449,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -2985,7 +3462,6 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
-    #       request_id: "__string",
     #     },
     #   })
     #
@@ -3045,7 +3521,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           md5: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
@@ -3062,12 +3537,13 @@ module Aws::Pinpoint
     #           badge: 1,
     #           body: "__string",
     #           category: "__string",
+    #           collapse_id: "__string",
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           media_url: "__string",
     #           preferred_authentication_method: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           sound: "__string",
@@ -3075,6 +3551,7 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #           thread_id: "__string",
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -3087,7 +3564,6 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           small_image_icon_url: "__string",
@@ -3110,23 +3586,12 @@ module Aws::Pinpoint
     #           data: {
     #             "__string" => "__string",
     #           },
-    #           json_data: "__string",
     #           silent_push: false,
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
     #           title: "__string",
     #           url: "__string",
-    #         },
-    #         email_message: {
-    #           body: "__string",
-    #           from_address: "__string",
-    #           html_body: "__string",
-    #           substitutions: {
-    #             "__string" => ["__string"],
-    #           },
-    #           template_arn: "__string",
-    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -3138,7 +3603,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
-    #           json_data: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
     #           silent_push: false,
@@ -3147,6 +3612,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -3159,7 +3625,6 @@ module Aws::Pinpoint
     #           },
     #         },
     #       },
-    #       request_id: "__string",
     #       users: {
     #         "__string" => {
     #           body_override: "__string",
@@ -3224,6 +3689,7 @@ module Aws::Pinpoint
     #   resp.adm_channel_response.application_id #=> String
     #   resp.adm_channel_response.creation_date #=> String
     #   resp.adm_channel_response.enabled #=> Boolean
+    #   resp.adm_channel_response.has_credential #=> Boolean
     #   resp.adm_channel_response.id #=> String
     #   resp.adm_channel_response.is_archived #=> Boolean
     #   resp.adm_channel_response.last_modified_by #=> String
@@ -3271,7 +3737,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_channel_response.application_id #=> String
     #   resp.apns_channel_response.creation_date #=> String
+    #   resp.apns_channel_response.default_authentication_method #=> String
     #   resp.apns_channel_response.enabled #=> Boolean
+    #   resp.apns_channel_response.has_credential #=> Boolean
+    #   resp.apns_channel_response.has_token_key #=> Boolean
     #   resp.apns_channel_response.id #=> String
     #   resp.apns_channel_response.is_archived #=> Boolean
     #   resp.apns_channel_response.last_modified_by #=> String
@@ -3319,7 +3788,10 @@ module Aws::Pinpoint
     #
     #   resp.apns_sandbox_channel_response.application_id #=> String
     #   resp.apns_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_sandbox_channel_response.default_authentication_method #=> String
     #   resp.apns_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_sandbox_channel_response.has_token_key #=> Boolean
     #   resp.apns_sandbox_channel_response.id #=> String
     #   resp.apns_sandbox_channel_response.is_archived #=> Boolean
     #   resp.apns_sandbox_channel_response.last_modified_by #=> String
@@ -3333,6 +3805,108 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def update_apns_sandbox_channel(params = {}, options = {})
       req = build_request(:update_apns_sandbox_channel, params)
+      req.send_request(options)
+    end
+
+    # Update an APNS VOIP channel
+    #
+    # @option params [required, Types::APNSVoipChannelRequest] :apns_voip_channel_request
+    #   Apple VOIP Push Notification Service channel definition.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::UpdateApnsVoipChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApnsVoipChannelResponse#apns_voip_channel_response #apns_voip_channel_response} => Types::APNSVoipChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_apns_voip_channel({
+    #     apns_voip_channel_request: { # required
+    #       bundle_id: "__string",
+    #       certificate: "__string",
+    #       default_authentication_method: "__string",
+    #       enabled: false,
+    #       private_key: "__string",
+    #       team_id: "__string",
+    #       token_key: "__string",
+    #       token_key_id: "__string",
+    #     },
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_channel_response.application_id #=> String
+    #   resp.apns_voip_channel_response.creation_date #=> String
+    #   resp.apns_voip_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_channel_response.id #=> String
+    #   resp.apns_voip_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_channel_response.platform #=> String
+    #   resp.apns_voip_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannel AWS API Documentation
+    #
+    # @overload update_apns_voip_channel(params = {})
+    # @param [Hash] params ({})
+    def update_apns_voip_channel(params = {}, options = {})
+      req = build_request(:update_apns_voip_channel, params)
+      req.send_request(options)
+    end
+
+    # Update an APNS VOIP sandbox channel
+    #
+    # @option params [required, Types::APNSVoipSandboxChannelRequest] :apns_voip_sandbox_channel_request
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Types::UpdateApnsVoipSandboxChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApnsVoipSandboxChannelResponse#apns_voip_sandbox_channel_response #apns_voip_sandbox_channel_response} => Types::APNSVoipSandboxChannelResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_apns_voip_sandbox_channel({
+    #     apns_voip_sandbox_channel_request: { # required
+    #       bundle_id: "__string",
+    #       certificate: "__string",
+    #       default_authentication_method: "__string",
+    #       enabled: false,
+    #       private_key: "__string",
+    #       team_id: "__string",
+    #       token_key: "__string",
+    #       token_key_id: "__string",
+    #     },
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apns_voip_sandbox_channel_response.application_id #=> String
+    #   resp.apns_voip_sandbox_channel_response.creation_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.default_authentication_method #=> String
+    #   resp.apns_voip_sandbox_channel_response.enabled #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_credential #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.has_token_key #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.id #=> String
+    #   resp.apns_voip_sandbox_channel_response.is_archived #=> Boolean
+    #   resp.apns_voip_sandbox_channel_response.last_modified_by #=> String
+    #   resp.apns_voip_sandbox_channel_response.last_modified_date #=> String
+    #   resp.apns_voip_sandbox_channel_response.platform #=> String
+    #   resp.apns_voip_sandbox_channel_response.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannel AWS API Documentation
+    #
+    # @overload update_apns_voip_sandbox_channel(params = {})
+    # @param [Hash] params ({})
+    def update_apns_voip_sandbox_channel(params = {}, options = {})
+      req = build_request(:update_apns_voip_sandbox_channel, params)
       req.send_request(options)
     end
 
@@ -3413,6 +3987,7 @@ module Aws::Pinpoint
     #   resp.baidu_channel_response.creation_date #=> String
     #   resp.baidu_channel_response.credential #=> String
     #   resp.baidu_channel_response.enabled #=> Boolean
+    #   resp.baidu_channel_response.has_credential #=> Boolean
     #   resp.baidu_channel_response.id #=> String
     #   resp.baidu_channel_response.is_archived #=> Boolean
     #   resp.baidu_channel_response.last_modified_by #=> String
@@ -3451,7 +4026,33 @@ module Aws::Pinpoint
     #       additional_treatments: [
     #         {
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -3528,7 +4129,33 @@ module Aws::Pinpoint
     #         total: 1,
     #       },
     #       message_configuration: {
+    #         adm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
     #         apns_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
@@ -3593,7 +4220,6 @@ module Aws::Pinpoint
     #       },
     #       segment_id: "__string",
     #       segment_version: 1,
-    #       trace: false,
     #       treatment_description: "__string",
     #       treatment_name: "__string",
     #     },
@@ -3603,6 +4229,17 @@ module Aws::Pinpoint
     #
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.image_icon_url #=> String
@@ -3614,6 +4251,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -3666,6 +4314,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.adm_message.body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.adm_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.adm_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.adm_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.adm_message.title #=> String
+    #   resp.campaign_response.message_configuration.adm_message.url #=> String
     #   resp.campaign_response.message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.apns_message.body #=> String
     #   resp.campaign_response.message_configuration.apns_message.image_icon_url #=> String
@@ -3677,6 +4336,17 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.apns_message.silent_push #=> Boolean
     #   resp.campaign_response.message_configuration.apns_message.title #=> String
     #   resp.campaign_response.message_configuration.apns_message.url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.campaign_response.message_configuration.baidu_message.body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_small_icon_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.image_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.json_body #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.media_url #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.raw_content #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.silent_push #=> Boolean
+    #   resp.campaign_response.message_configuration.baidu_message.title #=> String
+    #   resp.campaign_response.message_configuration.baidu_message.url #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -3759,6 +4429,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.creation_date #=> String
     #   resp.email_channel_response.enabled #=> Boolean
     #   resp.email_channel_response.from_address #=> String
+    #   resp.email_channel_response.has_credential #=> Boolean
     #   resp.email_channel_response.id #=> String
     #   resp.email_channel_response.identity #=> String
     #   resp.email_channel_response.is_archived #=> Boolean
@@ -3800,7 +4471,7 @@ module Aws::Pinpoint
     #       attributes: {
     #         "__string" => ["__string"],
     #       },
-    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #       demographic: {
     #         app_version: "__string",
     #         locale: "__string",
@@ -3871,7 +4542,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -3950,6 +4621,7 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
+    #   resp.gcm_channel_response.has_credential #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -4125,6 +4797,7 @@ module Aws::Pinpoint
     #   resp.sms_channel_response.application_id #=> String
     #   resp.sms_channel_response.creation_date #=> String
     #   resp.sms_channel_response.enabled #=> Boolean
+    #   resp.sms_channel_response.has_credential #=> Boolean
     #   resp.sms_channel_response.id #=> String
     #   resp.sms_channel_response.is_archived #=> Boolean
     #   resp.sms_channel_response.last_modified_by #=> String
@@ -4156,7 +4829,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

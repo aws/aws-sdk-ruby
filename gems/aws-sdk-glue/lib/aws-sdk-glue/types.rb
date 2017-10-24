@@ -8,6 +8,8 @@
 module Aws::Glue
   module Types
 
+    # Defines an action to be initiated by a trigger.
+    #
     # @note When making an API call, you may pass Action
     #   data as a hash:
     #
@@ -19,9 +21,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
+    #   The name of a job to be executed.
     #   @return [String]
     #
     # @!attribute [rw] arguments
+    #   Arguments to be passed to the job.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
@@ -329,6 +333,90 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Details about the job run and the error that occurred while trying to
+    # submit it for stopping.
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The job run Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_detail
+    #   The details of the error that occurred.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunError AWS API Documentation
+    #
+    class BatchStopJobRunError < Struct.new(
+      :job_name,
+      :job_run_id,
+      :error_detail)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchStopJobRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "NameString", # required
+    #         job_run_ids: ["IdString"], # required
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job whose job runs are to be stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_ids
+    #   A list of job run Ids of the given job to be stopped.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunRequest AWS API Documentation
+    #
+    class BatchStopJobRunRequest < Struct.new(
+      :job_name,
+      :job_run_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_submissions
+    #   A list of job runs which are successfully submitted for stopping.
+    #   @return [Array<Types::BatchStopJobRunSuccessfulSubmission>]
+    #
+    # @!attribute [rw] errors
+    #   A list containing the job run Ids and details of the error that
+    #   occurred for each job run while submitting to stop.
+    #   @return [Array<Types::BatchStopJobRunError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunResponse AWS API Documentation
+    #
+    class BatchStopJobRunResponse < Struct.new(
+      :successful_submissions,
+      :errors)
+      include Aws::Structure
+    end
+
+    # Details about the job run which is submitted successfully for
+    # stopping.
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The job run Id.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission AWS API Documentation
+    #
+    class BatchStopJobRunSuccessfulSubmission < Struct.new(
+      :job_name,
+      :job_run_id)
+      include Aws::Structure
+    end
+
     # Specifies a table definition in the Data Catalog.
     #
     # @note When making an API call, you may pass CatalogEntry
@@ -536,6 +624,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Defines a condition under which a trigger fires.
+    #
     # @note When making an API call, you may pass Condition
     #   data as a hash:
     #
@@ -546,12 +636,15 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] logical_operator
+    #   A logical operator.
     #   @return [String]
     #
     # @!attribute [rw] job_name
+    #   The name of the job in question.
     #   @return [String]
     #
     # @!attribute [rw] state
+    #   The condition state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition AWS API Documentation
@@ -574,7 +667,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection.
+    #   The type of the connection. Currently, only JDBC is supported; SFTP
+    #   is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -647,7 +741,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection.
+    #   The type of the connection. Currently, only JDBC is supported; SFTP
+    #   is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -696,16 +791,16 @@ module Aws::Glue
     end
 
     # Specifies a crawler program that examines a data source and uses
-    # classifiers to try to its schema. If successful, the crawler records
-    # metatdata concerning the data source in the Data Catalog.
+    # classifiers to try to determine its schema. If successful, the crawler
+    # records metatdata concerning the data source in the Data Catalog.
     #
     # @!attribute [rw] name
     #   The `Crawler` name.
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The ARN of an IAM role used to access customer resources such as
-    #   data in S3.
+    #   The IAM role (or ARN of an IAM role) used to access customer
+    #   resources such as data in S3.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -976,8 +1071,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The AWS ARN of the IAM role used by the new `Crawler` to access
-    #   customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
+    #   access customer resources.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -994,13 +1089,13 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A cron expression that can be used as a Cloudwatch event (see
-    #   [CloudWatch Schedule Expression Syntax][1]. For example, to run
-    #   every day at 12:15 UTC, specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] classifiers
@@ -1080,9 +1175,9 @@ module Aws::Glue
     #       {
     #         endpoint_name: "GenericString", # required
     #         role_arn: "RoleArn", # required
-    #         security_group_ids: ["GenericString"], # required
-    #         subnet_id: "GenericString", # required
-    #         public_key: "GenericString",
+    #         security_group_ids: ["GenericString"],
+    #         subnet_id: "GenericString",
+    #         public_key: "GenericString", # required
     #         number_of_nodes: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
@@ -1110,12 +1205,22 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes
-    #   The number of nodes to use.
+    #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
+    #   this DevEndpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path to one or more Python libraries in an S3 bucket that should be
-    #   loaded in your DevEndpoint.
+    #   Path(s) to one or more Python libraries in an S3 bucket that should
+    #   be loaded in your DevEndpoint. Multiple values must be complete
+    #   paths separated by a comma.
+    #
+    #   Please note that only pure Python libraries can currently be used on
+    #   a DevEndpoint. Libraries that rely on C extensions, such as the
+    #   [pandas][1] Python data analysis library, are not yet supported.
+    #
+    #
+    #
+    #   [1]: http://pandas.pydata.org/
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
@@ -1161,8 +1266,13 @@ module Aws::Glue
     #   The address of the YARN endpoint used by this DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] zeppelin_remote_spark_interpreter_port
+    #   The Apache Zeppelin port for the remote Apache Spark interpreter.
+    #   @return [Integer]
+    #
     # @!attribute [rw] number_of_nodes
-    #   The number of nodes in this DevEndpoint.
+    #   The number of AWS Glue Data Processing Units (DPUs) allocated to
+    #   this DevEndpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -1174,7 +1284,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path to one or more Python libraries in an S3 bucket that will be
+    #   Path(s) to one or more Python libraries in an S3 bucket that will be
     #   loaded in your DevEndpoint.
     #   @return [String]
     #
@@ -1200,6 +1310,7 @@ module Aws::Glue
       :subnet_id,
       :role_arn,
       :yarn_endpoint_address,
+      :zeppelin_remote_spark_interpreter_port,
       :number_of_nodes,
       :availability_zone,
       :vpc_id,
@@ -1283,7 +1394,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] log_uri
-    #   Location of the logs for this job.
+    #   This field is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -1617,7 +1728,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   A cron schedule expression for the new trigger.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] predicate
@@ -2095,6 +2212,10 @@ module Aws::Glue
     #   The YARN endpoint address used by this DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] zeppelin_remote_spark_interpreter_port
+    #   The Apache Zeppelin port for the remote Apache Spark interpreter.
+    #   @return [Integer]
+    #
     # @!attribute [rw] public_address
     #   The public address used by this DevEndpoint.
     #   @return [String]
@@ -2104,7 +2225,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes
-    #   The number of nodes used by this DevEndpoint.
+    #   The number of AWS Glue Data Processing Units (DPUs) allocated to
+    #   this DevEndpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -2116,13 +2238,25 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path to one or more Python libraries in an S3 bucket that should be
-    #   loaded in your DevEndpoint.
+    #   Path(s) to one or more Python libraries in an S3 bucket that should
+    #   be loaded in your DevEndpoint. Multiple values must be complete
+    #   paths separated by a comma.
+    #
+    #   Please note that only pure Python libraries can currently be used on
+    #   a DevEndpoint. Libraries that rely on C extensions, such as the
+    #   [pandas][1] Python data analysis library, are not yet supported.
+    #
+    #
+    #
+    #   [1]: http://pandas.pydata.org/
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
     #   Path to one or more Java Jars in an S3 bucket that should be loaded
     #   in your DevEndpoint.
+    #
+    #   Please note that only pure Java/Scala libraries can currently be
+    #   used on a DevEndpoint.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -2153,6 +2287,7 @@ module Aws::Glue
       :security_group_ids,
       :subnet_id,
       :yarn_endpoint_address,
+      :zeppelin_remote_spark_interpreter_port,
       :public_address,
       :status,
       :number_of_nodes,
@@ -2179,13 +2314,25 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] extra_python_libs_s3_path
-    #   Path to one or more Python libraries in an S3 bucket that should be
-    #   loaded in your DevEndpoint.
+    #   Path(s) to one or more Python libraries in an S3 bucket that should
+    #   be loaded in your DevEndpoint. Multiple values must be complete
+    #   paths separated by a comma.
+    #
+    #   Please note that only pure Python libraries can currently be used on
+    #   a DevEndpoint. Libraries that rely on C extensions, such as the
+    #   [pandas][1] Python data analysis library, are not yet supported.
+    #
+    #
+    #
+    #   [1]: http://pandas.pydata.org/
     #   @return [String]
     #
     # @!attribute [rw] extra_jars_s3_path
     #   Path to one or more Java Jars in an S3 bucket that should be loaded
     #   in your DevEndpoint.
+    #
+    #   Please note that only pure Java/Scala libraries can currently be
+    #   used on a DevEndpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpointCustomLibraries AWS API Documentation
@@ -2386,7 +2533,8 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] connection_type
-    #   The type of connections to return.
+    #   The type of connections to return. Currently, only JDBC is
+    #   supported; SFTP is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionsFilter AWS API Documentation
@@ -3636,7 +3784,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] log_uri
-    #   Location of the logs for this job.
+    #   This field is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -3857,7 +4005,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] log_uri
-    #   Location of the logs for this job.
+    #   This field is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -4212,6 +4360,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Contains a list of values defining partitions.
+    #
     # @note When making an API call, you may pass PartitionValueList
     #   data as a hash:
     #
@@ -4220,6 +4370,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] values
+    #   The list of values.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionValueList AWS API Documentation
@@ -4395,14 +4546,13 @@ module Aws::Glue
     # A scheduling object using a `cron` statement to schedule an event.
     #
     # @!attribute [rw] schedule_expression
-    #   A `cron` expression that can be used as a Cloudwatch event to
-    #   schedule something (see [CloudWatch Schedule Expression Syntax][1].
-    #   For example, to run something every day at 12:15 UTC, you would
-    #   specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -5104,12 +5254,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a version of a table.
+    #
     # @!attribute [rw] table
-    #   Represents a collection of related data organized in columns and
-    #   rows.
+    #   The table in question
     #   @return [Types::Table]
     #
     # @!attribute [rw] version_id
+    #   The ID value that identifies this table version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableVersion AWS API Documentation
@@ -5143,7 +5295,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   A cron schedule expression.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -5206,7 +5364,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   A cron expression specifying the schedule.
+    #   An updated `cron` expression used to specify the schedule (see
+    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
+    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * *
+    #   ? *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -5341,8 +5506,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The AWS ARN of the IAM role used by the new `Crawler` to access
-    #   customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
+    #   access customer resources.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5359,13 +5524,13 @@ module Aws::Glue
     #   @return [Types::CrawlerTargets]
     #
     # @!attribute [rw] schedule
-    #   A cron expression that can be used as a Cloudwatch event (see
-    #   [CloudWatch Schedule Expression Syntax][1]. For example, to run
-    #   every day at 12:15 UTC, specify: `cron(15 12 * * ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @!attribute [rw] classifiers
@@ -5415,7 +5580,14 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   Cron expression of the updated schedule.
+    #   The updated `cron` expression used to specify the schedule (see
+    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
+    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * *
+    #   ? *)`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerScheduleRequest AWS API Documentation
@@ -5483,6 +5655,7 @@ module Aws::Glue
     #           extra_python_libs_s3_path: "GenericString",
     #           extra_jars_s3_path: "GenericString",
     #         },
+    #         update_etl_libraries: false,
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -5494,16 +5667,21 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] custom_libraries
-    #   Custom Python or Java custom libraries to be loaded in the
-    #   DevEndpoint.
+    #   Custom Python or Java libraries to be loaded in the DevEndpoint.
     #   @return [Types::DevEndpointCustomLibraries]
+    #
+    # @!attribute [rw] update_etl_libraries
+    #   True if the list of custom libraries to be loaded in the development
+    #   endpoint needs to be updated, or False otherwise.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpointRequest AWS API Documentation
     #
     class UpdateDevEndpointRequest < Struct.new(
       :endpoint_name,
       :public_key,
-      :custom_libraries)
+      :custom_libraries,
+      :update_etl_libraries)
       include Aws::Structure
     end
 
