@@ -57,7 +57,7 @@ module Aws
         end
 
         def service_in_region?(svc, region_name)
-          svc['endpoints'].key?(region_name)
+          svc.key?('endpoints') && svc['endpoints'].key?(region_name)
         end
 
       end
