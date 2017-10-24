@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
 2.10.70 (2017-10-23)
 ------------------
 
