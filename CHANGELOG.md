@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.71 (2017-10-24)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
 
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
