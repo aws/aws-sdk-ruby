@@ -60,7 +60,8 @@ module Aws
         private
 
         def regions(service, partition)
-          names = Set.new(partition['regions'].keys & service['endpoints'].keys)
+          svc_endpoints = service.key?('endpoints') ? service['endpoints'].keys : []
+          names = Set.new(partition['regions'].keys & svc_endpoints)
           names - ["#{partition['partition']}-global"]
         end
 
