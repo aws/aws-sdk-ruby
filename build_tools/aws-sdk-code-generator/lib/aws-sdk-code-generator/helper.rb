@@ -1,5 +1,6 @@
-require 'kramdown'
 require 'set'
+# kramdown
+require 'kramdown'
 
 # disable inline attribute lists
 class Kramdown::Converter::Kramdown
@@ -7,6 +8,7 @@ class Kramdown::Converter::Kramdown
     nil
   end
 end
+# end kramdown
 
 module AwsSdkCodeGenerator
   module Helper
@@ -182,7 +184,12 @@ module AwsSdkCodeGenerator
         end
       end
     end
-    module_function :deep_copy, :operation_streaming?, :downcase_first
+
+    def wrap_string(str, width, indent = '')
+      str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
+    end
+
+    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string
 
   end
 end

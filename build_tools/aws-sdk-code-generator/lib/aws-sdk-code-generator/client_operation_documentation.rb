@@ -135,7 +135,7 @@ module AwsSdkCodeGenerator
           parts << "#\n"
           parts << "# @example Example: #{example['title']}\n#\n"
           if example['description'] && example['description'].length > 0
-            parts << "#{wrap_string(example['description'])}\n#\n"
+            parts << "#{Helper.wrap_string(example['description'], 120, "#   # ")}\n#\n"
           end
           parts += input.lines.map { |line| "#   " + line }
           if example['output']
@@ -196,10 +196,5 @@ module AwsSdkCodeGenerator
       end
     end
 
-    private
-
-    def wrap_string(content)
-      content.gsub(/(.{1,120})(\s+|\Z)/, "#   # \\1\n").chomp
-    end
   end
 end

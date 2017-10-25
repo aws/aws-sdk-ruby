@@ -7,7 +7,8 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :default_endpoint
       def initialize(options)
         @module_name = options.fetch(:module_name)
-        @default_endpoint = options.fetch(:default_endpoint)
+        endpoint = options.fetch(:default_endpoint)
+        @default_endpoint = endpoint.start_with?('http') ? endpoint : "https://#{endpoint}"
       end
 
       attr_reader :module_name

@@ -50,7 +50,7 @@ module BuildTools
 
     def gem_dependencies
       {
-        'aws-sdk-core' => '~> 3.0.0.rc20', # After GA => 3.0
+        'aws-sdk-core' => '~> 3',
         'aws-sigv4' => '~> 1.0'
       }
     end

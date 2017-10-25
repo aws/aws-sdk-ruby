@@ -24,7 +24,7 @@ module AwsSdkCodeGenerator
       end
 
       def homepage
-        @custom ? 'Gem Homepage' : 'http://github.com/aws/aws-sdk-ruby'
+        @custom ? 'http://gem-homepage.com' : 'http://github.com/aws/aws-sdk-ruby'
       end
 
       def email
@@ -34,6 +34,10 @@ module AwsSdkCodeGenerator
       # @return [String]
       def summary
         @custom ? @service.short_name : "AWS SDK for Ruby - #{@service.short_name}"
+      end
+
+      def metadata
+        @custom ? false : true
       end
 
       # @return [String]
