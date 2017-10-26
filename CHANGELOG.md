@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.72 (2017-10-26)
+------------------
+
 * Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
 
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
