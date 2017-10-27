@@ -947,7 +947,7 @@ module Aws::Organizations
     #
     # @!attribute [rw] root_id
     #   The unique identifier (ID) of the root in which you want to disable
-    #   a policy type. You can get the ID from the ListPolicies operation.
+    #   a policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lower-case letters or digits.
@@ -1123,7 +1123,25 @@ module Aws::Organizations
     #
     # @!attribute [rw] action
     #   The type of handshake, indicating what action occurs when the
-    #   recipient accepts the handshake.
+    #   recipient accepts the handshake. The following handshake types are
+    #   supported:
+    #
+    #   * **INVITE**\: This type of handshake represents a request to join
+    #     an organization. It is always sent from the master account to only
+    #     non-member accounts.
+    #
+    #   * **ENABLE\_ALL\_FEATURES**\: This type of handshake represents a
+    #     request to enable all features in an organization. It is always
+    #     sent from the master account to only *invited* member accounts.
+    #     Created accounts do not receive this because those accounts were
+    #     created by the organization's master account and approval is
+    #     inferred.
+    #
+    #   * **APPROVE\_ALL\_FEATURES**\: This type of handshake is sent from
+    #     the Organizations service when all member accounts have approved
+    #     the `ENABLE_ALL_FEATURES` invitation. It is sent only to the
+    #     master account and signals the master that it can finalize the
+    #     process to enable all features.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -1151,7 +1169,7 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES
+    #         action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
     #         parent_handshake_id: "HandshakeId",
     #       }
     #
@@ -1191,8 +1209,8 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         id: "HandshakePartyId",
-    #         type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION, EMAIL
+    #         id: "HandshakePartyId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #       }
     #
     # @!attribute [rw] id
@@ -1266,8 +1284,8 @@ module Aws::Organizations
     #
     #       {
     #         target: { # required
-    #           id: "HandshakePartyId",
-    #           type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION, EMAIL
+    #           id: "HandshakePartyId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
     #         },
     #         notes: "HandshakeNotes",
     #       }
@@ -1591,7 +1609,7 @@ module Aws::Organizations
     #
     #       {
     #         filter: {
-    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES
+    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
     #           parent_handshake_id: "HandshakeId",
     #         },
     #         next_token: "NextToken",
@@ -1664,7 +1682,7 @@ module Aws::Organizations
     #
     #       {
     #         filter: {
-    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES
+    #           action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
     #           parent_handshake_id: "HandshakeId",
     #         },
     #         next_token: "NextToken",

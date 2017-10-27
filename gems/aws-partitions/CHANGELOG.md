@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2017-10-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+* Issue - Handle service identifier with empty value.
+
+1.26.0 (2017-10-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.25.0 (2017-10-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.24.0 (2017-09-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.23.0 (2017-09-22)
 ------------------
 

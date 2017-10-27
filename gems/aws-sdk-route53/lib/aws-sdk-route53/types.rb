@@ -108,11 +108,12 @@ module Aws::Route53
     #
     #     * [Elastic Load Balancing][2] table in the "AWS Regions and
     #       Endpoints" chapter of the *Amazon Web Services General
-    #       Reference*\: Use the value in the "Amazon Route 53 Hosted Zone
-    #       ID" column that corresponds with the region that you created
-    #       your load balancer in.
+    #       Reference*\: Use the value that corresponds with the region that
+    #       you created your load balancer in. Note that there are separate
+    #       columns for Application and Classic Load Balancers and for
+    #       Network Load Balancers.
     #
-    #     * **AWS Management Console**\: Go to the Amazon EC2 page, click
+    #     * **AWS Management Console**\: Go to the Amazon EC2 page, choose
     #       **Load Balancers** in the navigation pane, select the load
     #       balancer, and get the value of the **Hosted zone** field on the
     #       **Description** tab.
@@ -121,18 +122,26 @@ module Aws::Route53
     #       get the value of `CanonicalHostedZoneNameId`. For more
     #       information, see the applicable guide:
     #
-    #       * Classic Load Balancer: [DescribeLoadBalancers][3]
+    #       * Classic Load Balancers: [DescribeLoadBalancers][3]
     #
-    #       * Application Load Balancer: [DescribeLoadBalancers][4]
+    #       * Application and Network Load Balancers:
+    #         [DescribeLoadBalancers][4]
     #
-    #     * **AWS CLI**\: Use ` describe-load-balancers ` to get the value
-    #       of `CanonicalHostedZoneNameID`.
+    #     * **AWS CLI**\: Use `describe-load-balancers` to get the value of
+    #       `CanonicalHostedZoneNameID` (for Classic Load Balancers) or
+    #       `CanonicalHostedZoneNameID` (for Application and Network Load
+    #       Balancers). For more information, see the applicable guide:
+    #
+    #       * Classic Load Balancers: [describe-load-balancers][5]
+    #
+    #       * Application and Network Load Balancers:
+    #         [describe-load-balancers][6]
     #
     #   An Amazon S3 bucket configured as a static website
     #
     #   : Specify the hosted zone ID for the region that you created the
     #     bucket in. For more information about valid values, see the
-    #     [Amazon Simple Storage Service Website Endpoints][5] table in the
+    #     [Amazon Simple Storage Service Website Endpoints][7] table in the
     #     "AWS Regions and Endpoints" chapter of the *Amazon Web Services
     #     General Reference*.
     #
@@ -148,7 +157,9 @@ module Aws::Route53
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region
     #   [3]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
     #   [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
-    #   [5]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [5]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
+    #   [6]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
+    #   [7]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -205,12 +216,18 @@ module Aws::Route53
     #       get the value of `DNSName`. For more information, see the
     #       applicable guide:
     #
-    #       * Classic Load Balancer: [DescribeLoadBalancers][5]
+    #       * Classic Load Balancers: [DescribeLoadBalancers][5]
     #
-    #       * Application Load Balancer: [DescribeLoadBalancers][6]
+    #       * Application and Network Load Balancers:
+    #         [DescribeLoadBalancers][6]
     #
-    #     * **AWS CLI**\: Use ` describe-load-balancers ` to get the value
-    #       of `DNSName`.
+    #     * **AWS CLI**\: Use `describe-load-balancers` to get the value of
+    #       `DNSName`. For more information, see the applicable guide:
+    #
+    #       * Classic Load Balancers: [describe-load-balancers][7]
+    #
+    #       * Application and Network Load Balancers:
+    #         [describe-load-balancers][8]
     #
     #   Amazon S3 bucket that is configured as a static website
     #
@@ -218,9 +235,9 @@ module Aws::Route53
     #     you created the bucket, for example,
     #     `s3-website-us-east-2.amazonaws.com`. For more information about
     #     valid values, see the table [Amazon Simple Storage Service (S3)
-    #     Website Endpoints][7] in the *Amazon Web Services General
+    #     Website Endpoints][9] in the *Amazon Web Services General
     #     Reference*. For more information about using S3 buckets for
-    #     websites, see [Getting Started with Amazon Route 53][8] in the
+    #     websites, see [Getting Started with Amazon Route 53][10] in the
     #     *Amazon Route 53 Developer Guide.*
     #
     #   Another Amazon Route 53 resource record set
@@ -236,8 +253,10 @@ module Aws::Route53
     #   [4]: http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
     #   [5]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
     #   [6]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
-    #   [7]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    #   [8]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
+    #   [7]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
+    #   [8]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
+    #   [9]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [10]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
     #   @return [String]
     #
     # @!attribute [rw] evaluate_target_health
@@ -5192,6 +5211,7 @@ module Aws::Route53
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
+    #         reset_elements: ["FullyQualifiedDomainName"], # accepts FullyQualifiedDomainName, Regions, ResourcePath, ChildHealthChecks
     #       }
     #
     # @!attribute [rw] health_check_id
@@ -5479,6 +5499,24 @@ module Aws::Route53
     #     known status, the default status for the health check is healthy.
     #   @return [String]
     #
+    # @!attribute [rw] reset_elements
+    #   A complex type that contains one `ResetElement` element for each
+    #   element that you want to reset to the default value. Valid values
+    #   for `ResetElement` include the following:
+    #
+    #   * `ChildHealthChecks`\: Amazon Route 53 resets
+    #     HealthCheckConfig$ChildHealthChecks to null.
+    #
+    #   * `FullyQualifiedDomainName`\: Amazon Route 53 resets
+    #     HealthCheckConfig$FullyQualifiedDomainName to null.
+    #
+    #   * `Regions`\: Amazon Route 53 resets the HealthCheckConfig$Regions
+    #     list to the default set of regions.
+    #
+    #   * `ResourcePath`\: Amazon Route 53 resets
+    #     HealthCheckConfig$ResourcePath to null.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckRequest AWS API Documentation
     #
     class UpdateHealthCheckRequest < Struct.new(
@@ -5496,7 +5534,8 @@ module Aws::Route53
       :enable_sni,
       :regions,
       :alarm_identifier,
-      :insufficient_data_health_status)
+      :insufficient_data_health_status,
+      :reset_elements)
       include Aws::Structure
     end
 

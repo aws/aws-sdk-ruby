@@ -145,6 +145,52 @@ module Aws::ElasticLoadBalancingV2
 
     # @!group API Operations
 
+    # Adds the specified certificate to the specified secure listener.
+    #
+    # If the certificate was already added, the call is successful but the
+    # certificate is not added again.
+    #
+    # To list the certificates for your listener, use
+    # DescribeListenerCertificates. To remove certificates from your
+    # listener, use RemoveListenerCertificates.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #
+    # @option params [required, Array<Types::Certificate>] :certificates
+    #   The certificate to add. You can specify one certificate per call.
+    #
+    # @return [Types::AddListenerCertificatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddListenerCertificatesOutput#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_listener_certificates({
+    #     listener_arn: "ListenerArn", # required
+    #     certificates: [ # required
+    #       {
+    #         certificate_arn: "CertificateArn",
+    #         is_default: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].certificate_arn #=> String
+    #   resp.certificates[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificates AWS API Documentation
+    #
+    # @overload add_listener_certificates(params = {})
+    # @param [Hash] params ({})
+    def add_listener_certificates(params = {}, options = {})
+      req = build_request(:add_listener_certificates, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified Elastic Load Balancing
     # resource. You can tag your Application Load Balancers, Network Load
     # Balancers, and your target groups.
@@ -350,6 +396,7 @@ module Aws::ElasticLoadBalancingV2
     #     certificates: [
     #       {
     #         certificate_arn: "CertificateArn",
+    #         is_default: false,
     #       },
     #     ],
     #     default_actions: [ # required
@@ -369,6 +416,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
+    #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
     #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
@@ -1199,6 +1247,47 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
+    # Describes the certificates for the specified secure listener.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Names (ARN) of the listener.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return with this call.
+    #
+    # @return [Types::DescribeListenerCertificatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeListenerCertificatesOutput#certificates #certificates} => Array&lt;Types::Certificate&gt;
+    #   * {Types::DescribeListenerCertificatesOutput#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_listener_certificates({
+    #     listener_arn: "ListenerArn", # required
+    #     marker: "Marker",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].certificate_arn #=> String
+    #   resp.certificates[0].is_default #=> Boolean
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificates AWS API Documentation
+    #
+    # @overload describe_listener_certificates(params = {})
+    # @param [Hash] params ({})
+    def describe_listener_certificates(params = {}, options = {})
+      req = build_request(:describe_listener_certificates, params)
+      req.send_request(options)
+    end
+
     # Describes the specified listeners or the listeners for the specified
     # Application Load Balancer or Network Load Balancer. You must specify
     # either a load balancer or one or more listeners.
@@ -1268,6 +1357,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
+    #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
     #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
@@ -2079,7 +2169,7 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
-    #   The SSL server certificate.
+    #   The default SSL server certificate.
     #
     # @option params [Array<Types::Action>] :default_actions
     #   The default action. For Application Load Balancers, the protocol of
@@ -2170,6 +2260,7 @@ module Aws::ElasticLoadBalancingV2
     #     certificates: [
     #       {
     #         certificate_arn: "CertificateArn",
+    #         is_default: false,
     #       },
     #     ],
     #     default_actions: [
@@ -2189,6 +2280,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
+    #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
     #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
@@ -2688,18 +2780,20 @@ module Aws::ElasticLoadBalancingV2
 
     # Registers the specified targets with the specified target group.
     #
-    # By default, the load balancer routes requests to registered targets
-    # using the protocol and port number for the target group.
-    # Alternatively, you can override the port for a target when you
+    # You can register targets by instance ID or by IP address. If the
+    # target is an EC2 instance, it must be in the `running` state when you
     # register it.
     #
-    # The target must be in the virtual private cloud (VPC) that you
-    # specified for the target group. If the target is an EC2 instance, it
-    # must be in the `running` state when you register it.
+    # By default, the load balancer routes requests to registered targets
+    # using the protocol and port for the target group. Alternatively, you
+    # can override the port for a target when you register it. You can
+    # register each EC2 instance or IP address with the same target group
+    # multiple times using different ports.
     #
-    # Network Load Balancers do not support the following instance types as
-    # targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2,
-    # M3, and T1.
+    # With a Network Load Balancer, you cannot register instances by
+    # instance ID if they have the following instance types: C1, CC1, CC2,
+    # CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can
+    # register instances of these types by IP address.
     #
     # To remove a target from a target group, use DeregisterTargets.
     #
@@ -2707,9 +2801,7 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #
     # @option params [required, Array<Types::TargetDescription>] :targets
-    #   The targets. The default port for a target is the port for the target
-    #   group. You can specify a port override. If a target is already
-    #   registered, you can register it again using a different port.
+    #   The targets.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2768,6 +2860,43 @@ module Aws::ElasticLoadBalancingV2
     # @param [Hash] params ({})
     def register_targets(params = {}, options = {})
       req = build_request(:register_targets, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified certificate from the specified secure listener.
+    #
+    # You can't remove the default certificate for a listener. To replace
+    # the default certificate, call ModifyListener.
+    #
+    # To list the certificates for your listener, use
+    # DescribeListenerCertificates.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #
+    # @option params [required, Array<Types::Certificate>] :certificates
+    #   The certificate to remove. You can specify one certificate per call.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_listener_certificates({
+    #     listener_arn: "ListenerArn", # required
+    #     certificates: [ # required
+    #       {
+    #         certificate_arn: "CertificateArn",
+    #         is_default: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificates AWS API Documentation
+    #
+    # @overload remove_listener_certificates(params = {})
+    # @param [Hash] params ({})
+    def remove_listener_certificates(params = {}, options = {})
+      req = build_request(:remove_listener_certificates, params)
       req.send_request(options)
     end
 
@@ -3092,7 +3221,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

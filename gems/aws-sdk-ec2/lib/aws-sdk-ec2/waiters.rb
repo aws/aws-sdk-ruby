@@ -874,6 +874,12 @@ module Aws::EC2
                 "expected" => "fulfilled"
               },
               {
+                "state" => "success",
+                "matcher" => "pathAll",
+                "argument" => "spot_instance_requests[].status.code",
+                "expected" => "request-canceled-and-instance-running"
+              },
+              {
                 "state" => "failure",
                 "matcher" => "pathAny",
                 "argument" => "spot_instance_requests[].status.code",

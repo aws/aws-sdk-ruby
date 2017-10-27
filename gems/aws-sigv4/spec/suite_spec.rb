@@ -27,7 +27,7 @@ module Aws
 
             let(:request) {
               raw_request = File.read("#{prefix}.req", encoding: "utf-8")
-              request = SpecHelper.parse_reqeust(raw_request)
+              request = SpecHelper.parse_request(raw_request)
               SpecHelper.debug("GIVEN REQUEST: |#{raw_request}|")
               SpecHelper.debug("PARSED REQUEST: #{request.inspect}")
               request

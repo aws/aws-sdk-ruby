@@ -38,6 +38,7 @@ module Aws::MTurk
     CreateQualificationTypeResponse = Shapes::StructureShape.new(name: 'CreateQualificationTypeResponse')
     CreateWorkerBlockRequest = Shapes::StructureShape.new(name: 'CreateWorkerBlockRequest')
     CreateWorkerBlockResponse = Shapes::StructureShape.new(name: 'CreateWorkerBlockResponse')
+    CurrencyAmount = Shapes::StringShape.new(name: 'CurrencyAmount')
     CustomerId = Shapes::StringShape.new(name: 'CustomerId')
     CustomerIdList = Shapes::ListShape.new(name: 'CustomerIdList')
     DeleteHITRequest = Shapes::StructureShape.new(name: 'DeleteHITRequest')
@@ -103,7 +104,6 @@ module Aws::MTurk
     NotifyWorkersFailureStatusList = Shapes::ListShape.new(name: 'NotifyWorkersFailureStatusList')
     NotifyWorkersRequest = Shapes::StructureShape.new(name: 'NotifyWorkersRequest')
     NotifyWorkersResponse = Shapes::StructureShape.new(name: 'NotifyWorkersResponse')
-    NumericValue = Shapes::StringShape.new(name: 'NumericValue')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterMapEntry = Shapes::StructureShape.new(name: 'ParameterMapEntry')
     ParameterMapEntryList = Shapes::ListShape.new(name: 'ParameterMapEntryList')
@@ -197,7 +197,7 @@ module Aws::MTurk
     AssociateQualificationWithWorkerResponse.struct_class = Types::AssociateQualificationWithWorkerResponse
 
     BonusPayment.add_member(:worker_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "WorkerId"))
-    BonusPayment.add_member(:bonus_amount, Shapes::ShapeRef.new(shape: NumericValue, location_name: "BonusAmount"))
+    BonusPayment.add_member(:bonus_amount, Shapes::ShapeRef.new(shape: CurrencyAmount, location_name: "BonusAmount"))
     BonusPayment.add_member(:assignment_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "AssignmentId"))
     BonusPayment.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
     BonusPayment.add_member(:grant_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "GrantTime"))
@@ -206,7 +206,7 @@ module Aws::MTurk
     BonusPaymentList.member = Shapes::ShapeRef.new(shape: BonusPayment)
 
     CreateAdditionalAssignmentsForHITRequest.add_member(:hit_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "HITId"))
-    CreateAdditionalAssignmentsForHITRequest.add_member(:number_of_additional_assignments, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfAdditionalAssignments"))
+    CreateAdditionalAssignmentsForHITRequest.add_member(:number_of_additional_assignments, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NumberOfAdditionalAssignments"))
     CreateAdditionalAssignmentsForHITRequest.add_member(:unique_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "UniqueRequestToken"))
     CreateAdditionalAssignmentsForHITRequest.struct_class = Types::CreateAdditionalAssignmentsForHITRequest
 
@@ -216,7 +216,7 @@ module Aws::MTurk
     CreateHITRequest.add_member(:auto_approval_delay_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "AutoApprovalDelayInSeconds"))
     CreateHITRequest.add_member(:lifetime_in_seconds, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "LifetimeInSeconds"))
     CreateHITRequest.add_member(:assignment_duration_in_seconds, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AssignmentDurationInSeconds"))
-    CreateHITRequest.add_member(:reward, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Reward"))
+    CreateHITRequest.add_member(:reward, Shapes::ShapeRef.new(shape: CurrencyAmount, required: true, location_name: "Reward"))
     CreateHITRequest.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Title"))
     CreateHITRequest.add_member(:keywords, Shapes::ShapeRef.new(shape: String, location_name: "Keywords"))
     CreateHITRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
@@ -235,7 +235,7 @@ module Aws::MTurk
 
     CreateHITTypeRequest.add_member(:auto_approval_delay_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "AutoApprovalDelayInSeconds"))
     CreateHITTypeRequest.add_member(:assignment_duration_in_seconds, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AssignmentDurationInSeconds"))
-    CreateHITTypeRequest.add_member(:reward, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Reward"))
+    CreateHITTypeRequest.add_member(:reward, Shapes::ShapeRef.new(shape: CurrencyAmount, required: true, location_name: "Reward"))
     CreateHITTypeRequest.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Title"))
     CreateHITTypeRequest.add_member(:keywords, Shapes::ShapeRef.new(shape: String, location_name: "Keywords"))
     CreateHITTypeRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
@@ -310,8 +310,8 @@ module Aws::MTurk
 
     GetAccountBalanceRequest.struct_class = Types::GetAccountBalanceRequest
 
-    GetAccountBalanceResponse.add_member(:available_balance, Shapes::ShapeRef.new(shape: NumericValue, location_name: "AvailableBalance"))
-    GetAccountBalanceResponse.add_member(:on_hold_balance, Shapes::ShapeRef.new(shape: NumericValue, location_name: "OnHoldBalance"))
+    GetAccountBalanceResponse.add_member(:available_balance, Shapes::ShapeRef.new(shape: CurrencyAmount, location_name: "AvailableBalance"))
+    GetAccountBalanceResponse.add_member(:on_hold_balance, Shapes::ShapeRef.new(shape: CurrencyAmount, location_name: "OnHoldBalance"))
     GetAccountBalanceResponse.struct_class = Types::GetAccountBalanceResponse
 
     GetAssignmentRequest.add_member(:assignment_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "AssignmentId"))
@@ -358,7 +358,7 @@ module Aws::MTurk
     HIT.add_member(:keywords, Shapes::ShapeRef.new(shape: String, location_name: "Keywords"))
     HIT.add_member(:hit_status, Shapes::ShapeRef.new(shape: HITStatus, location_name: "HITStatus"))
     HIT.add_member(:max_assignments, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxAssignments"))
-    HIT.add_member(:reward, Shapes::ShapeRef.new(shape: NumericValue, location_name: "Reward"))
+    HIT.add_member(:reward, Shapes::ShapeRef.new(shape: CurrencyAmount, location_name: "Reward"))
     HIT.add_member(:auto_approval_delay_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "AutoApprovalDelayInSeconds"))
     HIT.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expiration"))
     HIT.add_member(:assignment_duration_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "AssignmentDurationInSeconds"))
@@ -370,8 +370,8 @@ module Aws::MTurk
     HIT.add_member(:number_of_assignments_completed, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfAssignmentsCompleted"))
     HIT.struct_class = Types::HIT
 
-    HITLayoutParameter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    HITLayoutParameter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    HITLayoutParameter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    HITLayoutParameter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     HITLayoutParameter.struct_class = Types::HITLayoutParameter
 
     HITLayoutParameterList.member = Shapes::ShapeRef.new(shape: HITLayoutParameter)
@@ -498,8 +498,8 @@ module Aws::MTurk
 
     NotificationSpecification.add_member(:destination, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Destination"))
     NotificationSpecification.add_member(:transport, Shapes::ShapeRef.new(shape: NotificationTransport, required: true, location_name: "Transport"))
-    NotificationSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
-    NotificationSpecification.add_member(:event_types, Shapes::ShapeRef.new(shape: EventTypeList, location_name: "EventTypes"))
+    NotificationSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
+    NotificationSpecification.add_member(:event_types, Shapes::ShapeRef.new(shape: EventTypeList, required: true, location_name: "EventTypes"))
     NotificationSpecification.struct_class = Types::NotificationSpecification
 
     NotifyWorkersFailureStatus.add_member(:notify_workers_failure_code, Shapes::ShapeRef.new(shape: NotifyWorkersFailureCode, location_name: "NotifyWorkersFailureCode"))
@@ -577,7 +577,7 @@ module Aws::MTurk
     QualificationTypeList.member = Shapes::ShapeRef.new(shape: QualificationType)
 
     RejectAssignmentRequest.add_member(:assignment_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "AssignmentId"))
-    RejectAssignmentRequest.add_member(:requester_feedback, Shapes::ShapeRef.new(shape: String, location_name: "RequesterFeedback"))
+    RejectAssignmentRequest.add_member(:requester_feedback, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequesterFeedback"))
     RejectAssignmentRequest.struct_class = Types::RejectAssignmentRequest
 
     RejectAssignmentResponse.struct_class = Types::RejectAssignmentResponse
@@ -600,7 +600,7 @@ module Aws::MTurk
 
     ReviewActionDetailList.member = Shapes::ShapeRef.new(shape: ReviewActionDetail)
 
-    ReviewPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: String, location_name: "PolicyName"))
+    ReviewPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PolicyName"))
     ReviewPolicy.add_member(:parameters, Shapes::ShapeRef.new(shape: PolicyParameterList, location_name: "Parameters"))
     ReviewPolicy.struct_class = Types::ReviewPolicy
 
@@ -621,9 +621,9 @@ module Aws::MTurk
     ReviewResultDetailList.member = Shapes::ShapeRef.new(shape: ReviewResultDetail)
 
     SendBonusRequest.add_member(:worker_id, Shapes::ShapeRef.new(shape: CustomerId, required: true, location_name: "WorkerId"))
-    SendBonusRequest.add_member(:bonus_amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "BonusAmount"))
+    SendBonusRequest.add_member(:bonus_amount, Shapes::ShapeRef.new(shape: CurrencyAmount, required: true, location_name: "BonusAmount"))
     SendBonusRequest.add_member(:assignment_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "AssignmentId"))
-    SendBonusRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
+    SendBonusRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Reason"))
     SendBonusRequest.add_member(:unique_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "UniqueRequestToken"))
     SendBonusRequest.struct_class = Types::SendBonusRequest
 
@@ -638,7 +638,7 @@ module Aws::MTurk
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     UpdateExpirationForHITRequest.add_member(:hit_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "HITId"))
-    UpdateExpirationForHITRequest.add_member(:expire_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpireAt"))
+    UpdateExpirationForHITRequest.add_member(:expire_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExpireAt"))
     UpdateExpirationForHITRequest.struct_class = Types::UpdateExpirationForHITRequest
 
     UpdateExpirationForHITResponse.struct_class = Types::UpdateExpirationForHITResponse

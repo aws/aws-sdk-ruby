@@ -1761,6 +1761,12 @@ module Aws::DatabaseMigrationService
     #         replication_task_arn: "String", # required
     #         max_records: 1,
     #         marker: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] replication_task_arn
@@ -1775,7 +1781,7 @@ module Aws::DatabaseMigrationService
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 500.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -1784,12 +1790,22 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Filters applied to the describe table statistics action.
+    #
+    #   Valid filter names: schema-name \| table-name \| table-state
+    #
+    #   A combination of filters creates an AND condition where each record
+    #   matches all specified filters.
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatisticsMessage AWS API Documentation
     #
     class DescribeTableStatisticsMessage < Struct.new(
       :replication_task_arn,
       :max_records,
-      :marker)
+      :marker,
+      :filters)
       include Aws::Structure
     end
 
@@ -2261,7 +2277,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] extra_connection_attributes
-    #   Additional attributes associated with the connection.
+    #   Additional attributes associated with the connection. To reset this
+    #   parameter, pass the empty string ("") as an argument.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -3489,7 +3506,11 @@ module Aws::DatabaseMigrationService
     #   @return [Time]
     #
     # @!attribute [rw] table_state
-    #   The state of the table.
+    #   The state of the tables described.
+    #
+    #   Valid states: Table does not exist \| Before load \| Full load \|
+    #   Table completed \| Table cancelled \| Table error \| Table all \|
+    #   Table updates \| Table is being reloaded
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics AWS API Documentation

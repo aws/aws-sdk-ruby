@@ -80,7 +80,7 @@ module Aws
       def partition_matching_region(region)
         @rules['partitions'].find do |p|
           region.match(p["regionRegex"]) ||
-          p['services'].values.find { |svc| svc['endpoints'].key?(region) }
+          p['services'].values.find { |svc| svc['endpoints'].key?(region) if svc.key? 'endpoints' }
         end
       end
 

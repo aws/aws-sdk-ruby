@@ -69,7 +69,7 @@ module Aws::EC2
     #       },
     #     ],
     #     image_id: "String", # required
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -256,10 +256,9 @@ module Aws::EC2
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
-    #   command line tool, Base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide Base64-encoded
-    #   text.
+    #   [Adding User Data][2] (Windows). If you are using a command line tool,
+    #   base64-encoding is performed for you, and you can load the text from a
+    #   file. Otherwise, you must provide base64-encoded text.
     #
     #
     #
@@ -292,11 +291,12 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ebs_optimized
-    #   Indicates whether the instance is optimized for EBS I/O. This
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O performance.
-    #   This optimization isn't available with all instance types. Additional
-    #   usage charges apply when using an EBS-optimized instance.
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS-optimized
+    #   instance.
     #
     #   Default: `false`
     # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
@@ -1474,9 +1474,9 @@ module Aws::EC2
     #
     #   * `network-interface.source-dest-check` - Whether the network
     #     interface performs source/destination checking. A value of `true`
-    #     means checking is enabled, and `false` means checking is disabled.
-    #     The value must be `false` for the network interface to perform
-    #     network address translation (NAT) in your VPC.
+    #     means that checking is enabled, and `false` means that checking is
+    #     disabled. The value must be `false` for the network interface to
+    #     perform network address translation (NAT) in your VPC.
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the network
     #     interface.
@@ -1517,9 +1517,9 @@ module Aws::EC2
     #     reservation ID has a one-to-one relationship with an instance launch
     #     request, but can be associated with more than one instance if you
     #     launch multiple instances using the same launch request. For
-    #     example, if you launch one instance, you'll get one reservation ID.
-    #     If you launch ten instances using the same launch request, you'll
-    #     also get one reservation ID.
+    #     example, if you launch one instance, you get one reservation ID. If
+    #     you launch ten instances using the same launch request, you also get
+    #     one reservation ID.
     #
     #   * `root-device-name` - The name of the root device for the instance
     #     (for example, `/dev/sda1` or `/dev/xvda`).
@@ -1529,11 +1529,11 @@ module Aws::EC2
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
-    #     is enabled, and `false` means checking is disabled. The value must
-    #     be `false` for the instance to perform network address translation
-    #     (NAT) in your VPC.
+    #     is enabled, and `false` means that checking is disabled. The value
+    #     must be `false` for the instance to perform network address
+    #     translation (NAT) in your VPC.
     #
-    #   * `spot-instance-request-id` - The ID of the Spot instance request.
+    #   * `spot-instance-request-id` - The ID of the Spot Instance request.
     #
     #   * `state-reason-code` - The reason code for the state change.
     #
@@ -1551,9 +1551,9 @@ module Aws::EC2
     #     is independent of the `tag-value` filter. For example, if you use
     #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
     #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
@@ -2208,6 +2208,8 @@ module Aws::EC2
     #     group_ids: ["String"],
     #     group_names: ["String"],
     #     dry_run: false,
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2273,6 +2275,12 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :next_token
+    #   The token to request the next page of results.
+    # @option options [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another request with the returned
+    #   `NextToken` value. This value can be between 5 and 1000.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|

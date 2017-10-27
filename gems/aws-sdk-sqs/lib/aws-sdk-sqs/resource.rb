@@ -70,13 +70,21 @@ module Aws::SQS
     #     Valid values: An integer from 0 to 20 (seconds). The default is 0
     #     (zero).
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple Queue
+    #     Service Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be a
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered to
+    #       the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be a
     #     standard queue.
     #
     #      </note>
@@ -84,7 +92,7 @@ module Aws::SQS
     #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
     #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
     #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon SQS Developer Guide*.
+    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -92,7 +100,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see [Key
     #     Terms][5]. While the alias of the AWS-managed CMK for Amazon SQS is
     #     always `alias/aws/sqs`, the alias of a custom CMK can, for example,
-    #     be `alias/aws/sqs`. For more examples, see [KeyId][6] in the *AWS
+    #     be `alias/MyAlias `. For more examples, see [KeyId][6] in the *AWS
     #     Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds, for
@@ -101,8 +109,8 @@ module Aws::SQS
     #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
     #     hours). The default is 300 (5 minutes). A shorter time period
     #     provides better security but results in more calls to KMS which
-    #     incur charges after Free Tier. For more information, see [How Does
-    #     the Data Key Reuse Period Work?][8].
+    #     might incur charges after Free Tier. For more information, see [How
+    #     Does the Data Key Reuse Period Work?][8].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
@@ -113,12 +121,13 @@ module Aws::SQS
     #     attribute, you must also provide the `MessageGroupId` for your
     #     messages explicitly.
     #
-    #     For more information, see [FIFO Queue Logic][10] in the *Amazon SQS
-    #     Developer Guide*.
+    #     For more information, see [FIFO Queue Logic][10] in the *Amazon
+    #     Simple Queue Service Developer Guide*.
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
     #     Valid values: `true`, `false`. For more information, see
-    #     [Exactly-Once Processing][11] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-Once Processing][11] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #

@@ -54,6 +54,7 @@ module Aws::CloudFront
     DefaultCacheBehavior = Shapes::StructureShape.new(name: 'DefaultCacheBehavior')
     DeleteCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'DeleteCloudFrontOriginAccessIdentityRequest')
     DeleteDistributionRequest = Shapes::StructureShape.new(name: 'DeleteDistributionRequest')
+    DeleteServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'DeleteServiceLinkedRoleRequest')
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionAlreadyExists = Shapes::StructureShape.new(name: 'DistributionAlreadyExists')
@@ -158,6 +159,7 @@ module Aws::CloudFront
     QueryStringCacheKeys = Shapes::StructureShape.new(name: 'QueryStringCacheKeys')
     QueryStringCacheKeysList = Shapes::ListShape.new(name: 'QueryStringCacheKeysList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
     Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
@@ -408,6 +410,9 @@ module Aws::CloudFront
     DeleteDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteDistributionRequest.struct_class = Types::DeleteDistributionRequest
+
+    DeleteServiceLinkedRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "RoleName"))
+    DeleteServiceLinkedRoleRequest.struct_class = Types::DeleteServiceLinkedRoleRequest
 
     DeleteStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -1048,6 +1053,18 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+      end)
+
+      api.add_operation(:delete_service_linked_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceLinkedRole"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-03-25/service-linked-role/{RoleName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceLinkedRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

@@ -237,10 +237,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :source_identifier
-    #   The identifier of the event source to be added. An identifier must
-    #   begin with a letter and must contain only ASCII letters, digits, and
-    #   hyphens; it cannot end with a hyphen or contain two consecutive
-    #   hyphens.
+    #   The identifier of the event source to be added.
     #
     #   Constraints:
     #

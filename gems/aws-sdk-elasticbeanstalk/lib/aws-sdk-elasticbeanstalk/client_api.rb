@@ -167,6 +167,7 @@ module Aws::ElasticBeanstalk
     ListAvailableSolutionStacksResultMessage = Shapes::StructureShape.new(name: 'ListAvailableSolutionStacksResultMessage')
     ListPlatformVersionsRequest = Shapes::StructureShape.new(name: 'ListPlatformVersionsRequest')
     ListPlatformVersionsResult = Shapes::StructureShape.new(name: 'ListPlatformVersionsResult')
+    ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
     Listener = Shapes::StructureShape.new(name: 'Listener')
     LoadAverage = Shapes::ListShape.new(name: 'LoadAverage')
     LoadAverageValue = Shapes::FloatShape.new(name: 'LoadAverageValue')
@@ -229,8 +230,12 @@ module Aws::ElasticBeanstalk
     RequestCount = Shapes::IntegerShape.new(name: 'RequestCount')
     RequestEnvironmentInfoMessage = Shapes::StructureShape.new(name: 'RequestEnvironmentInfoMessage')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceTagsDescriptionMessage = Shapes::StructureShape.new(name: 'ResourceTagsDescriptionMessage')
+    ResourceTypeNotSupportedException = Shapes::StructureShape.new(name: 'ResourceTypeNotSupportedException')
     RestartAppServerMessage = Shapes::StructureShape.new(name: 'RestartAppServerMessage')
     RetrieveEnvironmentInfoMessage = Shapes::StructureShape.new(name: 'RetrieveEnvironmentInfoMessage')
     RetrieveEnvironmentInfoResultMessage = Shapes::StructureShape.new(name: 'RetrieveEnvironmentInfoResultMessage')
@@ -260,6 +265,8 @@ module Aws::ElasticBeanstalk
     SystemStatus = Shapes::StructureShape.new(name: 'SystemStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
     TerminateEnvForce = Shapes::BooleanShape.new(name: 'TerminateEnvForce')
@@ -275,6 +282,7 @@ module Aws::ElasticBeanstalk
     TooManyConfigurationTemplatesException = Shapes::StructureShape.new(name: 'TooManyConfigurationTemplatesException')
     TooManyEnvironmentsException = Shapes::StructureShape.new(name: 'TooManyEnvironmentsException')
     TooManyPlatformsException = Shapes::StructureShape.new(name: 'TooManyPlatformsException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
     UpdateApplicationMessage = Shapes::StructureShape.new(name: 'UpdateApplicationMessage')
@@ -283,6 +291,7 @@ module Aws::ElasticBeanstalk
     UpdateConfigurationTemplateMessage = Shapes::StructureShape.new(name: 'UpdateConfigurationTemplateMessage')
     UpdateDate = Shapes::TimestampShape.new(name: 'UpdateDate')
     UpdateEnvironmentMessage = Shapes::StructureShape.new(name: 'UpdateEnvironmentMessage')
+    UpdateTagsForResourceMessage = Shapes::StructureShape.new(name: 'UpdateTagsForResourceMessage')
     UserDefinedOption = Shapes::BooleanShape.new(name: 'UserDefinedOption')
     ValidateConfigurationSettingsMessage = Shapes::StructureShape.new(name: 'ValidateConfigurationSettingsMessage')
     ValidationMessage = Shapes::StructureShape.new(name: 'ValidationMessage')
@@ -781,6 +790,9 @@ module Aws::ElasticBeanstalk
     ListPlatformVersionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListPlatformVersionsResult.struct_class = Types::ListPlatformVersionsResult
 
+    ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
+
     Listener.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "Protocol"))
     Listener.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
     Listener.struct_class = Types::Listener
@@ -909,6 +921,10 @@ module Aws::ElasticBeanstalk
     RequestEnvironmentInfoMessage.add_member(:info_type, Shapes::ShapeRef.new(shape: EnvironmentInfoType, required: true, location_name: "InfoType"))
     RequestEnvironmentInfoMessage.struct_class = Types::RequestEnvironmentInfoMessage
 
+    ResourceTagsDescriptionMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    ResourceTagsDescriptionMessage.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ResourceTags"))
+    ResourceTagsDescriptionMessage.struct_class = Types::ResourceTagsDescriptionMessage
+
     RestartAppServerMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     RestartAppServerMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     RestartAppServerMessage.struct_class = Types::RestartAppServerMessage
@@ -976,6 +992,10 @@ module Aws::ElasticBeanstalk
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
     TerminateEnvironmentMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
@@ -1022,6 +1042,11 @@ module Aws::ElasticBeanstalk
     UpdateEnvironmentMessage.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
     UpdateEnvironmentMessage.add_member(:options_to_remove, Shapes::ShapeRef.new(shape: OptionsSpecifierList, location_name: "OptionsToRemove"))
     UpdateEnvironmentMessage.struct_class = Types::UpdateEnvironmentMessage
+
+    UpdateTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    UpdateTagsForResourceMessage.add_member(:tags_to_add, Shapes::ShapeRef.new(shape: TagList, location_name: "TagsToAdd"))
+    UpdateTagsForResourceMessage.add_member(:tags_to_remove, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagsToRemove"))
+    UpdateTagsForResourceMessage.struct_class = Types::UpdateTagsForResourceMessage
 
     ValidateConfigurationSettingsMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     ValidateConfigurationSettingsMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
@@ -1338,6 +1363,17 @@ module Aws::ElasticBeanstalk
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceMessage)
+        o.output = Shapes::ShapeRef.new(shape: ResourceTagsDescriptionMessage)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceTypeNotSupportedException)
+      end)
+
       api.add_operation(:rebuild_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RebuildEnvironment"
         o.http_method = "POST"
@@ -1431,6 +1467,19 @@ module Aws::ElasticBeanstalk
         o.output = Shapes::ShapeRef.new(shape: EnvironmentDescription)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyBucketsException)
+      end)
+
+      api.add_operation(:update_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTagsForResourceMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceTypeNotSupportedException)
       end)
 
       api.add_operation(:validate_configuration_settings, Seahorse::Model::Operation.new.tap do |o|

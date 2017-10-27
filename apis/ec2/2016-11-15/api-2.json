@@ -1807,6 +1807,15 @@
       "input":{"shape":"ModifyVpcPeeringConnectionOptionsRequest"},
       "output":{"shape":"ModifyVpcPeeringConnectionOptionsResult"}
     },
+    "ModifyVpcTenancy":{
+      "name":"ModifyVpcTenancy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyVpcTenancyRequest"},
+      "output":{"shape":"ModifyVpcTenancyResult"}
+    },
     "MonitorInstances":{
       "name":"MonitorInstances",
       "http":{
@@ -4468,6 +4477,7 @@
       "members":{
         "AvailabilityZone":{"shape":"String"},
         "Type":{"shape":"GatewayType"},
+        "AmazonSideAsn":{"shape":"Long"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -6249,7 +6259,9 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"Integer"}
       }
     },
     "DescribeSecurityGroupsResult":{
@@ -6258,6 +6270,10 @@
         "SecurityGroups":{
           "shape":"SecurityGroupList",
           "locationName":"securityGroupInfo"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -10089,6 +10105,9 @@
         "p2.xlarge",
         "p2.8xlarge",
         "p2.16xlarge",
+        "p3.2xlarge",
+        "p3.8xlarge",
+        "p3.16xlarge",
         "d2.xlarge",
         "d2.2xlarge",
         "d2.4xlarge",
@@ -10908,6 +10927,27 @@
         "RequesterPeeringConnectionOptions":{
           "shape":"PeeringConnectionOptions",
           "locationName":"requesterPeeringConnectionOptions"
+        }
+      }
+    },
+    "ModifyVpcTenancyRequest":{
+      "type":"structure",
+      "required":[
+        "VpcId",
+        "InstanceTenancy"
+      ],
+      "members":{
+        "VpcId":{"shape":"String"},
+        "InstanceTenancy":{"shape":"VpcTenancy"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyVpcTenancyResult":{
+      "type":"structure",
+      "members":{
+        "ReturnValue":{
+          "shape":"Boolean",
+          "locationName":"return"
         }
       }
     },
@@ -12102,7 +12142,10 @@
     },
     "PurchaseSet":{
       "type":"list",
-      "member":{"shape":"Purchase"}
+      "member":{
+        "shape":"Purchase",
+        "locationName":"item"
+      }
     },
     "PurchasedScheduledInstanceSet":{
       "type":"list",
@@ -15193,6 +15236,13 @@
         "ALL"
       ]
     },
+    "TunnelOptionsList":{
+      "type":"list",
+      "member":{
+        "shape":"VpnTunnelOptionsSpecification",
+        "locationName":"item"
+      }
+    },
     "UnassignIpv6AddressesRequest":{
       "type":"structure",
       "required":[
@@ -16182,6 +16232,10 @@
         "available"
       ]
     },
+    "VpcTenancy":{
+      "type":"string",
+      "enum":["default"]
+    },
     "VpnConnection":{
       "type":"structure",
       "members":{
@@ -16192,6 +16246,10 @@
         "CustomerGatewayId":{
           "shape":"String",
           "locationName":"customerGatewayId"
+        },
+        "Category":{
+          "shape":"String",
+          "locationName":"category"
         },
         "State":{
           "shape":"VpnState",
@@ -16256,7 +16314,8 @@
         "StaticRoutesOnly":{
           "shape":"Boolean",
           "locationName":"staticRoutesOnly"
-        }
+        },
+        "TunnelOptions":{"shape":"TunnelOptionsList"}
       }
     },
     "VpnGateway":{
@@ -16281,6 +16340,10 @@
         "VpnGatewayId":{
           "shape":"String",
           "locationName":"vpnGatewayId"
+        },
+        "AmazonSideAsn":{
+          "shape":"Long",
+          "locationName":"amazonSideAsn"
         },
         "Tags":{
           "shape":"TagList",
@@ -16338,6 +16401,13 @@
     "VpnStaticRouteSource":{
       "type":"string",
       "enum":["Static"]
+    },
+    "VpnTunnelOptionsSpecification":{
+      "type":"structure",
+      "members":{
+        "TunnelInsideCidr":{"shape":"String"},
+        "PreSharedKey":{"shape":"String"}
+      }
     },
     "ZoneNameStringList":{
       "type":"list",

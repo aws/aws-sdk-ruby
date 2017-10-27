@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2017-10-06)
+------------------
+
+* Feature - API update.
+
+* Issue - Update OJ Json parser error code
+* Issue - Fix typo
+
 1.4.0 (2017-09-14)
 ------------------
 

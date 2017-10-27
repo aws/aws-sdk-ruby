@@ -34,8 +34,12 @@ module Aws::CodeBuild
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
+    CreateWebhookInput = Shapes::StructureShape.new(name: 'CreateWebhookInput')
+    CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
+    DeleteWebhookInput = Shapes::StructureShape.new(name: 'DeleteWebhookInput')
+    DeleteWebhookOutput = Shapes::StructureShape.new(name: 'DeleteWebhookOutput')
     EnvironmentImage = Shapes::StructureShape.new(name: 'EnvironmentImage')
     EnvironmentImages = Shapes::ListShape.new(name: 'EnvironmentImages')
     EnvironmentLanguage = Shapes::StructureShape.new(name: 'EnvironmentLanguage')
@@ -59,6 +63,7 @@ module Aws::CodeBuild
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
     LogsLocation = Shapes::StructureShape.new(name: 'LogsLocation')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    OAuthProviderException = Shapes::StructureShape.new(name: 'OAuthProviderException')
     PhaseContext = Shapes::StructureShape.new(name: 'PhaseContext')
     PhaseContexts = Shapes::ListShape.new(name: 'PhaseContexts')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
@@ -90,6 +95,7 @@ module Aws::CodeBuild
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
+    Webhook = Shapes::StructureShape.new(name: 'Webhook')
     WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
@@ -172,10 +178,21 @@ module Aws::CodeBuild
     CreateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     CreateProjectOutput.struct_class = Types::CreateProjectOutput
 
+    CreateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
+    CreateWebhookInput.struct_class = Types::CreateWebhookInput
+
+    CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
+    CreateWebhookOutput.struct_class = Types::CreateWebhookOutput
+
     DeleteProjectInput.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
     DeleteProjectInput.struct_class = Types::DeleteProjectInput
 
     DeleteProjectOutput.struct_class = Types::DeleteProjectOutput
+
+    DeleteWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
+    DeleteWebhookInput.struct_class = Types::DeleteWebhookInput
+
+    DeleteWebhookOutput.struct_class = Types::DeleteWebhookOutput
 
     EnvironmentImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EnvironmentImage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -256,6 +273,7 @@ module Aws::CodeBuild
     Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Project.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     Project.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
+    Project.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
     Project.struct_class = Types::Project
 
     ProjectArtifacts.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactsType, required: true, location_name: "type"))
@@ -324,6 +342,9 @@ module Aws::CodeBuild
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
 
+    Webhook.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "url"))
+    Webhook.struct_class = Types::Webhook
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -377,6 +398,18 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
       end)
 
+      api.add_operation(:create_webhook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWebhook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWebhookInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateWebhookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_project, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteProject"
         o.http_method = "POST"
@@ -384,6 +417,17 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: DeleteProjectInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteProjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:delete_webhook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWebhook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWebhookInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWebhookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
       end)
 
       api.add_operation(:list_builds, Seahorse::Model::Operation.new.tap do |o|

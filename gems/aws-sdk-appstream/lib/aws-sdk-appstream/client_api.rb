@@ -28,6 +28,10 @@ module Aws::AppStream
     CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
     CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
+    CreateImageBuilderRequest = Shapes::StructureShape.new(name: 'CreateImageBuilderRequest')
+    CreateImageBuilderResult = Shapes::StructureShape.new(name: 'CreateImageBuilderResult')
+    CreateImageBuilderStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateImageBuilderStreamingURLRequest')
+    CreateImageBuilderStreamingURLResult = Shapes::StructureShape.new(name: 'CreateImageBuilderStreamingURLResult')
     CreateStackRequest = Shapes::StructureShape.new(name: 'CreateStackRequest')
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
@@ -36,12 +40,18 @@ module Aws::AppStream
     DeleteDirectoryConfigResult = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigResult')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
     DeleteFleetResult = Shapes::StructureShape.new(name: 'DeleteFleetResult')
+    DeleteImageBuilderRequest = Shapes::StructureShape.new(name: 'DeleteImageBuilderRequest')
+    DeleteImageBuilderResult = Shapes::StructureShape.new(name: 'DeleteImageBuilderResult')
+    DeleteImageRequest = Shapes::StructureShape.new(name: 'DeleteImageRequest')
+    DeleteImageResult = Shapes::StructureShape.new(name: 'DeleteImageResult')
     DeleteStackRequest = Shapes::StructureShape.new(name: 'DeleteStackRequest')
     DeleteStackResult = Shapes::StructureShape.new(name: 'DeleteStackResult')
     DescribeDirectoryConfigsRequest = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsRequest')
     DescribeDirectoryConfigsResult = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsResult')
     DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
+    DescribeImageBuildersRequest = Shapes::StructureShape.new(name: 'DescribeImageBuildersRequest')
+    DescribeImageBuildersResult = Shapes::StructureShape.new(name: 'DescribeImageBuildersResult')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResult = Shapes::StructureShape.new(name: 'DescribeImagesResult')
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
@@ -70,6 +80,11 @@ module Aws::AppStream
     FleetState = Shapes::StringShape.new(name: 'FleetState')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
     Image = Shapes::StructureShape.new(name: 'Image')
+    ImageBuilder = Shapes::StructureShape.new(name: 'ImageBuilder')
+    ImageBuilderList = Shapes::ListShape.new(name: 'ImageBuilderList')
+    ImageBuilderState = Shapes::StringShape.new(name: 'ImageBuilderState')
+    ImageBuilderStateChangeReason = Shapes::StructureShape.new(name: 'ImageBuilderStateChangeReason')
+    ImageBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageBuilderStateChangeReasonCode')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
@@ -91,6 +106,8 @@ module Aws::AppStream
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
+    ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
+    ResourceErrors = Shapes::ListShape.new(name: 'ResourceErrors')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotAvailableException = Shapes::StructureShape.new(name: 'ResourceNotAvailableException')
@@ -107,8 +124,12 @@ module Aws::AppStream
     StackList = Shapes::ListShape.new(name: 'StackList')
     StartFleetRequest = Shapes::StructureShape.new(name: 'StartFleetRequest')
     StartFleetResult = Shapes::StructureShape.new(name: 'StartFleetResult')
+    StartImageBuilderRequest = Shapes::StructureShape.new(name: 'StartImageBuilderRequest')
+    StartImageBuilderResult = Shapes::StructureShape.new(name: 'StartImageBuilderResult')
     StopFleetRequest = Shapes::StructureShape.new(name: 'StopFleetRequest')
     StopFleetResult = Shapes::StructureShape.new(name: 'StopFleetResult')
+    StopImageBuilderRequest = Shapes::StructureShape.new(name: 'StopImageBuilderRequest')
+    StopImageBuilderResult = Shapes::StructureShape.new(name: 'StopImageBuilderResult')
     StorageConnector = Shapes::StructureShape.new(name: 'StorageConnector')
     StorageConnectorList = Shapes::ListShape.new(name: 'StorageConnectorList')
     StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
@@ -178,6 +199,27 @@ module Aws::AppStream
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
     CreateFleetResult.struct_class = Types::CreateFleetResult
 
+    CreateImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateImageBuilderRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageName"))
+    CreateImageBuilderRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
+    CreateImageBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateImageBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    CreateImageBuilderRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateImageBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    CreateImageBuilderRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
+    CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
+
+    CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
+    CreateImageBuilderResult.struct_class = Types::CreateImageBuilderResult
+
+    CreateImageBuilderStreamingURLRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    CreateImageBuilderStreamingURLRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Long, location_name: "Validity"))
+    CreateImageBuilderStreamingURLRequest.struct_class = Types::CreateImageBuilderStreamingURLRequest
+
+    CreateImageBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
+    CreateImageBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
+    CreateImageBuilderStreamingURLResult.struct_class = Types::CreateImageBuilderStreamingURLResult
+
     CreateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -209,6 +251,18 @@ module Aws::AppStream
 
     DeleteFleetResult.struct_class = Types::DeleteFleetResult
 
+    DeleteImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DeleteImageBuilderRequest.struct_class = Types::DeleteImageBuilderRequest
+
+    DeleteImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
+    DeleteImageBuilderResult.struct_class = Types::DeleteImageBuilderResult
+
+    DeleteImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DeleteImageRequest.struct_class = Types::DeleteImageRequest
+
+    DeleteImageResult.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "Image"))
+    DeleteImageResult.struct_class = Types::DeleteImageResult
+
     DeleteStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     DeleteStackRequest.struct_class = Types::DeleteStackRequest
 
@@ -230,6 +284,15 @@ module Aws::AppStream
     DescribeFleetsResult.add_member(:fleets, Shapes::ShapeRef.new(shape: FleetList, location_name: "Fleets"))
     DescribeFleetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeFleetsResult.struct_class = Types::DescribeFleetsResult
+
+    DescribeImageBuildersRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
+    DescribeImageBuildersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeImageBuildersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImageBuildersRequest.struct_class = Types::DescribeImageBuildersRequest
+
+    DescribeImageBuildersResult.add_member(:image_builders, Shapes::ShapeRef.new(shape: ImageBuilderList, location_name: "ImageBuilders"))
+    DescribeImageBuildersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImageBuildersResult.struct_class = Types::DescribeImageBuildersResult
 
     DescribeImagesRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
     DescribeImagesRequest.struct_class = Types::DescribeImagesRequest
@@ -325,6 +388,28 @@ module Aws::AppStream
     Image.add_member(:public_base_image_released_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublicBaseImageReleasedDate"))
     Image.struct_class = Types::Image
 
+    ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    ImageBuilder.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    ImageBuilder.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
+    ImageBuilder.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ImageBuilder.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
+    ImageBuilder.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    ImageBuilder.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    ImageBuilder.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
+    ImageBuilder.add_member(:state, Shapes::ShapeRef.new(shape: ImageBuilderState, location_name: "State"))
+    ImageBuilder.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ImageBuilderStateChangeReason, location_name: "StateChangeReason"))
+    ImageBuilder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    ImageBuilder.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    ImageBuilder.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
+    ImageBuilder.add_member(:image_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageBuilderErrors"))
+    ImageBuilder.struct_class = Types::ImageBuilder
+
+    ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
+
+    ImageBuilderStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ImageBuilderStateChangeReasonCode, location_name: "Code"))
+    ImageBuilderStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ImageBuilderStateChangeReason.struct_class = Types::ImageBuilderStateChangeReason
+
     ImageList.member = Shapes::ShapeRef.new(shape: Image)
 
     ImageStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ImageStateChangeReasonCode, location_name: "Code"))
@@ -351,6 +436,13 @@ module Aws::AppStream
     Metadata.value = Shapes::ShapeRef.new(shape: String)
 
     OrganizationalUnitDistinguishedNamesList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName)
+
+    ResourceError.add_member(:error_code, Shapes::ShapeRef.new(shape: FleetErrorCode, location_name: "ErrorCode"))
+    ResourceError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ResourceError.add_member(:error_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ErrorTimestamp"))
+    ResourceError.struct_class = Types::ResourceError
+
+    ResourceErrors.member = Shapes::ShapeRef.new(shape: ResourceError)
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -390,10 +482,22 @@ module Aws::AppStream
 
     StartFleetResult.struct_class = Types::StartFleetResult
 
+    StartImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    StartImageBuilderRequest.struct_class = Types::StartImageBuilderRequest
+
+    StartImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
+    StartImageBuilderResult.struct_class = Types::StartImageBuilderResult
+
     StopFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StopFleetRequest.struct_class = Types::StopFleetRequest
 
     StopFleetResult.struct_class = Types::StopFleetResult
+
+    StopImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    StopImageBuilderRequest.struct_class = Types::StopImageBuilderRequest
+
+    StopImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
+    StopImageBuilderResult.struct_class = Types::StopImageBuilderResult
 
     StorageConnector.add_member(:connector_type, Shapes::ShapeRef.new(shape: StorageConnectorType, required: true, location_name: "ConnectorType"))
     StorageConnector.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
@@ -500,6 +604,32 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
+      api.add_operation(:create_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+      end)
+
+      api.add_operation(:create_image_builder_streaming_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImageBuilderStreamingURL"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImageBuilderStreamingURLRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImageBuilderStreamingURLResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_stack, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStack"
         o.http_method = "POST"
@@ -547,6 +677,29 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:delete_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_stack, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteStack"
         o.http_method = "POST"
@@ -573,6 +726,15 @@ module Aws::AppStream
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFleetsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFleetsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_image_builders, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImageBuilders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageBuildersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageBuildersResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -650,6 +812,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:start_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:stop_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopFleet"
         o.http_method = "POST"
@@ -657,6 +830,17 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: StopFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: StopFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:stop_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 

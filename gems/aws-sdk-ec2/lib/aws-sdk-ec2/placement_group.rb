@@ -379,9 +379,9 @@ module Aws::EC2
     #
     #   * `network-interface.source-dest-check` - Whether the network
     #     interface performs source/destination checking. A value of `true`
-    #     means checking is enabled, and `false` means checking is disabled.
-    #     The value must be `false` for the network interface to perform
-    #     network address translation (NAT) in your VPC.
+    #     means that checking is enabled, and `false` means that checking is
+    #     disabled. The value must be `false` for the network interface to
+    #     perform network address translation (NAT) in your VPC.
     #
     #   * `network-interface.subnet-id` - The ID of the subnet for the network
     #     interface.
@@ -422,9 +422,9 @@ module Aws::EC2
     #     reservation ID has a one-to-one relationship with an instance launch
     #     request, but can be associated with more than one instance if you
     #     launch multiple instances using the same launch request. For
-    #     example, if you launch one instance, you'll get one reservation ID.
-    #     If you launch ten instances using the same launch request, you'll
-    #     also get one reservation ID.
+    #     example, if you launch one instance, you get one reservation ID. If
+    #     you launch ten instances using the same launch request, you also get
+    #     one reservation ID.
     #
     #   * `root-device-name` - The name of the root device for the instance
     #     (for example, `/dev/sda1` or `/dev/xvda`).
@@ -434,11 +434,11 @@ module Aws::EC2
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
-    #     is enabled, and `false` means checking is disabled. The value must
-    #     be `false` for the instance to perform network address translation
-    #     (NAT) in your VPC.
+    #     is enabled, and `false` means that checking is disabled. The value
+    #     must be `false` for the instance to perform network address
+    #     translation (NAT) in your VPC.
     #
-    #   * `spot-instance-request-id` - The ID of the Spot instance request.
+    #   * `spot-instance-request-id` - The ID of the Spot Instance request.
     #
     #   * `state-reason-code` - The reason code for the state change.
     #
@@ -456,9 +456,9 @@ module Aws::EC2
     #     is independent of the `tag-value` filter. For example, if you use
     #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
     #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     #
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.

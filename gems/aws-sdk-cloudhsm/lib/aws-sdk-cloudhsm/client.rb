@@ -155,11 +155,29 @@ module Aws::CloudHSM
 
     # @!group API Operations
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Adds or overwrites one or more tags for the specified AWS CloudHSM
     # resource.
     #
     # Each tag consists of a key and a value. Tag keys must be unique to
     # each resource.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
@@ -196,9 +214,27 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Creates a high-availability partition group. A high-availability
     # partition group is a group of partitions that spans multiple physical
     # HSMs.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :label
     #   The label of the new high-availability partition group.
@@ -226,12 +262,21 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Creates an uninitialized HSM instance.
     #
     # There is an upfront fee charged for each HSM instance that you create
-    # with the CreateHsm operation. If you accidentally provision an HSM and
-    # want to request a refund, delete the instance using the DeleteHsm
-    # operation, go to the [AWS Support Center][1], create a new case, and
+    # with the `CreateHsm` operation. If you accidentally provision an HSM
+    # and want to request a refund, delete the instance using the DeleteHsm
+    # operation, go to the [AWS Support Center][7], create a new case, and
     # select **Account and Billing Support**.
     #
     # It can take up to 20 minutes to create and provision an HSM. You can
@@ -240,7 +285,13 @@ module Aws::CloudHSM
     #
     #
     #
-    # [1]: https://console.aws.amazon.com/support/home#/
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    # [7]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :subnet_id
     #   The identifier of the subnet in your VPC in which to place the HSM.
@@ -259,12 +310,13 @@ module Aws::CloudHSM
     #   an ENI on your behalf.
     #
     # @option params [String] :external_id
-    #   The external ID from **IamRoleArn**, if present.
+    #   The external ID from `IamRoleArn`, if present.
     #
     # @option params [required, String] :subscription_type
     #   Specifies the type of subscription for the HSM.
     #
     #   * **PRODUCTION** - The HSM is being used in a production environment.
+    #
     #   * **TRIAL** - The HSM is being used in a product trial.
     #
     # @option params [String] :client_token
@@ -305,7 +357,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Creates an HSM client.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :label
     #   The label for the client.
@@ -338,7 +408,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Deletes a high-availability partition group.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to delete.
@@ -366,8 +454,26 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Deletes an HSM. After completion, this operation cannot be undone and
     # your key material cannot be recovered.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hsm_arn
     #   The ARN of the HSM to delete.
@@ -395,7 +501,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Deletes a client.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client to delete.
@@ -423,7 +547,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Retrieves information about a high-availability partition group.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to describe.
@@ -471,16 +613,34 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Retrieves information about an HSM. You can identify the HSM by its
     # ARN or its serial number.
     #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    #
     # @option params [String] :hsm_arn
-    #   The ARN of the HSM. Either the *HsmArn* or the *SerialNumber*
+    #   The ARN of the HSM. Either the `HsmArn` or the `SerialNumber`
     #   parameter must be specified.
     #
     # @option params [String] :hsm_serial_number
-    #   The serial number of the HSM. Either the *HsmArn* or the
-    #   *HsmSerialNumber* parameter must be specified.
+    #   The serial number of the HSM. Either the `HsmArn` or the
+    #   `HsmSerialNumber` parameter must be specified.
     #
     # @return [Types::DescribeHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -547,7 +707,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Retrieves information about an HSM client.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :client_arn
     #   The ARN of the client.
@@ -587,8 +765,26 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Gets the configuration files necessary to connect to all high
     # availability partition groups the client is associated with.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client.
@@ -629,8 +825,26 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Lists the Availability Zones that have available AWS CloudHSM
     # capacity.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @return [Types::ListAvailableZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -650,16 +864,34 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Lists the high-availability partition groups for the account.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
-    # response contains a token that you pass in the next call to ListHapgs
-    # to retrieve the next set of items.
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
+    # response contains a token that you pass in the next call to
+    # `ListHapgs` to retrieve the next set of items.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListHapgs. Pass null if
-    #   this is the first call.
+    #   The `NextToken` value from a previous call to `ListHapgs`. Pass null
+    #   if this is the first call.
     #
     # @return [Types::ListHapgsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -687,16 +919,34 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Retrieves the identifiers of all of the HSMs provisioned for the
     # current customer.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
-    # response contains a token that you pass in the next call to ListHsms
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
+    # response contains a token that you pass in the next call to `ListHsms`
     # to retrieve the next set of items.
     #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+    #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListHsms. Pass null if
+    #   The `NextToken` value from a previous call to `ListHsms`. Pass null if
     #   this is the first call.
     #
     # @return [Types::ListHsmsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -725,15 +975,33 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Lists all of the clients.
     #
-    # This operation supports pagination with the use of the *NextToken*
-    # member. If more results are available, the *NextToken* member of the
+    # This operation supports pagination with the use of the `NextToken`
+    # member. If more results are available, the `NextToken` member of the
     # response contains a token that you pass in the next call to
-    # ListLunaClients to retrieve the next set of items.
+    # `ListLunaClients` to retrieve the next set of items.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [String] :next_token
-    #   The *NextToken* value from a previous call to ListLunaClients. Pass
+    #   The `NextToken` value from a previous call to `ListLunaClients`. Pass
     #   null if this is the first call.
     #
     # @return [Types::ListLunaClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -762,7 +1030,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Returns a list of all tags for the specified AWS CloudHSM resource.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -792,7 +1078,25 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Modifies an existing high-availability partition group.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hapg_arn
     #   The ARN of the high-availability partition group to modify.
@@ -829,6 +1133,15 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Modifies an HSM.
     #
     # This operation can result in the HSM being offline for up to 15
@@ -836,6 +1149,15 @@ module Aws::CloudHSM
     # modifying a production HSM, you should ensure that your AWS CloudHSM
     # service is configured for high availability, and consider executing
     # this operation during a maintenance window.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :hsm_arn
     #   The ARN of the HSM to modify.
@@ -890,10 +1212,28 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Modifies the certificate used by the client.
     #
     # This action can potentially start a workflow to install the new
     # certificate on the client's HSMs.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :client_arn
     #   The ARN of the client.
@@ -925,10 +1265,28 @@ module Aws::CloudHSM
       req.send_request(options)
     end
 
+    # This is documentation for **AWS CloudHSM Classic**. For more
+    # information, see [AWS CloudHSM Classic FAQs][1], the [AWS CloudHSM
+    # Classic User Guide][2], and the [AWS CloudHSM Classic API
+    # Reference][3].
+    #
+    # **For information about the current version of AWS CloudHSM**, see
+    # [AWS CloudHSM][4], the [AWS CloudHSM User Guide][5], and the [AWS
+    # CloudHSM API Reference][6].
+    #
     # Removes one or more tags from the specified AWS CloudHSM resource.
     #
     # To remove a tag, specify only the tag key to remove (not the value).
     # To overwrite the value for an existing tag, use AddTagsToResource.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudhsm/faqs-classic/
+    # [2]: http://docs.aws.amazon.com/cloudhsm/classic/userguide/
+    # [3]: http://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+    # [4]: http://aws.amazon.com/cloudhsm/
+    # [5]: http://docs.aws.amazon.com/cloudhsm/latest/userguide/
+    # [6]: http://docs.aws.amazon.com/cloudhsm/latest/APIReference/
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -976,7 +1334,7 @@ module Aws::CloudHSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsm'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

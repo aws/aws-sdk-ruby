@@ -53,6 +53,12 @@ See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009
 
 ### Resource Model, Waiters and Paginators
 
+### Document resource model outdate issue
+
+1. `:destination_cidr_block` is not longer an identifier for `Route` resource
+
+See [related Github issue #1630](https://github.com/aws/aws-sdk-ruby/issues/1630)
+
 ### Add Interface to Create Custom Waiters
 
 For cases where a particular waiter doesn't exist, this request would provide an

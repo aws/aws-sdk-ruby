@@ -227,6 +227,7 @@ module Aws::KinesisAnalytics
     #   version.
     #
     # @option params [required, Types::Input] :input
+    #   The Input to add.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -237,6 +238,12 @@ module Aws::KinesisAnalytics
     #     current_application_version_id: 1, # required
     #     input: { # required
     #       name_prefix: "InAppStreamName", # required
+    #       input_processing_configuration: {
+    #         input_lambda_processor: { # required
+    #           resource_arn: "ResourceARN", # required
+    #           role_arn: "RoleARN", # required
+    #         },
+    #       },
     #       kinesis_streams_input: {
     #         resource_arn: "ResourceARN", # required
     #         role_arn: "RoleARN", # required
@@ -279,6 +286,59 @@ module Aws::KinesisAnalytics
     # @param [Hash] params ({})
     def add_application_input(params = {}, options = {})
       req = build_request(:add_application_input, params)
+      req.send_request(options)
+    end
+
+    # Adds an InputProcessingConfiguration to an application. An input
+    # processor preprocesses records on the input stream before the
+    # application's SQL code executes. Currently, the only input processor
+    # available is [AWS Lambda][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    # @option params [required, String] :application_name
+    #   Name of the application to which you want to add the input processing
+    #   configuration.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   Version of the application to which you want to add the input
+    #   processing configuration. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
+    #   `ConcurrentModificationException` is returned.
+    #
+    # @option params [required, String] :input_id
+    #   The ID of the input configuration to which to add the input
+    #   configuration. You can get a list of the input IDs for an application
+    #   using the DescribeApplication operation.
+    #
+    # @option params [required, Types::InputProcessingConfiguration] :input_processing_configuration
+    #   The InputProcessingConfiguration to add to the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_application_input_processing_configuration({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     input_id: "Id", # required
+    #     input_processing_configuration: { # required
+    #       input_lambda_processor: { # required
+    #         resource_arn: "ResourceARN", # required
+    #         role_arn: "RoleARN", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfiguration AWS API Documentation
+    #
+    # @overload add_application_input_processing_configuration(params = {})
+    # @param [Hash] params ({})
+    def add_application_input_processing_configuration(params = {}, options = {})
+      req = build_request(:add_application_input_processing_configuration, params)
       req.send_request(options)
     end
 
@@ -571,6 +631,12 @@ module Aws::KinesisAnalytics
     #     inputs: [
     #       {
     #         name_prefix: "InAppStreamName", # required
+    #         input_processing_configuration: {
+    #           input_lambda_processor: { # required
+    #             resource_arn: "ResourceARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
+    #         },
     #         kinesis_streams_input: {
     #           resource_arn: "ResourceARN", # required
     #           role_arn: "RoleARN", # required
@@ -716,6 +782,38 @@ module Aws::KinesisAnalytics
       req.send_request(options)
     end
 
+    # Deletes an InputProcessingConfiguration from an input.
+    #
+    # @option params [required, String] :application_name
+    #   The Kinesis Analytics application name.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   The version ID of the Kinesis Analytics application.
+    #
+    # @option params [required, String] :input_id
+    #   The ID of the input configuration from which to delete the input
+    #   configuration. You can get a list of the input IDs for an application
+    #   using the DescribeApplication operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application_input_processing_configuration({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     input_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfiguration AWS API Documentation
+    #
+    # @overload delete_application_input_processing_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_application_input_processing_configuration(params = {}, options = {})
+      req = build_request(:delete_application_input_processing_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes output destination configuration from your application
     # configuration. Amazon Kinesis Analytics will no longer write data from
     # the corresponding in-application stream to the external output
@@ -841,6 +939,8 @@ module Aws::KinesisAnalytics
     #   resp.application_detail.input_descriptions[0].name_prefix #=> String
     #   resp.application_detail.input_descriptions[0].in_app_stream_names #=> Array
     #   resp.application_detail.input_descriptions[0].in_app_stream_names[0] #=> String
+    #   resp.application_detail.input_descriptions[0].input_processing_configuration_description.input_lambda_processor_description.resource_arn #=> String
+    #   resp.application_detail.input_descriptions[0].input_processing_configuration_description.input_lambda_processor_description.role_arn #=> String
     #   resp.application_detail.input_descriptions[0].kinesis_streams_input_description.resource_arn #=> String
     #   resp.application_detail.input_descriptions[0].kinesis_streams_input_description.role_arn #=> String
     #   resp.application_detail.input_descriptions[0].kinesis_firehose_input_description.resource_arn #=> String
@@ -914,30 +1014,48 @@ module Aws::KinesisAnalytics
     #
     # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #
-    # @option params [required, String] :resource_arn
+    # @option params [String] :resource_arn
     #   Amazon Resource Name (ARN) of the streaming source.
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to access
     #   the stream on your behalf.
     #
-    # @option params [required, Types::InputStartingPositionConfiguration] :input_starting_position_configuration
+    # @option params [Types::InputStartingPositionConfiguration] :input_starting_position_configuration
     #   Point at which you want Amazon Kinesis Analytics to start reading
     #   records from the specified streaming source discovery purposes.
+    #
+    # @option params [Types::S3Configuration] :s3_configuration
+    #
+    # @option params [Types::InputProcessingConfiguration] :input_processing_configuration
+    #   The InputProcessingConfiguration to use to preprocess the records
+    #   before discovering the schema of the records.
     #
     # @return [Types::DiscoverInputSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DiscoverInputSchemaResponse#input_schema #input_schema} => Types::SourceSchema
     #   * {Types::DiscoverInputSchemaResponse#parsed_input_records #parsed_input_records} => Array&lt;Array&lt;String&gt;&gt;
+    #   * {Types::DiscoverInputSchemaResponse#processed_input_records #processed_input_records} => Array&lt;String&gt;
     #   * {Types::DiscoverInputSchemaResponse#raw_input_records #raw_input_records} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.discover_input_schema({
-    #     resource_arn: "ResourceARN", # required
-    #     role_arn: "RoleARN", # required
-    #     input_starting_position_configuration: { # required
+    #     resource_arn: "ResourceARN",
+    #     role_arn: "RoleARN",
+    #     input_starting_position_configuration: {
     #       input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
+    #     },
+    #     s3_configuration: {
+    #       role_arn: "RoleARN", # required
+    #       bucket_arn: "BucketARN", # required
+    #       file_key: "FileKey", # required
+    #     },
+    #     input_processing_configuration: {
+    #       input_lambda_processor: { # required
+    #         resource_arn: "ResourceARN", # required
+    #         role_arn: "RoleARN", # required
+    #       },
     #     },
     #   })
     #
@@ -955,6 +1073,8 @@ module Aws::KinesisAnalytics
     #   resp.parsed_input_records #=> Array
     #   resp.parsed_input_records[0] #=> Array
     #   resp.parsed_input_records[0][0] #=> String
+    #   resp.processed_input_records #=> Array
+    #   resp.processed_input_records[0] #=> String
     #   resp.raw_input_records #=> Array
     #   resp.raw_input_records[0] #=> String
     #
@@ -1133,6 +1253,12 @@ module Aws::KinesisAnalytics
     #         {
     #           input_id: "Id", # required
     #           name_prefix_update: "InAppStreamName",
+    #           input_processing_configuration_update: {
+    #             input_lambda_processor_update: { # required
+    #               resource_arn_update: "ResourceARN",
+    #               role_arn_update: "RoleARN",
+    #             },
+    #           },
     #           kinesis_streams_input_update: {
     #             resource_arn_update: "ResourceARN",
     #             role_arn_update: "RoleARN",
@@ -1251,7 +1377,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

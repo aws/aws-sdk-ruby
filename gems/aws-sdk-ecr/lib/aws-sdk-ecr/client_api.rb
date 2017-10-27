@@ -28,6 +28,8 @@ module Aws::ECR
     CreateRepositoryRequest = Shapes::StructureShape.new(name: 'CreateRepositoryRequest')
     CreateRepositoryResponse = Shapes::StructureShape.new(name: 'CreateRepositoryResponse')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
+    DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
+    DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
     DeleteRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyRequest')
     DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
     DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
@@ -38,6 +40,7 @@ module Aws::ECR
     DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
     DescribeRepositoriesResponse = Shapes::StructureShape.new(name: 'DescribeRepositoriesResponse')
     EmptyUploadException = Shapes::StructureShape.new(name: 'EmptyUploadException')
+    EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
@@ -46,10 +49,16 @@ module Aws::ECR
     GetAuthorizationTokenResponse = Shapes::StructureShape.new(name: 'GetAuthorizationTokenResponse')
     GetDownloadUrlForLayerRequest = Shapes::StructureShape.new(name: 'GetDownloadUrlForLayerRequest')
     GetDownloadUrlForLayerResponse = Shapes::StructureShape.new(name: 'GetDownloadUrlForLayerResponse')
+    GetLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'GetLifecyclePolicyPreviewRequest')
+    GetLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyPreviewResponse')
+    GetLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'GetLifecyclePolicyRequest')
+    GetLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyResponse')
     GetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'GetRepositoryPolicyRequest')
     GetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'GetRepositoryPolicyResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
+    ImageActionType = Shapes::StringShape.new(name: 'ImageActionType')
     ImageAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageAlreadyExistsException')
+    ImageCount = Shapes::IntegerShape.new(name: 'ImageCount')
     ImageDetail = Shapes::StructureShape.new(name: 'ImageDetail')
     ImageDetailList = Shapes::ListShape.new(name: 'ImageDetailList')
     ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
@@ -85,6 +94,17 @@ module Aws::ECR
     LayerPartTooSmallException = Shapes::StructureShape.new(name: 'LayerPartTooSmallException')
     LayerSizeInBytes = Shapes::IntegerShape.new(name: 'LayerSizeInBytes')
     LayersNotFoundException = Shapes::StructureShape.new(name: 'LayersNotFoundException')
+    LifecyclePolicyNotFoundException = Shapes::StructureShape.new(name: 'LifecyclePolicyNotFoundException')
+    LifecyclePolicyPreviewFilter = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewFilter')
+    LifecyclePolicyPreviewInProgressException = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewInProgressException')
+    LifecyclePolicyPreviewNotFoundException = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewNotFoundException')
+    LifecyclePolicyPreviewResult = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewResult')
+    LifecyclePolicyPreviewResultList = Shapes::ListShape.new(name: 'LifecyclePolicyPreviewResultList')
+    LifecyclePolicyPreviewStatus = Shapes::StringShape.new(name: 'LifecyclePolicyPreviewStatus')
+    LifecyclePolicyPreviewSummary = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewSummary')
+    LifecyclePolicyRuleAction = Shapes::StructureShape.new(name: 'LifecyclePolicyRuleAction')
+    LifecyclePolicyRulePriority = Shapes::IntegerShape.new(name: 'LifecyclePolicyRulePriority')
+    LifecyclePolicyText = Shapes::StringShape.new(name: 'LifecyclePolicyText')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListImagesFilter = Shapes::StructureShape.new(name: 'ListImagesFilter')
     ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
@@ -98,6 +118,8 @@ module Aws::ECR
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
     PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
     PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
+    PutLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'PutLifecyclePolicyRequest')
+    PutLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'PutLifecyclePolicyResponse')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
     Repository = Shapes::StructureShape.new(name: 'Repository')
     RepositoryAlreadyExistsException = Shapes::StructureShape.new(name: 'RepositoryAlreadyExistsException')
@@ -111,6 +133,8 @@ module Aws::ECR
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
+    StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
+    StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
     TagStatus = Shapes::StringShape.new(name: 'TagStatus')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     UploadLayerPartRequest = Shapes::StructureShape.new(name: 'UploadLayerPartRequest')
@@ -173,6 +197,16 @@ module Aws::ECR
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     CreateRepositoryResponse.struct_class = Types::CreateRepositoryResponse
 
+    DeleteLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeleteLifecyclePolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
+
+    DeleteLifecyclePolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeleteLifecyclePolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    DeleteLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    DeleteLifecyclePolicyResponse.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: EvaluationTimestamp, location_name: "lastEvaluatedAt"))
+    DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
+
     DeleteRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DeleteRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteRepositoryPolicyRequest.struct_class = Types::DeleteRepositoryPolicyRequest
@@ -231,6 +265,33 @@ module Aws::ECR
     GetDownloadUrlForLayerResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: Url, location_name: "downloadUrl"))
     GetDownloadUrlForLayerResponse.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     GetDownloadUrlForLayerResponse.struct_class = Types::GetDownloadUrlForLayerResponse
+
+    GetLifecyclePolicyPreviewRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetLifecyclePolicyPreviewRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetLifecyclePolicyPreviewRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
+    GetLifecyclePolicyPreviewRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLifecyclePolicyPreviewRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetLifecyclePolicyPreviewRequest.add_member(:filter, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewFilter, location_name: "filter"))
+    GetLifecyclePolicyPreviewRequest.struct_class = Types::GetLifecyclePolicyPreviewRequest
+
+    GetLifecyclePolicyPreviewResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetLifecyclePolicyPreviewResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    GetLifecyclePolicyPreviewResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    GetLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
+    GetLifecyclePolicyPreviewResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLifecyclePolicyPreviewResponse.add_member(:preview_results, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewResultList, location_name: "previewResults"))
+    GetLifecyclePolicyPreviewResponse.add_member(:summary, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewSummary, location_name: "summary"))
+    GetLifecyclePolicyPreviewResponse.struct_class = Types::GetLifecyclePolicyPreviewResponse
+
+    GetLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetLifecyclePolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetLifecyclePolicyRequest.struct_class = Types::GetLifecyclePolicyRequest
+
+    GetLifecyclePolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetLifecyclePolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    GetLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    GetLifecyclePolicyResponse.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: EvaluationTimestamp, location_name: "lastEvaluatedAt"))
+    GetLifecyclePolicyResponse.struct_class = Types::GetLifecyclePolicyResponse
 
     GetRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     GetRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -299,6 +360,24 @@ module Aws::ECR
 
     LayerList.member = Shapes::ShapeRef.new(shape: Layer)
 
+    LifecyclePolicyPreviewFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
+    LifecyclePolicyPreviewFilter.struct_class = Types::LifecyclePolicyPreviewFilter
+
+    LifecyclePolicyPreviewResult.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
+    LifecyclePolicyPreviewResult.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
+    LifecyclePolicyPreviewResult.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
+    LifecyclePolicyPreviewResult.add_member(:action, Shapes::ShapeRef.new(shape: LifecyclePolicyRuleAction, location_name: "action"))
+    LifecyclePolicyPreviewResult.add_member(:applied_rule_priority, Shapes::ShapeRef.new(shape: LifecyclePolicyRulePriority, location_name: "appliedRulePriority"))
+    LifecyclePolicyPreviewResult.struct_class = Types::LifecyclePolicyPreviewResult
+
+    LifecyclePolicyPreviewResultList.member = Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewResult)
+
+    LifecyclePolicyPreviewSummary.add_member(:expiring_image_total_count, Shapes::ShapeRef.new(shape: ImageCount, location_name: "expiringImageTotalCount"))
+    LifecyclePolicyPreviewSummary.struct_class = Types::LifecyclePolicyPreviewSummary
+
+    LifecyclePolicyRuleAction.add_member(:type, Shapes::ShapeRef.new(shape: ImageActionType, location_name: "type"))
+    LifecyclePolicyRuleAction.struct_class = Types::LifecyclePolicyRuleAction
+
     ListImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
     ListImagesFilter.struct_class = Types::ListImagesFilter
 
@@ -324,6 +403,16 @@ module Aws::ECR
     PutImageResponse.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
     PutImageResponse.struct_class = Types::PutImageResponse
 
+    PutLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutLifecyclePolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    PutLifecyclePolicyRequest.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, required: true, location_name: "lifecyclePolicyText"))
+    PutLifecyclePolicyRequest.struct_class = Types::PutLifecyclePolicyRequest
+
+    PutLifecyclePolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PutLifecyclePolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    PutLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    PutLifecyclePolicyResponse.struct_class = Types::PutLifecyclePolicyResponse
+
     Repository.add_member(:repository_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "repositoryArn"))
     Repository.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     Repository.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
@@ -345,6 +434,17 @@ module Aws::ECR
     SetRepositoryPolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     SetRepositoryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
     SetRepositoryPolicyResponse.struct_class = Types::SetRepositoryPolicyResponse
+
+    StartLifecyclePolicyPreviewRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartLifecyclePolicyPreviewRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    StartLifecyclePolicyPreviewRequest.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    StartLifecyclePolicyPreviewRequest.struct_class = Types::StartLifecyclePolicyPreviewRequest
+
+    StartLifecyclePolicyPreviewResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartLifecyclePolicyPreviewResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    StartLifecyclePolicyPreviewResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
+    StartLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
+    StartLifecyclePolicyPreviewResponse.struct_class = Types::StartLifecyclePolicyPreviewResponse
 
     UploadLayerPartRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     UploadLayerPartRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -436,6 +536,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+      end)
+
       api.add_operation(:delete_repository, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRepository"
         o.http_method = "POST"
@@ -518,6 +630,30 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
       end)
 
+      api.add_operation(:get_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+      end)
+
+      api.add_operation(:get_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLifecyclePolicyPreview"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewNotFoundException)
+      end)
+
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRepositoryPolicy"
         o.http_method = "POST"
@@ -572,6 +708,17 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:put_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLifecyclePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLifecyclePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
       api.add_operation(:set_repository_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SetRepositoryPolicy"
         o.http_method = "POST"
@@ -581,6 +728,19 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
+      api.add_operation(:start_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartLifecyclePolicyPreview"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartLifecyclePolicyPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartLifecyclePolicyPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewInProgressException)
       end)
 
       api.add_operation(:upload_layer_part, Seahorse::Model::Operation.new.tap do |o|

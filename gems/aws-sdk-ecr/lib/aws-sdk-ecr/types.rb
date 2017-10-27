@@ -309,6 +309,59 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLifecyclePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that is associated with the repository
+    #   policy to  delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicyRequest AWS API Documentation
+    #
+    class DeleteLifecyclePolicyRequest < Struct.new(
+      :registry_id,
+      :repository_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_at
+    #   The time stamp of the last time that the lifecycle policy was run.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicyResponse AWS API Documentation
+    #
+    class DeleteLifecyclePolicyResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text,
+      :last_evaluated_at)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRepositoryPolicyRequest
     #   data as a hash:
     #
@@ -377,7 +430,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   Force the deletion of the repository if it contains images.
+    #   If a repository contains images, forces the deletion.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryRequest AWS API Documentation
@@ -671,6 +724,175 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLifecyclePolicyPreviewRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         image_ids: [
+    #           {
+    #             image_digest: "ImageDigest",
+    #             image_tag: "ImageTag",
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filter: {
+    #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository with the policy to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_ids
+    #   The list of imageIDs to be included.
+    #   @return [Array<Types::ImageIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated 
+    #   `GetLifecyclePolicyPreviewRequest` request where `maxResults` was
+    #   used and the  results exceeded the value of that parameter.
+    #   Pagination continues from the end of the  previous results that
+    #   returned the `nextToken` value. This value is  `null` when there are
+    #   no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of repository results returned by
+    #   `GetLifecyclePolicyPreviewRequest` in  paginated output. When this
+    #   parameter is used, `GetLifecyclePolicyPreviewRequest` only returns 
+    #   `maxResults` results in a single page along with a `nextToken` 
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending  another `GetLifecyclePolicyPreviewRequest`
+    #   request with the returned `nextToken`  value. This value can be
+    #   between 1 and 100. If this  parameter is not used, then
+    #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
+    #   `nextToken` value, if  applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   An optional parameter that filters results based on image tag status
+    #   and all tags, if tagged.
+    #   @return [Types::LifecyclePolicyPreviewFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreviewRequest AWS API Documentation
+    #
+    class GetLifecyclePolicyPreviewRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :image_ids,
+      :next_token,
+      :max_results,
+      :filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the lifecycle policy preview request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `GetLifecyclePolicyPreview` request. When the results of a
+    #   `GetLifecyclePolicyPreview` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] preview_results
+    #   The results of the lifecycle policy preview request.
+    #   @return [Array<Types::LifecyclePolicyPreviewResult>]
+    #
+    # @!attribute [rw] summary
+    #   The list of images that is returned as a result of the action.
+    #   @return [Types::LifecyclePolicyPreviewSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreviewResponse AWS API Documentation
+    #
+    class GetLifecyclePolicyPreviewResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text,
+      :status,
+      :next_token,
+      :preview_results,
+      :summary)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLifecyclePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository with the policy to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyRequest AWS API Documentation
+    #
+    class GetLifecyclePolicyRequest < Struct.new(
+      :registry_id,
+      :repository_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_at
+    #   The time stamp of the last time that the lifecycle policy was run.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyResponse AWS API Documentation
+    #
+    class GetLifecyclePolicyResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text,
+      :last_evaluated_at)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRepositoryPolicyRequest
     #   data as a hash:
     #
@@ -686,7 +908,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository whose policy you want to retrieve.
+    #   The name of the repository with the policy to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicyRequest AWS API Documentation
@@ -855,13 +1077,13 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that you intend to
-    #   upload layers to. If you do not specify a registry, the default
+    #   The AWS account ID associated with the registry to which you intend
+    #   to upload layers. If you do not specify a registry, the default
     #   registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository that you intend to upload layers to.
+    #   The name of the repository to which you intend to upload layers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUploadRequest AWS API Documentation
@@ -943,6 +1165,86 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The filter for the lifecycle policy preview.
+    #
+    # @note When making an API call, you may pass LifecyclePolicyPreviewFilter
+    #   data as a hash:
+    #
+    #       {
+    #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       }
+    #
+    # @!attribute [rw] tag_status
+    #   The tag status of the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewFilter AWS API Documentation
+    #
+    class LifecyclePolicyPreviewFilter < Struct.new(
+      :tag_status)
+      include Aws::Structure
+    end
+
+    # The result of the lifecycle policy preview.
+    #
+    # @!attribute [rw] image_tags
+    #   The list of tags associated with this image.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_digest
+    #   The `sha256` digest of the image manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_pushed_at
+    #   The date and time, expressed in standard JavaScript date format, at
+    #   which the current image was pushed to the repository.
+    #   @return [Time]
+    #
+    # @!attribute [rw] action
+    #   The type of action to be taken.
+    #   @return [Types::LifecyclePolicyRuleAction]
+    #
+    # @!attribute [rw] applied_rule_priority
+    #   The priority of the applied rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewResult AWS API Documentation
+    #
+    class LifecyclePolicyPreviewResult < Struct.new(
+      :image_tags,
+      :image_digest,
+      :image_pushed_at,
+      :action,
+      :applied_rule_priority)
+      include Aws::Structure
+    end
+
+    # The summary of the lifecycle policy preview request.
+    #
+    # @!attribute [rw] expiring_image_total_count
+    #   The number of expiring images.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewSummary AWS API Documentation
+    #
+    class LifecyclePolicyPreviewSummary < Struct.new(
+      :expiring_image_total_count)
+      include Aws::Structure
+    end
+
+    # The type of action to be taken.
+    #
+    # @!attribute [rw] type
+    #   The type of action to be taken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyRuleAction AWS API Documentation
+    #
+    class LifecyclePolicyRuleAction < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
     # An object representing a filter on a ListImages operation.
     #
     # @note When making an API call, you may pass ListImagesFilter
@@ -979,12 +1281,12 @@ module Aws::ECR
     #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
-    #   repository to list images in. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   repository in which to list images. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The repository whose image IDs are to be listed.
+    #   The repository with image IDs to be listed.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1098,13 +1400,66 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutLifecyclePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         lifecycle_policy_text: "LifecyclePolicyText", # required
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do  not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository to receive the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text to apply to the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutLifecyclePolicyRequest AWS API Documentation
+    #
+    class PutLifecyclePolicyRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutLifecyclePolicyResponse AWS API Documentation
+    #
+    class PutLifecyclePolicyResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text)
+      include Aws::Structure
+    end
+
     # An object representing a repository.
     #
     # @!attribute [rw] repository_arn
     #   The Amazon Resource Name (ARN) that identifies the repository. The
     #   ARN contains the `arn:aws:ecr` namespace, followed by the region of
-    #   the repository, the AWS account ID of the repository owner, the
-    #   repository namespace, and then the repository name. For example,
+    #   the repository, AWS account ID of the repository owner, repository
+    #   namespace, and repository name. For example,
     #   `arn:aws:ecr:region:012345678910:repository/test`.
     #   @return [String]
     #
@@ -1119,12 +1474,12 @@ module Aws::ECR
     #
     # @!attribute [rw] repository_uri
     #   The URI for the repository. You can use this URI for Docker `push`
-    #   and `pull` operations.
+    #   or `pull` operations.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time, in JavaScript date/time format, when the
-    #   repository was created.
+    #   The date and time, in JavaScript date format, when the repository
+    #   was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
@@ -1200,6 +1555,65 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartLifecyclePolicyPreviewRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_id: "RegistryId",
+    #         repository_name: "RepositoryName", # required
+    #         lifecycle_policy_text: "LifecyclePolicyText",
+    #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository. If you do not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository to be evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The policy to be evaluated against. If you do not specify a policy,
+    #   the current policy for the repository is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreviewRequest AWS API Documentation
+    #
+    class StartLifecyclePolicyPreviewRequest < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy_text
+    #   The JSON repository policy text.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the lifecycle policy preview request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreviewResponse AWS API Documentation
+    #
+    class StartLifecyclePolicyPreviewResponse < Struct.new(
+      :registry_id,
+      :repository_name,
+      :lifecycle_policy_text,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UploadLayerPartRequest
     #   data as a hash:
     #
@@ -1213,13 +1627,13 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that you are
-    #   uploading layer parts to. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The AWS account ID associated with the registry to which you are
+    #   uploading layer parts. If you do not specify a registry, the default
+    #   registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository that you are uploading layer parts to.
+    #   The name of the repository to which you are uploading layer parts.
     #   @return [String]
     #
     # @!attribute [rw] upload_id

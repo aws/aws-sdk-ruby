@@ -48,6 +48,58 @@ module Aws::KinesisAnalytics
     #
     class AddApplicationCloudWatchLoggingOptionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AddApplicationInputProcessingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         input_id: "Id", # required
+    #         input_processing_configuration: { # required
+    #           input_lambda_processor: { # required
+    #             resource_arn: "ResourceARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   Name of the application to which you want to add the input
+    #   processing configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   Version of the application to which you want to add the input
+    #   processing configuration. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
+    #   `ConcurrentModificationException` is returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_id
+    #   The ID of the input configuration to which to add the input
+    #   configuration. You can get a list of the input IDs for an
+    #   application using the DescribeApplication operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_processing_configuration
+    #   The InputProcessingConfiguration to add to the application.
+    #   @return [Types::InputProcessingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationRequest AWS API Documentation
+    #
+    class AddApplicationInputProcessingConfigurationRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :input_id,
+      :input_processing_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationResponse AWS API Documentation
+    #
+    class AddApplicationInputProcessingConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AddApplicationInputRequest
     #   data as a hash:
     #
@@ -56,6 +108,12 @@ module Aws::KinesisAnalytics
     #         current_application_version_id: 1, # required
     #         input: { # required
     #           name_prefix: "InAppStreamName", # required
+    #           input_processing_configuration: {
+    #             input_lambda_processor: { # required
+    #               resource_arn: "ResourceARN", # required
+    #               role_arn: "RoleARN", # required
+    #             },
+    #           },
     #           kinesis_streams_input: {
     #             resource_arn: "ResourceARN", # required
     #             role_arn: "RoleARN", # required
@@ -104,6 +162,7 @@ module Aws::KinesisAnalytics
     #   @return [Integer]
     #
     # @!attribute [rw] input
+    #   The Input to add.
     #   @return [Types::Input]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputRequest AWS API Documentation
@@ -374,6 +433,12 @@ module Aws::KinesisAnalytics
     #           {
     #             input_id: "Id", # required
     #             name_prefix_update: "InAppStreamName",
+    #             input_processing_configuration_update: {
+    #               input_lambda_processor_update: { # required
+    #                 resource_arn_update: "ResourceARN",
+    #                 role_arn_update: "RoleARN",
+    #               },
+    #             },
     #             kinesis_streams_input_update: {
     #               resource_arn_update: "ResourceARN",
     #               role_arn_update: "RoleARN",
@@ -634,6 +699,12 @@ module Aws::KinesisAnalytics
     #         inputs: [
     #           {
     #             name_prefix: "InAppStreamName", # required
+    #             input_processing_configuration: {
+    #               input_lambda_processor: { # required
+    #                 resource_arn: "ResourceARN", # required
+    #                 role_arn: "RoleARN", # required
+    #               },
+    #             },
     #             kinesis_streams_input: {
     #               resource_arn: "ResourceARN", # required
     #               role_arn: "RoleARN", # required
@@ -840,6 +911,42 @@ module Aws::KinesisAnalytics
     #
     class DeleteApplicationCloudWatchLoggingOptionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteApplicationInputProcessingConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #         input_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The Kinesis Analytics application name.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The version ID of the Kinesis Analytics application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input_id
+    #   The ID of the input configuration from which to delete the input
+    #   configuration. You can get a list of the input IDs for an
+    #   application using the DescribeApplication operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfigurationRequest AWS API Documentation
+    #
+    class DeleteApplicationInputProcessingConfigurationRequest < Struct.new(
+      :application_name,
+      :current_application_version_id,
+      :input_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfigurationResponse AWS API Documentation
+    #
+    class DeleteApplicationInputProcessingConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteApplicationOutputRequest
     #   data as a hash:
     #
@@ -1012,10 +1119,21 @@ module Aws::KinesisAnalytics
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "ResourceARN", # required
-    #         role_arn: "RoleARN", # required
-    #         input_starting_position_configuration: { # required
+    #         resource_arn: "ResourceARN",
+    #         role_arn: "RoleARN",
+    #         input_starting_position_configuration: {
     #           input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
+    #         },
+    #         s3_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           file_key: "FileKey", # required
+    #         },
+    #         input_processing_configuration: {
+    #           input_lambda_processor: { # required
+    #             resource_arn: "ResourceARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
     #         },
     #       }
     #
@@ -1033,12 +1151,22 @@ module Aws::KinesisAnalytics
     #   records from the specified streaming source discovery purposes.
     #   @return [Types::InputStartingPositionConfiguration]
     #
+    # @!attribute [rw] s3_configuration
+    #   @return [Types::S3Configuration]
+    #
+    # @!attribute [rw] input_processing_configuration
+    #   The InputProcessingConfiguration to use to preprocess the records
+    #   before discovering the schema of the records.
+    #   @return [Types::InputProcessingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchemaRequest AWS API Documentation
     #
     class DiscoverInputSchemaRequest < Struct.new(
       :resource_arn,
       :role_arn,
-      :input_starting_position_configuration)
+      :input_starting_position_configuration,
+      :s3_configuration,
+      :input_processing_configuration)
       include Aws::Structure
     end
 
@@ -1054,6 +1182,11 @@ module Aws::KinesisAnalytics
     #   stream record (a stream record can have more than one row).
     #   @return [Array<Array<String>>]
     #
+    # @!attribute [rw] processed_input_records
+    #   Stream data that was modified by the processor specified in the
+    #   `InputProcessingConfiguration` parameter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] raw_input_records
     #   Raw stream data that was sampled to infer the schema.
     #   @return [Array<String>]
@@ -1063,6 +1196,7 @@ module Aws::KinesisAnalytics
     class DiscoverInputSchemaResponse < Struct.new(
       :input_schema,
       :parsed_input_records,
+      :processed_input_records,
       :raw_input_records)
       include Aws::Structure
     end
@@ -1081,6 +1215,12 @@ module Aws::KinesisAnalytics
     #
     #       {
     #         name_prefix: "InAppStreamName", # required
+    #         input_processing_configuration: {
+    #           input_lambda_processor: { # required
+    #             resource_arn: "ResourceARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
+    #         },
     #         kinesis_streams_input: {
     #           resource_arn: "ResourceARN", # required
     #           role_arn: "RoleARN", # required
@@ -1124,6 +1264,13 @@ module Aws::KinesisAnalytics
     #   "MyInApplicationStream\_001", "MyInApplicationStream\_002" and
     #   so on.
     #   @return [String]
+    #
+    # @!attribute [rw] input_processing_configuration
+    #   The InputProcessingConfiguration for the Input. An input processor
+    #   transforms records as they are received from the stream, before the
+    #   application's SQL code executes. Currently, the only input
+    #   processing configuration available is InputLambdaProcessor.
+    #   @return [Types::InputProcessingConfiguration]
     #
     # @!attribute [rw] kinesis_streams_input
     #   If the streaming source is an Amazon Kinesis stream, identifies the
@@ -1169,6 +1316,7 @@ module Aws::KinesisAnalytics
     #
     class Input < Struct.new(
       :name_prefix,
+      :input_processing_configuration,
       :kinesis_streams_input,
       :kinesis_firehose_input,
       :input_parallelism,
@@ -1230,6 +1378,11 @@ module Aws::KinesisAnalytics
     #   stream source.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] input_processing_configuration_description
+    #   The description of the preprocessor that executes on records in this
+    #   input before the application's code is run.
+    #   @return [Types::InputProcessingConfigurationDescription]
+    #
     # @!attribute [rw] kinesis_streams_input_description
     #   If an Amazon Kinesis stream is configured as streaming source,
     #   provides Amazon Kinesis stream's ARN and an IAM role that enables
@@ -1245,8 +1398,8 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] input_schema
     #   Describes the format of the data in the streaming source, and how
-    #   each data element maps to corresponding columns created in the
-    #   in-application stream.
+    #   each data element maps to corresponding columns in the
+    #   in-application stream that is being created.
     #   @return [Types::SourceSchema]
     #
     # @!attribute [rw] input_parallelism
@@ -1265,11 +1418,110 @@ module Aws::KinesisAnalytics
       :input_id,
       :name_prefix,
       :in_app_stream_names,
+      :input_processing_configuration_description,
       :kinesis_streams_input_description,
       :kinesis_firehose_input_description,
       :input_schema,
       :input_parallelism,
       :input_starting_position_configuration)
+      include Aws::Structure
+    end
+
+    # An object that contains the ARN of the [AWS Lambda][1] function that
+    # is used to preprocess records in the stream, and the ARN of the IAM
+    # role used to access the AWS Lambda function.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    # @note When making an API call, you may pass InputLambdaProcessor
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         role_arn: "RoleARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the [AWS Lambda][1] function that operates on records in
+    #   the stream.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role used to access the AWS Lambda function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessor AWS API Documentation
+    #
+    class InputLambdaProcessor < Struct.new(
+      :resource_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # An object that contains the ARN of the [AWS Lambda][1] function that
+    # is used to preprocess records in the stream, and the ARN of the IAM
+    # role used to access the AWS Lambda expression.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the [AWS Lambda][1] function that is used to preprocess
+    #   the records in the stream.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role used to access the AWS Lambda function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorDescription AWS API Documentation
+    #
+    class InputLambdaProcessorDescription < Struct.new(
+      :resource_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Represents an update to the InputLambdaProcessor that is used to
+    # preprocess the records in the stream.
+    #
+    # @note When making an API call, you may pass InputLambdaProcessorUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn_update: "ResourceARN",
+    #         role_arn_update: "RoleARN",
+    #       }
+    #
+    # @!attribute [rw] resource_arn_update
+    #   The ARN of the new [AWS Lambda][1] function that is used to
+    #   preprocess the records in the stream.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/documentation/lambda/
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn_update
+    #   The ARN of the new IAM role used to access the AWS Lambda function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorUpdate AWS API Documentation
+    #
+    class InputLambdaProcessorUpdate < Struct.new(
+      :resource_arn_update,
+      :role_arn_update)
       include Aws::Structure
     end
 
@@ -1322,6 +1574,79 @@ module Aws::KinesisAnalytics
     #
     class InputParallelismUpdate < Struct.new(
       :count_update)
+      include Aws::Structure
+    end
+
+    # Provides a description of a processor that is used to preprocess the
+    # records in the stream prior to being processed by your application
+    # code. Currently, the only input processor available is [AWS
+    # Lambda][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    # @note When making an API call, you may pass InputProcessingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         input_lambda_processor: { # required
+    #           resource_arn: "ResourceARN", # required
+    #           role_arn: "RoleARN", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_lambda_processor
+    #   The InputLambdaProcessor that is used to preprocess the records in
+    #   the stream prior to being processed by your application code.
+    #   @return [Types::InputLambdaProcessor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfiguration AWS API Documentation
+    #
+    class InputProcessingConfiguration < Struct.new(
+      :input_lambda_processor)
+      include Aws::Structure
+    end
+
+    # Provides configuration information about an input processor.
+    # Currently, the only input processor available is [AWS Lambda][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/documentation/lambda/
+    #
+    # @!attribute [rw] input_lambda_processor_description
+    #   Provides configuration information about the associated
+    #   InputLambdaProcessorDescription.
+    #   @return [Types::InputLambdaProcessorDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationDescription AWS API Documentation
+    #
+    class InputProcessingConfigurationDescription < Struct.new(
+      :input_lambda_processor_description)
+      include Aws::Structure
+    end
+
+    # Describes updates to an InputProcessingConfiguration.
+    #
+    # @note When making an API call, you may pass InputProcessingConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         input_lambda_processor_update: { # required
+    #           resource_arn_update: "ResourceARN",
+    #           role_arn_update: "RoleARN",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_lambda_processor_update
+    #   Provides update information for an InputLambdaProcessor.
+    #   @return [Types::InputLambdaProcessorUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationUpdate AWS API Documentation
+    #
+    class InputProcessingConfigurationUpdate < Struct.new(
+      :input_lambda_processor_update)
       include Aws::Structure
     end
 
@@ -1418,6 +1743,12 @@ module Aws::KinesisAnalytics
     #       {
     #         input_id: "Id", # required
     #         name_prefix_update: "InAppStreamName",
+    #         input_processing_configuration_update: {
+    #           input_lambda_processor_update: { # required
+    #             resource_arn_update: "ResourceARN",
+    #             role_arn_update: "RoleARN",
+    #           },
+    #         },
     #         kinesis_streams_input_update: {
     #           resource_arn_update: "ResourceARN",
     #           role_arn_update: "RoleARN",
@@ -1462,6 +1793,10 @@ module Aws::KinesisAnalytics
     #   creates for the specific streaming source.
     #   @return [String]
     #
+    # @!attribute [rw] input_processing_configuration_update
+    #   Describes updates for an input processing configuration.
+    #   @return [Types::InputProcessingConfigurationUpdate]
+    #
     # @!attribute [rw] kinesis_streams_input_update
     #   If a Amazon Kinesis stream is the streaming source to be updated,
     #   provides an updated stream ARN and IAM role ARN.
@@ -1489,6 +1824,7 @@ module Aws::KinesisAnalytics
     class InputUpdate < Struct.new(
       :input_id,
       :name_prefix_update,
+      :input_processing_configuration_update,
       :kinesis_streams_input_update,
       :kinesis_firehose_input_update,
       :input_schema_update,
@@ -2347,6 +2683,33 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass S3Configuration
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         file_key: "FileKey", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] file_key
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3Configuration AWS API Documentation
+    #
+    class S3Configuration < Struct.new(
+      :role_arn,
+      :bucket_arn,
+      :file_key)
+      include Aws::Structure
+    end
+
     # Identifies the S3 bucket and object that contains the reference data.
     # Also identifies the IAM role Amazon Kinesis Analytics can assume to
     # read this object on your behalf.
@@ -2572,6 +2935,12 @@ module Aws::KinesisAnalytics
     #             {
     #               input_id: "Id", # required
     #               name_prefix_update: "InAppStreamName",
+    #               input_processing_configuration_update: {
+    #                 input_lambda_processor_update: { # required
+    #                   resource_arn_update: "ResourceARN",
+    #                   role_arn_update: "RoleARN",
+    #                 },
+    #               },
     #               kinesis_streams_input_update: {
     #                 resource_arn_update: "ResourceARN",
     #                 role_arn_update: "RoleARN",

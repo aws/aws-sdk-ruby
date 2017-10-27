@@ -8,19 +8,256 @@
 module Aws::Pinpoint
   module Types
 
+    # Amazon Device Messaging channel definition.
+    #
+    # @note When making an API call, you may pass ADMChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_id: "__string",
+    #         client_secret: "__string",
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] client_id
+    #   Client ID as gotten from Amazon
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   Client secret as gotten from Amazon
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelRequest AWS API Documentation
+    #
+    class ADMChannelRequest < Struct.new(
+      :client_id,
+      :client_secret,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Amazon Device Messaging channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who last updated this entry
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   Platform type. Will be "ADM"
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelResponse AWS API Documentation
+    #
+    class ADMChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :enabled,
+      :has_credential,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # ADM Message.
+    #
+    # @note When making an API call, you may pass ADMMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         consolidation_key: "__string",
+    #         data: {
+    #           "__string" => "__string",
+    #         },
+    #         expires_after: "__string",
+    #         icon_reference: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         md5: "__string",
+    #         raw_content: "__string",
+    #         silent_push: false,
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL - The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
+    #   Possible values include: OPEN\_APP \| DEEP\_LINK \| URL
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] consolidation_key
+    #   Optional. Arbitrary string used to indicate multiple messages are
+    #   logically the same and that ADM is allowed to drop previously
+    #   enqueued messages in favor of this one.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] expires_after
+    #   Optional. Number of seconds ADM should retain the message if the
+    #   device is offline
+    #   @return [String]
+    #
+    # @!attribute [rw] icon_reference
+    #   The icon image name of the asset saved in your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL that points to an image used as the large icon to the
+    #   notification content view.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL that points to an image used in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] md5
+    #   Optional. Base-64-encoded MD5 checksum of the data parameter. Used
+    #   to verify data integrity
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] silent_push
+    #   Indicates if the message should display on the users device. Silent
+    #   pushes can be used for Remote Configuration and Phone Home use
+    #   cases.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL that points to an image used as the small icon for the
+    #   notification which will be used to represent the notification in the
+    #   status bar and content view
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   Indicates a sound to play when the device receives the notification.
+    #   Supports default, or the filename of a sound resource bundled in the
+    #   app. Android sound files must reside in /res/raw/
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title
+    #   The message title that displays above the message on the user's
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the user's mobile browser. Used if the value for
+    #   Action is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMMessage AWS API Documentation
+    #
+    class ADMMessage < Struct.new(
+      :action,
+      :body,
+      :consolidation_key,
+      :data,
+      :expires_after,
+      :icon_reference,
+      :image_icon_url,
+      :image_url,
+      :md5,
+      :raw_content,
+      :silent_push,
+      :small_image_icon_url,
+      :sound,
+      :substitutions,
+      :title,
+      :url)
+      include Aws::Structure
+    end
+
     # Apple Push Notification Service channel definition.
     #
     # @note When making an API call, you may pass APNSChannelRequest
     #   data as a hash:
     #
     #       {
+    #         bundle_id: "__string",
     #         certificate: "__string",
+    #         default_authentication_method: "__string",
     #         enabled: false,
     #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
     #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
     #
     # @!attribute [rw] certificate
     #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -31,10 +268,29 @@ module Aws::Pinpoint
     #   The certificate private key.
     #   @return [String]
     #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelRequest AWS API Documentation
+    #
     class APNSChannelRequest < Struct.new(
+      :bundle_id,
       :certificate,
+      :default_authentication_method,
       :enabled,
-      :private_key)
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
       include Aws::Structure
     end
 
@@ -48,8 +304,20 @@ module Aws::Pinpoint
     #   When was this segment created
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -76,10 +344,15 @@ module Aws::Pinpoint
     #   Version of channel
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelResponse AWS API Documentation
+    #
     class APNSChannelResponse < Struct.new(
       :application_id,
       :creation_date,
+      :default_authentication_method,
       :enabled,
+      :has_credential,
+      :has_token_key,
       :id,
       :is_archived,
       :last_modified_by,
@@ -99,10 +372,13 @@ module Aws::Pinpoint
     #         badge: 1,
     #         body: "__string",
     #         category: "__string",
+    #         collapse_id: "__string",
     #         data: {
     #           "__string" => "__string",
     #         },
     #         media_url: "__string",
+    #         preferred_authentication_method: "__string",
+    #         priority: "__string",
     #         raw_content: "__string",
     #         silent_push: false,
     #         sound: "__string",
@@ -110,6 +386,7 @@ module Aws::Pinpoint
     #           "__string" => ["__string"],
     #         },
     #         thread_id: "__string",
+    #         time_to_live: 1,
     #         title: "__string",
     #         url: "__string",
     #       }
@@ -143,11 +420,26 @@ module Aws::Pinpoint
     #   identifier property of one of your app's registered categories.
     #   @return [String]
     #
+    # @!attribute [rw] collapse_id
+    #   Multiple notifications with the same collapse identifier are
+    #   displayed to the user as a single notification. The value of this
+    #   key must not exceed 64 bytes.
+    #   @return [String]
+    #
     # @!attribute [rw] data
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] media_url
     #   The URL that points to a video used in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_authentication_method
+    #   The preferred authentication method, either "CERTIFICATE" or
+    #   "TOKEN"
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Is this a transaction priority message or lower priority.
     #   @return [String]
     #
     # @!attribute [rw] raw_content
@@ -179,6 +471,15 @@ module Aws::Pinpoint
     #   your notifications together.
     #   @return [String]
     #
+    # @!attribute [rw] time_to_live
+    #   This parameter specifies how long (in seconds) the message should be
+    #   kept if APNS is unable to deliver the notification the first time.
+    #   If the value is 0, APNS treats the notification as if it expires
+    #   immediately and does not store the notification or attempt to
+    #   redeliver it. This value is converted to the expiration field when
+    #   sent to APNS
+    #   @return [Integer]
+    #
     # @!attribute [rw] title
     #   The message title that displays above the message on the user's
     #   device.
@@ -189,18 +490,24 @@ module Aws::Pinpoint
     #   Action is URL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSMessage AWS API Documentation
+    #
     class APNSMessage < Struct.new(
       :action,
       :badge,
       :body,
       :category,
+      :collapse_id,
       :data,
       :media_url,
+      :preferred_authentication_method,
+      :priority,
       :raw_content,
       :silent_push,
       :sound,
       :substitutions,
       :thread_id,
+      :time_to_live,
       :title,
       :url)
       include Aws::Structure
@@ -212,13 +519,26 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         bundle_id: "__string",
     #         certificate: "__string",
+    #         default_authentication_method: "__string",
     #         enabled: false,
     #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
     #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
     #
     # @!attribute [rw] certificate
     #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -229,10 +549,29 @@ module Aws::Pinpoint
     #   The certificate private key.
     #   @return [String]
     #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSSandboxChannelRequest AWS API Documentation
+    #
     class APNSSandboxChannelRequest < Struct.new(
+      :bundle_id,
       :certificate,
+      :default_authentication_method,
       :enabled,
-      :private_key)
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
       include Aws::Structure
     end
 
@@ -246,8 +585,20 @@ module Aws::Pinpoint
     #   When was this segment created
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -274,10 +625,275 @@ module Aws::Pinpoint
     #   Version of channel
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSSandboxChannelResponse AWS API Documentation
+    #
     class APNSSandboxChannelResponse < Struct.new(
       :application_id,
       :creation_date,
+      :default_authentication_method,
       :enabled,
+      :has_credential,
+      :has_token_key,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Push Notification Service channel definition.
+    #
+    # @note When making an API call, you may pass APNSVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "__string",
+    #         certificate: "__string",
+    #         default_authentication_method: "__string",
+    #         enabled: false,
+    #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_key
+    #   The certificate private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelRequest AWS API Documentation
+    #
+    class APNSVoipChannelRequest < Struct.new(
+      :bundle_id,
+      :certificate,
+      :default_authentication_method,
+      :enabled,
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Push Notification Service channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be APNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelResponse AWS API Documentation
+    #
+    class APNSVoipChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :default_authentication_method,
+      :enabled,
+      :has_credential,
+      :has_token_key,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Developer Push Notification Service channel definition.
+    #
+    # @note When making an API call, you may pass APNSVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bundle_id: "__string",
+    #         certificate: "__string",
+    #         default_authentication_method: "__string",
+    #         enabled: false,
+    #         private_key: "__string",
+    #         team_id: "__string",
+    #         token_key: "__string",
+    #         token_key_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] bundle_id
+    #   The bundle id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   The distribution certificate from Apple.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_key
+    #   The certificate private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_id
+    #   The team id used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_key_id
+    #   The token key used for APNs Tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelRequest AWS API Documentation
+    #
+    class APNSVoipSandboxChannelRequest < Struct.new(
+      :bundle_id,
+      :certificate,
+      :default_authentication_method,
+      :enabled,
+      :private_key,
+      :team_id,
+      :token_key,
+      :token_key_id)
+      include Aws::Structure
+    end
+
+    # Apple VOIP Developer Push Notification Service channel definition.
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for APNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_token_key
+    #   If the channel is registered with a token key for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be APNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelResponse AWS API Documentation
+    #
+    class APNSVoipSandboxChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :default_authentication_method,
+      :enabled,
+      :has_credential,
+      :has_token_key,
       :id,
       :is_archived,
       :last_modified_by,
@@ -292,6 +908,8 @@ module Aws::Pinpoint
     # @!attribute [rw] item
     #   List of campaign activities
     #   @return [Array<Types::ActivityResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivitiesResponse AWS API Documentation
     #
     class ActivitiesResponse < Struct.new(
       :item)
@@ -357,6 +975,8 @@ module Aws::Pinpoint
     #   The ID of a variation of the campaign used for A/B testing.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivityResponse AWS API Documentation
+    #
     class ActivityResponse < Struct.new(
       :application_id,
       :campaign_id,
@@ -381,7 +1001,7 @@ module Aws::Pinpoint
     #
     #       {
     #         body_override: "__string",
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         context: {
     #           "__string" => "__string",
     #         },
@@ -416,6 +1036,8 @@ module Aws::Pinpoint
     #   applicable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AddressConfiguration AWS API Documentation
+    #
     class AddressConfiguration < Struct.new(
       :body_override,
       :channel_type,
@@ -435,6 +1057,8 @@ module Aws::Pinpoint
     # @!attribute [rw] name
     #   The display name of the application.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationResponse AWS API Documentation
     #
     class ApplicationResponse < Struct.new(
       :id,
@@ -464,6 +1088,8 @@ module Aws::Pinpoint
     #   default with a quiet time of its own.
     #   @return [Types::QuietTime]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsResource AWS API Documentation
+    #
     class ApplicationSettingsResource < Struct.new(
       :application_id,
       :last_modified_date,
@@ -482,6 +1108,8 @@ module Aws::Pinpoint
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationsResponse AWS API Documentation
     #
     class ApplicationsResponse < Struct.new(
       :item,
@@ -508,9 +1136,218 @@ module Aws::Pinpoint
     # @!attribute [rw] values
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AttributeDimension AWS API Documentation
+    #
     class AttributeDimension < Struct.new(
       :attribute_type,
       :values)
+      include Aws::Structure
+    end
+
+    # Baidu Cloud Push credentials
+    #
+    # @note When making an API call, you may pass BaiduChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_key: "__string",
+    #         enabled: false,
+    #         secret_key: "__string",
+    #       }
+    #
+    # @!attribute [rw] api_key
+    #   Platform credential API key from Baidu.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] secret_key
+    #   Platform credential Secret key from Baidu.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduChannelRequest AWS API Documentation
+    #
+    class BaiduChannelRequest < Struct.new(
+      :api_key,
+      :enabled,
+      :secret_key)
+      include Aws::Structure
+    end
+
+    # Baidu Cloud Messaging channel definition
+    #
+    # @!attribute [rw] application_id
+    #   Application id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When was this segment created
+    #   @return [String]
+    #
+    # @!attribute [rw] credential
+    #   The Baidu API key from Baidu.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   Channel ID. Not used, only for backwards compatibility.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_archived
+    #   Is this channel archived
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Who made the last change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Last date this was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type. Will be BAIDU
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of channel
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduChannelResponse AWS API Documentation
+    #
+    class BaiduChannelResponse < Struct.new(
+      :application_id,
+      :creation_date,
+      :credential,
+      :enabled,
+      :has_credential,
+      :id,
+      :is_archived,
+      :last_modified_by,
+      :last_modified_date,
+      :platform,
+      :version)
+      include Aws::Structure
+    end
+
+    # Baidu Message.
+    #
+    # @note When making an API call, you may pass BaiduMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #         body: "__string",
+    #         data: {
+    #           "__string" => "__string",
+    #         },
+    #         icon_reference: "__string",
+    #         image_icon_url: "__string",
+    #         image_url: "__string",
+    #         raw_content: "__string",
+    #         silent_push: false,
+    #         small_image_icon_url: "__string",
+    #         sound: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title: "__string",
+    #         url: "__string",
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP - Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK - Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL - The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
+    #   Possible values include: OPEN\_APP \| DEEP\_LINK \| URL
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] icon_reference
+    #   The icon image name of the asset saved in your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL that points to an image used as the large icon to the
+    #   notification content view.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL that points to an image used in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] silent_push
+    #   Indicates if the message should display on the users device. Silent
+    #   pushes can be used for Remote Configuration and Phone Home use
+    #   cases.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL that points to an image used as the small icon for the
+    #   notification which will be used to represent the notification in the
+    #   status bar and content view
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   Indicates a sound to play when the device receives the notification.
+    #   Supports default, or the filename of a sound resource bundled in the
+    #   app. Android sound files must reside in /res/raw/
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title
+    #   The message title that displays above the message on the user's
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in the user's mobile browser. Used if the value for
+    #   Action is URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduMessage AWS API Documentation
+    #
+    class BaiduMessage < Struct.new(
+      :action,
+      :body,
+      :data,
+      :icon_reference,
+      :image_icon_url,
+      :image_url,
+      :raw_content,
+      :silent_push,
+      :small_image_icon_url,
+      :sound,
+      :substitutions,
+      :title,
+      :url)
       include Aws::Structure
     end
 
@@ -543,6 +1380,8 @@ module Aws::Pinpoint
     #   The email title (Or subject).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEmailMessage AWS API Documentation
+    #
     class CampaignEmailMessage < Struct.new(
       :body,
       :from_address,
@@ -559,6 +1398,8 @@ module Aws::Pinpoint
     #
     #       {
     #         daily: 1,
+    #         maximum_duration: 1,
+    #         messages_per_second: 1,
     #         total: 1,
     #       }
     #
@@ -566,12 +1407,27 @@ module Aws::Pinpoint
     #   The maximum number of messages that the campaign can send daily.
     #   @return [Integer]
     #
+    # @!attribute [rw] maximum_duration
+    #   The maximum duration of a campaign from the scheduled start. Must be
+    #   a minimum of 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] messages_per_second
+    #   The maximum number of messages per second that the campaign will
+    #   send. This is a best effort maximum cap and can go as high as 20000
+    #   and as low as 50
+    #   @return [Integer]
+    #
     # @!attribute [rw] total
     #   The maximum total number of messages that the campaign can send.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits AWS API Documentation
+    #
     class CampaignLimits < Struct.new(
       :daily,
+      :maximum_duration,
+      :messages_per_second,
       :total)
       include Aws::Structure
     end
@@ -658,6 +1514,8 @@ module Aws::Pinpoint
     #   The campaign version number.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignResponse AWS API Documentation
+    #
     class CampaignResponse < Struct.new(
       :additional_treatments,
       :application_id,
@@ -705,6 +1563,8 @@ module Aws::Pinpoint
     #   Sender ID of sent message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignSmsMessage AWS API Documentation
+    #
     class CampaignSmsMessage < Struct.new(
       :body,
       :message_type,
@@ -719,6 +1579,8 @@ module Aws::Pinpoint
     #   belongs to an A/B test campaign. Valid values: SCHEDULED, EXECUTING,
     #   PENDING\_NEXT\_RUN, COMPLETED, PAUSED
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignState AWS API Documentation
     #
     class CampaignState < Struct.new(
       :campaign_status)
@@ -735,6 +1597,8 @@ module Aws::Pinpoint
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignsResponse AWS API Documentation
     #
     class CampaignsResponse < Struct.new(
       :item,
@@ -755,6 +1619,8 @@ module Aws::Pinpoint
     #   Application Request.
     #   @return [Types::CreateApplicationRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateAppRequest AWS API Documentation
+    #
     class CreateAppRequest < Struct.new(
       :create_application_request)
       include Aws::Structure
@@ -763,6 +1629,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_response
     #   Application Response.
     #   @return [Types::ApplicationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateAppResponse AWS API Documentation
     #
     class CreateAppResponse < Struct.new(
       :application_response)
@@ -783,6 +1651,8 @@ module Aws::Pinpoint
     #   console.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApplicationRequest AWS API Documentation
+    #
     class CreateApplicationRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -797,7 +1667,33 @@ module Aws::Pinpoint
     #           additional_treatments: [
     #             {
     #               message_configuration: {
+    #                 adm_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
     #                 apns_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
+    #                 baidu_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
@@ -869,10 +1765,38 @@ module Aws::Pinpoint
     #           is_paused: false,
     #           limits: {
     #             daily: 1,
+    #             maximum_duration: 1,
+    #             messages_per_second: 1,
     #             total: 1,
     #           },
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -949,6 +1873,8 @@ module Aws::Pinpoint
     #   Used to create a campaign.
     #   @return [Types::WriteCampaignRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaignRequest AWS API Documentation
+    #
     class CreateCampaignRequest < Struct.new(
       :application_id,
       :write_campaign_request)
@@ -958,6 +1884,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_response
     #   Campaign definition
     #   @return [Types::CampaignResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaignResponse AWS API Documentation
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_response)
@@ -987,6 +1915,8 @@ module Aws::Pinpoint
     # @!attribute [rw] import_job_request
     #   @return [Types::ImportJobRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJobRequest AWS API Documentation
+    #
     class CreateImportJobRequest < Struct.new(
       :application_id,
       :import_job_request)
@@ -995,6 +1925,8 @@ module Aws::Pinpoint
 
     # @!attribute [rw] import_job_response
     #   @return [Types::ImportJobResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJobResponse AWS API Documentation
     #
     class CreateImportJobResponse < Struct.new(
       :import_job_response)
@@ -1070,6 +2002,8 @@ module Aws::Pinpoint
     #   Segment definition.
     #   @return [Types::WriteSegmentRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegmentRequest AWS API Documentation
+    #
     class CreateSegmentRequest < Struct.new(
       :application_id,
       :write_segment_request)
@@ -1079,6 +2013,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_response
     #   Segment definition.
     #   @return [Types::SegmentResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegmentResponse AWS API Documentation
     #
     class CreateSegmentResponse < Struct.new(
       :segment_response)
@@ -1104,6 +2040,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] substitutions
     #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultMessage AWS API Documentation
     #
     class DefaultMessage < Struct.new(
       :body,
@@ -1168,6 +2106,8 @@ module Aws::Pinpoint
     #   Action is URL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultPushNotificationMessage AWS API Documentation
+    #
     class DefaultPushNotificationMessage < Struct.new(
       :action,
       :body,
@@ -1176,6 +2116,34 @@ module Aws::Pinpoint
       :substitutions,
       :title,
       :url)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAdmChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannelRequest AWS API Documentation
+    #
+    class DeleteAdmChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adm_channel_response
+    #   Amazon Device Messaging channel definition.
+    #   @return [Types::ADMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannelResponse AWS API Documentation
+    #
+    class DeleteAdmChannelResponse < Struct.new(
+      :adm_channel_response)
       include Aws::Structure
     end
 
@@ -1189,6 +2157,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannelRequest AWS API Documentation
+    #
     class DeleteApnsChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1197,6 +2167,8 @@ module Aws::Pinpoint
     # @!attribute [rw] apns_channel_response
     #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannelResponse AWS API Documentation
     #
     class DeleteApnsChannelResponse < Struct.new(
       :apns_channel_response)
@@ -1213,6 +2185,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannelRequest AWS API Documentation
+    #
     class DeleteApnsSandboxChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1222,8 +2196,66 @@ module Aws::Pinpoint
     #   Apple Development Push Notification Service channel definition.
     #   @return [Types::APNSSandboxChannelResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannelResponse AWS API Documentation
+    #
     class DeleteApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelRequest AWS API Documentation
+    #
+    class DeleteApnsVoipChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelResponse AWS API Documentation
+    #
+    class DeleteApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class DeleteApnsVoipSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class DeleteApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -1237,6 +2269,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAppRequest AWS API Documentation
+    #
     class DeleteAppRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1246,8 +2280,38 @@ module Aws::Pinpoint
     #   Application Response.
     #   @return [Types::ApplicationResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAppResponse AWS API Documentation
+    #
     class DeleteAppResponse < Struct.new(
       :application_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBaiduChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannelRequest AWS API Documentation
+    #
+    class DeleteBaiduChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baidu_channel_response
+    #   Baidu Cloud Messaging channel definition
+    #   @return [Types::BaiduChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannelResponse AWS API Documentation
+    #
+    class DeleteBaiduChannelResponse < Struct.new(
+      :baidu_channel_response)
       include Aws::Structure
     end
 
@@ -1265,6 +2329,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaignRequest AWS API Documentation
+    #
     class DeleteCampaignRequest < Struct.new(
       :application_id,
       :campaign_id)
@@ -1274,6 +2340,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_response
     #   Campaign definition
     #   @return [Types::CampaignResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaignResponse AWS API Documentation
     #
     class DeleteCampaignResponse < Struct.new(
       :campaign_response)
@@ -1290,6 +2358,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannelRequest AWS API Documentation
+    #
     class DeleteEmailChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1298,6 +2368,8 @@ module Aws::Pinpoint
     # @!attribute [rw] email_channel_response
     #   Email Channel Response.
     #   @return [Types::EmailChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannelResponse AWS API Documentation
     #
     class DeleteEmailChannelResponse < Struct.new(
       :email_channel_response)
@@ -1315,6 +2387,8 @@ module Aws::Pinpoint
     #   Application Id.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStreamRequest AWS API Documentation
+    #
     class DeleteEventStreamRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1323,6 +2397,8 @@ module Aws::Pinpoint
     # @!attribute [rw] event_stream
     #   Model for an event publishing subscription export.
     #   @return [Types::EventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStreamResponse AWS API Documentation
     #
     class DeleteEventStreamResponse < Struct.new(
       :event_stream)
@@ -1339,6 +2415,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannelRequest AWS API Documentation
+    #
     class DeleteGcmChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1347,6 +2425,8 @@ module Aws::Pinpoint
     # @!attribute [rw] gcm_channel_response
     #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannelResponse AWS API Documentation
     #
     class DeleteGcmChannelResponse < Struct.new(
       :gcm_channel_response)
@@ -1367,6 +2447,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegmentRequest AWS API Documentation
+    #
     class DeleteSegmentRequest < Struct.new(
       :application_id,
       :segment_id)
@@ -1376,6 +2458,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_response
     #   Segment definition.
     #   @return [Types::SegmentResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegmentResponse AWS API Documentation
     #
     class DeleteSegmentResponse < Struct.new(
       :segment_response)
@@ -1392,6 +2476,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannelRequest AWS API Documentation
+    #
     class DeleteSmsChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -1400,6 +2486,8 @@ module Aws::Pinpoint
     # @!attribute [rw] sms_channel_response
     #   SMS Channel Response.
     #   @return [Types::SMSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannelResponse AWS API Documentation
     #
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response)
@@ -1412,15 +2500,40 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         adm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           consolidation_key: "__string",
+    #           data: {
+    #             "__string" => "__string",
+    #           },
+    #           expires_after: "__string",
+    #           icon_reference: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           md5: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
+    #           title: "__string",
+    #           url: "__string",
+    #         },
     #         apns_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           badge: 1,
     #           body: "__string",
     #           category: "__string",
+    #           collapse_id: "__string",
     #           data: {
     #             "__string" => "__string",
     #           },
     #           media_url: "__string",
+    #           preferred_authentication_method: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           silent_push: false,
     #           sound: "__string",
@@ -1428,6 +2541,26 @@ module Aws::Pinpoint
     #             "__string" => ["__string"],
     #           },
     #           thread_id: "__string",
+    #           time_to_live: 1,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           data: {
+    #             "__string" => "__string",
+    #           },
+    #           icon_reference: "__string",
+    #           image_icon_url: "__string",
+    #           image_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           small_image_icon_url: "__string",
+    #           sound: "__string",
+    #           substitutions: {
+    #             "__string" => ["__string"],
+    #           },
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -1460,6 +2593,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
     #           silent_push: false,
@@ -1468,6 +2602,7 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
     #         },
@@ -1481,10 +2616,20 @@ module Aws::Pinpoint
     #         },
     #       }
     #
+    # @!attribute [rw] adm_message
+    #   The message to ADM channels. Overrides the default push notification
+    #   message.
+    #   @return [Types::ADMMessage]
+    #
     # @!attribute [rw] apns_message
     #   The message to APNS channels. Overrides the default push
     #   notification message.
     #   @return [Types::APNSMessage]
+    #
+    # @!attribute [rw] baidu_message
+    #   The message to Baidu GCM channels. Overrides the default push
+    #   notification message.
+    #   @return [Types::BaiduMessage]
     #
     # @!attribute [rw] default_message
     #   The default message for all channels.
@@ -1503,8 +2648,12 @@ module Aws::Pinpoint
     #   The message to SMS channels. Overrides the default message.
     #   @return [Types::SMSMessage]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DirectMessageConfiguration AWS API Documentation
+    #
     class DirectMessageConfiguration < Struct.new(
+      :adm_message,
       :apns_message,
+      :baidu_message,
       :default_message,
       :default_push_notification_message,
       :gcm_message,
@@ -1541,6 +2690,8 @@ module Aws::Pinpoint
     #   event ingestion service
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest AWS API Documentation
+    #
     class EmailChannelRequest < Struct.new(
       :enabled,
       :from_address,
@@ -1566,6 +2717,10 @@ module Aws::Pinpoint
     # @!attribute [rw] from_address
     #   The email address used to send emails from.
     #   @return [String]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
+    #   @return [Boolean]
     #
     # @!attribute [rw] id
     #   Channel ID. Not used, only for backwards compatibility.
@@ -1600,11 +2755,14 @@ module Aws::Pinpoint
     #   Version of channel
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelResponse AWS API Documentation
+    #
     class EmailChannelResponse < Struct.new(
       :application_id,
       :creation_date,
       :enabled,
       :from_address,
+      :has_credential,
       :id,
       :identity,
       :is_archived,
@@ -1626,7 +2784,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -1713,6 +2871,8 @@ module Aws::Pinpoint
     #   Pinpoint.
     #   @return [Types::EndpointUser]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchItem AWS API Documentation
+    #
     class EndpointBatchItem < Struct.new(
       :address,
       :attributes,
@@ -1741,7 +2901,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -1781,6 +2941,8 @@ module Aws::Pinpoint
     # @!attribute [rw] item
     #   List of items to update. Maximum 100 items
     #   @return [Array<Types::EndpointBatchItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchRequest AWS API Documentation
     #
     class EndpointBatchRequest < Struct.new(
       :item)
@@ -1838,6 +3000,8 @@ module Aws::Pinpoint
     #   as Americas/Los\_Angeles.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointDemographic AWS API Documentation
+    #
     class EndpointDemographic < Struct.new(
       :app_version,
       :locale,
@@ -1891,6 +3055,8 @@ module Aws::Pinpoint
     #   state in US.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointLocation AWS API Documentation
+    #
     class EndpointLocation < Struct.new(
       :city,
       :country,
@@ -1898,6 +3064,39 @@ module Aws::Pinpoint
       :longitude,
       :postal_code,
       :region)
+      include Aws::Structure
+    end
+
+    # The result from sending a message to an endpoint.
+    #
+    # @!attribute [rw] address
+    #   Address that endpoint message was delivered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_status
+    #   Delivery status of message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   Downstream service status code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_message
+    #   Status message for message delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_token
+    #   If token was updated as part of delivery. (This is GCM Specific)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointMessageResult AWS API Documentation
+    #
+    class EndpointMessageResult < Struct.new(
+      :address,
+      :delivery_status,
+      :status_code,
+      :status_message,
+      :updated_token)
       include Aws::Structure
     end
 
@@ -1911,7 +3110,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -1992,6 +3191,8 @@ module Aws::Pinpoint
     #   Custom user-specific attributes that your app reports to Amazon
     #   Pinpoint.
     #   @return [Types::EndpointUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointRequest AWS API Documentation
     #
     class EndpointRequest < Struct.new(
       :address,
@@ -2075,13 +3276,12 @@ module Aws::Pinpoint
     #   The unique ID for the most recent request to update the endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] shard_id
-    #   @return [String]
-    #
     # @!attribute [rw] user
     #   Custom user-specific attributes that your app reports to Amazon
     #   Pinpoint.
     #   @return [Types::EndpointUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointResponse AWS API Documentation
     #
     class EndpointResponse < Struct.new(
       :address,
@@ -2098,8 +3298,55 @@ module Aws::Pinpoint
       :metrics,
       :opt_out,
       :request_id,
-      :shard_id,
       :user)
+      include Aws::Structure
+    end
+
+    # Endpoint send configuration.
+    #
+    # @note When making an API call, you may pass EndpointSendConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         body_override: "__string",
+    #         context: {
+    #           "__string" => "__string",
+    #         },
+    #         raw_content: "__string",
+    #         substitutions: {
+    #           "__string" => ["__string"],
+    #         },
+    #         title_override: "__string",
+    #       }
+    #
+    # @!attribute [rw] body_override
+    #   Body override. If specified will override default body.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] raw_content
+    #   The Raw JSON formatted string to be used as the payload. This value
+    #   overrides the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitutions
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] title_override
+    #   Title override. If specified will override default title if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointSendConfiguration AWS API Documentation
+    #
+    class EndpointSendConfiguration < Struct.new(
+      :body_override,
+      :context,
+      :raw_content,
+      :substitutions,
+      :title_override)
       include Aws::Structure
     end
 
@@ -2121,6 +3368,8 @@ module Aws::Pinpoint
     # @!attribute [rw] user_id
     #   The unique ID of the user.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointUser AWS API Documentation
     #
     class EndpointUser < Struct.new(
       :user_attributes,
@@ -2160,6 +3409,8 @@ module Aws::Pinpoint
     #   the stream in your account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventStream AWS API Documentation
+    #
     class EventStream < Struct.new(
       :application_id,
       :destination_stream_arn,
@@ -2188,6 +3439,8 @@ module Aws::Pinpoint
     #   If the channel is enabled for sending messages.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelRequest AWS API Documentation
+    #
     class GCMChannelRequest < Struct.new(
       :api_key,
       :enabled)
@@ -2210,6 +3463,10 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -2236,11 +3493,14 @@ module Aws::Pinpoint
     #   Version of channel
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelResponse AWS API Documentation
+    #
     class GCMChannelResponse < Struct.new(
       :application_id,
       :creation_date,
       :credential,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -2265,6 +3525,7 @@ module Aws::Pinpoint
     #         icon_reference: "__string",
     #         image_icon_url: "__string",
     #         image_url: "__string",
+    #         priority: "__string",
     #         raw_content: "__string",
     #         restricted_package_name: "__string",
     #         silent_push: false,
@@ -2273,6 +3534,7 @@ module Aws::Pinpoint
     #         substitutions: {
     #           "__string" => ["__string"],
     #         },
+    #         time_to_live: 1,
     #         title: "__string",
     #         url: "__string",
     #       }
@@ -2317,6 +3579,10 @@ module Aws::Pinpoint
     #   The URL that points to an image used in the push notification.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Is this a transaction priority message or lower priority.
+    #   @return [String]
+    #
     # @!attribute [rw] raw_content
     #   The Raw JSON formatted string to be used as the payload. This value
     #   overrides the message.
@@ -2348,6 +3614,12 @@ module Aws::Pinpoint
     # @!attribute [rw] substitutions
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] time_to_live
+    #   This parameter specifies how long (in seconds) the message should be
+    #   kept in GCM storage if the device is offline. The maximum time to
+    #   live supported is 4 weeks, and the default value is 4 weeks.
+    #   @return [Integer]
+    #
     # @!attribute [rw] title
     #   The message title that displays above the message on the user's
     #   device.
@@ -2358,6 +3630,8 @@ module Aws::Pinpoint
     #   Action is URL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMMessage AWS API Documentation
+    #
     class GCMMessage < Struct.new(
       :action,
       :body,
@@ -2366,14 +3640,44 @@ module Aws::Pinpoint
       :icon_reference,
       :image_icon_url,
       :image_url,
+      :priority,
       :raw_content,
       :restricted_package_name,
       :silent_push,
       :small_image_icon_url,
       :sound,
       :substitutions,
+      :time_to_live,
       :title,
       :url)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAdmChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannelRequest AWS API Documentation
+    #
+    class GetAdmChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adm_channel_response
+    #   Amazon Device Messaging channel definition.
+    #   @return [Types::ADMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannelResponse AWS API Documentation
+    #
+    class GetAdmChannelResponse < Struct.new(
+      :adm_channel_response)
       include Aws::Structure
     end
 
@@ -2387,6 +3691,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannelRequest AWS API Documentation
+    #
     class GetApnsChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2395,6 +3701,8 @@ module Aws::Pinpoint
     # @!attribute [rw] apns_channel_response
     #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannelResponse AWS API Documentation
     #
     class GetApnsChannelResponse < Struct.new(
       :apns_channel_response)
@@ -2411,6 +3719,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannelRequest AWS API Documentation
+    #
     class GetApnsSandboxChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2420,8 +3730,66 @@ module Aws::Pinpoint
     #   Apple Development Push Notification Service channel definition.
     #   @return [Types::APNSSandboxChannelResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannelResponse AWS API Documentation
+    #
     class GetApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelRequest AWS API Documentation
+    #
+    class GetApnsVoipChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelResponse AWS API Documentation
+    #
+    class GetApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class GetApnsVoipSandboxChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class GetApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -2435,6 +3803,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppRequest AWS API Documentation
+    #
     class GetAppRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2443,6 +3813,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_response
     #   Application Response.
     #   @return [Types::ApplicationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppResponse AWS API Documentation
     #
     class GetAppResponse < Struct.new(
       :application_response)
@@ -2459,6 +3831,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettingsRequest AWS API Documentation
+    #
     class GetApplicationSettingsRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2467,6 +3841,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_settings_resource
     #   Application settings.
     #   @return [Types::ApplicationSettingsResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettingsResponse AWS API Documentation
     #
     class GetApplicationSettingsResponse < Struct.new(
       :application_settings_resource)
@@ -2487,6 +3863,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppsRequest AWS API Documentation
+    #
     class GetAppsRequest < Struct.new(
       :page_size,
       :token)
@@ -2497,8 +3875,38 @@ module Aws::Pinpoint
     #   Get Applications Result.
     #   @return [Types::ApplicationsResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppsResponse AWS API Documentation
+    #
     class GetAppsResponse < Struct.new(
       :applications_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBaiduChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannelRequest AWS API Documentation
+    #
+    class GetBaiduChannelRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baidu_channel_response
+    #   Baidu Cloud Messaging channel definition
+    #   @return [Types::BaiduChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannelResponse AWS API Documentation
+    #
+    class GetBaiduChannelResponse < Struct.new(
+      :baidu_channel_response)
       include Aws::Structure
     end
 
@@ -2524,6 +3932,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivitiesRequest AWS API Documentation
+    #
     class GetCampaignActivitiesRequest < Struct.new(
       :application_id,
       :campaign_id,
@@ -2535,6 +3945,8 @@ module Aws::Pinpoint
     # @!attribute [rw] activities_response
     #   Activities for campaign.
     #   @return [Types::ActivitiesResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivitiesResponse AWS API Documentation
     #
     class GetCampaignActivitiesResponse < Struct.new(
       :activities_response)
@@ -2555,6 +3967,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignRequest AWS API Documentation
+    #
     class GetCampaignRequest < Struct.new(
       :application_id,
       :campaign_id)
@@ -2564,6 +3978,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_response
     #   Campaign definition
     #   @return [Types::CampaignResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignResponse AWS API Documentation
     #
     class GetCampaignResponse < Struct.new(
       :campaign_response)
@@ -2588,6 +4004,8 @@ module Aws::Pinpoint
     # @!attribute [rw] version
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionRequest AWS API Documentation
+    #
     class GetCampaignVersionRequest < Struct.new(
       :application_id,
       :campaign_id,
@@ -2598,6 +4016,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_response
     #   Campaign definition
     #   @return [Types::CampaignResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionResponse AWS API Documentation
     #
     class GetCampaignVersionResponse < Struct.new(
       :campaign_response)
@@ -2626,6 +4046,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionsRequest AWS API Documentation
+    #
     class GetCampaignVersionsRequest < Struct.new(
       :application_id,
       :campaign_id,
@@ -2637,6 +4059,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaigns_response
     #   List of available campaigns.
     #   @return [Types::CampaignsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionsResponse AWS API Documentation
     #
     class GetCampaignVersionsResponse < Struct.new(
       :campaigns_response)
@@ -2661,6 +4085,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignsRequest AWS API Documentation
+    #
     class GetCampaignsRequest < Struct.new(
       :application_id,
       :page_size,
@@ -2671,6 +4097,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaigns_response
     #   List of available campaigns.
     #   @return [Types::CampaignsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignsResponse AWS API Documentation
     #
     class GetCampaignsResponse < Struct.new(
       :campaigns_response)
@@ -2687,6 +4115,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannelRequest AWS API Documentation
+    #
     class GetEmailChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2695,6 +4125,8 @@ module Aws::Pinpoint
     # @!attribute [rw] email_channel_response
     #   Email Channel Response.
     #   @return [Types::EmailChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannelResponse AWS API Documentation
     #
     class GetEmailChannelResponse < Struct.new(
       :email_channel_response)
@@ -2715,6 +4147,8 @@ module Aws::Pinpoint
     # @!attribute [rw] endpoint_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpointRequest AWS API Documentation
+    #
     class GetEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id)
@@ -2724,6 +4158,8 @@ module Aws::Pinpoint
     # @!attribute [rw] endpoint_response
     #   Endpoint response
     #   @return [Types::EndpointResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpointResponse AWS API Documentation
     #
     class GetEndpointResponse < Struct.new(
       :endpoint_response)
@@ -2741,6 +4177,8 @@ module Aws::Pinpoint
     #   Application Id.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStreamRequest AWS API Documentation
+    #
     class GetEventStreamRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2749,6 +4187,8 @@ module Aws::Pinpoint
     # @!attribute [rw] event_stream
     #   Model for an event publishing subscription export.
     #   @return [Types::EventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStreamResponse AWS API Documentation
     #
     class GetEventStreamResponse < Struct.new(
       :event_stream)
@@ -2765,6 +4205,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannelRequest AWS API Documentation
+    #
     class GetGcmChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -2773,6 +4215,8 @@ module Aws::Pinpoint
     # @!attribute [rw] gcm_channel_response
     #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannelResponse AWS API Documentation
     #
     class GetGcmChannelResponse < Struct.new(
       :gcm_channel_response)
@@ -2793,6 +4237,8 @@ module Aws::Pinpoint
     # @!attribute [rw] job_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobRequest AWS API Documentation
+    #
     class GetImportJobRequest < Struct.new(
       :application_id,
       :job_id)
@@ -2801,6 +4247,8 @@ module Aws::Pinpoint
 
     # @!attribute [rw] import_job_response
     #   @return [Types::ImportJobResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobResponse AWS API Documentation
     #
     class GetImportJobResponse < Struct.new(
       :import_job_response)
@@ -2825,6 +4273,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobsRequest AWS API Documentation
+    #
     class GetImportJobsRequest < Struct.new(
       :application_id,
       :page_size,
@@ -2835,6 +4285,8 @@ module Aws::Pinpoint
     # @!attribute [rw] import_jobs_response
     #   Import job list.
     #   @return [Types::ImportJobsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobsResponse AWS API Documentation
     #
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response)
@@ -2863,6 +4315,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobsRequest AWS API Documentation
+    #
     class GetSegmentImportJobsRequest < Struct.new(
       :application_id,
       :page_size,
@@ -2874,6 +4328,8 @@ module Aws::Pinpoint
     # @!attribute [rw] import_jobs_response
     #   Import job list.
     #   @return [Types::ImportJobsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobsResponse AWS API Documentation
     #
     class GetSegmentImportJobsResponse < Struct.new(
       :import_jobs_response)
@@ -2894,6 +4350,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentRequest AWS API Documentation
+    #
     class GetSegmentRequest < Struct.new(
       :application_id,
       :segment_id)
@@ -2903,6 +4361,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_response
     #   Segment definition.
     #   @return [Types::SegmentResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentResponse AWS API Documentation
     #
     class GetSegmentResponse < Struct.new(
       :segment_response)
@@ -2927,6 +4387,8 @@ module Aws::Pinpoint
     # @!attribute [rw] version
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionRequest AWS API Documentation
+    #
     class GetSegmentVersionRequest < Struct.new(
       :application_id,
       :segment_id,
@@ -2937,6 +4399,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_response
     #   Segment definition.
     #   @return [Types::SegmentResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionResponse AWS API Documentation
     #
     class GetSegmentVersionResponse < Struct.new(
       :segment_response)
@@ -2965,6 +4429,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionsRequest AWS API Documentation
+    #
     class GetSegmentVersionsRequest < Struct.new(
       :application_id,
       :page_size,
@@ -2976,6 +4442,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segments_response
     #   Segments in your account.
     #   @return [Types::SegmentsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionsResponse AWS API Documentation
     #
     class GetSegmentVersionsResponse < Struct.new(
       :segments_response)
@@ -3000,6 +4468,8 @@ module Aws::Pinpoint
     # @!attribute [rw] token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentsRequest AWS API Documentation
+    #
     class GetSegmentsRequest < Struct.new(
       :application_id,
       :page_size,
@@ -3010,6 +4480,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segments_response
     #   Segments in your account.
     #   @return [Types::SegmentsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentsResponse AWS API Documentation
     #
     class GetSegmentsResponse < Struct.new(
       :segments_response)
@@ -3026,6 +4498,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelRequest AWS API Documentation
+    #
     class GetSmsChannelRequest < Struct.new(
       :application_id)
       include Aws::Structure
@@ -3034,6 +4508,8 @@ module Aws::Pinpoint
     # @!attribute [rw] sms_channel_response
     #   SMS Channel Response.
     #   @return [Types::SMSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelResponse AWS API Documentation
     #
     class GetSmsChannelResponse < Struct.new(
       :sms_channel_response)
@@ -3097,6 +4573,8 @@ module Aws::Pinpoint
     #   DefineSegment is true.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobRequest AWS API Documentation
+    #
     class ImportJobRequest < Struct.new(
       :define_segment,
       :external_id,
@@ -3151,6 +4629,8 @@ module Aws::Pinpoint
     #   A custom name for the segment created by the import job. Use if
     #   DefineSegment is true.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResource AWS API Documentation
     #
     class ImportJobResource < Struct.new(
       :define_segment,
@@ -3222,6 +4702,8 @@ module Aws::Pinpoint
     #   The job type. Will be Import.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResponse AWS API Documentation
+    #
     class ImportJobResponse < Struct.new(
       :application_id,
       :completed_pieces,
@@ -3249,6 +4731,8 @@ module Aws::Pinpoint
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobsResponse AWS API Documentation
     #
     class ImportJobsResponse < Struct.new(
       :item,
@@ -3331,6 +4815,8 @@ module Aws::Pinpoint
     #   Action is URL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Message AWS API Documentation
+    #
     class Message < Struct.new(
       :action,
       :body,
@@ -3356,6 +4842,8 @@ module Aws::Pinpoint
     #   The unique message body ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageBody AWS API Documentation
+    #
     class MessageBody < Struct.new(
       :message,
       :request_id)
@@ -3368,7 +4856,33 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         adm_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
     #         apns_message: {
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           body: "__string",
+    #           image_icon_url: "__string",
+    #           image_small_icon_url: "__string",
+    #           image_url: "__string",
+    #           json_body: "__string",
+    #           media_url: "__string",
+    #           raw_content: "__string",
+    #           silent_push: false,
+    #           title: "__string",
+    #           url: "__string",
+    #         },
+    #         baidu_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
     #           image_icon_url: "__string",
@@ -3420,8 +4934,18 @@ module Aws::Pinpoint
     #         },
     #       }
     #
+    # @!attribute [rw] adm_message
+    #   The message that the campaign delivers to ADM channels. Overrides
+    #   the default message.
+    #   @return [Types::Message]
+    #
     # @!attribute [rw] apns_message
     #   The message that the campaign delivers to APNS channels. Overrides
+    #   the default message.
+    #   @return [Types::Message]
+    #
+    # @!attribute [rw] baidu_message
+    #   The message that the campaign delivers to Baidu channels. Overrides
     #   the default message.
     #   @return [Types::Message]
     #
@@ -3442,8 +4966,12 @@ module Aws::Pinpoint
     #   The SMS message configuration.
     #   @return [Types::CampaignSmsMessage]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageConfiguration AWS API Documentation
+    #
     class MessageConfiguration < Struct.new(
+      :adm_message,
       :apns_message,
+      :baidu_message,
       :default_message,
       :email_message,
       :gcm_message,
@@ -3460,7 +4988,7 @@ module Aws::Pinpoint
     #         addresses: {
     #           "__string" => {
     #             body_override: "__string",
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #             context: {
     #               "__string" => "__string",
     #             },
@@ -3474,16 +5002,54 @@ module Aws::Pinpoint
     #         context: {
     #           "__string" => "__string",
     #         },
+    #         endpoints: {
+    #           "__string" => {
+    #             body_override: "__string",
+    #             context: {
+    #               "__string" => "__string",
+    #             },
+    #             raw_content: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title_override: "__string",
+    #           },
+    #         },
     #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             consolidation_key: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             expires_after: "__string",
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             md5: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
     #           apns_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             badge: 1,
     #             body: "__string",
     #             category: "__string",
+    #             collapse_id: "__string",
     #             data: {
     #               "__string" => "__string",
     #             },
     #             media_url: "__string",
+    #             preferred_authentication_method: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             silent_push: false,
     #             sound: "__string",
@@ -3491,6 +5057,26 @@ module Aws::Pinpoint
     #               "__string" => ["__string"],
     #             },
     #             thread_id: "__string",
+    #             time_to_live: 1,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -3523,6 +5109,7 @@ module Aws::Pinpoint
     #             icon_reference: "__string",
     #             image_icon_url: "__string",
     #             image_url: "__string",
+    #             priority: "__string",
     #             raw_content: "__string",
     #             restricted_package_name: "__string",
     #             silent_push: false,
@@ -3531,6 +5118,7 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
     #           },
@@ -3554,13 +5142,22 @@ module Aws::Pinpoint
     # @!attribute [rw] context
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] endpoints
+    #   A map of destination addresses, with the address as the key(Email
+    #   address, phone number or push token) and the Address Configuration
+    #   as the value.
+    #   @return [Hash<String,Types::EndpointSendConfiguration>]
+    #
     # @!attribute [rw] message_configuration
     #   Message configuration.
     #   @return [Types::DirectMessageConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageRequest AWS API Documentation
+    #
     class MessageRequest < Struct.new(
       :addresses,
       :context,
+      :endpoints,
       :message_configuration)
       include Aws::Structure
     end
@@ -3570,6 +5167,11 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   Application id of the message.
     #   @return [String]
+    #
+    # @!attribute [rw] endpoint_result
+    #   A map containing a multi part response for each address, with the
+    #   endpointId as the key and the result as the value.
+    #   @return [Hash<String,Types::EndpointMessageResult>]
     #
     # @!attribute [rw] request_id
     #   Original request Id for which this message was delivered.
@@ -3581,8 +5183,11 @@ module Aws::Pinpoint
     #   the result as the value.
     #   @return [Hash<String,Types::MessageResult>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResponse AWS API Documentation
+    #
     class MessageResponse < Struct.new(
       :application_id,
+      :endpoint_result,
       :request_id,
       :result)
       include Aws::Structure
@@ -3605,6 +5210,8 @@ module Aws::Pinpoint
     # @!attribute [rw] updated_token
     #   If token was updated as part of delivery. (This is GCM Specific)
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResult AWS API Documentation
     #
     class MessageResult < Struct.new(
       :delivery_status,
@@ -3633,6 +5240,8 @@ module Aws::Pinpoint
     #   Write event stream wrapper.
     #   @return [Types::WriteEventStream]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStreamRequest AWS API Documentation
+    #
     class PutEventStreamRequest < Struct.new(
       :application_id,
       :write_event_stream)
@@ -3642,6 +5251,8 @@ module Aws::Pinpoint
     # @!attribute [rw] event_stream
     #   Model for an event publishing subscription export.
     #   @return [Types::EventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStreamResponse AWS API Documentation
     #
     class PutEventStreamResponse < Struct.new(
       :event_stream)
@@ -3665,6 +5276,8 @@ module Aws::Pinpoint
     # @!attribute [rw] start
     #   The default start time for quiet time in ISO 8601 format.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/QuietTime AWS API Documentation
     #
     class QuietTime < Struct.new(
       :end,
@@ -3694,6 +5307,8 @@ module Aws::Pinpoint
     #   included in the segment.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RecencyDimension AWS API Documentation
+    #
     class RecencyDimension < Struct.new(
       :duration,
       :recency_type)
@@ -3708,6 +5323,7 @@ module Aws::Pinpoint
     #       {
     #         enabled: false,
     #         sender_id: "__string",
+    #         short_code: "__string",
     #       }
     #
     # @!attribute [rw] enabled
@@ -3718,9 +5334,16 @@ module Aws::Pinpoint
     #   Sender identifier of your messages.
     #   @return [String]
     #
+    # @!attribute [rw] short_code
+    #   ShortCode registered with phone provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSChannelRequest AWS API Documentation
+    #
     class SMSChannelRequest < Struct.new(
       :enabled,
-      :sender_id)
+      :sender_id,
+      :short_code)
       include Aws::Structure
     end
 
@@ -3736,6 +5359,10 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] enabled
     #   If the channel is enabled for sending messages.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_credential
+    #   If the channel is registered with a credential for authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -3770,10 +5397,13 @@ module Aws::Pinpoint
     #   Version of channel
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSChannelResponse AWS API Documentation
+    #
     class SMSChannelResponse < Struct.new(
       :application_id,
       :creation_date,
       :enabled,
+      :has_credential,
       :id,
       :is_archived,
       :last_modified_by,
@@ -3814,6 +5444,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] substitutions
     #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessage AWS API Documentation
     #
     class SMSMessage < Struct.new(
       :body,
@@ -3870,6 +5502,8 @@ module Aws::Pinpoint
     #   UTC-03 UTC-04 UTC-05 UTC-06 UTC-07 UTC-08 UTC-09 UTC-10 UTC-11
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Schedule AWS API Documentation
+    #
     class Schedule < Struct.new(
       :end_time,
       :frequency,
@@ -3895,6 +5529,8 @@ module Aws::Pinpoint
     # @!attribute [rw] recency
     #   The recency of use.
     #   @return [Types::RecencyDimension]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentBehaviors AWS API Documentation
     #
     class SegmentBehaviors < Struct.new(
       :recency)
@@ -3956,6 +5592,8 @@ module Aws::Pinpoint
     # @!attribute [rw] platform
     #   The device platform criteria for the segment.
     #   @return [Types::SetDimension]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentDemographics AWS API Documentation
     #
     class SegmentDemographics < Struct.new(
       :app_version,
@@ -4045,6 +5683,8 @@ module Aws::Pinpoint
     #   Custom segment user attributes.
     #   @return [Hash<String,Types::AttributeDimension>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentDimensions AWS API Documentation
+    #
     class SegmentDimensions < Struct.new(
       :attributes,
       :behavior,
@@ -4084,6 +5724,8 @@ module Aws::Pinpoint
     #   this segment.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentImportResource AWS API Documentation
+    #
     class SegmentImportResource < Struct.new(
       :channel_counts,
       :external_id,
@@ -4109,6 +5751,8 @@ module Aws::Pinpoint
     # @!attribute [rw] country
     #   The country filter according to ISO 3166-1 Alpha-2 codes.
     #   @return [Types::SetDimension]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentLocation AWS API Documentation
     #
     class SegmentLocation < Struct.new(
       :country)
@@ -4160,6 +5804,8 @@ module Aws::Pinpoint
     #   The segment version number.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentResponse AWS API Documentation
+    #
     class SegmentResponse < Struct.new(
       :application_id,
       :creation_date,
@@ -4184,6 +5830,8 @@ module Aws::Pinpoint
     #   is null if no additional pages exist.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentsResponse AWS API Documentation
+    #
     class SegmentsResponse < Struct.new(
       :item,
       :next_token)
@@ -4199,7 +5847,7 @@ module Aws::Pinpoint
     #           addresses: {
     #             "__string" => {
     #               body_override: "__string",
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #               context: {
     #                 "__string" => "__string",
     #               },
@@ -4213,16 +5861,54 @@ module Aws::Pinpoint
     #           context: {
     #             "__string" => "__string",
     #           },
+    #           endpoints: {
+    #             "__string" => {
+    #               body_override: "__string",
+    #               context: {
+    #                 "__string" => "__string",
+    #               },
+    #               raw_content: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title_override: "__string",
+    #             },
+    #           },
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               consolidation_key: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               expires_after: "__string",
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               md5: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               badge: 1,
     #               body: "__string",
     #               category: "__string",
+    #               collapse_id: "__string",
     #               data: {
     #                 "__string" => "__string",
     #               },
     #               media_url: "__string",
+    #               preferred_authentication_method: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               silent_push: false,
     #               sound: "__string",
@@ -4230,6 +5916,26 @@ module Aws::Pinpoint
     #                 "__string" => ["__string"],
     #               },
     #               thread_id: "__string",
+    #               time_to_live: 1,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4262,6 +5968,7 @@ module Aws::Pinpoint
     #               icon_reference: "__string",
     #               image_icon_url: "__string",
     #               image_url: "__string",
+    #               priority: "__string",
     #               raw_content: "__string",
     #               restricted_package_name: "__string",
     #               silent_push: false,
@@ -4270,6 +5977,7 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
     #             },
@@ -4292,6 +6000,8 @@ module Aws::Pinpoint
     #   Send message request.
     #   @return [Types::MessageRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessagesRequest AWS API Documentation
+    #
     class SendMessagesRequest < Struct.new(
       :application_id,
       :message_request)
@@ -4302,8 +6012,362 @@ module Aws::Pinpoint
     #   Send message response.
     #   @return [Types::MessageResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessagesResponse AWS API Documentation
+    #
     class SendMessagesResponse < Struct.new(
       :message_response)
+      include Aws::Structure
+    end
+
+    # Send message request.
+    #
+    # @note When making an API call, you may pass SendUsersMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         context: {
+    #           "__string" => "__string",
+    #         },
+    #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             consolidation_key: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             expires_after: "__string",
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             md5: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             badge: 1,
+    #             body: "__string",
+    #             category: "__string",
+    #             collapse_id: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             media_url: "__string",
+    #             preferred_authentication_method: "__string",
+    #             priority: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             thread_id: "__string",
+    #             time_to_live: 1,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           default_message: {
+    #             body: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #           },
+    #           default_push_notification_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             silent_push: false,
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           gcm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             collapse_key: "__string",
+    #             data: {
+    #               "__string" => "__string",
+    #             },
+    #             icon_reference: "__string",
+    #             image_icon_url: "__string",
+    #             image_url: "__string",
+    #             priority: "__string",
+    #             raw_content: "__string",
+    #             restricted_package_name: "__string",
+    #             silent_push: false,
+    #             small_image_icon_url: "__string",
+    #             sound: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             time_to_live: 1,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           sms_message: {
+    #             body: "__string",
+    #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             sender_id: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #           },
+    #         },
+    #         users: {
+    #           "__string" => {
+    #             body_override: "__string",
+    #             context: {
+    #               "__string" => "__string",
+    #             },
+    #             raw_content: "__string",
+    #             substitutions: {
+    #               "__string" => ["__string"],
+    #             },
+    #             title_override: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] message_configuration
+    #   Message configuration.
+    #   @return [Types::DirectMessageConfiguration]
+    #
+    # @!attribute [rw] users
+    #   A map of destination endpoints, with the EndpointId as the key
+    #   Endpoint Message Configuration as the value.
+    #   @return [Hash<String,Types::EndpointSendConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageRequest AWS API Documentation
+    #
+    class SendUsersMessageRequest < Struct.new(
+      :context,
+      :message_configuration,
+      :users)
+      include Aws::Structure
+    end
+
+    # User send message response.
+    #
+    # @!attribute [rw] application_id
+    #   Application id of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   Original request Id for which this message was delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   A map containing of UserId to Map of EndpointId to Endpoint Message
+    #   Result.
+    #   @return [Hash<String,Hash<String,Types::EndpointMessageResult>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageResponse AWS API Documentation
+    #
+    class SendUsersMessageResponse < Struct.new(
+      :application_id,
+      :request_id,
+      :result)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendUsersMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         send_users_message_request: { # required
+    #           context: {
+    #             "__string" => "__string",
+    #           },
+    #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               consolidation_key: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               expires_after: "__string",
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               md5: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               badge: 1,
+    #               body: "__string",
+    #               category: "__string",
+    #               collapse_id: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               media_url: "__string",
+    #               preferred_authentication_method: "__string",
+    #               priority: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               thread_id: "__string",
+    #               time_to_live: 1,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             default_message: {
+    #               body: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #             },
+    #             default_push_notification_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               silent_push: false,
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             gcm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               collapse_key: "__string",
+    #               data: {
+    #                 "__string" => "__string",
+    #               },
+    #               icon_reference: "__string",
+    #               image_icon_url: "__string",
+    #               image_url: "__string",
+    #               priority: "__string",
+    #               raw_content: "__string",
+    #               restricted_package_name: "__string",
+    #               silent_push: false,
+    #               small_image_icon_url: "__string",
+    #               sound: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               time_to_live: 1,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             sms_message: {
+    #               body: "__string",
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #             },
+    #           },
+    #           users: {
+    #             "__string" => {
+    #               body_override: "__string",
+    #               context: {
+    #                 "__string" => "__string",
+    #               },
+    #               raw_content: "__string",
+    #               substitutions: {
+    #                 "__string" => ["__string"],
+    #               },
+    #               title_override: "__string",
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] send_users_message_request
+    #   Send message request.
+    #   @return [Types::SendUsersMessageRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessagesRequest AWS API Documentation
+    #
+    class SendUsersMessagesRequest < Struct.new(
+      :application_id,
+      :send_users_message_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] send_users_message_response
+    #   User send message response.
+    #   @return [Types::SendUsersMessageResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessagesResponse AWS API Documentation
+    #
+    class SendUsersMessagesResponse < Struct.new(
+      :send_users_message_response)
       include Aws::Structure
     end
 
@@ -4325,6 +6389,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] values
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SetDimension AWS API Documentation
     #
     class SetDimension < Struct.new(
       :dimension_type,
@@ -4362,6 +6428,8 @@ module Aws::Pinpoint
     #   The custom name of a variation of the campaign used for A/B testing.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TreatmentResource AWS API Documentation
+    #
     class TreatmentResource < Struct.new(
       :id,
       :message_configuration,
@@ -4373,14 +6441,57 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateAdmChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         adm_channel_request: { # required
+    #           client_id: "__string",
+    #           client_secret: "__string",
+    #           enabled: false,
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] adm_channel_request
+    #   Amazon Device Messaging channel definition.
+    #   @return [Types::ADMChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannelRequest AWS API Documentation
+    #
+    class UpdateAdmChannelRequest < Struct.new(
+      :adm_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] adm_channel_response
+    #   Amazon Device Messaging channel definition.
+    #   @return [Types::ADMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannelResponse AWS API Documentation
+    #
+    class UpdateAdmChannelResponse < Struct.new(
+      :adm_channel_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateApnsChannelRequest
     #   data as a hash:
     #
     #       {
     #         apns_channel_request: { # required
+    #           bundle_id: "__string",
     #           certificate: "__string",
+    #           default_authentication_method: "__string",
     #           enabled: false,
     #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
     #         },
     #         application_id: "__string", # required
     #       }
@@ -4392,6 +6503,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannelRequest AWS API Documentation
+    #
     class UpdateApnsChannelRequest < Struct.new(
       :apns_channel_request,
       :application_id)
@@ -4401,6 +6514,8 @@ module Aws::Pinpoint
     # @!attribute [rw] apns_channel_response
     #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannelResponse AWS API Documentation
     #
     class UpdateApnsChannelResponse < Struct.new(
       :apns_channel_response)
@@ -4412,9 +6527,14 @@ module Aws::Pinpoint
     #
     #       {
     #         apns_sandbox_channel_request: { # required
+    #           bundle_id: "__string",
     #           certificate: "__string",
+    #           default_authentication_method: "__string",
     #           enabled: false,
     #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
     #         },
     #         application_id: "__string", # required
     #       }
@@ -4426,6 +6546,8 @@ module Aws::Pinpoint
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelRequest AWS API Documentation
+    #
     class UpdateApnsSandboxChannelRequest < Struct.new(
       :apns_sandbox_channel_request,
       :application_id)
@@ -4436,8 +6558,96 @@ module Aws::Pinpoint
     #   Apple Development Push Notification Service channel definition.
     #   @return [Types::APNSSandboxChannelResponse]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelResponse AWS API Documentation
+    #
     class UpdateApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateApnsVoipChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         apns_voip_channel_request: { # required
+    #           bundle_id: "__string",
+    #           certificate: "__string",
+    #           default_authentication_method: "__string",
+    #           enabled: false,
+    #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] apns_voip_channel_request
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelRequest AWS API Documentation
+    #
+    class UpdateApnsVoipChannelRequest < Struct.new(
+      :apns_voip_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_channel_response
+    #   Apple VOIP Push Notification Service channel definition.
+    #   @return [Types::APNSVoipChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelResponse AWS API Documentation
+    #
+    class UpdateApnsVoipChannelResponse < Struct.new(
+      :apns_voip_channel_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateApnsVoipSandboxChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         apns_voip_sandbox_channel_request: { # required
+    #           bundle_id: "__string",
+    #           certificate: "__string",
+    #           default_authentication_method: "__string",
+    #           enabled: false,
+    #           private_key: "__string",
+    #           team_id: "__string",
+    #           token_key: "__string",
+    #           token_key_id: "__string",
+    #         },
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] apns_voip_sandbox_channel_request
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelRequest]
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelRequest AWS API Documentation
+    #
+    class UpdateApnsVoipSandboxChannelRequest < Struct.new(
+      :apns_voip_sandbox_channel_request,
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apns_voip_sandbox_channel_response
+    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   @return [Types::APNSVoipSandboxChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelResponse AWS API Documentation
+    #
+    class UpdateApnsVoipSandboxChannelResponse < Struct.new(
+      :apns_voip_sandbox_channel_response)
       include Aws::Structure
     end
 
@@ -4449,6 +6659,8 @@ module Aws::Pinpoint
     #         write_application_settings_request: { # required
     #           limits: {
     #             daily: 1,
+    #             maximum_duration: 1,
+    #             messages_per_second: 1,
     #             total: 1,
     #           },
     #           quiet_time: {
@@ -4465,6 +6677,8 @@ module Aws::Pinpoint
     #   Creating application setting request
     #   @return [Types::WriteApplicationSettingsRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettingsRequest AWS API Documentation
+    #
     class UpdateApplicationSettingsRequest < Struct.new(
       :application_id,
       :write_application_settings_request)
@@ -4475,8 +6689,48 @@ module Aws::Pinpoint
     #   Application settings.
     #   @return [Types::ApplicationSettingsResource]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettingsResponse AWS API Documentation
+    #
     class UpdateApplicationSettingsResponse < Struct.new(
       :application_settings_resource)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateBaiduChannelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         baidu_channel_request: { # required
+    #           api_key: "__string",
+    #           enabled: false,
+    #           secret_key: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] baidu_channel_request
+    #   Baidu Cloud Push credentials
+    #   @return [Types::BaiduChannelRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannelRequest AWS API Documentation
+    #
+    class UpdateBaiduChannelRequest < Struct.new(
+      :application_id,
+      :baidu_channel_request)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baidu_channel_response
+    #   Baidu Cloud Messaging channel definition
+    #   @return [Types::BaiduChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannelResponse AWS API Documentation
+    #
+    class UpdateBaiduChannelResponse < Struct.new(
+      :baidu_channel_response)
       include Aws::Structure
     end
 
@@ -4490,7 +6744,33 @@ module Aws::Pinpoint
     #           additional_treatments: [
     #             {
     #               message_configuration: {
+    #                 adm_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
     #                 apns_message: {
+    #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                   body: "__string",
+    #                   image_icon_url: "__string",
+    #                   image_small_icon_url: "__string",
+    #                   image_url: "__string",
+    #                   json_body: "__string",
+    #                   media_url: "__string",
+    #                   raw_content: "__string",
+    #                   silent_push: false,
+    #                   title: "__string",
+    #                   url: "__string",
+    #                 },
+    #                 baidu_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                   body: "__string",
     #                   image_icon_url: "__string",
@@ -4562,10 +6842,38 @@ module Aws::Pinpoint
     #           is_paused: false,
     #           limits: {
     #             daily: 1,
+    #             maximum_duration: 1,
+    #             messages_per_second: 1,
     #             total: 1,
     #           },
     #           message_configuration: {
+    #             adm_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
     #             apns_message: {
+    #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #               body: "__string",
+    #               image_icon_url: "__string",
+    #               image_small_icon_url: "__string",
+    #               image_url: "__string",
+    #               json_body: "__string",
+    #               media_url: "__string",
+    #               raw_content: "__string",
+    #               silent_push: false,
+    #               title: "__string",
+    #               url: "__string",
+    #             },
+    #             baidu_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #               body: "__string",
     #               image_icon_url: "__string",
@@ -4645,6 +6953,8 @@ module Aws::Pinpoint
     #   Used to create a campaign.
     #   @return [Types::WriteCampaignRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaignRequest AWS API Documentation
+    #
     class UpdateCampaignRequest < Struct.new(
       :application_id,
       :campaign_id,
@@ -4655,6 +6965,8 @@ module Aws::Pinpoint
     # @!attribute [rw] campaign_response
     #   Campaign definition
     #   @return [Types::CampaignResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaignResponse AWS API Documentation
     #
     class UpdateCampaignResponse < Struct.new(
       :campaign_response)
@@ -4681,6 +6993,8 @@ module Aws::Pinpoint
     #   Email Channel Request
     #   @return [Types::EmailChannelRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannelRequest AWS API Documentation
+    #
     class UpdateEmailChannelRequest < Struct.new(
       :application_id,
       :email_channel_request)
@@ -4690,6 +7004,8 @@ module Aws::Pinpoint
     # @!attribute [rw] email_channel_response
     #   Email Channel Response.
     #   @return [Types::EmailChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannelResponse AWS API Documentation
     #
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response)
@@ -4707,7 +7023,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -4752,6 +7068,8 @@ module Aws::Pinpoint
     #   Endpoint update request
     #   @return [Types::EndpointRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointRequest AWS API Documentation
+    #
     class UpdateEndpointRequest < Struct.new(
       :application_id,
       :endpoint_id,
@@ -4762,6 +7080,8 @@ module Aws::Pinpoint
     # @!attribute [rw] message_body
     #   Simple message object.
     #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointResponse AWS API Documentation
     #
     class UpdateEndpointResponse < Struct.new(
       :message_body)
@@ -4780,7 +7100,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, ADM, SMS, EMAIL
+    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -4825,6 +7145,8 @@ module Aws::Pinpoint
     #   Endpoint batch update request.
     #   @return [Types::EndpointBatchRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatchRequest AWS API Documentation
+    #
     class UpdateEndpointsBatchRequest < Struct.new(
       :application_id,
       :endpoint_batch_request)
@@ -4834,6 +7156,8 @@ module Aws::Pinpoint
     # @!attribute [rw] message_body
     #   Simple message object.
     #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatchResponse AWS API Documentation
     #
     class UpdateEndpointsBatchResponse < Struct.new(
       :message_body)
@@ -4858,6 +7182,8 @@ module Aws::Pinpoint
     #   Google Cloud Messaging credentials
     #   @return [Types::GCMChannelRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannelRequest AWS API Documentation
+    #
     class UpdateGcmChannelRequest < Struct.new(
       :application_id,
       :gcm_channel_request)
@@ -4867,6 +7193,8 @@ module Aws::Pinpoint
     # @!attribute [rw] gcm_channel_response
     #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannelResponse AWS API Documentation
     #
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response)
@@ -4946,6 +7274,8 @@ module Aws::Pinpoint
     #   Segment definition.
     #   @return [Types::WriteSegmentRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegmentRequest AWS API Documentation
+    #
     class UpdateSegmentRequest < Struct.new(
       :application_id,
       :segment_id,
@@ -4956,6 +7286,8 @@ module Aws::Pinpoint
     # @!attribute [rw] segment_response
     #   Segment definition.
     #   @return [Types::SegmentResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegmentResponse AWS API Documentation
     #
     class UpdateSegmentResponse < Struct.new(
       :segment_response)
@@ -4970,6 +7302,7 @@ module Aws::Pinpoint
     #         sms_channel_request: { # required
     #           enabled: false,
     #           sender_id: "__string",
+    #           short_code: "__string",
     #         },
     #       }
     #
@@ -4980,6 +7313,8 @@ module Aws::Pinpoint
     #   SMS Channel Request
     #   @return [Types::SMSChannelRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannelRequest AWS API Documentation
+    #
     class UpdateSmsChannelRequest < Struct.new(
       :application_id,
       :sms_channel_request)
@@ -4989,6 +7324,8 @@ module Aws::Pinpoint
     # @!attribute [rw] sms_channel_response
     #   SMS Channel Response.
     #   @return [Types::SMSChannelResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannelResponse AWS API Documentation
     #
     class UpdateSmsChannelResponse < Struct.new(
       :sms_channel_response)
@@ -5003,6 +7340,8 @@ module Aws::Pinpoint
     #       {
     #         limits: {
     #           daily: 1,
+    #           maximum_duration: 1,
+    #           messages_per_second: 1,
     #           total: 1,
     #         },
     #         quiet_time: {
@@ -5023,6 +7362,8 @@ module Aws::Pinpoint
     #   default with a quiet time of its own.
     #   @return [Types::QuietTime]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest AWS API Documentation
+    #
     class WriteApplicationSettingsRequest < Struct.new(
       :limits,
       :quiet_time)
@@ -5038,7 +7379,33 @@ module Aws::Pinpoint
     #         additional_treatments: [
     #           {
     #             message_configuration: {
+    #               adm_message: {
+    #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                 body: "__string",
+    #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
+    #                 image_url: "__string",
+    #                 json_body: "__string",
+    #                 media_url: "__string",
+    #                 raw_content: "__string",
+    #                 silent_push: false,
+    #                 title: "__string",
+    #                 url: "__string",
+    #               },
     #               apns_message: {
+    #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #                 body: "__string",
+    #                 image_icon_url: "__string",
+    #                 image_small_icon_url: "__string",
+    #                 image_url: "__string",
+    #                 json_body: "__string",
+    #                 media_url: "__string",
+    #                 raw_content: "__string",
+    #                 silent_push: false,
+    #                 title: "__string",
+    #                 url: "__string",
+    #               },
+    #               baidu_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #                 body: "__string",
     #                 image_icon_url: "__string",
@@ -5110,10 +7477,38 @@ module Aws::Pinpoint
     #         is_paused: false,
     #         limits: {
     #           daily: 1,
+    #           maximum_duration: 1,
+    #           messages_per_second: 1,
     #           total: 1,
     #         },
     #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
     #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
@@ -5232,6 +7627,8 @@ module Aws::Pinpoint
     #   The custom name of a variation of the campaign used for A/B testing.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteCampaignRequest AWS API Documentation
+    #
     class WriteCampaignRequest < Struct.new(
       :additional_treatments,
       :description,
@@ -5270,6 +7667,8 @@ module Aws::Pinpoint
     #   The IAM role that authorizes Amazon Pinpoint to publish events to
     #   the stream in your account.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteEventStream AWS API Documentation
     #
     class WriteEventStream < Struct.new(
       :destination_stream_arn,
@@ -5346,6 +7745,8 @@ module Aws::Pinpoint
     #   The name of segment
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest AWS API Documentation
+    #
     class WriteSegmentRequest < Struct.new(
       :dimensions,
       :name)
@@ -5359,7 +7760,33 @@ module Aws::Pinpoint
     #
     #       {
     #         message_configuration: {
+    #           adm_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
     #           apns_message: {
+    #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #             body: "__string",
+    #             image_icon_url: "__string",
+    #             image_small_icon_url: "__string",
+    #             image_url: "__string",
+    #             json_body: "__string",
+    #             media_url: "__string",
+    #             raw_content: "__string",
+    #             silent_push: false,
+    #             title: "__string",
+    #             url: "__string",
+    #           },
+    #           baidu_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #             body: "__string",
     #             image_icon_url: "__string",
@@ -5445,6 +7872,8 @@ module Aws::Pinpoint
     # @!attribute [rw] treatment_name
     #   The custom name of a variation of the campaign used for A/B testing.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteTreatmentResource AWS API Documentation
     #
     class WriteTreatmentResource < Struct.new(
       :message_configuration,

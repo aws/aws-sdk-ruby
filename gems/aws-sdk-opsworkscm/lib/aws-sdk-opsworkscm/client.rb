@@ -431,7 +431,7 @@ module Aws::OpsWorksCM
     #   management console typically creates the service role for you, if you
     #   are using the AWS CLI or API commands, run the
     #   service-role-creation.yaml AWS CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
+    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
     #   This template creates a CloudFormation stack that includes the service
     #   role that you need.
     #
@@ -451,7 +451,7 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [String] :backup_id
     #   If you specify this field, AWS OpsWorks for Chef Automate creates the
@@ -771,6 +771,8 @@ module Aws::OpsWorksCM
     # parameters of the request are not valid.
     #
     # @option params [required, String] :node_association_status_token
+    #   The token returned in either the AssociateNodeResponse or the
+    #   DisassociateNodeResponse.
     #
     # @option params [required, String] :server_name
     #   The name of the server from which to disassociate the node.
@@ -778,6 +780,7 @@ module Aws::OpsWorksCM
     # @return [Types::DescribeNodeAssociationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNodeAssociationStatusResponse#node_association_status #node_association_status} => String
+    #   * {Types::DescribeNodeAssociationStatusResponse#engine_attributes #engine_attributes} => Array&lt;Types::EngineAttribute&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -789,6 +792,9 @@ module Aws::OpsWorksCM
     # @example Response structure
     #
     #   resp.node_association_status #=> String, one of "SUCCESS", "FAILED", "IN_PROGRESS"
+    #   resp.engine_attributes #=> Array
+    #   resp.engine_attributes[0].name #=> String
+    #   resp.engine_attributes[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus AWS API Documentation
     #
@@ -1007,6 +1013,10 @@ module Aws::OpsWorksCM
     # @option params [required, String] :server_name
     #   The name of the server on which to run maintenance.
     #
+    # @option params [Array<Types::EngineAttribute>] :engine_attributes
+    #   Engine attributes that are specific to the server on which you want to
+    #   run maintenance.
+    #
     # @return [Types::StartMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMaintenanceResponse#server #server} => Types::Server
@@ -1015,6 +1025,12 @@ module Aws::OpsWorksCM
     #
     #   resp = client.start_maintenance({
     #     server_name: "ServerName", # required
+    #     engine_attributes: [
+    #       {
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1223,7 +1239,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

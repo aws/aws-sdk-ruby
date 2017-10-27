@@ -376,7 +376,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       },
@@ -515,7 +515,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -721,7 +721,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only", # accepts sni-only, vip
-    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #         },
@@ -869,7 +869,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -1198,6 +1198,25 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # @option params [required, String] :role_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_linked_role({
+    #     role_name: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRole2017_03_25 AWS API Documentation
+    #
+    # @overload delete_service_linked_role(params = {})
+    # @param [Hash] params ({})
+    def delete_service_linked_role(params = {}, options = {})
+      req = build_request(:delete_service_linked_role, params)
+      req.send_request(options)
+    end
+
     # Delete a streaming distribution. To delete an RTMP distribution using
     # the CloudFront API, perform the following steps.
     #
@@ -1470,7 +1489,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -1616,7 +1635,7 @@ module Aws::CloudFront
     #   resp.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -1962,7 +1981,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -2128,7 +2147,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -2641,7 +2660,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       },
@@ -2782,7 +2801,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -2906,7 +2925,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

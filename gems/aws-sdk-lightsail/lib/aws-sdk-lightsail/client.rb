@@ -490,7 +490,7 @@ module Aws::Lightsail
     #
     #
     #
-    #   [1]: http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image
     #
     # @option params [String] :key_pair_name
     #   The name of your key pair.
@@ -1028,6 +1028,7 @@ module Aws::Lightsail
     #   resp.blueprints[0].version_code #=> String
     #   resp.blueprints[0].product_url #=> String
     #   resp.blueprints[0].license_url #=> String
+    #   resp.blueprints[0].platform #=> String, one of "LINUX_UNIX", "WINDOWS"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints AWS API Documentation
@@ -1075,6 +1076,8 @@ module Aws::Lightsail
     #   resp.bundles[0].power #=> Integer
     #   resp.bundles[0].ram_size_in_gb #=> Float
     #   resp.bundles[0].transfer_per_month_in_gb #=> Integer
+    #   resp.bundles[0].supported_platforms #=> Array
+    #   resp.bundles[0].supported_platforms[0] #=> String, one of "LINUX_UNIX", "WINDOWS"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles AWS API Documentation
@@ -1271,6 +1274,8 @@ module Aws::Lightsail
     #   resp.access_details.expires_at #=> Time
     #   resp.access_details.ip_address #=> String
     #   resp.access_details.password #=> String
+    #   resp.access_details.password_data.ciphertext #=> String
+    #   resp.access_details.password_data.key_pair_name #=> String
     #   resp.access_details.private_key #=> String
     #   resp.access_details.protocol #=> String, one of "ssh", "rdp"
     #   resp.access_details.instance_name #=> String
@@ -2368,7 +2373,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

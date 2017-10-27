@@ -91,11 +91,11 @@ module Aws::EC2
     # This DNS hostname can only be used inside the Amazon EC2 network. This
     # name is not available until the instance enters the `running` state.
     #
-    # \[EC2-VPC\] The Amazon-provided DNS server will resolve
-    # Amazon-provided private DNS hostnames if you've enabled DNS
-    # resolution and DNS hostnames in your VPC. If you are not using the
-    # Amazon-provided DNS server in your VPC, your custom domain name
-    # servers must resolve the hostname as appropriate.
+    # \[EC2-VPC\] The Amazon-provided DNS server resolves Amazon-provided
+    # private DNS hostnames if you've enabled DNS resolution and DNS
+    # hostnames in your VPC. If you are not using the Amazon-provided DNS
+    # server in your VPC, your custom domain name servers must resolve the
+    # hostname as appropriate.
     # @return [String]
     def private_dns_name
       data[:private_dns_name]
@@ -178,7 +178,7 @@ module Aws::EC2
       data[:client_token]
     end
 
-    # Indicates whether the instance is optimized for EBS I/O. This
+    # Indicates whether the instance is optimized for Amazon EBS I/O. This
     # optimization provides dedicated throughput to Amazon EBS and an
     # optimized configuration stack to provide optimal I/O performance. This
     # optimization isn't available with all instance types. Additional
@@ -206,7 +206,7 @@ module Aws::EC2
       data[:iam_instance_profile]
     end
 
-    # Indicates whether this is a Spot instance or a Scheduled Instance.
+    # Indicates whether this is a Spot Instance or a Scheduled Instance.
     # @return [String]
     def instance_lifecycle
       data[:instance_lifecycle]
@@ -239,10 +239,10 @@ module Aws::EC2
 
     # Specifies whether to enable an instance launched in a VPC to perform
     # NAT. This controls whether source/destination checking is enabled on
-    # the instance. A value of `true` means checking is enabled, and `false`
-    # means checking is disabled. The value must be `false` for the instance
-    # to perform NAT. For more information, see [NAT Instances][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # the instance. A value of `true` means that checking is enabled, and
+    # `false` means that checking is disabled. The value must be `false` for
+    # the instance to perform NAT. For more information, see [NAT
+    # Instances][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -252,7 +252,7 @@ module Aws::EC2
       data[:source_dest_check]
     end
 
-    # If the request is a Spot instance request, the ID of the request.
+    # If the request is a Spot Instance request, the ID of the request.
     # @return [String]
     def spot_instance_request_id
       data[:spot_instance_request_id]
@@ -782,8 +782,8 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Types::AttributeBooleanValue] :source_dest_check
     #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
+    #   `true` means that checking is enabled, and `false` means that checking
+    #   is disabled. This value must be `false` for a NAT instance to perform
     #   NAT.
     # @option options [String] :attribute
     #   The name of the attribute.
@@ -811,7 +811,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Types::AttributeBooleanValue] :ebs_optimized
-    #   Specifies whether the instance is optimized for EBS I/O. This
+    #   Specifies whether the instance is optimized for Amazon EBS I/O. This
     #   optimization provides dedicated throughput to Amazon EBS and an
     #   optimized configuration stack to provide optimal EBS I/O performance.
     #   This optimization isn't available with all instance types. Additional
@@ -865,9 +865,9 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     # @option options [Types::BlobAttributeValue] :user_data
     #   Changes the instance's user data to the specified value. If you are
-    #   using an AWS SDK or command line tool, Base64-encoding is performed
+    #   using an AWS SDK or command line tool, base64-encoding is performed
     #   for you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   provide base64-encoded text.
     # @option options [String] :value
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
     #   `userData`, `disableApiTermination`, or
@@ -954,7 +954,7 @@ module Aws::EC2
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The time at which the reported instance health state ended.
     # @option options [required, Array<String>] :reason_codes
-    #   One or more reason codes that describes the health state of your
+    #   One or more reason codes that describe the health state of your
     #   instance.
     #
     #   * `instance-stuck-in-state`\: My instance is stuck in a state.
@@ -968,14 +968,14 @@ module Aws::EC2
     #     instance.
     #
     #   * `performance-network`\: My instance is experiencing performance
-    #     problems which I believe are network related.
+    #     problems that I believe are network related.
     #
     #   * `performance-instance-store`\: My instance is experiencing
-    #     performance problems which I believe are related to the instance
+    #     performance problems that I believe are related to the instance
     #     stores.
     #
     #   * `performance-ebs-volume`\: My instance is experiencing performance
-    #     problems which I believe are related to an EBS volume.
+    #     problems that I believe are related to an EBS volume.
     #
     #   * `performance-other`\: My instance is experiencing performance
     #     problems.

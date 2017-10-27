@@ -36,7 +36,7 @@ module Aws::SQS
     #   permission. The principal must have an AWS account, but does not
     #   need to be signed up for Amazon SQS. For information about locating
     #   the AWS account identification, see [Your AWS Identifiers][2] in the
-    #   *Amazon SQS Developer Guide*.
+    #   *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -63,7 +63,8 @@ module Aws::SQS
     #   * `SendMessage`
     #
     #   For more information about these actions, see [Understanding
-    #   Permissions][1] in the *Amazon SQS Developer Guide*.
+    #   Permissions][1] in the *Amazon Simple Queue Service Developer
+    #   Guide*.
     #
     #   Specifying `SendMessage`, `DeleteMessage`, or
     #   `ChangeMessageVisibility` for `ActionName.n` also grants permissions
@@ -321,13 +322,21 @@ module Aws::SQS
     #     arrive. Valid values: An integer from 0 to 20 (seconds). The
     #     default is 0 (zero).
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
+    #     Queue Service Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
     #     a standard queue.
     #
     #      </note>
@@ -335,7 +344,7 @@ module Aws::SQS
     #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
     #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
     #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon SQS Developer Guide*.
+    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -343,7 +352,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
-    #     example, be `alias/aws/sqs`. For more examples, see [KeyId][6] in
+    #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
@@ -352,8 +361,8 @@ module Aws::SQS
     #     representing seconds, between 60 seconds (1 minute) and 86,400
     #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
-    #     which incur charges after Free Tier. For more information, see
-    #     [How Does the Data Key Reuse Period Work?][8].
+    #     which might incur charges after Free Tier. For more information,
+    #     see [How Does the Data Key Reuse Period Work?][8].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
@@ -365,11 +374,12 @@ module Aws::SQS
     #     your messages explicitly.
     #
     #     For more information, see [FIFO Queue Logic][10] in the *Amazon
-    #     SQS Developer Guide*.
+    #     Simple Queue Service Developer Guide*.
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
     #     Valid values: `true`, `false`. For more information, see
-    #     [Exactly-Once Processing][11] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-Once Processing][11] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -621,8 +631,8 @@ module Aws::SQS
     #
     #   * `ApproximateNumberOfMessages` - Returns the approximate number of
     #     visible messages in a queue. For more information, see [Resources
-    #     Required to Process Messages][1] in the *Amazon SQS Developer
-    #     Guide*.
+    #     Required to Process Messages][1] in the *Amazon Simple Queue
+    #     Service Developer Guide*.
     #
     #   * `ApproximateNumberOfMessagesDelayed` - Returns the approximate
     #     number of messages that are waiting to be added to the queue.
@@ -630,7 +640,7 @@ module Aws::SQS
     #   * `ApproximateNumberOfMessagesNotVisible` - Returns the approximate
     #     number of messages that have not timed-out and aren't deleted.
     #     For more information, see [Resources Required to Process
-    #     Messages][1] in the *Amazon SQS Developer Guide*.
+    #     Messages][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   * `CreatedTimestamp` - Returns the time when the queue was created
     #     in seconds ([epoch time][2]).
@@ -655,14 +665,23 @@ module Aws::SQS
     #     seconds, for which the `ReceiveMessage` action waits for a message
     #     to arrive.
     #
-    #   * `RedrivePolicy` - Returns the parameters for dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][3] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - Returns the string that includes the parameters
+    #     for dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][3] in the *Amazon Simple
+    #     Queue Service Developer Guide*.
+    #
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
     #
     #   * `VisibilityTimeout` - Returns the visibility timeout for the
     #     queue. For more information about the visibility timeout, see
-    #     [Visibility Timeout][4] in the *Amazon SQS Developer Guide*.
+    #     [Visibility Timeout][4] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][5]\:
     #
@@ -672,23 +691,25 @@ module Aws::SQS
     #
     #   * `KmsDataKeyReusePeriodSeconds` - Returns the length of time, in
     #     seconds, for which Amazon SQS can reuse a data key to encrypt or
-    #     decrypt messages before calling AWS KMS again.
+    #     decrypt messages before calling AWS KMS again. For more
+    #     information, see [How Does the Data Key Reuse Period Work?][7].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][7]\:
+    #   queues][8]\:
     #
     #   * `FifoQueue` - Returns whether the queue is FIFO. For more
-    #     information, see [FIFO Queue Logic][8] in the *Amazon SQS
-    #     Developer Guide*.
+    #     information, see [FIFO Queue Logic][9] in the *Amazon Simple Queue
+    #     Service Developer Guide*.
     #
-    #     <note markdown="1"> To determine whether a queue is [FIFO][7], you can check whether
+    #     <note markdown="1"> To determine whether a queue is [FIFO][8], you can check whether
     #     `QueueName` ends with the `.fifo` suffix.
     #
     #      </note>
     #
     #   * `ContentBasedDeduplication` - Returns whether content-based
     #     deduplication is enabled for the queue. For more information, see
-    #     [Exactly-Once Processing][9] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-Once Processing][10] in the *Amazon Simple Queue Service
+    #     Developer Guide*.
     #
     #
     #
@@ -698,9 +719,10 @@ module Aws::SQS
     #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
-    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
-    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
-    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
+    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+    #   [10]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest AWS API Documentation
@@ -752,8 +774,8 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # For more information, see [Responses][1] in the *Amazon SQS Developer
-    # Guide*.
+    # For more information, see [Responses][1] in the *Amazon Simple Queue
+    # Service Developer Guide*.
     #
     #
     #
@@ -778,7 +800,7 @@ module Aws::SQS
     #       }
     #
     # @!attribute [rw] queue_url
-    #   The URL of a dead letter queue.
+    #   The URL of a dead-letter queue.
     #
     #   Queue URLs are case-sensitive.
     #   @return [String]
@@ -794,13 +816,42 @@ module Aws::SQS
     #
     # @!attribute [rw] queue_urls
     #   A list of source queue URLs that have the `RedrivePolicy` queue
-    #   attribute configured with a dead letter queue.
+    #   attribute configured with a dead-letter queue.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult AWS API Documentation
     #
     class ListDeadLetterSourceQueuesResult < Struct.new(
       :queue_urls)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQueueTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         queue_url: "String", # required
+    #       }
+    #
+    # @!attribute [rw] queue_url
+    #   The URL of the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueueTagsRequest AWS API Documentation
+    #
+    class ListQueueTagsRequest < Struct.new(
+      :queue_url)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of all tags added to the specified queue.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueueTagsResult AWS API Documentation
+    #
+    class ListQueueTagsResult < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -886,7 +937,7 @@ module Aws::SQS
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
     #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon SQS Developer Guide*.
+    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -954,8 +1005,8 @@ module Aws::SQS
     #   `StringValue`.
     #
     #   You can also append custom labels. For more information, see
-    #   [Message Attribute Data Types and Validation][1] in the *Amazon SQS
-    #   Developer Guide*.
+    #   [Message Attribute Data Types and Validation][1] in the *Amazon
+    #   Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -1122,7 +1173,9 @@ module Aws::SQS
     # @!attribute [rw] wait_time_seconds
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
-    #   call returns sooner than `WaitTimeSeconds`.
+    #   call returns sooner than `WaitTimeSeconds`. If no messages are
+    #   available and the wait time expires, the call returns successfully
+    #   with an empty list of messages.
     #   @return [Integer]
     #
     # @!attribute [rw] receive_request_attempt_id
@@ -1342,7 +1395,7 @@ module Aws::SQS
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
     #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon SQS Developer Guide*.
+    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -1357,7 +1410,7 @@ module Aws::SQS
     #   `MessageDeduplicationId` is sent successfully, subsequent messages
     #   with the same `MessageDeduplicationId` are accepted successfully but
     #   aren't delivered. For more information, see [ Exactly-Once
-    #   Processing][1] in the *Amazon SQS Developer Guide*.
+    #   Processing][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -1596,7 +1649,7 @@ module Aws::SQS
     # @!attribute [rw] message_attributes
     #   Each message attribute consists of a `Name`, `Type`, and `Value`.
     #   For more information, see [Message Attribute Items and
-    #   Validation][1] in the *Amazon SQS Developer Guide*.
+    #   Validation][1] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -1611,7 +1664,7 @@ module Aws::SQS
     #   messages sent with the same `MessageDeduplicationId` are accepted
     #   successfully but aren't delivered during the 5-minute deduplication
     #   interval. For more information, see [ Exactly-Once Processing][1] in
-    #   the *Amazon SQS Developer Guide*.
+    #   the *Amazon Simple Queue Service Developer Guide*.
     #
     #   * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -1743,7 +1796,7 @@ module Aws::SQS
     # @!attribute [rw] message_id
     #   An attribute containing the `MessageId` of the message sent to the
     #   queue. For more information, see [Queue and Message Identifiers][1]
-    #   in the *Amazon SQS Developer Guide*.
+    #   in the *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
@@ -1816,13 +1869,21 @@ module Aws::SQS
     #     arrive. Valid values: an integer from 0 to 20 (seconds). The
     #     default is 0.
     #
-    #   * `RedrivePolicy` - The parameters for the dead letter queue
-    #     functionality of the source queue. For more information about the
-    #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
-    #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+    #   * `RedrivePolicy` - The string that includes the parameters for the
+    #     dead-letter queue functionality of the source queue. For more
+    #     information about the redrive policy and dead-letter queues, see
+    #     [Using Amazon SQS Dead-Letter Queues][2] in the *Amazon Simple
+    #     Queue Service Developer Guide*.
     #
-    #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead letter queue of a standard queue must also be
+    #     * `deadLetterTargetArn` - The Amazon Resource Name (ARN) of the
+    #       dead-letter queue to which Amazon SQS moves messages after the
+    #       value of `maxReceiveCount` is exceeded.
+    #
+    #     * `maxReceiveCount` - The number of times a message is delivered
+    #       to the source queue before being moved to the dead-letter queue.
+    #
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
     #     a standard queue.
     #
     #      </note>
@@ -1830,7 +1891,7 @@ module Aws::SQS
     #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
     #     values: an integer from 0 to 43,200 (12 hours). The default is 30.
     #     For more information about the visibility timeout, see [Visibility
-    #     Timeout][3] in the *Amazon SQS Developer Guide*.
+    #     Timeout][3] in the *Amazon Simple Queue Service Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -1838,7 +1899,7 @@ module Aws::SQS
     #     (CMK) for Amazon SQS or a custom CMK. For more information, see
     #     [Key Terms][5]. While the alias of the AWS-managed CMK for Amazon
     #     SQS is always `alias/aws/sqs`, the alias of a custom CMK can, for
-    #     example, be `alias/aws/sqs`. For more examples, see [KeyId][6] in
+    #     example, be `alias/MyAlias `. For more examples, see [KeyId][6] in
     #     the *AWS Key Management Service API Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds,
@@ -1847,15 +1908,15 @@ module Aws::SQS
     #     representing seconds, between 60 seconds (1 minute) and 86,400
     #     seconds (24 hours). The default is 300 (5 minutes). A shorter time
     #     period provides better security but results in more calls to KMS
-    #     which incur charges after Free Tier. For more information, see
-    #     [How Does the Data Key Reuse Period Work?][8].
+    #     which might incur charges after Free Tier. For more information,
+    #     see [How Does the Data Key Reuse Period Work?][8].
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
     #   queues][9]\:
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
     #     For more information, see [Exactly-Once Processing][10] in the
-    #     *Amazon SQS Developer Guide*.
+    #     *Amazon Simple Queue Service Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -1919,6 +1980,56 @@ module Aws::SQS
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attributes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         queue_url: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] queue_url
+    #   The URL of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to be added to the specified queue.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/TagQueueRequest AWS API Documentation
+    #
+    class TagQueueRequest < Struct.new(
+      :queue_url,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         queue_url: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] queue_url
+    #   The URL of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tags to be removed from the specified queue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/UntagQueueRequest AWS API Documentation
+    #
+    class UntagQueueRequest < Struct.new(
+      :queue_url,
+      :tag_keys)
       include Aws::Structure
     end
 

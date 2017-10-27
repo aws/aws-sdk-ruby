@@ -722,6 +722,22 @@ module Aws::CloudFormation
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #
+    # @option params [Boolean] :enable_termination_protection
+    #   Whether to enable termination protection on the specified stack. If a
+    #   user attempts to delete a stack with termination protection enabled,
+    #   the operation fails and the stack remains unchanged. For more
+    #   information, see [Protecting a Stack From Being Deleted][1] in the
+    #   *AWS CloudFormation User Guide*. Termination protection is disabled on
+    #   stacks by default.
+    #
+    #   For [nested stacks][2], termination protection is set on the root
+    #   stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #
     # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackOutput#stack_id #stack_id} => String
@@ -764,6 +780,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     enable_termination_protection: false,
     #   })
     #
     # @example Response structure
@@ -1737,6 +1754,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].parameters[0].parameter_value #=> String
     #   resp.stacks[0].parameters[0].use_previous_value #=> Boolean
     #   resp.stacks[0].creation_time #=> Time
+    #   resp.stacks[0].deletion_time #=> Time
     #   resp.stacks[0].last_updated_time #=> Time
     #   resp.stacks[0].rollback_configuration.rollback_triggers #=> Array
     #   resp.stacks[0].rollback_configuration.rollback_triggers[0].arn #=> String
@@ -1759,6 +1777,9 @@ module Aws::CloudFormation
     #   resp.stacks[0].tags #=> Array
     #   resp.stacks[0].tags[0].key #=> String
     #   resp.stacks[0].tags[0].value #=> String
+    #   resp.stacks[0].enable_termination_protection #=> Boolean
+    #   resp.stacks[0].parent_id #=> String
+    #   resp.stacks[0].root_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
@@ -2537,6 +2558,8 @@ module Aws::CloudFormation
     #   resp.stack_summaries[0].deletion_time #=> Time
     #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
     #   resp.stack_summaries[0].stack_status_reason #=> String
+    #   resp.stack_summaries[0].parent_id #=> String
+    #   resp.stack_summaries[0].root_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks AWS API Documentation
@@ -3122,6 +3145,51 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Updates termination protection for the specified stack. If a user
+    # attempts to delete a stack with termination protection enabled, the
+    # operation fails and the stack remains unchanged. For more information,
+    # see [Protecting a Stack From Being Deleted][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    # For [nested stacks][2], termination protection is set on the root
+    # stack and cannot be changed directly on the nested stack.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #
+    # @option params [required, Boolean] :enable_termination_protection
+    #   Whether to enable termination protection on the specified stack.
+    #
+    # @option params [required, String] :stack_name
+    #   The name or unique ID of the stack for which you want to set
+    #   termination protection.
+    #
+    # @return [Types::UpdateTerminationProtectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTerminationProtectionOutput#stack_id #stack_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_termination_protection({
+    #     enable_termination_protection: false, # required
+    #     stack_name: "StackNameOrId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtection AWS API Documentation
+    #
+    # @overload update_termination_protection(params = {})
+    # @param [Hash] params ({})
+    def update_termination_protection(params = {}, options = {})
+      req = build_request(:update_termination_protection, params)
+      req.send_request(options)
+    end
+
     # Validates a specified template. AWS CloudFormation first checks if the
     # template is valid JSON. If it isn't, AWS CloudFormation checks if the
     # template is valid YAML. If both these checks fail, AWS CloudFormation
@@ -3203,7 +3271,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4317,6 +4317,23 @@ module Aws::Route53
     #     the alarm state. For new health checks that have no last known
     #     status, the default status for the health check is healthy.
     #
+    # @option params [Array<String>] :reset_elements
+    #   A complex type that contains one `ResetElement` element for each
+    #   element that you want to reset to the default value. Valid values for
+    #   `ResetElement` include the following:
+    #
+    #   * `ChildHealthChecks`\: Amazon Route 53 resets
+    #     HealthCheckConfig$ChildHealthChecks to null.
+    #
+    #   * `FullyQualifiedDomainName`\: Amazon Route 53 resets
+    #     HealthCheckConfig$FullyQualifiedDomainName to null.
+    #
+    #   * `Regions`\: Amazon Route 53 resets the HealthCheckConfig$Regions
+    #     list to the default set of regions.
+    #
+    #   * `ResourcePath`\: Amazon Route 53 resets
+    #     HealthCheckConfig$ResourcePath to null.
+    #
     # @return [Types::UpdateHealthCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateHealthCheckResponse#health_check #health_check} => Types::HealthCheck
@@ -4342,6 +4359,7 @@ module Aws::Route53
     #       name: "AlarmName", # required
     #     },
     #     insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
+    #     reset_elements: ["FullyQualifiedDomainName"], # accepts FullyQualifiedDomainName, Regions, ResourcePath, ChildHealthChecks
     #   })
     #
     # @example Response structure
@@ -4554,7 +4572,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

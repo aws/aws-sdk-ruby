@@ -31,10 +31,16 @@ module Aws::WAFRegional
     Country = Shapes::StringShape.new(name: 'Country')
     CreateByteMatchSetRequest = Shapes::StructureShape.new(name: 'CreateByteMatchSetRequest')
     CreateByteMatchSetResponse = Shapes::StructureShape.new(name: 'CreateByteMatchSetResponse')
+    CreateGeoMatchSetRequest = Shapes::StructureShape.new(name: 'CreateGeoMatchSetRequest')
+    CreateGeoMatchSetResponse = Shapes::StructureShape.new(name: 'CreateGeoMatchSetResponse')
     CreateIPSetRequest = Shapes::StructureShape.new(name: 'CreateIPSetRequest')
     CreateIPSetResponse = Shapes::StructureShape.new(name: 'CreateIPSetResponse')
     CreateRateBasedRuleRequest = Shapes::StructureShape.new(name: 'CreateRateBasedRuleRequest')
     CreateRateBasedRuleResponse = Shapes::StructureShape.new(name: 'CreateRateBasedRuleResponse')
+    CreateRegexMatchSetRequest = Shapes::StructureShape.new(name: 'CreateRegexMatchSetRequest')
+    CreateRegexMatchSetResponse = Shapes::StructureShape.new(name: 'CreateRegexMatchSetResponse')
+    CreateRegexPatternSetRequest = Shapes::StructureShape.new(name: 'CreateRegexPatternSetRequest')
+    CreateRegexPatternSetResponse = Shapes::StructureShape.new(name: 'CreateRegexPatternSetResponse')
     CreateRuleRequest = Shapes::StructureShape.new(name: 'CreateRuleRequest')
     CreateRuleResponse = Shapes::StructureShape.new(name: 'CreateRuleResponse')
     CreateSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'CreateSizeConstraintSetRequest')
@@ -47,10 +53,16 @@ module Aws::WAFRegional
     CreateXssMatchSetResponse = Shapes::StructureShape.new(name: 'CreateXssMatchSetResponse')
     DeleteByteMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteByteMatchSetRequest')
     DeleteByteMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteByteMatchSetResponse')
+    DeleteGeoMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteGeoMatchSetRequest')
+    DeleteGeoMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteGeoMatchSetResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
     DeleteRateBasedRuleRequest = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleRequest')
     DeleteRateBasedRuleResponse = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleResponse')
+    DeleteRegexMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteRegexMatchSetRequest')
+    DeleteRegexMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteRegexMatchSetResponse')
+    DeleteRegexPatternSetRequest = Shapes::StructureShape.new(name: 'DeleteRegexPatternSetRequest')
+    DeleteRegexPatternSetResponse = Shapes::StructureShape.new(name: 'DeleteRegexPatternSetResponse')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteRuleResponse = Shapes::StructureShape.new(name: 'DeleteRuleResponse')
     DeleteSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'DeleteSizeConstraintSetRequest')
@@ -64,18 +76,33 @@ module Aws::WAFRegional
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
+    GeoMatchConstraint = Shapes::StructureShape.new(name: 'GeoMatchConstraint')
+    GeoMatchConstraintType = Shapes::StringShape.new(name: 'GeoMatchConstraintType')
+    GeoMatchConstraintValue = Shapes::StringShape.new(name: 'GeoMatchConstraintValue')
+    GeoMatchConstraints = Shapes::ListShape.new(name: 'GeoMatchConstraints')
+    GeoMatchSet = Shapes::StructureShape.new(name: 'GeoMatchSet')
+    GeoMatchSetSummaries = Shapes::ListShape.new(name: 'GeoMatchSetSummaries')
+    GeoMatchSetSummary = Shapes::StructureShape.new(name: 'GeoMatchSetSummary')
+    GeoMatchSetUpdate = Shapes::StructureShape.new(name: 'GeoMatchSetUpdate')
+    GeoMatchSetUpdates = Shapes::ListShape.new(name: 'GeoMatchSetUpdates')
     GetByteMatchSetRequest = Shapes::StructureShape.new(name: 'GetByteMatchSetRequest')
     GetByteMatchSetResponse = Shapes::StructureShape.new(name: 'GetByteMatchSetResponse')
     GetChangeTokenRequest = Shapes::StructureShape.new(name: 'GetChangeTokenRequest')
     GetChangeTokenResponse = Shapes::StructureShape.new(name: 'GetChangeTokenResponse')
     GetChangeTokenStatusRequest = Shapes::StructureShape.new(name: 'GetChangeTokenStatusRequest')
     GetChangeTokenStatusResponse = Shapes::StructureShape.new(name: 'GetChangeTokenStatusResponse')
+    GetGeoMatchSetRequest = Shapes::StructureShape.new(name: 'GetGeoMatchSetRequest')
+    GetGeoMatchSetResponse = Shapes::StructureShape.new(name: 'GetGeoMatchSetResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetRateBasedRuleManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysRequest')
     GetRateBasedRuleManagedKeysResponse = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysResponse')
     GetRateBasedRuleRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleRequest')
     GetRateBasedRuleResponse = Shapes::StructureShape.new(name: 'GetRateBasedRuleResponse')
+    GetRegexMatchSetRequest = Shapes::StructureShape.new(name: 'GetRegexMatchSetRequest')
+    GetRegexMatchSetResponse = Shapes::StructureShape.new(name: 'GetRegexMatchSetResponse')
+    GetRegexPatternSetRequest = Shapes::StructureShape.new(name: 'GetRegexPatternSetRequest')
+    GetRegexPatternSetResponse = Shapes::StructureShape.new(name: 'GetRegexPatternSetResponse')
     GetRuleRequest = Shapes::StructureShape.new(name: 'GetRuleRequest')
     GetRuleResponse = Shapes::StructureShape.new(name: 'GetRuleResponse')
     GetSampledRequestsMaxItems = Shapes::IntegerShape.new(name: 'GetSampledRequestsMaxItems')
@@ -110,10 +137,16 @@ module Aws::WAFRegional
     IPString = Shapes::StringShape.new(name: 'IPString')
     ListByteMatchSetsRequest = Shapes::StructureShape.new(name: 'ListByteMatchSetsRequest')
     ListByteMatchSetsResponse = Shapes::StructureShape.new(name: 'ListByteMatchSetsResponse')
+    ListGeoMatchSetsRequest = Shapes::StructureShape.new(name: 'ListGeoMatchSetsRequest')
+    ListGeoMatchSetsResponse = Shapes::StructureShape.new(name: 'ListGeoMatchSetsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
     ListRateBasedRulesRequest = Shapes::StructureShape.new(name: 'ListRateBasedRulesRequest')
     ListRateBasedRulesResponse = Shapes::StructureShape.new(name: 'ListRateBasedRulesResponse')
+    ListRegexMatchSetsRequest = Shapes::StructureShape.new(name: 'ListRegexMatchSetsRequest')
+    ListRegexMatchSetsResponse = Shapes::StructureShape.new(name: 'ListRegexMatchSetsResponse')
+    ListRegexPatternSetsRequest = Shapes::StructureShape.new(name: 'ListRegexPatternSetsRequest')
+    ListRegexPatternSetsResponse = Shapes::StructureShape.new(name: 'ListRegexPatternSetsResponse')
     ListResourcesForWebACLRequest = Shapes::StructureShape.new(name: 'ListResourcesForWebACLRequest')
     ListResourcesForWebACLResponse = Shapes::StructureShape.new(name: 'ListResourcesForWebACLResponse')
     ListRulesRequest = Shapes::StructureShape.new(name: 'ListRulesRequest')
@@ -145,6 +178,20 @@ module Aws::WAFRegional
     RateBasedRule = Shapes::StructureShape.new(name: 'RateBasedRule')
     RateKey = Shapes::StringShape.new(name: 'RateKey')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
+    RegexMatchSet = Shapes::StructureShape.new(name: 'RegexMatchSet')
+    RegexMatchSetSummaries = Shapes::ListShape.new(name: 'RegexMatchSetSummaries')
+    RegexMatchSetSummary = Shapes::StructureShape.new(name: 'RegexMatchSetSummary')
+    RegexMatchSetUpdate = Shapes::StructureShape.new(name: 'RegexMatchSetUpdate')
+    RegexMatchSetUpdates = Shapes::ListShape.new(name: 'RegexMatchSetUpdates')
+    RegexMatchTuple = Shapes::StructureShape.new(name: 'RegexMatchTuple')
+    RegexMatchTuples = Shapes::ListShape.new(name: 'RegexMatchTuples')
+    RegexPatternSet = Shapes::StructureShape.new(name: 'RegexPatternSet')
+    RegexPatternSetSummaries = Shapes::ListShape.new(name: 'RegexPatternSetSummaries')
+    RegexPatternSetSummary = Shapes::StructureShape.new(name: 'RegexPatternSetSummary')
+    RegexPatternSetUpdate = Shapes::StructureShape.new(name: 'RegexPatternSetUpdate')
+    RegexPatternSetUpdates = Shapes::ListShape.new(name: 'RegexPatternSetUpdates')
+    RegexPatternString = Shapes::StringShape.new(name: 'RegexPatternString')
+    RegexPatternStrings = Shapes::ListShape.new(name: 'RegexPatternStrings')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -179,10 +226,16 @@ module Aws::WAFRegional
     URIString = Shapes::StringShape.new(name: 'URIString')
     UpdateByteMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateByteMatchSetRequest')
     UpdateByteMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateByteMatchSetResponse')
+    UpdateGeoMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateGeoMatchSetRequest')
+    UpdateGeoMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateGeoMatchSetResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
     UpdateRateBasedRuleRequest = Shapes::StructureShape.new(name: 'UpdateRateBasedRuleRequest')
     UpdateRateBasedRuleResponse = Shapes::StructureShape.new(name: 'UpdateRateBasedRuleResponse')
+    UpdateRegexMatchSetRequest = Shapes::StructureShape.new(name: 'UpdateRegexMatchSetRequest')
+    UpdateRegexMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateRegexMatchSetResponse')
+    UpdateRegexPatternSetRequest = Shapes::StructureShape.new(name: 'UpdateRegexPatternSetRequest')
+    UpdateRegexPatternSetResponse = Shapes::StructureShape.new(name: 'UpdateRegexPatternSetResponse')
     UpdateRuleRequest = Shapes::StructureShape.new(name: 'UpdateRuleRequest')
     UpdateRuleResponse = Shapes::StructureShape.new(name: 'UpdateRuleResponse')
     UpdateSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'UpdateSizeConstraintSetRequest')
@@ -198,6 +251,7 @@ module Aws::WAFRegional
     WAFInvalidAccountException = Shapes::StructureShape.new(name: 'WAFInvalidAccountException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
     WAFInvalidParameterException = Shapes::StructureShape.new(name: 'WAFInvalidParameterException')
+    WAFInvalidRegexPatternException = Shapes::StructureShape.new(name: 'WAFInvalidRegexPatternException')
     WAFLimitsExceededException = Shapes::StructureShape.new(name: 'WAFLimitsExceededException')
     WAFNonEmptyEntityException = Shapes::StructureShape.new(name: 'WAFNonEmptyEntityException')
     WAFNonexistentContainerException = Shapes::StructureShape.new(name: 'WAFNonexistentContainerException')
@@ -269,6 +323,14 @@ module Aws::WAFRegional
     CreateByteMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     CreateByteMatchSetResponse.struct_class = Types::CreateByteMatchSetResponse
 
+    CreateGeoMatchSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateGeoMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateGeoMatchSetRequest.struct_class = Types::CreateGeoMatchSetRequest
+
+    CreateGeoMatchSetResponse.add_member(:geo_match_set, Shapes::ShapeRef.new(shape: GeoMatchSet, location_name: "GeoMatchSet"))
+    CreateGeoMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    CreateGeoMatchSetResponse.struct_class = Types::CreateGeoMatchSetResponse
+
     CreateIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateIPSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
     CreateIPSetRequest.struct_class = Types::CreateIPSetRequest
@@ -287,6 +349,22 @@ module Aws::WAFRegional
     CreateRateBasedRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RateBasedRule, location_name: "Rule"))
     CreateRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     CreateRateBasedRuleResponse.struct_class = Types::CreateRateBasedRuleResponse
+
+    CreateRegexMatchSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateRegexMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRegexMatchSetRequest.struct_class = Types::CreateRegexMatchSetRequest
+
+    CreateRegexMatchSetResponse.add_member(:regex_match_set, Shapes::ShapeRef.new(shape: RegexMatchSet, location_name: "RegexMatchSet"))
+    CreateRegexMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    CreateRegexMatchSetResponse.struct_class = Types::CreateRegexMatchSetResponse
+
+    CreateRegexPatternSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateRegexPatternSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    CreateRegexPatternSetRequest.struct_class = Types::CreateRegexPatternSetRequest
+
+    CreateRegexPatternSetResponse.add_member(:regex_pattern_set, Shapes::ShapeRef.new(shape: RegexPatternSet, location_name: "RegexPatternSet"))
+    CreateRegexPatternSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    CreateRegexPatternSetResponse.struct_class = Types::CreateRegexPatternSetResponse
 
     CreateRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateRuleRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
@@ -338,6 +416,13 @@ module Aws::WAFRegional
     DeleteByteMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteByteMatchSetResponse.struct_class = Types::DeleteByteMatchSetResponse
 
+    DeleteGeoMatchSetRequest.add_member(:geo_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GeoMatchSetId"))
+    DeleteGeoMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    DeleteGeoMatchSetRequest.struct_class = Types::DeleteGeoMatchSetRequest
+
+    DeleteGeoMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    DeleteGeoMatchSetResponse.struct_class = Types::DeleteGeoMatchSetResponse
+
     DeleteIPSetRequest.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "IPSetId"))
     DeleteIPSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
     DeleteIPSetRequest.struct_class = Types::DeleteIPSetRequest
@@ -351,6 +436,20 @@ module Aws::WAFRegional
 
     DeleteRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteRateBasedRuleResponse.struct_class = Types::DeleteRateBasedRuleResponse
+
+    DeleteRegexMatchSetRequest.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexMatchSetId"))
+    DeleteRegexMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    DeleteRegexMatchSetRequest.struct_class = Types::DeleteRegexMatchSetRequest
+
+    DeleteRegexMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    DeleteRegexMatchSetResponse.struct_class = Types::DeleteRegexMatchSetResponse
+
+    DeleteRegexPatternSetRequest.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    DeleteRegexPatternSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    DeleteRegexPatternSetRequest.struct_class = Types::DeleteRegexPatternSetRequest
+
+    DeleteRegexPatternSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    DeleteRegexPatternSetResponse.struct_class = Types::DeleteRegexPatternSetResponse
 
     DeleteRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     DeleteRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
@@ -396,6 +495,29 @@ module Aws::WAFRegional
     FieldToMatch.add_member(:data, Shapes::ShapeRef.new(shape: MatchFieldData, location_name: "Data"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
+    GeoMatchConstraint.add_member(:type, Shapes::ShapeRef.new(shape: GeoMatchConstraintType, required: true, location_name: "Type"))
+    GeoMatchConstraint.add_member(:value, Shapes::ShapeRef.new(shape: GeoMatchConstraintValue, required: true, location_name: "Value"))
+    GeoMatchConstraint.struct_class = Types::GeoMatchConstraint
+
+    GeoMatchConstraints.member = Shapes::ShapeRef.new(shape: GeoMatchConstraint)
+
+    GeoMatchSet.add_member(:geo_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GeoMatchSetId"))
+    GeoMatchSet.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    GeoMatchSet.add_member(:geo_match_constraints, Shapes::ShapeRef.new(shape: GeoMatchConstraints, required: true, location_name: "GeoMatchConstraints"))
+    GeoMatchSet.struct_class = Types::GeoMatchSet
+
+    GeoMatchSetSummaries.member = Shapes::ShapeRef.new(shape: GeoMatchSetSummary)
+
+    GeoMatchSetSummary.add_member(:geo_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GeoMatchSetId"))
+    GeoMatchSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    GeoMatchSetSummary.struct_class = Types::GeoMatchSetSummary
+
+    GeoMatchSetUpdate.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, required: true, location_name: "Action"))
+    GeoMatchSetUpdate.add_member(:geo_match_constraint, Shapes::ShapeRef.new(shape: GeoMatchConstraint, required: true, location_name: "GeoMatchConstraint"))
+    GeoMatchSetUpdate.struct_class = Types::GeoMatchSetUpdate
+
+    GeoMatchSetUpdates.member = Shapes::ShapeRef.new(shape: GeoMatchSetUpdate)
+
     GetByteMatchSetRequest.add_member(:byte_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ByteMatchSetId"))
     GetByteMatchSetRequest.struct_class = Types::GetByteMatchSetRequest
 
@@ -412,6 +534,12 @@ module Aws::WAFRegional
 
     GetChangeTokenStatusResponse.add_member(:change_token_status, Shapes::ShapeRef.new(shape: ChangeTokenStatus, location_name: "ChangeTokenStatus"))
     GetChangeTokenStatusResponse.struct_class = Types::GetChangeTokenStatusResponse
+
+    GetGeoMatchSetRequest.add_member(:geo_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GeoMatchSetId"))
+    GetGeoMatchSetRequest.struct_class = Types::GetGeoMatchSetRequest
+
+    GetGeoMatchSetResponse.add_member(:geo_match_set, Shapes::ShapeRef.new(shape: GeoMatchSet, location_name: "GeoMatchSet"))
+    GetGeoMatchSetResponse.struct_class = Types::GetGeoMatchSetResponse
 
     GetIPSetRequest.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "IPSetId"))
     GetIPSetRequest.struct_class = Types::GetIPSetRequest
@@ -432,6 +560,18 @@ module Aws::WAFRegional
 
     GetRateBasedRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RateBasedRule, location_name: "Rule"))
     GetRateBasedRuleResponse.struct_class = Types::GetRateBasedRuleResponse
+
+    GetRegexMatchSetRequest.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexMatchSetId"))
+    GetRegexMatchSetRequest.struct_class = Types::GetRegexMatchSetRequest
+
+    GetRegexMatchSetResponse.add_member(:regex_match_set, Shapes::ShapeRef.new(shape: RegexMatchSet, location_name: "RegexMatchSet"))
+    GetRegexMatchSetResponse.struct_class = Types::GetRegexMatchSetResponse
+
+    GetRegexPatternSetRequest.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    GetRegexPatternSetRequest.struct_class = Types::GetRegexPatternSetRequest
+
+    GetRegexPatternSetResponse.add_member(:regex_pattern_set, Shapes::ShapeRef.new(shape: RegexPatternSet, location_name: "RegexPatternSet"))
+    GetRegexPatternSetResponse.struct_class = Types::GetRegexPatternSetResponse
 
     GetRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     GetRuleRequest.struct_class = Types::GetRuleRequest
@@ -525,6 +665,14 @@ module Aws::WAFRegional
     ListByteMatchSetsResponse.add_member(:byte_match_sets, Shapes::ShapeRef.new(shape: ByteMatchSetSummaries, location_name: "ByteMatchSets"))
     ListByteMatchSetsResponse.struct_class = Types::ListByteMatchSetsResponse
 
+    ListGeoMatchSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListGeoMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListGeoMatchSetsRequest.struct_class = Types::ListGeoMatchSetsRequest
+
+    ListGeoMatchSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListGeoMatchSetsResponse.add_member(:geo_match_sets, Shapes::ShapeRef.new(shape: GeoMatchSetSummaries, location_name: "GeoMatchSets"))
+    ListGeoMatchSetsResponse.struct_class = Types::ListGeoMatchSetsResponse
+
     ListIPSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListIPSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
     ListIPSetsRequest.struct_class = Types::ListIPSetsRequest
@@ -540,6 +688,22 @@ module Aws::WAFRegional
     ListRateBasedRulesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListRateBasedRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: RuleSummaries, location_name: "Rules"))
     ListRateBasedRulesResponse.struct_class = Types::ListRateBasedRulesResponse
+
+    ListRegexMatchSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRegexMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListRegexMatchSetsRequest.struct_class = Types::ListRegexMatchSetsRequest
+
+    ListRegexMatchSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRegexMatchSetsResponse.add_member(:regex_match_sets, Shapes::ShapeRef.new(shape: RegexMatchSetSummaries, location_name: "RegexMatchSets"))
+    ListRegexMatchSetsResponse.struct_class = Types::ListRegexMatchSetsResponse
+
+    ListRegexPatternSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRegexPatternSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListRegexPatternSetsRequest.struct_class = Types::ListRegexPatternSetsRequest
+
+    ListRegexPatternSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListRegexPatternSetsResponse.add_member(:regex_pattern_sets, Shapes::ShapeRef.new(shape: RegexPatternSetSummaries, location_name: "RegexPatternSets"))
+    ListRegexPatternSetsResponse.struct_class = Types::ListRegexPatternSetsResponse
 
     ListResourcesForWebACLRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "WebACLId"))
     ListResourcesForWebACLRequest.struct_class = Types::ListResourcesForWebACLRequest
@@ -603,6 +767,49 @@ module Aws::WAFRegional
     RateBasedRule.add_member(:rate_key, Shapes::ShapeRef.new(shape: RateKey, required: true, location_name: "RateKey"))
     RateBasedRule.add_member(:rate_limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "RateLimit"))
     RateBasedRule.struct_class = Types::RateBasedRule
+
+    RegexMatchSet.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RegexMatchSetId"))
+    RegexMatchSet.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    RegexMatchSet.add_member(:regex_match_tuples, Shapes::ShapeRef.new(shape: RegexMatchTuples, location_name: "RegexMatchTuples"))
+    RegexMatchSet.struct_class = Types::RegexMatchSet
+
+    RegexMatchSetSummaries.member = Shapes::ShapeRef.new(shape: RegexMatchSetSummary)
+
+    RegexMatchSetSummary.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexMatchSetId"))
+    RegexMatchSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    RegexMatchSetSummary.struct_class = Types::RegexMatchSetSummary
+
+    RegexMatchSetUpdate.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, required: true, location_name: "Action"))
+    RegexMatchSetUpdate.add_member(:regex_match_tuple, Shapes::ShapeRef.new(shape: RegexMatchTuple, required: true, location_name: "RegexMatchTuple"))
+    RegexMatchSetUpdate.struct_class = Types::RegexMatchSetUpdate
+
+    RegexMatchSetUpdates.member = Shapes::ShapeRef.new(shape: RegexMatchSetUpdate)
+
+    RegexMatchTuple.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
+    RegexMatchTuple.add_member(:text_transformation, Shapes::ShapeRef.new(shape: TextTransformation, required: true, location_name: "TextTransformation"))
+    RegexMatchTuple.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    RegexMatchTuple.struct_class = Types::RegexMatchTuple
+
+    RegexMatchTuples.member = Shapes::ShapeRef.new(shape: RegexMatchTuple)
+
+    RegexPatternSet.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    RegexPatternSet.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    RegexPatternSet.add_member(:regex_pattern_strings, Shapes::ShapeRef.new(shape: RegexPatternStrings, required: true, location_name: "RegexPatternStrings"))
+    RegexPatternSet.struct_class = Types::RegexPatternSet
+
+    RegexPatternSetSummaries.member = Shapes::ShapeRef.new(shape: RegexPatternSetSummary)
+
+    RegexPatternSetSummary.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    RegexPatternSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    RegexPatternSetSummary.struct_class = Types::RegexPatternSetSummary
+
+    RegexPatternSetUpdate.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, required: true, location_name: "Action"))
+    RegexPatternSetUpdate.add_member(:regex_pattern_string, Shapes::ShapeRef.new(shape: RegexPatternString, required: true, location_name: "RegexPatternString"))
+    RegexPatternSetUpdate.struct_class = Types::RegexPatternSetUpdate
+
+    RegexPatternSetUpdates.member = Shapes::ShapeRef.new(shape: RegexPatternSetUpdate)
+
+    RegexPatternStrings.member = Shapes::ShapeRef.new(shape: RegexPatternString)
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
@@ -692,6 +899,14 @@ module Aws::WAFRegional
     UpdateByteMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     UpdateByteMatchSetResponse.struct_class = Types::UpdateByteMatchSetResponse
 
+    UpdateGeoMatchSetRequest.add_member(:geo_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GeoMatchSetId"))
+    UpdateGeoMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    UpdateGeoMatchSetRequest.add_member(:updates, Shapes::ShapeRef.new(shape: GeoMatchSetUpdates, required: true, location_name: "Updates"))
+    UpdateGeoMatchSetRequest.struct_class = Types::UpdateGeoMatchSetRequest
+
+    UpdateGeoMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    UpdateGeoMatchSetResponse.struct_class = Types::UpdateGeoMatchSetResponse
+
     UpdateIPSetRequest.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "IPSetId"))
     UpdateIPSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
     UpdateIPSetRequest.add_member(:updates, Shapes::ShapeRef.new(shape: IPSetUpdates, required: true, location_name: "Updates"))
@@ -708,6 +923,22 @@ module Aws::WAFRegional
 
     UpdateRateBasedRuleResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     UpdateRateBasedRuleResponse.struct_class = Types::UpdateRateBasedRuleResponse
+
+    UpdateRegexMatchSetRequest.add_member(:regex_match_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexMatchSetId"))
+    UpdateRegexMatchSetRequest.add_member(:updates, Shapes::ShapeRef.new(shape: RegexMatchSetUpdates, required: true, location_name: "Updates"))
+    UpdateRegexMatchSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    UpdateRegexMatchSetRequest.struct_class = Types::UpdateRegexMatchSetRequest
+
+    UpdateRegexMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    UpdateRegexMatchSetResponse.struct_class = Types::UpdateRegexMatchSetResponse
+
+    UpdateRegexPatternSetRequest.add_member(:regex_pattern_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RegexPatternSetId"))
+    UpdateRegexPatternSetRequest.add_member(:updates, Shapes::ShapeRef.new(shape: RegexPatternSetUpdates, required: true, location_name: "Updates"))
+    UpdateRegexPatternSetRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
+    UpdateRegexPatternSetRequest.struct_class = Types::UpdateRegexPatternSetRequest
+
+    UpdateRegexPatternSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
+    UpdateRegexPatternSetResponse.struct_class = Types::UpdateRegexPatternSetResponse
 
     UpdateRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     UpdateRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
@@ -837,6 +1068,20 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
+      api.add_operation(:create_geo_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGeoMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGeoMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGeoMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIPSet"
         o.http_method = "POST"
@@ -861,6 +1106,30 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
+      api.add_operation(:create_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegexMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegexMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegexMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
+      api.add_operation(:create_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRegexPatternSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRegexPatternSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRegexPatternSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
@@ -947,6 +1216,20 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
       end)
 
+      api.add_operation(:delete_geo_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGeoMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGeoMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGeoMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+      end)
+
       api.add_operation(:delete_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteIPSet"
         o.http_method = "POST"
@@ -972,6 +1255,34 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+      end)
+
+      api.add_operation(:delete_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegexMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegexMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegexMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
+      end)
+
+      api.add_operation(:delete_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRegexPatternSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRegexPatternSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRegexPatternSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
       end)
 
@@ -1087,6 +1398,17 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
       end)
 
+      api.add_operation(:get_geo_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGeoMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGeoMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGeoMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
       api.add_operation(:get_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIPSet"
         o.http_method = "POST"
@@ -1119,6 +1441,28 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+      end)
+
+      api.add_operation(:get_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRegexMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRegexMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRegexMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
+      api.add_operation(:get_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRegexPatternSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRegexPatternSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRegexPatternSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
       end)
 
       api.add_operation(:get_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1209,6 +1553,16 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
       end)
 
+      api.add_operation(:list_geo_match_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGeoMatchSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGeoMatchSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGeoMatchSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
       api.add_operation(:list_ip_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIPSets"
         o.http_method = "POST"
@@ -1225,6 +1579,26 @@ module Aws::WAFRegional
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListRateBasedRulesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRateBasedRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
+      api.add_operation(:list_regex_match_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRegexMatchSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRegexMatchSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRegexMatchSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
+      api.add_operation(:list_regex_pattern_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRegexPatternSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRegexPatternSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRegexPatternSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
       end)
@@ -1306,6 +1680,23 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
+      api.add_operation(:update_geo_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGeoMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGeoMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGeoMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentContainerException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
       api.add_operation(:update_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateIPSet"
         o.http_method = "POST"
@@ -1338,6 +1729,37 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFReferencedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
+      api.add_operation(:update_regex_match_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRegexMatchSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRegexMatchSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRegexMatchSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFDisallowedNameException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentContainerException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
+      api.add_operation(:update_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRegexPatternSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRegexPatternSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRegexPatternSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentContainerException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidRegexPatternException)
       end)
 
       api.add_operation(:update_rule, Seahorse::Model::Operation.new.tap do |o|

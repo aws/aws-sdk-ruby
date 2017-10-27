@@ -225,6 +225,133 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # An array that contains one or more Destinations, as well as the tags
+    # and replacement data associated with each of those Destinations.
+    #
+    # @note When making an API call, you may pass BulkEmailDestination
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           to_addresses: ["Address"],
+    #           cc_addresses: ["Address"],
+    #           bcc_addresses: ["Address"],
+    #         },
+    #         replacement_tags: [
+    #           {
+    #             name: "MessageTagName", # required
+    #             value: "MessageTagValue", # required
+    #           },
+    #         ],
+    #         replacement_template_data: "TemplateData",
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   Represents the destination of the message, consisting of To:, CC:,
+    #   and BCC: fields.
+    #
+    #   By default, the string must be 7-bit ASCII. If the text must contain
+    #   any other characters, then you must use MIME encoded-word syntax
+    #   (RFC 2047) instead of a literal string. MIME encoded-word syntax
+    #   uses the following form: `=?charset?encoding?encoded-text?=`. For
+    #   more information, see [RFC 2047][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc2047
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] replacement_tags
+    #   A list of tags, in the form of name/value pairs, to apply to an
+    #   email that you send using `SendBulkTemplatedEmail`. Tags correspond
+    #   to characteristics of the email that you define, so that you can
+    #   publish email sending events.
+    #   @return [Array<Types::MessageTag>]
+    #
+    # @!attribute [rw] replacement_template_data
+    #   A list of replacement values to apply to the template. This
+    #   parameter is a JSON object, typically consisting of key-value pairs
+    #   in which the keys correspond to replacement tags in the email
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BulkEmailDestination AWS API Documentation
+    #
+    class BulkEmailDestination < Struct.new(
+      :destination,
+      :replacement_tags,
+      :replacement_template_data)
+      include Aws::Structure
+    end
+
+    # An object that contains the response from the `SendBulkTemplatedEmail`
+    # operation.
+    #
+    # @!attribute [rw] status
+    #   The status of a message sent using the `SendBulkTemplatedEmail`
+    #   operation.
+    #
+    #   Possible values for this parameter include:
+    #
+    #   * `Success`\: Amazon SES accepted the message, and will attempt to
+    #     deliver it to the recipients.
+    #
+    #   * `MessageRejected`\: The message was rejected because it contained
+    #     a virus.
+    #
+    #   * `MailFromDomainNotVerified`\: The sender's email address or
+    #     domain was not verified.
+    #
+    #   * `ConfigurationSetDoesNotExist`\: The configuration set you
+    #     specified does not exist.
+    #
+    #   * `TemplateDoesNotExist`\: The template you specified does not
+    #     exist.
+    #
+    #   * `AccountSuspended`\: Your account has been shut down because of
+    #     issues related to your email sending practices.
+    #
+    #   * `AccountThrottled`\: The number of emails you can send has been
+    #     reduced because your account has exceeded its allocated sending
+    #     limit.
+    #
+    #   * `AccountDailyQuotaExceeded`\: You have reached or exceeded the
+    #     maximum number of emails you can send from your account in a
+    #     24-hour period.
+    #
+    #   * `InvalidSendingPoolName`\: The configuration set you specified
+    #     refers to an IP pool that does not exist.
+    #
+    #   * `InvalidParameterValue`\: One or more of the parameters you
+    #     specified when calling this operation was invalid. See the error
+    #     message for additional information.
+    #
+    #   * `TransientFailure`\: Amazon SES was unable to process your request
+    #     because of a temporary issue.
+    #
+    #   * `Failed`\: Amazon SES was unable to process your request. See the
+    #     error message for additional information.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A description of an error that prevented a message being sent using
+    #   the `SendBulkTemplatedEmail` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The unique message identifier returned from the
+    #   `SendBulkTemplatedEmail` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BulkEmailDestinationStatus AWS API Documentation
+    #
+    class BulkEmailDestinationStatus < Struct.new(
+      :status,
+      :error,
+      :message_id)
+      include Aws::Structure
+    end
+
     # Represents a request to create a receipt rule set by cloning an
     # existing one. You use receipt rule sets to receive email with Amazon
     # SES. For more information, see the [Amazon SES Developer Guide][1].
@@ -369,13 +496,12 @@ module Aws::SES
     # Configuration sets let you create groups of rules that you can apply
     # to the emails you send using Amazon SES. For more information about
     # using configuration sets, see [Using Amazon SES Configuration Sets][1]
-    # in the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/">Amazon
-    # SES Developer Guide</a>.</i>
+    # in the [Amazon SES Developer Guide][2].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html
+    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/
     #
     # @note When making an API call, you may pass ConfigurationSet
     #   data as a hash:
@@ -451,7 +577,7 @@ module Aws::SES
     #         event_destination: { # required
     #           name: "EventDestinationName", # required
     #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
+    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -553,13 +679,12 @@ module Aws::SES
     #   generated by Amazon SES emails.
     #
     #   For more information, see [Configuring Custom Domains to Handle Open
-    #   and Click Tracking][1] in the <i> <a
-    #   href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon
-    #   SES Developer Guide</a>.</i>
+    #   and Click Tracking][1] in the [Amazon SES Developer Guide][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -745,6 +870,41 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetResponse AWS API Documentation
     #
     class CreateReceiptRuleSetResponse < Aws::EmptyStructure; end
+
+    # Represents a request to create an email template. For more
+    # information, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @note When making an API call, you may pass CreateTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: { # required
+    #           template_name: "TemplateName", # required
+    #           subject_part: "SubjectPart",
+    #           text_part: "TextPart",
+    #           html_part: "HtmlPart",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The content of the email, composed of a subject line, an HTML part,
+    #   and a text-only part.
+    #   @return [Types::Template]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateRequest AWS API Documentation
+    #
+    class CreateTemplateRequest < Struct.new(
+      :template)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateResponse AWS API Documentation
+    #
+    class CreateTemplateResponse < Aws::EmptyStructure; end
 
     # Represents a request to delete a configuration set event destination.
     # Configuration set event destinations are associated with configuration
@@ -1023,6 +1183,35 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetResponse AWS API Documentation
     #
     class DeleteReceiptRuleSetResponse < Aws::EmptyStructure; end
+
+    # Represents a request to delete an email template. For more
+    # information, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @note When making an API call, you may pass DeleteTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateRequest AWS API Documentation
+    #
+    class DeleteTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateResponse AWS API Documentation
+    #
+    class DeleteTemplateResponse < Aws::EmptyStructure; end
 
     # Represents a request to delete an email address from the list of email
     # addresses you have attempted to verify under your AWS account.
@@ -1307,7 +1496,7 @@ module Aws::SES
     #       {
     #         name: "EventDestinationName", # required
     #         enabled: false,
-    #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
+    #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
     #         kinesis_firehose_destination: {
     #           iam_role_arn: "AmazonResourceName", # required
     #           delivery_stream_arn: "AmazonResourceName", # required
@@ -1681,6 +1870,36 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateRequest AWS API Documentation
+    #
+    class GetTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template
+    #   The content of the email, composed of a subject line, an HTML part,
+    #   and a text-only part.
+    #   @return [Types::Template]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateResponse AWS API Documentation
+    #
+    class GetTemplateResponse < Struct.new(
+      :template)
+      include Aws::Structure
+    end
+
     # Represents the DKIM attributes of a verified email address or a
     # domain.
     #
@@ -1851,9 +2070,12 @@ module Aws::SES
     #
     # Event destinations, such as Amazon Kinesis Firehose, are associated
     # with configuration sets, which enable you to publish email sending
-    # events. For information about using configuration sets, see the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # events. For information about using configuration sets, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass KinesisFirehoseDestination
     #   data as a hash:
@@ -1888,14 +2110,15 @@ module Aws::SES
     # To enable Amazon SES to call your AWS Lambda function or to publish to
     # an Amazon SNS topic of another account, Amazon SES must have
     # permission to access those resources. For information about giving
-    # permissions, see the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # permissions, see the [Amazon SES Developer Guide][1].
     #
     # For information about using AWS Lambda actions in receipt rules, see
-    # the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # the [Amazon SES Developer Guide][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html
     #
     # @note When making an API call, you may pass LambdaAction
     #   data as a hash:
@@ -1910,18 +2133,24 @@ module Aws::SES
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
     #   when the Lambda action is taken. An example of an Amazon SNS topic
     #   ARN is `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more
-    #   information about Amazon SNS topics, see the <i> <a
-    #   href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon
-    #   SNS Developer Guide</a>.</i>
+    #   information about Amazon SNS topics, see the [Amazon SNS Developer
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] function_arn
     #   The Amazon Resource Name (ARN) of the AWS Lambda function. An
     #   example of an AWS Lambda function ARN is
     #   `arn:aws:lambda:us-west-2:account-id:function:MyFunction`. For more
-    #   information about AWS Lambda, see the <i> <a
-    #   href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS
-    #   Lambda Developer Guide</a>.</i>
+    #   information about AWS Lambda, see the [AWS Lambda Developer
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/welcome.html
     #   @return [String]
     #
     # @!attribute [rw] invocation_type
@@ -1930,14 +2159,16 @@ module Aws::SES
     #   immediately result in a response, and a value of `Event` means that
     #   the function will be invoked asynchronously. The default value is
     #   `Event`. For information about AWS Lambda invocation types, see the
-    #   <i> <a
-    #   href="http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html">AWS
-    #   Lambda Developer Guide</a>.</i>
+    #   [AWS Lambda Developer Guide][1].
     #
     #   There is a 30-second timeout on `RequestResponse` invocations. You
     #   should use `Event` invocation in most cases. Use `RequestResponse`
     #   only when you want to make a mail flow decision, such as whether to
     #   stop the receipt rule or the receipt rule set.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LambdaAction AWS API Documentation
@@ -2196,6 +2427,50 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of templates to return. This value must be at
+    #   least 1 and less than or equal to 10. If you do not specify a value,
+    #   or if you specify a value less than 1 or greater than 10, the
+    #   operation will return up to 10 results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesRequest AWS API Documentation
+    #
+    class ListTemplatesRequest < Struct.new(
+      :next_token,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates_metadata
+    #   An array the contains the name of creation time stamp for each
+    #   template in your Amazon SES account.
+    #   @return [Array<Types::TemplateMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesResponse AWS API Documentation
+    #
+    class ListTemplatesResponse < Struct.new(
+      :templates_metadata,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A list of email addresses that you have verified with Amazon SES under
     # your AWS account.
     #
@@ -2253,10 +2528,12 @@ module Aws::SES
     # Notification (DSN) when an email that Amazon SES receives on your
     # behalf bounces.
     #
-    # For information about receiving email through Amazon SES, see the <i>
-    # <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # For information about receiving email through Amazon SES, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
     #
     # @note When making an API call, you may pass MessageDsn
     #   data as a hash:
@@ -3122,9 +3399,12 @@ module Aws::SES
     #
     # Event destinations, such as Amazon SNS, are associated with
     # configuration sets, which enable you to publish email sending events.
-    # For information about using configuration sets, see the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # For information about using configuration sets, see the [Amazon SES
+    # Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
     #
     # @note When making an API call, you may pass SNSDestination
     #   data as a hash:
@@ -3137,9 +3417,11 @@ module Aws::SES
     #   The ARN of the Amazon SNS topic that email sending events will be
     #   published to. An example of an Amazon SNS topic ARN is
     #   `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more information
-    #   about Amazon SNS topics, see the <i> <a
-    #   href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon
-    #   SNS Developer Guide</a>.</i>
+    #   about Amazon SNS topics, see the [Amazon SNS Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSDestination AWS API Documentation
@@ -3254,6 +3536,200 @@ module Aws::SES
     #
     class SendBounceResponse < Struct.new(
       :message_id)
+      include Aws::Structure
+    end
+
+    # Represents a request to send a templated email to multiple
+    # destinations using Amazon SES. For more information, see the [Amazon
+    # SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @note When making an API call, you may pass SendBulkTemplatedEmailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source: "Address", # required
+    #         source_arn: "AmazonResourceName",
+    #         reply_to_addresses: ["Address"],
+    #         return_path: "Address",
+    #         return_path_arn: "AmazonResourceName",
+    #         configuration_set_name: "ConfigurationSetName",
+    #         default_tags: [
+    #           {
+    #             name: "MessageTagName", # required
+    #             value: "MessageTagValue", # required
+    #           },
+    #         ],
+    #         template: "TemplateName", # required
+    #         template_arn: "AmazonResourceName",
+    #         default_template_data: "TemplateData",
+    #         destinations: [ # required
+    #           {
+    #             destination: { # required
+    #               to_addresses: ["Address"],
+    #               cc_addresses: ["Address"],
+    #               bcc_addresses: ["Address"],
+    #             },
+    #             replacement_tags: [
+    #               {
+    #                 name: "MessageTagName", # required
+    #                 value: "MessageTagValue", # required
+    #               },
+    #             ],
+    #             replacement_template_data: "TemplateData",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The email address that is sending the email. This email address must
+    #   be either individually verified with Amazon SES, or from a domain
+    #   that has been verified with Amazon SES. For information about
+    #   verifying identities, see the [Amazon SES Developer Guide][1].
+    #
+    #   If you are sending on behalf of another user and have been permitted
+    #   to do so by a sending authorization policy, then you must also
+    #   specify the `SourceArn` parameter. For more information about
+    #   sending authorization, see the [Amazon SES Developer Guide][2].
+    #
+    #   In all cases, the email address must be 7-bit ASCII. If the text
+    #   must contain any other characters, then you must use MIME
+    #   encoded-word syntax (RFC 2047) instead of a literal string. MIME
+    #   encoded-word syntax uses the following form:
+    #   `=?charset?encoding?encoded-text?=`. For more information, see [RFC
+    #   2047][3].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [3]: https://tools.ietf.org/html/rfc2047
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to send for the email address specified in
+    #   the `Source` parameter.
+    #
+    #   For example, if the owner of `example.com` (which has ARN
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`) attaches
+    #   a policy to it that authorizes you to send from `user@example.com`,
+    #   then you would specify the `SourceArn` to be
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`, and the
+    #   `Source` to be `user@example.com`.
+    #
+    #   For more information about sending authorization, see the [Amazon
+    #   SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] reply_to_addresses
+    #   The reply-to email address(es) for the message. If the recipient
+    #   replies to the message, each reply-to address will receive the
+    #   reply.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] return_path
+    #   The email address that bounces and complaints will be forwarded to
+    #   when feedback forwarding is enabled. If the message cannot be
+    #   delivered to the recipient, then an error message will be returned
+    #   from the recipient's ISP; this message will then be forwarded to
+    #   the email address specified by the `ReturnPath` parameter. The
+    #   `ReturnPath` parameter is never overwritten. This email address must
+    #   be either individually verified with Amazon SES, or from a domain
+    #   that has been verified with Amazon SES.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_path_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `ReturnPath` parameter.
+    #
+    #   For example, if the owner of `example.com` (which has ARN
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`) attaches
+    #   a policy to it that authorizes you to use `feedback@example.com`,
+    #   then you would specify the `ReturnPathArn` to be
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`, and the
+    #   `ReturnPath` to be `feedback@example.com`.
+    #
+    #   For more information about sending authorization, see the [Amazon
+    #   SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use when you send an email
+    #   using `SendBulkTemplatedEmail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_tags
+    #   A list of tags, in the form of name/value pairs, to apply to an
+    #   email that you send to a destination using `SendBulkTemplatedEmail`.
+    #   @return [Array<Types::MessageTag>]
+    #
+    # @!attribute [rw] template
+    #   The template to use when sending this email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The ARN of the template to use when sending this email.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_template_data
+    #   A list of replacement values to apply to the template when
+    #   replacement data is not specified in a Destination object. These
+    #   values act as a default or fallback option when no other data is
+    #   available.
+    #
+    #   The template data is a JSON object, typically consisting of
+    #   key-value pairs in which the keys correspond to replacement tags in
+    #   the email template.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   One or more `Destination` objects. All of the recipients in a
+    #   `Destination` will receive the same version of the email. You can
+    #   specify up to 50 `Destination` objects within a `Destinations`
+    #   array.
+    #   @return [Array<Types::BulkEmailDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailRequest AWS API Documentation
+    #
+    class SendBulkTemplatedEmailRequest < Struct.new(
+      :source,
+      :source_arn,
+      :reply_to_addresses,
+      :return_path,
+      :return_path_arn,
+      :configuration_set_name,
+      :default_tags,
+      :template,
+      :template_arn,
+      :default_template_data,
+      :destinations)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The unique message identifier returned from the
+    #   `SendBulkTemplatedEmail` action.
+    #   @return [Array<Types::BulkEmailDestinationStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailResponse AWS API Documentation
+    #
+    class SendBulkTemplatedEmailResponse < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -3671,6 +4147,185 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Represents a request to send a templated email using Amazon SES. For
+    # more information, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    #
+    # @note When making an API call, you may pass SendTemplatedEmailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source: "Address", # required
+    #         destination: { # required
+    #           to_addresses: ["Address"],
+    #           cc_addresses: ["Address"],
+    #           bcc_addresses: ["Address"],
+    #         },
+    #         reply_to_addresses: ["Address"],
+    #         return_path: "Address",
+    #         source_arn: "AmazonResourceName",
+    #         return_path_arn: "AmazonResourceName",
+    #         tags: [
+    #           {
+    #             name: "MessageTagName", # required
+    #             value: "MessageTagValue", # required
+    #           },
+    #         ],
+    #         configuration_set_name: "ConfigurationSetName",
+    #         template: "TemplateName", # required
+    #         template_arn: "AmazonResourceName",
+    #         template_data: "TemplateData", # required
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The email address that is sending the email. This email address must
+    #   be either individually verified with Amazon SES, or from a domain
+    #   that has been verified with Amazon SES. For information about
+    #   verifying identities, see the [Amazon SES Developer Guide][1].
+    #
+    #   If you are sending on behalf of another user and have been permitted
+    #   to do so by a sending authorization policy, then you must also
+    #   specify the `SourceArn` parameter. For more information about
+    #   sending authorization, see the [Amazon SES Developer Guide][2].
+    #
+    #   In all cases, the email address must be 7-bit ASCII. If the text
+    #   must contain any other characters, then you must use MIME
+    #   encoded-word syntax (RFC 2047) instead of a literal string. MIME
+    #   encoded-word syntax uses the following form:
+    #   `=?charset?encoding?encoded-text?=`. For more information, see [RFC
+    #   2047][3].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [3]: https://tools.ietf.org/html/rfc2047
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for this email, composed of To:, CC:, and BCC:
+    #   fields. A Destination can include up to 50 recipients across these
+    #   three fields.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] reply_to_addresses
+    #   The reply-to email address(es) for the message. If the recipient
+    #   replies to the message, each reply-to address will receive the
+    #   reply.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] return_path
+    #   The email address that bounces and complaints will be forwarded to
+    #   when feedback forwarding is enabled. If the message cannot be
+    #   delivered to the recipient, then an error message will be returned
+    #   from the recipient's ISP; this message will then be forwarded to
+    #   the email address specified by the `ReturnPath` parameter. The
+    #   `ReturnPath` parameter is never overwritten. This email address must
+    #   be either individually verified with Amazon SES, or from a domain
+    #   that has been verified with Amazon SES.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to send for the email address specified in
+    #   the `Source` parameter.
+    #
+    #   For example, if the owner of `example.com` (which has ARN
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`) attaches
+    #   a policy to it that authorizes you to send from `user@example.com`,
+    #   then you would specify the `SourceArn` to be
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`, and the
+    #   `Source` to be `user@example.com`.
+    #
+    #   For more information about sending authorization, see the [Amazon
+    #   SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] return_path_arn
+    #   This parameter is used only for sending authorization. It is the ARN
+    #   of the identity that is associated with the sending authorization
+    #   policy that permits you to use the email address specified in the
+    #   `ReturnPath` parameter.
+    #
+    #   For example, if the owner of `example.com` (which has ARN
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`) attaches
+    #   a policy to it that authorizes you to use `feedback@example.com`,
+    #   then you would specify the `ReturnPathArn` to be
+    #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`, and the
+    #   `ReturnPath` to be `feedback@example.com`.
+    #
+    #   For more information about sending authorization, see the [Amazon
+    #   SES Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags, in the form of name/value pairs, to apply to an
+    #   email that you send using `SendTemplatedEmail`. Tags correspond to
+    #   characteristics of the email that you define, so that you can
+    #   publish email sending events.
+    #   @return [Array<Types::MessageTag>]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use when you send an email
+    #   using `SendTemplatedEmail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The template to use when sending this email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The ARN of the template to use when sending this email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_data
+    #   A list of replacement values to apply to the template. This
+    #   parameter is a JSON object, typically consisting of key-value pairs
+    #   in which the keys correspond to replacement tags in the email
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendTemplatedEmailRequest AWS API Documentation
+    #
+    class SendTemplatedEmailRequest < Struct.new(
+      :source,
+      :destination,
+      :reply_to_addresses,
+      :return_path,
+      :source_arn,
+      :return_path_arn,
+      :tags,
+      :configuration_set_name,
+      :template,
+      :template_arn,
+      :template_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique message identifier returned from the `SendTemplatedEmail`
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendTemplatedEmailResponse AWS API Documentation
+    #
+    class SendTemplatedEmailResponse < Struct.new(
+      :message_id)
+      include Aws::Structure
+    end
+
     # Represents a request to set a receipt rule set as the active receipt
     # rule set. You use receipt rule sets to receive email with Amazon SES.
     # For more information, see the [Amazon SES Developer Guide][1].
@@ -4011,9 +4666,11 @@ module Aws::SES
     # Amazon Simple Notification Service (Amazon SNS).
     #
     # For information about setting a stop action in a receipt rule, see the
-    # <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html
     #
     # @note When making an API call, you may pass StopAction
     #   data as a hash:
@@ -4047,18 +4704,117 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # The content of the email, composed of a subject line, an HTML part,
+    # and a text-only part.
+    #
+    # @note When making an API call, you may pass Template
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         subject_part: "SubjectPart",
+    #         text_part: "TextPart",
+    #         html_part: "HtmlPart",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template. You will refer to this name when you send
+    #   email using the `SendTemplatedEmail` or `SendBulkTemplatedEmail`
+    #   operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_part
+    #   The subject line of the email.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_part
+    #   The email body that will be visible to recipients whose email
+    #   clients do not display HTML.
+    #   @return [String]
+    #
+    # @!attribute [rw] html_part
+    #   The HTML body of the email.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Template AWS API Documentation
+    #
+    class Template < Struct.new(
+      :template_name,
+      :subject_part,
+      :text_part,
+      :html_part)
+      include Aws::Structure
+    end
+
+    # Information about an email template.
+    #
+    # @!attribute [rw] name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time and date the template was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TemplateMetadata AWS API Documentation
+    #
+    class TemplateMetadata < Struct.new(
+      :name,
+      :created_timestamp)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TestRenderTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         template_data: "TemplateData", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template that you want to render.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_data
+    #   A list of replacement values to apply to the template. This
+    #   parameter is a JSON object, typically consisting of key-value pairs
+    #   in which the keys correspond to replacement tags in the email
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TestRenderTemplateRequest AWS API Documentation
+    #
+    class TestRenderTemplateRequest < Struct.new(
+      :template_name,
+      :template_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rendered_template
+    #   The complete MIME message rendered by applying the data in the
+    #   TemplateData parameter to the template specified in the TemplateName
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TestRenderTemplateResponse AWS API Documentation
+    #
+    class TestRenderTemplateResponse < Struct.new(
+      :rendered_template)
+      include Aws::Structure
+    end
+
     # A domain that is used to redirect email recipients to an Amazon
     # SES-operated domain. This domain captures open and click events
     # generated by Amazon SES emails.
     #
     # For more information, see [Configuring Custom Domains to Handle Open
-    # and Click Tracking][1] in the <i> <a
-    # href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon
-    # SES Developer Guide</a>.</i>
+    # and Click Tracking][1] in the [Amazon SES Developer Guide][2].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html
     #
     # @note When making an API call, you may pass TrackingOptions
     #   data as a hash:
@@ -4096,7 +4852,7 @@ module Aws::SES
     #         event_destination: { # required
     #           name: "EventDestinationName", # required
     #           enabled: false,
-    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click
+    #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery, open, click, renderingFailure
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -4164,13 +4920,12 @@ module Aws::SES
     #   generated by Amazon SES emails.
     #
     #   For more information, see [Configuring Custom Domains to Handle Open
-    #   and Click Tracking][1] in the <i> <a
-    #   href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon
-    #   SES Developer Guide</a>.</i>
+    #   and Click Tracking][1] in the [Amazon SES Developer Guide][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -4268,6 +5023,34 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse AWS API Documentation
     #
     class UpdateReceiptRuleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template: { # required
+    #           template_name: "TemplateName", # required
+    #           subject_part: "SubjectPart",
+    #           text_part: "TextPart",
+    #           html_part: "HtmlPart",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] template
+    #   The content of the email, composed of a subject line, an HTML part,
+    #   and a text-only part.
+    #   @return [Types::Template]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateTemplateRequest AWS API Documentation
+    #
+    class UpdateTemplateRequest < Struct.new(
+      :template)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateTemplateResponse AWS API Documentation
+    #
+    class UpdateTemplateResponse < Aws::EmptyStructure; end
 
     # Represents a request to generate the CNAME records needed to set up
     # Easy DKIM with Amazon SES. For more information about setting up Easy

@@ -303,6 +303,40 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Deletes a branch from a repository, unless that branch is the default
+    # branch for the repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the branch to be deleted.
+    #
+    # @option params [required, String] :branch_name
+    #   The name of the branch to delete.
+    #
+    # @return [Types::DeleteBranchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBranchOutput#deleted_branch #deleted_branch} => Types::BranchInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_branch({
+    #     repository_name: "RepositoryName", # required
+    #     branch_name: "BranchName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted_branch.branch_name #=> String
+    #   resp.deleted_branch.commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranch AWS API Documentation
+    #
+    # @overload delete_branch(params = {})
+    # @param [Hash] params ({})
+    def delete_branch(params = {}, options = {})
+      req = build_request(:delete_branch, params)
+      req.send_request(options)
+    end
+
     # Deletes a repository. If a specified repository was already deleted, a
     # null repository ID will be returned.
     #
@@ -411,7 +445,7 @@ module Aws::CodeCommit
     #   The name of the repository to which the commit was made.
     #
     # @option params [required, String] :commit_id
-    #   The commit ID.
+    #   The commit ID. Commit IDs are the full SHA of the commit.
     #
     # @return [Types::GetCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -426,6 +460,7 @@ module Aws::CodeCommit
     #
     # @example Response structure
     #
+    #   resp.commit.commit_id #=> String
     #   resp.commit.tree_id #=> String
     #   resp.commit.parents #=> Array
     #   resp.commit.parents[0] #=> String
@@ -892,7 +927,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

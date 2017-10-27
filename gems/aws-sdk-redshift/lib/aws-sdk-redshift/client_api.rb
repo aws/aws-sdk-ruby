@@ -709,6 +709,8 @@ module Aws::Redshift
     DescribeEventSubscriptionsMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionName"))
     DescribeEventSubscriptionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeEventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventSubscriptionsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
+    DescribeEventSubscriptionsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeEventSubscriptionsMessage.struct_class = Types::DescribeEventSubscriptionsMessage
 
     DescribeEventsMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
@@ -1728,6 +1730,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DescribeEventSubscriptionsMessage)
         o.output = Shapes::ShapeRef.new(shape: EventSubscriptionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {

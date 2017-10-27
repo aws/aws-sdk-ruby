@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2017-10-16)
+------------------
+
+* Feature - API update.
+
+1.2.0 (2017-10-02)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-cloudhsm` gemspec metadata.
 
 1.1.0 (2017-08-30)

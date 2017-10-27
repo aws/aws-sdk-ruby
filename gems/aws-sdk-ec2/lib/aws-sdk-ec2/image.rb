@@ -451,26 +451,28 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :attribute
-    #   The name of the attribute to modify.
+    #   The name of the attribute to modify. The valid values are
+    #   `description`, `launchPermission`, and `productCodes`.
     # @option options [Types::AttributeValue] :description
-    #   A description for the AMI.
+    #   A new description for the AMI.
     # @option options [Types::LaunchPermissionModifications] :launch_permission
-    #   A launch permission modification.
+    #   A new launch permission for the AMI.
     # @option options [String] :operation_type
-    #   The operation type.
+    #   The operation type. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :product_codes
-    #   One or more product codes. After you add a product code to an AMI, it
-    #   can't be removed. This is only valid when modifying the
-    #   `productCodes` attribute.
+    #   One or more DevPay product codes. After you add a product code to an
+    #   AMI, it can't be removed.
     # @option options [Array<String>] :user_groups
-    #   One or more user groups. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more user groups. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :user_ids
-    #   One or more AWS account IDs. This is only valid when modifying the
-    #   `launchPermission` attribute.
+    #   One or more AWS account IDs. This parameter can be used only when the
+    #   `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
-    #   The value of the attribute being modified. This is only valid when
-    #   modifying the `description` attribute.
+    #   The value of the attribute being modified. This parameter can be used
+    #   only when the `Attribute` parameter is `description` or
+    #   `productCodes`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

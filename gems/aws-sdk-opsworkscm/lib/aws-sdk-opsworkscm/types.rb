@@ -432,7 +432,7 @@ module Aws::OpsWorksCM
     #   management console typically creates the service role for you, if
     #   you are using the AWS CLI or API commands, run the
     #   service-role-creation.yaml AWS CloudFormation template, located at
-    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
+    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
     #   This template creates a CloudFormation stack that includes the
     #   service role that you need.
     #   @return [String]
@@ -454,7 +454,7 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_id
@@ -706,6 +706,8 @@ module Aws::OpsWorksCM
     #       }
     #
     # @!attribute [rw] node_association_status_token
+    #   The token returned in either the AssociateNodeResponse or the
+    #   DisassociateNodeResponse.
     #   @return [String]
     #
     # @!attribute [rw] server_name
@@ -733,10 +735,15 @@ module Aws::OpsWorksCM
     #     progress.
     #   @return [String]
     #
+    # @!attribute [rw] engine_attributes
+    #   Attributes specific to the node association.
+    #   @return [Array<Types::EngineAttribute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse AWS API Documentation
     #
     class DescribeNodeAssociationStatusResponse < Struct.new(
-      :node_association_status)
+      :node_association_status,
+      :engine_attributes)
       include Aws::Structure
     end
 
@@ -1122,16 +1129,28 @@ module Aws::OpsWorksCM
     #
     #       {
     #         server_name: "ServerName", # required
+    #         engine_attributes: [
+    #           {
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] server_name
     #   The name of the server on which to run maintenance.
     #   @return [String]
     #
+    # @!attribute [rw] engine_attributes
+    #   Engine attributes that are specific to the server on which you want
+    #   to run maintenance.
+    #   @return [Array<Types::EngineAttribute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceRequest AWS API Documentation
     #
     class StartMaintenanceRequest < Struct.new(
-      :server_name)
+      :server_name,
+      :engine_attributes)
       include Aws::Structure
     end
 

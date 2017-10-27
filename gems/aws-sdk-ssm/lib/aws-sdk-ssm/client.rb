@@ -156,15 +156,15 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you assign to your managed instances, Maintenance
-    # Windows, or Parameter Store parameters. Tags enable you to categorize
-    # your resources in different ways, for example, by purpose, owner, or
-    # environment. Each tag consists of a key and an optional value, both of
-    # which you define. For example, you could define a set of tags for your
-    # account's managed instances that helps you track each instance's
-    # owner and stack level. For example: Key=Owner and Value=DbAdmin,
-    # SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production,
-    # or Test.
+    # are metadata that you can assign to your documents, managed instances,
+    # Maintenance Windows, Parameter Store parameters, and patch baselines.
+    # Tags enable you to categorize your resources in different ways, for
+    # example, by purpose, owner, or environment. Each tag consists of a key
+    # and an optional value, both of which you define. For example, you
+    # could define a set of tags for your account's managed instances that
+    # helps you track each instance's owner and stack level. For example:
+    # Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
+    # Value=Production, Pre-Production, or Test.
     #
     # Each resource can have a maximum of 10 tags.
     #
@@ -188,6 +188,12 @@ module Aws::SSM
     # @option params [required, String] :resource_id
     #   The resource ID you want to tag.
     #
+    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline values,
+    #   use the ID of the resource, such as mw-01234361858c9b57b for a
+    #   Maintenance Window.
+    #
+    #   For the Document and Parameter values, use the name of the resource.
+    #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
@@ -198,7 +204,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -575,6 +581,9 @@ module Aws::SSM
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
+    #   resp.document_description.tags #=> Array
+    #   resp.document_description.tags[0].key #=> String
+    #   resp.document_description.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument AWS API Documentation
     #
@@ -1213,7 +1222,7 @@ module Aws::SSM
     # or instance.
     #
     # @option params [String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [String] :instance_id
     #   The instance ID.
@@ -1397,10 +1406,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes the specified SSM document.
+    # Describes the specified Systems Manager document.
     #
     # @option params [required, String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [String] :document_version
     #   The document version for which you want information. Can be a specific
@@ -1439,6 +1448,9 @@ module Aws::SSM
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
+    #   resp.document.tags #=> Array
+    #   resp.document.tags[0].key #=> String
+    #   resp.document.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument AWS API Documentation
     #
@@ -2356,6 +2368,7 @@ module Aws::SSM
     #   resp.parameters[0].last_modified_user #=> String
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].allowed_pattern #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
@@ -2714,10 +2727,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Gets the contents of the specified SSM document.
+    # Gets the contents of the specified Systems Manager document.
     #
     # @option params [required, String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [String] :document_version
     #   The document version for which you want information.
@@ -3189,6 +3202,7 @@ module Aws::SSM
     #   resp.parameter.name #=> String
     #   resp.parameter.type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameter.value #=> String
+    #   resp.parameter.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
     #
@@ -3242,6 +3256,7 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.parameters[0].value #=> String
     #   resp.parameters[0].allowed_pattern #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -3281,6 +3296,7 @@ module Aws::SSM
     #   resp.parameters[0].name #=> String
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
     #
@@ -3362,6 +3378,7 @@ module Aws::SSM
     #   resp.parameters[0].name #=> String
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].value #=> String
+    #   resp.parameters[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
@@ -3958,9 +3975,13 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes one or more of your SSM documents.
+    # Describes one or more of your Systems Manager documents.
     #
     # @option params [Array<Types::DocumentFilter>] :document_filter_list
+    #   One or more filters. Use a filter to return a more specific list of
+    #   results.
+    #
+    # @option params [Array<Types::DocumentKeyValuesFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #
@@ -3987,6 +4008,12 @@ module Aws::SSM
     #         value: "DocumentFilterValue", # required
     #       },
     #     ],
+    #     filters: [
+    #       {
+    #         key: "DocumentKeyValuesFilterKey",
+    #         values: ["DocumentKeyValuesFilterValue"],
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4001,6 +4028,9 @@ module Aws::SSM
     #   resp.document_identifiers[0].document_version #=> String
     #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
     #   resp.document_identifiers[0].schema_version #=> String
+    #   resp.document_identifiers[0].tags #=> Array
+    #   resp.document_identifiers[0].tags[0].key #=> String
+    #   resp.document_identifiers[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments AWS API Documentation
@@ -4224,7 +4254,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -4428,7 +4458,9 @@ module Aws::SSM
     #   example, for String types with values restricted to numbers, you can
     #   specify the following: AllowedPattern=^\\d+$
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutParameterResult#version #version} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4441,6 +4473,10 @@ module Aws::SSM
     #     overwrite: false,
     #     allowed_pattern: "AllowedPattern",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter AWS API Documentation
     #
@@ -4733,7 +4769,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -5135,7 +5171,7 @@ module Aws::SSM
     # specified instance.
     #
     # @option params [required, String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -5246,6 +5282,9 @@ module Aws::SSM
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
+    #   resp.document_description.tags #=> Array
+    #   resp.document_description.tags[0].key #=> String
+    #   resp.document_description.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument AWS API Documentation
     #
@@ -5826,7 +5865,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -100,6 +100,10 @@ module Aws::CodeCommit
 
     # Returns information about a specific commit.
     #
+    # @!attribute [rw] commit_id
+    #   The full SHA of the specified commit.
+    #   @return [String]
+    #
     # @!attribute [rw] tree_id
     #   Tree information for the specified commit.
     #   @return [String]
@@ -141,6 +145,7 @@ module Aws::CodeCommit
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Commit AWS API Documentation
     #
     class Commit < Struct.new(
+      :commit_id,
       :tree_id,
       :parents,
       :message,
@@ -241,6 +246,46 @@ module Aws::CodeCommit
     #
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata)
+      include Aws::Structure
+    end
+
+    # Represents the input of a delete branch operation.
+    #
+    # @note When making an API call, you may pass DeleteBranchInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         branch_name: "BranchName", # required
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the branch to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranchInput AWS API Documentation
+    #
+    class DeleteBranchInput < Struct.new(
+      :repository_name,
+      :branch_name)
+      include Aws::Structure
+    end
+
+    # Represents the output of a delete branch operation.
+    #
+    # @!attribute [rw] deleted_branch
+    #   Information about the branch deleted by the operation, including the
+    #   branch name and the commit ID that was the tip of the branch.
+    #   @return [Types::BranchInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranchOutput AWS API Documentation
+    #
+    class DeleteBranchOutput < Struct.new(
+      :deleted_branch)
       include Aws::Structure
     end
 
@@ -397,7 +442,7 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] commit_id
-    #   The commit ID.
+    #   The commit ID. Commit IDs are the full SHA of the commit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitInput AWS API Documentation
@@ -835,7 +880,12 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] branches
     #   The branches that will be included in the trigger configuration. If
-    #   no branches are specified, the trigger will apply to all branches.
+    #   you specify an empty array, the trigger will apply to all branches.
+    #
+    #   <note markdown="1"> While no content is required in the array, you must include the
+    #   array itself.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] events

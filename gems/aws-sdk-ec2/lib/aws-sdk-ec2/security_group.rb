@@ -260,30 +260,24 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     # @option options [String] :cidr_ip
-    #   The CIDR IPv4 address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     # @option options [String] :ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     # @option options [String] :source_security_group_name
-    #   The name of a destination security group. To authorize outbound access
-    #   to a destination security group, we recommend that you use a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     # @option options [String] :source_security_group_owner_id
-    #   The AWS account number for a destination security group. To authorize
-    #   outbound access to a destination security group, we recommend that you
-    #   use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     # @return [EmptyStructure]
     def authorize_egress(options = {})
       options = options.merge(group_id: @id)
@@ -353,8 +347,8 @@ module Aws::EC2
     #   specify either the security group ID or the security group name in the
     #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. Can be used to specify multiple rules in a
-    #   single command.
+    #   One or more sets of IP permissions. Can be used to specify multiple
+    #   rules in a single command.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
@@ -376,8 +370,8 @@ module Aws::EC2
     #   IP protocol and port range, use a set of IP permissions instead. For
     #   EC2-VPC, the source security group must be in the same VPC.
     # @option options [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The AWS account number for the source security group,
-    #   if the source security group is in a different account. You can't
+    #   \[EC2-Classic\] The AWS account ID for the source security group, if
+    #   the source security group is in a different account. You can't
     #   specify this parameter in combination with the following parameters:
     #   the CIDR IP address range, the IP protocol, the start of the port
     #   range, and the end of the port range. Creates rules that grant full
@@ -513,30 +507,24 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a destination
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     # @option options [String] :cidr_ip
-    #   The CIDR IP address range. We recommend that you specify the CIDR
-    #   range in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
     # @option options [Integer] :from_port
-    #   The start of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     # @option options [String] :ip_protocol
-    #   The IP protocol name or number. We recommend that you specify the
-    #   protocol in a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
     # @option options [Integer] :to_port
-    #   The end of port range for the TCP and UDP protocols, or an ICMP type
-    #   number. We recommend that you specify the port range in a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify the port.
     # @option options [String] :source_security_group_name
-    #   The name of a destination security group. To revoke outbound access to
-    #   a destination security group, we recommend that you use a set of IP
-    #   permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     # @option options [String] :source_security_group_owner_id
-    #   The AWS account number for a destination security group. To revoke
-    #   outbound access to a destination security group, we recommend that you
-    #   use a set of IP permissions instead.
+    #   Not supported. Use a set of IP permissions to specify a destination
+    #   security group.
     # @return [EmptyStructure]
     def revoke_egress(options = {})
       options = options.merge(group_id: @id)
@@ -600,10 +588,13 @@ module Aws::EC2
     #   The start of port range for the TCP and UDP protocols, or an ICMP type
     #   number. For the ICMP type number, use `-1` to specify all ICMP types.
     # @option options [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group.
+    #   \[EC2-Classic, default VPC\] The name of the security group. You must
+    #   specify either the security group ID or the security group name in the
+    #   request.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   A set of IP permissions. You can't specify a source security group
-    #   and a CIDR IP address range.
+    #   One or more sets of IP permissions. You can't specify a source
+    #   security group and a CIDR IP address range in the same set of
+    #   permissions.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). Use `-1` to specify all.

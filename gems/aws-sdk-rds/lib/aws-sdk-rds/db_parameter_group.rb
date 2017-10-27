@@ -236,7 +236,7 @@ module Aws::RDS
     #
     #   * Cannot be null, empty, or blank
     #
-    #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+    #   * Must contain from 1 to 255 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #

@@ -26,6 +26,11 @@ module Aws::SES
     BounceType = Shapes::StringShape.new(name: 'BounceType')
     BouncedRecipientInfo = Shapes::StructureShape.new(name: 'BouncedRecipientInfo')
     BouncedRecipientInfoList = Shapes::ListShape.new(name: 'BouncedRecipientInfoList')
+    BulkEmailDestination = Shapes::StructureShape.new(name: 'BulkEmailDestination')
+    BulkEmailDestinationList = Shapes::ListShape.new(name: 'BulkEmailDestinationList')
+    BulkEmailDestinationStatus = Shapes::StructureShape.new(name: 'BulkEmailDestinationStatus')
+    BulkEmailDestinationStatusList = Shapes::ListShape.new(name: 'BulkEmailDestinationStatusList')
+    BulkEmailStatus = Shapes::StringShape.new(name: 'BulkEmailStatus')
     CannotDeleteException = Shapes::StructureShape.new(name: 'CannotDeleteException')
     Charset = Shapes::StringShape.new(name: 'Charset')
     Cidr = Shapes::StringShape.new(name: 'Cidr')
@@ -55,6 +60,8 @@ module Aws::SES
     CreateReceiptRuleResponse = Shapes::StructureShape.new(name: 'CreateReceiptRuleResponse')
     CreateReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetRequest')
     CreateReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetResponse')
+    CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
+    CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CustomMailFromStatus = Shapes::StringShape.new(name: 'CustomMailFromStatus')
     CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
@@ -74,6 +81,8 @@ module Aws::SES
     DeleteReceiptRuleResponse = Shapes::StructureShape.new(name: 'DeleteReceiptRuleResponse')
     DeleteReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DeleteReceiptRuleSetRequest')
     DeleteReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DeleteReceiptRuleSetResponse')
+    DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
+    DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
     DeleteVerifiedEmailAddressRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedEmailAddressRequest')
     DescribeActiveReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetRequest')
     DescribeActiveReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetResponse')
@@ -92,6 +101,7 @@ module Aws::SES
     DsnAction = Shapes::StringShape.new(name: 'DsnAction')
     DsnStatus = Shapes::StringShape.new(name: 'DsnStatus')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+    Error = Shapes::StringShape.new(name: 'Error')
     EventDestination = Shapes::StructureShape.new(name: 'EventDestination')
     EventDestinationAlreadyExistsException = Shapes::StructureShape.new(name: 'EventDestinationAlreadyExistsException')
     EventDestinationDoesNotExistException = Shapes::StructureShape.new(name: 'EventDestinationDoesNotExistException')
@@ -116,8 +126,11 @@ module Aws::SES
     GetIdentityVerificationAttributesResponse = Shapes::StructureShape.new(name: 'GetIdentityVerificationAttributesResponse')
     GetSendQuotaResponse = Shapes::StructureShape.new(name: 'GetSendQuotaResponse')
     GetSendStatisticsResponse = Shapes::StructureShape.new(name: 'GetSendStatisticsResponse')
+    GetTemplateRequest = Shapes::StructureShape.new(name: 'GetTemplateRequest')
+    GetTemplateResponse = Shapes::StructureShape.new(name: 'GetTemplateResponse')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    HtmlPart = Shapes::StringShape.new(name: 'HtmlPart')
     Identity = Shapes::StringShape.new(name: 'Identity')
     IdentityDkimAttributes = Shapes::StructureShape.new(name: 'IdentityDkimAttributes')
     IdentityList = Shapes::ListShape.new(name: 'IdentityList')
@@ -130,9 +143,11 @@ module Aws::SES
     InvalidFirehoseDestinationException = Shapes::StructureShape.new(name: 'InvalidFirehoseDestinationException')
     InvalidLambdaFunctionException = Shapes::StructureShape.new(name: 'InvalidLambdaFunctionException')
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
+    InvalidRenderingParameterException = Shapes::StructureShape.new(name: 'InvalidRenderingParameterException')
     InvalidS3ConfigurationException = Shapes::StructureShape.new(name: 'InvalidS3ConfigurationException')
     InvalidSNSDestinationException = Shapes::StructureShape.new(name: 'InvalidSNSDestinationException')
     InvalidSnsTopicException = Shapes::StructureShape.new(name: 'InvalidSnsTopicException')
+    InvalidTemplateException = Shapes::StructureShape.new(name: 'InvalidTemplateException')
     InvalidTrackingOptionsException = Shapes::StructureShape.new(name: 'InvalidTrackingOptionsException')
     InvocationType = Shapes::StringShape.new(name: 'InvocationType')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
@@ -149,6 +164,8 @@ module Aws::SES
     ListReceiptFiltersResponse = Shapes::StructureShape.new(name: 'ListReceiptFiltersResponse')
     ListReceiptRuleSetsRequest = Shapes::StructureShape.new(name: 'ListReceiptRuleSetsRequest')
     ListReceiptRuleSetsResponse = Shapes::StructureShape.new(name: 'ListReceiptRuleSetsResponse')
+    ListTemplatesRequest = Shapes::StructureShape.new(name: 'ListTemplatesRequest')
+    ListTemplatesResponse = Shapes::StructureShape.new(name: 'ListTemplatesResponse')
     ListVerifiedEmailAddressesResponse = Shapes::StructureShape.new(name: 'ListVerifiedEmailAddressesResponse')
     MailFromDomainAttributes = Shapes::MapShape.new(name: 'MailFromDomainAttributes')
     MailFromDomainName = Shapes::StringShape.new(name: 'MailFromDomainName')
@@ -165,6 +182,7 @@ module Aws::SES
     MessageTagList = Shapes::ListShape.new(name: 'MessageTagList')
     MessageTagName = Shapes::StringShape.new(name: 'MessageTagName')
     MessageTagValue = Shapes::StringShape.new(name: 'MessageTagValue')
+    MissingRenderingAttributeException = Shapes::StructureShape.new(name: 'MissingRenderingAttributeException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotificationAttributes = Shapes::MapShape.new(name: 'NotificationAttributes')
     NotificationTopic = Shapes::StringShape.new(name: 'NotificationTopic')
@@ -195,6 +213,7 @@ module Aws::SES
     RecipientDsnFields = Shapes::StructureShape.new(name: 'RecipientDsnFields')
     RecipientsList = Shapes::ListShape.new(name: 'RecipientsList')
     RemoteMta = Shapes::StringShape.new(name: 'RemoteMta')
+    RenderedTemplate = Shapes::StringShape.new(name: 'RenderedTemplate')
     ReorderReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'ReorderReceiptRuleSetRequest')
     ReorderReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'ReorderReceiptRuleSetResponse')
     ReportingMta = Shapes::StringShape.new(name: 'ReportingMta')
@@ -209,12 +228,16 @@ module Aws::SES
     SNSDestination = Shapes::StructureShape.new(name: 'SNSDestination')
     SendBounceRequest = Shapes::StructureShape.new(name: 'SendBounceRequest')
     SendBounceResponse = Shapes::StructureShape.new(name: 'SendBounceResponse')
+    SendBulkTemplatedEmailRequest = Shapes::StructureShape.new(name: 'SendBulkTemplatedEmailRequest')
+    SendBulkTemplatedEmailResponse = Shapes::StructureShape.new(name: 'SendBulkTemplatedEmailResponse')
     SendDataPoint = Shapes::StructureShape.new(name: 'SendDataPoint')
     SendDataPointList = Shapes::ListShape.new(name: 'SendDataPointList')
     SendEmailRequest = Shapes::StructureShape.new(name: 'SendEmailRequest')
     SendEmailResponse = Shapes::StructureShape.new(name: 'SendEmailResponse')
     SendRawEmailRequest = Shapes::StructureShape.new(name: 'SendRawEmailRequest')
     SendRawEmailResponse = Shapes::StructureShape.new(name: 'SendRawEmailResponse')
+    SendTemplatedEmailRequest = Shapes::StructureShape.new(name: 'SendTemplatedEmailRequest')
+    SendTemplatedEmailResponse = Shapes::StructureShape.new(name: 'SendTemplatedEmailResponse')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SetActiveReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'SetActiveReceiptRuleSetRequest')
     SetActiveReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'SetActiveReceiptRuleSetResponse')
@@ -232,6 +255,16 @@ module Aws::SES
     SetReceiptRulePositionResponse = Shapes::StructureShape.new(name: 'SetReceiptRulePositionResponse')
     StopAction = Shapes::StructureShape.new(name: 'StopAction')
     StopScope = Shapes::StringShape.new(name: 'StopScope')
+    SubjectPart = Shapes::StringShape.new(name: 'SubjectPart')
+    Template = Shapes::StructureShape.new(name: 'Template')
+    TemplateData = Shapes::StringShape.new(name: 'TemplateData')
+    TemplateDoesNotExistException = Shapes::StructureShape.new(name: 'TemplateDoesNotExistException')
+    TemplateMetadata = Shapes::StructureShape.new(name: 'TemplateMetadata')
+    TemplateMetadataList = Shapes::ListShape.new(name: 'TemplateMetadataList')
+    TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TestRenderTemplateRequest = Shapes::StructureShape.new(name: 'TestRenderTemplateRequest')
+    TestRenderTemplateResponse = Shapes::StructureShape.new(name: 'TestRenderTemplateResponse')
+    TextPart = Shapes::StringShape.new(name: 'TextPart')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
@@ -243,6 +276,8 @@ module Aws::SES
     UpdateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsResponse')
     UpdateReceiptRuleRequest = Shapes::StructureShape.new(name: 'UpdateReceiptRuleRequest')
     UpdateReceiptRuleResponse = Shapes::StructureShape.new(name: 'UpdateReceiptRuleResponse')
+    UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
+    UpdateTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTemplateResponse')
     VerificationAttributes = Shapes::MapShape.new(name: 'VerificationAttributes')
     VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
     VerificationToken = Shapes::StringShape.new(name: 'VerificationToken')
@@ -280,6 +315,20 @@ module Aws::SES
     BouncedRecipientInfo.struct_class = Types::BouncedRecipientInfo
 
     BouncedRecipientInfoList.member = Shapes::ShapeRef.new(shape: BouncedRecipientInfo)
+
+    BulkEmailDestination.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    BulkEmailDestination.add_member(:replacement_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "ReplacementTags"))
+    BulkEmailDestination.add_member(:replacement_template_data, Shapes::ShapeRef.new(shape: TemplateData, location_name: "ReplacementTemplateData"))
+    BulkEmailDestination.struct_class = Types::BulkEmailDestination
+
+    BulkEmailDestinationList.member = Shapes::ShapeRef.new(shape: BulkEmailDestination)
+
+    BulkEmailDestinationStatus.add_member(:status, Shapes::ShapeRef.new(shape: BulkEmailStatus, location_name: "Status"))
+    BulkEmailDestinationStatus.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "Error"))
+    BulkEmailDestinationStatus.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    BulkEmailDestinationStatus.struct_class = Types::BulkEmailDestinationStatus
+
+    BulkEmailDestinationStatusList.member = Shapes::ShapeRef.new(shape: BulkEmailDestinationStatus)
 
     CloneReceiptRuleSetRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
     CloneReceiptRuleSetRequest.add_member(:original_rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "OriginalRuleSetName"))
@@ -342,6 +391,11 @@ module Aws::SES
 
     CreateReceiptRuleSetResponse.struct_class = Types::CreateReceiptRuleSetResponse
 
+    CreateTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Template, required: true, location_name: "Template"))
+    CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
+
+    CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
+
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "EventDestinationName"))
     DeleteConfigurationSetEventDestinationRequest.struct_class = Types::DeleteConfigurationSetEventDestinationRequest
@@ -384,6 +438,11 @@ module Aws::SES
     DeleteReceiptRuleSetRequest.struct_class = Types::DeleteReceiptRuleSetRequest
 
     DeleteReceiptRuleSetResponse.struct_class = Types::DeleteReceiptRuleSetResponse
+
+    DeleteTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    DeleteTemplateRequest.struct_class = Types::DeleteTemplateRequest
+
+    DeleteTemplateResponse.struct_class = Types::DeleteTemplateResponse
 
     DeleteVerifiedEmailAddressRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "EmailAddress"))
     DeleteVerifiedEmailAddressRequest.struct_class = Types::DeleteVerifiedEmailAddressRequest
@@ -482,6 +541,12 @@ module Aws::SES
     GetSendStatisticsResponse.add_member(:send_data_points, Shapes::ShapeRef.new(shape: SendDataPointList, location_name: "SendDataPoints"))
     GetSendStatisticsResponse.struct_class = Types::GetSendStatisticsResponse
 
+    GetTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    GetTemplateRequest.struct_class = Types::GetTemplateRequest
+
+    GetTemplateResponse.add_member(:template, Shapes::ShapeRef.new(shape: Template, location_name: "Template"))
+    GetTemplateResponse.struct_class = Types::GetTemplateResponse
+
     IdentityDkimAttributes.add_member(:dkim_enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "DkimEnabled"))
     IdentityDkimAttributes.add_member(:dkim_verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "DkimVerificationStatus"))
     IdentityDkimAttributes.add_member(:dkim_tokens, Shapes::ShapeRef.new(shape: VerificationTokenList, location_name: "DkimTokens"))
@@ -550,6 +615,14 @@ module Aws::SES
     ListReceiptRuleSetsResponse.add_member(:rule_sets, Shapes::ShapeRef.new(shape: ReceiptRuleSetsLists, location_name: "RuleSets"))
     ListReceiptRuleSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListReceiptRuleSetsResponse.struct_class = Types::ListReceiptRuleSetsResponse
+
+    ListTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTemplatesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
+    ListTemplatesRequest.struct_class = Types::ListTemplatesRequest
+
+    ListTemplatesResponse.add_member(:templates_metadata, Shapes::ShapeRef.new(shape: TemplateMetadataList, location_name: "TemplatesMetadata"))
+    ListTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTemplatesResponse.struct_class = Types::ListTemplatesResponse
 
     ListVerifiedEmailAddressesResponse.add_member(:verified_email_addresses, Shapes::ShapeRef.new(shape: AddressList, location_name: "VerifiedEmailAddresses"))
     ListVerifiedEmailAddressesResponse.struct_class = Types::ListVerifiedEmailAddressesResponse
@@ -670,6 +743,22 @@ module Aws::SES
     SendBounceResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
     SendBounceResponse.struct_class = Types::SendBounceResponse
 
+    SendBulkTemplatedEmailRequest.add_member(:source, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Source"))
+    SendBulkTemplatedEmailRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "SourceArn"))
+    SendBulkTemplatedEmailRequest.add_member(:reply_to_addresses, Shapes::ShapeRef.new(shape: AddressList, location_name: "ReplyToAddresses"))
+    SendBulkTemplatedEmailRequest.add_member(:return_path, Shapes::ShapeRef.new(shape: Address, location_name: "ReturnPath"))
+    SendBulkTemplatedEmailRequest.add_member(:return_path_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ReturnPathArn"))
+    SendBulkTemplatedEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SendBulkTemplatedEmailRequest.add_member(:default_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "DefaultTags"))
+    SendBulkTemplatedEmailRequest.add_member(:template, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "Template"))
+    SendBulkTemplatedEmailRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TemplateArn"))
+    SendBulkTemplatedEmailRequest.add_member(:default_template_data, Shapes::ShapeRef.new(shape: TemplateData, location_name: "DefaultTemplateData"))
+    SendBulkTemplatedEmailRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: BulkEmailDestinationList, required: true, location_name: "Destinations"))
+    SendBulkTemplatedEmailRequest.struct_class = Types::SendBulkTemplatedEmailRequest
+
+    SendBulkTemplatedEmailResponse.add_member(:status, Shapes::ShapeRef.new(shape: BulkEmailDestinationStatusList, required: true, location_name: "Status"))
+    SendBulkTemplatedEmailResponse.struct_class = Types::SendBulkTemplatedEmailResponse
+
     SendDataPoint.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     SendDataPoint.add_member(:delivery_attempts, Shapes::ShapeRef.new(shape: Counter, location_name: "DeliveryAttempts"))
     SendDataPoint.add_member(:bounces, Shapes::ShapeRef.new(shape: Counter, location_name: "Bounces"))
@@ -705,6 +794,22 @@ module Aws::SES
 
     SendRawEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
     SendRawEmailResponse.struct_class = Types::SendRawEmailResponse
+
+    SendTemplatedEmailRequest.add_member(:source, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Source"))
+    SendTemplatedEmailRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    SendTemplatedEmailRequest.add_member(:reply_to_addresses, Shapes::ShapeRef.new(shape: AddressList, location_name: "ReplyToAddresses"))
+    SendTemplatedEmailRequest.add_member(:return_path, Shapes::ShapeRef.new(shape: Address, location_name: "ReturnPath"))
+    SendTemplatedEmailRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "SourceArn"))
+    SendTemplatedEmailRequest.add_member(:return_path_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ReturnPathArn"))
+    SendTemplatedEmailRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "Tags"))
+    SendTemplatedEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SendTemplatedEmailRequest.add_member(:template, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "Template"))
+    SendTemplatedEmailRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TemplateArn"))
+    SendTemplatedEmailRequest.add_member(:template_data, Shapes::ShapeRef.new(shape: TemplateData, required: true, location_name: "TemplateData"))
+    SendTemplatedEmailRequest.struct_class = Types::SendTemplatedEmailRequest
+
+    SendTemplatedEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
+    SendTemplatedEmailResponse.struct_class = Types::SendTemplatedEmailResponse
 
     SetActiveReceiptRuleSetRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, location_name: "RuleSetName"))
     SetActiveReceiptRuleSetRequest.struct_class = Types::SetActiveReceiptRuleSetRequest
@@ -755,6 +860,25 @@ module Aws::SES
     StopAction.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
     StopAction.struct_class = Types::StopAction
 
+    Template.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    Template.add_member(:subject_part, Shapes::ShapeRef.new(shape: SubjectPart, location_name: "SubjectPart"))
+    Template.add_member(:text_part, Shapes::ShapeRef.new(shape: TextPart, location_name: "TextPart"))
+    Template.add_member(:html_part, Shapes::ShapeRef.new(shape: HtmlPart, location_name: "HtmlPart"))
+    Template.struct_class = Types::Template
+
+    TemplateMetadata.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "Name"))
+    TemplateMetadata.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    TemplateMetadata.struct_class = Types::TemplateMetadata
+
+    TemplateMetadataList.member = Shapes::ShapeRef.new(shape: TemplateMetadata)
+
+    TestRenderTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    TestRenderTemplateRequest.add_member(:template_data, Shapes::ShapeRef.new(shape: TemplateData, required: true, location_name: "TemplateData"))
+    TestRenderTemplateRequest.struct_class = Types::TestRenderTemplateRequest
+
+    TestRenderTemplateResponse.add_member(:rendered_template, Shapes::ShapeRef.new(shape: RenderedTemplate, location_name: "RenderedTemplate"))
+    TestRenderTemplateResponse.struct_class = Types::TestRenderTemplateResponse
+
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
     TrackingOptions.struct_class = Types::TrackingOptions
 
@@ -775,6 +899,11 @@ module Aws::SES
     UpdateReceiptRuleRequest.struct_class = Types::UpdateReceiptRuleRequest
 
     UpdateReceiptRuleResponse.struct_class = Types::UpdateReceiptRuleResponse
+
+    UpdateTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Template, required: true, location_name: "Template"))
+    UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
+
+    UpdateTemplateResponse.struct_class = Types::UpdateTemplateResponse
 
     VerificationAttributes.key = Shapes::ShapeRef.new(shape: Identity)
     VerificationAttributes.value = Shapes::ShapeRef.new(shape: IdentityVerificationAttributes)
@@ -902,6 +1031,17 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTemplateException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:delete_configuration_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteConfigurationSet"
         o.http_method = "POST"
@@ -971,6 +1111,14 @@ module Aws::SES
         o.input = Shapes::ShapeRef.new(shape: DeleteReceiptRuleSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteReceiptRuleSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: CannotDeleteException)
+      end)
+
+      api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTemplateResponse)
       end)
 
       api.add_operation(:delete_verified_email_address, Seahorse::Model::Operation.new.tap do |o|
@@ -1073,6 +1221,15 @@ module Aws::SES
         o.output = Shapes::ShapeRef.new(shape: GetSendStatisticsResponse)
       end)
 
+      api.add_operation(:get_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+      end)
+
       api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListConfigurationSets"
         o.http_method = "POST"
@@ -1119,6 +1276,14 @@ module Aws::SES
         o.output = Shapes::ShapeRef.new(shape: ListReceiptRuleSetsResponse)
       end)
 
+      api.add_operation(:list_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTemplatesResponse)
+      end)
+
       api.add_operation(:list_verified_email_addresses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVerifiedEmailAddresses"
         o.http_method = "POST"
@@ -1155,6 +1320,18 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
       end)
 
+      api.add_operation(:send_bulk_templated_email, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendBulkTemplatedEmail"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendBulkTemplatedEmailRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendBulkTemplatedEmailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
+        o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+      end)
+
       api.add_operation(:send_email, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendEmail"
         o.http_method = "POST"
@@ -1175,6 +1352,18 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
         o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+      end)
+
+      api.add_operation(:send_templated_email, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendTemplatedEmail"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendTemplatedEmailRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendTemplatedEmailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
+        o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
       end)
 
       api.add_operation(:set_active_receipt_rule_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1236,6 +1425,17 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: RuleDoesNotExistException)
       end)
 
+      api.add_operation(:test_render_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestRenderTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestRenderTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestRenderTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRenderingParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRenderingAttributeException)
+      end)
+
       api.add_operation(:update_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateConfigurationSetEventDestination"
         o.http_method = "POST"
@@ -1272,6 +1472,16 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: RuleSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: RuleDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTemplateException)
       end)
 
       api.add_operation(:verify_domain_dkim, Seahorse::Model::Operation.new.tap do |o|
