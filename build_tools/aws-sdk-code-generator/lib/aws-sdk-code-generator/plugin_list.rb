@@ -64,6 +64,7 @@ module AwsSdkCodeGenerator
           'Aws::Plugins::Protocols::ApiGateway' => "#{core_plugins}/protocols/api_gateway.rb",
           'Aws::Plugins::ApiKey' => "#{core_plugins}/api_key.rb",
           'Aws::Plugins::APIGAuthorizerToken' => "#{core_plugins}/apig_authorizer_token.rb",
+          'Aws::Plugins::APIGCredentialsConfiguration' => "#{core_plugins}/apig_credentials_configuration.rb"
         },
         nil         => {}
       }[protocol]
