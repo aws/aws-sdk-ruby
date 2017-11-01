@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
+
+* Feature - Aws::CloudHSMV2 - Updated the documentation for AWS CloudHSM V2.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
 2.10.74 (2017-10-26)
 ------------------
 
