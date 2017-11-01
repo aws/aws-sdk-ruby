@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.75 (2017-11-01)
+------------------
+
 * Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
 
 * Feature - Aws::CloudHSMV2 - Updated the documentation for AWS CloudHSM V2.
