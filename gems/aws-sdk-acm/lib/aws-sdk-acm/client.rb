@@ -333,16 +333,11 @@ module Aws::ACM
 
     # Retrieves an ACM Certificate and certificate chain for the certificate
     # specified by an ARN. The chain is an ordered list of certificates that
-    # contains the root certificate, intermediate certificates of
-    # subordinate CAs, and the ACM Certificate. The certificate and
+    # contains the ACM Certificate, intermediate certificates of subordinate
+    # CAs, and the root certificate in that order. The certificate and
     # certificate chain are base64 encoded. If you want to decode the
     # certificate chain to see the individual certificate fields, you can
     # use OpenSSL.
-    #
-    # <note markdown="1"> Currently, ACM Certificates can be used only with Elastic Load
-    # Balancing and Amazon CloudFront.
-    #
-    #  </note>
     #
     # @option params [required, String] :certificate_arn
     #   String that contains a certificate ARN in the following format:
@@ -391,7 +386,7 @@ module Aws::ACM
     #
     # For more information about importing certificates into ACM, including
     # the differences between certificates that you import and those that
-    # ACM provides, see [Importing Certificates][3] in the *AWS Certificate
+    # ACM provides, see [ Importing Certificates][3] in the *AWS Certificate
     # Manager User Guide*.
     #
     # To import a certificate, you must provide the certificate and the
@@ -407,6 +402,13 @@ module Aws::ACM
     # To import a new certificate, omit the `CertificateArn` field. Include
     # this field only when you want to replace a previously imported
     # certificate.
+    #
+    # When you import a certificate by using the CLI or one of the SDKs, you
+    # must specify the certificate, chain, and private key parameters as
+    # file names preceded by `file://`. For example, you can specify a
+    # certificate saved in the `C:\temp` folder as
+    # `C:\temp\certificate_to_import.pem`. If you are making an HTTP or
+    # HTTPS Query request, include these parameters as BLOBs.
     #
     # This operation returns the [Amazon Resource Name (ARN)][5] of the
     # imported certificate.
@@ -620,16 +622,25 @@ module Aws::ACM
 
     # Requests an ACM Certificate for use with other AWS services. To
     # request an ACM Certificate, you must specify the fully qualified
-    # domain name (FQDN) for your site. You can also specify additional
-    # FQDNs if users can reach your site by using other names. For each
-    # domain name you specify, email is sent to the domain owner to request
-    # approval to issue the certificate. After receiving approval from the
-    # domain owner, the ACM Certificate is issued. For more information, see
-    # the [AWS Certificate Manager User Guide][1].
+    # domain name (FQDN) for your site in the `DomainName` parameter. You
+    # can also specify additional FQDNs in the `SubjectAlternativeNames`
+    # parameter if users can reach your site by using other names.
+    #
+    # For each domain name you specify, email is sent to the domain owner to
+    # request approval to issue the certificate. Email is sent to three
+    # registered contact addresses in the WHOIS database and to five common
+    # system administration addresses formed from the `DomainName` you enter
+    # or the optional `ValidationDomain` parameter. For more information,
+    # see [Validate Domain Ownership][1].
+    #
+    # After receiving approval from the domain owner, the ACM Certificate is
+    # issued. For more information, see the [AWS Certificate Manager User
+    # Guide][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, of the
@@ -796,7 +807,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

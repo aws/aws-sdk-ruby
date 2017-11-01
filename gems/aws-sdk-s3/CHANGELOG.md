@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update S3 unit test with latest endpoint
+
 1.5.0 (2017-10-06)
 ------------------
 

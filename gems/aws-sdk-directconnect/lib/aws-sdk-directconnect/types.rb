@@ -498,7 +498,8 @@ module Aws::DirectConnect
     #
     #       {
     #         virtual_interface_id: "VirtualInterfaceId", # required
-    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #         virtual_gateway_id: "VirtualGatewayId",
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
     #       }
     #
     # @!attribute [rw] virtual_interface_id
@@ -523,11 +524,22 @@ module Aws::DirectConnect
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
     #   @return [String]
     #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   ID of the direct connect gateway that will be attached to the
+    #   virtual interface.
+    #
+    #   A direct connect gateway can be managed via the AWS Direct Connect
+    #   console or the CreateDirectConnectGateway action.
+    #
+    #   Default: None
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceRequest AWS API Documentation
     #
     class ConfirmPrivateVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
-      :virtual_gateway_id)
+      :virtual_gateway_id,
+      :direct_connect_gateway_id)
       include Aws::Structure
     end
 
@@ -882,6 +894,107 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Container for the parameters to the
+    # CreateDirectConnectGatewayAssociation operation.
+    #
+    # @note When making an API call, you may pass CreateDirectConnectGatewayAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationRequest AWS API Documentation
+    #
+    class CreateDirectConnectGatewayAssociationRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_gateway_id)
+      include Aws::Structure
+    end
+
+    # Container for the response from the
+    # CreateDirectConnectGatewayAssociation API call
+    #
+    # @!attribute [rw] direct_connect_gateway_association
+    #   The direct connect gateway association to be created.
+    #   @return [Types::DirectConnectGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationResult AWS API Documentation
+    #
+    class CreateDirectConnectGatewayAssociationResult < Struct.new(
+      :direct_connect_gateway_association)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the CreateDirectConnectGateway
+    # operation.
+    #
+    # @note When making an API call, you may pass CreateDirectConnectGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_name: "DirectConnectGatewayName", # required
+    #         amazon_side_asn: 1,
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_name
+    #   The name of the direct connect gateway.
+    #
+    #   Example: "My direct connect gateway"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_side_asn
+    #   The autonomous system number (ASN) for Border Gateway Protocol (BGP)
+    #   to be configured on the Amazon side of the connection. The ASN must
+    #   be in the private range of 64,512 to 65,534 or 4,200,000,000 to
+    #   4,294,967,294
+    #
+    #   Example: 65200
+    #
+    #   Default: 64512
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayRequest AWS API Documentation
+    #
+    class CreateDirectConnectGatewayRequest < Struct.new(
+      :direct_connect_gateway_name,
+      :amazon_side_asn)
+      include Aws::Structure
+    end
+
+    # Container for the response from the CreateDirectConnectGateway API
+    # call
+    #
+    # @!attribute [rw] direct_connect_gateway
+    #   The direct connect gateway to be created.
+    #   @return [Types::DirectConnectGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayResult AWS API Documentation
+    #
+    class CreateDirectConnectGatewayResult < Struct.new(
+      :direct_connect_gateway)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the CreateInterconnect operation.
     #
     # @note When making an API call, you may pass CreateInterconnectRequest
@@ -1015,7 +1128,8 @@ module Aws::DirectConnect
     #           amazon_address: "AmazonAddress",
     #           customer_address: "CustomerAddress",
     #           address_family: "ipv4", # accepts ipv4, ipv6
-    #           virtual_gateway_id: "VirtualGatewayId", # required
+    #           virtual_gateway_id: "VirtualGatewayId",
+    #           direct_connect_gateway_id: "DirectConnectGatewayId",
     #         },
     #       }
     #
@@ -1171,6 +1285,94 @@ module Aws::DirectConnect
     #
     class DeleteConnectionRequest < Struct.new(
       :connection_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # DeleteDirectConnectGatewayAssociation operation.
+    #
+    # @note When making an API call, you may pass DeleteDirectConnectGatewayAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationRequest AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayAssociationRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_gateway_id)
+      include Aws::Structure
+    end
+
+    # Container for the response from the
+    # DeleteDirectConnectGatewayAssociation API call
+    #
+    # @!attribute [rw] direct_connect_gateway_association
+    #   The direct connect gateway association to be deleted.
+    #   @return [Types::DirectConnectGatewayAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationResult AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayAssociationResult < Struct.new(
+      :direct_connect_gateway_association)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the DeleteDirectConnectGateway
+    # operation.
+    #
+    # @note When making an API call, you may pass DeleteDirectConnectGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayRequest AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayRequest < Struct.new(
+      :direct_connect_gateway_id)
+      include Aws::Structure
+    end
+
+    # Container for the response from the DeleteDirectConnectGateway API
+    # call
+    #
+    # @!attribute [rw] direct_connect_gateway
+    #   The direct connect gateway to be deleted.
+    #   @return [Types::DirectConnectGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayResult AWS API Documentation
+    #
+    class DeleteDirectConnectGatewayResult < Struct.new(
+      :direct_connect_gateway)
       include Aws::Structure
     end
 
@@ -1429,6 +1631,217 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Container for the parameters to the
+    # DescribeDirectConnectGatewayAssociations operation.
+    #
+    # @note When making an API call, you may pass DescribeDirectConnectGatewayAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         virtual_gateway_id: "VirtualGatewayId",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of direct connect gateway associations to return
+    #   per page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsRequest AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAssociationsRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_gateway_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the response from the
+    # DescribeDirectConnectGatewayAssociations API call
+    #
+    # @!attribute [rw] direct_connect_gateway_associations
+    #   Information about the direct connect gateway associations.
+    #   @return [Array<Types::DirectConnectGatewayAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of the result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsResult AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAssociationsResult < Struct.new(
+      :direct_connect_gateway_associations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # DescribeDirectConnectGatewayAttachments operation.
+    #
+    # @note When making an API call, you may pass DescribeDirectConnectGatewayAttachmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         virtual_interface_id: "VirtualInterfaceId",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    #   Example: "dxvif-abc123ef"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of direct connect gateway attachments to return
+    #   per page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachmentsRequest AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAttachmentsRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_interface_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the response from the
+    # DescribeDirectConnectGatewayAttachments API call
+    #
+    # @!attribute [rw] direct_connect_gateway_attachments
+    #   Information about the direct connect gateway attachments.
+    #   @return [Array<Types::DirectConnectGatewayAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of the result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachmentsResult AWS API Documentation
+    #
+    class DescribeDirectConnectGatewayAttachmentsResult < Struct.new(
+      :direct_connect_gateway_attachments,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the DescribeDirectConnectGateways
+    # operation.
+    #
+    # @note When making an API call, you may pass DescribeDirectConnectGatewaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of direct connect gateways to return per page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewaysRequest AWS API Documentation
+    #
+    class DescribeDirectConnectGatewaysRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the response from the DescribeDirectConnectGateways API
+    # call
+    #
+    # @!attribute [rw] direct_connect_gateways
+    #   Information about the direct connect gateways.
+    #   @return [Array<Types::DirectConnectGateway>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of the result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewaysResult AWS API Documentation
+    #
+    class DescribeDirectConnectGatewaysResult < Struct.new(
+      :direct_connect_gateways,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the DescribeHostedConnections
     # operation.
     #
@@ -1671,6 +2084,184 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
       :virtual_interface_id)
+      include Aws::Structure
+    end
+
+    # A direct connect gateway is an intermediate object that enables you to
+    # connect virtual interfaces and virtual private gateways.
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_name
+    #   The name of the direct connect gateway.
+    #
+    #   Example: "My direct connect gateway"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_side_asn
+    #   The autonomous system number (ASN) for the Amazon side of the
+    #   connection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner_account
+    #   The AWS account ID of the owner of the direct connect gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_connect_gateway_state
+    #   State of the direct connect gateway.
+    #
+    #   * **Pending**\: The initial state after calling
+    #     CreateDirectConnectGateway.
+    #
+    #   * **Available**\: The direct connect gateway is ready for use.
+    #
+    #   * **Deleting**\: The initial state after calling
+    #     DeleteDirectConnectGateway.
+    #
+    #   * **Deleted**\: The direct connect gateway is deleted and cannot
+    #     pass traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_error
+    #   Error message when the state of an object fails to advance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway AWS API Documentation
+    #
+    class DirectConnectGateway < Struct.new(
+      :direct_connect_gateway_id,
+      :direct_connect_gateway_name,
+      :amazon_side_asn,
+      :owner_account,
+      :direct_connect_gateway_state,
+      :state_change_error)
+      include Aws::Structure
+    end
+
+    # The association between a direct connect gateway and virtual private
+    # gateway.
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_id
+    #   The ID of the virtual private gateway to a VPC. This only applies to
+    #   private virtual interfaces.
+    #
+    #   Example: vgw-123er56
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_region
+    #   The region in which the virtual private gateway is located.
+    #
+    #   Example: us-east-1
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_gateway_owner_account
+    #   The AWS account ID of the owner of the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_state
+    #   State of the direct connect gateway association.
+    #
+    #   * **Associating**\: The initial state after calling
+    #     CreateDirectConnectGatewayAssociation.
+    #
+    #   * **Associated**\: The direct connect gateway and virtual private
+    #     gateway are successfully associated and ready to pass traffic.
+    #
+    #   * **Disassociating**\: The initial state after calling
+    #     DeleteDirectConnectGatewayAssociation.
+    #
+    #   * **Disassociated**\: The virtual private gateway is successfully
+    #     disassociated from the direct connect gateway. Traffic flow
+    #     between the direct connect gateway and virtual private gateway
+    #     stops.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_error
+    #   Error message when the state of an object fails to advance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation AWS API Documentation
+    #
+    class DirectConnectGatewayAssociation < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_gateway_id,
+      :virtual_gateway_region,
+      :virtual_gateway_owner_account,
+      :association_state,
+      :state_change_error)
+      include Aws::Structure
+    end
+
+    # The association between a direct connect gateway and virtual
+    # interface.
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    #   Example: dxvif-123dfg56
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_region
+    #   The region in which the virtual interface is located.
+    #
+    #   Example: us-east-1
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_owner_account
+    #   The AWS account ID of the owner of the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_state
+    #   State of the direct connect gateway attachment.
+    #
+    #   * **Attaching**\: The initial state after a virtual interface is
+    #     created using the direct connect gateway.
+    #
+    #   * **Attached**\: The direct connect gateway and virtual interface
+    #     are successfully attached and ready to pass traffic.
+    #
+    #   * **Detaching**\: The initial state after calling
+    #     DeleteVirtualInterface on a virtual interface that is attached to
+    #     a direct connect gateway.
+    #
+    #   * **Detached**\: The virtual interface is successfully detached from
+    #     the direct connect gateway. Traffic flow between the direct
+    #     connect gateway and virtual interface stops.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_error
+    #   Error message when the state of an object fails to advance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAttachment AWS API Documentation
+    #
+    class DirectConnectGatewayAttachment < Struct.new(
+      :direct_connect_gateway_id,
+      :virtual_interface_id,
+      :virtual_interface_region,
+      :virtual_interface_owner_account,
+      :attachment_state,
+      :state_change_error)
       include Aws::Structure
     end
 
@@ -2079,7 +2670,8 @@ module Aws::DirectConnect
     #         amazon_address: "AmazonAddress",
     #         customer_address: "CustomerAddress",
     #         address_family: "ipv4", # accepts ipv4, ipv6
-    #         virtual_gateway_id: "VirtualGatewayId", # required
+    #         virtual_gateway_id: "VirtualGatewayId",
+    #         direct_connect_gateway_id: "DirectConnectGatewayId",
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -2134,6 +2726,12 @@ module Aws::DirectConnect
     #   Example: vgw-123er56
     #   @return [String]
     #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface AWS API Documentation
     #
     class NewPrivateVirtualInterface < Struct.new(
@@ -2144,7 +2742,8 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       :address_family,
-      :virtual_gateway_id)
+      :virtual_gateway_id,
+      :direct_connect_gateway_id)
       include Aws::Structure
     end
 
@@ -2690,6 +3289,11 @@ module Aws::DirectConnect
     #   Example: 65000
     #   @return [Integer]
     #
+    # @!attribute [rw] amazon_side_asn
+    #   The autonomous system number (ASN) for the Amazon side of the
+    #   connection.
+    #   @return [Integer]
+    #
     # @!attribute [rw] auth_key
     #   The authentication key for BGP configuration.
     #
@@ -2761,6 +3365,12 @@ module Aws::DirectConnect
     #   Example: vgw-123er56
     #   @return [String]
     #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #   @return [String]
+    #
     # @!attribute [rw] route_filter_prefixes
     #   A list of routes to be advertised to the AWS network in this region
     #   (public virtual interface).
@@ -2781,6 +3391,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :amazon_side_asn,
       :auth_key,
       :amazon_address,
       :customer_address,
@@ -2788,6 +3399,7 @@ module Aws::DirectConnect
       :virtual_interface_state,
       :customer_router_config,
       :virtual_gateway_id,
+      :direct_connect_gateway_id,
       :route_filter_prefixes,
       :bgp_peers)
       include Aws::Structure

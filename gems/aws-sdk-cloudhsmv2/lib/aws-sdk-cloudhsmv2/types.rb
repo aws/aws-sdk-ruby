@@ -518,7 +518,8 @@ module Aws::CloudHSMV2
     #
     # @!attribute [rw] signed_cert
     #   The cluster certificate issued (signed) by your issuing certificate
-    #   authority (CA). The certificate must be in PEM format.
+    #   authority (CA). The certificate must be in PEM format and can
+    #   contain a maximum of 5000 characters.
     #   @return [String]
     #
     # @!attribute [rw] trust_anchor
@@ -527,7 +528,7 @@ module Aws::CloudHSMV2
     #   (self-signed) certificate or a certificate chain that begins with
     #   the certificate that issued the cluster certificate and ends with a
     #   root certificate. The certificate or certificate chain must be in
-    #   PEM format.
+    #   PEM format and can contain a maximum of 5000 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeClusterRequest AWS API Documentation
