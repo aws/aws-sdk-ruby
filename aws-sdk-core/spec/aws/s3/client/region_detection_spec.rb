@@ -21,10 +21,10 @@ module Aws
 
         before(:each) do
 
-          stub_request(:put, 'https://bucket.s3-us-west-2.amazonaws.com/key').
+          stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key').
             to_return(status: [301, 'Moved Permanently'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>PermanentRedirect</Code><Message>The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.</Message><RequestId>A9D9FE127C48F985</RequestId><Bucket>aws-sdk-fra</Bucket><HostId>1ErVsdg5tuC0lg2JQiB3FCd7K7blTR3VMH14Pm3405voMEIQftv8bi4nhpYbn3B4</HostId><Endpoint>aws-sdk-fra.s3.eu-central-1.amazonaws.com</Endpoint></Error>")
 
-          stub_request(:put, 'https://bucket.s3-external-1.amazonaws.com/key').
+          stub_request(:put, 'https://bucket.s3.external-1.amazonaws.com/key').
             to_return(status: [307, 'Temporary Redirect'], headers: {
               'Location' => 'https://bucket.s3.eu-central-1.amazonaws.com/key'
             })
@@ -40,7 +40,7 @@ module Aws
 
         before(:each) do
 
-          stub_request(:put, 'https://bucket.s3-us-west-2.amazonaws.com/key').
+          stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key').
             to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AuthorizationHeaderMalformed</Code><Message>The authorization header is malformed; the region 'us-east-1' is wrong; expecting 'eu-central-1'</Message><Region>eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId><HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oekWlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>")
 
           stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').

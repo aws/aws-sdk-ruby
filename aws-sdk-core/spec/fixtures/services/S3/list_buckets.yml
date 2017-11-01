@@ -3,7 +3,7 @@ config:
 operation: list_buckets
 params: {}
 request:
-  host: s3-us-west-2.amazonaws.com
+  host: s3.us-west-2.amazonaws.com
   method: GET
   path: /
   headers: {}

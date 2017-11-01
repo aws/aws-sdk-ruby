@@ -17,7 +17,7 @@ module Aws
           expect(client.config.use_dualstack_endpoint).to be(false)
           resp = client.put_object(bucket:'bucket-name', key:'key')
           expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://bucket-name.s3-us-west-2.amazonaws.com/key')
+            'https://bucket-name.s3.us-west-2.amazonaws.com/key')
         end
 
         it 'can be set in the constructor' do
@@ -38,7 +38,7 @@ module Aws
         it 'can be disabled by the operation' do
           resp = dualstack_client.put_object(bucket:'bucket-name', key:'key', use_dualstack_endpoint: false)
           expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://bucket-name.s3-us-west-2.amazonaws.com/key')
+            'https://bucket-name.s3.us-west-2.amazonaws.com/key')
         end
 
         it 'works for global operations' do
@@ -49,7 +49,7 @@ module Aws
         end
 
         it 'works with HTTP endpoints' do
-          client = Client.new(options.merge(use_dualstack_endpoint: true, endpoint: "http://s3-us-west-2.amazonaws.com"))
+          client = Client.new(options.merge(use_dualstack_endpoint: true, endpoint: "http://s3.us-west-2.amazonaws.com"))
           resp = client.put_object(bucket: 'bucket-name', key: 'key')
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'http://bucket-name.s3.dualstack.us-west-2.amazonaws.com/key'
@@ -64,7 +64,7 @@ module Aws
         end
 
         it 'works with DNS incompatible buckets in HTTP scheme' do
-          client = Client.new(options.merge(use_dualstack_endpoint: true, endpoint: "http://s3-us-west-2.amazonaws.com"))
+          client = Client.new(options.merge(use_dualstack_endpoint: true, endpoint: "http://s3.us-west-2.amazonaws.com"))
           resp = client.put_object(bucket: 'bucket.name', key: 'key')
           expect(resp.context.http_request.endpoint.to_s).to eq(
             'http://bucket.name.s3.dualstack.us-west-2.amazonaws.com/key'

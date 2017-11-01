@@ -220,7 +220,7 @@ module Aws
 
         it 'resolves correctly for gov-cloud' do
           s3 = Client.new(region: 'us-gov-west-1')
-          expect(s3.config.endpoint.to_s).to eq('https://s3-us-gov-west-1.amazonaws.com')
+          expect(s3.config.endpoint.to_s).to eq('https://s3.us-gov-west-1.amazonaws.com')
         end
 
       end
