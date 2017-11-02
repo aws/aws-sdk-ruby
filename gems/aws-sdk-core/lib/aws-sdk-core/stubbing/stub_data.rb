@@ -24,7 +24,7 @@ module Aws
             stub[key] = nil
           end
           if more_results = @pager.instance_variable_get('@more_results')
-            stub[more_results] = nil
+            stub[more_results] = false
           end
         end
       end
