@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.78 (2017-11-03)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 2.10.77 (2017-11-03)
