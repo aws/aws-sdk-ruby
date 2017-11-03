@@ -967,6 +967,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
+    #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1496,6 +1502,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
+    #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1991,14 +2003,14 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of container instance results returned by
-    #   `ListServices` in paginated output. When this parameter is used,
-    #   `ListServices` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListServices`
-    #   request with the returned `nextToken` value. This value can be between
-    #   1 and 10. If this parameter is not used, then `ListServices` returns
-    #   up to 10 results and a `nextToken` value if applicable.
+    #   The maximum number of service results returned by `ListServices` in
+    #   paginated output. When this parameter is used, `ListServices` only
+    #   returns `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListServices` request with the returned
+    #   `nextToken` value. This value can be between 1 and 10. If this
+    #   parameter is not used, then `ListServices` returns up to 10 results
+    #   and a `nextToken` value if applicable.
     #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2776,6 +2788,14 @@ module Aws::ECS
     #             add: ["String"],
     #             drop: ["String"],
     #           },
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["read"], # accepts read, write, mknod
+    #             },
+    #           ],
+    #           init_process_enabled: false,
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -2860,6 +2880,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
+    #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -3879,7 +3905,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

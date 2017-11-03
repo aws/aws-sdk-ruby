@@ -205,6 +205,14 @@ module Aws::ECS
     #             add: ["String"],
     #             drop: ["String"],
     #           },
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["read"], # accepts read, write, mknod
+    #             },
+    #           ],
+    #           init_process_enabled: false,
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -250,8 +258,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -284,8 +292,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -335,8 +343,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://aws.amazon.com/ec2/instance-types/
     #   [5]: https://docs.docker.com/engine/reference/run/#cpu-share-constraint
@@ -362,8 +370,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -395,8 +403,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -421,8 +429,8 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [4]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -447,8 +455,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::PortMapping>]
     #
@@ -486,8 +494,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#entrypoint
     #   @return [Array<String>]
@@ -501,8 +509,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -517,8 +525,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -529,8 +537,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -541,8 +549,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::VolumeFrom>]
     #
@@ -558,8 +566,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -570,8 +578,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -583,8 +591,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -595,8 +603,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -608,8 +616,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -621,8 +629,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_servers
@@ -633,8 +641,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -646,8 +654,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -659,8 +667,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::HostEntry>]
     #
@@ -681,8 +689,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
@@ -699,8 +707,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Hash<String,String>]
     #
@@ -716,8 +724,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -760,8 +768,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -1668,6 +1676,40 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing a container instance host device.
+    #
+    # @note When making an API call, you may pass Device
+    #   data as a hash:
+    #
+    #       {
+    #         host_path: "String", # required
+    #         container_path: "String",
+    #         permissions: ["read"], # accepts read, write, mknod
+    #       }
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container will be able to `read`, `write`, and
+    #   `mknod` the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Device AWS API Documentation
+    #
+    class Device < Struct.new(
+      :host_path,
+      :container_path,
+      :permissions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DiscoverPollEndpointRequest
     #   data as a hash:
     #
@@ -1814,10 +1856,20 @@ module Aws::ECS
     #   `CapAdd` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-add` option to [docker run][3].
     #
+    #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
+    #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
+    #   "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
+    #   "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" |
+    #   "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" |
+    #   "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+    #   "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT"
+    #   | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" |
+    #   "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"`
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -1827,10 +1879,20 @@ module Aws::ECS
     #   `CapDrop` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-drop` option to [docker run][3].
     #
+    #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
+    #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
+    #   "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
+    #   "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" |
+    #   "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" |
+    #   "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+    #   "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT"
+    #   | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" |
+    #   "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"`
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -1881,6 +1943,14 @@ module Aws::ECS
     #           add: ["String"],
     #           drop: ["String"],
     #         },
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["read"], # accepts read, write, mknod
+    #           },
+    #         ],
+    #         init_process_enabled: false,
     #       }
     #
     # @!attribute [rw] capabilities
@@ -1888,10 +1958,38 @@ module Aws::ECS
     #   dropped from the default configuration provided by Docker.
     #   @return [Types::KernelCapabilities]
     #
+    # @!attribute [rw] devices
+    #   Any host devices to expose to the container. This parameter maps to
+    #   `Devices` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--device` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Device>]
+    #
+    # @!attribute [rw] init_process_enabled
+    #   Run an `init` process inside the container that forwards signals and
+    #   reaps processes. This parameter maps to the `--init` option to
+    #   [docker run][1]. This parameter requires version 1.25 of the Docker
+    #   Remote API or greater on your container instance. To check the
+    #   Docker Remote API version on your container instance, log into your
+    #   container instance and run the following command: `sudo docker
+    #   version | grep "Server API version"`
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
-      :capabilities)
+      :capabilities,
+      :devices,
+      :init_process_enabled)
       include Aws::Structure
     end
 
@@ -2171,14 +2269,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of container instance results returned by
-    #   `ListServices` in paginated output. When this parameter is used,
-    #   `ListServices` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListServices`
-    #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 10. If this parameter is not used, then `ListServices`
-    #   returns up to 10 results and a `nextToken` value if applicable.
+    #   The maximum number of service results returned by `ListServices` in
+    #   paginated output. When this parameter is used, `ListServices` only
+    #   returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListServices` request with
+    #   the returned `nextToken` value. This value can be between 1 and 10.
+    #   If this parameter is not used, then `ListServices` returns up to 10
+    #   results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
@@ -3043,6 +3141,14 @@ module Aws::ECS
     #                 add: ["String"],
     #                 drop: ["String"],
     #               },
+    #               devices: [
+    #                 {
+    #                   host_path: "String", # required
+    #                   container_path: "String",
+    #                   permissions: ["read"], # accepts read, write, mknod
+    #                 },
+    #               ],
+    #               init_process_enabled: false,
     #             },
     #             hostname: "String",
     #             user: "String",

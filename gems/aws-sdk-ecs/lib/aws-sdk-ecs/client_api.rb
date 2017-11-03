@@ -61,6 +61,10 @@ module Aws::ECS
     DescribeTasksRequest = Shapes::StructureShape.new(name: 'DescribeTasksRequest')
     DescribeTasksResponse = Shapes::StructureShape.new(name: 'DescribeTasksResponse')
     DesiredStatus = Shapes::StringShape.new(name: 'DesiredStatus')
+    Device = Shapes::StructureShape.new(name: 'Device')
+    DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
+    DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
+    DevicesList = Shapes::ListShape.new(name: 'DevicesList')
     DiscoverPollEndpointRequest = Shapes::StructureShape.new(name: 'DiscoverPollEndpointRequest')
     DiscoverPollEndpointResponse = Shapes::StructureShape.new(name: 'DiscoverPollEndpointResponse')
     DockerLabelsMap = Shapes::MapShape.new(name: 'DockerLabelsMap')
@@ -365,6 +369,15 @@ module Aws::ECS
     DescribeTasksResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     DescribeTasksResponse.struct_class = Types::DescribeTasksResponse
 
+    Device.add_member(:host_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hostPath"))
+    Device.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
+    Device.add_member(:permissions, Shapes::ShapeRef.new(shape: DeviceCgroupPermissions, location_name: "permissions"))
+    Device.struct_class = Types::Device
+
+    DeviceCgroupPermissions.member = Shapes::ShapeRef.new(shape: DeviceCgroupPermission)
+
+    DevicesList.member = Shapes::ShapeRef.new(shape: Device)
+
     DiscoverPollEndpointRequest.add_member(:container_instance, Shapes::ShapeRef.new(shape: String, location_name: "containerInstance"))
     DiscoverPollEndpointRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DiscoverPollEndpointRequest.struct_class = Types::DiscoverPollEndpointRequest
@@ -402,6 +415,8 @@ module Aws::ECS
     KeyValuePair.struct_class = Types::KeyValuePair
 
     LinuxParameters.add_member(:capabilities, Shapes::ShapeRef.new(shape: KernelCapabilities, location_name: "capabilities"))
+    LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
+    LinuxParameters.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "initProcessEnabled"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
     ListAttributesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
