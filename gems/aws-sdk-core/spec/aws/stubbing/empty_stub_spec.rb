@@ -44,11 +44,12 @@ module Aws
                 'members' => {
                   'MaxResults' => { 'shape' => 'String' },
                   'NextToken' => { 'shape' => 'String' },
-                  'IsTruncated' => { 'shape' => 'String' },
+                  'IsTruncated' => { 'shape' => 'Boolean' },
                   'Results' => { 'shape' => 'StringList' }
                 }
               },
               'String' => { 'type' => 'string' },
+              'Boolean' => { 'type' => 'boolean'},
               'StringList' => {
                 'type' => 'list',
                 'member' => { 'shape' => 'String' }
@@ -71,7 +72,7 @@ module Aws
         stub = client.operation_name
         expect(stub[:results]).to eq([])
         expect(stub[:next_token]).to be(nil)
-        expect(stub[:is_truncated]).to be(nil)
+        expect(stub[:is_truncated]).to be(false)
       end
 
     end
