@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.77 (2017-11-03)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 2.10.76 (2017-11-01)
