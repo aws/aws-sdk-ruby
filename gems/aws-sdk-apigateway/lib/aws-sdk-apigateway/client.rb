@@ -580,27 +580,44 @@ module Aws::APIGateway
     #   (Required) The name of the DomainName resource.
     #
     # @option params [String] :certificate_name
-    #   The user-friendly name of the certificate.
+    #   The user-friendly name of the certificate that will be used by
+    #   edge-optimized endpoint for this domain name.
     #
     # @option params [String] :certificate_body
-    #   \[Deprecated\] The body of the server certificate provided by your
+    #   \[Deprecated\] The body of the server certificate that will be used by
+    #   edge-optimized endpoint for this domain name provided by your
     #   certificate authority.
     #
     # @option params [String] :certificate_private_key
-    #   \[Deprecated\] Your certificate's private key.
+    #   \[Deprecated\] Your edge-optimized endpoint's domain name
+    #   certificate's private key.
     #
     # @option params [String] :certificate_chain
     #   \[Deprecated\] The intermediate certificates and optionally the root
-    #   certificate, one after the other without any blank lines. If you
-    #   include the root certificate, your certificate chain must start with
-    #   intermediate certificates and end with the root certificate. Use the
-    #   intermediate certificates that were provided by your certificate
-    #   authority. Do not include any intermediaries that are not in the chain
-    #   of trust path.
+    #   certificate, one after the other without any blank lines, used by an
+    #   edge-optimized endpoint for this domain name. If you include the root
+    #   certificate, your certificate chain must start with intermediate
+    #   certificates and end with the root certificate. Use the intermediate
+    #   certificates that were provided by your certificate authority. Do not
+    #   include any intermediaries that are not in the chain of trust path.
     #
     # @option params [String] :certificate_arn
-    #   The reference to an AWS-managed certificate. AWS Certificate Manager
+    #   The reference to an AWS-managed certificate that will be used by
+    #   edge-optimized endpoint for this domain name. AWS Certificate Manager
     #   is the only supported source.
+    #
+    # @option params [String] :regional_certificate_name
+    #   The user-friendly name of the certificate that will be used by
+    #   regional endpoint for this domain name.
+    #
+    # @option params [String] :regional_certificate_arn
+    #   The reference to an AWS-managed certificate that will be used by
+    #   regional endpoint for this domain name. AWS Certificate Manager is the
+    #   only supported source.
+    #
+    # @option params [Types::EndpointConfiguration] :endpoint_configuration
+    #   The endpoint configuration of this DomainName showing the endpoint
+    #   types of the domain name.
     #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -608,7 +625,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_name #certificate_name} => String
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
+    #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
+    #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -619,6 +640,11 @@ module Aws::APIGateway
     #     certificate_private_key: "String",
     #     certificate_chain: "String",
     #     certificate_arn: "String",
+    #     regional_certificate_name: "String",
+    #     regional_certificate_arn: "String",
+    #     endpoint_configuration: {
+    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #     },
     #   })
     #
     # @example Response structure
@@ -627,7 +653,12 @@ module Aws::APIGateway
     #   resp.certificate_name #=> String
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
+    #   resp.regional_domain_name #=> String
+    #   resp.regional_certificate_name #=> String
+    #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -835,6 +866,10 @@ module Aws::APIGateway
     #   The list of binary media types supported by the RestApi. By default,
     #   the RestApi supports only UTF-8-encoded text payloads.
     #
+    # @option params [Types::EndpointConfiguration] :endpoint_configuration
+    #   The endpoint configuration of this RestApi showing the endpoint types
+    #   of the API.
+    #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestApi#id #id} => String
@@ -844,6 +879,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -853,6 +889,9 @@ module Aws::APIGateway
     #     version: "String",
     #     clone_from: "String",
     #     binary_media_types: ["String"],
+    #     endpoint_configuration: {
+    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #     },
     #   })
     #
     # @example Response structure
@@ -866,6 +905,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload create_rest_api(params = {})
     # @param [Hash] params ({})
@@ -2339,7 +2380,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_name #certificate_name} => String
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
+    #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
+    #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2353,7 +2398,12 @@ module Aws::APIGateway
     #   resp.certificate_name #=> String
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
+    #   resp.regional_domain_name #=> String
+    #   resp.regional_certificate_name #=> String
+    #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2391,7 +2441,12 @@ module Aws::APIGateway
     #   resp.items[0].certificate_name #=> String
     #   resp.items[0].certificate_arn #=> String
     #   resp.items[0].certificate_upload_date #=> Time
+    #   resp.items[0].regional_domain_name #=> String
+    #   resp.items[0].regional_certificate_name #=> String
+    #   resp.items[0].regional_certificate_arn #=> String
     #   resp.items[0].distribution_domain_name #=> String
+    #   resp.items[0].endpoint_configuration.types #=> Array
+    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -3185,6 +3240,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3203,6 +3259,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload get_rest_api(params = {})
     # @param [Hash] params ({})
@@ -3245,6 +3303,8 @@ module Aws::APIGateway
     #   resp.items[0].warnings[0] #=> String
     #   resp.items[0].binary_media_types #=> Array
     #   resp.items[0].binary_media_types[0] #=> String
+    #   resp.items[0].endpoint_configuration.types #=> Array
+    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload get_rest_apis(params = {})
     # @param [Hash] params ({})
@@ -3849,6 +3909,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3871,6 +3932,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload import_rest_api(params = {})
     # @param [Hash] params ({})
@@ -4454,6 +4517,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -4478,6 +4542,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload put_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5063,7 +5129,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_name #certificate_name} => String
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
+    #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
+    #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5085,7 +5155,12 @@ module Aws::APIGateway
     #   resp.certificate_name #=> String
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
+    #   resp.regional_domain_name #=> String
+    #   resp.regional_certificate_name #=> String
+    #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -5654,6 +5729,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5680,6 +5756,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.endpoint_configuration.types #=> Array
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
     # @overload update_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5886,7 +5964,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

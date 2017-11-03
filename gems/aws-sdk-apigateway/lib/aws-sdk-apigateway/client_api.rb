@@ -78,6 +78,8 @@ module Aws::APIGateway
     DomainName = Shapes::StructureShape.new(name: 'DomainName')
     DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EndpointConfiguration = Shapes::StructureShape.new(name: 'EndpointConfiguration')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ExportResponse = Shapes::StructureShape.new(name: 'ExportResponse')
     FlushStageAuthorizersCacheRequest = Shapes::StructureShape.new(name: 'FlushStageAuthorizersCacheRequest')
     FlushStageCacheRequest = Shapes::StructureShape.new(name: 'FlushStageCacheRequest')
@@ -146,6 +148,7 @@ module Aws::APIGateway
     ListOfDocumentationPart = Shapes::ListShape.new(name: 'ListOfDocumentationPart')
     ListOfDocumentationVersion = Shapes::ListShape.new(name: 'ListOfDocumentationVersion')
     ListOfDomainName = Shapes::ListShape.new(name: 'ListOfDomainName')
+    ListOfEndpointType = Shapes::ListShape.new(name: 'ListOfEndpointType')
     ListOfGatewayResponse = Shapes::ListShape.new(name: 'ListOfGatewayResponse')
     ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
     ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
@@ -366,6 +369,9 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:certificate_private_key, Shapes::ShapeRef.new(shape: String, location_name: "certificatePrivateKey"))
     CreateDomainNameRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: String, location_name: "certificateChain"))
     CreateDomainNameRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "certificateArn"))
+    CreateDomainNameRequest.add_member(:regional_certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateName"))
+    CreateDomainNameRequest.add_member(:regional_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateArn"))
+    CreateDomainNameRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -391,6 +397,7 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     CreateRestApiRequest.add_member(:clone_from, Shapes::ShapeRef.new(shape: String, location_name: "cloneFrom"))
     CreateRestApiRequest.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
+    CreateRestApiRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
     CreateStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -539,12 +546,19 @@ module Aws::APIGateway
     DomainName.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "certificateName"))
     DomainName.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "certificateArn"))
     DomainName.add_member(:certificate_upload_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "certificateUploadDate"))
+    DomainName.add_member(:regional_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalDomainName"))
+    DomainName.add_member(:regional_certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateName"))
+    DomainName.add_member(:regional_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateArn"))
     DomainName.add_member(:distribution_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "distributionDomainName"))
+    DomainName.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     DomainName.struct_class = Types::DomainName
 
     DomainNames.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
     DomainNames.add_member(:items, Shapes::ShapeRef.new(shape: ListOfDomainName, location_name: "item"))
     DomainNames.struct_class = Types::DomainNames
+
+    EndpointConfiguration.add_member(:types, Shapes::ShapeRef.new(shape: ListOfEndpointType, location_name: "types"))
+    EndpointConfiguration.struct_class = Types::EndpointConfiguration
 
     ExportResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     ExportResponse.add_member(:content_disposition, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Disposition"))
@@ -839,6 +853,8 @@ module Aws::APIGateway
 
     ListOfDomainName.member = Shapes::ShapeRef.new(shape: DomainName)
 
+    ListOfEndpointType.member = Shapes::ShapeRef.new(shape: EndpointType)
+
     ListOfGatewayResponse.member = Shapes::ShapeRef.new(shape: GatewayResponse)
 
     ListOfLong.member = Shapes::ShapeRef.new(shape: Long)
@@ -1046,6 +1062,7 @@ module Aws::APIGateway
     RestApi.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     RestApi.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
     RestApi.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
+    RestApi.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     RestApi.struct_class = Types::RestApi
 
     RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
