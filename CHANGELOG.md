@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.79 (2017-11-07)
+------------------
+
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
