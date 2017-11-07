@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
+* Feature - Aws::Pricing - Added support for a new service, AWS Price List Service.
+
 2.10.78 (2017-11-03)
 ------------------
 

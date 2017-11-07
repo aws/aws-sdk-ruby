@@ -318,6 +318,10 @@
     "models": "polly/2016-06-10",
     "endpoint": "polly"
   },
+  "Pricing": {
+    "models": "pricing/2017-10-15",
+    "endpoint": "api.pricing"
+  },
   "RDS": {
     "models": "rds/2014-10-31",
     "endpoint": "rds"

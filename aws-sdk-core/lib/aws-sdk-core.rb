@@ -103,6 +103,7 @@ module Aws
     Organizations
     Pinpoint
     Polly
+    Pricing
     RDS
     Redshift
     Rekognition

@@ -291,6 +291,7 @@ to be backwards compatible.
 | AWS OpsWorks                        | OpsWorks                      | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                    | 2016-11-01  |
 | AWS Organizations                   | Organizations                 | 2016-11-28  |
+| AWS Price List Service              | Pricing                       | 2017-10-15  |
 | AWS Resource Groups Tagging API     | ResourceGroupsTaggingAPI      | 2017-01-26  |
 | AWS Security Token Service          | STS                           | 2011-06-15  |
 | AWS Server Migration Service        | SMS                           | 2016-10-24  |
@@ -358,8 +359,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | WorkSpaces                    | 2015-04-08  |
 | Application Auto Scaling            | ApplicationAutoScaling        | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                   | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
 | Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
+| Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
 
 ## License
 
