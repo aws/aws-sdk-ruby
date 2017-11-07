@@ -118,10 +118,9 @@ module Aws::RDS
     # your read workload across multiple Aurora Replicas in your DB cluster.
     #
     # If a failover occurs, and the Aurora Replica that you are connected to
-    # is promoted to be the primary instance, your connection will be
-    # dropped. To continue sending your read workload to other Aurora
-    # Replicas in the cluster, you can then reconnect to the reader
-    # endpoint.
+    # is promoted to be the primary instance, your connection is dropped. To
+    # continue sending your read workload to other Aurora Replicas in the
+    # cluster, you can then reconnect to the reader endpoint.
     # @return [String]
     def reader_endpoint
       data[:reader_endpoint]
@@ -468,8 +467,7 @@ module Aws::RDS
     #   the DB cluster you are creating.
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` will be
-    #   used.
+    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
     #
     #   Constraints:
     #
@@ -600,7 +598,7 @@ module Aws::RDS
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
     #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster will be replicated from. You only need to specify
+    #   the DB cluster is replicated from. You only need to specify
     #   `PreSignedUrl` when you are performing cross-region replication from
     #   an encrypted DB cluster.
     #
@@ -1008,8 +1006,8 @@ module Aws::RDS
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
     #   with a KMS key that is different than the KMS key used to encrypt the
-    #   source DB cluster. The new DB cluster will be encrypted with the KMS
-    #   key identified by the `KmsKeyId` parameter.
+    #   source DB cluster. The new DB cluster is encrypted with the KMS key
+    #   identified by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:

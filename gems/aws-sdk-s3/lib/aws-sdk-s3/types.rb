@@ -135,6 +135,26 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Container for information regarding the access control for replicas.
+    #
+    # @note When making an API call, you may pass AccessControlTranslation
+    #   data as a hash:
+    #
+    #       {
+    #         owner: "Destination", # required, accepts Destination
+    #       }
+    #
+    # @!attribute [rw] owner
+    #   The override value for the owner of the replica object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlTranslation AWS API Documentation
+    #
+    class AccessControlTranslation < Struct.new(
+      :owner)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AnalyticsAndOperator
     #   data as a hash:
     #
@@ -1483,6 +1503,25 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBucketEncryptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket containing the server-side encryption
+    #   configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionRequest AWS API Documentation
+    #
+    class DeleteBucketEncryptionRequest < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteBucketInventoryConfigurationRequest
     #   data as a hash:
     #
@@ -1865,12 +1904,21 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Container for replication destination information.
+    #
     # @note When making an API call, you may pass Destination
     #   data as a hash:
     #
     #       {
     #         bucket: "BucketName", # required
+    #         account: "AccountId",
     #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         access_control_translation: {
+    #           owner: "Destination", # required, accepts Destination
+    #         },
+    #         encryption_configuration: {
+    #           replica_kms_key_id: "ReplicaKmsKeyID",
+    #         },
     #       }
     #
     # @!attribute [rw] bucket
@@ -1878,15 +1926,53 @@ module Aws::S3
     #   store replicas of the object identified by the rule.
     #   @return [String]
     #
+    # @!attribute [rw] account
+    #   Account ID of the destination bucket. Currently this is only being
+    #   verified if Access Control Translation is enabled
+    #   @return [String]
+    #
     # @!attribute [rw] storage_class
     #   The class of storage used to store the object.
     #   @return [String]
+    #
+    # @!attribute [rw] access_control_translation
+    #   Container for information regarding the access control for replicas.
+    #   @return [Types::AccessControlTranslation]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Container for information regarding encryption based configuration
+    #   for replicas.
+    #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
     #
     class Destination < Struct.new(
       :bucket,
-      :storage_class)
+      :account,
+      :storage_class,
+      :access_control_translation,
+      :encryption_configuration)
+      include Aws::Structure
+    end
+
+    # Container for information regarding encryption based configuration for
+    # replicas.
+    #
+    # @note When making an API call, you may pass EncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         replica_kms_key_id: "ReplicaKmsKeyID",
+    #       }
+    #
+    # @!attribute [rw] replica_kms_key_id
+    #   The id of the KMS key used to encrypt the replica object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :replica_kms_key_id)
       include Aws::Structure
     end
 
@@ -2086,6 +2172,37 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCorsRequest AWS API Documentation
     #
     class GetBucketCorsRequest < Struct.new(
+      :bucket)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server_side_encryption_configuration
+    #   Container for server-side encryption configuration rules. Currently
+    #   S3 supports one rule only.
+    #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionOutput AWS API Documentation
+    #
+    class GetBucketEncryptionOutput < Struct.new(
+      :server_side_encryption_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBucketEncryptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket from which the server-side encryption
+    #   configuration is retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionRequest AWS API Documentation
+    #
+    class GetBucketEncryptionRequest < Struct.new(
       :bucket)
       include Aws::Structure
     end
@@ -3357,6 +3474,13 @@ module Aws::S3
     #             bucket: "BucketName", # required
     #             format: "CSV", # required, accepts CSV
     #             prefix: "Prefix",
+    #             encryption: {
+    #               sses3: {
+    #               },
+    #               ssekms: {
+    #                 key_id: "SSEKMSKeyId", # required
+    #               },
+    #             },
     #           },
     #         },
     #         is_enabled: false, # required
@@ -3365,7 +3489,7 @@ module Aws::S3
     #         },
     #         id: "InventoryId", # required
     #         included_object_versions: "All", # required, accepts All, Current
-    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus
     #         schedule: { # required
     #           frequency: "Daily", # required, accepts Daily, Weekly
     #         },
@@ -3424,6 +3548,13 @@ module Aws::S3
     #           bucket: "BucketName", # required
     #           format: "CSV", # required, accepts CSV
     #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -3436,6 +3567,37 @@ module Aws::S3
     #
     class InventoryDestination < Struct.new(
       :s3_bucket_destination)
+      include Aws::Structure
+    end
+
+    # Contains the type of server-side encryption used to encrypt the
+    # inventory results.
+    #
+    # @note When making an API call, you may pass InventoryEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         sses3: {
+    #         },
+    #         ssekms: {
+    #           key_id: "SSEKMSKeyId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sses3
+    #   Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+    #   @return [Types::SSES3]
+    #
+    # @!attribute [rw] ssekms
+    #   Specifies the use of SSE-KMS to encrypt delievered Inventory
+    #   reports.
+    #   @return [Types::SSEKMS]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption AWS API Documentation
+    #
+    class InventoryEncryption < Struct.new(
+      :sses3,
+      :ssekms)
       include Aws::Structure
     end
 
@@ -3466,6 +3628,13 @@ module Aws::S3
     #         bucket: "BucketName", # required
     #         format: "CSV", # required, accepts CSV
     #         prefix: "Prefix",
+    #         encryption: {
+    #           sses3: {
+    #           },
+    #           ssekms: {
+    #             key_id: "SSEKMSKeyId", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] account_id
@@ -3485,13 +3654,19 @@ module Aws::S3
     #   The prefix that is prepended to all inventory results.
     #   @return [String]
     #
+    # @!attribute [rw] encryption
+    #   Contains the type of server-side encryption used to encrypt the
+    #   inventory results.
+    #   @return [Types::InventoryEncryption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryS3BucketDestination AWS API Documentation
     #
     class InventoryS3BucketDestination < Struct.new(
       :account_id,
       :bucket,
       :format,
-      :prefix)
+      :prefix,
+      :encryption)
       include Aws::Structure
     end
 
@@ -5480,6 +5655,48 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutBucketEncryptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         content_md5: "ContentMD5",
+    #         server_side_encryption_configuration: { # required
+    #           rules: [ # required
+    #             {
+    #               apply_server_side_encryption_by_default: {
+    #                 sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #                 kms_master_key_id: "SSEKMSKeyId",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket for which the server-side encryption
+    #   configuration is set.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The base64-encoded 128-bit MD5 digest of the server-side encryption
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_configuration
+    #   Container for server-side encryption configuration rules. Currently
+    #   S3 supports one rule only.
+    #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionRequest AWS API Documentation
+    #
+    class PutBucketEncryptionRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :server_side_encryption_configuration)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutBucketInventoryConfigurationRequest
     #   data as a hash:
     #
@@ -5493,6 +5710,13 @@ module Aws::S3
     #               bucket: "BucketName", # required
     #               format: "CSV", # required, accepts CSV
     #               prefix: "Prefix",
+    #               encryption: {
+    #                 sses3: {
+    #                 },
+    #                 ssekms: {
+    #                   key_id: "SSEKMSKeyId", # required
+    #                 },
+    #               },
     #             },
     #           },
     #           is_enabled: false, # required
@@ -5501,7 +5725,7 @@ module Aws::S3
     #           },
     #           id: "InventoryId", # required
     #           included_object_versions: "All", # required, accepts All, Current
-    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus
     #           schedule: { # required
     #             frequency: "Daily", # required, accepts Daily, Weekly
     #           },
@@ -5877,6 +6101,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         content_md5: "ContentMD5",
+    #         confirm_remove_self_bucket_access: false,
     #         policy: "Policy", # required
     #       }
     #
@@ -5885,6 +6110,11 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   @return [String]
+    #
+    # @!attribute [rw] confirm_remove_self_bucket_access
+    #   Set this parameter to true to confirm that you want to remove your
+    #   permissions to change this bucket policy in the future.
+    #   @return [Boolean]
     #
     # @!attribute [rw] policy
     #   The bucket policy as a JSON document.
@@ -5895,6 +6125,7 @@ module Aws::S3
     class PutBucketPolicyRequest < Struct.new(
       :bucket,
       :content_md5,
+      :confirm_remove_self_bucket_access,
       :policy)
       include Aws::Structure
     end
@@ -5912,9 +6143,21 @@ module Aws::S3
     #               id: "ID",
     #               prefix: "Prefix", # required
     #               status: "Enabled", # required, accepts Enabled, Disabled
+    #               source_selection_criteria: {
+    #                 sse_kms_encrypted_objects: {
+    #                   status: "Enabled", # required, accepts Enabled, Disabled
+    #                 },
+    #               },
     #               destination: { # required
     #                 bucket: "BucketName", # required
+    #                 account: "AccountId",
     #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #                 access_control_translation: {
+    #                   owner: "Destination", # required, accepts Destination
+    #                 },
+    #                 encryption_configuration: {
+    #                   replica_kms_key_id: "ReplicaKmsKeyID",
+    #                 },
     #               },
     #             },
     #           ],
@@ -6697,9 +6940,21 @@ module Aws::S3
     #             id: "ID",
     #             prefix: "Prefix", # required
     #             status: "Enabled", # required, accepts Enabled, Disabled
+    #             source_selection_criteria: {
+    #               sse_kms_encrypted_objects: {
+    #                 status: "Enabled", # required, accepts Enabled, Disabled
+    #               },
+    #             },
     #             destination: { # required
     #               bucket: "BucketName", # required
+    #               account: "AccountId",
     #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #               access_control_translation: {
+    #                 owner: "Destination", # required, accepts Destination
+    #               },
+    #               encryption_configuration: {
+    #                 replica_kms_key_id: "ReplicaKmsKeyID",
+    #               },
     #             },
     #           },
     #         ],
@@ -6724,6 +6979,8 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Container for information about a particular replication rule.
+    #
     # @note When making an API call, you may pass ReplicationRule
     #   data as a hash:
     #
@@ -6731,9 +6988,21 @@ module Aws::S3
     #         id: "ID",
     #         prefix: "Prefix", # required
     #         status: "Enabled", # required, accepts Enabled, Disabled
+    #         source_selection_criteria: {
+    #           sse_kms_encrypted_objects: {
+    #             status: "Enabled", # required, accepts Enabled, Disabled
+    #           },
+    #         },
     #         destination: { # required
     #           bucket: "BucketName", # required
+    #           account: "AccountId",
     #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           access_control_translation: {
+    #             owner: "Destination", # required, accepts Destination
+    #           },
+    #           encryption_configuration: {
+    #             replica_kms_key_id: "ReplicaKmsKeyID",
+    #           },
     #         },
     #       }
     #
@@ -6752,7 +7021,13 @@ module Aws::S3
     #   The rule is ignored if status is not Enabled.
     #   @return [String]
     #
+    # @!attribute [rw] source_selection_criteria
+    #   Container for filters that define which source objects should be
+    #   replicated.
+    #   @return [Types::SourceSelectionCriteria]
+    #
     # @!attribute [rw] destination
+    #   Container for replication destination information.
     #   @return [Types::Destination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
@@ -6761,6 +7036,7 @@ module Aws::S3
       :id,
       :prefix,
       :status,
+      :source_selection_criteria,
       :destination)
       include Aws::Structure
     end
@@ -7018,6 +7294,165 @@ module Aws::S3
     #
     class S3KeyFilter < Struct.new(
       :filter_rules)
+      include Aws::Structure
+    end
+
+    # Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+    #
+    # @note When making an API call, you may pass SSEKMS
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "SSEKMSKeyId", # required
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   Specifies the ID of the AWS Key Management Service (KMS) master
+    #   encryption key to use for encrypting Inventory reports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
+    #
+    class SSEKMS < Struct.new(
+      :key_id)
+      include Aws::Structure
+    end
+
+    # Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSES3 AWS API Documentation
+    #
+    class SSES3 < Aws::EmptyStructure; end
+
+    # Describes the default server-side encryption to apply to new objects
+    # in the bucket. If Put Object request does not specify any server-side
+    # encryption, this default encryption will be applied.
+    #
+    # @note When making an API call, you may pass ServerSideEncryptionByDefault
+    #   data as a hash:
+    #
+    #       {
+    #         sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #         kms_master_key_id: "SSEKMSKeyId",
+    #       }
+    #
+    # @!attribute [rw] sse_algorithm
+    #   Server-side encryption algorithm to use for the default encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   KMS master key ID to use for the default encryption. This parameter
+    #   is allowed if SSEAlgorithm is aws:kms.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault AWS API Documentation
+    #
+    class ServerSideEncryptionByDefault < Struct.new(
+      :sse_algorithm,
+      :kms_master_key_id)
+      include Aws::Structure
+    end
+
+    # Container for server-side encryption configuration rules. Currently S3
+    # supports one rule only.
+    #
+    # @note When making an API call, you may pass ServerSideEncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [ # required
+    #           {
+    #             apply_server_side_encryption_by_default: {
+    #               sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #               kms_master_key_id: "SSEKMSKeyId",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   Container for information about a particular server-side encryption
+    #   configuration rule.
+    #   @return [Array<Types::ServerSideEncryptionRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionConfiguration AWS API Documentation
+    #
+    class ServerSideEncryptionConfiguration < Struct.new(
+      :rules)
+      include Aws::Structure
+    end
+
+    # Container for information about a particular server-side encryption
+    # configuration rule.
+    #
+    # @note When making an API call, you may pass ServerSideEncryptionRule
+    #   data as a hash:
+    #
+    #       {
+    #         apply_server_side_encryption_by_default: {
+    #           sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #           kms_master_key_id: "SSEKMSKeyId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] apply_server_side_encryption_by_default
+    #   Describes the default server-side encryption to apply to new objects
+    #   in the bucket. If Put Object request does not specify any
+    #   server-side encryption, this default encryption will be applied.
+    #   @return [Types::ServerSideEncryptionByDefault]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule AWS API Documentation
+    #
+    class ServerSideEncryptionRule < Struct.new(
+      :apply_server_side_encryption_by_default)
+      include Aws::Structure
+    end
+
+    # Container for filters that define which source objects should be
+    # replicated.
+    #
+    # @note When making an API call, you may pass SourceSelectionCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         sse_kms_encrypted_objects: {
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sse_kms_encrypted_objects
+    #   Container for filter information of selection of KMS Encrypted S3
+    #   objects.
+    #   @return [Types::SseKmsEncryptedObjects]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria AWS API Documentation
+    #
+    class SourceSelectionCriteria < Struct.new(
+      :sse_kms_encrypted_objects)
+      include Aws::Structure
+    end
+
+    # Container for filter information of selection of KMS Encrypted S3
+    # objects.
+    #
+    # @note When making an API call, you may pass SseKmsEncryptedObjects
+    #   data as a hash:
+    #
+    #       {
+    #         status: "Enabled", # required, accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The replication for KMS encrypted S3 objects is disabled if status
+    #   is not Enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects AWS API Documentation
+    #
+    class SseKmsEncryptedObjects < Struct.new(
+      :status)
       include Aws::Structure
     end
 

@@ -203,6 +203,7 @@ module Aws::RDS
     DomainMembershipList = Shapes::ListShape.new(name: 'DomainMembershipList')
     DomainNotFoundFault = Shapes::StructureShape.new(name: 'DomainNotFoundFault')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleOptional = Shapes::FloatShape.new(name: 'DoubleOptional')
     DoubleRange = Shapes::StructureShape.new(name: 'DoubleRange')
     DoubleRangeList = Shapes::ListShape.new(name: 'DoubleRangeList')
     DownloadDBLogFilePortionDetails = Shapes::StructureShape.new(name: 'DownloadDBLogFilePortionDetails')
@@ -1630,6 +1631,12 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_enhanced_monitoring, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsEnhancedMonitoring"))
     OrderableDBInstanceOption.add_member(:supports_iam_database_authentication, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIAMDatabaseAuthentication"))
     OrderableDBInstanceOption.add_member(:supports_performance_insights, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsPerformanceInsights"))
+    OrderableDBInstanceOption.add_member(:min_storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinStorageSize"))
+    OrderableDBInstanceOption.add_member(:max_storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageSize"))
+    OrderableDBInstanceOption.add_member(:min_iops_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinIopsPerDbInstance"))
+    OrderableDBInstanceOption.add_member(:max_iops_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxIopsPerDbInstance"))
+    OrderableDBInstanceOption.add_member(:min_iops_per_gib, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinIopsPerGib"))
+    OrderableDBInstanceOption.add_member(:max_iops_per_gib, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxIopsPerGib"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")

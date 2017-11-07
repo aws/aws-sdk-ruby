@@ -256,17 +256,17 @@ module Aws::RDS
     # * **VPC:**false
     #
     # If no DB subnet group has been specified as part of the request and
-    # the PubliclyAccessible value has not been set, the DB instance will be
+    # the PubliclyAccessible value has not been set, the DB instance is
     # publicly accessible. If a specific DB subnet group has been specified
     # as part of the request and the PubliclyAccessible value has not been
-    # set, the DB instance will be private.
+    # set, the DB instance is private.
     # @return [Boolean]
     def publicly_accessible
       data[:publicly_accessible]
     end
 
     # The status of a Read Replica. If the instance is not a Read Replica,
-    # this will be blank.
+    # this is blank.
     # @return [Array<Types::DBInstanceStatusInfo>]
     def status_infos
       data[:status_infos]
@@ -407,11 +407,16 @@ module Aws::RDS
       data[:iam_database_authentication_enabled]
     end
 
+    # True if Performance Insights is enabled for the DB instance; otherwise
+    # false.
     # @return [Boolean]
     def performance_insights_enabled
       data[:performance_insights_enabled]
     end
 
+    # The KMS key identifier for encryption of Performance Insights data.
+    # The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier,
+    # or the KMS key alias for the KMS encryption key.
     # @return [String]
     def performance_insights_kms_key_id
       data[:performance_insights_kms_key_id]
@@ -759,16 +764,15 @@ module Aws::RDS
     #
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
@@ -907,9 +911,9 @@ module Aws::RDS
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in. For information on regions and Availability Zones, see [Regions
-    #   and Availability Zones][1].
+    #   The EC2 Availability Zone that the database instance is created in.
+    #   For information on regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -950,7 +954,7 @@ module Aws::RDS
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #   If this argument is omitted, the default DBParameterGroup for the
-    #   specified engine will be used.
+    #   specified engine is used.
     #
     #   Constraints:
     #
@@ -1127,6 +1131,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.19` (supported in all AWS regions)
+    #
     #   * `5.7.17` (supported in all AWS regions)
     #
     #   * `5.7.16` (supported in all AWS regions)
@@ -1134,6 +1140,8 @@ module Aws::RDS
     #   * `5.7.11` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.37` (supported in all AWS regions)
     #
     #   * `5.6.35` (supported in all AWS regions)
     #
@@ -1146,6 +1154,8 @@ module Aws::RDS
     #
     #
     #
+    #   * `5.5.57` (supported in all AWS regions)
+    #
     #   * `5.5.54` (supported in all AWS regions)
     #
     #   * `5.5.53` (supported in all AWS regions)
@@ -1153,6 +1163,9 @@ module Aws::RDS
     #   * `5.5.46` (supported in all AWS regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -1180,6 +1193,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
@@ -1204,16 +1219,16 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
+    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
+    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
+    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     #
     #   Default: `true`
     # @option options [String] :license_model
@@ -1261,10 +1276,10 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [String] :db_cluster_identifier
@@ -1387,7 +1402,12 @@ module Aws::RDS
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance; otherwise
+    #   false.
     # @option options [String] :performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier,
+    #   or the KMS key alias for the KMS encryption key.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1434,21 +1454,19 @@ module Aws::RDS
     #   unique key that identifies a DB instance. This parameter is stored as
     #   a lowercase string.
     # @option options [String] :db_instance_class
-    #   The compute and memory capacity of the Read Replica. Note that not all
-    #   instance classes are available in all regions for all DB engines.
-    #
-    #   Valid Values: `db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge
-    #   | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
-    #   db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large |
-    #   db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge |
-    #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
-    #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
-    #   db.t2.large`
+    #   The compute and memory capacity of the Read Replica, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
     #   Default: Inherits from the source DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :availability_zone
-    #   The Amazon EC2 Availability Zone that the Read Replica will be created
-    #   in.
+    #   The Amazon EC2 Availability Zone that the Read Replica is created in.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -1461,16 +1479,16 @@ module Aws::RDS
     #
     #   Valid Values: `1150-65535`
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the Read Replica during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to the
+    #   Read Replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance.
     # @option options [String] :option_group_name
-    #   The option group the DB instance will be associated with. If omitted,
-    #   the default option group for the engine specified will be used.
+    #   The option group the DB instance is associated with. If omitted, the
+    #   default option group for the engine specified is used.
     # @option options [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
     #   true specifies an Internet-facing instance with a publicly resolvable
@@ -1487,17 +1505,17 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [String] :db_subnet_group_name
     #   Specifies a DB subnet group for the DB instance. The new DB instance
-    #   will be created in the VPC associated with the DB subnet group. If no
-    #   DB subnet group is specified, then the new DB instance is not created
-    #   in a VPC.
+    #   is created in the VPC associated with the DB subnet group. If no DB
+    #   subnet group is specified, then the new DB instance is not created in
+    #   a VPC.
     #
     #   Constraints:
     #
@@ -1513,10 +1531,10 @@ module Aws::RDS
     #     source DB instance must either:&gt;
     #
     #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas will be created in the same VPC.
+    #       Replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas will be
-    #       created outside of any VPC.
+    #     * Not specify a DB subnet group. All these Read Replicas are created
+    #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
     # @option options [String] :storage_type
@@ -1589,7 +1607,7 @@ module Aws::RDS
     #   presigned URL request must contain the following parameter values:
     #
     #   * `DestinationRegion` - The AWS Region that the encrypted Read Replica
-    #     will be created in. This AWS Region is the same one where the
+    #     is created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
     #
@@ -1638,7 +1656,12 @@ module Aws::RDS
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the read replica; otherwise
+    #   false.
     # @option options [String] :performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier,
+    #   or the KMS key alias for the KMS encryption key.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1856,32 +1879,28 @@ module Aws::RDS
     #   provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
-    #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance, creating
-    #   a Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
+    #   migration, the DB instance is available for use, but might experience
+    #   performance degradation. While the migration takes place, nightly
+    #   backups for the instance are suspended. No other Amazon RDS operations
+    #   can take place for the instance, including modifying the instance,
+    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   for the instance, and creating a DB snapshot of the instance.
     # @option options [String] :db_instance_class
-    #   The new compute and memory capacity of the DB instance. To determine
-    #   the instance classes that are available for a particular DB engine,
-    #   use the DescribeOrderableDBInstanceOptions action. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The new compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
-    #   Passing a value for this setting causes an outage during the change
-    #   and is applied during the next maintenance window, unless
-    #   `ApplyImmediately` is specified as `true` for this request.
+    #   If you modify the DB instance class, an outage occurs during the
+    #   change. The change is applied during the next maintenance window,
+    #   unless `ApplyImmediately` is specified as `true` for this request.
     #
     #   Default: Uses existing setting
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
@@ -1933,12 +1952,12 @@ module Aws::RDS
     #
     #   If this parameter is set to `false`, changes to the DB instance are
     #   applied during the next maintenance window. Some parameter changes can
-    #   cause an outage and will be applied on the next call to
-    #   RebootDBInstance, or the next failure reboot. Review the table of
-    #   parameters in [Modifying a DB Instance and Using the Apply Immediately
-    #   Parameter][1] to see the impact that setting `ApplyImmediately` to
-    #   `true` or `false` has for each modified parameter and to determine
-    #   when the changes will be applied.
+    #   cause an outage and are applied on the next call to RebootDBInstance,
+    #   or the next failure reboot. Review the table of parameters in
+    #   [Modifying a DB Instance and Using the Apply Immediately Parameter][1]
+    #   to see the impact that setting `ApplyImmediately` to `true` or `false`
+    #   has for each modified parameter and to determine when the changes are
+    #   applied.
     #
     #   Default: `false`
     #
@@ -2098,8 +2117,8 @@ module Aws::RDS
     #   value for the EngineVersion parameter that is a different major
     #   version than the DB instance's current version.
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the DB instance during the maintenance window. Changing this parameter
+    #   Indicates that minor version upgrades are applied automatically to the
+    #   DB instance during the maintenance window. Changing this parameter
     #   does not result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
@@ -2140,13 +2159,12 @@ module Aws::RDS
     #   provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
-    #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance, creating
-    #   a Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
+    #   migration, the DB instance is available for use, but might experience
+    #   performance degradation. While the migration takes place, nightly
+    #   backups for the instance are suspended. No other Amazon RDS operations
+    #   can take place for the instance, including modifying the instance,
+    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   for the instance, and creating a DB snapshot of the instance.
     # @option options [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
     #   option group. Changing this parameter does not result in an outage
@@ -2325,7 +2343,12 @@ module Aws::RDS
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance; otherwise
+    #   false.
     # @option options [String] :performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier,
+    #   or the KMS key alias for the KMS encryption key.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2396,7 +2419,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :force_failover
-    #   When `true`, the reboot will be conducted through a MultiAZ failover.
+    #   When `true`, the reboot is conducted through a MultiAZ failover.
     #
     #   Constraint: You cannot specify `true` if the instance is not
     #   configured for MultiAZ.
@@ -2475,17 +2498,17 @@ module Aws::RDS
     #
     #   Constraints: Cannot be specified if RestoreTime parameter is provided.
     # @option options [String] :db_instance_class
-    #   The compute and memory capacity of the Amazon RDS DB instance.
-    #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
-    #   db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large |
-    #   db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge |
-    #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
-    #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
-    #   db.t2.large`
+    #   The compute and memory capacity of the Amazon RDS DB instance, for
+    #   example, `db.m4.large`. Not all DB instance classes are available in
+    #   all regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [Integer] :port
     #   The port number on which the database accepts connections.
     #
@@ -2493,8 +2516,7 @@ module Aws::RDS
     #
     #   Default: The same port as the original DB instance.
     # @option options [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in.
+    #   The EC2 Availability Zone that the database instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
@@ -2530,13 +2552,13 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor version upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     # @option options [String] :license_model
     #   License model information for the restored DB instance.
     #

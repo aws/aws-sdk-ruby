@@ -138,7 +138,7 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] resource_name
-    #   The Amazon RDS resource the tags will be added to. This value is an
+    #   The Amazon RDS resource that the tags are added to. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN,
     #   see [ Constructing an RDS Amazon Resource Name (ARN)][1].
     #
@@ -853,8 +853,8 @@ module Aws::RDS
     #   request must contain the following parameter values:
     #
     #   * `DestinationRegion` - The AWS Region that the encrypted DB
-    #     snapshot will be copied to. This AWS Region is the same one where
-    #     the `CopyDBSnapshot` action is called that contains this presigned
+    #     snapshot is copied to. This AWS Region is the same one where the
+    #     `CopyDBSnapshot` action is called that contains this presigned
     #     URL.
     #
     #     For example, if you copy an encrypted DB snapshot from the
@@ -1112,8 +1112,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` will be
-    #   used.
+    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
     #
     #   Constraints:
     #
@@ -1276,7 +1275,7 @@ module Aws::RDS
     # @!attribute [rw] pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
     #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster will be replicated from. You only need to specify
+    #   the DB cluster is replicated from. You only need to specify
     #   `PreSignedUrl` when you are performing cross-region replication from
     #   an encrypted DB cluster.
     #
@@ -1767,17 +1766,15 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the DB instance. Note that not
-    #   all instance classes are available in all regions for all DB
-    #   engines.
+    #   The compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium |
-    #   db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge |
-    #   db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge |
-    #   db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge |
-    #   db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge |
-    #   db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro |
-    #   db.t2.small | db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1930,9 +1927,9 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in. For information on regions and Availability Zones, see [Regions
-    #   and Availability Zones][1].
+    #   The EC2 Availability Zone that the database instance is created in.
+    #   For information on regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's AWS Region.
@@ -1979,7 +1976,7 @@ module Aws::RDS
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB
     #   instance. If this argument is omitted, the default DBParameterGroup
-    #   for the specified engine will be used.
+    #   for the specified engine is used.
     #
     #   Constraints:
     #
@@ -2174,6 +2171,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.19` (supported in all AWS regions)
+    #
     #   * `5.7.17` (supported in all AWS regions)
     #
     #   * `5.7.16` (supported in all AWS regions)
@@ -2181,6 +2180,8 @@ module Aws::RDS
     #   * `5.7.11` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.37` (supported in all AWS regions)
     #
     #   * `5.6.35` (supported in all AWS regions)
     #
@@ -2193,6 +2194,8 @@ module Aws::RDS
     #
     #
     #
+    #   * `5.5.57` (supported in all AWS regions)
+    #
     #   * `5.5.54` (supported in all AWS regions)
     #
     #   * `5.5.53` (supported in all AWS regions)
@@ -2200,6 +2203,9 @@ module Aws::RDS
     #   * `5.5.46` (supported in all AWS regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -2227,6 +2233,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
@@ -2251,18 +2259,18 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
+    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
+    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
+    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically
-    #   to the DB instance during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to
+    #   the DB instance during the maintenance window.
     #
     #   Default: `true`
     #   @return [Boolean]
@@ -2320,10 +2328,10 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will
-    #   be publicly accessible. If a specific DB subnet group has been
+    #   the PubliclyAccessible value has not been set, the DB instance is
+    #   publicly accessible. If a specific DB subnet group has been
     #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance will be private.
+    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2479,9 +2487,14 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
+    #   True to enable Performance Insights for the DB instance; otherwise
+    #   false.
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
@@ -2603,24 +2616,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the Read Replica. Note that not
-    #   all instance classes are available in all regions for all DB
-    #   engines.
-    #
-    #   Valid Values: `db.m1.small | db.m1.medium | db.m1.large |
-    #   db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #   The compute and memory capacity of the Read Replica, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
     #   Default: Inherits from the source DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Amazon EC2 Availability Zone that the Read Replica will be
-    #   created in.
+    #   The Amazon EC2 Availability Zone that the Read Replica is created
+    #   in.
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's AWS Region.
@@ -2637,8 +2648,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically
-    #   to the Read Replica during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to
+    #   the Read Replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     #   @return [Boolean]
@@ -2649,9 +2660,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
-    #   The option group the DB instance will be associated with. If
-    #   omitted, the default option group for the engine specified will be
-    #   used.
+    #   The option group the DB instance is associated with. If omitted, the
+    #   default option group for the engine specified is used.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -2670,10 +2680,10 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will
-    #   be publicly accessible. If a specific DB subnet group has been
+    #   the PubliclyAccessible value has not been set, the DB instance is
+    #   publicly accessible. If a specific DB subnet group has been
     #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance will be private.
+    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -2682,9 +2692,9 @@ module Aws::RDS
     #
     # @!attribute [rw] db_subnet_group_name
     #   Specifies a DB subnet group for the DB instance. The new DB instance
-    #   will be created in the VPC associated with the DB subnet group. If
-    #   no DB subnet group is specified, then the new DB instance is not
-    #   created in a VPC.
+    #   is created in the VPC associated with the DB subnet group. If no DB
+    #   subnet group is specified, then the new DB instance is not created
+    #   in a VPC.
     #
     #   Constraints:
     #
@@ -2700,9 +2710,9 @@ module Aws::RDS
     #     source DB instance must either:&gt;
     #
     #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas will be created in the same VPC.
+    #       Replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas will be
+    #     * Not specify a DB subnet group. All these Read Replicas are
     #       created outside of any VPC.
     #
     #   Example: `mySubnetgroup`
@@ -2789,9 +2799,9 @@ module Aws::RDS
     #   values:
     #
     #   * `DestinationRegion` - The AWS Region that the encrypted Read
-    #     Replica will be created in. This AWS Region is the same one where
-    #     the `CreateDBInstanceReadReplica` action is called that contains
-    #     this presigned URL.
+    #     Replica is created in. This AWS Region is the same one where the
+    #     `CreateDBInstanceReadReplica` action is called that contains this
+    #     presigned URL.
     #
     #     For example, if you create an encrypted DB instance in the
     #     us-west-1 region, from a source DB instance in the us-east-2
@@ -2842,9 +2852,14 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
+    #   True to enable Performance Insights for the read replica; otherwise
+    #   false.
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -3250,8 +3265,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   The type of source that will be generating the events. For example,
-    #   if you want to be notified of events generated by a DB instance, you
+    #   The type of source that is generating the events. For example, if
+    #   you want to be notified of events generated by a DB instance, you
     #   would set this parameter to db-instance. if this value is not
     #   specified, all events are returned.
     #
@@ -3271,8 +3286,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_ids
-    #   The list of identifiers of the event sources for which events will
-    #   be returned. If not specified, then all sources are included in the
+    #   The list of identifiers of the event sources for which events are
+    #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain
     #   only ASCII letters, digits, and hyphens; it cannot end with a hyphen
     #   or contain two consecutive hyphens.
@@ -3489,7 +3504,7 @@ module Aws::RDS
     #   your DB cluster.
     #
     #   If a failover occurs, and the Aurora Replica that you are connected
-    #   to is promoted to be the primary instance, your connection will be
+    #   to is promoted to be the primary instance, your connection is
     #   dropped. To continue sending your read workload to other Aurora
     #   Replicas in the cluster, you can then reconnect to the reader
     #   endpoint.
@@ -4327,15 +4342,15 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will
-    #   be publicly accessible. If a specific DB subnet group has been
+    #   the PubliclyAccessible value has not been set, the DB instance is
+    #   publicly accessible. If a specific DB subnet group has been
     #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance will be private.
+    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] status_infos
     #   The status of a Read Replica. If the instance is not a Read Replica,
-    #   this will be blank.
+    #   this is blank.
     #   @return [Array<Types::DBInstanceStatusInfo>]
     #
     # @!attribute [rw] storage_type
@@ -4440,9 +4455,14 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_enabled
+    #   True if Performance Insights is enabled for the DB instance;
+    #   otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
@@ -6756,7 +6776,7 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] source_type
-    #   The type of source that will be generating the events.
+    #   The type of source that is generating the events.
     #
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
     #   \| db-snapshot
@@ -6847,9 +6867,8 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] source_identifier
-    #   The identifier of the event source for which events will be
-    #   returned. If not specified, then all sources are included in the
-    #   response.
+    #   The identifier of the event source for which events are returned. If
+    #   not specified, then all sources are included in the response.
     #
     #   Constraints:
     #
@@ -6965,7 +6984,7 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_name
     #   A required parameter. Options available for the given engine name
-    #   will be described.
+    #   are described.
     #   @return [String]
     #
     # @!attribute [rw] major_engine_version
@@ -7606,8 +7625,8 @@ module Aws::RDS
     #
     # @!attribute [rw] number_of_lines
     #   The number of lines to download. If the number of lines specified
-    #   results in a file over 1 MB in size, the file will be truncated at 1
-    #   MB in size.
+    #   results in a file over 1 MB in size, the file is truncated at 1 MB
+    #   in size.
     #
     #   If the NumberOfLines parameter is specified, then the block of lines
     #   returned can be from the beginning or the end of the log file,
@@ -8506,34 +8525,31 @@ module Aws::RDS
     #   IOPS provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
+    #   migration, the DB instance is available for use, but might
     #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance,
-    #   creating a Read Replica for the instance, and creating a DB snapshot
-    #   of the instance.
+    #   nightly backups for the instance are suspended. No other Amazon RDS
+    #   operations can take place for the instance, including modifying the
+    #   instance, rebooting the instance, deleting the instance, creating a
+    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   instance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
-    #   The new compute and memory capacity of the DB instance. To determine
-    #   the instance classes that are available for a particular DB engine,
-    #   use the DescribeOrderableDBInstanceOptions action. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The new compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
-    #   Passing a value for this setting causes an outage during the change
-    #   and is applied during the next maintenance window, unless
-    #   `ApplyImmediately` is specified as `true` for this request.
+    #   If you modify the DB instance class, an outage occurs during the
+    #   change. The change is applied during the next maintenance window,
+    #   unless `ApplyImmediately` is specified as `true` for this request.
     #
     #   Default: Uses existing setting
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium |
-    #   db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge |
-    #   db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge |
-    #   db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge |
-    #   db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge |
-    #   db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro |
-    #   db.t2.small | db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -8594,12 +8610,12 @@ module Aws::RDS
     #
     #   If this parameter is set to `false`, changes to the DB instance are
     #   applied during the next maintenance window. Some parameter changes
-    #   can cause an outage and will be applied on the next call to
+    #   can cause an outage and are applied on the next call to
     #   RebootDBInstance, or the next failure reboot. Review the table of
     #   parameters in [Modifying a DB Instance and Using the Apply
     #   Immediately Parameter][1] to see the impact that setting
     #   `ApplyImmediately` to `true` or `false` has for each modified
-    #   parameter and to determine when the changes will be applied.
+    #   parameter and to determine when the changes are applied.
     #
     #   Default: `false`
     #
@@ -8781,8 +8797,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically
-    #   to the DB instance during the maintenance window. Changing this
+    #   Indicates that minor version upgrades are applied automatically to
+    #   the DB instance during the maintenance window. Changing this
     #   parameter does not result in an outage except in the following case
     #   and the change is asynchronously applied as soon as possible. An
     #   outage will result if this parameter is set to `true` during the
@@ -8827,13 +8843,13 @@ module Aws::RDS
     #   IOPS provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
+    #   migration, the DB instance is available for use, but might
     #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance,
-    #   creating a Read Replica for the instance, and creating a DB snapshot
-    #   of the instance.
+    #   nightly backups for the instance are suspended. No other Amazon RDS
+    #   operations can take place for the instance, including modifying the
+    #   instance, rebooting the instance, deleting the instance, creating a
+    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   instance.
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
@@ -9046,9 +9062,14 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
+    #   True to enable Performance Insights for the DB instance; otherwise
+    #   false.
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
@@ -9400,8 +9421,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   The type of source that will be generating the events. For example,
-    #   if you want to be notified of events generated by a DB instance, you
+    #   The type of source that is generating the events. For example, if
+    #   you want to be notified of events generated by a DB instance, you
     #   would set this parameter to db-instance. if this value is not
     #   specified, all events are returned.
     #
@@ -9992,70 +10013,93 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Contains a list of available options for a DB instance
+    # Contains a list of available options for a DB instance.
     #
     # This data type is used as a response element in the
     # DescribeOrderableDBInstanceOptions action.
     #
     # @!attribute [rw] engine
-    #   The engine type of the orderable DB instance.
+    #   The engine type of a DB instance.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The engine version of the orderable DB instance.
+    #   The engine version of a DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The DB instance class for the orderable DB instance.
+    #   The DB instance class for a DB instance.
     #   @return [String]
     #
     # @!attribute [rw] license_model
-    #   The license model for the orderable DB instance.
+    #   The license model for a DB instance.
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   A list of Availability Zones for the orderable DB instance.
+    #   A list of Availability Zones for a DB instance.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] multi_az_capable
-    #   Indicates whether this orderable DB instance is multi-AZ capable.
+    #   Indicates whether a DB instance is Multi-AZ capable.
     #   @return [Boolean]
     #
     # @!attribute [rw] read_replica_capable
-    #   Indicates whether this orderable DB instance can have a Read
-    #   Replica.
+    #   Indicates whether a DB instance can have a Read Replica.
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc
-    #   Indicates whether this is a VPC orderable DB instance.
+    #   Indicates whether a DB instance is in a VPC.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_storage_encryption
-    #   Indicates whether this orderable DB instance supports encrypted
-    #   storage.
+    #   Indicates whether a DB instance supports encrypted storage.
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_type
-    #   Indicates the storage type for this orderable DB instance.
+    #   Indicates the storage type for a DB instance.
     #   @return [String]
     #
     # @!attribute [rw] supports_iops
-    #   Indicates whether this orderable DB instance supports provisioned
-    #   IOPS.
+    #   Indicates whether a DB instance supports provisioned IOPS.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_enhanced_monitoring
-    #   Indicates whether the DB instance supports enhanced monitoring at
+    #   Indicates whether a DB instance supports Enhanced Monitoring at
     #   intervals from 1 to 60 seconds.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_iam_database_authentication
-    #   Indicates whether this orderable DB instance supports IAM database
+    #   Indicates whether a DB instance supports IAM database
     #   authentication.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_performance_insights
+    #   True if a DB instance supports Performance Insights, otherwise
+    #   false.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] min_storage_size
+    #   Minimum storage size for a DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_storage_size
+    #   Maximum storage size for a DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_iops_per_db_instance
+    #   Minimum total provisioned IOPS for a DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_iops_per_db_instance
+    #   Maximum total provisioned IOPS for a DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_iops_per_gib
+    #   Minimum provisioned IOPS per GiB for a DB instance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_iops_per_gib
+    #   Maximum provisioned IOPS per GiB for a DB instance.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
@@ -10073,7 +10117,13 @@ module Aws::RDS
       :supports_iops,
       :supports_enhanced_monitoring,
       :supports_iam_database_authentication,
-      :supports_performance_insights)
+      :supports_performance_insights,
+      :min_storage_size,
+      :max_storage_size,
+      :min_iops_per_db_instance,
+      :max_iops_per_db_instance,
+      :min_iops_per_gib,
+      :max_iops_per_gib)
       include Aws::Structure
     end
 
@@ -10189,15 +10239,15 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date
-    #   The date of the maintenance window when the action will be applied.
-    #   The maintenance action will be applied to the resource during its
-    #   first maintenance window after this date. If this date is specified,
-    #   any `next-maintenance` opt-in requests are ignored.
+    #   The date of the maintenance window when the action is applied. The
+    #   maintenance action is applied to the resource during its first
+    #   maintenance window after this date. If this date is specified, any
+    #   `next-maintenance` opt-in requests are ignored.
     #   @return [Time]
     #
     # @!attribute [rw] forced_apply_date
-    #   The date when the maintenance action will be automatically applied.
-    #   The maintenance action will be applied to the resource on this date
+    #   The date when the maintenance action is automatically applied. The
+    #   maintenance action is applied to the resource on this date
     #   regardless of the maintenance window for the resource. If this date
     #   is specified, any `immediate` opt-in requests are ignored.
     #   @return [Time]
@@ -10208,9 +10258,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] current_apply_date
-    #   The effective date when the pending maintenance action will be
-    #   applied to the resource. This date takes into account opt-in
-    #   requests received from the ApplyPendingMaintenanceAction API, the
+    #   The effective date when the pending maintenance action is applied to
+    #   the resource. This date takes into account opt-in requests received
+    #   from the ApplyPendingMaintenanceAction API, the
     #   `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is
     #   blank if an opt-in request has not been received and nothing has
     #   been specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.
@@ -10258,17 +10308,17 @@ module Aws::RDS
     #
     # @!attribute [rw] db_instance_class
     #   Contains the new `DBInstanceClass` for the DB instance that will be
-    #   applied or is in progress.
+    #   applied or is currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
     #   Contains the new `AllocatedStorage` size for the DB instance that
-    #   will be applied or is in progress.
+    #   will be applied or is currently being applied.
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   Contains the pending or in-progress change of the master credentials
-    #   for the DB instance.
+    #   Contains the pending or currently-in-progress change of the master
+    #   credentials for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -10298,12 +10348,12 @@ module Aws::RDS
     #
     # @!attribute [rw] iops
     #   Specifies the new Provisioned IOPS value for the DB instance that
-    #   will be applied or is being applied.
+    #   will be applied or is currently being applied.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
     #   Contains the new `DBInstanceIdentifier` for the DB instance that
-    #   will be applied or is in progress.
+    #   will be applied or is currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
@@ -10593,8 +10643,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] force_failover
-    #   When `true`, the reboot will be conducted through a MultiAZ
-    #   failover.
+    #   When `true`, the reboot is conducted through a MultiAZ failover.
     #
     #   Constraint: You cannot specify `true` if the instance is not
     #   configured for MultiAZ.
@@ -10727,8 +10776,8 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] resource_name
-    #   The Amazon RDS resource the tags will be removed from. This value is
-    #   an Amazon Resource Name (ARN). For information about creating an
+    #   The Amazon RDS resource that the tags are removed from. This value
+    #   is an Amazon Resource Name (ARN). For information about creating an
     #   ARN, see [ Constructing an RDS Amazon Resource Name (ARN)][1].
     #
     #
@@ -11158,7 +11207,7 @@ module Aws::RDS
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the
     #   restored DB cluster. If this argument is omitted,
-    #   `default.aurora5.6` will be used.
+    #   `default.aurora5.6` is used.
     #
     #   Constraints:
     #
@@ -11714,8 +11763,8 @@ module Aws::RDS
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
     #   with a KMS key that is different than the KMS key used to encrypt
-    #   the source DB cluster. The new DB cluster will be encrypted with the
-    #   KMS key identified by the `KmsKeyId` parameter.
+    #   the source DB cluster. The new DB cluster is encrypted with the KMS
+    #   key identified by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
@@ -11844,15 +11893,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the Amazon RDS DB instance.
+    #   The compute and memory capacity of the Amazon RDS DB instance, for
+    #   example, `db.m4.large`. Not all DB instance classes are available in
+    #   all regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium |
-    #   db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #   Default: The same DBInstanceClass as the original DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -11864,8 +11915,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in.
+    #   The EC2 Availability Zone that the database instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
@@ -11907,15 +11957,15 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will
-    #   be publicly accessible. If a specific DB subnet group has been
+    #   the PubliclyAccessible value has not been set, the DB instance is
+    #   publicly accessible. If a specific DB subnet group has been
     #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance will be private.
+    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically
-    #   to the DB instance during the maintenance window.
+    #   Indicates that minor version upgrades are applied automatically to
+    #   the DB instance during the maintenance window.
     #   @return [Boolean]
     #
     # @!attribute [rw] license_model
@@ -11974,18 +12024,20 @@ module Aws::RDS
     # @!attribute [rw] iops
     #   Specifies the amount of provisioned IOPS for the DB instance,
     #   expressed in I/O operations per second. If this parameter is not
-    #   specified, the IOPS value will be taken from the backup. If this
-    #   parameter is set to 0, the new instance will be converted to a
-    #   non-PIOPS instance, which will take additional time, though your DB
-    #   instance will be available for connections before the conversion
-    #   starts.
+    #   specified, the IOPS value is taken from the backup. If this
+    #   parameter is set to 0, the new instance is converted to a non-PIOPS
+    #   instance. The conversion takes additional time, though your DB
+    #   instance is available for connections before the conversion starts.
+    #
+    #   The provisioned IOPS value must follow the requirements for your
+    #   database engine. For more information, see [Amazon RDS Provisioned
+    #   IOPS Storage to Improve Performance][1].
     #
     #   Constraints: Must be an integer greater than 1000.
     #
-    #   **SQL Server**
     #
-    #   Setting the IOPS value for the SQL Server database engine is not
-    #   supported.
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
@@ -12190,17 +12242,17 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the Amazon RDS DB instance.
-    #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium |
-    #   db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #   The compute and memory capacity of the Amazon RDS DB instance, for
+    #   example, `db.m4.large`. Not all DB instance classes are available in
+    #   all regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -12212,8 +12264,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in.
+    #   The EC2 Availability Zone that the database instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
@@ -12255,15 +12306,15 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will
-    #   be publicly accessible. If a specific DB subnet group has been
+    #   the PubliclyAccessible value has not been set, the DB instance is
+    #   publicly accessible. If a specific DB subnet group has been
     #   specified as part of the request and the PubliclyAccessible value
-    #   has not been set, the DB instance will be private.
+    #   has not been set, the DB instance is private.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically
-    #   to the DB instance during the maintenance window.
+    #   Indicates that minor version upgrades are applied automatically to
+    #   the DB instance during the maintenance window.
     #   @return [Boolean]
     #
     # @!attribute [rw] license_model
@@ -12778,14 +12829,13 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] auto_upgrade
-    #   A value that indicates whether the target version will be applied to
-    #   any source DB instances that have AutoMinorVersionUpgrade set to
-    #   true.
+    #   A value that indicates whether the target version is applied to any
+    #   source DB instances that have AutoMinorVersionUpgrade set to true.
     #   @return [Boolean]
     #
     # @!attribute [rw] is_major_version_upgrade
-    #   A value that indicates whether a database engine will be upgraded to
-    #   a major version.
+    #   A value that indicates whether a database engine is upgraded to a
+    #   major version.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation

@@ -19,6 +19,7 @@ module Aws::S3
     AccelerateConfiguration = Shapes::StructureShape.new(name: 'AccelerateConfiguration')
     AcceptRanges = Shapes::StringShape.new(name: 'AcceptRanges')
     AccessControlPolicy = Shapes::StructureShape.new(name: 'AccessControlPolicy')
+    AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AllowedHeader = Shapes::StringShape.new(name: 'AllowedHeader')
     AllowedHeaders = Shapes::ListShape.new(name: 'AllowedHeaders', flattened: true)
@@ -63,6 +64,7 @@ module Aws::S3
     CompletedPart = Shapes::StructureShape.new(name: 'CompletedPart')
     CompletedPartList = Shapes::ListShape.new(name: 'CompletedPartList', flattened: true)
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    ConfirmRemoveSelfBucketAccess = Shapes::BooleanShape.new(name: 'ConfirmRemoveSelfBucketAccess')
     ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
     ContentEncoding = Shapes::StringShape.new(name: 'ContentEncoding')
     ContentLanguage = Shapes::StringShape.new(name: 'ContentLanguage')
@@ -96,6 +98,7 @@ module Aws::S3
     Delete = Shapes::StructureShape.new(name: 'Delete')
     DeleteBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketAnalyticsConfigurationRequest')
     DeleteBucketCorsRequest = Shapes::StructureShape.new(name: 'DeleteBucketCorsRequest')
+    DeleteBucketEncryptionRequest = Shapes::StructureShape.new(name: 'DeleteBucketEncryptionRequest')
     DeleteBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketInventoryConfigurationRequest')
     DeleteBucketLifecycleRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleRequest')
     DeleteBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetricsConfigurationRequest')
@@ -122,6 +125,7 @@ module Aws::S3
     ETag = Shapes::StringShape.new(name: 'ETag')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
@@ -147,6 +151,8 @@ module Aws::S3
     GetBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketAnalyticsConfigurationRequest')
     GetBucketCorsOutput = Shapes::StructureShape.new(name: 'GetBucketCorsOutput')
     GetBucketCorsRequest = Shapes::StructureShape.new(name: 'GetBucketCorsRequest')
+    GetBucketEncryptionOutput = Shapes::StructureShape.new(name: 'GetBucketEncryptionOutput')
+    GetBucketEncryptionRequest = Shapes::StructureShape.new(name: 'GetBucketEncryptionRequest')
     GetBucketInventoryConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationOutput')
     GetBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationRequest')
     GetBucketLifecycleConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketLifecycleConfigurationOutput')
@@ -206,6 +212,7 @@ module Aws::S3
     InventoryConfiguration = Shapes::StructureShape.new(name: 'InventoryConfiguration')
     InventoryConfigurationList = Shapes::ListShape.new(name: 'InventoryConfigurationList', flattened: true)
     InventoryDestination = Shapes::StructureShape.new(name: 'InventoryDestination')
+    InventoryEncryption = Shapes::StructureShape.new(name: 'InventoryEncryption')
     InventoryFilter = Shapes::StructureShape.new(name: 'InventoryFilter')
     InventoryFormat = Shapes::StringShape.new(name: 'InventoryFormat')
     InventoryFrequency = Shapes::StringShape.new(name: 'InventoryFrequency')
@@ -302,6 +309,7 @@ module Aws::S3
     ObjectVersionList = Shapes::ListShape.new(name: 'ObjectVersionList', flattened: true)
     ObjectVersionStorageClass = Shapes::StringShape.new(name: 'ObjectVersionStorageClass')
     Owner = Shapes::StructureShape.new(name: 'Owner')
+    OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
     Part = Shapes::StructureShape.new(name: 'Part')
     PartNumber = Shapes::IntegerShape.new(name: 'PartNumber')
     PartNumberMarker = Shapes::IntegerShape.new(name: 'PartNumberMarker')
@@ -316,6 +324,7 @@ module Aws::S3
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
     PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
     PutBucketCorsRequest = Shapes::StructureShape.new(name: 'PutBucketCorsRequest')
+    PutBucketEncryptionRequest = Shapes::StructureShape.new(name: 'PutBucketEncryptionRequest')
     PutBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketInventoryConfigurationRequest')
     PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
     PutBucketLifecycleRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleRequest')
@@ -345,6 +354,7 @@ module Aws::S3
     RedirectAllRequestsTo = Shapes::StructureShape.new(name: 'RedirectAllRequestsTo')
     ReplaceKeyPrefixWith = Shapes::StringShape.new(name: 'ReplaceKeyPrefixWith')
     ReplaceKeyWith = Shapes::StringShape.new(name: 'ReplaceKeyWith')
+    ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
@@ -372,9 +382,18 @@ module Aws::S3
     SSECustomerAlgorithm = Shapes::StringShape.new(name: 'SSECustomerAlgorithm')
     SSECustomerKey = Shapes::StringShape.new(name: 'SSECustomerKey')
     SSECustomerKeyMD5 = Shapes::StringShape.new(name: 'SSECustomerKeyMD5')
+    SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
+    SSES3 = Shapes::StructureShape.new(name: 'SSES3')
     ServerSideEncryption = Shapes::StringShape.new(name: 'ServerSideEncryption')
+    ServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'ServerSideEncryptionByDefault')
+    ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
+    ServerSideEncryptionRule = Shapes::StructureShape.new(name: 'ServerSideEncryptionRule')
+    ServerSideEncryptionRules = Shapes::ListShape.new(name: 'ServerSideEncryptionRules', flattened: true)
     Size = Shapes::IntegerShape.new(name: 'Size')
+    SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
+    SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
+    SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
     StartAfter = Shapes::StringShape.new(name: 'StartAfter')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageClassAnalysis = Shapes::StructureShape.new(name: 'StorageClassAnalysis')
@@ -431,6 +450,9 @@ module Aws::S3
     AccessControlPolicy.add_member(:grants, Shapes::ShapeRef.new(shape: Grants, location_name: "AccessControlList"))
     AccessControlPolicy.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     AccessControlPolicy.struct_class = Types::AccessControlPolicy
+
+    AccessControlTranslation.add_member(:owner, Shapes::ShapeRef.new(shape: OwnerOverride, required: true, location_name: "Owner"))
+    AccessControlTranslation.struct_class = Types::AccessControlTranslation
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: AllowedHeader)
 
@@ -654,6 +676,9 @@ module Aws::S3
     DeleteBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     DeleteBucketCorsRequest.struct_class = Types::DeleteBucketCorsRequest
 
+    DeleteBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    DeleteBucketEncryptionRequest.struct_class = Types::DeleteBucketEncryptionRequest
+
     DeleteBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     DeleteBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
     DeleteBucketInventoryConfigurationRequest.struct_class = Types::DeleteBucketInventoryConfigurationRequest
@@ -731,8 +756,14 @@ module Aws::S3
     DeletedObjects.member = Shapes::ShapeRef.new(shape: DeletedObject)
 
     Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    Destination.add_member(:account, Shapes::ShapeRef.new(shape: AccountId, location_name: "Account"))
     Destination.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    Destination.add_member(:access_control_translation, Shapes::ShapeRef.new(shape: AccessControlTranslation, location_name: "AccessControlTranslation"))
+    Destination.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     Destination.struct_class = Types::Destination
+
+    EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     Error.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
     Error.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
@@ -782,6 +813,14 @@ module Aws::S3
 
     GetBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     GetBucketCorsRequest.struct_class = Types::GetBucketCorsRequest
+
+    GetBucketEncryptionOutput.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    GetBucketEncryptionOutput.struct_class = Types::GetBucketEncryptionOutput
+    GetBucketEncryptionOutput[:payload] = :server_side_encryption_configuration
+    GetBucketEncryptionOutput[:payload_member] = GetBucketEncryptionOutput.member(:server_side_encryption_configuration)
+
+    GetBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetBucketEncryptionRequest.struct_class = Types::GetBucketEncryptionRequest
 
     GetBucketInventoryConfigurationOutput.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration"))
     GetBucketInventoryConfigurationOutput.struct_class = Types::GetBucketInventoryConfigurationOutput
@@ -1040,6 +1079,10 @@ module Aws::S3
     InventoryDestination.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: InventoryS3BucketDestination, required: true, location_name: "S3BucketDestination"))
     InventoryDestination.struct_class = Types::InventoryDestination
 
+    InventoryEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3, location_name: "SSE-S3"))
+    InventoryEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMS, location_name: "SSE-KMS"))
+    InventoryEncryption.struct_class = Types::InventoryEncryption
+
     InventoryFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
     InventoryFilter.struct_class = Types::InventoryFilter
 
@@ -1049,6 +1092,7 @@ module Aws::S3
     InventoryS3BucketDestination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     InventoryS3BucketDestination.add_member(:format, Shapes::ShapeRef.new(shape: InventoryFormat, required: true, location_name: "Format"))
     InventoryS3BucketDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    InventoryS3BucketDestination.add_member(:encryption, Shapes::ShapeRef.new(shape: InventoryEncryption, location_name: "Encryption"))
     InventoryS3BucketDestination.struct_class = Types::InventoryS3BucketDestination
 
     InventorySchedule.add_member(:frequency, Shapes::ShapeRef.new(shape: InventoryFrequency, required: true, location_name: "Frequency"))
@@ -1371,6 +1415,13 @@ module Aws::S3
     PutBucketCorsRequest[:payload] = :cors_configuration
     PutBucketCorsRequest[:payload_member] = PutBucketCorsRequest.member(:cors_configuration)
 
+    PutBucketEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    PutBucketEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketEncryptionRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, required: true, location_name: "ServerSideEncryptionConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketEncryptionRequest.struct_class = Types::PutBucketEncryptionRequest
+    PutBucketEncryptionRequest[:payload] = :server_side_encryption_configuration
+    PutBucketEncryptionRequest[:payload_member] = PutBucketEncryptionRequest.member(:server_side_encryption_configuration)
+
     PutBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
     PutBucketInventoryConfigurationRequest.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, required: true, location_name: "InventoryConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1420,6 +1471,7 @@ module Aws::S3
 
     PutBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketPolicyRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketPolicyRequest.add_member(:confirm_remove_self_bucket_access, Shapes::ShapeRef.new(shape: ConfirmRemoveSelfBucketAccess, location: "header", location_name: "x-amz-confirm-remove-self-bucket-access"))
     PutBucketPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutBucketPolicyRequest.struct_class = Types::PutBucketPolicyRequest
     PutBucketPolicyRequest[:payload] = :policy
@@ -1564,6 +1616,7 @@ module Aws::S3
     ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
     ReplicationRule.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationRuleStatus, required: true, location_name: "Status"))
+    ReplicationRule.add_member(:source_selection_criteria, Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
     ReplicationRule.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
     ReplicationRule.struct_class = Types::ReplicationRule
 
@@ -1608,6 +1661,29 @@ module Aws::S3
 
     S3KeyFilter.add_member(:filter_rules, Shapes::ShapeRef.new(shape: FilterRuleList, location_name: "FilterRule"))
     S3KeyFilter.struct_class = Types::S3KeyFilter
+
+    SSEKMS.add_member(:key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, required: true, location_name: "KeyId"))
+    SSEKMS.struct_class = Types::SSEKMS
+
+    SSES3.struct_class = Types::SSES3
+
+    ServerSideEncryptionByDefault.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: ServerSideEncryption, required: true, location_name: "SSEAlgorithm"))
+    ServerSideEncryptionByDefault.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSMasterKeyID"))
+    ServerSideEncryptionByDefault.struct_class = Types::ServerSideEncryptionByDefault
+
+    ServerSideEncryptionConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ServerSideEncryptionRules, required: true, location_name: "Rule"))
+    ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
+
+    ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, Shapes::ShapeRef.new(shape: ServerSideEncryptionByDefault, location_name: "ApplyServerSideEncryptionByDefault"))
+    ServerSideEncryptionRule.struct_class = Types::ServerSideEncryptionRule
+
+    ServerSideEncryptionRules.member = Shapes::ShapeRef.new(shape: ServerSideEncryptionRule)
+
+    SourceSelectionCriteria.add_member(:sse_kms_encrypted_objects, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjects, location_name: "SseKmsEncryptedObjects"))
+    SourceSelectionCriteria.struct_class = Types::SourceSelectionCriteria
+
+    SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
+    SseKmsEncryptedObjects.struct_class = Types::SseKmsEncryptedObjects
 
     StorageClassAnalysis.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))
     StorageClassAnalysis.struct_class = Types::StorageClassAnalysis
@@ -1796,6 +1872,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBucketEncryption"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/{Bucket}?encryption"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBucketEncryptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:delete_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBucketInventoryConfiguration"
         o.http_method = "DELETE"
@@ -1906,6 +1990,14 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}?cors"
         o.input = Shapes::ShapeRef.new(shape: GetBucketCorsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBucketCorsOutput)
+      end)
+
+      api.add_operation(:get_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketEncryption"
+        o.http_method = "GET"
+        o.http_request_uri = "/{Bucket}?encryption"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketEncryptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketEncryptionOutput)
       end)
 
       api.add_operation(:get_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2213,6 +2305,14 @@ module Aws::S3
         o.http_method = "PUT"
         o.http_request_uri = "/{Bucket}?cors"
         o.input = Shapes::ShapeRef.new(shape: PutBucketCorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:put_bucket_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketEncryption"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Bucket}?encryption"
+        o.input = Shapes::ShapeRef.new(shape: PutBucketEncryptionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 

@@ -433,6 +433,14 @@ module Aws::S3
       )
     end
 
+    # @return [BucketLifecycleConfiguration]
+    def lifecycle_configuration
+      BucketLifecycleConfiguration.new(
+        bucket_name: @name,
+        client: @client
+      )
+    end
+
     # @return [BucketLogging]
     def logging
       BucketLogging.new(

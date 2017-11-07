@@ -19,6 +19,7 @@ require_relative 'aws-sdk-s3/bucket'
 require_relative 'aws-sdk-s3/bucket_acl'
 require_relative 'aws-sdk-s3/bucket_cors'
 require_relative 'aws-sdk-s3/bucket_lifecycle'
+require_relative 'aws-sdk-s3/bucket_lifecycle_configuration'
 require_relative 'aws-sdk-s3/bucket_logging'
 require_relative 'aws-sdk-s3/bucket_notification'
 require_relative 'aws-sdk-s3/bucket_policy'
@@ -61,6 +62,6 @@ require_relative 'aws-sdk-s3/customizations'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end

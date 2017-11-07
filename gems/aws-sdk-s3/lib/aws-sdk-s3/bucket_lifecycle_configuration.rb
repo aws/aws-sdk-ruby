@@ -6,7 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
-  class BucketPolicy
+  class BucketLifecycleConfiguration
 
     extend Aws::Deprecations
 
@@ -30,10 +30,9 @@ module Aws::S3
       @bucket_name
     end
 
-    # The bucket policy as a JSON document.
-    # @return [IO]
-    def policy
-      data[:policy]
+    # @return [Array<Types::LifecycleRule>]
+    def rules
+      data[:rules]
     end
 
     # @!endgroup
@@ -43,22 +42,22 @@ module Aws::S3
       @client
     end
 
-    # Loads, or reloads {#data} for the current {BucketPolicy}.
+    # Loads, or reloads {#data} for the current {BucketLifecycleConfiguration}.
     # Returns `self` making it possible to chain methods.
     #
-    #     bucket_policy.reload.data
+    #     bucket_lifecycle_configuration.reload.data
     #
     # @return [self]
     def load
-      resp = @client.get_bucket_policy(bucket: @bucket_name)
+      resp = @client.get_bucket_lifecycle_configuration(bucket: @bucket_name)
       @data = resp.data
       self
     end
     alias :reload :load
 
-    # @return [Types::GetBucketPolicyOutput]
-    #   Returns the data for this {BucketPolicy}. Calls
-    #   {Client#get_bucket_policy} if {#data_loaded?} is `false`.
+    # @return [Types::GetBucketLifecycleConfigurationOutput]
+    #   Returns the data for this {BucketLifecycleConfiguration}. Calls
+    #   {Client#get_bucket_lifecycle_configuration} if {#data_loaded?} is `false`.
     def data
       load unless @data
       @data
@@ -170,33 +169,74 @@ module Aws::S3
 
     # @example Request syntax with placeholder values
     #
-    #   bucket_policy.delete()
+    #   bucket_lifecycle_configuration.delete()
     # @param [Hash] options ({})
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = @client.delete_bucket_policy(options)
+      resp = @client.delete_bucket_lifecycle(options)
       resp.data
     end
 
     # @example Request syntax with placeholder values
     #
-    #   bucket_policy.put({
-    #     content_md5: "ContentMD5",
-    #     confirm_remove_self_bucket_access: false,
-    #     policy: "Policy", # required
+    #   bucket_lifecycle_configuration.put({
+    #     lifecycle_configuration: {
+    #       rules: [ # required
+    #         {
+    #           expiration: {
+    #             date: Time.now,
+    #             days: 1,
+    #             expired_object_delete_marker: false,
+    #           },
+    #           id: "ID",
+    #           prefix: "Prefix",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           transitions: [
+    #             {
+    #               date: Time.now,
+    #               days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             },
+    #           ],
+    #           noncurrent_version_transitions: [
+    #             {
+    #               noncurrent_days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             },
+    #           ],
+    #           noncurrent_version_expiration: {
+    #             noncurrent_days: 1,
+    #           },
+    #           abort_incomplete_multipart_upload: {
+    #             days_after_initiation: 1,
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :content_md5
-    # @option options [Boolean] :confirm_remove_self_bucket_access
-    #   Set this parameter to true to confirm that you want to remove your
-    #   permissions to change this bucket policy in the future.
-    # @option options [required, String] :policy
-    #   The bucket policy as a JSON document.
+    # @option options [Types::BucketLifecycleConfiguration] :lifecycle_configuration
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = @client.put_bucket_policy(options)
+      resp = @client.put_bucket_lifecycle_configuration(options)
       resp.data
     end
 

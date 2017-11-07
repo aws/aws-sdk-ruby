@@ -95,8 +95,7 @@ module Aws::RDS
     #   Example: `my-cluster1`
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` will be
-    #   used.
+    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
     #
     #   Constraints:
     #
@@ -227,7 +226,7 @@ module Aws::RDS
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
     #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster will be replicated from. You only need to specify
+    #   the DB cluster is replicated from. You only need to specify
     #   `PreSignedUrl` when you are performing cross-region replication from
     #   an encrypted DB cluster.
     #
@@ -553,16 +552,15 @@ module Aws::RDS
     #
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this instance.
     #
@@ -701,9 +699,9 @@ module Aws::RDS
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in. For information on regions and Availability Zones, see [Regions
-    #   and Availability Zones][1].
+    #   The EC2 Availability Zone that the database instance is created in.
+    #   For information on regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -744,7 +742,7 @@ module Aws::RDS
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #   If this argument is omitted, the default DBParameterGroup for the
-    #   specified engine will be used.
+    #   specified engine is used.
     #
     #   Constraints:
     #
@@ -921,6 +919,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.19` (supported in all AWS regions)
+    #
     #   * `5.7.17` (supported in all AWS regions)
     #
     #   * `5.7.16` (supported in all AWS regions)
@@ -928,6 +928,8 @@ module Aws::RDS
     #   * `5.7.11` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.37` (supported in all AWS regions)
     #
     #   * `5.6.35` (supported in all AWS regions)
     #
@@ -940,6 +942,8 @@ module Aws::RDS
     #
     #
     #
+    #   * `5.5.57` (supported in all AWS regions)
+    #
     #   * `5.5.54` (supported in all AWS regions)
     #
     #   * `5.5.53` (supported in all AWS regions)
@@ -947,6 +951,9 @@ module Aws::RDS
     #   * `5.5.46` (supported in all AWS regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -974,6 +981,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
@@ -998,16 +1007,16 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
+    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
+    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
+    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
     # @option options [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     #
     #   Default: `true`
     # @option options [String] :license_model
@@ -1055,10 +1064,10 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [String] :db_cluster_identifier
@@ -1181,7 +1190,12 @@ module Aws::RDS
     #
     #   Default: `false`
     # @option options [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance; otherwise
+    #   false.
     # @option options [String] :performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier,
+    #   or the KMS key alias for the KMS encryption key.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)
@@ -1345,10 +1359,10 @@ module Aws::RDS
     #   notification. The ARN is created by Amazon SNS when you create a topic
     #   and subscribe to it.
     # @option options [String] :source_type
-    #   The type of source that will be generating the events. For example, if
-    #   you want to be notified of events generated by a DB instance, you
-    #   would set this parameter to db-instance. if this value is not
-    #   specified, all events are returned.
+    #   The type of source that is generating the events. For example, if you
+    #   want to be notified of events generated by a DB instance, you would
+    #   set this parameter to db-instance. if this value is not specified, all
+    #   events are returned.
     #
     #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
@@ -1362,7 +1376,7 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     # @option options [Array<String>] :source_ids
-    #   The list of identifiers of the event sources for which events will be
+    #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain only
     #   ASCII letters, digits, and hyphens; it cannot end with a hyphen or
@@ -2093,7 +2107,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :source_type
-    #   The type of source that will be generating the events.
+    #   The type of source that is generating the events.
     #
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
     #   \| db-snapshot
@@ -2179,8 +2193,8 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :source_identifier
-    #   The identifier of the event source for which events will be returned.
-    #   If not specified, then all sources are included in the response.
+    #   The identifier of the event source for which events are returned. If
+    #   not specified, then all sources are included in the response.
     #
     #   Constraints:
     #
