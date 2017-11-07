@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.80 (2017-11-07)
+------------------
+
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
