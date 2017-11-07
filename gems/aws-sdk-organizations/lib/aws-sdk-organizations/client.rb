@@ -549,13 +549,14 @@ module Aws::Organizations
     # The user in the master account who calls this API must also have the
     # `iam:CreateRole` permission because AWS Organizations preconfigures
     # the new member account with a role (named
-    # `OrganizationAccountAccessRole` by default) that grants users in the
-    # master account administrator permissions in the new member account.
+    # `OrganizationAccountAccessRole`) that grants users in the master
+    # account administrator permissions in the new member account.
     # Principals in the master account can assume the role. AWS
     # Organizations clones the company name and address information for the
     # new account from the organization's master account.
     #
-    #
+    # This operation can be called only from the organization's master
+    # account.
     #
     # For more information about creating accounts, see [Creating an AWS
     # Account in Your Organization][2] in the *AWS Organizations User
@@ -581,9 +582,6 @@ module Aws::Organizations
     # and Tools][4].
     #
     #  </note>
-    #
-    # This operation can be called only from the organization's master
-    # account.
     #
     # If you get an exception that indicates that you exceeded your account
     # limits for the organization or that you can"t add an account because
@@ -2332,6 +2330,9 @@ module Aws::Organizations
     # and not in any child OUs. To get a list of all accounts in the
     # organization, use the ListAccounts operation.
     #
+    # This operation can be called only from the organization's master
+    # account.
+    #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or organization unit
     #   (OU) whose accounts you want to list.
@@ -2424,6 +2425,9 @@ module Aws::Organizations
     # Lists all of the OUs or accounts that are contained in the specified
     # parent OU or root. This operation, along with ListParents enables you
     # to traverse the tree structure that makes up this root.
+    #
+    # This operation can be called only from the organization's master
+    # account.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
@@ -3900,7 +3904,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.2.0 (2017-11-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pricing` gem.
+
 3.1.0 (2017-09-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2017-11-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Pricing`.
+
 1.30.0 (2017-11-03)
 ------------------
 

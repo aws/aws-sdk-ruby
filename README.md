@@ -335,6 +335,7 @@ to be backwards compatible.
 | AWS OpsWorks                        | Aws::OpsWorks                      | aws-sdk-opsworks                      | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                    | aws-sdk-opsworkscm                    | 2016-11-01  |
 | AWS Organizations                   | Aws::Organizations                 | aws-sdk-organizations                 | 2016-11-28  |
+| AWS Price List Service              | Aws::Pricing                       | aws-sdk-pricing                       | 2017-10-15  |
 | AWS Resource Groups Tagging API     | Aws::ResourceGroupsTaggingAPI      | aws-sdk-resourcegroupstaggingapi      | 2017-01-26  |
 | AWS Security Token Service          | Aws::STS                           | aws-sdk-core                          | 2011-06-15  |
 | AWS Server Migration Service        | Aws::SMS                           | aws-sdk-sms                           | 2016-10-24  |
@@ -402,8 +403,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                    | aws-sdk-workspaces                    | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling        | aws-sdk-applicationautoscaling        | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                   | aws-sdk-autoscaling                   | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2        | aws-sdk-elasticloadbalancingv2        | 2015-12-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancing          | aws-sdk-elasticloadbalancing          | 2012-06-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2        | aws-sdk-elasticloadbalancingv2        | 2015-12-01  |
 
 ## License
 

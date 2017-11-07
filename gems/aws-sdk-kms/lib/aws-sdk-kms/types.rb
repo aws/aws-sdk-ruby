@@ -42,16 +42,17 @@ module Aws::KMS
     #   The unique identifier for the customer master key (CMK) for which to
     #   cancel deletion.
     #
-    #   To specify this value, use the unique key ID or the Amazon Resource
-    #   Name (ARN) of the CMK. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   To obtain the unique key ID and key ARN for a given CMK, use
-    #   ListKeys or DescribeKey.
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletionRequest AWS API Documentation
@@ -88,15 +89,20 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   An identifier of the key for which you are creating the alias. This
-    #   value cannot be another alias but can be a globally unique
-    #   identifier or a fully specified ARN to a key.
+    #   Identifies the CMK for which you are creating the alias. This value
+    #   cannot be an alias.
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasRequest AWS API Documentation
@@ -114,7 +120,7 @@ module Aws::KMS
     #         key_id: "KeyIdType", # required
     #         grantee_principal: "PrincipalIdType", # required
     #         retiring_principal: "PrincipalIdType",
-    #         operations: ["Decrypt"], # accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, CreateGrant, RetireGrant, DescribeKey
+    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, CreateGrant, RetireGrant, DescribeKey
     #         constraints: {
     #           encryption_context_subset: {
     #             "EncryptionContextKey" => "EncryptionContextValue",
@@ -131,13 +137,18 @@ module Aws::KMS
     #   The unique identifier for the customer master key (CMK) that the
     #   grant applies to.
     #
-    #   To specify this value, use the globally unique key ID or the Amazon
-    #   Resource Name (ARN) of the key. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
-    #   * Globally unique key ID: 12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] grantee_principal
@@ -298,7 +309,7 @@ module Aws::KMS
     #   policy to the CMK. For more information, see [Default Key Policy][3]
     #   in the *AWS Key Management Service Developer Guide*.
     #
-    #   The policy size limit is 32 KiB (32768 bytes).
+    #   The policy size limit is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -445,9 +456,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] plaintext
-    #   Decrypted plaintext data. This value may not be returned if the
-    #   customer master key is not available or if you didn't have
-    #   permission to use it.
+    #   Decrypted plaintext data. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse AWS API Documentation
@@ -468,7 +478,7 @@ module Aws::KMS
     # @!attribute [rw] alias_name
     #   The alias to be deleted. The name must start with the word "alias"
     #   followed by a forward slash (alias/). Aliases that begin with
-    #   "alias/AWS" are reserved.
+    #   "alias/aws" are reserved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasRequest AWS API Documentation
@@ -489,13 +499,17 @@ module Aws::KMS
     #   The identifier of the CMK whose key material to delete. The CMK's
     #   `Origin` must be `EXTERNAL`.
     #
-    #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterialRequest AWS API Documentation
@@ -514,20 +528,26 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier, a fully specified ARN to either an alias
-    #   or a key, or an alias name prefixed by "alias/".
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
-    #   * Alias ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   For example:
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Alias Name Example - alias/MyAliasName
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -568,15 +588,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
     #   For example:
     #
-    #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN:
-    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRequest AWS API Documentation
@@ -594,14 +618,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationRequest AWS API Documentation
@@ -619,14 +648,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRequest AWS API Documentation
@@ -644,14 +678,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
@@ -674,20 +713,26 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier, a fully specified ARN to either an alias
-    #   or a key, or an alias name prefixed by "alias/".
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
-    #   * Alias ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   For example:
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Alias Name Example - alias/MyAliasName
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
@@ -727,8 +772,8 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The encrypted plaintext. If you are using the CLI, the value is
-    #   Base64 encoded. Otherwise, it is not encoded.
+    #   The encrypted plaintext. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -760,18 +805,24 @@ module Aws::KMS
     #   The identifier of the CMK under which to generate and encrypt the
     #   data encryption key.
     #
-    #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers
-    #   to the CMK. Examples:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   For example:
     #
-    #   * CMK ARN:
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
     #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
@@ -822,12 +873,15 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The encrypted data encryption key.
+    #   The encrypted data encryption key. When you use the HTTP API or the
+    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
-    #   The data encryption key. Use this data key for local encryption and
-    #   decryption, then remove it from memory as soon as possible.
+    #   The data encryption key. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded. Use this
+    #   data key for local encryption and decryption, then remove it from
+    #   memory as soon as possible.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -858,21 +912,27 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK under which to generate and encrypt the
-    #   data encryption key.
+    #   The identifier of the customer master key (CMK) under which to
+    #   generate and encrypt the data encryption key.
     #
-    #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers
-    #   to the CMK. Examples:
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   For example:
     #
-    #   * CMK ARN:
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
     #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
@@ -923,7 +983,8 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The encrypted data encryption key.
+    #   The encrypted data encryption key. When you use the HTTP API or the
+    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -958,7 +1019,8 @@ module Aws::KMS
     end
 
     # @!attribute [rw] plaintext
-    #   The random byte string.
+    #   The random byte string. When you use the HTTP API or the AWS CLI,
+    #   the value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
@@ -977,20 +1039,24 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   String that contains the name of the policy. Currently, this must be
-    #   "default". Policy names can be discovered by calling
-    #   ListKeyPolicies.
+    #   Specifies the name of the policy. The only valid name is `default`.
+    #   To get the names of key policies, use ListKeyPolicies.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyRequest AWS API Documentation
@@ -1020,14 +1086,20 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusRequest AWS API Documentation
@@ -1061,13 +1133,17 @@ module Aws::KMS
     #   The identifier of the CMK into which you will import key material.
     #   The CMK's `Origin` must be `EXTERNAL`.
     #
-    #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_algorithm
@@ -1114,7 +1190,7 @@ module Aws::KMS
     #   The time at which the import token and public key are no longer
     #   valid. After this time, you cannot use them to make an
     #   ImportKeyMaterial request and you must send another
-    #   `GetParametersForImport` request to retrieve new ones.
+    #   `GetParametersForImport` request to get new ones.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportResponse AWS API Documentation
@@ -1254,13 +1330,17 @@ module Aws::KMS
     #   The identifier of the CMK to import the key material into. The
     #   CMK's `Origin` must be `EXTERNAL`.
     #
-    #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] import_token
@@ -1469,7 +1549,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] aliases
-    #   A list of key aliases in the user's account.
+    #   A list of aliases.
     #   @return [Array<Types::AliasListEntry>]
     #
     # @!attribute [rw] next_marker
@@ -1479,9 +1559,9 @@ module Aws::KMS
     #
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
-    #   this value is true, the list in this response is truncated. To
-    #   retrieve more items, pass the value of the `NextMarker` element in
-    #   this response to the `Marker` parameter in a subsequent request.
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
@@ -1519,14 +1599,20 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest AWS API Documentation
@@ -1549,9 +1635,9 @@ module Aws::KMS
     #
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
-    #   this value is true, the list in this response is truncated. To
-    #   retrieve more items, pass the value of the `NextMarker` element in
-    #   this response to the `Marker` parameter in a subsequent request.
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
@@ -1573,14 +1659,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK). You can use
-    #   the unique key ID or the Amazon Resource Name (ARN) of the CMK.
-    #   Examples:
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1622,9 +1713,9 @@ module Aws::KMS
     #
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
-    #   this value is true, the list in this response is truncated. To
-    #   retrieve more items, pass the value of the `NextMarker` element in
-    #   this response to the `Marker` parameter in a subsequent request.
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
@@ -1669,7 +1760,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] keys
-    #   A list of keys.
+    #   A list of customer master keys (CMKs).
     #   @return [Array<Types::KeyListEntry>]
     #
     # @!attribute [rw] next_marker
@@ -1679,9 +1770,9 @@ module Aws::KMS
     #
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
-    #   this value is true, the list in this response is truncated. To
-    #   retrieve more items, pass the value of the `NextMarker` element in
-    #   this response to the `Marker` parameter in a subsequent request.
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
@@ -1703,14 +1794,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK whose tags you are listing. You can
-    #   use the unique key ID or the Amazon Resource Name (ARN) of the CMK.
-    #   Examples:
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1753,9 +1849,9 @@ module Aws::KMS
     #
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
-    #   this value is true, the list in this response is truncated. To
-    #   retrieve more items, pass the value of the `NextMarker` element in
-    #   this response to the `Marker` parameter in a subsequent request.
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse AWS API Documentation
@@ -1828,21 +1924,23 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
     #   For example:
     #
-    #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * ARN:
-    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the key policy.
-    #
-    #   This value must be `default`.
+    #   The name of the key policy. The only valid value is `default`.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -1866,7 +1964,7 @@ module Aws::KMS
     #     more information, see [Changes that I make are not always
     #     immediately visible][2] in the *IAM User Guide*.
     #
-    #   The policy size limit is 32 KiB (32768 bytes).
+    #   The policy size limit is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -1932,20 +2030,26 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] destination_key_id
-    #   A unique identifier for the CMK to use to reencrypt the data. This
-    #   value can be a globally unique identifier, a fully specified ARN to
-    #   either an alias or a key, or an alias name prefixed by "alias/".
+    #   A unique identifier for the CMK that is used to reencrypt the data.
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   "alias/". To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
-    #   * Alias ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+    #   For example:
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Alias Name Example - alias/MyAliasName
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
     #   @return [String]
     #
     # @!attribute [rw] destination_encryption_context
@@ -1975,7 +2079,8 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The reencrypted data.
+    #   The reencrypted data. When you use the HTTP API or the AWS CLI, the
+    #   value is Base64-encoded. Otherwise, it is not encoded.
     #   @return [String]
     #
     # @!attribute [rw] source_key_id
@@ -2009,12 +2114,10 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The Amazon Resource Name of the CMK associated with the grant.
-    #   Example:
+    #   The Amazon Resource Name (ARN) of the CMK associated with the grant.
     #
-    #   * arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
-    #
-    #   ^
+    #   For example:
+    #   `arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] grant_id
@@ -2046,14 +2149,20 @@ module Aws::KMS
     #
     # @!attribute [rw] key_id
     #   A unique identifier for the customer master key associated with the
-    #   grant. This value can be a globally unique identifier or the fully
-    #   specified ARN to a key.
+    #   grant.
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] grant_id
@@ -2077,18 +2186,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The unique identifier for the customer master key (CMK) to delete.
+    #   The unique identifier of the customer master key (CMK) to delete.
     #
-    #   To specify this value, use the unique key ID or the Amazon Resource
-    #   Name (ARN) of the CMK. Examples:
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   To obtain the unique key ID and key ARN for a given CMK, use
-    #   ListKeys or DescribeKey.
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] pending_window_in_days
@@ -2129,6 +2239,14 @@ module Aws::KMS
     # keys and tag values are both required, but tag values can be empty
     # (null) strings.
     #
+    # For information about the rules that apply to tag keys and tag values,
+    # see [User-Defined Tag Restrictions][1] in the *AWS Billing and Cost
+    # Management User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -2167,14 +2285,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK you are tagging. You can use the
-    #   unique key ID or the Amazon Resource Name (ARN) of the CMK.
-    #   Examples:
+    #   A unique identifier for the CMK you are tagging.
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2199,13 +2322,18 @@ module Aws::KMS
     #
     # @!attribute [rw] key_id
     #   A unique identifier for the CMK from which you are removing tags.
-    #   You can use the unique key ID or the Amazon Resource Name (ARN) of
-    #   the CMK. Examples:
     #
-    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2236,17 +2364,22 @@ module Aws::KMS
     #
     # @!attribute [rw] target_key_id
     #   Unique identifier of the customer master key to be mapped to the
-    #   alias. This value can be a globally unique identifier or the fully
-    #   specified ARN of a key.
+    #   alias.
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
     #
-    #   You can call ListAliases to verify that the alias is mapped to the
-    #   correct `TargetKeyId`.
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
+    #
+    #   To verify that the alias is mapped to the correct CMK, use
+    #   ListAliases.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasRequest AWS API Documentation
@@ -2266,14 +2399,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK. This value can be a globally unique
-    #   identifier or the fully specified ARN to a key.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] description

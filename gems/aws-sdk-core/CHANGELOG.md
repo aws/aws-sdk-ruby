@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.6.1 (2017-11-07)
+------------------
+
 * Issue - Update empty struct stubbing shape
 
 3.6.0 (2017-09-20)

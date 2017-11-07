@@ -156,7 +156,7 @@ module Aws::KMS
     CreateGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     CreateGrantRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "GranteePrincipal"))
     CreateGrantRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "RetiringPrincipal"))
-    CreateGrantRequest.add_member(:operations, Shapes::ShapeRef.new(shape: GrantOperationList, location_name: "Operations"))
+    CreateGrantRequest.add_member(:operations, Shapes::ShapeRef.new(shape: GrantOperationList, required: true, location_name: "Operations"))
     CreateGrantRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: GrantConstraints, location_name: "Constraints"))
     CreateGrantRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     CreateGrantRequest.add_member(:name, Shapes::ShapeRef.new(shape: GrantNameType, location_name: "Name"))

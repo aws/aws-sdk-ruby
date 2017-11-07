@@ -272,6 +272,9 @@
   "Polly": {
     "models": "polly/2016-06-10"
   },
+  "Pricing": {
+    "models": "pricing/2017-10-15"
+  },
   "RDS": {
     "models": "rds/2014-10-31",
     "addPlugins": [
