@@ -26,7 +26,7 @@ module Aws
     # data client-side.
     #
     # One of the benefits of envelope encryption is that if your master key
-    # is compromised, you have the option of jut re-encrypting the stored
+    # is compromised, you have the option of just re-encrypting the stored
     # envelope symmetric keys, instead of re-encrypting all of the
     # data in your account.
     #
