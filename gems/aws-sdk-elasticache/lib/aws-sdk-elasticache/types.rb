@@ -28,6 +28,7 @@ module Aws::ElastiCache
     #   to be added, for example
     #   `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
     #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
+    #   ElastiCache resources are *cluster* and *snapshot*.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1].
@@ -50,12 +51,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents the allowed node types you can use to modify your cache
-    # cluster or replication group.
+    # Represents the allowed node types you can use to modify your cluster
+    # or replication group.
     #
     # @!attribute [rw] scale_up_modifications
     #   A string list, each element of which specifies a cache node type
-    #   which you can use to scale your cache cluster or replication group.
+    #   which you can use to scale your cluster or replication group.
     #
     #   When scaling up a Redis cluster or replication group using
     #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
@@ -122,7 +123,7 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Describes an Availability Zone in which the cache cluster is launched.
+    # Describes an Availability Zone in which the cluster is launched.
     #
     # @!attribute [rw] name
     #   The name of the Availability Zone.
@@ -135,11 +136,11 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Contains all of the attributes of a specific cache cluster.
+    # Contains all of the attributes of a specific cluster.
     #
     # @!attribute [rw] cache_cluster_id
-    #   The user-supplied identifier of the cache cluster. This identifier
-    #   is a unique key that identifies a cache cluster.
+    #   The user-supplied identifier of the cluster. This identifier is a
+    #   unique key that identifies a cluster.
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint
@@ -157,7 +158,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_node_type
-    #   The name of the compute and memory capacity node type for the cache
+    #   The name of the compute and memory capacity node type for the
     #   cluster.
     #
     #   The following node types are supported by ElastiCache. Generally
@@ -217,9 +218,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -234,35 +232,35 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   The name of the cache engine (`memcached` or `redis`) to be used for
-    #   this cache cluster.
+    #   this cluster.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the cache engine that is used in this cache cluster.
+    #   The version of the cache engine that is used in this cluster.
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_status
-    #   The current state of this cache cluster, one of the following
-    #   values: `available`, `creating`, `deleted`, `deleting`,
-    #   `incompatible-network`, `modifying`, `rebooting cache cluster
-    #   nodes`, `restore-failed`, or `snapshotting`.
+    #   The current state of this cluster, one of the following values:
+    #   `available`, `creating`, `deleted`, `deleting`,
+    #   `incompatible-network`, `modifying`, `rebooting cluster nodes`,
+    #   `restore-failed`, or `snapshotting`.
     #   @return [String]
     #
     # @!attribute [rw] num_cache_nodes
-    #   The number of cache nodes in the cache cluster.
+    #   The number of cache nodes in the cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
     #   running Memcached, this value must be between 1 and 20.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_availability_zone
-    #   The name of the Availability Zone in which the cache cluster is
-    #   located or "Multiple" if the cache nodes are located in different
+    #   The name of the Availability Zone in which the cluster is located or
+    #   "Multiple" if the cache nodes are located in different
     #   Availability Zones.
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_create_time
-    #   The date and time when the cache cluster was created.
+    #   The date and time when the cluster was created.
     #   @return [Time]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -291,8 +289,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] pending_modified_values
-    #   A group of settings that are applied to the cache cluster in the
-    #   future, or that are currently being applied.
+    #   A group of settings that are applied to the cluster in the future,
+    #   or that are currently being applied.
     #   @return [Types::PendingModifiedValues]
     #
     # @!attribute [rw] notification_configuration
@@ -311,12 +309,11 @@ module Aws::ElastiCache
     #   @return [Types::CacheParameterGroupStatus]
     #
     # @!attribute [rw] cache_subnet_group_name
-    #   The name of the cache subnet group associated with the cache
-    #   cluster.
+    #   The name of the cache subnet group associated with the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cache_nodes
-    #   A list of cache nodes that are members of the cache cluster.
+    #   A list of cache nodes that are members of the cluster.
     #   @return [Array<Types::CacheNode>]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -324,18 +321,17 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   A list of VPC Security Groups associated with the cache cluster.
+    #   A list of VPC Security Groups associated with the cluster.
     #   @return [Array<Types::SecurityGroupMembership>]
     #
     # @!attribute [rw] replication_group_id
-    #   The replication group to which this cache cluster belongs. If this
-    #   field is empty, the cache cluster is not associated with any
-    #   replication group.
+    #   The replication group to which this cluster belongs. If this field
+    #   is empty, the cluster is not associated with any replication group.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_retention_limit
-    #   The number of days for which ElastiCache retains automatic cache
-    #   cluster snapshots before deleting them. For example, if you set
+    #   The number of days for which ElastiCache retains automatic cluster
+    #   snapshots before deleting them. For example, if you set
     #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
     #   retained for 5 days before being deleted.
     #
@@ -345,7 +341,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] snapshot_window
     #   The daily time range (in UTC) during which ElastiCache begins taking
-    #   a daily snapshot of your cache cluster.
+    #   a daily snapshot of your cluster.
     #
     #   Example: `05:00-09:00`
     #   @return [String]
@@ -417,8 +413,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_clusters
-    #   A list of cache clusters. Each item in the list contains detailed
-    #   information about one cache cluster.
+    #   A list of clusters. Each item in the list contains detailed
+    #   information about one cluster.
     #   @return [Array<Types::CacheCluster>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterMessage AWS API Documentation
@@ -485,9 +481,9 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents an individual cache node within a cache cluster. Each cache
-    # node runs its own instance of the cluster's protocol-compliant
-    # caching software - either Memcached or Redis.
+    # Represents an individual cache node within a cluster. Each cache node
+    # runs its own instance of the cluster's protocol-compliant caching
+    # software - either Memcached or Redis.
     #
     # The following node types are supported by ElastiCache. Generally
     # speaking, the current generation types provide more memory and
@@ -546,9 +542,6 @@ module Aws::ElastiCache
     # * Redis Append-only files (AOF) functionality is not supported for T1
     #   or T2 instances.
     #
-    # Supported node types are available in all regions except as noted in
-    # the following table.
-    #
     # For a complete listing of node types and specifications, see [Amazon
     # ElastiCache Product Features and Details][1] and either [Cache Node
     # Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -585,7 +578,7 @@ module Aws::ElastiCache
     # @!attribute [rw] source_cache_node_id
     #   The ID of the primary node to which this read replica node is
     #   synchronized. If this field is empty, this node is not associated
-    #   with a primary cache cluster.
+    #   with a primary cluster.
     #   @return [String]
     #
     # @!attribute [rw] customer_availability_zone
@@ -606,8 +599,8 @@ module Aws::ElastiCache
     end
 
     # A parameter that has a different value for each cache node type it is
-    # applied to. For example, in a Redis cache cluster, a `cache.m1.large`
-    # cache node type would have a larger `maxmemory` value than a
+    # applied to. For example, in a Redis cluster, a `cache.m1.large` cache
+    # node type would have a larger `maxmemory` value than a
     # `cache.m1.small` type.
     #
     # @!attribute [rw] parameter_name
@@ -837,8 +830,8 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents a cache cluster's status within a particular cache
-    # security group.
+    # Represents a cluster's status within a particular cache security
+    # group.
     #
     # @!attribute [rw] cache_security_group_name
     #   The name of the cache security group.
@@ -847,7 +840,7 @@ module Aws::ElastiCache
     # @!attribute [rw] status
     #   The membership status in the cache security group. The status
     #   changes when a cache security group is modified, or when the cache
-    #   security groups assigned to a cache cluster are modified.
+    #   security groups assigned to a cluster are modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMembership AWS API Documentation
@@ -979,8 +972,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] snapshot
-    #   Represents a copy of an entire Redis cache cluster as of the time
-    #   when the snapshot was taken.
+    #   Represents a copy of an entire Redis cluster as of the time when the
+    #   snapshot was taken.
     #   @return [Types::Snapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotResult AWS API Documentation
@@ -1046,14 +1039,14 @@ module Aws::ElastiCache
     #   operation or parameter is not supported on Redis (cluster mode
     #   enabled) replication groups.
     #
-    #   The ID of the replication group to which this cache cluster should
-    #   belong. If this parameter is specified, the cache cluster is added
-    #   to the specified replication group as a read replica; otherwise, the
-    #   cache cluster is a standalone primary that is not part of any
-    #   replication group.
+    #   The ID of the replication group to which this cluster should belong.
+    #   If this parameter is specified, the cluster is added to the
+    #   specified replication group as a read replica; otherwise, the
+    #   cluster is a standalone primary that is not part of any replication
+    #   group.
     #
     #   If the specified replication group is Multi-AZ enabled and the
-    #   Availability Zone is not specified, the cache cluster is created in
+    #   Availability Zone is not specified, the cluster is created in
     #   Availability Zones that provide the best spread of read replicas
     #   across Availability Zones.
     #
@@ -1067,19 +1060,18 @@ module Aws::ElastiCache
     #   a single Availability Zone or created across multiple Availability
     #   Zones in the cluster's region.
     #
-    #   This parameter is only supported for Memcached cache clusters.
+    #   This parameter is only supported for Memcached clusters.
     #
     #   If the `AZMode` and `PreferredAvailabilityZones` are not specified,
     #   ElastiCache assumes `single-az` mode.
     #   @return [String]
     #
     # @!attribute [rw] preferred_availability_zone
-    #   The EC2 Availability Zone in which the cache cluster is created.
+    #   The EC2 Availability Zone in which the cluster is created.
     #
-    #   All nodes belonging to this Memcached cache cluster are placed in
-    #   the preferred Availability Zone. If you want to create your nodes
-    #   across multiple Availability Zones, use
-    #   `PreferredAvailabilityZones`.
+    #   All nodes belonging to this Memcached cluster are placed in the
+    #   preferred Availability Zone. If you want to create your nodes across
+    #   multiple Availability Zones, use `PreferredAvailabilityZones`.
     #
     #   Default: System chosen Availability Zone.
     #   @return [String]
@@ -1090,9 +1082,9 @@ module Aws::ElastiCache
     #
     #   This option is only supported on Memcached.
     #
-    #   <note markdown="1"> If you are creating your cache cluster in an Amazon VPC
-    #   (recommended) you can only locate nodes in Availability Zones that
-    #   are associated with the subnets in the selected subnet group.
+    #   <note markdown="1"> If you are creating your cluster in an Amazon VPC (recommended) you
+    #   can only locate nodes in Availability Zones that are associated with
+    #   the subnets in the selected subnet group.
     #
     #    The number of Availability Zones listed must equal the value of
     #   `NumCacheNodes`.
@@ -1107,7 +1099,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] num_cache_nodes
-    #   The initial number of cache nodes that the cache cluster has.
+    #   The initial number of cache nodes that the cluster has.
     #
     #   For clusters running Redis, this value must be 1. For clusters
     #   running Memcached, this value must be between 1 and 20.
@@ -1182,9 +1174,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -1198,21 +1187,21 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the cache engine to be used for this cache cluster.
+    #   The name of the cache engine to be used for this cluster.
     #
     #   Valid values for this parameter are: `memcached` \| `redis`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the cache engine to be used for this cache
-    #   cluster. To view the supported cache engine versions, use the
+    #   The version number of the cache engine to be used for this cluster.
+    #   To view the supported cache engine versions, use the
     #   DescribeCacheEngineVersions operation.
     #
     #   **Important:** You can upgrade to a newer engine version (see
     #   [Selecting a Cache Engine and Version][1]), but you cannot downgrade
     #   to an earlier engine version. If you want to use an earlier engine
-    #   version, you must delete the existing cache cluster or replication
-    #   group and create it anew with the earlier engine version.
+    #   version, you must delete the existing cluster or replication group
+    #   and create it anew with the earlier engine version.
     #
     #
     #
@@ -1220,17 +1209,17 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_name
-    #   The name of the parameter group to associate with this cache
-    #   cluster. If this argument is omitted, the default parameter group
-    #   for the specified engine is used. You cannot use any parameter group
-    #   which has `cluster-enabled='yes'` when creating a cluster.
+    #   The name of the parameter group to associate with this cluster. If
+    #   this argument is omitted, the default parameter group for the
+    #   specified engine is used. You cannot use any parameter group which
+    #   has `cluster-enabled='yes'` when creating a cluster.
     #   @return [String]
     #
     # @!attribute [rw] cache_subnet_group_name
-    #   The name of the subnet group to be used for the cache cluster.
+    #   The name of the subnet group to be used for the cluster.
     #
-    #   Use this parameter only when you are creating a cache cluster in an
-    #   Amazon Virtual Private Cloud (Amazon VPC).
+    #   Use this parameter only when you are creating a cluster in an Amazon
+    #   Virtual Private Cloud (Amazon VPC).
     #
     #   If you're going to launch your cluster in an Amazon VPC, you need
     #   to create a subnet group before you start creating a cluster. For
@@ -1242,17 +1231,17 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
-    #   A list of security group names to associate with this cache cluster.
+    #   A list of security group names to associate with this cluster.
     #
-    #   Use this parameter only when you are creating a cache cluster
-    #   outside of an Amazon Virtual Private Cloud (Amazon VPC).
+    #   Use this parameter only when you are creating a cluster outside of
+    #   an Amazon Virtual Private Cloud (Amazon VPC).
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   One or more VPC security groups associated with the cache cluster.
+    #   One or more VPC security groups associated with the cluster.
     #
-    #   Use this parameter only when you are creating a cache cluster in an
-    #   Amazon Virtual Private Cloud (Amazon VPC).
+    #   Use this parameter only when you are creating a cluster in an Amazon
+    #   Virtual Private Cloud (Amazon VPC).
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1285,7 +1274,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] preferred_maintenance_window
     #   Specifies the weekly time range during which maintenance on the
-    #   cache cluster is performed. It is specified as a range in the format
+    #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period. Valid values for `ddd` are:
     #
@@ -1322,8 +1311,7 @@ module Aws::ElastiCache
     #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
     #   Service (SNS) topic to which notifications are sent.
     #
-    #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cache cluster
-    #   owner.
+    #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cluster owner.
     #
     #    </note>
     #   @return [String]
@@ -1342,8 +1330,7 @@ module Aws::ElastiCache
     #
     #    </note>
     #
-    #   Default: 0 (i.e., automatic backups are disabled for this cache
-    #   cluster).
+    #   Default: 0 (i.e., automatic backups are disabled for this cluster).
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_window
@@ -1363,6 +1350,14 @@ module Aws::ElastiCache
     # @!attribute [rw] auth_token
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
+    #
+    #   This parameter is valid only if:
+    #
+    #   * The parameter `TransitEncryptionEnabled` was set to `true` when
+    #     the cluster was created.
+    #
+    #   * The line `requirepass` was added to the database configuration
+    #     file.
     #
     #   Password constraints:
     #
@@ -1412,7 +1407,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] cache_cluster
-    #   Contains all of the attributes of a specific cache cluster.
+    #   Contains all of the attributes of a specific cluster.
     #   @return [Types::CacheCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterResult AWS API Documentation
@@ -1639,9 +1634,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] primary_cluster_id
-    #   The identifier of the cache cluster that serves as the primary for
-    #   this replication group. This cache cluster must already exist and
-    #   have a status of `available`.
+    #   The identifier of the cluster that serves as the primary for this
+    #   replication group. This cluster must already exist and have a status
+    #   of `available`.
     #
     #   This parameter is not required if `NumCacheClusters`,
     #   `NumNodeGroups`, or `ReplicasPerNodeGroup` is specified.
@@ -1686,16 +1681,16 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] preferred_cache_cluster_a_zs
     #   A list of EC2 Availability Zones in which the replication group's
-    #   cache clusters are created. The order of the Availability Zones in
-    #   the list is the order in which clusters are allocated. The primary
+    #   clusters are created. The order of the Availability Zones in the
+    #   list is the order in which clusters are allocated. The primary
     #   cluster is created in the first AZ in the list.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `NodeGroupConfiguration` instead.
     #
     #   <note markdown="1"> If you are creating your replication group in an Amazon VPC
-    #   (recommended), you can only locate cache clusters in Availability
-    #   Zones associated with the subnets in the selected subnet group.
+    #   (recommended), you can only locate clusters in Availability Zones
+    #   associated with the subnets in the selected subnet group.
     #
     #    The number of Availability Zones listed must equal the value of
     #   `NumCacheClusters`.
@@ -1791,9 +1786,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -1807,21 +1799,21 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the cache engine to be used for the cache clusters in
-    #   this replication group.
+    #   The name of the cache engine to be used for the clusters in this
+    #   replication group.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the cache engine to be used for the cache
-    #   clusters in this replication group. To view the supported cache
-    #   engine versions, use the `DescribeCacheEngineVersions` operation.
+    #   The version number of the cache engine to be used for the clusters
+    #   in this replication group. To view the supported cache engine
+    #   versions, use the `DescribeCacheEngineVersions` operation.
     #
     #   **Important:** You can upgrade to a newer engine version (see
     #   [Selecting a Cache Engine and Version][1]) in the *ElastiCache User
     #   Guide*, but you cannot downgrade to an earlier engine version. If
     #   you want to use an earlier engine version, you must delete the
-    #   existing cache cluster or replication group and create it anew with
-    #   the earlier engine version.
+    #   existing cluster or replication group and create it anew with the
+    #   earlier engine version.
     #
     #
     #
@@ -1872,7 +1864,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] tags
     #   A list of cost allocation tags to be added to this resource. A tag
-    #   is a key-value pair.
+    #   is a key-value pair. A tag key does not have to be accompanied by a
+    #   tag value.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] snapshot_arns
@@ -1896,7 +1889,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] preferred_maintenance_window
     #   Specifies the weekly time range during which maintenance on the
-    #   cache cluster is performed. It is specified as a range in the format
+    #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period. Valid values for `ddd` are:
     #
@@ -1933,8 +1926,7 @@ module Aws::ElastiCache
     #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
     #   Service (SNS) topic to which notifications are sent.
     #
-    #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cache cluster
-    #   owner.
+    #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cluster owner.
     #
     #    </note>
     #   @return [String]
@@ -1949,8 +1941,7 @@ module Aws::ElastiCache
     #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
     #   retained for 5 days before being deleted.
     #
-    #   Default: 0 (i.e., automatic backups are disabled for this cache
-    #   cluster).
+    #   Default: 0 (i.e., automatic backups are disabled for this cluster).
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_window
@@ -2090,8 +2081,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_id
-    #   The identifier of an existing cache cluster. The snapshot is created
-    #   from this cache cluster.
+    #   The identifier of an existing cluster. The snapshot is created from
+    #   this cluster.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_name
@@ -2108,8 +2099,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] snapshot
-    #   Represents a copy of an entire Redis cache cluster as of the time
-    #   when the snapshot was taken.
+    #   Represents a copy of an entire Redis cluster as of the time when the
+    #   snapshot was taken.
     #   @return [Types::Snapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotResult AWS API Documentation
@@ -2130,15 +2121,14 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] cache_cluster_id
-    #   The cache cluster identifier for the cluster to be deleted. This
-    #   parameter is not case sensitive.
+    #   The cluster identifier for the cluster to be deleted. This parameter
+    #   is not case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] final_snapshot_identifier
-    #   The user-supplied name of a final cache cluster snapshot. This is
-    #   the unique name that identifies the snapshot. ElastiCache creates
-    #   the snapshot, and then deletes the cache cluster immediately
-    #   afterward.
+    #   The user-supplied name of a final cluster snapshot. This is the
+    #   unique name that identifies the snapshot. ElastiCache creates the
+    #   snapshot, and then deletes the cluster immediately afterward.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheClusterMessage AWS API Documentation
@@ -2150,7 +2140,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] cache_cluster
-    #   Contains all of the attributes of a specific cache cluster.
+    #   Contains all of the attributes of a specific cluster.
     #   @return [Types::CacheCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheClusterResult AWS API Documentation
@@ -2173,7 +2163,7 @@ module Aws::ElastiCache
     #   The name of the cache parameter group to delete.
     #
     #   <note markdown="1"> The specified cache security group must not be associated with any
-    #   cache clusters.
+    #   clusters.
     #
     #    </note>
     #   @return [String]
@@ -2303,8 +2293,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] snapshot
-    #   Represents a copy of an entire Redis cache cluster as of the time
-    #   when the snapshot was taken.
+    #   Represents a copy of an entire Redis cluster as of the time when the
+    #   snapshot was taken.
     #   @return [Types::Snapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotResult AWS API Documentation
@@ -2329,8 +2319,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_cluster_id
     #   The user-supplied cluster identifier. If this parameter is
-    #   specified, only information about that specific cache cluster is
-    #   returned. This parameter isn't case sensitive.
+    #   specified, only information about that specific cluster is returned.
+    #   This parameter isn't case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -2891,9 +2881,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -3043,9 +3030,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -3155,8 +3139,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_cluster_id
     #   A user-supplied cluster identifier. If this parameter is specified,
-    #   only snapshots associated with that specific cache cluster are
-    #   described.
+    #   only snapshots associated with that specific cluster are described.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_name
@@ -3286,18 +3269,18 @@ module Aws::ElastiCache
     end
 
     # Represents a single occurrence of something interesting within the
-    # system. Some examples of events are creating a cache cluster, adding
-    # or removing a cache node, or rebooting a node.
+    # system. Some examples of events are creating a cluster, adding or
+    # removing a cache node, or rebooting a node.
     #
     # @!attribute [rw] source_identifier
     #   The identifier for the source of the event. For example, if the
-    #   event occurred at the cache cluster level, the identifier would be
-    #   the name of the cache cluster.
+    #   event occurred at the cluster level, the identifier would be the
+    #   name of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   Specifies the origin of this event - a cache cluster, a parameter
-    #   group, a security group, etc.
+    #   Specifies the origin of this event - a cluster, a parameter group, a
+    #   security group, etc.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3349,7 +3332,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] cache_cluster_id
-    #   The name of the cache cluster you want to scale up to a larger node
+    #   The name of the cluster you want to scale up to a larger node
     #   instanced type. ElastiCache uses the cluster id to identify the
     #   current node type of this cluster and from that to create a list of
     #   node types you can scale up to.
@@ -3432,17 +3415,16 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] cache_cluster_id
-    #   The cache cluster identifier. This value is stored as a lowercase
-    #   string.
+    #   The cluster identifier. This value is stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] num_cache_nodes
-    #   The number of cache nodes that the cache cluster should have. If the
-    #   value for `NumCacheNodes` is greater than the sum of the number of
-    #   current cache nodes and the number of cache nodes pending creation
-    #   (which may be zero), more nodes are added. If the value is less than
-    #   the number of existing cache nodes, nodes are removed. If the value
-    #   is equal to the number of current cache nodes, any pending add or
+    #   The number of cache nodes that the cluster should have. If the value
+    #   for `NumCacheNodes` is greater than the sum of the number of current
+    #   cache nodes and the number of cache nodes pending creation (which
+    #   may be zero), more nodes are added. If the value is less than the
+    #   number of existing cache nodes, nodes are removed. If the value is
+    #   equal to the number of current cache nodes, any pending add or
     #   remove requests are canceled.
     #
     #   If you are removing cache nodes, you must use the
@@ -3472,7 +3454,7 @@ module Aws::ElastiCache
     #   request. To cancel pending operations to modify the number of cache
     #   nodes in a cluster, use the `ModifyCacheCluster` request and set
     #   `NumCacheNodes` equal to the number of cache nodes currently in the
-    #   cache cluster.
+    #   cluster.
     #
     #    </note>
     #   @return [Integer]
@@ -3492,18 +3474,18 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] az_mode
-    #   Specifies whether the new nodes in this Memcached cache cluster are
-    #   all created in a single Availability Zone or created across multiple
+    #   Specifies whether the new nodes in this Memcached cluster are all
+    #   created in a single Availability Zone or created across multiple
     #   Availability Zones.
     #
     #   Valid values: `single-az` \| `cross-az`.
     #
-    #   This option is only supported for Memcached cache clusters.
+    #   This option is only supported for Memcached clusters.
     #
-    #   <note markdown="1"> You cannot specify `single-az` if the Memcached cache cluster
-    #   already has cache nodes in different Availability Zones. If
-    #   `cross-az` is specified, existing Memcached nodes remain in their
-    #   current Availability Zone.
+    #   <note markdown="1"> You cannot specify `single-az` if the Memcached cluster already has
+    #   cache nodes in different Availability Zones. If `cross-az` is
+    #   specified, existing Memcached nodes remain in their current
+    #   Availability Zone.
     #
     #    Only newly created nodes are located in different Availability
     #   Zones. For instructions on how to move existing Memcached nodes to
@@ -3603,8 +3585,8 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] cache_security_group_names
-    #   A list of cache security group names to authorize on this cache
-    #   cluster. This change is asynchronously applied as soon as possible.
+    #   A list of cache security group names to authorize on this cluster.
+    #   This change is asynchronously applied as soon as possible.
     #
     #   You can use this parameter only with clusters that are created
     #   outside of an Amazon Virtual Private Cloud (Amazon VPC).
@@ -3614,7 +3596,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   Specifies the VPC Security Groups associated with the cache cluster.
+    #   Specifies the VPC Security Groups associated with the cluster.
     #
     #   This parameter can be used only with clusters that are created in an
     #   Amazon Virtual Private Cloud (Amazon VPC).
@@ -3649,16 +3631,16 @@ module Aws::ElastiCache
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
     #   notifications are sent.
     #
-    #   <note markdown="1"> The Amazon SNS topic owner must be same as the cache cluster owner.
+    #   <note markdown="1"> The Amazon SNS topic owner must be same as the cluster owner.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_name
-    #   The name of the cache parameter group to apply to this cache
-    #   cluster. This change is asynchronously applied as soon as possible
-    #   for parameters when the `ApplyImmediately` parameter is specified as
-    #   `true` for this request.
+    #   The name of the cache parameter group to apply to this cluster. This
+    #   change is asynchronously applied as soon as possible for parameters
+    #   when the `ApplyImmediately` parameter is specified as `true` for
+    #   this request.
     #   @return [String]
     #
     # @!attribute [rw] notification_topic_status
@@ -3672,9 +3654,9 @@ module Aws::ElastiCache
     #   If `true`, this parameter causes the modifications in this request
     #   and any pending modifications to be applied, asynchronously and as
     #   soon as possible, regardless of the `PreferredMaintenanceWindow`
-    #   setting for the cache cluster.
+    #   setting for the cluster.
     #
-    #   If `false`, changes to the cache cluster are applied on the next
+    #   If `false`, changes to the cluster are applied on the next
     #   maintenance reboot, or the next failure reboot, whichever occurs
     #   first.
     #
@@ -3694,8 +3676,8 @@ module Aws::ElastiCache
     #   **Important:** You can upgrade to a newer engine version (see
     #   [Selecting a Cache Engine and Version][1]), but you cannot downgrade
     #   to an earlier engine version. If you want to use an earlier engine
-    #   version, you must delete the existing cache cluster and create it
-    #   anew with the earlier engine version.
+    #   version, you must delete the existing cluster and create it anew
+    #   with the earlier engine version.
     #
     #
     #
@@ -3707,8 +3689,8 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
-    #   The number of days for which ElastiCache retains automatic cache
-    #   cluster snapshots before deleting them. For example, if you set
+    #   The number of days for which ElastiCache retains automatic cluster
+    #   snapshots before deleting them. For example, if you set
     #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
     #   retained for 5 days before being deleted.
     #
@@ -3720,12 +3702,11 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] snapshot_window
     #   The daily time range (in UTC) during which ElastiCache begins taking
-    #   a daily snapshot of your cache cluster.
+    #   a daily snapshot of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_type
-    #   A valid cache node type that you want to scale this cache cluster up
-    #   to.
+    #   A valid cache node type that you want to scale this cluster up to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
@@ -3752,7 +3733,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] cache_cluster
-    #   Contains all of the attributes of a specific cache cluster.
+    #   Contains all of the attributes of a specific cluster.
     #   @return [Types::CacheCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterResult AWS API Documentation
@@ -3892,9 +3873,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] snapshotting_cluster_id
-    #   The cache cluster ID that is used as the daily snapshot source for
-    #   the replication group. This parameter cannot be set for Redis
-    #   (cluster mode enabled) replication groups.
+    #   The cluster ID that is used as the daily snapshot source for the
+    #   replication group. This parameter cannot be set for Redis (cluster
+    #   mode enabled) replication groups.
     #   @return [String]
     #
     # @!attribute [rw] automatic_failover_enabled
@@ -3919,20 +3900,19 @@ module Aws::ElastiCache
     #   soon as possible.
     #
     #   This parameter can be used only with replication group containing
-    #   cache clusters running outside of an Amazon Virtual Private Cloud
-    #   (Amazon VPC).
+    #   clusters running outside of an Amazon Virtual Private Cloud (Amazon
+    #   VPC).
     #
     #   Constraints: Must contain no more than 255 alphanumeric characters.
     #   Must not be `Default`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   Specifies the VPC Security Groups associated with the cache clusters
-    #   in the replication group.
+    #   Specifies the VPC Security Groups associated with the clusters in
+    #   the replication group.
     #
     #   This parameter can be used only with replication group containing
-    #   cache clusters running in an Amazon Virtual Private Cloud (Amazon
-    #   VPC).
+    #   clusters running in an Amazon Virtual Private Cloud (Amazon VPC).
     #   @return [Array<String>]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -4001,8 +3981,8 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
-    #   The upgraded version of the cache engine to be run on the cache
-    #   clusters in the replication group.
+    #   The upgraded version of the cache engine to be run on the clusters
+    #   in the replication group.
     #
     #   **Important:** You can upgrade to a newer engine version (see
     #   [Selecting a Cache Engine and Version][1]), but you cannot downgrade
@@ -4085,6 +4065,82 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Represents the input for a `ModifyReplicationGroupShardConfiguration`
+    # operation.
+    #
+    # @note When making an API call, you may pass ModifyReplicationGroupShardConfigurationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         node_group_count: 1, # required
+    #         apply_immediately: false, # required
+    #         resharding_configuration: [
+    #           {
+    #             preferred_availability_zones: ["String"],
+    #           },
+    #         ],
+    #         node_groups_to_remove: ["String"],
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The name of the Redis (cluster mode enabled) cluster (replication
+    #   group) on which the shards are to be configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_count
+    #   The number of node groups (shards) that results from the
+    #   modification of the shard configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Indicates that the shard reconfiguration process begins immediately.
+    #   At present, the only permitted value for this parameter is `true`.
+    #
+    #   Value: true
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resharding_configuration
+    #   Specifies the preferred availability zones for each node group in
+    #   the cluster. If the value of `NodeGroupCount` is greater than the
+    #   current number of node groups (shards), you can use this parameter
+    #   to specify the preferred availability zones of the cluster's
+    #   shards. If you omit this parameter ElastiCache selects availability
+    #   zones for you.
+    #
+    #   You can specify this parameter only if the value of `NodeGroupCount`
+    #   is greater than the current number of node groups (shards).
+    #   @return [Array<Types::ReshardingConfiguration>]
+    #
+    # @!attribute [rw] node_groups_to_remove
+    #   If the value of `NodeGroupCount` is less than the current number of
+    #   node groups (shards), `NodeGroupsToRemove` is a required list of
+    #   node group ids to remove from the cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfigurationMessage AWS API Documentation
+    #
+    class ModifyReplicationGroupShardConfigurationMessage < Struct.new(
+      :replication_group_id,
+      :node_group_count,
+      :apply_immediately,
+      :resharding_configuration,
+      :node_groups_to_remove)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfigurationResult AWS API Documentation
+    #
+    class ModifyReplicationGroupShardConfigurationResult < Struct.new(
+      :replication_group)
+      include Aws::Structure
+    end
+
     # Represents a collection of cache nodes in a replication group. One
     # node in the node group is the read/write primary node. All the other
     # nodes are read-only Replica nodes.
@@ -4126,7 +4182,7 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # node group (shard) configuration options. Each node group (shard)
+    # Node group (shard) configuration options. Each node group (shard)
     # configuration has the following: `Slots`, `PrimaryAvailabilityZone`,
     # `ReplicaAvailabilityZones`, `ReplicaCount`.
     #
@@ -4176,11 +4232,11 @@ module Aws::ElastiCache
     # Represents a single node within a node group (shard).
     #
     # @!attribute [rw] cache_cluster_id
-    #   The ID of the cache cluster to which the node belongs.
+    #   The ID of the cluster to which the node belongs.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_id
-    #   The ID of the node within its cache cluster. A node ID is a numeric
+    #   The ID of the node within its cluster. A node ID is a numeric
     #   identifier (0001, 0002, etc.).
     #   @return [String]
     #
@@ -4209,10 +4265,10 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents an individual cache node in a snapshot of a cache cluster.
+    # Represents an individual cache node in a snapshot of a cluster.
     #
     # @!attribute [rw] cache_cluster_id
-    #   A unique identifier for the source cache cluster.
+    #   A unique identifier for the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] node_group_id
@@ -4220,7 +4276,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_node_id
-    #   The cache node identifier for the node in the source cache cluster.
+    #   The cache node identifier for the node in the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] node_group_configuration
@@ -4233,7 +4289,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_node_create_time
     #   The date and time when the cache node was created in the source
-    #   cache cluster.
+    #   cluster.
     #   @return [Time]
     #
     # @!attribute [rw] snapshot_create_time
@@ -4364,11 +4420,11 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # A group of settings that are applied to the cache cluster in the
-    # future, or that are currently being applied.
+    # A group of settings that are applied to the cluster in the future, or
+    # that are currently being applied.
     #
     # @!attribute [rw] num_cache_nodes
-    #   The new number of cache nodes for the cache cluster.
+    #   The new number of cache nodes for the cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
     #   running Memcached, this value must be between 1 and 20.
@@ -4376,17 +4432,17 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_node_ids_to_remove
     #   A list of cache node IDs that are being removed (or will be removed)
-    #   from the cache cluster. A node ID is a numeric identifier (0001,
-    #   0002, etc.).
+    #   from the cluster. A node ID is a numeric identifier (0001, 0002,
+    #   etc.).
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_version
-    #   The new cache engine version that the cache cluster runs.
+    #   The new cache engine version that the cluster runs.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_type
-    #   The cache node type that this cache cluster or replication group is
-    #   scaled to.
+    #   The cache node type that this cluster or replication group is scaled
+    #   to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
@@ -4468,14 +4524,14 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] cache_cluster_id
-    #   The cache cluster identifier. This parameter is stored as a
-    #   lowercase string.
+    #   The cluster identifier. This parameter is stored as a lowercase
+    #   string.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_ids_to_reboot
     #   A list of cache node IDs to reboot. A node ID is a numeric
-    #   identifier (0001, 0002, etc.). To reboot an entire cache cluster,
-    #   specify all of the cache node IDs.
+    #   identifier (0001, 0002, etc.). To reboot an entire cluster, specify
+    #   all of the cache node IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheClusterMessage AWS API Documentation
@@ -4487,7 +4543,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] cache_cluster
-    #   Contains all of the attributes of a specific cache cluster.
+    #   Contains all of the attributes of a specific cluster.
     #   @return [Types::CacheCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheClusterResult AWS API Documentation
@@ -4560,7 +4616,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the replication group.
+    #   The user supplied description of the replication group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4575,18 +4631,20 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroupPendingModifiedValues]
     #
     # @!attribute [rw] member_clusters
-    #   The names of all the cache clusters that are part of this
-    #   replication group.
+    #   The identifiers of all the nodes that are part of this replication
+    #   group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] node_groups
-    #   A single element list with information about the nodes in the
-    #   replication group.
+    #   A list of node groups in this replication group. For Redis (cluster
+    #   mode disabled) replication groups, this is a single-element list.
+    #   For Redis (cluster mode enabled) replication groups, the list
+    #   contains an entry for each node group (shard).
     #   @return [Array<Types::NodeGroup>]
     #
     # @!attribute [rw] snapshotting_cluster_id
-    #   The cache cluster ID that is used as the daily snapshot source for
-    #   the replication group.
+    #   The cluster ID that is used as the daily snapshot source for the
+    #   replication group.
     #   @return [String]
     #
     # @!attribute [rw] automatic_failover
@@ -4604,13 +4662,13 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint
-    #   The configuration endpoint for this replicaiton group. Use the
+    #   The configuration endpoint for this replication group. Use the
     #   configuration endpoint to connect to this replication group.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] snapshot_retention_limit
-    #   The number of days for which ElastiCache retains automatic cache
-    #   cluster snapshots before deleting them. For example, if you set
+    #   The number of days for which ElastiCache retains automatic cluster
+    #   snapshots before deleting them. For example, if you set
     #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
     #   retained for 5 days before being deleted.
     #
@@ -4738,11 +4796,16 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
     #
+    # @!attribute [rw] resharding
+    #   The status of an online resharding operation.
+    #   @return [Types::ReshardingStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
-      :automatic_failover_status)
+      :automatic_failover_status,
+      :resharding)
       include Aws::Structure
     end
 
@@ -4816,9 +4879,6 @@ module Aws::ElastiCache
     #
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
-    #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
     #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
@@ -4971,9 +5031,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -5088,6 +5145,41 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # A list of `PreferredAvailabilityZones` objects that specifies the
+    # configuration of a node group in the resharded cluster.
+    #
+    # @note When making an API call, you may pass ReshardingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         preferred_availability_zones: ["String"],
+    #       }
+    #
+    # @!attribute [rw] preferred_availability_zones
+    #   A list of preferred availability zones for the nodes in this
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReshardingConfiguration AWS API Documentation
+    #
+    class ReshardingConfiguration < Struct.new(
+      :preferred_availability_zones)
+      include Aws::Structure
+    end
+
+    # The status of an online resharding operation.
+    #
+    # @!attribute [rw] slot_migration
+    #   Represents the progress of an online resharding operation.
+    #   @return [Types::SlotMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReshardingStatus AWS API Documentation
+    #
+    class ReshardingStatus < Struct.new(
+      :slot_migration)
+      include Aws::Structure
+    end
+
     # Represents the input of a `RevokeCacheSecurityGroupIngress` operation.
     #
     # @note When making an API call, you may pass RevokeCacheSecurityGroupIngressMessage
@@ -5148,7 +5240,7 @@ module Aws::ElastiCache
     # @!attribute [rw] status
     #   The status of the cache security group membership. The status
     #   changes whenever a cache security group is modified, or when the
-    #   cache security groups assigned to a cache cluster are modified.
+    #   cache security groups assigned to a cluster are modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SecurityGroupMembership AWS API Documentation
@@ -5159,8 +5251,21 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents a copy of an entire Redis cache cluster as of the time when
-    # the snapshot was taken.
+    # Represents the progress of an online resharding operation.
+    #
+    # @!attribute [rw] progress_percentage
+    #   The percentage of the slot migration that is complete.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SlotMigration AWS API Documentation
+    #
+    class SlotMigration < Struct.new(
+      :progress_percentage)
+      include Aws::Structure
+    end
+
+    # Represents a copy of an entire Redis cluster as of the time when the
+    # snapshot was taken.
     #
     # @!attribute [rw] snapshot_name
     #   The name of a snapshot. For an automatic snapshot, the name is
@@ -5177,7 +5282,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_id
-    #   The user-supplied identifier of the source cache cluster.
+    #   The user-supplied identifier of the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_status
@@ -5192,7 +5297,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_node_type
     #   The name of the compute and memory capacity node type for the source
-    #   cache cluster.
+    #   cluster.
     #
     #   The following node types are supported by ElastiCache. Generally
     #   speaking, the current generation types provide more memory and
@@ -5251,9 +5356,6 @@ module Aws::ElastiCache
     #   * Redis Append-only files (AOF) functionality is not supported for
     #     T1 or T2 instances.
     #
-    #   Supported node types are available in all regions except as noted in
-    #   the following table.
-    #
     #   For a complete listing of node types and specifications, see [Amazon
     #   ElastiCache Product Features and Details][1] and either [Cache Node
     #   Type-Specific Parameters for Memcached][2] or [Cache Node
@@ -5268,28 +5370,28 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   The name of the cache engine (`memcached` or `redis`) used by the
-    #   source cache cluster.
+    #   source cluster.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The version of the cache engine version that is used by the source
-    #   cache cluster.
+    #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] num_cache_nodes
-    #   The number of cache nodes in the source cache cluster.
+    #   The number of cache nodes in the source cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
     #   running Memcached, this value must be between 1 and 20.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_availability_zone
-    #   The name of the Availability Zone in which the source cache cluster
-    #   is located.
+    #   The name of the Availability Zone in which the source cluster is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_create_time
-    #   The date and time when the source cache cluster was created.
+    #   The date and time when the source cluster was created.
     #   @return [Time]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -5319,27 +5421,26 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) for the topic used by the source
-    #   cache cluster for publishing notifications.
+    #   cluster for publishing notifications.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number used by each cache nodes in the source cache
-    #   cluster.
+    #   The port number used by each cache nodes in the source cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_parameter_group_name
-    #   The cache parameter group that is associated with the source cache
+    #   The cache parameter group that is associated with the source
     #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] cache_subnet_group_name
-    #   The name of the cache subnet group associated with the source cache
+    #   The name of the cache subnet group associated with the source
     #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
     #   The Amazon Virtual Private Cloud identifier (VPC ID) of the cache
-    #   subnet group for the source cache cluster.
+    #   subnet group for the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -5351,10 +5452,10 @@ module Aws::ElastiCache
     #   retains the snapshot before deleting it.
     #
     #   For manual snapshots, this field reflects the
-    #   `SnapshotRetentionLimit` for the source cache cluster when the
-    #   snapshot was created. This field is otherwise ignored: Manual
-    #   snapshots do not expire, and can only be deleted using the
-    #   `DeleteSnapshot` operation.
+    #   `SnapshotRetentionLimit` for the source cluster when the snapshot
+    #   was created. This field is otherwise ignored: Manual snapshots do
+    #   not expire, and can only be deleted using the `DeleteSnapshot`
+    #   operation.
     #
     #   **Important** If the value of SnapshotRetentionLimit is set to zero
     #   (0), backups are turned off.
@@ -5362,7 +5463,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] snapshot_window
     #   The daily time range during which ElastiCache takes daily snapshots
-    #   of the source cache cluster.
+    #   of the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] num_node_groups
@@ -5386,7 +5487,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] node_snapshots
-    #   A list of the cache nodes in the source cache cluster.
+    #   A list of the cache nodes in the source cluster.
     #   @return [Array<Types::NodeSnapshot>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
@@ -5419,9 +5520,9 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # Represents the subnet associated with a cache cluster. This parameter
-    # refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC)
-    # and used with ElastiCache.
+    # Represents the subnet associated with a cluster. This parameter refers
+    # to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and
+    # used with ElastiCache.
     #
     # @!attribute [rw] subnet_identifier
     #   The unique identifier for the subnet.

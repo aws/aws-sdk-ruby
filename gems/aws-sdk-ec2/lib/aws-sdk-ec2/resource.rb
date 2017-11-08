@@ -151,14 +151,11 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping.
-    #
-    #   Supplying both a snapshot ID and an encryption value as arguments for
-    #   block-device mapping results in an error. This is because only blank
-    #   volumes can be encrypted on start, and these are not created from a
-    #   snapshot. If a snapshot is the basis for the volume, it contains data
-    #   by definition and its encryption status cannot be changed using this
-    #   action.
+    #   One or more block device mapping entries. You can't specify both a
+    #   snapshot ID and an encryption value. This is because only blank
+    #   volumes can be encrypted on creation. If a snapshot is the basis for a
+    #   volume, it is not blank and its encryption status is used for the
+    #   volume encryption status.
     # @option options [required, String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages.
     # @option options [String] :instance_type
@@ -1230,6 +1227,9 @@ module Aws::EC2
     #
     #   * `state-reason-message` - The message for the state change.
     #
+    #   * `sriov-net-support` - A value of `simple` indicates that enhanced
+    #     networking with the Intel 82599 VF interface is enabled.
+    #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
     #     to the resource. Specify the key of the tag in the filter name and
     #     the value of the tag in the filter value. For example, for the tag
@@ -2219,36 +2219,63 @@ module Aws::EC2
     #
     #   * `description` - The description of the security group.
     #
+    #   * `egress.ip-permission.cidr` - An IPv4 CIDR block for an outbound
+    #     security group rule.
+    #
+    #   * `egress.ip-permission.from-port` - For an outbound rule, the start
+    #     of port range for the TCP and UDP protocols, or an ICMP type number.
+    #
+    #   * `egress.ip-permission.group-id` - The ID of a security group that
+    #     has been referenced in an outbound security group rule.
+    #
+    #   * `egress.ip-permission.group-name` - The name of a security group
+    #     that has been referenced in an outbound security group rule.
+    #
+    #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
+    #     outbound security group rule.
+    #
     #   * `egress.ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service to which the security group allows access.
+    #     service to which a security group rule allows outbound access.
+    #
+    #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
+    #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #
+    #   * `egress.ip-permission.to-port` - For an outbound rule, the end of
+    #     port range for the TCP and UDP protocols, or an ICMP code.
+    #
+    #   * `egress.ip-permission.user-id` - The ID of an AWS account that has
+    #     been referenced in an outbound security group rule.
     #
     #   * `group-id` - The ID of the security group.
     #
     #   * `group-name` - The name of the security group.
     #
-    #   * `ip-permission.cidr` - An IPv4 CIDR range that has been granted
-    #     permission in a security group rule.
+    #   * `ip-permission.cidr` - An IPv4 CIDR block for an inbound security
+    #     group rule.
     #
-    #   * `ip-permission.from-port` - The start of port range for the TCP and
-    #     UDP protocols, or an ICMP type number.
+    #   * `ip-permission.from-port` - For an inbound rule, the start of port
+    #     range for the TCP and UDP protocols, or an ICMP type number.
     #
     #   * `ip-permission.group-id` - The ID of a security group that has been
-    #     granted permission.
+    #     referenced in an inbound security group rule.
     #
     #   * `ip-permission.group-name` - The name of a security group that has
-    #     been granted permission.
+    #     been referenced in an inbound security group rule.
     #
-    #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR range that has been granted
-    #     permission in a security group rule.
+    #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
+    #     security group rule.
     #
-    #   * `ip-permission.protocol` - The IP protocol for the permission (`tcp`
-    #     \| `udp` \| `icmp` or a protocol number).
+    #   * `ip-permission.prefix-list-id` - The ID (prefix) of the AWS service
+    #     from which a security group rule allows inbound access.
     #
-    #   * `ip-permission.to-port` - The end of port range for the TCP and UDP
-    #     protocols, or an ICMP code.
+    #   * `ip-permission.protocol` - The IP protocol for an inbound security
+    #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #
+    #   * `ip-permission.to-port` - For an inbound rule, the end of port range
+    #     for the TCP and UDP protocols, or an ICMP code.
     #
     #   * `ip-permission.user-id` - The ID of an AWS account that has been
-    #     granted permission.
+    #     referenced in an inbound security group rule.
     #
     #   * `owner-id` - The AWS account ID of the owner of the security group.
     #

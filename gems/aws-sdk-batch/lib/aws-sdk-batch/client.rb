@@ -145,14 +145,14 @@ module Aws::Batch
 
     # @!group API Operations
 
-    # Cancels jobs in an AWS Batch job queue. Jobs that are in the
+    # Cancels a job in an AWS Batch job queue. Jobs that are in the
     # `SUBMITTED`, `PENDING`, or `RUNNABLE` state are cancelled. Jobs that
     # have progressed to `STARTING` or `RUNNING` are not cancelled (but the
-    # API operation still succeeds, even if no jobs are cancelled); these
-    # jobs must be terminated with the TerminateJob operation.
+    # API operation still succeeds, even if no job is cancelled); these jobs
+    # must be terminated with the TerminateJob operation.
     #
     # @option params [required, String] :job_id
-    #   A list of up to 100 job IDs to cancel.
+    #   The AWS Batch job ID of the job to cancel.
     #
     # @option params [required, String] :reason
     #   A message to attach to the job that explains the reason for cancelling
@@ -223,7 +223,7 @@ module Aws::Batch
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, and underscores are allowed.
+    #   and lowercase), numbers, hyphens, and underscores are allowed.
     #
     # @option params [required, String] :type
     #   The type of the compute environment.
@@ -1452,13 +1452,13 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Terminates jobs in a job queue. Jobs that are in the `STARTING` or
+    # Terminates a job in a job queue. Jobs that are in the `STARTING` or
     # `RUNNING` state are terminated, which causes them to transition to
     # `FAILED`. Jobs that have not progressed to the `STARTING` state are
     # cancelled.
     #
     # @option params [required, String] :job_id
-    #   Job IDs to be terminated. Up to 100 jobs can be specified.
+    #   The AWS Batch job ID of the job to terminate.
     #
     # @option params [required, String] :reason
     #   A message to attach to the job that explains the reason for cancelling
@@ -1661,7 +1661,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

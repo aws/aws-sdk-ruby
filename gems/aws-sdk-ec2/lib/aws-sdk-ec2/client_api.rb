@@ -398,6 +398,8 @@ module Aws::EC2
     DiskImageFormat = Shapes::StringShape.new(name: 'DiskImageFormat')
     DiskImageList = Shapes::ListShape.new(name: 'DiskImageList')
     DiskImageVolumeDescription = Shapes::StructureShape.new(name: 'DiskImageVolumeDescription')
+    DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
+    DnsEntrySet = Shapes::ListShape.new(name: 'DnsEntrySet')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
@@ -463,6 +465,7 @@ module Aws::EC2
     GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
     GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
     GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
+    GroupIdentifierSet = Shapes::ListShape.new(name: 'GroupIdentifierSet')
     GroupIds = Shapes::ListShape.new(name: 'GroupIds')
     GroupNameStringList = Shapes::ListShape.new(name: 'GroupNameStringList')
     HistoryRecord = Shapes::StructureShape.new(name: 'HistoryRecord')
@@ -828,10 +831,16 @@ module Aws::EC2
     ScheduledInstancesSecurityGroupIdSet = Shapes::ListShape.new(name: 'ScheduledInstancesSecurityGroupIdSet')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroupIdStringList = Shapes::ListShape.new(name: 'SecurityGroupIdStringList')
+    SecurityGroupIdentifier = Shapes::StructureShape.new(name: 'SecurityGroupIdentifier')
     SecurityGroupList = Shapes::ListShape.new(name: 'SecurityGroupList')
     SecurityGroupReference = Shapes::StructureShape.new(name: 'SecurityGroupReference')
     SecurityGroupReferences = Shapes::ListShape.new(name: 'SecurityGroupReferences')
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
+    ServiceDetail = Shapes::StructureShape.new(name: 'ServiceDetail')
+    ServiceDetailSet = Shapes::ListShape.new(name: 'ServiceDetailSet')
+    ServiceType = Shapes::StringShape.new(name: 'ServiceType')
+    ServiceTypeDetail = Shapes::StructureShape.new(name: 'ServiceTypeDetail')
+    ServiceTypeDetailSet = Shapes::ListShape.new(name: 'ServiceTypeDetailSet')
     ShutdownBehavior = Shapes::StringShape.new(name: 'ShutdownBehavior')
     SlotDateTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotDateTimeRangeRequest')
     SlotStartTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotStartTimeRangeRequest')
@@ -966,6 +975,7 @@ module Aws::EC2
     VpcClassicLinkList = Shapes::ListShape.new(name: 'VpcClassicLinkList')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointSet = Shapes::ListShape.new(name: 'VpcEndpointSet')
+    VpcEndpointType = Shapes::StringShape.new(name: 'VpcEndpointType')
     VpcIdStringList = Shapes::ListShape.new(name: 'VpcIdStringList')
     VpcIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'VpcIpv6CidrBlockAssociation')
     VpcIpv6CidrBlockAssociationSet = Shapes::ListShape.new(name: 'VpcIpv6CidrBlockAssociationSet')
@@ -1641,16 +1651,20 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
-    CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVpcEndpointRequest.add_member(:vpc_endpoint_type, Shapes::ShapeRef.new(shape: VpcEndpointType, location_name: "VpcEndpointType"))
+    CreateVpcEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    CreateVpcEndpointRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceName"))
     CreateVpcEndpointRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
     CreateVpcEndpointRequest.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RouteTableId"))
-    CreateVpcEndpointRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceName"))
-    CreateVpcEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    CreateVpcEndpointRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SubnetId"))
+    CreateVpcEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SecurityGroupId"))
+    CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
-    CreateVpcEndpointResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateVpcEndpointResult.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "vpcEndpoint"))
+    CreateVpcEndpointResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateVpcEndpointResult.struct_class = Types::CreateVpcEndpointResult
 
     CreateVpcPeeringConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -2479,23 +2493,26 @@ module Aws::EC2
     DescribeVpcClassicLinkResult.struct_class = Types::DescribeVpcClassicLinkResult
 
     DescribeVpcEndpointServicesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeVpcEndpointServicesRequest.add_member(:service_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "ServiceName"))
+    DescribeVpcEndpointServicesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeVpcEndpointServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeVpcEndpointServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeVpcEndpointServicesRequest.struct_class = Types::DescribeVpcEndpointServicesRequest
 
-    DescribeVpcEndpointServicesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVpcEndpointServicesResult.add_member(:service_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "serviceNameSet"))
+    DescribeVpcEndpointServicesResult.add_member(:service_details, Shapes::ShapeRef.new(shape: ServiceDetailSet, location_name: "serviceDetailSet"))
+    DescribeVpcEndpointServicesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVpcEndpointServicesResult.struct_class = Types::DescribeVpcEndpointServicesResult
 
     DescribeVpcEndpointsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeVpcEndpointsRequest.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "VpcEndpointId"))
     DescribeVpcEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeVpcEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeVpcEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeVpcEndpointsRequest.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "VpcEndpointId"))
     DescribeVpcEndpointsRequest.struct_class = Types::DescribeVpcEndpointsRequest
 
-    DescribeVpcEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVpcEndpointsResult.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpointSet, location_name: "vpcEndpointSet"))
+    DescribeVpcEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVpcEndpointsResult.struct_class = Types::DescribeVpcEndpointsResult
 
     DescribeVpcPeeringConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -2645,6 +2662,12 @@ module Aws::EC2
     DiskImageVolumeDescription.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     DiskImageVolumeDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, location_name: "size"))
     DiskImageVolumeDescription.struct_class = Types::DiskImageVolumeDescription
+
+    DnsEntry.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    DnsEntry.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "hostedZoneId"))
+    DnsEntry.struct_class = Types::DnsEntry
+
+    DnsEntrySet.member = Shapes::ShapeRef.new(shape: DnsEntry, location_name: "item")
 
     EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
@@ -2862,6 +2885,8 @@ module Aws::EC2
     GroupIdentifier.struct_class = Types::GroupIdentifier
 
     GroupIdentifierList.member = Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: "item")
+
+    GroupIdentifierSet.member = Shapes::ShapeRef.new(shape: SecurityGroupIdentifier, location_name: "item")
 
     GroupIds.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -3568,12 +3593,17 @@ module Aws::EC2
     ModifyVpcAttributeRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "vpcId"))
     ModifyVpcAttributeRequest.struct_class = Types::ModifyVpcAttributeRequest
 
-    ModifyVpcEndpointRequest.add_member(:add_route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddRouteTableId"))
     ModifyVpcEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    ModifyVpcEndpointRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
-    ModifyVpcEndpointRequest.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveRouteTableId"))
-    ModifyVpcEndpointRequest.add_member(:reset_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetPolicy"))
     ModifyVpcEndpointRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcEndpointId"))
+    ModifyVpcEndpointRequest.add_member(:reset_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetPolicy"))
+    ModifyVpcEndpointRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
+    ModifyVpcEndpointRequest.add_member(:add_route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddRouteTableId"))
+    ModifyVpcEndpointRequest.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveRouteTableId"))
+    ModifyVpcEndpointRequest.add_member(:add_subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddSubnetId"))
+    ModifyVpcEndpointRequest.add_member(:remove_subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveSubnetId"))
+    ModifyVpcEndpointRequest.add_member(:add_security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddSecurityGroupId"))
+    ModifyVpcEndpointRequest.add_member(:remove_security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveSecurityGroupId"))
+    ModifyVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     ModifyVpcEndpointRequest.struct_class = Types::ModifyVpcEndpointRequest
 
     ModifyVpcEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -4481,6 +4511,10 @@ module Aws::EC2
 
     SecurityGroupIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupId")
 
+    SecurityGroupIdentifier.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    SecurityGroupIdentifier.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    SecurityGroupIdentifier.struct_class = Types::SecurityGroupIdentifier
+
     SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroup, location_name: "item")
 
     SecurityGroupReference.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
@@ -4491,6 +4525,23 @@ module Aws::EC2
     SecurityGroupReferences.member = Shapes::ShapeRef.new(shape: SecurityGroupReference, location_name: "item")
 
     SecurityGroupStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroup")
+
+    ServiceDetail.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    ServiceDetail.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceTypeDetailSet, location_name: "serviceType"))
+    ServiceDetail.add_member(:availability_zones, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "availabilityZoneSet"))
+    ServiceDetail.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
+    ServiceDetail.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
+    ServiceDetail.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
+    ServiceDetail.add_member(:vpc_endpoint_policy_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "vpcEndpointPolicySupported"))
+    ServiceDetail.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptanceRequired"))
+    ServiceDetail.struct_class = Types::ServiceDetail
+
+    ServiceDetailSet.member = Shapes::ShapeRef.new(shape: ServiceDetail, location_name: "item")
+
+    ServiceTypeDetail.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
+    ServiceTypeDetail.struct_class = Types::ServiceTypeDetail
+
+    ServiceTypeDetailSet.member = Shapes::ShapeRef.new(shape: ServiceTypeDetail, location_name: "item")
 
     SlotDateTimeRangeRequest.add_member(:earliest_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EarliestTime"))
     SlotDateTimeRangeRequest.add_member(:latest_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LatestTime"))
@@ -4988,13 +5039,19 @@ module Aws::EC2
 
     VpcClassicLinkList.member = Shapes::ShapeRef.new(shape: VpcClassicLink, location_name: "item")
 
-    VpcEndpoint.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTimestamp"))
-    VpcEndpoint.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "policyDocument"))
-    VpcEndpoint.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "routeTableIdSet"))
+    VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
+    VpcEndpoint.add_member(:vpc_endpoint_type, Shapes::ShapeRef.new(shape: VpcEndpointType, location_name: "vpcEndpointType"))
+    VpcEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     VpcEndpoint.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     VpcEndpoint.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
-    VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
-    VpcEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    VpcEndpoint.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "policyDocument"))
+    VpcEndpoint.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "routeTableIdSet"))
+    VpcEndpoint.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "subnetIdSet"))
+    VpcEndpoint.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierSet, location_name: "groupSet"))
+    VpcEndpoint.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
+    VpcEndpoint.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkInterfaceIdSet"))
+    VpcEndpoint.add_member(:dns_entries, Shapes::ShapeRef.new(shape: DnsEntrySet, location_name: "dnsEntrySet"))
+    VpcEndpoint.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTimestamp"))
     VpcEndpoint.struct_class = Types::VpcEndpoint
 
     VpcEndpointSet.member = Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "item")

@@ -266,6 +266,93 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
+    # Deletes the specified Application Auto Scaling scheduled action.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_action({
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     scheduled_action_name: "ResourceIdMaxLen1600", # required
+    #     resource_id: "ResourceIdMaxLen1600", # required
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledAction AWS API Documentation
+    #
+    # @overload delete_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_action(params = {}, options = {})
+      req = build_request(:delete_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Deregisters a scalable target.
     #
     # Deregistering a scalable target deletes the scaling policies that are
@@ -678,8 +765,7 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Provides descriptive information about the scaling policies in the
-    # specified namespace.
+    # Describes the scaling policies for the specified service namespace.
     #
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `PolicyNames` parameters.
@@ -867,6 +953,136 @@ module Aws::ApplicationAutoScaling
     # @param [Hash] params ({})
     def describe_scaling_policies(params = {}, options = {})
       req = build_request(:describe_scaling_policies, params)
+      req.send_request(options)
+    end
+
+    # Describes the scheduled actions for the specified service namespace.
+    #
+    # You can filter the results using the `ResourceId`,
+    # `ScalableDimension`, and `ScheduledActionNames` parameters.
+    #
+    # To create a scheduled action or update an existing one, see
+    # PutScheduledAction. If you are no longer using a scheduled action, you
+    # can delete it using DeleteScheduledAction.
+    #
+    # @option params [Array<String>] :scheduled_action_names
+    #   The names of the scheduled actions to describe.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier. If
+    #   you specify a scalable dimension, you must also specify a resource ID.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property. If you specify a scalable
+    #   dimension, you must also specify a resource ID.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of scalable target results. This value can be
+    #   between 1 and 50. The default value is 50.
+    #
+    #   If this parameter is used, the operation returns up to `MaxResults`
+    #   results at a time, along with a `NextToken` value. To get the next set
+    #   of results, include the `NextToken` value in a subsequent call. If
+    #   this parameter is not used, the operation returns up to 50 results and
+    #   a `NextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::DescribeScheduledActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
+    #   * {Types::DescribeScheduledActionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduled_actions({
+    #     scheduled_action_names: ["ResourceIdMaxLen1600"],
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     resource_id: "ResourceIdMaxLen1600",
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     max_results: 1,
+    #     next_token: "XmlString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_actions #=> Array
+    #   resp.scheduled_actions[0].scheduled_action_name #=> String
+    #   resp.scheduled_actions[0].scheduled_action_arn #=> String
+    #   resp.scheduled_actions[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
+    #   resp.scheduled_actions[0].schedule #=> String
+    #   resp.scheduled_actions[0].resource_id #=> String
+    #   resp.scheduled_actions[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
+    #   resp.scheduled_actions[0].start_time #=> Time
+    #   resp.scheduled_actions[0].end_time #=> Time
+    #   resp.scheduled_actions[0].scalable_target_action.min_capacity #=> Integer
+    #   resp.scheduled_actions[0].scalable_target_action.max_capacity #=> Integer
+    #   resp.scheduled_actions[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScheduledActions AWS API Documentation
+    #
+    # @overload describe_scheduled_actions(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduled_actions(params = {}, options = {})
+      req = build_request(:describe_scheduled_actions, params)
       req.send_request(options)
     end
 
@@ -1095,6 +1311,150 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
+    # Creates or updates a scheduled action for an Application Auto Scaling
+    # scalable target.
+    #
+    # Each scalable target is identified by a service namespace, resource
+    # ID, and scalable dimension. A scheduled action applies to the scalable
+    # target identified by those three attributes. You cannot create a
+    # scheduled action without first registering a scalable target using
+    # RegisterScalableTarget.
+    #
+    # To update an action, specify its name and the parameters that you want
+    # to change. If you don't specify start and end times, the old values
+    # are deleted. Any other parameters that you don't specify are not
+    # changed by this update request.
+    #
+    # You can view the scheduled actions using DescribeScheduledActions. If
+    # you are no longer using a scheduled action, you can delete it using
+    # DeleteScheduledAction.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [String] :schedule
+    #   The schedule for this action. The following formats are supported:
+    #
+    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #
+    #   * Rate expressions - `rate(value unit)`
+    #
+    #   * Cron expressions - `cron(fields)`
+    #
+    #   At expressions are useful for one-time schedules. Specify the time, in
+    #   UTC.
+    #
+    #   For rate expressions, *value* is a positive integer and *unit* is
+    #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
+    #
+    #   For more information about cron expressions, see [Cron][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Cron
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The date and time for the scheduled action to start.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The date and time for the scheduled action to end.
+    #
+    # @option params [Types::ScalableTargetAction] :scalable_target_action
+    #   The new minimum and maximum capacity. You can set both values or just
+    #   one. During the scheduled time, if the current capacity is below the
+    #   minimum capacity, Application Auto Scaling scales out to the minimum
+    #   capacity. If the current capacity is above the maximum capacity,
+    #   Application Auto Scaling scales in to the maximum capacity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_scheduled_action({
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     schedule: "ResourceIdMaxLen1600",
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #     resource_id: "ResourceIdMaxLen1600", # required
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     scalable_target_action: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScheduledAction AWS API Documentation
+    #
+    # @overload put_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def put_scheduled_action(params = {}, options = {})
+      req = build_request(:put_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Registers or updates a scalable target. A scalable target is a
     # resource that Application Auto Scaling can scale out or scale in.
     # After you have registered a scalable target, you can use this
@@ -1253,7 +1613,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

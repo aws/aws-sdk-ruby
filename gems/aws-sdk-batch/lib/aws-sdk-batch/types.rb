@@ -18,7 +18,8 @@ module Aws::Batch
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the Amazon ECS task that is
-    #   associated with the job attempt.
+    #   associated with the job attempt. Each container attempt receives a
+    #   task ARN when they reach the `STARTING` status.
     #   @return [String]
     #
     # @!attribute [rw] exit_code
@@ -89,7 +90,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_id
-    #   A list of up to 100 job IDs to cancel.
+    #   The AWS Batch job ID of the job to cancel.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -241,7 +242,12 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] instance_types
-    #   The instances types that may launched.
+    #   The instances types that may be launched. You can specify instance
+    #   families to launch any instance type within those families (for
+    #   example, `c4` or `p3`), or you can specify specific sizes within a
+    #   family (such as `c4.8xlarge`). You can also choose `optimal` to pick
+    #   instance types (from the latest C, M, and R instance families) on
+    #   the fly that match the demand of your job queues.
     #   @return [Array<String>]
     #
     # @!attribute [rw] image_id
@@ -377,6 +383,12 @@ module Aws::Batch
     #
     # @!attribute [rw] environment
     #   The environment variables to pass to a container.
+    #
+    #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
+    #   convention is reserved for variables that are set by the AWS Batch
+    #   service.
+    #
+    #    </note>
     #   @return [Array<Types::KeyValuePair>]
     #
     # @!attribute [rw] mount_points
@@ -418,7 +430,8 @@ module Aws::Batch
     #
     # @!attribute [rw] task_arn
     #   The Amazon Resource Name (ARN) of the Amazon ECS task that is
-    #   associated with the container job.
+    #   associated with the container job. Each container attempt receives a
+    #   task ARN when they reach the `STARTING` status.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
@@ -488,6 +501,12 @@ module Aws::Batch
     #   environment variables, which are added to the container at launch,
     #   or you can override the existing environment variables from the
     #   Docker image or the job definition.
+    #
+    #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
+    #   convention is reserved for variables that are set by the AWS Batch
+    #   service.
+    #
+    #    </note>
     #   @return [Array<Types::KeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides AWS API Documentation
@@ -636,6 +655,12 @@ module Aws::Batch
     #   We do not recommend using plain text environment variables for
     #   sensitive information, such as credential data.
     #
+    #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
+    #   convention is reserved for variables that are set by the AWS Batch
+    #   service.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
@@ -752,7 +777,7 @@ module Aws::Batch
     #
     # @!attribute [rw] compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, and underscores are allowed.
+    #   and lowercase), numbers, hyphens, and underscores are allowed.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1844,7 +1869,7 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_id
-    #   Job IDs to be terminated. Up to 100 jobs can be specified.
+    #   The AWS Batch job ID of the job to terminate.
     #   @return [String]
     #
     # @!attribute [rw] reason
