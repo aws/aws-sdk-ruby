@@ -113,6 +113,9 @@ module Aws::EC2
     ClassicLinkDnsSupportList = Shapes::ListShape.new(name: 'ClassicLinkDnsSupportList')
     ClassicLinkInstance = Shapes::StructureShape.new(name: 'ClassicLinkInstance')
     ClassicLinkInstanceList = Shapes::ListShape.new(name: 'ClassicLinkInstanceList')
+    ClassicLoadBalancer = Shapes::StructureShape.new(name: 'ClassicLoadBalancer')
+    ClassicLoadBalancers = Shapes::ListShape.new(name: 'ClassicLoadBalancers')
+    ClassicLoadBalancersConfig = Shapes::StructureShape.new(name: 'ClassicLoadBalancersConfig')
     ClientData = Shapes::StructureShape.new(name: 'ClientData')
     ConfirmProductInstanceRequest = Shapes::StructureShape.new(name: 'ConfirmProductInstanceRequest')
     ConfirmProductInstanceResult = Shapes::StructureShape.new(name: 'ConfirmProductInstanceResult')
@@ -128,6 +131,8 @@ module Aws::EC2
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CreateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'CreateCustomerGatewayRequest')
     CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
+    CreateDefaultSubnetRequest = Shapes::StructureShape.new(name: 'CreateDefaultSubnetRequest')
+    CreateDefaultSubnetResult = Shapes::StructureShape.new(name: 'CreateDefaultSubnetResult')
     CreateDefaultVpcRequest = Shapes::StructureShape.new(name: 'CreateDefaultVpcRequest')
     CreateDefaultVpcResult = Shapes::StructureShape.new(name: 'CreateDefaultVpcResult')
     CreateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'CreateDhcpOptionsRequest')
@@ -589,6 +594,7 @@ module Aws::EC2
     LaunchSpecsList = Shapes::ListShape.new(name: 'LaunchSpecsList')
     ListingState = Shapes::StringShape.new(name: 'ListingState')
     ListingStatus = Shapes::StringShape.new(name: 'ListingStatus')
+    LoadBalancersConfig = Shapes::StructureShape.new(name: 'LoadBalancersConfig')
     LoadPermission = Shapes::StructureShape.new(name: 'LoadPermission')
     LoadPermissionList = Shapes::ListShape.new(name: 'LoadPermissionList')
     LoadPermissionListRequest = Shapes::ListShape.new(name: 'LoadPermissionListRequest')
@@ -905,6 +911,9 @@ module Aws::EC2
     TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
     TargetConfigurationRequest = Shapes::StructureShape.new(name: 'TargetConfigurationRequest')
     TargetConfigurationRequestSet = Shapes::ListShape.new(name: 'TargetConfigurationRequestSet')
+    TargetGroup = Shapes::StructureShape.new(name: 'TargetGroup')
+    TargetGroups = Shapes::ListShape.new(name: 'TargetGroups')
+    TargetGroupsConfig = Shapes::StructureShape.new(name: 'TargetGroupsConfig')
     TargetReservationValue = Shapes::StructureShape.new(name: 'TargetReservationValue')
     TargetReservationValueSet = Shapes::ListShape.new(name: 'TargetReservationValueSet')
     TelemetryStatus = Shapes::StringShape.new(name: 'TelemetryStatus')
@@ -1356,6 +1365,14 @@ module Aws::EC2
 
     ClassicLinkInstanceList.member = Shapes::ShapeRef.new(shape: ClassicLinkInstance, location_name: "item")
 
+    ClassicLoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ClassicLoadBalancer.struct_class = Types::ClassicLoadBalancer
+
+    ClassicLoadBalancers.member = Shapes::ShapeRef.new(shape: ClassicLoadBalancer, location_name: "item")
+
+    ClassicLoadBalancersConfig.add_member(:classic_load_balancers, Shapes::ShapeRef.new(shape: ClassicLoadBalancers, required: true, location_name: "classicLoadBalancers"))
+    ClassicLoadBalancersConfig.struct_class = Types::ClassicLoadBalancersConfig
+
     ClientData.add_member(:comment, Shapes::ShapeRef.new(shape: String, location_name: "Comment"))
     ClientData.add_member(:upload_end, Shapes::ShapeRef.new(shape: DateTime, location_name: "UploadEnd"))
     ClientData.add_member(:upload_size, Shapes::ShapeRef.new(shape: Double, location_name: "UploadSize"))
@@ -1427,6 +1444,13 @@ module Aws::EC2
 
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
     CreateCustomerGatewayResult.struct_class = Types::CreateCustomerGatewayResult
+
+    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
+    CreateDefaultSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateDefaultSubnetRequest.struct_class = Types::CreateDefaultSubnetRequest
+
+    CreateDefaultSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
+    CreateDefaultSubnetResult.struct_class = Types::CreateDefaultSubnetResult
 
     CreateDefaultVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateDefaultVpcRequest.struct_class = Types::CreateDefaultVpcRequest
@@ -3448,6 +3472,10 @@ module Aws::EC2
 
     LaunchSpecsList.member = Shapes::ShapeRef.new(shape: SpotFleetLaunchSpecification, location_name: "item")
 
+    LoadBalancersConfig.add_member(:classic_load_balancers_config, Shapes::ShapeRef.new(shape: ClassicLoadBalancersConfig, location_name: "classicLoadBalancersConfig"))
+    LoadBalancersConfig.add_member(:target_groups_config, Shapes::ShapeRef.new(shape: TargetGroupsConfig, location_name: "targetGroupsConfig"))
+    LoadBalancersConfig.struct_class = Types::LoadBalancersConfig
+
     LoadPermission.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
     LoadPermission.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "group"))
     LoadPermission.struct_class = Types::LoadPermission
@@ -4653,6 +4681,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
     SpotFleetRequestConfigData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
     SpotFleetRequestConfigData.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
+    SpotFleetRequestConfigData.add_member(:load_balancers_config, Shapes::ShapeRef.new(shape: LoadBalancersConfig, location_name: "loadBalancersConfig"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")
@@ -4815,6 +4844,14 @@ module Aws::EC2
     TargetConfigurationRequest.struct_class = Types::TargetConfigurationRequest
 
     TargetConfigurationRequestSet.member = Shapes::ShapeRef.new(shape: TargetConfigurationRequest, location_name: "TargetConfigurationRequest")
+
+    TargetGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    TargetGroup.struct_class = Types::TargetGroup
+
+    TargetGroups.member = Shapes::ShapeRef.new(shape: TargetGroup, location_name: "item")
+
+    TargetGroupsConfig.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, required: true, location_name: "targetGroups"))
+    TargetGroupsConfig.struct_class = Types::TargetGroupsConfig
 
     TargetReservationValue.add_member(:reservation_value, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "reservationValue"))
     TargetReservationValue.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, location_name: "targetConfiguration"))
@@ -5412,6 +5449,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCustomerGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCustomerGatewayResult)
+      end)
+
+      api.add_operation(:create_default_subnet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDefaultSubnet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDefaultSubnetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDefaultSubnetResult)
       end)
 
       api.add_operation(:create_default_vpc, Seahorse::Model::Operation.new.tap do |o|

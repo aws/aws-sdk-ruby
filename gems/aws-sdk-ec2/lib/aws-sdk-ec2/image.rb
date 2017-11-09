@@ -139,8 +139,7 @@ module Aws::EC2
       data[:name]
     end
 
-    # The device name of the root device (for example, `/dev/sda1` or
-    # `/dev/xvda`).
+    # The device name of the root device volume (for example, `/dev/sda1`).
     # @return [String]
     def root_device_name
       data[:root_device_name]

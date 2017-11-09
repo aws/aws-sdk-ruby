@@ -806,8 +806,8 @@ module Aws::EC2
     #   * `block-device-mapping.delete-on-termination` - A Boolean that
     #     indicates whether the EBS volume is deleted on instance termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh` or `xvdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.status` - The status for the EBS volume
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
@@ -1007,11 +1007,11 @@ module Aws::EC2
     #     you launch ten instances using the same launch request, you also get
     #     one reservation ID.
     #
-    #   * `root-device-name` - The name of the root device for the instance
-    #     (for example, `/dev/sda1` or `/dev/xvda`).
+    #   * `root-device-name` - The device name of the root device volume (for
+    #     example, `/dev/sda1`).
     #
-    #   * `root-device-type` - The type of root device that the instance uses
-    #     (`ebs` \| `instance-store`).
+    #   * `root-device-type` - The type of the root device volume (`ebs` \|
+    #     `instance-store`).
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking

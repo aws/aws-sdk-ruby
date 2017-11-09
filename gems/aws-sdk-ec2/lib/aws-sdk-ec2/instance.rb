@@ -218,7 +218,7 @@ module Aws::EC2
       data[:elastic_gpu_associations]
     end
 
-    # The root device name (for example, `/dev/sda1` or `/dev/xvda`).
+    # The device name of the root device volume (for example, `/dev/sda1`).
     # @return [String]
     def root_device_name
       data[:root_device_name]
@@ -535,8 +535,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :device
-    #   The device name to expose to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     # @option options [required, String] :volume_id
     #   The ID of the EBS volume. The volume and instance must be within the
     #   same Availability Zone.
@@ -1260,8 +1259,8 @@ module Aws::EC2
     #   * `attachment.delete-on-termination` - Whether the volume is deleted
     #     on instance termination.
     #
-    #   * `attachment.device` - The device name that is exposed to the
-    #     instance (for example, `/dev/sda1`).
+    #   * `attachment.device` - The device name specified in the block device
+    #     mapping (for example, `/dev/sda1`).
     #
     #   * `attachment.instance-id` - The ID of the instance the volume is
     #     attached to.

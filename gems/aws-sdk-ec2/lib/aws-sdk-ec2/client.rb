@@ -1166,8 +1166,7 @@ module Aws::EC2
     # [4]: https://aws.amazon.com/marketplace/help/200900000
     #
     # @option params [required, String] :device
-    #   The device name to expose to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -2518,6 +2517,65 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_customer_gateway(params = {}, options = {})
       req = build_request(:create_customer_gateway, params)
+      req.send_request(options)
+    end
+
+    # Creates a default subnet with a size `/20` IPv4 CIDR block in the
+    # specified Availability Zone in your default VPC. You can have only one
+    # default subnet per Availability Zone. For more information, see
+    # [Creating a Default Subnet][1] in the *Amazon Virtual Private Cloud
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html#create-default-subnet
+    #
+    # @option params [required, String] :availability_zone
+    #   The Availability Zone in which to create the default subnet.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateDefaultSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDefaultSubnetResult#subnet #subnet} => Types::Subnet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_default_subnet({
+    #     availability_zone: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.available_ip_address_count #=> Integer
+    #   resp.subnet.cidr_block #=> String
+    #   resp.subnet.default_for_az #=> Boolean
+    #   resp.subnet.map_public_ip_on_launch #=> Boolean
+    #   resp.subnet.state #=> String, one of "pending", "available"
+    #   resp.subnet.subnet_id #=> String
+    #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
+    #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.subnet.tags #=> Array
+    #   resp.subnet.tags[0].key #=> String
+    #   resp.subnet.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
+    #
+    # @overload create_default_subnet(params = {})
+    # @param [Hash] params ({})
+    def create_default_subnet(params = {}, options = {})
+      req = build_request(:create_default_subnet, params)
       req.send_request(options)
     end
 
@@ -8426,8 +8484,8 @@ module Aws::EC2
     #     indicates whether the Amazon EBS volume is deleted on instance
     #     termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.snapshot-id` - The ID of the snapshot used for
     #     the EBS volume.
@@ -8475,7 +8533,7 @@ module Aws::EC2
     #
     #   * `ramdisk-id` - The RAM disk ID.
     #
-    #   * `root-device-name` - The name of the root device volume (for
+    #   * `root-device-name` - The device name of the root device volume (for
     #     example, `/dev/sda1`).
     #
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
@@ -9089,8 +9147,8 @@ module Aws::EC2
     #   * `block-device-mapping.delete-on-termination` - A Boolean that
     #     indicates whether the EBS volume is deleted on instance termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh` or `xvdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.status` - The status for the EBS volume
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
@@ -9290,11 +9348,11 @@ module Aws::EC2
     #     you launch ten instances using the same launch request, you also get
     #     one reservation ID.
     #
-    #   * `root-device-name` - The name of the root device for the instance
-    #     (for example, `/dev/sda1` or `/dev/xvda`).
+    #   * `root-device-name` - The device name of the root device volume (for
+    #     example, `/dev/sda1`).
     #
-    #   * `root-device-type` - The type of root device that the instance uses
-    #     (`ebs` \| `instance-store`).
+    #   * `root-device-type` - The type of the root device volume (`ebs` \|
+    #     `instance-store`).
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
@@ -12842,6 +12900,10 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_until #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.replace_unhealthy_instances #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_interruption_behavior #=> String, one of "stop", "terminate"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.classic_load_balancers_config.classic_load_balancers #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.classic_load_balancers_config.classic_load_balancers[0].name #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups[0].arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
     #
@@ -12893,21 +12955,22 @@ module Aws::EC2
     #   * `launch-group` - The Spot instance launch group.
     #
     #   * `launch.block-device-mapping.delete-on-termination` - Indicates
-    #     whether the Amazon EBS volume is deleted on instance termination.
+    #     whether the EBS volume is deleted on instance termination.
     #
     #   * `launch.block-device-mapping.device-name` - The device name for the
-    #     Amazon EBS volume (for example, `/dev/sdh`).
+    #     volume in the block device mapping (for example, `/dev/sdh` or
+    #     `xvdh`).
     #
     #   * `launch.block-device-mapping.snapshot-id` - The ID of the snapshot
-    #     used for the Amazon EBS volume.
+    #     for the EBS volume.
     #
-    #   * `launch.block-device-mapping.volume-size` - The size of the Amazon
-    #     EBS volume, in GiB.
+    #   * `launch.block-device-mapping.volume-size` - The size of the EBS
+    #     volume, in GiB.
     #
-    #   * `launch.block-device-mapping.volume-type` - The type of the Amazon
-    #     EBS volume: `gp2` for General Purpose SSD, `io1` for Provisioned
-    #     IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
-    #     `standard` for Magnetic.
+    #   * `launch.block-device-mapping.volume-type` - The type of EBS volume:
+    #     `gp2` for General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1`
+    #     for Throughput Optimized HDD, `sc1`for Cold HDD, or `standard` for
+    #     Magnetic.
     #
     #   * `launch.group-id` - The security group for the instance.
     #
@@ -13976,8 +14039,8 @@ module Aws::EC2
     #   * `attachment.delete-on-termination` - Whether the volume is deleted
     #     on instance termination.
     #
-    #   * `attachment.device` - The device name that is exposed to the
-    #     instance (for example, `/dev/sda1`).
+    #   * `attachment.device` - The device name specified in the block device
+    #     mapping (for example, `/dev/sda1`).
     #
     #   * `attachment.instance-id` - The ID of the instance the volume is
     #     attached to.
@@ -18668,8 +18731,7 @@ module Aws::EC2
     #   The ID of the RAM disk.
     #
     # @option params [String] :root_device_name
-    #   The name of the root device (for example, `/dev/sda1`, or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example, `/dev/sda1`).
     #
     # @option params [String] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
@@ -19629,6 +19691,22 @@ module Aws::EC2
     #       valid_until: Time.now,
     #       replace_unhealthy_instances: false,
     #       instance_interruption_behavior: "stop", # accepts stop, terminate
+    #       load_balancers_config: {
+    #         classic_load_balancers_config: {
+    #           classic_load_balancers: [ # required
+    #             {
+    #               name: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         target_groups_config: {
+    #           target_groups: [ # required
+    #             {
+    #               arn: "String", # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -21715,7 +21793,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

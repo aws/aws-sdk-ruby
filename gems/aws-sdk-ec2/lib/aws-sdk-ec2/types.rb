@@ -913,8 +913,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device
-    #   The device name to expose to the instance (for example, `/dev/sdh`
-    #   or `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -1387,8 +1386,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] virtual_name
@@ -1979,6 +1977,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a Classic Load Balancer.
+    #
+    # @note When making an API call, you may pass ClassicLoadBalancer
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancer AWS API Documentation
+    #
+    class ClassicLoadBalancer < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Describes the Classic Load Balancers to attach to a Spot fleet. Spot
+    # fleet registers the running Spot instances with these Classic Load
+    # Balancers.
+    #
+    # @note When making an API call, you may pass ClassicLoadBalancersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         classic_load_balancers: [ # required
+    #           {
+    #             name: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] classic_load_balancers
+    #   One or more Classic Load Balancers.
+    #   @return [Array<Types::ClassicLoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancersConfig AWS API Documentation
+    #
+    class ClassicLoadBalancersConfig < Struct.new(
+      :classic_load_balancers)
+      include Aws::Structure
+    end
+
     # Describes the client-specific data.
     #
     # @note When making an API call, you may pass ClientData
@@ -2469,6 +2513,44 @@ module Aws::EC2
     #
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDefaultSubnetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to create the default subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetRequest AWS API Documentation
+    #
+    class CreateDefaultSubnetRequest < Struct.new(
+      :availability_zone,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subnet
+    #   Information about the subnet.
+    #   @return [Types::Subnet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetResult AWS API Documentation
+    #
+    class CreateDefaultSubnetResult < Struct.new(
+      :subnet)
       include Aws::Structure
     end
 
@@ -6884,8 +6966,8 @@ module Aws::EC2
     #     that indicates whether the Amazon EBS volume is deleted on
     #     instance termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.snapshot-id` - The ID of the snapshot used
     #     for the EBS volume.
@@ -6935,8 +7017,8 @@ module Aws::EC2
     #
     #   * `ramdisk-id` - The RAM disk ID.
     #
-    #   * `root-device-name` - The name of the root device volume (for
-    #     example, `/dev/sda1`).
+    #   * `root-device-name` - The device name of the root device volume
+    #     (for example, `/dev/sda1`).
     #
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
@@ -7368,8 +7450,8 @@ module Aws::EC2
     #     indicates whether the EBS volume is deleted on instance
     #     termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh` or `xvdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.status` - The status for the EBS volume
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
@@ -7574,11 +7656,11 @@ module Aws::EC2
     #     ID. If you launch ten instances using the same launch request, you
     #     also get one reservation ID.
     #
-    #   * `root-device-name` - The name of the root device for the instance
-    #     (for example, `/dev/sda1` or `/dev/xvda`).
+    #   * `root-device-name` - The device name of the root device volume
+    #     (for example, `/dev/sda1`).
     #
-    #   * `root-device-type` - The type of root device that the instance
-    #     uses (`ebs` \| `instance-store`).
+    #   * `root-device-type` - The type of the root device volume (`ebs` \|
+    #     `instance-store`).
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
@@ -10154,21 +10236,22 @@ module Aws::EC2
     #   * `launch-group` - The Spot instance launch group.
     #
     #   * `launch.block-device-mapping.delete-on-termination` - Indicates
-    #     whether the Amazon EBS volume is deleted on instance termination.
+    #     whether the EBS volume is deleted on instance termination.
     #
     #   * `launch.block-device-mapping.device-name` - The device name for
-    #     the Amazon EBS volume (for example, `/dev/sdh`).
+    #     the volume in the block device mapping (for example, `/dev/sdh` or
+    #     `xvdh`).
     #
     #   * `launch.block-device-mapping.snapshot-id` - The ID of the snapshot
-    #     used for the Amazon EBS volume.
+    #     for the EBS volume.
     #
-    #   * `launch.block-device-mapping.volume-size` - The size of the Amazon
-    #     EBS volume, in GiB.
+    #   * `launch.block-device-mapping.volume-size` - The size of the EBS
+    #     volume, in GiB.
     #
-    #   * `launch.block-device-mapping.volume-type` - The type of the Amazon
-    #     EBS volume: `gp2` for General Purpose SSD, `io1` for Provisioned
-    #     IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD,
-    #     or `standard` for Magnetic.
+    #   * `launch.block-device-mapping.volume-type` - The type of EBS
+    #     volume: `gp2` for General Purpose SSD, `io1` for Provisioned IOPS
+    #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
+    #     `standard` for Magnetic.
     #
     #   * `launch.group-id` - The security group for the instance.
     #
@@ -10933,8 +11016,8 @@ module Aws::EC2
     #   * `attachment.delete-on-termination` - Whether the volume is deleted
     #     on instance termination.
     #
-    #   * `attachment.device` - The device name that is exposed to the
-    #     instance (for example, `/dev/sda1`).
+    #   * `attachment.device` - The device name specified in the block
+    #     device mapping (for example, `/dev/sda1`).
     #
     #   * `attachment.instance-id` - The ID of the instance the volume is
     #     attached to.
@@ -12887,7 +12970,7 @@ module Aws::EC2
     # @!attribute [rw] event_sub_type
     #   The event.
     #
-    #   The following are the `error` events.
+    #   The following are the `error` events:
     #
     #   * `iamFleetRoleInvalid` - The Spot fleet did not have the required
     #     permissions either to launch or terminate an instance.
@@ -12902,7 +12985,7 @@ module Aws::EC2
     #   * `spotInstanceCountLimitExceeded` - You've reached the limit on
     #     the number of Spot instances that you can launch.
     #
-    #   The following are the `fleetRequestChange` events.
+    #   The following are the `fleetRequestChange` events:
     #
     #   * `active` - The Spot fleet has been validated and Amazon EC2 is
     #     attempting to maintain the target number of running Spot
@@ -12934,11 +13017,21 @@ module Aws::EC2
     #   * `submitted` - The Spot fleet request is being evaluated and Amazon
     #     EC2 is preparing to launch the target number of Spot instances.
     #
-    #   The following are the `instanceChange` events.
+    #   The following are the `instanceChange` events:
     #
     #   * `launched` - A bid was fulfilled and a new instance was launched.
     #
     #   * `terminated` - An instance was terminated by the user.
+    #
+    #   The following are the `Information` events:
+    #
+    #   * `launchSpecUnusable` - The bid price of a launch specification is
+    #     not valid because it is below the market price or the market price
+    #     is above the On-Demand price.
+    #
+    #   * `fleetProgressHalted` - The bid price of every launch
+    #     specification is not valid. A launch specification might become
+    #     valid if the market price changes.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -13636,13 +13729,14 @@ module Aws::EC2
     # @!attribute [rw] event_type
     #   The event type.
     #
-    #   * `error` - Indicates an error with the Spot fleet request.
+    #   * `error` - An error with the Spot fleet request.
     #
-    #   * `fleetRequestChange` - Indicates a change in the status or
-    #     configuration of the Spot fleet request.
+    #   * `fleetRequestChange` - A change in the status or configuration of
+    #     the Spot fleet request.
     #
-    #   * `instanceChange` - Indicates that an instance was launched or
-    #     terminated.
+    #   * `instanceChange` - An instance was launched or terminated.
+    #
+    #   * `Information` - An informational event.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -14106,8 +14200,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] root_device_name
-    #   The device name of the root device (for example, `/dev/sda1` or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -15187,7 +15281,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceNetworkInterface>]
     #
     # @!attribute [rw] root_device_name
-    #   The root device name (for example, `/dev/sda1` or `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -15328,8 +15423,8 @@ module Aws::EC2
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] root_device_name
-    #   The name of the root device (for example, `/dev/sda1` or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] source_dest_check
@@ -15372,8 +15467,7 @@ module Aws::EC2
     # Describes a block device mapping.
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -15405,8 +15499,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -16427,6 +16520,45 @@ module Aws::EC2
       :ramdisk_id,
       :subnet_id,
       :monitoring)
+      include Aws::Structure
+    end
+
+    # Describes the Classic Load Balancers and target groups to attach to a
+    # Spot fleet request.
+    #
+    # @note When making an API call, you may pass LoadBalancersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         classic_load_balancers_config: {
+    #           classic_load_balancers: [ # required
+    #             {
+    #               name: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         target_groups_config: {
+    #           target_groups: [ # required
+    #             {
+    #               arn: "String", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] classic_load_balancers_config
+    #   The Classic Load Balancers.
+    #   @return [Types::ClassicLoadBalancersConfig]
+    #
+    # @!attribute [rw] target_groups_config
+    #   The target groups.
+    #   @return [Types::TargetGroupsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadBalancersConfig AWS API Documentation
+    #
+    class LoadBalancersConfig < Struct.new(
+      :classic_load_balancers_config,
+      :target_groups_config)
       include Aws::Structure
     end
 
@@ -19389,8 +19521,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] root_device_name
-    #   The name of the root device (for example, `/dev/sda1`, or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] sriov_net_support
@@ -20063,6 +20195,22 @@ module Aws::EC2
     #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
     #           instance_interruption_behavior: "stop", # accepts stop, terminate
+    #           load_balancers_config: {
+    #             classic_load_balancers_config: {
+    #               classic_load_balancers: [ # required
+    #                 {
+    #                   name: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             target_groups_config: {
+    #               target_groups: [ # required
+    #                 {
+    #                   arn: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -22480,8 +22628,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -22498,7 +22645,7 @@ module Aws::EC2
     #   The virtual device name (`ephemeral`N). Instance store volumes are
     #   numbered starting from 0. An instance type with two available
     #   instance store volumes can specify mappings for `ephemeral0` and
-    #   `ephemeral1`.The number of available instance store volumes depends
+    #   `ephemeral1`. The number of available instance store volumes depends
     #   on the instance type. After you connect to the instance, you must
     #   mount the volume.
     #
@@ -23847,6 +23994,22 @@ module Aws::EC2
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
     #         instance_interruption_behavior: "stop", # accepts stop, terminate
+    #         load_balancers_config: {
+    #           classic_load_balancers_config: {
+    #             classic_load_balancers: [ # required
+    #               {
+    #                 name: "String", # required
+    #               },
+    #             ],
+    #           },
+    #           target_groups_config: {
+    #             target_groups: [ # required
+    #               {
+    #                 arn: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -23936,6 +24099,17 @@ module Aws::EC2
     #   interrupted.
     #   @return [String]
     #
+    # @!attribute [rw] load_balancers_config
+    #   One or more Classic Load Balancers and target groups to attach to
+    #   the Spot fleet request. Spot fleet registers the running Spot
+    #   instances with the specified Classic Load Balancers and target
+    #   groups.
+    #
+    #   With Network Load Balancers, Spot fleet cannot register instances
+    #   that have the following instance types: C1, CC1, CC2, CG1, CG2, CR1,
+    #   CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.
+    #   @return [Types::LoadBalancersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
     #
     class SpotFleetRequestConfigData < Struct.new(
@@ -23952,7 +24126,8 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :replace_unhealthy_instances,
-      :instance_interruption_behavior)
+      :instance_interruption_behavior,
+      :load_balancers_config)
       include Aws::Structure
     end
 
@@ -24772,6 +24947,51 @@ module Aws::EC2
     class TargetConfigurationRequest < Struct.new(
       :instance_count,
       :offering_id)
+      include Aws::Structure
+    end
+
+    # Describes a load balancer target group.
+    #
+    # @note When making an API call, you may pass TargetGroup
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the target group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroup AWS API Documentation
+    #
+    class TargetGroup < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Describes the target groups to attach to a Spot fleet. Spot fleet
+    # registers the running Spot instances with these target groups.
+    #
+    # @note When making an API call, you may pass TargetGroupsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         target_groups: [ # required
+    #           {
+    #             arn: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] target_groups
+    #   One or more target groups.
+    #   @return [Array<Types::TargetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroupsConfig AWS API Documentation
+    #
+    class TargetGroupsConfig < Struct.new(
+      :target_groups)
       include Aws::Structure
     end
 

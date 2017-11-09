@@ -959,8 +959,7 @@ module Aws::EC2
     # @option options [String] :ramdisk_id
     #   The ID of the RAM disk.
     # @option options [String] :root_device_name
-    #   The name of the root device (for example, `/dev/sda1`, or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example, `/dev/sda1`).
     # @option options [String] :sriov_net_support
     #   Set to `simple` to enable enhanced networking with the Intel 82599
     #   Virtual Function interface for the AMI and any instances that you
@@ -1165,8 +1164,8 @@ module Aws::EC2
     #     indicates whether the Amazon EBS volume is deleted on instance
     #     termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.snapshot-id` - The ID of the snapshot used for
     #     the EBS volume.
@@ -1214,7 +1213,7 @@ module Aws::EC2
     #
     #   * `ramdisk-id` - The RAM disk ID.
     #
-    #   * `root-device-name` - The name of the root device volume (for
+    #   * `root-device-name` - The device name of the root device volume (for
     #     example, `/dev/sda1`).
     #
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
@@ -1320,8 +1319,8 @@ module Aws::EC2
     #   * `block-device-mapping.delete-on-termination` - A Boolean that
     #     indicates whether the EBS volume is deleted on instance termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh` or `xvdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.status` - The status for the EBS volume
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
@@ -1521,11 +1520,11 @@ module Aws::EC2
     #     you launch ten instances using the same launch request, you also get
     #     one reservation ID.
     #
-    #   * `root-device-name` - The name of the root device for the instance
-    #     (for example, `/dev/sda1` or `/dev/xvda`).
+    #   * `root-device-name` - The device name of the root device volume (for
+    #     example, `/dev/sda1`).
     #
-    #   * `root-device-type` - The type of root device that the instance uses
-    #     (`ebs` \| `instance-store`).
+    #   * `root-device-type` - The type of the root device volume (`ebs` \|
+    #     `instance-store`).
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
@@ -2553,8 +2552,8 @@ module Aws::EC2
     #   * `attachment.delete-on-termination` - Whether the volume is deleted
     #     on instance termination.
     #
-    #   * `attachment.device` - The device name that is exposed to the
-    #     instance (for example, `/dev/sda1`).
+    #   * `attachment.device` - The device name specified in the block device
+    #     mapping (for example, `/dev/sda1`).
     #
     #   * `attachment.instance-id` - The ID of the instance the volume is
     #     attached to.
