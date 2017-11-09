@@ -40,6 +40,8 @@ module AwsSdkCodeGenerator
         # skip the service module and customizations
         next if file_name.include? '/customizations.rb'
         next unless file_name.include? '/'
+        # skip markdown files
+        next if file_name.include? 'README.md'
         code << src_code
       end
       code.join("\n")

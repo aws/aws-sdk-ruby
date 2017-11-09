@@ -3,7 +3,6 @@ require 'aws-sdk-core'
 # Aws module documentation.
 module Aws
   # service gems
-  autoload :Whitelist, 'aws-sdk-whitelist'
   autoload :ACM, 'aws-sdk-acm'
   autoload :APIGateway, 'aws-sdk-apigateway'
   autoload :AppStream, 'aws-sdk-appstream'

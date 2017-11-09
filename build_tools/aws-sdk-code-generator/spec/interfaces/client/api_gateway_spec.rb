@@ -4,19 +4,28 @@ describe 'Client Interface:' do
   describe 'API Gateway white label SDK' do
 
     before(:all) do
-       SpecHelper.generate_service(['WhiteLabel'], multiple_files: false)
+       SpecHelper.generate_service(['WhiteLabel'], multiple_files: false, custom: true)
     end
 
     let(:creds) {
       Aws::Credentials.new('akid', 'secret')
     }
-    let(:endpoint) {
-      'https://fslzovvquc.execute-api.us-west-2.amazonaws.com/test'
-    }
     let(:client) {
       WhiteLabel::Client.new(
         stub_responses: true,
-        endpoint: endpoint
+      )
+    }
+    let(:client_w_token) {
+      WhiteLabel::Client.new(
+        stub_responses: true,
+        authorizer_token: 'my-fancy-token'
+      )
+    }
+    let(:client_w_token_creds) {
+      WhiteLabel::Client.new(
+        stub_responses: true,
+        credentials: creds,
+        authorizer_token: 'my-fancy-token'
       )
     }
 
@@ -59,7 +68,6 @@ describe 'Client Interface:' do
       client_w_ua = WhiteLabel::Client.new(
         credentials: creds,
         stub_responses: true,
-        endpoint: endpoint,
         user_agent_suffix: 'foo'
       )
       resp = client_w_ua.put_apikey({
@@ -72,19 +80,12 @@ describe 'Client Interface:' do
     end
 
     it 'allows customized authorizer token' do
-      Aws.config.update(
-        authorizer_token: 'my-fancy-token'
-      )
-      resp = client.put_customauth_scalars(scalar_types: {})
+      resp = client_w_token.put_customauth_scalars(scalar_types: {})
       expect(resp.context.http_request.headers['Authorization']).to eq('my-fancy-token')
     end
 
     it 'use custom authorizer with `custom` authtype only' do
-      Aws.config.update(
-        authorizer_token: 'my-fancy-token',
-        credentials: creds
-      )
-      resp = client.put_iamauth_scalars(scalar_types: { string_member: "foo"})
+      resp = client_w_token_creds.put_iamauth_scalars(scalar_types: { string_member: "foo"})
       expect(resp.context.http_request.headers['Authorization']).to include('akid')
     end
 

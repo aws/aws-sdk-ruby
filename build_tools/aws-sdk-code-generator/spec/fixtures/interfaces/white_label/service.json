@@ -1,11 +1,11 @@
 {
   "metadata" : {
     "apiVersion" : "2016-12-14T20:41:37Z",
-    "endpointPrefix" : "fslzovvquc",
+    "endpointPrefix" : "foobar",
     "signingName" : "execute-api",
     "serviceFullName" : "SdkTestApi",
     "protocol" : "api-gateway",
-    "uid" : "fslzovvquc-2016-12-14T20:41:37Z",
+    "uid" : "foobar-2016-12-14T20:41:37Z",
     "signatureVersion" : "v4"
   },
   "operations" : {
@@ -27,7 +27,8 @@
       }, {
         "shape" : "InternalServerErrorException"
       } ],
-      "authtype" : "none"
+      "authtype" : "none",
+      "documentation": "An operation for No Auth"
     },
     "GetNoauthScalars" : {
       "name" : "GetNoauthScalars",
@@ -383,7 +384,8 @@
         "ErrorType" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "errorType"
+          "locationName" : "errorType",
+          "documentation" : "The Type for the Error"
         }
       }
     },

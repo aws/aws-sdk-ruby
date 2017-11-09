@@ -53,7 +53,7 @@ def client_for(suite, test_case, n)
   unless Aws.const_defined?(name)
     operation = test_case['given']
     operation['http'] ||= { 'method' => 'POST', 'requestUri' => '/' }
-    service = AwsSdkCodeGenerator::Service.new(
+    opts = {
       name: name,
       module_name: "Aws::#{name}",
       api: {
@@ -65,7 +65,11 @@ def client_for(suite, test_case, n)
       },
       gem_dependencies: { 'aws-sdk-core' => '3' },
       gem_version: '1.0.0',
-    )
+    }
+    if suite['metadata']['protocol'] == "api-gateway"
+      opts[:default_endpoint] = "https://foobar.us-west-2.amazonaws.com/test"
+    end
+    service = AwsSdkCodeGenerator::Service.new(opts)
     code = AwsSdkCodeGenerator::CodeBuilder.new(
       aws_sdk_core_lib_path: File.expand_path('../../../../gems/aws-sdk-core/lib/', __FILE__),
       service: service,

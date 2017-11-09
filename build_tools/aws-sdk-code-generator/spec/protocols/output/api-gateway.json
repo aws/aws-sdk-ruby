@@ -476,7 +476,7 @@
         }
       },
       "__string": {
-        "type": "string" 
+        "type": "string"
       }
     },
     "cases": [
