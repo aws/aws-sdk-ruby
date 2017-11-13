@@ -101,7 +101,7 @@ The GitHub issues are intended for bug reports and feature requests. For help an
 
 ## Configuration
 
-You need to configure `:credentials` and a `:region` to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.
+You will need to configure credentials and a region, either in configuration files or environment variables, to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.
 
 The SDK searches the following locations for credentials:
 
@@ -110,6 +110,7 @@ The SDK searches the following locations for credentials:
 * The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
     * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2, or from the ECS credential provider when running in an ECS container with that feature enabled.
+* If using `~/.aws/config` or `~/.aws/credentials` a `:profile` option can be used to choose the proper credentials.
 
 The SDK searches the following locations for a region:
 
@@ -120,7 +121,7 @@ The SDK searches the following locations for a region:
 
 ### Configuration Options
 
-You can configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**. The `Aws.config` hash takes precedence over environment variables.
+You can also configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
 require 'aws-sdk'
