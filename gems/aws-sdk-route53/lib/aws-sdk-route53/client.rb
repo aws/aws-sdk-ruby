@@ -1165,6 +1165,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -1326,6 +1328,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #   resp.change_info.id #=> String
     #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
     #   resp.change_info.submitted_at #=> Time
@@ -1396,12 +1400,12 @@ module Aws::Route53
     #
     #   2.  Create a CloudWatch Logs resource policy, and give it the
     #       permissions that Amazon Route 53 needs to create log streams and
-    #       to to send query logs to log streams. For the value of
-    #       `Resource`, specify the ARN for the log group that you created
-    #       in the previous step. To use the same resource policy for all
-    #       the CloudWatch Logs log groups that you created for query
-    #       logging configurations, replace the hosted zone name with `*`,
-    #       for example:
+    #       to send query logs to log streams. For the value of `Resource`,
+    #       specify the ARN for the log group that you created in the
+    #       previous step. To use the same resource policy for all the
+    #       CloudWatch Logs log groups that you created for query logging
+    #       configurations, replace the hosted zone name with `*`, for
+    #       example:
     #
     #       `arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*`
     #
@@ -2288,6 +2292,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -2479,6 +2485,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #   resp.delegation_set.id #=> String
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
@@ -2832,6 +2840,8 @@ module Aws::Route53
     #   resp.health_checks #=> Array
     #   resp.health_checks[0].id #=> String
     #   resp.health_checks[0].caller_reference #=> String
+    #   resp.health_checks[0].linked_service.service_principal #=> String
+    #   resp.health_checks[0].linked_service.description #=> String
     #   resp.health_checks[0].health_check_config.ip_address #=> String
     #   resp.health_checks[0].health_check_config.port #=> Integer
     #   resp.health_checks[0].health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -2933,6 +2943,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
+    #   resp.hosted_zones[0].linked_service.service_principal #=> String
+    #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.marker #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_marker #=> String
@@ -3062,6 +3074,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
+    #   resp.hosted_zones[0].linked_service.service_principal #=> String
+    #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.dns_name #=> String
     #   resp.hosted_zone_id #=> String
     #   resp.is_truncated #=> Boolean
@@ -4318,9 +4332,9 @@ module Aws::Route53
     #     status, the default status for the health check is healthy.
     #
     # @option params [Array<String>] :reset_elements
-    #   A complex type that contains one `ResetElement` element for each
-    #   element that you want to reset to the default value. Valid values for
-    #   `ResetElement` include the following:
+    #   A complex type that contains one `ResettableElementName` element for
+    #   each element that you want to reset to the default value. Valid values
+    #   for `ResettableElementName` include the following:
     #
     #   * `ChildHealthChecks`\: Amazon Route 53 resets
     #     HealthCheckConfig$ChildHealthChecks to null.
@@ -4366,6 +4380,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -4435,6 +4451,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment AWS API Documentation
     #
@@ -4572,7 +4590,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

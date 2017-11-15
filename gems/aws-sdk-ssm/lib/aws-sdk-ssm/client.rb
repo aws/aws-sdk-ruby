@@ -663,9 +663,8 @@ module Aws::SSM
     # Creates a patch baseline.
     #
     # @option params [String] :operating_system
-    #   Defines the operating system the patch baseline applies to. Supported
-    #   operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU and
-    #   REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #   Defines the operating system the patch baseline applies to. The
+    #   Default value is WINDOWS.
     #
     # @option params [required, String] :name
     #   The name of the patch baseline.
@@ -755,8 +754,7 @@ module Aws::SSM
     # Amazon S3. This is an asynchronous operation that returns immediately.
     # After a successful initial sync is completed, the system continuously
     # syncs data to the Amazon S3 bucket. To check the status of the sync,
-    # use the [ListResourceDataSync](API_ListResourceDataSync.html)
-    # operation.
+    # use the ListResourceDataSync.
     #
     # By default, data is not encrypted in Amazon S3. We strongly recommend
     # that you enable encryption in Amazon S3 to ensure secure data storage.
@@ -1218,8 +1216,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes the associations for the specified Systems Manager document
-    # or instance.
+    # Describes the association for the specified target or instance. If you
+    # created the association by using the `Targets` parameter, then you
+    # must retrieve the association by using the association ID. If you
+    # created the association by specifying an instance ID and a Systems
+    # Manager document, then you retrieve the association by specifying the
+    # document name and the instance ID.
     #
     # @option params [String] :name
     #   The name of the Systems Manager document.
@@ -2771,6 +2773,12 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #
+    # @option params [Array<Types::InventoryAggregator>] :aggregators
+    #   Returns counts of inventory types based on one or more expressions.
+    #   For example, if you aggregate by using an expression that uses the
+    #   `AWS:InstanceInformation.PlatformType` type, you can see a count of
+    #   how many Windows and Linux instances exist in your inventoried fleet.
+    #
     # @option params [Array<Types::ResultAttribute>] :result_attributes
     #   The list of inventory item types to return.
     #
@@ -2796,6 +2804,14 @@ module Aws::SSM
     #         key: "InventoryFilterKey", # required
     #         values: ["InventoryFilterValue"], # required
     #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #       },
+    #     ],
+    #     aggregators: [
+    #       {
+    #         expression: "InventoryAggregatorExpression",
+    #         aggregators: {
+    #           # recursive InventoryAggregatorList
+    #         },
     #       },
     #     ],
     #     result_attributes: [
@@ -2845,6 +2861,12 @@ module Aws::SSM
     #   returns a token that you can specify in a subsequent call to get the
     #   next set of results.
     #
+    # @option params [Boolean] :aggregator
+    #   Returns inventory schemas that support aggregation. For example, this
+    #   call returns the `AWS:InstanceInformation` type, because it supports
+    #   aggregation based on the `PlatformName`, `PlatformType`, and
+    #   `PlatformVersion` attributes.
+    #
     # @option params [Boolean] :sub_type
     #   Returns the sub-type schema for a specified inventory type.
     #
@@ -2859,6 +2881,7 @@ module Aws::SSM
     #     type_name: "InventoryItemTypeNameFilter",
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     aggregator: false,
     #     sub_type: false,
     #   })
     #
@@ -2870,6 +2893,7 @@ module Aws::SSM
     #   resp.schemas[0].attributes #=> Array
     #   resp.schemas[0].attributes[0].name #=> String
     #   resp.schemas[0].attributes[0].data_type #=> String, one of "string", "number"
+    #   resp.schemas[0].display_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema AWS API Documentation
@@ -3328,9 +3352,8 @@ module Aws::SSM
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of five levels. Examples: /Environment/Test/DBString003
-    #
-    #   /Finance/Prod/IAD/OS/WinServ2016/license15
+    #   maximum of five levels. For example:
+    #   `/Finance/Prod/IAD/WinServ2016/license15`
     #
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
@@ -4433,10 +4456,20 @@ module Aws::SSM
     # Add one or more parameters to the system.
     #
     # @option params [required, String] :name
-    #   The name of the parameter that you want to add to the system.
+    #   The fully qualified name of the parameter that you want to add to the
+    #   system. The fully qualified name includes the complete hierarchy of
+    #   the parameter path and name. For example:
+    #   `/Dev/DBServer/MySQL/db-string13`
+    #
+    #   <note markdown="1"> The maximum length constraint listed below includes capacity for
+    #   additional system attributes that are not part of the name. The
+    #   maximum length for the fully qualified parameter name is 1011
+    #   characters.
+    #
+    #    </note>
     #
     # @option params [String] :description
-    #   Information about the parameter that you want to add to the system
+    #   Information about the parameter that you want to add to the system.
     #
     # @option params [required, String] :value
     #   The parameter value that you want to add to the system.
@@ -5865,7 +5898,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

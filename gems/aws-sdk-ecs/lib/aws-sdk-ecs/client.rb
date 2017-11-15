@@ -160,6 +160,20 @@ module Aws::ECS
     # However, you can create your own cluster with a unique name with the
     # `CreateCluster` action.
     #
+    # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
+    # create the service-linked role for your account so that required
+    # resources in other AWS services can be managed on your behalf.
+    # However, if the IAM user that makes the call does not have permissions
+    # to create the service-linked role, it is not created. For more
+    # information, see [Using Service-Linked Roles for Amazon ECS][1] in the
+    # *Amazon EC2 Container Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing-service-linked-roles.html
+    #
     # @option params [String] :cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
@@ -334,20 +348,30 @@ module Aws::ECS
     # @option params [String] :role
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
     #   allows Amazon ECS to make calls to your load balancer on your behalf.
-    #   This parameter is required if you are using a load balancer with your
-    #   service. If you specify the `role` parameter, you must also specify a
-    #   load balancer object with the `loadBalancers` parameter.
+    #   This parameter is only permitted if you are using a load balancer with
+    #   your service and your task definition does not use the `awsvpc`
+    #   network mode. If you specify the `role` parameter, you must also
+    #   specify a load balancer object with the `loadBalancers` parameter.
+    #
+    #   If your account has already created the Amazon ECS service-linked
+    #   role, that role is used by default for your service unless you specify
+    #   a role here. The service-linked role is required if your task
+    #   definition uses the `awsvpc` network mode, in which case you should
+    #   not specify a role here. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon EC2 Container
+    #   Service Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
     #   name with the path. For example, if a role with the name `bar` has a
     #   path of `/foo/` then you would specify `/foo/bar` as the role name.
-    #   For more information, see [Friendly Names and Paths][1] in the *IAM
+    #   For more information, see [Friendly Names and Paths][2] in the *IAM
     #   User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing-service-linked-roles.html
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -362,6 +386,17 @@ module Aws::ECS
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for tasks in your service. You
     #   can specify a maximum of 5 strategy rules per service.
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The network configuration for the service. This parameter is required
+    #   for task definitions that use the `awsvpc` network mode to receive
+    #   their own Elastic Network Interface, and it is not supported for other
+    #   network modes. For more information, see [Task Networking][1] in the
+    #   *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -518,6 +553,12 @@ module Aws::ECS
     #         field: "String",
     #       },
     #     ],
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -546,6 +587,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -558,6 +603,10 @@ module Aws::ECS
     #   resp.service.placement_strategy #=> Array
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -754,6 +803,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -766,6 +819,10 @@ module Aws::ECS
     #   resp.service.placement_strategy #=> Array
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -888,6 +945,13 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
     #   resp.container_instance.registered_at #=> Time
+    #   resp.container_instance.attachments #=> Array
+    #   resp.container_instance.attachments[0].id #=> String
+    #   resp.container_instance.attachments[0].type #=> String
+    #   resp.container_instance.attachments[0].status #=> String
+    #   resp.container_instance.attachments[0].details #=> Array
+    #   resp.container_instance.attachments[0].details[0].name #=> String
+    #   resp.container_instance.attachments[0].details[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
@@ -999,7 +1063,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
-    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
+    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "awsvpc", "none"
     #   resp.task_definition.revision #=> Integer
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
@@ -1237,6 +1301,13 @@ module Aws::ECS
     #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instances[0].attributes[0].target_id #=> String
     #   resp.container_instances[0].registered_at #=> Time
+    #   resp.container_instances[0].attachments #=> Array
+    #   resp.container_instances[0].attachments[0].id #=> String
+    #   resp.container_instances[0].attachments[0].type #=> String
+    #   resp.container_instances[0].attachments[0].status #=> String
+    #   resp.container_instances[0].attachments[0].details #=> Array
+    #   resp.container_instances[0].attachments[0].details[0].name #=> String
+    #   resp.container_instances[0].attachments[0].details[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1355,6 +1426,10 @@ module Aws::ECS
     #   resp.services[0].deployments[0].running_count #=> Integer
     #   resp.services[0].deployments[0].created_at #=> Time
     #   resp.services[0].deployments[0].updated_at #=> Time
+    #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -1367,6 +1442,10 @@ module Aws::ECS
     #   resp.services[0].placement_strategy #=> Array
     #   resp.services[0].placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.services[0].placement_strategy[0].field #=> String
+    #   resp.services[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.services[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.services[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.services[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1534,7 +1613,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
-    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
+    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "awsvpc", "none"
     #   resp.task_definition.revision #=> Integer
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
@@ -1663,6 +1742,10 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_interfaces #=> Array
+    #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -1670,6 +1753,13 @@ module Aws::ECS
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].group #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2593,6 +2683,13 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
     #   resp.container_instance.registered_at #=> Time
+    #   resp.container_instance.attachments #=> Array
+    #   resp.container_instance.attachments[0].id #=> String
+    #   resp.container_instance.attachments[0].type #=> String
+    #   resp.container_instance.attachments[0].status #=> String
+    #   resp.container_instance.attachments[0].details #=> Array
+    #   resp.container_instance.attachments[0].details[0].name #=> String
+    #   resp.container_instance.attachments[0].details[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
@@ -2646,25 +2743,36 @@ module Aws::ECS
     #
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
-    #   valid values are `none`, `bridge`, and `host`.
+    #   valid values are `none`, `bridge`, `awsvpc`, and `host`. The default
+    #   Docker network mode is `bridge`. If the network mode is set to `none`,
+    #   you cannot specify port mappings in your container definitions, and
+    #   the task's containers do not have external connectivity. The `host`
+    #   and `awsvpc` network modes offer the highest networking performance
+    #   for containers because they use the EC2 network stack instead of the
+    #   virtualized network stack provided by the `bridge` mode.
     #
-    #   The default Docker network mode is `bridge`. If the network mode is
-    #   set to `none`, you cannot specify port mappings in your container
-    #   definitions, and the task's containers do not have external
-    #   connectivity. The `host` network mode offers the highest networking
-    #   performance for containers because they use the host network stack
-    #   instead of the virtualized network stack provided by the `bridge`
-    #   mode; however, exposed container ports are mapped directly to the
-    #   corresponding host port, so you cannot take advantage of dynamic host
-    #   port mappings or run multiple instantiations of the same task on a
-    #   single container instance if port mappings are used.
+    #   With the `host` and `awsvpc` network modes, exposed container ports
+    #   are mapped directly to the corresponding host port (for the `host`
+    #   network mode) or the attached ENI port (for the `awsvpc` network
+    #   mode), so you cannot take advantage of dynamic host port mappings.
     #
-    #   For more information, see [Network settings][1] in the *Docker run
+    #   If the network mode is `awsvpc`, the task is allocated an Elastic
+    #   Network Interface, and you must specify a NetworkConfiguration when
+    #   you create a service or run a task with the task definition. For more
+    #   information, see [Task Networking][1] in the *Amazon EC2 Container
+    #   Service Developer Guide*.
+    #
+    #   If the network mode is `host`, you can not run multiple instantiations
+    #   of the same task on a single container instance when port mappings are
+    #   used.
+    #
+    #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
     #   A list of container definitions in JSON format that describe the
@@ -2745,7 +2853,7 @@ module Aws::ECS
     #   resp = client.register_task_definition({
     #     family: "String", # required
     #     task_role_arn: "String",
-    #     network_mode: "bridge", # accepts bridge, host, none
+    #     network_mode: "bridge", # accepts bridge, host, awsvpc, none
     #     container_definitions: [ # required
     #       {
     #         name: "String",
@@ -2912,7 +3020,7 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
-    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
+    #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "awsvpc", "none"
     #   resp.task_definition.revision #=> Integer
     #   resp.task_definition.volumes #=> Array
     #   resp.task_definition.volumes[0].name #=> String
@@ -3005,6 +3113,17 @@ module Aws::ECS
     #   The placement strategy objects to use for the task. You can specify a
     #   maximum of 5 strategy rules per task.
     #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The network configuration for the task. This parameter is required for
+    #   task definitions that use the `awsvpc` network mode to receive their
+    #   own Elastic Network Interface, and it is not supported for other
+    #   network modes. For more information, see [Task Networking][1] in the
+    #   *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
@@ -3086,6 +3205,12 @@ module Aws::ECS
     #         field: "String",
     #       },
     #     ],
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3120,6 +3245,10 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_interfaces #=> Array
+    #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3127,6 +3256,13 @@ module Aws::ECS
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].group #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3198,6 +3334,11 @@ module Aws::ECS
     #   value is the family name of the task definition (for example,
     #   family:my-family-name).
     #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The VPC subnet and security group configuration for tasks that receive
+    #   their own Elastic Network Interface by using the `awsvpc` networking
+    #   mode.
+    #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
@@ -3229,6 +3370,12 @@ module Aws::ECS
     #     container_instances: ["String"], # required
     #     started_by: "String",
     #     group: "String",
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3263,6 +3410,10 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_bindings[0].container_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
     #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.tasks[0].containers[0].network_interfaces #=> Array
+    #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3270,6 +3421,13 @@ module Aws::ECS
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].group #=> String
+    #   resp.tasks[0].attachments #=> Array
+    #   resp.tasks[0].attachments[0].id #=> String
+    #   resp.tasks[0].attachments[0].type #=> String
+    #   resp.tasks[0].attachments[0].status #=> String
+    #   resp.tasks[0].attachments[0].details #=> Array
+    #   resp.tasks[0].attachments[0].details[0].name #=> String
+    #   resp.tasks[0].attachments[0].details[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3362,6 +3520,10 @@ module Aws::ECS
     #   resp.task.containers[0].network_bindings[0].container_port #=> Integer
     #   resp.task.containers[0].network_bindings[0].host_port #=> Integer
     #   resp.task.containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task.containers[0].network_interfaces #=> Array
+    #   resp.task.containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -3369,6 +3531,13 @@ module Aws::ECS
     #   resp.task.started_at #=> Time
     #   resp.task.stopped_at #=> Time
     #   resp.task.group #=> String
+    #   resp.task.attachments #=> Array
+    #   resp.task.attachments[0].id #=> String
+    #   resp.task.attachments[0].type #=> String
+    #   resp.task.attachments[0].status #=> String
+    #   resp.task.attachments[0].details #=> Array
+    #   resp.task.attachments[0].details[0].name #=> String
+    #   resp.task.attachments[0].details[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -3466,6 +3635,12 @@ module Aws::ECS
     # @option params [String] :reason
     #   The reason for the state change request.
     #
+    # @option params [Array<Types::ContainerStateChange>] :containers
+    #   Any containers associated with the state change request.
+    #
+    # @option params [Array<Types::AttachmentStateChange>] :attachments
+    #   Any attachments associated with the state change request.
+    #
     # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SubmitTaskStateChangeResponse#acknowledgment #acknowledgment} => String
@@ -3477,6 +3652,28 @@ module Aws::ECS
     #     task: "String",
     #     status: "String",
     #     reason: "String",
+    #     containers: [
+    #       {
+    #         container_name: "String",
+    #         exit_code: 1,
+    #         network_bindings: [
+    #           {
+    #             bind_ip: "String",
+    #             container_port: 1,
+    #             host_port: 1,
+    #             protocol: "tcp", # accepts tcp, udp
+    #           },
+    #         ],
+    #         reason: "String",
+    #         status: "String",
+    #       },
+    #     ],
+    #     attachments: [
+    #       {
+    #         attachment_arn: "String", # required
+    #         status: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3565,6 +3762,13 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
     #   resp.container_instance.registered_at #=> Time
+    #   resp.container_instance.attachments #=> Array
+    #   resp.container_instance.attachments[0].id #=> String
+    #   resp.container_instance.attachments[0].type #=> String
+    #   resp.container_instance.attachments[0].status #=> String
+    #   resp.container_instance.attachments[0].details #=> Array
+    #   resp.container_instance.attachments[0].details[0].name #=> String
+    #   resp.container_instance.attachments[0].details[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
@@ -3687,6 +3891,13 @@ module Aws::ECS
     #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instances[0].attributes[0].target_id #=> String
     #   resp.container_instances[0].registered_at #=> Time
+    #   resp.container_instances[0].attachments #=> Array
+    #   resp.container_instances[0].attachments[0].id #=> String
+    #   resp.container_instances[0].attachments[0].type #=> String
+    #   resp.container_instances[0].attachments[0].status #=> String
+    #   resp.container_instances[0].attachments[0].details #=> Array
+    #   resp.container_instances[0].attachments[0].details[0].name #=> String
+    #   resp.container_instances[0].attachments[0].details[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3700,8 +3911,8 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Modifies the desired count, deployment configuration, or task
-    # definition used in a service.
+    # Modifies the desired count, deployment configuration, network
+    # configuration, or task definition used in a service.
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -3800,6 +4011,25 @@ module Aws::ECS
     #   Optional deployment parameters that control how many tasks run during
     #   the deployment and the ordering of stopping and starting tasks.
     #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The network configuration for the service. This parameter is required
+    #   for task definitions that use the `awsvpc` network mode to receive
+    #   their own Elastic Network Interface, and it is not supported for other
+    #   network modes. For more information, see [Task Networking][1] in the
+    #   *Amazon EC2 Container Service Developer Guide*.
+    #
+    #   <note markdown="1"> Updating a service to add a subnet to a list of existing subnets does
+    #   not trigger a service deployment. For example, if your network
+    #   configuration change is to keep the existing subnets and simply add
+    #   another subnet to the network configuration, this does not trigger a
+    #   new service deployment.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -3842,6 +4072,12 @@ module Aws::ECS
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
+    #     network_configuration: {
+    #       awsvpc_configuration: {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3870,6 +4106,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -3882,6 +4122,10 @@ module Aws::ECS
     #   resp.service.placement_strategy #=> Array
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -3905,7 +4149,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

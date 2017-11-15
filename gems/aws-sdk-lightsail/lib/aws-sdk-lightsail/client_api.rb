@@ -16,8 +16,11 @@ module Aws::Lightsail
     AccountSetupInProgressException = Shapes::StructureShape.new(name: 'AccountSetupInProgressException')
     AllocateStaticIpRequest = Shapes::StructureShape.new(name: 'AllocateStaticIpRequest')
     AllocateStaticIpResult = Shapes::StructureShape.new(name: 'AllocateStaticIpResult')
+    AttachDiskRequest = Shapes::StructureShape.new(name: 'AttachDiskRequest')
+    AttachDiskResult = Shapes::StructureShape.new(name: 'AttachDiskResult')
     AttachStaticIpRequest = Shapes::StructureShape.new(name: 'AttachStaticIpRequest')
     AttachStaticIpResult = Shapes::StructureShape.new(name: 'AttachStaticIpResult')
+    AttachedDiskMap = Shapes::MapShape.new(name: 'AttachedDiskMap')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     Base64 = Shapes::StringShape.new(name: 'Base64')
@@ -28,6 +31,12 @@ module Aws::Lightsail
     BundleList = Shapes::ListShape.new(name: 'BundleList')
     CloseInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'CloseInstancePublicPortsRequest')
     CloseInstancePublicPortsResult = Shapes::StructureShape.new(name: 'CloseInstancePublicPortsResult')
+    CreateDiskFromSnapshotRequest = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotRequest')
+    CreateDiskFromSnapshotResult = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotResult')
+    CreateDiskRequest = Shapes::StructureShape.new(name: 'CreateDiskRequest')
+    CreateDiskResult = Shapes::StructureShape.new(name: 'CreateDiskResult')
+    CreateDiskSnapshotRequest = Shapes::StructureShape.new(name: 'CreateDiskSnapshotRequest')
+    CreateDiskSnapshotResult = Shapes::StructureShape.new(name: 'CreateDiskSnapshotResult')
     CreateDomainEntryRequest = Shapes::StructureShape.new(name: 'CreateDomainEntryRequest')
     CreateDomainEntryResult = Shapes::StructureShape.new(name: 'CreateDomainEntryResult')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
@@ -40,6 +49,10 @@ module Aws::Lightsail
     CreateInstancesResult = Shapes::StructureShape.new(name: 'CreateInstancesResult')
     CreateKeyPairRequest = Shapes::StructureShape.new(name: 'CreateKeyPairRequest')
     CreateKeyPairResult = Shapes::StructureShape.new(name: 'CreateKeyPairResult')
+    DeleteDiskRequest = Shapes::StructureShape.new(name: 'DeleteDiskRequest')
+    DeleteDiskResult = Shapes::StructureShape.new(name: 'DeleteDiskResult')
+    DeleteDiskSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotRequest')
+    DeleteDiskSnapshotResult = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotResult')
     DeleteDomainEntryRequest = Shapes::StructureShape.new(name: 'DeleteDomainEntryRequest')
     DeleteDomainEntryResult = Shapes::StructureShape.new(name: 'DeleteDomainEntryResult')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
@@ -50,10 +63,18 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult = Shapes::StructureShape.new(name: 'DeleteInstanceSnapshotResult')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteKeyPairResult = Shapes::StructureShape.new(name: 'DeleteKeyPairResult')
+    DetachDiskRequest = Shapes::StructureShape.new(name: 'DetachDiskRequest')
+    DetachDiskResult = Shapes::StructureShape.new(name: 'DetachDiskResult')
     DetachStaticIpRequest = Shapes::StructureShape.new(name: 'DetachStaticIpRequest')
     DetachStaticIpResult = Shapes::StructureShape.new(name: 'DetachStaticIpResult')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     DiskList = Shapes::ListShape.new(name: 'DiskList')
+    DiskMap = Shapes::StructureShape.new(name: 'DiskMap')
+    DiskMapList = Shapes::ListShape.new(name: 'DiskMapList')
+    DiskSnapshot = Shapes::StructureShape.new(name: 'DiskSnapshot')
+    DiskSnapshotList = Shapes::ListShape.new(name: 'DiskSnapshotList')
+    DiskSnapshotState = Shapes::StringShape.new(name: 'DiskSnapshotState')
+    DiskState = Shapes::StringShape.new(name: 'DiskState')
     Domain = Shapes::StructureShape.new(name: 'Domain')
     DomainEntry = Shapes::StructureShape.new(name: 'DomainEntry')
     DomainEntryList = Shapes::ListShape.new(name: 'DomainEntryList')
@@ -70,6 +91,14 @@ module Aws::Lightsail
     GetBlueprintsResult = Shapes::StructureShape.new(name: 'GetBlueprintsResult')
     GetBundlesRequest = Shapes::StructureShape.new(name: 'GetBundlesRequest')
     GetBundlesResult = Shapes::StructureShape.new(name: 'GetBundlesResult')
+    GetDiskRequest = Shapes::StructureShape.new(name: 'GetDiskRequest')
+    GetDiskResult = Shapes::StructureShape.new(name: 'GetDiskResult')
+    GetDiskSnapshotRequest = Shapes::StructureShape.new(name: 'GetDiskSnapshotRequest')
+    GetDiskSnapshotResult = Shapes::StructureShape.new(name: 'GetDiskSnapshotResult')
+    GetDiskSnapshotsRequest = Shapes::StructureShape.new(name: 'GetDiskSnapshotsRequest')
+    GetDiskSnapshotsResult = Shapes::StructureShape.new(name: 'GetDiskSnapshotsResult')
+    GetDisksRequest = Shapes::StructureShape.new(name: 'GetDisksRequest')
+    GetDisksResult = Shapes::StructureShape.new(name: 'GetDisksResult')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResult = Shapes::StructureShape.new(name: 'GetDomainResult')
     GetDomainsRequest = Shapes::StructureShape.new(name: 'GetDomainsRequest')
@@ -196,12 +225,23 @@ module Aws::Lightsail
     AllocateStaticIpResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     AllocateStaticIpResult.struct_class = Types::AllocateStaticIpResult
 
+    AttachDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    AttachDiskRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    AttachDiskRequest.add_member(:disk_path, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "diskPath"))
+    AttachDiskRequest.struct_class = Types::AttachDiskRequest
+
+    AttachDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    AttachDiskResult.struct_class = Types::AttachDiskResult
+
     AttachStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     AttachStaticIpRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     AttachStaticIpRequest.struct_class = Types::AttachStaticIpRequest
 
     AttachStaticIpResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     AttachStaticIpResult.struct_class = Types::AttachStaticIpResult
+
+    AttachedDiskMap.key = Shapes::ShapeRef.new(shape: ResourceName)
+    AttachedDiskMap.value = Shapes::ShapeRef.new(shape: DiskMapList)
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "zoneName"))
     AvailabilityZone.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "state"))
@@ -247,6 +287,30 @@ module Aws::Lightsail
     CloseInstancePublicPortsResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     CloseInstancePublicPortsResult.struct_class = Types::CloseInstancePublicPortsResult
 
+    CreateDiskFromSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    CreateDiskFromSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    CreateDiskFromSnapshotRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "availabilityZone"))
+    CreateDiskFromSnapshotRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "sizeInGb"))
+    CreateDiskFromSnapshotRequest.struct_class = Types::CreateDiskFromSnapshotRequest
+
+    CreateDiskFromSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateDiskFromSnapshotResult.struct_class = Types::CreateDiskFromSnapshotResult
+
+    CreateDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    CreateDiskRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "availabilityZone"))
+    CreateDiskRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "sizeInGb"))
+    CreateDiskRequest.struct_class = Types::CreateDiskRequest
+
+    CreateDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateDiskResult.struct_class = Types::CreateDiskResult
+
+    CreateDiskSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    CreateDiskSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    CreateDiskSnapshotRequest.struct_class = Types::CreateDiskSnapshotRequest
+
+    CreateDiskSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateDiskSnapshotResult.struct_class = Types::CreateDiskSnapshotResult
+
     CreateDomainEntryRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     CreateDomainEntryRequest.add_member(:domain_entry, Shapes::ShapeRef.new(shape: DomainEntry, required: true, location_name: "domainEntry"))
     CreateDomainEntryRequest.struct_class = Types::CreateDomainEntryRequest
@@ -268,6 +332,7 @@ module Aws::Lightsail
     CreateInstanceSnapshotResult.struct_class = Types::CreateInstanceSnapshotResult
 
     CreateInstancesFromSnapshotRequest.add_member(:instance_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceNames"))
+    CreateInstancesFromSnapshotRequest.add_member(:attached_disk_mapping, Shapes::ShapeRef.new(shape: AttachedDiskMap, location_name: "attachedDiskMapping"))
     CreateInstancesFromSnapshotRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, required: true, location_name: "availabilityZone"))
     CreateInstancesFromSnapshotRequest.add_member(:instance_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceSnapshotName"))
     CreateInstancesFromSnapshotRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "bundleId"))
@@ -298,6 +363,18 @@ module Aws::Lightsail
     CreateKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
     CreateKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     CreateKeyPairResult.struct_class = Types::CreateKeyPairResult
+
+    DeleteDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    DeleteDiskRequest.struct_class = Types::DeleteDiskRequest
+
+    DeleteDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteDiskResult.struct_class = Types::DeleteDiskResult
+
+    DeleteDiskSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    DeleteDiskSnapshotRequest.struct_class = Types::DeleteDiskSnapshotRequest
+
+    DeleteDiskSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteDiskSnapshotResult.struct_class = Types::DeleteDiskSnapshotResult
 
     DeleteDomainEntryRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     DeleteDomainEntryRequest.add_member(:domain_entry, Shapes::ShapeRef.new(shape: DomainEntry, required: true, location_name: "domainEntry"))
@@ -330,6 +407,12 @@ module Aws::Lightsail
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     DeleteKeyPairResult.struct_class = Types::DeleteKeyPairResult
 
+    DetachDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    DetachDiskRequest.struct_class = Types::DetachDiskRequest
+
+    DetachDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DetachDiskResult.struct_class = Types::DetachDiskResult
+
     DetachStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     DetachStaticIpRequest.struct_class = Types::DetachStaticIpRequest
 
@@ -343,16 +426,38 @@ module Aws::Lightsail
     Disk.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
     Disk.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     Disk.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
-    Disk.add_member(:gb_in_use, Shapes::ShapeRef.new(shape: integer, location_name: "gbInUse"))
     Disk.add_member(:is_system_disk, Shapes::ShapeRef.new(shape: boolean, location_name: "isSystemDisk"))
     Disk.add_member(:iops, Shapes::ShapeRef.new(shape: integer, location_name: "iops"))
     Disk.add_member(:path, Shapes::ShapeRef.new(shape: string, location_name: "path"))
-    Disk.add_member(:attached_to, Shapes::ShapeRef.new(shape: string, location_name: "attachedTo"))
+    Disk.add_member(:state, Shapes::ShapeRef.new(shape: DiskState, location_name: "state"))
+    Disk.add_member(:attached_to, Shapes::ShapeRef.new(shape: ResourceName, location_name: "attachedTo"))
     Disk.add_member(:is_attached, Shapes::ShapeRef.new(shape: boolean, location_name: "isAttached"))
-    Disk.add_member(:attachment_state, Shapes::ShapeRef.new(shape: string, location_name: "attachmentState"))
+    Disk.add_member(:attachment_state, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "attachmentState"))
+    Disk.add_member(:gb_in_use, Shapes::ShapeRef.new(shape: integer, deprecated: true, location_name: "gbInUse"))
     Disk.struct_class = Types::Disk
 
     DiskList.member = Shapes::ShapeRef.new(shape: Disk)
+
+    DiskMap.add_member(:original_disk_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "originalDiskPath"))
+    DiskMap.add_member(:new_disk_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "newDiskName"))
+    DiskMap.struct_class = Types::DiskMap
+
+    DiskMapList.member = Shapes::ShapeRef.new(shape: DiskMap)
+
+    DiskSnapshot.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    DiskSnapshot.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    DiskSnapshot.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    DiskSnapshot.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    DiskSnapshot.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    DiskSnapshot.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    DiskSnapshot.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "sizeInGb"))
+    DiskSnapshot.add_member(:state, Shapes::ShapeRef.new(shape: DiskSnapshotState, location_name: "state"))
+    DiskSnapshot.add_member(:progress, Shapes::ShapeRef.new(shape: string, location_name: "progress"))
+    DiskSnapshot.add_member(:from_disk_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "fromDiskName"))
+    DiskSnapshot.add_member(:from_disk_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromDiskArn"))
+    DiskSnapshot.struct_class = Types::DiskSnapshot
+
+    DiskSnapshotList.member = Shapes::ShapeRef.new(shape: DiskSnapshot)
 
     Domain.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Domain.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -405,6 +510,32 @@ module Aws::Lightsail
     GetBundlesResult.add_member(:bundles, Shapes::ShapeRef.new(shape: BundleList, location_name: "bundles"))
     GetBundlesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetBundlesResult.struct_class = Types::GetBundlesResult
+
+    GetDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
+    GetDiskRequest.struct_class = Types::GetDiskRequest
+
+    GetDiskResult.add_member(:disk, Shapes::ShapeRef.new(shape: Disk, location_name: "disk"))
+    GetDiskResult.struct_class = Types::GetDiskResult
+
+    GetDiskSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskSnapshotName"))
+    GetDiskSnapshotRequest.struct_class = Types::GetDiskSnapshotRequest
+
+    GetDiskSnapshotResult.add_member(:disk_snapshot, Shapes::ShapeRef.new(shape: DiskSnapshot, location_name: "diskSnapshot"))
+    GetDiskSnapshotResult.struct_class = Types::GetDiskSnapshotResult
+
+    GetDiskSnapshotsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetDiskSnapshotsRequest.struct_class = Types::GetDiskSnapshotsRequest
+
+    GetDiskSnapshotsResult.add_member(:disk_snapshots, Shapes::ShapeRef.new(shape: DiskSnapshotList, location_name: "diskSnapshots"))
+    GetDiskSnapshotsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetDiskSnapshotsResult.struct_class = Types::GetDiskSnapshotsResult
+
+    GetDisksRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetDisksRequest.struct_class = Types::GetDisksRequest
+
+    GetDisksResult.add_member(:disks, Shapes::ShapeRef.new(shape: DiskList, location_name: "disks"))
+    GetDisksResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetDisksResult.struct_class = Types::GetDisksResult
 
     GetDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     GetDomainRequest.struct_class = Types::GetDomainRequest
@@ -609,6 +740,7 @@ module Aws::Lightsail
     InstanceSnapshot.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     InstanceSnapshot.add_member(:state, Shapes::ShapeRef.new(shape: InstanceSnapshotState, location_name: "state"))
     InstanceSnapshot.add_member(:progress, Shapes::ShapeRef.new(shape: string, location_name: "progress"))
+    InstanceSnapshot.add_member(:from_attached_disks, Shapes::ShapeRef.new(shape: DiskList, location_name: "fromAttachedDisks"))
     InstanceSnapshot.add_member(:from_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "fromInstanceName"))
     InstanceSnapshot.add_member(:from_instance_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fromInstanceArn"))
     InstanceSnapshot.add_member(:from_blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "fromBlueprintId"))
@@ -745,6 +877,7 @@ module Aws::Lightsail
     StaticIpList.member = Shapes::ShapeRef.new(shape: StaticIp)
 
     StopInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    StopInstanceRequest.add_member(:force, Shapes::ShapeRef.new(shape: boolean, location_name: "force"))
     StopInstanceRequest.struct_class = Types::StopInstanceRequest
 
     StopInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -794,6 +927,21 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:attach_disk, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachDisk"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachDiskRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:attach_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AttachStaticIp"
         o.http_method = "POST"
@@ -815,6 +963,51 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CloseInstancePublicPortsRequest)
         o.output = Shapes::ShapeRef.new(shape: CloseInstancePublicPortsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_disk, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDisk"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDiskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_disk_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDiskFromSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDiskFromSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDiskFromSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_disk_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDiskSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDiskSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDiskSnapshotResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -914,6 +1107,36 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDisk"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDiskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_disk_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDiskSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDiskSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDiskSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDomain"
         o.http_method = "POST"
@@ -989,6 +1212,21 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:detach_disk, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachDisk"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachDiskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:detach_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetachStaticIp"
         o.http_method = "POST"
@@ -1055,6 +1293,66 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetBundlesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBundlesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_disk, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDisk"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDiskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_disk_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDiskSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDiskSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDiskSnapshotResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_disk_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDiskSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDiskSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDiskSnapshotsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_disks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDisks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDisksRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDisksResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

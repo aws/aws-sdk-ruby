@@ -12,9 +12,15 @@ module Aws::ECS
     include Seahorse::Model
 
     AgentUpdateStatus = Shapes::StringShape.new(name: 'AgentUpdateStatus')
+    Attachment = Shapes::StructureShape.new(name: 'Attachment')
+    AttachmentDetails = Shapes::ListShape.new(name: 'AttachmentDetails')
+    AttachmentStateChange = Shapes::StructureShape.new(name: 'AttachmentStateChange')
+    AttachmentStateChanges = Shapes::ListShape.new(name: 'AttachmentStateChanges')
+    Attachments = Shapes::ListShape.new(name: 'Attachments')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeLimitExceededException = Shapes::StructureShape.new(name: 'AttributeLimitExceededException')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
+    AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
@@ -32,6 +38,8 @@ module Aws::ECS
     ContainerInstances = Shapes::ListShape.new(name: 'ContainerInstances')
     ContainerOverride = Shapes::StructureShape.new(name: 'ContainerOverride')
     ContainerOverrides = Shapes::ListShape.new(name: 'ContainerOverrides')
+    ContainerStateChange = Shapes::StructureShape.new(name: 'ContainerStateChange')
+    ContainerStateChanges = Shapes::ListShape.new(name: 'ContainerStateChanges')
     Containers = Shapes::ListShape.new(name: 'Containers')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
@@ -105,6 +113,9 @@ module Aws::ECS
     MountPointList = Shapes::ListShape.new(name: 'MountPointList')
     NetworkBinding = Shapes::StructureShape.new(name: 'NetworkBinding')
     NetworkBindings = Shapes::ListShape.new(name: 'NetworkBindings')
+    NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
     NoUpdateAvailableException = Shapes::StructureShape.new(name: 'NoUpdateAvailableException')
     PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
@@ -173,6 +184,22 @@ module Aws::ECS
     VolumeFromList = Shapes::ListShape.new(name: 'VolumeFromList')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
 
+    Attachment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Attachment.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    Attachment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    Attachment.add_member(:details, Shapes::ShapeRef.new(shape: AttachmentDetails, location_name: "details"))
+    Attachment.struct_class = Types::Attachment
+
+    AttachmentDetails.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    AttachmentStateChange.add_member(:attachment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "attachmentArn"))
+    AttachmentStateChange.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
+    AttachmentStateChange.struct_class = Types::AttachmentStateChange
+
+    AttachmentStateChanges.member = Shapes::ShapeRef.new(shape: AttachmentStateChange)
+
+    Attachments.member = Shapes::ShapeRef.new(shape: Attachment)
+
     Attribute.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Attribute.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "targetType"))
@@ -180,6 +207,10 @@ module Aws::ECS
     Attribute.struct_class = Types::Attribute
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
+
+    AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
+    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroups"))
+    AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
 
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Cluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
@@ -199,6 +230,7 @@ module Aws::ECS
     Container.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
     Container.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     Container.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
+    Container.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
     Container.struct_class = Types::Container
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -245,6 +277,7 @@ module Aws::ECS
     ContainerInstance.add_member(:agent_update_status, Shapes::ShapeRef.new(shape: AgentUpdateStatus, location_name: "agentUpdateStatus"))
     ContainerInstance.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     ContainerInstance.add_member(:registered_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "registeredAt"))
+    ContainerInstance.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     ContainerInstance.struct_class = Types::ContainerInstance
 
     ContainerInstances.member = Shapes::ShapeRef.new(shape: ContainerInstance)
@@ -258,6 +291,15 @@ module Aws::ECS
     ContainerOverride.struct_class = Types::ContainerOverride
 
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)
+
+    ContainerStateChange.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ContainerStateChange.add_member(:exit_code, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "exitCode"))
+    ContainerStateChange.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
+    ContainerStateChange.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    ContainerStateChange.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    ContainerStateChange.struct_class = Types::ContainerStateChange
+
+    ContainerStateChanges.member = Shapes::ShapeRef.new(shape: ContainerStateChange)
 
     Containers.member = Shapes::ShapeRef.new(shape: Container)
 
@@ -277,6 +319,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     CreateServiceRequest.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "placementConstraints"))
     CreateServiceRequest.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "placementStrategy"))
+    CreateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -310,6 +353,7 @@ module Aws::ECS
     Deployment.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
     Deployment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Deployment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    Deployment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentConfiguration.add_member(:maximum_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maximumPercent"))
@@ -524,6 +568,16 @@ module Aws::ECS
 
     NetworkBindings.member = Shapes::ShapeRef.new(shape: NetworkBinding)
 
+    NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
+    NetworkConfiguration.struct_class = Types::NetworkConfiguration
+
+    NetworkInterface.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
+    NetworkInterface.add_member(:private_ipv_4_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpv4Address"))
+    NetworkInterface.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
+    NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
     PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
     PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: String, location_name: "expression"))
     PlacementConstraint.struct_class = Types::PlacementConstraint
@@ -593,6 +647,7 @@ module Aws::ECS
     RunTaskRequest.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
     RunTaskRequest.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "placementConstraints"))
     RunTaskRequest.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "placementStrategy"))
+    RunTaskRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     RunTaskRequest.struct_class = Types::RunTaskRequest
 
     RunTaskResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, location_name: "tasks"))
@@ -615,6 +670,7 @@ module Aws::ECS
     Service.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Service.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "placementConstraints"))
     Service.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "placementStrategy"))
+    Service.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Service.struct_class = Types::Service
 
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -632,6 +688,7 @@ module Aws::ECS
     StartTaskRequest.add_member(:container_instances, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "containerInstances"))
     StartTaskRequest.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     StartTaskRequest.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    StartTaskRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     StartTaskRequest.struct_class = Types::StartTaskRequest
 
     StartTaskResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, location_name: "tasks"))
@@ -664,6 +721,8 @@ module Aws::ECS
     SubmitTaskStateChangeRequest.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "task"))
     SubmitTaskStateChangeRequest.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     SubmitTaskStateChangeRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    SubmitTaskStateChangeRequest.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerStateChanges, location_name: "containers"))
+    SubmitTaskStateChangeRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentStateChanges, location_name: "attachments"))
     SubmitTaskStateChangeRequest.struct_class = Types::SubmitTaskStateChangeRequest
 
     SubmitTaskStateChangeResponse.add_member(:acknowledgment, Shapes::ShapeRef.new(shape: String, location_name: "acknowledgment"))
@@ -684,6 +743,7 @@ module Aws::ECS
     Task.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
     Task.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stoppedAt"))
     Task.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    Task.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     Task.struct_class = Types::Task
 
     TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -738,6 +798,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
     UpdateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
     UpdateServiceRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
+    UpdateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))

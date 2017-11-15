@@ -2274,6 +2274,12 @@ module Aws::Route53
     #   check.
     #   @return [String]
     #
+    # @!attribute [rw] linked_service
+    #   If the health check was created by another service, the service that
+    #   created the health check. When a health check is created by another
+    #   service, you can't edit or delete it using Amazon Route 53.
+    #   @return [Types::LinkedService]
+    #
     # @!attribute [rw] health_check_config
     #   A complex type that contains detailed information about one health
     #   check.
@@ -2295,6 +2301,7 @@ module Aws::Route53
     class HealthCheck < Struct.new(
       :id,
       :caller_reference,
+      :linked_service,
       :health_check_config,
       :health_check_version,
       :cloud_watch_alarm_configuration)
@@ -2739,6 +2746,12 @@ module Aws::Route53
     #   The number of resource record sets in the hosted zone.
     #   @return [Integer]
     #
+    # @!attribute [rw] linked_service
+    #   If the hosted zone was created by another service, the service that
+    #   created the hosted zone. When a hosted zone is created by another
+    #   service, you can't edit or delete it using Amazon Route 53.
+    #   @return [Types::LinkedService]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZone AWS API Documentation
     #
     class HostedZone < Struct.new(
@@ -2746,7 +2759,8 @@ module Aws::Route53
       :name,
       :caller_reference,
       :config,
-      :resource_record_set_count)
+      :resource_record_set_count,
+      :linked_service)
       include Aws::Structure
     end
 
@@ -2775,6 +2789,32 @@ module Aws::Route53
     class HostedZoneConfig < Struct.new(
       :comment,
       :private_zone)
+      include Aws::Structure
+    end
+
+    # If a health check or hosted zone was created by another service,
+    # `LinkedService` is a complex type that describes the service that
+    # created the resource. When a resource is created by another service,
+    # you can't edit or delete it using Amazon Route 53.
+    #
+    # @!attribute [rw] service_principal
+    #   If the health check or hosted zone was created by another service,
+    #   the service that created the resource. When a resource is created by
+    #   another service, you can't edit or delete it using Amazon Route 53.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   If the health check or hosted zone was created by another service,
+    #   an optional description that can be provided by the other service.
+    #   When a resource is created by another service, you can't edit or
+    #   delete it using Amazon Route 53.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LinkedService AWS API Documentation
+    #
+    class LinkedService < Struct.new(
+      :service_principal,
+      :description)
       include Aws::Structure
     end
 
@@ -5500,9 +5540,9 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] reset_elements
-    #   A complex type that contains one `ResetElement` element for each
-    #   element that you want to reset to the default value. Valid values
-    #   for `ResetElement` include the following:
+    #   A complex type that contains one `ResettableElementName` element for
+    #   each element that you want to reset to the default value. Valid
+    #   values for `ResettableElementName` include the following:
     #
     #   * `ChildHealthChecks`\: Amazon Route 53 resets
     #     HealthCheckConfig$ChildHealthChecks to null.

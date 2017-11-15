@@ -166,6 +166,7 @@ module Aws::Route53
     IsPrivateZone = Shapes::BooleanShape.new(name: 'IsPrivateZone')
     LastVPCAssociation = Shapes::StructureShape.new(name: 'LastVPCAssociation')
     LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
+    LinkedService = Shapes::StructureShape.new(name: 'LinkedService')
     ListGeoLocationsRequest = Shapes::StructureShape.new(name: 'ListGeoLocationsRequest')
     ListGeoLocationsResponse = Shapes::StructureShape.new(name: 'ListGeoLocationsResponse')
     ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
@@ -248,6 +249,7 @@ module Aws::Route53
     ResourceTagSetList = Shapes::ListShape.new(name: 'ResourceTagSetList')
     ResourceURI = Shapes::StringShape.new(name: 'ResourceURI')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReport = Shapes::StructureShape.new(name: 'StatusReport')
@@ -607,6 +609,7 @@ module Aws::Route53
 
     HealthCheck.add_member(:id, Shapes::ShapeRef.new(shape: HealthCheckId, required: true, location_name: "Id"))
     HealthCheck.add_member(:caller_reference, Shapes::ShapeRef.new(shape: HealthCheckNonce, required: true, location_name: "CallerReference"))
+    HealthCheck.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
     HealthCheck.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, required: true, location_name: "HealthCheckConfig"))
     HealthCheck.add_member(:health_check_version, Shapes::ShapeRef.new(shape: HealthCheckVersion, required: true, location_name: "HealthCheckVersion"))
     HealthCheck.add_member(:cloud_watch_alarm_configuration, Shapes::ShapeRef.new(shape: CloudWatchAlarmConfiguration, location_name: "CloudWatchAlarmConfiguration"))
@@ -646,6 +649,7 @@ module Aws::Route53
     HostedZone.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
     HostedZone.add_member(:config, Shapes::ShapeRef.new(shape: HostedZoneConfig, location_name: "Config"))
     HostedZone.add_member(:resource_record_set_count, Shapes::ShapeRef.new(shape: HostedZoneRRSetCount, location_name: "ResourceRecordSetCount"))
+    HostedZone.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
     HostedZone.struct_class = Types::HostedZone
 
     HostedZoneConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
@@ -653,6 +657,10 @@ module Aws::Route53
     HostedZoneConfig.struct_class = Types::HostedZoneConfig
 
     HostedZones.member = Shapes::ShapeRef.new(shape: HostedZone, location_name: "HostedZone")
+
+    LinkedService.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    LinkedService.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    LinkedService.struct_class = Types::LinkedService
 
     ListGeoLocationsRequest.add_member(:start_continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location: "querystring", location_name: "startcontinentcode"))
     ListGeoLocationsRequest.add_member(:start_country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location: "querystring", location_name: "startcountrycode"))

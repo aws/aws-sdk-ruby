@@ -21,6 +21,7 @@ module Aws::SSM
     AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
     AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
     AgentErrorCode = Shapes::StringShape.new(name: 'AgentErrorCode')
+    AggregatorSchemaOnly = Shapes::BooleanShape.new(name: 'AggregatorSchemaOnly')
     AllowedPattern = Shapes::StringShape.new(name: 'AllowedPattern')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
@@ -384,6 +385,9 @@ module Aws::SSM
     InvalidTarget = Shapes::StructureShape.new(name: 'InvalidTarget')
     InvalidTypeNameException = Shapes::StructureShape.new(name: 'InvalidTypeNameException')
     InvalidUpdate = Shapes::StructureShape.new(name: 'InvalidUpdate')
+    InventoryAggregator = Shapes::StructureShape.new(name: 'InventoryAggregator')
+    InventoryAggregatorExpression = Shapes::StringShape.new(name: 'InventoryAggregatorExpression')
+    InventoryAggregatorList = Shapes::ListShape.new(name: 'InventoryAggregatorList')
     InventoryAttributeDataType = Shapes::StringShape.new(name: 'InventoryAttributeDataType')
     InventoryFilter = Shapes::StructureShape.new(name: 'InventoryFilter')
     InventoryFilterKey = Shapes::StringShape.new(name: 'InventoryFilterKey')
@@ -412,6 +416,7 @@ module Aws::SSM
     InventoryResultItem = Shapes::StructureShape.new(name: 'InventoryResultItem')
     InventoryResultItemKey = Shapes::StringShape.new(name: 'InventoryResultItemKey')
     InventoryResultItemMap = Shapes::MapShape.new(name: 'InventoryResultItemMap')
+    InventoryTypeDisplayName = Shapes::StringShape.new(name: 'InventoryTypeDisplayName')
     InvocationDoesNotExist = Shapes::StructureShape.new(name: 'InvocationDoesNotExist')
     InvocationTraceOutput = Shapes::StringShape.new(name: 'InvocationTraceOutput')
     IsSubTypeSchema = Shapes::BooleanShape.new(name: 'IsSubTypeSchema')
@@ -724,7 +729,7 @@ module Aws::SSM
     Url = Shapes::StringShape.new(name: 'Url')
     Version = Shapes::StringShape.new(name: 'Version')
 
-    AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId")
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     Activation.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
     Activation.add_member(:description, Shapes::ShapeRef.new(shape: ActivationDescription, location_name: "Description"))
@@ -776,15 +781,15 @@ module Aws::SSM
     AssociationDescription.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
-    AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription")
+    AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
 
     AssociationFilter.add_member(:key, Shapes::ShapeRef.new(shape: AssociationFilterKey, required: true, location_name: "key"))
     AssociationFilter.add_member(:value, Shapes::ShapeRef.new(shape: AssociationFilterValue, required: true, location_name: "value"))
     AssociationFilter.struct_class = Types::AssociationFilter
 
-    AssociationFilterList.member = Shapes::ShapeRef.new(shape: AssociationFilter, location_name: "AssociationFilter")
+    AssociationFilterList.member = Shapes::ShapeRef.new(shape: AssociationFilter)
 
-    AssociationList.member = Shapes::ShapeRef.new(shape: Association, location_name: "Association")
+    AssociationList.member = Shapes::ShapeRef.new(shape: Association)
 
     AssociationOverview.add_member(:status, Shapes::ShapeRef.new(shape: StatusName, location_name: "Status"))
     AssociationOverview.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StatusName, location_name: "DetailedStatus"))
@@ -950,7 +955,7 @@ module Aws::SSM
 
     ComplianceItemEntryList.member = Shapes::ShapeRef.new(shape: ComplianceItemEntry)
 
-    ComplianceItemList.member = Shapes::ShapeRef.new(shape: ComplianceItem, location_name: "Item")
+    ComplianceItemList.member = Shapes::ShapeRef.new(shape: ComplianceItem)
 
     ComplianceResourceIdList.member = Shapes::ShapeRef.new(shape: ComplianceResourceId)
 
@@ -961,16 +966,16 @@ module Aws::SSM
     ComplianceStringFilter.add_member(:type, Shapes::ShapeRef.new(shape: ComplianceQueryOperatorType, location_name: "Type"))
     ComplianceStringFilter.struct_class = Types::ComplianceStringFilter
 
-    ComplianceStringFilterList.member = Shapes::ShapeRef.new(shape: ComplianceStringFilter, location_name: "ComplianceFilter")
+    ComplianceStringFilterList.member = Shapes::ShapeRef.new(shape: ComplianceStringFilter)
 
-    ComplianceStringFilterValueList.member = Shapes::ShapeRef.new(shape: ComplianceFilterValue, location_name: "FilterValue")
+    ComplianceStringFilterValueList.member = Shapes::ShapeRef.new(shape: ComplianceFilterValue)
 
     ComplianceSummaryItem.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, location_name: "ComplianceType"))
     ComplianceSummaryItem.add_member(:compliant_summary, Shapes::ShapeRef.new(shape: CompliantSummary, location_name: "CompliantSummary"))
     ComplianceSummaryItem.add_member(:non_compliant_summary, Shapes::ShapeRef.new(shape: NonCompliantSummary, location_name: "NonCompliantSummary"))
     ComplianceSummaryItem.struct_class = Types::ComplianceSummaryItem
 
-    ComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ComplianceSummaryItem, location_name: "Item")
+    ComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ComplianceSummaryItem)
 
     CompliantSummary.add_member(:compliant_count, Shapes::ShapeRef.new(shape: ComplianceSummaryCount, location_name: "CompliantCount"))
     CompliantSummary.add_member(:severity_summary, Shapes::ShapeRef.new(shape: SeveritySummary, location_name: "SeveritySummary"))
@@ -990,7 +995,7 @@ module Aws::SSM
     CreateAssociationBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntries, required: true, location_name: "Entries"))
     CreateAssociationBatchRequest.struct_class = Types::CreateAssociationBatchRequest
 
-    CreateAssociationBatchRequestEntries.member = Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry, location_name: "entries")
+    CreateAssociationBatchRequestEntries.member = Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry)
 
     CreateAssociationBatchRequestEntry.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     CreateAssociationBatchRequestEntry.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -1382,7 +1387,7 @@ module Aws::SSM
     DocumentFilter.add_member(:value, Shapes::ShapeRef.new(shape: DocumentFilterValue, required: true, location_name: "value"))
     DocumentFilter.struct_class = Types::DocumentFilter
 
-    DocumentFilterList.member = Shapes::ShapeRef.new(shape: DocumentFilter, location_name: "DocumentFilter")
+    DocumentFilterList.member = Shapes::ShapeRef.new(shape: DocumentFilter)
 
     DocumentIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     DocumentIdentifier.add_member(:owner, Shapes::ShapeRef.new(shape: DocumentOwner, location_name: "Owner"))
@@ -1393,7 +1398,7 @@ module Aws::SSM
     DocumentIdentifier.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
-    DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier, location_name: "DocumentIdentifier")
+    DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier)
 
     DocumentKeyValuesFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterKey, location_name: "Key"))
     DocumentKeyValuesFilter.add_member(:values, Shapes::ShapeRef.new(shape: DocumentKeyValuesFilterValues, location_name: "Values"))
@@ -1409,7 +1414,7 @@ module Aws::SSM
     DocumentParameter.add_member(:default_value, Shapes::ShapeRef.new(shape: DocumentParameterDefaultValue, location_name: "DefaultValue"))
     DocumentParameter.struct_class = Types::DocumentParameter
 
-    DocumentParameterList.member = Shapes::ShapeRef.new(shape: DocumentParameter, location_name: "DocumentParameter")
+    DocumentParameterList.member = Shapes::ShapeRef.new(shape: DocumentParameter)
 
     DocumentVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DocumentVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
@@ -1430,7 +1435,7 @@ module Aws::SSM
     FailedCreateAssociation.add_member(:fault, Shapes::ShapeRef.new(shape: Fault, location_name: "Fault"))
     FailedCreateAssociation.struct_class = Types::FailedCreateAssociation
 
-    FailedCreateAssociationList.member = Shapes::ShapeRef.new(shape: FailedCreateAssociation, location_name: "FailedCreateAssociationEntry")
+    FailedCreateAssociationList.member = Shapes::ShapeRef.new(shape: FailedCreateAssociation)
 
     FailureDetails.add_member(:failure_stage, Shapes::ShapeRef.new(shape: String, location_name: "FailureStage"))
     FailureDetails.add_member(:failure_type, Shapes::ShapeRef.new(shape: String, location_name: "FailureType"))
@@ -1493,6 +1498,7 @@ module Aws::SSM
     GetDocumentResult.struct_class = Types::GetDocumentResult
 
     GetInventoryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: InventoryFilterList, location_name: "Filters"))
+    GetInventoryRequest.add_member(:aggregators, Shapes::ShapeRef.new(shape: InventoryAggregatorList, location_name: "Aggregators"))
     GetInventoryRequest.add_member(:result_attributes, Shapes::ShapeRef.new(shape: ResultAttributeList, location_name: "ResultAttributes"))
     GetInventoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetInventoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1505,6 +1511,7 @@ module Aws::SSM
     GetInventorySchemaRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeNameFilter, location_name: "TypeName"))
     GetInventorySchemaRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetInventorySchemaRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetInventorySchemaMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetInventorySchemaRequest.add_member(:aggregator, Shapes::ShapeRef.new(shape: AggregatorSchemaOnly, location_name: "Aggregator"))
     GetInventorySchemaRequest.add_member(:sub_type, Shapes::ShapeRef.new(shape: IsSubTypeSchema, location_name: "SubType", metadata: {"box"=>true}))
     GetInventorySchemaRequest.struct_class = Types::GetInventorySchemaRequest
 
@@ -1723,17 +1730,17 @@ module Aws::SSM
     InstanceInformationFilter.add_member(:value_set, Shapes::ShapeRef.new(shape: InstanceInformationFilterValueSet, required: true, location_name: "valueSet"))
     InstanceInformationFilter.struct_class = Types::InstanceInformationFilter
 
-    InstanceInformationFilterList.member = Shapes::ShapeRef.new(shape: InstanceInformationFilter, location_name: "InstanceInformationFilter")
+    InstanceInformationFilterList.member = Shapes::ShapeRef.new(shape: InstanceInformationFilter)
 
-    InstanceInformationFilterValueSet.member = Shapes::ShapeRef.new(shape: InstanceInformationFilterValue, location_name: "InstanceInformationFilterValue")
+    InstanceInformationFilterValueSet.member = Shapes::ShapeRef.new(shape: InstanceInformationFilterValue)
 
-    InstanceInformationList.member = Shapes::ShapeRef.new(shape: InstanceInformation, location_name: "InstanceInformation")
+    InstanceInformationList.member = Shapes::ShapeRef.new(shape: InstanceInformation)
 
     InstanceInformationStringFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstanceInformationStringFilterKey, required: true, location_name: "Key"))
     InstanceInformationStringFilter.add_member(:values, Shapes::ShapeRef.new(shape: InstanceInformationFilterValueSet, required: true, location_name: "Values"))
     InstanceInformationStringFilter.struct_class = Types::InstanceInformationStringFilter
 
-    InstanceInformationStringFilterList.member = Shapes::ShapeRef.new(shape: InstanceInformationStringFilter, location_name: "InstanceInformationStringFilter")
+    InstanceInformationStringFilterList.member = Shapes::ShapeRef.new(shape: InstanceInformationStringFilter)
 
     InstancePatchState.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     InstancePatchState.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
@@ -1763,14 +1770,20 @@ module Aws::SSM
 
     InstancePatchStatesList.member = Shapes::ShapeRef.new(shape: InstancePatchState)
 
+    InventoryAggregator.add_member(:expression, Shapes::ShapeRef.new(shape: InventoryAggregatorExpression, location_name: "Expression"))
+    InventoryAggregator.add_member(:aggregators, Shapes::ShapeRef.new(shape: InventoryAggregatorList, location_name: "Aggregators"))
+    InventoryAggregator.struct_class = Types::InventoryAggregator
+
+    InventoryAggregatorList.member = Shapes::ShapeRef.new(shape: InventoryAggregator)
+
     InventoryFilter.add_member(:key, Shapes::ShapeRef.new(shape: InventoryFilterKey, required: true, location_name: "Key"))
     InventoryFilter.add_member(:values, Shapes::ShapeRef.new(shape: InventoryFilterValueList, required: true, location_name: "Values"))
     InventoryFilter.add_member(:type, Shapes::ShapeRef.new(shape: InventoryQueryOperatorType, location_name: "Type"))
     InventoryFilter.struct_class = Types::InventoryFilter
 
-    InventoryFilterList.member = Shapes::ShapeRef.new(shape: InventoryFilter, location_name: "InventoryFilter")
+    InventoryFilterList.member = Shapes::ShapeRef.new(shape: InventoryFilter)
 
-    InventoryFilterValueList.member = Shapes::ShapeRef.new(shape: InventoryFilterValue, location_name: "FilterValue")
+    InventoryFilterValueList.member = Shapes::ShapeRef.new(shape: InventoryFilterValue)
 
     InventoryItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     InventoryItem.add_member(:schema_version, Shapes::ShapeRef.new(shape: InventoryItemSchemaVersion, required: true, location_name: "SchemaVersion"))
@@ -1784,7 +1797,7 @@ module Aws::SSM
     InventoryItemAttribute.add_member(:data_type, Shapes::ShapeRef.new(shape: InventoryAttributeDataType, required: true, location_name: "DataType"))
     InventoryItemAttribute.struct_class = Types::InventoryItemAttribute
 
-    InventoryItemAttributeList.member = Shapes::ShapeRef.new(shape: InventoryItemAttribute, location_name: "Attribute")
+    InventoryItemAttributeList.member = Shapes::ShapeRef.new(shape: InventoryItemAttribute)
 
     InventoryItemContentContext.key = Shapes::ShapeRef.new(shape: AttributeName)
     InventoryItemContentContext.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -1794,11 +1807,12 @@ module Aws::SSM
 
     InventoryItemEntryList.member = Shapes::ShapeRef.new(shape: InventoryItemEntry)
 
-    InventoryItemList.member = Shapes::ShapeRef.new(shape: InventoryItem, location_name: "Item")
+    InventoryItemList.member = Shapes::ShapeRef.new(shape: InventoryItem)
 
     InventoryItemSchema.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     InventoryItemSchema.add_member(:version, Shapes::ShapeRef.new(shape: InventoryItemSchemaVersion, location_name: "Version"))
     InventoryItemSchema.add_member(:attributes, Shapes::ShapeRef.new(shape: InventoryItemAttributeList, required: true, location_name: "Attributes"))
+    InventoryItemSchema.add_member(:display_name, Shapes::ShapeRef.new(shape: InventoryTypeDisplayName, location_name: "DisplayName"))
     InventoryItemSchema.struct_class = Types::InventoryItemSchema
 
     InventoryItemSchemaResultList.member = Shapes::ShapeRef.new(shape: InventoryItemSchema)
@@ -1807,7 +1821,7 @@ module Aws::SSM
     InventoryResultEntity.add_member(:data, Shapes::ShapeRef.new(shape: InventoryResultItemMap, location_name: "Data"))
     InventoryResultEntity.struct_class = Types::InventoryResultEntity
 
-    InventoryResultEntityList.member = Shapes::ShapeRef.new(shape: InventoryResultEntity, location_name: "Entity")
+    InventoryResultEntityList.member = Shapes::ShapeRef.new(shape: InventoryResultEntity)
 
     InventoryResultItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     InventoryResultItem.add_member(:schema_version, Shapes::ShapeRef.new(shape: InventoryItemSchemaVersion, required: true, location_name: "SchemaVersion"))
@@ -2230,7 +2244,7 @@ module Aws::SSM
     PatchStatus.add_member(:approval_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ApprovalDate"))
     PatchStatus.struct_class = Types::PatchStatus
 
-    PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType")
+    PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType)
 
     PutComplianceItemsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, required: true, location_name: "ResourceId"))
     PutComplianceItemsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, required: true, location_name: "ResourceType"))
@@ -2322,7 +2336,7 @@ module Aws::SSM
     ResourceComplianceSummaryItem.add_member(:non_compliant_summary, Shapes::ShapeRef.new(shape: NonCompliantSummary, location_name: "NonCompliantSummary"))
     ResourceComplianceSummaryItem.struct_class = Types::ResourceComplianceSummaryItem
 
-    ResourceComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ResourceComplianceSummaryItem, location_name: "Item")
+    ResourceComplianceSummaryItemList.member = Shapes::ShapeRef.new(shape: ResourceComplianceSummaryItem)
 
     ResourceDataSyncItem.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, location_name: "SyncName"))
     ResourceDataSyncItem.add_member(:s3_destination, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Destination, location_name: "S3Destination"))
@@ -2344,7 +2358,7 @@ module Aws::SSM
     ResultAttribute.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     ResultAttribute.struct_class = Types::ResultAttribute
 
-    ResultAttributeList.member = Shapes::ShapeRef.new(shape: ResultAttribute, location_name: "ResultAttribute")
+    ResultAttributeList.member = Shapes::ShapeRef.new(shape: ResultAttribute)
 
     S3OutputLocation.add_member(:output_s3_region, Shapes::ShapeRef.new(shape: S3Region, location_name: "OutputS3Region"))
     S3OutputLocation.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "OutputS3BucketName"))
