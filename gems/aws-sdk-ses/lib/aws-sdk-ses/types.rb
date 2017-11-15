@@ -322,6 +322,13 @@ module Aws::SES
     #   * `InvalidSendingPoolName`\: The configuration set you specified
     #     refers to an IP pool that does not exist.
     #
+    #   * `AccountSendingPaused`\: Email sending for the Amazon SES account
+    #     was disabled using the UpdateAccountSendingEnabled operation.
+    #
+    #   * `ConfigurationSetSendingPaused`\: Email sending for this
+    #     configuration set was disabled using the
+    #     UpdateConfigurationSetSendingEnabled operation.
+    #
     #   * `InvalidParameterValue`\: One or more of the parameters you
     #     specified when calling this operation was invalid. See the error
     #     message for additional information.
@@ -1284,7 +1291,7 @@ module Aws::SES
     #
     #       {
     #         configuration_set_name: "ConfigurationSetName", # required
-    #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions
+    #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions, reputationOptions
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -1325,12 +1332,18 @@ module Aws::SES
     #   with the configuration set.
     #   @return [Types::TrackingOptions]
     #
+    # @!attribute [rw] reputation_options
+    #   An object that represents the reputation settings for the
+    #   configuration set.
+    #   @return [Types::ReputationOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSetResponse AWS API Documentation
     #
     class DescribeConfigurationSetResponse < Struct.new(
       :configuration_set,
       :event_destinations,
-      :tracking_options)
+      :tracking_options,
+      :reputation_options)
       include Aws::Structure
     end
 
@@ -1599,6 +1612,21 @@ module Aws::SES
     class ExtensionField < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # Represents a request to return the email sending status for your
+    # Amazon SES account.
+    #
+    # @!attribute [rw] enabled
+    #   Describes whether email sending is enabled or disabled for your
+    #   Amazon SES account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledResponse AWS API Documentation
+    #
+    class GetAccountSendingEnabledResponse < Struct.new(
+      :enabled)
       include Aws::Structure
     end
 
@@ -3223,6 +3251,51 @@ module Aws::SES
     #
     class ReorderReceiptRuleSetResponse < Aws::EmptyStructure; end
 
+    # Contains information about the reputation settings for a configuration
+    # set.
+    #
+    # @!attribute [rw] sending_enabled
+    #   Describes whether email sending is enabled or disabled for the
+    #   configuration set. If the value is `true`, then Amazon SES will send
+    #   emails that use the configuration set. If the value is `false`,
+    #   Amazon SES will not send emails that use the configuration set. The
+    #   default value is `true`. You can change this setting using
+    #   UpdateConfigurationSetSendingEnabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reputation_metrics_enabled
+    #   Describes whether or not Amazon SES publishes reputation metrics for
+    #   the configuration set, such as bounce and complaint rates, to Amazon
+    #   CloudWatch.
+    #
+    #   If the value is `true`, reputation metrics are published. If the
+    #   value is `false`, reputation metrics are not published. The default
+    #   value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_fresh_start
+    #   The date and time at which the reputation metrics for the
+    #   configuration set were last reset. Resetting these metrics is known
+    #   as a *fresh start*.
+    #
+    #   When you disable email sending for a configuration set using
+    #   UpdateConfigurationSetSendingEnabled and later re-enable it, the
+    #   reputation metrics for the configuration set (but not for the entire
+    #   Amazon SES account) are reset.
+    #
+    #   If email sending for the configuration set has never been disabled
+    #   and later re-enabled, the value of this attribute is `null`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReputationOptions AWS API Documentation
+    #
+    class ReputationOptions < Struct.new(
+      :sending_enabled,
+      :reputation_metrics_enabled,
+      :last_fresh_start)
+      include Aws::Structure
+    end
+
     # When included in a receipt rule, this action saves the received
     # message to an Amazon Simple Storage Service (Amazon S3) bucket and,
     # optionally, publishes a notification to Amazon Simple Notification
@@ -4835,6 +4908,28 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Represents a request to enable or disable the email sending
+    # capabilities for your entire Amazon SES account.
+    #
+    # @note When making an API call, you may pass UpdateAccountSendingEnabledRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Describes whether email sending is enabled or disabled for your
+    #   Amazon SES account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledRequest AWS API Documentation
+    #
+    class UpdateAccountSendingEnabledRequest < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
     # Represents a request to update the event destination of a
     # configuration set. Configuration sets enable you to publish email
     # sending events. For information about using configuration sets, see
@@ -4895,6 +4990,63 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+    # Represents a request to modify the reputation metric publishing
+    # settings for a configuration set.
+    #
+    # @note When making an API call, you may pass UpdateConfigurationSetReputationMetricsEnabledRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_set_name: "ConfigurationSetName", # required
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Describes whether or not Amazon SES will publish reputation metrics
+    #   for the configuration set, such as bounce and complaint rates, to
+    #   Amazon CloudWatch.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetReputationMetricsEnabledRequest AWS API Documentation
+    #
+    class UpdateConfigurationSetReputationMetricsEnabledRequest < Struct.new(
+      :configuration_set_name,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Represents a request to enable or disable the email sending
+    # capabilities for a specific configuration set.
+    #
+    # @note When making an API call, you may pass UpdateConfigurationSetSendingEnabledRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_set_name: "ConfigurationSetName", # required
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Describes whether email sending is enabled or disabled for the
+    #   configuration set.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetSendingEnabledRequest AWS API Documentation
+    #
+    class UpdateConfigurationSetSendingEnabledRequest < Struct.new(
+      :configuration_set_name,
+      :enabled)
+      include Aws::Structure
+    end
 
     # Represents a request to update the tracking options for a
     # configuration set.

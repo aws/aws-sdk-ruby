@@ -164,6 +164,7 @@ module Aws::APIGateway
     ListOfUsage = Shapes::ListShape.new(name: 'ListOfUsage')
     ListOfUsagePlan = Shapes::ListShape.new(name: 'ListOfUsagePlan')
     ListOfUsagePlanKey = Shapes::ListShape.new(name: 'ListOfUsagePlanKey')
+    LocationStatusType = Shapes::StringShape.new(name: 'LocationStatusType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfHeaderValues = Shapes::MapShape.new(name: 'MapOfHeaderValues')
     MapOfIntegrationResponse = Shapes::MapShape.new(name: 'MapOfIntegrationResponse')
@@ -547,9 +548,11 @@ module Aws::APIGateway
     DomainName.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "certificateArn"))
     DomainName.add_member(:certificate_upload_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "certificateUploadDate"))
     DomainName.add_member(:regional_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalDomainName"))
+    DomainName.add_member(:regional_hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "regionalHostedZoneId"))
     DomainName.add_member(:regional_certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateName"))
     DomainName.add_member(:regional_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "regionalCertificateArn"))
     DomainName.add_member(:distribution_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "distributionDomainName"))
+    DomainName.add_member(:distribution_hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "distributionHostedZoneId"))
     DomainName.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     DomainName.struct_class = Types::DomainName
 
@@ -647,6 +650,7 @@ module Aws::APIGateway
     GetDocumentationPartsRequest.add_member(:path, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "path"))
     GetDocumentationPartsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
     GetDocumentationPartsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetDocumentationPartsRequest.add_member(:location_status, Shapes::ShapeRef.new(shape: LocationStatusType, location: "querystring", location_name: "locationStatus"))
     GetDocumentationPartsRequest.struct_class = Types::GetDocumentationPartsRequest
 
     GetDocumentationVersionRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))

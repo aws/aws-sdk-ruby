@@ -626,9 +626,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_hosted_zone_id #regional_hosted_zone_id} => String
     #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
     #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -654,9 +656,11 @@ module Aws::APIGateway
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.regional_domain_name #=> String
+    #   resp.regional_hosted_zone_id #=> String
     #   resp.regional_certificate_name #=> String
     #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -2263,6 +2267,12 @@ module Aws::APIGateway
     # @option params [Integer] :limit
     #   The maximum number of returned results per page.
     #
+    # @option params [String] :location_status
+    #   The status of the API documentation parts to retrieve. Valid values
+    #   are `DOCUMENTED` for retrieving DocumentationPart resources with
+    #   content and `UNDOCUMENTED` for DocumentationPart resources without
+    #   content.
+    #
     # @return [Types::DocumentationParts] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DocumentationParts#position #position} => String
@@ -2277,6 +2287,7 @@ module Aws::APIGateway
     #     path: "String",
     #     position: "String",
     #     limit: 1,
+    #     location_status: "DOCUMENTED", # accepts DOCUMENTED, UNDOCUMENTED
     #   })
     #
     # @example Response structure
@@ -2381,9 +2392,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_hosted_zone_id #regional_hosted_zone_id} => String
     #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
     #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -2399,9 +2412,11 @@ module Aws::APIGateway
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.regional_domain_name #=> String
+    #   resp.regional_hosted_zone_id #=> String
     #   resp.regional_certificate_name #=> String
     #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -2442,9 +2457,11 @@ module Aws::APIGateway
     #   resp.items[0].certificate_arn #=> String
     #   resp.items[0].certificate_upload_date #=> Time
     #   resp.items[0].regional_domain_name #=> String
+    #   resp.items[0].regional_hosted_zone_id #=> String
     #   resp.items[0].regional_certificate_name #=> String
     #   resp.items[0].regional_certificate_arn #=> String
     #   resp.items[0].distribution_domain_name #=> String
+    #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -3889,11 +3906,30 @@ module Aws::APIGateway
     #   value is `false`.
     #
     # @option params [Hash<String,String>] :parameters
-    #   Custom header parameters as part of the request. For example, to
-    #   exclude DocumentationParts from an imported API, set
-    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
-    #   command of `aws apigateway import-rest-api --parameters
-    #   ignore=documentation --body 'file:///path/to/imported-api-body.json`.
+    #   A key-value map of context-specific query string parameters specifying
+    #   the behavior of different API importing operations. The following
+    #   shows operation-specific parameters and their supported values.
+    #
+    #   To exclude DocumentationParts from the import, set `parameters` as
+    #   `ignore=documentation`.
+    #
+    #   To configure the endpoint type, set `parameters` as
+    #   `endpointConfigurationTypes=EDGE`
+    #   or`endpointConfigurationTypes=REGIONAL`. The default endpoint type is
+    #   `EDGE`.
+    #
+    #   To handle imported `basePath`, set `parameters` as `basePath=ignore`,
+    #   `basePath=prepend` or `basePath=split`.
+    #
+    #   For example, the AWS CLI command to exclude documentation from the
+    #   imported API is:
+    #
+    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json
+    #
+    #   The AWS CLI command to set the regional endpoint on the imported API
+    #   is:
+    #
+    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
     #
     # @option params [required, String, IO] :body
     #   The POST request body containing external API definitions. Currently,
@@ -5130,9 +5166,11 @@ module Aws::APIGateway
     #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#regional_domain_name #regional_domain_name} => String
+    #   * {Types::DomainName#regional_hosted_zone_id #regional_hosted_zone_id} => String
     #   * {Types::DomainName#regional_certificate_name #regional_certificate_name} => String
     #   * {Types::DomainName#regional_certificate_arn #regional_certificate_arn} => String
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
+    #   * {Types::DomainName#distribution_hosted_zone_id #distribution_hosted_zone_id} => String
     #   * {Types::DomainName#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -5156,9 +5194,11 @@ module Aws::APIGateway
     #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.regional_domain_name #=> String
+    #   resp.regional_hosted_zone_id #=> String
     #   resp.regional_certificate_name #=> String
     #   resp.regional_certificate_arn #=> String
     #   resp.distribution_domain_name #=> String
+    #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -5964,7 +6004,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

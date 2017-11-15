@@ -2154,6 +2154,17 @@ module Aws::APIGateway
     #   when you create a regional endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] regional_hosted_zone_id
+    #   The region-specific Amazon Route 53 Hosted Zone ID of the regional
+    #   endpoint. For more information, see [Set up a Regional Custom Domain
+    #   Name][1] and [AWS Regions and Endpoints for API Gateway][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   @return [String]
+    #
     # @!attribute [rw] regional_certificate_name
     #   The name of the certificate that will be used for validating the
     #   regional domain name.
@@ -2178,6 +2189,18 @@ module Aws::APIGateway
     #   [1]: http://aws.amazon.com/documentation/cloudfront/
     #   @return [String]
     #
+    # @!attribute [rw] distribution_hosted_zone_id
+    #   The region-agnostic Amazon Route 53 Hosted Zone ID of the
+    #   edge-optimized endpoint. The valid value is `Z2FDTNDATAQYW2` for all
+    #   the regions. For more information, see [Set up a Regional Custom
+    #   Domain Name][1] and [AWS Regions and Endpoints for API Gateway][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
     #   types of the domain name.
@@ -2189,9 +2212,11 @@ module Aws::APIGateway
       :certificate_arn,
       :certificate_upload_date,
       :regional_domain_name,
+      :regional_hosted_zone_id,
       :regional_certificate_name,
       :regional_certificate_arn,
       :distribution_domain_name,
+      :distribution_hosted_zone_id,
       :endpoint_configuration)
       include Aws::Structure
     end
@@ -2820,6 +2845,7 @@ module Aws::APIGateway
     #         path: "String",
     #         position: "String",
     #         limit: 1,
+    #         location_status: "DOCUMENTED", # accepts DOCUMENTED, UNDOCUMENTED
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -2846,13 +2872,21 @@ module Aws::APIGateway
     #   The maximum number of returned results per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] location_status
+    #   The status of the API documentation parts to retrieve. Valid values
+    #   are `DOCUMENTED` for retrieving DocumentationPart resources with
+    #   content and `UNDOCUMENTED` for DocumentationPart resources without
+    #   content.
+    #   @return [String]
+    #
     class GetDocumentationPartsRequest < Struct.new(
       :rest_api_id,
       :type,
       :name_query,
       :path,
       :position,
-      :limit)
+      :limit,
+      :location_status)
       include Aws::Structure
     end
 
@@ -3890,12 +3924,31 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
-    #   Custom header parameters as part of the request. For example, to
-    #   exclude DocumentationParts from an imported API, set
-    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
-    #   command of `aws apigateway import-rest-api --parameters
-    #   ignore=documentation --body
-    #   'file:///path/to/imported-api-body.json`.
+    #   A key-value map of context-specific query string parameters
+    #   specifying the behavior of different API importing operations. The
+    #   following shows operation-specific parameters and their supported
+    #   values.
+    #
+    #   To exclude DocumentationParts from the import, set `parameters` as
+    #   `ignore=documentation`.
+    #
+    #   To configure the endpoint type, set `parameters` as
+    #   `endpointConfigurationTypes=EDGE`
+    #   or`endpointConfigurationTypes=REGIONAL`. The default endpoint type
+    #   is `EDGE`.
+    #
+    #   To handle imported `basePath`, set `parameters` as
+    #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
+    #
+    #   For example, the AWS CLI command to exclude documentation from the
+    #   imported API is:
+    #
+    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json
+    #
+    #   The AWS CLI command to set the regional endpoint on the imported API
+    #   is:
+    #
+    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body

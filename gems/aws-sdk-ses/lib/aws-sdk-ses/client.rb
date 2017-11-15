@@ -1100,12 +1100,13 @@ module Aws::SES
     #   * {Types::DescribeConfigurationSetResponse#configuration_set #configuration_set} => Types::ConfigurationSet
     #   * {Types::DescribeConfigurationSetResponse#event_destinations #event_destinations} => Array&lt;Types::EventDestination&gt;
     #   * {Types::DescribeConfigurationSetResponse#tracking_options #tracking_options} => Types::TrackingOptions
+    #   * {Types::DescribeConfigurationSetResponse#reputation_options #reputation_options} => Types::ReputationOptions
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_configuration_set({
     #     configuration_set_name: "ConfigurationSetName", # required
-    #     configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions
+    #     configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations, trackingOptions, reputationOptions
     #   })
     #
     # @example Response structure
@@ -1124,6 +1125,9 @@ module Aws::SES
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
     #   resp.event_destinations[0].sns_destination.topic_arn #=> String
     #   resp.tracking_options.custom_redirect_domain #=> String
+    #   resp.reputation_options.sending_enabled #=> Boolean
+    #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
+    #   resp.reputation_options.last_fresh_start #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSet AWS API Documentation
     #
@@ -1326,6 +1330,40 @@ module Aws::SES
     # @param [Hash] params ({})
     def describe_receipt_rule_set(params = {}, options = {})
       req = build_request(:describe_receipt_rule_set, params)
+      req.send_request(options)
+    end
+
+    # Returns the email sending status of the Amazon SES account.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @return [Types::GetAccountSendingEnabledResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountSendingEnabledResponse#enabled #enabled} => Boolean
+    #
+    #
+    # @example Example: GetAccountSendingEnabled
+    #
+    #   # The following example returns if sending status for an account is enabled. (true / false):
+    #
+    #   resp = client.get_account_sending_enabled({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled: true, 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabled AWS API Documentation
+    #
+    # @overload get_account_sending_enabled(params = {})
+    # @param [Hash] params ({})
+    def get_account_sending_enabled(params = {}, options = {})
+      req = build_request(:get_account_sending_enabled, params)
       req.send_request(options)
     end
 
@@ -2635,7 +2673,7 @@ module Aws::SES
     # @example Response structure
     #
     #   resp.status #=> Array
-    #   resp.status[0].status #=> String, one of "Success", "MessageRejected", "MailFromDomainNotVerified", "ConfigurationSetDoesNotExist", "TemplateDoesNotExist", "AccountSuspended", "AccountThrottled", "AccountDailyQuotaExceeded", "InvalidSendingPoolName", "InvalidParameterValue", "TransientFailure", "Failed"
+    #   resp.status[0].status #=> String, one of "Success", "MessageRejected", "MailFromDomainNotVerified", "ConfigurationSetDoesNotExist", "TemplateDoesNotExist", "AccountSuspended", "AccountThrottled", "AccountDailyQuotaExceeded", "InvalidSendingPoolName", "AccountSendingPaused", "ConfigurationSetSendingPaused", "InvalidParameterValue", "TransientFailure", "Failed"
     #   resp.status[0].error #=> String
     #   resp.status[0].message_id #=> String
     #
@@ -3804,6 +3842,44 @@ module Aws::SES
       req.send_request(options)
     end
 
+    # Enables or disables email sending across your entire Amazon SES
+    # account. You can use this operation in conjunction with Amazon
+    # CloudWatch alarms to temporarily pause email sending across your
+    # Amazon SES account when reputation metrics (such as your bounce on
+    # complaint rate) reach certain thresholds.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [Boolean] :enabled
+    #   Describes whether email sending is enabled or disabled for your Amazon
+    #   SES account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateAccountSendingEnabled
+    #
+    #   # The following example updated the sending status for this account.
+    #
+    #   resp = client.update_account_sending_enabled({
+    #     enabled: true, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_sending_enabled({
+    #     enabled: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabled AWS API Documentation
+    #
+    # @overload update_account_sending_enabled(params = {})
+    # @param [Hash] params ({})
+    def update_account_sending_enabled(params = {}, options = {})
+      req = build_request(:update_account_sending_enabled, params)
+      req.send_request(options)
+    end
+
     # Updates the event destination of a configuration set. Event
     # destinations are associated with configuration sets, which enable you
     # to publish email sending events to Amazon CloudWatch, Amazon Kinesis
@@ -3867,6 +3943,93 @@ module Aws::SES
     # @param [Hash] params ({})
     def update_configuration_set_event_destination(params = {}, options = {})
       req = build_request(:update_configuration_set_event_destination, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables the publishing of reputation metrics for emails
+    # sent using a specific configuration set. Reputation metrics include
+    # bounce and complaint rates. These metrics are published to Amazon
+    # CloudWatch. By using Amazon CloudWatch, you can create alarms when
+    # bounce or complaint rates exceed a certain threshold.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set that you want to update.
+    #
+    # @option params [required, Boolean] :enabled
+    #   Describes whether or not Amazon SES will publish reputation metrics
+    #   for the configuration set, such as bounce and complaint rates, to
+    #   Amazon CloudWatch.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateConfigurationSetReputationMetricsEnabled
+    #
+    #   # Set the reputationMetricsEnabled flag for a specific configuration set.
+    #
+    #   resp = client.update_configuration_set_reputation_metrics_enabled({
+    #     configuration_set_name: "foo", 
+    #     enabled: true, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration_set_reputation_metrics_enabled({
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetReputationMetricsEnabled AWS API Documentation
+    #
+    # @overload update_configuration_set_reputation_metrics_enabled(params = {})
+    # @param [Hash] params ({})
+    def update_configuration_set_reputation_metrics_enabled(params = {}, options = {})
+      req = build_request(:update_configuration_set_reputation_metrics_enabled, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables email sending for messages sent using a specific
+    # configuration set. You can use this operation in conjunction with
+    # Amazon CloudWatch alarms to temporarily pause email sending for a
+    # configuration set when the reputation metrics for that configuration
+    # set (such as your bounce on complaint rate) reach certain thresholds.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set that you want to update.
+    #
+    # @option params [required, Boolean] :enabled
+    #   Describes whether email sending is enabled or disabled for the
+    #   configuration set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateConfigurationSetReputationMetricsEnabled
+    #
+    #   # Set the sending enabled flag for a specific configuration set.
+    #
+    #   resp = client.update_configuration_set_sending_enabled({
+    #     configuration_set_name: "foo", 
+    #     enabled: true, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration_set_sending_enabled({
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetSendingEnabled AWS API Documentation
+    #
+    # @overload update_configuration_set_sending_enabled(params = {})
+    # @param [Hash] params ({})
+    def update_configuration_set_sending_enabled(params = {}, options = {})
+      req = build_request(:update_configuration_set_sending_enabled, params)
       req.send_request(options)
     end
 
@@ -4256,7 +4419,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

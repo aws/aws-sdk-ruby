@@ -38,6 +38,8 @@ module Aws::States
     DescribeActivityOutput = Shapes::StructureShape.new(name: 'DescribeActivityOutput')
     DescribeExecutionInput = Shapes::StructureShape.new(name: 'DescribeExecutionInput')
     DescribeExecutionOutput = Shapes::StructureShape.new(name: 'DescribeExecutionOutput')
+    DescribeStateMachineForExecutionInput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionInput')
+    DescribeStateMachineForExecutionOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionOutput')
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
     DescribeStateMachineOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineOutput')
     Error = Shapes::StringShape.new(name: 'Error')
@@ -80,6 +82,7 @@ module Aws::States
     ListExecutionsOutput = Shapes::StructureShape.new(name: 'ListExecutionsOutput')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
+    MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
@@ -108,6 +111,8 @@ module Aws::States
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
+    UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
 
     ActivityFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     ActivityFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
@@ -186,6 +191,16 @@ module Aws::States
     DescribeExecutionOutput.add_member(:input, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "input"))
     DescribeExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
+
+    DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    DescribeStateMachineForExecutionInput.struct_class = Types::DescribeStateMachineForExecutionInput
+
+    DescribeStateMachineForExecutionOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    DescribeStateMachineForExecutionOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    DescribeStateMachineForExecutionOutput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
+    DescribeStateMachineForExecutionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    DescribeStateMachineForExecutionOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
+    DescribeStateMachineForExecutionOutput.struct_class = Types::DescribeStateMachineForExecutionOutput
 
     DescribeStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     DescribeStateMachineInput.struct_class = Types::DescribeStateMachineInput
@@ -372,6 +387,14 @@ module Aws::States
     StopExecutionOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "stopDate"))
     StopExecutionOutput.struct_class = Types::StopExecutionOutput
 
+    UpdateStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
+    UpdateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
+    UpdateStateMachineInput.struct_class = Types::UpdateStateMachineInput
+
+    UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
+    UpdateStateMachineOutput.struct_class = Types::UpdateStateMachineOutput
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -457,6 +480,16 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+      end)
+
+      api.add_operation(:describe_state_machine_for_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStateMachineForExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStateMachineForExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineForExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
       end)
 
       api.add_operation(:get_activity_task, Seahorse::Model::Operation.new.tap do |o|
@@ -591,6 +624,19 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: StopExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+      end)
+
+      api.add_operation(:update_state_machine, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStateMachine"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStateMachineInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStateMachineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
+        o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameter)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
       end)
     end
 
