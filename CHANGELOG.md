@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
+
+* Feature - Aws::Polly - Updated the API for Amazon Polly.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.10.83 (2017-11-15)
 ------------------
 
