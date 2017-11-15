@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.83 (2017-11-15)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
