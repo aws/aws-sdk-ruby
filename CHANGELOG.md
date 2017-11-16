@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::OpsWorksCM - Updated the API, documentation, and waiters for AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
 2.10.84 (2017-11-15)
 ------------------
 
