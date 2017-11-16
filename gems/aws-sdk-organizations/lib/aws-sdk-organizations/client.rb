@@ -549,8 +549,8 @@ module Aws::Organizations
     # The user in the master account who calls this API must also have the
     # `iam:CreateRole` permission because AWS Organizations preconfigures
     # the new member account with a role (named
-    # `OrganizationAccountAccessRole`) that grants users in the master
-    # account administrator permissions in the new member account.
+    # `OrganizationAccountAccessRole` by default) that grants users in the
+    # master account administrator permissions in the new member account.
     # Principals in the master account can assume the role. AWS
     # Organizations clones the company name and address information for the
     # new account from the organization's master account.
@@ -582,6 +582,9 @@ module Aws::Organizations
     # and Tools][4].
     #
     #  </note>
+    #
+    # This operation can be called only from the organization's master
+    # account.
     #
     # If you get an exception that indicates that you exceeded your account
     # limits for the organization or that you can"t add an account because
@@ -1756,6 +1759,65 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Disables the integration of an AWS service (the service that is
+    # specified by `ServicePrincipal`) with AWS Organizations. When you
+    # disable integration, the specified service no longer can create a
+    # [service-linked role][1] in *new* accounts in your organization. This
+    # means the service can't perform operations on your behalf on any new
+    # accounts in your organization. The service can still perform
+    # operations in older accounts until the service completes its clean-up
+    # from AWS Organizations.
+    #
+    #
+    #
+    # We recommend that you disable integration between AWS Organizations
+    # and the specified AWS service by using the console or commands that
+    # are provided by the specified service. Doing so ensures that the other
+    # service is aware that it can clean up any resources that are required
+    # only for the integration. How the service cleans up its resources in
+    # the organization's accounts depends on that service. For more
+    # information, see the documentation for the other AWS service.
+    #
+    # After you perform the `DisableAWSServiceAccess` operation, the
+    # specified service can no longer perform operations in your
+    # organization's accounts unless the operations are explicitly
+    # permitted by the IAM policies that are attached to your roles.
+    #
+    # For more information about integrating other services with AWS
+    # Organizations, including the list of services that work with
+    # Organizations, see [Integrating AWS Organizations with Other AWS
+    # Services][2] in the *AWS Organizations User Guide*.
+    #
+    # This operation can be called only from the organization's master
+    # account.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #
+    # @option params [required, String] :service_principal
+    #   The service principal name of the AWS service for which you want to
+    #   disable integration with your organization. This is typically in the
+    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_aws_service_access({
+    #     service_principal: "ServicePrincipal", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess AWS API Documentation
+    #
+    # @overload disable_aws_service_access(params = {})
+    # @param [Hash] params ({})
+    def disable_aws_service_access(params = {}, options = {})
+      req = build_request(:disable_aws_service_access, params)
+      req.send_request(options)
+    end
+
     # Disables an organizational control policy type in a root. A policy of
     # a certain type can be attached to entities in a root only if that type
     # is enabled in the root. After you perform this operation, you no
@@ -1828,6 +1890,56 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def disable_policy_type(params = {}, options = {})
       req = build_request(:disable_policy_type, params)
+      req.send_request(options)
+    end
+
+    # Enables the integration of an AWS service (the service that is
+    # specified by `ServicePrincipal`) with AWS Organizations. When you
+    # enable integration, you allow the specified service to create a
+    # [service-linked role][1] in all the accounts in your organization.
+    # This allows the service to perform operations on your behalf in your
+    # organization and its accounts.
+    #
+    # We recommend that you enable integration between AWS Organizations and
+    # the specified AWS service by using the console or commands that are
+    # provided by the specified service. Doing so ensures that the service
+    # is aware that it can create the resources that are required for the
+    # integration. How the service creates those resources in the
+    # organization's accounts depends on that service. For more
+    # information, see the documentation for the other AWS service.
+    #
+    # For more information about enabling services to integrate with AWS
+    # Organizations, see [Integrating AWS Organizations with Other AWS
+    # Services][2] in the *AWS Organizations User Guide*.
+    #
+    # This operation can be called only from the organization's master
+    # account and only if the organization has [enabled all features][3].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
+    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #
+    # @option params [required, String] :service_principal
+    #   The service principal name of the AWS service for which you want to
+    #   enable integration with your organization. This is typically in the
+    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_aws_service_access({
+    #     service_principal: "ServicePrincipal", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess AWS API Documentation
+    #
+    # @overload enable_aws_service_access(params = {})
+    # @param [Hash] params ({})
+    def enable_aws_service_access(params = {}, options = {})
+      req = build_request(:enable_aws_service_access, params)
       req.send_request(options)
     end
 
@@ -2212,6 +2324,69 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def leave_organization(params = {}, options = {})
       req = build_request(:leave_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the AWS services that you enabled to integrate with
+    # your organization. After a service on this list creates the resources
+    # that it requires for the integration, it can perform operations on
+    # your organization and its accounts.
+    #
+    # For more information about integrating other services with AWS
+    # Organizations, including the list of services that currently work with
+    # Organizations, see [Integrating AWS Organizations with Other AWS
+    # Services][1] in the *AWS Organizations User Guide*.
+    #
+    # This operation can be called only from the organization's master
+    # account.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #
+    # @option params [String] :next_token
+    #   Use this parameter if you receive a `NextToken` response in a previous
+    #   request that indicates that there is more output available. Set it to
+    #   the value of the previous call's `NextToken` response to indicate
+    #   where the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   (Optional) Use this to limit the number of results you want included
+    #   in the response. If you do not include this parameter, it defaults to
+    #   a value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to get
+    #   the next part of the results. Note that Organizations might return
+    #   fewer results than the maximum even when there are more results
+    #   available. You should check `NextToken` after every operation to
+    #   ensure that you receive all of the results.
+    #
+    # @return [Types::ListAWSServiceAccessForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAWSServiceAccessForOrganizationResponse#enabled_service_principals #enabled_service_principals} => Array&lt;Types::EnabledServicePrincipal&gt;
+    #   * {Types::ListAWSServiceAccessForOrganizationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_aws_service_access_for_organization({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enabled_service_principals #=> Array
+    #   resp.enabled_service_principals[0].service_principal #=> String
+    #   resp.enabled_service_principals[0].date_enabled #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization AWS API Documentation
+    #
+    # @overload list_aws_service_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_aws_service_access_for_organization(params = {}, options = {})
+      req = build_request(:list_aws_service_access_for_organization, params)
       req.send_request(options)
     end
 
@@ -3904,7 +4079,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

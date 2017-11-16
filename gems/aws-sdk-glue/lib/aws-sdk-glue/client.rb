@@ -505,10 +505,14 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a `Classifier` in the user's account.
+    # Creates a classifier in the user's account. This may be either a
+    # `GrokClassifier` or an `XMLClassifier`.
     #
     # @option params [Types::CreateGrokClassifierRequest] :grok_classifier
-    #   A grok classifier to create.
+    #   A `GrokClassifier` object specifying the classifier to create.
+    #
+    # @option params [Types::CreateXMLClassifierRequest] :xml_classifier
+    #   An `XMLClassifier` object specifying the classifier to create.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -520,6 +524,11 @@ module Aws::Glue
     #       name: "NameString", # required
     #       grok_pattern: "GrokPattern", # required
     #       custom_patterns: "CustomPatterns",
+    #     },
+    #     xml_classifier: {
+    #       classification: "Classification", # required
+    #       name: "NameString", # required
+    #       row_tag: "RowTag",
     #     },
     #   })
     #
@@ -572,23 +581,23 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a new `Crawler` with specified targets, role, configuration,
-    # and optional schedule. At least one crawl target must be specified, in
+    # Creates a new crawler with specified targets, role, configuration, and
+    # optional schedule. At least one crawl target must be specified, in
     # either the *s3Targets* or the *jdbcTargets* field.
     #
     # @option params [required, String] :name
-    #   Name of the new `Crawler`.
+    #   Name of the new crawler.
     #
     # @option params [required, String] :role
-    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
-    #   access customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new crawler to access
+    #   customer resources.
     #
     # @option params [required, String] :database_name
-    #   The Glue `Database` where results will be stored, such as:
+    #   The AWS Glue database where results are written, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
-    #   A description of the new `Crawler`.
+    #   A description of the new crawler.
     #
     # @option params [required, Types::CrawlerTargets] :targets
     #   A list of collection of targets to crawl.
@@ -603,16 +612,25 @@ module Aws::Glue
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
-    #   A list of custom `Classifier` names that the user has registered. By
-    #   default, all AWS classifiers are included in a crawl, but these custom
+    #   A list of custom classifiers that the user has registered. By default,
+    #   all AWS classifiers are included in a crawl, but these custom
     #   classifiers always override the default classifiers for a given
     #   classification.
     #
     # @option params [String] :table_prefix
-    #   The table prefix used for catalog tables created.
+    #   The table prefix used for catalog tables that are created.
     #
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
     #   Policy for the crawler's update and deletion behavior.
+    #
+    # @option params [String] :configuration
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a Crawler's behavior.
+    #
+    #   You can use this field to force partitions to inherit metadata such as
+    #   classification, input format, output format, serde information, and
+    #   schema from their parent table, rather than detect this information
+    #   separately for each partition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -620,7 +638,7 @@ module Aws::Glue
     #
     #   resp = client.create_crawler({
     #     name: "NameString", # required
-    #     role: "RoleArn", # required
+    #     role: "Role", # required
     #     database_name: "DatabaseName", # required
     #     description: "DescriptionString",
     #     targets: { # required
@@ -645,6 +663,7 @@ module Aws::Glue
     #       update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
+    #     configuration: "CrawlerConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler AWS API Documentation
@@ -1199,10 +1218,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a `Classifier` from the metadata store.
+    # Removes a classifier from the Data Catalog.
     #
     # @option params [required, String] :name
-    #   Name of the `Classifier` to remove.
+    #   Name of the classifier to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1248,11 +1267,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a specified `Crawler` from the metadata store, unless the
-    # `Crawler` state is `RUNNING`.
+    # Removes a specified crawler from the Data Catalog, unless the crawler
+    # state is `RUNNING`.
     #
     # @option params [required, String] :name
-    #   Name of the `Crawler` to remove.
+    #   Name of the crawler to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1505,10 +1524,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieve a `Classifier` by name.
+    # Retrieve a classifier by name.
     #
     # @option params [required, String] :name
-    #   Name of the `Classifier` to retrieve.
+    #   Name of the classifier to retrieve.
     #
     # @return [Types::GetClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1529,6 +1548,12 @@ module Aws::Glue
     #   resp.classifier.grok_classifier.version #=> Integer
     #   resp.classifier.grok_classifier.grok_pattern #=> String
     #   resp.classifier.grok_classifier.custom_patterns #=> String
+    #   resp.classifier.xml_classifier.name #=> String
+    #   resp.classifier.xml_classifier.classification #=> String
+    #   resp.classifier.xml_classifier.creation_time #=> Time
+    #   resp.classifier.xml_classifier.last_updated #=> Time
+    #   resp.classifier.xml_classifier.version #=> Integer
+    #   resp.classifier.xml_classifier.row_tag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier AWS API Documentation
     #
@@ -1539,7 +1564,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Lists all Classifier objects in the metadata store.
+    # Lists all classifier objects in the Data Catalog.
     #
     # @option params [Integer] :max_results
     #   Size of the list to return (optional).
@@ -1569,6 +1594,12 @@ module Aws::Glue
     #   resp.classifiers[0].grok_classifier.version #=> Integer
     #   resp.classifiers[0].grok_classifier.grok_pattern #=> String
     #   resp.classifiers[0].grok_classifier.custom_patterns #=> String
+    #   resp.classifiers[0].xml_classifier.name #=> String
+    #   resp.classifiers[0].xml_classifier.classification #=> String
+    #   resp.classifiers[0].xml_classifier.creation_time #=> Time
+    #   resp.classifiers[0].xml_classifier.last_updated #=> Time
+    #   resp.classifiers[0].xml_classifier.version #=> Integer
+    #   resp.classifiers[0].xml_classifier.row_tag #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers AWS API Documentation
@@ -1686,10 +1717,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves metadata for a specified `Crawler`.
+    # Retrieves metadata for a specified crawler.
     #
     # @option params [required, String] :name
-    #   Name of the `Crawler` to retrieve metadata for.
+    #   Name of the crawler to retrieve metadata for.
     #
     # @return [Types::GetCrawlerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1734,6 +1765,7 @@ module Aws::Glue
     #   resp.crawler.last_crawl.message_prefix #=> String
     #   resp.crawler.last_crawl.start_time #=> Time
     #   resp.crawler.version #=> Integer
+    #   resp.crawler.configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler AWS API Documentation
     #
@@ -1790,10 +1822,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves metadata for all `Crawlers` defined in the customer account.
+    # Retrieves metadata for all crawlers defined in the customer account.
     #
     # @option params [Integer] :max_results
-    #   The number of Crawlers to return on each call.
+    #   The number of crawlers to return on each call.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -1844,6 +1876,7 @@ module Aws::Glue
     #   resp.crawlers[0].last_crawl.message_prefix #=> String
     #   resp.crawlers[0].last_crawl.start_time #=> Time
     #   resp.crawlers[0].version #=> Integer
+    #   resp.crawlers[0].configuration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers AWS API Documentation
@@ -3104,11 +3137,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Starts a crawl using the specified `Crawler`, regardless of what is
-    # scheduled. If the `Crawler` is already running, does nothing.
+    # Starts a crawl using the specified crawler, regardless of what is
+    # scheduled. If the crawler is already running, does nothing.
     #
     # @option params [required, String] :name
-    #   Name of the `Crawler` to start.
+    #   Name of the crawler to start.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3221,10 +3254,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # If the specified `Crawler` is running, stops the crawl.
+    # If the specified crawler is running, stops the crawl.
     #
     # @option params [required, String] :name
-    #   Name of the `Crawler` to stop.
+    #   Name of the crawler to stop.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3294,10 +3327,14 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Modifies an existing `Classifier`.
+    # Modifies an existing classifier (either a `GrokClassifier` or an
+    # `XMLClassifier`).
     #
     # @option params [Types::UpdateGrokClassifierRequest] :grok_classifier
     #   A `GrokClassifier` object with updated fields.
+    #
+    # @option params [Types::UpdateXMLClassifierRequest] :xml_classifier
+    #   An `XMLClassifier` object with updated fields.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3309,6 +3346,11 @@ module Aws::Glue
     #       classification: "Classification",
     #       grok_pattern: "GrokPattern",
     #       custom_patterns: "CustomPatterns",
+    #     },
+    #     xml_classifier: {
+    #       name: "NameString", # required
+    #       classification: "Classification",
+    #       row_tag: "RowTag",
     #     },
     #   })
     #
@@ -3365,25 +3407,25 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Updates a `Crawler`. If a `Crawler` is running, you must stop it using
+    # Updates a crawler. If a crawler is running, you must stop it using
     # `StopCrawler` before updating it.
     #
     # @option params [required, String] :name
-    #   Name of the new `Crawler`.
+    #   Name of the new crawler.
     #
     # @option params [String] :role
-    #   The IAM role (or ARN of an IAM role) used by the new `Crawler` to
-    #   access customer resources.
+    #   The IAM role (or ARN of an IAM role) used by the new crawler to access
+    #   customer resources.
     #
     # @option params [String] :database_name
-    #   The Glue `Database` where results will be stored, such as:
+    #   The AWS Glue database where results are stored, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
-    #   A description of the new `Crawler`.
+    #   A description of the new crawler.
     #
     # @option params [Types::CrawlerTargets] :targets
-    #   A list of collection of targets to crawl.
+    #   A list of targets to crawl.
     #
     # @option params [String] :schedule
     #   A `cron` expression used to specify the schedule (see [Time-Based
@@ -3395,16 +3437,25 @@ module Aws::Glue
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Array<String>] :classifiers
-    #   A list of custom `Classifier` names that the user has registered. By
-    #   default, all AWS classifiers are included in a crawl, but these custom
-    #   classifiers always override the default classifiers for a given
-    #   classification.
+    #   A list of custom classifiers that the user has registered. By default,
+    #   all classifiers are included in a crawl, but these custom classifiers
+    #   always override the default classifiers for a given classification.
     #
     # @option params [String] :table_prefix
-    #   The table prefix used for catalog tables created.
+    #   The table prefix used for catalog tables that are created.
     #
     # @option params [Types::SchemaChangePolicy] :schema_change_policy
     #   Policy for the crawler's update and deletion behavior.
+    #
+    # @option params [String] :configuration
+    #   Crawler configuration information. This versioned JSON string allows
+    #   users to specify aspects of a Crawler's behavior.
+    #
+    #   You can use this field to force partitions to inherit metadata such as
+    #   classification, input format, output format, serde information, and
+    #   schema from their parent table, rather than detect this information
+    #   separately for each partition. Use the following JSON string to
+    #   specify that behavior:
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3412,7 +3463,7 @@ module Aws::Glue
     #
     #   resp = client.update_crawler({
     #     name: "NameString", # required
-    #     role: "RoleArn",
+    #     role: "Role",
     #     database_name: "DatabaseName",
     #     description: "DescriptionStringRemovable",
     #     targets: {
@@ -3437,6 +3488,7 @@ module Aws::Glue
     #       update_behavior: "LOG", # accepts LOG, UPDATE_IN_DATABASE
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
+    #     configuration: "CrawlerConfiguration",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler AWS API Documentation
@@ -3448,7 +3500,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Updates the schedule of a crawler using a Cron expression.
+    # Updates the schedule of a crawler using a `cron` expression.
     #
     # @option params [required, String] :crawler_name
     #   Name of the crawler whose schedule to update.
@@ -3915,7 +3967,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

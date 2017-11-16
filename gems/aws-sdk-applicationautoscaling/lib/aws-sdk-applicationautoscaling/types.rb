@@ -80,9 +80,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] policy_name
@@ -124,6 +124,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -153,6 +156,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -173,10 +180,10 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -218,6 +225,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -247,6 +257,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -267,9 +281,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -307,6 +321,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -337,6 +354,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -356,9 +377,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -400,6 +421,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scalable_dimension
@@ -431,6 +455,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -480,9 +508,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -524,6 +552,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -554,6 +585,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -604,9 +639,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -652,6 +687,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -682,6 +720,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -733,9 +775,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -781,6 +823,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -811,10 +856,14 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of scalable target results. This value can be
+    #   The maximum number of scheduled action results. This value can be
     #   between 1 and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
@@ -889,7 +938,7 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
     #         resource_label: "ResourceLabel",
     #       }
     #
@@ -914,9 +963,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -934,7 +983,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -994,6 +1043,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1023,6 +1075,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1081,11 +1137,11 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1155,6 +1211,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1184,6 +1243,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -1225,9 +1288,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -1268,6 +1331,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1298,6 +1364,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1314,9 +1384,19 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that allows Application Auto Scaling to
-    #   modify the scalable target on your behalf. This parameter is
-    #   required when you register a scalable target and optional when you
-    #   update one.
+    #   modify the scalable target on your behalf.
+    #
+    #   With Amazon RDS resources, permissions are granted using a
+    #   service-linked role. For more information, see [Service-Linked Roles
+    #   for Application Auto Scaling][1].
+    #
+    #   For resources that are not supported using a service-linked role,
+    #   this parameter is required when you register a scalable target and
+    #   optional when you update one.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/application-autoscaling-service-linked-roles.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
@@ -1372,6 +1452,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1402,6 +1485,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1501,6 +1588,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1530,6 +1620,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1623,6 +1717,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1652,6 +1749,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1757,6 +1858,9 @@ module Aws::ApplicationAutoScaling
     #   * DynamoDB global secondary index - The resource type is `index` and
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1786,6 +1890,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write
     #     capacity for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
+    #     an Aurora DB cluster. Available for Aurora MySQL-compatible
+    #     edition.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -1986,7 +2094,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {

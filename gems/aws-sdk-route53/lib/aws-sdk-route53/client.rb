@@ -2117,6 +2117,64 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Gets the specified limit for the current account, for example, the
+    # maximum number of health checks that you can create using the account.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #     checks that you can create using the current account.
+    #
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #     zones that you can create using the current account.
+    #
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum number
+    #     of reusable delegation sets that you can create using the current
+    #     account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #     traffic policies that you can create using the current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum number
+    #     of traffic policy instances that you can create using the current
+    #     account. (Traffic policy instances are referred to as traffic flow
+    #     policy records in the Amazon Route 53 console.)
+    #
+    # @return [Types::GetAccountLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLimitResponse#limit #limit} => Types::AccountLimit
+    #   * {Types::GetAccountLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_limit({
+    #     type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_HEALTH_CHECKS_BY_OWNER", "MAX_HOSTED_ZONES_BY_OWNER", "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER", "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER", "MAX_TRAFFIC_POLICIES_BY_OWNER"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimit AWS API Documentation
+    #
+    # @overload get_account_limit(params = {})
+    # @param [Hash] params ({})
+    def get_account_limit(params = {}, options = {})
+      req = build_request(:get_account_limit, params)
+      req.send_request(options)
+    end
+
     # Returns the current status of a change batch request. The status is
     # one of the following values:
     #
@@ -2524,6 +2582,56 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Gets the specified limit for a specified hosted zone, for example, the
+    # maximum number of records that you can create in the hosted zone.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #     can create in the specified hosted zone.
+    #
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_TYPE**\: The maximum number of Amazon
+    #     VPCs that you can associate with the specified private hosted zone.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that you want to get a limit for.
+    #
+    # @return [Types::GetHostedZoneLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHostedZoneLimitResponse#limit #limit} => Types::HostedZoneLimit
+    #   * {Types::GetHostedZoneLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hosted_zone_limit({
+    #     type: "MAX_RRSETS_BY_ZONE", # required, accepts MAX_RRSETS_BY_ZONE, MAX_VPCS_ASSOCIATED_BY_ZONE
+    #     hosted_zone_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_RRSETS_BY_ZONE", "MAX_VPCS_ASSOCIATED_BY_ZONE"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimit AWS API Documentation
+    #
+    # @overload get_hosted_zone_limit(params = {})
+    # @param [Hash] params ({})
+    def get_hosted_zone_limit(params = {}, options = {})
+      req = build_request(:get_hosted_zone_limit, params)
+      req.send_request(options)
+    end
+
     # Gets information about a specified configuration for DNS query
     # logging.
     #
@@ -2594,6 +2702,52 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_reusable_delegation_set(params = {}, options = {})
       req = build_request(:get_reusable_delegation_set, params)
+      req.send_request(options)
+    end
+
+    # Gets the maximum number of hosted zones that you can associate with
+    # the specified reusable delegation set.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum
+    #   number of hosted zones that you can associate with the specified
+    #   reusable delegation set.
+    #
+    # @option params [required, String] :delegation_set_id
+    #   The ID of the delegation set that you want to get the limit for.
+    #
+    # @return [Types::GetReusableDelegationSetLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReusableDelegationSetLimitResponse#limit #limit} => Types::ReusableDelegationSetLimit
+    #   * {Types::GetReusableDelegationSetLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reusable_delegation_set_limit({
+    #     type: "MAX_ZONES_BY_REUSABLE_DELEGATION_SET", # required, accepts MAX_ZONES_BY_REUSABLE_DELEGATION_SET
+    #     delegation_set_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimit AWS API Documentation
+    #
+    # @overload get_reusable_delegation_set_limit(params = {})
+    # @param [Hash] params ({})
+    def get_reusable_delegation_set_limit(params = {}, options = {})
+      req = build_request(:get_reusable_delegation_set_limit, params)
       req.send_request(options)
     end
 
@@ -4590,7 +4744,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

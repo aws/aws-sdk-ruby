@@ -12,6 +12,7 @@ require_relative 'aws-sdk-opsworkscm/types'
 require_relative 'aws-sdk-opsworkscm/client_api'
 require_relative 'aws-sdk-opsworkscm/client'
 require_relative 'aws-sdk-opsworkscm/errors'
+require_relative 'aws-sdk-opsworkscm/waiters'
 require_relative 'aws-sdk-opsworkscm/resource'
 require_relative 'aws-sdk-opsworkscm/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 # @service
 module Aws::OpsWorksCM
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end
