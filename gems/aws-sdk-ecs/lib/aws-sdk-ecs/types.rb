@@ -1328,7 +1328,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
@@ -3485,7 +3485,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
@@ -3704,7 +3704,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
@@ -4679,7 +4679,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
