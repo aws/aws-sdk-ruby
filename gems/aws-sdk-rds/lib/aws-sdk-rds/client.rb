@@ -269,7 +269,7 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
     #
     # @option params [required, String] :resource_name
-    #   The Amazon RDS resource the tags will be added to. This value is an
+    #   The Amazon RDS resource that the tags are added to. This value is an
     #   Amazon Resource Name (ARN). For information about creating an ARN, see
     #   [ Constructing an RDS Amazon Resource Name (ARN)][1].
     #
@@ -337,7 +337,7 @@ module Aws::RDS
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
-    #   request. An opt-in request of type `immediate` cannot be undone.
+    #   request. An opt-in request of type `immediate` can't be undone.
     #
     #   Valid values:
     #
@@ -407,8 +407,8 @@ module Aws::RDS
     # EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
     # EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).
     #
-    # <note markdown="1"> You cannot authorize ingress from an EC2 security group in one AWS
-    # Region to an Amazon RDS DB instance in another. You cannot authorize
+    # <note markdown="1"> You can't authorize ingress from an EC2 security group in one AWS
+    # Region to an Amazon RDS DB instance in another. You can't authorize
     # ingress from a VPC security group in one VPC to an Amazon RDS DB
     # instance in another.
     #
@@ -543,7 +543,12 @@ module Aws::RDS
     #   A description for the copied DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -609,14 +614,14 @@ module Aws::RDS
     # cluster snapshot from another AWS Region, you must provide the
     # following values:
     #
-    # * `KmsKeyId` - The AWS Key Management System (KMS) key identifier for
-    #   the key to use to encrypt the copy of the DB cluster snapshot in the
-    #   destination AWS Region.
+    # * `KmsKeyId` - The AWS Key Management System (AWS KMS) key identifier
+    #   for the key to use to encrypt the copy of the DB cluster snapshot in
+    #   the destination AWS Region.
     #
     # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
     #   request for the `CopyDBClusterSnapshot` action to be called in the
-    #   source AWS Region where the DB cluster snapshot will be copied from.
-    #   The pre-signed URL must be a valid request for the
+    #   source AWS Region where the DB cluster snapshot is copied from. The
+    #   pre-signed URL must be a valid request for the
     #   `CopyDBClusterSnapshot` API action that can be executed in the
     #   source AWS Region that contains the encrypted DB cluster snapshot to
     #   be copied.
@@ -637,8 +642,8 @@ module Aws::RDS
     #     identifier for the encrypted DB cluster snapshot to be copied.
     #     This identifier must be in the Amazon Resource Name (ARN) format
     #     for the source AWS Region. For example, if you are copying an
-    #     encrypted DB cluster snapshot from the us-west-2 region, then your
-    #     `SourceDBClusterSnapshotIdentifier` looks like the following
+    #     encrypted DB cluster snapshot from the us-west-2 AWS Region, then
+    #     your `SourceDBClusterSnapshotIdentifier` looks like the following
     #     example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
     #
@@ -678,7 +683,7 @@ module Aws::RDS
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
-    #   You cannot copy an encrypted, shared DB cluster snapshot from one AWS
+    #   You can't copy an encrypted, shared DB cluster snapshot from one AWS
     #   Region to another.
     #
     #   Constraints:
@@ -713,9 +718,9 @@ module Aws::RDS
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
-    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
-    #   key alias for the KMS encryption key.
+    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
+    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
+    #   KMS key alias for the KMS encryption key.
     #
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, Amazon RDS encrypts the target DB cluster
@@ -734,7 +739,7 @@ module Aws::RDS
     #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
     #   copy of the DB cluster snapshot in the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you cannot use encryption keys from one AWS Region in another
+    #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
     #
     # @option params [String] :pre_signed_url
@@ -750,11 +755,11 @@ module Aws::RDS
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBClusterSnapshot`
-    #     action that is called in the destination AWS Region, and the action
-    #     contained in the pre-signed URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB cluster snapshot in the destination AWS
+    #     Region. This is the same identifier for both the
+    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
+    #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
     #     snapshot will be created in.
@@ -763,7 +768,7 @@ module Aws::RDS
     #     identifier for the encrypted DB cluster snapshot to be copied. This
     #     identifier must be in the Amazon Resource Name (ARN) format for the
     #     source AWS Region. For example, if you are copying an encrypted DB
-    #     cluster snapshot from the us-west-2 region, then your
+    #     cluster snapshot from the us-west-2 AWS Region, then your
     #     `SourceDBClusterSnapshotIdentifier` looks like the following
     #     example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
@@ -779,10 +784,15 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags
     #   True to copy all tags from the source DB cluster snapshot to the
-    #   target DB cluster snapshot; otherwise false. The default is false.
+    #   target DB cluster snapshot, and otherwise false. The default is false.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -895,7 +905,12 @@ module Aws::RDS
     #   A description for the copied DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -955,7 +970,7 @@ module Aws::RDS
     # the AWS Region where you call the `CopyDBSnapshot` action is the
     # destination AWS Region for the DB snapshot copy.
     #
-    # You cannot copy an encrypted, shared DB snapshot from one AWS Region
+    # You can't copy an encrypted, shared DB snapshot from one AWS Region
     # to another.
     #
     # For more information about copying snapshots, see [Copying a DB
@@ -1029,14 +1044,19 @@ module Aws::RDS
     #   If you copy an encrypted snapshot to a different AWS Region, then you
     #   must specify a KMS key for the destination AWS Region. KMS encryption
     #   keys are specific to the AWS Region that they are created in, and you
-    #   cannot use encryption keys from one AWS Region in another AWS Region.
+    #   can't use encryption keys from one AWS Region in another AWS Region.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :copy_tags
     #   True to copy all tags from the source DB snapshot to the target DB
-    #   snapshot; otherwise false. The default is false.
+    #   snapshot, and otherwise false. The default is false.
     #
     # @option params [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
@@ -1045,8 +1065,8 @@ module Aws::RDS
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
     #   from another AWS Region by using the Amazon RDS API. You can specify
-    #   the source region option instead of this parameter when you copy an
-    #   encrypted DB snapshot from another AWS Region by using the AWS CLI.
+    #   the `--source-region` option instead of this parameter when you copy
+    #   an encrypted DB snapshot from another AWS Region by using the AWS CLI.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
     #   action that can be executed in the source AWS Region that contains the
@@ -1054,28 +1074,28 @@ module Aws::RDS
     #   contain the following parameter values:
     #
     #   * `DestinationRegion` - The AWS Region that the encrypted DB snapshot
-    #     will be copied to. This AWS Region is the same one where the
+    #     is copied to. This AWS Region is the same one where the
     #     `CopyDBSnapshot` action is called that contains this presigned URL.
     #
     #     For example, if you copy an encrypted DB snapshot from the us-west-2
-    #     region to the us-east-1 region, then you call the `CopyDBSnapshot`
-    #     action in the us-east-1 region and provide a presigned URL that
-    #     contains a call to the `CopyDBSnapshot` action in the us-west-2
-    #     region. For this example, the `DestinationRegion` in the presigned
-    #     URL must be set to the us-east-1 region.
+    #     AWS Region to the us-east-1 AWS Region, then you call the
+    #     `CopyDBSnapshot` action in the us-east-1 AWS Region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action in
+    #     the us-west-2 AWS Region. For this example, the `DestinationRegion`
+    #     in the presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB snapshot in the destination AWS Region. This is
-    #     the same identifier for both the `CopyDBSnapshot` action that is
-    #     called in the destination AWS Region, and the action contained in
-    #     the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB snapshot in the destination AWS Region.
+    #     This is the same identifier for both the `CopyDBSnapshot` action
+    #     that is called in the destination AWS Region, and the action
+    #     contained in the presigned URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are copying an encrypted DB snapshot from the
-    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` looks like
-    #     the following example:
+    #     us-west-2 AWS Region, then your `SourceDBSnapshotIdentifier` looks
+    #     like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see
@@ -1095,7 +1115,8 @@ module Aws::RDS
     #   to another, and your DB instance uses a nondefault option group. If
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
-    #   regions. For more information, see [Option Group Considerations][1].
+    #   AWS Regions. For more information, see [Option Group
+    #   Considerations][1].
     #
     #
     #
@@ -1223,7 +1244,12 @@ module Aws::RDS
     #   The description for the copied option group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CopyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1319,8 +1345,8 @@ module Aws::RDS
     #
     # @option params [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
-    #   be created in. For information on regions and Availability Zones, see
-    #   [Regions and Availability Zones][1].
+    #   be created in. For information on AWS Regions and Availability Zones,
+    #   see [Regions and Availability Zones][1].
     #
     #
     #
@@ -1363,8 +1389,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, `default.aurora5.6` will be
-    #   used.
+    #   cluster. If this argument is omitted, `default.aurora5.6` is used.
     #
     #   Constraints:
     #
@@ -1387,7 +1412,7 @@ module Aws::RDS
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`
+    #   Valid Values: `aurora`, `aurora-postgresql`
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
@@ -1423,8 +1448,8 @@ module Aws::RDS
     #   A value that indicates that the DB cluster should be associated with
     #   the specified option group.
     #
-    #   Permanent options cannot be removed from an option group. The option
-    #   group cannot be removed from a DB cluster once it is associated with a
+    #   Permanent options can't be removed from an option group. The option
+    #   group can't be removed from a DB cluster once it is associated with a
     #   DB cluster.
     #
     # @option params [String] :preferred_backup_window
@@ -1432,15 +1457,16 @@ module Aws::RDS
     #   automated backups are enabled using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -1456,12 +1482,12 @@ module Aws::RDS
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the Preferred
+    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
@@ -1474,13 +1500,18 @@ module Aws::RDS
     #   if this DB cluster is created as a Read Replica.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :storage_encrypted
     #   Specifies whether the DB cluster is encrypted.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a DB cluster with the same AWS
@@ -1510,7 +1541,7 @@ module Aws::RDS
     # @option params [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
     #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster will be replicated from. You only need to specify
+    #   the DB cluster is replicated from. You only need to specify
     #   `PreSignedUrl` when you are performing cross-region replication from
     #   an encrypted DB cluster.
     #
@@ -1521,9 +1552,9 @@ module Aws::RDS
     #   The pre-signed URL request must contain the following parameter
     #   values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster in the destination AWS Region. This
-    #     should refer to the same KMS key for both the `CreateDBCluster`
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB cluster in the destination AWS Region.
+    #     This should refer to the same KMS key for both the `CreateDBCluster`
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
@@ -1534,8 +1565,8 @@ module Aws::RDS
     #     encrypted DB cluster to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are copying an encrypted DB cluster from the
-    #     us-west-2 region, then your `ReplicationSourceIdentifier` would look
-    #     like Example:
+    #     us-west-2 AWS Region, then your `ReplicationSourceIdentifier` would
+    #     look like Example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
@@ -1548,9 +1579,8 @@ module Aws::RDS
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #
@@ -1741,7 +1771,12 @@ module Aws::RDS
     #   The description for the DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1989,7 +2024,7 @@ module Aws::RDS
     #
     # @option params [Integer] :allocated_storage
     #   The amount of storage (in gigabytes) to be initially allocated for the
-    #   database instance.
+    #   DB instance.
     #
     #   Type: Integer
     #
@@ -2074,16 +2109,15 @@ module Aws::RDS
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     #
     # @option params [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   Regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this instance.
@@ -2093,6 +2127,8 @@ module Aws::RDS
     #   Valid Values:
     #
     #   * `aurora`
+    #
+    #   * `aurora-postgresql`
     #
     #   * `mariadb`
     #
@@ -2183,8 +2219,8 @@ module Aws::RDS
     #   * Cannot be a reserved word for the chosen database engine.
     #
     # @option params [String] :master_user_password
-    #   The password for the master user. Can be any printable ASCII character
-    #   except "/", """, or "@".
+    #   The password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@".
     #
     #   **Amazon Aurora**
     #
@@ -2228,16 +2264,16 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in. For information on regions and Availability Zones, see [Regions
-    #   and Availability Zones][1].
+    #   The EC2 Availability Zone that the DB instance is created in. For
+    #   information on AWS Regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
     #
     #   Example: `us-east-1d`
     #
-    #   Constraint: The AvailabilityZone parameter cannot be specified if the
+    #   Constraint: The AvailabilityZone parameter can't be specified if the
     #   MultiAZ parameter is set to `true`. The specified Availability Zone
     #   must be in the same AWS Region as the current endpoint.
     #
@@ -2251,30 +2287,28 @@ module Aws::RDS
     #   If there is no DB subnet group, then it is a non-VPC DB instance.
     #
     # @option params [String] :preferred_maintenance_window
-    #   The weekly time range during which system maintenance can occur, in
-    #   Universal Coordinated Time (UTC). For more information, see [DB
-    #   Instance Maintenance][1].
+    #   The time range each week during which system maintenance can occur, in
+    #   Universal Coordinated Time (UTC). For more information, see [Amazon
+    #   RDS Maintenance Window][1].
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][2] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week.
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBMaintenance.html
-    #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #   If this argument is omitted, the default DBParameterGroup for the
-    #   specified engine will be used.
+    #   specified engine is used.
     #
     #   Constraints:
     #
@@ -2305,22 +2339,22 @@ module Aws::RDS
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [DB Instance Backups][1].
+    #   parameter. For more information, see [The Backup Window][1].
     #
     #   **Amazon Aurora**
     #
     #   Not applicable. The daily time range for creating automated backups is
     #   managed by the DB cluster. For more information, see CreateDBCluster.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred DB Instance Maintenance Window][2].
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2].
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -2328,7 +2362,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
     #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     #
     # @option params [Integer] :port
@@ -2380,7 +2414,7 @@ module Aws::RDS
     #   Type: Integer
     #
     # @option params [Boolean] :multi_az
-    #   Specifies if the DB instance is a Multi-AZ deployment. You cannot set
+    #   Specifies if the DB instance is a Multi-AZ deployment. You can't set
     #   the AvailabilityZone parameter if the MultiAZ parameter is set to
     #   true.
     #
@@ -2399,89 +2433,96 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
-    #   * `10.1.23` (supported in all AWS regions)
+    #   * `10.1.23` (supported in all AWS Regions)
     #
-    #   * `10.1.19` (supported in all AWS regions)
+    #   * `10.1.19` (supported in all AWS Regions)
     #
-    #   * `10.1.14` (supported in all regions except us-east-2)
+    #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
     #
-    #   * `10.0.31` (supported in all AWS regions)
+    #   * `10.0.31` (supported in all AWS Regions)
     #
-    #   * `10.0.28` (supported in all AWS regions)
+    #   * `10.0.28` (supported in all AWS Regions)
     #
-    #   * `10.0.24` (supported in all AWS regions)
+    #   * `10.0.24` (supported in all AWS Regions)
     #
-    #   * `10.0.17` (supported in all regions except us-east-2, ca-central-1,
-    #     eu-west-2)
+    #   * `10.0.17` (supported in all AWS Regions except us-east-2,
+    #     ca-central-1, eu-west-2)
     #
     #   **Microsoft SQL Server 2016**
     #
-    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS regions)
+    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS Regions)
     #
-    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS regions)
+    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS Regions)
     #
     #   **Microsoft SQL Server 2014**
     #
-    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS regions)
+    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS Regions)
     #
-    #   * `12.00.5000.0.v1` (supported for all editions, and all AWS regions)
+    #   * `12.00.5000.0.v1` (supported for all editions, and all AWS Regions)
     #
     #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
-    #     Edition, and all AWS regions except ca-central-1 and eu-west-2)
+    #     Edition, and all AWS Regions except ca-central-1 and eu-west-2)
     #
     #   **Microsoft SQL Server 2012**
     #
-    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS regions)
+    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS Regions)
     #
-    #   * `11.00.6020.0.v1` (supported for all editions, and all AWS regions)
+    #   * `11.00.6020.0.v1` (supported for all editions, and all AWS Regions)
     #
-    #   * `11.00.5058.0.v1` (supported for all editions, and all AWS regions
+    #   * `11.00.5058.0.v1` (supported for all editions, and all AWS Regions
     #     except us-east-2, ca-central-1, and eu-west-2)
     #
-    #   * `11.00.2100.60.v1` (supported for all editions, and all AWS regions
+    #   * `11.00.2100.60.v1` (supported for all editions, and all AWS Regions
     #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **Microsoft SQL Server 2008 R2**
     #
-    #   * `10.50.6529.0.v1` (supported for all editions, and all AWS regions
+    #   * `10.50.6529.0.v1` (supported for all editions, and all AWS Regions
     #     except us-east-2, ca-central-1, and eu-west-2)
     #
-    #   * `10.50.6000.34.v1` (supported for all editions, and all AWS regions
+    #   * `10.50.6000.34.v1` (supported for all editions, and all AWS Regions
     #     except us-east-2, ca-central-1, and eu-west-2)
     #
-    #   * `10.50.2789.0.v1` (supported for all editions, and all AWS regions
+    #   * `10.50.2789.0.v1` (supported for all editions, and all AWS Regions
     #     except us-east-2, ca-central-1, and eu-west-2)
     #
     #   **MySQL**
+    #
+    #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
     #
     #   * `5.7.16` (supported in all AWS regions)
     #
-    #   * `5.7.11` (supported in all AWS regions)
+    #
+    #
+    #   * `5.6.37` (supported in all AWS Regions)
+    #
+    #   * `5.6.35` (supported in all AWS Regions)
+    #
+    #   * `5.6.34` (supported in all AWS Regions)
+    #
+    #   * `5.6.29` (supported in all AWS Regions)
+    #
+    #   * `5.6.27` (supported in all AWS Regions except us-east-2,
+    #     ca-central-1, eu-west-2)
     #
     #
     #
-    #   * `5.6.35` (supported in all AWS regions)
+    #   * `5.5.57` (supported in all AWS Regions)
     #
-    #   * `5.6.34` (supported in all AWS regions)
+    #   * `5.5.54` (supported in all AWS Regions)
     #
-    #   * `5.6.29` (supported in all AWS regions)
+    #   * `5.5.53` (supported in all AWS Regions)
     #
-    #   * `5.6.27` (supported in all regions except us-east-2, ca-central-1,
-    #     eu-west-2)
-    #
-    #
-    #
-    #   * `5.5.54` (supported in all AWS regions)
-    #
-    #   * `5.5.53` (supported in all AWS regions)
-    #
-    #   * `5.5.46` (supported in all AWS regions)
+    #   * `5.5.46` (supported in all AWS Regions)
     #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -2509,6 +2550,8 @@ module Aws::RDS
     #
     #   **Oracle 11g**
     #
+    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
+    #
     #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
@@ -2533,17 +2576,17 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.1 | 9.6.2 | 9.6.3`
+    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** `9.5.6 | 9.5.4 | 9.5.2`
+    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** `9.4.11 | 9.4.9 | 9.4.7`
+    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
     #
-    #   * **Version 9.3.x:** `9.3.16 | 9.3.14 | 9.3.12`
+    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     #
     #   Default: `true`
     #
@@ -2555,20 +2598,26 @@ module Aws::RDS
     #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
-    #   be initially allocated for the DB instance.
+    #   be initially allocated for the DB instance. For information about
+    #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
+    #   Improve Performance][1].
     #
     #   Constraints: Must be a multiple between 3 and 10 of the storage amount
     #   for the DB instance. Must also be an integer multiple of 1000. For
     #   example, if the size of your DB instance is 500 GB, then your `Iops`
     #   value can be 2000, 3000, 4000, or 5000.
     #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #
     # @option params [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
     #   option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
     # @option params [String] :character_set_name
@@ -2596,13 +2645,18 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :db_cluster_identifier
     #   The identifier of the DB cluster that the instance will belong to.
@@ -2619,15 +2673,15 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     #
     # @option params [String] :tde_credential_arn
-    #   The ARN from the Key Store with which to associate the instance for
+    #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     # @option params [String] :tde_credential_password
-    #   The password for the given ARN from the Key Store in order to access
+    #   The password for the given ARN from the key store in order to access
     #   the device.
     #
     # @option params [Boolean] :storage_encrypted
@@ -2641,7 +2695,7 @@ module Aws::RDS
     #   Default: false
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier for an encrypted DB instance.
+    #   The AWS KMS key identifier for an encrypted DB instance.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a DB instance with the same AWS
@@ -2665,7 +2719,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the DB instance to snapshots of the DB
-    #   instance; otherwise false. The default is false.
+    #   instance, and otherwise false. The default is false.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
@@ -2679,7 +2733,7 @@ module Aws::RDS
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
-    #   metrics to CloudWatch Logs. For example,
+    #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [Setting Up and Enabling Enhanced
     #   Monitoring][1].
@@ -2719,7 +2773,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines:
@@ -2738,8 +2792,13 @@ module Aws::RDS
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance, and otherwise
+    #   false.
     #
     # @option params [String] :performance_insights_kms_key_id
+    #   The AWS KMS key identifier for encryption of Performance Insights
+    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2962,7 +3021,7 @@ module Aws::RDS
     #
     #   * Can specify a DB instance that is a PostgreSQL DB instance only if
     #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
-    #     for cross region replication).
+    #     for cross-region replication).
     #
     #   * The specified DB instance must have automatic backups enabled, its
     #     backup retention period must be greater than 0.
@@ -2979,22 +3038,20 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [String] :db_instance_class
-    #   The compute and memory capacity of the Read Replica. Note that not all
-    #   instance classes are available in all regions for all DB engines.
-    #
-    #   Valid Values: `db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge
-    #   | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
-    #   db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large |
-    #   db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge |
-    #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
-    #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
-    #   db.t2.large`
+    #   The compute and memory capacity of the Read Replica, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   Regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
     #   Default: Inherits from the source DB instance.
     #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #
     # @option params [String] :availability_zone
-    #   The Amazon EC2 Availability Zone that the Read Replica will be created
-    #   in.
+    #   The Amazon EC2 Availability Zone that the Read Replica is created in.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -3009,8 +3066,8 @@ module Aws::RDS
     #   Valid Values: `1150-65535`
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades will be applied automatically to
-    #   the Read Replica during the maintenance window.
+    #   Indicates that minor engine upgrades are applied automatically to the
+    #   Read Replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     #
@@ -3019,8 +3076,8 @@ module Aws::RDS
     #   be initially allocated for the DB instance.
     #
     # @option params [String] :option_group_name
-    #   The option group the DB instance will be associated with. If omitted,
-    #   the default option group for the engine specified will be used.
+    #   The option group the DB instance is associated with. If omitted, the
+    #   default option group for the engine specified is used.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
@@ -3038,19 +3095,24 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :db_subnet_group_name
     #   Specifies a DB subnet group for the DB instance. The new DB instance
-    #   will be created in the VPC associated with the DB subnet group. If no
-    #   DB subnet group is specified, then the new DB instance is not created
-    #   in a VPC.
+    #   is created in the VPC associated with the DB subnet group. If no DB
+    #   subnet group is specified, then the new DB instance is not created in
+    #   a VPC.
     #
     #   Constraints:
     #
@@ -3066,10 +3128,10 @@ module Aws::RDS
     #     source DB instance must either:&gt;
     #
     #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas will be created in the same VPC.
+    #       Replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas will be
-    #       created outside of any VPC.
+    #     * Not specify a DB subnet group. All these Read Replicas are created
+    #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
     #
@@ -3081,12 +3143,12 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the Read Replica to snapshots of the Read
-    #   Replica; otherwise false. The default is false.
+    #   Replica, and otherwise false. The default is false.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
@@ -3100,7 +3162,7 @@ module Aws::RDS
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
-    #   metrics to CloudWatch Logs. For example,
+    #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
     #   Enhanced Monitoring][1].
@@ -3128,7 +3190,7 @@ module Aws::RDS
     #   If you create an encrypted Read Replica in a different AWS Region,
     #   then you must specify a KMS key for the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you cannot use encryption keys from one AWS Region in another
+    #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
     #
     # @option params [String] :pre_signed_url
@@ -3138,9 +3200,9 @@ module Aws::RDS
     #
     #   You must specify this parameter when you create an encrypted Read
     #   Replica from another AWS Region by using the Amazon RDS API. You can
-    #   specify the source region option instead of this parameter when you
-    #   create an encrypted Read Replica from another AWS Region by using the
-    #   AWS CLI.
+    #   specify the `--source-region` option instead of this parameter when
+    #   you create an encrypted Read Replica from another AWS Region by using
+    #   the AWS CLI.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
@@ -3148,29 +3210,29 @@ module Aws::RDS
     #   presigned URL request must contain the following parameter values:
     #
     #   * `DestinationRegion` - The AWS Region that the encrypted Read Replica
-    #     will be created in. This AWS Region is the same one where the
+    #     is created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
     #
     #     For example, if you create an encrypted DB instance in the us-west-1
-    #     region, from a source DB instance in the us-east-2 region, then you
-    #     call the `CreateDBInstanceReadReplica` action in the us-east-1
-    #     region and provide a presigned URL that contains a call to the
-    #     `CreateDBInstanceReadReplica` action in the us-west-2 region. For
-    #     this example, the `DestinationRegion` in the presigned URL must be
-    #     set to the us-east-1 region.
+    #     AWS Region, from a source DB instance in the us-east-2 AWS Region,
+    #     then you call the `CreateDBInstanceReadReplica` action in the
+    #     us-east-1 AWS Region and provide a presigned URL that contains a
+    #     call to the `CreateDBInstanceReadReplica` action in the us-west-2
+    #     AWS Region. For this example, the `DestinationRegion` in the
+    #     presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the Read Replica in the destination AWS Region. This is the same
-    #     identifier for both the `CreateDBInstanceReadReplica` action that is
-    #     called in the destination AWS Region, and the action contained in
-    #     the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the Read Replica in the destination AWS Region. This is the
+    #     same identifier for both the `CreateDBInstanceReadReplica` action
+    #     that is called in the destination AWS Region, and the action
+    #     contained in the presigned URL.
     #
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
     #     the Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are creating an encrypted Read Replica from a DB
-    #     instance in the us-west-2 region, then your
+    #     instance in the us-west-2 AWS Region, then your
     #     `SourceDBInstanceIdentifier` looks like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
     #
@@ -3185,7 +3247,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
@@ -3199,8 +3261,13 @@ module Aws::RDS
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the read replica, and
+    #   otherwise false.
     #
     # @option params [String] :performance_insights_kms_key_id
+    #   The AWS KMS key identifier for encryption of Performance Insights
+    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -3424,7 +3491,12 @@ module Aws::RDS
     #   The description for the DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3500,7 +3572,12 @@ module Aws::RDS
     #   The description for the DB security group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3589,7 +3666,12 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3681,7 +3763,12 @@ module Aws::RDS
     #   The EC2 Subnet IDs for the DB subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3756,13 +3843,13 @@ module Aws::RDS
     # EventCategories = Availability, Backup.
     #
     # If you specify both the SourceType and SourceIds, such as SourceType =
-    # db-instance and SourceIdentifier = myDBInstance1, you will be notified
-    # of all the db-instance events for the specified source. If you specify
-    # a SourceType but do not specify a SourceIdentifier, you will receive
-    # notice of the events for that source type for all your RDS sources. If
-    # you do not specify either the SourceType nor the SourceIdentifier, you
-    # will be notified of events generated from all RDS sources belonging to
-    # your customer account.
+    # db-instance and SourceIdentifier = myDBInstance1, you are notified of
+    # all the db-instance events for the specified source. If you specify a
+    # SourceType but do not specify a SourceIdentifier, you receive notice
+    # of the events for that source type for all your RDS sources. If you do
+    # not specify either the SourceType nor the SourceIdentifier, you are
+    # notified of events generated from all RDS sources belonging to your
+    # customer account.
     #
     # @option params [required, String] :subscription_name
     #   The name of the subscription.
@@ -3775,10 +3862,10 @@ module Aws::RDS
     #   and subscribe to it.
     #
     # @option params [String] :source_type
-    #   The type of source that will be generating the events. For example, if
-    #   you want to be notified of events generated by a DB instance, you
-    #   would set this parameter to db-instance. if this value is not
-    #   specified, all events are returned.
+    #   The type of source that is generating the events. For example, if you
+    #   want to be notified of events generated by a DB instance, you would
+    #   set this parameter to db-instance. if this value is not specified, all
+    #   events are returned.
     #
     #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
     #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
@@ -3794,10 +3881,10 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     #
     # @option params [Array<String>] :source_ids
-    #   The list of identifiers of the event sources for which events will be
+    #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain only
-    #   ASCII letters, digits, and hyphens; it cannot end with a hyphen or
+    #   ASCII letters, digits, and hyphens; it can't end with a hyphen or
     #   contain two consecutive hyphens.
     #
     #   Constraints:
@@ -3821,7 +3908,12 @@ module Aws::RDS
     #   **false** to create the subscription but not active it.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3919,7 +4011,12 @@ module Aws::RDS
     #   The description of the option group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::CreateOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4002,7 +4099,7 @@ module Aws::RDS
 
     # The DeleteDBCluster action deletes a previously provisioned DB
     # cluster. When you delete a DB cluster, all automated backups for that
-    # DB cluster are deleted and cannot be recovered. Manual DB cluster
+    # DB cluster are deleted and can't be recovered. Manual DB cluster
     # snapshots of the specified DB cluster are not deleted.
     #
     #
@@ -4142,7 +4239,7 @@ module Aws::RDS
     end
 
     # Deletes a specified DB cluster parameter group. The DB cluster
-    # parameter group to be deleted cannot be associated with any DB
+    # parameter group to be deleted can't be associated with any DB
     # clusters.
     #
     # For more information on Amazon Aurora, see [Aurora on Amazon RDS][1]
@@ -4159,7 +4256,7 @@ module Aws::RDS
     #
     #   * Must be the name of an existing DB cluster parameter group.
     #
-    #   * You cannot delete a default DB cluster parameter group.
+    #   * You can't delete a default DB cluster parameter group.
     #
     #   * Cannot be associated with any DB clusters.
     #
@@ -4270,14 +4367,14 @@ module Aws::RDS
 
     # The DeleteDBInstance action deletes a previously provisioned DB
     # instance. When you delete a DB instance, all automated backups for
-    # that instance are deleted and cannot be recovered. Manual DB snapshots
+    # that instance are deleted and can't be recovered. Manual DB snapshots
     # of the DB instance to be deleted by `DeleteDBInstance` are not
     # deleted.
     #
     # If you request a final DB snapshot the status of the Amazon RDS DB
     # instance is `deleting` until the DB snapshot is created. The API
     # action `DescribeDBInstance` is used to monitor the status of this
-    # operation. The action cannot be canceled or reverted once submitted.
+    # operation. The action can't be canceled or reverted once submitted.
     #
     # Note that when a DB instance is in a failure state and has a status of
     # `failed`, `incompatible-restore`, or `incompatible-network`, you can
@@ -4285,7 +4382,7 @@ module Aws::RDS
     # `true`.
     #
     # If the specified DB instance is part of an Amazon Aurora DB cluster,
-    # you cannot delete the DB instance if both of the following conditions
+    # you can't delete the DB instance if both of the following conditions
     # are true:
     #
     # * The DB cluster is a Read Replica of another Amazon Aurora DB
@@ -4480,7 +4577,7 @@ module Aws::RDS
     end
 
     # Deletes a specified DBParameterGroup. The DBParameterGroup to be
-    # deleted cannot be associated with any DB instances.
+    # deleted can't be associated with any DB instances.
     #
     # @option params [required, String] :db_parameter_group_name
     #   The name of the DB parameter group.
@@ -4489,7 +4586,7 @@ module Aws::RDS
     #
     #   * Must be the name of an existing DB parameter group
     #
-    #   * You cannot delete a default DB parameter group
+    #   * You can't delete a default DB parameter group
     #
     #   * Cannot be associated with any DB instances
     #
@@ -4529,7 +4626,7 @@ module Aws::RDS
     # @option params [required, String] :db_security_group_name
     #   The name of the DB security group to delete.
     #
-    #   <note markdown="1"> You cannot delete the default DB security group.
+    #   <note markdown="1"> You can't delete the default DB security group.
     #
     #    </note>
     #
@@ -4655,7 +4752,7 @@ module Aws::RDS
     # @option params [required, String] :db_subnet_group_name
     #   The name of the database subnet group to delete.
     #
-    #   <note markdown="1"> You cannot delete the default subnet group.
+    #   <note markdown="1"> You can't delete the default subnet group.
     #
     #    </note>
     #
@@ -4752,7 +4849,7 @@ module Aws::RDS
     # @option params [required, String] :option_group_name
     #   The name of the option group to be deleted.
     #
-    #   <note markdown="1"> You cannot delete default option groups.
+    #   <note markdown="1"> You can't delete default option groups.
     #
     #    </note>
     #
@@ -5173,7 +5270,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_identifier
     #   The ID of the DB cluster to retrieve the list of DB cluster snapshots
-    #   for. This parameter cannot be used in conjunction with the
+    #   for. This parameter can't be used in conjunction with the
     #   `DBClusterSnapshotIdentifier` parameter. This parameter is not
     #   case-sensitive.
     #
@@ -5185,7 +5282,7 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_snapshot_identifier
     #   A specific DB cluster snapshot identifier to describe. This parameter
-    #   cannot be used in conjunction with the `DBClusterIdentifier`
+    #   can't be used in conjunction with the `DBClusterIdentifier`
     #   parameter. This value is stored as a lowercase string.
     #
     #   Constraints:
@@ -5244,20 +5341,18 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   Set this value to `true` to include shared manual DB cluster snapshots
-    #   from other AWS accounts that this AWS account has been given
-    #   permission to copy or restore, otherwise set this value to `false`.
-    #   The default is `false`.
+    #   True to include shared manual DB cluster snapshots from other AWS
+    #   accounts that this AWS account has been given permission to copy or
+    #   restore, and otherwise false. The default is `false`.
     #
     #   You can give an AWS account permission to restore a manual DB cluster
     #   snapshot from another AWS account by the
     #   ModifyDBClusterSnapshotAttribute API action.
     #
     # @option params [Boolean] :include_public
-    #   Set this value to `true` to include manual DB cluster snapshots that
-    #   are public and can be copied or restored by any AWS account, otherwise
-    #   set this value to `false`. The default is `false`. The default is
-    #   false.
+    #   True to include manual DB cluster snapshots that are public and can be
+    #   copied or restored by any AWS account, and otherwise false. The
+    #   default is `false`. The default is false.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
@@ -5620,7 +5715,7 @@ module Aws::RDS
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB instances associated with the DB Clusters
+    #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
@@ -6203,7 +6298,7 @@ module Aws::RDS
     #
     # @option params [String] :db_instance_identifier
     #   The ID of the DB instance to retrieve the list of DB snapshots for.
-    #   This parameter cannot be used in conjunction with
+    #   This parameter can't be used in conjunction with
     #   `DBSnapshotIdentifier`. This parameter is not case-sensitive.
     #
     #   Constraints:
@@ -6213,7 +6308,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [String] :db_snapshot_identifier
-    #   A specific DB snapshot identifier to describe. This parameter cannot
+    #   A specific DB snapshot identifier to describe. This parameter can't
     #   be used in conjunction with `DBInstanceIdentifier`. This value is
     #   stored as a lowercase string.
     #
@@ -6272,19 +6367,18 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   Set this value to `true` to include shared manual DB snapshots from
-    #   other AWS accounts that this AWS account has been given permission to
-    #   copy or restore, otherwise set this value to `false`. The default is
-    #   `false`.
+    #   True to include shared manual DB snapshots from other AWS accounts
+    #   that this AWS account has been given permission to copy or restore,
+    #   and otherwise false. The default is `false`.
     #
     #   You can give an AWS account permission to restore a manual DB snapshot
     #   from another AWS account by using the ModifyDBSnapshotAttribute API
     #   action.
     #
     # @option params [Boolean] :include_public
-    #   Set this value to `true` to include manual DB snapshots that are
-    #   public and can be copied or restored by any AWS account, otherwise set
-    #   this value to `false`. The default is `false`.
+    #   True to include manual DB snapshots that are public and can be copied
+    #   or restored by any AWS account, and otherwise false. The default is
+    #   false.
     #
     #   You can share a manual DB snapshot as public by using the
     #   ModifyDBSnapshotAttribute API.
@@ -6639,7 +6733,7 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
     #
     # @option params [String] :source_type
-    #   The type of source that will be generating the events.
+    #   The type of source that is generating the events.
     #
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
     #   \| db-snapshot
@@ -6787,8 +6881,8 @@ module Aws::RDS
     # as a parameter. By default, the past hour of events are returned.
     #
     # @option params [String] :source_identifier
-    #   The identifier of the event source for which events will be returned.
-    #   If not specified, then all sources are included in the response.
+    #   The identifier of the event source for which events are returned. If
+    #   not specified, then all sources are included in the response.
     #
     #   Constraints:
     #
@@ -6928,8 +7022,8 @@ module Aws::RDS
     # Describes all available options.
     #
     # @option params [required, String] :engine_name
-    #   A required parameter. Options available for the given engine name will
-    #   be described.
+    #   A required parameter. Options available for the given engine name are
+    #   described.
     #
     # @option params [String] :major_engine_version
     #   If specified, filters the results to include only options for the
@@ -7240,6 +7334,12 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_iam_database_authentication #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_performance_insights #=> Boolean
+    #   resp.orderable_db_instance_options[0].min_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].max_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].min_iops_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].max_iops_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].min_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].max_iops_per_gib #=> Float
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -7590,7 +7690,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Returns a list of the source AWS regions where the current AWS Region
+    # Returns a list of the source AWS Regions where the current AWS Region
     # can create a Read Replica or copy a DB snapshot from. This API action
     # supports pagination.
     #
@@ -7787,8 +7887,8 @@ module Aws::RDS
     #
     # @option params [Integer] :number_of_lines
     #   The number of lines to download. If the number of lines specified
-    #   results in a file over 1 MB in size, the file will be truncated at 1
-    #   MB in size.
+    #   results in a file over 1 MB in size, the file is truncated at 1 MB in
+    #   size.
     #
     #   If the NumberOfLines parameter is specified, then the block of lines
     #   returned can be from the beginning or the end of the log file,
@@ -8134,8 +8234,8 @@ module Aws::RDS
     #   brief (sub-second) period during which new connections are rejected
     #   but existing connections are not interrupted.
     #
-    #   Permanent options cannot be removed from an option group. The option
-    #   group cannot be removed from a DB cluster once it is associated with a
+    #   Permanent options can't be removed from an option group. The option
+    #   group can't be removed from a DB cluster once it is associated with a
     #   DB cluster.
     #
     # @option params [String] :preferred_backup_window
@@ -8143,15 +8243,16 @@ module Aws::RDS
     #   automated backups are enabled, using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -8167,12 +8268,12 @@ module Aws::RDS
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the Preferred
+    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
@@ -8181,9 +8282,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #
@@ -8571,33 +8671,29 @@ module Aws::RDS
     #   provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
-    #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance, creating
-    #   a Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
+    #   migration, the DB instance is available for use, but might experience
+    #   performance degradation. While the migration takes place, nightly
+    #   backups for the instance are suspended. No other Amazon RDS operations
+    #   can take place for the instance, including modifying the instance,
+    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   for the instance, and creating a DB snapshot of the instance.
     #
     # @option params [String] :db_instance_class
-    #   The new compute and memory capacity of the DB instance. To determine
-    #   the instance classes that are available for a particular DB engine,
-    #   use the DescribeOrderableDBInstanceOptions action. Note that not all
-    #   instance classes are available in all regions for all DB engines.
+    #   The new compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   Regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
     #
-    #   Passing a value for this setting causes an outage during the change
-    #   and is applied during the next maintenance window, unless
-    #   `ApplyImmediately` is specified as `true` for this request.
+    #   If you modify the DB instance class, an outage occurs during the
+    #   change. The change is applied during the next maintenance window,
+    #   unless `ApplyImmediately` is specified as `true` for this request.
     #
     #   Default: Uses existing setting
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge |
-    #   db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge |
-    #   db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge |
-    #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
-    #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
-    #   db.t2.medium | db.t2.large`
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [String] :db_subnet_group_name
     #   The new DB subnet group for the DB instance. You can use this
@@ -8653,12 +8749,12 @@ module Aws::RDS
     #
     #   If this parameter is set to `false`, changes to the DB instance are
     #   applied during the next maintenance window. Some parameter changes can
-    #   cause an outage and will be applied on the next call to
-    #   RebootDBInstance, or the next failure reboot. Review the table of
-    #   parameters in [Modifying a DB Instance and Using the Apply Immediately
-    #   Parameter][1] to see the impact that setting `ApplyImmediately` to
-    #   `true` or `false` has for each modified parameter and to determine
-    #   when the changes will be applied.
+    #   cause an outage and are applied on the next call to RebootDBInstance,
+    #   or the next failure reboot. Review the table of parameters in
+    #   [Modifying a DB Instance and Using the Apply Immediately Parameter][1]
+    #   to see the impact that setting `ApplyImmediately` to `true` or `false`
+    #   has for each modified parameter and to determine when the changes are
+    #   applied.
     #
     #   Default: `false`
     #
@@ -8667,8 +8763,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
     #
     # @option params [String] :master_user_password
-    #   The new password for the master user. Can be any printable ASCII
-    #   character except "/", """, or "@".
+    #   The new password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@".
     #
     #   Changing this parameter does not result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
@@ -8771,7 +8867,7 @@ module Aws::RDS
     #
     #   * Must be in the format hh24:mi-hh24:mi
     #
-    #   * Times should be in Universal Time Coordinated (UTC)
+    #   * Must be in Universal Time Coordinated (UTC)
     #
     #   * Must not conflict with the preferred maintenance window
     #
@@ -8827,8 +8923,8 @@ module Aws::RDS
     #   version than the DB instance's current version.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the DB instance during the maintenance window. Changing this parameter
+    #   Indicates that minor version upgrades are applied automatically to the
+    #   DB instance during the maintenance window. Changing this parameter
     #   does not result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
@@ -8871,13 +8967,12 @@ module Aws::RDS
     #   provisioned (if any), and the number of prior scale storage
     #   operations. Typical migration times are under 24 hours, but the
     #   process can take up to several days in some cases. During the
-    #   migration, the DB instance will be available for use, but might
-    #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance will be suspended. No other Amazon
-    #   RDS operations can take place for the instance, including modifying
-    #   the instance, rebooting the instance, deleting the instance, creating
-    #   a Read Replica for the instance, and creating a DB snapshot of the
-    #   instance.
+    #   migration, the DB instance is available for use, but might experience
+    #   performance degradation. While the migration takes place, nightly
+    #   backups for the instance are suspended. No other Amazon RDS operations
+    #   can take place for the instance, including modifying the instance,
+    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   for the instance, and creating a DB snapshot of the instance.
     #
     # @option params [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
@@ -8890,8 +8985,8 @@ module Aws::RDS
     #   connections are not interrupted.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
     # @option params [String] :new_db_instance_identifier
@@ -8919,15 +9014,15 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     #
     # @option params [String] :tde_credential_arn
-    #   The ARN from the Key Store with which to associate the instance for
+    #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     # @option params [String] :tde_credential_password
-    #   The password for the given ARN from the Key Store in order to access
+    #   The password for the given ARN from the key store in order to access
     #   the device.
     #
     # @option params [String] :ca_certificate_identifier
@@ -8942,7 +9037,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the DB instance to snapshots of the DB
-    #   instance; otherwise false. The default is false.
+    #   instance, and otherwise false. The default is false.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
@@ -9021,7 +9116,7 @@ module Aws::RDS
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
-    #   metrics to CloudWatch Logs. For example,
+    #   metrics to Amazon CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
     #   a monitoring role, go to [To create an IAM role for Amazon RDS
     #   Enhanced Monitoring][1].
@@ -9053,7 +9148,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
@@ -9072,8 +9167,13 @@ module Aws::RDS
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance, and otherwise
+    #   false.
     #
     # @option params [String] :performance_insights_kms_key_id
+    #   The AWS KMS key identifier for encryption of Performance Insights
+    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9612,7 +9712,7 @@ module Aws::RDS
     end
 
     # Modifies an existing RDS event notification subscription. Note that
-    # you cannot modify the source identifiers using this call; to change
+    # you can't modify the source identifiers using this call; to change
     # source identifiers for a subscription, use the
     # AddSourceIdentifierToSubscription and
     # RemoveSourceIdentifierFromSubscription calls.
@@ -9634,10 +9734,10 @@ module Aws::RDS
     #   and subscribe to it.
     #
     # @option params [String] :source_type
-    #   The type of source that will be generating the events. For example, if
-    #   you want to be notified of events generated by a DB instance, you
-    #   would set this parameter to db-instance. if this value is not
-    #   specified, all events are returned.
+    #   The type of source that is generating the events. For example, if you
+    #   want to be notified of events generated by a DB instance, you would
+    #   set this parameter to db-instance. if this value is not specified, all
+    #   events are returned.
     #
     #   Valid values: db-instance \| db-parameter-group \| db-security-group
     #   \| db-snapshot
@@ -9720,8 +9820,8 @@ module Aws::RDS
     #   The name of the option group to be modified.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
     # @option params [Array<Types::OptionConfiguration>] :options_to_include
@@ -9876,15 +9976,16 @@ module Aws::RDS
     #   automated backups are enabled, using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -10127,7 +10228,12 @@ module Aws::RDS
     #   Default: `1`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @return [Types::PurchaseReservedDBInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10197,7 +10303,7 @@ module Aws::RDS
     # parameter group that were pending. Rebooting a DB instance results in
     # a momentary outage of the instance, during which the DB instance
     # status is set to rebooting. If the RDS instance is configured for
-    # MultiAZ, it is possible that the reboot will be conducted through a
+    # MultiAZ, it is possible that the reboot is conducted through a
     # failover. An Amazon RDS event is created when the reboot is completed.
     #
     # If your DB instance is deployed in multiple Availability Zones, you
@@ -10223,9 +10329,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :force_failover
-    #   When `true`, the reboot will be conducted through a MultiAZ failover.
+    #   When `true`, the reboot is conducted through a MultiAZ failover.
     #
-    #   Constraint: You cannot specify `true` if the instance is not
+    #   Constraint: You can't specify `true` if the instance is not
     #   configured for MultiAZ.
     #
     # @return [Types::RebootDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -10465,7 +10571,7 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
     #
     # @option params [required, String] :resource_name
-    #   The Amazon RDS resource the tags will be removed from. This value is
+    #   The Amazon RDS resource that the tags are removed from. This value is
     #   an Amazon Resource Name (ARN). For information about creating an ARN,
     #   see [ Constructing an RDS Amazon Resource Name (ARN)][1].
     #
@@ -10531,12 +10637,12 @@ module Aws::RDS
     # @option params [Boolean] :reset_all_parameters
     #   A value that is set to `true` to reset all parameters in the DB
     #   cluster parameter group to their default values, and `false`
-    #   otherwise. You cannot use this parameter if there is a list of
+    #   otherwise. You can't use this parameter if there is a list of
     #   parameter names specified for the `Parameters` parameter.
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of parameter names in the DB cluster parameter group to reset
-    #   to the default values. You cannot use this parameter if the
+    #   to the default values. You can't use this parameter if the
     #   `ResetAllParameters` parameter is set to `true`.
     #
     # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -10728,8 +10834,8 @@ module Aws::RDS
     #   The database name for the restored DB cluster.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The name of the DB cluster to create from the source data in the S3
-    #   bucket. This parameter is isn't case-sensitive.
+    #   The name of the DB cluster to create from the source data in the
+    #   Amazon S3 bucket. This parameter is isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -10744,7 +10850,7 @@ module Aws::RDS
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the
     #   restored DB cluster. If this argument is omitted, `default.aurora5.6`
-    #   will be used.
+    #   is used.
     #
     #   Constraints:
     #
@@ -10769,7 +10875,7 @@ module Aws::RDS
     #   The name of the database engine to be used for the restored DB
     #   cluster.
     #
-    #   Valid Values: `aurora`
+    #   Valid Values: `aurora`, `aurora-postgresql`
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
@@ -10805,8 +10911,8 @@ module Aws::RDS
     #   A value that indicates that the restored DB cluster should be
     #   associated with the specified option group.
     #
-    #   Permanent options cannot be removed from an option group. An option
-    #   group cannot be removed from a DB cluster once it is associated with a
+    #   Permanent options can't be removed from an option group. An option
+    #   group can't be removed from a DB cluster once it is associated with a
     #   DB cluster.
     #
     # @option params [String] :preferred_backup_window
@@ -10814,15 +10920,16 @@ module Aws::RDS
     #   automated backups are enabled using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -10838,12 +10945,12 @@ module Aws::RDS
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the Preferred
+    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
@@ -10852,13 +10959,18 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :storage_encrypted
     #   Specifies whether the restored DB cluster is encrypted.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a DB cluster with the same AWS
@@ -10873,9 +10985,8 @@ module Aws::RDS
     #   key for each AWS Region.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #
@@ -11093,8 +11204,8 @@ module Aws::RDS
     #   The tags to be assigned to the restored DB cluster.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from a DB snapshot or DB cluster snapshot.
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   cluster from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -11113,9 +11224,8 @@ module Aws::RDS
     #     not encrypted, then the restored DB cluster is not encrypted.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #
@@ -11266,7 +11376,7 @@ module Aws::RDS
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
     #
-    #   Constraints: You cannot specify `copy-on-write` if the engine version
+    #   Constraints: You can't specify `copy-on-write` if the engine version
     #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
@@ -11331,11 +11441,16 @@ module Aws::RDS
     #   A list of VPC security groups that the new DB cluster belongs to.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from an encrypted DB cluster.
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   cluster from an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -11345,8 +11460,8 @@ module Aws::RDS
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
     #   with a KMS key that is different than the KMS key used to encrypt the
-    #   source DB cluster. The new DB cluster will be encrypted with the KMS
-    #   key identified by the `KmsKeyId` parameter.
+    #   source DB cluster. The new DB cluster is encrypted with the KMS key
+    #   identified by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
@@ -11362,9 +11477,8 @@ module Aws::RDS
     #   then the restore request is rejected.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #
@@ -11517,15 +11631,17 @@ module Aws::RDS
     #     `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
     #
     # @option params [String] :db_instance_class
-    #   The compute and memory capacity of the Amazon RDS DB instance.
+    #   The compute and memory capacity of the Amazon RDS DB instance, for
+    #   example, `db.m4.large`. Not all DB instance classes are available in
+    #   all AWS Regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
-    #   db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large |
-    #   db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge |
-    #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
-    #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
-    #   db.t2.large`
+    #   Default: The same DBInstanceClass as the original DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
@@ -11535,12 +11651,11 @@ module Aws::RDS
     #   Constraints: Value must be `1150-65535`
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in.
+    #   The EC2 Availability Zone that the DB instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to `true`.
     #
     #   Example: `us-east-1a`
@@ -11556,7 +11671,7 @@ module Aws::RDS
     # @option params [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to `true`.
     #
     # @option params [Boolean] :publicly_accessible
@@ -11575,14 +11690,14 @@ module Aws::RDS
     #   * **VPC:** false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor version upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     #
     # @option params [String] :license_model
     #   License model information for the restored DB instance.
@@ -11612,6 +11727,8 @@ module Aws::RDS
     #
     #   * `aurora`
     #
+    #   * `aurora-postgresql`
+    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -11637,29 +11754,36 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   Specifies the amount of provisioned IOPS for the DB instance,
     #   expressed in I/O operations per second. If this parameter is not
-    #   specified, the IOPS value will be taken from the backup. If this
-    #   parameter is set to 0, the new instance will be converted to a
-    #   non-PIOPS instance, which will take additional time, though your DB
-    #   instance will be available for connections before the conversion
-    #   starts.
+    #   specified, the IOPS value is taken from the backup. If this parameter
+    #   is set to 0, the new instance is converted to a non-PIOPS instance.
+    #   The conversion takes additional time, though your DB instance is
+    #   available for connections before the conversion starts.
+    #
+    #   The provisioned IOPS value must follow the requirements for your
+    #   database engine. For more information, see [Amazon RDS Provisioned
+    #   IOPS Storage to Improve Performance][1].
     #
     #   Constraints: Must be an integer greater than 1000.
     #
-    #   **SQL Server**
     #
-    #   Setting the IOPS value for the SQL Server database engine is not
-    #   supported.
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
     # @option params [String] :option_group_name
     #   The name of the option group to be used for the restored DB instance.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
@@ -11669,15 +11793,15 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     #
     # @option params [String] :tde_credential_arn
-    #   The ARN from the Key Store with which to associate the instance for
+    #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     # @option params [String] :tde_credential_password
-    #   The password for the given ARN from the Key Store in order to access
+    #   The password for the given ARN from the key store in order to access
     #   the device.
     #
     # @option params [String] :domain
@@ -11685,7 +11809,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the restored DB instance to snapshots of
-    #   the DB instance; otherwise false. The default is false.
+    #   the DB instance, and otherwise false. The default is false.
     #
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
@@ -11693,7 +11817,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
@@ -11940,6 +12064,466 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Amazon Relational Database Service (Amazon RDS) supports importing
+    # MySQL databases by using backup files. You can create a backup of your
+    # on-premises database, store it on Amazon Simple Storage Service
+    # (Amazon S3), and then restore the backup file onto a new Amazon RDS DB
+    # instance running MySQL. For more information, see [Importing Data into
+    # an Amazon RDS MySQL DB Instance][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
+    #
+    # @option params [String] :db_name
+    #   The name of the database to create when the DB instance is created.
+    #   Follow the naming rules specified in CreateDBInstance.
+    #
+    # @option params [required, String] :db_instance_identifier
+    #   The DB instance identifier. This parameter is stored as a lowercase
+    #   string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `mydbinstance`
+    #
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage (in gigabytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in CreateDBInstance.
+    #
+    #   <note markdown="1"> Be sure to allocate enough memory for your new DB instance so that the
+    #   restore operation can succeed. You can also allocate additional memory
+    #   for future growth.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :db_instance_class
+    #   The compute and memory capacity of the DB instance, for example,
+    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   Regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB Instance Class][1]
+    #   in the Amazon RDS User Guide.
+    #
+    #   Importing from Amazon S3 is not supported on the db.t2.micro DB
+    #   instance class.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #
+    # @option params [required, String] :engine
+    #   The name of the database engine to be used for this instance.
+    #
+    #   Valid Values: `mysql`
+    #
+    # @option params [String] :master_username
+    #   The name for the master user.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters or numbers.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot be a reserved word for the chosen database engine.
+    #
+    # @option params [String] :master_user_password
+    #   The password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@".
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    # @option params [Array<String>] :db_security_groups
+    #   A list of DB security groups to associate with this DB instance.
+    #
+    #   Default: The default DB security group for the database engine.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   A list of VPC security groups to associate with this DB instance.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone that the DB instance is created in. For
+    #   information about AWS Regions and Availability Zones, see [Regions and
+    #   Availability Zones][1].
+    #
+    #   Default: A random, system-chosen Availability Zone in the endpoint's
+    #   AWS Region.
+    #
+    #   Example: `us-east-1d`
+    #
+    #   Constraint: The AvailabilityZone parameter can't be specified if the
+    #   MultiAZ parameter is set to `true`. The specified Availability Zone
+    #   must be in the same AWS Region as the current endpoint.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #
+    # @option params [String] :db_subnet_group_name
+    #   A DB subnet group to associate with this DB instance.
+    #
+    # @option params [String] :preferred_maintenance_window
+    #   The time range each week during which system maintenance can occur, in
+    #   Universal Coordinated Time (UTC). For more information, see [Amazon
+    #   RDS Maintenance Window][1].
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `ddd:hh24:mi-ddd:hh24:mi`.
+    #
+    #   * Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred backup window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
+    #
+    # @option params [String] :db_parameter_group_name
+    #   The name of the DB parameter group to associate with this DB instance.
+    #   If this argument is omitted, the default parameter group for the
+    #   specified engine is used.
+    #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days for which automated backups are retained. Setting
+    #   this parameter to a positive number enables backups. For more
+    #   information, see CreateDBInstance.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The time range each day during which automated backups are created if
+    #   automated backups are enabled. For more information, see [The Backup
+    #   Window][1].
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #
+    # @option params [Integer] :port
+    #   The port number on which the database accepts connections.
+    #
+    #   Type: Integer
+    #
+    #   Valid Values: `1150`-`65535`
+    #
+    #   Default: `3306`
+    #
+    # @option params [Boolean] :multi_az
+    #   Specifies whether the DB instance is a Multi-AZ deployment. If MultiAZ
+    #   is set to `true`, you can't set the AvailabilityZone parameter.
+    #
+    # @option params [String] :engine_version
+    #   The version number of the database engine to use. Choose the latest
+    #   minor version of your database engine as specified in
+    #   CreateDBInstance.
+    #
+    # @option params [Boolean] :auto_minor_version_upgrade
+    #   True to indicate that minor engine upgrades are applied automatically
+    #   to the DB instance during the maintenance window, and otherwise false.
+    #
+    #   Default: `true`
+    #
+    # @option params [String] :license_model
+    #   The license model for this DB instance. Use `general-public-license`.
+    #
+    # @option params [Integer] :iops
+    #   The amount of Provisioned IOPS (input/output operations per second) to
+    #   allocate initially for the DB instance. For information about valid
+    #   Iops values, see see [Amazon RDS Provisioned IOPS Storage to Improve
+    #   Performance][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #
+    # @option params [String] :option_group_name
+    #   The name of the option group to associate with this DB instance. If
+    #   this argument is omitted, the default option group for the specified
+    #   engine is used.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies whether the DB instance is publicly accessible or not. For
+    #   more information, see CreateDBInstance.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to associate with this DB instance. For more
+    #   information, see [Tagging Amazon RDS Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @option params [String] :storage_type
+    #   Specifies the storage type to be associated with the DB instance.
+    #
+    #   Valid values: `standard` \| `gp2` \| `io1`
+    #
+    #   If you specify `io1`, you must also include a value for the `Iops`
+    #   parameter.
+    #
+    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   `standard`
+    #
+    # @option params [Boolean] :storage_encrypted
+    #   Specifies whether the new DB instance is encrypted or not.
+    #
+    # @option params [String] :kms_key_id
+    #   The AWS KMS key identifier for an encrypted DB instance.
+    #
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are creating a DB instance with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   instance, then you can use the KMS key alias instead of the ARN for
+    #   the KM encryption key.
+    #
+    #   If the `StorageEncrypted` parameter is true, and you do not specify a
+    #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
+    #   default encryption key. AWS KMS creates the default encryption key for
+    #   your AWS account. Your AWS account has a different default encryption
+    #   key for each AWS Region.
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   True to copy all tags from the DB instance to snapshots of the DB
+    #   instance, and otherwise false.
+    #
+    #   Default: false.
+    #
+    # @option params [Integer] :monitoring_interval
+    #   The interval, in seconds, between points when Enhanced Monitoring
+    #   metrics are collected for the DB instance. To disable collecting
+    #   Enhanced Monitoring metrics, specify 0.
+    #
+    #   If `MonitoringRoleArn` is specified, then you must also set
+    #   `MonitoringInterval` to a value other than 0.
+    #
+    #   Valid Values: 0, 1, 5, 10, 15, 30, 60
+    #
+    #   Default: `0`
+    #
+    # @option params [String] :monitoring_role_arn
+    #   The ARN for the IAM role that permits RDS to send enhanced monitoring
+    #   metrics to Amazon CloudWatch Logs. For example,
+    #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
+    #   a monitoring role, see [Setting Up and Enabling Enhanced
+    #   Monitoring][1].
+    #
+    #   If `MonitoringInterval` is set to a value other than 0, then you must
+    #   supply a `MonitoringRoleArn` value.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling
+    #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
+    #
+    #   Default: `false`
+    #
+    # @option params [required, String] :source_engine
+    #   The name of the engine of your source database.
+    #
+    #   Valid Values: `mysql`
+    #
+    # @option params [required, String] :source_engine_version
+    #   The engine version of your source database.
+    #
+    #   Valid Values: `5.6`
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The name of your Amazon S3 bucket that contains your database backup
+    #   file.
+    #
+    # @option params [String] :s3_prefix
+    #   The prefix of your Amazon S3 bucket.
+    #
+    # @option params [required, String] :s3_ingestion_role_arn
+    #   An AWS Identity and Access Management (IAM) role to allow Amazon RDS
+    #   to access your Amazon S3 bucket.
+    #
+    # @option params [Boolean] :enable_performance_insights
+    #   True to enable Performance Insights for the DB instance, and otherwise
+    #   false.
+    #
+    # @option params [String] :performance_insights_kms_key_id
+    #   The AWS KMS key identifier for encryption of Performance Insights
+    #   data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
+    #
+    # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_db_instance_from_s3({
+    #     db_name: "String",
+    #     db_instance_identifier: "String", # required
+    #     allocated_storage: 1,
+    #     db_instance_class: "String", # required
+    #     engine: "String", # required
+    #     master_username: "String",
+    #     master_user_password: "String",
+    #     db_security_groups: ["String"],
+    #     vpc_security_group_ids: ["String"],
+    #     availability_zone: "String",
+    #     db_subnet_group_name: "String",
+    #     preferred_maintenance_window: "String",
+    #     db_parameter_group_name: "String",
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
+    #     port: 1,
+    #     multi_az: false,
+    #     engine_version: "String",
+    #     auto_minor_version_upgrade: false,
+    #     license_model: "String",
+    #     iops: 1,
+    #     option_group_name: "String",
+    #     publicly_accessible: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     storage_type: "String",
+    #     storage_encrypted: false,
+    #     kms_key_id: "String",
+    #     copy_tags_to_snapshot: false,
+    #     monitoring_interval: 1,
+    #     monitoring_role_arn: "String",
+    #     enable_iam_database_authentication: false,
+    #     source_engine: "String", # required
+    #     source_engine_version: "String", # required
+    #     s3_bucket_name: "String", # required
+    #     s3_prefix: "String",
+    #     s3_ingestion_role_arn: "String", # required
+    #     enable_performance_insights: false,
+    #     performance_insights_kms_key_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_instance.db_instance_identifier #=> String
+    #   resp.db_instance.db_instance_class #=> String
+    #   resp.db_instance.engine #=> String
+    #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.master_username #=> String
+    #   resp.db_instance.db_name #=> String
+    #   resp.db_instance.endpoint.address #=> String
+    #   resp.db_instance.endpoint.port #=> Integer
+    #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.allocated_storage #=> Integer
+    #   resp.db_instance.instance_create_time #=> Time
+    #   resp.db_instance.preferred_backup_window #=> String
+    #   resp.db_instance.backup_retention_period #=> Integer
+    #   resp.db_instance.db_security_groups #=> Array
+    #   resp.db_instance.db_security_groups[0].db_security_group_name #=> String
+    #   resp.db_instance.db_security_groups[0].status #=> String
+    #   resp.db_instance.vpc_security_groups #=> Array
+    #   resp.db_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_instance.vpc_security_groups[0].status #=> String
+    #   resp.db_instance.db_parameter_groups #=> Array
+    #   resp.db_instance.db_parameter_groups[0].db_parameter_group_name #=> String
+    #   resp.db_instance.db_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.db_instance.availability_zone #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_name #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_description #=> String
+    #   resp.db_instance.db_subnet_group.vpc_id #=> String
+    #   resp.db_instance.db_subnet_group.subnet_group_status #=> String
+    #   resp.db_instance.db_subnet_group.subnets #=> Array
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.pending_modified_values.db_instance_class #=> String
+    #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.master_user_password #=> String
+    #   resp.db_instance.pending_modified_values.port #=> Integer
+    #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine_version #=> String
+    #   resp.db_instance.pending_modified_values.license_model #=> String
+    #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
+    #   resp.db_instance.pending_modified_values.storage_type #=> String
+    #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+    #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.latest_restorable_time #=> Time
+    #   resp.db_instance.multi_az #=> Boolean
+    #   resp.db_instance.engine_version #=> String
+    #   resp.db_instance.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
+    #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
+    #   resp.db_instance.license_model #=> String
+    #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.option_group_memberships #=> Array
+    #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
+    #   resp.db_instance.option_group_memberships[0].status #=> String
+    #   resp.db_instance.character_set_name #=> String
+    #   resp.db_instance.secondary_availability_zone #=> String
+    #   resp.db_instance.publicly_accessible #=> Boolean
+    #   resp.db_instance.status_infos #=> Array
+    #   resp.db_instance.status_infos[0].status_type #=> String
+    #   resp.db_instance.status_infos[0].normal #=> Boolean
+    #   resp.db_instance.status_infos[0].status #=> String
+    #   resp.db_instance.status_infos[0].message #=> String
+    #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.tde_credential_arn #=> String
+    #   resp.db_instance.db_instance_port #=> Integer
+    #   resp.db_instance.db_cluster_identifier #=> String
+    #   resp.db_instance.storage_encrypted #=> Boolean
+    #   resp.db_instance.kms_key_id #=> String
+    #   resp.db_instance.dbi_resource_id #=> String
+    #   resp.db_instance.ca_certificate_identifier #=> String
+    #   resp.db_instance.domain_memberships #=> Array
+    #   resp.db_instance.domain_memberships[0].domain #=> String
+    #   resp.db_instance.domain_memberships[0].status #=> String
+    #   resp.db_instance.domain_memberships[0].fqdn #=> String
+    #   resp.db_instance.domain_memberships[0].iam_role_name #=> String
+    #   resp.db_instance.copy_tags_to_snapshot #=> Boolean
+    #   resp.db_instance.monitoring_interval #=> Integer
+    #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
+    #   resp.db_instance.monitoring_role_arn #=> String
+    #   resp.db_instance.promotion_tier #=> Integer
+    #   resp.db_instance.db_instance_arn #=> String
+    #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
+    #
+    # @overload restore_db_instance_from_s3(params = {})
+    # @param [Hash] params ({})
+    def restore_db_instance_from_s3(params = {}, options = {})
+      req = build_request(:restore_db_instance_from_s3, params)
+      req.send_request(options)
+    end
+
     # Restores a DB instance to an arbitrary point in time. You can restore
     # to any point in time before the time identified by the
     # LatestRestorableTime property. You can restore to a point up to the
@@ -11964,7 +12548,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [required, String] :target_db_instance_identifier
-    #   The name of the new database instance to be created.
+    #   The name of the new DB instance to be created.
     #
     #   Constraints:
     #
@@ -11997,17 +12581,17 @@ module Aws::RDS
     #   Constraints: Cannot be specified if RestoreTime parameter is provided.
     #
     # @option params [String] :db_instance_class
-    #   The compute and memory capacity of the Amazon RDS DB instance.
-    #
-    #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
-    #   | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
-    #   db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large |
-    #   db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge |
-    #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
-    #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
-    #   db.t2.large`
+    #   The compute and memory capacity of the Amazon RDS DB instance, for
+    #   example, `db.m4.large`. Not all DB instance classes are available in
+    #   all AWS Regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the Amazon RDS User Guide.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
@@ -12017,12 +12601,11 @@ module Aws::RDS
     #   Default: The same port as the original DB instance.
     #
     # @option params [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance will be created
-    #   in.
+    #   The EC2 Availability Zone that the DB instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to true.
     #
     #   Example: `us-east-1a`
@@ -12038,7 +12621,7 @@ module Aws::RDS
     # @option params [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to `true`.
     #
     # @option params [Boolean] :publicly_accessible
@@ -12057,14 +12640,14 @@ module Aws::RDS
     #   * **VPC:**false
     #
     #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance will be
+    #   the PubliclyAccessible value has not been set, the DB instance is
     #   publicly accessible. If a specific DB subnet group has been specified
     #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance will be private.
+    #   set, the DB instance is private.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the DB instance during the maintenance window.
+    #   Indicates that minor version upgrades are applied automatically to the
+    #   DB instance during the maintenance window.
     #
     # @option params [String] :license_model
     #   License model information for the restored DB instance.
@@ -12091,6 +12674,8 @@ module Aws::RDS
     #   Valid Values:
     #
     #   * `aurora`
+    #
+    #   * `aurora-postgresql`
     #
     #   * `mariadb`
     #
@@ -12129,16 +12714,21 @@ module Aws::RDS
     #   The name of the option group to be used for the restored DB instance.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the restored DB instance to snapshots of
-    #   the DB instance; otherwise false. The default is false.
+    #   the DB instance, and otherwise false. The default is false.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
@@ -12148,15 +12738,15 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     #
     # @option params [String] :tde_credential_arn
-    #   The ARN from the Key Store with which to associate the instance for
+    #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     #
     # @option params [String] :tde_credential_password
-    #   The password for the given ARN from the Key Store in order to access
+    #   The password for the given ARN from the key store in order to access
     #   the device.
     #
     # @option params [String] :domain
@@ -12168,7 +12758,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines
@@ -12430,7 +13020,7 @@ module Aws::RDS
     # @option params [String] :cidrip
     #   The IP range to revoke access from. Must be a valid CIDR range. If
     #   `CIDRIP` is specified, `EC2SecurityGroupName`, `EC2SecurityGroupId`
-    #   and `EC2SecurityGroupOwnerId` cannot be provided.
+    #   and `EC2SecurityGroupOwnerId` can't be provided.
     #
     # @option params [String] :ec2_security_group_name
     #   The name of the EC2 security group to revoke access from. For VPC DB
@@ -12769,7 +13359,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

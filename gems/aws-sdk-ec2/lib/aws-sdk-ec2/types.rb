@@ -913,8 +913,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device
-    #   The device name to expose to the instance (for example, `/dev/sdh`
-    #   or `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -1387,8 +1386,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] virtual_name
@@ -1979,6 +1977,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a Classic Load Balancer.
+    #
+    # @note When making an API call, you may pass ClassicLoadBalancer
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancer AWS API Documentation
+    #
+    class ClassicLoadBalancer < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # Describes the Classic Load Balancers to attach to a Spot fleet. Spot
+    # fleet registers the running Spot instances with these Classic Load
+    # Balancers.
+    #
+    # @note When making an API call, you may pass ClassicLoadBalancersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         classic_load_balancers: [ # required
+    #           {
+    #             name: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] classic_load_balancers
+    #   One or more Classic Load Balancers.
+    #   @return [Array<Types::ClassicLoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancersConfig AWS API Documentation
+    #
+    class ClassicLoadBalancersConfig < Struct.new(
+      :classic_load_balancers)
+      include Aws::Structure
+    end
+
     # Describes the client-specific data.
     #
     # @note When making an API call, you may pass ClientData
@@ -2469,6 +2513,44 @@ module Aws::EC2
     #
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDefaultSubnetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to create the default subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetRequest AWS API Documentation
+    #
+    class CreateDefaultSubnetRequest < Struct.new(
+      :availability_zone,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subnet
+    #   Information about the subnet.
+    #   @return [Types::Subnet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetResult AWS API Documentation
+    #
+    class CreateDefaultSubnetResult < Struct.new(
+      :subnet)
       include Aws::Structure
     end
 
@@ -4061,13 +4143,60 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         client_token: "String",
     #         dry_run: false,
+    #         vpc_endpoint_type: "Interface", # accepts Interface, Gateway
+    #         vpc_id: "String", # required
+    #         service_name: "String", # required
     #         policy_document: "String",
     #         route_table_ids: ["String"],
-    #         service_name: "String", # required
-    #         vpc_id: "String", # required
+    #         subnet_ids: ["String"],
+    #         security_group_ids: ["String"],
+    #         client_token: "String",
+    #         private_dns_enabled: false,
     #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint_type
+    #   The type of endpoint. If not specified, the default is a gateway
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the endpoint will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The AWS service name, in the form `com.amazonaws.region.service `.
+    #   To get a list of available services, use the
+    #   DescribeVpcEndpointServices request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   (Gateway endpoint) A policy to attach to the endpoint that controls
+    #   access to the service. The policy must be in valid JSON format. If
+    #   this parameter is not specified, we attach a default policy that
+    #   allows full access to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_ids
+    #   (Gateway endpoint) One or more route table IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   (Interface endpoint) The ID of one or more subnets in which to
+    #   create a network interface for the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   (Interface endpoint) The ID of one or more security groups to
+    #   associate with the network interface.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
@@ -4079,62 +4208,55 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @!attribute [rw] private_dns_enabled
+    #   (Interface endpoint) Indicate whether to associate a private hosted
+    #   zone with the specified VPC. The private hosted zone contains a
+    #   record set for the default public DNS name for the service for the
+    #   region (for example, `kinesis.us-east-1.amazonaws.com`) which
+    #   resolves to the private IP addresses of the endpoint network
+    #   interfaces in the VPC. This enables you to make requests to the
+    #   default public DNS name for the service instead of the public DNS
+    #   names that are automatically generated by the VPC endpoint service.
+    #
+    #   To use a private hosted zone, you must set the following VPC
+    #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
+    #   Use ModifyVpcAttribute to set the VPC attributes.
+    #
+    #   Default: `true`
     #   @return [Boolean]
-    #
-    # @!attribute [rw] policy_document
-    #   A policy to attach to the endpoint that controls access to the
-    #   service. The policy must be in valid JSON format. If this parameter
-    #   is not specified, we attach a default policy that allows full access
-    #   to the service.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_table_ids
-    #   One or more route table IDs.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] service_name
-    #   The AWS service name, in the form `com.amazonaws.region.service `.
-    #   To get a list of available services, use the
-    #   DescribeVpcEndpointServices request.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC in which the endpoint will be used.
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
     #
     class CreateVpcEndpointRequest < Struct.new(
-      :client_token,
       :dry_run,
+      :vpc_endpoint_type,
+      :vpc_id,
+      :service_name,
       :policy_document,
       :route_table_ids,
-      :service_name,
-      :vpc_id)
+      :subnet_ids,
+      :security_group_ids,
+      :client_token,
+      :private_dns_enabled)
       include Aws::Structure
     end
 
     # Contains the output of CreateVpcEndpoint.
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   Information about the endpoint.
+    #   @return [Types::VpcEndpoint]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint
-    #   Information about the endpoint.
-    #   @return [Types::VpcEndpoint]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointResult AWS API Documentation
     #
     class CreateVpcEndpointResult < Struct.new(
-      :client_token,
-      :vpc_endpoint)
+      :vpc_endpoint,
+      :client_token)
       include Aws::Structure
     end
 
@@ -6844,8 +6966,8 @@ module Aws::EC2
     #     that indicates whether the Amazon EBS volume is deleted on
     #     instance termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.snapshot-id` - The ID of the snapshot used
     #     for the EBS volume.
@@ -6895,8 +7017,8 @@ module Aws::EC2
     #
     #   * `ramdisk-id` - The RAM disk ID.
     #
-    #   * `root-device-name` - The name of the root device volume (for
-    #     example, `/dev/sda1`).
+    #   * `root-device-name` - The device name of the root device volume
+    #     (for example, `/dev/sda1`).
     #
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
@@ -6907,6 +7029,9 @@ module Aws::EC2
     #   * `state-reason-code` - The reason code for the state change.
     #
     #   * `state-reason-message` - The message for the state change.
+    #
+    #   * `sriov-net-support` - A value of `simple` indicates that enhanced
+    #     networking with the Intel 82599 VF interface is enabled.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
     #     to the resource. Specify the key of the tag in the filter name and
@@ -7325,8 +7450,8 @@ module Aws::EC2
     #     indicates whether the EBS volume is deleted on instance
     #     termination.
     #
-    #   * `block-device-mapping.device-name` - The device name for the EBS
-    #     volume (for example, `/dev/sdh` or `xvdh`).
+    #   * `block-device-mapping.device-name` - The device name specified in
+    #     the block device mapping (for example, `/dev/sdh` or `xvdh`).
     #
     #   * `block-device-mapping.status` - The status for the EBS volume
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
@@ -7531,11 +7656,11 @@ module Aws::EC2
     #     ID. If you launch ten instances using the same launch request, you
     #     also get one reservation ID.
     #
-    #   * `root-device-name` - The name of the root device for the instance
-    #     (for example, `/dev/sda1` or `/dev/xvda`).
+    #   * `root-device-name` - The device name of the root device volume
+    #     (for example, `/dev/sda1`).
     #
-    #   * `root-device-type` - The type of root device that the instance
-    #     uses (`ebs` \| `instance-store`).
+    #   * `root-device-type` - The type of the root device volume (`ebs` \|
+    #     `instance-store`).
     #
     #   * `source-dest-check` - Indicates whether the instance performs
     #     source/destination checking. A value of `true` means that checking
@@ -8758,7 +8883,7 @@ module Aws::EC2
     #           },
     #         ],
     #         include_marketplace: false,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
     #         min_duration: 1,
@@ -9472,36 +9597,65 @@ module Aws::EC2
     #
     #   * `description` - The description of the security group.
     #
+    #   * `egress.ip-permission.cidr` - An IPv4 CIDR block for an outbound
+    #     security group rule.
+    #
+    #   * `egress.ip-permission.from-port` - For an outbound rule, the start
+    #     of port range for the TCP and UDP protocols, or an ICMP type
+    #     number.
+    #
+    #   * `egress.ip-permission.group-id` - The ID of a security group that
+    #     has been referenced in an outbound security group rule.
+    #
+    #   * `egress.ip-permission.group-name` - The name of a security group
+    #     that has been referenced in an outbound security group rule.
+    #
+    #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
+    #     outbound security group rule.
+    #
     #   * `egress.ip-permission.prefix-list-id` - The ID (prefix) of the AWS
-    #     service to which the security group allows access.
+    #     service to which a security group rule allows outbound access.
+    #
+    #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
+    #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol
+    #     number).
+    #
+    #   * `egress.ip-permission.to-port` - For an outbound rule, the end of
+    #     port range for the TCP and UDP protocols, or an ICMP code.
+    #
+    #   * `egress.ip-permission.user-id` - The ID of an AWS account that has
+    #     been referenced in an outbound security group rule.
     #
     #   * `group-id` - The ID of the security group.
     #
     #   * `group-name` - The name of the security group.
     #
-    #   * `ip-permission.cidr` - An IPv4 CIDR range that has been granted
-    #     permission in a security group rule.
+    #   * `ip-permission.cidr` - An IPv4 CIDR block for an inbound security
+    #     group rule.
     #
-    #   * `ip-permission.from-port` - The start of port range for the TCP
-    #     and UDP protocols, or an ICMP type number.
+    #   * `ip-permission.from-port` - For an inbound rule, the start of port
+    #     range for the TCP and UDP protocols, or an ICMP type number.
     #
     #   * `ip-permission.group-id` - The ID of a security group that has
-    #     been granted permission.
+    #     been referenced in an inbound security group rule.
     #
     #   * `ip-permission.group-name` - The name of a security group that has
-    #     been granted permission.
+    #     been referenced in an inbound security group rule.
     #
-    #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR range that has been
-    #     granted permission in a security group rule.
+    #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
+    #     security group rule.
     #
-    #   * `ip-permission.protocol` - The IP protocol for the permission
-    #     (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #   * `ip-permission.prefix-list-id` - The ID (prefix) of the AWS
+    #     service from which a security group rule allows inbound access.
     #
-    #   * `ip-permission.to-port` - The end of port range for the TCP and
-    #     UDP protocols, or an ICMP code.
+    #   * `ip-permission.protocol` - The IP protocol for an inbound security
+    #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #
+    #   * `ip-permission.to-port` - For an inbound rule, the end of port
+    #     range for the TCP and UDP protocols, or an ICMP code.
     #
     #   * `ip-permission.user-id` - The ID of an AWS account that has been
-    #     granted permission.
+    #     referenced in an inbound security group rule.
     #
     #   * `owner-id` - The AWS account ID of the owner of the security
     #     group.
@@ -10082,21 +10236,22 @@ module Aws::EC2
     #   * `launch-group` - The Spot instance launch group.
     #
     #   * `launch.block-device-mapping.delete-on-termination` - Indicates
-    #     whether the Amazon EBS volume is deleted on instance termination.
+    #     whether the EBS volume is deleted on instance termination.
     #
     #   * `launch.block-device-mapping.device-name` - The device name for
-    #     the Amazon EBS volume (for example, `/dev/sdh`).
+    #     the volume in the block device mapping (for example, `/dev/sdh` or
+    #     `xvdh`).
     #
     #   * `launch.block-device-mapping.snapshot-id` - The ID of the snapshot
-    #     used for the Amazon EBS volume.
+    #     for the EBS volume.
     #
-    #   * `launch.block-device-mapping.volume-size` - The size of the Amazon
-    #     EBS volume, in GiB.
+    #   * `launch.block-device-mapping.volume-size` - The size of the EBS
+    #     volume, in GiB.
     #
-    #   * `launch.block-device-mapping.volume-type` - The type of the Amazon
-    #     EBS volume: `gp2` for General Purpose SSD, `io1` for Provisioned
-    #     IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD,
-    #     or `standard` for Magnetic.
+    #   * `launch.block-device-mapping.volume-type` - The type of EBS
+    #     volume: `gp2` for General Purpose SSD, `io1` for Provisioned IOPS
+    #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
+    #     `standard` for Magnetic.
     #
     #   * `launch.group-id` - The security group for the instance.
     #
@@ -10240,7 +10395,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         dry_run: false,
     #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         max_results: 1,
     #         next_token: "String",
     #         product_descriptions: ["String"],
@@ -10861,8 +11016,8 @@ module Aws::EC2
     #   * `attachment.delete-on-termination` - Whether the volume is deleted
     #     on instance termination.
     #
-    #   * `attachment.device` - The device name that is exposed to the
-    #     instance (for example, `/dev/sda1`).
+    #   * `attachment.device` - The device name specified in the block
+    #     device mapping (for example, `/dev/sda1`).
     #
     #   * `attachment.instance-id` - The ID of the instance the volume is
     #     attached to.
@@ -11174,6 +11329,13 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
+    #         service_names: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -11184,6 +11346,18 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] service_names
+    #   One or more service names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `service-name`\: The name of the service.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. The request
@@ -11203,6 +11377,8 @@ module Aws::EC2
     #
     class DescribeVpcEndpointServicesRequest < Struct.new(
       :dry_run,
+      :service_names,
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -11210,20 +11386,25 @@ module Aws::EC2
 
     # Contains the output of DescribeVpcEndpointServices.
     #
+    # @!attribute [rw] service_names
+    #   A list of supported AWS services.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_details
+    #   Information about the service.
+    #   @return [Array<Types::ServiceDetail>]
+    #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
-    # @!attribute [rw] service_names
-    #   A list of supported AWS services.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicesResult AWS API Documentation
     #
     class DescribeVpcEndpointServicesResult < Struct.new(
-      :next_token,
-      :service_names)
+      :service_names,
+      :service_details,
+      :next_token)
       include Aws::Structure
     end
 
@@ -11234,6 +11415,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
+    #         vpc_endpoint_ids: ["String"],
     #         filters: [
     #           {
     #             name: "String",
@@ -11242,7 +11424,6 @@ module Aws::EC2
     #         ],
     #         max_results: 1,
     #         next_token: "String",
-    #         vpc_endpoint_ids: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -11251,6 +11432,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   One or more endpoint IDs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
@@ -11279,37 +11464,33 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_ids
-    #   One or more endpoint IDs.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsRequest AWS API Documentation
     #
     class DescribeVpcEndpointsRequest < Struct.new(
       :dry_run,
+      :vpc_endpoint_ids,
       :filters,
       :max_results,
-      :next_token,
-      :vpc_endpoint_ids)
+      :next_token)
       include Aws::Structure
     end
 
     # Contains the output of DescribeVpcEndpoints.
+    #
+    # @!attribute [rw] vpc_endpoints
+    #   Information about the endpoints.
+    #   @return [Array<Types::VpcEndpoint>]
     #
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoints
-    #   Information about the endpoints.
-    #   @return [Array<Types::VpcEndpoint>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsResult AWS API Documentation
     #
     class DescribeVpcEndpointsResult < Struct.new(
-      :next_token,
-      :vpc_endpoints)
+      :vpc_endpoints,
+      :next_token)
       include Aws::Structure
     end
 
@@ -12372,6 +12553,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a DNS entry.
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the private hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsEntry AWS API Documentation
+    #
+    class DnsEntry < Struct.new(
+      :dns_name,
+      :hosted_zone_id)
+      include Aws::Structure
+    end
+
     # Describes a block device for an EBS volume.
     #
     # @note When making an API call, you may pass EbsBlockDevice
@@ -12387,9 +12586,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS
-    #   volumes may only be attached to instances that support Amazon EBS
-    #   encryption.
+    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
+    #   only be attached to instances that support Amazon EBS encryption. If
+    #   you are creating a volume from a snapshot, you can't specify an
+    #   encryption value. This is because only blank volumes can be
+    #   encrypted on creation.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -12769,7 +12970,7 @@ module Aws::EC2
     # @!attribute [rw] event_sub_type
     #   The event.
     #
-    #   The following are the `error` events.
+    #   The following are the `error` events:
     #
     #   * `iamFleetRoleInvalid` - The Spot fleet did not have the required
     #     permissions either to launch or terminate an instance.
@@ -12784,7 +12985,7 @@ module Aws::EC2
     #   * `spotInstanceCountLimitExceeded` - You've reached the limit on
     #     the number of Spot instances that you can launch.
     #
-    #   The following are the `fleetRequestChange` events.
+    #   The following are the `fleetRequestChange` events:
     #
     #   * `active` - The Spot fleet has been validated and Amazon EC2 is
     #     attempting to maintain the target number of running Spot
@@ -12816,11 +13017,21 @@ module Aws::EC2
     #   * `submitted` - The Spot fleet request is being evaluated and Amazon
     #     EC2 is preparing to launch the target number of Spot instances.
     #
-    #   The following are the `instanceChange` events.
+    #   The following are the `instanceChange` events:
     #
     #   * `launched` - A bid was fulfilled and a new instance was launched.
     #
     #   * `terminated` - An instance was terminated by the user.
+    #
+    #   The following are the `Information` events:
+    #
+    #   * `launchSpecUnusable` - The bid price of a launch specification is
+    #     not valid because it is below the market price or the market price
+    #     is above the On-Demand price.
+    #
+    #   * `fleetProgressHalted` - The bid price of every launch
+    #     specification is not valid. A launch specification might become
+    #     valid if the market price changes.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -13518,13 +13729,14 @@ module Aws::EC2
     # @!attribute [rw] event_type
     #   The event type.
     #
-    #   * `error` - Indicates an error with the Spot fleet request.
+    #   * `error` - An error with the Spot fleet request.
     #
-    #   * `fleetRequestChange` - Indicates a change in the status or
-    #     configuration of the Spot fleet request.
+    #   * `fleetRequestChange` - A change in the status or configuration of
+    #     the Spot fleet request.
     #
-    #   * `instanceChange` - Indicates that an instance was launched or
-    #     terminated.
+    #   * `instanceChange` - An instance was launched or terminated.
+    #
+    #   * `Information` - An informational event.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -13988,8 +14200,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] root_device_name
-    #   The device name of the root device (for example, `/dev/sda1` or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -14404,7 +14616,7 @@ module Aws::EC2
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         monitoring: false,
     #         placement: {
     #           availability_zone: "String",
@@ -14521,7 +14733,7 @@ module Aws::EC2
     #           group_ids: ["String"],
     #           group_names: ["String"],
     #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #           monitoring: false,
     #           placement: {
     #             availability_zone: "String",
@@ -15069,7 +15281,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceNetworkInterface>]
     #
     # @!attribute [rw] root_device_name
-    #   The root device name (for example, `/dev/sda1` or `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -15210,8 +15423,8 @@ module Aws::EC2
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] root_device_name
-    #   The name of the root device (for example, `/dev/sda1` or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] source_dest_check
@@ -15254,8 +15467,7 @@ module Aws::EC2
     # Describes a block device mapping.
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -15287,8 +15499,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -16312,6 +16523,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the Classic Load Balancers and target groups to attach to a
+    # Spot fleet request.
+    #
+    # @note When making an API call, you may pass LoadBalancersConfig
+    #   data as a hash:
+    #
+    #       {
+    #         classic_load_balancers_config: {
+    #           classic_load_balancers: [ # required
+    #             {
+    #               name: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         target_groups_config: {
+    #           target_groups: [ # required
+    #             {
+    #               arn: "String", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] classic_load_balancers_config
+    #   The Classic Load Balancers.
+    #   @return [Types::ClassicLoadBalancersConfig]
+    #
+    # @!attribute [rw] target_groups_config
+    #   The target groups.
+    #   @return [Types::TargetGroupsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadBalancersConfig AWS API Documentation
+    #
+    class LoadBalancersConfig < Struct.new(
+      :classic_load_balancers_config,
+      :target_groups_config)
+      include Aws::Structure
+    end
+
     # Describes a load permission.
     #
     # @!attribute [rw] user_id
@@ -17032,7 +17282,7 @@ module Aws::EC2
     #           {
     #             availability_zone: "String",
     #             instance_count: 1,
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
@@ -17424,17 +17674,18 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         add_route_table_ids: ["String"],
     #         dry_run: false,
-    #         policy_document: "String",
-    #         remove_route_table_ids: ["String"],
-    #         reset_policy: false,
     #         vpc_endpoint_id: "String", # required
+    #         reset_policy: false,
+    #         policy_document: "String",
+    #         add_route_table_ids: ["String"],
+    #         remove_route_table_ids: ["String"],
+    #         add_subnet_ids: ["String"],
+    #         remove_subnet_ids: ["String"],
+    #         add_security_group_ids: ["String"],
+    #         remove_security_group_ids: ["String"],
+    #         private_dns_enabled: false,
     #       }
-    #
-    # @!attribute [rw] add_route_table_ids
-    #   One or more route tables IDs to associate with the endpoint.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17443,38 +17694,73 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] policy_document
-    #   A policy document to attach to the endpoint. The policy must be in
-    #   valid JSON format.
-    #   @return [String]
-    #
-    # @!attribute [rw] remove_route_table_ids
-    #   One or more route table IDs to disassociate from the endpoint.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] reset_policy
-    #   Specify `true` to reset the policy document to the default policy.
-    #   The default policy allows access to the service.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] vpc_endpoint_id
     #   The ID of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] reset_policy
+    #   (Gateway endpoint) Specify `true` to reset the policy document to
+    #   the default policy. The default policy allows full access to the
+    #   service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] policy_document
+    #   (Gateway endpoint) A policy document to attach to the endpoint. The
+    #   policy must be in valid JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_route_table_ids
+    #   (Gateway endpoint) One or more route tables IDs to associate with
+    #   the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_route_table_ids
+    #   (Gateway endpoint) One or more route table IDs to disassociate from
+    #   the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_subnet_ids
+    #   (Interface endpoint) One or more subnet IDs in which to serve the
+    #   endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_subnet_ids
+    #   (Interface endpoint) One or more subnets IDs in which to remove the
+    #   endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_security_group_ids
+    #   (Interface endpoint) One or more security group IDs to associate
+    #   with the network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_security_group_ids
+    #   (Interface endpoint) One or more security group IDs to disassociate
+    #   from the network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_dns_enabled
+    #   (Interface endpoint) Indicate whether a private hosted zone is
+    #   associated with the VPC.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
     #
     class ModifyVpcEndpointRequest < Struct.new(
-      :add_route_table_ids,
       :dry_run,
-      :policy_document,
-      :remove_route_table_ids,
+      :vpc_endpoint_id,
       :reset_policy,
-      :vpc_endpoint_id)
+      :policy_document,
+      :add_route_table_ids,
+      :remove_route_table_ids,
+      :add_subnet_ids,
+      :remove_subnet_ids,
+      :add_security_group_ids,
+      :remove_security_group_ids,
+      :private_dns_enabled)
       include Aws::Structure
     end
 
-    # Contains the output of ModifyVpcEndpoint.
-    #
     # @!attribute [rw] return
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
@@ -19235,8 +19521,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] root_device_name
-    #   The name of the root device (for example, `/dev/sda1`, or
-    #   `/dev/xvda`).
+    #   The device name of the root device volume (for example,
+    #   `/dev/sda1`).
     #   @return [String]
     #
     # @!attribute [rw] sriov_net_support
@@ -19847,7 +20133,7 @@ module Aws::EC2
     #                 name: "String",
     #               },
     #               image_id: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #               kernel_id: "String",
     #               key_name: "String",
     #               monitoring: {
@@ -19909,6 +20195,22 @@ module Aws::EC2
     #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
     #           instance_interruption_behavior: "stop", # accepts stop, terminate
+    #           load_balancers_config: {
+    #             classic_load_balancers_config: {
+    #               classic_load_balancers: [ # required
+    #                 {
+    #                   name: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             target_groups_config: {
+    #               target_groups: [ # required
+    #                 {
+    #                   arn: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -19981,7 +20283,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -20200,7 +20502,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -20257,7 +20559,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   One or more block device mapping entries. You can't specify both a
+    #   snapshot ID and an encryption value. This is because only blank
+    #   volumes can be encrypted on creation. If a snapshot is the basis for
+    #   a volume, it is not blank and its encryption status is used for the
+    #   volume encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -20559,7 +20865,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
@@ -21525,7 +21831,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String", # required
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -21607,14 +21913,11 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] block_device_mappings
-    #   The block device mapping.
-    #
-    #   Supplying both a snapshot ID and an encryption value as arguments
-    #   for block-device mapping results in an error. This is because only
-    #   blank volumes can be encrypted on start, and these are not created
-    #   from a snapshot. If a snapshot is the basis for the volume, it
-    #   contains data by definition and its encryption status cannot be
-    #   changed using this action.
+    #   One or more block device mapping entries. You can't specify both a
+    #   snapshot ID and an encryption value. This is because only blank
+    #   volumes can be encrypted on creation. If a snapshot is the basis for
+    #   a volume, it is not blank and its encryption status is used for the
+    #   volume encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
@@ -22325,8 +22628,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] device_name
-    #   The device name exposed to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -22343,7 +22645,7 @@ module Aws::EC2
     #   The virtual device name (`ephemeral`N). Instance store volumes are
     #   numbered starting from 0. An instance type with two available
     #   instance store volumes can specify mappings for `ephemeral0` and
-    #   `ephemeral1`.The number of available instance store volumes depends
+    #   `ephemeral1`. The number of available instance store volumes depends
     #   on the instance type. After you connect to the instance, you must
     #   mount the volume.
     #
@@ -22864,6 +23166,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a security group.
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupIdentifier AWS API Documentation
+    #
+    class SecurityGroupIdentifier < Struct.new(
+      :group_id,
+      :group_name)
+      include Aws::Structure
+    end
+
     # Describes a VPC with a security group that references your security
     # group.
     #
@@ -22885,6 +23205,68 @@ module Aws::EC2
       :group_id,
       :referencing_vpc_id,
       :vpc_peering_connection_id)
+      include Aws::Structure
+    end
+
+    # Describes a service.
+    #
+    # @!attribute [rw] service_name
+    #   The Amazon Resource Name (ARN) of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   The type of service.
+    #   @return [Array<Types::ServiceTypeDetail>]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones in which the service is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owner
+    #   The AWS account ID of the service owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_endpoint_dns_names
+    #   The DNS names for the service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name for the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_policy_supported
+    #   Indicates whether the service supports endpoint policies.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Indicates whether VPC endpoint connection requests to the service
+    #   must be accepted by the service owner.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
+    #
+    class ServiceDetail < Struct.new(
+      :service_name,
+      :service_type,
+      :availability_zones,
+      :owner,
+      :base_endpoint_dns_names,
+      :private_dns_name,
+      :vpc_endpoint_policy_supported,
+      :acceptance_required)
+      include Aws::Structure
+    end
+
+    # Describes the type of service for a VPC endpoint.
+    #
+    # @!attribute [rw] service_type
+    #   The type of service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceTypeDetail AWS API Documentation
+    #
+    class ServiceTypeDetail < Struct.new(
+      :service_type)
       include Aws::Structure
     end
 
@@ -23267,7 +23649,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -23333,7 +23715,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   One or more block device mapping entries. You can't specify both a
+    #   snapshot ID and an encryption value. This is because only blank
+    #   volumes can be encrypted on creation. If a snapshot is the basis for
+    #   a volume, it is not blank and its encryption status is used for the
+    #   volume encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -23546,7 +23932,7 @@ module Aws::EC2
     #               name: "String",
     #             },
     #             image_id: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #             kernel_id: "String",
     #             key_name: "String",
     #             monitoring: {
@@ -23608,6 +23994,22 @@ module Aws::EC2
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
     #         instance_interruption_behavior: "stop", # accepts stop, terminate
+    #         load_balancers_config: {
+    #           classic_load_balancers_config: {
+    #             classic_load_balancers: [ # required
+    #               {
+    #                 name: "String", # required
+    #               },
+    #             ],
+    #           },
+    #           target_groups_config: {
+    #             target_groups: [ # required
+    #               {
+    #                 arn: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -23697,6 +24099,17 @@ module Aws::EC2
     #   interrupted.
     #   @return [String]
     #
+    # @!attribute [rw] load_balancers_config
+    #   One or more Classic Load Balancers and target groups to attach to
+    #   the Spot fleet request. Spot fleet registers the running Spot
+    #   instances with the specified Classic Load Balancers and target
+    #   groups.
+    #
+    #   With Network Load Balancers, Spot fleet cannot register instances
+    #   that have the following instance types: C1, CC1, CC2, CG1, CG2, CR1,
+    #   CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.
+    #   @return [Types::LoadBalancersConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
     #
     class SpotFleetRequestConfigData < Struct.new(
@@ -23713,7 +24126,8 @@ module Aws::EC2
       :valid_from,
       :valid_until,
       :replace_unhealthy_instances,
-      :instance_interruption_behavior)
+      :instance_interruption_behavior,
+      :load_balancers_config)
       include Aws::Structure
     end
 
@@ -24533,6 +24947,51 @@ module Aws::EC2
     class TargetConfigurationRequest < Struct.new(
       :instance_count,
       :offering_id)
+      include Aws::Structure
+    end
+
+    # Describes a load balancer target group.
+    #
+    # @note When making an API call, you may pass TargetGroup
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the target group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroup AWS API Documentation
+    #
+    class TargetGroup < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Describes the target groups to attach to a Spot fleet. Spot fleet
+    # registers the running Spot instances with these target groups.
+    #
+    # @note When making an API call, you may pass TargetGroupsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         target_groups: [ # required
+    #           {
+    #             arn: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] target_groups
+    #   One or more target groups.
+    #   @return [Array<Types::TargetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroupsConfig AWS API Documentation
+    #
+    class TargetGroupsConfig < Struct.new(
+      :target_groups)
       include Aws::Structure
     end
 
@@ -25596,17 +26055,17 @@ module Aws::EC2
 
     # Describes a VPC endpoint.
     #
-    # @!attribute [rw] creation_timestamp
-    #   The date and time the VPC endpoint was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] policy_document
-    #   The policy document associated with the endpoint.
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] route_table_ids
-    #   One or more route tables associated with the endpoint.
-    #   @return [Array<String>]
+    # @!attribute [rw] vpc_endpoint_type
+    #   The type of endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC to which the endpoint is associated.
+    #   @return [String]
     #
     # @!attribute [rw] service_name
     #   The name of the AWS service to which the endpoint is associated.
@@ -25616,24 +26075,59 @@ module Aws::EC2
     #   The state of the VPC endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC endpoint.
+    # @!attribute [rw] policy_document
+    #   The policy document associated with the endpoint, if applicable.
     #   @return [String]
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC to which the endpoint is associated.
-    #   @return [String]
+    # @!attribute [rw] route_table_ids
+    #   (Gateway endpoint) One or more route tables associated with the
+    #   endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   (Interface endpoint) One or more subnets in which the endpoint is
+    #   located.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] groups
+    #   (Interface endpoint) Information about the security groups
+    #   associated with the network interface.
+    #   @return [Array<Types::SecurityGroupIdentifier>]
+    #
+    # @!attribute [rw] private_dns_enabled
+    #   (Interface endpoint) Indicates whether the VPC is associated with a
+    #   private hosted zone.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   (Interface endpoint) One or more network interfaces for the
+    #   endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_entries
+    #   (Interface endpoint) The DNS entries for the endpoint.
+    #   @return [Array<Types::DnsEntry>]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The date and time the VPC endpoint was created.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
-      :creation_timestamp,
-      :policy_document,
-      :route_table_ids,
+      :vpc_endpoint_id,
+      :vpc_endpoint_type,
+      :vpc_id,
       :service_name,
       :state,
-      :vpc_endpoint_id,
-      :vpc_id)
+      :policy_document,
+      :route_table_ids,
+      :subnet_ids,
+      :groups,
+      :private_dns_enabled,
+      :network_interface_ids,
+      :dns_entries,
+      :creation_timestamp)
       include Aws::Structure
     end
 

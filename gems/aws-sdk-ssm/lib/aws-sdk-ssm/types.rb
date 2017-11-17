@@ -1792,9 +1792,8 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] operating_system
-    #   Defines the operating system the patch baseline applies to.
-    #   Supported operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU
-    #   and REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #   Defines the operating system the patch baseline applies to. The
+    #   Default value is WINDOWS.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4376,6 +4375,14 @@ module Aws::SSM
     #             type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
     #           },
     #         ],
+    #         aggregators: [
+    #           {
+    #             expression: "InventoryAggregatorExpression",
+    #             aggregators: {
+    #               # recursive InventoryAggregatorList
+    #             },
+    #           },
+    #         ],
     #         result_attributes: [
     #           {
     #             type_name: "InventoryItemTypeName", # required
@@ -4389,6 +4396,14 @@ module Aws::SSM
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
     #   @return [Array<Types::InventoryFilter>]
+    #
+    # @!attribute [rw] aggregators
+    #   Returns counts of inventory types based on one or more expressions.
+    #   For example, if you aggregate by using an expression that uses the
+    #   `AWS:InstanceInformation.PlatformType` type, you can see a count of
+    #   how many Windows and Linux instances exist in your inventoried
+    #   fleet.
+    #   @return [Array<Types::InventoryAggregator>]
     #
     # @!attribute [rw] result_attributes
     #   The list of inventory item types to return.
@@ -4409,6 +4424,7 @@ module Aws::SSM
     #
     class GetInventoryRequest < Struct.new(
       :filters,
+      :aggregators,
       :result_attributes,
       :next_token,
       :max_results)
@@ -4440,6 +4456,7 @@ module Aws::SSM
     #         type_name: "InventoryItemTypeNameFilter",
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         aggregator: false,
     #         sub_type: false,
     #       }
     #
@@ -4458,6 +4475,13 @@ module Aws::SSM
     #   next set of results.
     #   @return [Integer]
     #
+    # @!attribute [rw] aggregator
+    #   Returns inventory schemas that support aggregation. For example,
+    #   this call returns the `AWS:InstanceInformation` type, because it
+    #   supports aggregation based on the `PlatformName`, `PlatformType`,
+    #   and `PlatformVersion` attributes.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] sub_type
     #   Returns the sub-type schema for a specified inventory type.
     #   @return [Boolean]
@@ -4468,6 +4492,7 @@ module Aws::SSM
       :type_name,
       :next_token,
       :max_results,
+      :aggregator,
       :sub_type)
       include Aws::Structure
     end
@@ -5049,9 +5074,8 @@ module Aws::SSM
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of five levels. Examples: /Environment/Test/DBString003
-    #
-    #   /Finance/Prod/IAD/OS/WinServ2016/license15
+    #   maximum of five levels. For example:
+    #   `/Finance/Prod/IAD/WinServ2016/license15`
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -5729,6 +5753,41 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Specifies the inventory type and attribute for the aggregation
+    # execution.
+    #
+    # @note When making an API call, you may pass InventoryAggregator
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "InventoryAggregatorExpression",
+    #         aggregators: [
+    #           {
+    #             expression: "InventoryAggregatorExpression",
+    #             aggregators: {
+    #               # recursive InventoryAggregatorList
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   The inventory type and attribute name for aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregators
+    #   Nested aggregators to further refine aggregation for an inventory
+    #   type.
+    #   @return [Array<Types::InventoryAggregator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator AWS API Documentation
+    #
+    class InventoryAggregator < Struct.new(
+      :expression,
+      :aggregators)
+      include Aws::Structure
+    end
+
     # One or more filters. Use a filter to return a more specific list of
     # results.
     #
@@ -5872,12 +5931,18 @@ module Aws::SSM
     #   attribute name.
     #   @return [Array<Types::InventoryItemAttribute>]
     #
+    # @!attribute [rw] display_name
+    #   The alias name of the inventory type. The alias name is used for
+    #   display purposes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItemSchema AWS API Documentation
     #
     class InventoryItemSchema < Struct.new(
       :type_name,
       :version,
-      :attributes)
+      :attributes,
+      :display_name)
       include Aws::Structure
     end
 
@@ -7719,9 +7784,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] operating_system
-    #   Defines the operating system the patch baseline applies to.
-    #   Supported operating systems include WINDOWS, AMAZON\_LINUX, UBUNTU
-    #   and REDHAT\_ENTERPRISE\_LINUX. The Default value is WINDOWS.
+    #   Defines the operating system the patch baseline applies to. The
+    #   Default value is WINDOWS.
     #   @return [String]
     #
     # @!attribute [rw] baseline_description
@@ -8120,11 +8184,21 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the parameter that you want to add to the system.
+    #   The fully qualified name of the parameter that you want to add to
+    #   the system. The fully qualified name includes the complete hierarchy
+    #   of the parameter path and name. For example:
+    #   `/Dev/DBServer/MySQL/db-string13`
+    #
+    #   <note markdown="1"> The maximum length constraint listed below includes capacity for
+    #   additional system attributes that are not part of the name. The
+    #   maximum length for the fully qualified parameter name is 1011
+    #   characters.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Information about the parameter that you want to add to the system
+    #   Information about the parameter that you want to add to the system.
     #   @return [String]
     #
     # @!attribute [rw] value

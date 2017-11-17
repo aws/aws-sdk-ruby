@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2017-11-15)
+------------------
+
+* Feature - API update.
+
+1.1.0 (2017-11-07)
+------------------
+
+* Feature - API update.
+
 * Issue - Update `aws-sdk-states` gemspec metadata.
 
 1.0.0 (2017-08-29)

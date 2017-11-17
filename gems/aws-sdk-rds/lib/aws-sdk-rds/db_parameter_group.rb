@@ -204,7 +204,12 @@ module Aws::RDS
     # @option options [required, String] :description
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [DBParameterGroup]
     def create(options = {})
       options = options.merge(db_parameter_group_name: @name)
@@ -246,7 +251,12 @@ module Aws::RDS
     # @option options [required, String] :target_db_parameter_group_description
     #   A description for the copied DB parameter group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [DBParameterGroup]
     def copy(options = {})
       options = options.merge(source_db_parameter_group_identifier: @name)

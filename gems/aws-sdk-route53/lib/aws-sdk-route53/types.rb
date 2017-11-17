@@ -8,6 +8,44 @@
 module Aws::Route53
   module Types
 
+    # A complex type that contains the type of limit that you specified in
+    # the request and the current value for that limit.
+    #
+    # @!attribute [rw] type
+    #   The limit that you requested. Valid values include the following:
+    #
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #     checks that you can create using the current account.
+    #
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #     zones that you can create using the current account.
+    #
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum
+    #     number of reusable delegation sets that you can create using the
+    #     current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #     traffic policies that you can create using the current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum
+    #     number of traffic policy instances that you can create using the
+    #     current account. (Traffic policy instances are referred to as
+    #     traffic flow policy records in the Amazon Route 53 console.)
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value for the limit that is specified by
+    #   AccountLimit$Type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AccountLimit AWS API Documentation
+    #
+    class AccountLimit < Struct.new(
+      :type,
+      :value)
+      include Aws::Structure
+    end
+
     # A complex type that identifies the CloudWatch alarm that you want
     # Amazon Route 53 health checkers to use to determine whether this
     # health check is healthy.
@@ -119,23 +157,26 @@ module Aws::Route53
     #       **Description** tab.
     #
     #     * **Elastic Load Balancing API**\: Use `DescribeLoadBalancers` to
-    #       get the value of `CanonicalHostedZoneNameId`. For more
-    #       information, see the applicable guide:
+    #       get the applicable value. For more information, see the
+    #       applicable guide:
     #
-    #       * Classic Load Balancers: [DescribeLoadBalancers][3]
+    #       * Classic Load Balancers: Use [DescribeLoadBalancers][3] to get
+    #         the value of `CanonicalHostedZoneNameId`.
     #
-    #       * Application and Network Load Balancers:
-    #         [DescribeLoadBalancers][4]
+    #       * Application and Network Load Balancers: Use
+    #         [DescribeLoadBalancers][4] to get the value of
+    #         `CanonicalHostedZoneId`.
     #
-    #     * **AWS CLI**\: Use `describe-load-balancers` to get the value of
-    #       `CanonicalHostedZoneNameID` (for Classic Load Balancers) or
-    #       `CanonicalHostedZoneNameID` (for Application and Network Load
-    #       Balancers). For more information, see the applicable guide:
+    #     * **AWS CLI**\: Use `describe-load-balancers` to get the
+    #       applicable value. For more information, see the applicable
+    #       guide:
     #
-    #       * Classic Load Balancers: [describe-load-balancers][5]
+    #       * Classic Load Balancers: Use [describe-load-balancers][5] to
+    #         get the value of `CanonicalHostedZoneNameId`.
     #
-    #       * Application and Network Load Balancers:
-    #         [describe-load-balancers][6]
+    #       * Application and Network Load Balancers: Use
+    #         [describe-load-balancers][6] to get the value of
+    #         `CanonicalHostedZoneId`.
     #
     #   An Amazon S3 bucket configured as a static website
     #
@@ -442,43 +483,6 @@ module Aws::Route53
     #   * `UPSERT`\: If a resource record set doesn't already exist, Amazon
     #     Route 53 creates it. If a resource record set does exist, Amazon
     #     Route 53 updates it with the values in the request.
-    #
-    #   The values that you need to include in the request depend on the
-    #   type of resource record set that you're creating, deleting, or
-    #   updating:
-    #
-    #   **Basic resource record sets (excluding alias, failover,
-    #   geolocation, latency, and weighted resource record sets)**
-    #
-    #   * `Name`
-    #
-    #   * `Type`
-    #
-    #   * `TTL`
-    #
-    #   **Failover, geolocation, latency, or weighted resource record sets
-    #   (excluding alias resource record sets)**
-    #
-    #   * `Name`
-    #
-    #   * `Type`
-    #
-    #   * `TTL`
-    #
-    #   * `SetIdentifier`
-    #
-    #   **Alias resource record sets (including failover alias, geolocation
-    #   alias, latency alias, and weighted alias resource record sets)**
-    #
-    #   * `Name`
-    #
-    #   * `Type`
-    #
-    #   * `AliasTarget` (includes `DNSName`, `EvaluateTargetHealth`, and
-    #     `HostedZoneId`)
-    #
-    #   * `SetIdentifier` (for failover, geolocation, latency, and weighted
-    #     resource record sets)
     #   @return [String]
     #
     # @!attribute [rw] resource_record_set
@@ -1750,6 +1754,70 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that contains information about the request to create a
+    # hosted zone.
+    #
+    # @note When making an API call, you may pass GetAccountLimitRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #     checks that you can create using the current account.
+    #
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #     zones that you can create using the current account.
+    #
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum
+    #     number of reusable delegation sets that you can create using the
+    #     current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #     traffic policies that you can create using the current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum
+    #     number of traffic policy instances that you can create using the
+    #     current account. (Traffic policy instances are referred to as
+    #     traffic flow policy records in the Amazon Route 53 console.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitRequest AWS API Documentation
+    #
+    class GetAccountLimitRequest < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # A complex type that contains the requested limit.
+    #
+    # @!attribute [rw] limit
+    #   The current setting for the specified limit. For example, if you
+    #   specified `MAX_HEALTH_CHECKS_BY_OWNER` for the value of `Type` in
+    #   the request, the value of `Limit` is the maximum number of health
+    #   checks that you can create using the current account.
+    #   @return [Types::AccountLimit]
+    #
+    # @!attribute [rw] count
+    #   The current number of entities that you have created of the
+    #   specified type. For example, if you specified
+    #   `MAX_HEALTH_CHECKS_BY_OWNER` for the value of `Type` in the request,
+    #   the value of `Count` is the current number of health checks that you
+    #   have created using the current account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitResponse AWS API Documentation
+    #
+    class GetAccountLimitResponse < Struct.new(
+      :limit,
+      :count)
+      include Aws::Structure
+    end
+
     # The input for a GetChange request.
     #
     # @note When making an API call, you may pass GetChangeRequest
@@ -2044,6 +2112,65 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that contains information about the request to create a
+    # hosted zone.
+    #
+    # @note When making an API call, you may pass GetHostedZoneLimitRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "MAX_RRSETS_BY_ZONE", # required, accepts MAX_RRSETS_BY_ZONE, MAX_VPCS_ASSOCIATED_BY_ZONE
+    #         hosted_zone_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #     can create in the specified hosted zone.
+    #
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_TYPE**\: The maximum number of Amazon
+    #     VPCs that you can associate with the specified private hosted
+    #     zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that you want to get a limit for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimitRequest AWS API Documentation
+    #
+    class GetHostedZoneLimitRequest < Struct.new(
+      :type,
+      :hosted_zone_id)
+      include Aws::Structure
+    end
+
+    # A complex type that contains the requested limit.
+    #
+    # @!attribute [rw] limit
+    #   The current setting for the specified limit. For example, if you
+    #   specified `MAX_RRSETS_BY_ZONE` for the value of `Type` in the
+    #   request, the value of `Limit` is the maximum number of records that
+    #   you can create in the specified hosted zone.
+    #   @return [Types::HostedZoneLimit]
+    #
+    # @!attribute [rw] count
+    #   The current number of entities that you have created of the
+    #   specified type. For example, if you specified `MAX_RRSETS_BY_ZONE`
+    #   for the value of `Type` in the request, the value of `Count` is the
+    #   current number of records that you have created in the specified
+    #   hosted zone.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimitResponse AWS API Documentation
+    #
+    class GetHostedZoneLimitResponse < Struct.new(
+      :limit,
+      :count)
+      include Aws::Structure
+    end
+
     # A request to get information about a specified hosted zone.
     #
     # @note When making an API call, you may pass GetHostedZoneRequest
@@ -2118,6 +2245,55 @@ module Aws::Route53
     #
     class GetQueryLoggingConfigResponse < Struct.new(
       :query_logging_config)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the request to create a
+    # hosted zone.
+    #
+    # @note When making an API call, you may pass GetReusableDelegationSetLimitRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "MAX_ZONES_BY_REUSABLE_DELEGATION_SET", # required, accepts MAX_ZONES_BY_REUSABLE_DELEGATION_SET
+    #         delegation_set_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum
+    #   number of hosted zones that you can associate with the specified
+    #   reusable delegation set.
+    #   @return [String]
+    #
+    # @!attribute [rw] delegation_set_id
+    #   The ID of the delegation set that you want to get the limit for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimitRequest AWS API Documentation
+    #
+    class GetReusableDelegationSetLimitRequest < Struct.new(
+      :type,
+      :delegation_set_id)
+      include Aws::Structure
+    end
+
+    # A complex type that contains the requested limit.
+    #
+    # @!attribute [rw] limit
+    #   The current setting for the limit on hosted zones that you can
+    #   associate with the specified reusable delegation set.
+    #   @return [Types::ReusableDelegationSetLimit]
+    #
+    # @!attribute [rw] count
+    #   The current number of hosted zones that you can associate with the
+    #   specified reusable delegation set.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimitResponse AWS API Documentation
+    #
+    class GetReusableDelegationSetLimitResponse < Struct.new(
+      :limit,
+      :count)
       include Aws::Structure
     end
 
@@ -2274,6 +2450,12 @@ module Aws::Route53
     #   check.
     #   @return [String]
     #
+    # @!attribute [rw] linked_service
+    #   If the health check was created by another service, the service that
+    #   created the health check. When a health check is created by another
+    #   service, you can't edit or delete it using Amazon Route 53.
+    #   @return [Types::LinkedService]
+    #
     # @!attribute [rw] health_check_config
     #   A complex type that contains detailed information about one health
     #   check.
@@ -2295,6 +2477,7 @@ module Aws::Route53
     class HealthCheck < Struct.new(
       :id,
       :caller_reference,
+      :linked_service,
       :health_check_config,
       :health_check_version,
       :cloud_watch_alarm_configuration)
@@ -2739,6 +2922,12 @@ module Aws::Route53
     #   The number of resource record sets in the hosted zone.
     #   @return [Integer]
     #
+    # @!attribute [rw] linked_service
+    #   If the hosted zone was created by another service, the service that
+    #   created the hosted zone. When a hosted zone is created by another
+    #   service, you can't edit or delete it using Amazon Route 53.
+    #   @return [Types::LinkedService]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZone AWS API Documentation
     #
     class HostedZone < Struct.new(
@@ -2746,7 +2935,8 @@ module Aws::Route53
       :name,
       :caller_reference,
       :config,
-      :resource_record_set_count)
+      :resource_record_set_count,
+      :linked_service)
       include Aws::Structure
     end
 
@@ -2775,6 +2965,58 @@ module Aws::Route53
     class HostedZoneConfig < Struct.new(
       :comment,
       :private_zone)
+      include Aws::Structure
+    end
+
+    # A complex type that contains the type of limit that you specified in
+    # the request and the current value for that limit.
+    #
+    # @!attribute [rw] type
+    #   The limit that you requested. Valid values include the following:
+    #
+    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #     can create in the specified hosted zone.
+    #
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_TYPE**\: The maximum number of Amazon
+    #     VPCs that you can associate with the specified private hosted
+    #     zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value for the limit that is specified by `Type`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneLimit AWS API Documentation
+    #
+    class HostedZoneLimit < Struct.new(
+      :type,
+      :value)
+      include Aws::Structure
+    end
+
+    # If a health check or hosted zone was created by another service,
+    # `LinkedService` is a complex type that describes the service that
+    # created the resource. When a resource is created by another service,
+    # you can't edit or delete it using Amazon Route 53.
+    #
+    # @!attribute [rw] service_principal
+    #   If the health check or hosted zone was created by another service,
+    #   the service that created the resource. When a resource is created by
+    #   another service, you can't edit or delete it using Amazon Route 53.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   If the health check or hosted zone was created by another service,
+    #   an optional description that can be provided by the other service.
+    #   When a resource is created by another service, you can't edit or
+    #   delete it using Amazon Route 53.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LinkedService AWS API Documentation
+    #
+    class LinkedService < Struct.new(
+      :service_principal,
+      :description)
       include Aws::Structure
     end
 
@@ -4823,6 +5065,29 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that contains the type of limit that you specified in
+    # the request and the current value for that limit.
+    #
+    # @!attribute [rw] type
+    #   The limit that you requested:
+    #   `MAX_ZONES_BY_REUSABLE_DELEGATION_SET`, the maximum number of hosted
+    #   zones that you can associate with the specified reusable delegation
+    #   set.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value for the `MAX_ZONES_BY_REUSABLE_DELEGATION_SET`
+    #   limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ReusableDelegationSetLimit AWS API Documentation
+    #
+    class ReusableDelegationSetLimit < Struct.new(
+      :type,
+      :value)
+      include Aws::Structure
+    end
+
     # A complex type that contains the status that one Amazon Route 53
     # health checker reports and the time of the health check.
     #
@@ -5500,9 +5765,9 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] reset_elements
-    #   A complex type that contains one `ResetElement` element for each
-    #   element that you want to reset to the default value. Valid values
-    #   for `ResetElement` include the following:
+    #   A complex type that contains one `ResettableElementName` element for
+    #   each element that you want to reset to the default value. Valid
+    #   values for `ResettableElementName` include the following:
     #
     #   * `ChildHealthChecks`\: Amazon Route 53 resets
     #     HealthCheckConfig$ChildHealthChecks to null.

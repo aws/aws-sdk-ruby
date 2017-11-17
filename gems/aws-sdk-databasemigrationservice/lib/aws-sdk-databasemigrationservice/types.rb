@@ -282,7 +282,7 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] certificate_arn
-    #   The Amazon Resource Number (ARN) for the certificate.
+    #   The Amazon Resource Name (ARN) for the certificate.
     #   @return [String]
     #
     # @!attribute [rw] ssl_mode
@@ -1628,6 +1628,71 @@ module Aws::DatabaseMigrationService
     class DescribeReplicationSubnetGroupsResponse < Struct.new(
       :marker,
       :replication_subnet_groups)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeReplicationTaskAssessmentResultsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   \- The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   task. When this input parameter is specified the API will return
+    #   only one result and ignore the values of the max-records and marker
+    #   parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResultsMessage AWS API Documentation
+    #
+    class DescribeReplicationTaskAssessmentResultsMessage < Struct.new(
+      :replication_task_arn,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   \- The Amazon S3 bucket where the task assessment report is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_assessment_results
+    #   The task assessment report.
+    #   @return [Array<Types::ReplicationTaskAssessmentResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResultsResponse AWS API Documentation
+    #
+    class DescribeReplicationTaskAssessmentResultsResponse < Struct.new(
+      :marker,
+      :bucket_name,
+      :replication_task_assessment_results)
       include Aws::Structure
     end
 
@@ -3249,6 +3314,50 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The task assessment report in JSON format.
+    #
+    # @!attribute [rw] replication_task_identifier
+    #   The replication task identifier of the task on which the task
+    #   assessment was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_last_assessment_date
+    #   The date the task assessment was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] assessment_status
+    #   The status of the task assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_results_file
+    #   The file containing the results of the task assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_results
+    #   The task assessment results in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_url
+    #   The URL of the S3 object containing the task assessment results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentResult AWS API Documentation
+    #
+    class ReplicationTaskAssessmentResult < Struct.new(
+      :replication_task_identifier,
+      :replication_task_arn,
+      :replication_task_last_assessment_date,
+      :assessment_status,
+      :assessment_results_file,
+      :assessment_results,
+      :s3_object_url)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] full_load_progress_percent
     #   The percent complete for the full load migration task.
     #   @return [Integer]
@@ -3346,6 +3455,35 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartReplicationTaskAssessmentMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentMessage AWS API Documentation
+    #
+    class StartReplicationTaskAssessmentMessage < Struct.new(
+      :replication_task_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task
+    #   The assessed replication task.
+    #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentResponse AWS API Documentation
+    #
+    class StartReplicationTaskAssessmentResponse < Struct.new(
+      :replication_task)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartReplicationTaskMessage
     #   data as a hash:
     #
@@ -3356,7 +3494,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] replication_task_arn
-    #   The Amazon Resource Number (ARN) of the replication task to be
+    #   The Amazon Resource Name (ARN) of the replication task to be
     #   started.
     #   @return [String]
     #
@@ -3396,8 +3534,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] replication_task_arn
-    #   The Amazon Resource Number(ARN) of the replication task to be
-    #   stopped.
+    #   The Amazon Resource Name(ARN) of the replication task to be stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTaskMessage AWS API Documentation
@@ -3513,6 +3650,48 @@ module Aws::DatabaseMigrationService
     #   Table updates \| Table is being reloaded
     #   @return [String]
     #
+    # @!attribute [rw] validation_pending_records
+    #   The number of records that have yet to be validated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] validation_failed_records
+    #   The number of records that failed validation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] validation_suspended_records
+    #   The number of records that could not be validated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] validation_state
+    #   The validation state of the table.
+    #
+    #   The parameter can have the following values
+    #
+    #   * Not enabled—Validation is not enabled for the table in the
+    #     migration task.
+    #
+    #   * Pending records—Some records in the table are waiting for
+    #     validation.
+    #
+    #   * Mismatched records—Some records in the table do not match between
+    #     the source and target.
+    #
+    #   * Suspended records—Some records in the table could not be
+    #     validated.
+    #
+    #   * No primary key—The table could not be validated because it had no
+    #     primary key.
+    #
+    #   * Table error—The table was not validated because it was in an error
+    #     state and some data was not migrated.
+    #
+    #   * Validated—All rows in the table were validated. If the table is
+    #     updated, the status can change from Validated.
+    #
+    #   * Error—The table could not be validated because of an unexpected
+    #     error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics AWS API Documentation
     #
     class TableStatistics < Struct.new(
@@ -3526,7 +3705,11 @@ module Aws::DatabaseMigrationService
       :full_load_condtnl_chk_failed_rows,
       :full_load_error_rows,
       :last_update_time,
-      :table_state)
+      :table_state,
+      :validation_pending_records,
+      :validation_failed_records,
+      :validation_suspended_records,
+      :validation_state)
       include Aws::Structure
     end
 

@@ -538,7 +538,8 @@ module Aws::CloudHSMV2
     #
     # @option params [required, String] :signed_cert
     #   The cluster certificate issued (signed) by your issuing certificate
-    #   authority (CA). The certificate must be in PEM format.
+    #   authority (CA). The certificate must be in PEM format and can contain
+    #   a maximum of 5000 characters.
     #
     # @option params [required, String] :trust_anchor
     #   The issuing certificate of the issuing certificate authority (CA) that
@@ -546,7 +547,7 @@ module Aws::CloudHSMV2
     #   (self-signed) certificate or a certificate chain that begins with the
     #   certificate that issued the cluster certificate and ends with a root
     #   certificate. The certificate or certificate chain must be in PEM
-    #   format.
+    #   format and can contain a maximum of 5000 characters.
     #
     # @return [Types::InitializeClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -701,7 +702,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

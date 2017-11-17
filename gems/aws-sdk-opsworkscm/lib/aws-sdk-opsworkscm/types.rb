@@ -58,13 +58,13 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] node_name
-    #   The name of the Chef client node.
+    #   The name of the node.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
     #   Engine attributes used for associating the node.
     #
-    #   **Attributes accepted in a AssociateNode request:**
+    #   **Attributes accepted in a AssociateNode request for Chef**
     #
     #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node is
     #     associated. By default only one organization named `default` can
@@ -72,6 +72,13 @@ module Aws::OpsWorksCM
     #
     #   * `CHEF_NODE_PUBLIC_KEY`\: A PEM-formatted public key. This key is
     #     required for the `chef-client` agent to access the Chef API.
+    #
+    #   **Attributes accepted in a AssociateNode request for Puppet**
+    #
+    #   * `PUPPET_NODE_CSR`\: A PEM-formatted certificate-signing request
+    #     (CSR) that is created by the node.
+    #
+    #   ^
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeRequest AWS API Documentation
@@ -203,8 +210,8 @@ module Aws::OpsWorksCM
     #   @return [Array<String>]
     #
     # @!attribute [rw] tools_version
-    #   The version of AWS OpsWorks for Chef Automate-specific tools that is
-    #   obtained from the server when the backup is created.
+    #   The version of AWS OpsWorks CM-specific tools that is obtained from
+    #   the server when the backup is created.
     #   @return [String]
     #
     # @!attribute [rw] user_arn
@@ -317,27 +324,29 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef`.
+    #   `Chef` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
-    #   The engine model, or option. Valid values include `Single`.
+    #   The engine model of the server. Valid values in this release include
+    #   `Monolithic` for Puppet and `Single` for Chef.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The major release version of the engine that you want to use. Values
-    #   depend on the engine that you choose.
+    #   The major release version of the engine that you want to use. For a
+    #   Chef server, the valid value for EngineVersion is currently `12`.
+    #   For a Puppet server, the valid value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
     #   Optional engine attributes on a specified server.
     #
-    #   **Attributes accepted in a createServer request:**
+    #   **Attributes accepted in a Chef createServer request:**
     #
     #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef. This private key is required to
-    #     access the Chef API. When no CHEF\_PIVOTAL\_KEY is set, one is
-    #     generated and returned in the response.
+    #     stored by AWS OpsWorks for Chef Automate. This private key is
+    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is
+    #     set, one is generated and returned in the response.
     #
     #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the
     #     administrative user in the Chef Automate GUI. The password length
@@ -347,12 +356,19 @@ module Aws::OpsWorksCM
     #     case letter, one upper case letter, one number, and one special
     #     character. When no CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is
     #     generated and returned in the response.
+    #
+    #   **Attributes accepted in a Puppet createServer request:**
+    #
+    #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
+    #     console, a password must use ASCII characters.
+    #
+    #   ^
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a
-    #   new backup is created, AWS OpsWorks for Chef Automate deletes the
-    #   oldest backups if this number is exceeded. The default value is `1`.
+    #   new backup is created, AWS OpsWorks CM deletes the oldest backups if
+    #   this number is exceeded. The default value is `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] server_name
@@ -373,9 +389,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type to use. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, or `m4.2xlarge`.
+    #   The Amazon EC2 instance type to use. For example, `m4.large`.
+    #   Recommended instance types include `t2.medium` and greater, `m4.*`,
+    #   or `c4.xlarge` and greater.
     #   @return [String]
     #
     # @!attribute [rw] key_pair
@@ -386,21 +402,21 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
-    #   OpsWorks for Chef Automate performs maintenance on the instance.
-    #   Valid values must be specified in the following format: `DDD:HH:MM`.
-    #   The specified time is in coordinated universal time (UTC). The
-    #   default value is a random one-hour period on Tuesday, Wednesday, or
-    #   Friday. See `TimeWindowDefinition` for more information.
+    #   OpsWorks CM performs maintenance on the instance. Valid values must
+    #   be specified in the following format: `DDD:HH:MM`. The specified
+    #   time is in coordinated universal time (UTC). The default value is a
+    #   random one-hour period on Tuesday, Wednesday, or Friday. See
+    #   `TimeWindowDefinition` for more information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
-    #   The start time for a one-hour period during which AWS OpsWorks for
-    #   Chef Automate backs up application-level data on your server if
-    #   automated backups are enabled. Valid values must be specified in one
-    #   of the following formats:
+    #   The start time for a one-hour period during which AWS OpsWorks CM
+    #   backs up application-level data on your server if automated backups
+    #   are enabled. Valid values must be specified in one of the following
+    #   formats:
     #
     #   * `HH:MM` for daily backups
     #
@@ -421,20 +437,20 @@ module Aws::OpsWorksCM
     #   If you add this parameter, the specified security groups must be
     #   within the VPC that is specified by `SubnetIds`.
     #
-    #   If you do not specify this parameter, AWS OpsWorks for Chef Automate
-    #   creates one new security group that uses TCP ports 22 and 443, open
-    #   to 0.0.0.0/0 (everyone).
+    #   If you do not specify this parameter, AWS OpsWorks CM creates one
+    #   new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
+    #   (everyone).
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn
-    #   The service role that the AWS OpsWorks for Chef Automate service
-    #   backend uses to work with your account. Although the AWS OpsWorks
-    #   management console typically creates the service role for you, if
-    #   you are using the AWS CLI or API commands, run the
-    #   service-role-creation.yaml AWS CloudFormation template, located at
+    #   The service role that the AWS OpsWorks CM service backend uses to
+    #   work with your account. Although the AWS OpsWorks management console
+    #   typically creates the service role for you, if you are using the AWS
+    #   CLI or API commands, run the service-role-creation.yaml AWS
+    #   CloudFormation template, located at
     #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
     #   This template creates a CloudFormation stack that includes the
-    #   service role that you need.
+    #   service role and instance profile that you need.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -458,8 +474,8 @@ module Aws::OpsWorksCM
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_id
-    #   If you specify this field, AWS OpsWorks for Chef Automate creates
-    #   the server by using the backup represented by BackupId.
+    #   If you specify this field, AWS OpsWorks CM creates the server by
+    #   using the backup represented by BackupId.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerRequest AWS API Documentation
@@ -736,7 +752,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
-    #   Attributes specific to the node association.
+    #   Attributes specific to the node association. In Puppet, the attibute
+    #   PUPPET\_NODE\_CERT contains the signed certificate (the result of
+    #   the CSR).
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse AWS API Documentation
@@ -791,6 +809,12 @@ module Aws::OpsWorksCM
 
     # @!attribute [rw] servers
     #   Contains the response to a `DescribeServers` request.
+    #
+    #   *For Puppet Server:*
+    #   `DescribeServersResponse$Servers$EngineAttributes` contains
+    #   PUPPET\_API\_CA\_CERT. This is the PEM-encoded CA certificate that
+    #   is used by the Puppet API over TCP port number 8140. The CA
+    #   certificate is also used to sign node certificates.
     #   @return [Array<Types::Server>]
     #
     # @!attribute [rw] next_token
@@ -832,13 +856,14 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] node_name
-    #   The name of the Chef client node.
+    #   The name of the client node.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
-    #   Engine attributes used for disassociating the node.
+    #   Engine attributes that are used for disassociating the node. No
+    #   attributes are required for Puppet.
     #
-    #   **Attributes accepted in a DisassociateNode request:**
+    #   **Attributes required in a DisassociateNode request for Chef**
     #
     #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node
     #     was associated. By default only one organization named `default`
@@ -974,22 +999,22 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The engine type of the server. The valid value in this release is
-    #   `Chef`.
+    #   The engine type of the server. Valid values in this release include
+    #   `Chef` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
-    #   The engine model of the server. The valid value in this release is
-    #   `Single`.
+    #   The engine model of the server. Valid values in this release include
+    #   `Monolithic` for Puppet and `Single` for Chef.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
     #   The response of a createServer() request returns the master
     #   credential to access the server in EngineAttributes. These
-    #   credentials are not stored by AWS OpsWorks for Chef Automate; they
-    #   are returned only as part of the result of createServer().
+    #   credentials are not stored by AWS OpsWorks CM; they are returned
+    #   only as part of the result of createServer().
     #
-    #   **Attributes returned in a createServer response:**
+    #   **Attributes returned in a createServer response for Chef**
     #
     #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is
     #     generated by AWS OpsWorks for Chef Automate. This private key is
@@ -1001,12 +1026,23 @@ module Aws::OpsWorksCM
     #     file, unzip it, and then change to the directory where you've
     #     unzipped the file contents. From this directory, you can run Knife
     #     commands.
+    #
+    #   **Attributes returned in a createServer response for Puppet**
+    #
+    #   * `PUPPET_STARTER_KIT`\: A base64-encoded ZIP file. The ZIP file
+    #     contains a Puppet starter kit, including a README and a required
+    #     private key. Save this file, unzip it, and then change to the
+    #     directory where you've unzipped the file contents.
+    #
+    #   * `PUPPET_ADMIN_PASSWORD`\: An administrator password that you can
+    #     use to sign in to the Puppet Enterprise console after the server
+    #     is online.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] engine_version
-    #   The engine version of the server. Because Chef is the engine
-    #   available in this release, the valid value for EngineVersion is
-    #   `12`.
+    #   The engine version of the server. For a Chef server, the valid value
+    #   for EngineVersion is currently `12`. For a Puppet server, the valid
+    #   value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_arn

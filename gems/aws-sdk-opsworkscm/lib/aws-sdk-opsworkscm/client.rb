@@ -155,9 +155,22 @@ module Aws::OpsWorksCM
 
     # @!group API Operations
 
-    # Associates a new node with the Chef server. This command is an
-    # alternative to `knife bootstrap`. For more information about how to
-    # disassociate a node, see DisassociateNode.
+    # Associates a new node with the server. For more information about how
+    # to disassociate a node, see DisassociateNode.
+    #
+    # On a Chef server: This command is an alternative to `knife bootstrap`.
+    #
+    # Example (Chef): `aws opsworks-cm associate-node --server-name MyServer
+    # --node-name MyManagedNode --engine-attributes
+    # "Name=CHEF_ORGANIZATION,Value=default"
+    # "Name=CHEF_NODE_PUBLIC_KEY,Value=public-key-pem"`
+    #
+    # On a Puppet server, this command is an alternative to the `puppet cert
+    # sign` command that signs a Puppet node CSR.
+    #
+    # Example (Chef): `aws opsworks-cm associate-node --server-name MyServer
+    # --node-name MyManagedNode --engine-attributes
+    # "Name=PUPPET_NODE_CSR,Value=csr-pem"`
     #
     # A node can can only be associated with servers that are in a `HEALTHY`
     # state. Otherwise, an `InvalidStateException` is thrown. A
@@ -167,21 +180,16 @@ module Aws::OpsWorksCM
     # Scaling configurations, AWS Cloudformation templates, or the user data
     # of a server's instance.
     #
-    # Example: `aws opsworks-cm associate-node --server-name MyServer
-    # --node-name MyManagedNode --engine-attributes
-    # "Name=MyOrganization,Value=default"
-    # "Name=Chef_node_public_key,Value=Public_key_contents"`
-    #
     # @option params [required, String] :server_name
     #   The name of the server with which to associate the node.
     #
     # @option params [required, String] :node_name
-    #   The name of the Chef client node.
+    #   The name of the node.
     #
     # @option params [required, Array<Types::EngineAttribute>] :engine_attributes
     #   Engine attributes used for associating the node.
     #
-    #   **Attributes accepted in a AssociateNode request:**
+    #   **Attributes accepted in a AssociateNode request for Chef**
     #
     #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node is
     #     associated. By default only one organization named `default` can
@@ -189,6 +197,13 @@ module Aws::OpsWorksCM
     #
     #   * `CHEF_NODE_PUBLIC_KEY`\: A PEM-formatted public key. This key is
     #     required for the `chef-client` agent to access the Chef API.
+    #
+    #   **Attributes accepted in a AssociateNode request for Puppet**
+    #
+    #   * `PUPPET_NODE_CSR`\: A PEM-formatted certificate-signing request
+    #     (CSR) that is created by the node.
+    #
+    #   ^
     #
     # @return [Types::AssociateNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -308,11 +323,18 @@ module Aws::OpsWorksCM
     #
     # If you do not specify a security group by adding the
     # `SecurityGroupIds` parameter, AWS OpsWorks creates a new security
-    # group. The default security group opens the Chef server to the world
-    # on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH
-    # access. SSH is also open to the world on TCP port 22.
+    # group.
     #
-    # By default, the Chef Server is accessible from any IP address. We
+    # *Chef Automate:* The default security group opens the Chef server to
+    # the world on TCP port 443. If a KeyName is present, AWS OpsWorks
+    # enables SSH access. SSH is also open to the world on TCP port 22.
+    #
+    # *Puppet Enterprise:* The default security group opens TCP ports 22,
+    # 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS
+    # OpsWorks enables SSH access. SSH is also open to the world on TCP port
+    # 22.
+    #
+    # By default, your server is accessible from any IP address. We
     # recommend that you update your security group rules to allow access
     # from known IP addresses and address ranges only. To edit security
     # group rules, open Security Groups in the navigation pane of the EC2
@@ -328,24 +350,26 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef`.
+    #   `Chef` and `Puppet`.
     #
     # @option params [String] :engine_model
-    #   The engine model, or option. Valid values include `Single`.
+    #   The engine model of the server. Valid values in this release include
+    #   `Monolithic` for Puppet and `Single` for Chef.
     #
     # @option params [String] :engine_version
-    #   The major release version of the engine that you want to use. Values
-    #   depend on the engine that you choose.
+    #   The major release version of the engine that you want to use. For a
+    #   Chef server, the valid value for EngineVersion is currently `12`. For
+    #   a Puppet server, the valid value is `2017`.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
     #   Optional engine attributes on a specified server.
     #
-    #   **Attributes accepted in a createServer request:**
+    #   **Attributes accepted in a Chef createServer request:**
     #
     #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef. This private key is required to
-    #     access the Chef API. When no CHEF\_PIVOTAL\_KEY is set, one is
-    #     generated and returned in the response.
+    #     stored by AWS OpsWorks for Chef Automate. This private key is
+    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is set,
+    #     one is generated and returned in the response.
     #
     #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
     #     user in the Chef Automate GUI. The password length is a minimum of
@@ -356,10 +380,17 @@ module Aws::OpsWorksCM
     #     CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is generated and
     #     returned in the response.
     #
+    #   **Attributes accepted in a Puppet createServer request:**
+    #
+    #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
+    #     console, a password must use ASCII characters.
+    #
+    #   ^
+    #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
-    #   backup is created, AWS OpsWorks for Chef Automate deletes the oldest
-    #   backups if this number is exceeded. The default value is `1`.
+    #   backup is created, AWS OpsWorks CM deletes the oldest backups if this
+    #   number is exceeded. The default value is `1`.
     #
     # @option params [required, String] :server_name
     #   The name of the server. The server name must be unique within your AWS
@@ -377,9 +408,9 @@ module Aws::OpsWorksCM
     #   instance profile you need.
     #
     # @option params [required, String] :instance_type
-    #   The Amazon EC2 instance type to use. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, or `m4.2xlarge`.
+    #   The Amazon EC2 instance type to use. For example, `m4.large`.
+    #   Recommended instance types include `t2.medium` and greater, `m4.*`, or
+    #   `c4.xlarge` and greater.
     #
     # @option params [String] :key_pair
     #   The Amazon EC2 key pair to set for the instance. This parameter is
@@ -388,20 +419,20 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
-    #   OpsWorks for Chef Automate performs maintenance on the instance. Valid
-    #   values must be specified in the following format: `DDD:HH:MM`. The
-    #   specified time is in coordinated universal time (UTC). The default
-    #   value is a random one-hour period on Tuesday, Wednesday, or Friday.
-    #   See `TimeWindowDefinition` for more information.
+    #   OpsWorks CM performs maintenance on the instance. Valid values must be
+    #   specified in the following format: `DDD:HH:MM`. The specified time is
+    #   in coordinated universal time (UTC). The default value is a random
+    #   one-hour period on Tuesday, Wednesday, or Friday. See
+    #   `TimeWindowDefinition` for more information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
     #
     # @option params [String] :preferred_backup_window
-    #   The start time for a one-hour period during which AWS OpsWorks for
-    #   Chef Automate backs up application-level data on your server if
-    #   automated backups are enabled. Valid values must be specified in one
-    #   of the following formats:
+    #   The start time for a one-hour period during which AWS OpsWorks CM
+    #   backs up application-level data on your server if automated backups
+    #   are enabled. Valid values must be specified in one of the following
+    #   formats:
     #
     #   * `HH:MM` for daily backups
     #
@@ -421,19 +452,19 @@ module Aws::OpsWorksCM
     #   you add this parameter, the specified security groups must be within
     #   the VPC that is specified by `SubnetIds`.
     #
-    #   If you do not specify this parameter, AWS OpsWorks for Chef Automate
-    #   creates one new security group that uses TCP ports 22 and 443, open to
-    #   0.0.0.0/0 (everyone).
+    #   If you do not specify this parameter, AWS OpsWorks CM creates one new
+    #   security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
+    #   (everyone).
     #
     # @option params [required, String] :service_role_arn
-    #   The service role that the AWS OpsWorks for Chef Automate service
-    #   backend uses to work with your account. Although the AWS OpsWorks
-    #   management console typically creates the service role for you, if you
-    #   are using the AWS CLI or API commands, run the
-    #   service-role-creation.yaml AWS CloudFormation template, located at
+    #   The service role that the AWS OpsWorks CM service backend uses to work
+    #   with your account. Although the AWS OpsWorks management console
+    #   typically creates the service role for you, if you are using the AWS
+    #   CLI or API commands, run the service-role-creation.yaml AWS
+    #   CloudFormation template, located at
     #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
     #   This template creates a CloudFormation stack that includes the service
-    #   role that you need.
+    #   role and instance profile that you need.
     #
     # @option params [Array<String>] :subnet_ids
     #   The IDs of subnets in which to launch the server EC2 instance.
@@ -454,8 +485,8 @@ module Aws::OpsWorksCM
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [String] :backup_id
-    #   If you specify this field, AWS OpsWorks for Chef Automate creates the
-    #   server by using the backup represented by BackupId.
+    #   If you specify this field, AWS OpsWorks CM creates the server by using
+    #   the backup represented by BackupId.
     #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -557,7 +588,7 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Deletes the server and the underlying AWS CloudFormation stack
+    # Deletes the server and the underlying AWS CloudFormation stacks
     # (including the server's EC2 instance). When you run this command, the
     # server state is updated to `DELETING`. After the server is deleted, it
     # is no longer returned by `DescribeServer` requests. If the AWS
@@ -807,8 +838,7 @@ module Aws::OpsWorksCM
 
     # Lists all configuration management servers that are identified with
     # your account. Only the stored results from Amazon DynamoDB are
-    # returned. AWS OpsWorks for Chef Automate does not query other
-    # services.
+    # returned. AWS OpsWorks CM does not query other services.
     #
     # This operation is synchronous.
     #
@@ -890,10 +920,11 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Disassociates a node from a Chef server, and removes the node from the
-    # Chef server's managed nodes. After a node is disassociated, the node
-    # key pair is no longer valid for accessing the Chef API. For more
-    # information about how to associate a node, see AssociateNode.
+    # Disassociates a node from an AWS OpsWorks CM server, and removes the
+    # node from the server's managed nodes. After a node is disassociated,
+    # the node key pair is no longer valid for accessing the configuration
+    # manager's API. For more information about how to associate a node,
+    # see AssociateNode.
     #
     # A node can can only be disassociated from a server that is in a
     # `HEALTHY` state. Otherwise, an `InvalidStateException` is thrown. A
@@ -905,12 +936,13 @@ module Aws::OpsWorksCM
     #   The name of the server from which to disassociate the node.
     #
     # @option params [required, String] :node_name
-    #   The name of the Chef client node.
+    #   The name of the client node.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
-    #   Engine attributes used for disassociating the node.
+    #   Engine attributes that are used for disassociating the node. No
+    #   attributes are required for Puppet.
     #
-    #   **Attributes accepted in a DisassociateNode request:**
+    #   **Attributes required in a DisassociateNode request for Chef**
     #
     #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node was
     #     associated. By default only one organization named `default` can
@@ -1155,8 +1187,10 @@ module Aws::OpsWorksCM
 
     # Updates engine-specific attributes on a specified server. The server
     # enters the `MODIFYING` state when this operation is in progress. Only
-    # one update can occur at a time. You can use this command to reset the
-    # Chef server's private key (`CHEF_PIVOTAL_KEY`).
+    # one update can occur at a time. You can use this command to reset a
+    # Chef server's private key (`CHEF_PIVOTAL_KEY`), a Chef server's
+    # admin password (`CHEF_DELIVERY_ADMIN_PASSWORD`), or a Puppet server's
+    # admin password (`PUPPET_ADMIN_PASSWORD`).
     #
     # This operation is asynchronous.
     #
@@ -1239,14 +1273,127 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.waiter_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name     | params                              | :delay   | :max_attempts |
+    # | --------------- | ----------------------------------- | -------- | ------------- |
+    # | node_associated | {#describe_node_association_status} | 15       | 15            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        node_associated: Waiters::NodeAssociated
+      }
     end
 
     class << self

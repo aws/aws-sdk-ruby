@@ -11,6 +11,7 @@ module Aws::SES
 
     include Seahorse::Model
 
+    AccountSendingPausedException = Shapes::StructureShape.new(name: 'AccountSendingPausedException')
     AddHeaderAction = Shapes::StructureShape.new(name: 'AddHeaderAction')
     Address = Shapes::StringShape.new(name: 'Address')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
@@ -45,6 +46,7 @@ module Aws::SES
     ConfigurationSetAttributeList = Shapes::ListShape.new(name: 'ConfigurationSetAttributeList')
     ConfigurationSetDoesNotExistException = Shapes::StructureShape.new(name: 'ConfigurationSetDoesNotExistException')
     ConfigurationSetName = Shapes::StringShape.new(name: 'ConfigurationSetName')
+    ConfigurationSetSendingPausedException = Shapes::StructureShape.new(name: 'ConfigurationSetSendingPausedException')
     ConfigurationSets = Shapes::ListShape.new(name: 'ConfigurationSets')
     Content = Shapes::StructureShape.new(name: 'Content')
     Counter = Shapes::IntegerShape.new(name: 'Counter')
@@ -114,6 +116,7 @@ module Aws::SES
     ExtensionFieldList = Shapes::ListShape.new(name: 'ExtensionFieldList')
     ExtensionFieldName = Shapes::StringShape.new(name: 'ExtensionFieldName')
     ExtensionFieldValue = Shapes::StringShape.new(name: 'ExtensionFieldValue')
+    GetAccountSendingEnabledResponse = Shapes::StructureShape.new(name: 'GetAccountSendingEnabledResponse')
     GetIdentityDkimAttributesRequest = Shapes::StructureShape.new(name: 'GetIdentityDkimAttributesRequest')
     GetIdentityDkimAttributesResponse = Shapes::StructureShape.new(name: 'GetIdentityDkimAttributesResponse')
     GetIdentityMailFromDomainAttributesRequest = Shapes::StructureShape.new(name: 'GetIdentityMailFromDomainAttributesRequest')
@@ -153,6 +156,7 @@ module Aws::SES
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
     LastAttemptDate = Shapes::TimestampShape.new(name: 'LastAttemptDate')
+    LastFreshStart = Shapes::TimestampShape.new(name: 'LastFreshStart')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListConfigurationSetsRequest = Shapes::StructureShape.new(name: 'ListConfigurationSetsRequest')
     ListConfigurationSetsResponse = Shapes::StructureShape.new(name: 'ListConfigurationSetsResponse')
@@ -217,6 +221,7 @@ module Aws::SES
     ReorderReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'ReorderReceiptRuleSetRequest')
     ReorderReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'ReorderReceiptRuleSetResponse')
     ReportingMta = Shapes::StringShape.new(name: 'ReportingMta')
+    ReputationOptions = Shapes::StructureShape.new(name: 'ReputationOptions')
     RuleDoesNotExistException = Shapes::StructureShape.new(name: 'RuleDoesNotExistException')
     RuleOrRuleSetName = Shapes::StringShape.new(name: 'RuleOrRuleSetName')
     RuleSetDoesNotExistException = Shapes::StructureShape.new(name: 'RuleSetDoesNotExistException')
@@ -270,8 +275,11 @@ module Aws::SES
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
     TrackingOptionsAlreadyExistsException = Shapes::StructureShape.new(name: 'TrackingOptionsAlreadyExistsException')
     TrackingOptionsDoesNotExistException = Shapes::StructureShape.new(name: 'TrackingOptionsDoesNotExistException')
+    UpdateAccountSendingEnabledRequest = Shapes::StructureShape.new(name: 'UpdateAccountSendingEnabledRequest')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
     UpdateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationResponse')
+    UpdateConfigurationSetReputationMetricsEnabledRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetReputationMetricsEnabledRequest')
+    UpdateConfigurationSetSendingEnabledRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetSendingEnabledRequest')
     UpdateConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsRequest')
     UpdateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsResponse')
     UpdateReceiptRuleRequest = Shapes::StructureShape.new(name: 'UpdateReceiptRuleRequest')
@@ -460,6 +468,7 @@ module Aws::SES
     DescribeConfigurationSetResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, location_name: "ConfigurationSet"))
     DescribeConfigurationSetResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
     DescribeConfigurationSetResponse.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, location_name: "TrackingOptions"))
+    DescribeConfigurationSetResponse.add_member(:reputation_options, Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
     DescribeConfigurationSetResponse.struct_class = Types::DescribeConfigurationSetResponse
 
     DescribeReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
@@ -501,6 +510,9 @@ module Aws::SES
     ExtensionField.struct_class = Types::ExtensionField
 
     ExtensionFieldList.member = Shapes::ShapeRef.new(shape: ExtensionField)
+
+    GetAccountSendingEnabledResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
+    GetAccountSendingEnabledResponse.struct_class = Types::GetAccountSendingEnabledResponse
 
     GetIdentityDkimAttributesRequest.add_member(:identities, Shapes::ShapeRef.new(shape: IdentityList, required: true, location_name: "Identities"))
     GetIdentityDkimAttributesRequest.struct_class = Types::GetIdentityDkimAttributesRequest
@@ -719,6 +731,11 @@ module Aws::SES
 
     ReorderReceiptRuleSetResponse.struct_class = Types::ReorderReceiptRuleSetResponse
 
+    ReputationOptions.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
+    ReputationOptions.add_member(:reputation_metrics_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "ReputationMetricsEnabled"))
+    ReputationOptions.add_member(:last_fresh_start, Shapes::ShapeRef.new(shape: LastFreshStart, location_name: "LastFreshStart"))
+    ReputationOptions.struct_class = Types::ReputationOptions
+
     S3Action.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
     S3Action.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
     S3Action.add_member(:object_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "ObjectKeyPrefix"))
@@ -882,11 +899,22 @@ module Aws::SES
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
     TrackingOptions.struct_class = Types::TrackingOptions
 
+    UpdateAccountSendingEnabledRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
+    UpdateAccountSendingEnabledRequest.struct_class = Types::UpdateAccountSendingEnabledRequest
+
     UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestination, required: true, location_name: "EventDestination"))
     UpdateConfigurationSetEventDestinationRequest.struct_class = Types::UpdateConfigurationSetEventDestinationRequest
 
     UpdateConfigurationSetEventDestinationResponse.struct_class = Types::UpdateConfigurationSetEventDestinationResponse
+
+    UpdateConfigurationSetReputationMetricsEnabledRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    UpdateConfigurationSetReputationMetricsEnabledRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "Enabled"))
+    UpdateConfigurationSetReputationMetricsEnabledRequest.struct_class = Types::UpdateConfigurationSetReputationMetricsEnabledRequest
+
+    UpdateConfigurationSetSendingEnabledRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    UpdateConfigurationSetSendingEnabledRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "Enabled"))
+    UpdateConfigurationSetSendingEnabledRequest.struct_class = Types::UpdateConfigurationSetSendingEnabledRequest
 
     UpdateConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     UpdateConfigurationSetTrackingOptionsRequest.add_member(:tracking_options, Shapes::ShapeRef.new(shape: TrackingOptions, required: true, location_name: "TrackingOptions"))
@@ -1165,6 +1193,14 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: RuleSetDoesNotExistException)
       end)
 
+      api.add_operation(:get_account_sending_enabled, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountSendingEnabled"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetAccountSendingEnabledResponse)
+      end)
+
       api.add_operation(:get_identity_dkim_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIdentityDkimAttributes"
         o.http_method = "POST"
@@ -1330,6 +1366,8 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetSendingPausedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSendingPausedException)
       end)
 
       api.add_operation(:send_email, Seahorse::Model::Operation.new.tap do |o|
@@ -1341,6 +1379,8 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
         o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetSendingPausedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSendingPausedException)
       end)
 
       api.add_operation(:send_raw_email, Seahorse::Model::Operation.new.tap do |o|
@@ -1352,6 +1392,8 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
         o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetSendingPausedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSendingPausedException)
       end)
 
       api.add_operation(:send_templated_email, Seahorse::Model::Operation.new.tap do |o|
@@ -1364,6 +1406,8 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetSendingPausedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSendingPausedException)
       end)
 
       api.add_operation(:set_active_receipt_rule_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1436,6 +1480,14 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: MissingRenderingAttributeException)
       end)
 
+      api.add_operation(:update_account_sending_enabled, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountSendingEnabled"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountSendingEnabledRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:update_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateConfigurationSetEventDestination"
         o.http_method = "POST"
@@ -1447,6 +1499,24 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSNSDestinationException)
+      end)
+
+      api.add_operation(:update_configuration_set_reputation_metrics_enabled, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfigurationSetReputationMetricsEnabled"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationSetReputationMetricsEnabledRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+      end)
+
+      api.add_operation(:update_configuration_set_sending_enabled, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfigurationSetSendingEnabled"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationSetSendingEnabledRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
       end)
 
       api.add_operation(:update_configuration_set_tracking_options, Seahorse::Model::Operation.new.tap do |o|

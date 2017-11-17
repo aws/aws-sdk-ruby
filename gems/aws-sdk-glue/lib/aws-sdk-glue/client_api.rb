@@ -74,6 +74,7 @@ module Aws::Glue
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConnectionsList = Shapes::StructureShape.new(name: 'ConnectionsList')
     Crawler = Shapes::StructureShape.new(name: 'Crawler')
+    CrawlerConfiguration = Shapes::StringShape.new(name: 'CrawlerConfiguration')
     CrawlerList = Shapes::ListShape.new(name: 'CrawlerList')
     CrawlerMetrics = Shapes::StructureShape.new(name: 'CrawlerMetrics')
     CrawlerMetricsList = Shapes::ListShape.new(name: 'CrawlerMetricsList')
@@ -106,6 +107,7 @@ module Aws::Glue
     CreateTriggerResponse = Shapes::StructureShape.new(name: 'CreateTriggerResponse')
     CreateUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'CreateUserDefinedFunctionRequest')
     CreateUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'CreateUserDefinedFunctionResponse')
+    CreateXMLClassifierRequest = Shapes::StructureShape.new(name: 'CreateXMLClassifierRequest')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
@@ -283,8 +285,10 @@ module Aws::Glue
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceUri = Shapes::StructureShape.new(name: 'ResourceUri')
     ResourceUriList = Shapes::ListShape.new(name: 'ResourceUriList')
+    Role = Shapes::StringShape.new(name: 'Role')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
+    RowTag = Shapes::StringShape.new(name: 'RowTag')
     S3Target = Shapes::StructureShape.new(name: 'S3Target')
     S3TargetList = Shapes::ListShape.new(name: 'S3TargetList')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -358,6 +362,7 @@ module Aws::Glue
     UpdateTriggerResponse = Shapes::StructureShape.new(name: 'UpdateTriggerResponse')
     UpdateUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'UpdateUserDefinedFunctionRequest')
     UpdateUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'UpdateUserDefinedFunctionResponse')
+    UpdateXMLClassifierRequest = Shapes::StructureShape.new(name: 'UpdateXMLClassifierRequest')
     UriString = Shapes::StringShape.new(name: 'UriString')
     UserDefinedFunction = Shapes::StructureShape.new(name: 'UserDefinedFunction')
     UserDefinedFunctionInput = Shapes::StructureShape.new(name: 'UserDefinedFunctionInput')
@@ -369,6 +374,7 @@ module Aws::Glue
     VersionMismatchException = Shapes::StructureShape.new(name: 'VersionMismatchException')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
+    XMLClassifier = Shapes::StructureShape.new(name: 'XMLClassifier')
 
     Action.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     Action.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
@@ -463,6 +469,7 @@ module Aws::Glue
     CatalogImportStatus.struct_class = Types::CatalogImportStatus
 
     Classifier.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: GrokClassifier, location_name: "GrokClassifier"))
+    Classifier.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: XMLClassifier, location_name: "XMLClassifier"))
     Classifier.struct_class = Types::Classifier
 
     ClassifierList.member = Shapes::ShapeRef.new(shape: Classifier)
@@ -531,7 +538,7 @@ module Aws::Glue
     ConnectionsList.struct_class = Types::ConnectionsList
 
     Crawler.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
-    Crawler.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "Role"))
+    Crawler.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     Crawler.add_member(:targets, Shapes::ShapeRef.new(shape: CrawlerTargets, location_name: "Targets"))
     Crawler.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
     Crawler.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -545,6 +552,7 @@ module Aws::Glue
     Crawler.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
     Crawler.add_member(:last_crawl, Shapes::ShapeRef.new(shape: LastCrawlInfo, location_name: "LastCrawl"))
     Crawler.add_member(:version, Shapes::ShapeRef.new(shape: VersionId, location_name: "Version"))
+    Crawler.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     Crawler.struct_class = Types::Crawler
 
     CrawlerList.member = Shapes::ShapeRef.new(shape: Crawler)
@@ -568,6 +576,7 @@ module Aws::Glue
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
+    CreateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: CreateXMLClassifierRequest, location_name: "XMLClassifier"))
     CreateClassifierRequest.struct_class = Types::CreateClassifierRequest
 
     CreateClassifierResponse.struct_class = Types::CreateClassifierResponse
@@ -579,7 +588,7 @@ module Aws::Glue
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
     CreateCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
-    CreateCrawlerRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "Role"))
+    CreateCrawlerRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     CreateCrawlerRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
     CreateCrawlerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateCrawlerRequest.add_member(:targets, Shapes::ShapeRef.new(shape: CrawlerTargets, required: true, location_name: "Targets"))
@@ -587,6 +596,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
     CreateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     CreateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     CreateCrawlerRequest.struct_class = Types::CreateCrawlerRequest
 
     CreateCrawlerResponse.struct_class = Types::CreateCrawlerResponse
@@ -683,6 +693,11 @@ module Aws::Glue
     CreateUserDefinedFunctionRequest.struct_class = Types::CreateUserDefinedFunctionRequest
 
     CreateUserDefinedFunctionResponse.struct_class = Types::CreateUserDefinedFunctionResponse
+
+    CreateXMLClassifierRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
+    CreateXMLClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateXMLClassifierRequest.add_member(:row_tag, Shapes::ShapeRef.new(shape: RowTag, location_name: "RowTag"))
+    CreateXMLClassifierRequest.struct_class = Types::CreateXMLClassifierRequest
 
     DagEdges.member = Shapes::ShapeRef.new(shape: CodeGenEdge)
 
@@ -1366,6 +1381,7 @@ module Aws::Glue
     TriggerUpdate.struct_class = Types::TriggerUpdate
 
     UpdateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: UpdateGrokClassifierRequest, location_name: "GrokClassifier"))
+    UpdateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: UpdateXMLClassifierRequest, location_name: "XMLClassifier"))
     UpdateClassifierRequest.struct_class = Types::UpdateClassifierRequest
 
     UpdateClassifierResponse.struct_class = Types::UpdateClassifierResponse
@@ -1378,7 +1394,7 @@ module Aws::Glue
     UpdateConnectionResponse.struct_class = Types::UpdateConnectionResponse
 
     UpdateCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
-    UpdateCrawlerRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "Role"))
+    UpdateCrawlerRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     UpdateCrawlerRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
     UpdateCrawlerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionStringRemovable, location_name: "Description"))
     UpdateCrawlerRequest.add_member(:targets, Shapes::ShapeRef.new(shape: CrawlerTargets, location_name: "Targets"))
@@ -1386,6 +1402,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:classifiers, Shapes::ShapeRef.new(shape: ClassifierNameList, location_name: "Classifiers"))
     UpdateCrawlerRequest.add_member(:table_prefix, Shapes::ShapeRef.new(shape: TablePrefix, location_name: "TablePrefix"))
     UpdateCrawlerRequest.add_member(:schema_change_policy, Shapes::ShapeRef.new(shape: SchemaChangePolicy, location_name: "SchemaChangePolicy"))
+    UpdateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     UpdateCrawlerRequest.struct_class = Types::UpdateCrawlerRequest
 
     UpdateCrawlerResponse.struct_class = Types::UpdateCrawlerResponse
@@ -1455,6 +1472,11 @@ module Aws::Glue
 
     UpdateUserDefinedFunctionResponse.struct_class = Types::UpdateUserDefinedFunctionResponse
 
+    UpdateXMLClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateXMLClassifierRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
+    UpdateXMLClassifierRequest.add_member(:row_tag, Shapes::ShapeRef.new(shape: RowTag, location_name: "RowTag"))
+    UpdateXMLClassifierRequest.struct_class = Types::UpdateXMLClassifierRequest
+
     UserDefinedFunction.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, location_name: "FunctionName"))
     UserDefinedFunction.add_member(:class_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ClassName"))
     UserDefinedFunction.add_member(:owner_name, Shapes::ShapeRef.new(shape: NameString, location_name: "OwnerName"))
@@ -1473,6 +1495,14 @@ module Aws::Glue
     UserDefinedFunctionList.member = Shapes::ShapeRef.new(shape: UserDefinedFunction)
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: ValueString)
+
+    XMLClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    XMLClassifier.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, required: true, location_name: "Classification"))
+    XMLClassifier.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    XMLClassifier.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    XMLClassifier.add_member(:version, Shapes::ShapeRef.new(shape: VersionId, location_name: "Version"))
+    XMLClassifier.add_member(:row_tag, Shapes::ShapeRef.new(shape: RowTag, location_name: "RowTag"))
+    XMLClassifier.struct_class = Types::XMLClassifier
 
 
     # @api private
@@ -2056,6 +2086,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:get_partition, Seahorse::Model::Operation.new.tap do |o|

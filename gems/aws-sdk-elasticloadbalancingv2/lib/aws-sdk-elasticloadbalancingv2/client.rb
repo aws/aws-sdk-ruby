@@ -254,12 +254,14 @@ module Aws::ElasticLoadBalancingV2
     # Creates a listener for the specified Application Load Balancer or
     # Network Load Balancer.
     #
-    # You can create up to 10 listeners per load balancer.
-    #
     # To update a listener, use ModifyListener. When you are finished with a
     # listener, you can delete it using DeleteListener. If you are finished
     # with both the listener and the load balancer, you can delete them both
     # using DeleteLoadBalancer.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple listeners with the same
+    # settings, each call succeeds.
     #
     # For more information, see [Listeners for Your Application Load
     # Balancers][1] in the *Application Load Balancers Guide* and [Listeners
@@ -442,11 +444,13 @@ module Aws::ElasticLoadBalancingV2
     # you are finished with a load balancer, you can delete it using
     # DeleteLoadBalancer.
     #
-    # You can create up to 20 load balancers per region per account. You can
-    # request an increase for the number of load balancers for your account.
-    # For more information, see [Limits for Your Application Load
+    # For limit information, see [Limits for Your Application Load
     # Balancer][1] in the *Application Load Balancers Guide* and [Limits for
     # Your Network Load Balancer][2] in the *Network Load Balancers Guide*.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple load balancers with the
+    # same settings, each call succeeds.
     #
     # For more information, see [Application Load Balancers][3] in the
     # *Application Load Balancers Guide* and [Network Load Balancers][4] in
@@ -474,16 +478,20 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones.
     #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the subnets to attach to the load balancer. You can specify
     #   only one subnet per Availability Zone. You must specify either subnets
     #   or subnet mappings.
     #
-    #   \[Network Load Balancers\] You can specify one Elastic IP address per
-    #   subnet.
+    #   \[Application Load Balancers\] You must specify subnets from at least
+    #   two Availability Zones. You cannot specify Elastic IP addresses for
+    #   your subnets.
     #
-    #   \[Application Load Balancers\] You cannot specify Elastic IP addresses
-    #   for your subnets.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You can specify one Elastic IP address per subnet.
     #
     # @option params [Array<String>] :security_groups
     #   \[Application Load Balancers\] The IDs of the security groups to
@@ -834,6 +842,10 @@ module Aws::ElasticLoadBalancingV2
     # group in an action using CreateListener or CreateRule.
     #
     # To delete a target group, use DeleteTargetGroup.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple target groups with the
+    # same settings, each call succeeds.
     #
     # For more information, see [Target Groups for Your Application Load
     # Balancers][1] in the *Application Load Balancers Guide* or [Target
@@ -3143,8 +3155,7 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones. You can specify only one subnet per Availability
     #   Zone. You must specify either subnets or subnet mappings.
     #
-    #   The load balancer is allocated one static IP address per subnet. You
-    #   cannot specify your own Elastic IP addresses.
+    #   You cannot specify Elastic IP addresses for your subnets.
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3221,7 +3232,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

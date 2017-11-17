@@ -71,6 +71,7 @@ module Aws::Organizations
     DescribePolicyResponse = Shapes::StructureShape.new(name: 'DescribePolicyResponse')
     DestinationParentNotFoundException = Shapes::StructureShape.new(name: 'DestinationParentNotFoundException')
     DetachPolicyRequest = Shapes::StructureShape.new(name: 'DetachPolicyRequest')
+    DisableAWSServiceAccessRequest = Shapes::StructureShape.new(name: 'DisableAWSServiceAccessRequest')
     DisablePolicyTypeRequest = Shapes::StructureShape.new(name: 'DisablePolicyTypeRequest')
     DisablePolicyTypeResponse = Shapes::StructureShape.new(name: 'DisablePolicyTypeResponse')
     DuplicateAccountException = Shapes::StructureShape.new(name: 'DuplicateAccountException')
@@ -79,10 +80,13 @@ module Aws::Organizations
     DuplicatePolicyAttachmentException = Shapes::StructureShape.new(name: 'DuplicatePolicyAttachmentException')
     DuplicatePolicyException = Shapes::StructureShape.new(name: 'DuplicatePolicyException')
     Email = Shapes::StringShape.new(name: 'Email')
+    EnableAWSServiceAccessRequest = Shapes::StructureShape.new(name: 'EnableAWSServiceAccessRequest')
     EnableAllFeaturesRequest = Shapes::StructureShape.new(name: 'EnableAllFeaturesRequest')
     EnableAllFeaturesResponse = Shapes::StructureShape.new(name: 'EnableAllFeaturesResponse')
     EnablePolicyTypeRequest = Shapes::StructureShape.new(name: 'EnablePolicyTypeRequest')
     EnablePolicyTypeResponse = Shapes::StructureShape.new(name: 'EnablePolicyTypeResponse')
+    EnabledServicePrincipal = Shapes::StructureShape.new(name: 'EnabledServicePrincipal')
+    EnabledServicePrincipals = Shapes::ListShape.new(name: 'EnabledServicePrincipals')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExceptionType = Shapes::StringShape.new(name: 'ExceptionType')
     FinalizingOrganizationException = Shapes::StructureShape.new(name: 'FinalizingOrganizationException')
@@ -112,6 +116,8 @@ module Aws::Organizations
     InvalidInputExceptionReason = Shapes::StringShape.new(name: 'InvalidInputExceptionReason')
     InviteAccountToOrganizationRequest = Shapes::StructureShape.new(name: 'InviteAccountToOrganizationRequest')
     InviteAccountToOrganizationResponse = Shapes::StructureShape.new(name: 'InviteAccountToOrganizationResponse')
+    ListAWSServiceAccessForOrganizationRequest = Shapes::StructureShape.new(name: 'ListAWSServiceAccessForOrganizationRequest')
+    ListAWSServiceAccessForOrganizationResponse = Shapes::StructureShape.new(name: 'ListAWSServiceAccessForOrganizationResponse')
     ListAccountsForParentRequest = Shapes::StructureShape.new(name: 'ListAccountsForParentRequest')
     ListAccountsForParentResponse = Shapes::StructureShape.new(name: 'ListAccountsForParentResponse')
     ListAccountsRequest = Shapes::StructureShape.new(name: 'ListAccountsRequest')
@@ -188,6 +194,7 @@ module Aws::Organizations
     RootNotFoundException = Shapes::StructureShape.new(name: 'RootNotFoundException')
     Roots = Shapes::ListShape.new(name: 'Roots')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     SourceParentNotFoundException = Shapes::StructureShape.new(name: 'SourceParentNotFoundException')
     TargetName = Shapes::StringShape.new(name: 'TargetName')
     TargetNotFoundException = Shapes::StructureShape.new(name: 'TargetNotFoundException')
@@ -325,12 +332,18 @@ module Aws::Organizations
     DetachPolicyRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: PolicyTargetId, required: true, location_name: "TargetId"))
     DetachPolicyRequest.struct_class = Types::DetachPolicyRequest
 
+    DisableAWSServiceAccessRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    DisableAWSServiceAccessRequest.struct_class = Types::DisableAWSServiceAccessRequest
+
     DisablePolicyTypeRequest.add_member(:root_id, Shapes::ShapeRef.new(shape: RootId, required: true, location_name: "RootId"))
     DisablePolicyTypeRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "PolicyType"))
     DisablePolicyTypeRequest.struct_class = Types::DisablePolicyTypeRequest
 
     DisablePolicyTypeResponse.add_member(:root, Shapes::ShapeRef.new(shape: Root, location_name: "Root"))
     DisablePolicyTypeResponse.struct_class = Types::DisablePolicyTypeResponse
+
+    EnableAWSServiceAccessRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    EnableAWSServiceAccessRequest.struct_class = Types::EnableAWSServiceAccessRequest
 
     EnableAllFeaturesRequest.struct_class = Types::EnableAllFeaturesRequest
 
@@ -343,6 +356,12 @@ module Aws::Organizations
 
     EnablePolicyTypeResponse.add_member(:root, Shapes::ShapeRef.new(shape: Root, location_name: "Root"))
     EnablePolicyTypeResponse.struct_class = Types::EnablePolicyTypeResponse
+
+    EnabledServicePrincipal.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    EnabledServicePrincipal.add_member(:date_enabled, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateEnabled"))
+    EnabledServicePrincipal.struct_class = Types::EnabledServicePrincipal
+
+    EnabledServicePrincipals.member = Shapes::ShapeRef.new(shape: EnabledServicePrincipal)
 
     Handshake.add_member(:id, Shapes::ShapeRef.new(shape: HandshakeId, location_name: "Id"))
     Handshake.add_member(:arn, Shapes::ShapeRef.new(shape: HandshakeArn, location_name: "Arn"))
@@ -379,6 +398,14 @@ module Aws::Organizations
 
     InviteAccountToOrganizationResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
     InviteAccountToOrganizationResponse.struct_class = Types::InviteAccountToOrganizationResponse
+
+    ListAWSServiceAccessForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAWSServiceAccessForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAWSServiceAccessForOrganizationRequest.struct_class = Types::ListAWSServiceAccessForOrganizationRequest
+
+    ListAWSServiceAccessForOrganizationResponse.add_member(:enabled_service_principals, Shapes::ShapeRef.new(shape: EnabledServicePrincipals, location_name: "EnabledServicePrincipals"))
+    ListAWSServiceAccessForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAWSServiceAccessForOrganizationResponse.struct_class = Types::ListAWSServiceAccessForOrganizationResponse
 
     ListAccountsForParentRequest.add_member(:parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "ParentId"))
     ListAccountsForParentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -871,6 +898,21 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:disable_aws_service_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableAWSServiceAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableAWSServiceAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:disable_policy_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisablePolicyType"
         o.http_method = "POST"
@@ -884,6 +926,21 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: RootNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:enable_aws_service_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableAWSServiceAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableAWSServiceAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
@@ -953,6 +1010,26 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: MasterCannotLeaveOrganizationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_aws_service_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAWSServiceAccessForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAWSServiceAccessForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAWSServiceAccessForOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_accounts, Seahorse::Model::Operation.new.tap do |o|

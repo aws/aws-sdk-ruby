@@ -155,11 +155,35 @@ module Aws::States
 
     # @!group API Operations
 
-    # Creates an activity.
+    # Creates an activity. An activity is a task which you write in any
+    # programming language and host on any machine which has access to AWS
+    # Step Functions. Activities must poll Step Functions using the
+    # `GetActivityTask` API action and respond using `SendTask*` API
+    # actions. This function lets Step Functions know the existence of your
+    # activity and returns an identifier for use in a state machine and when
+    # polling from the activity.
     #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
-    #   AWS account and region.
+    #   AWS account and region for 90 days. For more information, see [ Limits
+    #   Related to State Machine Executions][1] in the *AWS Step Functions
+    #   Developer Guide*.
+    #
+    #   A name must *not* contain:
+    #
+    #   * whitespace
+    #
+    #   * brackets `< > \{ \} [ ]`
+    #
+    #   * wildcard characters `? *`
+    #
+    #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
+    #
+    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -186,11 +210,33 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Creates a state machine.
+    # Creates a state machine. A state machine consists of a collection of
+    # states that can do work (`Task` states), determine to which states to
+    # transition next (`Choice` states), stop an execution with an error
+    # (`Fail` states), and so on. State machines are specified using a
+    # JSON-based, structured language.
     #
     # @option params [required, String] :name
     #   The name of the state machine. This name must be unique for your AWS
-    #   account and region.
+    #   account and region for 90 days. For more information, see [ Limits
+    #   Related to State Machine Executions][1] in the *AWS Step Functions
+    #   Developer Guide*.
+    #
+    #   A name must *not* contain:
+    #
+    #   * whitespace
+    #
+    #   * brackets `< > \{ \} [ ]`
+    #
+    #   * wildcard characters `? *`
+    #
+    #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
+    #
+    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @option params [required, String] :definition
     #   The Amazon States Language definition of the state machine.
@@ -248,9 +294,15 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Deletes a state machine. This is an asynchronous operation-- it sets
-    # the state machine's status to "DELETING" and begins the delete
-    # process.
+    # Deletes a state machine. This is an asynchronous operation: It sets
+    # the state machine's status to `DELETING` and begins the deletion
+    # process. Each state machine execution is deleted the next time it
+    # makes a state transition.
+    #
+    # <note markdown="1"> The state machine itself is deleted after all executions are completed
+    # or deleted.
+    #
+    #  </note>
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to delete.
@@ -384,26 +436,64 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Describes the state machine associated with a specific execution.
+    #
+    # @option params [required, String] :execution_arn
+    #   The Amazon Resource Name (ARN) of the execution you want state machine
+    #   information for.
+    #
+    # @return [Types::DescribeStateMachineForExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStateMachineForExecutionOutput#state_machine_arn #state_machine_arn} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#name #name} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#definition #definition} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#role_arn #role_arn} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#update_date #update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_state_machine_for_execution({
+    #     execution_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state_machine_arn #=> String
+    #   resp.name #=> String
+    #   resp.definition #=> String
+    #   resp.role_arn #=> String
+    #   resp.update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
+    #
+    # @overload describe_state_machine_for_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_state_machine_for_execution(params = {}, options = {})
+      req = build_request(:describe_state_machine_for_execution, params)
+      req.send_request(options)
+    end
+
     # Used by workers to retrieve a task (with the specified activity ARN)
-    # scheduled for execution by a running state machine. This initiates a
-    # long poll, where the service holds the HTTP connection open and
-    # responds as soon as a task becomes available (i.e. an execution of a
-    # task of this type is needed.) The maximum time the service holds on to
-    # the request before responding is 60 seconds. If no task is available
-    # within 60 seconds, the poll will return an empty result, that is, the
-    # `taskToken` returned is an empty string.
+    # which has been scheduled for execution by a running state machine.
+    # This initiates a long poll, where the service holds the HTTP
+    # connection open and responds as soon as a task becomes available (i.e.
+    # an execution of a task of this type is needed.) The maximum time the
+    # service holds on to the request before responding is 60 seconds. If no
+    # task is available within 60 seconds, the poll returns a `taskToken`
+    # with a null string.
     #
     # Workers should set their client side socket timeout to at least 65
     # seconds (5 seconds higher than the maximum time the service may hold
     # the poll request).
     #
     # @option params [required, String] :activity_arn
-    #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from.
+    #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from
+    #   (assigned when you create the task using CreateActivity.)
     #
     # @option params [String] :worker_name
-    #   An arbitrary name may be provided in order to identify the worker that
-    #   the task is assigned to. This name will be used when it is logged in
-    #   the execution history.
+    #   You can provide an arbitrary name in order to identify the worker that
+    #   the task is assigned to. This name is used when it is logged in the
+    #   execution history.
     #
     # @return [Types::GetActivityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -434,26 +524,29 @@ module Aws::States
     # Returns the history of the specified execution as a list of events. By
     # default, the results are returned in ascending order of the
     # `timeStamp` of the events. Use the `reverseOrder` parameter to get the
-    # latest events first. The results may be split into multiple pages. To
-    # retrieve subsequent pages, make the call again using the `nextToken`
-    # returned by the previous call.
+    # latest events first.
+    #
+    # If a `nextToken` is returned by a previous call, there are more
+    # results available. To retrieve the next page of results, make the call
+    # again using the returned token in `nextToken`. Keep all other
+    # arguments unchanged.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that will be returned per call.
-    #   `nextToken` can be used to obtain further pages of results. The
-    #   default is 100 and the maximum allowed page size is 1000.
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 100. A value of 0 uses the default.
     #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
     #
     # @option params [Boolean] :reverse_order
     #   Lists events in descending order of their `timeStamp`.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` was returned by a previous call, there are more
+    #   If a `nextToken` is returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the call
     #   again using the returned token in `nextToken`. Keep all other
     #   arguments unchanged.
@@ -479,7 +572,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateEntered", "ParallelStateExited", "WaitStateEntered", "WaitStateExited"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "WaitStateAborted", "WaitStateEntered", "WaitStateExited"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -530,20 +623,23 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Lists the existing activities. The results may be split into multiple
-    # pages. To retrieve subsequent pages, make the call again using the
-    # `nextToken` returned by the previous call.
+    # Lists the existing activities.
+    #
+    # If a `nextToken` is returned by a previous call, there are more
+    # results available. To retrieve the next page of results, make the call
+    # again using the returned token in `nextToken`. Keep all other
+    # arguments unchanged.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that will be returned per call.
-    #   `nextToken` can be used to obtain further pages of results. The
-    #   default is 100 and the maximum allowed page size is 1000.
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 100. A value of 0 uses the default.
     #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` was returned by a previous call, there are more
+    #   If a `nextToken` is returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the call
     #   again using the returned token in `nextToken`. Keep all other
     #   arguments unchanged.
@@ -581,28 +677,31 @@ module Aws::States
     end
 
     # Lists the executions of a state machine that meet the filtering
-    # criteria. The results may be split into multiple pages. To retrieve
-    # subsequent pages, make the call again using the `nextToken` returned
-    # by the previous call.
+    # criteria.
+    #
+    # If a `nextToken` is returned by a previous call, there are more
+    # results available. To retrieve the next page of results, make the call
+    # again using the returned token in `nextToken`. Keep all other
+    # arguments unchanged.
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
-    #   will be listed.
+    #   is listed.
     #
     # @option params [String] :status_filter
     #   If specified, only list the executions whose current execution status
     #   matches the given filter.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that will be returned per call.
-    #   `nextToken` can be used to obtain further pages of results. The
-    #   default is 100 and the maximum allowed page size is 1000.
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 100. A value of 0 uses the default.
     #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` was returned by a previous call, there are more
+    #   If a `nextToken` is returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the call
     #   again using the returned token in `nextToken`. Keep all other
     #   arguments unchanged.
@@ -644,20 +743,23 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Lists the existing state machines. The results may be split into
-    # multiple pages. To retrieve subsequent pages, make the call again
-    # using the `nextToken` returned by the previous call.
+    # Lists the existing state machines.
+    #
+    # If a `nextToken` is returned by a previous call, there are more
+    # results available. To retrieve the next page of results, make the call
+    # again using the returned token in `nextToken`. Keep all other
+    # arguments unchanged.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that will be returned per call.
-    #   `nextToken` can be used to obtain further pages of results. The
-    #   default is 100 and the maximum allowed page size is 1000.
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 100. A value of 0 uses the default.
     #
-    #   This is an upper limit only; the actual number of results returned per
-    #   call may be fewer than the specified maximum.
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
     #
     # @option params [String] :next_token
-    #   If a `nextToken` was returned by a previous call, there are more
+    #   If a `nextToken` is returned by a previous call, there are more
     #   results available. To retrieve the next page of results, make the call
     #   again using the returned token in `nextToken`. Keep all other
     #   arguments unchanged.
@@ -732,7 +834,7 @@ module Aws::States
     # the `Heartbeat` clock. The `Heartbeat` threshold is specified in the
     # state machine's Amazon States Language definition. This action does
     # not in itself create an event in the execution history. However, if
-    # the task times out, the execution history will contain an
+    # the task times out, the execution history contains an
     # `ActivityTimedOut` event.
     #
     # <note markdown="1"> The `Timeout` of a task, defined in the state machine's Amazon States
@@ -749,7 +851,7 @@ module Aws::States
     # @option params [required, String] :task_token
     #   The token that represents this task. Task tokens are generated by the
     #   service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   GetActivityTaskOutput$taskToken).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -774,7 +876,7 @@ module Aws::States
     # @option params [required, String] :task_token
     #   The token that represents this task. Task tokens are generated by the
     #   service when the tasks are assigned to a worker (see
-    #   GetActivityTask::taskToken).
+    #   GetActivityTaskOutput$taskToken).
     #
     # @option params [required, String] :output
     #   The JSON output of the task.
@@ -804,10 +906,52 @@ module Aws::States
     #
     # @option params [String] :name
     #   The name of the execution. This name must be unique for your AWS
-    #   account and region.
+    #   account and region for 90 days. For more information, see [ Limits
+    #   Related to State Machine Executions][1] in the *AWS Step Functions
+    #   Developer Guide*.
+    #
+    #   An execution can't use the name of another execution for 90 days.
+    #
+    #    When you make multiple `StartExecution` calls with the same name, the
+    #   new execution doesn't run and the following rules apply:
+    #
+    #    * When the original execution is open and the execution input from
+    #   the
+    #     new call is *different*, the `ExecutionAlreadyExists` message is
+    #     returned.
+    #
+    #   * When the original execution is open and the execution input from the
+    #     new call is *identical*, the `Success` message is returned.
+    #
+    #   * When the original execution is closed, the `ExecutionAlreadyExists`
+    #     message is returned regardless of input.
+    #
+    #   A name must *not* contain:
+    #
+    #   * whitespace
+    #
+    #   * brackets `< > \{ \} [ ]`
+    #
+    #   * wildcard characters `? *`
+    #
+    #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
+    #
+    #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @option params [String] :input
-    #   The JSON input data for the execution.
+    #   The string that contains the JSON input data for the execution, for
+    #   example:
+    #
+    #   `"input": "\{"first_name" : "test"\}"`
+    #
+    #   <note markdown="1"> If you don't include any JSON input data, you still must include the
+    #   two braces, for example: `"input": "\{\}"`
+    #
+    #    </note>
     #
     # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -872,6 +1016,53 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Updates an existing state machine by modifying its `definition` and/or
+    # `roleArn`. Running executions will continue to use the previous
+    # `definition` and `roleArn`.
+    #
+    # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
+    # `definition` and `roleArn`. Executions started immediately after
+    # calling `UpdateStateMachine` may use the previous state machine
+    # `definition` and `roleArn`. You must include at least one of
+    # `definition` or `roleArn` or you will receive a
+    # `MissingRequiredParameter` error.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine.
+    #
+    # @option params [String] :definition
+    #   The Amazon States Language definition of the state machine.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
+    #
+    # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStateMachineOutput#update_date #update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_state_machine({
+    #     state_machine_arn: "Arn", # required
+    #     definition: "Definition",
+    #     role_arn: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachine AWS API Documentation
+    #
+    # @overload update_state_machine(params = {})
+    # @param [Hash] params ({})
+    def update_state_machine(params = {}, options = {})
+      req = build_request(:update_state_machine, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -885,7 +1076,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -861,6 +861,11 @@ module Aws::APIGateway
     #         certificate_private_key: "String",
     #         certificate_chain: "String",
     #         certificate_arn: "String",
+    #         regional_certificate_name: "String",
+    #         regional_certificate_arn: "String",
+    #         endpoint_configuration: {
+    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -868,22 +873,26 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The user-friendly name of the certificate.
+    #   The user-friendly name of the certificate that will be used by
+    #   edge-optimized endpoint for this domain name.
     #   @return [String]
     #
     # @!attribute [rw] certificate_body
-    #   \[Deprecated\] The body of the server certificate provided by your
+    #   \[Deprecated\] The body of the server certificate that will be used
+    #   by edge-optimized endpoint for this domain name provided by your
     #   certificate authority.
     #   @return [String]
     #
     # @!attribute [rw] certificate_private_key
-    #   \[Deprecated\] Your certificate's private key.
+    #   \[Deprecated\] Your edge-optimized endpoint's domain name
+    #   certificate's private key.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
     #   \[Deprecated\] The intermediate certificates and optionally the root
-    #   certificate, one after the other without any blank lines. If you
-    #   include the root certificate, your certificate chain must start with
+    #   certificate, one after the other without any blank lines, used by an
+    #   edge-optimized endpoint for this domain name. If you include the
+    #   root certificate, your certificate chain must start with
     #   intermediate certificates and end with the root certificate. Use the
     #   intermediate certificates that were provided by your certificate
     #   authority. Do not include any intermediaries that are not in the
@@ -891,9 +900,26 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   The reference to an AWS-managed certificate. AWS Certificate Manager
-    #   is the only supported source.
+    #   The reference to an AWS-managed certificate that will be used by
+    #   edge-optimized endpoint for this domain name. AWS Certificate
+    #   Manager is the only supported source.
     #   @return [String]
+    #
+    # @!attribute [rw] regional_certificate_name
+    #   The user-friendly name of the certificate that will be used by
+    #   regional endpoint for this domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] regional_certificate_arn
+    #   The reference to an AWS-managed certificate that will be used by
+    #   regional endpoint for this domain name. AWS Certificate Manager is
+    #   the only supported source.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of this DomainName showing the endpoint
+    #   types of the domain name.
+    #   @return [Types::EndpointConfiguration]
     #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
@@ -901,7 +927,10 @@ module Aws::APIGateway
       :certificate_body,
       :certificate_private_key,
       :certificate_chain,
-      :certificate_arn)
+      :certificate_arn,
+      :regional_certificate_name,
+      :regional_certificate_arn,
+      :endpoint_configuration)
       include Aws::Structure
     end
 
@@ -1032,6 +1061,9 @@ module Aws::APIGateway
     #         version: "String",
     #         clone_from: "String",
     #         binary_media_types: ["String"],
+    #         endpoint_configuration: {
+    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1055,12 +1087,18 @@ module Aws::APIGateway
     #   the RestApi supports only UTF-8-encoded text payloads.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of this RestApi showing the endpoint
+    #   types of the API.
+    #   @return [Types::EndpointConfiguration]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
       :version,
       :clone_from,
-      :binary_media_types)
+      :binary_media_types,
+      :endpoint_configuration)
       include Aws::Structure
     end
 
@@ -2063,11 +2101,25 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents a domain name that is contained in a simpler, more
-    # intuitive URL that can be called.
+    # Represents a custom domain name as a user-friendly host name of an API
+    # (RestApi).
+    #
+    # <div class="Remarks" markdown="1">
+    # When you deploy an API, Amazon API Gateway creates a default host name
+    # for the API. This default API host name is of the
+    # `\{restapi-id\}.execute-api.\{region\}.amazonaws.com` format. With the
+    # default host name, you can access the API's root resource with the
+    # URL of
+    # `https://\{restapi-id\}.execute-api.\{region\}.amazonaws.com/\{stage\}/`.
+    # When you set up a custom domain name of `apis.example.com` for this
+    # API, you can then access the same resource using the URL of the
+    # `https://apis.examples.com/myApi`, where `myApi` is the base path
+    # mapping (BasePathMapping) of your API under the custom domain name.
+    #
+    # </div>
     #
     # <div class="seeAlso">
-    # [Use Client-Side Certificate][1]
+    # [Set a Custom Host Name for an API][1]
     # </div>
     #
     #
@@ -2079,33 +2131,93 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The name of the certificate.
+    #   The name of the certificate that will be used by edge-optimized
+    #   endpoint for this domain name.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   The reference to an AWS-managed certificate. AWS Certificate Manager
-    #   is the only supported source.
+    #   The reference to an AWS-managed certificate that will be used by
+    #   edge-optimized endpoint for this domain name. AWS Certificate
+    #   Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] certificate_upload_date
-    #   The timestamp when the certificate was uploaded.
+    #   The timestamp when the certificate that was used by edge-optimized
+    #   endpoint for this domain name was uploaded.
     #   @return [Time]
     #
+    # @!attribute [rw] regional_domain_name
+    #   The domain name associated with the regional endpoint for this
+    #   custom domain name. You set up this association by adding a DNS
+    #   record that points the custom domain name to this regional domain
+    #   name. The regional domain name is returned by Amazon API Gateway
+    #   when you create a regional endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] regional_hosted_zone_id
+    #   The region-specific Amazon Route 53 Hosted Zone ID of the regional
+    #   endpoint. For more information, see [Set up a Regional Custom Domain
+    #   Name][1] and [AWS Regions and Endpoints for API Gateway][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   @return [String]
+    #
+    # @!attribute [rw] regional_certificate_name
+    #   The name of the certificate that will be used for validating the
+    #   regional domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] regional_certificate_arn
+    #   The reference to an AWS-managed certificate that will be used for
+    #   validating the regional domain name. AWS Certificate Manager is the
+    #   only supported source.
+    #   @return [String]
+    #
     # @!attribute [rw] distribution_domain_name
-    #   The domain name of the Amazon CloudFront distribution. For more
-    #   information, see the [Amazon CloudFront documentation][1].
+    #   The domain name of the Amazon CloudFront distribution associated
+    #   with this custom domain name for an edge-optimized endpoint. You set
+    #   up this association when adding a DNS record pointing the custom
+    #   domain name to this distribution name. For more information about
+    #   CloudFront distributions, see the [Amazon CloudFront
+    #   documentation][1].
     #
     #
     #
     #   [1]: http://aws.amazon.com/documentation/cloudfront/
     #   @return [String]
     #
+    # @!attribute [rw] distribution_hosted_zone_id
+    #   The region-agnostic Amazon Route 53 Hosted Zone ID of the
+    #   edge-optimized endpoint. The valid value is `Z2FDTNDATAQYW2` for all
+    #   the regions. For more information, see [Set up a Regional Custom
+    #   Domain Name][1] and [AWS Regions and Endpoints for API Gateway][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of this DomainName showing the endpoint
+    #   types of the domain name.
+    #   @return [Types::EndpointConfiguration]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
       :certificate_arn,
       :certificate_upload_date,
-      :distribution_domain_name)
+      :regional_domain_name,
+      :regional_hosted_zone_id,
+      :regional_certificate_name,
+      :regional_certificate_arn,
+      :distribution_domain_name,
+      :distribution_hosted_zone_id,
+      :endpoint_configuration)
       include Aws::Structure
     end
 
@@ -2129,6 +2241,28 @@ module Aws::APIGateway
     class DomainNames < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The endpoint configuration to indicate the types of endpoints an API
+    # (RestApi) or its custom domain name (DomainName) has.
+    #
+    # @note When making an API call, you may pass EndpointConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #       }
+    #
+    # @!attribute [rw] types
+    #   A list of endpoint types of an API (RestApi) or its custom domain
+    #   name (DomainName). For an edge-optimized API and its custom domain
+    #   name, the endpoint type is `"EDGE"`. For a regional API and its
+    #   custom domain name, the endpoint type is `REGIONAL`.
+    #   @return [Array<String>]
+    #
+    class EndpointConfiguration < Struct.new(
+      :types)
       include Aws::Structure
     end
 
@@ -2711,6 +2845,7 @@ module Aws::APIGateway
     #         path: "String",
     #         position: "String",
     #         limit: 1,
+    #         location_status: "DOCUMENTED", # accepts DOCUMENTED, UNDOCUMENTED
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -2737,13 +2872,21 @@ module Aws::APIGateway
     #   The maximum number of returned results per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] location_status
+    #   The status of the API documentation parts to retrieve. Valid values
+    #   are `DOCUMENTED` for retrieving DocumentationPart resources with
+    #   content and `UNDOCUMENTED` for DocumentationPart resources without
+    #   content.
+    #   @return [String]
+    #
     class GetDocumentationPartsRequest < Struct.new(
       :rest_api_id,
       :type,
       :name_query,
       :path,
       :position,
-      :limit)
+      :limit,
+      :location_status)
       include Aws::Structure
     end
 
@@ -3781,12 +3924,31 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
-    #   Custom header parameters as part of the request. For example, to
-    #   exclude DocumentationParts from an imported API, set
-    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
-    #   command of `aws apigateway import-rest-api --parameters
-    #   ignore=documentation --body
-    #   'file:///path/to/imported-api-body.json`.
+    #   A key-value map of context-specific query string parameters
+    #   specifying the behavior of different API importing operations. The
+    #   following shows operation-specific parameters and their supported
+    #   values.
+    #
+    #   To exclude DocumentationParts from the import, set `parameters` as
+    #   `ignore=documentation`.
+    #
+    #   To configure the endpoint type, set `parameters` as
+    #   `endpointConfigurationTypes=EDGE`
+    #   or`endpointConfigurationTypes=REGIONAL`. The default endpoint type
+    #   is `EDGE`.
+    #
+    #   To handle imported `basePath`, set `parameters` as
+    #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
+    #
+    #   For example, the AWS CLI command to exclude documentation from the
+    #   imported API is:
+    #
+    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json
+    #
+    #   The AWS CLI command to set the regional endpoint on the imported API
+    #   is:
+    #
+    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
@@ -5338,6 +5500,11 @@ module Aws::APIGateway
     #   the RestApi supports only UTF-8-encoded text payloads.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of this RestApi showing the endpoint
+    #   types of the API.
+    #   @return [Types::EndpointConfiguration]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -5345,7 +5512,8 @@ module Aws::APIGateway
       :created_date,
       :version,
       :warnings,
-      :binary_media_types)
+      :binary_media_types,
+      :endpoint_configuration)
       include Aws::Structure
     end
 

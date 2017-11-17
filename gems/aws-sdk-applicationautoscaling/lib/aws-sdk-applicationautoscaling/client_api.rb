@@ -19,6 +19,8 @@ module Aws::ApplicationAutoScaling
     CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
     DeleteScalingPolicyRequest = Shapes::StructureShape.new(name: 'DeleteScalingPolicyRequest')
     DeleteScalingPolicyResponse = Shapes::StructureShape.new(name: 'DeleteScalingPolicyResponse')
+    DeleteScheduledActionRequest = Shapes::StructureShape.new(name: 'DeleteScheduledActionRequest')
+    DeleteScheduledActionResponse = Shapes::StructureShape.new(name: 'DeleteScheduledActionResponse')
     DeregisterScalableTargetRequest = Shapes::StructureShape.new(name: 'DeregisterScalableTargetRequest')
     DeregisterScalableTargetResponse = Shapes::StructureShape.new(name: 'DeregisterScalableTargetResponse')
     DescribeScalableTargetsRequest = Shapes::StructureShape.new(name: 'DescribeScalableTargetsRequest')
@@ -27,6 +29,8 @@ module Aws::ApplicationAutoScaling
     DescribeScalingActivitiesResponse = Shapes::StructureShape.new(name: 'DescribeScalingActivitiesResponse')
     DescribeScalingPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesRequest')
     DescribeScalingPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesResponse')
+    DescribeScheduledActionsRequest = Shapes::StructureShape.new(name: 'DescribeScheduledActionsRequest')
+    DescribeScheduledActionsResponse = Shapes::StructureShape.new(name: 'DescribeScheduledActionsResponse')
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailedResourceAccessException = Shapes::StructureShape.new(name: 'FailedResourceAccessException')
@@ -52,6 +56,8 @@ module Aws::ApplicationAutoScaling
     PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     PutScalingPolicyRequest = Shapes::StructureShape.new(name: 'PutScalingPolicyRequest')
     PutScalingPolicyResponse = Shapes::StructureShape.new(name: 'PutScalingPolicyResponse')
+    PutScheduledActionRequest = Shapes::StructureShape.new(name: 'PutScheduledActionRequest')
+    PutScheduledActionResponse = Shapes::StructureShape.new(name: 'PutScheduledActionResponse')
     RegisterScalableTargetRequest = Shapes::StructureShape.new(name: 'RegisterScalableTargetRequest')
     RegisterScalableTargetResponse = Shapes::StructureShape.new(name: 'RegisterScalableTargetResponse')
     ResourceCapacity = Shapes::IntegerShape.new(name: 'ResourceCapacity')
@@ -61,6 +67,7 @@ module Aws::ApplicationAutoScaling
     ResourceLabel = Shapes::StringShape.new(name: 'ResourceLabel')
     ScalableDimension = Shapes::StringShape.new(name: 'ScalableDimension')
     ScalableTarget = Shapes::StructureShape.new(name: 'ScalableTarget')
+    ScalableTargetAction = Shapes::StructureShape.new(name: 'ScalableTargetAction')
     ScalableTargets = Shapes::ListShape.new(name: 'ScalableTargets')
     ScalingActivities = Shapes::ListShape.new(name: 'ScalingActivities')
     ScalingActivity = Shapes::StructureShape.new(name: 'ScalingActivity')
@@ -68,6 +75,9 @@ module Aws::ApplicationAutoScaling
     ScalingAdjustment = Shapes::IntegerShape.new(name: 'ScalingAdjustment')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
     ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
+    ScheduledAction = Shapes::StructureShape.new(name: 'ScheduledAction')
+    ScheduledActionName = Shapes::StringShape.new(name: 'ScheduledActionName')
+    ScheduledActions = Shapes::ListShape.new(name: 'ScheduledActions')
     ServiceNamespace = Shapes::StringShape.new(name: 'ServiceNamespace')
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
@@ -97,6 +107,14 @@ module Aws::ApplicationAutoScaling
     DeleteScalingPolicyRequest.struct_class = Types::DeleteScalingPolicyRequest
 
     DeleteScalingPolicyResponse.struct_class = Types::DeleteScalingPolicyResponse
+
+    DeleteScheduledActionRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
+    DeleteScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ScheduledActionName"))
+    DeleteScheduledActionRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
+    DeleteScheduledActionRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
+    DeleteScheduledActionRequest.struct_class = Types::DeleteScheduledActionRequest
+
+    DeleteScheduledActionResponse.struct_class = Types::DeleteScheduledActionResponse
 
     DeregisterScalableTargetRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     DeregisterScalableTargetRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
@@ -139,6 +157,18 @@ module Aws::ApplicationAutoScaling
     DescribeScalingPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScalingPoliciesResponse.struct_class = Types::DescribeScalingPoliciesResponse
 
+    DescribeScheduledActionsRequest.add_member(:scheduled_action_names, Shapes::ShapeRef.new(shape: ResourceIdsMaxLen1600, location_name: "ScheduledActionNames"))
+    DescribeScheduledActionsRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
+    DescribeScheduledActionsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "ResourceId"))
+    DescribeScheduledActionsRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
+    DescribeScheduledActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeScheduledActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScheduledActionsRequest.struct_class = Types::DescribeScheduledActionsRequest
+
+    DescribeScheduledActionsResponse.add_member(:scheduled_actions, Shapes::ShapeRef.new(shape: ScheduledActions, location_name: "ScheduledActions"))
+    DescribeScheduledActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScheduledActionsResponse.struct_class = Types::DescribeScheduledActionsResponse
+
     MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
@@ -162,6 +192,18 @@ module Aws::ApplicationAutoScaling
     PutScalingPolicyResponse.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     PutScalingPolicyResponse.struct_class = Types::PutScalingPolicyResponse
 
+    PutScheduledActionRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
+    PutScheduledActionRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Schedule"))
+    PutScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "ScheduledActionName"))
+    PutScheduledActionRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
+    PutScheduledActionRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
+    PutScheduledActionRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
+    PutScheduledActionRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
+    PutScheduledActionRequest.add_member(:scalable_target_action, Shapes::ShapeRef.new(shape: ScalableTargetAction, location_name: "ScalableTargetAction"))
+    PutScheduledActionRequest.struct_class = Types::PutScheduledActionRequest
+
+    PutScheduledActionResponse.struct_class = Types::PutScheduledActionResponse
+
     RegisterScalableTargetRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     RegisterScalableTargetRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
     RegisterScalableTargetRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, required: true, location_name: "ScalableDimension"))
@@ -182,6 +224,10 @@ module Aws::ApplicationAutoScaling
     ScalableTarget.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "RoleARN"))
     ScalableTarget.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
     ScalableTarget.struct_class = Types::ScalableTarget
+
+    ScalableTargetAction.add_member(:min_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MinCapacity"))
+    ScalableTargetAction.add_member(:max_capacity, Shapes::ShapeRef.new(shape: ResourceCapacity, location_name: "MaxCapacity"))
+    ScalableTargetAction.struct_class = Types::ScalableTargetAction
 
     ScalableTargets.member = Shapes::ShapeRef.new(shape: ScalableTarget)
 
@@ -213,6 +259,20 @@ module Aws::ApplicationAutoScaling
     ScalingPolicy.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     ScalingPolicy.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
+
+    ScheduledAction.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "ScheduledActionName"))
+    ScheduledAction.add_member(:scheduled_action_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ScheduledActionARN"))
+    ScheduledAction.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
+    ScheduledAction.add_member(:schedule, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "Schedule"))
+    ScheduledAction.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
+    ScheduledAction.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
+    ScheduledAction.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
+    ScheduledAction.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
+    ScheduledAction.add_member(:scalable_target_action, Shapes::ShapeRef.new(shape: ScalableTargetAction, location_name: "ScalableTargetAction"))
+    ScheduledAction.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreationTime"))
+    ScheduledAction.struct_class = Types::ScheduledAction
+
+    ScheduledActions.member = Shapes::ShapeRef.new(shape: ScheduledAction)
 
     StepAdjustment.add_member(:metric_interval_lower_bound, Shapes::ShapeRef.new(shape: MetricScale, location_name: "MetricIntervalLowerBound"))
     StepAdjustment.add_member(:metric_interval_upper_bound, Shapes::ShapeRef.new(shape: MetricScale, location_name: "MetricIntervalUpperBound"))
@@ -258,6 +318,18 @@ module Aws::ApplicationAutoScaling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteScalingPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteScalingPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduledActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
@@ -331,6 +403,18 @@ module Aws::ApplicationAutoScaling
         )
       end)
 
+      api.add_operation(:describe_scheduled_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeScheduledActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScheduledActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeScheduledActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutScalingPolicy"
         o.http_method = "POST"
@@ -342,6 +426,19 @@ module Aws::ApplicationAutoScaling
         o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: FailedResourceAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:put_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutScheduledActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 

@@ -83,6 +83,7 @@ module Aws
   autoload :Organizations, 'aws-sdk-organizations'
   autoload :Pinpoint, 'aws-sdk-pinpoint'
   autoload :Polly, 'aws-sdk-polly'
+  autoload :Pricing, 'aws-sdk-pricing'
   autoload :RDS, 'aws-sdk-rds'
   autoload :Redshift, 'aws-sdk-redshift'
   autoload :Rekognition, 'aws-sdk-rekognition'

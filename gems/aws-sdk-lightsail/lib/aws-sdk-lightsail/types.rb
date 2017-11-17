@@ -38,6 +38,48 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AttachDiskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #         instance_name: "ResourceName", # required
+    #         disk_path: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the Lightsail instance where you want to utilize the
+    #   storage disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_path
+    #   The disk path to expose to the instance (e.g., `/dev/xvdf`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDiskRequest AWS API Documentation
+    #
+    class AttachDiskRequest < Struct.new(
+      :disk_name,
+      :instance_name,
+      :disk_path)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operation.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDiskResult AWS API Documentation
+    #
+    class AttachDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AttachStaticIpRequest
     #   data as a hash:
     #
@@ -77,7 +119,7 @@ module Aws::Lightsail
     # Describes an Availability Zone.
     #
     # @!attribute [rw] zone_name
-    #   The name of the Availability Zone. The format is `us-east-1a`
+    #   The name of the Availability Zone. The format is `us-east-2a`
     #   (case-sensitive).
     #   @return [String]
     #
@@ -282,6 +324,141 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDiskFromSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #         disk_snapshot_name: "ResourceName", # required
+    #         availability_zone: "NonEmptyString", # required
+    #         size_in_gb: 1, # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_snapshot_name
+    #   The name of the disk snapshot (e.g., `my-snapshot`) from which to
+    #   create the new storage disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where you want to create the disk (e.g.,
+    #   `us-east-2a`). Choose the same Availability Zone as the Lightsail
+    #   instance where you want to create the disk.
+    #
+    #   Use the GetRegions operation to list the Availability Zones where
+    #   Lightsail is currently available.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size of the disk in GB (e.g., `32`).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotRequest AWS API Documentation
+    #
+    class CreateDiskFromSnapshotRequest < Struct.new(
+      :disk_name,
+      :disk_snapshot_name,
+      :availability_zone,
+      :size_in_gb)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotResult AWS API Documentation
+    #
+    class CreateDiskFromSnapshotResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDiskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #         availability_zone: "NonEmptyString", # required
+    #         size_in_gb: 1, # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where you want to create the disk (e.g.,
+    #   `us-east-2a`). Choose the same Availability Zone as the Lightsail
+    #   instance where you want to create the disk.
+    #
+    #   Use the GetRegions operation to list the Availability Zones where
+    #   Lightsail is currently available.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size of the disk in GB (e.g., `32`).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskRequest AWS API Documentation
+    #
+    class CreateDiskRequest < Struct.new(
+      :disk_name,
+      :availability_zone,
+      :size_in_gb)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskResult AWS API Documentation
+    #
+    class CreateDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDiskSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #         disk_snapshot_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique name of the source disk (e.g., `my-source-disk`).
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_snapshot_name
+    #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
+    #   based on the source disk.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskSnapshotRequest AWS API Documentation
+    #
+    class CreateDiskSnapshotRequest < Struct.new(
+      :disk_name,
+      :disk_snapshot_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskSnapshotResult AWS API Documentation
+    #
+    class CreateDiskSnapshotResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDomainEntryRequest
     #   data as a hash:
     #
@@ -407,6 +584,14 @@ module Aws::Lightsail
     #
     #       {
     #         instance_names: ["string"], # required
+    #         attached_disk_mapping: {
+    #           "ResourceName" => [
+    #             {
+    #               original_disk_path: "NonEmptyString",
+    #               new_disk_name: "ResourceName",
+    #             },
+    #           ],
+    #         },
     #         availability_zone: "string", # required
     #         instance_snapshot_name: "ResourceName", # required
     #         bundle_id: "NonEmptyString", # required
@@ -418,9 +603,13 @@ module Aws::Lightsail
     #   The names for your new instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] attached_disk_mapping
+    #   An object containing information about one or more disk mappings.
+    #   @return [Hash<String,Array<Types::DiskMap>>]
+    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone where you want to create your instances. Use
-    #   the following formatting: `us-east-1a` (case sensitive). You can get
+    #   the following formatting: `us-east-2a` (case sensitive). You can get
     #   a list of availability zones by using the [get regions][1]
     #   operation. Be sure to add the `include availability zones` parameter
     #   to your request.
@@ -466,6 +655,7 @@ module Aws::Lightsail
     #
     class CreateInstancesFromSnapshotRequest < Struct.new(
       :instance_names,
+      :attached_disk_mapping,
       :availability_zone,
       :instance_snapshot_name,
       :bundle_id,
@@ -507,7 +697,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which to create your instance. Use the
-    #   following format: `us-east-1a` (case sensitive). You can get a list
+    #   following format: `us-east-2a` (case sensitive). You can get a list
     #   of availability zones by using the [get regions][1] operation. Be
     #   sure to add the `include availability zones` parameter to your
     #   request.
@@ -627,6 +817,65 @@ module Aws::Lightsail
       :public_key_base_64,
       :private_key_base_64,
       :operation)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDiskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique name of the disk you want to delete (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskRequest AWS API Documentation
+    #
+    class DeleteDiskRequest < Struct.new(
+      :disk_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskResult AWS API Documentation
+    #
+    class DeleteDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDiskSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_snapshot_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_snapshot_name
+    #   The name of the disk snapshot you want to delete (e.g.,
+    #   `my-disk-snapshot`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskSnapshotRequest AWS API Documentation
+    #
+    class DeleteDiskSnapshotRequest < Struct.new(
+      :disk_snapshot_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskSnapshotResult AWS API Documentation
+    #
+    class DeleteDiskSnapshotResult < Struct.new(
+      :operations)
       include Aws::Structure
     end
 
@@ -795,6 +1044,36 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetachDiskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The unique name of the disk you want to detach from your instance
+    #   (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskRequest AWS API Documentation
+    #
+    class DetachDiskRequest < Struct.new(
+      :disk_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskResult AWS API Documentation
+    #
+    class DetachDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachStaticIpRequest
     #   data as a hash:
     #
@@ -825,10 +1104,10 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the hard disk (an SSD).
+    # Describes a system disk or an block storage disk.
     #
     # @!attribute [rw] name
-    #   The name of the disk.
+    #   The unique name of the disk.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -847,19 +1126,15 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The region and Availability Zone where the disk is located.
+    #   The AWS Region and Availability Zone where the disk is located.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The resource type of the disk.
+    #   The Lightsail resource type (e.g., `Disk`).
     #   @return [String]
     #
     # @!attribute [rw] size_in_gb
     #   The size of the disk in GB.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] gb_in_use
-    #   The number of GB in use by the disk.
     #   @return [Integer]
     #
     # @!attribute [rw] is_system_disk
@@ -875,6 +1150,10 @@ module Aws::Lightsail
     #   The disk path.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   Describes the status of the disk.
+    #   @return [String]
+    #
     # @!attribute [rw] attached_to
     #   The resources to which the disk is attached.
     #   @return [String]
@@ -884,8 +1163,24 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] attachment_state
-    #   The attachment state of the disk.
+    #   (Deprecated) The attachment state of the disk.
+    #
+    #   <note markdown="1"> In releases prior to November 9, 2017, this parameter returned
+    #   `attached` for system disks in the API response. It is now
+    #   deprecated, but still included in the response. Use `isAttached`
+    #   instead.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] gb_in_use
+    #   (Deprecated) The number of GB in use by the disk.
+    #
+    #   <note markdown="1"> In releases prior to November 9, 2017, this parameter was not
+    #   included in the API response. It is now deprecated.
+    #
+    #    </note>
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Disk AWS API Documentation
     #
@@ -897,13 +1192,110 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :size_in_gb,
-      :gb_in_use,
       :is_system_disk,
       :iops,
       :path,
+      :state,
       :attached_to,
       :is_attached,
-      :attachment_state)
+      :attachment_state,
+      :gb_in_use)
+      include Aws::Structure
+    end
+
+    # Describes a block storage disk mapping.
+    #
+    # @note When making an API call, you may pass DiskMap
+    #   data as a hash:
+    #
+    #       {
+    #         original_disk_path: "NonEmptyString",
+    #         new_disk_name: "ResourceName",
+    #       }
+    #
+    # @!attribute [rw] original_disk_path
+    #   The original disk path exposed to the instance (for example,
+    #   `/dev/sdh`).
+    #   @return [String]
+    #
+    # @!attribute [rw] new_disk_name
+    #   The new disk name (e.g., `my-new-disk`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskMap AWS API Documentation
+    #
+    class DiskMap < Struct.new(
+      :original_disk_path,
+      :new_disk_name)
+      include Aws::Structure
+    end
+
+    # Describes a block storage disk snapshot.
+    #
+    # @!attribute [rw] name
+    #   The name of the disk snapshot (e.g., `my-disk-snapshot`).
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the disk snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about an instance or another resource in
+    #   Lightsail. This code enables our support team to look up your
+    #   Lightsail information more easily.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date when the disk snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   The AWS Region and Availability Zone where the disk snapshot was
+    #   created.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type (e.g., `DiskSnapshot`).
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size of the disk in GB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The status of the disk snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the disk snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_disk_name
+    #   The unique name of the source disk from which you are creating the
+    #   disk snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_disk_arn
+    #   The Amazon Resource Name (ARN) of the source disk from which you are
+    #   creating the disk snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshot AWS API Documentation
+    #
+    class DiskSnapshot < Struct.new(
+      :name,
+      :arn,
+      :support_code,
+      :created_at,
+      :location,
+      :resource_type,
+      :size_in_gb,
+      :state,
+      :progress,
+      :from_disk_name,
+      :from_disk_arn)
       include Aws::Structure
     end
 
@@ -1144,6 +1536,138 @@ module Aws::Lightsail
     #
     class GetBundlesResult < Struct.new(
       :bundles,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDiskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_name
+    #   The name of the disk (e.g., `my-disk`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskRequest AWS API Documentation
+    #
+    class GetDiskRequest < Struct.new(
+      :disk_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disk
+    #   An object containing information about the disk.
+    #   @return [Types::Disk]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskResult AWS API Documentation
+    #
+    class GetDiskResult < Struct.new(
+      :disk)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDiskSnapshotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disk_snapshot_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] disk_snapshot_name
+    #   The name of the disk snapshot (e.g., `my-disk-snapshot`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotRequest AWS API Documentation
+    #
+    class GetDiskSnapshotRequest < Struct.new(
+      :disk_snapshot_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disk_snapshot
+    #   An object containing information about the disk snapshot.
+    #   @return [Types::DiskSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotResult AWS API Documentation
+    #
+    class GetDiskSnapshotResult < Struct.new(
+      :disk_snapshot)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDiskSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] page_token
+    #   A token used for advancing to the next page of results from your
+    #   GetDiskSnapshots request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotsRequest AWS API Documentation
+    #
+    class GetDiskSnapshotsRequest < Struct.new(
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disk_snapshots
+    #   An array of objects containing information about all block storage
+    #   disk snapshots.
+    #   @return [Array<Types::DiskSnapshot>]
+    #
+    # @!attribute [rw] next_page_token
+    #   A token used for advancing to the next page of results from your
+    #   GetDiskSnapshots request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotsResult AWS API Documentation
+    #
+    class GetDiskSnapshotsResult < Struct.new(
+      :disk_snapshots,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDisksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] page_token
+    #   A token used for advancing to the next page of results from your
+    #   GetDisks request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisksRequest AWS API Documentation
+    #
+    class GetDisksRequest < Struct.new(
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disks
+    #   An array of objects containing information about all block storage
+    #   disks.
+    #   @return [Array<Types::Disk>]
+    #
+    # @!attribute [rw] next_page_token
+    #   A token used for advancing to the next page of results from your
+    #   GetDisks request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisksResult AWS API Documentation
+    #
+    class GetDisksResult < Struct.new(
+      :disks,
       :next_page_token)
       include Aws::Structure
     end
@@ -1713,7 +2237,7 @@ module Aws::Lightsail
     # @!attribute [rw] include_availability_zones
     #   A Boolean value indicating whether to also include Availability
     #   Zones in your get regions request. Availability Zones are indicated
-    #   with a letter: e.g., `us-east-1a`.
+    #   with a letter: e.g., `us-east-2a`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegionsRequest AWS API Documentation
@@ -1843,12 +2367,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] name
     #   The name the user gave the instance (e.g.,
-    #   `Amazon_Linux-1GB-Virginia-1`).
+    #   `Amazon_Linux-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the instance (e.g.,
-    #   `arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE`).
+    #   `arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -2188,7 +2712,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the snapshot (e.g.,
-    #   `arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE`).
+    #   `arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -2220,6 +2744,11 @@ module Aws::Lightsail
     #   The progress of the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] from_attached_disks
+    #   An array of disk objects containing information about all block
+    #   storage disks.
+    #   @return [Array<Types::Disk>]
+    #
     # @!attribute [rw] from_instance_name
     #   The instance from which the snapshot was created.
     #   @return [String]
@@ -2227,7 +2756,7 @@ module Aws::Lightsail
     # @!attribute [rw] from_instance_arn
     #   The Amazon Resource Name (ARN) of the instance from which the
     #   snapshot was created (e.g.,
-    #   `arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE`).
+    #   `arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] from_blueprint_id
@@ -2256,6 +2785,7 @@ module Aws::Lightsail
       :resource_type,
       :state,
       :progress,
+      :from_attached_disks,
       :from_instance_name,
       :from_instance_arn,
       :from_blueprint_id,
@@ -2307,7 +2837,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the key pair (e.g.,
-    #   `arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE`).
+    #   `arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -2475,7 +3005,7 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] operation_details
-    #   Details about the operation (e.g., `Debian-1GB-Virginia-1`).
+    #   Details about the operation (e.g., `Debian-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] operation_type
@@ -2691,15 +3221,15 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name (e.g., `Virginia`).
+    #   The display name (e.g., `Ohio`).
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The region name (e.g., `us-east-1`).
+    #   The region name (e.g., `us-east-2`).
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones. Follows the format `us-east-1a`
+    #   The Availability Zones. Follows the format `us-east-2a`
     #   (case-sensitive).
     #   @return [Array<Types::AvailabilityZone>]
     #
@@ -2747,7 +3277,7 @@ module Aws::Lightsail
     # Describes the resource location.
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone. Follows the format `us-east-1a`
+    #   The Availability Zone. Follows the format `us-east-2a`
     #   (case-sensitive).
     #   @return [String]
     #
@@ -2796,12 +3326,12 @@ module Aws::Lightsail
     # Describes the static IP.
     #
     # @!attribute [rw] name
-    #   The name of the static IP (e.g., `StaticIP-Virginia-EXAMPLE`).
+    #   The name of the static IP (e.g., `StaticIP-Ohio-EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the static IP (e.g.,
-    #   `arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE`).
+    #   `arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -2830,7 +3360,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] attached_to
     #   The instance where the static IP is attached (e.g.,
-    #   `Amazon_Linux-1GB-Virginia-1`).
+    #   `Amazon_Linux-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] is_attached
@@ -2857,16 +3387,27 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] instance_name
     #   The name of the instance (a virtual private server) to stop.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   When set to `True`, forces a Lightsail instance that is stuck in a
+    #   `stopping` state to stop.
+    #
+    #   Only use the `force` parameter if your instance is stuck in the
+    #   `stopping` state. In any other state, your instance should stop
+    #   normally without adding this parameter to your API request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstanceRequest AWS API Documentation
     #
     class StopInstanceRequest < Struct.new(
-      :instance_name)
+      :instance_name,
+      :force)
       include Aws::Structure
     end
 

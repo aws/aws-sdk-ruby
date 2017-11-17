@@ -1165,6 +1165,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -1326,6 +1328,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #   resp.change_info.id #=> String
     #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
     #   resp.change_info.submitted_at #=> Time
@@ -1396,12 +1400,12 @@ module Aws::Route53
     #
     #   2.  Create a CloudWatch Logs resource policy, and give it the
     #       permissions that Amazon Route 53 needs to create log streams and
-    #       to to send query logs to log streams. For the value of
-    #       `Resource`, specify the ARN for the log group that you created
-    #       in the previous step. To use the same resource policy for all
-    #       the CloudWatch Logs log groups that you created for query
-    #       logging configurations, replace the hosted zone name with `*`,
-    #       for example:
+    #       to send query logs to log streams. For the value of `Resource`,
+    #       specify the ARN for the log group that you created in the
+    #       previous step. To use the same resource policy for all the
+    #       CloudWatch Logs log groups that you created for query logging
+    #       configurations, replace the hosted zone name with `*`, for
+    #       example:
     #
     #       `arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*`
     #
@@ -2113,6 +2117,64 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Gets the specified limit for the current account, for example, the
+    # maximum number of health checks that you can create using the account.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**\: The maximum number of health
+    #     checks that you can create using the current account.
+    #
+    #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**\: The maximum number of hosted
+    #     zones that you can create using the current account.
+    #
+    #   * **MAX\_REUSABLE\_DELEGATION\_SETS\_BY\_OWNER**\: The maximum number
+    #     of reusable delegation sets that you can create using the current
+    #     account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICIES\_BY\_OWNER**\: The maximum number of
+    #     traffic policies that you can create using the current account.
+    #
+    #   * **MAX\_TRAFFIC\_POLICY\_INSTANCES\_BY\_OWNER**\: The maximum number
+    #     of traffic policy instances that you can create using the current
+    #     account. (Traffic policy instances are referred to as traffic flow
+    #     policy records in the Amazon Route 53 console.)
+    #
+    # @return [Types::GetAccountLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLimitResponse#limit #limit} => Types::AccountLimit
+    #   * {Types::GetAccountLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_limit({
+    #     type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_HEALTH_CHECKS_BY_OWNER", "MAX_HOSTED_ZONES_BY_OWNER", "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER", "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER", "MAX_TRAFFIC_POLICIES_BY_OWNER"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimit AWS API Documentation
+    #
+    # @overload get_account_limit(params = {})
+    # @param [Hash] params ({})
+    def get_account_limit(params = {}, options = {})
+      req = build_request(:get_account_limit, params)
+      req.send_request(options)
+    end
+
     # Returns the current status of a change batch request. The status is
     # one of the following values:
     #
@@ -2288,6 +2350,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -2479,6 +2543,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #   resp.delegation_set.id #=> String
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
@@ -2513,6 +2579,56 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_hosted_zone_count(params = {}, options = {})
       req = build_request(:get_hosted_zone_count, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified limit for a specified hosted zone, for example, the
+    # maximum number of records that you can create in the hosted zone.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   The limit that you want to get. Valid values include the following:
+    #
+    #   * **MAX\_RRSETS\_BY\_ZONE**\: The maximum number of records that you
+    #     can create in the specified hosted zone.
+    #
+    #   * **MAX\_VPCS\_ASSOCIATED\_BY\_TYPE**\: The maximum number of Amazon
+    #     VPCs that you can associate with the specified private hosted zone.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that you want to get a limit for.
+    #
+    # @return [Types::GetHostedZoneLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHostedZoneLimitResponse#limit #limit} => Types::HostedZoneLimit
+    #   * {Types::GetHostedZoneLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_hosted_zone_limit({
+    #     type: "MAX_RRSETS_BY_ZONE", # required, accepts MAX_RRSETS_BY_ZONE, MAX_VPCS_ASSOCIATED_BY_ZONE
+    #     hosted_zone_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_RRSETS_BY_ZONE", "MAX_VPCS_ASSOCIATED_BY_ZONE"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimit AWS API Documentation
+    #
+    # @overload get_hosted_zone_limit(params = {})
+    # @param [Hash] params ({})
+    def get_hosted_zone_limit(params = {}, options = {})
+      req = build_request(:get_hosted_zone_limit, params)
       req.send_request(options)
     end
 
@@ -2586,6 +2702,52 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_reusable_delegation_set(params = {}, options = {})
       req = build_request(:get_reusable_delegation_set, params)
+      req.send_request(options)
+    end
+
+    # Gets the maximum number of hosted zones that you can associate with
+    # the specified reusable delegation set.
+    #
+    # For the default limit, see [Limits][1] in the *Amazon Route 53
+    # Developer Guide*. To request a higher limit, [open a case][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53
+    #
+    # @option params [required, String] :type
+    #   Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum
+    #   number of hosted zones that you can associate with the specified
+    #   reusable delegation set.
+    #
+    # @option params [required, String] :delegation_set_id
+    #   The ID of the delegation set that you want to get the limit for.
+    #
+    # @return [Types::GetReusableDelegationSetLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReusableDelegationSetLimitResponse#limit #limit} => Types::ReusableDelegationSetLimit
+    #   * {Types::GetReusableDelegationSetLimitResponse#count #count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reusable_delegation_set_limit({
+    #     type: "MAX_ZONES_BY_REUSABLE_DELEGATION_SET", # required, accepts MAX_ZONES_BY_REUSABLE_DELEGATION_SET
+    #     delegation_set_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit.type #=> String, one of "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
+    #   resp.limit.value #=> Integer
+    #   resp.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimit AWS API Documentation
+    #
+    # @overload get_reusable_delegation_set_limit(params = {})
+    # @param [Hash] params ({})
+    def get_reusable_delegation_set_limit(params = {}, options = {})
+      req = build_request(:get_reusable_delegation_set_limit, params)
       req.send_request(options)
     end
 
@@ -2832,6 +2994,8 @@ module Aws::Route53
     #   resp.health_checks #=> Array
     #   resp.health_checks[0].id #=> String
     #   resp.health_checks[0].caller_reference #=> String
+    #   resp.health_checks[0].linked_service.service_principal #=> String
+    #   resp.health_checks[0].linked_service.description #=> String
     #   resp.health_checks[0].health_check_config.ip_address #=> String
     #   resp.health_checks[0].health_check_config.port #=> Integer
     #   resp.health_checks[0].health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -2933,6 +3097,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
+    #   resp.hosted_zones[0].linked_service.service_principal #=> String
+    #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.marker #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_marker #=> String
@@ -3062,6 +3228,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].config.comment #=> String
     #   resp.hosted_zones[0].config.private_zone #=> Boolean
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
+    #   resp.hosted_zones[0].linked_service.service_principal #=> String
+    #   resp.hosted_zones[0].linked_service.description #=> String
     #   resp.dns_name #=> String
     #   resp.hosted_zone_id #=> String
     #   resp.is_truncated #=> Boolean
@@ -4318,9 +4486,9 @@ module Aws::Route53
     #     status, the default status for the health check is healthy.
     #
     # @option params [Array<String>] :reset_elements
-    #   A complex type that contains one `ResetElement` element for each
-    #   element that you want to reset to the default value. Valid values for
-    #   `ResetElement` include the following:
+    #   A complex type that contains one `ResettableElementName` element for
+    #   each element that you want to reset to the default value. Valid values
+    #   for `ResettableElementName` include the following:
     #
     #   * `ChildHealthChecks`\: Amazon Route 53 resets
     #     HealthCheckConfig$ChildHealthChecks to null.
@@ -4366,6 +4534,8 @@ module Aws::Route53
     #
     #   resp.health_check.id #=> String
     #   resp.health_check.caller_reference #=> String
+    #   resp.health_check.linked_service.service_principal #=> String
+    #   resp.health_check.linked_service.description #=> String
     #   resp.health_check.health_check_config.ip_address #=> String
     #   resp.health_check.health_check_config.port #=> Integer
     #   resp.health_check.health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC"
@@ -4435,6 +4605,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #   resp.hosted_zone.linked_service.service_principal #=> String
+    #   resp.hosted_zone.linked_service.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment AWS API Documentation
     #
@@ -4572,7 +4744,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

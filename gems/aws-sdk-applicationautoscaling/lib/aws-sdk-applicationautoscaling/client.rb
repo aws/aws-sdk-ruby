@@ -201,6 +201,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -229,6 +232,9 @@ module Aws::ApplicationAutoScaling
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
     #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -252,9 +258,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.delete_scaling_policy({
     #     policy_name: "ResourceIdMaxLen1600", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy AWS API Documentation
@@ -263,6 +269,99 @@ module Aws::ApplicationAutoScaling
     # @param [Hash] params ({})
     def delete_scaling_policy(params = {}, options = {})
       req = build_request(:delete_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Application Auto Scaling scheduled action.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_action({
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #     scheduled_action_name: "ResourceIdMaxLen1600", # required
+    #     resource_id: "ResourceIdMaxLen1600", # required
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledAction AWS API Documentation
+    #
+    # @overload delete_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_action(params = {}, options = {})
+      req = build_request(:delete_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -308,6 +407,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -337,6 +439,9 @@ module Aws::ApplicationAutoScaling
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
     #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -358,9 +463,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget AWS API Documentation
@@ -417,6 +522,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -446,6 +554,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -492,9 +603,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scalable_targets({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_ids: ["ResourceIdMaxLen1600"],
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -502,9 +613,9 @@ module Aws::ApplicationAutoScaling
     # @example Response structure
     #
     #   resp.scalable_targets #=> Array
-    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
+    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds"
     #   resp.scalable_targets[0].resource_id #=> String
-    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
+    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount"
     #   resp.scalable_targets[0].min_capacity #=> Integer
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
@@ -566,6 +677,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -594,6 +708,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -646,9 +763,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scaling_activities({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -657,9 +774,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp.scaling_activities #=> Array
     #   resp.scaling_activities[0].activity_id #=> String
-    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
+    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds"
     #   resp.scaling_activities[0].resource_id #=> String
-    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
+    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount"
     #   resp.scaling_activities[0].description #=> String
     #   resp.scaling_activities[0].cause #=> String
     #   resp.scaling_activities[0].start_time #=> Time
@@ -678,8 +795,7 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Provides descriptive information about the scaling policies in the
-    # specified namespace.
+    # Describes the scaling policies for the specified service namespace.
     #
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `PolicyNames` parameters.
@@ -726,6 +842,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -754,6 +873,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -818,9 +940,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.describe_scaling_policies({
     #     policy_names: ["ResourceIdMaxLen1600"],
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -830,9 +952,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies #=> Array
     #   resp.scaling_policies[0].policy_arn #=> String
     #   resp.scaling_policies[0].policy_name #=> String
-    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb"
+    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds"
     #   resp.scaling_policies[0].resource_id #=> String
-    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits"
+    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount"
     #   resp.scaling_policies[0].policy_type #=> String, one of "StepScaling", "TargetTrackingScaling"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.adjustment_type #=> String, one of "ChangeInCapacity", "PercentChangeInCapacity", "ExactCapacity"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.step_adjustments #=> Array
@@ -843,7 +965,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].step_scaling_policy_configuration.cooldown #=> Integer
     #   resp.scaling_policies[0].step_scaling_policy_configuration.metric_aggregation_type #=> String, one of "Average", "Minimum", "Maximum"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization", "ALBRequestCountPerTarget", "RDSReaderAverageCPUUtilization", "RDSReaderAverageDatabaseConnections", "EC2SpotFleetRequestAverageCPUUtilization", "EC2SpotFleetRequestAverageNetworkIn", "EC2SpotFleetRequestAverageNetworkOut"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.resource_label #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metric_name #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.namespace #=> String
@@ -867,6 +989,142 @@ module Aws::ApplicationAutoScaling
     # @param [Hash] params ({})
     def describe_scaling_policies(params = {}, options = {})
       req = build_request(:describe_scaling_policies, params)
+      req.send_request(options)
+    end
+
+    # Describes the scheduled actions for the specified service namespace.
+    #
+    # You can filter the results using the `ResourceId`,
+    # `ScalableDimension`, and `ScheduledActionNames` parameters.
+    #
+    # To create a scheduled action or update an existing one, see
+    # PutScheduledAction. If you are no longer using a scheduled action, you
+    # can delete it using DeleteScheduledAction.
+    #
+    # @option params [Array<String>] :scheduled_action_names
+    #   The names of the scheduled actions to describe.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier. If
+    #   you specify a scalable dimension, you must also specify a resource ID.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property. If you specify a scalable
+    #   dimension, you must also specify a resource ID.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of scheduled action results. This value can be
+    #   between 1 and 50. The default value is 50.
+    #
+    #   If this parameter is used, the operation returns up to `MaxResults`
+    #   results at a time, along with a `NextToken` value. To get the next set
+    #   of results, include the `NextToken` value in a subsequent call. If
+    #   this parameter is not used, the operation returns up to 50 results and
+    #   a `NextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::DescribeScheduledActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
+    #   * {Types::DescribeScheduledActionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduled_actions({
+    #     scheduled_action_names: ["ResourceIdMaxLen1600"],
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #     resource_id: "ResourceIdMaxLen1600",
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #     max_results: 1,
+    #     next_token: "XmlString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_actions #=> Array
+    #   resp.scheduled_actions[0].scheduled_action_name #=> String
+    #   resp.scheduled_actions[0].scheduled_action_arn #=> String
+    #   resp.scheduled_actions[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds"
+    #   resp.scheduled_actions[0].schedule #=> String
+    #   resp.scheduled_actions[0].resource_id #=> String
+    #   resp.scheduled_actions[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount"
+    #   resp.scheduled_actions[0].start_time #=> Time
+    #   resp.scheduled_actions[0].end_time #=> Time
+    #   resp.scheduled_actions[0].scalable_target_action.min_capacity #=> Integer
+    #   resp.scheduled_actions[0].scalable_target_action.max_capacity #=> Integer
+    #   resp.scheduled_actions[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScheduledActions AWS API Documentation
+    #
+    # @overload describe_scheduled_actions(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduled_actions(params = {}, options = {})
+      req = build_request(:describe_scheduled_actions, params)
       req.send_request(options)
     end
 
@@ -924,6 +1182,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -951,6 +1212,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [String] :policy_type
     #   The policy type. If you are creating a new policy, this parameter is
@@ -1038,9 +1302,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "PolicyName", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #     policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #     step_scaling_policy_configuration: {
     #       adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1058,7 +1322,7 @@ module Aws::ApplicationAutoScaling
     #     target_tracking_scaling_policy_configuration: {
     #       target_value: 1.0, # required
     #       predefined_metric_specification: {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
     #         resource_label: "ResourceLabel",
     #       },
     #       customized_metric_specification: {
@@ -1092,6 +1356,156 @@ module Aws::ApplicationAutoScaling
     # @param [Hash] params ({})
     def put_scaling_policy(params = {}, options = {})
       req = build_request(:put_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a scheduled action for an Application Auto Scaling
+    # scalable target.
+    #
+    # Each scalable target is identified by a service namespace, resource
+    # ID, and scalable dimension. A scheduled action applies to the scalable
+    # target identified by those three attributes. You cannot create a
+    # scheduled action without first registering a scalable target using
+    # RegisterScalableTarget.
+    #
+    # To update an action, specify its name and the parameters that you want
+    # to change. If you don't specify start and end times, the old values
+    # are deleted. Any other parameters that you don't specify are not
+    # changed by this update request.
+    #
+    # You can view the scheduled actions using DescribeScheduledActions. If
+    # you are no longer using a scheduled action, you can delete it using
+    # DeleteScheduledAction.
+    #
+    # @option params [required, String] :service_namespace
+    #   The namespace of the AWS service. For more information, see [AWS
+    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #
+    # @option params [String] :schedule
+    #   The schedule for this action. The following formats are supported:
+    #
+    #   * At expressions - `at(yyyy-mm-ddThh:mm:ss)`
+    #
+    #   * Rate expressions - `rate(value unit)`
+    #
+    #   * Cron expressions - `cron(fields)`
+    #
+    #   At expressions are useful for one-time schedules. Specify the time, in
+    #   UTC.
+    #
+    #   For rate expressions, *value* is a positive integer and *unit* is
+    #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
+    #
+    #   For more information about cron expressions, see [Cron][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Cron
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource associated with the scheduled action.
+    #   This string consists of the resource type and unique identifier.
+    #
+    #   * ECS service - The resource type is `service` and the unique
+    #     identifier is the cluster name and service name. Example:
+    #     `service/default/sample-webapp`.
+    #
+    #   * Spot fleet request - The resource type is `spot-fleet-request` and
+    #     the unique identifier is the Spot fleet request ID. Example:
+    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
+    #
+    #   * EMR cluster - The resource type is `instancegroup` and the unique
+    #     identifier is the cluster ID and instance group ID. Example:
+    #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
+    #   * DynamoDB table - The resource type is `table` and the unique
+    #     identifier is the resource ID. Example: `table/my-table`.
+    #
+    #   * DynamoDB global secondary index - The resource type is `index` and
+    #     the unique identifier is the resource ID. Example:
+    #     `table/my-table/index/my-table-index`.
+    #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    # @option params [String] :scalable_dimension
+    #   The scalable dimension. This string consists of the service namespace,
+    #   resource type, and scaling property.
+    #
+    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
+    #     service.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot fleet request.
+    #
+    #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
+    #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
+    #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:table:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB table.
+    #
+    #   * `dynamodb:index:ReadCapacityUnits` - The provisioned read capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
+    #     for a DynamoDB global secondary index.
+    #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The date and time for the scheduled action to start.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The date and time for the scheduled action to end.
+    #
+    # @option params [Types::ScalableTargetAction] :scalable_target_action
+    #   The new minimum and maximum capacity. You can set both values or just
+    #   one. During the scheduled time, if the current capacity is below the
+    #   minimum capacity, Application Auto Scaling scales out to the minimum
+    #   capacity. If the current capacity is above the maximum capacity,
+    #   Application Auto Scaling scales in to the maximum capacity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_scheduled_action({
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #     schedule: "ResourceIdMaxLen1600",
+    #     scheduled_action_name: "ScheduledActionName", # required
+    #     resource_id: "ResourceIdMaxLen1600", # required
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     scalable_target_action: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScheduledAction AWS API Documentation
+    #
+    # @overload put_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def put_scheduled_action(params = {}, options = {})
+      req = build_request(:put_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -1141,6 +1555,9 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `table/my-table/index/my-table-index`.
     #
+    #   * Aurora DB cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -1170,6 +1587,9 @@ module Aws::ApplicationAutoScaling
     #   * `dynamodb:index:WriteCapacityUnits` - The provisioned write capacity
     #     for a DynamoDB global secondary index.
     #
+    #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in an
+    #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
+    #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
     #   parameter is required if you are registering a scalable target and
@@ -1182,8 +1602,19 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [String] :role_arn
     #   The ARN of an IAM role that allows Application Auto Scaling to modify
-    #   the scalable target on your behalf. This parameter is required when
-    #   you register a scalable target and optional when you update one.
+    #   the scalable target on your behalf.
+    #
+    #   With Amazon RDS resources, permissions are granted using a
+    #   service-linked role. For more information, see [Service-Linked Roles
+    #   for Application Auto Scaling][1].
+    #
+    #   For resources that are not supported using a service-linked role, this
+    #   parameter is required when you register a scalable target and optional
+    #   when you update one.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/application-autoscaling-service-linked-roles.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1223,9 +1654,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
@@ -1253,7 +1684,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

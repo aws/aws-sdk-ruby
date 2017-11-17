@@ -937,6 +937,26 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableAWSServiceAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_principal: "ServicePrincipal", # required
+    #       }
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal name of the AWS service for which you want to
+    #   disable integration with your organization. This is typically in the
+    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessRequest AWS API Documentation
+    #
+    class DisableAWSServiceAccessRequest < Struct.new(
+      :service_principal)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisablePolicyTypeRequest
     #   data as a hash:
     #
@@ -978,6 +998,26 @@ module Aws::Organizations
     #
     class DisablePolicyTypeResponse < Struct.new(
       :root)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableAWSServiceAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_principal: "ServicePrincipal", # required
+    #       }
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal name of the AWS service for which you want to
+    #   enable integration with your organization. This is typically in the
+    #   form of a URL, such as ` service-abbreviation.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessRequest AWS API Documentation
+    #
+    class EnableAWSServiceAccessRequest < Struct.new(
+      :service_principal)
       include Aws::Structure
     end
 
@@ -1040,6 +1080,27 @@ module Aws::Organizations
     #
     class EnablePolicyTypeResponse < Struct.new(
       :root)
+      include Aws::Structure
+    end
+
+    # A structure that contains details of a service principal that is
+    # enabled to integrate with AWS Organizations.
+    #
+    # @!attribute [rw] service_principal
+    #   The name of the service principal. This is typically in the form of
+    #   a URL, such as: ` servicename.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_enabled
+    #   The date that the service principal was enabled for integration with
+    #   AWS Organizations.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal AWS API Documentation
+    #
+    class EnabledServicePrincipal < Struct.new(
+      :service_principal,
+      :date_enabled)
       include Aws::Structure
     end
 
@@ -1332,6 +1393,65 @@ module Aws::Organizations
     #
     class InviteAccountToOrganizationResponse < Struct.new(
       :handshake)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAWSServiceAccessForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Use this parameter if you receive a `NextToken` response in a
+    #   previous request that indicates that there is more output available.
+    #   Set it to the value of the previous call's `NextToken` response to
+    #   indicate where the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   (Optional) Use this to limit the number of results you want included
+    #   in the response. If you do not include this parameter, it defaults
+    #   to a value that is specific to the operation. If additional items
+    #   exist beyond the maximum you specify, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that
+    #   Organizations might return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest AWS API Documentation
+    #
+    class ListAWSServiceAccessForOrganizationRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_service_principals
+    #   A list of the service principals for the services that are enabled
+    #   to integrate with your organization. Each principal is a structure
+    #   that includes the name and the date that it was enabled for
+    #   integration with AWS Organizations.
+    #   @return [Array<Types::EnabledServicePrincipal>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, this value indicates that there is more output available
+    #   than is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse AWS API Documentation
+    #
+    class ListAWSServiceAccessForOrganizationResponse < Struct.new(
+      :enabled_service_principals,
+      :next_token)
       include Aws::Structure
     end
 

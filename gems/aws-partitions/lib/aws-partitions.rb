@@ -299,6 +299,7 @@ module Aws
             'Organizations' => 'organizations',
             'Pinpoint' => 'pinpoint',
             'Polly' => 'polly',
+            'Pricing' => 'api.pricing',
             'RDS' => 'rds',
             'Redshift' => 'redshift',
             'Rekognition' => 'rekognition',

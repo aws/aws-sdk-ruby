@@ -939,6 +939,29 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Deletes the server-side encryption configuration from the bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket containing the server-side encryption
+    #   configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_encryption({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryption AWS API Documentation
+    #
+    # @overload delete_bucket_encryption(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_encryption(params = {}, options = {})
+      req = build_request(:delete_bucket_encryption, params)
+      req.send_request(options)
+    end
+
     # Deletes an inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
@@ -1597,6 +1620,37 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Returns the server-side encryption configuration of a bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket from which the server-side encryption
+    #   configuration is retrieved.
+    #
+    # @return [Types::GetBucketEncryptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketEncryptionOutput#server_side_encryption_configuration #server_side_encryption_configuration} => Types::ServerSideEncryptionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_encryption({
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.server_side_encryption_configuration.rules #=> Array
+    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption AWS API Documentation
+    #
+    # @overload get_bucket_encryption(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_encryption(params = {}, options = {})
+      req = build_request(:get_bucket_encryption, params)
+      req.send_request(options)
+    end
+
     # Returns an inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
@@ -1622,14 +1676,15 @@ module Aws::S3
     #
     #   resp.inventory_configuration.destination.s3_bucket_destination.account_id #=> String
     #   resp.inventory_configuration.destination.s3_bucket_destination.bucket #=> String
-    #   resp.inventory_configuration.destination.s3_bucket_destination.format #=> String, one of "CSV"
+    #   resp.inventory_configuration.destination.s3_bucket_destination.format #=> String, one of "CSV", "ORC"
     #   resp.inventory_configuration.destination.s3_bucket_destination.prefix #=> String
+    #   resp.inventory_configuration.destination.s3_bucket_destination.encryption.ssekms.key_id #=> String
     #   resp.inventory_configuration.is_enabled #=> Boolean
     #   resp.inventory_configuration.filter.prefix #=> String
     #   resp.inventory_configuration.id #=> String
     #   resp.inventory_configuration.included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration.optional_fields #=> Array
-    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus"
+    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus"
     #   resp.inventory_configuration.schedule.frequency #=> String, one of "Daily", "Weekly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration AWS API Documentation
@@ -2141,8 +2196,12 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].id #=> String
     #   resp.replication_configuration.rules[0].prefix #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
+    #   resp.replication_configuration.rules[0].destination.account #=> String
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
+    #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication AWS API Documentation
     #
@@ -3133,14 +3192,15 @@ module Aws::S3
     #   resp.inventory_configuration_list #=> Array
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.account_id #=> String
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.bucket #=> String
-    #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.format #=> String, one of "CSV"
+    #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.format #=> String, one of "CSV", "ORC"
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.prefix #=> String
+    #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.encryption.ssekms.key_id #=> String
     #   resp.inventory_configuration_list[0].is_enabled #=> Boolean
     #   resp.inventory_configuration_list[0].filter.prefix #=> String
     #   resp.inventory_configuration_list[0].id #=> String
     #   resp.inventory_configuration_list[0].included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration_list[0].optional_fields #=> Array
-    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus"
+    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus"
     #   resp.inventory_configuration_list[0].schedule.frequency #=> String, one of "Daily", "Weekly"
     #   resp.is_truncated #=> Boolean
     #   resp.next_continuation_token #=> String
@@ -4234,6 +4294,49 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Creates a new server-side encryption configuration (or replaces an
+    # existing one, if present).
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket for which the server-side encryption
+    #   configuration is set.
+    #
+    # @option params [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the server-side encryption
+    #   configuration.
+    #
+    # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
+    #   Container for server-side encryption configuration rules. Currently S3
+    #   supports one rule only.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_encryption({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     server_side_encryption_configuration: { # required
+    #       rules: [ # required
+    #         {
+    #           apply_server_side_encryption_by_default: {
+    #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #             kms_master_key_id: "SSEKMSKeyId",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryption AWS API Documentation
+    #
+    # @overload put_bucket_encryption(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_encryption(params = {}, options = {})
+      req = build_request(:put_bucket_encryption, params)
+      req.send_request(options)
+    end
+
     # Adds an inventory configuration (identified by the inventory ID) from
     # the bucket.
     #
@@ -4259,8 +4362,15 @@ module Aws::S3
     #         s3_bucket_destination: { # required
     #           account_id: "AccountId",
     #           bucket: "BucketName", # required
-    #           format: "CSV", # required, accepts CSV
+    #           format: "CSV", # required, accepts CSV, ORC
     #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
     #         },
     #       },
     #       is_enabled: false, # required
@@ -4269,7 +4379,7 @@ module Aws::S3
     #       },
     #       id: "InventoryId", # required
     #       included_object_versions: "All", # required, accepts All, Current
-    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus
     #       schedule: { # required
     #         frequency: "Daily", # required, accepts Daily, Weekly
     #       },
@@ -4713,6 +4823,10 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #
+    # @option params [Boolean] :confirm_remove_self_bucket_access
+    #   Set this parameter to true to confirm that you want to remove your
+    #   permissions to change this bucket policy in the future.
+    #
     # @option params [required, String] :policy
     #   The bucket policy as a JSON document.
     #
@@ -4733,6 +4847,7 @@ module Aws::S3
     #   resp = client.put_bucket_policy({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
+    #     confirm_remove_self_bucket_access: false,
     #     policy: "Policy", # required
     #   })
     #
@@ -4792,9 +4907,21 @@ module Aws::S3
     #           id: "ID",
     #           prefix: "Prefix", # required
     #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           source_selection_criteria: {
+    #             sse_kms_encrypted_objects: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
     #           destination: { # required
     #             bucket: "BucketName", # required
+    #             account: "AccountId",
     #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #             access_control_translation: {
+    #               owner: "Destination", # required, accepts Destination
+    #             },
+    #             encryption_configuration: {
+    #               replica_kms_key_id: "ReplicaKmsKeyID",
+    #             },
     #           },
     #         },
     #       ],
@@ -5823,7 +5950,7 @@ module Aws::S3
     #
     #   resp = client.upload_part_copy({
     #     bucket: "examplebucket", 
-    #     copy_source: "bucketname/sourceobjectkey", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
     #     key: "examplelargeobject", 
     #     part_number: 1, 
     #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
@@ -5892,7 +6019,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

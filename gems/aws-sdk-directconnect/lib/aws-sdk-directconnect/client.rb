@@ -386,6 +386,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
     #   * {Types::VirtualInterface#customer_address #customer_address} => String
@@ -393,6 +394,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
     #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
     #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #
@@ -422,6 +424,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
@@ -429,6 +432,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.customer_router_config #=> String
     #   resp.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_id #=> String
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
@@ -492,6 +496,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
     #   * {Types::VirtualInterface#customer_address #customer_address} => String
@@ -499,6 +504,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
     #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
     #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #
@@ -533,6 +539,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
@@ -540,6 +547,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.customer_router_config #=> String
     #   resp.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_id #=> String
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
@@ -720,9 +728,11 @@ module Aws::DirectConnect
     # associated with a LAG; hosted connections must be migrated along with
     # their virtual interfaces using AssociateHostedConnection.
     #
-    # Hosted virtual interfaces (an interface for which the owner of the
-    # connection is not the owner of physical connection) can only be
-    # reassociated by the owner of the physical connection.
+    # In order to reassociate a virtual interface to a new connection or
+    # LAG, the requester must own either the virtual interface itself or the
+    # connection to which the virtual interface is currently associated.
+    # Additionally, the requester must own the connection or LAG to which
+    # the virtual interface will be newly associated.
     #
     # @option params [required, String] :virtual_interface_id
     #   The ID of the virtual interface.
@@ -749,6 +759,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
     #   * {Types::VirtualInterface#customer_address #customer_address} => String
@@ -756,6 +767,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
     #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
     #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #
@@ -776,6 +788,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
@@ -783,6 +796,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.customer_router_config #=> String
     #   resp.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_id #=> String
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
@@ -846,7 +860,8 @@ module Aws::DirectConnect
     #
     # After the virtual interface owner calls this function, the virtual
     # interface will be created and attached to the given virtual private
-    # gateway, and will be available for handling traffic.
+    # gateway or direct connect gateway, and will be available for handling
+    # traffic.
     #
     # @option params [required, String] :virtual_interface_id
     #   The ID of the virtual interface.
@@ -855,7 +870,7 @@ module Aws::DirectConnect
     #
     #   Default: None
     #
-    # @option params [required, String] :virtual_gateway_id
+    # @option params [String] :virtual_gateway_id
     #   ID of the virtual private gateway that will be attached to the virtual
     #   interface.
     #
@@ -868,6 +883,15 @@ module Aws::DirectConnect
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
     #
+    # @option params [String] :direct_connect_gateway_id
+    #   ID of the direct connect gateway that will be attached to the virtual
+    #   interface.
+    #
+    #   A direct connect gateway can be managed via the AWS Direct Connect
+    #   console or the CreateDirectConnectGateway action.
+    #
+    #   Default: None
+    #
     # @return [Types::ConfirmPrivateVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfirmPrivateVirtualInterfaceResponse#virtual_interface_state #virtual_interface_state} => String
@@ -876,7 +900,8 @@ module Aws::DirectConnect
     #
     #   resp = client.confirm_private_virtual_interface({
     #     virtual_interface_id: "VirtualInterfaceId", # required
-    #     virtual_gateway_id: "VirtualGatewayId", # required
+    #     virtual_gateway_id: "VirtualGatewayId",
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
     #   })
     #
     # @example Response structure
@@ -984,6 +1009,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
@@ -991,6 +1017,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.virtual_gateway_id #=> String
+    #   resp.virtual_interface.direct_connect_gateway_id #=> String
     #   resp.virtual_interface.route_filter_prefixes #=> Array
     #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interface.bgp_peers #=> Array
@@ -1022,6 +1049,8 @@ module Aws::DirectConnect
     # can establish connections with AWS Direct Connect locations in
     # multiple regions, but a connection in one region does not provide
     # connectivity to other regions.
+    #
+    # To find the locations for your region, use DescribeLocations.
     #
     # You can automatically add the new connection to a link aggregation
     # group (LAG) by specifying a LAG ID in the request. This ensures that
@@ -1100,6 +1129,109 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def create_connection(params = {}, options = {})
       req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
+    # Creates a new direct connect gateway. A direct connect gateway is an
+    # intermediate object that enables you to connect a set of virtual
+    # interfaces and virtual private gateways. direct connect gateways are
+    # global and visible in any AWS region after they are created. The
+    # virtual interfaces and virtual private gateways that are connected
+    # through a direct connect gateway can be in different regions. This
+    # enables you to connect to a VPC in any region, regardless of the
+    # region in which the virtual interfaces are located, and pass traffic
+    # between them.
+    #
+    # @option params [required, String] :direct_connect_gateway_name
+    #   The name of the direct connect gateway.
+    #
+    #   Example: "My direct connect gateway"
+    #
+    #   Default: None
+    #
+    # @option params [Integer] :amazon_side_asn
+    #   The autonomous system number (ASN) for Border Gateway Protocol (BGP)
+    #   to be configured on the Amazon side of the connection. The ASN must be
+    #   in the private range of 64,512 to 65,534 or 4,200,000,000 to
+    #   4,294,967,294
+    #
+    #   Example: 65200
+    #
+    #   Default: 64512
+    #
+    # @return [Types::CreateDirectConnectGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDirectConnectGatewayResult#direct_connect_gateway #direct_connect_gateway} => Types::DirectConnectGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_direct_connect_gateway({
+    #     direct_connect_gateway_name: "DirectConnectGatewayName", # required
+    #     amazon_side_asn: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_name #=> String
+    #   resp.direct_connect_gateway.amazon_side_asn #=> Integer
+    #   resp.direct_connect_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.direct_connect_gateway.state_change_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGateway AWS API Documentation
+    #
+    # @overload create_direct_connect_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_direct_connect_gateway(params = {}, options = {})
+      req = build_request(:create_direct_connect_gateway, params)
+      req.send_request(options)
+    end
+
+    # Creates an association between a direct connect gateway and a virtual
+    # private gateway (VGW). The VGW must be attached to a VPC and must not
+    # be associated with another direct connect gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #
+    # @return [Types::CreateDirectConnectGatewayAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDirectConnectGatewayAssociationResult#direct_connect_gateway_association #direct_connect_gateway_association} => Types::DirectConnectGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_direct_connect_gateway_association({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #     virtual_gateway_id: "VirtualGatewayId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociation AWS API Documentation
+    #
+    # @overload create_direct_connect_gateway_association(params = {})
+    # @param [Hash] params ({})
+    def create_direct_connect_gateway_association(params = {}, options = {})
+      req = build_request(:create_direct_connect_gateway_association, params)
       req.send_request(options)
     end
 
@@ -1353,6 +1485,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
     #   * {Types::VirtualInterface#customer_address #customer_address} => String
@@ -1360,6 +1493,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
     #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
     #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #
@@ -1375,7 +1509,8 @@ module Aws::DirectConnect
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
     #       address_family: "ipv4", # accepts ipv4, ipv6
-    #       virtual_gateway_id: "VirtualGatewayId", # required
+    #       virtual_gateway_id: "VirtualGatewayId",
+    #       direct_connect_gateway_id: "DirectConnectGatewayId",
     #     },
     #   })
     #
@@ -1389,6 +1524,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
@@ -1396,6 +1532,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.customer_router_config #=> String
     #   resp.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_id #=> String
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
@@ -1450,6 +1587,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
     #   * {Types::VirtualInterface#customer_address #customer_address} => String
@@ -1457,6 +1595,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
     #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
     #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#direct_connect_gateway_id #direct_connect_gateway_id} => String
     #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
     #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
     #
@@ -1490,6 +1629,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
     #   resp.customer_address #=> String
@@ -1497,6 +1637,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.customer_router_config #=> String
     #   resp.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_id #=> String
     #   resp.route_filter_prefixes #=> Array
     #   resp.route_filter_prefixes[0].cidr #=> String
     #   resp.bgp_peers #=> Array
@@ -1562,6 +1703,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
     #   resp.virtual_interface.customer_address #=> String
@@ -1569,6 +1711,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.virtual_interface.customer_router_config #=> String
     #   resp.virtual_interface.virtual_gateway_id #=> String
+    #   resp.virtual_interface.direct_connect_gateway_id #=> String
     #   resp.virtual_interface.route_filter_prefixes #=> Array
     #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interface.bgp_peers #=> Array
@@ -1647,6 +1790,92 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def delete_connection(params = {}, options = {})
       req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes a direct connect gateway. You must first delete all virtual
+    # interfaces that are attached to the direct connect gateway and
+    # disassociate all virtual private gateways that are associated with the
+    # direct connect gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @return [Types::DeleteDirectConnectGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDirectConnectGatewayResult#direct_connect_gateway #direct_connect_gateway} => Types::DirectConnectGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_direct_connect_gateway({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_name #=> String
+    #   resp.direct_connect_gateway.amazon_side_asn #=> Integer
+    #   resp.direct_connect_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.direct_connect_gateway.state_change_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGateway AWS API Documentation
+    #
+    # @overload delete_direct_connect_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_direct_connect_gateway(params = {}, options = {})
+      req = build_request(:delete_direct_connect_gateway, params)
+      req.send_request(options)
+    end
+
+    # Deletes the association between a direct connect gateway and a virtual
+    # private gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #
+    # @return [Types::DeleteDirectConnectGatewayAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDirectConnectGatewayAssociationResult#direct_connect_gateway_association #direct_connect_gateway_association} => Types::DirectConnectGatewayAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_direct_connect_gateway_association({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #     virtual_gateway_id: "VirtualGatewayId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_association.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_region #=> String
+    #   resp.direct_connect_gateway_association.virtual_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_association.association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.direct_connect_gateway_association.state_change_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociation AWS API Documentation
+    #
+    # @overload delete_direct_connect_gateway_association(params = {})
+    # @param [Hash] params ({})
+    def delete_direct_connect_gateway_association(params = {}, options = {})
+      req = build_request(:delete_direct_connect_gateway_association, params)
       req.send_request(options)
     end
 
@@ -1943,6 +2172,208 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def describe_connections_on_interconnect(params = {}, options = {})
       req = build_request(:describe_connections_on_interconnect, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all direct connect gateway and virtual private
+    # gateway (VGW) associations. Either a direct connect gateway ID or a
+    # VGW ID must be provided in the request. If a direct connect gateway ID
+    # is provided, the response returns all VGWs associated with the direct
+    # connect gateway. If a VGW ID is provided, the response returns all
+    # direct connect gateways associated with the VGW. If both are provided,
+    # the response only returns the association that matches both the direct
+    # connect gateway and the VGW.
+    #
+    # @option params [String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @option params [String] :virtual_gateway_id
+    #   The ID of the virtual private gateway.
+    #
+    #   Example: "vgw-abc123ef"
+    #
+    #   Default: None
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of direct connect gateway associations to return
+    #   per page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #
+    # @option params [String] :next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #
+    # @return [Types::DescribeDirectConnectGatewayAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectConnectGatewayAssociationsResult#direct_connect_gateway_associations #direct_connect_gateway_associations} => Array&lt;Types::DirectConnectGatewayAssociation&gt;
+    #   * {Types::DescribeDirectConnectGatewayAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_direct_connect_gateway_associations({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
+    #     virtual_gateway_id: "VirtualGatewayId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_associations #=> Array
+    #   resp.direct_connect_gateway_associations[0].direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_associations[0].virtual_gateway_id #=> String
+    #   resp.direct_connect_gateway_associations[0].virtual_gateway_region #=> String
+    #   resp.direct_connect_gateway_associations[0].virtual_gateway_owner_account #=> String
+    #   resp.direct_connect_gateway_associations[0].association_state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.direct_connect_gateway_associations[0].state_change_error #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociations AWS API Documentation
+    #
+    # @overload describe_direct_connect_gateway_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_direct_connect_gateway_associations(params = {}, options = {})
+      req = build_request(:describe_direct_connect_gateway_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all direct connect gateway and virtual interface
+    # (VIF) attachments. Either a direct connect gateway ID or a VIF ID must
+    # be provided in the request. If a direct connect gateway ID is
+    # provided, the response returns all VIFs attached to the direct connect
+    # gateway. If a VIF ID is provided, the response returns all direct
+    # connect gateways attached to the VIF. If both are provided, the
+    # response only returns the attachment that matches both the direct
+    # connect gateway and the VIF.
+    #
+    # @option params [String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @option params [String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    #   Example: "dxvif-abc123ef"
+    #
+    #   Default: None
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of direct connect gateway attachments to return per
+    #   page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #
+    # @option params [String] :next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #
+    # @return [Types::DescribeDirectConnectGatewayAttachmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectConnectGatewayAttachmentsResult#direct_connect_gateway_attachments #direct_connect_gateway_attachments} => Array&lt;Types::DirectConnectGatewayAttachment&gt;
+    #   * {Types::DescribeDirectConnectGatewayAttachmentsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_direct_connect_gateway_attachments({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway_attachments #=> Array
+    #   resp.direct_connect_gateway_attachments[0].direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway_attachments[0].virtual_interface_id #=> String
+    #   resp.direct_connect_gateway_attachments[0].virtual_interface_region #=> String
+    #   resp.direct_connect_gateway_attachments[0].virtual_interface_owner_account #=> String
+    #   resp.direct_connect_gateway_attachments[0].attachment_state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.direct_connect_gateway_attachments[0].state_change_error #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachments AWS API Documentation
+    #
+    # @overload describe_direct_connect_gateway_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_direct_connect_gateway_attachments(params = {}, options = {})
+      req = build_request(:describe_direct_connect_gateway_attachments, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of direct connect gateways in your account. Deleted
+    # direct connect gateways are not returned. You can provide a direct
+    # connect gateway ID in the request to return information about the
+    # specific direct connect gateway only. Otherwise, if a direct connect
+    # gateway ID is not provided, information about all of your direct
+    # connect gateways is returned.
+    #
+    # @option params [String] :direct_connect_gateway_id
+    #   The ID of the direct connect gateway.
+    #
+    #   Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+    #
+    #   Default: None
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of direct connect gateways to return per page.
+    #
+    #   Example: 15
+    #
+    #   Default: None
+    #
+    # @option params [String] :next_token
+    #   The token provided in the previous describe result to retrieve the
+    #   next page of the result.
+    #
+    #   Default: None
+    #
+    # @return [Types::DescribeDirectConnectGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectConnectGatewaysResult#direct_connect_gateways #direct_connect_gateways} => Array&lt;Types::DirectConnectGateway&gt;
+    #   * {Types::DescribeDirectConnectGatewaysResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_direct_connect_gateways({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateways #=> Array
+    #   resp.direct_connect_gateways[0].direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateways[0].direct_connect_gateway_name #=> String
+    #   resp.direct_connect_gateways[0].amazon_side_asn #=> Integer
+    #   resp.direct_connect_gateways[0].owner_account #=> String
+    #   resp.direct_connect_gateways[0].direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.direct_connect_gateways[0].state_change_error #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGateways AWS API Documentation
+    #
+    # @overload describe_direct_connect_gateways(params = {})
+    # @param [Hash] params ({})
+    def describe_direct_connect_gateways(params = {}, options = {})
+      req = build_request(:describe_direct_connect_gateways, params)
       req.send_request(options)
     end
 
@@ -2351,6 +2782,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].virtual_interface_name #=> String
     #   resp.virtual_interfaces[0].vlan #=> Integer
     #   resp.virtual_interfaces[0].asn #=> Integer
+    #   resp.virtual_interfaces[0].amazon_side_asn #=> Integer
     #   resp.virtual_interfaces[0].auth_key #=> String
     #   resp.virtual_interfaces[0].amazon_address #=> String
     #   resp.virtual_interfaces[0].customer_address #=> String
@@ -2358,6 +2790,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #   resp.virtual_interfaces[0].customer_router_config #=> String
     #   resp.virtual_interfaces[0].virtual_gateway_id #=> String
+    #   resp.virtual_interfaces[0].direct_connect_gateway_id #=> String
     #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array
     #   resp.virtual_interfaces[0].route_filter_prefixes[0].cidr #=> String
     #   resp.virtual_interfaces[0].bgp_peers #=> Array
@@ -2626,7 +3059,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

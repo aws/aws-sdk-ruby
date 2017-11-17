@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2017-11-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.35.0 (2017-11-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.34.0 (2017-11-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.33.0 (2017-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.32.0 (2017-11-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.31.0 (2017-11-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Pricing`.
+
+1.30.0 (2017-11-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.29.0 (2017-11-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.28.0 (2017-11-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.27.0 (2017-10-26)
 ------------------
 

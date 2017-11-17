@@ -183,10 +183,14 @@ module Aws::S3
     #
     #   bucket_policy.put({
     #     content_md5: "ContentMD5",
+    #     confirm_remove_self_bucket_access: false,
     #     policy: "Policy", # required
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
+    # @option options [Boolean] :confirm_remove_self_bucket_access
+    #   Set this parameter to true to confirm that you want to remove your
+    #   permissions to change this bucket policy in the future.
     # @option options [required, String] :policy
     #   The bucket policy as a JSON document.
     # @return [EmptyStructure]

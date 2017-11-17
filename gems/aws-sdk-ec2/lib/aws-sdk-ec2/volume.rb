@@ -260,8 +260,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :device
-    #   The device name to expose to the instance (for example, `/dev/sdh` or
-    #   `xvdh`).
+    #   The device name (for example, `/dev/sdh` or `xvdh`).
     # @option options [required, String] :instance_id
     #   The ID of the instance.
     # @option options [Boolean] :dry_run

@@ -11,6 +11,8 @@ module Aws::Route53
 
     include Seahorse::Model
 
+    AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
+    AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
     AlarmIdentifier = Shapes::StructureShape.new(name: 'AlarmIdentifier')
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AliasHealthEnabled = Shapes::BooleanShape.new(name: 'AliasHealthEnabled')
@@ -98,6 +100,8 @@ module Aws::Route53
     GeoLocationDetailsList = Shapes::ListShape.new(name: 'GeoLocationDetailsList')
     GeoLocationSubdivisionCode = Shapes::StringShape.new(name: 'GeoLocationSubdivisionCode')
     GeoLocationSubdivisionName = Shapes::StringShape.new(name: 'GeoLocationSubdivisionName')
+    GetAccountLimitRequest = Shapes::StructureShape.new(name: 'GetAccountLimitRequest')
+    GetAccountLimitResponse = Shapes::StructureShape.new(name: 'GetAccountLimitResponse')
     GetChangeRequest = Shapes::StructureShape.new(name: 'GetChangeRequest')
     GetChangeResponse = Shapes::StructureShape.new(name: 'GetChangeResponse')
     GetCheckerIpRangesRequest = Shapes::StructureShape.new(name: 'GetCheckerIpRangesRequest')
@@ -114,10 +118,14 @@ module Aws::Route53
     GetHealthCheckStatusResponse = Shapes::StructureShape.new(name: 'GetHealthCheckStatusResponse')
     GetHostedZoneCountRequest = Shapes::StructureShape.new(name: 'GetHostedZoneCountRequest')
     GetHostedZoneCountResponse = Shapes::StructureShape.new(name: 'GetHostedZoneCountResponse')
+    GetHostedZoneLimitRequest = Shapes::StructureShape.new(name: 'GetHostedZoneLimitRequest')
+    GetHostedZoneLimitResponse = Shapes::StructureShape.new(name: 'GetHostedZoneLimitResponse')
     GetHostedZoneRequest = Shapes::StructureShape.new(name: 'GetHostedZoneRequest')
     GetHostedZoneResponse = Shapes::StructureShape.new(name: 'GetHostedZoneResponse')
     GetQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'GetQueryLoggingConfigRequest')
     GetQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'GetQueryLoggingConfigResponse')
+    GetReusableDelegationSetLimitRequest = Shapes::StructureShape.new(name: 'GetReusableDelegationSetLimitRequest')
+    GetReusableDelegationSetLimitResponse = Shapes::StructureShape.new(name: 'GetReusableDelegationSetLimitResponse')
     GetReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'GetReusableDelegationSetRequest')
     GetReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'GetReusableDelegationSetResponse')
     GetTrafficPolicyInstanceCountRequest = Shapes::StructureShape.new(name: 'GetTrafficPolicyInstanceCountRequest')
@@ -146,8 +154,11 @@ module Aws::Route53
     HostedZoneAlreadyExists = Shapes::StructureShape.new(name: 'HostedZoneAlreadyExists')
     HostedZoneConfig = Shapes::StructureShape.new(name: 'HostedZoneConfig')
     HostedZoneCount = Shapes::IntegerShape.new(name: 'HostedZoneCount')
+    HostedZoneLimit = Shapes::StructureShape.new(name: 'HostedZoneLimit')
+    HostedZoneLimitType = Shapes::StringShape.new(name: 'HostedZoneLimitType')
     HostedZoneNotEmpty = Shapes::StructureShape.new(name: 'HostedZoneNotEmpty')
     HostedZoneNotFound = Shapes::StructureShape.new(name: 'HostedZoneNotFound')
+    HostedZoneNotPrivate = Shapes::StructureShape.new(name: 'HostedZoneNotPrivate')
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
     HostedZones = Shapes::ListShape.new(name: 'HostedZones')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
@@ -165,7 +176,9 @@ module Aws::Route53
     Inverted = Shapes::BooleanShape.new(name: 'Inverted')
     IsPrivateZone = Shapes::BooleanShape.new(name: 'IsPrivateZone')
     LastVPCAssociation = Shapes::StructureShape.new(name: 'LastVPCAssociation')
+    LimitValue = Shapes::IntegerShape.new(name: 'LimitValue')
     LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
+    LinkedService = Shapes::StructureShape.new(name: 'LinkedService')
     ListGeoLocationsRequest = Shapes::StructureShape.new(name: 'ListGeoLocationsRequest')
     ListGeoLocationsResponse = Shapes::StructureShape.new(name: 'ListGeoLocationsResponse')
     ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
@@ -247,7 +260,10 @@ module Aws::Route53
     ResourceTagSet = Shapes::StructureShape.new(name: 'ResourceTagSet')
     ResourceTagSetList = Shapes::ListShape.new(name: 'ResourceTagSetList')
     ResourceURI = Shapes::StringShape.new(name: 'ResourceURI')
+    ReusableDelegationSetLimit = Shapes::StructureShape.new(name: 'ReusableDelegationSetLimit')
+    ReusableDelegationSetLimitType = Shapes::StringShape.new(name: 'ReusableDelegationSetLimitType')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReport = Shapes::StructureShape.new(name: 'StatusReport')
@@ -298,12 +314,17 @@ module Aws::Route53
     UpdateTrafficPolicyCommentResponse = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyCommentResponse')
     UpdateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceRequest')
     UpdateTrafficPolicyInstanceResponse = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceResponse')
+    UsageCount = Shapes::IntegerShape.new(name: 'UsageCount')
     VPC = Shapes::StructureShape.new(name: 'VPC')
     VPCAssociationAuthorizationNotFound = Shapes::StructureShape.new(name: 'VPCAssociationAuthorizationNotFound')
     VPCAssociationNotFound = Shapes::StructureShape.new(name: 'VPCAssociationNotFound')
     VPCId = Shapes::StringShape.new(name: 'VPCId')
     VPCRegion = Shapes::StringShape.new(name: 'VPCRegion')
     VPCs = Shapes::ListShape.new(name: 'VPCs')
+
+    AccountLimit.add_member(:type, Shapes::ShapeRef.new(shape: AccountLimitType, required: true, location_name: "Type"))
+    AccountLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
+    AccountLimit.struct_class = Types::AccountLimit
 
     AlarmIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: CloudWatchRegion, required: true, location_name: "Region"))
     AlarmIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "Name"))
@@ -520,6 +541,13 @@ module Aws::Route53
 
     GeoLocationDetailsList.member = Shapes::ShapeRef.new(shape: GeoLocationDetails, location_name: "GeoLocationDetails")
 
+    GetAccountLimitRequest.add_member(:type, Shapes::ShapeRef.new(shape: AccountLimitType, required: true, location: "uri", location_name: "Type"))
+    GetAccountLimitRequest.struct_class = Types::GetAccountLimitRequest
+
+    GetAccountLimitResponse.add_member(:limit, Shapes::ShapeRef.new(shape: AccountLimit, required: true, location_name: "Limit"))
+    GetAccountLimitResponse.add_member(:count, Shapes::ShapeRef.new(shape: UsageCount, required: true, location_name: "Count"))
+    GetAccountLimitResponse.struct_class = Types::GetAccountLimitResponse
+
     GetChangeRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     GetChangeRequest.struct_class = Types::GetChangeRequest
 
@@ -567,6 +595,14 @@ module Aws::Route53
     GetHostedZoneCountResponse.add_member(:hosted_zone_count, Shapes::ShapeRef.new(shape: HostedZoneCount, required: true, location_name: "HostedZoneCount"))
     GetHostedZoneCountResponse.struct_class = Types::GetHostedZoneCountResponse
 
+    GetHostedZoneLimitRequest.add_member(:type, Shapes::ShapeRef.new(shape: HostedZoneLimitType, required: true, location: "uri", location_name: "Type"))
+    GetHostedZoneLimitRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    GetHostedZoneLimitRequest.struct_class = Types::GetHostedZoneLimitRequest
+
+    GetHostedZoneLimitResponse.add_member(:limit, Shapes::ShapeRef.new(shape: HostedZoneLimit, required: true, location_name: "Limit"))
+    GetHostedZoneLimitResponse.add_member(:count, Shapes::ShapeRef.new(shape: UsageCount, required: true, location_name: "Count"))
+    GetHostedZoneLimitResponse.struct_class = Types::GetHostedZoneLimitResponse
+
     GetHostedZoneRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     GetHostedZoneRequest.struct_class = Types::GetHostedZoneRequest
 
@@ -580,6 +616,14 @@ module Aws::Route53
 
     GetQueryLoggingConfigResponse.add_member(:query_logging_config, Shapes::ShapeRef.new(shape: QueryLoggingConfig, required: true, location_name: "QueryLoggingConfig"))
     GetQueryLoggingConfigResponse.struct_class = Types::GetQueryLoggingConfigResponse
+
+    GetReusableDelegationSetLimitRequest.add_member(:type, Shapes::ShapeRef.new(shape: ReusableDelegationSetLimitType, required: true, location: "uri", location_name: "Type"))
+    GetReusableDelegationSetLimitRequest.add_member(:delegation_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    GetReusableDelegationSetLimitRequest.struct_class = Types::GetReusableDelegationSetLimitRequest
+
+    GetReusableDelegationSetLimitResponse.add_member(:limit, Shapes::ShapeRef.new(shape: ReusableDelegationSetLimit, required: true, location_name: "Limit"))
+    GetReusableDelegationSetLimitResponse.add_member(:count, Shapes::ShapeRef.new(shape: UsageCount, required: true, location_name: "Count"))
+    GetReusableDelegationSetLimitResponse.struct_class = Types::GetReusableDelegationSetLimitResponse
 
     GetReusableDelegationSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     GetReusableDelegationSetRequest.struct_class = Types::GetReusableDelegationSetRequest
@@ -607,6 +651,7 @@ module Aws::Route53
 
     HealthCheck.add_member(:id, Shapes::ShapeRef.new(shape: HealthCheckId, required: true, location_name: "Id"))
     HealthCheck.add_member(:caller_reference, Shapes::ShapeRef.new(shape: HealthCheckNonce, required: true, location_name: "CallerReference"))
+    HealthCheck.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
     HealthCheck.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, required: true, location_name: "HealthCheckConfig"))
     HealthCheck.add_member(:health_check_version, Shapes::ShapeRef.new(shape: HealthCheckVersion, required: true, location_name: "HealthCheckVersion"))
     HealthCheck.add_member(:cloud_watch_alarm_configuration, Shapes::ShapeRef.new(shape: CloudWatchAlarmConfiguration, location_name: "CloudWatchAlarmConfiguration"))
@@ -646,13 +691,22 @@ module Aws::Route53
     HostedZone.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
     HostedZone.add_member(:config, Shapes::ShapeRef.new(shape: HostedZoneConfig, location_name: "Config"))
     HostedZone.add_member(:resource_record_set_count, Shapes::ShapeRef.new(shape: HostedZoneRRSetCount, location_name: "ResourceRecordSetCount"))
+    HostedZone.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
     HostedZone.struct_class = Types::HostedZone
 
     HostedZoneConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
     HostedZoneConfig.add_member(:private_zone, Shapes::ShapeRef.new(shape: IsPrivateZone, location_name: "PrivateZone"))
     HostedZoneConfig.struct_class = Types::HostedZoneConfig
 
+    HostedZoneLimit.add_member(:type, Shapes::ShapeRef.new(shape: HostedZoneLimitType, required: true, location_name: "Type"))
+    HostedZoneLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
+    HostedZoneLimit.struct_class = Types::HostedZoneLimit
+
     HostedZones.member = Shapes::ShapeRef.new(shape: HostedZone, location_name: "HostedZone")
+
+    LinkedService.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    LinkedService.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    LinkedService.struct_class = Types::LinkedService
 
     ListGeoLocationsRequest.add_member(:start_continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location: "querystring", location_name: "startcontinentcode"))
     ListGeoLocationsRequest.add_member(:start_country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location: "querystring", location_name: "startcountrycode"))
@@ -867,6 +921,10 @@ module Aws::Route53
     ResourceTagSet.struct_class = Types::ResourceTagSet
 
     ResourceTagSetList.member = Shapes::ShapeRef.new(shape: ResourceTagSet, location_name: "ResourceTagSet")
+
+    ReusableDelegationSetLimit.add_member(:type, Shapes::ShapeRef.new(shape: ReusableDelegationSetLimitType, required: true, location_name: "Type"))
+    ReusableDelegationSetLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
+    ReusableDelegationSetLimit.struct_class = Types::ReusableDelegationSetLimit
 
     StatusReport.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     StatusReport.add_member(:checked_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CheckedTime"))
@@ -1303,6 +1361,15 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:get_account_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountLimit"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/accountlimit/{Type}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
       api.add_operation(:get_change, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetChange"
         o.http_method = "GET"
@@ -1389,6 +1456,17 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:get_hosted_zone_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHostedZoneLimit"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzonelimit/{Id}/{Type}"
+        o.input = Shapes::ShapeRef.new(shape: GetHostedZoneLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetHostedZoneLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: HostedZoneNotPrivate)
+      end)
+
       api.add_operation(:get_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetQueryLoggingConfig"
         o.http_method = "GET"
@@ -1408,6 +1486,16 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDelegationSet)
         o.errors << Shapes::ShapeRef.new(shape: DelegationSetNotReusable)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:get_reusable_delegation_set_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReusableDelegationSetLimit"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/reusabledelegationsetlimit/{Id}/{Type}"
+        o.input = Shapes::ShapeRef.new(shape: GetReusableDelegationSetLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetReusableDelegationSetLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDelegationSet)
       end)
 
       api.add_operation(:get_traffic_policy, Seahorse::Model::Operation.new.tap do |o|

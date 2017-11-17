@@ -8,6 +8,64 @@
 module Aws::ECS
   module Types
 
+    # An object representing a container instance or task attachment.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the attachment, such as an `ElasticNetworkInterface`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the attachment. Valid values are `PRECREATED`,
+    #   `CREATED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `DETACHED`, and
+    #   `DELETED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Details of the attachment. For Elastic Network Interfaces, this
+    #   includes the network interface ID, the MAC address, the subnet ID,
+    #   and the private IPv4 address.
+    #   @return [Array<Types::KeyValuePair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attachment AWS API Documentation
+    #
+    class Attachment < Struct.new(
+      :id,
+      :type,
+      :status,
+      :details)
+      include Aws::Structure
+    end
+
+    # An object representing a change in state for a task attachment.
+    #
+    # @note When making an API call, you may pass AttachmentStateChange
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_arn: "String", # required
+    #         status: "String", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttachmentStateChange AWS API Documentation
+    #
+    class AttachmentStateChange < Struct.new(
+      :attachment_arn,
+      :status)
+      include Aws::Structure
+    end
+
     # An attribute is a name-value pair associated with an Amazon ECS
     # object. Attributes enable you to extend the Amazon ECS data model by
     # adding custom metadata to your resources. For more information, see
@@ -56,6 +114,35 @@ module Aws::ECS
       :value,
       :target_type,
       :target_id)
+      include Aws::Structure
+    end
+
+    # An object representing the subnets and security groups for a task or
+    # service.
+    #
+    # @note When making an API call, you may pass AwsVpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #       }
+    #
+    # @!attribute [rw] subnets
+    #   The subnets associated with the task or service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups associated with the task or service. If you do
+    #   not specify a security group, the default security group for the VPC
+    #   is used.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration AWS API Documentation
+    #
+    class AwsVpcConfiguration < Struct.new(
+      :subnets,
+      :security_groups)
       include Aws::Structure
     end
 
@@ -145,6 +232,10 @@ module Aws::ECS
     #   The network bindings associated with the container.
     #   @return [Array<Types::NetworkBinding>]
     #
+    # @!attribute [rw] network_interfaces
+    #   The network interfaces associated with the container.
+    #   @return [Array<Types::NetworkInterface>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -154,7 +245,8 @@ module Aws::ECS
       :last_status,
       :exit_code,
       :reason,
-      :network_bindings)
+      :network_bindings,
+      :network_interfaces)
       include Aws::Structure
     end
 
@@ -205,6 +297,14 @@ module Aws::ECS
     #             add: ["String"],
     #             drop: ["String"],
     #           },
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["read"], # accepts read, write, mknod
+    #             },
+    #           ],
+    #           init_process_enabled: false,
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -250,8 +350,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -284,8 +384,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -335,8 +435,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://aws.amazon.com/ec2/instance-types/
     #   [5]: https://docs.docker.com/engine/reference/run/#cpu-share-constraint
@@ -362,8 +462,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -395,8 +495,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Integer]
     #
@@ -421,8 +521,8 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [4]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -447,8 +547,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::PortMapping>]
     #
@@ -486,8 +586,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#entrypoint
     #   @return [Array<String>]
@@ -501,8 +601,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
     #   @return [Array<String>]
@@ -517,8 +617,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
     #
@@ -529,8 +629,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::MountPoint>]
     #
@@ -541,8 +641,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::VolumeFrom>]
     #
@@ -558,8 +658,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -570,8 +670,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -583,8 +683,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
@@ -595,8 +695,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   @return [Boolean]
     #
     # @!attribute [rw] privileged
@@ -608,8 +708,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
@@ -621,8 +721,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   @return [Boolean]
     #
     # @!attribute [rw] dns_servers
@@ -633,8 +733,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -646,8 +746,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -659,8 +759,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::HostEntry>]
     #
@@ -681,8 +781,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
@@ -699,8 +799,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Hash<String,String>]
     #
@@ -716,8 +816,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::Ulimit>]
     #
@@ -760,8 +860,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.docker.com/engine/admin/logging/overview/
     #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -896,6 +996,11 @@ module Aws::ECS
     #   The Unix timestamp for when the container instance was registered.
     #   @return [Time]
     #
+    # @!attribute [rw] attachments
+    #   The Elastic Network Interfaces associated with the container
+    #   instance.
+    #   @return [Array<Types::Attachment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
     #
     class ContainerInstance < Struct.new(
@@ -911,7 +1016,8 @@ module Aws::ECS
       :pending_tasks_count,
       :agent_update_status,
       :attributes,
-      :registered_at)
+      :registered_at,
+      :attachments)
       include Aws::Structure
     end
 
@@ -984,6 +1090,58 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing a change in state for a container.
+    #
+    # @note When making an API call, you may pass ContainerStateChange
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "String",
+    #         exit_code: 1,
+    #         network_bindings: [
+    #           {
+    #             bind_ip: "String",
+    #             container_port: 1,
+    #             host_port: 1,
+    #             protocol: "tcp", # accepts tcp, udp
+    #           },
+    #         ],
+    #         reason: "String",
+    #         status: "String",
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] exit_code
+    #   The exit code for the container, if the state change is a result of
+    #   the container exiting.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_bindings
+    #   Any network bindings associated with the container.
+    #   @return [Array<Types::NetworkBinding>]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the state change.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerStateChange AWS API Documentation
+    #
+    class ContainerStateChange < Struct.new(
+      :container_name,
+      :exit_code,
+      :network_bindings,
+      :reason,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateClusterRequest
     #   data as a hash:
     #
@@ -1050,6 +1208,12 @@ module Aws::ECS
     #             field: "String",
     #           },
     #         ],
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -1109,21 +1273,31 @@ module Aws::ECS
     # @!attribute [rw] role
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
     #   allows Amazon ECS to make calls to your load balancer on your
-    #   behalf. This parameter is required if you are using a load balancer
-    #   with your service. If you specify the `role` parameter, you must
+    #   behalf. This parameter is only permitted if you are using a load
+    #   balancer with your service and your task definition does not use the
+    #   `awsvpc` network mode. If you specify the `role` parameter, you must
     #   also specify a load balancer object with the `loadBalancers`
     #   parameter.
+    #
+    #   If your account has already created the Amazon ECS service-linked
+    #   role, that role is used by default for your service unless you
+    #   specify a role here. The service-linked role is required if your
+    #   task definition uses the `awsvpc` network mode, in which case you
+    #   should not specify a role here. For more information, see [Using
+    #   Service-Linked Roles for Amazon ECS][1] in the *Amazon EC2 Container
+    #   Service Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
     #   role name with the path. For example, if a role with the name `bar`
     #   has a path of `/foo/` then you would specify `/foo/bar` as the role
-    #   name. For more information, see [Friendly Names and Paths][1] in the
+    #   name. For more information, see [Friendly Names and Paths][2] in the
     #   *IAM User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing-service-linked-roles.html
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
     #   @return [String]
     #
     # @!attribute [rw] deployment_configuration
@@ -1144,6 +1318,19 @@ module Aws::ECS
     #   can specify a maximum of 5 strategy rules per service.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the service. This parameter is
+    #   required for task definitions that use the `awsvpc` network mode to
+    #   receive their own Elastic Network Interface, and it is not supported
+    #   for other network modes. For more information, see [Task
+    #   Networking][1] in the *Amazon EC2 Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -1156,7 +1343,8 @@ module Aws::ECS
       :role,
       :deployment_configuration,
       :placement_constraints,
-      :placement_strategy)
+      :placement_strategy,
+      :network_configuration)
       include Aws::Structure
     end
 
@@ -1329,6 +1517,12 @@ module Aws::ECS
     #   The Unix timestamp for when the service was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] network_configuration
+    #   The VPC subnet and security group configuration for tasks that
+    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   networking mode.
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -1339,7 +1533,8 @@ module Aws::ECS
       :pending_count,
       :running_count,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :network_configuration)
       include Aws::Structure
     end
 
@@ -1668,6 +1863,40 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing a container instance host device.
+    #
+    # @note When making an API call, you may pass Device
+    #   data as a hash:
+    #
+    #       {
+    #         host_path: "String", # required
+    #         container_path: "String",
+    #         permissions: ["read"], # accepts read, write, mknod
+    #       }
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container will be able to `read`, `write`, and
+    #   `mknod` the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Device AWS API Documentation
+    #
+    class Device < Struct.new(
+      :host_path,
+      :container_path,
+      :permissions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DiscoverPollEndpointRequest
     #   data as a hash:
     #
@@ -1814,10 +2043,20 @@ module Aws::ECS
     #   `CapAdd` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-add` option to [docker run][3].
     #
+    #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
+    #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
+    #   "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
+    #   "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" |
+    #   "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" |
+    #   "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+    #   "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT"
+    #   | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" |
+    #   "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"`
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -1827,10 +2066,20 @@ module Aws::ECS
     #   `CapDrop` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-drop` option to [docker run][3].
     #
+    #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
+    #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
+    #   "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
+    #   "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" |
+    #   "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" |
+    #   "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+    #   "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT"
+    #   | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" |
+    #   "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"`
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<String>]
     #
@@ -1881,6 +2130,14 @@ module Aws::ECS
     #           add: ["String"],
     #           drop: ["String"],
     #         },
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["read"], # accepts read, write, mknod
+    #           },
+    #         ],
+    #         init_process_enabled: false,
     #       }
     #
     # @!attribute [rw] capabilities
@@ -1888,10 +2145,38 @@ module Aws::ECS
     #   dropped from the default configuration provided by Docker.
     #   @return [Types::KernelCapabilities]
     #
+    # @!attribute [rw] devices
+    #   Any host devices to expose to the container. This parameter maps to
+    #   `Devices` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--device` option to [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Device>]
+    #
+    # @!attribute [rw] init_process_enabled
+    #   Run an `init` process inside the container that forwards signals and
+    #   reaps processes. This parameter maps to the `--init` option to
+    #   [docker run][1]. This parameter requires version 1.25 of the Docker
+    #   Remote API or greater on your container instance. To check the
+    #   Docker Remote API version on your container instance, log into your
+    #   container instance and run the following command: `sudo docker
+    #   version | grep "Server API version"`
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
-      :capabilities)
+      :capabilities,
+      :devices,
+      :init_process_enabled)
       include Aws::Structure
     end
 
@@ -2171,14 +2456,14 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of container instance results returned by
-    #   `ListServices` in paginated output. When this parameter is used,
-    #   `ListServices` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListServices`
-    #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 10. If this parameter is not used, then `ListServices`
-    #   returns up to 10 results and a `nextToken` value if applicable.
+    #   The maximum number of service results returned by `ListServices` in
+    #   paginated output. When this parameter is used, `ListServices` only
+    #   returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListServices` request with
+    #   the returned `nextToken` value. This value can be between 1 and 10.
+    #   If this parameter is not used, then `ListServices` returns up to 10
+    #   results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
@@ -2690,6 +2975,54 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing the network configuration for a task or
+    # service.
+    #
+    # @note When making an API call, you may pass NetworkConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         awsvpc_configuration: {
+    #           subnets: ["String"], # required
+    #           security_groups: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] awsvpc_configuration
+    #   The VPC subnets and security groups associated with a task.
+    #   @return [Types::AwsVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration AWS API Documentation
+    #
+    class NetworkConfiguration < Struct.new(
+      :awsvpc_configuration)
+      include Aws::Structure
+    end
+
+    # An object representing the Elastic Network Interface for tasks that
+    # use the `awsvpc` network mode.
+    #
+    # @!attribute [rw] attachment_id
+    #   The attachment ID for the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ipv_4_address
+    #   The private IPv4 address for the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_address
+    #   The private IPv6 address for the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :attachment_id,
+      :private_ipv_4_address,
+      :ipv6_address)
+      include Aws::Structure
+    end
+
     # An object representing a constraint on task placement. For more
     # information, see [Task Placement Constraints][1] in the *Amazon EC2
     # Container Service Developer Guide*.
@@ -3000,7 +3333,7 @@ module Aws::ECS
     #       {
     #         family: "String", # required
     #         task_role_arn: "String",
-    #         network_mode: "bridge", # accepts bridge, host, none
+    #         network_mode: "bridge", # accepts bridge, host, awsvpc, none
     #         container_definitions: [ # required
     #           {
     #             name: "String",
@@ -3043,6 +3376,14 @@ module Aws::ECS
     #                 add: ["String"],
     #                 drop: ["String"],
     #               },
+    #               devices: [
+    #                 {
+    #                   host_path: "String", # required
+    #                   container_path: "String",
+    #                   permissions: ["read"], # accepts read, write, mknod
+    #                 },
+    #               ],
+    #               init_process_enabled: false,
     #             },
     #             hostname: "String",
     #             user: "String",
@@ -3115,25 +3456,37 @@ module Aws::ECS
     #
     # @!attribute [rw] network_mode
     #   The Docker networking mode to use for the containers in the task.
-    #   The valid values are `none`, `bridge`, and `host`.
-    #
-    #   The default Docker network mode is `bridge`. If the network mode is
-    #   set to `none`, you cannot specify port mappings in your container
+    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`. The
+    #   default Docker network mode is `bridge`. If the network mode is set
+    #   to `none`, you cannot specify port mappings in your container
     #   definitions, and the task's containers do not have external
-    #   connectivity. The `host` network mode offers the highest networking
-    #   performance for containers because they use the host network stack
-    #   instead of the virtualized network stack provided by the `bridge`
-    #   mode; however, exposed container ports are mapped directly to the
-    #   corresponding host port, so you cannot take advantage of dynamic
-    #   host port mappings or run multiple instantiations of the same task
-    #   on a single container instance if port mappings are used.
+    #   connectivity. The `host` and `awsvpc` network modes offer the
+    #   highest networking performance for containers because they use the
+    #   EC2 network stack instead of the virtualized network stack provided
+    #   by the `bridge` mode.
     #
-    #   For more information, see [Network settings][1] in the *Docker run
+    #   With the `host` and `awsvpc` network modes, exposed container ports
+    #   are mapped directly to the corresponding host port (for the `host`
+    #   network mode) or the attached ENI port (for the `awsvpc` network
+    #   mode), so you cannot take advantage of dynamic host port mappings.
+    #
+    #   If the network mode is `awsvpc`, the task is allocated an Elastic
+    #   Network Interface, and you must specify a NetworkConfiguration when
+    #   you create a service or run a task with the task definition. For
+    #   more information, see [Task Networking][1] in the *Amazon EC2
+    #   Container Service Developer Guide*.
+    #
+    #   If the network mode is `host`, you can not run multiple
+    #   instantiations of the same task on a single container instance when
+    #   port mappings are used.
+    #
+    #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
     # @!attribute [rw] container_definitions
@@ -3271,6 +3624,12 @@ module Aws::ECS
     #             field: "String",
     #           },
     #         ],
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -3336,6 +3695,18 @@ module Aws::ECS
     #   a maximum of 5 strategy rules per task.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the task. This parameter is required
+    #   for task definitions that use the `awsvpc` network mode to receive
+    #   their own Elastic Network Interface, and it is not supported for
+    #   other network modes. For more information, see [Task Networking][1]
+    #   in the *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
     #
     class RunTaskRequest < Struct.new(
@@ -3346,7 +3717,8 @@ module Aws::ECS
       :started_by,
       :group,
       :placement_constraints,
-      :placement_strategy)
+      :placement_strategy,
+      :network_configuration)
       include Aws::Structure
     end
 
@@ -3457,6 +3829,12 @@ module Aws::ECS
     #   placed.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @!attribute [rw] network_configuration
+    #   The VPC subnet and security group configuration for tasks that
+    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   networking mode.
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -3475,7 +3853,8 @@ module Aws::ECS
       :events,
       :created_at,
       :placement_constraints,
-      :placement_strategy)
+      :placement_strategy,
+      :network_configuration)
       include Aws::Structure
     end
 
@@ -3529,6 +3908,12 @@ module Aws::ECS
     #         container_instances: ["String"], # required
     #         started_by: "String",
     #         group: "String",
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -3584,6 +3969,12 @@ module Aws::ECS
     #   family:my-family-name).
     #   @return [String]
     #
+    # @!attribute [rw] network_configuration
+    #   The VPC subnet and security group configuration for tasks that
+    #   receive their own Elastic Network Interface by using the `awsvpc`
+    #   networking mode.
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskRequest AWS API Documentation
     #
     class StartTaskRequest < Struct.new(
@@ -3592,7 +3983,8 @@ module Aws::ECS
       :overrides,
       :container_instances,
       :started_by,
-      :group)
+      :group,
+      :network_configuration)
       include Aws::Structure
     end
 
@@ -3744,6 +4136,28 @@ module Aws::ECS
     #         task: "String",
     #         status: "String",
     #         reason: "String",
+    #         containers: [
+    #           {
+    #             container_name: "String",
+    #             exit_code: 1,
+    #             network_bindings: [
+    #               {
+    #                 bind_ip: "String",
+    #                 container_port: 1,
+    #                 host_port: 1,
+    #                 protocol: "tcp", # accepts tcp, udp
+    #               },
+    #             ],
+    #             reason: "String",
+    #             status: "String",
+    #           },
+    #         ],
+    #         attachments: [
+    #           {
+    #             attachment_arn: "String", # required
+    #             status: "String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cluster
@@ -3764,13 +4178,23 @@ module Aws::ECS
     #   The reason for the state change request.
     #   @return [String]
     #
+    # @!attribute [rw] containers
+    #   Any containers associated with the state change request.
+    #   @return [Array<Types::ContainerStateChange>]
+    #
+    # @!attribute [rw] attachments
+    #   Any attachments associated with the state change request.
+    #   @return [Array<Types::AttachmentStateChange>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeRequest AWS API Documentation
     #
     class SubmitTaskStateChangeRequest < Struct.new(
       :cluster,
       :task,
       :status,
-      :reason)
+      :reason,
+      :containers,
+      :attachments)
       include Aws::Structure
     end
 
@@ -3860,6 +4284,11 @@ module Aws::ECS
     #   The name of the task group associated with the task.
     #   @return [String]
     #
+    # @!attribute [rw] attachments
+    #   The Elastic Network Adapter associated with the task if the task
+    #   uses the `awsvpc` network mode.
+    #   @return [Array<Types::Attachment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -3877,7 +4306,8 @@ module Aws::ECS
       :created_at,
       :started_at,
       :stopped_at,
-      :group)
+      :group,
+      :attachments)
       include Aws::Structure
     end
 
@@ -3911,13 +4341,15 @@ module Aws::ECS
     #
     # @!attribute [rw] network_mode
     #   The Docker networking mode to use for the containers in the task.
-    #   The valid values are `none`, `bridge`, and `host`.
+    #   The valid values are `none`, `bridge`, `awsvpc`, and `host`.
     #
     #   If the network mode is `none`, the containers do not have external
-    #   connectivity. The default Docker network mode is `bridge`. The
-    #   `host` network mode offers the highest networking performance for
-    #   containers because it uses the host network stack instead of the
-    #   virtualized network stack provided by the `bridge` mode.
+    #   connectivity. The default Docker network mode is `bridge`. If the
+    #   network mode is `awsvpc`, the task is allocated an Elastic Network
+    #   Interface. The `host` and `awsvpc` network modes offer the highest
+    #   networking performance for containers because they use the EC2
+    #   network stack instead of the virtualized network stack provided by
+    #   the `bridge` mode.
     #
     #   For more information, see [Network settings][1] in the *Docker run
     #   reference*.
@@ -4191,6 +4623,12 @@ module Aws::ECS
     #           maximum_percent: 1,
     #           minimum_healthy_percent: 1,
     #         },
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -4223,6 +4661,27 @@ module Aws::ECS
     #   tasks.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the service. This parameter is
+    #   required for task definitions that use the `awsvpc` network mode to
+    #   receive their own Elastic Network Interface, and it is not supported
+    #   for other network modes. For more information, see [Task
+    #   Networking][1] in the *Amazon EC2 Container Service Developer
+    #   Guide*.
+    #
+    #   <note markdown="1"> Updating a service to add a subnet to a list of existing subnets
+    #   does not trigger a service deployment. For example, if your network
+    #   configuration change is to keep the existing subnets and simply add
+    #   another subnet to the network configuration, this does not trigger a
+    #   new service deployment.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   @return [Types::NetworkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -4230,7 +4689,8 @@ module Aws::ECS
       :service,
       :desired_count,
       :task_definition,
-      :deployment_configuration)
+      :deployment_configuration,
+      :network_configuration)
       include Aws::Structure
     end
 

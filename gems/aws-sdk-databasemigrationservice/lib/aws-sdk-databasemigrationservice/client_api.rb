@@ -73,6 +73,8 @@ module Aws::DatabaseMigrationService
     DescribeReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReplicationInstancesResponse')
     DescribeReplicationSubnetGroupsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationSubnetGroupsMessage')
     DescribeReplicationSubnetGroupsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationSubnetGroupsResponse')
+    DescribeReplicationTaskAssessmentResultsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentResultsMessage')
+    DescribeReplicationTaskAssessmentResultsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTaskAssessmentResultsResponse')
     DescribeReplicationTasksMessage = Shapes::StructureShape.new(name: 'DescribeReplicationTasksMessage')
     DescribeReplicationTasksResponse = Shapes::StructureShape.new(name: 'DescribeReplicationTasksResponse')
     DescribeSchemasMessage = Shapes::StructureShape.new(name: 'DescribeSchemasMessage')
@@ -140,6 +142,8 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroupDoesNotCoverEnoughAZs = Shapes::StructureShape.new(name: 'ReplicationSubnetGroupDoesNotCoverEnoughAZs')
     ReplicationSubnetGroups = Shapes::ListShape.new(name: 'ReplicationSubnetGroups')
     ReplicationTask = Shapes::StructureShape.new(name: 'ReplicationTask')
+    ReplicationTaskAssessmentResult = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentResult')
+    ReplicationTaskAssessmentResultList = Shapes::ListShape.new(name: 'ReplicationTaskAssessmentResultList')
     ReplicationTaskList = Shapes::ListShape.new(name: 'ReplicationTaskList')
     ReplicationTaskStats = Shapes::StructureShape.new(name: 'ReplicationTaskStats')
     ResourceAlreadyExistsFault = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsFault')
@@ -152,6 +156,8 @@ module Aws::DatabaseMigrationService
     SecretString = Shapes::StringShape.new(name: 'SecretString')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartReplicationTaskAssessmentMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentMessage')
+    StartReplicationTaskAssessmentResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentResponse')
     StartReplicationTaskMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskMessage')
     StartReplicationTaskResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskResponse')
     StartReplicationTaskTypeValue = Shapes::StringShape.new(name: 'StartReplicationTaskTypeValue')
@@ -184,7 +190,7 @@ module Aws::DatabaseMigrationService
     AccountQuota.add_member(:max, Shapes::ShapeRef.new(shape: Long, location_name: "Max"))
     AccountQuota.struct_class = Types::AccountQuota
 
-    AccountQuotaList.member = Shapes::ShapeRef.new(shape: AccountQuota, location_name: "AccountQuota")
+    AccountQuotaList.member = Shapes::ShapeRef.new(shape: AccountQuota)
 
     AddTagsToResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     AddTagsToResourceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -207,7 +213,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:key_length, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "KeyLength"))
     Certificate.struct_class = Types::Certificate
 
-    CertificateList.member = Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate")
+    CertificateList.member = Shapes::ShapeRef.new(shape: Certificate)
 
     Connection.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceArn"))
     Connection.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
@@ -217,7 +223,7 @@ module Aws::DatabaseMigrationService
     Connection.add_member(:replication_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceIdentifier"))
     Connection.struct_class = Types::Connection
 
-    ConnectionList.member = Shapes::ShapeRef.new(shape: Connection, location_name: "Connection")
+    ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
     CreateEndpointMessage.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointIdentifier"))
     CreateEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, required: true, location_name: "EndpointType"))
@@ -433,6 +439,16 @@ module Aws::DatabaseMigrationService
     DescribeReplicationSubnetGroupsResponse.add_member(:replication_subnet_groups, Shapes::ShapeRef.new(shape: ReplicationSubnetGroups, location_name: "ReplicationSubnetGroups"))
     DescribeReplicationSubnetGroupsResponse.struct_class = Types::DescribeReplicationSubnetGroupsResponse
 
+    DescribeReplicationTaskAssessmentResultsMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    DescribeReplicationTaskAssessmentResultsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeReplicationTaskAssessmentResultsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskAssessmentResultsMessage.struct_class = Types::DescribeReplicationTaskAssessmentResultsMessage
+
+    DescribeReplicationTaskAssessmentResultsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationTaskAssessmentResultsResponse.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    DescribeReplicationTaskAssessmentResultsResponse.add_member(:replication_task_assessment_results, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentResultList, location_name: "ReplicationTaskAssessmentResults"))
+    DescribeReplicationTaskAssessmentResultsResponse.struct_class = Types::DescribeReplicationTaskAssessmentResultsResponse
+
     DescribeReplicationTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeReplicationTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReplicationTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -484,7 +500,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     Endpoint.struct_class = Types::Endpoint
 
-    EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint")
+    EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
@@ -493,15 +509,15 @@ module Aws::DatabaseMigrationService
     Event.add_member(:date, Shapes::ShapeRef.new(shape: TStamp, location_name: "Date"))
     Event.struct_class = Types::Event
 
-    EventCategoriesList.member = Shapes::ShapeRef.new(shape: String, location_name: "EventCategory")
+    EventCategoriesList.member = Shapes::ShapeRef.new(shape: String)
 
     EventCategoryGroup.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
     EventCategoryGroup.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
     EventCategoryGroup.struct_class = Types::EventCategoryGroup
 
-    EventCategoryGroupList.member = Shapes::ShapeRef.new(shape: EventCategoryGroup, location_name: "EventCategoryGroup")
+    EventCategoryGroupList.member = Shapes::ShapeRef.new(shape: EventCategoryGroup)
 
-    EventList.member = Shapes::ShapeRef.new(shape: Event, location_name: "Event")
+    EventList.member = Shapes::ShapeRef.new(shape: Event)
 
     EventSubscription.add_member(:customer_aws_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomerAwsId"))
     EventSubscription.add_member(:cust_subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "CustSubscriptionId"))
@@ -514,15 +530,15 @@ module Aws::DatabaseMigrationService
     EventSubscription.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     EventSubscription.struct_class = Types::EventSubscription
 
-    EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription")
+    EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
     Filter.struct_class = Types::Filter
 
-    FilterList.member = Shapes::ShapeRef.new(shape: Filter, location_name: "Filter")
+    FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
-    FilterValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "Value")
+    FilterValueList.member = Shapes::ShapeRef.new(shape: String)
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
@@ -628,7 +644,7 @@ module Aws::DatabaseMigrationService
     OrderableReplicationInstance.add_member(:included_allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "IncludedAllocatedStorage"))
     OrderableReplicationInstance.struct_class = Types::OrderableReplicationInstance
 
-    OrderableReplicationInstanceList.member = Shapes::ShapeRef.new(shape: OrderableReplicationInstance, location_name: "OrderableReplicationInstance")
+    OrderableReplicationInstanceList.member = Shapes::ShapeRef.new(shape: OrderableReplicationInstance)
 
     RefreshSchemasMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     RefreshSchemasMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
@@ -680,7 +696,7 @@ module Aws::DatabaseMigrationService
     ReplicationInstance.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SecondaryAvailabilityZone"))
     ReplicationInstance.struct_class = Types::ReplicationInstance
 
-    ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance")
+    ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance)
 
     ReplicationInstancePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -699,7 +715,7 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ReplicationSubnetGroup.struct_class = Types::ReplicationSubnetGroup
 
-    ReplicationSubnetGroups.member = Shapes::ShapeRef.new(shape: ReplicationSubnetGroup, location_name: "ReplicationSubnetGroup")
+    ReplicationSubnetGroups.member = Shapes::ShapeRef.new(shape: ReplicationSubnetGroup)
 
     ReplicationTask.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
     ReplicationTask.add_member(:source_endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceEndpointArn"))
@@ -717,7 +733,18 @@ module Aws::DatabaseMigrationService
     ReplicationTask.add_member(:replication_task_stats, Shapes::ShapeRef.new(shape: ReplicationTaskStats, location_name: "ReplicationTaskStats"))
     ReplicationTask.struct_class = Types::ReplicationTask
 
-    ReplicationTaskList.member = Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask")
+    ReplicationTaskAssessmentResult.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
+    ReplicationTaskAssessmentResult.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    ReplicationTaskAssessmentResult.add_member(:replication_task_last_assessment_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationTaskLastAssessmentDate"))
+    ReplicationTaskAssessmentResult.add_member(:assessment_status, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentStatus"))
+    ReplicationTaskAssessmentResult.add_member(:assessment_results_file, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentResultsFile"))
+    ReplicationTaskAssessmentResult.add_member(:assessment_results, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentResults"))
+    ReplicationTaskAssessmentResult.add_member(:s3_object_url, Shapes::ShapeRef.new(shape: String, location_name: "S3ObjectUrl"))
+    ReplicationTaskAssessmentResult.struct_class = Types::ReplicationTaskAssessmentResult
+
+    ReplicationTaskAssessmentResultList.member = Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentResult)
+
+    ReplicationTaskList.member = Shapes::ShapeRef.new(shape: ReplicationTask)
 
     ReplicationTaskStats.add_member(:full_load_progress_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "FullLoadProgressPercent"))
     ReplicationTaskStats.add_member(:elapsed_time_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ElapsedTimeMillis"))
@@ -738,7 +765,13 @@ module Aws::DatabaseMigrationService
 
     SchemaList.member = Shapes::ShapeRef.new(shape: String)
 
-    SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
+    SourceIdsList.member = Shapes::ShapeRef.new(shape: String)
+
+    StartReplicationTaskAssessmentMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
+    StartReplicationTaskAssessmentMessage.struct_class = Types::StartReplicationTaskAssessmentMessage
+
+    StartReplicationTaskAssessmentResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
+    StartReplicationTaskAssessmentResponse.struct_class = Types::StartReplicationTaskAssessmentResponse
 
     StartReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
     StartReplicationTaskMessage.add_member(:start_replication_task_type, Shapes::ShapeRef.new(shape: StartReplicationTaskTypeValue, required: true, location_name: "StartReplicationTaskType"))
@@ -759,16 +792,16 @@ module Aws::DatabaseMigrationService
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
     Subnet.struct_class = Types::Subnet
 
-    SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
+    SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
-    SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
+    SubnetList.member = Shapes::ShapeRef.new(shape: Subnet)
 
     SupportedEndpointType.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
     SupportedEndpointType.add_member(:supports_cdc, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsCDC"))
     SupportedEndpointType.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, location_name: "EndpointType"))
     SupportedEndpointType.struct_class = Types::SupportedEndpointType
 
-    SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType, location_name: "SupportedEndpointType")
+    SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType)
 
     TableListToReload.member = Shapes::ShapeRef.new(shape: TableToReload)
 
@@ -783,6 +816,10 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:full_load_error_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadErrorRows"))
     TableStatistics.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastUpdateTime"))
     TableStatistics.add_member(:table_state, Shapes::ShapeRef.new(shape: String, location_name: "TableState"))
+    TableStatistics.add_member(:validation_pending_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationPendingRecords"))
+    TableStatistics.add_member(:validation_failed_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationFailedRecords"))
+    TableStatistics.add_member(:validation_suspended_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationSuspendedRecords"))
+    TableStatistics.add_member(:validation_state, Shapes::ShapeRef.new(shape: String, location_name: "ValidationState"))
     TableStatistics.struct_class = Types::TableStatistics
 
     TableStatisticsList.member = Shapes::ShapeRef.new(shape: TableStatistics)
@@ -795,7 +832,7 @@ module Aws::DatabaseMigrationService
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
-    TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
     TestConnectionMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     TestConnectionMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
@@ -804,13 +841,13 @@ module Aws::DatabaseMigrationService
     TestConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     TestConnectionResponse.struct_class = Types::TestConnectionResponse
 
-    VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
+    VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
 
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId"))
     VpcSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     VpcSecurityGroupMembership.struct_class = Types::VpcSecurityGroupMembership
 
-    VpcSecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupMembership, location_name: "VpcSecurityGroupMembership")
+    VpcSecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupMembership)
 
 
     # @api private
@@ -1127,6 +1164,21 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_replication_task_assessment_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplicationTaskAssessmentResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentResultsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplicationTaskAssessmentResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_replication_tasks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeReplicationTasks"
         o.http_method = "POST"
@@ -1297,6 +1349,16 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: StartReplicationTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
+      api.add_operation(:start_replication_task_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplicationTaskAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartReplicationTaskAssessmentMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartReplicationTaskAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
       api.add_operation(:stop_replication_task, Seahorse::Model::Operation.new.tap do |o|
