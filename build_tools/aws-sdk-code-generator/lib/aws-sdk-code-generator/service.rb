@@ -22,7 +22,10 @@ module AwsSdkCodeGenerator
       @gem_name = options[:gem_name] || "aws-sdk-#{identifier}"
       @gem_version = options.fetch(:gem_version)
       @api = load_json(options.fetch(:api))
-      ApplyDocs.new(@api).apply(load_json(options[:docs]))
+      unless @api['metadata']['protocol'] == 'api-gateway'
+        # Dont reply on API Gateway doc.json
+        ApplyDocs.new(@api).apply(load_json(options[:docs]))
+      end
       @paginators = load_json(options[:paginators])
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])

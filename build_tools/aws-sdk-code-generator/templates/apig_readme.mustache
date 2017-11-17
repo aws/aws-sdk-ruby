@@ -20,10 +20,6 @@ puts client.operation_names
 
 For each operation usage example, see `lib/client.rb` documentation block per operation
 
-## API Key
-
-Simply provide an `:api_key` value when calling an API along with other params, this value will be picked up in the `x-api-key` header value.
-
 ## Authorizer
 
 For operations used custom authorizer, you can provide your own authorizer token logic at `lib/plugins/authorizer.rb` under method `generate_token`. For more information, please see [here](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html).
@@ -53,6 +49,10 @@ Valid region and credentials options are:
 * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
 * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
 * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
+
+## API Key
+
+Simply provide an `:api_key` value when calling an API along with other params, this value will be picked up in the `x-api-key` header value.
 
 ## License
 

@@ -9,7 +9,7 @@ module BuildTools
     # @option options [required, String] :model_path
     # @option options [required, String] :default_endpoint
     def initialize(options = {})
-      @svc_name = upcase_first(options.fetch(:service_name))
+      @svc_name = validate(options.fetch(:service_name))
 
       @default_endpoint = options.fetch(:default_endpoint)
       @model_path = options.fetch(:model_path)
@@ -73,12 +73,10 @@ module BuildTools
       (["#{@output_dir}/#{@gem_name}/lib/#{@gem_name}"] + parts).join('/') + '.rb'
     end
 
-    def upcase_first(name)
-      if name[0] =~ /[a-z]/
-        name.size == 1 ? name.upcase : name[0].upcase + name[1..-1]
-      else
-        name
-      end
+    def validate(svc_name)
+      # replace all non alphanumber with space, can make camel case string
+      raw = svc_name.gsub(/[^0-9a-zA-Z]/i, ' ')
+      raw.split(' ').collect(&:capitalize).join
     end
 
   end
