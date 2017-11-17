@@ -53,7 +53,7 @@ module BuildTools
 
     def gem_dependencies
       {
-        'aws-sdk-core' => '~> 3',
+        'aws-sdk-core' => '>= 3.7\', \'< 4.0',
         'aws-sigv4' => '~> 1.0'
       }
     end

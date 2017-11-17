@@ -171,9 +171,25 @@ module AwsSdkCodeGenerator
             end
             o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
+            o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
+          end
+        end
+      end
+
+      def apig_authorizer
+        return nil unless @service.api.key? 'authorizers'
+        @service.api['authorizers'].map do |name, authorizer|
+          Authorizer.new.tap do |a|
+            a.name = name
+            a.authorizer_name = underscore(name)
+            a.type = authorizer['type'] if authorizer.key? 'type'
+            if authorizer.key? 'placement'
+              a.location = authorizer['placement']['location']
+              a.location_name = authorizer['placement']['name']
+            end
           end
         end
       end
@@ -387,8 +403,32 @@ module AwsSdkCodeGenerator
         # @return [Boolean]
         attr_accessor :require_apikey
 
+        # APIG only
+        # @return [String, nil]
+        attr_accessor :authorizer
+
         # @return [Pager, nil]
         attr_accessor :pager
+
+      end
+
+      # APIG SDK only
+      class Authorizer
+
+        # @return [String]
+        attr_accessor :name
+
+        # @return [String]
+        attr_accessor :authorizer_name
+
+        # @return [String]
+        attr_accessor :type
+
+        # @return [String]
+        attr_accessor :location
+
+        # @return [String]
+        attr_accessor :location_name
 
       end
     end

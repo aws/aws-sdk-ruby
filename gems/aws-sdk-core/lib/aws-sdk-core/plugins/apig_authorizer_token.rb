@@ -16,8 +16,11 @@ module Aws
 
         def call(context)
           if context.operation['authtype'] == 'custom' &&
-            context.config.authorizer_token
-            context.http_request.headers['Authorization'] = context.config.authorizer_token
+            context.config.authorizer_token &&
+            context.authorizer.placement[:location] == 'header'
+
+            header = context.authorizer.placement[:name]
+            context.http_request.headers[header] = context.config.authorizer_token
           end
           @handler.call(context)
         end

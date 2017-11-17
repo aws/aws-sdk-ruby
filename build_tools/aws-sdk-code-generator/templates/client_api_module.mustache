@@ -36,6 +36,9 @@ module {{module_name}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}
+        {{#authorizer}}
+        o.authorizer = "{{authorizer}}"
+        {{/authorizer}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
@@ -55,6 +58,17 @@ module {{module_name}}
         {{/pager}}
       end)
       {{/operations}}
+      {{#apig_authorizer}}
+
+      api.add_authorizer(:{{authorizer_name}}, Seahorse::Model::Authorizer.new.tap do |a|
+        a.name = "{{name}}"{{#type}}
+        a.type = "{{type}}"{{/type}}{{#location}}
+        a.placement = {
+          :location => "{{location}}",
+          :name => "{{location_name}}"
+        }{{/location}}
+      end)
+      {{/apig_authorizer}}
     end
 
   end

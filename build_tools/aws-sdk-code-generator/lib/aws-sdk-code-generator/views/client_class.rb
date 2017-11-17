@@ -80,6 +80,11 @@ module AwsSdkCodeGenerator
         Waiter.markdown_table(@waiters)
       end
 
+      # @return [Boolean]
+      def authorizer?
+        @custom
+      end
+
     end
   end
 end

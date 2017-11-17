@@ -25,6 +25,9 @@ module Seahorse
       # @return [String, nil]
       attr_accessor :documentation
 
+      # @return [String, nil]
+      attr_accessor :authorizer
+
       # @return [ShapeRef, nil]
       attr_accessor :input
 

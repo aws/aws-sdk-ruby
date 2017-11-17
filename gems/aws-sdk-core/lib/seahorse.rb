@@ -45,6 +45,7 @@ require_relative 'seahorse/client/plugins/response_target'
 
 require_relative 'seahorse/model/api'
 require_relative 'seahorse/model/operation'
+require_relative 'seahorse/model/authorizer'
 require_relative 'seahorse/model/shapes'
 
 require_relative 'seahorse/client/base'

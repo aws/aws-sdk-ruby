@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support APIGateway protocol and custom service build.
+
 3.6.0 (2017-09-20)
 ------------------
 
