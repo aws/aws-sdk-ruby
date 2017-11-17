@@ -252,7 +252,12 @@ module Aws::RDS
     # @option options [required, String] :db_security_group_description
     #   The description for the DB security group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [DBSecurityGroup]
     def create(options = {})
       options = options.merge(db_security_group_name: @name)
@@ -287,7 +292,7 @@ module Aws::RDS
     # @option options [String] :cidrip
     #   The IP range to revoke access from. Must be a valid CIDR range. If
     #   `CIDRIP` is specified, `EC2SecurityGroupName`, `EC2SecurityGroupId`
-    #   and `EC2SecurityGroupOwnerId` cannot be provided.
+    #   and `EC2SecurityGroupOwnerId` can't be provided.
     # @option options [String] :ec2_security_group_name
     #   The name of the EC2 security group to revoke access from. For VPC DB
     #   security groups, `EC2SecurityGroupId` must be provided. Otherwise,

@@ -256,7 +256,7 @@ module Aws::DatabaseMigrationService
     #   Tags to be added to the endpoint.
     #
     # @option params [String] :certificate_arn
-    #   The Amazon Resource Number (ARN) for the certificate.
+    #   The Amazon Resource Name (ARN) for the certificate.
     #
     # @option params [String] :ssl_mode
     #   The SSL mode to use for the SSL connection.
@@ -2409,6 +2409,66 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns the task assessment results from Amazon S3. This action always
+    # returns the latest results.
+    #
+    # @option params [String] :replication_task_arn
+    #   \- The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   task. When this input parameter is specified the API will return only
+    #   one result and ignore the values of the max-records and marker
+    #   parameters.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationTaskAssessmentResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#bucket_name #bucket_name} => String
+    #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#replication_task_assessment_results #replication_task_assessment_results} => Array&lt;Types::ReplicationTaskAssessmentResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_task_assessment_results({
+    #     replication_task_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.bucket_name #=> String
+    #   resp.replication_task_assessment_results #=> Array
+    #   resp.replication_task_assessment_results[0].replication_task_identifier #=> String
+    #   resp.replication_task_assessment_results[0].replication_task_arn #=> String
+    #   resp.replication_task_assessment_results[0].replication_task_last_assessment_date #=> Time
+    #   resp.replication_task_assessment_results[0].assessment_status #=> String
+    #   resp.replication_task_assessment_results[0].assessment_results_file #=> String
+    #   resp.replication_task_assessment_results[0].assessment_results #=> String
+    #   resp.replication_task_assessment_results[0].s3_object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResults AWS API Documentation
+    #
+    # @overload describe_replication_task_assessment_results(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_task_assessment_results(params = {}, options = {})
+      req = build_request(:describe_replication_task_assessment_results, params)
+      req.send_request(options)
+    end
+
     # Returns information about replication tasks for your account in the
     # current region.
     #
@@ -2665,6 +2725,10 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].full_load_error_rows #=> Integer
     #   resp.table_statistics[0].last_update_time #=> Time
     #   resp.table_statistics[0].table_state #=> String
+    #   resp.table_statistics[0].validation_pending_records #=> Integer
+    #   resp.table_statistics[0].validation_failed_records #=> Integer
+    #   resp.table_statistics[0].validation_suspended_records #=> Integer
+    #   resp.table_statistics[0].validation_state #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics AWS API Documentation
@@ -3571,8 +3635,7 @@ module Aws::DatabaseMigrationService
     # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html
     #
     # @option params [required, String] :replication_task_arn
-    #   The Amazon Resource Number (ARN) of the replication task to be
-    #   started.
+    #   The Amazon Resource Name (ARN) of the replication task to be started.
     #
     # @option params [required, String] :start_replication_task_type
     #   The type of replication task.
@@ -3650,10 +3713,57 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Starts the replication task assessment for unsupported data types in
+    # the source database.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #
+    # @return [Types::StartReplicationTaskAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplicationTaskAssessmentResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication_task_assessment({
+    #     replication_task_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task.replication_task_identifier #=> String
+    #   resp.replication_task.source_endpoint_arn #=> String
+    #   resp.replication_task.target_endpoint_arn #=> String
+    #   resp.replication_task.replication_instance_arn #=> String
+    #   resp.replication_task.migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_task.table_mappings #=> String
+    #   resp.replication_task.replication_task_settings #=> String
+    #   resp.replication_task.status #=> String
+    #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
+    #   resp.replication_task.replication_task_creation_date #=> Time
+    #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.replication_task_arn #=> String
+    #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
+    #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loaded #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
+    #
+    # @overload start_replication_task_assessment(params = {})
+    # @param [Hash] params ({})
+    def start_replication_task_assessment(params = {}, options = {})
+      req = build_request(:start_replication_task_assessment, params)
+      req.send_request(options)
+    end
+
     # Stops the replication task.
     #
     # @option params [required, String] :replication_task_arn
-    #   The Amazon Resource Number(ARN) of the replication task to be stopped.
+    #   The Amazon Resource Name(ARN) of the replication task to be stopped.
     #
     # @return [Types::StopReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3789,7 +3899,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

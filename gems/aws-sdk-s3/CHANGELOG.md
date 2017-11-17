@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2017-11-17)
+------------------
+
+* Feature - API update.
+
 * Issue - Fix S3 unit test with latest endpoint
 
 1.6.0 (2017-11-07)

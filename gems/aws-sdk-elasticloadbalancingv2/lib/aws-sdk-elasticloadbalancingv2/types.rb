@@ -2411,6 +2411,9 @@ module Aws::ElasticLoadBalancingV2
     #     deregistering target from `draining` to `unused`. The range is
     #     0-3600 seconds. The default value is 300 seconds.
     #
+    #   * `proxy_protocol_v2.enabled` - \[Network Load Balancers\] Indicates
+    #     whether Proxy Protocol version 2 is enabled.
+    #
     #   * `stickiness.enabled` - \[Application Load Balancers\] Indicates
     #     whether sticky sessions are enabled. The value is `true` or
     #     `false`.

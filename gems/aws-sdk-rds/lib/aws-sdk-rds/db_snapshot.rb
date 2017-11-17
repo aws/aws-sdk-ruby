@@ -168,8 +168,8 @@ module Aws::RDS
       data[:encrypted]
     end
 
-    # If `Encrypted` is true, the KMS key identifier for the encrypted DB
-    # snapshot.
+    # If `Encrypted` is true, the AWS KMS key identifier for the encrypted
+    # DB snapshot.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -191,7 +191,7 @@ module Aws::RDS
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
-    # to database accounts is enabled; otherwise false.
+    # to database accounts is enabled, and otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -341,7 +341,12 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [DBSnapshot]
     def create(options = {})
       options = options.merge(
@@ -408,12 +413,17 @@ module Aws::RDS
     #   If you copy an encrypted snapshot to a different AWS Region, then you
     #   must specify a KMS key for the destination AWS Region. KMS encryption
     #   keys are specific to the AWS Region that they are created in, and you
-    #   cannot use encryption keys from one AWS Region in another AWS Region.
+    #   can't use encryption keys from one AWS Region in another AWS Region.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [Boolean] :copy_tags
     #   True to copy all tags from the source DB snapshot to the target DB
-    #   snapshot; otherwise false. The default is false.
+    #   snapshot, and otherwise false. The default is false.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBSnapshot` API action in the source AWS Region that contains the
@@ -421,8 +431,8 @@ module Aws::RDS
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
     #   from another AWS Region by using the Amazon RDS API. You can specify
-    #   the source region option instead of this parameter when you copy an
-    #   encrypted DB snapshot from another AWS Region by using the AWS CLI.
+    #   the `--source-region` option instead of this parameter when you copy
+    #   an encrypted DB snapshot from another AWS Region by using the AWS CLI.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
     #   action that can be executed in the source AWS Region that contains the
@@ -434,24 +444,24 @@ module Aws::RDS
     #     `CopyDBSnapshot` action is called that contains this presigned URL.
     #
     #     For example, if you copy an encrypted DB snapshot from the us-west-2
-    #     region to the us-east-1 region, then you call the `CopyDBSnapshot`
-    #     action in the us-east-1 region and provide a presigned URL that
-    #     contains a call to the `CopyDBSnapshot` action in the us-west-2
-    #     region. For this example, the `DestinationRegion` in the presigned
-    #     URL must be set to the us-east-1 region.
+    #     AWS Region to the us-east-1 AWS Region, then you call the
+    #     `CopyDBSnapshot` action in the us-east-1 AWS Region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action in
+    #     the us-west-2 AWS Region. For this example, the `DestinationRegion`
+    #     in the presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB snapshot in the destination AWS Region. This is
-    #     the same identifier for both the `CopyDBSnapshot` action that is
-    #     called in the destination AWS Region, and the action contained in
-    #     the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB snapshot in the destination AWS Region.
+    #     This is the same identifier for both the `CopyDBSnapshot` action
+    #     that is called in the destination AWS Region, and the action
+    #     contained in the presigned URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are copying an encrypted DB snapshot from the
-    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` looks like
-    #     the following example:
+    #     us-west-2 AWS Region, then your `SourceDBSnapshotIdentifier` looks
+    #     like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see
@@ -470,7 +480,8 @@ module Aws::RDS
     #   to another, and your DB instance uses a nondefault option group. If
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
-    #   regions. For more information, see [Option Group Considerations][1].
+    #   AWS Regions. For more information, see [Option Group
+    #   Considerations][1].
     #
     #
     #
@@ -554,7 +565,7 @@ module Aws::RDS
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
     #   example, `db.m4.large`. Not all DB instance classes are available in
-    #   all regions, or for all database engines. For the full list of DB
+    #   all AWS Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
     #   Class][1] in the Amazon RDS User Guide.
     #
@@ -570,11 +581,11 @@ module Aws::RDS
     #
     #   Constraints: Value must be `1150-65535`
     # @option options [String] :availability_zone
-    #   The EC2 Availability Zone that the database instance is created in.
+    #   The EC2 Availability Zone that the DB instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to `true`.
     #
     #   Example: `us-east-1a`
@@ -588,7 +599,7 @@ module Aws::RDS
     # @option options [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment.
     #
-    #   Constraint: You cannot specify the AvailabilityZone parameter if the
+    #   Constraint: You can't specify the AvailabilityZone parameter if the
     #   MultiAZ parameter is set to `true`.
     # @option options [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the DB instance. A value of
@@ -639,6 +650,8 @@ module Aws::RDS
     #
     #   * `aurora`
     #
+    #   * `aurora-postgresql`
+    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -681,11 +694,16 @@ module Aws::RDS
     #   The name of the option group to be used for the restored DB instance.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, cannot be removed from an option group, and that option group
-    #   cannot be removed from a DB instance once it is associated with a DB
+    #   TDE, can't be removed from an option group, and that option group
+    #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
@@ -694,25 +712,25 @@ module Aws::RDS
     #   If you specify `io1`, you must also include a value for the `Iops`
     #   parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified; otherwise
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
     # @option options [String] :tde_credential_arn
-    #   The ARN from the Key Store with which to associate the instance for
+    #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
     # @option options [String] :tde_credential_password
-    #   The password for the given ARN from the Key Store in order to access
+    #   The password for the given ARN from the key store in order to access
     #   the device.
     # @option options [String] :domain
     #   Specify the Active Directory Domain to restore the instance in.
     # @option options [Boolean] :copy_tags_to_snapshot
     #   True to copy all tags from the restored DB instance to snapshots of
-    #   the DB instance; otherwise false. The default is false.
+    #   the DB instance, and otherwise false. The default is false.
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     # @option options [Boolean] :enable_iam_database_authentication
     #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts; otherwise false.
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following database
     #   engines

@@ -239,7 +239,12 @@ module Aws::RDS
     #
     #   Default: `1`
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [ReservedDBInstance]
     def purchase(options = {})
       options = options.merge(reserved_db_instances_offering_id: @id)

@@ -225,16 +225,16 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
-    # If `StorageEncrypted` is true, the KMS key identifier for the
+    # If `StorageEncrypted` is true, the AWS KMS key identifier for the
     # encrypted DB cluster.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
     end
 
-    # The region-unique, immutable identifier for the DB cluster. This
-    # identifier is found in AWS CloudTrail log entries whenever the KMS key
-    # for the DB cluster is accessed.
+    # The AWS Region-unique, immutable identifier for the DB cluster. This
+    # identifier is found in AWS CloudTrail log entries whenever the AWS KMS
+    # key for the DB cluster is accessed.
     # @return [String]
     def db_cluster_resource_id
       data[:db_cluster_resource_id]
@@ -256,7 +256,7 @@ module Aws::RDS
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
-    # to database accounts is enabled; otherwise false.
+    # to database accounts is enabled, and otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -441,8 +441,8 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
-    #   be created in. For information on regions and Availability Zones, see
-    #   [Regions and Availability Zones][1].
+    #   be created in. For information on AWS Regions and Availability Zones,
+    #   see [Regions and Availability Zones][1].
     #
     #
     #
@@ -487,7 +487,7 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`
+    #   Valid Values: `aurora`, `aurora-postgresql`
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
@@ -518,23 +518,24 @@ module Aws::RDS
     #   A value that indicates that the DB cluster should be associated with
     #   the specified option group.
     #
-    #   Permanent options cannot be removed from an option group. The option
-    #   group cannot be removed from a DB cluster once it is associated with a
+    #   Permanent options can't be removed from an option group. The option
+    #   group can't be removed from a DB cluster once it is associated with a
     #   DB cluster.
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -549,12 +550,12 @@ module Aws::RDS
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the Preferred
+    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
@@ -565,11 +566,16 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a Read Replica.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [Boolean] :storage_encrypted
     #   Specifies whether the DB cluster is encrypted.
     # @option options [String] :kms_key_id
-    #   The KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a DB cluster with the same AWS
@@ -609,9 +615,9 @@ module Aws::RDS
     #   The pre-signed URL request must contain the following parameter
     #   values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster in the destination AWS Region. This
-    #     should refer to the same KMS key for both the `CreateDBCluster`
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB cluster in the destination AWS Region.
+    #     This should refer to the same KMS key for both the `CreateDBCluster`
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
@@ -622,8 +628,8 @@ module Aws::RDS
     #     encrypted DB cluster to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source AWS Region. For
     #     example, if you are copying an encrypted DB cluster from the
-    #     us-west-2 region, then your `ReplicationSourceIdentifier` would look
-    #     like Example:
+    #     us-west-2 AWS Region, then your `ReplicationSourceIdentifier` would
+    #     look like Example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
@@ -635,9 +641,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     # @option options [String] :destination_region
@@ -843,23 +848,24 @@ module Aws::RDS
     #   brief (sub-second) period during which new connections are rejected
     #   but existing connections are not interrupted.
     #
-    #   Permanent options cannot be removed from an option group. The option
-    #   group cannot be removed from a DB cluster once it is associated with a
+    #   Permanent options can't be removed from an option group. The option
+    #   group can't be removed from a DB cluster once it is associated with a
     #   DB cluster.
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
     #   parameter.
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region. To see the time blocks available, see [ Adjusting
-    #   the Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   RDS User Guide.*
     #
     #   Constraints:
     #
     #   * Must be in the format `hh24:mi-hh24:mi`.
     #
-    #   * Times should be in Universal Coordinated Time (UTC).
+    #   * Must be in Universal Coordinated Time (UTC).
     #
     #   * Must not conflict with the preferred maintenance window.
     #
@@ -874,12 +880,12 @@ module Aws::RDS
     #
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
-    #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week. To see the
-    #   time blocks available, see [ Adjusting the Preferred Maintenance
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the Preferred
+    #   Maintenance Window][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
     #   Constraints: Minimum 30-minute window.
     #
@@ -887,9 +893,8 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     # @return [DBCluster]
@@ -944,7 +949,7 @@ module Aws::RDS
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
     #
-    #   Constraints: You cannot specify `copy-on-write` if the engine version
+    #   Constraints: You can't specify `copy-on-write` if the engine version
     #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
@@ -993,10 +998,15 @@ module Aws::RDS
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster belongs to.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :kms_key_id
-    #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from an encrypted DB cluster.
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   cluster from an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -1022,9 +1032,8 @@ module Aws::RDS
     #   If `DBClusterIdentifier` refers to a DB cluster that is not encrypted,
     #   then the restore request is rejected.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     # @return [DBCluster]
@@ -1165,7 +1174,7 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_snapshot_identifier
     #   A specific DB cluster snapshot identifier to describe. This parameter
-    #   cannot be used in conjunction with the `DBClusterIdentifier`
+    #   can't be used in conjunction with the `DBClusterIdentifier`
     #   parameter. This value is stored as a lowercase string.
     #
     #   Constraints:
@@ -1219,19 +1228,17 @@ module Aws::RDS
     #   the response includes only records beyond the marker, up to the value
     #   specified by `MaxRecords`.
     # @option options [Boolean] :include_shared
-    #   Set this value to `true` to include shared manual DB cluster snapshots
-    #   from other AWS accounts that this AWS account has been given
-    #   permission to copy or restore, otherwise set this value to `false`.
-    #   The default is `false`.
+    #   True to include shared manual DB cluster snapshots from other AWS
+    #   accounts that this AWS account has been given permission to copy or
+    #   restore, and otherwise false. The default is `false`.
     #
     #   You can give an AWS account permission to restore a manual DB cluster
     #   snapshot from another AWS account by the
     #   ModifyDBClusterSnapshotAttribute API action.
     # @option options [Boolean] :include_public
-    #   Set this value to `true` to include manual DB cluster snapshots that
-    #   are public and can be copied or restored by any AWS account, otherwise
-    #   set this value to `false`. The default is `false`. The default is
-    #   false.
+    #   True to include manual DB cluster snapshots that are public and can be
+    #   copied or restored by any AWS account, and otherwise false. The
+    #   default is `false`. The default is false.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.

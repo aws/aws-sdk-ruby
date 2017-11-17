@@ -304,7 +304,7 @@ module Aws::RDS
     #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain only
-    #   ASCII letters, digits, and hyphens; it cannot end with a hyphen or
+    #   ASCII letters, digits, and hyphens; it can't end with a hyphen or
     #   contain two consecutive hyphens.
     #
     #   Constraints:
@@ -326,7 +326,12 @@ module Aws::RDS
     #   A Boolean value; set to **true** to activate the subscription, set to
     #   **false** to create the subscription but not active it.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [EventSubscription]
     def create(options = {})
       options = options.merge(subscription_name: @name)

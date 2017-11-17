@@ -938,16 +938,30 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
     #         resource_label: "ResourceLabel",
     #       }
     #
     # @!attribute [rw] predefined_metric_type
-    #   The metric type.
+    #   The metric type. The `ALBRequestCountPerTarget` metric type applies
+    #   only to Spot fleet requests.
     #   @return [String]
     #
     # @!attribute [rw] resource_label
-    #   Reserved for future use.
+    #   Identifies the resource associated with the metric type. You can't
+    #   specify a resource label unless the metric type is
+    #   `ALBRequestCountPerTarget` and there is a target group attached to
+    #   the Spot fleet request.
+    #
+    #   The format is
+    #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
+    #   where:
+    #
+    #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
+    #     final portion of the load balancer ARN
+    #
+    #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
+    #     the final portion of the target group ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PredefinedMetricSpecification AWS API Documentation
@@ -983,7 +997,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -2094,7 +2108,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {

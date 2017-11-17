@@ -130,7 +130,7 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
-    # If `StorageEncrypted` is true, the KMS key identifier for the
+    # If `StorageEncrypted` is true, the AWS KMS key identifier for the
     # encrypted DB cluster snapshot.
     # @return [String]
     def kms_key_id
@@ -145,14 +145,14 @@ module Aws::RDS
 
     # If the DB cluster snapshot was copied from a source DB cluster
     # snapshot, the Amazon Resource Name (ARN) for the source DB cluster
-    # snapshot; otherwise, a null value.
+    # snapshot, otherwise, a null value.
     # @return [String]
     def source_db_cluster_snapshot_arn
       data[:source_db_cluster_snapshot_arn]
     end
 
     # True if mapping of AWS Identity and Access Management (IAM) accounts
-    # to database accounts is enabled; otherwise false.
+    # to database accounts is enabled, and otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -348,9 +348,9 @@ module Aws::RDS
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
-    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
-    #   key alias for the KMS encryption key.
+    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
+    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
+    #   KMS key alias for the KMS encryption key.
     #
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, Amazon RDS encrypts the target DB cluster
@@ -369,7 +369,7 @@ module Aws::RDS
     #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
     #   copy of the DB cluster snapshot in the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you cannot use encryption keys from one AWS Region in another
+    #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
@@ -384,11 +384,11 @@ module Aws::RDS
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBClusterSnapshot`
-    #     action that is called in the destination AWS Region, and the action
-    #     contained in the pre-signed URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB cluster snapshot in the destination AWS
+    #     Region. This is the same identifier for both the
+    #     `CopyDBClusterSnapshot` action that is called in the destination AWS
+    #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
     #     snapshot will be created in.
@@ -397,7 +397,7 @@ module Aws::RDS
     #     identifier for the encrypted DB cluster snapshot to be copied. This
     #     identifier must be in the Amazon Resource Name (ARN) format for the
     #     source AWS Region. For example, if you are copying an encrypted DB
-    #     cluster snapshot from the us-west-2 region, then your
+    #     cluster snapshot from the us-west-2 AWS Region, then your
     #     `SourceDBClusterSnapshotIdentifier` looks like the following
     #     example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
@@ -412,9 +412,14 @@ module Aws::RDS
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :copy_tags
     #   True to copy all tags from the source DB cluster snapshot to the
-    #   target DB cluster snapshot; otherwise false. The default is false.
+    #   target DB cluster snapshot, and otherwise false. The default is false.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags.
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -515,8 +520,8 @@ module Aws::RDS
     # @option options [Array<Types::Tag>] :tags
     #   The tags to be assigned to the restored DB cluster.
     # @option options [String] :kms_key_id
-    #   The KMS key identifier to use when restoring an encrypted DB cluster
-    #   from a DB snapshot or DB cluster snapshot.
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
+    #   cluster from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -534,9 +539,8 @@ module Aws::RDS
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
     #     not encrypted, then the restored DB cluster is not encrypted.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A Boolean value that is true to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts, and otherwise
-    #   false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     # @return [DBCluster]

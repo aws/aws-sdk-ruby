@@ -1676,7 +1676,7 @@ module Aws::S3
     #
     #   resp.inventory_configuration.destination.s3_bucket_destination.account_id #=> String
     #   resp.inventory_configuration.destination.s3_bucket_destination.bucket #=> String
-    #   resp.inventory_configuration.destination.s3_bucket_destination.format #=> String, one of "CSV"
+    #   resp.inventory_configuration.destination.s3_bucket_destination.format #=> String, one of "CSV", "ORC"
     #   resp.inventory_configuration.destination.s3_bucket_destination.prefix #=> String
     #   resp.inventory_configuration.destination.s3_bucket_destination.encryption.ssekms.key_id #=> String
     #   resp.inventory_configuration.is_enabled #=> Boolean
@@ -3192,7 +3192,7 @@ module Aws::S3
     #   resp.inventory_configuration_list #=> Array
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.account_id #=> String
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.bucket #=> String
-    #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.format #=> String, one of "CSV"
+    #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.format #=> String, one of "CSV", "ORC"
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.prefix #=> String
     #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.encryption.ssekms.key_id #=> String
     #   resp.inventory_configuration_list[0].is_enabled #=> Boolean
@@ -4362,7 +4362,7 @@ module Aws::S3
     #         s3_bucket_destination: { # required
     #           account_id: "AccountId",
     #           bucket: "BucketName", # required
-    #           format: "CSV", # required, accepts CSV
+    #           format: "CSV", # required, accepts CSV, ORC
     #           prefix: "Prefix",
     #           encryption: {
     #             sses3: {
@@ -6019,7 +6019,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

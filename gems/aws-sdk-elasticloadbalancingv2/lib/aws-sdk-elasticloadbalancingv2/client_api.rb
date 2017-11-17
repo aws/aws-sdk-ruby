@@ -817,6 +817,7 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerOutput)
         o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_rule, Seahorse::Model::Operation.new.tap do |o|
