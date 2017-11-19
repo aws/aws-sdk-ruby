@@ -25,6 +25,9 @@ module Seahorse
       # @return [String, nil]
       attr_accessor :documentation
 
+      # @return [String, nil]
+      attr_accessor :authorizer
+
       # @return [ShapeRef, nil]
       attr_accessor :input
 
@@ -33,6 +36,10 @@ module Seahorse
 
       # @return [Array<ShapeRef>]
       attr_accessor :errors
+
+      # APIG only
+      # @return [Boolean]
+      attr_accessor :require_apikey
 
       def [](key)
         @metadata[key.to_s]

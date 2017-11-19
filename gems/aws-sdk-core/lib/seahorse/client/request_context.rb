@@ -6,6 +6,7 @@ module Seahorse
 
       # @option options [required,Symbol] :operation_name (nil)
       # @option options [required,Model::Operation] :operation (nil)
+      # @option options [Model::Authorizer] :authorizer (nil)
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
       # @option options [Http::Request] :http_request (Http::Request.new)
@@ -14,6 +15,7 @@ module Seahorse
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @operation = options[:operation]
+        @authorizer = options[:authorizer]
         @client = options[:client]
         @params = options[:params] || {}
         @config = options[:config]
@@ -28,6 +30,9 @@ module Seahorse
 
       # @return [Model::Operation]
       attr_accessor :operation
+
+      # @return [Model::Authorizer] APIG SDKs only
+      attr_accessor :authorizer
 
       # @return [Seahorse::Client::Base]
       attr_accessor :client

@@ -1,5 +1,6 @@
-require 'kramdown'
 require 'set'
+# kramdown
+require 'kramdown'
 
 # disable inline attribute lists
 class Kramdown::Converter::Kramdown
@@ -7,6 +8,7 @@ class Kramdown::Converter::Kramdown
     nil
   end
 end
+# end kramdown
 
 module AwsSdkCodeGenerator
   module Helper
@@ -118,6 +120,22 @@ module AwsSdkCodeGenerator
       shape(member_ref)
     end
 
+    def upcase_first(name)
+      if name[0] =~ /[a-z]/
+        name.size == 1 ? name.upcase : name[0].upcase + name[1..-1]
+      else
+        name
+      end
+    end
+
+    def downcase_first(name)
+      if name[0] =~/[A-Z]/
+        name.size == 1 ? name.downcase : name[0].downcase + name[1..-1]
+      else
+        name
+      end
+    end
+
     def shape(ref)
       if ref.nil?
         nil
@@ -166,7 +184,12 @@ module AwsSdkCodeGenerator
         end
       end
     end
-    module_function :deep_copy, :operation_streaming?
+
+    def wrap_string(str, width, indent = '')
+      str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
+    end
+
+    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string
 
   end
 end

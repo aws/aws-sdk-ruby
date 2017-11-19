@@ -22,7 +22,10 @@ module AwsSdkCodeGenerator
       @gem_name = options[:gem_name] || "aws-sdk-#{identifier}"
       @gem_version = options.fetch(:gem_version)
       @api = load_json(options.fetch(:api))
-      ApplyDocs.new(@api).apply(load_json(options[:docs]))
+      unless @api['metadata']['protocol'] == 'api-gateway'
+        # Dont reply on API Gateway doc.json
+        ApplyDocs.new(@api).apply(load_json(options[:docs]))
+      end
       @paginators = load_json(options[:paginators])
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
@@ -31,6 +34,8 @@ module AwsSdkCodeGenerator
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
       @endpoints_key = options.fetch(:endpoints_key, nil)
+      # APIG custom service only
+      @default_endpoint = options[:default_endpoint]
 
       # computed attributes
       @protocol = api.fetch('metadata').fetch('protocol')
@@ -73,6 +78,9 @@ module AwsSdkCodeGenerator
 
     # @return [String, nil]
     attr_reader :endpoints_key
+
+    # @return [String] Required for APIG custom service
+    attr_reader :default_endpoint
 
     # @return [Hash<String,String>] A hash of plugins to add.
     attr_reader :add_plugins

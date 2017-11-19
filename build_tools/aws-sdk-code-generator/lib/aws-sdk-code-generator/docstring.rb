@@ -1,4 +1,6 @@
+# kramdown
 require 'kramdown'
+# end kramdown
 
 module AwsSdkCodeGenerator
   module Docstring
@@ -103,6 +105,7 @@ module AwsSdkCodeGenerator
         string.to_s.encode(:xml => :text)
       end
 
+      # kramdown html
       # @param [String<HTML>, nil] html
       # @option options [Integer] :line_width (70)
       # @return [String<Markdown>, nil]
@@ -144,6 +147,7 @@ module AwsSdkCodeGenerator
           markdown.gsub(/\\(\*|`|'|")/, '\1')
         end
       end
+      # end kramdown html
 
       # @param [Array<Array<String>>]
       def markdown_table(table)

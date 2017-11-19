@@ -36,8 +36,12 @@ module AwsSdkCodeGenerator
     # @api private
     def source
       code = @gem_dependencies.map { |gem_name, _| "require '#{gem_name}'" }
-      source_files.each.with_index do |(_, src_code), n|
-        next if n < 2 # skip the service module and customizations
+      source_files.each.with_index do |(file_name, src_code), n|
+        # skip the service module and customizations
+        next if file_name.include? '/customizations.rb'
+        next unless file_name.include? '/'
+        # skip markdown files
+        next if file_name.include? 'README.md'
         code << src_code
       end
       code.join("\n")
@@ -47,6 +51,11 @@ module AwsSdkCodeGenerator
     def source_files(options = {})
       prefix = options.fetch(:prefix, @service.gem_name)
       Enumerator.new do |y|
+        if @service.protocol == 'api-gateway'
+          y.yield("#{prefix}/../../README.md", apig_readme)
+          y.yield("#{prefix}/plugins/authorizer.rb", authorizer_class)
+          y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
+        end
         y.yield("#{prefix}.rb", service_module(prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
@@ -95,6 +104,7 @@ module AwsSdkCodeGenerator
         api: @service.api,
         waiters: @service.waiters,
         examples: @service.examples,
+        custom: @service.protocol == 'api-gateway'
       ).render
     end
 
@@ -106,6 +116,20 @@ module AwsSdkCodeGenerator
       Views::WaitersModule.new(
         module_name: @service.module_name,
         waiters: @waiters,
+        custom: @service.protocol == 'api-gateway'
+      ).render
+    end
+
+    def authorizer_class
+      Views::AuthorizerClass.new(
+        module_name: @service.module_name
+      ).render
+    end
+
+    def apig_endpoint_class
+      Views::APIGEndpointClass.new(
+        module_name: @service.module_name,
+        default_endpoint: @service.default_endpoint
       ).render
     end
 
@@ -115,6 +139,7 @@ module AwsSdkCodeGenerator
         resources: @service.resources,
         paginators: @paginators,
         api: @api,
+        custom: @service.protocol == 'api-gateway'
       ).render
     end
 
@@ -126,8 +151,18 @@ module AwsSdkCodeGenerator
         paginators: @paginators,
         waiters: @waiters,
         resource: resource_definition,
+        custom: @service.protocol == 'api-gateway'
       ).render
     end
 
+    def apig_readme
+      Views::APIGReadme.new(
+        service_name: @service.name,
+        gem_major_version: @service.gem_version.split('.').first,
+        gem_name: @service.gem_name,
+        module_name: @service.module_name
+      ).render
+    end
   end
+
 end

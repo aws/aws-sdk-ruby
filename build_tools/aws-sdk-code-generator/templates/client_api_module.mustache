@@ -1,5 +1,6 @@
-{{> generated_src_warning}}
-
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
 module {{module_name}}
   # @api private
   module ClientApi
@@ -35,9 +36,15 @@ module {{module_name}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}
+        {{#authorizer}}
+        o.authorizer = "{{authorizer}}"
+        {{/authorizer}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
+        {{#require_apikey}}
+        o.require_apikey = {{require_apikey}}
+        {{/require_apikey}}
         {{#shape_references}}
         {{#lines}}
         {{{.}}}{{/lines}}
@@ -51,6 +58,17 @@ module {{module_name}}
         {{/pager}}
       end)
       {{/operations}}
+      {{#apig_authorizer}}
+
+      api.add_authorizer(:{{authorizer_name}}, Seahorse::Model::Authorizer.new.tap do |a|
+        a.name = "{{name}}"{{#type}}
+        a.type = "{{type}}"{{/type}}{{#location}}
+        a.placement = {
+          :location => "{{location}}",
+          :name => "{{location_name}}"
+        }{{/location}}
+      end)
+      {{/apig_authorizer}}
     end
 
   end

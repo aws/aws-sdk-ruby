@@ -5,6 +5,7 @@ module BuildTools
 
     def initialize(options)
       @directory = options.fetch(:directory)
+      @custom = options[:custom] || false
     end
 
     def write_files(generator)
@@ -57,6 +58,7 @@ module BuildTools
     end
 
     def gems_path(path)
+      return path if @custom
       'gems/' + path.split('/gems/', 2)[1]
     end
 

@@ -1,0 +1,14 @@
+module {{module_name}}
+  module Plugins
+
+    class APIGEndpoint < Seahorse::Client::Plugin
+
+      def after_initialize(client)
+        if client.config.endpoint.nil?
+          client.config.endpoint = '{{default_endpoint}}'
+        end
+      end
+
+    end
+  end
+end

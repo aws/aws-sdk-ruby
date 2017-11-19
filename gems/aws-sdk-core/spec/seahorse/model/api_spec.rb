@@ -31,6 +31,42 @@ module Seahorse
 
       end
 
+      describe '#authorizers' do
+
+        it 'provides an enumerator for authorizers' do
+          authorizer = double('authorizer')
+          api = Api.new
+          api.add_authorizer('name', authorizer)
+          expect(api.authorizers).to be_kind_of(Enumerator)
+          expect(api.authorizers.to_a).to eq([[:name, authorizer]])
+        end
+
+        it 'provides authorizer names' do
+          api = Api.new
+          api.add_authorizer('a1', double('authorizer'))
+          api.add_authorizer('a2', double('authorizer'))
+          expect(api.authorizer_names).to eq([:a1, :a2])
+        end
+
+        it 'provides an authorizer getter' do
+          authorizer = double('authorizer')
+          api = Api.new
+          api.add_authorizer(:name, authorizer)
+          expect(api.authorizer(:name)).to be(authorizer)
+        end
+
+        it 'provides indifferent string/symbol access to authorizers by name' do
+          authorizer1 = double('authorizer-1')
+          authorizer2 = double('authorizer-2')
+          api = Api.new
+          api.add_authorizer(:name, authorizer1)
+          expect(api.authorizer('name')).to be(authorizer1)
+          api.add_authorizer('name', authorizer2)
+          expect(api.authorizer(:name)).to be(authorizer2)
+        end
+
+      end
+
       it 'provides an enumerator for operations' do
         operation = double('operation')
         api = Api.new

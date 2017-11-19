@@ -5,6 +5,7 @@ module Seahorse
       def initialize
         @metadata = {}
         @operations = {}
+        @authorizers = {}
       end
 
       # @return [String, nil]
@@ -35,6 +36,30 @@ module Seahorse
 
       def add_operation(name, operation)
         @operations[name.to_sym] = operation
+      end
+
+      def authorizers(&block)
+        if block_given?
+          @authorizers.each(&block)
+        else
+          @authorizers.enum_for(:each)
+        end
+      end
+
+      def authorizer(name)
+        if @authorizers.key?(name.to_sym)
+          @authorizers[name.to_sym]
+        else
+          raise ArgumentError, "unknown authorizer #{name.inspect}"
+        end
+      end
+
+      def authorizer_names
+        @authorizers.keys
+      end
+
+      def add_authorizer(name, authorizer)
+        @authorizers[name.to_sym] = authorizer
       end
 
       def inspect(*args)

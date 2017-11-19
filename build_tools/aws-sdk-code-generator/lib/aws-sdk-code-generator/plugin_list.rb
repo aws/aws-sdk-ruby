@@ -60,6 +60,12 @@ module AwsSdkCodeGenerator
         'rest-xml'  => { 'Aws::Plugins::Protocols::RestXml' => "#{core_plugins}/protocols/rest_xml.rb" },
         'query'     => { 'Aws::Plugins::Protocols::Query' => "#{core_plugins}/protocols/query.rb" },
         'ec2'       => { 'Aws::Plugins::Protocols::EC2' => "#{core_plugins}/protocols/ec2.rb" },
+        'api-gateway' => {
+          'Aws::Plugins::Protocols::ApiGateway' => "#{core_plugins}/protocols/api_gateway.rb",
+          'Aws::Plugins::ApiKey' => "#{core_plugins}/api_key.rb",
+          'Aws::Plugins::APIGAuthorizerToken' => "#{core_plugins}/apig_authorizer_token.rb",
+          'Aws::Plugins::APIGCredentialsConfiguration' => "#{core_plugins}/apig_credentials_configuration.rb"
+        },
         nil         => {}
       }[protocol]
     end

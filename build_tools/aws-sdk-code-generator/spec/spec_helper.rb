@@ -52,6 +52,7 @@ module SpecHelper
     #       tmp_dir = generate_service(['Aws', 'S3'])
     #
     # @option options [Boolean] :multiple_files (true)
+    # @option options [Boolean] :custom (false)
     #
     # @return [String] Returns a path to the tmp directory where
     #   the src code was generated into.
@@ -69,25 +70,39 @@ module SpecHelper
         svc_path,
       ])
 
-      service_opts = {
+      svc_name = module_names.last
+      gem_name = module_names.last.downcase
+
+      shared_opts = {
         gem_version: '1.0.0',
-        name: module_names.last,
-        gem_name: module_names.last.downcase,
+        name: svc_name,
+        gem_name: gem_name,
         module_name: module_names.join('::'),
+      }
+
+      # For regular service
+      service_opts = shared_opts.merge({
         api: model_path(:api, api_dir),
         paginators: model_path(:paginators, api_dir),
         resources: model_path(:resources, api_dir),
         waiters: model_path(:waiters, api_dir),
         examples: model_path(:examples, api_dir),
-      }
+      })
+
+      # For APIG service
+      apig_opts = shared_opts.merge({
+        api: model_path(:service, api_dir),
+        default_endpoint: "https://foobar.us-west-2.amazonaws.com/test",
+      })
+
+      svc_opts = options[:custom] ? apig_opts : service_opts
 
       generator = AwsSdkCodeGenerator::CodeBuilder.new(
         aws_sdk_core_lib_path: File.expand_path('../../../../gems/aws-sdk-core/lib/', __FILE__),
-        service: AwsSdkCodeGenerator::Service.new(service_opts)
+        service: AwsSdkCodeGenerator::Service.new(svc_opts)
       )
 
       if options.fetch(:multiple_files, true)
-
         tmpdir = Dir.mktmpdir
         generator.source_files.each do |path, code|
           path = File.join(tmpdir, path)
@@ -99,7 +114,6 @@ module SpecHelper
         $LOAD_PATH << tmpdir
         require "#{tmpdir}/#{svc_path}"
         tmpdir
-
       else
         code = generator.source
         begin
@@ -126,7 +140,6 @@ module SpecHelper
       path = "#{models_dir}/#{model}.json"
       File.exists?(path) ? path : nil
     end
-
   end
 end
 

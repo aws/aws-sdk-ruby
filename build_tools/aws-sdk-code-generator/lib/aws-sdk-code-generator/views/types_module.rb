@@ -4,11 +4,19 @@ module AwsSdkCodeGenerator
   module Views
     class TypesModule < View
 
+      include Helper
+
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
         @api = @service.api
         @input_shapes = compute_input_shapes(@service.api)
+      end
+
+      # @return [String|nil]
+      def generated_src_warning
+        return if @service.protocol == 'api-gateway'
+        GENERATED_SRC_WARNING
       end
 
       def module_name
@@ -18,6 +26,8 @@ module AwsSdkCodeGenerator
       # @return [Array<StructClass>]
       def structures
         @service.api['shapes'].inject([]) do |list, (shape_name, shape)|
+          # APIG model can have input/output shape with downcase
+          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
           if struct_type?(shape)
             list << StructClass.new(
               class_name: shape_name,
@@ -33,6 +43,7 @@ module AwsSdkCodeGenerator
       private
 
       def struct_members(shape)
+        return if shape['members'].nil?
         shape['members'].map do |member_name, _|
           StructMember.new(member_name: underscore(member_name))
         end
@@ -49,6 +60,7 @@ module AwsSdkCodeGenerator
 
       def input_example_docs(shape_name)
         if @input_shapes.include?(shape_name)
+          return if shape(shape_name)['members'].nil?
           if shape(shape_name)['members'].empty?
             note = '@api private'
           else
@@ -63,6 +75,11 @@ module AwsSdkCodeGenerator
       end
 
       def attribute_macros_docs(shape_name)
+        # APIG model downcase shape name in origin
+        if shape(shape_name).nil? && @service.protocol == 'api-gateway'
+          shape_name = downcase_first(shape_name)
+        end
+        return if shape(shape_name)['members'].nil?
         shape(shape_name)['members'].map do |member_name, member_ref|
           docs = Api.docstring(member_ref, @api).to_s
           docs += idempotency_token_msg if idempotency_token?(member_ref)
@@ -77,7 +94,9 @@ module AwsSdkCodeGenerator
 
       def see_also_tag(shape_name)
         uid = @api['metadata']['uid']
-        Crosslink.tag_string(uid, shape_name) unless !Crosslink.taggable?(uid)
+        if @api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
+          Crosslink.tag_string(uid, shape_name)
+        end
       end
 
       def struct_type?(shape)
@@ -108,6 +127,7 @@ module AwsSdkCodeGenerator
         s = shape(shape_ref)
         case s['type']
         when 'structure'
+          return if s['members'].nil?
           s['members'].each_pair do |_, member_ref|
             visit_inputs(member_ref, inputs)
           end
@@ -129,7 +149,7 @@ module AwsSdkCodeGenerator
           @class_name = options.fetch(:class_name)
           @members = options.fetch(:members)
           @documentation = options.fetch(:documentation)
-          if @members.empty?
+          if @members.nil? || @members.empty?
             @empty = true
           else
             @empty = false

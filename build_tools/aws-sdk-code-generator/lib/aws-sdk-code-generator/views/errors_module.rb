@@ -7,6 +7,12 @@ module AwsSdkCodeGenerator
         @service = options.fetch(:service)
       end
 
+      # @return [String|nil]
+      def generated_src_warning
+        return if @service.protocol == 'api-gateway'
+        GENERATED_SRC_WARNING
+      end
+
       def module_name
         @service.module_name
       end

@@ -54,6 +54,7 @@ require_relative 'aws-sdk-core/stubbing/protocols/query'
 require_relative 'aws-sdk-core/stubbing/protocols/rest'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_json'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_xml'
+require_relative 'aws-sdk-core/stubbing/protocols/api_gateway'
 
 # protocols
 

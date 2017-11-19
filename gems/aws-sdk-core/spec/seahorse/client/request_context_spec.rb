@@ -43,6 +43,19 @@ module Seahorse
 
       end
 
+      describe '#authorizer' do
+
+        it 'defaults to nil' do
+          expect(RequestContext.new.authorizer).to be(nil)
+        end
+
+        it 'can be set in the constructor' do
+          authorizer = Object.new
+          expect(RequestContext.new(authorizer: authorizer).authorizer).to be(authorizer)
+        end
+
+      end
+
       describe '#retries' do
 
         it 'defaults to 0' do

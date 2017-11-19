@@ -50,6 +50,9 @@ require_relative 'aws-sdk-code-generator/views/root_resource_class'
 require_relative 'aws-sdk-code-generator/views/service_module'
 require_relative 'aws-sdk-code-generator/views/spec/spec_helper'
 require_relative 'aws-sdk-code-generator/views/types_module'
+require_relative 'aws-sdk-code-generator/views/authorizer_class'
+require_relative 'aws-sdk-code-generator/views/apig_endpoint_class'
+require_relative 'aws-sdk-code-generator/views/apig_readme'
 require_relative 'aws-sdk-code-generator/views/version'
 require_relative 'aws-sdk-code-generator/views/waiters_module'
 require_relative 'aws-sdk-code-generator/waiter'
@@ -58,3 +61,16 @@ require_relative 'aws-sdk-code-generator/yard_option_tag'
 # Public interfaces
 require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
+
+module AwsSdkCodeGenerator
+
+  GENERATED_SRC_WARNING = <<-WARNING_TXT
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+  WARNING_TXT
+
+end

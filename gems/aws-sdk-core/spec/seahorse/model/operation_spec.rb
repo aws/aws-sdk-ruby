@@ -38,6 +38,13 @@ module Seahorse
         expect(operation.documentation).to eq('docstring')
       end
 
+      it 'defaults #authorizer to nil' do
+        operation = Operation.new
+        expect(operation.authorizer).to be(nil)
+        operation.authorizer = 'MyAuthorizer'
+        expect(operation.authorizer).to eq('MyAuthorizer')
+      end
+
       it 'defaults #input to nil' do
         shape_ref = double('shape-ref')
         operation = Operation.new
