@@ -52,6 +52,7 @@ module Aws
     CognitoIdentityProvider
     CognitoSync
     ConfigService
+    CostExplorer
     CostandUsageReportService
     DAX
     DataPipeline

@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
+
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Kinesis - Updated the API, and documentation for Amazon Kinesis.
+
+* Feature - Aws::WorkDocs - Updated the API, and documentation for Amazon WorkDocs.
+
+* Feature - Aws::CostExplorer - Added support for a new service, AWS Cost Explorer Service.
+
 2.10.86 (2017-11-17)
 ------------------
 

@@ -114,6 +114,10 @@
     "models": "config/2014-11-12",
     "endpoint": "config"
   },
+  "CostExplorer": {
+    "models": "ce/2017-10-25",
+    "endpoint": "ce"
+  },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06",
     "endpoint": "cur"

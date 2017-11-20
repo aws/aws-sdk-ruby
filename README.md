@@ -267,6 +267,7 @@ to be backwards compatible.
 | AWS CodePipeline                    | CodePipeline                  | 2015-07-09  |
 | AWS CodeStar                        | CodeStar                      | 2017-04-19  |
 | AWS Config                          | ConfigService                 | 2014-11-12  |
+| AWS Cost Explorer Service           | CostExplorer                  | 2017-10-25  |
 | AWS Cost and Usage Report Service   | CostandUsageReportService     | 2017-01-06  |
 | AWS Data Pipeline                   | DataPipeline                  | 2012-10-29  |
 | AWS Database Migration Service      | DatabaseMigrationService      | 2016-01-01  |
@@ -282,8 +283,8 @@ to be backwards compatible.
 | AWS IoT                             | IoT                           | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                  | 2015-05-28  |
 | AWS Key Management Service          | KMS                           | 2014-11-01  |
-| AWS Lambda                          | LambdaPreview                 | 2014-11-11  |
 | AWS Lambda                          | Lambda                        | 2015-03-31  |
+| AWS Lambda                          | LambdaPreview                 | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | MarketplaceEntitlementService | 2017-01-11  |
 | AWS Migration Hub                   | MigrationHub                  | 2017-05-31  |
@@ -359,8 +360,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | WorkSpaces                    | 2015-04-08  |
 | Application Auto Scaling            | ApplicationAutoScaling        | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                   | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
+| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 
 ## License
 
