@@ -155,8 +155,8 @@ module Aws::Kinesis
 
     # @!group API Operations
 
-    # Adds or updates tags for the specified Amazon Kinesis stream. Each
-    # stream can have up to 10 tags.
+    # Adds or updates tags for the specified Kinesis stream. Each stream can
+    # have up to 10 tags.
     #
     # If tags have already been assigned to the stream, `AddTagsToStream`
     # overwrites any existing tags that correspond to the specified tag
@@ -188,9 +188,9 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Creates an Amazon Kinesis stream. A stream captures and transports
-    # data records that are continuously emitted from different data sources
-    # or *producers*. Scale-out within a stream is explicitly supported by
+    # Creates a Kinesis stream. A stream captures and transports data
+    # records that are continuously emitted from different data sources or
+    # *producers*. Scale-out within a stream is explicitly supported by
     # means of shards, which are uniquely identified groups of data records
     # in a stream.
     #
@@ -198,9 +198,8 @@ module Aws::Kinesis
     # of. Each shard can support reads up to 5 transactions per second, up
     # to a maximum data read total of 2 MB per second. Each shard can
     # support writes up to 1,000 records per second, up to a maximum data
-    # write total of 1 MB per second. You can add shards to a stream if the
-    # amount of data input increases and you can remove shards if the amount
-    # of data input decreases.
+    # write total of 1 MB per second. I the amount of data input increases
+    # or decreases, you can add or remove shards.
     #
     # The stream name identifies the stream. The name is scoped to the AWS
     # account used by the application. It is also scoped by region. That is,
@@ -209,13 +208,13 @@ module Aws::Kinesis
     # the same name.
     #
     # `CreateStream` is an asynchronous operation. Upon receiving a
-    # `CreateStream` request, Amazon Kinesis immediately returns and sets
-    # the stream status to `CREATING`. After the stream is created, Amazon
-    # Kinesis sets the stream status to `ACTIVE`. You should perform read
+    # `CreateStream` request, Kinesis Streams immediately returns and sets
+    # the stream status to `CREATING`. After the stream is created, Kinesis
+    # Streams sets the stream status to `ACTIVE`. You should perform read
     # and write operations only on an `ACTIVE` stream.
     #
     # You receive a `LimitExceededException` when making a `CreateStream`
-    # request if you try to do one of the following:
+    # request when you try to do one of the following:
     #
     # * Have more than five streams in the `CREATING` state at any point in
     #   time.
@@ -223,8 +222,8 @@ module Aws::Kinesis
     # * Create more shards than are authorized for your account.
     #
     # For the default shard limit for an AWS account, see [Streams
-    # Limits][1] in the *Amazon Kinesis Streams Developer Guide*. If you
-    # need to increase this limit, [contact AWS Support][2].
+    # Limits][1] in the *Amazon Kinesis Streams Developer Guide*. To
+    # increase this limit, [contact AWS Support][2].
     #
     # You can use `DescribeStream` to check the stream status, which is
     # returned in `StreamStatus`.
@@ -240,8 +239,8 @@ module Aws::Kinesis
     #   A name to identify the stream. The stream name is scoped to the AWS
     #   account used by the application that creates the stream. It is also
     #   scoped by region. That is, two streams in two different AWS accounts
-    #   can have the same name, and two streams in the same AWS account but in
-    #   two different regions can have the same name.
+    #   can have the same name. Two streams in the same AWS account but in two
+    #   different regions can also have the same name.
     #
     # @option params [required, Integer] :shard_count
     #   The number of shards that the stream will use. The throughput of the
@@ -268,8 +267,8 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Decreases the Amazon Kinesis stream's retention period, which is the
-    # length of time data records are accessible after they are added to the
+    # Decreases the Kinesis stream's retention period, which is the length
+    # of time data records are accessible after they are added to the
     # stream. The minimum value of a stream's retention period is 24 hours.
     #
     # This operation may result in lost data. For example, if the stream's
@@ -301,16 +300,16 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Deletes an Amazon Kinesis stream and all its shards and data. You must
-    # shut down any applications that are operating on the stream before you
+    # Deletes a Kinesis stream and all its shards and data. You must shut
+    # down any applications that are operating on the stream before you
     # delete the stream. If an application attempts to operate on a deleted
-    # stream, it will receive the exception `ResourceNotFoundException`.
+    # stream, it receives the exception `ResourceNotFoundException`.
     #
     # If the stream is in the `ACTIVE` state, you can delete it. After a
     # `DeleteStream` request, the specified stream is in the `DELETING`
-    # state until Amazon Kinesis completes the deletion.
+    # state until Kinesis Streams completes the deletion.
     #
-    # **Note:** Amazon Kinesis might continue to accept data read and write
+    # **Note:** Kinesis Streams might continue to accept data read and write
     # operations, such as PutRecord, PutRecords, and GetRecords, on a stream
     # in the `DELETING` state until the stream deletion is complete.
     #
@@ -368,7 +367,7 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Describes the specified Amazon Kinesis stream.
+    # Describes the specified Kinesis stream.
     #
     # The information returned includes the stream name, Amazon Resource
     # Name (ARN), creation time, enhanced metric configuration, and shard
@@ -447,10 +446,53 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Provides a summarized description of the specified Kinesis stream
+    # without the shard list.
+    #
+    # The information returned includes the stream name, Amazon Resource
+    # Name (ARN), status, record retention period, approximate creation
+    # time, monitoring, encryption details, and open shard count.
+    #
+    # @option params [required, String] :stream_name
+    #   The name of the stream to describe.
+    #
+    # @return [Types::DescribeStreamSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStreamSummaryOutput#stream_description_summary #stream_description_summary} => Types::StreamDescriptionSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stream_summary({
+    #     stream_name: "StreamName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_description_summary.stream_name #=> String
+    #   resp.stream_description_summary.stream_arn #=> String
+    #   resp.stream_description_summary.stream_status #=> String, one of "CREATING", "DELETING", "ACTIVE", "UPDATING"
+    #   resp.stream_description_summary.retention_period_hours #=> Integer
+    #   resp.stream_description_summary.stream_creation_timestamp #=> Time
+    #   resp.stream_description_summary.enhanced_monitoring #=> Array
+    #   resp.stream_description_summary.enhanced_monitoring[0].shard_level_metrics #=> Array
+    #   resp.stream_description_summary.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+    #   resp.stream_description_summary.encryption_type #=> String, one of "NONE", "KMS"
+    #   resp.stream_description_summary.key_id #=> String
+    #   resp.stream_description_summary.open_shard_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
+    #
+    # @overload describe_stream_summary(params = {})
+    # @param [Hash] params ({})
+    def describe_stream_summary(params = {}, options = {})
+      req = build_request(:describe_stream_summary, params)
+      req.send_request(options)
+    end
+
     # Disables enhanced monitoring.
     #
     # @option params [required, String] :stream_name
-    #   The name of the Amazon Kinesis stream for which to disable enhanced
+    #   The name of the Kinesis stream for which to disable enhanced
     #   monitoring.
     #
     # @option params [required, Array<String>] :shard_level_metrics
@@ -513,8 +555,7 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Enables enhanced Amazon Kinesis stream monitoring for shard-level
-    # metrics.
+    # Enables enhanced Kinesis stream monitoring for shard-level metrics.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream for which to enable enhanced monitoring.
@@ -579,14 +620,14 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Gets data records from an Amazon Kinesis stream's shard.
+    # Gets data records from a Kinesis stream's shard.
     #
     # Specify a shard iterator using the `ShardIterator` parameter. The
     # shard iterator specifies the position in the shard from which you want
     # to start reading data records sequentially. If there are no records
     # available in the portion of the shard that the iterator points to,
-    # GetRecords returns an empty list. Note that it might take multiple
-    # calls to get to a portion of the shard that contains records.
+    # GetRecords returns an empty list. It might take multiple calls to get
+    # to a portion of the shard that contains records.
     #
     # You can scale by provisioning multiple shards per stream while
     # considering service limits (for more information, see [Streams
@@ -596,10 +637,10 @@ module Aws::Kinesis
     # GetRecords in a loop. Use GetShardIterator to get the shard iterator
     # to specify in the first GetRecords call. GetRecords returns a new
     # shard iterator in `NextShardIterator`. Specify the shard iterator
-    # returned in `NextShardIterator` in subsequent calls to GetRecords.
-    # Note that if the shard has been closed, the shard iterator can't
-    # return more data and GetRecords returns `null` in `NextShardIterator`.
-    # You can terminate the loop when the shard is closed, or when the shard
+    # returned in `NextShardIterator` in subsequent calls to GetRecords. If
+    # the shard has been closed, the shard iterator can't return more data
+    # and GetRecords returns `null` in `NextShardIterator`. You can
+    # terminate the loop when the shard is closed, or when the shard
     # iterator reaches the record with the sequence number or other
     # attribute that marks it as the last record to process.
     #
@@ -615,10 +656,10 @@ module Aws::Kinesis
     # calls made within the next 5 seconds throw
     # `ProvisionedThroughputExceededException`. If there is insufficient
     # provisioned throughput on the shard, subsequent calls made within the
-    # next 1 second throw `ProvisionedThroughputExceededException`. Note
-    # that GetRecords won't return any data when it throws an exception.
-    # For this reason, we recommend that you wait one second between calls
-    # to GetRecords; however, it's possible that the application will get
+    # next 1 second throw `ProvisionedThroughputExceededException`.
+    # GetRecords won't return any data when it throws an exception. For
+    # this reason, we recommend that you wait one second between calls to
+    # GetRecords; however, it's possible that the application will get
     # exceptions for longer than 1 second.
     #
     # To detect whether the application is falling behind in processing, you
@@ -629,13 +670,13 @@ module Aws::Kinesis
     # Each Amazon Kinesis record includes a value,
     # `ApproximateArrivalTimestamp`, that is set when a stream successfully
     # receives and stores a record. This is commonly referred to as a
-    # server-side timestamp, whereas a client-side timestamp is set when a
+    # server-side time stamp, whereas a client-side time stamp is set when a
     # data producer creates or sends the record to a stream (a data producer
     # is any data source putting data records into a stream, for example
-    # with PutRecords). The timestamp has millisecond precision. There are
-    # no guarantees about the timestamp accuracy, or that the timestamp is
+    # with PutRecords). The time stamp has millisecond precision. There are
+    # no guarantees about the time stamp accuracy, or that the time stamp is
     # always increasing. For example, records in a shard or across a stream
-    # might have timestamps that are out of order.
+    # might have time stamps that are out of order.
     #
     #
     #
@@ -698,15 +739,16 @@ module Aws::Kinesis
     # You must specify the shard iterator type. For example, you can set the
     # `ShardIteratorType` parameter to read exactly from the position
     # denoted by a specific sequence number by using the
-    # `AT_SEQUENCE_NUMBER` shard iterator type, or right after the sequence
-    # number by using the `AFTER_SEQUENCE_NUMBER` shard iterator type, using
-    # sequence numbers returned by earlier calls to PutRecord, PutRecords,
-    # GetRecords, or DescribeStream. In the request, you can specify the
-    # shard iterator type `AT_TIMESTAMP` to read records from an arbitrary
-    # point in time, `TRIM_HORIZON` to cause `ShardIterator` to point to the
-    # last untrimmed record in the shard in the system (the oldest data
-    # record in the shard), or `LATEST` so that you always read the most
-    # recent data in the shard.
+    # `AT_SEQUENCE_NUMBER` shard iterator type. Alternatively, the parameter
+    # can read right after the sequence number by using the
+    # `AFTER_SEQUENCE_NUMBER` shard iterator type, using sequence numbers
+    # returned by earlier calls to PutRecord, PutRecords, GetRecords, or
+    # DescribeStream. In the request, you can specify the shard iterator
+    # type `AT_TIMESTAMP` to read records from an arbitrary point in time,
+    # `TRIM_HORIZON` to cause `ShardIterator` to point to the last untrimmed
+    # record in the shard in the system (the oldest data record in the
+    # shard), or `LATEST` so that you always read the most recent data in
+    # the shard.
     #
     # When you read repeatedly from a stream, use a GetShardIterator request
     # to get the first shard iterator for use in your first GetRecords
@@ -721,8 +763,8 @@ module Aws::Kinesis
     # *Amazon Kinesis Streams Developer Guide*.
     #
     # If the shard is closed, GetShardIterator returns a valid iterator for
-    # the last sequence number of the shard. Note that a shard can be closed
-    # as a result of using SplitShard or MergeShards.
+    # the last sequence number of the shard. A shard can be closed as a
+    # result of using SplitShard or MergeShards.
     #
     # GetShardIterator has a limit of 5 transactions per second per account
     # per open shard.
@@ -735,7 +777,7 @@ module Aws::Kinesis
     #   The name of the Amazon Kinesis stream.
     #
     # @option params [required, String] :shard_id
-    #   The shard ID of the Amazon Kinesis shard to get the iterator for.
+    #   The shard ID of the Kinesis Streams shard to get the iterator for.
     #
     # @option params [required, String] :shard_iterator_type
     #   Determines how the shard iterator is used to start reading data
@@ -752,7 +794,7 @@ module Aws::Kinesis
     #     `StartingSequenceNumber`.
     #
     #   * AT\_TIMESTAMP - Start reading from the position denoted by a
-    #     specific timestamp, provided in the value `Timestamp`.
+    #     specific time stamp, provided in the value `Timestamp`.
     #
     #   * TRIM\_HORIZON - Start reading at the last untrimmed record in the
     #     shard in the system, which is the oldest data record in the shard.
@@ -766,12 +808,12 @@ module Aws::Kinesis
     #   AFTER\_SEQUENCE\_NUMBER.
     #
     # @option params [Time,DateTime,Date,Integer,String] :timestamp
-    #   The timestamp of the data record from which to start reading. Used
-    #   with shard iterator type AT\_TIMESTAMP. A timestamp is the Unix epoch
+    #   The time stamp of the data record from which to start reading. Used
+    #   with shard iterator type AT\_TIMESTAMP. A time stamp is the Unix epoch
     #   date with precision in milliseconds. For example,
     #   `2016-04-04T19:58:46.480-00:00` or `1459799926.480`. If a record with
-    #   this exact timestamp does not exist, the iterator returned is for the
-    #   next (later) record. If the timestamp is older than the current trim
+    #   this exact time stamp does not exist, the iterator returned is for the
+    #   next (later) record. If the time stamp is older than the current trim
     #   horizon, the iterator returned is for the oldest untrimmed data record
     #   (TRIM\_HORIZON).
     #
@@ -807,13 +849,13 @@ module Aws::Kinesis
     # stream. The maximum value of a stream's retention period is 168 hours
     # (7 days).
     #
-    # Upon choosing a longer stream retention period, this operation will
-    # increase the time period records are accessible that have not yet
-    # expired. However, it will not make previous data that has expired
-    # (older than the stream's previous retention period) accessible after
-    # the operation has been called. For example, if a stream's retention
-    # period is set to 24 hours and is increased to 168 hours, any data that
-    # is older than 24 hours will remain inaccessible to consumer
+    # If you choose a longer stream retention period, this operation
+    # increases the time period during which records that have not yet
+    # expired are accessible. However, it does not make previous, expired
+    # data (older than the stream's previous retention period) accessible
+    # after the operation has been called. For example, if a stream's
+    # retention period is set to 24 hours and is increased to 168 hours, any
+    # data that is older than 24 hours remains inaccessible to consumer
     # applications.
     #
     # @option params [required, String] :stream_name
@@ -841,12 +883,12 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Lists your Amazon Kinesis streams.
+    # Lists your Kinesis streams.
     #
     # The number of streams may be too large to return from a single call to
     # `ListStreams`. You can limit the number of returned streams using the
     # `Limit` parameter. If you do not specify a value for the `Limit`
-    # parameter, Amazon Kinesis uses the default limit, which is currently
+    # parameter, Kinesis Streams uses the default limit, which is currently
     # 10.
     #
     # You can detect if there are more streams available to list by using
@@ -893,7 +935,7 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Lists the tags for the specified Amazon Kinesis stream.
+    # Lists the tags for the specified Kinesis stream.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream.
@@ -938,13 +980,13 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Merges two adjacent shards in an Amazon Kinesis stream and combines
-    # them into a single shard to reduce the stream's capacity to ingest
-    # and transport data. Two shards are considered adjacent if the union of
-    # the hash key ranges for the two shards form a contiguous set with no
-    # gaps. For example, if you have two shards, one with a hash key range
-    # of 276...381 and the other with a hash key range of 382...454, then
-    # you could merge these two shards into a single shard that would have a
+    # Merges two adjacent shards in a Kinesis stream and combines them into
+    # a single shard to reduce the stream's capacity to ingest and
+    # transport data. Two shards are considered adjacent if the union of the
+    # hash key ranges for the two shards form a contiguous set with no gaps.
+    # For example, if you have two shards, one with a hash key range of
+    # 276...381 and the other with a hash key range of 382...454, then you
+    # could merge these two shards into a single shard that would have a
     # hash key range of 276...454. After the merge, the single child shard
     # receives data for all hash key values covered by the two parent
     # shards.
@@ -978,7 +1020,7 @@ module Aws::Kinesis
     # CreateStream, DeleteStream, `MergeShards` or SplitShard, you will
     # receive a `LimitExceededException`.
     #
-    # `MergeShards` has limit of 5 transactions per second per account.
+    # `MergeShards` has a limit of 5 transactions per second per account.
     #
     #
     #
@@ -1026,11 +1068,11 @@ module Aws::Kinesis
     # log file, geographic/location data, website clickstream data, and so
     # on.
     #
-    # The partition key is used by Amazon Kinesis to distribute data across
-    # shards. Amazon Kinesis segregates the data records that belong to a
+    # The partition key is used by Kinesis Streams to distribute data across
+    # shards. Kinesis Streams segregates the data records that belong to a
     # stream into multiple shards, using the partition key associated with
-    # each data record to determine which shard a given data record belongs
-    # to.
+    # each data record to determine the shard to which a given data record
+    # belongs.
     #
     # Partition keys are Unicode strings, with a maximum length limit of 256
     # characters for each key. An MD5 hash function is used to map partition
@@ -1093,7 +1135,7 @@ module Aws::Kinesis
     #   same client and to the same partition key. Usage: set the
     #   `SequenceNumberForOrdering` of record *n* to the sequence number of
     #   record *n-1* (as returned in the result when putting record *n-1*). If
-    #   this parameter is not set, records will be coarsely ordered based on
+    #   this parameter is not set, records are coarsely ordered based on
     #   arrival time.
     #
     # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1127,9 +1169,9 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Writes multiple data records into an Amazon Kinesis stream in a single
-    # call (also referred to as a `PutRecords` request). Use this operation
-    # to send data into the stream for data ingestion and processing.
+    # Writes multiple data records into a Kinesis stream in a single call
+    # (also referred to as a `PutRecords` request). Use this operation to
+    # send data into the stream for data ingestion and processing.
     #
     # Each `PutRecords` request can support up to 500 records. Each record
     # in the request can be as large as 1 MB, up to a limit of 5 MB for the
@@ -1147,7 +1189,7 @@ module Aws::Kinesis
     # log file, geographic/location data, website clickstream data, and so
     # on.
     #
-    # The partition key is used by Amazon Kinesis as input to a hash
+    # The partition key is used by Kinesis Streams as input to a hash
     # function that maps the partition key and associated data to a specific
     # shard. An MD5 hash function is used to map partition keys to 128-bit
     # integer values and to map associated data records to shards. As a
@@ -1174,13 +1216,13 @@ module Aws::Kinesis
     # all records in each `PutRecords` request. A single record failure does
     # not stop the processing of subsequent records.
     #
-    # A successfully-processed record includes `ShardId` and
+    # A successfully processed record includes `ShardId` and
     # `SequenceNumber` values. The `ShardId` parameter identifies the shard
     # in the stream where the record is stored. The `SequenceNumber`
     # parameter is an identifier assigned to the put record, unique to all
     # records in the stream.
     #
-    # An unsuccessfully-processed record includes `ErrorCode` and
+    # An unsuccessfully processed record includes `ErrorCode` and
     # `ErrorMessage` values. `ErrorCode` reflects the type of error and can
     # be one of the following values:
     # `ProvisionedThroughputExceededException` or `InternalFailure`.
@@ -1246,8 +1288,8 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Removes tags from the specified Amazon Kinesis stream. Removed tags
-    # are deleted and cannot be recovered after this operation successfully
+    # Removes tags from the specified Kinesis stream. Removed tags are
+    # deleted and cannot be recovered after this operation successfully
     # completes.
     #
     # If you specify a tag that does not exist, it is ignored.
@@ -1276,36 +1318,35 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Splits a shard into two new shards in the Amazon Kinesis stream to
-    # increase the stream's capacity to ingest and transport data.
-    # `SplitShard` is called when there is a need to increase the overall
-    # capacity of a stream because of an expected increase in the volume of
-    # data records being ingested.
+    # Splits a shard into two new shards in the Kinesis stream, to increase
+    # the stream's capacity to ingest and transport data. `SplitShard` is
+    # called when there is a need to increase the overall capacity of a
+    # stream because of an expected increase in the volume of data records
+    # being ingested.
     #
     # You can also use `SplitShard` when a shard appears to be approaching
     # its maximum utilization; for example, the producers sending data into
     # the specific shard are suddenly sending more than previously
     # anticipated. You can also call `SplitShard` to increase stream
-    # capacity, so that more Amazon Kinesis applications can simultaneously
+    # capacity, so that more Kinesis Streams applications can simultaneously
     # read data from the stream for real-time processing.
     #
     # You must specify the shard to be split and the new hash key, which is
     # the position in the shard where the shard gets split in two. In many
-    # cases, the new hash key might simply be the average of the beginning
-    # and ending hash key, but it can be any hash key value in the range
-    # being mapped into the shard. For more information about splitting
-    # shards, see [Split a Shard][1] in the *Amazon Kinesis Streams
-    # Developer Guide*.
+    # cases, the new hash key might be the average of the beginning and
+    # ending hash key, but it can be any hash key value in the range being
+    # mapped into the shard. For more information, see [Split a Shard][1] in
+    # the *Amazon Kinesis Streams Developer Guide*.
     #
     # You can use DescribeStream to determine the shard ID and hash key
     # values for the `ShardToSplit` and `NewStartingHashKey` parameters that
     # are specified in the `SplitShard` request.
     #
     # `SplitShard` is an asynchronous operation. Upon receiving a
-    # `SplitShard` request, Amazon Kinesis immediately returns a response
+    # `SplitShard` request, Kinesis Streams immediately returns a response
     # and sets the stream status to `UPDATING`. After the operation is
-    # completed, Amazon Kinesis sets the stream status to `ACTIVE`. Read and
-    # write operations continue to work while the stream is in the
+    # completed, Kinesis Streams sets the stream status to `ACTIVE`. Read
+    # and write operations continue to work while the stream is in the
     # `UPDATING` state.
     #
     # You can use `DescribeStream` to check the status of the stream, which
@@ -1319,14 +1360,14 @@ module Aws::Kinesis
     # authorized for your account, you receive a `LimitExceededException`.
     #
     # For the default shard limit for an AWS account, see [Streams
-    # Limits][2] in the *Amazon Kinesis Streams Developer Guide*. If you
-    # need to increase this limit, [contact AWS Support][3].
+    # Limits][2] in the *Amazon Kinesis Streams Developer Guide*. To
+    # increase this limit, [contact AWS Support][3].
     #
     # If you try to operate on too many streams simultaneously using
     # CreateStream, DeleteStream, MergeShards, and/or SplitShard, you
     # receive a `LimitExceededException`.
     #
-    # `SplitShard` has limit of 5 transactions per second per account.
+    # `SplitShard` has a limit of 5 transactions per second per account.
     #
     #
     #
@@ -1373,39 +1414,48 @@ module Aws::Kinesis
     # specified stream.
     #
     # Starting encryption is an asynchronous operation. Upon receiving the
-    # request, Amazon Kinesis returns immediately and sets the status of the
-    # stream to `UPDATING`. After the update is complete, Amazon Kinesis
-    # sets the status of the stream back to `ACTIVE`. Updating or applying
-    # encryption normally takes a few seconds to complete but it can take
-    # minutes. You can continue to read and write data to your stream while
-    # its status is `UPDATING`. Once the status of the stream is `ACTIVE`,
-    # records written to the stream will begin to be encrypted.
+    # request, Kinesis Streams returns immediately and sets the status of
+    # the stream to `UPDATING`. After the update is complete, Kinesis
+    # Streams sets the status of the stream back to `ACTIVE`. Updating or
+    # applying encryption normally takes a few seconds to complete, but it
+    # can take minutes. You can continue to read and write data to your
+    # stream while its status is `UPDATING`. Once the status of the stream
+    # is `ACTIVE`, encryption begins for records written to the stream.
     #
     # API Limits: You can successfully apply a new AWS KMS key for
-    # server-side encryption 25 times in a rolling 24 hour period.
+    # server-side encryption 25 times in a rolling 24-hour period.
     #
-    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
-    # status before all records written to the stream are encrypted. After
-    # you’ve enabled encryption, you can verify encryption was applied by
-    # inspecting the API response from `PutRecord` or `PutRecords`.
+    # Note: It can take up to five seconds after the stream is in an
+    # `ACTIVE` status before all records written to the stream are
+    # encrypted. After you enable encryption, you can verify that encryption
+    # is applied by inspecting the API response from `PutRecord` or
+    # `PutRecords`.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream for which to start encrypting records.
     #
     # @option params [required, String] :encryption_type
-    #   The encryption type to use. This parameter can be one of the following
-    #   values:
-    #
-    #   * `NONE`\: Not valid for this operation. An
-    #     `InvalidOperationException` will be thrown.
-    #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed KMS key.
+    #   The encryption type to use. The only valid value is `KMS`.
     #
     # @option params [required, String] :key_id
-    #   The GUID for the customer-managed KMS key to use for encryption. You
-    #   can also use a Kinesis-owned master key by specifying the alias
-    #   `aws/kinesis`.
+    #   The GUID for the customer-managed KMS key to use for encryption. This
+    #   value can be a globally unique identifier, a fully specified ARN to
+    #   either an alias or a key, or an alias name prefixed by "alias/".You
+    #   can also use a master key owned by Kinesis Streams by specifying the
+    #   alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis Streams: `alias/aws/kinesis`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1429,39 +1479,49 @@ module Aws::Kinesis
     # Disables server-side encryption for a specified stream.
     #
     # Stopping encryption is an asynchronous operation. Upon receiving the
-    # request, Amazon Kinesis returns immediately and sets the status of the
-    # stream to `UPDATING`. After the update is complete, Amazon Kinesis
-    # sets the status of the stream back to `ACTIVE`. Stopping encryption
-    # normally takes a few seconds to complete but it can take minutes. You
-    # can continue to read and write data to your stream while its status is
-    # `UPDATING`. Once the status of the stream is `ACTIVE` records written
-    # to the stream will no longer be encrypted by the Amazon Kinesis
-    # Streams service.
+    # request, Kinesis Streams returns immediately and sets the status of
+    # the stream to `UPDATING`. After the update is complete, Kinesis
+    # Streams sets the status of the stream back to `ACTIVE`. Stopping
+    # encryption normally takes a few seconds to complete, but it can take
+    # minutes. You can continue to read and write data to your stream while
+    # its status is `UPDATING`. Once the status of the stream is `ACTIVE`,
+    # records written to the stream are no longer encrypted by Kinesis
+    # Streams.
     #
     # API Limits: You can successfully disable server-side encryption 25
-    # times in a rolling 24 hour period.
+    # times in a rolling 24-hour period.
     #
-    # Note: It can take up to 5 seconds after the stream is in an `ACTIVE`
-    # status before all records written to the stream are no longer subject
-    # to encryption. After you’ve disabled encryption, you can verify
-    # encryption was not applied by inspecting the API response from
+    # Note: It can take up to five seconds after the stream is in an
+    # `ACTIVE` status before all records written to the stream are no longer
+    # subject to encryption. After you disabled encryption, you can verify
+    # that encryption is not applied by inspecting the API response from
     # `PutRecord` or `PutRecords`.
     #
     # @option params [required, String] :stream_name
     #   The name of the stream on which to stop encrypting records.
     #
     # @option params [required, String] :encryption_type
-    #   The encryption type. This parameter can be one of the following
-    #   values:
-    #
-    #   * `NONE`\: Not valid for this operation. An
-    #     `InvalidOperationException` will be thrown.
-    #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed KMS key.
+    #   The encryption type. The only valid value is `KMS`.
     #
     # @option params [required, String] :key_id
-    #   The GUID for the customer-managed key that was used for encryption.
+    #   The GUID for the customer-managed KMS key to use for encryption. This
+    #   value can be a globally unique identifier, a fully specified ARN to
+    #   either an alias or a key, or an alias name prefixed by "alias/".You
+    #   can also use a master key owned by Kinesis Streams by specifying the
+    #   alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis Streams: `alias/aws/kinesis`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1486,40 +1546,40 @@ module Aws::Kinesis
     # number of shards.
     #
     # Updating the shard count is an asynchronous operation. Upon receiving
-    # the request, Amazon Kinesis returns immediately and sets the status of
-    # the stream to `UPDATING`. After the update is complete, Amazon Kinesis
-    # sets the status of the stream back to `ACTIVE`. Depending on the size
-    # of the stream, the scaling action could take a few minutes to
+    # the request, Kinesis Streams returns immediately and sets the status
+    # of the stream to `UPDATING`. After the update is complete, Kinesis
+    # Streams sets the status of the stream back to `ACTIVE`. Depending on
+    # the size of the stream, the scaling action could take a few minutes to
     # complete. You can continue to read and write data to your stream while
     # its status is `UPDATING`.
     #
-    # To update the shard count, Amazon Kinesis performs splits or merges on
-    # individual shards. This can cause short-lived shards to be created, in
-    # addition to the final shards. We recommend that you double or halve
+    # To update the shard count, Kinesis Streams performs splits or merges
+    # on individual shards. This can cause short-lived shards to be created,
+    # in addition to the final shards. We recommend that you double or halve
     # the shard count, as this results in the fewest number of splits or
     # merges.
     #
     # This operation has the following limits, which are per region per
-    # account unless otherwise noted:
+    # account unless otherwise noted. You cannot:
     #
-    # * scale more than twice per rolling 24 hour period
+    # * Scale more than twice per rolling 24 hour period
     #
-    # * scale up above double your current shard count
+    # * Scale up to double your current shard count
     #
-    # * scale down below half your current shard count
+    # * Scale down below half your current shard count
     #
-    # * scale up above 200 shards in a stream
+    # * Scale up to more 500 shards in a stream
     #
-    # * scale a stream with more than 200 shards down unless the result is
-    #   less than 200 shards
+    # * Scale a stream with more than 500 shards down unless the result is
+    #   less than 500 shards
     #
-    # * scale up above the shard limits for your account
+    # * Scale up more the shard limits for your account
     #
     # *
     #
     # For the default limits for an AWS account, see [Streams Limits][1] in
-    # the *Amazon Kinesis Streams Developer Guide*. If you need to increase
-    # a limit, [contact AWS Support][2].
+    # the *Amazon Kinesis Streams Developer Guide*. To increase a limit,
+    # [contact AWS Support][2].
     #
     #
     #
@@ -1577,7 +1637,7 @@ module Aws::Kinesis
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

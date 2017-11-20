@@ -98,6 +98,9 @@
   "ConfigService": {
     "models": "config/2014-11-12"
   },
+  "CostExplorer": {
+    "models": "ce/2017-10-25"
+  },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06"
   },

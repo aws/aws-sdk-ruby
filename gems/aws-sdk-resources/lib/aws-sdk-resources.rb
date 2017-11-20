@@ -32,6 +32,7 @@ module Aws
   autoload :CognitoIdentityProvider, 'aws-sdk-cognitoidentityprovider'
   autoload :CognitoSync, 'aws-sdk-cognitosync'
   autoload :ConfigService, 'aws-sdk-configservice'
+  autoload :CostExplorer, 'aws-sdk-costexplorer'
   autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :DAX, 'aws-sdk-dax'
   autoload :DataPipeline, 'aws-sdk-datapipeline'

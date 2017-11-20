@@ -3546,7 +3546,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] sdk_type
     #   The language for the generated SDK. Currently `java`, `javascript`,
-    #   `android`, `objectivec` and `swift` (for iOS) are supported.
+    #   `android`, `objectivec` (for iOS), `swift` (for iOS), and `ruby` are
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] parameters

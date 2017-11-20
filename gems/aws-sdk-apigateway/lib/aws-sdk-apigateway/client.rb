@@ -3340,7 +3340,8 @@ module Aws::APIGateway
     #
     # @option params [required, String] :sdk_type
     #   The language for the generated SDK. Currently `java`, `javascript`,
-    #   `android`, `objectivec` and `swift` (for iOS) are supported.
+    #   `android`, `objectivec` (for iOS), `swift` (for iOS), and `ruby` are
+    #   supported.
     #
     # @option params [Hash<String,String>] :parameters
     #   A string-to-string key-value map of query parameters
@@ -6004,7 +6005,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

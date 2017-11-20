@@ -249,6 +249,7 @@ module Aws
             'CognitoIdentityProvider' => 'cognito-idp',
             'CognitoSync' => 'cognito-sync',
             'ConfigService' => 'config',
+            'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
             'DAX' => 'dax',
             'DataPipeline' => 'datapipeline',

@@ -22,6 +22,8 @@ module Aws::Kinesis
     DescribeStreamInput = Shapes::StructureShape.new(name: 'DescribeStreamInput')
     DescribeStreamInputLimit = Shapes::IntegerShape.new(name: 'DescribeStreamInputLimit')
     DescribeStreamOutput = Shapes::StructureShape.new(name: 'DescribeStreamOutput')
+    DescribeStreamSummaryInput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryInput')
+    DescribeStreamSummaryOutput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryOutput')
     DisableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'DisableEnhancedMonitoringInput')
     EnableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'EnableEnhancedMonitoringInput')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
@@ -88,6 +90,7 @@ module Aws::Kinesis
     StopStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopStreamEncryptionInput')
     StreamARN = Shapes::StringShape.new(name: 'StreamARN')
     StreamDescription = Shapes::StructureShape.new(name: 'StreamDescription')
+    StreamDescriptionSummary = Shapes::StructureShape.new(name: 'StreamDescriptionSummary')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     StreamNameList = Shapes::ListShape.new(name: 'StreamNameList')
     StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
@@ -129,6 +132,12 @@ module Aws::Kinesis
 
     DescribeStreamOutput.add_member(:stream_description, Shapes::ShapeRef.new(shape: StreamDescription, required: true, location_name: "StreamDescription"))
     DescribeStreamOutput.struct_class = Types::DescribeStreamOutput
+
+    DescribeStreamSummaryInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    DescribeStreamSummaryInput.struct_class = Types::DescribeStreamSummaryInput
+
+    DescribeStreamSummaryOutput.add_member(:stream_description_summary, Shapes::ShapeRef.new(shape: StreamDescriptionSummary, required: true, location_name: "StreamDescriptionSummary"))
+    DescribeStreamSummaryOutput.struct_class = Types::DescribeStreamSummaryOutput
 
     DisableEnhancedMonitoringInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     DisableEnhancedMonitoringInput.add_member(:shard_level_metrics, Shapes::ShapeRef.new(shape: MetricsNameList, required: true, location_name: "ShardLevelMetrics"))
@@ -288,6 +297,17 @@ module Aws::Kinesis
     StreamDescription.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
     StreamDescription.struct_class = Types::StreamDescription
 
+    StreamDescriptionSummary.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    StreamDescriptionSummary.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    StreamDescriptionSummary.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
+    StreamDescriptionSummary.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+    StreamDescriptionSummary.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
+    StreamDescriptionSummary.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
+    StreamDescriptionSummary.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    StreamDescriptionSummary.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
+    StreamDescriptionSummary.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
+    StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
+
     StreamNameList.member = Shapes::ShapeRef.new(shape: StreamName)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -394,6 +414,16 @@ module Aws::Kinesis
             "stream_description.shards[-1].shard_id" => "exclusive_start_shard_id"
           }
         )
+      end)
+
+      api.add_operation(:describe_stream_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStreamSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStreamSummaryInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStreamSummaryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:disable_enhanced_monitoring, Seahorse::Model::Operation.new.tap do |o|

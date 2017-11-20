@@ -256,6 +256,9 @@ module Aws::Firehose
     # @option params [Types::ElasticsearchDestinationConfiguration] :elasticsearch_destination_configuration
     #   The destination in Amazon ES. You can specify only one destination.
     #
+    # @option params [Types::SplunkDestinationConfiguration] :splunk_destination_configuration
+    #   The destination in Splunk. You can specify only one destination.
+    #
     # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeliveryStreamOutput#delivery_stream_arn #delivery_stream_arn} => String
@@ -317,7 +320,7 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -388,7 +391,7 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -465,7 +468,57 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #     },
+    #     splunk_destination_configuration: {
+    #       hec_endpoint: "HECEndpoint", # required
+    #       hec_endpoint_type: "Raw", # required, accepts Raw, Event
+    #       hec_token: "HECToken", # required
+    #       hec_acknowledgment_timeout_in_seconds: 1,
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #       s3_configuration: { # required
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "Lambda", # required, accepts Lambda
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -596,7 +649,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors #=> Array
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.role_arn #=> String
@@ -632,7 +685,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors #=> Array
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.role_arn #=> String
@@ -673,11 +726,37 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors #=> Array
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint_type #=> String, one of "Raw", "Event"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_token #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_acknowledgment_timeout_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.retry_options.duration_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_backup_mode #=> String, one of "FailedEventsOnly", "AllEvents"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.bucket_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors #=> Array
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters #=> Array
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.has_more_destinations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream AWS API Documentation
@@ -686,36 +765,6 @@ module Aws::Firehose
     # @param [Hash] params ({})
     def describe_delivery_stream(params = {}, options = {})
       req = build_request(:describe_delivery_stream, params)
-      req.send_request(options)
-    end
-
-    # @option params [required, String] :delivery_stream_arn
-    #
-    # @return [Types::GetKinesisStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetKinesisStreamOutput#kinesis_stream_arn #kinesis_stream_arn} => String
-    #   * {Types::GetKinesisStreamOutput#credentials_for_reading_kinesis_stream #credentials_for_reading_kinesis_stream} => Types::SessionCredentials
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_kinesis_stream({
-    #     delivery_stream_arn: "DeliveryStreamARN", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.kinesis_stream_arn #=> String
-    #   resp.credentials_for_reading_kinesis_stream.access_key_id #=> String
-    #   resp.credentials_for_reading_kinesis_stream.secret_access_key #=> String
-    #   resp.credentials_for_reading_kinesis_stream.session_token #=> String
-    #   resp.credentials_for_reading_kinesis_stream.expiration #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream AWS API Documentation
-    #
-    # @overload get_kinesis_stream(params = {})
-    # @param [Hash] params ({})
-    def get_kinesis_stream(params = {}, options = {})
-      req = build_request(:get_kinesis_stream, params)
       req.send_request(options)
     end
 
@@ -731,7 +780,8 @@ module Aws::Firehose
     # **ExclusiveStartDeliveryStreamName** parameter of a subsequent call.
     #
     # @option params [Integer] :limit
-    #   The maximum number of delivery streams to list.
+    #   The maximum number of delivery streams to list. The default value is
+    #   10.
     #
     # @option params [String] :delivery_stream_type
     #   The delivery stream type. This can be one of the following values:
@@ -1022,6 +1072,9 @@ module Aws::Firehose
     # @option params [Types::ElasticsearchDestinationUpdate] :elasticsearch_destination_update
     #   Describes an update for a destination in Amazon ES.
     #
+    # @option params [Types::SplunkDestinationUpdate] :splunk_destination_update
+    #   Describes an update for a destination in Splunk.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1078,7 +1131,7 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1149,7 +1202,7 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1225,7 +1278,57 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #     },
+    #     splunk_destination_update: {
+    #       hec_endpoint: "HECEndpoint",
+    #       hec_endpoint_type: "Raw", # accepts Raw, Event
+    #       hec_token: "HECToken",
+    #       hec_acknowledgment_timeout_in_seconds: 1,
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #       s3_update: {
+    #         role_arn: "RoleARN",
+    #         bucket_arn: "BucketARN",
+    #         prefix: "Prefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "Lambda", # required, accepts Lambda
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1262,7 +1365,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

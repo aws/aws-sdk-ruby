@@ -12,7 +12,6 @@ module Aws::Firehose
     include Seahorse::Model
 
     AWSKMSKeyARN = Shapes::StringShape.new(name: 'AWSKMSKeyARN')
-    AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     BufferingHints = Shapes::StructureShape.new(name: 'BufferingHints')
@@ -62,12 +61,12 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration = Shapes::StructureShape.new(name: 'ExtendedS3DestinationConfiguration')
     ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
-    FirehoseSource = Shapes::StringShape.new(name: 'FirehoseSource')
-    GetKinesisStreamInput = Shapes::StructureShape.new(name: 'GetKinesisStreamInput')
-    GetKinesisStreamOutput = Shapes::StructureShape.new(name: 'GetKinesisStreamOutput')
+    HECAcknowledgmentTimeoutInSeconds = Shapes::IntegerShape.new(name: 'HECAcknowledgmentTimeoutInSeconds')
+    HECEndpoint = Shapes::StringShape.new(name: 'HECEndpoint')
+    HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
+    HECToken = Shapes::StringShape.new(name: 'HECToken')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
-    InvalidStreamTypeException = Shapes::StructureShape.new(name: 'InvalidStreamTypeException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
     KinesisStreamARN = Shapes::StringShape.new(name: 'KinesisStreamARN')
     KinesisStreamSourceConfiguration = Shapes::StructureShape.new(name: 'KinesisStreamSourceConfiguration')
@@ -112,12 +111,15 @@ module Aws::Firehose
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
-    SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
-    SessionCredentials = Shapes::StructureShape.new(name: 'SessionCredentials')
-    SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
     SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
+    SplunkDestinationConfiguration = Shapes::StructureShape.new(name: 'SplunkDestinationConfiguration')
+    SplunkDestinationDescription = Shapes::StructureShape.new(name: 'SplunkDestinationDescription')
+    SplunkDestinationUpdate = Shapes::StructureShape.new(name: 'SplunkDestinationUpdate')
+    SplunkRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SplunkRetryDurationInSeconds')
+    SplunkRetryOptions = Shapes::StructureShape.new(name: 'SplunkRetryOptions')
+    SplunkS3BackupMode = Shapes::StringShape.new(name: 'SplunkS3BackupMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateDestinationInput = Shapes::StructureShape.new(name: 'UpdateDestinationInput')
     UpdateDestinationOutput = Shapes::StructureShape.new(name: 'UpdateDestinationOutput')
@@ -144,6 +146,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:extended_s3_destination_configuration, Shapes::ShapeRef.new(shape: ExtendedS3DestinationConfiguration, location_name: "ExtendedS3DestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:splunk_destination_configuration, Shapes::ShapeRef.new(shape: SplunkDestinationConfiguration, location_name: "SplunkDestinationConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -181,6 +184,7 @@ module Aws::Firehose
     DestinationDescription.add_member(:extended_s3_destination_description, Shapes::ShapeRef.new(shape: ExtendedS3DestinationDescription, location_name: "ExtendedS3DestinationDescription"))
     DestinationDescription.add_member(:redshift_destination_description, Shapes::ShapeRef.new(shape: RedshiftDestinationDescription, location_name: "RedshiftDestinationDescription"))
     DestinationDescription.add_member(:elasticsearch_destination_description, Shapes::ShapeRef.new(shape: ElasticsearchDestinationDescription, location_name: "ElasticsearchDestinationDescription"))
+    DestinationDescription.add_member(:splunk_destination_description, Shapes::ShapeRef.new(shape: SplunkDestinationDescription, location_name: "SplunkDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
 
     DestinationDescriptionList.member = Shapes::ShapeRef.new(shape: DestinationDescription)
@@ -269,13 +273,6 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
-
-    GetKinesisStreamInput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
-    GetKinesisStreamInput.struct_class = Types::GetKinesisStreamInput
-
-    GetKinesisStreamOutput.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamARN, location_name: "KinesisStreamARN"))
-    GetKinesisStreamOutput.add_member(:credentials_for_reading_kinesis_stream, Shapes::ShapeRef.new(shape: SessionCredentials, location_name: "CredentialsForReadingKinesisStream"))
-    GetKinesisStreamOutput.struct_class = Types::GetKinesisStreamOutput
 
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
@@ -409,14 +406,44 @@ module Aws::Firehose
     S3DestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     S3DestinationUpdate.struct_class = Types::S3DestinationUpdate
 
-    SessionCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, required: true, location_name: "AccessKeyId"))
-    SessionCredentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, required: true, location_name: "SecretAccessKey"))
-    SessionCredentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, required: true, location_name: "SessionToken"))
-    SessionCredentials.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Expiration"))
-    SessionCredentials.struct_class = Types::SessionCredentials
-
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
+
+    SplunkDestinationConfiguration.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, required: true, location_name: "HECEndpoint"))
+    SplunkDestinationConfiguration.add_member(:hec_endpoint_type, Shapes::ShapeRef.new(shape: HECEndpointType, required: true, location_name: "HECEndpointType"))
+    SplunkDestinationConfiguration.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, required: true, location_name: "HECToken"))
+    SplunkDestinationConfiguration.add_member(:hec_acknowledgment_timeout_in_seconds, Shapes::ShapeRef.new(shape: HECAcknowledgmentTimeoutInSeconds, location_name: "HECAcknowledgmentTimeoutInSeconds"))
+    SplunkDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: SplunkRetryOptions, location_name: "RetryOptions"))
+    SplunkDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SplunkS3BackupMode, location_name: "S3BackupMode"))
+    SplunkDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    SplunkDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SplunkDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationConfiguration.struct_class = Types::SplunkDestinationConfiguration
+
+    SplunkDestinationDescription.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
+    SplunkDestinationDescription.add_member(:hec_endpoint_type, Shapes::ShapeRef.new(shape: HECEndpointType, location_name: "HECEndpointType"))
+    SplunkDestinationDescription.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, location_name: "HECToken"))
+    SplunkDestinationDescription.add_member(:hec_acknowledgment_timeout_in_seconds, Shapes::ShapeRef.new(shape: HECAcknowledgmentTimeoutInSeconds, location_name: "HECAcknowledgmentTimeoutInSeconds"))
+    SplunkDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: SplunkRetryOptions, location_name: "RetryOptions"))
+    SplunkDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SplunkS3BackupMode, location_name: "S3BackupMode"))
+    SplunkDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    SplunkDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SplunkDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationDescription.struct_class = Types::SplunkDestinationDescription
+
+    SplunkDestinationUpdate.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
+    SplunkDestinationUpdate.add_member(:hec_endpoint_type, Shapes::ShapeRef.new(shape: HECEndpointType, location_name: "HECEndpointType"))
+    SplunkDestinationUpdate.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, location_name: "HECToken"))
+    SplunkDestinationUpdate.add_member(:hec_acknowledgment_timeout_in_seconds, Shapes::ShapeRef.new(shape: HECAcknowledgmentTimeoutInSeconds, location_name: "HECAcknowledgmentTimeoutInSeconds"))
+    SplunkDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: SplunkRetryOptions, location_name: "RetryOptions"))
+    SplunkDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SplunkS3BackupMode, location_name: "S3BackupMode"))
+    SplunkDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    SplunkDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SplunkDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationUpdate.struct_class = Types::SplunkDestinationUpdate
+
+    SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
+    SplunkRetryOptions.struct_class = Types::SplunkRetryOptions
 
     UpdateDestinationInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     UpdateDestinationInput.add_member(:current_delivery_stream_version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "CurrentDeliveryStreamVersionId"))
@@ -425,6 +452,7 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:extended_s3_destination_update, Shapes::ShapeRef.new(shape: ExtendedS3DestinationUpdate, location_name: "ExtendedS3DestinationUpdate"))
     UpdateDestinationInput.add_member(:redshift_destination_update, Shapes::ShapeRef.new(shape: RedshiftDestinationUpdate, location_name: "RedshiftDestinationUpdate"))
     UpdateDestinationInput.add_member(:elasticsearch_destination_update, Shapes::ShapeRef.new(shape: ElasticsearchDestinationUpdate, location_name: "ElasticsearchDestinationUpdate"))
+    UpdateDestinationInput.add_member(:splunk_destination_update, Shapes::ShapeRef.new(shape: SplunkDestinationUpdate, location_name: "SplunkDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput
 
     UpdateDestinationOutput.struct_class = Types::UpdateDestinationOutput
@@ -472,17 +500,6 @@ module Aws::Firehose
         o.input = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:get_kinesis_stream, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetKinesisStream"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetKinesisStreamInput)
-        o.output = Shapes::ShapeRef.new(shape: GetKinesisStreamOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidStreamTypeException)
       end)
 
       api.add_operation(:list_delivery_streams, Seahorse::Model::Operation.new.tap do |o|

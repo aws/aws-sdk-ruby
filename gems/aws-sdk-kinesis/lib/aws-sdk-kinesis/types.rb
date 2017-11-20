@@ -50,8 +50,8 @@ module Aws::Kinesis
     #   A name to identify the stream. The stream name is scoped to the AWS
     #   account used by the application that creates the stream. It is also
     #   scoped by region. That is, two streams in two different AWS accounts
-    #   can have the same name, and two streams in the same AWS account but
-    #   in two different regions can have the same name.
+    #   can have the same name. Two streams in the same AWS account but in
+    #   two different regions can also have the same name.
     #   @return [String]
     #
     # @!attribute [rw] shard_count
@@ -188,6 +188,35 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStreamSummaryInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName", # required
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryInput AWS API Documentation
+    #
+    class DescribeStreamSummaryInput < Struct.new(
+      :stream_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_description_summary
+    #   A StreamDescriptionSummary containing information about the stream.
+    #   @return [Types::StreamDescriptionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryOutput AWS API Documentation
+    #
+    class DescribeStreamSummaryOutput < Struct.new(
+      :stream_description_summary)
+      include Aws::Structure
+    end
+
     # Represents the input for DisableEnhancedMonitoring.
     #
     # @note When making an API call, you may pass DisableEnhancedMonitoringInput
@@ -199,7 +228,7 @@ module Aws::Kinesis
     #       }
     #
     # @!attribute [rw] stream_name
-    #   The name of the Amazon Kinesis stream for which to disable enhanced
+    #   The name of the Kinesis stream for which to disable enhanced
     #   monitoring.
     #   @return [String]
     #
@@ -339,7 +368,7 @@ module Aws::Kinesis
     # DisableEnhancedMonitoring.
     #
     # @!attribute [rw] stream_name
-    #   The name of the Amazon Kinesis stream.
+    #   The name of the Kinesis stream.
     #   @return [String]
     #
     # @!attribute [rw] current_shard_level_metrics
@@ -400,14 +429,14 @@ module Aws::Kinesis
     # @!attribute [rw] next_shard_iterator
     #   The next position in the shard from which to start sequentially
     #   reading data records. If set to `null`, the shard has been closed
-    #   and the requested iterator will not return any more data.
+    #   and the requested iterator does not return any more data.
     #   @return [String]
     #
     # @!attribute [rw] millis_behind_latest
     #   The number of milliseconds the GetRecords response is from the tip
     #   of the stream, indicating how far behind current time the consumer
-    #   is. A value of zero indicates record processing is caught up, and
-    #   there are no new records to process at this moment.
+    #   is. A value of zero indicates that record processing is caught up,
+    #   and there are no new records to process at this moment.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput AWS API Documentation
@@ -437,7 +466,7 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] shard_id
-    #   The shard ID of the Amazon Kinesis shard to get the iterator for.
+    #   The shard ID of the Kinesis Streams shard to get the iterator for.
     #   @return [String]
     #
     # @!attribute [rw] shard_iterator_type
@@ -455,7 +484,7 @@ module Aws::Kinesis
     #     `StartingSequenceNumber`.
     #
     #   * AT\_TIMESTAMP - Start reading from the position denoted by a
-    #     specific timestamp, provided in the value `Timestamp`.
+    #     specific time stamp, provided in the value `Timestamp`.
     #
     #   * TRIM\_HORIZON - Start reading at the last untrimmed record in the
     #     shard in the system, which is the oldest data record in the shard.
@@ -471,12 +500,12 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The timestamp of the data record from which to start reading. Used
-    #   with shard iterator type AT\_TIMESTAMP. A timestamp is the Unix
+    #   The time stamp of the data record from which to start reading. Used
+    #   with shard iterator type AT\_TIMESTAMP. A time stamp is the Unix
     #   epoch date with precision in milliseconds. For example,
     #   `2016-04-04T19:58:46.480-00:00` or `1459799926.480`. If a record
-    #   with this exact timestamp does not exist, the iterator returned is
-    #   for the next (later) record. If the timestamp is older than the
+    #   with this exact time stamp does not exist, the iterator returned is
+    #   for the next (later) record. If the time stamp is older than the
     #   current trim horizon, the iterator returned is for the oldest
     #   untrimmed data record (TRIM\_HORIZON).
     #   @return [Time]
@@ -735,8 +764,8 @@ module Aws::Kinesis
     #   same client and to the same partition key. Usage: set the
     #   `SequenceNumberForOrdering` of record *n* to the sequence number of
     #   record *n-1* (as returned in the result when putting record *n-1*).
-    #   If this parameter is not set, records will be coarsely ordered based
-    #   on arrival time.
+    #   If this parameter is not set, records are coarsely ordered based on
+    #   arrival time.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordInput AWS API Documentation
@@ -930,7 +959,7 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # The unit of data of the Amazon Kinesis stream, which is composed of a
+    # The unit of data of the Kinesis stream, which is composed of a
     # sequence number, a partition key, and a data blob.
     #
     # @!attribute [rw] sequence_number
@@ -943,10 +972,10 @@ module Aws::Kinesis
     #
     # @!attribute [rw] data
     #   The data blob. The data in the blob is both opaque and immutable to
-    #   the Amazon Kinesis service, which does not inspect, interpret, or
-    #   change the data in the blob in any way. When the data blob (the
-    #   payload before base64-encoding) is added to the partition key size,
-    #   the total size must not exceed the maximum record size (1 MB).
+    #   Kinesis Streams, which does not inspect, interpret, or change the
+    #   data in the blob in any way. When the data blob (the payload before
+    #   base64-encoding) is added to the partition key size, the total size
+    #   must not exceed the maximum record size (1 MB).
     #   @return [String]
     #
     # @!attribute [rw] partition_key
@@ -1020,8 +1049,7 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # A uniquely identified group of data records in an Amazon Kinesis
-    # stream.
+    # A uniquely identified group of data records in a Kinesis stream.
     #
     # @!attribute [rw] shard_id
     #   The unique identifier of the shard within the stream.
@@ -1108,20 +1136,28 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] encryption_type
-    #   The encryption type to use. This parameter can be one of the
-    #   following values:
-    #
-    #   * `NONE`\: Not valid for this operation. An
-    #     `InvalidOperationException` will be thrown.
-    #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed KMS key.
+    #   The encryption type to use. The only valid value is `KMS`.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed KMS key to use for encryption. You
-    #   can also use a Kinesis-owned master key by specifying the alias
-    #   `aws/kinesis`.
+    #   The GUID for the customer-managed KMS key to use for encryption.
+    #   This value can be a globally unique identifier, a fully specified
+    #   ARN to either an alias or a key, or an alias name prefixed by
+    #   "alias/".You can also use a master key owned by Kinesis Streams by
+    #   specifying the alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis Streams: `alias/aws/kinesis`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryptionInput AWS API Documentation
@@ -1147,18 +1183,28 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] encryption_type
-    #   The encryption type. This parameter can be one of the following
-    #   values:
-    #
-    #   * `NONE`\: Not valid for this operation. An
-    #     `InvalidOperationException` will be thrown.
-    #
-    #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed KMS key.
+    #   The encryption type. The only valid value is `KMS`.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed key that was used for encryption.
+    #   The GUID for the customer-managed KMS key to use for encryption.
+    #   This value can be a globally unique identifier, a fully specified
+    #   ARN to either an alias or a key, or an alias name prefixed by
+    #   "alias/".You can also use a master key owned by Kinesis Streams by
+    #   specifying the alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis Streams: `alias/aws/kinesis`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionInput AWS API Documentation
@@ -1184,11 +1230,11 @@ module Aws::Kinesis
     #   The current status of the stream being described. The stream status
     #   is one of the following states:
     #
-    #   * `CREATING` - The stream is being created. Amazon Kinesis
+    #   * `CREATING` - The stream is being created. Kinesis Streams
     #     immediately returns and sets `StreamStatus` to `CREATING`.
     #
     #   * `DELETING` - The stream is being deleted. The specified stream is
-    #     in the `DELETING` state until Amazon Kinesis completes the
+    #     in the `DELETING` state until Kinesis Streams completes the
     #     deletion.
     #
     #   * `ACTIVE` - The stream exists and is ready for read and write
@@ -1232,8 +1278,24 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed KMS key used for encryption on the
-    #   stream.
+    #   The GUID for the customer-managed KMS key to use for encryption.
+    #   This value can be a globally unique identifier, a fully specified
+    #   ARN to either an alias or a key, or an alias name prefixed by
+    #   "alias/".You can also use a master key owned by Kinesis Streams by
+    #   specifying the alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis Streams: `alias/aws/kinesis`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescription AWS API Documentation
@@ -1249,6 +1311,96 @@ module Aws::Kinesis
       :enhanced_monitoring,
       :encryption_type,
       :key_id)
+      include Aws::Structure
+    end
+
+    # Represents the output for DescribeStreamSummary
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) for the stream being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_status
+    #   The current status of the stream being described. The stream status
+    #   is one of the following states:
+    #
+    #   * `CREATING` - The stream is being created. Kinesis Streams
+    #     immediately returns and sets `StreamStatus` to `CREATING`.
+    #
+    #   * `DELETING` - The stream is being deleted. The specified stream is
+    #     in the `DELETING` state until Kinesis Streams completes the
+    #     deletion.
+    #
+    #   * `ACTIVE` - The stream exists and is ready for read and write
+    #     operations or deletion. You should perform read and write
+    #     operations only on an `ACTIVE` stream.
+    #
+    #   * `UPDATING` - Shards in the stream are being merged or split. Read
+    #     and write operations continue to work while the stream is in the
+    #     `UPDATING` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period_hours
+    #   The current retention period, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_creation_timestamp
+    #   The approximate time that the stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Represents the current enhanced monitoring settings of the stream.
+    #   @return [Array<Types::EnhancedMetrics>]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type used. This value is one of the following:
+    #
+    #   * `KMS`
+    #
+    #   * `NONE`
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The GUID for the customer-managed KMS key to use for encryption.
+    #   This value can be a globally unique identifier, a fully specified
+    #   ARN to either an alias or a key, or an alias name prefixed by
+    #   "alias/".You can also use a master key owned by Kinesis Streams by
+    #   specifying the alias `aws/kinesis`.
+    #
+    #   * Key ARN example:
+    #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias ARN example: `
+    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName`
+    #
+    #   * Globally unique key ID example:
+    #     `12345678-1234-1234-1234-123456789012`
+    #
+    #   * Alias name example: `alias/MyAliasName`
+    #
+    #   * Master key owned by Kinesis: `alias/aws/kinesis`
+    #   @return [String]
+    #
+    # @!attribute [rw] open_shard_count
+    #   The number of open shards in the stream.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary AWS API Documentation
+    #
+    class StreamDescriptionSummary < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :stream_status,
+      :retention_period_hours,
+      :stream_creation_timestamp,
+      :enhanced_monitoring,
+      :encryption_type,
+      :key_id,
+      :open_shard_count)
       include Aws::Structure
     end
 

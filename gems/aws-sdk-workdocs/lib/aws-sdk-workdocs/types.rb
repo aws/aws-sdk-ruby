@@ -18,9 +18,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -53,9 +53,9 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserRequest AWS API Documentation
@@ -143,12 +143,16 @@ module Aws::WorkDocs
     #             role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
     #           },
     #         ],
+    #         notification_options: {
+    #           send_email: false,
+    #           email_message: "MessageType",
+    #         },
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -159,12 +163,17 @@ module Aws::WorkDocs
     #   The users, groups, or organization being granted permission.
     #   @return [Array<Types::SharePrincipal>]
     #
+    # @!attribute [rw] notification_options
+    #   The notification options.
+    #   @return [Types::NotificationOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsRequest AWS API Documentation
     #
     class AddResourcePermissionsRequest < Struct.new(
       :authentication_token,
       :resource_id,
-      :principals)
+      :principals,
+      :notification_options)
       include Aws::Structure
     end
 
@@ -247,9 +256,11 @@ module Aws::WorkDocs
     #   @return [Types::User]
     #
     # @!attribute [rw] created_timestamp
+    #   The timestamp that the comment was created.
     #   @return [Time]
     #
     # @!attribute [rw] comment_status
+    #   The status of the comment.
     #   @return [String]
     #
     # @!attribute [rw] recipient_id
@@ -282,9 +293,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -357,9 +368,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -399,9 +410,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -437,7 +448,7 @@ module Aws::WorkDocs
     #
     #       {
     #         resource_id: "ResourceIdType", # required
-    #         labels: ["Label"], # required
+    #         labels: ["SharedLabel"], # required
     #         authentication_token: "AuthenticationHeaderType",
     #       }
     #
@@ -450,9 +461,9 @@ module Aws::WorkDocs
     #   @return [Array<String>]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsRequest AWS API Documentation
@@ -489,7 +500,7 @@ module Aws::WorkDocs
     #
     # @!attribute [rw] protocol
     #   The protocol to use. The supported value is https, which delivers
-    #   JSON-encoded messasges using HTTPS POST.
+    #   JSON-encoded messages using HTTPS POST.
     #   @return [String]
     #
     # @!attribute [rw] subscription_type
@@ -568,9 +579,9 @@ module Aws::WorkDocs
     #   @return [Types::StorageRuleType]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest AWS API Documentation
@@ -612,9 +623,9 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserRequest AWS API Documentation
@@ -636,9 +647,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -675,9 +686,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -722,9 +733,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -748,9 +759,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -774,9 +785,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -797,7 +808,7 @@ module Aws::WorkDocs
     #       {
     #         resource_id: "ResourceIdType", # required
     #         authentication_token: "AuthenticationHeaderType",
-    #         labels: ["Label"],
+    #         labels: ["SharedLabel"],
     #         delete_all: false,
     #       }
     #
@@ -806,9 +817,9 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -866,9 +877,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -897,19 +908,19 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The timestamp that determines the starting time of the activities;
-    #   the response includes the activities performed after the specified
+    #   The timestamp that determines the starting time of the activities.
+    #   The response includes the activities performed after the specified
     #   timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The timestamp that determines the end time of the activities; the
+    #   The timestamp that determines the end time of the activities. The
     #   response includes the activities performed before the specified
     #   timestamp.
     #   @return [Time]
@@ -930,8 +941,7 @@ module Aws::WorkDocs
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   The marker for the next set of results. (You received this marker
-    #   from a previous call.)
+    #   The marker for the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesRequest AWS API Documentation
@@ -975,9 +985,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1038,9 +1048,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1110,9 +1120,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1181,6 +1191,68 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         search_query: "SearchQueryType", # required
+    #         organization_id: "IdType",
+    #         marker: "MarkerType",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_query
+    #   A query to describe groups by group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroupsRequest AWS API Documentation
+    #
+    class DescribeGroupsRequest < Struct.new(
+      :authentication_token,
+      :search_query,
+      :organization_id,
+      :marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   The list of groups.
+    #   @return [Array<Types::GroupMetadata>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroupsResponse AWS API Documentation
+    #
+    class DescribeGroupsResponse < Struct.new(
+      :groups,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeNotificationSubscriptionsRequest
     #   data as a hash:
     #
@@ -1235,18 +1307,23 @@ module Aws::WorkDocs
     #       {
     #         authentication_token: "AuthenticationHeaderType",
     #         resource_id: "ResourceIdType", # required
+    #         principal_id: "IdType",
     #         limit: 1,
     #         marker: "PageMarkerType",
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The ID of the principal to filter permissions by.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1263,6 +1340,7 @@ module Aws::WorkDocs
     class DescribeResourcePermissionsRequest < Struct.new(
       :authentication_token,
       :resource_id,
+      :principal_id,
       :limit,
       :marker)
       include Aws::Structure
@@ -1295,9 +1373,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1351,9 +1429,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] organization_id
@@ -1507,20 +1585,20 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
-    #   The time stamp when the document was first uploaded.
+    #   The timestamp when the document was first uploaded.
     #   @return [Time]
     #
     # @!attribute [rw] modified_timestamp
-    #   The time stamp when the document was last uploaded.
+    #   The timestamp when the document was last uploaded.
     #   @return [Time]
     #
     # @!attribute [rw] content_created_timestamp
-    #   The time stamp when the content of the document was originally
+    #   The timestamp when the content of the document was originally
     #   created.
     #   @return [Time]
     #
     # @!attribute [rw] content_modified_timestamp
-    #   The time stamp when the content of the document was modified.
+    #   The timestamp when the content of the document was modified.
     #   @return [Time]
     #
     # @!attribute [rw] creator_id
@@ -1626,7 +1704,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserRequest AWS API Documentation
@@ -1659,9 +1739,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1713,9 +1793,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1763,9 +1843,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -1824,9 +1904,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1878,9 +1958,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -1949,9 +2029,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1963,12 +2043,12 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] content_created_timestamp
-    #   The time stamp when the content of the document was originally
+    #   The timestamp when the content of the document was originally
     #   created.
     #   @return [Time]
     #
     # @!attribute [rw] content_modified_timestamp
-    #   The time stamp when the content of the document was modified.
+    #   The timestamp when the content of the document was modified.
     #   @return [Time]
     #
     # @!attribute [rw] content_type
@@ -2013,7 +2093,34 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # Describes the users and/or user groups.
+    # Set of options which defines notification preferences of given action.
+    #
+    # @note When making an API call, you may pass NotificationOptions
+    #   data as a hash:
+    #
+    #       {
+    #         send_email: false,
+    #         email_message: "MessageType",
+    #       }
+    #
+    # @!attribute [rw] send_email
+    #   Boolean value to indicate an email notification should be sent to
+    #   the receipients.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] email_message
+    #   Text value to be included in the email body.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/NotificationOptions AWS API Documentation
+    #
+    class NotificationOptions < Struct.new(
+      :send_email,
+      :email_message)
+      include Aws::Structure
+    end
+
+    # Describes the users or user groups.
     #
     # @!attribute [rw] users
     #   The list of users.
@@ -2081,9 +2188,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2109,9 +2216,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2147,7 +2254,7 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] original_name
-    #   The original name of the resource prior to a rename operation.
+    #   The original name of the resource before a rename operation.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2337,9 +2444,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -2355,8 +2462,8 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] resource_state
-    #   The resource state of the document. Note that only ACTIVE and
-    #   RECYCLED are supported.
+    #   The resource state of the document. Only ACTIVE and RECYCLED are
+    #   supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentRequest AWS API Documentation
@@ -2381,9 +2488,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] document_id
@@ -2420,9 +2527,9 @@ module Aws::WorkDocs
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -2438,8 +2545,8 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] resource_state
-    #   The resource state of the folder. Note that only ACTIVE and RECYCLED
-    #   are accepted values from the API.
+    #   The resource state of the folder. Only ACTIVE and RECYCLED are
+    #   accepted values from the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderRequest AWS API Documentation
@@ -2461,19 +2568,20 @@ module Aws::WorkDocs
     #         user_id: "IdType", # required
     #         given_name: "UserAttributeValueType",
     #         surname: "UserAttributeValueType",
-    #         type: "USER", # accepts USER, ADMIN
+    #         type: "USER", # accepts USER, ADMIN, POWERUSER, MINIMALUSER, WORKSPACESUSER
     #         storage_rule: {
     #           storage_allocated_in_bytes: 1,
     #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
     #         },
     #         time_zone_id: "TimeZoneIdType",
     #         locale: "en", # accepts en, fr, ko, de, es, ja, ru, zh_CN, zh_TW, pt_BR, default
+    #         grant_poweruser_privileges: "TRUE", # accepts TRUE, FALSE
     #       }
     #
     # @!attribute [rw] authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when
+    #   using administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2504,6 +2612,11 @@ module Aws::WorkDocs
     #   The locale of the user.
     #   @return [String]
     #
+    # @!attribute [rw] grant_poweruser_privileges
+    #   Boolean value to determine whether the user is granted Poweruser
+    #   privileges.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
@@ -2514,7 +2627,8 @@ module Aws::WorkDocs
       :type,
       :storage_rule,
       :time_zone_id,
-      :locale)
+      :locale,
+      :grant_poweruser_privileges)
       include Aws::Structure
     end
 
@@ -2637,7 +2751,7 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The username of the user.
+    #   The name of the user.
     #   @return [String]
     #
     # @!attribute [rw] given_name
@@ -2666,7 +2780,7 @@ module Aws::WorkDocs
     # Describes the storage for a user.
     #
     # @!attribute [rw] storage_utilized_in_bytes
-    #   The amount of storage utilized, in bytes.
+    #   The amount of storage used, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_rule

@@ -98,6 +98,168 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Returns information about a specific comment.
+    #
+    # @!attribute [rw] comment_id
+    #   The system-generated comment ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_reply_to
+    #   The ID of the comment for which this comment is a reply, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time the comment was created, in timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time the comment was most recently modified, in
+    #   timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] author_arn
+    #   The Amazon Resource Name (ARN) of the person who posted the comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deleted
+    #   A Boolean value indicating whether the comment has been deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Comment AWS API Documentation
+    #
+    class Comment < Struct.new(
+      :comment_id,
+      :content,
+      :in_reply_to,
+      :creation_date,
+      :last_modified_date,
+      :author_arn,
+      :deleted,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # Returns information about comments on the comparison between two
+    # commits.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the compared commits.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit used to establish the 'before' of
+    #   the comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   The full commit ID of the commit used to establish the 'after' of
+    #   the comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_blob_id
+    #   The full blob ID of the commit used to establish the 'before' of
+    #   the comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_blob_id
+    #   The full blob ID of the commit used to establish the 'after' of
+    #   the comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Location information about the comment on the comparison, including
+    #   the file name, line number, and whether the version of the file
+    #   where the comment was made is 'BEFORE' or 'AFTER'.
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] comments
+    #   An array of comment objects. Each comment object contains
+    #   information about a comment on the comparison between commits.
+    #   @return [Array<Types::Comment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentsForComparedCommit AWS API Documentation
+    #
+    class CommentsForComparedCommit < Struct.new(
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :before_blob_id,
+      :after_blob_id,
+      :location,
+      :comments)
+      include Aws::Structure
+    end
+
+    # Returns information about comments on a pull request.
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit that was the tip of the destination
+    #   branch when the pull request was created. This commit will be
+    #   superceded by the after commit in the source branch when and if you
+    #   merge the source branch into the destination branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   he full commit ID of the commit that was the tip of the source
+    #   branch at the time the comment was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_blob_id
+    #   The full blob ID of the file on which you want to comment on the
+    #   destination commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_blob_id
+    #   The full blob ID of the file on which you want to comment on the
+    #   source commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Location information about the comment on the pull request,
+    #   including the file name, line number, and whether the version of the
+    #   file where the comment was made is 'BEFORE' (destination branch)
+    #   or 'AFTER' (source branch).
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] comments
+    #   An array of comment objects. Each comment object contains
+    #   information about a comment on the pull request.
+    #   @return [Array<Types::Comment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentsForPullRequest AWS API Documentation
+    #
+    class CommentsForPullRequest < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :before_blob_id,
+      :after_blob_id,
+      :location,
+      :comments)
+      include Aws::Structure
+    end
+
     # Returns information about a specific commit.
     #
     # @!attribute [rw] commit_id
@@ -185,6 +347,76 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       :commit_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePullRequestInput
+    #   data as a hash:
+    #
+    #       {
+    #         title: "Title", # required
+    #         description: "Description",
+    #         targets: [ # required
+    #           {
+    #             repository_name: "RepositoryName", # required
+    #             source_reference: "ReferenceName", # required
+    #             destination_reference: "ReferenceName",
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] title
+    #   The title of the pull request. This title will be used to identify
+    #   the pull request to other users in the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets for the pull request, including the source of the code
+    #   to be reviewed (the source branch), and the destination where the
+    #   creator of the pull request intends the code to be merged after the
+    #   pull request is closed (the destination branch).
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If using an AWS SDK,
+    #   you do not have to generate an idempotency token, as this will be
+    #   done for you.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestInput AWS API Documentation
+    #
+    class CreatePullRequestInput < Struct.new(
+      :title,
+      :description,
+      :targets,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the newly created pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestOutput AWS API Documentation
+    #
+    class CreatePullRequestOutput < Struct.new(
+      :pull_request)
       include Aws::Structure
     end
 
@@ -289,6 +521,36 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCommentContentInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The unique, system-generated ID of the comment. To get this ID, use
+    #   GetCommentsForComparedCommit or GetCommentsForPullRequest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContentInput AWS API Documentation
+    #
+    class DeleteCommentContentInput < Struct.new(
+      :comment_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comment
+    #   Information about the comment you just deleted.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContentOutput AWS API Documentation
+    #
+    class DeleteCommentContentOutput < Struct.new(
+      :comment)
+      include Aws::Structure
+    end
+
     # Represents the input of a delete repository operation.
     #
     # @note When making an API call, you may pass DeleteRepositoryInput
@@ -319,6 +581,72 @@ module Aws::CodeCommit
     #
     class DeleteRepositoryOutput < Struct.new(
       :repository_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePullRequestEventsInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         pull_request_event_type: "PULL_REQUEST_CREATED", # accepts PULL_REQUEST_CREATED, PULL_REQUEST_STATUS_CHANGED, PULL_REQUEST_SOURCE_REFERENCE_UPDATED, PULL_REQUEST_MERGE_STATE_CHANGED
+    #         actor_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_event_type
+    #   Optional. The pull request event type about which you want to return
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_arn
+    #   The Amazon Resource Name (ARN) of the user whose actions resulted in
+    #   the event. Examples include updating the pull request with
+    #   additional commits or changing the status of a pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 events, which is also the maximum number of
+    #   events that can be returned in a result.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEventsInput AWS API Documentation
+    #
+    class DescribePullRequestEventsInput < Struct.new(
+      :pull_request_id,
+      :pull_request_event_type,
+      :actor_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request_events
+    #   Information about the pull request events.
+    #   @return [Array<Types::PullRequestEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEventsOutput AWS API Documentation
+    #
+    class DescribePullRequestEventsOutput < Struct.new(
+      :pull_request_events,
+      :next_token)
       include Aws::Structure
     end
 
@@ -424,6 +752,170 @@ module Aws::CodeCommit
     #
     class GetBranchOutput < Struct.new(
       :branch)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCommentInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The unique, system-generated ID of the comment. To get this ID, use
+    #   GetCommentsForComparedCommit or GetCommentsForPullRequest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentInput AWS API Documentation
+    #
+    class GetCommentInput < Struct.new(
+      :comment_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comment
+    #   The contents of the comment.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentOutput AWS API Documentation
+    #
+    class GetCommentOutput < Struct.new(
+      :comment)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCommentsForComparedCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         before_commit_id: "CommitId",
+    #         after_commit_id: "CommitId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to compare commits.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   To establish the directionality of the comparison, the full commit
+    #   ID of the 'before' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   To establish the directionality of the comparison, the full commit
+    #   ID of the 'after' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 comments, and is configurable up to 500.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommitInput AWS API Documentation
+    #
+    class GetCommentsForComparedCommitInput < Struct.new(
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comments_for_compared_commit_data
+    #   A list of comment objects on the compared commit.
+    #   @return [Array<Types::CommentsForComparedCommit>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommitOutput AWS API Documentation
+    #
+    class GetCommentsForComparedCommitOutput < Struct.new(
+      :comments_for_compared_commit_data,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCommentsForPullRequestInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         repository_name: "RepositoryName",
+    #         before_commit_id: "CommitId",
+    #         after_commit_id: "CommitId",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit in the destination branch that was
+    #   the tip of the branch at the time the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   The full commit ID of the commit in the source branch that was the
+    #   tip of the branch at the time the comment was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 comments. You can return up to 500 comments with
+    #   a single request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequestInput AWS API Documentation
+    #
+    class GetCommentsForPullRequestInput < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comments_for_pull_request_data
+    #   An array of comment objects on the pull request.
+    #   @return [Array<Types::CommentsForPullRequest>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequestOutput AWS API Documentation
+    #
+    class GetCommentsForPullRequestOutput < Struct.new(
+      :comments_for_pull_request_data,
+      :next_token)
       include Aws::Structure
     end
 
@@ -552,6 +1044,99 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMergeConflictsInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         destination_commit_specifier: "CommitName", # required
+    #         source_commit_specifier: "CommitName", # required
+    #         merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_option
+    #   The merge option or strategy you want to use to merge the code. The
+    #   only valid value is FAST\_FORWARD\_MERGE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsInput AWS API Documentation
+    #
+    class GetMergeConflictsInput < Struct.new(
+      :repository_name,
+      :destination_commit_specifier,
+      :source_commit_specifier,
+      :merge_option)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mergeable
+    #   A Boolean value that indicates whether the code is mergable by the
+    #   specified merge option.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destination_commit_id
+    #   The commit ID of the destination commit specifier that was used in
+    #   the merge evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The commit ID of the source commit specifier that was used in the
+    #   merge evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsOutput AWS API Documentation
+    #
+    class GetMergeConflictsOutput < Struct.new(
+      :mergeable,
+      :destination_commit_id,
+      :source_commit_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPullRequestInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestInput AWS API Documentation
+    #
+    class GetPullRequestInput < Struct.new(
+      :pull_request_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the specified pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestOutput AWS API Documentation
+    #
+    class GetPullRequestOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
     # Represents the input of a get repository operation.
     #
     # @note When making an API call, you may pass GetRepositoryInput
@@ -667,6 +1252,69 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPullRequestsInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         author_arn: "Arn",
+    #         pull_request_status: "OPEN", # accepts OPEN, CLOSED
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository for which you want to list pull requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_arn
+    #   Optional. The Amazon Resource Name (ARN) of the user who created the
+    #   pull request. If used, this filters the results to pull requests
+    #   created by that user.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_status
+    #   Optional. The status of the pull request. If used, this refines the
+    #   results to the pull requests that match the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequestsInput AWS API Documentation
+    #
+    class ListPullRequestsInput < Struct.new(
+      :repository_name,
+      :author_arn,
+      :pull_request_status,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request_ids
+    #   The system-generated IDs of the pull requests.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequestsOutput AWS API Documentation
+    #
+    class ListPullRequestsOutput < Struct.new(
+      :pull_request_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Represents the input of a list repositories operation.
     #
     # @note When making an API call, you may pass ListRepositoriesInput
@@ -722,6 +1370,613 @@ module Aws::CodeCommit
     class ListRepositoriesOutput < Struct.new(
       :repositories,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Returns information about the location of a change or comment in the
+    # comparison between two commits or a pull request.
+    #
+    # @note When making an API call, you may pass Location
+    #   data as a hash:
+    #
+    #       {
+    #         file_path: "Path",
+    #         file_position: 1,
+    #         relative_file_version: "BEFORE", # accepts BEFORE, AFTER
+    #       }
+    #
+    # @!attribute [rw] file_path
+    #   The name of the file being compared, including its extension and
+    #   subdirectory, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_position
+    #   The position of a change within a compared file, in line number
+    #   format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] relative_file_version
+    #   In a comparison of commits or a pull request, whether the change is
+    #   in the 'before' or 'after' of that comparison.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Location AWS API Documentation
+    #
+    class Location < Struct.new(
+      :file_path,
+      :file_position,
+      :relative_file_version)
+      include Aws::Structure
+    end
+
+    # Returns information about a merge or potential merge between a source
+    # reference and a destination reference in a pull request.
+    #
+    # @!attribute [rw] is_merged
+    #   A Boolean value indicating whether the merge has been made.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] merged_by
+    #   The Amazon Resource Name (ARN) of the user who merged the branches.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeMetadata AWS API Documentation
+    #
+    class MergeMetadata < Struct.new(
+      :is_merged,
+      :merged_by)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MergePullRequestByFastForwardInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         repository_name: "RepositoryName", # required
+    #         source_commit_id: "CommitId",
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception
+    #   thrown if the current commit ID of the tip of the source branch does
+    #   not match this commit ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForwardInput AWS API Documentation
+    #
+    class MergePullRequestByFastForwardInput < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :source_commit_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the specified pull request, including information
+    #   about the merge.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForwardOutput AWS API Documentation
+    #
+    class MergePullRequestByFastForwardOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PostCommentForComparedCommitInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         before_commit_id: "CommitId",
+    #         after_commit_id: "CommitId", # required
+    #         location: {
+    #           file_path: "Path",
+    #           file_position: 1,
+    #           relative_file_version: "BEFORE", # accepts BEFORE, AFTER
+    #         },
+    #         content: "Content", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to post a comment on the
+    #   comparison between commits.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   To establish the directionality of the comparison, the full commit
+    #   ID of the 'before' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   To establish the directionality of the comparison, the full commit
+    #   ID of the 'after' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the comparison where you want to comment.
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] content
+    #   The content of the comment you want to make.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitInput AWS API Documentation
+    #
+    class PostCommentForComparedCommitInput < Struct.new(
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :location,
+      :content,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you posted a comment on the
+    #   comparison between commits.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   In the directionality you established, the full commit ID of the
+    #   'before' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   In the directionality you established, the full commit ID of the
+    #   'after' commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_blob_id
+    #   In the directionality you established, the blob ID of the 'before'
+    #   blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_blob_id
+    #   In the directionality you established, the blob ID of the 'after'
+    #   blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the comment in the comparison between the two
+    #   commits.
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] comment
+    #   The content of the comment you posted.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitOutput AWS API Documentation
+    #
+    class PostCommentForComparedCommitOutput < Struct.new(
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :before_blob_id,
+      :after_blob_id,
+      :location,
+      :comment)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PostCommentForPullRequestInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         repository_name: "RepositoryName", # required
+    #         before_commit_id: "CommitId", # required
+    #         after_commit_id: "CommitId", # required
+    #         location: {
+    #           file_path: "Path",
+    #           file_position: 1,
+    #           relative_file_version: "BEFORE", # accepts BEFORE, AFTER
+    #         },
+    #         content: "Content", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to post a comment on a
+    #   pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit in the destination branch that was
+    #   the tip of the branch at the time the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   The full commit ID of the commit in the source branch that is the
+    #   current tip of the branch for the pull request when you post the
+    #   comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the change where you want to post your comment. If
+    #   no location is provided, the comment will be posted as a general
+    #   comment on the pull request difference between the before commit ID
+    #   and the after commit ID.
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] content
+    #   The content of your comment on the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequestInput AWS API Documentation
+    #
+    class PostCommentForPullRequestInput < Struct.new(
+      :pull_request_id,
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id,
+      :location,
+      :content,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you posted a comment on a pull
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit in the source branch used to create
+    #   the pull request, or in the case of an updated pull request, the
+    #   full commit ID of the commit used to update the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   The full commit ID of the commit in the destination branch where the
+    #   pull request will be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_blob_id
+    #   In the directionality of the pull request, the blob ID of the
+    #   'before' blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_blob_id
+    #   In the directionality of the pull request, the blob ID of the
+    #   'after' blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the change where you posted your comment.
+    #   @return [Types::Location]
+    #
+    # @!attribute [rw] comment
+    #   The content of the comment you posted.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequestOutput AWS API Documentation
+    #
+    class PostCommentForPullRequestOutput < Struct.new(
+      :repository_name,
+      :pull_request_id,
+      :before_commit_id,
+      :after_commit_id,
+      :before_blob_id,
+      :after_blob_id,
+      :location,
+      :comment)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PostCommentReplyInput
+    #   data as a hash:
+    #
+    #       {
+    #         in_reply_to: "CommentId", # required
+    #         client_request_token: "ClientRequestToken",
+    #         content: "Content", # required
+    #       }
+    #
+    # @!attribute [rw] in_reply_to
+    #   The system-generated ID of the comment to which you want to reply.
+    #   To get this ID, use GetCommentsForComparedCommit or
+    #   GetCommentsForPullRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The contents of your reply to a comment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReplyInput AWS API Documentation
+    #
+    class PostCommentReplyInput < Struct.new(
+      :in_reply_to,
+      :client_request_token,
+      :content)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comment
+    #   Information about the reply to a comment.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReplyOutput AWS API Documentation
+    #
+    class PostCommentReplyOutput < Struct.new(
+      :comment)
+      include Aws::Structure
+    end
+
+    # Returns information about a pull request.
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The user-defined title of the pull request. This title is displayed
+    #   in the list of pull requests to other users of the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The user-defined description of the pull request. This description
+    #   can be used to clarify what should be reviewed and other details of
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_activity_date
+    #   The day and time of the last user or system activity on the pull
+    #   request, in timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time the pull request was originally created, in
+    #   timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pull_request_status
+    #   The status of the pull request. Pull request status can only change
+    #   from `OPEN` to `CLOSED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_arn
+    #   The Amazon Resource Name (ARN) of the user who created the pull
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_targets
+    #   The targets of the pull request, including the source branch and
+    #   destination branch for the pull request.
+    #   @return [Array<Types::PullRequestTarget>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequest AWS API Documentation
+    #
+    class PullRequest < Struct.new(
+      :pull_request_id,
+      :title,
+      :description,
+      :last_activity_date,
+      :creation_date,
+      :pull_request_status,
+      :author_arn,
+      :pull_request_targets,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # Returns information about a pull request event.
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_date
+    #   The day and time of the pull request event, in timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pull_request_event_type
+    #   The type of the pull request event, for example a status change
+    #   event (PULL\_REQUEST\_STATUS\_CHANGED) or update event
+    #   (PULL\_REQUEST\_SOURCE\_REFERENCE\_UPDATED).
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_arn
+    #   The Amazon Resource Name (ARN) of the user whose actions resulted in
+    #   the event. Examples include updating the pull request with
+    #   additional commits or changing the status of a pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_status_changed_event_metadata
+    #   Information about the change in status for the pull request event.
+    #   @return [Types::PullRequestStatusChangedEventMetadata]
+    #
+    # @!attribute [rw] pull_request_source_reference_updated_event_metadata
+    #   Information about the updated source branch for the pull request
+    #   event.
+    #   @return [Types::PullRequestSourceReferenceUpdatedEventMetadata]
+    #
+    # @!attribute [rw] pull_request_merged_state_changed_event_metadata
+    #   Information about the change in mergability state for the pull
+    #   request event.
+    #   @return [Types::PullRequestMergedStateChangedEventMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestEvent AWS API Documentation
+    #
+    class PullRequestEvent < Struct.new(
+      :pull_request_id,
+      :event_date,
+      :pull_request_event_type,
+      :actor_arn,
+      :pull_request_status_changed_event_metadata,
+      :pull_request_source_reference_updated_event_metadata,
+      :pull_request_merged_state_changed_event_metadata)
+      include Aws::Structure
+    end
+
+    # Returns information about the change in the merge state for a pull
+    # request event.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_reference
+    #   The name of the branch that the pull request will be merged into.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_metadata
+    #   Information about the merge state change event.
+    #   @return [Types::MergeMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestMergedStateChangedEventMetadata AWS API Documentation
+    #
+    class PullRequestMergedStateChangedEventMetadata < Struct.new(
+      :repository_name,
+      :destination_reference,
+      :merge_metadata)
+      include Aws::Structure
+    end
+
+    # Information about an update to the source branch of a pull request.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the pull request was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_id
+    #   The full commit ID of the commit in the destination branch that was
+    #   the tip of the branch at the time the pull request was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_id
+    #   The full commit ID of the commit in the source branch that was the
+    #   tip of the branch at the time the pull request was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestSourceReferenceUpdatedEventMetadata AWS API Documentation
+    #
+    class PullRequestSourceReferenceUpdatedEventMetadata < Struct.new(
+      :repository_name,
+      :before_commit_id,
+      :after_commit_id)
+      include Aws::Structure
+    end
+
+    # Information about a change to the status of a pull request.
+    #
+    # @!attribute [rw] pull_request_status
+    #   The changed status of the pull request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestStatusChangedEventMetadata AWS API Documentation
+    #
+    class PullRequestStatusChangedEventMetadata < Struct.new(
+      :pull_request_status)
+      include Aws::Structure
+    end
+
+    # Returns information about a pull request target.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the pull request source and
+    #   destination branches.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_reference
+    #   The branch of the repository that contains the changes for the pull
+    #   request. Also known as the source branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_reference
+    #   The branch of the repository where the pull request changes will be
+    #   merged into. Also known as the destination branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_commit
+    #   The full commit ID that is the tip of the destination branch. This
+    #   is the commit where the pull request was or will be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_commit
+    #   The full commit ID of the tip of the source branch used to create
+    #   the pull request. If the pull request branch is updated by a push
+    #   while the pull request is open, the commit ID will change to reflect
+    #   the new tip of the branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_metadata
+    #   Returns metadata about the state of the merge, including whether the
+    #   merge has been made.
+    #   @return [Types::MergeMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestTarget AWS API Documentation
+    #
+    class PullRequestTarget < Struct.new(
+      :repository_name,
+      :source_reference,
+      :destination_reference,
+      :destination_commit,
+      :source_commit,
+      :merge_metadata)
       include Aws::Structure
     end
 
@@ -927,6 +2182,40 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Returns information about a target for a pull request.
+    #
+    # @note When making an API call, you may pass Target
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_reference: "ReferenceName", # required
+    #         destination_reference: "ReferenceName",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the pull request.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_reference
+    #   The branch of the repository that contains the changes for the pull
+    #   request. Also known as the source branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_reference
+    #   The branch of the repository where the pull request changes will be
+    #   merged into. Also known as the destination branch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Target AWS API Documentation
+    #
+    class Target < Struct.new(
+      :repository_name,
+      :source_reference,
+      :destination_reference)
+      include Aws::Structure
+    end
+
     # Represents the input of a test repository triggers operation.
     #
     # @note When making an API call, you may pass TestRepositoryTriggersInput
@@ -983,6 +2272,44 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateCommentInput
+    #   data as a hash:
+    #
+    #       {
+    #         comment_id: "CommentId", # required
+    #         content: "Content", # required
+    #       }
+    #
+    # @!attribute [rw] comment_id
+    #   The system-generated ID of the comment you want to update. To get
+    #   this ID, use GetCommentsForComparedCommit or
+    #   GetCommentsForPullRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The updated content with which you want to replace the existing
+    #   content of the comment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateCommentInput AWS API Documentation
+    #
+    class UpdateCommentInput < Struct.new(
+      :comment_id,
+      :content)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comment
+    #   Information about the updated comment.
+    #   @return [Types::Comment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateCommentOutput AWS API Documentation
+    #
+    class UpdateCommentOutput < Struct.new(
+      :comment)
+      include Aws::Structure
+    end
+
     # Represents the input of an update default branch operation.
     #
     # @note When making an API call, you may pass UpdateDefaultBranchInput
@@ -1006,6 +2333,118 @@ module Aws::CodeCommit
     class UpdateDefaultBranchInput < Struct.new(
       :repository_name,
       :default_branch_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePullRequestDescriptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         description: "Description", # required
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated content of the description for the pull request. This
+    #   content will replace the existing description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescriptionInput AWS API Documentation
+    #
+    class UpdatePullRequestDescriptionInput < Struct.new(
+      :pull_request_id,
+      :description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the updated pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescriptionOutput AWS API Documentation
+    #
+    class UpdatePullRequestDescriptionOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePullRequestStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         pull_request_status: "OPEN", # required, accepts OPEN, CLOSED
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] pull_request_status
+    #   The status of the pull request. The only valid operations are to
+    #   update the status from `OPEN` to `OPEN`, `OPEN` to `CLOSED` or from
+    #   from `CLOSED` to `CLOSED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatusInput AWS API Documentation
+    #
+    class UpdatePullRequestStatusInput < Struct.new(
+      :pull_request_id,
+      :pull_request_status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatusOutput AWS API Documentation
+    #
+    class UpdatePullRequestStatusOutput < Struct.new(
+      :pull_request)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePullRequestTitleInput
+    #   data as a hash:
+    #
+    #       {
+    #         pull_request_id: "PullRequestId", # required
+    #         title: "Title", # required
+    #       }
+    #
+    # @!attribute [rw] pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The updated title of the pull request. This will replace the
+    #   existing title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitleInput AWS API Documentation
+    #
+    class UpdatePullRequestTitleInput < Struct.new(
+      :pull_request_id,
+      :title)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pull_request
+    #   Information about the updated pull request.
+    #   @return [Types::PullRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitleOutput AWS API Documentation
+    #
+    class UpdatePullRequestTitleOutput < Struct.new(
+      :pull_request)
       include Aws::Structure
     end
 

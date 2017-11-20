@@ -151,9 +151,9 @@ module Aws::WorkDocs
     # document version, or fails to do so.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -187,9 +187,9 @@ module Aws::WorkDocs
     #   The ID of the user.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @return [Types::ActivateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -213,7 +213,7 @@ module Aws::WorkDocs
     #   resp.user.root_folder_id #=> String
     #   resp.user.recycle_bin_folder_id #=> String
     #   resp.user.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.user.type #=> String, one of "USER", "ADMIN"
+    #   resp.user.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.user.created_timestamp #=> Time
     #   resp.user.modified_timestamp #=> Time
     #   resp.user.time_zone_id #=> String
@@ -236,15 +236,18 @@ module Aws::WorkDocs
     # different permissions.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
     #
     # @option params [required, Array<Types::SharePrincipal>] :principals
     #   The users, groups, or organization being granted permission.
+    #
+    # @option params [Types::NotificationOptions] :notification_options
+    #   The notification options.
     #
     # @return [Types::AddResourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -262,6 +265,10 @@ module Aws::WorkDocs
     #         role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
     #       },
     #     ],
+    #     notification_options: {
+    #       send_email: false,
+    #       email_message: "MessageType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -285,9 +292,9 @@ module Aws::WorkDocs
     # Adds a new comment to the specified document version.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -346,7 +353,7 @@ module Aws::WorkDocs
     #   resp.comment.contributor.root_folder_id #=> String
     #   resp.comment.contributor.recycle_bin_folder_id #=> String
     #   resp.comment.contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.comment.contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.comment.contributor.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.comment.contributor.created_timestamp #=> Time
     #   resp.comment.contributor.modified_timestamp #=> Time
     #   resp.comment.contributor.time_zone_id #=> String
@@ -372,9 +379,9 @@ module Aws::WorkDocs
     # folder, document, or version).
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
@@ -411,9 +418,9 @@ module Aws::WorkDocs
     # Creates a folder with the specified name and parent folder.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [String] :name
     #   The name of the new folder.
@@ -467,9 +474,9 @@ module Aws::WorkDocs
     #   List of labels to add to the resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -477,7 +484,7 @@ module Aws::WorkDocs
     #
     #   resp = client.create_labels({
     #     resource_id: "ResourceIdType", # required
-    #     labels: ["Label"], # required
+    #     labels: ["SharedLabel"], # required
     #     authentication_token: "AuthenticationHeaderType",
     #   })
     #
@@ -509,7 +516,7 @@ module Aws::WorkDocs
     #
     # @option params [required, String] :protocol
     #   The protocol to use. The supported value is https, which delivers
-    #   JSON-encoded messasges using HTTPS POST.
+    #   JSON-encoded messages using HTTPS POST.
     #
     # @option params [required, String] :subscription_type
     #   The notification type.
@@ -571,9 +578,9 @@ module Aws::WorkDocs
     #   The amount of storage for the user.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -607,7 +614,7 @@ module Aws::WorkDocs
     #   resp.user.root_folder_id #=> String
     #   resp.user.recycle_bin_folder_id #=> String
     #   resp.user.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.user.type #=> String, one of "USER", "ADMIN"
+    #   resp.user.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.user.created_timestamp #=> Time
     #   resp.user.modified_timestamp #=> Time
     #   resp.user.time_zone_id #=> String
@@ -632,9 +639,9 @@ module Aws::WorkDocs
     #   The ID of the user.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -657,9 +664,9 @@ module Aws::WorkDocs
     # Deletes the specified comment from the document version.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -693,9 +700,9 @@ module Aws::WorkDocs
     # Deletes custom metadata from the specified resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource, either a document or folder.
@@ -736,9 +743,9 @@ module Aws::WorkDocs
     # metadata.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -764,9 +771,9 @@ module Aws::WorkDocs
     # Permanently deletes the specified folder and its contents.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -792,9 +799,9 @@ module Aws::WorkDocs
     # Deletes the contents of the specified folder.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -823,9 +830,9 @@ module Aws::WorkDocs
     #   The ID of the resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [Array<String>] :labels
     #   List of labels to delete from the resource.
@@ -840,7 +847,7 @@ module Aws::WorkDocs
     #   resp = client.delete_labels({
     #     resource_id: "ResourceIdType", # required
     #     authentication_token: "AuthenticationHeaderType",
-    #     labels: ["Label"],
+    #     labels: ["SharedLabel"],
     #     delete_all: false,
     #   })
     #
@@ -882,9 +889,9 @@ module Aws::WorkDocs
     # Deletes the specified user from a Simple AD or Microsoft AD directory.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :user_id
     #   The ID of the user.
@@ -910,17 +917,17 @@ module Aws::WorkDocs
     # Describes the user activities in a specified time period.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The timestamp that determines the starting time of the activities; the
+    #   The timestamp that determines the starting time of the activities. The
     #   response includes the activities performed after the specified
     #   timestamp.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The timestamp that determines the end time of the activities; the
+    #   The timestamp that determines the end time of the activities. The
     #   response includes the activities performed before the specified
     #   timestamp.
     #
@@ -937,8 +944,7 @@ module Aws::WorkDocs
     #   The maximum number of items to return.
     #
     # @option params [String] :marker
-    #   The marker for the next set of results. (You received this marker from
-    #   a previous call.)
+    #   The marker for the next set of results.
     #
     # @return [Types::DescribeActivitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1009,7 +1015,7 @@ module Aws::WorkDocs
     #   resp.user_activities[0].comment_metadata.contributor.root_folder_id #=> String
     #   resp.user_activities[0].comment_metadata.contributor.recycle_bin_folder_id #=> String
     #   resp.user_activities[0].comment_metadata.contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.user_activities[0].comment_metadata.contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.user_activities[0].comment_metadata.contributor.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.user_activities[0].comment_metadata.contributor.created_timestamp #=> Time
     #   resp.user_activities[0].comment_metadata.contributor.modified_timestamp #=> Time
     #   resp.user_activities[0].comment_metadata.contributor.time_zone_id #=> String
@@ -1034,9 +1040,9 @@ module Aws::WorkDocs
     # List all the comments for the specified document version.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1082,7 +1088,7 @@ module Aws::WorkDocs
     #   resp.comments[0].contributor.root_folder_id #=> String
     #   resp.comments[0].contributor.recycle_bin_folder_id #=> String
     #   resp.comments[0].contributor.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.comments[0].contributor.type #=> String, one of "USER", "ADMIN"
+    #   resp.comments[0].contributor.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.comments[0].contributor.created_timestamp #=> Time
     #   resp.comments[0].contributor.modified_timestamp #=> Time
     #   resp.comments[0].contributor.time_zone_id #=> String
@@ -1110,9 +1116,9 @@ module Aws::WorkDocs
     # By default, only active versions are returned.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1186,9 +1192,9 @@ module Aws::WorkDocs
     # You can also request initialized documents.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -1282,6 +1288,57 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Describes the groups specified by query.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
+    #
+    # @option params [required, String] :search_query
+    #   A query to describe groups by group name.
+    #
+    # @option params [String] :organization_id
+    #   The ID of the organization.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return with this call.
+    #
+    # @return [Types::DescribeGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGroupsResponse#groups #groups} => Array&lt;Types::GroupMetadata&gt;
+    #   * {Types::DescribeGroupsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_groups({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     search_query: "SearchQueryType", # required
+    #     organization_id: "IdType",
+    #     marker: "MarkerType",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].id #=> String
+    #   resp.groups[0].name #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroups AWS API Documentation
+    #
+    # @overload describe_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_groups(params = {}, options = {})
+      req = build_request(:describe_groups, params)
+      req.send_request(options)
+    end
+
     # Lists the specified notification subscriptions.
     #
     # @option params [required, String] :organization_id
@@ -1327,12 +1384,15 @@ module Aws::WorkDocs
     # Describes the permissions of a specified resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
+    #
+    # @option params [String] :principal_id
+    #   The ID of the principal to filter permissions by.
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return with this call.
@@ -1351,6 +1411,7 @@ module Aws::WorkDocs
     #   resp = client.describe_resource_permissions({
     #     authentication_token: "AuthenticationHeaderType",
     #     resource_id: "ResourceIdType", # required
+    #     principal_id: "IdType",
     #     limit: 1,
     #     marker: "PageMarkerType",
     #   })
@@ -1375,14 +1436,14 @@ module Aws::WorkDocs
     end
 
     # Describes the current user's special folders; the `RootFolder` and
-    # the `RecyleBin`. `RootFolder` is the root of user's files and folders
-    # and `RecyleBin` is the root of recycled items. This is not a valid
-    # action for SigV4 (administrative API) clients.
+    # the `RecycleBin`. `RootFolder` is the root of user's files and
+    # folders and `RecycleBin` is the root of recycled items. This is not a
+    # valid action for SigV4 (administrative API) clients.
     #
     # @option params [required, String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return.
@@ -1438,9 +1499,9 @@ module Aws::WorkDocs
     # you can use to request the next set of results.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [String] :organization_id
     #   The ID of the organization.
@@ -1504,7 +1565,7 @@ module Aws::WorkDocs
     #   resp.users[0].root_folder_id #=> String
     #   resp.users[0].recycle_bin_folder_id #=> String
     #   resp.users[0].status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.users[0].type #=> String, one of "USER", "ADMIN"
+    #   resp.users[0].type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.users[0].created_timestamp #=> Time
     #   resp.users[0].modified_timestamp #=> Time
     #   resp.users[0].time_zone_id #=> String
@@ -1529,7 +1590,9 @@ module Aws::WorkDocs
     # (administrative API) clients.
     #
     # @option params [required, String] :authentication_token
-    #   Amazon WorkDocs authentication token.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @return [Types::GetCurrentUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1552,7 +1615,7 @@ module Aws::WorkDocs
     #   resp.user.root_folder_id #=> String
     #   resp.user.recycle_bin_folder_id #=> String
     #   resp.user.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.user.type #=> String, one of "USER", "ADMIN"
+    #   resp.user.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.user.created_timestamp #=> Time
     #   resp.user.modified_timestamp #=> Time
     #   resp.user.time_zone_id #=> String
@@ -1573,9 +1636,9 @@ module Aws::WorkDocs
     # Retrieves details of a document.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1642,9 +1705,9 @@ module Aws::WorkDocs
     # can also request the names of the parent folders.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1691,9 +1754,9 @@ module Aws::WorkDocs
     # Retrieves version metadata for the specified document.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -1755,9 +1818,9 @@ module Aws::WorkDocs
     # Retrieves the metadata of the specified folder.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -1813,9 +1876,9 @@ module Aws::WorkDocs
     # can also request the parent folder names.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -1870,9 +1933,9 @@ module Aws::WorkDocs
     # To cancel the document upload, call AbortDocumentVersionUpload.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [String] :id
     #   The ID of the document.
@@ -1881,11 +1944,10 @@ module Aws::WorkDocs
     #   The name of the document.
     #
     # @option params [Time,DateTime,Date,Integer,String] :content_created_timestamp
-    #   The time stamp when the content of the document was originally
-    #   created.
+    #   The timestamp when the content of the document was originally created.
     #
     # @option params [Time,DateTime,Date,Integer,String] :content_modified_timestamp
-    #   The time stamp when the content of the document was modified.
+    #   The timestamp when the content of the document was modified.
     #
     # @option params [String] :content_type
     #   The content type of the document.
@@ -1955,9 +2017,9 @@ module Aws::WorkDocs
     # Removes all the permissions from the specified resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
@@ -1984,9 +2046,9 @@ module Aws::WorkDocs
     # resource.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource.
@@ -2021,9 +2083,9 @@ module Aws::WorkDocs
     # access to both the document and its parent folder, if applicable.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -2035,8 +2097,8 @@ module Aws::WorkDocs
     #   The ID of the parent folder.
     #
     # @option params [String] :resource_state
-    #   The resource state of the document. Note that only ACTIVE and RECYCLED
-    #   are supported.
+    #   The resource state of the document. Only ACTIVE and RECYCLED are
+    #   supported.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2067,9 +2129,9 @@ module Aws::WorkDocs
     # InitiateDocumentVersionUpload.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :document_id
     #   The ID of the document.
@@ -2105,9 +2167,9 @@ module Aws::WorkDocs
     # applicable.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :folder_id
     #   The ID of the folder.
@@ -2119,8 +2181,8 @@ module Aws::WorkDocs
     #   The ID of the parent folder.
     #
     # @option params [String] :resource_state
-    #   The resource state of the folder. Note that only ACTIVE and RECYCLED
-    #   are accepted values from the API.
+    #   The resource state of the folder. Only ACTIVE and RECYCLED are
+    #   accepted values from the API.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2147,9 +2209,9 @@ module Aws::WorkDocs
     # revokes administrative privileges to the Amazon WorkDocs site.
     #
     # @option params [String] :authentication_token
-    #   Amazon WorkDocs authentication token. This field should not be set
-    #   when using administrative API actions, as in accessing the API using
-    #   AWS credentials.
+    #   Amazon WorkDocs authentication token. Do not set this field when using
+    #   administrative API actions, as in accessing the API using AWS
+    #   credentials.
     #
     # @option params [required, String] :user_id
     #   The ID of the user.
@@ -2172,6 +2234,10 @@ module Aws::WorkDocs
     # @option params [String] :locale
     #   The locale of the user.
     #
+    # @option params [String] :grant_poweruser_privileges
+    #   Boolean value to determine whether the user is granted Poweruser
+    #   privileges.
+    #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user #user} => Types::User
@@ -2183,13 +2249,14 @@ module Aws::WorkDocs
     #     user_id: "IdType", # required
     #     given_name: "UserAttributeValueType",
     #     surname: "UserAttributeValueType",
-    #     type: "USER", # accepts USER, ADMIN
+    #     type: "USER", # accepts USER, ADMIN, POWERUSER, MINIMALUSER, WORKSPACESUSER
     #     storage_rule: {
     #       storage_allocated_in_bytes: 1,
     #       storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
     #     },
     #     time_zone_id: "TimeZoneIdType",
     #     locale: "en", # accepts en, fr, ko, de, es, ja, ru, zh_CN, zh_TW, pt_BR, default
+    #     grant_poweruser_privileges: "TRUE", # accepts TRUE, FALSE
     #   })
     #
     # @example Response structure
@@ -2203,7 +2270,7 @@ module Aws::WorkDocs
     #   resp.user.root_folder_id #=> String
     #   resp.user.recycle_bin_folder_id #=> String
     #   resp.user.status #=> String, one of "ACTIVE", "INACTIVE", "PENDING"
-    #   resp.user.type #=> String, one of "USER", "ADMIN"
+    #   resp.user.type #=> String, one of "USER", "ADMIN", "POWERUSER", "MINIMALUSER", "WORKSPACESUSER"
     #   resp.user.created_timestamp #=> Time
     #   resp.user.modified_timestamp #=> Time
     #   resp.user.time_zone_id #=> String
@@ -2234,7 +2301,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

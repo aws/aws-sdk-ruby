@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.3.0 (2017-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-costexplorer` gem.
+
 3.2.0 (2017-11-07)
 ------------------
 

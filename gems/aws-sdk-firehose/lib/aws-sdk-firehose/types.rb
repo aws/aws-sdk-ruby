@@ -196,7 +196,7 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -267,7 +267,7 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -344,7 +344,57 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         splunk_destination_configuration: {
+    #           hec_endpoint: "HECEndpoint", # required
+    #           hec_endpoint_type: "Raw", # required, accepts Raw, Event
+    #           hec_token: "HECToken", # required
+    #           hec_acknowledgment_timeout_in_seconds: 1,
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #           s3_configuration: { # required
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -401,6 +451,10 @@ module Aws::Firehose
     #   The destination in Amazon ES. You can specify only one destination.
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
+    # @!attribute [rw] splunk_destination_configuration
+    #   The destination in Splunk. You can specify only one destination.
+    #   @return [Types::SplunkDestinationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
     class CreateDeliveryStreamInput < Struct.new(
@@ -410,7 +464,8 @@ module Aws::Firehose
       :s3_destination_configuration,
       :extended_s3_destination_configuration,
       :redshift_destination_configuration,
-      :elasticsearch_destination_configuration)
+      :elasticsearch_destination_configuration,
+      :splunk_destination_configuration)
       include Aws::Structure
     end
 
@@ -581,6 +636,10 @@ module Aws::Firehose
     #   The destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationDescription]
     #
+    # @!attribute [rw] splunk_destination_description
+    #   The destination in Splunk.
+    #   @return [Types::SplunkDestinationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
     #
     class DestinationDescription < Struct.new(
@@ -588,7 +647,8 @@ module Aws::Firehose
       :s3_destination_description,
       :extended_s3_destination_description,
       :redshift_destination_description,
-      :elasticsearch_destination_description)
+      :elasticsearch_destination_description,
+      :splunk_destination_description)
       include Aws::Structure
     end
 
@@ -674,7 +734,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -889,7 +949,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1063,7 +1123,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1262,7 +1322,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1360,37 +1420,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetKinesisStreamInput
-    #   data as a hash:
-    #
-    #       {
-    #         delivery_stream_arn: "DeliveryStreamARN", # required
-    #       }
-    #
-    # @!attribute [rw] delivery_stream_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamInput AWS API Documentation
-    #
-    class GetKinesisStreamInput < Struct.new(
-      :delivery_stream_arn)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] kinesis_stream_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] credentials_for_reading_kinesis_stream
-    #   @return [Types::SessionCredentials]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamOutput AWS API Documentation
-    #
-    class GetKinesisStreamOutput < Struct.new(
-      :kinesis_stream_arn,
-      :credentials_for_reading_kinesis_stream)
-      include Aws::Structure
-    end
-
     # Describes an encryption key for a destination in Amazon S3.
     #
     # @note When making an API call, you may pass KMSEncryptionConfig
@@ -1475,7 +1504,8 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] limit
-    #   The maximum number of delivery streams to list.
+    #   The maximum number of delivery streams to list. The default value is
+    #   10.
     #   @return [Integer]
     #
     # @!attribute [rw] delivery_stream_type
@@ -1532,7 +1562,7 @@ module Aws::Firehose
     #             type: "Lambda", # required, accepts Lambda
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1565,7 +1595,7 @@ module Aws::Firehose
     #         type: "Lambda", # required, accepts Lambda
     #         parameters: [
     #           {
-    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #             parameter_value: "ProcessorParameterValue", # required
     #           },
     #         ],
@@ -1593,7 +1623,7 @@ module Aws::Firehose
     #   data as a hash:
     #
     #       {
-    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #         parameter_value: "ProcessorParameterValue", # required
     #       }
     #
@@ -1790,7 +1820,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -2000,7 +2030,7 @@ module Aws::Firehose
     #               type: "Lambda", # required, accepts Lambda
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -2352,28 +2382,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @!attribute [rw] access_key_id
-    #   @return [String]
-    #
-    # @!attribute [rw] secret_access_key
-    #   @return [String]
-    #
-    # @!attribute [rw] session_token
-    #   @return [String]
-    #
-    # @!attribute [rw] expiration
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SessionCredentials AWS API Documentation
-    #
-    class SessionCredentials < Struct.new(
-      :access_key_id,
-      :secret_access_key,
-      :session_token,
-      :expiration)
-      include Aws::Structure
-    end
-
     # Details about a Kinesis stream used as the source for a Kinesis
     # Firehose delivery stream.
     #
@@ -2386,6 +2394,334 @@ module Aws::Firehose
     #
     class SourceDescription < Struct.new(
       :kinesis_stream_source_description)
+      include Aws::Structure
+    end
+
+    # Describes the configuration of a destination in Splunk.
+    #
+    # @note When making an API call, you may pass SplunkDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         hec_endpoint: "HECEndpoint", # required
+    #         hec_endpoint_type: "Raw", # required, accepts Raw, Event
+    #         hec_token: "HECToken", # required
+    #         hec_acknowledgment_timeout_in_seconds: 1,
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #         s3_configuration: { # required
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hec_endpoint
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
+    #   sends your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_endpoint_type
+    #   This type can be either "Raw" or "Event".
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_token
+    #   This is a GUID you obtain from your Splunk cluster when you create a
+    #   new HEC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
+    #   The amount of time that Kinesis Firehose waits to receive an
+    #   acknowledgment from Splunk after it sends it data. At the end of the
+    #   timeout period Kinesis Firehose either tries to send the data again
+    #   or considers it an error, based on your retry settings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Firehose is unable to deliver
+    #   data to Splunk or if it doesn't receive an acknowledgment of
+    #   receipt from Splunk.
+    #   @return [Types::SplunkRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Defines how documents should be delivered to Amazon S3. When set to
+    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
+    #   not be indexed to the configured Amazon S3 destination. When set to
+    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
+    #   Amazon S3, and also writes failed documents to Amazon S3. Default
+    #   value is `FailedDocumentsOnly`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The configuration for the backup Amazon S3 location.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration AWS API Documentation
+    #
+    class SplunkDestinationConfiguration < Struct.new(
+      :hec_endpoint,
+      :hec_endpoint_type,
+      :hec_token,
+      :hec_acknowledgment_timeout_in_seconds,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_configuration,
+      :processing_configuration,
+      :cloud_watch_logging_options)
+      include Aws::Structure
+    end
+
+    # Describes a destination in Splunk.
+    #
+    # @!attribute [rw] hec_endpoint
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
+    #   sends your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_endpoint_type
+    #   This type can be either "Raw" or "Event".
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_token
+    #   This is a GUID you obtain from your Splunk cluster when you create a
+    #   new HEC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
+    #   The amount of time that Kinesis Firehose waits to receive an
+    #   acknowledgment from Splunk after it sends it data. At the end of the
+    #   timeout period Kinesis Firehose either tries to send the data again
+    #   or considers it an error, based on your retry settings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Firehose is unable to deliver
+    #   data to Splunk or if it doesn't receive an acknowledgment of
+    #   receipt from Splunk.
+    #   @return [Types::SplunkRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Defines how documents should be delivered to Amazon S3. When set to
+    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
+    #   not be indexed to the configured Amazon S3 destination. When set to
+    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
+    #   Amazon S3, and also writes failed documents to Amazon S3. Default
+    #   value is `FailedDocumentsOnly`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   The Amazon S3 destination.&gt;
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription AWS API Documentation
+    #
+    class SplunkDestinationDescription < Struct.new(
+      :hec_endpoint,
+      :hec_endpoint_type,
+      :hec_token,
+      :hec_acknowledgment_timeout_in_seconds,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_destination_description,
+      :processing_configuration,
+      :cloud_watch_logging_options)
+      include Aws::Structure
+    end
+
+    # Describes an update for a destination in Splunk.
+    #
+    # @note When making an API call, you may pass SplunkDestinationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         hec_endpoint: "HECEndpoint",
+    #         hec_endpoint_type: "Raw", # accepts Raw, Event
+    #         hec_token: "HECToken",
+    #         hec_acknowledgment_timeout_in_seconds: 1,
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #         s3_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hec_endpoint
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
+    #   sends your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_endpoint_type
+    #   This type can be either "Raw" or "Event".
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_token
+    #   This is a GUID you obtain from your Splunk cluster when you create a
+    #   new HEC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
+    #   The amount of time that Kinesis Firehose waits to receive an
+    #   acknowledgment from Splunk after it sends it data. At the end of the
+    #   timeout period Kinesis Firehose either tries to send the data again
+    #   or considers it an error, based on your retry settings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Firehose is unable to deliver
+    #   data to Splunk or if it doesn't receive an acknowledgment of
+    #   receipt from Splunk.
+    #   @return [Types::SplunkRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Defines how documents should be delivered to Amazon S3. When set to
+    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
+    #   not be indexed to the configured Amazon S3 destination. When set to
+    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
+    #   Amazon S3, and also writes failed documents to Amazon S3. Default
+    #   value is `FailedDocumentsOnly`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_update
+    #   Your update to the configuration of the backup Amazon S3 location.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate AWS API Documentation
+    #
+    class SplunkDestinationUpdate < Struct.new(
+      :hec_endpoint,
+      :hec_endpoint_type,
+      :hec_token,
+      :hec_acknowledgment_timeout_in_seconds,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_update,
+      :processing_configuration,
+      :cloud_watch_logging_options)
+      include Aws::Structure
+    end
+
+    # Configures retry behavior in case Kinesis Firehose is unable to
+    # deliver documents to Splunk or if it doesn't receive an
+    # acknowledgment from Splunk.
+    #
+    # @note When making an API call, you may pass SplunkRetryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The total amount of time that Kinesis Firehose spends on retries.
+    #   This duration starts after the initial attempt to send data to
+    #   Splunk fails and doesn't include the periods during which Kinesis
+    #   Firehose waits for acknowledgment from Splunk after each attempt.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkRetryOptions AWS API Documentation
+    #
+    class SplunkRetryOptions < Struct.new(
+      :duration_in_seconds)
       include Aws::Structure
     end
 
@@ -2444,7 +2780,7 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -2515,7 +2851,7 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -2591,7 +2927,57 @@ module Aws::Firehose
     #                 type: "Lambda", # required, accepts Lambda
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         splunk_destination_update: {
+    #           hec_endpoint: "HECEndpoint",
+    #           hec_endpoint_type: "Raw", # accepts Raw, Event
+    #           hec_token: "HECToken",
+    #           hec_acknowledgment_timeout_in_seconds: 1,
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedEventsOnly", # accepts FailedEventsOnly, AllEvents
+    #           s3_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -2640,6 +3026,10 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationUpdate]
     #
+    # @!attribute [rw] splunk_destination_update
+    #   Describes an update for a destination in Splunk.
+    #   @return [Types::SplunkDestinationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
     #
     class UpdateDestinationInput < Struct.new(
@@ -2649,7 +3039,8 @@ module Aws::Firehose
       :s3_destination_update,
       :extended_s3_destination_update,
       :redshift_destination_update,
-      :elasticsearch_destination_update)
+      :elasticsearch_destination_update,
+      :splunk_destination_update)
       include Aws::Structure
     end
 

@@ -19,6 +19,7 @@ module Aws::WorkDocs
     AddResourcePermissionsRequest = Shapes::StructureShape.new(name: 'AddResourcePermissionsRequest')
     AddResourcePermissionsResponse = Shapes::StructureShape.new(name: 'AddResourcePermissionsResponse')
     AuthenticationHeaderType = Shapes::StringShape.new(name: 'AuthenticationHeaderType')
+    BooleanEnumType = Shapes::StringShape.new(name: 'BooleanEnumType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
     Comment = Shapes::StructureShape.new(name: 'Comment')
     CommentIdType = Shapes::StringShape.new(name: 'CommentIdType')
@@ -65,6 +66,8 @@ module Aws::WorkDocs
     DescribeDocumentVersionsResponse = Shapes::StructureShape.new(name: 'DescribeDocumentVersionsResponse')
     DescribeFolderContentsRequest = Shapes::StructureShape.new(name: 'DescribeFolderContentsRequest')
     DescribeFolderContentsResponse = Shapes::StructureShape.new(name: 'DescribeFolderContentsResponse')
+    DescribeGroupsRequest = Shapes::StructureShape.new(name: 'DescribeGroupsRequest')
+    DescribeGroupsResponse = Shapes::StructureShape.new(name: 'DescribeGroupsResponse')
     DescribeNotificationSubscriptionsRequest = Shapes::StructureShape.new(name: 'DescribeNotificationSubscriptionsRequest')
     DescribeNotificationSubscriptionsResponse = Shapes::StructureShape.new(name: 'DescribeNotificationSubscriptionsResponse')
     DescribeResourcePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeResourcePermissionsRequest')
@@ -121,13 +124,13 @@ module Aws::WorkDocs
     InitiateDocumentVersionUploadResponse = Shapes::StructureShape.new(name: 'InitiateDocumentVersionUploadResponse')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
-    Label = Shapes::StringShape.new(name: 'Label')
-    Labels = Shapes::ListShape.new(name: 'Labels')
+    InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitType = Shapes::IntegerShape.new(name: 'LimitType')
     LocaleType = Shapes::StringShape.new(name: 'LocaleType')
     MarkerType = Shapes::StringShape.new(name: 'MarkerType')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    NotificationOptions = Shapes::StructureShape.new(name: 'NotificationOptions')
     OrderType = Shapes::StringShape.new(name: 'OrderType')
     OrganizationUserList = Shapes::ListShape.new(name: 'OrganizationUserList')
     PageMarkerType = Shapes::StringShape.new(name: 'PageMarkerType')
@@ -135,6 +138,7 @@ module Aws::WorkDocs
     PasswordType = Shapes::StringShape.new(name: 'PasswordType')
     PermissionInfo = Shapes::StructureShape.new(name: 'PermissionInfo')
     PermissionInfoList = Shapes::ListShape.new(name: 'PermissionInfoList')
+    PositiveIntegerType = Shapes::IntegerShape.new(name: 'PositiveIntegerType')
     PositiveSizeType = Shapes::IntegerShape.new(name: 'PositiveSizeType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
@@ -161,6 +165,8 @@ module Aws::WorkDocs
     ShareResult = Shapes::StructureShape.new(name: 'ShareResult')
     ShareResultsList = Shapes::ListShape.new(name: 'ShareResultsList')
     ShareStatusType = Shapes::StringShape.new(name: 'ShareStatusType')
+    SharedLabel = Shapes::StringShape.new(name: 'SharedLabel')
+    SharedLabels = Shapes::ListShape.new(name: 'SharedLabels')
     SignedHeaderMap = Shapes::MapShape.new(name: 'SignedHeaderMap')
     SizeType = Shapes::IntegerShape.new(name: 'SizeType')
     StorageLimitExceededException = Shapes::StructureShape.new(name: 'StorageLimitExceededException')
@@ -223,6 +229,7 @@ module Aws::WorkDocs
     AddResourcePermissionsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     AddResourcePermissionsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "ResourceId"))
     AddResourcePermissionsRequest.add_member(:principals, Shapes::ShapeRef.new(shape: SharePrincipalList, required: true, location_name: "Principals"))
+    AddResourcePermissionsRequest.add_member(:notification_options, Shapes::ShapeRef.new(shape: NotificationOptions, location_name: "NotificationOptions"))
     AddResourcePermissionsRequest.struct_class = Types::AddResourcePermissionsRequest
 
     AddResourcePermissionsResponse.add_member(:share_results, Shapes::ShapeRef.new(shape: ShareResultsList, location_name: "ShareResults"))
@@ -278,7 +285,7 @@ module Aws::WorkDocs
     CreateFolderResponse.struct_class = Types::CreateFolderResponse
 
     CreateLabelsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "ResourceId"))
-    CreateLabelsRequest.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, required: true, location_name: "Labels"))
+    CreateLabelsRequest.add_member(:labels, Shapes::ShapeRef.new(shape: SharedLabels, required: true, location_name: "Labels"))
     CreateLabelsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     CreateLabelsRequest.struct_class = Types::CreateLabelsRequest
 
@@ -345,7 +352,7 @@ module Aws::WorkDocs
 
     DeleteLabelsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "ResourceId"))
     DeleteLabelsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
-    DeleteLabelsRequest.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location: "querystring", location_name: "labels"))
+    DeleteLabelsRequest.add_member(:labels, Shapes::ShapeRef.new(shape: SharedLabels, location: "querystring", location_name: "labels"))
     DeleteLabelsRequest.add_member(:delete_all, Shapes::ShapeRef.new(shape: BooleanType, location: "querystring", location_name: "deleteAll"))
     DeleteLabelsRequest.struct_class = Types::DeleteLabelsRequest
 
@@ -410,6 +417,17 @@ module Aws::WorkDocs
     DescribeFolderContentsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarkerType, location_name: "Marker"))
     DescribeFolderContentsResponse.struct_class = Types::DescribeFolderContentsResponse
 
+    DescribeGroupsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
+    DescribeGroupsRequest.add_member(:search_query, Shapes::ShapeRef.new(shape: SearchQueryType, required: true, location: "querystring", location_name: "searchQuery"))
+    DescribeGroupsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: IdType, location: "querystring", location_name: "organizationId"))
+    DescribeGroupsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location: "querystring", location_name: "marker"))
+    DescribeGroupsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerType, location: "querystring", location_name: "limit"))
+    DescribeGroupsRequest.struct_class = Types::DescribeGroupsRequest
+
+    DescribeGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: GroupMetadataList, location_name: "Groups"))
+    DescribeGroupsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    DescribeGroupsResponse.struct_class = Types::DescribeGroupsResponse
+
     DescribeNotificationSubscriptionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "OrganizationId"))
     DescribeNotificationSubscriptionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarkerType, location: "querystring", location_name: "marker"))
     DescribeNotificationSubscriptionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location: "querystring", location_name: "limit"))
@@ -421,6 +439,7 @@ module Aws::WorkDocs
 
     DescribeResourcePermissionsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DescribeResourcePermissionsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "ResourceId"))
+    DescribeResourcePermissionsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdType, location: "querystring", location_name: "principalId"))
     DescribeResourcePermissionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location: "querystring", location_name: "limit"))
     DescribeResourcePermissionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarkerType, location: "querystring", location_name: "marker"))
     DescribeResourcePermissionsRequest.struct_class = Types::DescribeResourcePermissionsRequest
@@ -451,7 +470,7 @@ module Aws::WorkDocs
     DescribeUsersRequest.struct_class = Types::DescribeUsersRequest
 
     DescribeUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: OrganizationUserList, location_name: "Users"))
-    DescribeUsersResponse.add_member(:total_number_of_users, Shapes::ShapeRef.new(shape: SizeType, location_name: "TotalNumberOfUsers"))
+    DescribeUsersResponse.add_member(:total_number_of_users, Shapes::ShapeRef.new(shape: SizeType, deprecated: true, location_name: "TotalNumberOfUsers"))
     DescribeUsersResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarkerType, location_name: "Marker"))
     DescribeUsersResponse.struct_class = Types::DescribeUsersResponse
 
@@ -462,7 +481,7 @@ module Aws::WorkDocs
     DocumentMetadata.add_member(:modified_timestamp, Shapes::ShapeRef.new(shape: TimestampType, location_name: "ModifiedTimestamp"))
     DocumentMetadata.add_member(:latest_version_metadata, Shapes::ShapeRef.new(shape: DocumentVersionMetadata, location_name: "LatestVersionMetadata"))
     DocumentMetadata.add_member(:resource_state, Shapes::ShapeRef.new(shape: ResourceStateType, location_name: "ResourceState"))
-    DocumentMetadata.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
+    DocumentMetadata.add_member(:labels, Shapes::ShapeRef.new(shape: SharedLabels, location_name: "Labels"))
     DocumentMetadata.struct_class = Types::DocumentMetadata
 
     DocumentMetadataList.member = Shapes::ShapeRef.new(shape: DocumentMetadata)
@@ -500,7 +519,7 @@ module Aws::WorkDocs
     FolderMetadata.add_member(:modified_timestamp, Shapes::ShapeRef.new(shape: TimestampType, location_name: "ModifiedTimestamp"))
     FolderMetadata.add_member(:resource_state, Shapes::ShapeRef.new(shape: ResourceStateType, location_name: "ResourceState"))
     FolderMetadata.add_member(:signature, Shapes::ShapeRef.new(shape: HashType, location_name: "Signature"))
-    FolderMetadata.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
+    FolderMetadata.add_member(:labels, Shapes::ShapeRef.new(shape: SharedLabels, location_name: "Labels"))
     FolderMetadata.add_member(:size, Shapes::ShapeRef.new(shape: SizeType, location_name: "Size"))
     FolderMetadata.add_member(:latest_version_size, Shapes::ShapeRef.new(shape: SizeType, location_name: "LatestVersionSize"))
     FolderMetadata.struct_class = Types::FolderMetadata
@@ -582,7 +601,9 @@ module Aws::WorkDocs
     InitiateDocumentVersionUploadResponse.add_member(:upload_metadata, Shapes::ShapeRef.new(shape: UploadMetadata, location_name: "UploadMetadata"))
     InitiateDocumentVersionUploadResponse.struct_class = Types::InitiateDocumentVersionUploadResponse
 
-    Labels.member = Shapes::ShapeRef.new(shape: Label)
+    NotificationOptions.add_member(:send_email, Shapes::ShapeRef.new(shape: BooleanType, location_name: "SendEmail"))
+    NotificationOptions.add_member(:email_message, Shapes::ShapeRef.new(shape: MessageType, location_name: "EmailMessage"))
+    NotificationOptions.struct_class = Types::NotificationOptions
 
     OrganizationUserList.member = Shapes::ShapeRef.new(shape: User)
 
@@ -647,6 +668,8 @@ module Aws::WorkDocs
 
     ShareResultsList.member = Shapes::ShapeRef.new(shape: ShareResult)
 
+    SharedLabels.member = Shapes::ShapeRef.new(shape: SharedLabel)
+
     SignedHeaderMap.key = Shapes::ShapeRef.new(shape: HeaderNameType)
     SignedHeaderMap.value = Shapes::ShapeRef.new(shape: HeaderValueType)
 
@@ -689,6 +712,7 @@ module Aws::WorkDocs
     UpdateUserRequest.add_member(:storage_rule, Shapes::ShapeRef.new(shape: StorageRuleType, location_name: "StorageRule"))
     UpdateUserRequest.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneIdType, location_name: "TimeZoneId"))
     UpdateUserRequest.add_member(:locale, Shapes::ShapeRef.new(shape: LocaleType, location_name: "Locale"))
+    UpdateUserRequest.add_member(:grant_poweruser_privileges, Shapes::ShapeRef.new(shape: BooleanEnumType, location_name: "GrantPoweruserPrivileges"))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -1058,6 +1082,18 @@ module Aws::WorkDocs
         )
       end)
 
+      api.add_operation(:describe_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/groups"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_notification_subscriptions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeNotificationSubscriptions"
         o.http_method = "GET"
@@ -1138,6 +1174,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
       end)
 
       api.add_operation(:get_document_path, Seahorse::Model::Operation.new.tap do |o|
@@ -1165,6 +1202,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
       end)
 
       api.add_operation(:get_folder, Seahorse::Model::Operation.new.tap do |o|
@@ -1301,6 +1339,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DeactivatingLastSystemUserException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
     end
 

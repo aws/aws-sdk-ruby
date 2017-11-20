@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2017-11-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CostExplorer`.
+
 1.36.0 (2017-11-17)
 ------------------
 

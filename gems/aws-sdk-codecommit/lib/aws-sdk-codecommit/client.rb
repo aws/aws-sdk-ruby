@@ -241,6 +241,84 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Creates a pull request in the specified repository.
+    #
+    # @option params [required, String] :title
+    #   The title of the pull request. This title will be used to identify the
+    #   pull request to other users in the repository.
+    #
+    # @option params [String] :description
+    #   A description of the pull request.
+    #
+    # @option params [required, Array<Types::Target>] :targets
+    #   The targets for the pull request, including the source of the code to
+    #   be reviewed (the source branch), and the destination where the creator
+    #   of the pull request intends the code to be merged after the pull
+    #   request is closed (the destination branch).
+    #
+    # @option params [String] :client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If using an AWS SDK,
+    #   you do not have to generate an idempotency token, as this will be done
+    #   for you.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePullRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePullRequestOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_pull_request({
+    #     title: "Title", # required
+    #     description: "Description",
+    #     targets: [ # required
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         source_reference: "ReferenceName", # required
+    #         destination_reference: "ReferenceName",
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequest AWS API Documentation
+    #
+    # @overload create_pull_request(params = {})
+    # @param [Hash] params ({})
+    def create_pull_request(params = {}, options = {})
+      req = build_request(:create_pull_request, params)
+      req.send_request(options)
+    end
+
     # Creates a new, empty repository.
     #
     # @option params [required, String] :repository_name
@@ -337,6 +415,43 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Deletes the content of a comment made on a change, file, or commit in
+    # a repository.
+    #
+    # @option params [required, String] :comment_id
+    #   The unique, system-generated ID of the comment. To get this ID, use
+    #   GetCommentsForComparedCommit or GetCommentsForPullRequest.
+    #
+    # @return [Types::DeleteCommentContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCommentContentOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_comment_content({
+    #     comment_id: "CommentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContent AWS API Documentation
+    #
+    # @overload delete_comment_content(params = {})
+    # @param [Hash] params ({})
+    def delete_comment_content(params = {}, options = {})
+      req = build_request(:delete_comment_content, params)
+      req.send_request(options)
+    end
+
     # Deletes a repository. If a specified repository was already deleted, a
     # null repository ID will be returned.
     #
@@ -367,6 +482,71 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def delete_repository(params = {}, options = {})
       req = build_request(:delete_repository, params)
+      req.send_request(options)
+    end
+
+    # Returns information about one or more pull request events.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [String] :pull_request_event_type
+    #   Optional. The pull request event type about which you want to return
+    #   information.
+    #
+    # @option params [String] :actor_arn
+    #   The Amazon Resource Name (ARN) of the user whose actions resulted in
+    #   the event. Examples include updating the pull request with additional
+    #   commits or changing the status of a pull request.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 events, which is also the maximum number of events
+    #   that can be returned in a result.
+    #
+    # @return [Types::DescribePullRequestEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePullRequestEventsOutput#pull_request_events #pull_request_events} => Array&lt;Types::PullRequestEvent&gt;
+    #   * {Types::DescribePullRequestEventsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pull_request_events({
+    #     pull_request_id: "PullRequestId", # required
+    #     pull_request_event_type: "PULL_REQUEST_CREATED", # accepts PULL_REQUEST_CREATED, PULL_REQUEST_STATUS_CHANGED, PULL_REQUEST_SOURCE_REFERENCE_UPDATED, PULL_REQUEST_MERGE_STATE_CHANGED
+    #     actor_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request_events #=> Array
+    #   resp.pull_request_events[0].pull_request_id #=> String
+    #   resp.pull_request_events[0].event_date #=> Time
+    #   resp.pull_request_events[0].pull_request_event_type #=> String, one of "PULL_REQUEST_CREATED", "PULL_REQUEST_STATUS_CHANGED", "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", "PULL_REQUEST_MERGE_STATE_CHANGED"
+    #   resp.pull_request_events[0].actor_arn #=> String
+    #   resp.pull_request_events[0].pull_request_status_changed_event_metadata.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.repository_name #=> String
+    #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.before_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_source_reference_updated_event_metadata.after_commit_id #=> String
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.repository_name #=> String
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.destination_reference #=> String
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request_events[0].pull_request_merged_state_changed_event_metadata.merge_metadata.merged_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEvents AWS API Documentation
+    #
+    # @overload describe_pull_request_events(params = {})
+    # @param [Hash] params ({})
+    def describe_pull_request_events(params = {}, options = {})
+      req = build_request(:describe_pull_request_events, params)
       req.send_request(options)
     end
 
@@ -435,6 +615,185 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def get_branch(params = {}, options = {})
       req = build_request(:get_branch, params)
+      req.send_request(options)
+    end
+
+    # Returns the content of a comment made on a change, file, or commit in
+    # a repository.
+    #
+    # @option params [required, String] :comment_id
+    #   The unique, system-generated ID of the comment. To get this ID, use
+    #   GetCommentsForComparedCommit or GetCommentsForPullRequest.
+    #
+    # @return [Types::GetCommentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCommentOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_comment({
+    #     comment_id: "CommentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetComment AWS API Documentation
+    #
+    # @overload get_comment(params = {})
+    # @param [Hash] params ({})
+    def get_comment(params = {}, options = {})
+      req = build_request(:get_comment, params)
+      req.send_request(options)
+    end
+
+    # Returns information about comments made on the comparison between two
+    # commits.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to compare commits.
+    #
+    # @option params [String] :before_commit_id
+    #   To establish the directionality of the comparison, the full commit ID
+    #   of the 'before' commit.
+    #
+    # @option params [required, String] :after_commit_id
+    #   To establish the directionality of the comparison, the full commit ID
+    #   of the 'after' commit.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 comments, and is configurable up to 500.
+    #
+    # @return [Types::GetCommentsForComparedCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCommentsForComparedCommitOutput#comments_for_compared_commit_data #comments_for_compared_commit_data} => Array&lt;Types::CommentsForComparedCommit&gt;
+    #   * {Types::GetCommentsForComparedCommitOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_comments_for_compared_commit({
+    #     repository_name: "RepositoryName", # required
+    #     before_commit_id: "CommitId",
+    #     after_commit_id: "CommitId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comments_for_compared_commit_data #=> Array
+    #   resp.comments_for_compared_commit_data[0].repository_name #=> String
+    #   resp.comments_for_compared_commit_data[0].before_commit_id #=> String
+    #   resp.comments_for_compared_commit_data[0].after_commit_id #=> String
+    #   resp.comments_for_compared_commit_data[0].before_blob_id #=> String
+    #   resp.comments_for_compared_commit_data[0].after_blob_id #=> String
+    #   resp.comments_for_compared_commit_data[0].location.file_path #=> String
+    #   resp.comments_for_compared_commit_data[0].location.file_position #=> Integer
+    #   resp.comments_for_compared_commit_data[0].location.relative_file_version #=> String, one of "BEFORE", "AFTER"
+    #   resp.comments_for_compared_commit_data[0].comments #=> Array
+    #   resp.comments_for_compared_commit_data[0].comments[0].comment_id #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].content #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].in_reply_to #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].creation_date #=> Time
+    #   resp.comments_for_compared_commit_data[0].comments[0].last_modified_date #=> Time
+    #   resp.comments_for_compared_commit_data[0].comments[0].author_arn #=> String
+    #   resp.comments_for_compared_commit_data[0].comments[0].deleted #=> Boolean
+    #   resp.comments_for_compared_commit_data[0].comments[0].client_request_token #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommit AWS API Documentation
+    #
+    # @overload get_comments_for_compared_commit(params = {})
+    # @param [Hash] params ({})
+    def get_comments_for_compared_commit(params = {}, options = {})
+      req = build_request(:get_comments_for_compared_commit, params)
+      req.send_request(options)
+    end
+
+    # Returns comments made on a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [String] :repository_name
+    #   The name of the repository that contains the pull request.
+    #
+    # @option params [String] :before_commit_id
+    #   The full commit ID of the commit in the destination branch that was
+    #   the tip of the branch at the time the pull request was created.
+    #
+    # @option params [String] :after_commit_id
+    #   The full commit ID of the commit in the source branch that was the tip
+    #   of the branch at the time the comment was made.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   The default is 100 comments. You can return up to 500 comments with a
+    #   single request.
+    #
+    # @return [Types::GetCommentsForPullRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCommentsForPullRequestOutput#comments_for_pull_request_data #comments_for_pull_request_data} => Array&lt;Types::CommentsForPullRequest&gt;
+    #   * {Types::GetCommentsForPullRequestOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_comments_for_pull_request({
+    #     pull_request_id: "PullRequestId", # required
+    #     repository_name: "RepositoryName",
+    #     before_commit_id: "CommitId",
+    #     after_commit_id: "CommitId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comments_for_pull_request_data #=> Array
+    #   resp.comments_for_pull_request_data[0].pull_request_id #=> String
+    #   resp.comments_for_pull_request_data[0].repository_name #=> String
+    #   resp.comments_for_pull_request_data[0].before_commit_id #=> String
+    #   resp.comments_for_pull_request_data[0].after_commit_id #=> String
+    #   resp.comments_for_pull_request_data[0].before_blob_id #=> String
+    #   resp.comments_for_pull_request_data[0].after_blob_id #=> String
+    #   resp.comments_for_pull_request_data[0].location.file_path #=> String
+    #   resp.comments_for_pull_request_data[0].location.file_position #=> Integer
+    #   resp.comments_for_pull_request_data[0].location.relative_file_version #=> String, one of "BEFORE", "AFTER"
+    #   resp.comments_for_pull_request_data[0].comments #=> Array
+    #   resp.comments_for_pull_request_data[0].comments[0].comment_id #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].content #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].in_reply_to #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].creation_date #=> Time
+    #   resp.comments_for_pull_request_data[0].comments[0].last_modified_date #=> Time
+    #   resp.comments_for_pull_request_data[0].comments[0].author_arn #=> String
+    #   resp.comments_for_pull_request_data[0].comments[0].deleted #=> Boolean
+    #   resp.comments_for_pull_request_data[0].comments[0].client_request_token #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequest AWS API Documentation
+    #
+    # @overload get_comments_for_pull_request(params = {})
+    # @param [Hash] params ({})
+    def get_comments_for_pull_request(params = {}, options = {})
+      req = build_request(:get_comments_for_pull_request, params)
       req.send_request(options)
     end
 
@@ -557,6 +916,98 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about merge conflicts between the before and after
+    # commit IDs for a pull request in a repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where the pull request was created.
+    #
+    # @option params [required, String] :destination_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :source_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, a branch name or a full commit ID.
+    #
+    # @option params [required, String] :merge_option
+    #   The merge option or strategy you want to use to merge the code. The
+    #   only valid value is FAST\_FORWARD\_MERGE.
+    #
+    # @return [Types::GetMergeConflictsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMergeConflictsOutput#mergeable #mergeable} => Boolean
+    #   * {Types::GetMergeConflictsOutput#destination_commit_id #destination_commit_id} => String
+    #   * {Types::GetMergeConflictsOutput#source_commit_id #source_commit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_merge_conflicts({
+    #     repository_name: "RepositoryName", # required
+    #     destination_commit_specifier: "CommitName", # required
+    #     source_commit_specifier: "CommitName", # required
+    #     merge_option: "FAST_FORWARD_MERGE", # required, accepts FAST_FORWARD_MERGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mergeable #=> Boolean
+    #   resp.destination_commit_id #=> String
+    #   resp.source_commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflicts AWS API Documentation
+    #
+    # @overload get_merge_conflicts(params = {})
+    # @param [Hash] params ({})
+    def get_merge_conflicts(params = {}, options = {})
+      req = build_request(:get_merge_conflicts, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a pull request in a specified repository.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @return [Types::GetPullRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPullRequestOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_pull_request({
+    #     pull_request_id: "PullRequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequest AWS API Documentation
+    #
+    # @overload get_pull_request(params = {})
+    # @param [Hash] params ({})
+    def get_pull_request(params = {}, options = {})
+      req = build_request(:get_pull_request, params)
+      req.send_request(options)
+    end
+
     # Returns information about a repository.
     #
     # <note markdown="1"> The description field for a repository accepts all HTML characters and
@@ -675,6 +1126,58 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns a list of pull requests for a specified repository. The return
+    # list can be refined by pull request status or pull request author ARN.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository for which you want to list pull requests.
+    #
+    # @option params [String] :author_arn
+    #   Optional. The Amazon Resource Name (ARN) of the user who created the
+    #   pull request. If used, this filters the results to pull requests
+    #   created by that user.
+    #
+    # @option params [String] :pull_request_status
+    #   Optional. The status of the pull request. If used, this refines the
+    #   results to the pull requests that match the specified status.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @option params [Integer] :max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #
+    # @return [Types::ListPullRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPullRequestsOutput#pull_request_ids #pull_request_ids} => Array&lt;String&gt;
+    #   * {Types::ListPullRequestsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pull_requests({
+    #     repository_name: "RepositoryName", # required
+    #     author_arn: "Arn",
+    #     pull_request_status: "OPEN", # accepts OPEN, CLOSED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request_ids #=> Array
+    #   resp.pull_request_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequests AWS API Documentation
+    #
+    # @overload list_pull_requests(params = {})
+    # @param [Hash] params ({})
+    def list_pull_requests(params = {}, options = {})
+      req = build_request(:list_pull_requests, params)
+      req.send_request(options)
+    end
+
     # Gets information about one or more repositories.
     #
     # @option params [String] :next_token
@@ -717,6 +1220,293 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def list_repositories(params = {}, options = {})
       req = build_request(:list_repositories, params)
+      req.send_request(options)
+    end
+
+    # Closes a pull request and attempts to merge the source commit of a
+    # pull request into the specified destination branch for that pull
+    # request at the specified commit using the fast-forward merge option.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where the pull request was created.
+    #
+    # @option params [String] :source_commit_id
+    #   The full commit ID of the original or updated commit in the pull
+    #   request source branch. Pass this value if you want an exception thrown
+    #   if the current commit ID of the tip of the source branch does not
+    #   match this commit ID.
+    #
+    # @return [Types::MergePullRequestByFastForwardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergePullRequestByFastForwardOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_pull_request_by_fast_forward({
+    #     pull_request_id: "PullRequestId", # required
+    #     repository_name: "RepositoryName", # required
+    #     source_commit_id: "CommitId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForward AWS API Documentation
+    #
+    # @overload merge_pull_request_by_fast_forward(params = {})
+    # @param [Hash] params ({})
+    def merge_pull_request_by_fast_forward(params = {}, options = {})
+      req = build_request(:merge_pull_request_by_fast_forward, params)
+      req.send_request(options)
+    end
+
+    # Posts a comment on the comparison between two commits.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to post a comment on the
+    #   comparison between commits.
+    #
+    # @option params [String] :before_commit_id
+    #   To establish the directionality of the comparison, the full commit ID
+    #   of the 'before' commit.
+    #
+    # @option params [required, String] :after_commit_id
+    #   To establish the directionality of the comparison, the full commit ID
+    #   of the 'after' commit.
+    #
+    # @option params [Types::Location] :location
+    #   The location of the comparison where you want to comment.
+    #
+    # @option params [required, String] :content
+    #   The content of the comment you want to make.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PostCommentForComparedCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PostCommentForComparedCommitOutput#repository_name #repository_name} => String
+    #   * {Types::PostCommentForComparedCommitOutput#before_commit_id #before_commit_id} => String
+    #   * {Types::PostCommentForComparedCommitOutput#after_commit_id #after_commit_id} => String
+    #   * {Types::PostCommentForComparedCommitOutput#before_blob_id #before_blob_id} => String
+    #   * {Types::PostCommentForComparedCommitOutput#after_blob_id #after_blob_id} => String
+    #   * {Types::PostCommentForComparedCommitOutput#location #location} => Types::Location
+    #   * {Types::PostCommentForComparedCommitOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.post_comment_for_compared_commit({
+    #     repository_name: "RepositoryName", # required
+    #     before_commit_id: "CommitId",
+    #     after_commit_id: "CommitId", # required
+    #     location: {
+    #       file_path: "Path",
+    #       file_position: 1,
+    #       relative_file_version: "BEFORE", # accepts BEFORE, AFTER
+    #     },
+    #     content: "Content", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_name #=> String
+    #   resp.before_commit_id #=> String
+    #   resp.after_commit_id #=> String
+    #   resp.before_blob_id #=> String
+    #   resp.after_blob_id #=> String
+    #   resp.location.file_path #=> String
+    #   resp.location.file_position #=> Integer
+    #   resp.location.relative_file_version #=> String, one of "BEFORE", "AFTER"
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommit AWS API Documentation
+    #
+    # @overload post_comment_for_compared_commit(params = {})
+    # @param [Hash] params ({})
+    def post_comment_for_compared_commit(params = {}, options = {})
+      req = build_request(:post_comment_for_compared_commit, params)
+      req.send_request(options)
+    end
+
+    # Posts a comment on a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to post a comment on a pull
+    #   request.
+    #
+    # @option params [required, String] :before_commit_id
+    #   The full commit ID of the commit in the destination branch that was
+    #   the tip of the branch at the time the pull request was created.
+    #
+    # @option params [required, String] :after_commit_id
+    #   The full commit ID of the commit in the source branch that is the
+    #   current tip of the branch for the pull request when you post the
+    #   comment.
+    #
+    # @option params [Types::Location] :location
+    #   The location of the change where you want to post your comment. If no
+    #   location is provided, the comment will be posted as a general comment
+    #   on the pull request difference between the before commit ID and the
+    #   after commit ID.
+    #
+    # @option params [required, String] :content
+    #   The content of your comment on the change.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PostCommentForPullRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PostCommentForPullRequestOutput#repository_name #repository_name} => String
+    #   * {Types::PostCommentForPullRequestOutput#pull_request_id #pull_request_id} => String
+    #   * {Types::PostCommentForPullRequestOutput#before_commit_id #before_commit_id} => String
+    #   * {Types::PostCommentForPullRequestOutput#after_commit_id #after_commit_id} => String
+    #   * {Types::PostCommentForPullRequestOutput#before_blob_id #before_blob_id} => String
+    #   * {Types::PostCommentForPullRequestOutput#after_blob_id #after_blob_id} => String
+    #   * {Types::PostCommentForPullRequestOutput#location #location} => Types::Location
+    #   * {Types::PostCommentForPullRequestOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.post_comment_for_pull_request({
+    #     pull_request_id: "PullRequestId", # required
+    #     repository_name: "RepositoryName", # required
+    #     before_commit_id: "CommitId", # required
+    #     after_commit_id: "CommitId", # required
+    #     location: {
+    #       file_path: "Path",
+    #       file_position: 1,
+    #       relative_file_version: "BEFORE", # accepts BEFORE, AFTER
+    #     },
+    #     content: "Content", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_name #=> String
+    #   resp.pull_request_id #=> String
+    #   resp.before_commit_id #=> String
+    #   resp.after_commit_id #=> String
+    #   resp.before_blob_id #=> String
+    #   resp.after_blob_id #=> String
+    #   resp.location.file_path #=> String
+    #   resp.location.file_position #=> Integer
+    #   resp.location.relative_file_version #=> String, one of "BEFORE", "AFTER"
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequest AWS API Documentation
+    #
+    # @overload post_comment_for_pull_request(params = {})
+    # @param [Hash] params ({})
+    def post_comment_for_pull_request(params = {}, options = {})
+      req = build_request(:post_comment_for_pull_request, params)
+      req.send_request(options)
+    end
+
+    # Posts a comment in reply to an existing comment on a comparison
+    # between commits or a pull request.
+    #
+    # @option params [required, String] :in_reply_to
+    #   The system-generated ID of the comment to which you want to reply. To
+    #   get this ID, use GetCommentsForComparedCommit or
+    #   GetCommentsForPullRequest.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, client-generated idempotency token that when provided in a
+    #   request, ensures the request cannot be repeated with a changed
+    #   parameter. If a request is received with the same parameters and a
+    #   token is included, the request will return information about the
+    #   initial request that used that token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :content
+    #   The contents of your reply to a comment.
+    #
+    # @return [Types::PostCommentReplyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PostCommentReplyOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.post_comment_reply({
+    #     in_reply_to: "CommentId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     content: "Content", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReply AWS API Documentation
+    #
+    # @overload post_comment_reply(params = {})
+    # @param [Hash] params ({})
+    def post_comment_reply(params = {}, options = {})
+      req = build_request(:post_comment_reply, params)
       req.send_request(options)
     end
 
@@ -810,6 +1600,47 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Replaces the contents of a comment.
+    #
+    # @option params [required, String] :comment_id
+    #   The system-generated ID of the comment you want to update. To get this
+    #   ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
+    #
+    # @option params [required, String] :content
+    #   The updated content with which you want to replace the existing
+    #   content of the comment.
+    #
+    # @return [Types::UpdateCommentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCommentOutput#comment #comment} => Types::Comment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_comment({
+    #     comment_id: "CommentId", # required
+    #     content: "Content", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comment.comment_id #=> String
+    #   resp.comment.content #=> String
+    #   resp.comment.in_reply_to #=> String
+    #   resp.comment.creation_date #=> Time
+    #   resp.comment.last_modified_date #=> Time
+    #   resp.comment.author_arn #=> String
+    #   resp.comment.deleted #=> Boolean
+    #   resp.comment.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateComment AWS API Documentation
+    #
+    # @overload update_comment(params = {})
+    # @param [Hash] params ({})
+    def update_comment(params = {}, options = {})
+      req = build_request(:update_comment, params)
+      req.send_request(options)
+    end
+
     # Sets or changes the default branch name for the specified repository.
     #
     # <note markdown="1"> If you use this operation to change the default branch name to the
@@ -839,6 +1670,154 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def update_default_branch(params = {}, options = {})
       req = build_request(:update_default_branch, params)
+      req.send_request(options)
+    end
+
+    # Replaces the contents of the description of a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :description
+    #   The updated content of the description for the pull request. This
+    #   content will replace the existing description.
+    #
+    # @return [Types::UpdatePullRequestDescriptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullRequestDescriptionOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_request_description({
+    #     pull_request_id: "PullRequestId", # required
+    #     description: "Description", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescription AWS API Documentation
+    #
+    # @overload update_pull_request_description(params = {})
+    # @param [Hash] params ({})
+    def update_pull_request_description(params = {}, options = {})
+      req = build_request(:update_pull_request_description, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :pull_request_status
+    #   The status of the pull request. The only valid operations are to
+    #   update the status from `OPEN` to `OPEN`, `OPEN` to `CLOSED` or from
+    #   from `CLOSED` to `CLOSED`.
+    #
+    # @return [Types::UpdatePullRequestStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullRequestStatusOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_request_status({
+    #     pull_request_id: "PullRequestId", # required
+    #     pull_request_status: "OPEN", # required, accepts OPEN, CLOSED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatus AWS API Documentation
+    #
+    # @overload update_pull_request_status(params = {})
+    # @param [Hash] params ({})
+    def update_pull_request_status(params = {}, options = {})
+      req = build_request(:update_pull_request_status, params)
+      req.send_request(options)
+    end
+
+    # Replaces the title of a pull request.
+    #
+    # @option params [required, String] :pull_request_id
+    #   The system-generated ID of the pull request. To get this ID, use
+    #   ListPullRequests.
+    #
+    # @option params [required, String] :title
+    #   The updated title of the pull request. This will replace the existing
+    #   title.
+    #
+    # @return [Types::UpdatePullRequestTitleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullRequestTitleOutput#pull_request #pull_request} => Types::PullRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_request_title({
+    #     pull_request_id: "PullRequestId", # required
+    #     title: "Title", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_request.pull_request_id #=> String
+    #   resp.pull_request.title #=> String
+    #   resp.pull_request.description #=> String
+    #   resp.pull_request.last_activity_date #=> Time
+    #   resp.pull_request.creation_date #=> Time
+    #   resp.pull_request.pull_request_status #=> String, one of "OPEN", "CLOSED"
+    #   resp.pull_request.author_arn #=> String
+    #   resp.pull_request.pull_request_targets #=> Array
+    #   resp.pull_request.pull_request_targets[0].repository_name #=> String
+    #   resp.pull_request.pull_request_targets[0].source_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_reference #=> String
+    #   resp.pull_request.pull_request_targets[0].destination_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].source_commit #=> String
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.is_merged #=> Boolean
+    #   resp.pull_request.pull_request_targets[0].merge_metadata.merged_by #=> String
+    #   resp.pull_request.client_request_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitle AWS API Documentation
+    #
+    # @overload update_pull_request_title(params = {})
+    # @param [Hash] params ({})
+    def update_pull_request_title(params = {}, options = {})
+      req = build_request(:update_pull_request_title, params)
       req.send_request(options)
     end
 
@@ -927,7 +1906,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -312,6 +312,7 @@ to be backwards compatible.
 | AWS CodePipeline                    | Aws::CodePipeline                  | aws-sdk-codepipeline                  | 2015-07-09  |
 | AWS CodeStar                        | Aws::CodeStar                      | aws-sdk-codestar                      | 2017-04-19  |
 | AWS Config                          | Aws::ConfigService                 | aws-sdk-configservice                 | 2014-11-12  |
+| AWS Cost Explorer Service           | Aws::CostExplorer                  | aws-sdk-costexplorer                  | 2017-10-25  |
 | AWS Cost and Usage Report Service   | Aws::CostandUsageReportService     | aws-sdk-costandusagereportservice     | 2017-01-06  |
 | AWS Data Pipeline                   | Aws::DataPipeline                  | aws-sdk-datapipeline                  | 2012-10-29  |
 | AWS Database Migration Service      | Aws::DatabaseMigrationService      | aws-sdk-databasemigrationservice      | 2016-01-01  |
@@ -327,8 +328,8 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                           | aws-sdk-iot                           | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                  | aws-sdk-iotdataplane                  | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                           | aws-sdk-kms                           | 2014-11-01  |
-| AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
 | AWS Lambda                          | Aws::Lambda                        | aws-sdk-lambda                        | 2015-03-31  |
+| AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics  | aws-sdk-marketplacecommerceanalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | Aws::MarketplaceEntitlementService | aws-sdk-marketplaceentitlementservice | 2017-01-11  |
 | AWS Migration Hub                   | Aws::MigrationHub                  | aws-sdk-migrationhub                  | 2017-05-31  |
@@ -404,8 +405,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                    | aws-sdk-workspaces                    | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling        | aws-sdk-applicationautoscaling        | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                   | aws-sdk-autoscaling                   | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancing          | aws-sdk-elasticloadbalancing          | 2012-06-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancingV2        | aws-sdk-elasticloadbalancingv2        | 2015-12-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancing          | aws-sdk-elasticloadbalancing          | 2012-06-01  |
 
 ## License
 
