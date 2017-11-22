@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.88 (2017-11-22)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
